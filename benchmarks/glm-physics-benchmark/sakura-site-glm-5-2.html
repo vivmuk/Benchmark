@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SAKURA — 桜</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Noto+Serif+JP:wght@200;300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f5ede0;
+    --cream-light: #faf4e8;
+    --cream-dark: #e8dcc8;
+    --pale-pink: #f4c2c2;
+    --pale-pink-light: #f8d7da;
+    --dusty-rose: #c9a9a6;
+    --dusty-rose-dark: #a8847f;
+    --ink: #2b2622;
+    --ink-light: #4a4239;
+    --ink-faint: rgba(43, 38, 34, 0.08);
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html, body {
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  body {
+    font-family: 'Cormorant Garamond', 'Noto Serif JP', serif;
+    background: var(--cream);
+    color: var(--ink);
+    position: relative;
+    min-height: 100vh;
+  }
+
+  /* Paper texture overlay */
+  .paper-grain {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0.4;
+    mix-blend-mode: multiply;
+    background-image: 
+      radial-gradient(circle at 20% 30%, rgba(180, 160, 130, 0.06) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(160, 140, 110, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 50% 50%, rgba(200, 180, 150, 0.03) 0%, transparent 70%);
+  }
+
+  .paper-grain::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.3 0 0 0 0 0.25 0 0 0 0 0.2 0 0 0 0.08 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    opacity: 0.5;
+  }
+
+  /* Vignette */
+  .vignette {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 99;
+    background: radial-gradient(ellipse at center, transparent 40%, rgba(60, 45, 35, 0.12) 100%);
+  }
+
+  /* Navigation */
+  nav {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    z-index: 200;
+    padding: 1.8rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.6s ease;
+  }
+
+  nav.scrolled {
+    background: rgba(245, 237, 224, 0.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 1.2rem 3rem;
+    border-bottom: 1px solid rgba(43, 38, 34, 0.06);
+  }
+
+  .nav-brand {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1.4rem;
+    font-weight: 300;
+    letter-spacing: 0.4em;
+    color: var(--ink);
+  }
+
+  .nav-brand span {
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    color: var(--dusty-rose-dark);
+    display: block;
+    margin-top: 2px;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.8rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--ink);
+    font-size: 1.05rem;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    position: relative;
+    transition: color 0.4s ease;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 50%;
+    width: 0; height: 1px;
+    background: var(--dusty-rose-dark);
+    transition: all 0.4s ease;
+    transform: translateX(-50%);
+  }
+
+  .nav-links a:hover {
+    color: var(--dusty-rose-dark);
+  }
+
+  .nav-links a:hover::after {
+    width: 100%;
+  }
+
+  /* Hero Section */
+  .hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    min-height: 700px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Background ink wash layer */
+  .layer-bg {
+    position: absolute;
+    top: -5%; left: -5%;
+    width: 110%; height: 110%;
+    z-index: 1;
+    will-change: transform;
+  }
+
+  /* Midground branches */
+  .layer-mid {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 2;
+    pointer-events: none;
+    will-change: transform;
+  }
+
+  .layer-mid svg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0; left: 0;
+  }
+
+  /* Foreground petals canvas */
+  .layer-fg {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  /* Hero text content */
+  .hero-content {
+    position: relative;
+    z-index: 4;
+    text-align: center;
+    padding: 0 2rem;
+  }
+
+  .hero-kanji {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1.8rem;
+    font-weight: 200;
+    letter-spacing: 0.5em;
+    color: var(--dusty-rose-dark);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 1.8s ease 0.3s forwards;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(4rem, 14vw, 11rem);
+    font-weight: 300;
+    letter-spacing: 0.15em;
+    color: var(--ink);
+    line-height: 0.9;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 2s ease 0.6s forwards;
+    text-indent: 0.15em;
+  }
+
+  .hero-divider {
+    width: 60px;
+    height: 1px;
+    background: var(--dusty-rose-dark);
+    margin: 0 auto 1.5rem;
+    opacity: 0;
+    animation: fadeUp 2s ease 1s forwards;
+  }
+
+  .hero-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    color: var(--ink-light);
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.6;
+    opacity: 0;
+    animation: fadeUp 2s ease 1.2s forwards;
+  }
+
+  .hero-subtag {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 0.85rem;
+    font-weight: 200;
+    letter-spacing: 0.4em;
+    color: var(--dusty-rose);
+    margin-top: 2rem;
+    opacity: 0;
+    animation: fadeUp 2s ease 1.5s forwards;
+  }
+
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Scroll indicator */
+  .scroll-indicator {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+    text-align: center;
+    opacity: 0;
+    animation: fadeUp 2s ease 2s forwards;
+  }
+
+  .scroll-indicator span {
+    display: block;
+    font-family: 'Noto Serif JP', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.4em;
+    color: var(--dusty-rose-dark);
+    margin-bottom: 0.8rem;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--dusty-rose-dark), transparent);
+    margin: 0 auto;
+    animation: scrollPulse 2.5s ease-in-out infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(0.7); }
+    50% { opacity: 1; transform: scaleY(1); }
+  }
+
+  /* Content sections */
+  .section {
+    padding: 8rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 10;
+  }
+
+  .section-label {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.5em;
+    color: var(--dusty-rose-dark);
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 300;
+    text-align: center;
+    color: var(--ink);
+    margin-bottom: 3rem;
+    letter-spacing: 0.05em;
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--dusty-rose-dark);
+  }
+
+  .story-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    margin-top: 3rem;
+  }
+
+  .story-text p {
+    font-size: 1.15rem;
+    line-height: 1.9;
+    color: var(--ink-light);
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+  }
+
+  .story-text p:first-letter {
+    font-size: 2.5rem;
+    font-weight: 500;
+    color: var(--dusty-rose-dark);
+    float: left;
+    line-height: 1;
+    margin-right: 0.5rem;
+    margin-top: 0.3rem;
+  }
+
+  .story-visual {
+    position: relative;
+    height: 400px;
+  }
+
+  .story-visual svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .collection-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2.5rem;
+    margin-top: 3rem;
+  }
+
+  .collection-card {
+    background: var(--cream-light);
+    padding: 2.5rem 2rem;
+    text-align: center;
+    border: 1px solid rgba(43, 38, 34, 0.06);
+    transition: all 0.5s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .collection-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, transparent 40%, rgba(244, 194, 194, 0.08) 100%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  .collection-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px -15px rgba(43, 38, 34, 0.12);
+  }
+
+  .collection-card:hover::before {
+    opacity: 1;
+  }
+
+  .collection-card svg {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 1.5rem;
+  }
+
+  .collection-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+  }
+
+  .collection-card .jp {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    color: var(--dusty-rose-dark);
+    margin-bottom: 1rem;
+  }
+
+  .collection-card p {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--ink-light);
+    font-weight: 300;
+  }
+
+  .visit-info {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .visit-info p {
+    font-size: 1.15rem;
+    line-height: 1.9;
+    color: var(--ink-light);
+    margin-bottom: 1rem;
+    font-weight: 300;
+  }
+
+  .visit-info .hours {
+    margin-top: 2rem;
+    display: inline-block;
+    padding: 1.5rem 3rem;
+    border-top: 1px solid var(--ink-faint);
+    border-bottom: 1px solid var(--ink-faint);
+  }
+
+  .visit-info .hours-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 3rem;
+    margin: 0.5rem 0;
+    font-size: 1rem;
+  }
+
+  .visit-info .hours-row span:first-child {
+    color: var(--dusty-rose-dark);
+    letter-spacing: 0.1em;
+  }
+
+  footer {
+    text-align: center;
+    padding: 4rem 2rem 3rem;
+    border-top: 1px solid var(--ink-faint);
+    margin-top: 4rem;
+  }
+
+  footer p {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.3em;
+    color: var(--dusty-rose-dark);
+  }
+
+  footer .footer-en {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    color: var(--ink-light);
+    margin-top: 0.5rem;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    nav {
+      padding: 1.2rem 1.5rem;
+    }
+
+    .nav-links {
+      gap: 1.2rem;
+    }
+
+    .nav-links a {
+      font-size: 0.85rem;
+    }
+
+    .nav-brand {
+      font-size: 1.1rem;
+    }
+
+    .story-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .section {
+      padding: 5rem 1.5rem;
+    }
+
+    .hero-kanji {
+      font-size: 1.3rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .nav-links {
+      gap: 0.8rem;
+    }
+
+    .nav-links a {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+    }
+
+    .nav-brand span {
+      display: none;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- Paper texture & vignette -->
+<div class="paper-grain"></div>
+<div class="vignette"></div>
+
+<!-- Navigation -->
+<nav id="nav">
+  <div class="nav-brand">
+    SAKURA
+    <span>桜 · さくら</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#story">Story</a></li>
+    <li><a href="#collection">Collection</a></li>
+    <li><a href="#visit">Visit</a></li>
+  </ul>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero" id="home">
+
+  <!-- Background: distant ink wash mountains & mist -->
+  <div class="layer-bg" id="layerBg">
+    <svg viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%;">
+      <defs>
+        <filter id="inkWashBg" x="-20%" y="-20%" width="140%" height="140%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.015" numOctaves="3" seed="3" result="noise"/>
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="18" xChannelSelector="R" yChannelSelector="G"/>
+          <feGaussianBlur stdDeviation="1.5"/>
+        </filter>
+        <filter id="inkWashMist" x="-20%" y="-20%" width="140%" height="140%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.008" numOctaves="2" seed="7" result="noise"/>
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="30" xChannelSelector="R" yChannelSelector="G"/>
+          <feGaussianBlur stdDeviation="6"/>
+        </filter>
+        <linearGradient id="mistGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="rgba(245,237,224,0)"/>
+          <stop offset="40%" stop-color="rgba(232,220,200,0.3)"/>
+          <stop offset="100%" stop-color="rgba(245,237,224,0)"/>
+        </linearGradient>
+        <radialGradient id="bgGlow" cx="50%" cy="45%" r="50%">
+          <stop offset="0%" stop-color="rgba(248,215,218,0.15)"/>
+          <stop offset="100%" stop-color="rgba(248,215,218,0)"/>
+        </radialGradient>
+      </defs>
+
+      <!-- Soft glow behind title -->
+      <rect width="1920" height="1080" fill="url(#bgGlow)"/>
+
+      <!-- Distant mountains - far layer -->
+      <path d="M0,650 Q200,580 400,610 T800,590 Q1000,560 1200,600 T1600,580 Q1800,560 1920,590 L1920,1080 L0,1080 Z"
+            fill="rgba(43,38,34,0.04)" filter="url(#inkWashBg)"/>
+
+      <!-- Mid mountains -->
+      <path d="M0,720 Q150,660 350,690 Q550,720 750,680 Q950,640 1150,690 Q1350,730 1550,700 Q1750,670 1920,700 L1920,1080 L0,1080 Z"
+            fill="rgba(43,38,34,0.06)" filter="url(#inkWashBg)"/>
+
+      <!-- Near hills -->
+      <path d="M0,820 Q200,770 450,790 Q700,810 950,780 Q1200,750 1450,790 Q1700,820 1920,800 L1920,1080 L0,1080 Z"
+            fill="rgba(43,38,34,0.08)" filter="url(#inkWashBg)"/>
+
+      <!-- Mist bands -->
+      <ellipse cx="960" cy="700" rx="900" ry="40" fill="url(#mistGrad)" filter="url(#inkWashMist)" opacity="0.6"/>
+      <ellipse cx="600" cy="780" rx="700" ry="30" fill="url(#mistGrad)" filter="url(#inkWashMist)" opacity="0.4"/>
+      <ellipse cx="1300" cy="750" rx="600" ry="25" fill="url(#mistGrad)" filter="url(#inkWashMist)" opacity="0.5"/>
+    </svg>
+  </div>
+
+  <!-- Midground: Sakura branches -->
+  <div class="layer-mid" id="layerMid">
+    <svg viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <!-- Ink brush filter for branches -->
+        <filter id="inkBrush" x="-10%" y="-10%" width="120%" height="120%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" seed="5" result="noise"/>
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="8" xChannelSelector="R" yChannelSelector="G"/>
+          <feGaussianBlur stdDeviation="0.6"/>
+        </filter>
+        <filter id="inkBrushLight" x="-10%" y="-10%" width="120%" height="120%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.06" numOctaves="2" seed="9" result="noise"/>
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="5" xChannelSelector="R" yChannelSelector="G"/>
+        </filter>
+
+        <!-- Branch gradient -->
+        <linearGradient id="branchGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#2b2622" stop-opacity="0.7"/>
+          <stop offset="50%" stop-color="#2b2622" stop-opacity="0.85"/>
+          <stop offset="100%" stop-color="#2b2622" stop-opacity="0.5"/>
+        </linearGradient>
+
+        <!-- Blossom gradients -->
+        <radialGradient id="blossomGrad" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#fff5f5" stop-opacity="0.95"/>
+          <stop offset="40%" stop-color="#f8d7da" stop-opacity="0.9"/>
+          <stop offset="80%" stop-color="#f4c2c2" stop-opacity="0.8"/>
+          <stop offset="100%" stop-color="#e8a0a0" stop-opacity="0.7"/>
+        </radialGradient>
+        <radialGradient id="blossomGradDeep" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#fce4ec" stop-opacity="0.9"/>
+          <stop offset="50%" stop-color="#f4c2c2" stop-opacity="0.85"/>
+          <stop offset="100%" stop-color="#c9a9a6" stop-opacity="0.75"/>
+        </radialGradient>
+
+        <!-- Reusable blossom symbol -->
+        <symbol id="blossom" viewBox="-15 -15 30 30">
+          <g>
+            <!-- 5 petals -->
+            <g class="petal-group">
+              <ellipse cx="0" cy="-9" rx="5.5" ry="9" fill="url(#blossomGrad)" transform="rotate(0)"/>
+              <ellipse cx="0" cy="-9" rx="5.5" ry="9" fill="url(#blossomGrad)" transform="rotate(72)"/>
+              <ellipse cx="0" cy="-9" rx="5.5" ry="9" fill="url(#blossomGrad)" transform="rotate(144)"/>
+              <ellipse cx="0" cy="-9" rx="5.5" ry="9" fill="url(#blossomGrad)" transform="rotate(216)"/>
+              <ellipse cx="0" cy="-9" rx="5.5" ry="9" fill="url(#blossomGrad)" transform="rotate(288)"/>
+            </g>
+            <!-- Center -->
+            <circle cx="0" cy="0" r="1.8" fill="#e8a0a0" opacity="0.6"/>
+            <circle cx="0" cy="0" r="0.8" fill="#c9a9a6" opacity="0.8"/>
+            <!-- Stamens -->
+            <g stroke="#d4a0a0" stroke-width="0.4" opacity="0.5">
+              <line x1="0" y1="0" x2="1.5" y2="-3.5"/>
+              <line x1="0" y1="0" x2="-1.5" y2="-3.5"/>
+              <line x1="0" y1="0" x2="3" y2="-2"/>
+              <line x1="0" y1="0" x2="-3" y2="-2"/>
+              <line x1="0" y1="0" x2="0" y2="-4"/>
+            </g>
+          </g>
+        </symbol>
+
+        <symbol id="blossomDeep" viewBox="-15 -15 30 30">
+          <g>
+            <ellipse cx="0" cy="-9" rx="5.5" ry="9" fill="url(#blossomGradDeep)" transform="rotate(15)"/>
+            <ellipse cx="0" cy="-9" rx="5.5" ry="9" fill="url(#blossomGradDeep)" transform="rotate(87)"/>
+            <ellipse cx="0" cy="-9" rx="5.5" ry="9" fill="url(#blossomGradDeep)" transform="rotate(159)"/>
+            <ellipse cx="0" cy="-9" rx="5.5" ry="9" fill="url(#blossomGradDeep)" transform="rotate(231)"/>
+            <ellipse cx="0" cy="-9" rx="5.5" ry="9" fill="url(#blossomGradDeep)" transform="rotate(303)"/>
+            <circle cx="0" cy="0" r="1.5" fill="#a8847f" opacity="0.6"/>
+          </g>
+        </symbol>
+
+        <symbol id="blossomSmall" viewBox="-10 -10 20 20">
+          <g>
+            <ellipse cx="0" cy="-6" rx="3.5" ry="6" fill="url(#blossomGrad)" transform="rotate(0)"/>
+            <ellipse cx="0" cy="-6" rx="3.5" ry="6" fill="url(#blossomGrad)" transform="rotate(72)"/>
+            <ellipse cx="0" cy="-6" rx="3.5" ry="6" fill="url(#blossomGrad)" transform="rotate(144)"/>
+            <ellipse cx="0" cy="-6" rx="3.5" ry="6" fill="url(#blossomGrad)" transform="rotate(216)"/>
+            <ellipse cx="0" cy="-6" rx="3.5" ry="6" fill="url(#blossomGrad)" transform="rotate(288)"/>
+            <circle cx="0" cy="0" r="1" fill="#e8a0a0" opacity="0.5"/>
+          </g>
+        </symbol>
+      </defs>
+
+      <!-- ===== TOP-LEFT BRANCH CLUSTER ===== -->
+      <g filter="url(#inkBrush)" opacity="0.88">
+        <!-- Main branch from top-left -->
+        <path d="M-50,80 Q150,120 300,180 Q450,240 580,340 Q650,390 700,460"
+              stroke="url(#branchGrad)" stroke-width="7" fill="none" stroke-linecap="round"/>
+        <!-- Secondary branch -->
+        <path d="M180,140 Q280,100 380,90 Q450,85 520,95"
+              stroke="#2b2622" stroke-width="4.5" fill="none" stroke-linecap="round" opacity="0.75"/>
+        <!-- Tertiary branches -->
+        <path d="M350,185 Q420,200 480,230 Q520,250 545,280"
+              stroke="#2b2622" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.65"/>
+        <path d="M500,300 Q560,310 610,335 Q640,350 660,375"
+              stroke="#2b2622" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.6"/>
+        <!-- Thin twigs -->
+        <path d="M280,105 Q310,80 330,55 Q340,40 345,25" stroke="#2b2622" stroke-width="1.8" fill="none" stroke-linecap="round" opacity="0.55"/>
+        <path d="M420,92 Q440,70 455,50" stroke="#2b2622" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.5"/>
+        <path d="M580,340 Q610,330 630,310" stroke="#2b2622" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.5"/>
+        <path d="M680,430 Q700,420 715,400" stroke="#2b2622" stroke-width="1.2" fill="none" stroke-linecap="round" opacity="0.45"/>
+      </g>
+
+      <!-- Blossoms on top-left branch -->
+      <g filter="url(#inkBrushLight)">
+        <use href="#blossom" x="120" y="95" width="28" height="28"/>
+        <use href="#blossomDeep" x="250" y="105" width="24" height="24"/>
+        <use href="#blossom" x="340" y="75" width="26" height="26"/>
+        <use href="#blossomSmall" x="320" y="50" width="18" height="18"/>
+        <use href="#blossom" x="430" y="80" width="30" height="30"/>
+        <use href="#blossomSmall" x="460" y="55" width="16" height="16"/>
+        <use href="#blossomDeep" x="490" y="100" width="22" height="22"/>
+        <use href="#blossom" x="460" y="220" width="32" height="32"/>
+        <use href="#blossomSmall" x="520" y="250" width="20" height="20"/>
+        <use href="#blossom" x="570" y="280" width="26" height="26"/>
+        <use href="#blossomDeep" x="620" y="320" width="24" height="24"/>
+        <use href="#blossom" x="650" y="370" width="28" height="28"/>
+        <use href="#blossomSmall" x="690" y="400" width="18" height="18"/>
+        <use href="#blossom" x="670" y="440" width="25" height="25"/>
+        <use href="#blossomSmall" x="200" y="130" width="16" height="16"/>
+        <use href="#blossom" x="380" y="170" width="22" height="22"/>
+      </g>
+
+      <!-- ===== TOP-RIGHT BRANCH CLUSTER ===== -->
+      <g filter="url(#inkBrush)" opacity="0.82">
+        <path d="M1970,60 Q1800,100 1650,160 Q1500,220 1380,310 Q1320,360 1280,420"
+              stroke="url(#branchGrad)" stroke-width="6.5" fill="none" stroke-linecap="round"/>
+        <path d="M1750,130 Q1650,100 1560,95 Q1500,92 1450,100"
+              stroke="#2b2622" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.7"/>
+        <path d="M1550,200 Q1480,210 1420,235 Q1380,250 1355,275"
+              stroke="#2b2622" stroke-width="2.8" fill="none" stroke-linecap="round" opacity="0.62"/>
+        <path d="M1400,320 Q1360,330 1330,355" stroke="#2b2622" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.55"/>
+        <path d="M1620,110 Q1600,85 1590,60" stroke="#2b2622" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.5"/>
+        <path d="M1500,100 Q1485,75 1475,50" stroke="#2b2622" stroke-width="1.3" fill="none" stroke-linecap="round" opacity="0.45"/>
+      </g>
+
+      <!-- Blossoms on top-right branch -->
+      <g filter="url(#inkBrushLight)">
+        <use href="#blossom" x="1820" y="85" width="28" height="28"/>
+        <use href="#blossomDeep" x="1700" y="115" width="24" height="24"/>
+        <use href="#blossom" x="1600" y="85" width="26" height="26"/>
+        <use href="#blossomSmall" x="1580" y="55" width="18" height="18"/>
+        <use href="#blossom" x="1500" y="95" width="30" height="30"/>
+        <use href="#blossomSmall" x="1465" y="65" width="16" height="16"/>
+        <use href="#blossomDeep" x="1430" y="110" width="22" height="22"/>
+        <use href="#blossom" x="1380" y="230" width="32" height="32"/>
+        <use href="#blossomSmall" x="1340" y="260" width="20" height="20"/>
+        <use href="#blossom" x="1310" y="300" width="26" height="26"/>
+        <use href="#blossomDeep" x="1290" y="350" width="24" height="24"/>
+        <use href="#blossom" x="1270" y="400" width="25" height="25"/>
+        <use href="#blossomSmall" x="1330" y="340" width="18" height="18"/>
+      </g>
+
+      <!-- ===== BOTTOM-LEFT SMALL BRANCH ===== -->
+      <g filter="url(#inkBrush)" opacity="0.7">
+        <path d="M-30,950 Q80,900 180,870 Q250,850 310,840"
+              stroke="#2b2622" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <path d="M150,880 Q200,860 240,845" stroke="#2b2622" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.6"/>
+      </g>
+      <g filter="url(#inkBrushLight)">
+        <use href="#blossomSmall" x="80" y="890" width="20" height="20"/>
+        <use href="#blossom" x="170" y="860" width="24" height="24"/>
+        <use href="#blossomSmall" x="250" y="830" width="18" height="18"/>
+        <use href="#blossomDeep" x="290" y="825" width="20" height="20"/>
+      </g>
+
+      <!-- ===== BOTTOM-RIGHT SMALL BRANCH ===== -->
+      <g filter="url(#inkBrush)" opacity="0.68">
+        <path d="M1950,920 Q1830,880 1720,860 Q1640,850 1580,855"
+              stroke="#2b2622" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+        <path d="M1780,875 Q1720,860 1670,855" stroke="#2b2622" stroke-width="1.8" fill="none" stroke-linecap="round" opacity="0.55"/>
+      </g>
+      <g filter="url(#inkBrushLight)">
+        <use href="#blossom" x="1830" y="870" width="22" height="22"/>
+        <use href="#blossomSmall" x="1740" y="845" width="18" height="18"/>
+        <use href="#blossomDeep" x="1650" y="840" width="20" height="20"/>
+        <use href="#blossomSmall" x="1590" y="845" width="16" height="16"/>
+      </g>
+
+      <!-- Floating single blossoms (scattered) -->
+      <g filter="url(#inkBrushLight)" opacity="0.5">
+        <use href="#blossomSmall" x="850" y="200" width="14" height="14"/>
+        <use href="#blossomSmall" x="1100" y="150" width="12" height="12"/>
+        <use href="#blossomSmall" x="950" y="850" width="16" height="16"/>
+        <use href="#blossomSmall" x="1150" y="900" width="14" height="14"/>
+      </g>
+    </svg>
+  </div>
+
+  <!-- Foreground: Falling petals canvas -->
+  <canvas class="layer-fg" id="petalCanvas"></canvas>
+
+  <!-- Hero text content -->
+  <div class="hero-content">
+    <div class="hero-kanji">桜 · さくら</div>
+    <h1 class="hero-title">SAKURA</h1>
+    <div class="hero-divider"></div>
+    <p class="hero-tagline">Where fleeting beauty blooms eternal —<br>a whisper of spring across still water.</p>
+    <div class="hero-subtag">花は桜木、人は武士</div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="scroll-indicator">
+    <span>SCROLL</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- Story Section -->
+<section class="section" id="story">
+  <div class="section-label">物語 · STORY</div>
+  <h2 class="section-title">The <em>Ephemeral</em> Bloom</h2>
+  <div class="story-grid">
+    <div class="story-text">
+      <p>In the quiet tradition of sumi-e, the cherry blossom is not merely a flower — it is a moment suspended between presence and absence. Each petal carries the weight of impermanence, the beauty of mono no aware, the gentle sorrow of things that pass.</p>
+      <p>For three centuries, our garden has preserved this philosophy. The ink flows from charcoal ground on stone, the brush traces branches that reach toward nothing and everything at once. Here, you do not observe the sakura. You become part of its falling.</p>
+    </div>
+    <div class="story-visual">
+      <svg viewBox="0 0 400 400" style="width:100%;height:100%;">
+        <defs>
+          <filter id="storyInk" x="-10%" y="-10%" width="120%" height="120%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="3" seed="12" result="noise"/>
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="6" xChannelSelector="R" yChannelSelector="G"/>
+          </filter>
+          <filter id="storyInkSoft" x="-10%" y="-10%" width="120%" height="120%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" seed="8" result="noise"/>
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+          </filter>
+          <radialGradient id="storyBlossom" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#fff5f5" stop-opacity="0.95"/>
+            <stop offset="50%" stop-color="#f8d7da" stop-opacity="0.85"/>
+            <stop offset="100%" stop-color="#c9a9a6" stop-opacity="0.7"/>
+          </radialGradient>
+        </defs>
+        <!-- Enso circle -->
+        <path d="M200,80 Q290,80 310,170 Q320,260 250,300 Q160,320 110,260 Q70,190 120,120 Q160,75 200,80"
+              fill="none" stroke="#2b2622" stroke-width="6" stroke-linecap="round"
+              opacity="0.12" filter="url(#storyInk)"/>
+        <!-- Branch -->
+        <g filter="url(#storyInk)">
+          <path d="M50,350 Q120,300 180,240 Q230,190 270,130 Q290,100 300,70"
+                stroke="#2b2622" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.8"/>
+          <path d="M180,240 Q220,230 250,210" stroke="#2b2622" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.6"/>
+          <path d="M250,130 Q280,120 300,110" stroke="#2b2622" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.5"/>
+        </g>
+        <!-- Blossoms -->
+        <g filter="url(#storyInkSoft)">
+          <g transform="translate(290,70)">
+            <ellipse cx="0" cy="-10" rx="6" ry="10" fill="url(#storyBlossom)" transform="rotate(0)"/>
+            <ellipse cx="0" cy="-10" rx="6" ry="10" fill="url(#storyBlossom)" transform="rotate(72)"/>
+            <ellipse cx="0" cy="-10" rx="6" ry="10" fill="url(#storyBlossom)" transform="rotate(144)"/>
+            <ellipse cx="0" cy="-10" rx="6" ry="10" fill="url(#storyBlossom)" transform="rotate(216)"/>
+            <ellipse cx="0" cy="-10" rx="6" ry="10" fill="url(#storyBlossom)" transform="rotate(288)"/>
+            <circle r="2" fill="#c9a9a6" opacity="0.7"/>
+          </g>
+          <g transform="translate(250,110)">
+            <ellipse cx="0" cy="-8" rx="5" ry="8" fill="url(#storyBlossom)" transform="rotate(15)"/>
+            <ellipse cx="0" cy="-8" rx="5" ry="8" fill="url(#storyBlossom)" transform="rotate(87)"/>
+            <ellipse cx="0" cy="-8" rx="5" ry="8" fill="url(#storyBlossom)" transform="rotate(159)"/>
+            <ellipse cx="0" cy="-8" rx="5" ry="8" fill="url(#storyBlossom)" transform="rotate(231)"/>
+            <ellipse cx="0" cy

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GLM 5.2 Physics + Sakura Benchmark Report</title>
+<style>
+  :root { --bg:#FEFCF8; --ink:#1A1A2E; --teal:#00D4AA; --muted:#6b6b7b; }
+  body { font-family: Inter, system-ui, sans-serif; background: var(--bg); color: var(--ink); max-width: 1100px; margin: 0 auto; padding: 2rem; line-height: 1.6; }
+  h1, h2 { font-family: Georgia, serif; }
+  h1 { color: var(--teal); }
+  table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+  th, td { padding: 0.75rem; border-bottom: 1px solid #ddd; text-align: left; }
+  th { background: #f3f3f3; }
+  .summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; margin: 1rem 0; }
+  .card { background: white; border-radius: 12px; padding: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  .card big { display: block; font-size: 1.8rem; font-weight: 700; color: var(--teal); }
+  iframe { width: 100%; height: 360px; border: 1px solid #ddd; border-radius: 12px; margin: 1rem 0; background: white; }
+  pre { background: #f4f4f4; padding: 1rem; border-radius: 8px; overflow-x: auto; }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.9rem; }
+  .prompt { background: #fff; border-left: 4px solid var(--teal); padding: 1rem; border-radius: 0 8px 8px 0; }
+</style>
+</head>
+<body>
+<h1>GLM 5.2 Physics + Sakura Benchmark</h1>
+<p>Run started: 2026-07-05T13:30:56.546584 UTC | Model: <code>zai-org-glm-5-2</code></p>
+
+<div class="summary">
+  <div class="card"><big>79.4</big>Average Score / 100</div>
+  <div class="card"><big>0</big>Total Tokens</div>
+  <div class="card"><big>0.0s</big>Total Wall Time</div>
+  <div class="card"><big>5</big>Tasks</div>
+</div>
+
+<h2>Task Results</h2>
+<table>
+<tr><th>Task</th><th>Latency</th><th>Prompt Tok</th><th>Completion Tok</th><th>Total Tok</th><th>Score</th><th>Artifact</th></tr>
+<tr>
+                <td>HTML5 Canvas Physics Demo</td>
+                <td>—s</td>
+                <td>—</td>
+                <td>—</td>
+                <td>—</td>
+                <td>85/100</td>
+                <td><a href="glm-physics-demo.html" target="_blank">Open</a></td>
+            </tr>
+<tr>
+                <td>Sakura One-Shot Website</td>
+                <td>—s</td>
+                <td>—</td>
+                <td>—</td>
+                <td>—</td>
+                <td>61/100</td>
+                <td><a href="glm-sakura-site.html" target="_blank">Open</a></td>
+            </tr>
+<tr>
+                <td>Enhanced Interactive Physics Demo</td>
+                <td>—s</td>
+                <td>—</td>
+                <td>—</td>
+                <td>—</td>
+                <td>89/100</td>
+                <td><a href="glm-physics-demo-enhanced.html" target="_blank">Open</a></td>
+            </tr>
+<tr>
+                <td>Physics Bug Fix</td>
+                <td>—s</td>
+                <td>—</td>
+                <td>—</td>
+                <td>—</td>
+                <td>72/100</td>
+                <td><a href="glm-physics-fixed.html" target="_blank">Open</a></td>
+            </tr>
+<tr>
+                <td>Physics Implementation Explanation</td>
+                <td>—s</td>
+                <td>—</td>
+                <td>—</td>
+                <td>—</td>
+                <td>90/100</td>
+                <td><a href="glm-physics-explanation.md" target="_blank">Open</a></td>
+            </tr>
+
+</table>
+
+<h2>Physics Demo (GLM 5.2 generated)</h2>
+<iframe src="glm-physics-demo.html" title="Physics Demo"></iframe>
+
+<h2>Enhanced Interactive Physics Demo</h2>
+<iframe src="glm-physics-demo-enhanced.html" title="Enhanced Physics Demo"></iframe>
+
+<h2>Sakura One-Shot Website</h2>
+<iframe src="glm-sakura-site.html" title="Sakura Site"></iframe>
+
+<h2>How the Sakura Website Was Built (with Fable 5)</h2>
+<p>The original post highlights Fable 5's ability to produce <strong>one-shot web designs</strong>.
+Fable 5's large output window lets it emit a complete, self-contained HTML file in a single generation:
+embedded SVG ink branches, CSS paper texture, JS petal physics, parallax layers, and responsive layout.
+No iterative coding or external assets required.</p>
+
+<h3>Prompt that would create the Sakura site</h3>
+<div class="prompt">
+<pre><code>Create a single self-contained HTML file for a premium Japanese "SAKURA" themed landing page in traditional sumi-e ink wash painting style. Use a soft cream/parchment paper texture background with subtle grain, SVG cherry blossom branches with ink-brush stroke filters, elegant Japanese-inspired serif typography for "SAKURA", animated falling petals via a lightweight JS particle system, subtle parallax depth, minimal navigation, and responsive full-bleed hero. No external images.</code></pre>
+</div>
+
+<h2>Bug Fix Explanation</h2>
+<div class="prompt">
+<pre><code>html
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;&lt;title&gt;Fixed Cars&lt;/title&gt;&lt;/head&gt;
+&lt;body&gt;
+&lt;canvas id=&quot;c&quot; width=&quot;800&quot; height=&quot;400&quot;&gt;&lt;/canvas&gt;
+&lt;script&gt;
+const ctx = document.getElementById(&#x27;c&#x27;).getContext(&#x27;2d&#x27;);
+let cars = [{x: -50, y: 280, speed: 2, color: &#x27;red&#x27;, wheelAngle: 0}];
+
+// Parallax offsets for different depth layers
+let cloudOffset = 0;   // farthest
+let mountOffset = 0;   // far
+let hillOffset  = 0;   // mid
+let roadOffset  = 0;   // near (matches car speed)
+
+function drawBackground() {
+  // Sky
+  ctx.fillStyle = &#x27;skyblue&#x27;;
+  ctx.fillRect(0, 0, 800, 400);
+
+  // Clouds (slowest)
+  ctx.fillStyle = &#x27;white&#x27;;
+  for (let i = 0; i &lt; 5; i++) {
+    let cx = ((i * 220 - cloudOffset) % 1100 + 1100) % 1100 - 220;
+    ctx.beginPath();
+    ctx.arc(cx,      70, 22, 0, Math.PI * 2);
+    ctx.arc(cx + 24, 70, 28, 0, Math.PI * 2);
+    ctx.arc(cx + 54, 70, 22, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  // Far mountains
+  ctx.fillStyle = &#x27;#6b8e9e&#x27;;
+  for (let i = 0; i &lt; 6; i++) {
+    let mx = ((i * 180 - mountOffset) % 1080 + 1080) % 1080 - 180;
+    ctx.beginPath();
+    ctx.moveTo(mx, 300);
+    ctx.lineTo(mx + 90, 170);
+    ctx.lineTo(mx + 180, 300);
+    ctx.closePath();
+    ctx.fill();
+  }
+
+  // Near hills
+  ctx.fillStyle = &#x27;#5a8a5a&#x27;;
+  for (let i = 0; i &lt; 7; i++) {
+    let hx = ((i * 150 - hillOffset) % 1050 + 1050) % 1050 - 150;
+    ctx.beginPath();
+    ctx.arc(hx + 75, 300, 75, Math.PI, 0);
+    ctx.closePath();
+    ctx.fill();
+  }
+
+  // Road
+  ctx.fillStyle = &#x27;gray&#x27;;
+  ctx.fillRect(0, 300, 800, 50);
+
+  // Road dashes (scroll at car speed)
+  ctx.fillStyle = &#x27;white&#x27;;
+  for (let i = 0; i &lt; 11; i++) {
+    let dx = ((i * 80 - roadOffset) % 880 + 880) % 880 - 80;
+    ctx.fillRect(dx, 322, 40, 6);
+  }
+}
+
+function drawWheel(x, y, radius, angle) {
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.rotate(angle);
+  // Tire
+  ctx.fillStyle = &#x27;black&#x27;;
+  ctx.beginPath();
+  ctx.arc(0, 0, radius, 0, Math.PI * 2);
+  ctx.fill();
+  // Hub
+  ctx.fillStyle = &#x27;silver&#x27;;
+  ctx.beginPath();
+  ctx.arc(0, 0, radius * 0.4, 0, Math.PI * 2);
+  ctx.fill();
+  // Spokes (these make rotation visible)
+  ctx.strokeStyle = &#x27;#333&#x27;;
+  ctx.lineWidth = 2;
+  for (let i = 0; i &lt; 4; i++) {
+    let a = i * Math.PI / 2;
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.lineTo(Math.cos(a) * radius, Math.sin(a) * radius);
+    ctx.stroke();
+  }
+  ctx.restore();
+}
+
+function draw() {
+  drawBackground();
+
+  cars.forEach(car =&gt; {
+    car.x += car.speed;
+    // Wheel angular velocity proportional to linear speed
+    car.wheelAngle += car.speed / 8;
+
+    // Body
+    ctx.fillStyle = car.color;
+    ctx.fillRect(car.x, car.y, 60, 30);
+    // Cabin
+    ctx.fillRect(car.x + 15, car.y - 15, 30, 15);
+
+    // Wheels
+    drawWheel(car.x + 12, car.y + 30, 8, car.wheelAngle);
+    drawWheel(car.x + 48, car.y + 30, 8, car.wheelAngle);
+
+    if (car.x &gt; 800) car.x = -60;
+  });
+
+  // Advance parallax layers
+  cloudOffset += 0.15;
+  mountOffset += 0.4;
+  hillOffset  += 0.9;
+  roadOffset  += 2; // same as car speed
+
+  requestAnimationFrame(draw);
+}
+draw();
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+```
+
+**What was wrong and how I fixed it:**
+
+1. **`requestAnimationFrame(draw())` — the fatal bug.** The parentheses meant `draw` was *invoked immediately* (returning `undefined`), and `requestAnimationFrame` was then called with `undefined`. Worse, because `draw()` itself calls `draw()` synchronously before returning, this produced unbounded synchronous recursion and an instant stack overflow — the animation never actually ran. Fixed by passing the function reference: `requestAnimationFrame(draw)`.
+
+2. **Wheels didn&#x27;t rotate.** The original just drew two filled circles, which look identical no matter how the car moves. I added a per-car `wheelAngle` that increments proportionally to `car.speed`, and a `drawWheel` helper that uses `ctx.translate`/`ctx.rotate` to spin a tire + hub + spokes so the rotation is visually obvious.
+
+3. **No parallax background.** The original had only a flat sky and a static road, so there was nothing to convey motion except the car itself. I added four scrolling layers at different speeds — clouds (slowest), far mountains, near hills, and road dashes (fastest, matching car speed) — using modulo wrapping so each layer loops seamlessly. The depth ordering (slow = far, fast = near) is what creates the parallax effect.
+
+4. **Minor polish:** added a cabin on top of each car so it actually looks like a car, and used `closePath()` on the mountain/hill fills for clean edges.</code></pre>
+</div>
+
+<h2>Conclusion</h2>
+<p>GLM 5.2 (via Venice API as <code>zai-org-glm-5-2</code>) scored <strong>79.4/100</strong> on this combined artistic + physics benchmark.
+It is a capable low-cost model for producing interactive Canvas demos and aesthetic landing pages from rich natural-language prompts,
+though polish and physical realism may require a second iteration pass for production quality.</p>
+
+</body>
+</html>

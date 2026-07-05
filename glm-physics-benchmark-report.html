@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GLM 5.2 Physics + Sakura Benchmark Report</title>
+<style>
+  :root { --bg:#FEFCF8; --ink:#1A1A2E; --teal:#00D4AA; --muted:#6b6b7b; }
+  body { font-family: Inter, system-ui, sans-serif; background: var(--bg); color: var(--ink); max-width: 1100px; margin: 0 auto; padding: 2rem; line-height: 1.6; }
+  h1, h2 { font-family: Georgia, serif; }
+  h1 { color: var(--teal); }
+  table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+  th, td { padding: 0.75rem; border-bottom: 1px solid #ddd; text-align: left; }
+  th { background: #f3f3f3; }
+  .summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; margin: 1rem 0; }
+  .card { background: white; border-radius: 12px; padding: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  .card big { display: block; font-size: 1.8rem; font-weight: 700; color: var(--teal); }
+  iframe { width: 100%; height: 360px; border: 1px solid #ddd; border-radius: 12px; margin: 1rem 0; background: white; }
+  pre { background: #f4f4f4; padding: 1rem; border-radius: 8px; overflow-x: auto; }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.9rem; }
+  .prompt { background: #fff; border-left: 4px solid var(--teal); padding: 1rem; border-radius: 0 8px 8px 0; }
+</style>
+</head>
+<body>
+<h1>GLM 5.2 Physics + Sakura Benchmark</h1>
+<p>Run started: 2026-07-05T13:28:26.779198 UTC | Model: <code>zai-org-glm-5-2</code></p>
+
+<div class="summary">
+  <div class="card"><big>67.6</big>Average Score / 100</div>
+  <div class="card"><big>0</big>Total Tokens</div>
+  <div class="card"><big>0.0s</big>Total Wall Time</div>
+  <div class="card"><big>5</big>Tasks</div>
+</div>
+
+<h2>Task Results</h2>
+<table>
+<tr><th>Task</th><th>Latency</th><th>Prompt Tok</th><th>Completion Tok</th><th>Total Tok</th><th>Score</th><th>Artifact</th></tr>
+<tr>
+                <td>HTML5 Canvas Physics Demo</td>
+                <td>—s</td>
+                <td>—</td>
+                <td>—</td>
+                <td>0</td>
+                <td>47/100</td>
+                <td><a href="glm-physics-demo.html" target="_blank">Open</a></td>
+            </tr>
+<tr>
+                <td>Sakura One-Shot Website</td>
+                <td>—s</td>
+                <td>—</td>
+                <td>—</td>
+                <td>0</td>
+                <td>61/100</td>
+                <td><a href="glm-sakura-site.html" target="_blank">Open</a></td>
+            </tr>
+<tr>
+                <td>Enhanced Interactive Physics Demo</td>
+                <td>—s</td>
+                <td>—</td>
+                <td>—</td>
+                <td>0</td>
+                <td>89/100</td>
+                <td><a href="glm-physics-demo-enhanced.html" target="_blank">Open</a></td>
+            </tr>
+<tr>
+                <td>Physics Bug Fix</td>
+                <td>—s</td>
+                <td>—</td>
+                <td>—</td>
+                <td>0</td>
+                <td>51/100</td>
+                <td><a href="glm-physics-fixed.html" target="_blank">Open</a></td>
+            </tr>
+<tr>
+                <td>Physics Implementation Explanation</td>
+                <td>—s</td>
+                <td>—</td>
+                <td>—</td>
+                <td>0</td>
+                <td>90/100</td>
+                <td><a href="glm-physics-explanation.md" target="_blank">Open</a></td>
+            </tr>
+
+</table>
+
+<h2>Physics Demo (GLM 5.2 generated)</h2>
+<iframe src="glm-physics-demo.html" title="Physics Demo"></iframe>
+
+<h2>Enhanced Interactive Physics Demo</h2>
+<iframe src="glm-physics-demo-enhanced.html" title="Enhanced Physics Demo"></iframe>
+
+<h2>Sakura One-Shot Website</h2>
+<iframe src="glm-sakura-site.html" title="Sakura Site"></iframe>
+
+<h2>How the Sakura Website Was Built (with Fable 5)</h2>
+<p>The original post highlights Fable 5's ability to produce <strong>one-shot web designs</strong>.
+Fable 5's large output window lets it emit a complete, self-contained HTML file in a single generation:
+embedded SVG ink branches, CSS paper texture, JS petal physics, parallax layers, and responsive layout.
+No iterative coding or external assets required.</p>
+
+<h3>Prompt that would create the Sakura site</h3>
+<div class="prompt">
+<pre><code>Create a single self-contained HTML file for a premium Japanese "SAKURA" themed landing page in traditional sumi-e ink wash painting style. Use a soft cream/parchment paper texture background with subtle grain, SVG cherry blossom branches with ink-brush stroke filters, elegant Japanese-inspired serif typography for "SAKURA", animated falling petals via a lightweight JS particle system, subtle parallax depth, minimal navigation, and responsive full-bleed hero. No external images.</code></pre>
+</div>
+
+<h2>Bug Fix Explanation</h2>
+<div class="prompt">
+<pre><code>html
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;&lt;title&gt;Fixed Cars&lt;/title&gt;&lt;/head&gt;
+&lt;body&gt;
+&lt;canvas id=&quot;c&quot; width=&quot;800&quot; height=&quot;400&quot;&gt;&lt;/canvas&gt;
+&lt;script&gt;
+const ctx = document.getElementById(&#x27;c&#x27;).getContext(&#x27;2d&#x27;);
+const W = 800, H = 400;
+
+let cars = [
+  {x: -60,  y: 290, speed: 2,   color: &#x27;#d33&#x27;, wheelAngle: 0},
+  {x: -220, y: 290, speed: 3.2, color: &#x27;#33d&#x27;, wheelAngle: 0}
+];
+
+let bg = { clouds: 0, mountains: 0, hills: 0, road: 0 };
+
+const clouds = Array.from({length: 7}, (_, i) =&gt; ({
+  x: i * 260, y: 25 + (i * 37) % 70, s: 16 + (i * 13) % 12
+}));
+const mountains = Array.from({length: 8}, (_, i) =&gt; ({
+  x: i * 200, h: 45 + (i * 29) % 40
+}));
+const hills = Array.from({length: 10}, (_, i) =&gt; ({
+  x: i * 160, h: 25 + (i * 17) % 25
+}));
+
+const CLOUD_P = 7 * 260;
+const MOUNT_P = 8 * 200;
+const HILL_P  = 10 * 160;
+
+function wrapPos(x, period) {
+  let v = ((x % period) + period) % period;
+  if (v &gt; W + 50) v -= period;
+  return v;
+}
+
+function drawBackground(avgSpeed) {
+  let g = ctx.createLinearGradient(0, 0, 0, 320);
+  g.addColorStop(0, &#x27;#87ceeb&#x27;);
+  g.addColorStop(1, &#x27;#</code></pre>
+</div>
+
+<h2>Conclusion</h2>
+<p>GLM 5.2 (via Venice API as <code>zai-org-glm-5-2</code>) scored <strong>67.6/100</strong> on this combined artistic + physics benchmark.
+It is a capable low-cost model for producing interactive Canvas demos and aesthetic landing pages from rich natural-language prompts,
+though polish and physical realism may require a second iteration pass for production quality.</p>
+
+</body>
+</html>

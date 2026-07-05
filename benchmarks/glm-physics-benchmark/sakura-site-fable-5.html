@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SAKURA — 桜 | Ink & Blossom</title>
+<style>
+  :root{
+    --cream:#f5efe2;
+    --cream-deep:#ece3d0;
+    --paper:#f7f2e7;
+    --pink-pale:#f6dce2;
+    --pink-soft:#f0c4cf;
+    --rose-dusty:#d49aa7;
+    --rose-deep:#b97b8b;
+    --ink:#2e2a28;
+    --ink-soft:#4a4440;
+    --ink-faint:rgba(46,42,40,.55);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box}
+
+  html,body{height:100%;overflow-x:hidden}
+
+  body{
+    font-family:'Georgia','Yu Mincho','Hiragino Mincho ProN','Noto Serif JP',serif;
+    background:var(--cream);
+    color:var(--ink);
+    position:relative;
+  }
+
+  /* ---------- Paper texture ---------- */
+  .paper-bg{
+    position:fixed;
+    inset:0;
+    z-index:0;
+    background:
+      radial-gradient(ellipse 120% 90% at 20% 10%, rgba(246,220,226,.35) 0%, transparent 55%),
+      radial-gradient(ellipse 100% 80% at 85% 85%, rgba(212,154,167,.18) 0%, transparent 60%),
+      radial-gradient(ellipse 140% 120% at 50% 50%, var(--paper) 0%, var(--cream) 60%, var(--cream-deep) 100%);
+  }
+  .paper-grain{
+    position:fixed;
+    inset:0;
+    z-index:1;
+    pointer-events:none;
+    opacity:.5;
+    mix-blend-mode:multiply;
+  }
+
+  /* ---------- Ink wash background layer ---------- */
+  .ink-wash{
+    position:fixed;
+    inset:-5%;
+    width:110%;
+    height:110%;
+    z-index:2;
+    pointer-events:none;
+    will-change:transform;
+  }
+
+  /* ---------- Branch layer (midground) ---------- */
+  .branch-layer{
+    position:fixed;
+    inset:-3%;
+    width:106%;
+    height:106%;
+    z-index:3;
+    pointer-events:none;
+    will-change:transform;
+  }
+  .branch-layer svg{width:100%;height:100%}
+
+  /* ---------- Petal canvas (foreground) ---------- */
+  #petals{
+    position:fixed;
+    inset:0;
+    z-index:6;
+    pointer-events:none;
+  }
+
+  /* ---------- Navigation ---------- */
+  nav{
+    position:fixed;
+    top:0;left:0;right:0;
+    z-index:10;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:1.8rem 4vw;
+    animation:fadeDown 1.6s cubic-bezier(.22,.8,.3,1) both;
+  }
+  .nav-mark{
+    font-size:1.35rem;
+    letter-spacing:.45em;
+    font-weight:400;
+    color:var(--ink);
+    display:flex;
+    align-items:center;
+    gap:.7rem;
+  }
+  .nav-mark .seal{
+    width:34px;height:34px;
+    background:var(--rose-deep);
+    border-radius:6px;
+    display:flex;align-items:center;justify-content:center;
+    color:var(--cream);
+    font-size:1rem;
+    letter-spacing:0;
+    box-shadow:0 2px 8px rgba(185,123,139,.35);
+    transform:rotate(-3deg);
+  }
+  nav ul{
+    display:flex;
+    gap:3rem;
+    list-style:none;
+  }
+  nav a{
+    text-decoration:none;
+    color:var(--ink-soft);
+    font-size:.82rem;
+    letter-spacing:.28em;
+    text-transform:uppercase;
+    position:relative;
+    padding-bottom:4px;
+    transition:color .4s;
+  }
+  nav a::after{
+    content:'';
+    position:absolute;
+    left:50%;bottom:0;
+    width:0;height:1px;
+    background:var(--rose-deep);
+    transition:all .45s cubic-bezier(.22,.8,.3,1);
+  }
+  nav a:hover{color:var(--rose-deep)}
+  nav a:hover::after{left:0;width:100%}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;
+    z-index:5;
+    min-height:100vh;
+    min-height:100svh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:0 6vw;
+  }
+  .kanji-vertical{
+    position:absolute;
+    right:6vw;
+    top:50%;
+    transform:translateY(-50%);
+    writing-mode:vertical-rl;
+    font-size:clamp(1rem,1.6vw,1.4rem);
+    letter-spacing:.9em;
+    color:var(--ink-faint);
+    animation:fadeIn 2.4s 1s both;
+  }
+  .kanji-vertical::before{
+    content:'';
+    position:absolute;
+    top:-3.5rem;
+    left:50%;
+    width:1px;
+    height:2.6rem;
+    background:linear-gradient(to bottom,transparent,var(--rose-dusty));
+  }
+  .hero-eyebrow{
+    font-size:.78rem;
+    letter-spacing:.55em;
+    text-transform:uppercase;
+    color:var(--rose-deep);
+    margin-bottom:2.2rem;
+    animation:fadeUp 1.4s .3s cubic-bezier(.22,.8,.3,1) both;
+  }
+  h1{
+    font-size:clamp(4rem,14vw,11.5rem);
+    font-weight:400;
+    letter-spacing:.14em;
+    line-height:.95;
+    color:var(--ink);
+    text-indent:.14em;
+    animation:fadeUp 1.6s .55s cubic-bezier(.22,.8,.3,1) both;
+    position:relative;
+  }
+  h1 .accent{
+    color:var(--rose-deep);
+    font-style:italic;
+  }
+  .kanji-sub{
+    margin-top:1.4rem;
+    font-size:clamp(1.1rem,2.2vw,1.6rem);
+    letter-spacing:1.2em;
+    text-indent:1.2em;
+    color:var(--ink-soft);
+    animation:fadeUp 1.6s .8s cubic-bezier(.22,.8,.3,1) both;
+  }
+  .hero-divider{
+    width:80px;
+    height:1px;
+    margin:2.6rem auto 2.2rem;
+    background:linear-gradient(to right,transparent,var(--rose-dusty),transparent);
+    position:relative;
+    animation:fadeIn 2s 1.1s both;
+  }
+  .hero-divider::after{
+    content:'';
+    position:absolute;
+    left:50%;top:50%;
+    transform:translate(-50%,-50%) rotate(45deg);
+    width:7px;height:7px;
+    background:var(--pink-soft);
+    border-radius:50% 0;
+  }
+  .tagline{
+    font-size:clamp(1rem,1.9vw,1.35rem);
+    font-style:italic;
+    line-height:2;
+    color:var(--ink-faint);
+    max-width:34em;
+    animation:fadeUp 1.6s 1.2s cubic-bezier(.22,.8,.3,1) both;
+  }
+  .hero-cta{
+    margin-top:3rem;
+    display:flex;
+    gap:1.4rem;
+    animation:fadeUp 1.6s 1.5s cubic-bezier(.22,.8,.3,1) both;
+  }
+  .btn{
+    text-decoration:none;
+    font-size:.8rem;
+    letter-spacing:.3em;
+    text-transform:uppercase;
+    padding:1rem 2.6rem;
+    transition:all .45s cubic-bezier(.22,.8,.3,1);
+  }
+  .btn-primary{
+    color:var(--cream);
+    background:var(--ink);
+    box-shadow:0 6px 24px rgba(46,42,40,.22);
+  }
+  .btn-primary:hover{
+    background:var(--rose-deep);
+    box-shadow:0 8px 28px rgba(185,123,139,.4);
+    transform:translateY(-2px);
+  }
+  .btn-ghost{
+    color:var(--ink-soft);
+    border:1px solid rgba(46,42,40,.3);
+  }
+  .btn-ghost:hover{
+    border-color:var(--rose-deep);
+    color:var(--rose-deep);
+    transform:translateY(-2px);
+  }
+  .scroll-hint{
+    position:absolute;
+    bottom:2.4rem;
+    left:50%;
+    transform:translateX(-50%);
+    font-size:.68rem;
+    letter-spacing:.4em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    animation:fadeIn 2s 2s both;
+  }
+  .scroll-hint::after{
+    content:'';
+    display:block;
+    width:1px;height:34px;
+    margin:.8rem auto 0;
+    background:linear-gradient(to bottom,var(--rose-dusty),transparent);
+    animation:drip 2.4s ease-in-out infinite;
+  }
+
+  @keyframes fadeUp{from{opacity:0;transform:translateY(34px)}to{opacity:1;transform:none}}
+  @keyframes fadeDown{from{opacity:0;transform:translateY(-24px)}to{opacity:1;transform:none}}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  @keyframes drip{0%,100%{transform:scaleY(.4);transform-origin:top;opacity:.4}50%{transform:scaleY(1);opacity:1}}
+
+  @media(max-width:720px){
+    nav{padding:1.3rem 5vw}
+    nav ul{gap:1.4rem}
+    nav a{font-size:.68rem;letter-spacing:.18em}
+    .nav-mark{font-size:1rem;letter-spacing:.3em}
+    .kanji-vertical{display:none}
+    .hero-cta{flex-direction:column;align-items:center}
+    .kanji-sub{letter-spacing:.7em;text-indent:.7em}
+  }
+</style>
+</head>
+<body>
+
+<!-- Paper background -->
+<div class="paper-bg"></div>
+
+<!-- Grain texture (SVG turbulence noise) -->
+<svg class="paper-grain" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <filter id="grain">
+    <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch" result="noise"/>
+    <feColorMatrix in="noise" type="matrix" values="0 0 0 0 0.45  0 0 0 0 0.41  0 0 0 0 0.37  0 0 0 0.06 0"/>
+  </filter>
+  <rect width="100%" height="100%" filter="url(#grain)"/>
+</svg>
+
+<!-- Ink wash background layer (parallax: slowest) -->
+<svg class="ink-wash" id="inkWash" viewBox="0 0 1400 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="washBlur" x="-40%" y="-40%" width="180%" height="180%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.012 0.02" numOctaves="3" seed="7" result="t"/>
+      <feDisplacementMap in="SourceGraphic" in2="t" scale="90"/>
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+    <radialGradient id="washPink" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#eec3cd" stop-opacity=".5"/>
+      <stop offset="100%" stop-color="#eec3cd" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="washInk" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#5a534d" stop-opacity=".22"/>
+      <stop offset="100%" stop-color="#5a534d" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <g filter="url(#washBlur)">
+    <ellipse cx="220" cy="180" rx="360" ry="230" fill="url(#washInk)"/>
+    <ellipse cx="1150" cy="220" rx="420" ry="260" fill="url(#washPink)"/>
+    <ellipse cx="1050" cy="740" rx="480" ry="280" fill="url(#washInk)" opacity=".7"/>
+    <ellipse cx="320" cy="760" rx="400" ry="240" fill="url(#washPink)" opacity=".8"/>
+    <ellipse cx="700" cy="450" rx="520" ry="300" fill="url(#washPink)" opacity=".35"/>
+  </g>
+</svg>
+
+<!-- Sakura branches midground (parallax: medium) -->
+<div class="branch-layer" id="branchLayer">
+<svg viewBox="0 0 1400 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Ink brush stroke filter -->
+    <filter id="brush" x="-25%" y="-25%" width="150%" height="150%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.045 0.09" numOctaves="4" seed="3" result="rough"/>
+      <feDisplacementMap in="SourceGraphic" in2="rough" scale="9" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="brushHeavy" x="-30%" y="-30%" width="160%" height="160%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.03 0.07" numOctaves="4" seed="11" result="rough2"/>
+      <feDisplacementMap in="SourceGraphic" in2="rough2" scale="16" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="blossomSoft" x="-40%" y="-40%" width="180%" height="180%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.09" numOctaves="2" seed="5" result="bt"/>
+      <feDisplacementMap in="SourceGraphic" in2="bt" scale="5"/>
+      <feGaussianBlur stdDeviation=".6"/>
+    </filter>
+    <radialGradient id="blossomFill" cx="50%" cy="45%" r="60%">
+      <stop offset="0%" stop-color="#fbeef1"/>
+      <stop offset="55%" stop-color="#f0c4cf"/>
+      <stop offset="100%" stop-color="#d49aa7"/>
+    </radialGradient>
+    <radialGradient id="blossomFill2" cx="50%" cy="45%" r="60%">
+      <stop offset="0%" stop-color="#f6dce2"/>
+      <stop offset="100%" stop-color="#c98a99"/>
+    </radialGradient>
+
+    <!-- Reusable 5-petal blossom -->
+    <g id="blossom">
+      <g filter="url(#blossomSoft)">
+        <ellipse cx="0" cy="-7" rx="4.6" ry="6.6" fill="url(#blossomFill)" transform="rotate(0)"/>
+        <ellipse cx="0" cy="-7" rx="4.6" ry="6.6" fill="url(#blossomFill)" transform="rotate(72)"/>
+        <ellipse cx="0" cy="-7" rx="4.6" ry="6.6" fill="url(#blossomFill)" transform="rotate(144)"/>
+        <ellipse cx="0" cy="-7" rx="4.6" ry="6.6" fill="url(#blossomFill)" transform="rotate(216)"/>
+        <ellipse cx="0" cy="-7" rx="4.6" ry="6.6" fill="url(#blossomFill)" transform="rotate(288)"/>
+        <circle cx="0" cy="0" r="2.2" fill="#b97b8b"/>
+      </g>
+    </g>
+    <g id="bud">
+      <circle r="3.6" fill="url(#blossomFill2)" filter="url(#blossomSoft)"/>
+    </g>
+  </defs>
+
+  <!-- ===== Main branch: sweeps in from top-left ===== -->
+  <g filter="url(#brushHeavy)" stroke="#332e2b" fill="none" stroke-linecap="round">
+    <path d="M -40 60 C 160 90, 300 150, 430 240 C 520 300, 580 340, 660 360" stroke-width="14" opacity=".92"/>
+    <path d="M 300 150 C 360 220, 380 300, 370 380" stroke-width="7" opacity=".85"/>
+    <path d="M 430 240 C 500 220, 590 190, 690 195" stroke-width="6" opacity=".85"/>
+    <path d="M 560 330 C 620 380, 650 440, 655 500" stroke-width="5" opacity=".8"/>
+    <path d="M 660 360 C 730 370, 800 350, 850 320" stroke-width="5" opacity=".8"/>
+  </g>
+  <g filter="url(#brush)" stroke="#3d3733" fill="none" stroke-linecap="round">
+    <path d="M 370 380 C 365 430, 380 470, 405 500" stroke-width="3" opacity=".75"/>
+    <path d="M 690 195 C 740 185, 780 190, 815 205" stroke-width="3" opacity=".75"/>
+    <path d="M 850 320 C 895 305, 930 300, 965 305" stroke-width="3" opacity=".7"/>
+    <path d="M 655 500 C 665 540, 690 565, 720 580" stroke-width="2.6" opacity=".7"/>
+  </g>
+
+  <!-- ===== Secondary branch: from top-right ===== -->
+  <g filter="url(#brushHeavy)" stroke="#332e2b" fill="none" stroke-linecap="round">
+    <path d="M 1460 120 C 1300 140, 1180 200, 1090 290 C 1030 350, 990 400, 940 430" stroke-width="12" opacity=".9"/>
+    <path d="M 1180 200 C 1140 260, 1130 330, 1145 400" stroke-width="6" opacity=".8"/>
+    <path d="M 1090 290 C 1050 280, 1000 285, 960 305" stroke-width="5" opacity=".8"/>
+  </g>
+  <g filter="url(#brush)" stroke="#3d3733" fill="none" stroke-linecap="round">
+    <path d="M 1145 400 C 1155 450, 1150 495, 1130 530" stroke-width="3" opacity=".72"/>
+    <path d="M 940 430 C 905 460, 885 495, 880 530" stroke-width="3" opacity=".72"/>
+  </g>
+
+  <!-- ===== Low branch: bottom-left corner ===== -->
+  <g filter="url(#brushHeavy)" stroke="#332e2b" fill="none" stroke-linecap="round">
+    <path d="M -30 870 C 120 800, 240 760, 340 750 C 420 742, 470 750, 520 770" stroke-width="10" opacity=".85"/>
+    <path d="M 240 760 C 270 710, 320 680, 380 665" stroke-width="5" opacity=".78"/>
+  </g>
+  <g filter="url(#brush)" stroke="#3d3733" fill="none" stroke-linecap="round">
+    <path d="M 380 665 C 420 655, 460 658, 495 672" stroke-width="2.6" opacity=".7"/>
+  </g>
+
+  <!-- ===== Blossom clusters ===== -->
+  <g>
+    <!-- main branch clusters -->
+    <use href="#blossom" x="370" y="378" transform="translate(370,378) scale(1.5) rotate(12)" />
+    <use href="#blossom" transform="translate(404,502) scale(1.2) rotate(-20)"/>
+    <use href="#blossom" transform="translate(388,455) scale(.95) rotate(40)"/>
+    <use href="#blossom" transform="translate(690,193) scale(1.55) rotate(-8)"/>
+    <use href="#blossom" transform="translate(730,183) scale(1.1) rotate(30)"/>
+    <use href="#blossom" transform="translate(816,207) scale(1.3) rotate(66)"/>
+    <use href="#blossom" transform="translate(775,192) scale(.85) rotate(-45)"/>
+    <use href="#blossom" transform="translate(852,318) scale(1.45) rotate(15)"/>
+    <use href="#blossom" transform="translate(905,304) scale(1.05) rotate(-30)"/>
+    <use href="#blossom" transform="translate(966,306) scale(1.25) rotate(52)"/>
+    <use href="#blossom" transform="translate(656,502) scale(1.35) rotate(-14)"/>
+    <use href="#blossom" transform="translate(690,566) scale(1.0) rotate(24)"/>
+    <use href="#blossom" transform="translate(722,582) scale(1.2) rotate(-38)"/>
+    <use href="#bud" transform="translate(640,470) scale(1.2)"/>
+    <use href="#bud" transform="translate(840,190) scale(1.1)"/>
+    <use href="#bud" transform="translate(935,310) scale(1.3)"/>
+
+    <!-- right branch clusters -->
+    <use href="#blossom" transform="translate(1146,402) scale(1.5) rotate(20)"/>
+    <use href="#blossom" transform="translate(1130,532) scale(1.25) rotate(-25)"/>
+    <use href="#blossom" transform="translate(1152,466) scale(.9) rotate(50)"/>
+    <use href="#blossom" transform="translate(940,432) scale(1.4) rotate(-10)"/>
+    <use href="#blossom" transform="translate(882,530) scale(1.15) rotate(35)"/>
+    <use href="#blossom" transform="translate(902,478) scale(.9) rotate(-55)"/>
+    <use href="#bud" transform="translate(1115,555) scale(1.2)"/>
+    <use href="#bud" transform="translate(865,555) scale(1.1)"/>
+
+    <!-- low branch clusters -->
+    <use href="#blossom" transform="translate(382,663) scale(1.4) rotate(8)"/>
+    <use href="#blossom" transform="translate(497,674) scale(1.2) rotate(-28)"/>
+    <use href="#blossom" transform="translate(440,660) scale(.95) rotate(44)"/>
+    <use href="#blossom" transform="translate(520,772) scale(1.3) rotate(-12)"/>
+    <use href="#bud" transform="translate(470,690) scale(1.2)"/>
+  </g>
+</svg>
+</div>
+
+<!-- Foreground petals -->
+<canvas id="petals"></canvas>
+
+<!-- Navigation -->
+<nav>
+  <div class="nav-mark"><span class="seal">桜</span>SAKURA</div>
+  <ul>
+    <li><a href="#home">Home</a></li>
+    <li><a href="#story">Story</a></li>
+    <li><a href="#collection">Collection</a></li>
+    <li><a href="#visit">Visit</a></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<header class="hero" id="home">
+  <div class="kanji-vertical">花は桜木、人は武士</div>
+  <p class="hero-eyebrow">The Art of the Fleeting</p>
+  <h1>SAKU<span class="accent">RA</span></h1>
+  <p class="kanji-sub">桜　の　物　語</p>
+  <div class="hero-divider"></div>
+  <p class="tagline">Beneath ink-brushed branches, a thousand petals surrender to the wind —<br>beauty made perfect by the certainty of its passing.</p>
+  <div class="hero-cta">
+    <a href="#collection" class="btn btn-primary">Explore Collection</a>
+    <a href="#story" class="btn btn-ghost">Our Story</a>
+  </div>
+  <div class="scroll-hint">Scroll</div>
+</header>
+
+<script>
+(function(){
+  'use strict';
+
+  /* ============================================================
+     SAKURA PETAL PARTICLE SYSTEM
+     Slow, graceful fall · sinusoidal drift · soft rotation
+     Occasional gusts · periodic breezes · fade in/out
+  ============================================================ */
+  const canvas = document.getElementById('petals');
+  const ctx = canvas.getContext('2d');
+  let W, H, DPR;
+
+  function resize(){
+    DPR = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth;
+    H = window.innerHeight;
+    canvas.width  = W * DPR;
+    canvas.height = H * DPR;
+    canvas.style.width  = W + 'px';
+    canvas.style.height = H + 'px';
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const PETAL_COLORS = [
+    [246, 220, 226],  // pale pink
+    [240, 196, 207],  // soft pink
+    [212, 154, 167],  // dusty rose
+    [250, 235, 238],  // near-white pink
+    [201, 138, 153]   // deeper rose
+  ];
+
+  const rand = (a, b) => a + Math.random() * (b - a);
+
+  // Global wind state — slow, evolving breeze
+  const wind = {
+    base: 0,          // persistent horizontal push
+    gust: 0,          // transient gust force (x)
+    gustY: 0,         // transient vertical gust (negative = upward)
+    t: Math.random() * 1000
+  };
+
+  function petalCount(){
+    return Math.max(24, Math.min(70, Math.floor(W * H / 26000)));
+  }
+
+  class Petal {
+    constructor(initial){
+      this.reset(initial);
+    }
+    reset(initial){
+      // Depth: 0 (far) → 1 (near). Drives size, speed, opacity.
+      this.depth = Math.pow(Math.random(), 1.4);
+      this.size  = rand(5, 9) + this.depth * 8;
+
+      this.x = rand(-0.05 * W, 1.05 * W);
+      this.y = initial ? rand(-0.1 * H, H) : rand(-0.18 * H, -0.04 * H);
+
+      // Very slow terminal fall speed — real petals fall ~0.5–1.5 m/s
+      this.vy = rand(0.22, 0.5) + this.depth * 0.55;
+      this.vx = 0;
+
+      // Sinusoidal sway — each petal has its own rhythm
+      this.swayAmp   = rand(0.35, 1.1) * (0.6 + this.depth * 0.7);
+      this.swayFreq  = rand(0.006, 0.016);
+      this.swayPhase = rand(0, Math.PI * 2);
+      // Secondary slower sway for organic wandering
+      this.sway2Amp  = rand(0.15, 0.5);
+      this.sway2Freq = rand(0.0018, 0.005);
+
+      // Soft rotation + gentle flutter (3D-ish flip via scale)
+      this.rot      = rand(0, Math.PI * 2);
+      this.rotSpeed = rand(-0.012, 0.012);
+      this.flipPhase = rand(0, Math.PI * 2);
+      this.flipSpeed = rand(0.008, 0.022);
+
+      this.baseOpacity = rand(0.45, 0.9) * (0.5 + this.depth * 0.5);
+      this.color = PETAL_COLORS[Math.floor(Math.random() * PETAL_COLORS.length)];
+
+      this.life = 0;                 // frames alive → fade-in
+      this.fadeIn = rand(50, 110);   // frames to reach full opacity
+    }
+
+    update(t){
+      this.life++;
+
+      // Fall + sinusoidal side-to-side drift
+      const sway = Math.sin(t * this.swayFreq * 60 + this.swayPhase) * this.swayAmp
+                 + Math.sin(t * this.sway2Freq * 60 + this.swayPhase * 1.7) * this.sway2Amp;
+
+      // Wind influence scaled by depth (near petals catch more wind)
+      const windPush = (wind.base + wind.gust) * (0.5 + this.depth * 0.8);
+
+      this.vx += (sway * 0.06 + windPush * 0.05 - this.vx * 0.04);
+      const vyEff = this.vy + wind.gustY * (0.4 + this.depth * 0.6);
+
+      this.x += this.vx;
+      this.y += vyEff;
+
+      this.rot += this.rotSpeed + this.vx * 0.004;
+      this.flipPhase += this.flipSpeed;
+
+      // Wrap horizontally
+      if (this.x < -0.1 * W) this.x = 1.08 * W;
+      if (this.x >  1.1 * W) this.x = -0.08 * W;
+
+      // Respawn past bottom
+      if (this.y > H + 40) this.reset(false);
+    }
+
+    opacity(){
+      // Fade in at spawn
+      const fin = Math.min(1, this.life / this.fadeIn);
+      // Fade out over the bottom 18% of the viewport
+      const fadeZone = H * 0.18;
+      const fout = this.y > H - fadeZone
+        ? Math.max(0, 1 - (this.y - (H - fadeZone)) / fadeZone)
+        : 1;
+      return this.baseOpacity * fin * fout;
+    }
+
+    draw(ctx){
+      const o = this.opacity();
+      if (o <= 0.01) return;
+
+      const flip = 0.35 + 0.65 * Math.abs(Math.sin(this.flipPhase)); // fluttering width
+      const [r, g, b] = this.color;
+      const s = this.size;
+
+      ctx.save();
+      ctx.translate(this.x, this.y);
+      ctx.rotate(this.rot);
+      ctx.scale(flip, 1);
+      ctx.globalAlpha = o;
+
+      // Sakura petal: teardrop with notched tip
+      const grad = ctx.createLinearGradient(0, -s * 0.6, 0, s * 0.6);
+      grad.addColorStop(0, `rgba(${r},${g},${b},1)`);
+      grad.addColorStop(1, `rgba(${Math.max(0,r-32)},${Math.max(0,g-42)},${Math.max(0,b-30)},1)`);
+      ctx.fillStyle = grad;
+
+      ctx.beginPath();
+      ctx.moveTo(0, -s * 0.55);                                        // stem end
+      ctx.bezierCurveTo( s * 0.52, -s * 0.42,  s * 0.55,  s * 0.28,  s * 0.16, s * 0.5);
+      ctx.quadraticCurveTo(0, s * 0.28, -s * 0.16, s * 0.5);           // notch at tip
+      ctx.bezierCurveTo(-s * 0.55,  s * 0.28, -s * 0.52, -s * 0.42, 0, -s * 0.55);
+      ctx.closePath();
+      ctx.fill();
+
+      // Subtle center vein highlight
+      ctx.globalAlpha = o * 0.35;
+      ctx.strokeStyle = 'rgba(255,250,250,0.9)';
+      ctx.lineWidth = 0.6;
+      ctx.beginPath();
+      ctx.moveTo(0, -s * 0.4);
+      ctx.quadraticCurveTo(s * 0.05, 0, 0, s * 0.3);
+      ctx.stroke();
+
+      ctx.restore();
+    }
+  }
+
+  let petals = [];
+  function populate(){
+    const n = petalCount();
+    petals = [];
+    for (let i = 0; i < n; i++) petals.push(new Petal(true));
+  }
+  populate();
+  window.addEventListener('resize', () => {
+    const n = petalCount();
+    while (petals.length < n) petals.push(new Petal(true));
+    petals.length = n;
+  });
+
+  /* ---- Wind director: periodic breezes + occasional gusts ---- */
+  let nextGust = performance.now() + rand(6000, 14000);
+  function updateWind(now, t){
+    // Slow oscillating base breeze (period ~20-40s)
+    wind.base = Math.sin(t * 0.05) * 0.9 + Math.sin(t * 0.021 + 2.1) * 0.6;
+
+    // Trigger occasional gusts
+    if (now > nextGust){
+      const upward = Math.random() < 0.4; // sometimes lift petals upward
+      wind.gustTarget  = rand(1.5, 3.4) * (Math.random() < 0.5 ? -1 : 1);
+      wind.gustYTarget = upward ? -rand(0.5, 1.1) : 0;
+      wind.gustDecay = now + rand(1800, 3600);
+      nextGust = now + rand(7000, 16000);
+    }
+    // Ease gust in/out
+    if (wind.gustDecay && now < wind.gustDecay){
+      wind.gust  += ((wind.gustTarget  || 0) - wind.gust)  * 0.02;
+      wind.gustY += ((wind.gustYTarget || 0) - wind.gustY) * 0.02;
+    } else {
+      wind.gust  *= 0.985;
+      wind.gustY *= 0.985;
+    }
+  }
+
+  /* ---- Main loop ---- */
+  let last = performance.now();
+  function frame(now){
+    const t = now * 0.001;
+    updateWind(now, t);
+
+    ctx.clearRect(0, 0, W, H);
+    for (let i = 0; i < petals.length; i++){
+      pet

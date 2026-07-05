@@ -1,0 +1,18 @@
+Title: Elephant Adventure
+
+Welcome to Elephant Adventure, a simple game where you will navigate through a magical forest, encounter friendly elephants, and complete challenges to earn points!
+
+Game Overview:
+- You will start at the entrance of the forest.
+- You will encounter various obstacles and challenges.
+- You will meet friendly elephants who will give you hints and help.
+- Your goal is to reach the end of the forest and collect as many points as possible.
+
+How to Play:
+1. Read the description of each challenge.
+2. Choose the correct action to overcome the challenge.
+3. Collect points for each correct action.
+4. Avoid mistakes to lose points.
+5. Reach the end of the forest and see your final score.
+
+Let's start the game!

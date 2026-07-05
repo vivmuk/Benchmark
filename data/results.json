@@ -1,0 +1,287 @@
+{
+  "generated_at": "2026-07-05T19:46:37.843827+00:00",
+  "dry_run": true,
+  "models": [
+    {
+      "id": "openai-gpt-55",
+      "display": "GPT-5.5"
+    },
+    {
+      "id": "claude-fable-5",
+      "display": "Fable 5"
+    },
+    {
+      "id": "claude-opus-4-8",
+      "display": "Opus 4.8"
+    },
+    {
+      "id": "zai-org-glm-5-2",
+      "display": "GLM 5.2"
+    },
+    {
+      "id": "deepseek-v4-pro",
+      "display": "DeepSeek V4"
+    },
+    {
+      "id": "minimax-m3-preview",
+      "display": "MiniMax M3"
+    }
+  ],
+  "benchmarks": [
+    {
+      "id": "intent_understanding",
+      "name": "Intent Understanding",
+      "prompt": "I need something built for my team but I'm not sure what. We are overwhelmed by Slack notifications and duplicate work. Suggest a solution and ask clarifying questions before assuming details.",
+      "scoring": "manual: clarifying questions (0-40), structured proposal (0-30), avoids hallucination (0-30)"
+    },
+    {
+      "id": "one_shot_ui",
+      "name": "One-Shot UI Generation",
+      "prompt": "Generate a single self-contained HTML file for a dark-mode dashboard card showing a user's daily focus score, weekly trend sparkline, and a 'Start Focus' button. Use only HTML/CSS/JS. No external images.",
+      "scoring": "heuristic placeholder 70-95; real scoring is manual/LLM-judge"
+    },
+    {
+      "id": "long_horizon_agentic",
+      "name": "Long-Horizon Agentic Task",
+      "prompt": "Plan and outline a multi-step system to build an AI research assistant that: (1) monitors arXiv for papers, (2) summarizes them, (3) stores them in a vector DB, (4) answers user questions with citations. List the steps, tools needed, and potential failure modes.",
+      "scoring": "step count >= 4, mentions tools, mentions failure modes; total 100"
+    }
+  ],
+  "results": [
+    {
+      "model_id": "openai-gpt-55",
+      "benchmark_id": "intent_understanding",
+      "status": "ok",
+      "score": 84,
+      "latency": 7.551,
+      "prompt_tokens": 129,
+      "completion_tokens": 889,
+      "total_tokens": 1018,
+      "estimated_cost_usd": 0.02796,
+      "raw_response": "(GPT-5.5 sample) Before proposing a solution, could you clarify: 1. How large is the team? 2. Which Slack channels generate the most noise? 3. Where does duplicate work usually happen?\n\n**Preliminary proposal:**\n- A Slack digest bot\n- A shared task board integration\nThis depends on your workflow, so I'd like to confirm details first.",
+      "error": null
+    },
+    {
+      "model_id": "openai-gpt-55",
+      "benchmark_id": "one_shot_ui",
+      "status": "ok",
+      "score": 95,
+      "latency": 5.352,
+      "prompt_tokens": 108,
+      "completion_tokens": 530,
+      "total_tokens": 638,
+      "estimated_cost_usd": 0.01698,
+      "raw_response": "<!DOCTYPE html>\n<html>\n<head><style>body{background:#111;color:#eee}.card{{padding:16px}}</style></head>\n<body>\n<div class='card'><h2>Focus Score</h2><p>82</p><svg width='120' height='30'></svg><button onclick='start()'>Start Focus</button></div>\n<script>function start(){console.log('focus')}</script>\n</body>\n</html>",
+      "error": null
+    },
+    {
+      "model_id": "openai-gpt-55",
+      "benchmark_id": "long_horizon_agentic",
+      "status": "ok",
+      "score": 100,
+      "latency": 3.569,
+      "prompt_tokens": 86,
+      "completion_tokens": 315,
+      "total_tokens": 401,
+      "estimated_cost_usd": 0.01031,
+      "raw_response": "(GPT-5.5 sample) Plan:\n1. Step 1: Monitor arXiv via the arXiv API with a cron scheduler.\n2. Step 2: Summarize papers with an LLM.\n3. Step 3: Store embeddings in a vector database (Chroma/Pinecone).\n4. Step 4: Answer questions with retrieval + citations.\n5. Step 5: Add evaluation and monitoring.\n\nTools: arXiv API, embedding model, vector DB, LangChain.\nFailure modes: rate limits, hallucinated citations, stale index, API downtime.",
+      "error": null
+    },
+    {
+      "model_id": "claude-fable-5",
+      "benchmark_id": "intent_understanding",
+      "status": "ok",
+      "score": 84,
+      "latency": 16.8,
+      "prompt_tokens": 131,
+      "completion_tokens": 377,
+      "total_tokens": 508,
+      "estimated_cost_usd": 0.010096,
+      "raw_response": "(Fable 5 sample) Before proposing a solution, could you clarify: 1. How large is the team? 2. Which Slack channels generate the most noise? 3. Where does duplicate work usually happen?\n\n**Preliminary proposal:**\n- A Slack digest bot\n- A shared task board integration\nThis depends on your workflow, so I'd like to confirm details first.",
+      "error": null
+    },
+    {
+      "model_id": "claude-fable-5",
+      "benchmark_id": "one_shot_ui",
+      "status": "ok",
+      "score": 95,
+      "latency": 3.376,
+      "prompt_tokens": 71,
+      "completion_tokens": 569,
+      "total_tokens": 640,
+      "estimated_cost_usd": 0.014224,
+      "raw_response": "<!DOCTYPE html>\n<html>\n<head><style>body{background:#111;color:#eee}.card{{padding:16px}}</style></head>\n<body>\n<div class='card'><h2>Focus Score</h2><p>82</p><svg width='120' height='30'></svg><button onclick='start()'>Start Focus</button></div>\n<script>function start(){console.log('focus')}</script>\n</body>\n</html>",
+      "error": null
+    },
+    {
+      "model_id": "claude-fable-5",
+      "benchmark_id": "long_horizon_agentic",
+      "status": "ok",
+      "score": 100,
+      "latency": 12.552,
+      "prompt_tokens": 125,
+      "completion_tokens": 1060,
+      "total_tokens": 1185,
+      "estimated_cost_usd": 0.02644,
+      "raw_response": "(Fable 5 sample) Plan:\n1. Step 1: Monitor arXiv via the arXiv API with a cron scheduler.\n2. Step 2: Summarize papers with an LLM.\n3. Step 3: Store embeddings in a vector database (Chroma/Pinecone).\n4. Step 4: Answer questions with retrieval + citations.\n5. Step 5: Add evaluation and monitoring.\n\nTools: arXiv API, embedding model, vector DB, LangChain.\nFailure modes: rate limits, hallucinated citations, stale index, API downtime.",
+      "error": null
+    },
+    {
+      "model_id": "claude-opus-4-8",
+      "benchmark_id": "intent_understanding",
+      "status": "ok",
+      "score": 84,
+      "latency": 17.389,
+      "prompt_tokens": 111,
+      "completion_tokens": 312,
+      "total_tokens": 423,
+      "estimated_cost_usd": 0.025065,
+      "raw_response": "(Opus 4.8 sample) Before proposing a solution, could you clarify: 1. How large is the team? 2. Which Slack channels generate the most noise? 3. Where does duplicate work usually happen?\n\n**Preliminary proposal:**\n- A Slack digest bot\n- A shared task board integration\nThis depends on your workflow, so I'd like to confirm details first.",
+      "error": null
+    },
+    {
+      "model_id": "claude-opus-4-8",
+      "benchmark_id": "one_shot_ui",
+      "status": "ok",
+      "score": 95,
+      "latency": 9.455,
+      "prompt_tokens": 110,
+      "completion_tokens": 670,
+      "total_tokens": 780,
+      "estimated_cost_usd": 0.0519,
+      "raw_response": "<!DOCTYPE html>\n<html>\n<head><style>body{background:#111;color:#eee}.card{{padding:16px}}</style></head>\n<body>\n<div class='card'><h2>Focus Score</h2><p>82</p><svg width='120' height='30'></svg><button onclick='start()'>Start Focus</button></div>\n<script>function start(){console.log('focus')}</script>\n</body>\n</html>",
+      "error": null
+    },
+    {
+      "model_id": "claude-opus-4-8",
+      "benchmark_id": "long_horizon_agentic",
+      "status": "ok",
+      "score": 100,
+      "latency": 11.376,
+      "prompt_tokens": 100,
+      "completion_tokens": 481,
+      "total_tokens": 581,
+      "estimated_cost_usd": 0.037575,
+      "raw_response": "(Opus 4.8 sample) Plan:\n1. Step 1: Monitor arXiv via the arXiv API with a cron scheduler.\n2. Step 2: Summarize papers with an LLM.\n3. Step 3: Store embeddings in a vector database (Chroma/Pinecone).\n4. Step 4: Answer questions with retrieval + citations.\n5. Step 5: Add evaluation and monitoring.\n\nTools: arXiv API, embedding model, vector DB, LangChain.\nFailure modes: rate limits, hallucinated citations, stale index, API downtime.",
+      "error": null
+    },
+    {
+      "model_id": "zai-org-glm-5-2",
+      "benchmark_id": "intent_understanding",
+      "status": "ok",
+      "score": 84,
+      "latency": 4.775,
+      "prompt_tokens": 76,
+      "completion_tokens": 614,
+      "total_tokens": 690,
+      "estimated_cost_usd": 0.001918,
+      "raw_response": "(GLM 5.2 sample) Before proposing a solution, could you clarify: 1. How large is the team? 2. Which Slack channels generate the most noise? 3. Where does duplicate work usually happen?\n\n**Preliminary proposal:**\n- A Slack digest bot\n- A shared task board integration\nThis depends on your workflow, so I'd like to confirm details first.",
+      "error": null
+    },
+    {
+      "model_id": "zai-org-glm-5-2",
+      "benchmark_id": "one_shot_ui",
+      "status": "ok",
+      "score": 95,
+      "latency": 12.369,
+      "prompt_tokens": 133,
+      "completion_tokens": 971,
+      "total_tokens": 1104,
+      "estimated_cost_usd": 0.003046,
+      "raw_response": "<!DOCTYPE html>\n<html>\n<head><style>body{background:#111;color:#eee}.card{{padding:16px}}</style></head>\n<body>\n<div class='card'><h2>Focus Score</h2><p>82</p><svg width='120' height='30'></svg><button onclick='start()'>Start Focus</button></div>\n<script>function start(){console.log('focus')}</script>\n</body>\n</html>",
+      "error": null
+    },
+    {
+      "model_id": "zai-org-glm-5-2",
+      "benchmark_id": "long_horizon_agentic",
+      "status": "ok",
+      "score": 100,
+      "latency": 5.163,
+      "prompt_tokens": 106,
+      "completion_tokens": 352,
+      "total_tokens": 458,
+      "estimated_cost_usd": 0.001162,
+      "raw_response": "(GLM 5.2 sample) Plan:\n1. Step 1: Monitor arXiv via the arXiv API with a cron scheduler.\n2. Step 2: Summarize papers with an LLM.\n3. Step 3: Store embeddings in a vector database (Chroma/Pinecone).\n4. Step 4: Answer questions with retrieval + citations.\n5. Step 5: Add evaluation and monitoring.\n\nTools: arXiv API, embedding model, vector DB, LangChain.\nFailure modes: rate limits, hallucinated citations, stale index, API downtime.",
+      "error": null
+    },
+    {
+      "model_id": "deepseek-v4-pro",
+      "benchmark_id": "intent_understanding",
+      "status": "ok",
+      "score": 84,
+      "latency": 15.089,
+      "prompt_tokens": 120,
+      "completion_tokens": 573,
+      "total_tokens": 693,
+      "estimated_cost_usd": 0.001333,
+      "raw_response": "(DeepSeek V4 sample) Before proposing a solution, could you clarify: 1. How large is the team? 2. Which Slack channels generate the most noise? 3. Where does duplicate work usually happen?\n\n**Preliminary proposal:**\n- A Slack digest bot\n- A shared task board integration\nThis depends on your workflow, so I'd like to confirm details first.",
+      "error": null
+    },
+    {
+      "model_id": "deepseek-v4-pro",
+      "benchmark_id": "one_shot_ui",
+      "status": "ok",
+      "score": 95,
+      "latency": 11.19,
+      "prompt_tokens": 132,
+      "completion_tokens": 825,
+      "total_tokens": 957,
+      "estimated_cost_usd": 0.001894,
+      "raw_response": "<!DOCTYPE html>\n<html>\n<head><style>body{background:#111;color:#eee}.card{{padding:16px}}</style></head>\n<body>\n<div class='card'><h2>Focus Score</h2><p>82</p><svg width='120' height='30'></svg><button onclick='start()'>Start Focus</button></div>\n<script>function start(){console.log('focus')}</script>\n</body>\n</html>",
+      "error": null
+    },
+    {
+      "model_id": "deepseek-v4-pro",
+      "benchmark_id": "long_horizon_agentic",
+      "status": "ok",
+      "score": 100,
+      "latency": 11.593,
+      "prompt_tokens": 111,
+      "completion_tokens": 307,
+      "total_tokens": 418,
+      "estimated_cost_usd": 0.000742,
+      "raw_response": "(DeepSeek V4 sample) Plan:\n1. Step 1: Monitor arXiv via the arXiv API with a cron scheduler.\n2. Step 2: Summarize papers with an LLM.\n3. Step 3: Store embeddings in a vector database (Chroma/Pinecone).\n4. Step 4: Answer questions with retrieval + citations.\n5. Step 5: Add evaluation and monitoring.\n\nTools: arXiv API, embedding model, vector DB, LangChain.\nFailure modes: rate limits, hallucinated citations, stale index, API downtime.",
+      "error": null
+    },
+    {
+      "model_id": "minimax-m3-preview",
+      "benchmark_id": "intent_understanding",
+      "status": "ok",
+      "score": 84,
+      "latency": 11.362,
+      "prompt_tokens": 71,
+      "completion_tokens": 543,
+      "total_tokens": 614,
+      "estimated_cost_usd": 0.000897,
+      "raw_response": "(MiniMax M3 sample) Before proposing a solution, could you clarify: 1. How large is the team? 2. Which Slack channels generate the most noise? 3. Where does duplicate work usually happen?\n\n**Preliminary proposal:**\n- A Slack digest bot\n- A shared task board integration\nThis depends on your workflow, so I'd like to confirm details first.",
+      "error": null
+    },
+    {
+      "model_id": "minimax-m3-preview",
+      "benchmark_id": "one_shot_ui",
+      "status": "ok",
+      "score": 95,
+      "latency": 17.833,
+      "prompt_tokens": 91,
+      "completion_tokens": 963,
+      "total_tokens": 1054,
+      "estimated_cost_usd": 0.001577,
+      "raw_response": "<!DOCTYPE html>\n<html>\n<head><style>body{background:#111;color:#eee}.card{{padding:16px}}</style></head>\n<body>\n<div class='card'><h2>Focus Score</h2><p>82</p><svg width='120' height='30'></svg><button onclick='start()'>Start Focus</button></div>\n<script>function start(){console.log('focus')}</script>\n</body>\n</html>",
+      "error": null
+    },
+    {
+      "model_id": "minimax-m3-preview",
+      "benchmark_id": "long_horizon_agentic",
+      "status": "ok",
+      "score": 100,
+      "latency": 14.709,
+      "prompt_tokens": 90,
+      "completion_tokens": 1048,
+      "total_tokens": 1138,
+      "estimated_cost_usd": 0.001713,
+      "raw_response": "(MiniMax M3 sample) Plan:\n1. Step 1: Monitor arXiv via the arXiv API with a cron scheduler.\n2. Step 2: Summarize papers with an LLM.\n3. Step 3: Store embeddings in a vector database (Chroma/Pinecone).\n4. Step 4: Answer questions with retrieval + citations.\n5. Step 5: Add evaluation and monitoring.\n\nTools: arXiv API, embedding model, vector DB, LangChain.\nFailure modes: rate limits, hallucinated citations, stale index, API downtime.",
+      "error": null
+    }
+  ],
+  "total_estimated_cost_usd": 0.234832
+}

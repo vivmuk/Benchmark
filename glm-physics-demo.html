@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Bridge Traffic Physics</title>
+<style>
+  html, body { margin: 0; padding: 0; height: 100%; background: #05060a; overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+  #wrap { position: relative; width: 100vw; height: 100vh; }
+  canvas { display: block; width: 100%; height: 100%; cursor: crosshair; }
+
+  #title {
+    position: absolute; top: 22px; left: 50%; transform: translateX(-50%);
+    color: #f6f8ff; font-size: 22px; font-weight: 600; letter-spacing: 5px;
+    text-shadow: 0 2px 14px rgba(0,0,0,0.7), 0 0 26px rgba(120,160,255,0.25);
+    pointer-events: none; user-select: none; z-index: 5;
+  }
+
+  #panel {
+    position: absolute; top: 70px; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 18px; align-items: center; padding: 12px 18px;
+    background: rgba(12,16,28,0.55); backdrop-filter: blur(10px);
+    border: 1px solid rgba(120,160,255,0.18); border-radius: 14px;
+    color: #e8ecff; font-size: 13px; z-index: 6;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.45);
+  }
+  #panel label { display: flex; flex-direction: column; gap: 6px; min-width: 150px; }
+  #panel .row { display: flex; align-items: center; gap: 8px; }
+  #panel input[type=range] { width: 150px; accent-color: #6ea0ff; }
+  #panel button {
+    background: linear-gradient(180deg,#2a3554,#1a2238);
+    color: #e8ecff; border: 1px solid rgba(120,160,255,0.3);
+    padding: 9px 16px; border-radius: 9px; font-size: 13px; cursor: pointer;
+    transition: transform 0.12s ease, background 0.2s ease;
+  }
+  #panel button:hover { background: linear-gradient(180deg,#34406a,#222c46); transform: translateY(-1px); }
+  #panel button:active { transform: translateY(0); }
+  #panel .val { color: #8fb0ff; font-variant-numeric: tabular-nums; min-width: 38px; text-align: right; }
+  #hint {
+    position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%);
+    color: rgba(220,228,255,0.55); font-size: 12px; letter-spacing: 1px;
+    pointer-events: none; user-select: none; z-index: 5;
+  }
+</style>
+</head>
+<body>
+<div id="wrap">
+  <canvas id="c"></canvas>
+  <div id="title">BRIDGE TRAFFIC PHYSICS</div>
+  <div id="panel">
+    <label>
+      <span>Global Speed</span>
+      <div class="row">
+        <input id="speed" type="range" min="0" max="300" value="100">
+        <span class="val" id="speedVal">1.00x</span>
+      </div>
+    </label>
+    <button id="toggleTime">☀ Day</button>
+    <button id="clearCars">Clear Cars</button>
+  </div>
+  <div id="hint">Click on the road to spawn a car</div>
+</div>
+
+<script>
+(() => {
+  const canvas = document.getElementById('c');
+  const ctx = canvas.getContext('2d');
+  let W = 0, H = 0, DPR = Math.min(window.devicePixelRatio || 1, 2);
+
+  function resize() {
+    W = window.innerWidth; H = window.innerHeight;
+    canvas.width = W * DPR; canvas.height = H * DPR;
+    canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  // ---------- State ----------
+  let isNight = false;
+  let speedMult = 1.0;
+  const cars = [];
+  const MAX_CARS = 24;
+
+  // Road geometry (in CSS px). Road sits on the bridge deck.
+  // We'll define a horizon and a road that occupies the middle band.
+  const ROAD = {
+    topY: () => H * 0.55,        // far edge of road (horizon-ish)
+    bottomY: () => H * 0.78,     // near edge of road
+    leftX: () => 0,
+    rightX: () => W,
+  };
+
+  // ---------- Car ----------
+  const CAR_COLORS = [
+    '#d23b3b', '#3b6fd2', '#e0a72b', '#2bbf7a', '#9b4fd1',
+    '#e06a8a', '#3aa9c9', '#d97a2b', '#8a8f99', '#1d2230'
+  ];
+
+  function makeCar(x, dir) {
+    const lane = Math.floor(Math.random() * 2); // 0 or 1 lane offset
+    const baseY = ROAD.topY() + (ROAD.bottomY() - ROAD.topY()) * (0.55 + lane * 0.22);
+    const scale = 0.7 + (baseY - ROAD.topY()) / (ROAD.bottomY() - ROAD.topY()) * 0.6;
+    return {
+      x: x,
+      y: baseY,
+      dir: dir, // 1 = moving right, -1 = moving left
+      baseY: baseY,
+      scale: scale,
+      color: CAR_COLORS[Math.floor(Math.random() * CAR_COLORS.length)],
+      speed: 60 + Math.random() * 50, // px/sec base
+      wheelRot: 0,
+      bouncePhase: Math.random() * Math.PI * 2,
+      bounceAmp: 0.6 + Math.random() * 0.8,
+      width: 70,
+      height: 26,
+      lane: lane,
+    };
+  }
+
+  // Seed a few cars
+  function seedCars() {
+    for (let i = 0; i < 6; i++) {
+      const dir = Math.random() < 0.5 ? 1 : -1;
+      const x = Math.random() * W;
+      cars.push(makeCar(x, dir));
+    }
+  }
+  seedCars();
+
+  // ---------- Parallax layers ----------
+  // Distant mountains, hills, etc. We'll generate silhouettes.
+  function ridgePath(seed, amp, baseY, segments) {
+    const pts = [];
+    let r = seed;
+    const rand = () => { r = (r * 9301 + 49297) % 233280; return r / 233280; };
+    for (let i = 0; i <= segments; i++) {
+      const x = (i / segments) * W;
+      const y = baseY - Math.sin(i * 0.5 + seed) * amp * (0.5 + rand() * 0.8);
+      pts.push([x, y]);
+    }
+    return pts;
+  }
+
+  let mountains = [];
+  let hills = [];
+  function rebuildTerrain() {
+    mountains = ridgePath(12, 70, H * 0.5, 24);
+    hills = ridgePath(77, 40, H * 0.54, 30);
+  }
+  rebuildTerrain();
+  window.addEventListener('resize', rebuildTerrain);
+
+  // ---------- Bridge structure ----------
+  // The bridge deck is the road surface. Below it: trusses/cables, then water.
+  function drawBridge(t) {
+    const deckTop = ROAD.topY();
+    const deckBottom = ROAD.bottomY();
+    const midY = (deckTop + deckBottom) / 2;
+
+    // Support pillars below deck
+    const pillarSpacing = 220;
+    ctx.save();
+    for (let x = -((t * 0.02) % pillarSpacing); x < W + pillarSpacing; x += pillarSpacing) {
+      ctx.fillStyle = isNight ? '#1a2030' : '#5a6478';
+      ctx.fillRect(x - 12, deckBottom, 24, H - deckBottom);
+    }
+    ctx.restore();
+
+    // Suspension cables (parabolic curves) from two towers
+    const towerXs = [W * 0.25, W * 0.75];
+    const towerTop = deckTop - 140;
+    ctx.strokeStyle = isNight ? '#2a3450' : '#778099';
+    ctx.lineWidth = 2;
+    for (const tx of towerXs) {
+      // tower
+      ctx.fillStyle = isNight ? '#222c44' : '#8893ad';
+      ctx.fillRect(tx - 5, towerTop, 10, deckBottom - towerTop);
+      // main cable curve
+      ctx.beginPath();
+      for (let i = 0; i <= 40; i++) {
+        const px = tx - 200 + (i / 40) * 400;
+        const py = towerTop + Math.pow((px - tx) / 200, 2) * 90;
+        if (i === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+      }
+      ctx.stroke();
+      // vertical hangers
+      for (let i = 1; i < 10; i++) {
+        const px = tx - 200 + (i / 10) * 400;
+        const py = towerTop + Math.pow((px - tx) / 200, 2) * 90;
+        if (py < deckTop - 2) {
+          ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(px, deckTop); ctx.stroke();
+        }
+      }
+    }
+
+    // Deck surface (road)
+    const deckGrad = ctx.createLinearGradient(0, deckTop, 0, deckBottom);
+    if (isNight) {
+      deckGrad.addColorStop(0, '#15192a');
+      deckGrad.addColorStop(1, '#0c1020');
+    } else {
+      deckGrad.addColorStop(0, '#3a3f4d');
+      deckGrad.addColorStop(1, '#2a2f3d');
+    }
+    ctx.fillStyle = deckGrad;
+    ctx.fillRect(0, deckTop, W, deckBottom - deckTop);
+
+    // Lane markings (dashed center line)
+    ctx.strokeStyle = isNight ? 'rgba(240,220,120,0.5)' : 'rgba(255,235,140,0.85)';
+    ctx.lineWidth = 2;
+    ctx.setLineDash([22, 18]);
+    ctx.lineDashOffset = -(t * 0.06 * speedMult) % 40;
+    const laneY = deckTop + (deckBottom - deckTop) * 0.5;
+    ctx.beginPath(); ctx.moveTo(0, laneY); ctx.lineTo(W, laneY); ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Edge curbs
+    ctx.fillStyle = isNight ? '#1e2438' : '#6a7188';
+    ctx.fillRect(0, deckTop - 4, W, 4);
+    ctx.fillRect(0, deckBottom, W, 4);
+  }
+
+  // ---------- Water ----------
+  function drawWater(t) {
+    const waterTop = ROAD.bottomY() + 8;
+    const grad = ctx.createLinearGradient(0, waterTop, 0, H);
+    if (isNight) {
+      grad.addColorStop(0, '#0a1428');
+      grad.addColorStop(1, '#040814');
+    } else {
+      grad.addColorStop(0, '#2a6a9a');
+      grad.addColorStop(1, '#143a5a');
+    }
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, waterTop, W, H - waterTop);
+
+    // Ripple highlights
+    ctx.strokeStyle = isNight ? 'rgba(120,160,220,0.12)' : 'rgba(220,240,255,0.35)';
+    ctx.lineWidth = 1;
+    for (let i = 0; i < 8; i++) {
+      const y = waterTop + 10 + i * 18 + Math.sin(t * 0.001 + i) * 3;
+      ctx.beginPath();
+      ctx.moveTo(0, y);
+      for (let x = 0; x <= W; x += 20) {
+        ctx.lineTo(x, y + Math.sin(x * 0.02 + t * 0.002 + i) * 2);
+      }
+      ctx.stroke();
+    }
+
+    // Reflection of bridge towers (simple vertical smear)
+    ctx.fillStyle = isNight ? 'rgba(30,40,70,0.4)' : 'rgba(120,140,180,0.35)';
+    for (const tx of [W * 0.25, W * 0.75]) {
+      ctx.fillRect(tx - 5, waterTop, 10, 60);
+    }
+  }
+
+  // ---------- Sky ----------
+  function drawSky() {
+    const g = ctx.createLinearGradient(0, 0, 0, ROAD.topY());
+    if (isNight) {
+      g.addColorStop(0, '#05080f');
+      g.addColorStop(0.6, '#0c1226');
+      g.addColorStop(1, '#1a2240');
+    } else {
+      g.addColorStop(0, '#7fb8e8');
+      g.addColorStop(0.5, '#b8d8f0');
+      g.addColorStop(1, '#e8eef6');
+    }
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, W, ROAD.topY());
+
+    // Sun or Moon
+    if (isNight) {
+      ctx.fillStyle = '#e8ecf0';
+      ctx.beginPath(); ctx.arc(W * 0.82, H * 0.16, 26, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = 'rgba(10,16,30,0.85)';
+      ctx.beginPath(); ctx.arc(W * 0.82 - 9, H * 0.16 - 6, 22, 0, Math.PI * 2); ctx.fill();
+      // stars
+      ctx.fillStyle = 'rgba(255,255,255,0.8)';
+      for (let i = 0; i < 60; i++) {
+        const sx = (i * 137.5) % W;
+        const sy = (i * 73.3) % (H * 0.4);
+        ctx.fillRect(sx, sy, 1.2, 1.2);
+      }
+    } else {
+      ctx.fillStyle = '#fff6c8';
+      ctx.beginPath(); ctx.arc(W * 0.82, H * 0.18, 34, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = 'rgba(255,240,180,0.25)';
+      ctx.beginPath(); ctx.arc(W * 0.82, H * 0.18, 55, 0, Math.PI * 2); ctx.fill();
+      // clouds
+      ctx.fillStyle = 'rgba(255,255,255,0.7)';
+      for (let i = 0; i < 4; i++) {
+        const cx = (i * 240 + 80) % W;
+        const cy = 60 + (i % 2) * 40;
+        cloud(cx, cy, 40 + i * 8);
+      }
+    }
+  }
+  function cloud(x, y, r) {
+    ctx.beginPath();
+    ctx.arc(x, y, r * 0.6, 0, Math.PI * 2);
+    ctx.arc(x + r * 0.5, y + 4, r * 0.5, 0, Math.PI * 2);
+    ctx.arc(x - r * 0.5, y + 4, r * 0.45, 0, Math.PI * 2);
+    ctx.arc(x + r * 0.2, y - 8, r * 0.4, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  function drawTerrain() {
+    // Far mountains
+    ctx.fillStyle = isNight ? '#101628' : '#7a8aa8';
+    ctx.beginPath();
+    ctx.moveTo(0, ROAD.topY());
+    for (const [x, y] of mountains) ctx.lineTo(x, y);
+    ctx.lineTo(W, ROAD.topY()); ctx.closePath(); ctx.fill();
+
+    // Near hills
+    ctx.fillStyle = isNight ? '#0c1220' : '#5a7088';
+    ctx.beginPath();
+    ctx.moveTo(0, ROAD.topY());
+    for (const [x, y] of hills) ctx.lineTo(x, y);
+    ctx.lineTo(W, ROAD.topY()); ctx.closePath(); ctx.fill();
+  }
+
+  // ---------- Car drawing ----------
+  function drawCar(car, t) {
+    const w = car.width * car.scale;
+    const h = car.height * car.scale;
+    const bounce = Math.sin(t * 0.012 + car.bouncePhase) * car.bounceAmp;
+    const x = car.x;
+    const y = car.y + bounce;
+
+    ctx.save();
+    ctx.translate(x, y);
+    if (car.dir === -1) ctx.scale(-1, 1);
+
+    // Shadow
+    ctx.fillStyle = 'rgba(0,0,0,0.28)';
+    ctx.beginPath();
+    ctx.ellipse(0, h * 0.55, w * 0.55, h * 0.18, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Body lower
+    ctx.fillStyle = car.color;
+    roundRect(-w/2, -h*0.2, w, h*0.6, 6); ctx.fill();
+
+    // Cabin
+    ctx.fillStyle = shade(car.color, -20);
+    roundRect(-w*0.18, -h*0.55, w*0.5, h*0.4, 5); ctx.fill();
+
+    // Windows
+    ctx.fillStyle = isNight ? '#0a1020' : '#9fc4e0';
+    roundRect(-w*0.14, -h*0.5, w*0.18, h*0.32, 3); ctx.fill();
+    roundRect(w*0.06, -h*0.5, w*0.18, h*0.32, 3); ctx.fill();
+
+    // Wheels (rotating)
+    const wheelR = h * 0.28;
+    const wheelOffX = w * 0.32;
+    const wheelY = h * 0.32;
+    for (const wx of [-wheelOffX, wheelOffX]) {
+      ctx.fillStyle = '#0a0a0a';
+      ctx.beginPath(); ctx.arc(wx, wheelY, wheelR, 0, Math.PI * 2); ctx.fill();
+      // hub
+      ctx.fillStyle = '#888';
+      ctx.beginPath(); ctx.arc(wx, wheelY, wheelR * 0.45, 0, Math.PI * 2); ctx.fill();
+      // spokes (rotation)
+      ctx.strokeStyle = '#444';
+      ctx.lineWidth = 1.5;
+      for (let s = 0; s < 4; s++) {
+        const a = car.wheelRot + s * Math.PI / 2;
+        ctx.beginPath();
+        ctx.moveTo(wx, wheelY);
+        ctx.lineTo(wx + Math.cos(a) * wheelR * 0.42, wheelY + Math.sin(a) * wheelR * 0.42);
+        ctx.stroke();
+      }
+    }
+
+    // Headlights (front = right side in local space since dir handled by flip)
+    if (isNight) {
+      // headlight beam
+      ctx.fillStyle = 'rgba(255,240,180,0.18)';
+      ctx.beginPath();
+      ctx.moveTo(w/2, -h*0.05);
+      ctx.lineTo(w/2 + 60, -h*0.5);
+      ctx.lineTo(w/2 + 60, h*0.4);
+      ctx.closePath(); ctx.fill();
+
+      // headlight bulb
+      ctx.fillStyle = '#fff2c0';
+      ctx.beginPath(); ctx.arc(w/2 - 2, -h*0.05, 2.5, 0, Math.PI * 2); ctx.fill();
+      ctx.beginPath(); ctx.arc(w/2 - 2, h*0.2, 2.5, 0, Math.PI * 2); ctx.fill();
+
+      // taillight (rear = left)
+      ctx.fillStyle = '#ff3030';
+      ctx.beginPath(); ctx.arc(-w/2 + 2, -h*0.05, 2, 0, Math.PI * 2); ctx.fill();
+      ctx.beginPath(); ctx.arc(-w/2 + 2, h*0.2, 2, 0, Math.PI * 2); ctx.fill();
+      // taillight glow
+      ctx.fillStyle = 'rgba(255,40,40,0.22)';
+      ctx.beginPath(); ctx.arc(-w/2 + 2, -h*0.05, 6, 0, Math.PI * 2); ctx.fill();
+      ctx.beginPath(); ctx.arc(-w/2 + 2, h*0.2, 6, 0, Math.PI * 2); ctx.fill();
+    } else {
+      // Daytime: subtle headlight housings, no glow
+      ctx.fillStyle = '#e8e8d0';
+      ctx.beginPath(); ctx.arc(w/2 - 2, -h*0.05, 2, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = '#cc4040';
+      ctx.beginPath(); ctx.arc(-w/2 + 2, h*0.2, 1.8, 0, Math.PI * 2); ctx.fill();
+    }
+
+    ctx.restore();
+  }
+
+  function roundRect(x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.arcTo(x + w, y, x + w, y + h, r);
+    ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r);
+    ctx.arcTo(x, y, x + w, y, r);
+    ctx.closePath();
+  }
+
+  function shade(hex, amt) {
+    const c = hex.replace('#','');
+    let r = parseInt(c.substr(0,2),16) + amt;
+    let g = parseInt(c.substr(2,2),16) + amt;
+    let b = parseInt(c.substr(4,2),16) + amt;
+    r = Math.max(0, Math.min(255, r));
+    g = Math.max(0, Math.min(255, g));
+    b = Math.max(0, Math.min(255, b));
+    return '#' + [r,g,b].map(v => v.toString(16).padStart(2,'0')).join('');
+  }
+
+  // ---------- Night overlay (brightness) ----------
+  function drawNightOverlay() {
+    if (!isNight) return;
+    // Subtle vignette + blue tint to simulate darkness
+    const g = ctx.createRadialGradient(W/2, H/2, Math.min(W,H)*0.2, W/2, H/2, Math.max(W,H)*0.7);
+    g.addColorStop(0, 'rgba(0,0,0,0)');
+    g.addColorStop(1, 'rgba(0,5,15,0.55)');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, W, H);
+  }
+
+  // ---------- Update ----------
+  let last = performance.now();
+  function update(now) {
+    const dt = Math.min(0.05, (now - last) / 1000);
+    last = now;
+
+    for (const car of cars) {
+      car.x += car.dir * car.speed * speedMult * dt;
+      // wheel rotation proportional to speed
+      car.wheelRot += car.dir * car.speed * speedMult * dt * 0.12;
+      // wrap around
+      if (car.dir === 1 && car.x > W + 80) car.x = -80;
+      if (car.dir === -1 && car.x < -80) car.x = W + 80;
+    }
+
+    render(now);
+    requestAnimationFrame(update);
+  }
+
+  function render(t) {
+    ctx.clearRect(0, 0, W, H);
+    drawSky();
+    drawTerrain();
+    drawBridge(t);
+    // sort cars by y so nearer cars draw on top
+    const sorted = cars.slice().sort((a,b) => a.y - b.y);
+    for (const car of sorted) drawCar(car, t);
+    drawWater(t);
+    drawNightOverlay();
+  }
+
+  requestAnimationFrame(update);
+
+  // ---------- Interactions ----------
+  canvas.addEventListener('click', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    // Only spawn if click is on the road band
+    if (y >= ROAD.topY() - 6 && y <= ROAD.bottomY() + 6) {
+      if (cars.length >= MAX_CARS) cars.shift();
+      // Direction based on which lane half
+      const lane = (y - ROAD.topY()) / (ROAD.bottomY() - ROAD.topY());
+      const dir = lane < 0.5 ? 1 : -1; // far lane goes right, near lane goes left (visual variety)
+      const car = makeCar(x, dir);
+      // Place in the clicked lane
+      car.y = y;
+      car.baseY = y;
+      const t = (y - ROAD.topY()) / (ROAD.bottomY() - ROAD.topY());
+      car.scale = 0.7 + t * 0.6;
+      cars.push(car);
+    }
+  });
+
+  const speedInput = document.getElementById('speed');
+  const speedVal = document.getElementById('speedVal');
+  speedInput.addEventListener('input', () => {
+    speedMult = parseFloat(speedInput.value) / 100;
+    speedVal.textContent = speedMult.toFixed(2) + 'x';
+  });
+
+  const toggleBtn = document.getElementById('toggleTime');
+  toggleBtn.addEventListener('click', () => {
+    isNight = !isNight;
+    toggleBtn.textContent = isNight ? '☾ Night' : '☀ Day';
+    document.body.style.background = isNight ? '#05060a' : '#9bc4e8';
+  });
+
+  const clearBtn = document.getElementById('clearCars');
+  clearBtn.addEventListener('click', () => {
+    cars.length = 0;
+  });
+})();
+</script>
+</body>
+</html>

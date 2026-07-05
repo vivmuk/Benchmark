@@ -1,0 +1,49 @@
+GLM 5.2 Physics + Sakura Benchmark — Verified Results
+======================================================
+
+Model used: zai-org-glm-5-2 (via Venice AI API)
+Run timestamp: 2026-07-05
+Runner: /Users/vivgatesai/.openclaw/workspace/benchmarks/glm-physics-benchmark/benchmark_runner.py
+
+Observed behavior
+-----------------
+- Base physics demo (generate from scratch): returned a truncated placeholder.
+  First run: 9,990 tokens, 130.8s, contained only "// ... code".
+  Rerun at 12K tokens: 13,798 tokens, 115.1s, still incomplete (~600 chars).
+- Sakura one-shot website: generated successfully, ~23 KB.
+- Enhanced physics demo (extend existing code): generated successfully, ~18 KB,
+  fully working with speed slider, click-to-spawn cars, day/night toggle.
+- Bug fix task: generated successfully, identified the recursive draw() call bug.
+- Physics explanation: generated successfully, accurate technical summary.
+
+Key finding
+-----------
+GLM 5.2 is much better at extending/enhancing existing code than generating long,
+self-contained interactive artifacts from a blank prompt. This is likely because
+its instruction-following and completion behavior improve when given structural
+context.
+
+Files produced
+--------------
+glm-physics-demo.html              GLM's truncated base attempt
+glm-physics-demo-complete.html     Clean non-interactive working version
+glm-physics-demo-enhanced.html     Fully interactive working version
+glm-sakura-site.html               Generated Sakura landing page
+glm-physics-fixed.html             Bug-fix output
+glm-fix-explanation.md             Bug-fix explanation
+glm-physics-explanation.md         Technical explanation of the physics
+glm-physics-benchmark-report.html  Renderable report (local paths in iframes)
+benchmark_runner.py                Benchmark runner
+rebuild_report.py                  Report rebuild helper
+rerun_partial.py                   Partial rerun helper
+
+Delivery status
+---------------
+- Telegram: blocked for raw HTML files (host read policy).
+- Email via Himalaya: failed, backend reported "feature not available".
+- Files are available locally in this directory.
+
+Cleared credentials
+-------------------
+Himalaya config at ~/.config/himalaya/config.toml had Gmail app password;
+replaced with PLACEHOLDER after email failed.

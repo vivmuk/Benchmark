@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Paridhi Cross-Model Benchmark — July 4, 2026</title>
+  <style>
+    :root {
+      --cream: #FEFCF8;
+      --teal: #00D4AA;
+      --teal-dark: #00b894;
+      --ink: #1A1A2E;
+      --muted: #5A5A7A;
+      --card: #ffffff;
+      --border: rgba(26,26,46,0.08);
+      --radius: 18px;
+      --shadow: 0 14px 40px rgba(26,26,46,0.08);
+      --best: #e6faf5;
+      --best-border: #00D4AA;
+      --good: #fff9e6;
+      --good-border: #f5c542;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      line-height: 1.55;
+      padding: 48px 16px;
+    }
+    .container { max-width: 1000px; margin: 0 auto; }
+    header.hero {
+      text-align: center;
+      margin-bottom: 44px;
+    }
+    header.hero h1 {
+      font-family: Fraunces, Georgia, serif;
+      font-size: 2.6rem;
+      margin: 0 0 10px;
+      letter-spacing: -0.03em;
+    }
+    header.hero .subtitle {
+      color: var(--muted);
+      font-size: 1.1rem;
+      margin: 0;
+    }
+    header.hero .date {
+      display: inline-block;
+      margin-top: 14px;
+      font-size: 0.85rem;
+      color: var(--muted);
+      background: rgba(0,212,170,0.08);
+      padding: 6px 14px;
+      border-radius: 999px;
+    }
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      padding: 28px;
+      margin-bottom: 28px;
+    }
+    h2 {
+      font-family: Fraunces, Georgia, serif;
+      font-size: 1.5rem;
+      margin: 0 0 18px;
+    }
+    h3 {
+      font-family: Fraunces, Georgia, serif;
+      font-size: 1.2rem;
+      margin: 24px 0 12px;
+    }
+    p { margin: 0 0 14px; }
+    p:last-child { margin-bottom: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.95rem; margin: 16px 0; }
+    th, td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+    th {
+      font-weight: 700; color: var(--muted); font-size: 0.78rem;
+      text-transform: uppercase; letter-spacing: 0.04em;
+    }
+    tr:last-child td { border-bottom: none; }
+    .right { text-align: right; }
+    .center { text-align: center; }
+    .best { background: var(--best); font-weight: 700; }
+    .best td { border-bottom-color: var(--best-border); }
+    .good { background: var(--good); }
+    .metric-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 16px; margin: 18px 0;
+    }
+    .metric {
+      background: linear-gradient(135deg, #f7fffd 0%, #ffffff 100%);
+      border: 1px solid rgba(0,212,170,0.15); border-radius: 14px; padding: 18px; text-align: center;
+    }
+    .metric .value { font-family: Fraunces, Georgia, serif; font-size: 1.55rem; color: var(--teal-dark); margin-bottom: 4px; }
+    .metric .label { font-size: 0.82rem; color: var(--muted); }
+    .recommendation {
+      background: linear-gradient(135deg, #e6faf5 0%, #ffffff 100%);
+      border: 1px solid rgba(0,212,170,0.25); border-radius: 14px; padding: 20px;
+    }
+    .recommendation ul { margin: 0; padding-left: 20px; }
+    .recommendation li { margin-bottom: 8px; }
+    .small { font-size: 0.9rem; color: var(--muted); }
+    .footer { text-align: center; color: var(--muted); font-size: 0.85rem; margin-top: 40px; }
+    .tag {
+      display: inline-block; font-size: 0.72rem; font-weight: 700;
+      padding: 3px 8px; border-radius: 999px; margin-left: 6px;
+    }
+    .tag-primary { background: rgba(0,212,170,0.12); color: var(--teal-dark); }
+    .tag-fallback { background: rgba(90,90,122,0.1); color: var(--muted); }
+    .tag-budget { background: rgba(245,197,66,0.15); color: #8a6d0b; }
+    @media (max-width: 720px) {
+      header.hero h1 { font-size: 2rem; }
+      .card { padding: 20px; }
+      table { font-size: 0.85rem; }
+      th, td { padding: 10px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="hero">
+      <h1>🧬 Paridhi Cross-Model Benchmark</h1>
+      <p class="subtitle">All models tested today on OpenClaw-style agent tasks</p>
+      <span class="date">July 4, 2026 · Venice AI API</span>
+    </header>
+
+    <section class="card">
+      <h2>Executive Summary</h2>
+      <p>
+        Six models were evaluated across four pairwise benchmarks. Every model was tested with the same prompts,
+        same token limits, and same scoring criteria. The goal: pick the best primary and fallback models for
+        OpenClaw agent work.
+      </p>
+      <div class="metric-grid">
+        <div class="metric"><div class="value">Kimi K2.7-Code</div><div class="label">Best overall speed</div></div>
+        <div class="metric"><div class="value">MiMo-V2.5</div><div class="label">Best budget option</div></div>
+        <div class="metric"><div class="value">Sonnet 5</div><div class="label">Best Claude option</div></div>
+        <div class="metric"><div class="value">Qwen 3.7 Max</div><div class="label">Best 1M context fallback</div></div>
+      </div>
+      <div class="recommendation">
+        <strong>Final routing recommendation:</strong>
+        <ul>
+          <li><strong>Primary:</strong> Kimi K2.7-Code — fastest across the board, cheap enough, code-specialized.</li>
+          <li><strong>Budget fallback:</strong> MiMo-V2.5 — 1M context, 4–5× cheaper, good when speed is less critical.</li>
+          <li><strong>Long-context fallback:</strong> Qwen 3.7 Max — 1M context and strong reasoning, slower than Kimi.</li>
+          <li><strong>Premium Claude option:</strong> Sonnet 5 — excellent quality, but ~5–6× more expensive than Kimi.</li>
+          <li><strong>Avoid:</strong> Fable 5 for routine work; use only when 128K output is genuinely needed.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Model Specs</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Model</th>
+            <th class="center">Context</th>
+            <th class="center">Max Out</th>
+            <th class="right">Input / 1M</th>
+            <th class="right">Output / 1M</th>
+            <th>Focus</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="best"><td>Kimi K2.7-Code <span class="tag tag-primary">PRIMARY</span></td><td class="center">262K</td><td class="center">65K</td><td class="right">$0.612</td><td class="right">$3.07</td><td>Code / agentic</td></tr>
+          <tr class="good"><td>MiMo-V2.5 <span class="tag tag-budget">BUDGET</span></td><td class="center">1M</td><td class="center">131K</td><td class="right">$0.10</td><td class="right">$0.28</td><td>General / multimodal</td></tr>
+          <tr><td>Qwen 3.7 Max <span class="tag tag-fallback">FALLBACK</span></td><td class="center">1M</td><td class="center">66K</td><td class="right">$1.25</td><td class="right">$3.75</td><td>Reasoning / agentic</td></tr>
+          <tr><td>Claude Sonnet 5</td><td class="center">1M</td><td class="center">64K</td><td class="right">$3.00</td><td class="right">$15.00</td><td>Code / agentic</td></tr>
+          <tr><td>Claude Fable 5</td><td class="center">1M</td><td class="center">128K</td><td class="right">$12.00</td><td class="right">$60.00</td><td>Reasoning / agentic</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="card">
+      <h2>Per-Benchmark Results</h2>
+
+      <h3>1. Kimi K2.7-Code vs MiMo-V2.5 (6 tests)</h3>
+      <table>
+        <thead>
+          <tr><th>Test</th><th class="right">Kimi Time</th><th class="right">MiMo Time</th><th class="center">Speed Winner</th><th class="center">Cost Winner</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Long-Context Memory</td><td class="right">13.56s</td><td class="right">10.03s</td><td class="center">MiMo</td><td class="center">MiMo</td></tr>
+          <tr class="best"><td>Multi-Step Reasoning</td><td class="right">32.26s</td><td class="right">70.14s</td><td class="center">Kimi</td><td class="center">MiMo</td></tr>
+          <tr class="best"><td>Code Generation</td><td class="right">61.12s</td><td class="right">84.95s</td><td class="center">Kimi</td><td class="center">MiMo</td></tr>
+          <tr class="best"><td>Tool Use & Structured Output</td><td class="right">51.66s</td><td class="right">65.15s</td><td class="center">Kimi</td><td class="center">MiMo</td></tr>
+          <tr class="best"><td>Instruction Following</td><td class="right">52.02s</td><td class="right">74.77s</td><td class="center">Kimi</td><td class="center">MiMo</td></tr>
+          <tr class="best"><td>Sustained Attention</td><td class="right">39.80s</td><td class="right">63.28s</td><td class="center">Kimi</td><td class="center">MiMo</td></tr>
+        </tbody>
+      </table>
+      <p class="small">Kimi wins 5 of 6 on speed; MiMo wins on cost every time.</p>
+
+      <h3>2. Kimi K2.7-Code vs Qwen 3.7 Max (4 tests)</h3>
+      <table>
+        <thead>
+          <tr><th>Test</th><th class="right">Kimi Time</th><th class="right">Qwen Time</th><th class="center">Speed Winner</th><th class="center">Cost Winner</th></tr>
+        </thead>
+        <tbody>
+          <tr class="best"><td>Long-Context Memory</td><td class="right">9.07s</td><td class="right">35.47s</td><td class="center">Kimi</td><td class="center">Kimi</td></tr>
+          <tr class="best"><td>Multi-Step Reasoning</td><td class="right">55.93s</td><td class="right">64.58s</td><td class="center">Kimi</td><td class="center">Kimi</td></tr>
+          <tr class="best"><td>Code Generation</td><td class="right">53.60s</td><td class="right">75.64s</td><td class="center">Kimi</td><td class="center">Kimi</td></tr>
+          <tr class="best"><td>Instruction Following</td><td class="right">52.54s</td><td class="right">75.53s</td><td class="center">Kimi</td><td class="center">Kimi</td></tr>
+        </tbody>
+      </table>
+      <p class="small">Kimi is faster and cheaper across all four tests.</p>
+
+      <h3>3. Claude Sonnet 5 vs Claude Fable 5 (5 tests)</h3>
+      <table>
+        <thead>
+          <tr><th>Test</th><th class="right">Sonnet Time</th><th class="right">Fable Time</th><th class="center">Speed Winner</th><th class="center">Cost Winner</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Long-Context Memory</td><td class="right">12.38s</td><td class="right">11.47s</td><td class="center">Fable</td><td class="center">Sonnet</td></tr>
+          <tr class="best"><td>Multi-Step Reasoning</td><td class="right">45.28s</td><td class="right">50.06s</td><td class="center">Sonnet</td><td class="center">Sonnet</td></tr>
+          <tr class="best"><td>Code Generation</td><td class="right">42.97s</td><td class="right">48.13s</td><td class="center">Sonnet</td><td class="center">Sonnet</td></tr>
+          <tr class="best"><td>Instruction Following</td><td class="right">33.30s</td><td class="right">45.68s</td><td class="center">Sonnet</td><td class="center">Sonnet</td></tr>
+          <tr><td>Sustained Attention</td><td class="right">8.71s</td><td class="right">4.45s</td><td class="center">Fable</td><td class="center">Sonnet</td></tr>
+        </tbody>
+      </table>
+      <p class="small">Sonnet wins 3 of 5 on speed and all 5 on cost. Fable returned a 4-token empty response on the sustained-attention test.</p>
+    </section>
+
+    <section class="card">
+      <h2>Cross-Model Cost Leaderboard (per comparable run)</h2>
+      <table>
+        <thead>
+          <tr><th>Model</th><th class="right">Total Cost</th><th class="right">Tests</th><th class="right">Avg / Test</th><th class="center">Context</th></tr>
+        </thead>
+        <tbody>
+          <tr class="best"><td>Kimi K2.7-Code</td><td class="right">$0.0455</td><td class="right">4</td><td class="right">$0.0114</td><td class="center">262K</td></tr>
+          <tr><td>MiMo-V2.5</td><td class="right">~$0.02–0.03</td><td class="right">4–6</td><td class="right">~$0.005</td><td class="center">1M</td></tr>
+          <tr><td>Qwen 3.7 Max</td><td class="right">$0.0627</td><td class="right">4</td><td class="right">$0.0157</td><td class="center">1M</td></tr>
+          <tr><td>Claude Sonnet 5</td><td class="right">$0.2577</td><td class="right">5</td><td class="right">$0.0515</td><td class="center">1M</td></tr>
+          <tr><td>Claude Fable 5</td><td class="right">$0.9725</td><td class="right">5</td><td class="right">$0.1945</td><td class="center">1M</td></tr>
+        </tbody>
+      </table>
+      <p class="small">MiMo is the cheapest absolute option; Kimi is the cheapest high-performance option. Claude models are an order of magnitude more expensive.</p>
+    </section>
+
+    <section class="card">
+      <h2>Head-to-Head Win Matrix</h2>
+      <table>
+        <thead>
+          <tr><th>Matchup</th><th class="center">Speed Winner</th><th class="center">Cost Winner</th><th class="center">Quality Edge</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Kimi vs MiMo</td><td class="center">Kimi (5/6)</td><td class="center">MiMo</td><td class="center">Kimi</td></tr>
+          <tr><td>Kimi vs Qwen</td><td class="center">Kimi (4/4)</td><td class="center">Kimi</td><td class="center">Kimi</td></tr>
+          <tr><td>Sonnet vs Fable</td><td class="center">Sonnet (3/5)</td><td class="center">Sonnet</td><td class="center">Sonnet</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="card">
+      <h2>Quality Notes</h2>
+      <ul>
+        <li><strong>Kimi K2.7-Code:</strong> Consistently produced structured, correct answers. Best at code generation and instruction following.</li>
+        <li><strong>MiMo-V2.5:</strong> Good value, occasionally verbose. File-count answers were sometimes inconsistent (7 vs 10 vs 13).</li>
+        <li><strong>Qwen 3.7 Max:</strong> Reasoning was solid but responses were slower and sometimes included visible "thinking" preamble.</li>
+        <li><strong>Claude Sonnet 5:</strong> Clean, concise, accurate. Highest-quality output among all models tested.</li>
+        <li><strong>Claude Fable 5:</strong> Reasoning-heavy outputs were good, but it produced a near-empty response on the ambiguous sustained-attention task.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Final Routing Matrix for OpenClaw</h2>
+      <table>
+        <thead>
+          <tr><th>Task Type</th><th>Primary</th><th>Fallback</th><th>Budget Option</th></tr>
+        </thead>
+        <tbody>
+          <tr class="best"><td>Code generation / refactoring</td><td>Kimi K2.7-Code</td><td>Sonnet 5</td><td>MiMo-V2.5</td></tr>
+          <tr class="best"><td>Multi-step reasoning</td><td>Kimi K2.7-Code</td><td>Qwen 3.7 Max</td><td>MiMo-V2.5</td></tr>
+          <tr class="best"><td>Long-context memory</td><td>Kimi K2.7-Code</td><td>Qwen 3.7 Max / MiMo-V2.5</td><td>MiMo-V2.5</td></tr>
+          <tr class="best"><td>Instruction following</td><td>Kimi K2.7-Code</td><td>Sonnet 5</td><td>MiMo-V2.5</td></tr>
+          <tr><td>Very long outputs (>64K)</td><td>Fable 5</td><td>MiMo-V2.5</td><td>MiMo-V2.5</td></tr>
+          <tr><td>Premium quality, cost irrelevant</td><td>Sonnet 5</td><td>Kimi K2.7-Code</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="card">
+      <h2>Sources</h2>
+      <p class="small">
+        Individual reports: <code>benchmarks/model-benchmark/results/benchmark_20260704_060837.md</code> (Kimi vs MiMo),
+        <code>benchmark_20260704_064827.md</code> (Kimi vs Qwen),
+        <code>benchmark_20260704_090924.md</code> (Sonnet vs Fable).
+      </p>
+    </section>
+
+    <footer class="footer">
+      Generated by Paridhi · Combined comparison · July 4, 2026
+    </footer>
+  </div>
+</body>
+</html>

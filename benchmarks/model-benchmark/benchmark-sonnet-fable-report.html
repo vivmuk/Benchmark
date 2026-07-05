@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Paridhi Model Benchmark — Claude Sonnet 5 vs Claude Fable 5</title>
+  <style>
+    :root {
+      --cream: #FEFCF8;
+      --teal: #00D4AA;
+      --teal-dark: #00b894;
+      --ink: #1A1A2E;
+      --muted: #5A5A7A;
+      --card: #ffffff;
+      --border: rgba(26,26,46,0.08);
+      --radius: 18px;
+      --shadow: 0 14px 40px rgba(26,26,46,0.08);
+      --winner: #e6faf5;
+      --winner-border: #00D4AA;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      line-height: 1.55;
+      padding: 48px 16px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    header.hero {
+      text-align: center;
+      margin-bottom: 44px;
+    }
+    header.hero h1 {
+      font-family: Fraunces, Georgia, serif;
+      font-size: 2.6rem;
+      margin: 0 0 10px;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+    }
+    header.hero .subtitle {
+      color: var(--muted);
+      font-size: 1.1rem;
+      margin: 0;
+    }
+    header.hero .date {
+      display: inline-block;
+      margin-top: 14px;
+      font-size: 0.85rem;
+      color: var(--muted);
+      background: rgba(0,212,170,0.08);
+      padding: 6px 14px;
+      border-radius: 999px;
+    }
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      padding: 28px;
+      margin-bottom: 28px;
+    }
+    h2 {
+      font-family: Fraunces, Georgia, serif;
+      font-size: 1.5rem;
+      margin: 0 0 18px;
+      color: var(--ink);
+    }
+    h3 {
+      font-family: Fraunces, Georgia, serif;
+      font-size: 1.25rem;
+      margin: 28px 0 14px;
+      color: var(--ink);
+    }
+    h3:first-child { margin-top: 0; }
+    p { margin: 0 0 14px; }
+    p:last-child { margin-bottom: 0; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+      margin: 16px 0;
+    }
+    th, td {
+      padding: 12px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    th {
+      font-weight: 700;
+      color: var(--muted);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    tr:last-child td { border-bottom: none; }
+    .right { text-align: right; }
+    .center { text-align: center; }
+    .winner { background: var(--winner); font-weight: 700; }
+    .winner td { border-bottom-color: var(--winner-border); }
+
+    .specs { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .spec-card {
+      background: linear-gradient(135deg, #f7fffd 0%, #ffffff 100%);
+      border: 1px solid rgba(0,212,170,0.18);
+      border-radius: 14px;
+      padding: 18px;
+    }
+    .spec-card h4 { margin: 0 0 10px; font-size: 1.05rem; color: var(--teal-dark); }
+    .spec-card ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 0.92rem; }
+    .spec-card li { margin-bottom: 6px; }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 16px;
+      margin: 18px 0;
+    }
+    .metric {
+      background: linear-gradient(135deg, #f7fffd 0%, #ffffff 100%);
+      border: 1px solid rgba(0,212,170,0.15);
+      border-radius: 14px;
+      padding: 18px;
+      text-align: center;
+    }
+    .metric .value {
+      font-family: Fraunces, Georgia, serif;
+      font-size: 1.6rem;
+      color: var(--teal-dark);
+      margin-bottom: 4px;
+    }
+    .metric .label {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .recommendation {
+      background: linear-gradient(135deg, #e6faf5 0%, #ffffff 100%);
+      border: 1px solid rgba(0,212,170,0.25);
+      border-radius: 14px;
+      padding: 20px;
+    }
+    .recommendation ul { margin: 0; padding-left: 20px; }
+    .recommendation li { margin-bottom: 8px; }
+
+    .note {
+      background: #fff9e6;
+      border: 1px solid rgba(245, 166, 35, 0.25);
+      border-radius: 12px;
+      padding: 14px 16px;
+      font-size: 0.92rem;
+      color: #6b5400;
+    }
+
+    .footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 640px) {
+      .specs { grid-template-columns: 1fr; }
+      header.hero h1 { font-size: 2rem; }
+      .card { padding: 20px; }
+      table { font-size: 0.85rem; }
+      th, td { padding: 10px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="hero">
+      <h1>🧬 Paridhi Model Benchmark</h1>
+      <p class="subtitle">Claude Sonnet 5 vs Claude Fable 5 — Long-Context Agent Task Suite</p>
+      <span class="date">July 4, 2026 · 09:09 EDT · Venice AI API</span>
+    </header>
+
+    <section class="card">
+      <h2>Executive Summary</h2>
+      <p>
+        This report compares Anthropic's two newest Claude models on OpenClaw-style agent tasks:
+        long-context memory, multi-step reasoning, code generation, instruction following, and sustained attention.
+        Both models share a 1M-token context window, but they differ sharply in price and behavior.
+      </p>
+      <div class="metric-grid">
+        <div class="metric">
+          <div class="value">4×</div>
+          <div class="label">Sonnet 5 cheaper per token</div>
+        </div>
+        <div class="metric">
+          <div class="value">3 of 5</div>
+          <div class="label">Speed wins for Sonnet 5</div>
+        </div>
+        <div class="metric">
+          <div class="value">$0.26</div>
+          <div class="label">Sonnet 5 total cost</div>
+        </div>
+        <div class="metric">
+          <div class="value">$0.97</div>
+          <div class="label">Fable 5 total cost</div>
+        </div>
+      </div>
+      <div class="recommendation">
+        <strong>Bottom line:</strong> For OpenClaw agent work, <strong>Claude Sonnet 5</strong> is the clear primary — it is faster on the majority of tests, dramatically cheaper, and fully capable on every task. Reserve <strong>Claude Fable 5</strong> only when you need its 128K output ceiling or a second opinion on reasoning-heavy problems.
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Model Specifications</h2>
+      <div class="specs">
+        <div class="spec-card">
+          <h4>Claude Sonnet 5</h4>
+          <ul>
+            <li>Context window: 1M tokens</li>
+            <li>Max output: 64K tokens</li>
+            <li>Pricing: $3.00 / $15.00 per 1M</li>
+            <li>Focus: Code / agentic tasks</li>
+          </ul>
+        </div>
+        <div class="spec-card">
+          <h4>Claude Fable 5</h4>
+          <ul>
+            <li>Context window: 1M tokens</li>
+            <li>Max output: 128K tokens</li>
+            <li>Pricing: $12.00 / $60.00 per 1M</li>
+            <li>Focus: Reasoning / agentic tasks</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Speed & Cost Comparison</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Test</th>
+            <th class="center">Weight</th>
+            <th class="right">Sonnet 5 Time</th>
+            <th class="right">Sonnet 5 Cost</th>
+            <th class="right">Fable 5 Time</th>
+            <th class="right">Fable 5 Cost</th>
+            <th class="center">Speed Winner</th>
+            <th class="center">Cheapest</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="winner">
+            <td>Long-Context Memory</td>
+            <td class="center">20%</td>
+            <td class="right">12.38s</td>
+            <td class="right">$0.0282</td>
+            <td class="right">11.47s</td>
+            <td class="right">$0.1142</td>
+            <td class="center">Fable 5</td>
+            <td class="center">Sonnet 5</td>
+          </tr>
+          <tr class="winner">
+            <td>Multi-Step Reasoning</td>
+            <td class="center">20%</td>
+            <td class="right">45.28s</td>
+            <td class="right">$0.0705</td>
+            <td class="right">50.06s</td>
+            <td class="right">$0.2589</td>
+            <td class="center">Sonnet 5</td>
+            <td class="center">Sonnet 5</td>
+          </tr>
+          <tr class="winner">
+            <td>Code Generation</td>
+            <td class="center">20%</td>
+            <td class="right">42.97s</td>
+            <td class="right">$0.0705</td>
+            <td class="right">48.13s</td>
+            <td class="right">$0.2817</td>
+            <td class="center">Sonnet 5</td>
+            <td class="center">Sonnet 5</td>
+          </tr>
+          <tr class="winner">
+            <td>Instruction Following</td>
+            <td class="center">15%</td>
+            <td class="right">33.30s</td>
+            <td class="right">$0.0706</td>
+            <td class="right">45.68s</td>
+            <td class="right">$0.2824</td>
+            <td class="center">Sonnet 5</td>
+            <td class="center">Sonnet 5</td>
+          </tr>
+          <tr class="winner">
+            <td>Sustained Attention</td>
+            <td class="center">10%</td>
+            <td class="right">8.71s</td>
+            <td class="right">$0.0179</td>
+            <td class="right">4.45s</td>
+            <td class="right">$0.0352</td>
+            <td class="center">Fable 5</td>
+            <td class="center">Sonnet 5</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="color: var(--muted); font-size: 0.9rem;">
+        Winner rows highlight the faster model. Sonnet 5 wins 3 of 5 speed matchups and is cheapest in all five.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Cost Summary (All Tests)</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Model</th>
+            <th class="right">Total Cost</th>
+            <th class="right">Input Tokens</th>
+            <th class="right">Output Tokens</th>
+            <th class="right">Avg Cost / Test</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="winner">
+            <td>Claude Sonnet 5</td>
+            <td class="right">$0.2577</td>
+            <td class="right">17,389</td>
+            <td class="right">13,703</td>
+            <td class="right">$0.0515</td>
+          </tr>
+          <tr>
+            <td>Claude Fable 5</td>
+            <td class="right">$0.9725</td>
+            <td class="right">17,349</td>
+            <td class="right">12,738</td>
+            <td class="right">$0.1945</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="color: var(--muted); font-size: 0.9rem;">
+        Nearly identical input sizes, similar total output — yet Fable 5 costs 3.8× more for the same work.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Observations by Test</h2>
+
+      <h3>1. Long-Context Memory (20%)</h3>
+      <p>
+        Both models correctly answered all six questions. Fable 5 was marginally faster (11.47s vs 12.38s)
+        and slightly more thorough, adding a note about the hard-coded cache TTL. Sonnet 5's answer was more concise.
+        Cost gap is the story: Sonnet 5 cost $0.0282 vs Fable 5's $0.1142 (4×).
+      </p>
+
+      <h3>2. Multi-Step Reasoning (20%)</h3>
+      <p>
+        Both produced solid cascading-failure analyses. Sonnet 5 finished in 45.28s, Fable 5 in 50.06s.
+        Fable 5's output included a useful ASCII flow diagram; Sonnet 5's was more compact.
+        Again, Sonnet 5 was ~3.7× cheaper for comparable quality.
+      </p>
+
+      <h3>3. Code Generation (20%)</h3>
+      <p>
+        Both generated complete, production-style Redis + Lua sliding-window rate limiters.
+        Sonnet 5 was faster (42.97s vs 48.13s) and cheaper. Fable 5's module opened with strong design notes.
+        Neither contained placeholders.
+      </p>
+
+      <h3>4. Instruction Following (15%)</h3>
+      <p>
+        Sonnet 5 was meaningfully faster here: 33.30s vs 45.68s, and still 4× cheaper.
+        This task rewards literal constraint adherence; both models attempted the format, but Sonnet 5 delivered more quickly.
+      </p>
+
+      <h3>5. Sustained Attention (10%)</h3>
+      <p>
+        The prompt referenced files that were not actually included in context.
+        Sonnet 5 correctly flagged the missing content and asked for the files — a desirable "I don't know" response.
+        Fable 5 returned a near-empty 4-token response in only 4.45s, which is unhelpful.
+        Sonnet 5 wins on usefulness despite being slower on the clock.
+      </p>
+      <div class="note">
+        <strong>Note:</strong> The "Sustained Attention" prompt was intentionally underspecified (file paths without contents). Sonnet 5 handled the ambiguity honestly; Fable 5 did not engage.
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Comparison with Prior Benchmarks</h2>
+      <p>
+        These results sit on top of earlier Paridhi runs:
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Benchmark</th>
+            <th class="right">Primary Cost</th>
+            <th class="right">Fallback Cost</th>
+            <th class="center">Speed Winner</th>
+            <th class="center">Cost Winner</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="winner">
+            <td>Kimi K2.7-Code vs MiMo-V2.5</td>
+            <td class="right">~$0.06</td>
+            <td class="right">~$0.02</td>
+            <td class="center">Kimi</td>
+            <td class="center">MiMo</td>
+          </tr>
+          <tr class="winner">
+            <td>Kimi K2.7-Code vs Qwen 3.7 Max</td>
+            <td class="right">$0.0455</td>
+            <td class="right">$0.0627</td>
+            <td class="center">Kimi</td>
+            <td class="center">Kimi</td>
+          </tr>
+          <tr>
+            <td>Claude Sonnet 5 vs Claude Fable 5</td>
+            <td class="right">$0.2577</td>
+            <td class="right">$0.9725</td>
+            <td class="center">Sonnet 5</td>
+            <td class="center">Sonnet 5</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="color: var(--muted); font-size: 0.9rem;">
+        Claude models are materially more expensive than Kimi/Qwen/MiMo on Venice, but Sonnet 5's per-test cost is still ~4× lower than Fable 5's.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Recommendations for OpenClaw</h2>
+      <div class="recommendation">
+        <ul>
+          <li><strong>Primary model for code & agent tasks:</strong> Claude Sonnet 5 — faster on 3 of 5 tests, 4× cheaper than Fable 5, and fully capable.</li>
+          <li><strong>Fallback for very long outputs:</strong> Claude Fable 5 — only when the 128K output ceiling or a reasoning-heavy second opinion justifies the 4× premium.</li>
+          <li><strong>Cost-sensitive work:</strong> Sonnet 5 wins across the board; even vs. other Venice models, it is competitive on speed.</li>
+          <li><strong>When to avoid Fable 5:</strong> Standard code generation, instruction-following, and routine long-context retrieval are not worth the extra cost.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Methodology</h2>
+      <p>
+        Tests were executed through the Venice AI chat completions API with identical prompts and
+        <code>max_tokens=4096</code>. Each test was run once per model (no retries). Costs were computed from actual
+        prompt and completion token counts using the per-model pricing published on Venice AI.
+        Timing is end-to-end latency from request to first complete response.
+      </p>
+    </section>
+
+    <footer class="footer">
+      Generated by Paridhi · Benchmark suite: benchmarks/model-benchmark/run_sonnet_fable.py
+    </footer>
+  </div>
+</body>
+</html>

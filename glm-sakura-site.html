@@ -1,0 +1,719 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SAKURA — 桜</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;700;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f4ecd8;
+    --paper-2:#efe6cf;
+    --ink:#1a1612;
+    --ink-soft:#3a322a;
+    --ink-wash:#6b5d4f;
+    --sakura:#f7c6d8;
+    --sakura-deep:#e58aae;
+    --sakura-pale:#fde4ee;
+    --vermillion:#a83232;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box}
+
+  html,body{
+    height:100%;
+    overflow-x:hidden;
+  }
+
+  body{
+    font-family:"Shippori Mincho","Cormorant Garamond",Georgia,serif;
+    background:var(--paper);
+    color:var(--ink);
+    position:relative;
+    min-height:100vh;
+  }
+
+  /* Paper grain overlay */
+  .grain{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:50;
+    opacity:.35;
+    mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.1 0 0 0 0 0.08 0 0 0 0 0.06 0 0 0 0.5 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+
+  /* Paper texture gradient */
+  .paper-bg{
+    position:fixed;
+    inset:0;
+    z-index:-3;
+    background:
+      radial-gradient(ellipse at 20% 10%, #fbf3df 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 90%, #e8dcc0 0%, transparent 60%),
+      radial-gradient(ellipse at 50% 50%, #f4ecd8 0%, #e9dcbf 100%);
+  }
+
+  /* Background ink wash layer */
+  .ink-wash{
+    position:fixed;
+    inset:0;
+    z-index:-2;
+    pointer-events:none;
+    opacity:.55;
+  }
+
+  /* Midground branches */
+  .midground{
+    position:fixed;
+    inset:0;
+    z-index:-1;
+    pointer-events:none;
+  }
+
+  /* Foreground petals canvas */
+  #petals{
+    position:fixed;
+    inset:0;
+    z-index:5;
+    pointer-events:none;
+  }
+
+  /* Navigation */
+  nav{
+    position:fixed;
+    top:0;left:0;right:0;
+    z-index:20;
+    padding:28px 48px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    backdrop-filter:blur(2px);
+    background:linear-gradient(to bottom, rgba(244,236,216,0.4), transparent);
+  }
+
+  .brand{
+    font-family:"Shippori Mincho",serif;
+    font-weight:800;
+    font-size:22px;
+    letter-spacing:.4em;
+    color:var(--ink);
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .brand .kanji{
+    font-size:18px;
+    color:var(--vermillion);
+    letter-spacing:0;
+  }
+
+  .nav-links{
+    display:flex;
+    gap:42px;
+    list-style:none;
+  }
+  .nav-links a{
+    text-decoration:none;
+    color:var(--ink-soft);
+    font-size:13px;
+    letter-spacing:.32em;
+    text-transform:uppercase;
+    font-weight:500;
+    position:relative;
+    padding:4px 0;
+    transition:color .4s ease;
+  }
+  .nav-links a::after{
+    content:"";
+    position:absolute;
+    left:50%;bottom:0;
+    width:0;height:1px;
+    background:var(--vermillion);
+    transition:all .4s ease;
+    transform:translateX(-50%);
+  }
+  .nav-links a:hover{color:var(--ink)}
+  .nav-links a:hover::after{width:100%}
+
+  /* Hero */
+  .hero{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:120px 24px 80px;
+    position:relative;
+    z-index:2;
+  }
+
+  .hero-kanji{
+    font-family:"Shippori Mincho",serif;
+    font-weight:500;
+    font-size:clamp(28px,4vw,42px);
+    color:var(--ink-wash);
+    letter-spacing:.5em;
+    margin-bottom:24px;
+    opacity:0;
+    animation:fadeUp 1.6s ease .3s forwards;
+  }
+
+  .hero-title{
+    font-family:"Shippori Mincho",serif;
+    font-weight:800;
+    font-size:clamp(80px,18vw,240px);
+    line-height:.9;
+    letter-spacing:.08em;
+    color:var(--ink);
+    position:relative;
+    opacity:0;
+    animation:fadeUp 1.8s ease .6s forwards;
+  }
+
+  .hero-title .accent{
+    color:var(--sakura-deep);
+    font-style:italic;
+    font-weight:500;
+  }
+
+  .divider{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    margin:36px 0 28px;
+    opacity:0;
+    animation:fadeUp 1.6s ease 1s forwards;
+  }
+  .divider .line{
+    width:80px;height:1px;
+    background:var(--ink-wash);
+  }
+  .divider .dot{
+    width:6px;height:6px;
+    border-radius:50%;
+    background:var(--vermillion);
+  }
+
+  .tagline{
+    font-family:"Cormorant Garamond",serif;
+    font-style:italic;
+    font-weight:300;
+    font-size:clamp(16px,2vw,22px);
+    color:var(--ink-soft);
+    max-width:560px;
+    line-height:1.7;
+    letter-spacing:.04em;
+    opacity:0;
+    animation:fadeUp 1.6s ease 1.2s forwards;
+  }
+
+  .tagline .jp{
+    display:block;
+    font-family:"Shippori Mincho",serif;
+    font-style:normal;
+    font-size:14px;
+    color:var(--ink-wash);
+    letter-spacing:.3em;
+    margin-top:14px;
+  }
+
+  .scroll-cue{
+    position:absolute;
+    bottom:40px;
+    left:50%;
+    transform:translateX(-50%);
+    font-size:11px;
+    letter-spacing:.4em;
+    color:var(--ink-wash);
+    text-transform:uppercase;
+    opacity:0;
+    animation:fadeUp 1.6s ease 1.6s forwards, float 2.4s ease-in-out 2.2s infinite;
+  }
+  .scroll-cue::after{
+    content:"";
+    display:block;
+    width:1px;height:40px;
+    background:var(--ink-wash);
+    margin:14px auto 0;
+  }
+
+  @keyframes fadeUp{
+    from{opacity:0;transform:translateY(24px)}
+    to{opacity:1;transform:translateY(0)}
+  }
+  @keyframes float{
+    0%,100%{transform:translateX(-50%) translateY(0)}
+    50%{transform:translateX(-50%) translateY(8px)}
+  }
+
+  /* Story section */
+  section.story{
+    padding:160px 24px;
+    max-width:1100px;
+    margin:0 auto;
+    position:relative;
+    z-index:3;
+  }
+
+  .section-label{
+    font-size:11px;
+    letter-spacing:.5em;
+    color:var(--vermillion);
+    text-transform:uppercase;
+    margin-bottom:20px;
+    text-align:center;
+  }
+
+  .section-title{
+    font-family:"Shippori Mincho",serif;
+    font-weight:700;
+    font-size:clamp(36px,6vw,72px);
+    text-align:center;
+    color:var(--ink);
+    margin-bottom:48px;
+    letter-spacing:.04em;
+  }
+
+  .story-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:80px;
+    align-items:center;
+  }
+  .story-text p{
+    font-family:"Cormorant Garamond",serif;
+    font-size:18px;
+    line-height:1.9;
+    color:var(--ink-soft);
+    margin-bottom:22px;
+  }
+  .story-text p:first-letter{
+    font-family:"Shippori Mincho",serif;
+    font-size:42px;
+    float:left;
+    line-height:1;
+    padding:6px 10px 0 0;
+    color:var(--vermillion);
+  }
+  .story-visual{
+    position:relative;
+    aspect-ratio:3/4;
+    background:linear-gradient(135deg, #f0e6cf, #e6d9b8);
+    border:1px solid rgba(26,22,18,0.08);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+  }
+
+  /* Collection */
+  section.collection{
+    padding:120px 24px 160px;
+    max-width:1300px;
+    margin:0 auto;
+    position:relative;
+    z-index:3;
+  }
+  .collection-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:32px;
+    margin-top:60px;
+  }
+  .card{
+    aspect-ratio:4/5;
+    background:linear-gradient(160deg, #f5ecd6, #e8dab9);
+    position:relative;
+    overflow:hidden;
+    cursor:pointer;
+    transition:transform .6s cubic-bezier(.2,.8,.2,1);
+  }
+  .card:hover{transform:translateY(-8px)}
+  .card-info{
+    position:absolute;
+    bottom:0;left:0;right:0;
+    padding:24px;
+    background:linear-gradient(to top, rgba(244,236,216,.95), transparent);
+  }
+  .card-info h3{
+    font-family:"Shippori MinMincho",serif;
+    font-weight:700;
+    font-size:22px;
+    color:var(--ink);
+    margin-bottom:6px;
+  }
+  .card-info span{
+    font-size:11px;
+    letter-spacing:.3em;
+    color:var(--ink-wash);
+    text-transform:uppercase;
+  }
+
+  /* Visit */
+  section.visit{
+    padding:120px 24px 200px;
+    text-align:center;
+    position:relative;
+    z-index:3;
+    max-width:800px;
+    margin:0 auto;
+  }
+  .visit-info{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:32px;
+    margin-top:48px;
+  }
+  .visit-info .item{
+    padding:24px 12px;
+  }
+  .visit-info .item .label{
+    font-size:10px;
+    letter-spacing:.4em;
+    color:var(--vermillion);
+    text-transform:uppercase;
+    margin-bottom:10px;
+  }
+  .visit-info .item .value{
+    font-family:"Shippori Mincho",serif;
+    font-size:16px;
+    color:var(--ink);
+    line-height:1.6;
+  }
+
+  footer{
+    text-align:center;
+    padding:40px 24px;
+    border-top:1px solid rgba(26,22,18,0.1);
+    font-size:11px;
+    letter-spacing:.3em;
+    color:var(--ink-wash);
+    text-transform:uppercase;
+    position:relative;
+    z-index:3;
+  }
+
+  /* Hanko seal */
+  .seal{
+    position:absolute;
+    width:54px;height:54px;
+    background:var(--vermillion);
+    color:#f4ecd8;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:"Shippori Mincho",serif;
+    font-weight:700;
+    font-size:22px;
+    transform:rotate(-4deg);
+    box-shadow:0 2px 8px rgba(168,50,50,.3);
+  }
+
+  @media (max-width:860px){
+    nav{padding:20px 24px}
+    .nav-links{gap:22px}
+    .nav-links a{font-size:11px;letter-spacing:.2em}
+    .story-grid{grid-template-columns:1fr;gap:40px}
+    .collection-grid{grid-template-columns:1fr;gap:24px}
+    .visit-info{grid-template-columns:1fr;gap:20px}
+    .brand{font-size:16px;letter-spacing:.3em}
+  }
+  @media (max-width:560px){
+    .nav-links a span{display:none}
+    .nav-links a:first-child::before{content:"Home"}
+  }
+</style>
+</head>
+<body>
+
+<div class="paper-bg"></div>
+
+<!-- Background ink wash -->
+<svg class="ink-wash" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="washBlur"><feGaussianBlur stdDeviation="22"/></filter>
+    <filter id="brushRough">
+      <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" seed="7"/>
+      <feDisplacementMap in="SourceGraphic" scale="14"/>
+      <feGaussianBlur stdDeviation="1.2"/>
+    </filter>
+    <radialGradient id="washGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#3a322a" stop-opacity="0.5"/>
+      <stop offset="60%" stop-color="#6b5d4f" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#6b5d4f" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="mountainGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a1612" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#1a1612" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <!-- Distant mountain suggestion -->
+  <path d="M0,620 Q200,540 380,580 T720,560 T1080,590 T1440,570 L1440,900 L0,900 Z"
+        fill="url(#mountainGrad)" filter="url(#washBlur)"/>
+  <!-- Soft ink wash blobs -->
+  <ellipse cx="220" cy="280" rx="320" ry="180" fill="url(#washGrad)" filter="url(#washBlur)"/>
+  <ellipse cx="1200" cy="380" rx="280" ry="160" fill="url(#washGrad)" filter="url(#washBlur)"/>
+  <ellipse cx="720" cy="700" rx="400" ry="120" fill="url(#washGrad)" filter="url(#washBlur)" opacity="0.6"/>
+</svg>
+
+<!-- Midground branches -->
+<svg class="midground" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="brush" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.025" numOctaves="3" seed="3"/>
+      <feDisplacementMap in="SourceGraphic" scale="18"/>
+      <feGaussianBlur stdDeviation="0.6"/>
+    </filter>
+    <filter id="brushSoft" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" seed="9"/>
+      <feDisplacementMap in="SourceGraphic" scale="10"/>
+      <feGaussianBlur stdDeviation="1.4"/>
+    </filter>
+    <radialGradient id="blossomGrad" cx="50%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#fde4ee"/>
+      <stop offset="60%" stop-color="#f7c6d8"/>
+      <stop offset="100%" stop-color="#e58aae" stop-opacity="0.7"/>
+    </radialGradient>
+    <radialGradient id="blossomGrad2" cx="50%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#fff0f6"/>
+      <stop offset="70%" stop-color="#f9cddd"/>
+      <stop offset="100%" stop-color="#e89bb9" stop-opacity="0.6"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Top-left branch -->
+  <g filter="url(#brush)" stroke="#1a1612" fill="none" stroke-linecap="round">
+    <path d="M-20,120 C80,140 160,100 240,160 S380,200 460,180 S560,220 640,200" stroke-width="6" opacity="0.85"/>
+    <path d="M120,150 C160,180 180,230 200,290" stroke-width="3" opacity="0.7"/>
+    <path d="M280,170 C300,210 320,260 340,310" stroke-width="2.5" opacity="0.65"/>
+    <path d="M380,185 C400,225 410,275 420,330" stroke-width="2" opacity="0.6"/>
+    <path d="M500,195 C520,235 540,285 560,340" stroke-width="2" opacity="0.55"/>
+    <path d="M180,250 C210,270 240,290 280,300" stroke-width="1.5" opacity="0.5"/>
+    <path d="M340,290 C370,310 400,320 440,325" stroke-width="1.5" opacity="0.5"/>
+  </g>
+
+  <!-- Top-right branch (mirrored, lighter) -->
+  <g filter="url(#brush)" stroke="#1a1612" fill="none" stroke-linecap="round" opacity="0.7">
+    <path d="M1460,80 C1360,100 1280,60 1200,120 S1080,160 1000,140 S900,180 820,160" stroke-width="5"/>
+    <path d="M1320,110 C1300,150 1280,200 1260,260" stroke-width="2.5"/>
+    <path d="M1180,130 C1160,170 1140,220 1120,280" stroke-width="2"/>
+    <path d="M1060,145 C1040,185 1020,235 1000,295" stroke-width="1.8"/>
+    <path d="M940,155 C920,195 900,245 880,305" stroke-width="1.5"/>
+  </g>
+
+  <!-- Bottom-left branch -->
+  <g filter="url(#brush)" stroke="#1a1612" fill="none" stroke-linecap="round" opacity="0.75">
+    <path d="M-20,820 C80,800 160,840 240,790 S380,750 460,780" stroke-width="5"/>
+    <path d="M140,810 C160,770 180,720 200,670" stroke-width="2.5"/>
+    <path d="M300,790 C320,750 340,700 360,650" stroke-width="2"/>
+    <path d="M420,775 C440,735 460,685 480,635" stroke-width="1.8"/>
+  </g>
+
+  <!-- Blossoms cluster top-left -->
+  <g filter="url(#brushSoft)">
+    <g transform="translate(180,250)">
+      <circle r="14" fill="url(#blossomGrad)"/>
+      <circle cx="-3" cy="-2" r="11" fill="url(#blossomGrad2)" opacity="0.8"/>
+      <circle cx="4" cy="3" r="9" fill="url(#blossomGrad)" opacity="0.7"/>
+    </g>
+    <g transform="translate(220,200)">
+      <circle r="12" fill="url(#blossomGrad)"/>
+      <circle cx="2" cy="-3" r="9" fill="url(#blossomGrad2)" opacity="0.8"/>
+    </g>
+    <g transform="translate(340,310)">
+      <circle r="16" fill="url(#blossomGrad)"/>
+      <circle cx="-4" cy="-3" r="12" fill="url(#blossomGrad2)" opacity="0.85"/>
+      <circle cx="5" cy="4" r="10" fill="url(#blossomGrad)" opacity="0.7"/>
+    </g>
+    <g transform="translate(420,330)">
+      <circle r="13" fill="url(#blossomGrad)"/>
+      <circle cx="3" cy="-2" r="10" fill="url(#blossomGrad2)" opacity="0.8"/>
+    </g>
+    <g transform="translate(560,340)">
+      <circle r="15" fill="url(#blossomGrad)"/>
+      <circle cx="-3" cy="-3" r="11" fill="url(#blossomGrad2)" opacity="0.85"/>
+      <circle cx="4" cy="3" r="9" fill="url(#blossomGrad)" opacity="0.7"/>
+    </g>
+    <g transform="translate(280,180)">
+      <circle r="10" fill="url(#blossomGrad)" opacity="0.85"/>
+    </g>
+    <g transform="translate(490,210)">
+      <circle r="11" fill="url(#blossomGrad2)" opacity="0.8"/>
+    </g>
+    <g transform="translate(620,180)">
+      <circle r="9" fill="url(#blossomGrad)" opacity="0.75"/>
+    </g>
+  </g>
+
+  <!-- Blossoms cluster top-right -->
+  <g filter="url(#brushSoft)">
+    <g transform="translate(1260,260)">
+      <circle r="14" fill="url(#blossomGrad)"/>
+      <circle cx="3" cy="-2" r="11" fill="url(#blossomGrad2)" opacity="0.8"/>
+      <circle cx="-4" cy="3" r="9" fill="url(#blossomGrad)" opacity="0.7"/>
+    </g>
+    <g transform="translate(1120,280)">
+      <circle r="15" fill="url(#blossomGrad)"/>
+      <circle cx="-3" cy="-3" r="12" fill="url(#blossomGrad2)" opacity="0.85"/>
+    </g>
+    <g transform="translate(1000,295)">
+      <circle r="13" fill="url(#blossomGrad)"/>
+      <circle cx="2" cy="-2" r="10" fill="url(#blossomGrad2)" opacity="0.8"/>
+    </g>
+    <g transform="translate(880,305)">
+      <circle r="14" fill="url(#blossomGrad)"/>
+      <circle cx="-3" cy="3" r="10" fill="url(#blossomGrad)" opacity="0.7"/>
+    </g>
+    <g transform="translate(1180,150)">
+      <circle r="10" fill="url(#blossomGrad2)" opacity="0.8"/>
+    </g>
+    <g transform="translate(1040,170)">
+      <circle r="11" fill="url(#blossomGrad)" opacity="0.85"/>
+    </g>
+    <g transform="translate(920,190)">
+      <circle r="9" fill="url(#blossomGrad2)" opacity="0.75"/>
+    </g>
+  </g>
+
+  <!-- Blossoms bottom-left -->
+  <g filter="url(#brushSoft)">
+    <g transform="translate(200,670)">
+      <circle r="13" fill="url(#blossomGrad)"/>
+      <circle cx="-3" cy="-2" r="10" fill="url(#blossomGrad2)" opacity="0.8"/>
+    </g>
+    <g transform="translate(360,650)">
+      <circle r="14" fill="url(#blossomGrad)"/>
+      <circle cx="3" cy="-3" r="11" fill="url(#blossomGrad2)" opacity="0.85"/>
+      <circle cx="-4" cy="3" r="9" fill="url(#blossomGrad)" opacity="0.7"/>
+    </g>
+    <g transform="translate(480,635)">
+      <circle r="12" fill="url(#blossomGrad)"/>
+      <circle cx="2" cy="-2" r="9" fill="url(#blossomGrad2)" opacity="0.8"/>
+    </g>
+    <g transform="translate(280,720)">
+      <circle r="10" fill="url(#blossomGrad2)" opacity="0.8"/>
+    </g>
+    <g transform="translate(420,700)">
+      <circle r="11" fill="url(#blossomGrad)" opacity="0.85"/>
+    </g>
+  </g>
+
+  <!-- A few falling petals in midground -->
+  <g opacity="0.6" filter="url(#brushSoft)">
+    <ellipse cx="500" cy="450" rx="6" ry="3" fill="#f7c6d8" transform="rotate(30 500 450)"/>
+    <ellipse cx="900" cy="520" rx="5" ry="2.5" fill="#f9cddd" transform="rotate(-20 900 520)"/>
+    <ellipse cx="700" cy="380" rx="6" ry="3" fill="#f7c6d8" transform="rotate(60 700 380)"/>
+    <ellipse cx="1100" cy="600" rx="5" ry="2.5" fill="#fde4ee" transform="rotate(15 1100 600)"/>
+    <ellipse cx="300" cy="550" rx="6" ry="3" fill="#f7c6d8" transform="rotate(-45 300 550)"/>
+  </g>
+</svg>
+
+<!-- Foreground petals -->
+<canvas id="petals"></canvas>
+
+<div class="grain"></div>
+
+<nav>
+  <div class="brand">SAKURA <span class="kanji">桜</span></div>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#story">Story</a></li>
+    <li><a href="#collection">Collection</a></li>
+    <li><a href="#visit">Visit</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="home">
+  <div class="hero-kanji">花は桜木、人は武士</div>
+  <h1 class="hero-title">SAKURA</h1>
+  <div class="divider">
+    <span class="line"></span>
+    <span class="dot"></span>
+    <span class="line"></span>
+  </div>
+  <p class="tagline">
+    A fleeting bloom, an eternal memory — where ink meets petal, and stillness becomes song.
+    <span class="jp">一瞬の美、永遠の記憶</span>
+  </p>
+  <div class="scroll-cue">Scroll</div>
+</section>
+
+<section class="story" id="story">
+  <div class="section-label">— Story —</div>
+  <h2 class="section-title">The Way of Blossoms</h2>
+  <div class="story-grid">
+    <div class="story-text">
+      <p>In the quiet discipline of sumi-e, the brush seeks not to imitate nature, but to capture its breath. A single stroke carries the weight of a thousand springs — the moment a petal releases its hold and surrenders to the wind.</p>
+      <p>SAKURA is an homage to mono no aware — the gentle sorrow of impermanence. Each blossom is born to fall, and in falling, reveals the profound beauty of things that do not last.</p>
+      <p>Here, ink and pigment meet handmade washi. Tradition is not preserved under glass, but practiced with hands that tremble and breathe.</p>
+    </div>
+    <div class="story-visual">
+      <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+        <defs>
+          <filter id="brush2">
+            <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="3" seed="5"/>
+            <feDisplacementMap in="SourceGraphic" scale="12"/>
+            <feGaussianBlur stdDeviation="0.8"/>
+          </filter>
+          <radialGradient id="bg2" cx="50%" cy="40%" r="55%">
+            <stop offset="0%" stop-color="#fde4ee"/>
+            <stop offset="60%" stop-color="#f7c6d8"/>
+            <stop offset="100%" stop-color="#e58aae" stop-opacity="0.6"/>
+          </radialGradient>
+        </defs>
+        <g filter="url(#brush2)" stroke="#1a1612" fill="none" stroke-linecap="round">
+          <path d="M40,380 C80,340 110,300 140,250 S180,170 210,120 S240,60 260,30" stroke-width="5" opacity="0.85"/>
+          <path d="M120,290 C140,270 160,260 190,255" stroke-width="2.5" opacity="0.7"/>
+          <path d="M170,200 C190,185 210,180 240,180" stroke-width="2" opacity="0.65"/>
+          <path d="M210,120 C225,105 240,100 265,100" stroke-width="1.8" opacity="0.6"/>
+        </g>
+        <g filter="url(#brush2)">
+          <circle cx="195" cy="255" r="16" fill="url(#bg2)"/>
+          <circle cx="245" cy="180" r="18" fill="url(#bg2)"/>
+          <circle cx="265" cy="100" r="14" fill="url(#bg2)"/>
+          <circle cx="160" cy="265" r="10" fill="url(#bg2)" opacity="0.8"/>
+          <circle cx="225" cy="190" r="11" fill="url(#bg2)" opacity="0.85"/>
+        </g>
+        <g transform="translate(250,360) rotate(-6)" opacity="0.9">
+          <rect width="40" height="40" fill="#a83232"/>
+          <text x="20" y="28" text-anchor="middle" fill="#f4ecd8" font-family="Shippori Mincho, serif" font-size="20" font-weight="700">桜</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="collection" id="collection">
+  <div class="section-label">— Collection —</div>
+  <h2 class="section-title">Selected Works</h2>
+  <div class="collection-grid">
+    <div class="card">
+      <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+        <defs>
+          <filter id="c1"><feTurbulence baseFrequency="0.03" numOctaves="3" seed="2"/><feDisplacementMap in="SourceGraphic" scale="10"/><feGaussianBlur stdDeviation="0.6"/></filter>
+          <radialGradient id="g1" cx="50%" cy="40%" r="55%"><stop offset="0%" stop-color="#fde4ee"/><stop offset="100%" stop-color="#e58aae" stop-opacity="0.6"/></radialGradient>
+        </defs>
+        <g filter="url(#c1)" stroke="#1a1612" fill="none" stroke-linecap="round">
+          <path d="M50,460 C100,400 140,340 180,280 S240,160 280,80" stroke-width="5" opacity="0.85"/>
+          <path d="M150,360 C170,340 190,330 220,330" stroke-width="2" opacity="0.7"/>
+          <path d="M210,220 C230,205 250,200 280,205" stroke-width="1.8" opacity="0.65"/>
+        </g>
+        <g filter="url(#c1)">
+          <circle cx="225" cy="330" r="18" fill="url(#g1)"/>
+          <circle cx="285" cy="205" r="20" fill="url(#g1)"/>
+          <circle cx="190" cy="345" r="11" fill="url(#g1)" opacity="0.8"/>
+        </g>
+      </svg>
+      <div class="card-info">
+        <h3>First Light</h3>
+        <span>初光 — 2024</span>
+      </div>
+    </div>
+    <div class="card">
+      <

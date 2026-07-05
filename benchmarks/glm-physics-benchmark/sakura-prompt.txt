@@ -1,0 +1,14 @@
+Create a single, self-contained HTML file for a premium Japanese "SAKURA" landing page in traditional sumi-e ink wash painting style.
+
+Aesthetic requirements:
+- Soft cream/parchment paper-textured background with subtle grain.
+- Japanese cherry blossom (sakura) branches drawn with SVG, using ink-brush stroke filters (feTurbulence + feDisplacementMap) and soft pink blossoms.
+- Large elegant Japanese-inspired serif typography for "SAKURA" and a poetic tagline.
+- Falling sakura petals using a lightweight JavaScript particle system. CRITICAL: petals must fall slowly, gently, and gracefully — like real cherry blossom petals in a light breeze. They should drift side-to-side (sinusoidal horizontal sway), rotate softly as they fall, and have varied sizes/opacity. Add occasional upward gusts and periodic breezes. Use opacity fade-in at spawn and fade-out near the bottom.
+- Subtle parallax depth: background ink wash, midground branches, foreground petals.
+- Minimal navigation bar: Home, Story, Collection, Visit.
+- Responsive, full-bleed hero section.
+- No external images; generate everything with SVG, CSS gradients, and inline JS.
+- Use a soft, limited color palette: cream, pale pink, dusty rose, charcoal ink.
+
+Return ONLY the complete HTML file inside a ```html code block.

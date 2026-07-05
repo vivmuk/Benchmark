@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SAKURA — 桜 | A Meditation in Ink and Blossom</title>
+<style>
+  :root {
+    --cream: #f5efe2;
+    --parchment: #efe7d5;
+    --pale-pink: #f3d7dc;
+    --dusty-rose: #d9a1ac;
+    --deep-rose: #b97684;
+    --ink: #2b2926;
+    --ink-soft: #4a463f;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    height: 100%;
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", Georgia, "Times New Roman", serif;
+    color: var(--ink);
+    background: var(--cream);
+    overflow-x: hidden;
+  }
+
+  /* ---------- Paper texture background ---------- */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background:
+      radial-gradient(ellipse at 20% 15%, rgba(243,215,220,0.35), transparent 55%),
+      radial-gradient(ellipse at 85% 80%, rgba(217,161,172,0.18), transparent 50%),
+      linear-gradient(160deg, #f7f1e4 0%, #f2ead8 45%, #ede3cf 100%);
+    pointer-events: none;
+  }
+
+  /* subtle grain via repeating fractal-ish gradients */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    opacity: 0.5;
+    background-image:
+      repeating-linear-gradient(0deg, rgba(43,41,38,0.012) 0 1px, transparent 1px 3px),
+      repeating-linear-gradient(90deg, rgba(43,41,38,0.012) 0 1px, transparent 1px 4px),
+      repeating-radial-gradient(circle at 30% 40%, rgba(43,41,38,0.008) 0 2px, transparent 2px 5px);
+    pointer-events: none;
+  }
+
+  /* ---------- Canvas overlay ---------- */
+  #petalCanvas {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 50;
+    pointer-events: none;
+  }
+
+  /* ---------- Navigation ---------- */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 40;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.6rem 4vw;
+    background: linear-gradient(to bottom, rgba(245,239,226,0.9), rgba(245,239,226,0));
+  }
+
+  .nav-mark {
+    font-size: 1.35rem;
+    letter-spacing: 0.45em;
+    font-weight: 400;
+    color: var(--ink);
+  }
+  .nav-mark span { color: var(--deep-rose); }
+
+  nav ul {
+    display: flex;
+    gap: 2.6rem;
+    list-style: none;
+  }
+
+  nav a {
+    text-decoration: none;
+    color: var(--ink-soft);
+    font-size: 0.82rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    position: relative;
+    padding-bottom: 4px;
+    transition: color 0.4s ease;
+  }
+  nav a::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 0;
+    height: 1px;
+    background: var(--deep-rose);
+    transition: width 0.4s ease, left 0.4s ease;
+  }
+  nav a:hover { color: var(--deep-rose); }
+  nav a:hover::after { width: 100%; left: 0; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 6rem 5vw 4rem;
+  }
+
+  .hero-kanji {
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    color: var(--ink);
+    opacity: 0.14;
+    letter-spacing: 0.3em;
+    margin-bottom: -1.2rem;
+    user-select: none;
+  }
+
+  .hero h1 {
+    font-size: clamp(3.8rem, 13vw, 11rem);
+    font-weight: 400;
+    letter-spacing: 0.28em;
+    margin-left: 0.28em; /* optical centering for tracking */
+    color: var(--ink);
+    line-height: 1.05;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--deep-rose);
+  }
+
+  .hero-rule {
+    width: 120px;
+    height: 2px;
+    margin: 2.2rem auto 1.8rem;
+    background: linear-gradient(to right, transparent, var(--dusty-rose), transparent);
+  }
+
+  .hero p.tagline {
+    font-size: clamp(1rem, 2vw, 1.35rem);
+    letter-spacing: 0.14em;
+    color: var(--ink-soft);
+    max-width: 34em;
+    line-height: 2;
+    font-style: italic;
+  }
+
+  .hero p.tagline-jp {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    letter-spacing: 0.5em;
+    color: var(--dusty-rose);
+  }
+
+  .hero .cta {
+    margin-top: 3rem;
+    display: inline-block;
+    padding: 0.9rem 3.2rem;
+    border: 1px solid var(--ink-soft);
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 0.82rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    transition: all 0.5s ease;
+    background: rgba(255,255,255,0.15);
+  }
+  .hero .cta:hover {
+    background: var(--ink);
+    color: var(--cream);
+    border-color: var(--ink);
+  }
+
+  /* ---------- SVG branches ---------- */
+  .branch {
+    position: fixed;
+    z-index: 1;
+    pointer-events: none;
+  }
+  .branch-tl {
+    top: -40px;
+    left: -60px;
+    width: min(52vw, 720px);
+    opacity: 0.92;
+  }
+  .branch-br {
+    bottom: -50px;
+    right: -70px;
+    width: min(44vw, 600px);
+    opacity: 0.85;
+    transform: rotate(180deg);
+  }
+
+  /* ---------- Sections ---------- */
+  section.panel {
+    position: relative;
+    z-index: 2;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 7rem 6vw;
+    text-align: center;
+  }
+
+  section.panel h2 {
+    font-weight: 400;
+    font-size: 1.6rem;
+    letter-spacing: 0.4em;
+    margin-bottom: 0.6rem;
+    color: var(--ink);
+    text-transform: uppercase;
+  }
+  section.panel .jp {
+    display: block;
+    font-size: 0.85rem;
+    letter-spacing: 0.6em;
+    color: var(--deep-rose);
+    margin-bottom: 2rem;
+  }
+  section.panel p {
+    line-height: 2.2;
+    letter-spacing: 0.06em;
+    color: var(--ink-soft);
+    font-size: 1rem;
+  }
+
+  footer {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 3rem 5vw 4rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.3em;
+    color: var(--ink-soft);
+    opacity: 0.7;
+  }
+
+  @media (max-width: 640px) {
+    nav ul { gap: 1.3rem; }
+    nav a { font-size: 0.72rem; letter-spacing: 0.18em; }
+    .branch-tl { width: 80vw; }
+    .branch-br { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ==================== SVG DEFINITIONS: ink-brush filter ==================== -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <filter id="inkBrush" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.045" numOctaves="4" seed="7" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="9" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="inkBrushSoft" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.09" numOctaves="3" seed="21" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="5" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+</svg>
+
+<!-- ==================== Branch: top-left ==================== -->
+<svg class="branch branch-tl" viewBox="0 0 700 460" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <g filter="url(#inkBrush)">
+    <!-- main bough -->
+    <path d="M -20 60 C 120 90, 210 130, 320 200 C 420 262, 500 300, 640 330"
+          stroke="#2b2926" stroke-width="14" stroke-linecap="round" opacity="0.85"/>
+    <path d="M -10 55 C 130 85, 220 128, 330 196"
+          stroke="#2b2926" stroke-width="6" stroke-linecap="round" opacity="0.35"/>
+    <!-- secondary branches -->
+    <path d="M 200 128 C 250 90, 300 70, 370 62"
+          stroke="#2b2926" stroke-width="7" stroke-linecap="round" opacity="0.8"/>
+    <path d="M 320 200 C 360 160, 410 140, 480 128"
+          stroke="#2b2926" stroke-width="6" stroke-linecap="round" opacity="0.75"/>
+    <path d="M 430 268 C 470 240, 520 228, 575 224"
+          stroke="#2b2926" stroke-width="5" stroke-linecap="round" opacity="0.7"/>
+    <path d="M 150 100 C 175 140, 185 180, 180 230"
+          stroke="#2b2926" stroke-width="5" stroke-linecap="round" opacity="0.7"/>
+    <!-- twigs -->
+    <path d="M 370 62 C 400 52, 425 50, 455 54" stroke="#2b2926" stroke-width="3.5" stroke-linecap="round" opacity="0.65"/>
+    <path d="M 480 128 C 510 118, 540 116, 565 120" stroke="#2b2926" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+    <path d="M 180 230 C 178 260, 172 285, 158 310" stroke="#2b2926" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+  </g>
+  <!-- blossoms (soft ink-wash pinks) -->
+  <g filter="url(#inkBrushSoft)">
+    <g opacity="0.9">
+      <circle cx="455" cy="52" r="14" fill="#f3d7dc"/>
+      <circle cx="470" cy="62" r="10" fill="#e9bcc6"/>
+      <circle cx="443" cy="66" r="9" fill="#f3d7dc"/>
+      <circle cx="460" cy="45" r="7" fill="#d9a1ac"/>
+      <circle cx="457" cy="56" r="3" fill="#b97684"/>
+    </g>
+    <g opacity="0.85">
+      <circle cx="568" cy="116" r="13" fill="#f3d7dc"/>
+      <circle cx="582" cy="126" r="9" fill="#e9bcc6"/>
+      <circle cx="556" cy="128" r="8" fill="#f3d7dc"/>
+      <circle cx="570" cy="122" r="3" fill="#b97684"/>
+    </g>
+    <g opacity="0.9">
+      <circle cx="372" cy="60" r="10" fill="#e9bcc6"/>
+      <circle cx="360" cy="70" r="8" fill="#f3d7dc"/>
+      <circle cx="368" cy="65" r="2.5" fill="#b97684"/>
+    </g>
+    <g opacity="0.85">
+      <circle cx="156" cy="312" r="12" fill="#f3d7dc"/>
+      <circle cx="168" cy="322" r="9" fill="#e9bcc6"/>
+      <circle cx="146" cy="324" r="8" fill="#f3d7dc"/>
+      <circle cx="158" cy="318" r="3" fill="#b97684"/>
+    </g>
+    <g opacity="0.85">
+      <circle cx="578" cy="222" r="11" fill="#e9bcc6"/>
+      <circle cx="590" cy="230" r="8" fill="#f3d7dc"/>
+      <circle cx="582" cy="226" r="2.5" fill="#b97684"/>
+    </g>
+    <g opacity="0.8">
+      <circle cx="245" cy="94" r="9" fill="#f3d7dc"/>
+      <circle cx="255" cy="102" r="7" fill="#e9bcc6"/>
+      <circle cx="249" cy="98" r="2.5" fill="#b97684"/>
+    </g>
+    <g opacity="0.8">
+      <circle cx="500" cy="122" r="8" fill="#f3d7dc"/>
+      <circle cx="510" cy="130" r="6" fill="#e9bcc6"/>
+    </g>
+    <!-- buds -->
+    <circle cx="415" cy="150" r="4.5" fill="#d9a1ac" opacity="0.8"/>
+    <circle cx="530" cy="234" r="4" fill="#d9a1ac" opacity="0.75"/>
+    <circle cx="185" cy="255" r="4" fill="#d9a1ac" opacity="0.75"/>
+  </g>
+</svg>
+
+<!-- ==================== Branch: bottom-right (mirrored) ==================== -->
+<svg class="branch branch-br" viewBox="0 0 700 460" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <g filter="url(#inkBrush)">
+    <path d="M -20 60 C 120 90, 210 130, 320 200 C 420 262, 500 300, 640 330"
+          stroke="#2b2926" stroke-width="12" stroke-linecap="round" opacity="0.75"/>
+    <path d="M 200 128 C 250 90, 300 70, 370 62"
+          stroke="#2b2926" stroke-width="6" stroke-linecap="round" opacity="0.7"/>
+    <path d="M 320 200 C 360 160, 410 140, 480 128"
+          stroke="#2b2926" stroke-width="5" stroke-linecap="round" opacity="0.65"/>
+  </g>
+  <g filter="url(#inkBrushSoft)">
+    <g opacity="0.85">
+      <circle cx="372" cy="60" r="12" fill="#f3d7dc"/>
+      <circle cx="385" cy="70" r="9" fill="#e9bcc6"/>
+      <circle cx="362" cy="72" r="8" fill="#f3d7dc"/>
+      <circle cx="374" cy="66" r="3" fill="#b97684"/>
+    </g>
+    <g opacity="0.8">
+      <circle cx="482" cy="126" r="10" fill="#e9bcc6"/>
+      <circle cx="493" cy="134" r="8" fill="#f3d7dc"/>
+      <circle cx="486" cy="130" r="2.5" fill="#b97684"/>
+    </g>
+    <circle cx="250" cy="98" r="5" fill="#d9a1ac" opacity="0.8"/>
+    <circle cx="420" cy="152" r="4" fill="#d9a1ac" opacity="0.7"/>
+  </g>
+</svg>
+
+<!-- ==================== Navigation ==================== -->
+<nav>
+  <div class="nav-mark">SAKU<span>RA</span></div>
+  <ul>
+    <li><a href="#home">Home</a></li>
+    <li><a href="#story">Story</a></li>
+    <li><a href="#collection">Collection</a></li>
+    <li><a href="#visit">Visit</a></li>
+  </ul>
+</nav>
+
+<!-- ==================== Hero ==================== -->
+<header class="hero" id="home">
+  <div class="hero-kanji">桜</div>
+  <h1>SAKU<em>RA</em></h1>
+  <div class="hero-rule"></div>
+  <p class="tagline">Petals do not mourn their falling — they become the wind's calligraphy, written once, upon the breath of spring.</p>
+  <p class="tagline-jp">散る桜　残る桜も　散る桜</p>
+  <a class="cta" href="#story">Begin the Journey</a>
+</header>
+
+<!-- ==================== Sections ==================== -->
+<section class="panel" id="story">
+  <h2>Story</h2>
+  <span class="jp">物語</span>
+  <p>Born from a single brushstroke, our story follows the old masters of sumi-e — where an entire season lives in one gesture of ink. Each spring, we return to the same hillside, the same gnarled bough, to witness what cannot be kept: the five-day bloom, the slow white drift, the quiet after.</p>
+</section>
+
+<section class="panel" id="collection">
+  <h2>Collection</h2>
+  <span class="jp">作品集</span>
+  <p>Hand-ground ink on washi paper. Limited seasonal works — blossom studies, wind sketches, and the falling-petal series — each sealed with the vermilion mark of the atelier. No two strokes repeat; no two springs return.</p>
+</section>
+
+<section class="panel" id="visit">
+  <h2>Visit</h2>
+  <span class="jp">来訪</span>
+  <p>The atelier opens with the first bloom and closes with the last petal. Find us where the river bends beneath the old cherry trees — arrive slowly, leave quietly, and let the season do the speaking.</p>
+</section>
+
+<footer>© SAKURA ATELIER — 一期一会</footer>
+
+<!-- ==================== Petal canvas overlay ==================== -->
+<canvas id="petalCanvas"></canvas>
+
+<!-- ==================== Petal physics engine ==================== -->
+<script>
+(function () {
+  "use strict";
+
+  var canvas = document.getElementById("petalCanvas");
+  var ctx = canvas.getContext("2d");
+  var W = 0, H = 0;
+
+  function resize() {
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+  window.addEventListener("resize", resize);
+  resize();
+
+  var rand = function (min, max) { return min + Math.random() * (max - min); };
+
+  var PETAL_COLORS = [
+    "243,215,220",  // pale pink
+    "233,188,198",  // blossom pink
+    "217,161,172",  // dusty rose
+    "248,228,232",  // near-white pink
+    "185,118,132"   // deep rose (rare accent)
+  ];
+
+  var MAX_PETALS = 120;   // >= 60 required, keep generous
+  var MIN_PETALS = 60;
+
+  /* ---------------- Wind gust controller ----------------
+     Every 3-8 seconds a gust ramps up, holds briefly, and
+     subsides over ~1.5s total, pushing all petals sideways. */
+  var wind = {
+    force: 0,          // current horizontal force (px/frame)
+    target: 0,
+    active: false,
+    startTime: 0,
+    duration: 1500,    // gust lifetime ms
+    direction: 1,
+    strength: 0,
+    nextGustAt: performance.now() + rand(3000, 8000)
+  };
+
+  function updateWind(now) {
+    if (!wind.active && now >= wind.nextGustAt) {
+      wind.active = true;
+      wind.startTime = now;
+      wind.direction = Math.random() < 0.5 ? -1 : 1;
+      wind.strength = rand(1.2, 2.8);
+    }
+    if (wind.active) {
+      var t = (now - wind.startTime) / wind.duration; // 0 -> 1
+      if (t >= 1) {
+        wind.active = false;
+        wind.force = 0;
+        wind.nextGustAt = now + rand(3000, 8000);
+      } else {
+        // smooth ramp up then down: sin envelope
+        wind.force = wind.direction * wind.strength * Math.sin(Math.PI * t);
+      }
+    }
+  }
+
+  /* ---------------- Petal class ---------------- */
+  function Petal(spawnAnywhere) {
+    this.reset(spawnAnywhere);
+  }
+
+  Petal.prototype.reset = function (spawnAnywhere) {
+    this.x = rand(-40, W + 40);
+    this.y = spawnAnywhere ? rand(-20, H) : rand(-30, -8);
+    this.size = rand(2, 8);
+    this.rotation = rand(0, Math.PI * 2);
+    this.rotationSpeed = rand(-0.03, 0.03);
+    this.fallSpeed = rand(0.3, 1.2);
+    this.swayAmplitude = rand(0.5, 2.5);
+    this.swayPhase = rand(0, Math.PI * 2);
+    this.swayFrequency = rand(0.008, 0.025);
+    this.baseOpacity = rand(0.4, 0.9);
+    this.color = PETAL_COLORS[Math.floor(Math.random() * PETAL_COLORS.length)];
+    this.tick = rand(0, 1000);
+    this.wobble = rand(0.6, 1.0); // 3D flutter factor
+  };
+
+  Petal.prototype.update = function () {
+    this.tick++;
+
+    // vertical fall
+    this.y += this.fallSpeed;
+
+    // horizontal sway (own phase + frequency) plus wind gust force
+    this.x += Math.sin(this.tick * this.swayFrequency + this.swayPhase) * this.swayAmplitude * 0.35
+            + wind.force * (this.size / 8); // lighter/bigger petals catch more wind
+
+    // slow rotation
+    this.rotation += this.rotationSpeed + wind.force * 0.002;
+
+    // wrap horizontally so gusts don't empty the screen
+    if (this.x < -60) this.x = W + 50;
+    if (this.x > W + 60) this.x = -50;
+
+    // recycle at bottom
+    if (this.y > H + 20) this.reset(false);
+  };
+
+  Petal.prototype.currentOpacity = function () {
+    // progress through the fall, 0 at top -> 1 at bottom
+    var p = (this.y + 30) / (H + 50);
+    if (p < 0) p = 0;
+    if (p > 1) p = 1;
+    var envelope = 1;
+    if (p < 0.10)      envelope = p / 0.10;          // fade in first 10%
+    else if (p > 0.90) envelope = (1 - p) / 0.10;    // fade out last 10%
+    return this.baseOpacity * envelope;
+  };
+
+  Petal.prototype.draw = function (ctx) {
+    var o = this.currentOpacity();
+    if (o <= 0.005) return;
+
+    ctx.save();
+    ctx.translate(this.x, this.y);
+    ctx.rotate(this.rotation);
+
+    // gentle flutter: petals appear to tilt in 3D
+    var flutter = 0.55 + 0.45 * Math.sin(this.tick * 0.02 + this.swayPhase);
+    ctx.scale(1, Math.max(0.35, flutter * this.wobble));
+
+    var s = this.size;
+    ctx.fillStyle = "rgba(" + this.color + "," + o.toFixed(3) + ")";
+
+    // petal shape: teardrop with a notched tip (bezier curves)
+    ctx.beginPath();
+    ctx.moveTo(0, -s);                                  // stem end
+    ctx.bezierCurveTo( s * 0.9, -s * 0.6,  s * 0.9,  s * 0.5,  s * 0.18, s);
+    ctx.quadraticCurveTo(0, s * 0.72, -s * 0.18, s);    // the notch
+    ctx.bezierCurveTo(-s * 0.9,  s * 0.5, -s * 0.9, -s * 0.6, 0, -s);
+    ctx.closePath();
+    ctx.fill();
+
+    ctx.restore();
+  };
+
+  /* ---------------- Simulation ---------------- */
+  var petals = [];
+
+  // pre-seed so the sky is alive immediately
+  for (var i = 0; i < MIN_PETALS; i++) {
+    petals.push(new Petal(true));
+  }
+
+  function animate(now) {
+    ctx.clearRect(0, 0, W, H);
+
+    updateWind(now);
+
+    // continuous spawn: roughly 1-2 petals per frame until cap
+    if (petals.length < MAX_PETALS) {
+      var toSpawn = 1 + (Math.random() < 0.5 ? 1 : 0);
+      for (var s = 0; s < toSpawn && petals.length < MAX_PETALS; s++) {
+        petals.push(new Petal(false));
+      }
+    }
+
+    for (var j = 0; j < petals.length; j++) {
+      petals[j].update();
+      petals[j].draw(ctx);
+    }
+
+    requestAnimationFrame(animate);
+  }
+
+  requestAnimationFrame(animate);
+})();
+</script>
+
+</body>
+</html>
