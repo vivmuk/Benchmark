@@ -12,7 +12,7 @@ import requests
 from datetime import datetime
 
 API_URL = "https://api.venice.ai/api/v1/chat/completions"
-API_KEY = "VENICE_INFERENCE_KEY_eSo1FVcIDqp9rr5CI6LLpLUmq2tu721fEasyCWPmcV"
+API_KEY = os.environ.get("VENICE_INFERENCE_KEY", "")
 
 MODELS = {
     "Kimi K2.7-Code": "kimi-k2-7-code",

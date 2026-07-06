@@ -71,12 +71,26 @@
         </div>
         <div class="stat">
           <div class="stat-value" id="statTopScore">—</div>
-          <div class="stat-label">Top avg score</div>
+          <div class="stat-label">Top VivIndex · <span id="statVivLeader">—</span></div>
         </div>
         <div class="stat">
           <div class="stat-value"><span id="statCost">$1.13</span></div>
           <div class="stat-label">Est. cost per full run</div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="vivindex">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Headline Metric</span>
+        <h2>VivIndex — one number per model</h2>
+        <p>A weighted composite across all four tracks: Long-Horizon Agentic 30%, Intent Understanding 25%, One-Shot UI 25%, Brick Breaker Realism 20%. Higher is better.</p>
+      </div>
+      <div class="chart-card reveal" style="max-width:880px;margin:0 auto">
+        <h3>VivIndex ranking</h3>
+        <canvas id="vivIndexChart" class="chart-canvas" style="min-height:320px"></canvas>
       </div>
     </div>
   </section>
@@ -167,7 +181,7 @@
           <canvas id="leaderboardChart" class="chart-canvas"></canvas>
         </div>
         <div class="chart-card reveal">
-          <h3>Cost per value</h3>
+          <h3>VivIndex vs. cost per run</h3>
           <canvas id="costValueChart" class="chart-canvas"></canvas>
         </div>
       </div>
@@ -198,6 +212,26 @@
           </thead>
           <tbody id="leaderboardBody"></tbody>
         </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="speed">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Performance</span>
+        <h2>Speed &amp; latency</h2>
+        <p>Output speed measured as completion tokens per second of generation time; response time is average end-to-end seconds per benchmark run.</p>
+      </div>
+      <div class="charts-grid">
+        <div class="chart-card reveal">
+          <h3>Output speed (tokens/sec) · higher is better</h3>
+          <canvas id="speedChart" class="chart-canvas"></canvas>
+        </div>
+        <div class="chart-card reveal">
+          <h3>Avg response time (s) · lower is better</h3>
+          <canvas id="latencyChart" class="chart-canvas"></canvas>
+        </div>
       </div>
     </div>
   </section>
@@ -241,6 +275,16 @@
           <p>Models generate a playable Canvas game in one shot. Scored on physics plausibility, control responsiveness, collision detection, game states, particle/sound effects, and responsive design.</p>
           <button class="method-popover-btn" popovertarget="pop-brick">Learn more</button>
         </article>
+        <article class="method-card reveal" data-expandable>
+          <h3>5 · VivIndex Composite</h3>
+          <p>Weighted average of the four tracks: Long-Horizon Agentic 30%, Intent Understanding 25%, One-Shot UI 25%, Brick Breaker 20%. Weights favor sustained-coherence tasks; missing benchmarks are renormalized rather than scored as zero.</p>
+          <button class="method-popover-btn" popovertarget="pop-vivindex">Learn more</button>
+        </article>
+        <article class="method-card reveal" data-expandable>
+          <h3>6 · Speed &amp; Latency</h3>
+          <p>Output speed = completion tokens ÷ generation seconds, pooled across all runs. Response time = mean end-to-end request latency. Both measured against the live Venice API, not vendor claims.</p>
+          <button class="method-popover-btn" popovertarget="pop-speed">Learn more</button>
+        </article>
       </div>
     </div>
   </section>
@@ -256,6 +300,8 @@
   <div popover id="pop-ui"><strong>One-Shot UI</strong><p>Single-prompt self-contained HTML; graded on polish, accessibility, and zero-edit runnability.</p></div>
   <div popover id="pop-agent"><strong>Agentic Task</strong><p>Multi-step tool planning with recovery and coherence across 50+ conceptual steps.</p></div>
   <div popover id="pop-brick"><strong>Brick Breaker Realism</strong><p>Physics accuracy, controls, collision, particles, sound, and responsive canvas gameplay.</p></div>
+  <div popover id="pop-vivindex"><strong>VivIndex</strong><p>Composite = Σ(score × weight) ÷ Σ(weights present). Agentic 0.30, Intent 0.25, UI 0.25, Brick 0.20. Specialized models evaluated on fewer tracks are renormalized, not penalized.</p></div>
+  <div popover id="pop-speed"><strong>Speed &amp; Latency</strong><p>Tokens/sec uses actual completion_tokens and wall-clock latency from live API runs. Single-run measurements — variance bands planned for the next release.</p></div>
 
   <script src="assets/app.js"></script>
 </body>

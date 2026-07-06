@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
+import os
 """Quick test for both models."""
 import requests
 import json
 import time
 
 API_URL = "https://api.venice.ai/api/v1/chat/completions"
-API_KEY = "VENICE_INFERENCE_KEY_eSo1FVcIDqp9rr5CI6LLpLUmq2tu721fEasyCWPmcV"
+API_KEY = os.environ.get("VENICE_INFERENCE_KEY", "")
 
 def call_model(model, prompt, max_tokens=500):
     headers = {

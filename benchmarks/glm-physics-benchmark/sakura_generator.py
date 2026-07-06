@@ -6,7 +6,7 @@ using Fable 5 and GLM 5.2 via Venice API.
 import os, time, requests
 
 API_URL = "https://api.venice.ai/api/v1/chat/completions"
-API_KEY = os.environ.get("VENICE_INFERENCE_KEY") or os.environ.get("VENICE_INFERENCE_KEY_eSo1FVcIDqp9rr5CI6LLpLUmq2tu721fEasyCWPmcV")
+API_KEY = os.environ.get("VENICE_INFERENCE_KEY") or os.environ.get(os.environ.get("VENICE_INFERENCE_KEY", ""))
 if not API_KEY:
     raise RuntimeError("VENICE_INFERENCE_KEY not set")
 OUT_DIR = os.path.dirname(os.path.abspath(__file__))

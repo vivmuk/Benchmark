@@ -13,7 +13,7 @@ from datetime import datetime
 from collections import defaultdict
 
 API_URL = "https://api.venice.ai/api/v1/chat/completions"
-API_KEY = "VENICE_INFERENCE_KEY_eSo1FVcIDqp9rr5CI6LLpLUmq2tu721fEasyCWPmcV"
+API_KEY = os.environ.get("VENICE_INFERENCE_KEY", "")
 
 MODELS = {
     "Claude Sonnet 5": {"id": "claude-sonnet-5", "input_per_m": 3.0, "output_per_m": 15.0},

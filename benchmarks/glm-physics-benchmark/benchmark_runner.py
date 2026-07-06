@@ -13,7 +13,7 @@ import requests
 from datetime import datetime
 
 API_URL = "https://api.venice.ai/api/v1/chat/completions"
-API_KEY = os.environ.get("VENICE_INFERENCE_KEY", "VENICE_INFERENCE_KEY_eSo1FVcIDqp9rr5CI6LLpLUmq2tu721fEasyCWPmcV")
+API_KEY = os.environ.get("VENICE_INFERENCE_KEY", os.environ.get("VENICE_INFERENCE_KEY", ""))
 MODEL_ID = "zai-org-glm-5-2"
 OUT_DIR = os.path.dirname(os.path.abspath(__file__))
 

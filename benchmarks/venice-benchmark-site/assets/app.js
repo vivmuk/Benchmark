@@ -51,12 +51,21 @@
     ],
   };
 
+  // VivIndex weights — long-horizon agentic weighted highest (hardest task),
+  // brick-breaker lowest (single heuristic). Documented in Methodology.
+  const VIVINDEX_WEIGHTS = {
+    "intent-understanding": 0.25,
+    "one-shot-ui": 0.25,
+    "long-horizon-agent": 0.30,
+    "brick-breaker-realism": 0.20,
+  };
+
   const state = {
     data: [],
     isLive: false,
     sort: { key: "score", dir: -1 },
     filter: { text: "", benchmark: "all" },
-    charts: { leaderboard: null, costValue: null, sparklines: [] },
+    charts: { leaderboard: null, costValue: null, vivIndex: null, speed: null, latency: null, sparklines: [] },
   };
 
   const $ = (sel, root = document) => root.querySelector(sel);
@@ -83,8 +92,26 @@
   function modelAggregates(rows) {
     return uniqueModels(rows).map((model) => {
       const mr = rows.filter((r) => r.model === model);
+      // VivIndex: weighted composite over benchmarks present, renormalized.
+      let wSum = 0, wTotal = 0;
+      mr.forEach((r) => {
+        const w = VIVINDEX_WEIGHTS[r.benchmark];
+        if (w != null && r.score != null) { wSum += r.score * w; wTotal += w; }
+      });
+      const vivIndex = wTotal > 0 ? wSum / wTotal : 0;
+      const trackCount = mr.filter((r) => VIVINDEX_WEIGHTS[r.benchmark] != null && r.score != null).length;
+      const fullCoverage = trackCount >= BENCHMARKS.length;
+      // Output speed: total completion tokens / total generation time.
+      const speedRows = mr.filter((r) => r.completionTokens > 0 && r.latency > 0);
+      const tokensPerSec = speedRows.length
+        ? speedRows.reduce((a, r) => a + r.completionTokens, 0) / speedRows.reduce((a, r) => a + r.latency, 0)
+        : null;
       return {
         model,
+        vivIndex,
+        trackCount,
+        fullCoverage,
+        tokensPerSec,
         avgScore: avg(mr.map((r) => r.score)),
         avgLatency: avg(mr.map((r) => r.latency)),
         avgTokens: avg(mr.map((r) => r.tokens)),
@@ -97,6 +124,13 @@
     });
   }
 
+  function median(nums) {
+    const s = nums.slice().sort((a, b) => a - b);
+    if (!s.length) return 0;
+    const m = Math.floor(s.length / 2);
+    return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
+  }
+
   function modelColor(model, alpha = 1) {
     const hex = MODEL_COLORS[model] || "#94a3b8";
     if (alpha >= 1) return hex;
@@ -106,8 +140,11 @@
     return `rgba(${r}, ${g}, ${b}, ${alpha})`;
   }
 
+  // Live data emits e.g. "long_horizon_agentic"; the UI uses "long-horizon-agent".
+  const ID_ALIASES = { "long-horizon-agentic": "long-horizon-agent" };
   function normalizeId(id) {
-    return String(id).replace(/_/g, "-");
+    const n = String(id).replace(/_/g, "-");
+    return ID_ALIASES[n] || n;
   }
 
   async function loadData() {
@@ -127,6 +164,7 @@
         score: r.score,
         latency: r.latency,
         tokens: r.total_tokens || r.tokens,
+        completionTokens: r.completion_tokens || (r.tokens ? Math.round(r.tokens * 0.55) : null),
         cost: r.estimated_cost_usd || r.cost,
       }));
       state.isLive = true;
@@ -142,6 +180,147 @@
         status.textContent = "● Sample data";
         status.classList.add("fallback");
       }
+    }
+  }
+
+  function renderVivIndexChart() {
+    const canvas = $("#vivIndexChart");
+    if (!canvas || typeof Chart === "undefined") return;
+    // Full-coverage models ranked first; partial-coverage models shown
+    // separately (hatched) so renormalization can't inflate their rank.
+    const aggs = modelAggregates(state.data).sort((a, b) =>
+      (b.fullCoverage - a.fullCoverage) || (b.vivIndex - a.vivIndex));
+    if (state.charts.vivIndex) state.charts.vivIndex.destroy();
+    state.charts.vivIndex = new Chart(canvas, {
+      type: "bar",
+      data: {
+        labels: aggs.map((a) => a.fullCoverage ? a.model : `${a.model} (${a.trackCount}/${BENCHMARKS.length} tracks)`),
+        datasets: [{
+          label: "VivIndex",
+          data: aggs.map((a) => Number(a.vivIndex.toFixed(1))),
+          backgroundColor: aggs.map((a) => modelColor(a.model, a.fullCoverage ? 0.78 : 0.28)),
+          borderColor: aggs.map((a) => modelColor(a.model)),
+          borderWidth: 1.5,
+          borderDash: [4, 3],
+          borderRadius: 6,
+          maxBarThickness: 34,
+        }],
+      },
+      options: {
+        indexAxis: "y",
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: (ctx) => {
+                const a = aggs[ctx.dataIndex];
+                const base = ` VivIndex: ${ctx.raw} (weighted: agentic 30%, intent 25%, UI 25%, brick 20%)`;
+                return a.fullCoverage ? base : [base, ` ⚠ Partial coverage: evaluated on ${a.trackCount} of ${BENCHMARKS.length} tracks`];
+              },
+            },
+          },
+        },
+        scales: {
+          x: { min: 0, max: 100, grid: { color: "rgba(26,26,46,0.06)" } },
+          y: { grid: { display: false } },
+        },
+      },
+    });
+  }
+
+  // Draws the shaded "most attractive quadrant" (low cost, high score)
+  // plus dashed median guides on the score-vs-cost scatter.
+  const quadrantPlugin = {
+    id: "quadrant",
+    beforeDatasetsDraw(chart, _args, opts) {
+      if (!opts || opts.xMid == null || opts.yMid == null) return;
+      const { ctx, chartArea, scales } = chart;
+      const x = scales.x.getPixelForValue(opts.xMid);
+      const y = scales.y.getPixelForValue(opts.yMid);
+      ctx.save();
+      ctx.fillStyle = "rgba(0, 212, 170, 0.08)";
+      ctx.fillRect(chartArea.left, chartArea.top, Math.max(0, x - chartArea.left), Math.max(0, y - chartArea.top));
+      ctx.strokeStyle = "rgba(26, 26, 46, 0.18)";
+      ctx.setLineDash([5, 4]);
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(x, chartArea.top);
+      ctx.lineTo(x, chartArea.bottom);
+      ctx.moveTo(chartArea.left, y);
+      ctx.lineTo(chartArea.right, y);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle = "rgba(0, 150, 120, 0.9)";
+      ctx.font = "600 11px Inter, sans-serif";
+      ctx.fillText("Most attractive quadrant", chartArea.left + 8, chartArea.top + 16);
+      ctx.restore();
+    },
+  };
+
+  function renderSpeedCharts() {
+    const speedCanvas = $("#speedChart");
+    const latencyCanvas = $("#latencyChart");
+    if (typeof Chart === "undefined") return;
+    const aggs = modelAggregates(state.data);
+
+    if (speedCanvas) {
+      const rows = aggs.filter((a) => a.tokensPerSec != null).sort((a, b) => b.tokensPerSec - a.tokensPerSec);
+      if (state.charts.speed) state.charts.speed.destroy();
+      state.charts.speed = new Chart(speedCanvas, {
+        type: "bar",
+        data: {
+          labels: rows.map((a) => a.model),
+          datasets: [{
+            label: "Output tokens/sec",
+            data: rows.map((a) => Number(a.tokensPerSec.toFixed(1))),
+            backgroundColor: rows.map((a) => modelColor(a.model, 0.75)),
+            borderColor: rows.map((a) => modelColor(a.model)),
+            borderWidth: 1.5,
+            borderRadius: 6,
+            maxBarThickness: 56,
+          }],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false }, tooltip: { callbacks: { label: (c) => ` ${c.raw} tok/s (higher is better)` } } },
+          scales: {
+            y: { beginAtZero: true, title: { display: true, text: "Tokens per second" }, grid: { color: "rgba(26,26,46,0.06)" } },
+            x: { grid: { display: false } },
+          },
+        },
+      });
+    }
+
+    if (latencyCanvas) {
+      const rows = aggs.filter((a) => a.avgLatency > 0).sort((a, b) => a.avgLatency - b.avgLatency);
+      if (state.charts.latency) state.charts.latency.destroy();
+      state.charts.latency = new Chart(latencyCanvas, {
+        type: "bar",
+        data: {
+          labels: rows.map((a) => a.model),
+          datasets: [{
+            label: "Avg response time (s)",
+            data: rows.map((a) => Number(a.avgLatency.toFixed(1))),
+            backgroundColor: rows.map((a) => modelColor(a.model, 0.75)),
+            borderColor: rows.map((a) => modelColor(a.model)),
+            borderWidth: 1.5,
+            borderRadius: 6,
+            maxBarThickness: 56,
+          }],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false }, tooltip: { callbacks: { label: (c) => ` ${c.raw}s avg end-to-end (lower is better)` } } },
+          scales: {
+            y: { beginAtZero: true, title: { display: true, text: "Seconds (lower is better)" }, grid: { color: "rgba(26,26,46,0.06)" } },
+            x: { grid: { display: false } },
+          },
+        },
+      });
     }
   }
 
@@ -180,34 +359,35 @@
     const canvas = $("#costValueChart");
     if (!canvas || typeof Chart === "undefined") return;
     const aggs = modelAggregates(state.data);
-    const maxCost = Math.max(...aggs.map((a) => a.avgCost), 0.01);
+    const xMid = median(aggs.map((a) => a.avgCost));
+    const yMid = median(aggs.map((a) => a.vivIndex));
     if (state.charts.costValue) state.charts.costValue.destroy();
     state.charts.costValue = new Chart(canvas, {
-      type: "bubble",
+      type: "scatter",
       data: {
         datasets: aggs.map((a) => ({
           label: a.model,
-          data: [{
-            x: Number(a.avgCost.toFixed(4)),
-            y: Number(a.avgScore.toFixed(2)),
-            r: 6 + Math.min((a.avgCost / maxCost) * 28, 28),
-          }],
-          backgroundColor: modelColor(a.model, 0.55),
+          data: [{ x: Number(a.avgCost.toFixed(4)), y: Number(a.vivIndex.toFixed(1)) }],
+          backgroundColor: modelColor(a.model, 0.65),
           borderColor: modelColor(a.model),
-          borderWidth: 1.5,
+          borderWidth: 2,
+          pointRadius: 8,
+          pointHoverRadius: 10,
         })),
       },
+      plugins: [quadrantPlugin],
       options: {
         responsive: true,
         maintainAspectRatio: false,
         plugins: {
+          quadrant: { xMid, yMid },
           legend: { position: "bottom", labels: { usePointStyle: true, boxWidth: 8 } },
           tooltip: {
             callbacks: {
               label: (ctx) => [
                 ` ${ctx.dataset.label}`,
                 ` Avg cost/run: $${ctx.raw.x.toFixed(3)}`,
-                ` Avg score: ${ctx.raw.y.toFixed(1)}`,
+                ` VivIndex: ${ctx.raw.y.toFixed(1)}`,
               ],
             },
           },
@@ -215,13 +395,13 @@
         scales: {
           x: {
             type: "logarithmic",
-            title: { display: true, text: "Avg cost per run (USD, log)" },
+            title: { display: true, text: "Avg cost per run (USD, log) — left is cheaper" },
             grid: { color: "rgba(26,26,46,0.06)" },
           },
           y: {
-            min: 60,
+            min: 40,
             max: 100,
-            title: { display: true, text: "Average score" },
+            title: { display: true, text: "VivIndex (weighted composite)" },
             grid: { color: "rgba(26,26,46,0.06)" },
           },
         },
@@ -311,11 +491,11 @@
           <span class="badge">#${i + 1}</span>
           <h3>${a.model}</h3>
         </header>
-        <div class="score">${a.avgScore.toFixed(1)}</div>
+        <div class="score">${a.vivIndex.toFixed(1)}<small style="font-size:.45em;color:var(--ink-2);font-weight:500"> VivIndex</small></div>
         <dl>
           <div><dt>Latency</dt><dd>${a.avgLatency.toFixed(1)}s</dd></div>
           <div><dt>Cost/run</dt><dd>$${a.avgCost.toFixed(3)}</dd></div>
-          <div><dt>Tokens</dt><dd>${Math.round(a.avgTokens).toLocaleString()}</dd></div>
+          <div><dt>Speed</dt><dd>${a.tokensPerSec != null ? a.tokensPerSec.toFixed(0) + " tok/s" : "—"}</dd></div>
         </dl>
         <canvas height="60"></canvas>
       </article>
@@ -350,12 +530,14 @@
 
   function populateStats() {
     const aggs = modelAggregates(state.data);
-    const top = aggs.length ? Math.max(...aggs.map((a) => a.avgScore)) : 0;
+    const top = aggs.length ? aggs.reduce((best, a) => (a.vivIndex > best.vivIndex ? a : best)) : null;
     const el = (id, v) => { const e = $(id); if (e) e.textContent = v; };
     el("#statModels", uniqueModels(state.data).length);
     el("#statBenchmarks", BENCHMARKS.length);
     el("#statRuns", state.data.length);
-    el("#statTopScore", top ? top.toFixed(1) : "—");
+    el("#statTopScore", top ? top.vivIndex.toFixed(1) : "—");
+    const leader = $("#statVivLeader");
+    if (leader && top) leader.textContent = top.model;
   }
 
   function initMobileNav() {
@@ -442,8 +624,10 @@
   async function init() {
     initMobileNav();
     await loadData();
+    renderVivIndexChart();
     renderLeaderboardChart();
     renderCostValueChart();
+    renderSpeedCharts();
     initTableControls();
     renderTable();
     renderComparison();
