@@ -10,10 +10,23 @@
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/styles.css" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script>
+    (function(){
+      try {
+        if (navigator.gpu && typeof navigator.gpu.requestAdapter === 'function') {
+          document.documentElement.classList.add('has-webgpu');
+          navigator.gpu.requestAdapter().then(adapter => {
+            if (adapter) document.documentElement.classList.add('gpu-ready');
+          });
+        }
+      } catch(e) {}
+    })();
+  </script>
 </head>
 <body>
+  <div class="gpu-bg" aria-hidden="true"><canvas id="gpuCanvas"></canvas></div>
 
-  <nav class="navbar">
+  <nav class="navbar vt-nav">
     <div class="container">
       <a href="#" class="nav-logo">Benchmark<span>Viv</span></a>
       <ul class="nav-links" id="siteNav">
@@ -23,14 +36,15 @@
         <li><a href="#methodology">Methodology</a></li>
       </ul>
       <a href="#leaderboard" class="nav-cta">View Results</a>
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" style="display:none">☰</button>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" style="display:none"><span></span><span></span><span></span></button>
     </div>
   </nav>
 
-  <header class="hero">
+  <header class="hero vt-hero">
+    <div class="blob" aria-hidden="true"></div>
     <div class="container">
       <span class="eyebrow">Venice API Evaluation</span>
-      <h1>Long-horizon benchmarks for <span class="grad">frontier models</span></h1>
+      <h1>Long-horizon benchmarks for <em>frontier models</em></h1>
       <p>Independent, repeatable evaluations on the tasks that actually matter — understanding intent, shipping interfaces in one shot, staying coherent across long agentic runs, and generating playable interactive experiences.</p>
       <div class="hero-actions">
         <a href="#leaderboard" class="btn btn-primary">Explore Leaderboard</a>
@@ -195,7 +209,7 @@
         <h2>Per-model performance</h2>
         <p>Score distribution across the four benchmark tracks.</p>
       </div>
-      <div class="compare-grid" id="modelComparison"></div>
+      <div class="compare-grid" id="modelComparison" data-carousel></div>
     </div>
   </section>
 
@@ -207,21 +221,25 @@
         <p>Every benchmark is run with fixed prompts, default sampling, and transparent heuristics. Scores are reproducible and auditable.</p>
       </div>
       <div class="method-grid">
-        <article class="method-card reveal">
+        <article class="method-card reveal" data-expandable>
           <h3>1 · Intent Understanding</h3>
           <p>Models receive ambiguous, underspecified prompts. Points for clarifying questions, structured proposals, and explicit uncertainty before assuming details.</p>
+          <button class="method-popover-btn" popovertarget="pop-intent">Learn more</button>
         </article>
-        <article class="method-card reveal">
+        <article class="method-card reveal" data-expandable>
           <h3>2 · One-Shot UI Generation</h3>
           <p>Models must emit a single self-contained HTML file. Scored on visual polish, semantic structure, accessibility, responsiveness, and whether it runs without edits.</p>
+          <button class="method-popover-btn" popovertarget="pop-ui">Learn more</button>
         </article>
-        <article class="method-card reveal">
+        <article class="method-card reveal" data-expandable>
           <h3>3 · Long-Horizon Agentic Task</h3>
           <p>Models plan and outline a multi-step tool-calling system. Points for step coverage, tool mentions, failure-mode awareness, and logical ordering.</p>
+          <button class="method-popover-btn" popovertarget="pop-agent">Learn more</button>
         </article>
-        <article class="method-card reveal">
+        <article class="method-card reveal" data-expandable>
           <h3>4 · Brick Breaker Realism</h3>
           <p>Models generate a playable Canvas game in one shot. Scored on physics plausibility, control responsiveness, collision detection, game states, particle/sound effects, and responsive design.</p>
+          <button class="method-popover-btn" popovertarget="pop-brick">Learn more</button>
         </article>
       </div>
     </div>
@@ -233,6 +251,11 @@
       <p>Independent benchmark showcase for Venice API models. Generated with Fable 5.</p>
     </div>
   </footer>
+
+  <div popover id="pop-intent"><strong>Intent Understanding</strong><p>Scored on clarification, context inference, and hallucination resistance.</p></div>
+  <div popover id="pop-ui"><strong>One-Shot UI</strong><p>Single-prompt self-contained HTML; graded on polish, accessibility, and zero-edit runnability.</p></div>
+  <div popover id="pop-agent"><strong>Agentic Task</strong><p>Multi-step tool planning with recovery and coherence across 50+ conceptual steps.</p></div>
+  <div popover id="pop-brick"><strong>Brick Breaker Realism</strong><p>Physics accuracy, controls, collision, particles, sound, and responsive canvas gameplay.</p></div>
 
   <script src="assets/app.js"></script>
 </body>

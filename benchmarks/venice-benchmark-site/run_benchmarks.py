@@ -3,9 +3,9 @@
 BenchmarkViv - Long-horizon benchmark runner for the Venice API.
 
 Usage:
-    python benchmark_runner.py            # dry-run (default, no API calls)
-    python benchmark_runner.py --dry-run  # explicit dry-run
-    python benchmark_runner.py --run-real # real API calls (needs VENICE_INFERENCE_KEY)
+    python run_benchmarks.py            # dry-run (default, no API calls)
+    python run_benchmarks.py --dry-run  # explicit dry-run
+    python run_benchmarks.py --run-real # real API calls (needs VENICE_INFERENCE_KEY)
 """
 
 import argparse
@@ -46,6 +46,12 @@ MODELS = [
     {"id": "deepseek-v4-pro",    "display": "DeepSeek V4"},
     {"id": "minimax-m3-preview", "display": "MiniMax M3"},
 ]
+
+# Restrict specialized models to the benchmarks where they are evaluated.
+# Fable 5 is assessed only on One-Shot UI Generation.
+MODEL_BENCHMARK_LIMITS = {
+    "claude-fable-5": {"one_shot_ui"},
+}
 
 # Approximate fallback pricing (USD per 1M tokens: input, output).
 # Used if the /models endpoint does not return pricing.
@@ -422,11 +428,17 @@ def run(dry_run: bool) -> None:
 
     results = []
     total_cost = 0.0
-    total_calls = len(MODELS) * len(BENCHMARKS)
+    total_calls = sum(
+        len(BENCHMARKS) if model["id"] not in MODEL_BENCHMARK_LIMITS
+        else len(MODEL_BENCHMARK_LIMITS[model["id"]])
+        for model in MODELS
+    )
     call_index = 0
 
     for model in MODELS:
-        for bench in BENCHMARKS:
+        allowed = MODEL_BENCHMARK_LIMITS.get(model["id"])
+        benches = [b for b in BENCHMARKS if not allowed or b["id"] in allowed]
+        for bench in benches:
             call_index += 1
             print(f"[{call_index}/{total_calls}] {model['display']} ({model['id']}) "
                   f"-> {bench['name']} ... ", end="", flush=True)

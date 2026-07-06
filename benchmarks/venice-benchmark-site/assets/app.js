@@ -262,7 +262,7 @@
         <td>${benchmarkLabel(r.benchmark)}</td>
         <td>
           <strong>${fmtScore(r.score)}</strong>
-          <div class="score-bar"><i style="width:${Math.max(0, Math.min(100, r.score))}%"></i></div>
+          <div class="score-bar u-score-animate" style="--score:${Math.max(0, Math.min(100, r.score))}%"></div>
         </td>
         <td>${fmtLatency(r.latency)}</td>
         <td>${fmtTokens(r.tokens)}</td>
@@ -382,6 +382,63 @@
     targets.forEach((t) => io.observe(t));
   }
 
+  function initGpuBackground() {
+    const canvas = $("#gpuCanvas");
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+    let w, h, particles;
+    function resize() {
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+      particles = Array.from({ length: 36 }, () => ({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.35,
+        vy: (Math.random() - 0.5) * 0.35 - 0.15,
+        r: Math.random() * 2.5 + 1,
+        a: Math.random() * 0.4 + 0.1,
+      }));
+    }
+    let frame = 0;
+    function draw() {
+      if (!ctx) return;
+      ctx.clearRect(0, 0, w, h);
+      for (const p of particles) {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < -20) p.x = w + 20;
+        if (p.x > w + 20) p.x = -20;
+        if (p.y < -20) p.y = h + 20;
+        if (p.y > h + 20) p.y = -20;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(0, 212, 170, ${p.a})`;
+        ctx.fill();
+      }
+      frame = requestAnimationFrame(draw);
+    }
+    resize();
+    draw();
+    window.addEventListener("resize", resize);
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+    reduced.addEventListener?.("change", () => { if (reduced.matches && frame) cancelAnimationFrame(frame); else if (!frame) draw(); });
+  }
+
+  function initWaapiScores() {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          const bar = e.target;
+          requestAnimationFrame(() => bar.classList.add("is-scored"));
+          io.unobserve(bar);
+        }
+      });
+    }, { threshold: 0.5 });
+    $$(".score-bar").forEach((b) => io.observe(b));
+  }
+
   async function init() {
     initMobileNav();
     await loadData();
@@ -392,6 +449,8 @@
     renderComparison();
     populateStats();
     initReveal();
+    initGpuBackground();
+    initWaapiScores();
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
