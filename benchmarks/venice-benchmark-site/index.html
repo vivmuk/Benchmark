@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="BenchmarkViv — Long-horizon AI benchmarks for Venice API models. Intent understanding, one-shot UI generation, agentic tasks, and interactive game generation." />
+  <meta name="description" content="BenchmarkViv. Long-horizon AI benchmarks for Venice API models. Intent understanding, one-shot UI generation, agentic tasks, and interactive game generation." />
   <title>BenchmarkViv</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/styles.css" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <script>
@@ -30,27 +30,27 @@
     <div class="container">
       <a href="#" class="nav-logo">Benchmark<span>Viv</span></a>
       <ul class="nav-links" id="siteNav">
-        <li><a href="#benchmarks">Benchmarks</a></li>
-        <li><a href="arcade.html">Arcade</a></li>
         <li><a href="#leaderboard">Leaderboard</a></li>
+        <li><a href="#tracks">Tracks</a></li>
+        <li><a href="arcade.html">Arcade</a></li>
         <li><a href="#methodology">Methodology</a></li>
       </ul>
-      <a href="arcade.html" class="nav-cta">Play Arcade</a>
+      <a href="arcade.html" class="nav-cta">View Arcade</a>
       <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" style="display:none"><span></span><span></span><span></span></button>
     </div>
   </nav>
 
   <header class="hero vt-hero">
-    <div class="blob" aria-hidden="true"></div>
-    <div class="container">
+    <div class="hero-backdrop"></div>
+    <div class="container hero-content">
       <span class="eyebrow">Venice API Evaluation</span>
       <h1>Long-horizon benchmarks for <em>frontier models</em></h1>
-      <p>Independent, repeatable evaluations on the tasks that actually matter — understanding intent, shipping interfaces in one shot, staying coherent across long agentic runs, and generating playable interactive experiences.</p>
+      <p>Independent, repeatable evaluations on the tasks that actually matter. Understanding intent, shipping interfaces in one shot, staying coherent across long agentic runs, and generating playable interactive experiences.</p>
       <div class="hero-actions">
         <a href="#leaderboard" class="btn btn-primary">Explore Leaderboard</a>
         <a href="arcade.html" class="btn btn-ghost">Open Arcade</a>
       </div>
-      <p class="data-status" id="dataStatus">Loading benchmark data…</p>
+      <p class="data-status" id="dataStatus">Loading benchmark data</p>
     </div>
   </header>
 
@@ -70,11 +70,11 @@
           <div class="stat-label">Total evaluation runs</div>
         </div>
         <div class="stat">
-          <div class="stat-value" id="statTopScore">—</div>
-          <div class="stat-label">Top VivIndex · <span id="statVivLeader">—</span></div>
+          <div class="stat-value"><span id="statTopScore">-</span><span class="accent">.</span></div>
+          <div class="stat-label">Top VivIndex · <span id="statVivLeader">-</span></div>
         </div>
         <div class="stat">
-          <div class="stat-value"><span id="statCost">$1.13</span></div>
+          <div class="stat-value">$<span id="statCost">1.13</span></div>
           <div class="stat-label">Est. cost per full run</div>
         </div>
       </div>
@@ -84,27 +84,27 @@
   <section id="vivindex">
     <div class="container">
       <div class="section-head">
-        <span class="eyebrow">Headline Metric</span>
-        <h2>VivIndex — one number per model</h2>
-        <p>A weighted composite across all four tracks: Long-Horizon Agentic 30%, Intent Understanding 25%, One-Shot UI 25%, Brick Breaker Realism 20%. Higher is better.</p>
+        <h2>VivIndex. One number per model.</h2>
+        <p>A weighted composite across all four tracks. Long-Horizon Agentic 30%, Intent Understanding 25%, One-Shot UI 25%, Brick Breaker Realism 20%. Higher is better.</p>
       </div>
-      <div class="chart-card reveal" style="max-width:880px;margin:0 auto">
-        <h3>VivIndex ranking</h3>
-        <div class="chart-wrap chart-wrap-tall"><canvas id="vivIndexChart"></canvas></div>
+      <div class="charts-grid">
+        <div class="chart-card">
+          <h3>VivIndex ranking</h3>
+          <div class="chart-wrap chart-wrap-tall"><canvas id="vivIndexChart"></canvas></div>
+        </div>
       </div>
     </div>
   </section>
 
-  <section id="benchmarks">
+  <section id="tracks">
     <div class="container">
       <div class="section-head">
-        <span class="eyebrow">The Tracks</span>
         <h2>Four evaluation dimensions</h2>
         <p>Each benchmark isolates a different failure mode that separates demo-quality models from production-ready systems.</p>
       </div>
       <div class="bench-grid">
         <article class="bench-card reveal">
-          <div class="bench-icon">🎯</div>
+          <div class="bench-icon">01</div>
           <h3>Intent Understanding</h3>
           <p>Ambiguous and adversarial prompts. Scored on clarifying questions, context inference, and resisting hallucination.</p>
           <div class="bench-tags">
@@ -114,7 +114,7 @@
           </div>
         </article>
         <article class="bench-card reveal">
-          <div class="bench-icon">🖥️</div>
+          <div class="bench-icon magenta">02</div>
           <h3>One-Shot UI Generation</h3>
           <p>Single-prompt, complete interface. Graded on polish, semantic HTML, accessibility, responsiveness, and zero-fix runnability.</p>
           <div class="bench-tags">
@@ -124,7 +124,7 @@
           </div>
         </article>
         <article class="bench-card reveal">
-          <div class="bench-icon">🧭</div>
+          <div class="bench-icon acid">03</div>
           <h3>Long-Horizon Agentic Task</h3>
           <p>Multi-step tool-calling loops spanning 50+ steps. Scored on goal completion, loop avoidance, error recovery, and coherence.</p>
           <div class="bench-tags">
@@ -134,7 +134,7 @@
           </div>
         </article>
         <article class="bench-card reveal">
-          <div class="bench-icon">🧱</div>
+          <div class="bench-icon">04</div>
           <h3>Brick Breaker Realism</h3>
           <p>Generate a fully playable brick breaker game in one shot. Scored on physics accuracy, controls, collision resolution, particles, sound, and responsiveness.</p>
           <div class="bench-tags">
@@ -147,22 +147,23 @@
     </div>
   </section>
 
-  <section class="arcade-teaser">
-    <div class="container arcade-teaser-card reveal">
-      <div>
-        <span class="eyebrow">Arcade</span>
-        <h2>Play benchmark-generated games on their own page</h2>
-        <p>The playable Brick Breaker demo now lives in Arcade so the leaderboard stays focused on benchmark results.</p>
+  <section>
+    <div class="container">
+      <div class="arcade-teaser-card reveal">
+        <div>
+          <span class="eyebrow">Arcade</span>
+          <h2>Six models. Six brick games. One prompt.</h2>
+          <p>Each model generates its own interpretation of the most advanced brick breaker possible. Play them all on the Arcade page.</p>
+        </div>
+        <a href="arcade.html" class="btn btn-primary">Launch Arcade</a>
       </div>
-      <a href="arcade.html" class="btn btn-primary">Launch Arcade</a>
     </div>
   </section>
 
-  <section id="leaderboard" class="leaderboard">
+  <section id="leaderboard" class="leaderboard vt-leaderboard">
     <div class="container">
       <div class="section-head">
-        <span class="eyebrow">Leaderboard</span>
-        <h2>Model performance & cost</h2>
+        <h2>Model performance &amp; cost</h2>
         <p>Composite scores across all four tracks. Filter, sort, and compare cost per run.</p>
       </div>
 
@@ -178,7 +179,7 @@
       </div>
 
       <div class="table-controls">
-        <input type="search" id="tableSearch" class="table-search" placeholder="Filter models…" aria-label="Filter models" />
+        <input type="search" id="tableSearch" class="table-search" placeholder="Filter models" aria-label="Filter models" />
         <div class="filter-chips" id="benchmarkFilters">
           <button class="filter-chip is-active" data-filter="all">All</button>
           <button class="filter-chip" data-filter="intent-understanding">Intent</button>
@@ -210,17 +211,16 @@
   <section id="speed">
     <div class="container">
       <div class="section-head">
-        <span class="eyebrow">Performance</span>
         <h2>Speed &amp; latency</h2>
-        <p>Output speed measured as completion tokens per second of generation time; response time is average end-to-end seconds per benchmark run.</p>
+        <p>Output speed measured as completion tokens per second of generation time. Response time is average end-to-end seconds per benchmark run.</p>
       </div>
       <div class="charts-grid">
         <div class="chart-card reveal">
-          <h3>Output speed (tokens/sec) · higher is better</h3>
+          <h3>Output speed (tokens/sec). Higher is better.</h3>
           <div class="chart-wrap"><canvas id="speedChart"></canvas></div>
         </div>
         <div class="chart-card reveal">
-          <h3>Avg response time (s) · lower is better</h3>
+          <h3>Avg response time (s). Lower is better.</h3>
           <div class="chart-wrap"><canvas id="latencyChart"></canvas></div>
         </div>
       </div>
@@ -230,51 +230,43 @@
   <section id="comparison">
     <div class="container">
       <div class="section-head">
-        <span class="eyebrow">Model Profiles</span>
-        <h2>Per-model performance</h2>
+        <h2>Per-model profiles</h2>
         <p>Score distribution across the four benchmark tracks.</p>
       </div>
-      <div class="compare-grid" id="modelComparison" data-carousel></div>
+      <div class="compare-grid" id="modelComparison"></div>
     </div>
   </section>
 
   <section id="methodology">
     <div class="container">
       <div class="section-head">
-        <span class="eyebrow">Methodology</span>
         <h2>How we score</h2>
         <p>Every benchmark is run with fixed prompts, default sampling, and transparent heuristics. Scores are reproducible and auditable.</p>
       </div>
       <div class="method-grid">
-        <article class="method-card reveal" data-expandable>
+        <article class="method-card reveal">
           <h3>1 · Intent Understanding</h3>
           <p>Models receive ambiguous, underspecified prompts. Points for clarifying questions, structured proposals, and explicit uncertainty before assuming details.</p>
-          <button class="method-popover-btn" popovertarget="pop-intent">Learn more</button>
         </article>
-        <article class="method-card reveal" data-expandable>
+        <article class="method-card reveal">
           <h3>2 · One-Shot UI Generation</h3>
           <p>Models must emit a single self-contained HTML file. Scored on visual polish, semantic structure, accessibility, responsiveness, and whether it runs without edits.</p>
-          <button class="method-popover-btn" popovertarget="pop-ui">Learn more</button>
         </article>
-        <article class="method-card reveal" data-expandable>
+        <article class="method-card reveal">
           <h3>3 · Long-Horizon Agentic Task</h3>
           <p>Models plan and outline a multi-step tool-calling system. Points for step coverage, tool mentions, failure-mode awareness, and logical ordering.</p>
-          <button class="method-popover-btn" popovertarget="pop-agent">Learn more</button>
         </article>
-        <article class="method-card reveal" data-expandable>
+        <article class="method-card reveal">
           <h3>4 · Brick Breaker Realism</h3>
           <p>Models generate a playable Canvas game in one shot. Scored on physics plausibility, control responsiveness, collision detection, game states, particle/sound effects, and responsive design.</p>
-          <button class="method-popover-btn" popovertarget="pop-brick">Learn more</button>
         </article>
-        <article class="method-card reveal" data-expandable>
+        <article class="method-card reveal">
           <h3>5 · VivIndex Composite</h3>
-          <p>Weighted average of the four tracks: Long-Horizon Agentic 30%, Intent Understanding 25%, One-Shot UI 25%, Brick Breaker 20%. Weights favor sustained-coherence tasks; missing benchmarks are renormalized rather than scored as zero.</p>
-          <button class="method-popover-btn" popovertarget="pop-vivindex">Learn more</button>
+          <p>Weighted average of the four tracks. Long-Horizon Agentic 30%, Intent Understanding 25%, One-Shot UI 25%, Brick Breaker 20%. Weights favor sustained-coherence tasks. Missing benchmarks are renormalized rather than scored as zero.</p>
         </article>
-        <article class="method-card reveal" data-expandable>
+        <article class="method-card reveal">
           <h3>6 · Speed &amp; Latency</h3>
-          <p>Output speed = completion tokens ÷ generation seconds, pooled across all runs. Response time = mean end-to-end request latency. Both measured against the live Venice API, not vendor claims.</p>
-          <button class="method-popover-btn" popovertarget="pop-speed">Learn more</button>
+          <p>Output speed uses actual completion_tokens and wall-clock latency from live API runs. Single-run measurements. Variance bands planned for the next release.</p>
         </article>
       </div>
     </div>
@@ -283,16 +275,9 @@
   <footer class="footer">
     <div class="container">
       <div class="footer-logo">Benchmark<span>Viv</span></div>
-      <p>Independent benchmark showcase for Venice API models. Generated with Fable 5.</p>
+      <p>Independent benchmark showcase for Venice API models. <a href="arcade.html">Play the generated games on Arcade</a>.</p>
     </div>
   </footer>
-
-  <div popover id="pop-intent"><strong>Intent Understanding</strong><p>Scored on clarification, context inference, and hallucination resistance.</p></div>
-  <div popover id="pop-ui"><strong>One-Shot UI</strong><p>Single-prompt self-contained HTML; graded on polish, accessibility, and zero-edit runnability.</p></div>
-  <div popover id="pop-agent"><strong>Agentic Task</strong><p>Multi-step tool planning with recovery and coherence across 50+ conceptual steps.</p></div>
-  <div popover id="pop-brick"><strong>Brick Breaker Realism</strong><p>Physics accuracy, controls, collision, particles, sound, and responsive canvas gameplay.</p></div>
-  <div popover id="pop-vivindex"><strong>VivIndex</strong><p>Composite = Σ(score × weight) ÷ Σ(weights present). Agentic 0.30, Intent 0.25, UI 0.25, Brick 0.20. Specialized models evaluated on fewer tracks are renormalized, not penalized.</p></div>
-  <div popover id="pop-speed"><strong>Speed &amp; Latency</strong><p>Tokens/sec uses actual completion_tokens and wall-clock latency from live API runs. Single-run measurements — variance bands planned for the next release.</p></div>
 
   <script src="assets/app.js"></script>
 </body>

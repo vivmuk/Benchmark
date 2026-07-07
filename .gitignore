@@ -1,24 +1,10 @@
-# Private assistant/workspace files — never commit
-MEMORY.md
-memory/
-TOOLS.md
-USER.md
-IDENTITY.md
-SOUL.md
-AGENTS.md
-HEARTBEAT.md
-BOOTSTRAP.md
-.openclaw/
-.clawhub/
-openclaw-workspace-state.json
-
-# Python
 __pycache__/
 *.pyc
 
-# OS
-.DS_Store
+# Per-brick test output lives in arcade/ alongside index.html; allow real bricks,
+# but ignore small synthetic placeholders so a partial run doesn't pollute the repo.
+# Threshold: real bricks are > 1000 bytes; dry-run placeholders are ~330 bytes.
+arcade/*.raw.txt
 
-# Local junk
-tmp/
-node_modules/
+# Don't commit the in-progress brick_arcade.json from a partial run
+benchmarks/venice-benchmark-site/data/brick_arcade.json.tmp

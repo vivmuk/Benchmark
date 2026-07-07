@@ -11,13 +11,14 @@
     { id: "brick-breaker-realism", label: "Brick Breaker" },
   ];
 
+  // Model colors mapped onto the Riso 4-ink palette (cobalt / magenta / acid).
   const MODEL_COLORS = {
-    "GPT-5.5": "#10a37f",
-    "Fable 5": "#d97757",
-    "Opus 4.8": "#8b5cf6",
-    "GLM 5.2": "#3b82f6",
-    "DeepSeek V4": "#0ea5e9",
-    "MiniMax M3": "#f43f5e",
+    "GPT-5.5":     "#0066FF",  // cobalt
+    "Fable 5":     "#F5FF40",  // acid
+    "Opus 4.8":    "#8b5cf6",  // kept violet (legible on dark, distinct)
+    "GLM 5.2":     "#FF2E93",  // magenta
+    "DeepSeek V4": "#22d3ee",  // cyan (kept for chart legibility vs cobalt)
+    "MiniMax M3":  "#F4F2EE",  // paper
   };
 
   const FALLBACK_DATA = {
@@ -223,7 +224,7 @@
           },
         },
         scales: {
-          x: { min: 0, max: 100, grid: { color: "rgba(26,26,46,0.06)" } },
+          x: { min: 0, max: 100, grid: { color: "rgba(244,242,238,0.07)" } },
           y: { grid: { display: false } },
         },
       },
@@ -240,9 +241,9 @@
       const x = scales.x.getPixelForValue(opts.xMid);
       const y = scales.y.getPixelForValue(opts.yMid);
       ctx.save();
-      ctx.fillStyle = "rgba(0, 212, 170, 0.08)";
+      ctx.fillStyle = "rgba(255, 46, 147, 0.10)";
       ctx.fillRect(chartArea.left, chartArea.top, Math.max(0, x - chartArea.left), Math.max(0, y - chartArea.top));
-      ctx.strokeStyle = "rgba(26, 26, 46, 0.18)";
+      ctx.strokeStyle = "rgba(244, 242, 238, 0.20)";
       ctx.setLineDash([5, 4]);
       ctx.lineWidth = 1;
       ctx.beginPath();
@@ -252,8 +253,8 @@
       ctx.lineTo(chartArea.right, y);
       ctx.stroke();
       ctx.setLineDash([]);
-      ctx.fillStyle = "rgba(0, 150, 120, 0.9)";
-      ctx.font = "600 11px Inter, sans-serif";
+      ctx.fillStyle = "rgba(245, 255, 64, 0.95)";
+      ctx.font = "600 11px Geist, sans-serif";
       ctx.fillText("Most attractive quadrant", chartArea.left + 8, chartArea.top + 16);
       ctx.restore();
     },
@@ -287,7 +288,7 @@
           maintainAspectRatio: false,
           plugins: { legend: { display: false }, tooltip: { callbacks: { label: (c) => ` ${c.raw} tok/s (higher is better)` } } },
           scales: {
-            y: { beginAtZero: true, title: { display: true, text: "Tokens per second" }, grid: { color: "rgba(26,26,46,0.06)" } },
+            y: { beginAtZero: true, title: { display: true, text: "Tokens per second" }, grid: { color: "rgba(244,242,238,0.07)" } },
             x: { grid: { display: false } },
           },
         },
@@ -316,7 +317,7 @@
           maintainAspectRatio: false,
           plugins: { legend: { display: false }, tooltip: { callbacks: { label: (c) => ` ${c.raw}s avg end-to-end (lower is better)` } } },
           scales: {
-            y: { beginAtZero: true, title: { display: true, text: "Seconds (lower is better)" }, grid: { color: "rgba(26,26,46,0.06)" } },
+            y: { beginAtZero: true, title: { display: true, text: "Seconds (lower is better)" }, grid: { color: "rgba(244,242,238,0.07)" } },
             x: { grid: { display: false } },
           },
         },
@@ -348,7 +349,7 @@
         maintainAspectRatio: false,
         plugins: { legend: { display: false } },
         scales: {
-          y: { min: 0, max: 100, grid: { color: "rgba(26,26,46,0.06)" } },
+          y: { min: 0, max: 100, grid: { color: "rgba(244,242,238,0.07)" } },
           x: { grid: { display: false } },
         },
       },
@@ -396,13 +397,13 @@
           x: {
             type: "logarithmic",
             title: { display: true, text: "Avg cost per run (USD, log) — left is cheaper" },
-            grid: { color: "rgba(26,26,46,0.06)" },
+            grid: { color: "rgba(244,242,238,0.07)" },
           },
           y: {
             min: 40,
             max: 100,
             title: { display: true, text: "VivIndex (weighted composite)" },
-            grid: { color: "rgba(26,26,46,0.06)" },
+            grid: { color: "rgba(244,242,238,0.07)" },
           },
         },
       },
@@ -595,7 +596,7 @@
         if (p.y > h + 20) p.y = -20;
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(0, 212, 170, ${p.a})`;
+        ctx.fillStyle = `rgba(255, 46, 147, ${p.a})`;
         ctx.fill();
       }
       frame = requestAnimationFrame(draw);
