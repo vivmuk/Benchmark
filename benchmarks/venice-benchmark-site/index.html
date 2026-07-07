@@ -31,11 +31,11 @@
       <a href="#" class="nav-logo">Benchmark<span>Viv</span></a>
       <ul class="nav-links" id="siteNav">
         <li><a href="#benchmarks">Benchmarks</a></li>
-        <li><a href="#demo">Demo</a></li>
+        <li><a href="arcade.html">Arcade</a></li>
         <li><a href="#leaderboard">Leaderboard</a></li>
         <li><a href="#methodology">Methodology</a></li>
       </ul>
-      <a href="#leaderboard" class="nav-cta">View Results</a>
+      <a href="arcade.html" class="nav-cta">Play Arcade</a>
       <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" style="display:none"><span></span><span></span><span></span></button>
     </div>
   </nav>
@@ -48,7 +48,7 @@
       <p>Independent, repeatable evaluations on the tasks that actually matter — understanding intent, shipping interfaces in one shot, staying coherent across long agentic runs, and generating playable interactive experiences.</p>
       <div class="hero-actions">
         <a href="#leaderboard" class="btn btn-primary">Explore Leaderboard</a>
-        <a href="#methodology" class="btn btn-ghost">Read Methodology</a>
+        <a href="arcade.html" class="btn btn-ghost">Open Arcade</a>
       </div>
       <p class="data-status" id="dataStatus">Loading benchmark data…</p>
     </div>
@@ -147,23 +147,14 @@
     </div>
   </section>
 
-  <section id="demo" class="game-demo">
-    <div class="container">
-      <div class="section-head">
-        <span class="eyebrow">Play the Demo</span>
-        <h2>Brick Breaker Realism</h2>
-        <p>This game was generated in a single prompt by Fable 5. No manual edits. Move with mouse, touch, or arrow keys. Click or tap to launch.</p>
+  <section class="arcade-teaser">
+    <div class="container arcade-teaser-card reveal">
+      <div>
+        <span class="eyebrow">Arcade</span>
+        <h2>Play benchmark-generated games on their own page</h2>
+        <p>The playable Brick Breaker demo now lives in Arcade so the leaderboard stays focused on benchmark results.</p>
       </div>
-      <div class="game-frame-wrap">
-        <iframe id="gameFrame" src="brick-game-demo.html" title="Brick Breaker Realism demo" loading="lazy"></iframe>
-        <div class="game-overlay"><span>▶ Play</span></div>
-      </div>
-      <div class="game-meta">
-        <div><strong>1-shot</strong><small>Prompt → playable game</small></div>
-        <div><strong>Physics</strong><small>Angle reflection & spin</small></div>
-        <div><strong>Audio</strong><small>Web Audio API SFX</small></div>
-        <div><strong>Responsive</strong><small>Mouse, touch, keys</small></div>
-      </div>
+      <a href="arcade.html" class="btn btn-primary">Launch Arcade</a>
     </div>
   </section>
 
