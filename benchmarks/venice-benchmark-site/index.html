@@ -90,7 +90,7 @@
       </div>
       <div class="chart-card reveal" style="max-width:880px;margin:0 auto">
         <h3>VivIndex ranking</h3>
-        <canvas id="vivIndexChart" class="chart-canvas" style="min-height:320px"></canvas>
+        <div class="chart-wrap chart-wrap-tall"><canvas id="vivIndexChart"></canvas></div>
       </div>
     </div>
   </section>
@@ -178,11 +178,11 @@
       <div class="charts-grid">
         <div class="chart-card reveal">
           <h3>Average score by model</h3>
-          <canvas id="leaderboardChart" class="chart-canvas"></canvas>
+          <div class="chart-wrap"><canvas id="leaderboardChart"></canvas></div>
         </div>
         <div class="chart-card reveal">
           <h3>VivIndex vs. cost per run</h3>
-          <canvas id="costValueChart" class="chart-canvas"></canvas>
+          <div class="chart-wrap"><canvas id="costValueChart"></canvas></div>
         </div>
       </div>
 
@@ -226,11 +226,11 @@
       <div class="charts-grid">
         <div class="chart-card reveal">
           <h3>Output speed (tokens/sec) · higher is better</h3>
-          <canvas id="speedChart" class="chart-canvas"></canvas>
+          <div class="chart-wrap"><canvas id="speedChart"></canvas></div>
         </div>
         <div class="chart-card reveal">
           <h3>Avg response time (s) · lower is better</h3>
-          <canvas id="latencyChart" class="chart-canvas"></canvas>
+          <div class="chart-wrap"><canvas id="latencyChart"></canvas></div>
         </div>
       </div>
     </div>

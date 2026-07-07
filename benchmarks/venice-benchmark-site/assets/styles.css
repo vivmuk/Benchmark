@@ -316,6 +316,10 @@ tr:nth-child(1) .rank{color:#00D4AA}
 .chart-card:hover{transform:translateY(-4px);box-shadow:0 20px 56px -18px rgba(26,26,46,.2)}
 .chart-card h3{font:600 1.15rem Fraunces,serif;color:#1A1A2E;margin:0 0 16px}
 .chart-canvas{width:100%;height:280px}
+.chart-wrap{position:relative;height:280px;width:100%;overflow:hidden}
+.chart-wrap-tall{height:340px}
+.chart-wrap>canvas{max-height:100%}
+.compare-card .spark-wrap{position:relative;height:60px;overflow:hidden}
 
 /* 4. Compare Cards */
 .compare-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;padding:96px 24px;max-width:1120px;margin:0 auto}

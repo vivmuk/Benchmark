@@ -497,7 +497,7 @@
           <div><dt>Cost/run</dt><dd>$${a.avgCost.toFixed(3)}</dd></div>
           <div><dt>Speed</dt><dd>${a.tokensPerSec != null ? a.tokensPerSec.toFixed(0) + " tok/s" : "—"}</dd></div>
         </dl>
-        <canvas height="60"></canvas>
+        <div class="spark-wrap"><canvas></canvas></div>
       </article>
     `).join("");
 
