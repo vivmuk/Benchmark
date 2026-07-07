@@ -1,0 +1,105 @@
+{
+  "generated_at": "2026-07-07T11:42:08.847965+00:00",
+  "dry_run": false,
+  "prompt_file": "prompts/brick_breaker_maximum.md",
+  "max_tokens": 16384,
+  "models": [
+    {
+      "id": "openai-gpt-55",
+      "display": "GPT-5.5"
+    },
+    {
+      "id": "claude-opus-4-8",
+      "display": "Opus 4.8"
+    },
+    {
+      "id": "zai-org-glm-5-2",
+      "display": "GLM 5.2"
+    },
+    {
+      "id": "deepseek-v4-pro",
+      "display": "DeepSeek V4"
+    },
+    {
+      "id": "minimax-m3-preview",
+      "display": "MiniMax M3"
+    }
+  ],
+  "results": [
+    {
+      "model_id": "openai-gpt-55",
+      "display": "GPT-5.5",
+      "status": "ok",
+      "latency": 255.32,
+      "prompt_tokens": 1917,
+      "completion_tokens": 16384,
+      "total_tokens": 18301,
+      "estimated_cost_usd": 0.5107,
+      "score": 83,
+      "html": "arcade/openai-gpt-55-brick.html",
+      "raw_chars": 20725,
+      "note": "real Venice API run",
+      "error": null
+    },
+    {
+      "model_id": "claude-opus-4-8",
+      "display": "Opus 4.8",
+      "status": "ok",
+      "latency": 165.89,
+      "prompt_tokens": 3107,
+      "completion_tokens": 16384,
+      "total_tokens": 19491,
+      "estimated_cost_usd": 1.2754,
+      "score": 90,
+      "html": "arcade/claude-opus-4-8-brick.html",
+      "raw_chars": 34344,
+      "note": "real Venice API run",
+      "error": null
+    },
+    {
+      "model_id": "zai-org-glm-5-2",
+      "display": "GLM 5.2",
+      "status": "ok",
+      "latency": 127.46,
+      "prompt_tokens": 1891,
+      "completion_tokens": 16384,
+      "total_tokens": 18275,
+      "estimated_cost_usd": 0.051,
+      "score": 90,
+      "html": "arcade/zai-org-glm-5-2-brick.html",
+      "raw_chars": 53250,
+      "note": "real Venice API run",
+      "error": null
+    },
+    {
+      "model_id": "deepseek-v4-pro",
+      "display": "DeepSeek V4",
+      "status": "ok",
+      "latency": 251.81,
+      "prompt_tokens": 1979,
+      "completion_tokens": 16385,
+      "total_tokens": 18364,
+      "estimated_cost_usd": 0.0372,
+      "score": 90,
+      "html": "arcade/deepseek-v4-pro-brick.html",
+      "raw_chars": 39199,
+      "note": "real Venice API run",
+      "error": null
+    },
+    {
+      "model_id": "minimax-m3-preview",
+      "display": "MiniMax M3",
+      "status": "error",
+      "latency": 81.27,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "estimated_cost_usd": 0.0,
+      "score": 0,
+      "html": "arcade/minimax-m3-preview-brick.raw.txt",
+      "raw_chars": 0,
+      "note": "real Venice API run",
+      "error": "Malformed response"
+    }
+  ]
+}
