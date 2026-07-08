@@ -33,10 +33,10 @@
         <li><a href="#leaderboard">Leaderboard</a></li>
         <li><a href="#tracks">Tracks</a></li>
         <li><a href="arcade.html">Arcade</a></li>
-        <li><a href="#methodology">Methodology</a></li>
+        <li><a href="experimental-design.html">Design</a></li>
       </ul>
-      <a href="arcade.html" class="nav-cta">View Arcade</a>
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" style="display:none"><span></span><span></span><span></span></button>
+      <a href="experimental-design.html" class="nav-cta">Experimental Design</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </nav>
 
@@ -48,7 +48,7 @@
       <p>Independent, repeatable evaluations on the tasks that actually matter. Understanding intent, shipping interfaces in one shot, staying coherent across long agentic runs, and generating playable interactive experiences.</p>
       <div class="hero-actions">
         <a href="#leaderboard" class="btn btn-primary">Explore Leaderboard</a>
-        <a href="arcade.html" class="btn btn-ghost">Open Arcade</a>
+        <a href="experimental-design.html" class="btn btn-ghost">Experimental Design</a>
       </div>
       <p class="data-status" id="dataStatus">Loading benchmark data</p>
     </div>
@@ -152,7 +152,7 @@
       <div class="arcade-teaser-card reveal">
         <div>
           <span class="eyebrow">Arcade</span>
-          <h2>Seven models. Seven brick games. One prompt.</h2>
+          <h2>Same prompt. Multiple models. One Arcade.</h2>
           <p>Each model generates its own interpretation of the most advanced brick breaker possible. Play them all on the Arcade page.</p>
         </div>
         <a href="arcade.html" class="btn btn-primary">Launch Arcade</a>
@@ -264,9 +264,10 @@
           <h3>5 · VivIndex Composite</h3>
           <p>Weighted average of the four tracks. Long-Horizon Agentic 30%, Intent Understanding 25%, One-Shot UI 25%, Brick Breaker 20%. Weights favor sustained-coherence tasks. Missing benchmarks are renormalized rather than scored as zero.</p>
         </article>
-        <article class="method-card reveal">
-          <h3>6 · Speed &amp; Latency</h3>
-          <p>Output speed uses actual completion_tokens and wall-clock latency from live API runs. Single-run measurements. Variance bands planned for the next release.</p>
+                        <article class="method-card reveal">
+          <h3>6 · Full protocol</h3>
+          <p>Exact prompts, scoring math, Arcade design, and non-claims are published on the Experimental Design Play page — the lab notebook for this suite.</p>
+          <p style="margin-top:0.8rem"><a class="btn btn-primary" href="experimental-design.html">Open Experimental Design</a></p>
         </article>
       </div>
     </div>
@@ -275,7 +276,12 @@
   <footer class="footer">
     <div class="container">
       <div class="footer-logo">Benchmark<span>Viv</span></div>
-      <p>Independent benchmark showcase for Venice API models. <a href="arcade.html">Play the generated games on Arcade</a>.</p>
+      <p>Independent benchmark showcase for Venice API models.</p>
+      <div class="footer-links">
+        <a href="arcade.html">Arcade</a>
+        <a href="experimental-design.html">Experimental Design</a>
+        <a href="#leaderboard">Leaderboard</a>
+      </div>
     </div>
   </footer>
 

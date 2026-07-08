@@ -14,12 +14,12 @@
   // Model colors mapped onto the Riso 4-ink palette (cobalt / magenta / acid).
   const MODEL_COLORS = {
     "GPT-5.5":     "#0066FF",  // cobalt
-    "Fable 5":     "#F5FF40",  // acid
+    "Fable 5":     "#8B9A00",  // acid (readable on light)
     "Opus 4.8":    "#8b5cf6",  // kept violet (legible on dark, distinct)
     "GLM 5.2":     "#FF2E93",  // magenta
     "DeepSeek V4": "#22d3ee",  // cyan (kept for chart legibility vs cobalt)
-    "MiniMax M3":  "#F4F2EE",  // paper
-    "Grok 4.5":    "#9ca3af",  // graphite (xAI-adjacent, distinct on dark)
+    "MiniMax M3":  "#6B7280",  // slate
+    "Grok 4.5":    "#111827",  // graphite
   };
 
   const FALLBACK_DATA = {
@@ -225,8 +225,8 @@
           },
         },
         scales: {
-          x: { min: 0, max: 100, grid: { color: "rgba(244,242,238,0.07)" } },
-          y: { grid: { display: false } },
+          x: { min: 0, max: 100, grid: { color: "rgba(18,18,26,0.08)" }, ticks: { color: "rgba(18,18,26,0.55)" } },
+          y: { grid: { display: false }, ticks: { color: "rgba(18,18,26,0.75)" } },
         },
       },
     });
@@ -242,9 +242,9 @@
       const x = scales.x.getPixelForValue(opts.xMid);
       const y = scales.y.getPixelForValue(opts.yMid);
       ctx.save();
-      ctx.fillStyle = "rgba(255, 46, 147, 0.10)";
+      ctx.fillStyle = "rgba(225, 29, 116, 0.08)";
       ctx.fillRect(chartArea.left, chartArea.top, Math.max(0, x - chartArea.left), Math.max(0, y - chartArea.top));
-      ctx.strokeStyle = "rgba(244, 242, 238, 0.20)";
+      ctx.strokeStyle = "rgba(18, 18, 26, 0.18)";
       ctx.setLineDash([5, 4]);
       ctx.lineWidth = 1;
       ctx.beginPath();
@@ -254,7 +254,7 @@
       ctx.lineTo(chartArea.right, y);
       ctx.stroke();
       ctx.setLineDash([]);
-      ctx.fillStyle = "rgba(245, 255, 64, 0.95)";
+      ctx.fillStyle = "rgba(18, 18, 26, 0.72)";
       ctx.font = "600 11px Geist, sans-serif";
       ctx.fillText("Most attractive quadrant", chartArea.left + 8, chartArea.top + 16);
       ctx.restore();
@@ -289,8 +289,8 @@
           maintainAspectRatio: false,
           plugins: { legend: { display: false }, tooltip: { callbacks: { label: (c) => ` ${c.raw} tok/s (higher is better)` } } },
           scales: {
-            y: { beginAtZero: true, title: { display: true, text: "Tokens per second" }, grid: { color: "rgba(244,242,238,0.07)" } },
-            x: { grid: { display: false } },
+            y: { beginAtZero: true, title: { display: true, text: "Tokens per second" }, grid: { color: "rgba(18,18,26,0.08)" }, ticks: { color: "rgba(18,18,26,0.55)" } },
+            x: { grid: { display: false }, ticks: { color: "rgba(18,18,26,0.75)" } },
           },
         },
       });
@@ -318,8 +318,8 @@
           maintainAspectRatio: false,
           plugins: { legend: { display: false }, tooltip: { callbacks: { label: (c) => ` ${c.raw}s avg end-to-end (lower is better)` } } },
           scales: {
-            y: { beginAtZero: true, title: { display: true, text: "Seconds (lower is better)" }, grid: { color: "rgba(244,242,238,0.07)" } },
-            x: { grid: { display: false } },
+            y: { beginAtZero: true, title: { display: true, text: "Seconds (lower is better)" }, grid: { color: "rgba(18,18,26,0.08)" }, ticks: { color: "rgba(18,18,26,0.55)" } },
+            x: { grid: { display: false }, ticks: { color: "rgba(18,18,26,0.75)" } },
           },
         },
       });
@@ -350,8 +350,8 @@
         maintainAspectRatio: false,
         plugins: { legend: { display: false } },
         scales: {
-          y: { min: 0, max: 100, grid: { color: "rgba(244,242,238,0.07)" } },
-          x: { grid: { display: false } },
+          y: { min: 0, max: 100, grid: { color: "rgba(18,18,26,0.08)" }, ticks: { color: "rgba(18,18,26,0.55)" } },
+          x: { grid: { display: false }, ticks: { color: "rgba(18,18,26,0.75)" } },
         },
       },
     });
@@ -397,14 +397,16 @@
         scales: {
           x: {
             type: "logarithmic",
-            title: { display: true, text: "Avg cost per run (USD, log) — left is cheaper" },
-            grid: { color: "rgba(244,242,238,0.07)" },
+            title: { display: true, text: "Avg cost per run (USD, log) — left is cheaper", color: "rgba(18,18,26,0.55)" },
+            grid: { color: "rgba(18,18,26,0.08)" },
+            ticks: { color: "rgba(18,18,26,0.55)" },
           },
           y: {
             min: 40,
             max: 100,
-            title: { display: true, text: "VivIndex (weighted composite)" },
-            grid: { color: "rgba(244,242,238,0.07)" },
+            title: { display: true, text: "VivIndex (weighted composite)", color: "rgba(18,18,26,0.55)" },
+            grid: { color: "rgba(18,18,26,0.08)" },
+            ticks: { color: "rgba(18,18,26,0.55)" },
           },
         },
       },
@@ -546,7 +548,6 @@
     const toggle = $("#navToggle");
     const nav = $("#siteNav");
     if (!toggle || !nav) return;
-    toggle.style.display = "block";
     toggle.addEventListener("click", () => {
       const open = nav.classList.toggle("is-open");
       toggle.setAttribute("aria-expanded", String(open));
@@ -555,6 +556,19 @@
       nav.classList.remove("is-open");
       toggle.setAttribute("aria-expanded", "false");
     }));
+    // Close menu on outside tap / resize back to desktop.
+    document.addEventListener("click", (e) => {
+      if (!nav.classList.contains("is-open")) return;
+      if (nav.contains(e.target) || toggle.contains(e.target)) return;
+      nav.classList.remove("is-open");
+      toggle.setAttribute("aria-expanded", "false");
+    });
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 900 && nav.classList.contains("is-open")) {
+        nav.classList.remove("is-open");
+        toggle.setAttribute("aria-expanded", "false");
+      }
+    });
   }
 
   function initReveal() {
@@ -597,7 +611,7 @@
         if (p.y > h + 20) p.y = -20;
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 46, 147, ${p.a})`;
+        ctx.fillStyle = `rgba(0, 87, 230, ${p.a * 0.55})`;
         ctx.fill();
       }
       frame = requestAnimationFrame(draw);

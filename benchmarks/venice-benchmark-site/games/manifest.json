@@ -1,0 +1,93 @@
+{
+  "openai-gpt-55": {
+    "model_id": "openai-gpt-55",
+    "display": "GPT-5.5",
+    "prompt": "Create a single self-contained HTML file for a realistic Brick Breaker game with Canvas. Include: ball physics with angle reflection, paddle with mouse/keyboard/touch controls, brick grid with collision detection, score/lives/level, start/game-over/victory screens, particle effects on brick break, synthesized sound effects with Web Audio API, responsive design, dark neon aesthetic.",
+    "max_tokens": 16384,
+    "temperature": 0.5,
+    "status": "error",
+    "file": null,
+    "chars": 0,
+    "latency_s": 189.2,
+    "completion_tokens": 16384,
+    "error": "no complete HTML document in response (24225 chars)"
+  },
+  "claude-fable-5": {
+    "model_id": "claude-fable-5",
+    "display": "Fable 5",
+    "prompt": "Create a single self-contained HTML file for a realistic Brick Breaker game with Canvas. Include: ball physics with angle reflection, paddle with mouse/keyboard/touch controls, brick grid with collision detection, score/lives/level, start/game-over/victory screens, particle effects on brick break, synthesized sound effects with Web Audio API, responsive design, dark neon aesthetic.",
+    "max_tokens": 16384,
+    "temperature": 0.5,
+    "status": "ok",
+    "file": "claude-fable-5.html",
+    "chars": 21898,
+    "latency_s": 109.3,
+    "completion_tokens": 11979,
+    "error": null
+  },
+  "claude-opus-4-8": {
+    "model_id": "claude-opus-4-8",
+    "display": "Opus 4.8",
+    "prompt": "Create a single self-contained HTML file for a realistic Brick Breaker game with Canvas. Include: ball physics with angle reflection, paddle with mouse/keyboard/touch controls, brick grid with collision detection, score/lives/level, start/game-over/victory screens, particle effects on brick break, synthesized sound effects with Web Audio API, responsive design, dark neon aesthetic.",
+    "max_tokens": 16384,
+    "temperature": 0.5,
+    "status": "ok",
+    "file": "claude-opus-4-8.html",
+    "chars": 18313,
+    "latency_s": 94.3,
+    "completion_tokens": 9467,
+    "error": null
+  },
+  "zai-org-glm-5-2": {
+    "model_id": "zai-org-glm-5-2",
+    "display": "GLM 5.2",
+    "prompt": "Create a single self-contained HTML file for a realistic Brick Breaker game with Canvas. Include: ball physics with angle reflection, paddle with mouse/keyboard/touch controls, brick grid with collision detection, score/lives/level, start/game-over/victory screens, particle effects on brick break, synthesized sound effects with Web Audio API, responsive design, dark neon aesthetic.",
+    "max_tokens": 16384,
+    "temperature": 0.5,
+    "status": "error",
+    "file": null,
+    "chars": 0,
+    "latency_s": 194.0,
+    "completion_tokens": 16384,
+    "error": "no complete HTML document in response (17923 chars)"
+  },
+  "deepseek-v4-pro": {
+    "model_id": "deepseek-v4-pro",
+    "display": "DeepSeek V4",
+    "prompt": "Create a single self-contained HTML file for a realistic Brick Breaker game with Canvas. Include: ball physics with angle reflection, paddle with mouse/keyboard/touch controls, brick grid with collision detection, score/lives/level, start/game-over/victory screens, particle effects on brick break, synthesized sound effects with Web Audio API, responsive design, dark neon aesthetic.",
+    "max_tokens": 16384,
+    "temperature": 0.5,
+    "status": "error",
+    "file": null,
+    "chars": 0,
+    "latency_s": 0.2,
+    "completion_tokens": null,
+    "error": "HTTP 402: {\"error\":\"API key DIEM spend limit exceeded. Your account may still have DIEM balance, but this API key has reached its configured DIEM spending limit.\"}"
+  },
+  "minimax-m3-preview": {
+    "model_id": "minimax-m3-preview",
+    "display": "MiniMax M3",
+    "prompt": "Create a single self-contained HTML file for a realistic Brick Breaker game with Canvas. Include: ball physics with angle reflection, paddle with mouse/keyboard/touch controls, brick grid with collision detection, score/lives/level, start/game-over/victory screens, particle effects on brick break, synthesized sound effects with Web Audio API, responsive design, dark neon aesthetic.",
+    "max_tokens": 16384,
+    "temperature": 0.5,
+    "status": "error",
+    "file": null,
+    "chars": 0,
+    "latency_s": 0.2,
+    "completion_tokens": null,
+    "error": "HTTP 402: {\"error\":\"API key DIEM spend limit exceeded. Your account may still have DIEM balance, but this API key has reached its configured DIEM spending limit.\"}"
+  },
+  "grok-4-5": {
+    "model_id": "grok-4-5",
+    "display": "Grok 4.5",
+    "prompt": "Create a single self-contained HTML file for a realistic Brick Breaker game with Canvas. Include: ball physics with angle reflection, paddle with mouse/keyboard/touch controls, brick grid with collision detection, score/lives/level, start/game-over/victory screens, particle effects on brick break, synthesized sound effects with Web Audio API, responsive design, dark neon aesthetic.",
+    "max_tokens": 16384,
+    "temperature": 0.5,
+    "status": "ok",
+    "file": "grok-4-5.html",
+    "chars": 20173,
+    "latency_s": 187.0,
+    "completion_tokens": 17587,
+    "error": null
+  }
+}

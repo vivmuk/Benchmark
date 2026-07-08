@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="BenchmarkViv Experimental Design Play — full prompts, scoring rules, protocol, and methodology for the Venice API model evaluation." />
+  <title>Experimental Design · BenchmarkViv</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+  <nav class="navbar vt-nav">
+    <div class="container">
+      <a href="index.html" class="nav-logo">Benchmark<span>Viv</span></a>
+      <ul class="nav-links" id="siteNav">
+        <li><a href="index.html#leaderboard">Leaderboard</a></li>
+        <li><a href="index.html#tracks">Tracks</a></li>
+        <li><a href="arcade.html">Arcade</a></li>
+        <li><a href="experimental-design.html" aria-current="page">Design</a></li>
+      </ul>
+      <a href="index.html#leaderboard" class="nav-cta">View Results</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-backdrop"></div>
+    <div class="container hero-content">
+      <span class="eyebrow">Experimental Design Play</span>
+      <h1>How BenchmarkViv is <em>built</em></h1>
+      <p>Every prompt, parameter, scoring rule, and composite weight — spelled out so anyone can audit, reproduce, or disagree with the design on substance rather than vibes.</p>
+      <div class="hero-actions">
+        <a href="#protocol" class="btn btn-primary">Jump to protocol</a>
+        <a href="#prompts" class="btn btn-ghost">Read exact prompts</a>
+      </div>
+      <div class="design-toc">
+        <a href="#protocol">Protocol<span>API · params · models</span></a>
+        <a href="#vivindex">VivIndex<span>Weights · formula</span></a>
+        <a href="#prompts">Track prompts<span>All 4 leaderboard tasks</span></a>
+        <a href="#scoring">Scoring code<span>Heuristics in plain English</span></a>
+        <a href="#arcade-design">Arcade design<span>Maximum brick prompt</span></a>
+        <a href="#limits">Limits<span>What we do not claim</span></a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="protocol">
+      <div class="container">
+        <div class="section-head">
+          <h2>Protocol</h2>
+          <p>The leaderboard matrix is a single-shot chat completion per model × track. No tool loops, no multi-turn repair, no cherry-picked retries.</p>
+        </div>
+
+        <div class="protocol-grid">
+          <article class="protocol-card">
+            <h3>API surface</h3>
+            <p>All runs go through the Venice chat completions endpoint with the same request shape.</p>
+            <dl class="kv">
+              <dt>Endpoint</dt><dd>POST https://api.venice.ai/api/v1/chat/completions</dd>
+              <dt>Auth</dt><dd>Bearer Venice inference key</dd>
+              <dt>Messages</dt><dd>One user turn only: the track prompt</dd>
+              <dt>Temperature</dt><dd>0.5 for every model and every track</dd>
+              <dt>Leaderboard max_tokens</dt><dd>2048</dd>
+              <dt>Arcade max_tokens</dt><dd>16384</dd>
+              <dt>Timeout</dt><dd>180s leaderboard · 480s arcade</dd>
+            </dl>
+          </article>
+
+          <article class="protocol-card">
+            <h3>Model set</h3>
+            <p>Seven Venice-hosted models, full-coverage on all four tracks after the Fable 5 completion pass.</p>
+            <ul>
+              <li>GPT-5.5 <code>openai-gpt-55</code></li>
+              <li>Fable 5 <code>claude-fable-5</code></li>
+              <li>Opus 4.8 <code>claude-opus-4-8</code></li>
+              <li>GLM 5.2 <code>zai-org-glm-5-2</code></li>
+              <li>DeepSeek V4 <code>deepseek-v4-pro</code></li>
+              <li>MiniMax M3 <code>minimax-m3-preview</code></li>
+              <li>Grok 4.5 <code>grok-4-5</code></li>
+            </ul>
+          </article>
+
+          <article class="protocol-card">
+            <h3>Fairness rules</h3>
+            <ul>
+              <li>Identical prompt text for every model on a given track.</li>
+              <li>No system prompt, no few-shot examples, no tool definitions.</li>
+              <li>No retries after a successful HTTP 200 (even if content is weak).</li>
+              <li>Failed HTTP/auth/timeouts score 0 and remain visible.</li>
+              <li>Cost uses Venice pricing when available, otherwise fixed fallback rates.</li>
+              <li>Raw responses are stored in <code>data/results.json</code> for audit.</li>
+            </ul>
+          </article>
+
+          <article class="protocol-card">
+            <h3>Artifacts</h3>
+            <ul>
+              <li><code>run_benchmarks.py</code> — leaderboard matrix runner</li>
+              <li><code>data/results.json</code> — scores, latency, tokens, costs, raw text</li>
+              <li><code>run_brick_arcade.py</code> — arcade capability run</li>
+              <li><code>data/brick_arcade.json</code> — arcade metadata + paths</li>
+              <li><code>arcade/*-brick.html</code> — playable one-shot games</li>
+              <li><code>prompts/brick_breaker_maximum.md</code> — arcade prompt source</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="vivindex">
+      <div class="container">
+        <div class="section-head">
+          <h2>VivIndex composite</h2>
+          <p>One headline number per model. Weights favor sustained planning over single-file flash.</p>
+        </div>
+        <div class="protocol-card">
+          <h3>Formula</h3>
+          <div class="prompt-block">VivIndex = Σ (score_track × weight_track) / Σ (weights for tracks present)
+
+Weights:
+  long_horizon_agentic     0.30
+  intent_understanding     0.25
+  one_shot_ui              0.25
+  brick_breaker_realism    0.20</div>
+          <div class="weight-bars" aria-hidden="true">
+            <div class="weight-row"><div class="weight-track"><div class="weight-fill" style="width:100%"></div></div><strong>30%</strong></div>
+            <div class="weight-row"><div class="weight-track"><div class="weight-fill" style="width:83%"></div></div><strong>25%</strong></div>
+            <div class="weight-row"><div class="weight-track"><div class="weight-fill" style="width:83%"></div></div><strong>25%</strong></div>
+            <div class="weight-row"><div class="weight-track"><div class="weight-fill" style="width:67%"></div></div><strong>20%</strong></div>
+          </div>
+          <p style="margin-top:1rem">If a model is missing a track, weights for present tracks are renormalized. That protects specialized partial runs from being zero-penalized — but the current public matrix is full-coverage (4/4) for every model.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="prompts">
+      <div class="container">
+        <div class="section-head">
+          <h2>Exact leaderboard prompts</h2>
+          <p>These strings are sent verbatim as the single user message. No preamble is added by the runner.</p>
+        </div>
+
+        <div class="protocol-grid" style="grid-template-columns:1fr; gap:1rem">
+          <article class="prompt-card" id="prompt-intent">
+            <h3>01 · Intent Understanding</h3>
+            <p><strong>Why it exists:</strong> production assistants get underspecified requests. The failure mode is confident invention instead of clarification.</p>
+            <div class="prompt-block">I need something built for my team but I'm not sure what. We are overwhelmed by Slack notifications and duplicate work. Suggest a solution and ask clarifying questions before assuming details.</div>
+            <div class="score-box">
+              <h4>Scoring heuristic (0–100)</h4>
+              <ul class="score-list">
+                <li><strong>Clarifying questions (0–40):</strong> 10 points per <code>?</code>, capped at 40.</li>
+                <li><strong>Structured proposal (0–30):</strong> markers like <code>- </code>, <code>* </code>, <code>1.</code>, <code>##</code>, <code>**</code> (6 pts each, cap 30).</li>
+                <li><strong>Anti-assumption / hedging (0–30):</strong> presence of words such as clarify, before, depends, assume, confirm, could you (6 pts each, cap 30).</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="prompt-card" id="prompt-ui">
+            <h3>02 · One-Shot UI Generation</h3>
+            <p><strong>Why it exists:</strong> can the model ship a complete, self-contained interface without a repair loop?</p>
+            <div class="prompt-block">Generate a single self-contained HTML file for a dark-mode dashboard card showing a user's daily focus score, weekly trend sparkline, and a 'Start Focus' button. Use only HTML/CSS/JS. No external images.</div>
+            <div class="score-box">
+              <h4>Scoring heuristic (0 or 70–95)</h4>
+              <ul class="score-list">
+                <li>Checks for HTML document markers, CSS, JS/script, a button, and focus+score language.</li>
+                <li>0 hits → 0. Otherwise maps 1–5 hits onto 70–95.</li>
+                <li>This is intentionally a coarse runnable-structure check, not a visual beauty contest.</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="prompt-card" id="prompt-agentic">
+            <h3>03 · Long-Horizon Agentic Task</h3>
+            <p><strong>Why it exists:</strong> long-horizon work fails on step coverage, tool reality, and failure-mode blindness. Weighted highest in VivIndex.</p>
+            <div class="prompt-block">Plan and outline a multi-step system to build an AI research assistant that: (1) monitors arXiv for papers, (2) summarizes them, (3) stores them in a vector DB, (4) answers user questions with citations. List the steps, tools needed, and potential failure modes.</div>
+            <div class="score-box">
+              <h4>Scoring heuristic (0–100)</h4>
+              <ul class="score-list">
+                <li><strong>Steps (0–40):</strong> numbered steps / “step N”; ≥4 steps awards full 40.</li>
+                <li><strong>Tools (0–30):</strong> terms such as api, arxiv, vector, database, embedding, llm, pinecone, chroma, weaviate, faiss, langchain, cron.</li>
+                <li><strong>Failure modes (0–30):</strong> failure/fail/error/hallucinat/rate limit/downtime/stale/risk/edge case.</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="prompt-card" id="prompt-brick">
+            <h3>04 · Brick Breaker Realism (leaderboard track)</h3>
+            <p><strong>Why it exists:</strong> a hard one-shot interactive artifact under the same 2048-token budget as the other tracks. This is the scored matrix track — not the Arcade capability run.</p>
+            <div class="prompt-block">Create a single self-contained HTML file for a realistic Brick Breaker game with Canvas. Include: ball physics with angle reflection, paddle with mouse/keyboard/touch controls, brick grid with collision detection, score/lives/level, start/game-over/victory screens, particle effects on brick break, synthesized sound effects with Web Audio API, responsive design, dark neon aesthetic.</div>
+            <div class="score-box">
+              <h4>Scoring heuristic (0–100)</h4>
+              <ul class="score-list">
+                <li><strong>Canvas + RAF (20):</strong> <code>&lt;canvas&gt;</code> and <code>requestAnimationFrame</code>.</li>
+                <li><strong>Paddle + bricks (20)</strong></li>
+                <li><strong>Game state (15):</strong> score, lives, game-over/victory language.</li>
+                <li><strong>Physics (15):</strong> collision + angle/reflection math.</li>
+                <li><strong>FX / responsive (15):</strong> particles, Web Audio, resize/media queries.</li>
+                <li><strong>Polish (15):</strong> neon/glow/gradient/shadow + length > 3000 chars.</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="scoring">
+      <div class="container">
+        <div class="section-head">
+          <h2>Scoring philosophy</h2>
+          <p>Heuristics are transparent, cheap, and reproducible. They are not human preference judgments.</p>
+        </div>
+        <div class="protocol-grid">
+          <article class="callout">
+            <p><strong>What heuristics buy us:</strong> anyone can re-score the stored raw responses without an LLM judge. Ties and near-ties should be treated as “same tier,” not destiny.</p>
+          </article>
+          <article class="callout warning">
+            <p><strong>What heuristics miss:</strong> elegant prose that never asks a question can still lose Intent; a beautiful UI missing one keyword can under-score; a truncated but promising game can look worse than a keyword-stuffed shell.</p>
+          </article>
+        </div>
+        <div class="protocol-card" style="margin-top:1rem">
+          <h3>Secondary metrics (not in VivIndex)</h3>
+          <ul>
+            <li><strong>Latency:</strong> wall-clock end-to-end seconds for the Venice request.</li>
+            <li><strong>Tokens/sec:</strong> completion_tokens ÷ latency.</li>
+            <li><strong>Cost:</strong> priced from prompt + completion tokens using Venice rates when available.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="arcade-design">
+      <div class="container">
+        <div class="section-head">
+          <h2>Arcade design (capability track)</h2>
+          <p>The Arcade is a separate experiment from the leaderboard Brick track. Same fairness idea, much larger output budget, more open-ended prompt.</p>
+        </div>
+        <div class="protocol-card">
+          <h3>How Arcade differs from leaderboard Brick</h3>
+          <ul>
+            <li>Leaderboard Brick uses the Realism prompt + <code>max_tokens=2048</code> and contributes to VivIndex.</li>
+            <li>Arcade uses the Maximum prompt + <code>max_tokens=16384</code> and is judged primarily by playability in the browser.</li>
+            <li>Arcade still records a heuristic score for ranking cards, but the point is to play what each model shipped.</li>
+          </ul>
+          <div class="prompt-block">Generate a single self-contained HTML file containing the most advanced,
+fully-featured Brick Breaker game you are capable of producing in one prompt.
+
+Use everything you know:
+  - Canvas (and WebGL where it earns complexity)
+  - Ball physics with angle reflection off paddle (subtle spin on contact)
+  - Multi-ball, multiple levels with progression, persistent best score in localStorage
+  - Power-ups (multi-ball, paddle extend, slow ball, sticky paddle, laser, life)
+  - Particle trails on ball motion + explosions on brick break
+  - Web Audio API for synthesized sound effects (no external audio assets)
+  - Score, lives, level, start screen, in-game HUD, game-over, victory
+  - Mobile gestures (touch to launch, swipe to move paddle) and keyboard (arrows / WASD)
+  - Accessibility: prefers-reduced-motion fallback, color contrast for HUD, focus rings
+
+Inline all CSS, JS, and audio. No external libraries, no CDN imports, no fetched images.
+Make it feel polished and production-quality. Output only the HTML file, starting with
+<!DOCTYPE html> and ending with </html>. Nothing else.</div>
+          <p style="margin-top:0.9rem">If extraction fails, the raw response is kept and the card shows a failure state instead of inventing a playable game.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="limits">
+      <div class="container">
+        <div class="section-head">
+          <h2>Limits & non-claims</h2>
+          <p>BenchmarkViv is an independent showcase, not a certification body.</p>
+        </div>
+        <div class="protocol-grid">
+          <article class="protocol-card">
+            <h3>We claim</h3>
+            <ul>
+              <li>Fixed prompts and fixed sampling settings across models.</li>
+              <li>Transparent heuristics with stored raw outputs.</li>
+              <li>Live Venice latency/cost observations for those runs.</li>
+              <li>Playable Arcade artifacts for successful extractions.</li>
+            </ul>
+          </article>
+          <article class="protocol-card">
+            <h3>We do not claim</h3>
+            <ul>
+              <li>Statistical significance across many seeds (current matrix is single-run).</li>
+              <li>Human preference ranking or Elo from blind pairwise votes.</li>
+              <li>Safety, tool-use agency, or multi-hour agent reliability.</li>
+              <li>That a higher VivIndex means “best model for every job.”</li>
+            </ul>
+          </article>
+        </div>
+        <div class="callout" style="margin-top:1rem">
+          <p><strong>Reproduce:</strong> set <code>VENICE_INFERENCE_KEY</code>, run <code>python3 run_benchmarks.py --run-real</code> for the matrix and <code>python3 run_brick_arcade.py --run-real</code> for Arcade. Dry-run modes exist for wiring checks at $0.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-logo">Benchmark<span>Viv</span></div>
+      <p>Experimental design notes for the Venice model evaluation showcase.</p>
+      <div class="footer-links">
+        <a href="index.html">Results</a>
+        <a href="arcade.html">Arcade</a>
+        <a href="index.html#leaderboard">Leaderboard</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/app.js"></script>
+</body>
+</html>
