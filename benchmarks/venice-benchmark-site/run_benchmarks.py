@@ -48,11 +48,9 @@ MODELS = [
     {"id": "grok-4-5",           "display": "Grok 4.5"},
 ]
 
-# Restrict specialized models to the benchmarks where they are evaluated.
-# Fable 5 is assessed only on One-Shot UI Generation.
-MODEL_BENCHMARK_LIMITS = {
-    "claude-fable-5": {"one_shot_ui"},
-}
+# Optional per-model benchmark allowlists. Empty = all models run all tracks
+# for apples-to-apples comparison.
+MODEL_BENCHMARK_LIMITS = {}
 
 # Approximate fallback pricing (USD per 1M tokens: input, output).
 # Used if the /models endpoint does not return pricing.
