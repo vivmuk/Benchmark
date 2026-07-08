@@ -45,6 +45,7 @@ MODELS = [
     {"id": "zai-org-glm-5-2",    "display": "GLM 5.2"},
     {"id": "deepseek-v4-pro",    "display": "DeepSeek V4"},
     {"id": "minimax-m3-preview", "display": "MiniMax M3"},
+    {"id": "grok-4-5",           "display": "Grok 4.5"},
 ]
 
 # Restrict specialized models to the benchmarks where they are evaluated.
@@ -62,6 +63,7 @@ FALLBACK_PRICING = {
     "zai-org-glm-5-2":    {"input": 1.00,  "output": 3.00},
     "deepseek-v4-pro":    {"input": 0.60,  "output": 2.20},
     "minimax-m3-preview": {"input": 0.40,  "output": 1.60},
+    "grok-4-5":           {"input": 2.27,  "output": 6.80},
 }
 DEFAULT_PRICING = {"input": 5.00, "output": 15.00}
 
@@ -135,6 +137,11 @@ def fetch_pricing(api_key: str) -> dict:
             price = spec.get("pricing", {}) or entry.get("pricing", {}) or {}
             inp = price.get("input") or price.get("prompt")
             out = price.get("output") or price.get("completion")
+            # Venice may return nested {"usd": N, "diem": N} pricing objects.
+            if isinstance(inp, dict):
+                inp = inp.get("usd", inp.get("diem"))
+            if isinstance(out, dict):
+                out = out.get("usd", out.get("diem"))
             if model_id and inp is not None and out is not None:
                 try:
                     pricing[model_id] = {"input": float(inp), "output": float(out)}
@@ -410,18 +417,29 @@ def estimate_total_cost(pricing: dict) -> float:
     return round(total, 4)
 
 
-def run(dry_run: bool) -> None:
+def run(dry_run: bool, model_filter: str | None = None) -> None:
     api_key = os.environ.get(API_KEY_ENV, "")
     pricing = dict(FALLBACK_PRICING)
+
+    selected_models = MODELS
+    if model_filter:
+        selected_models = [m for m in MODELS if m["id"] == model_filter or m["display"].lower() == model_filter.lower()]
+        if not selected_models:
+            known = ", ".join(m["id"] for m in MODELS)
+            print(f"ERROR: model '{model_filter}' not found. Known ids: {known}")
+            sys.exit(1)
 
     if not dry_run:
         if not api_key:
             print(f"ERROR: environment variable {API_KEY_ENV} is not set.")
             sys.exit(1)
         pricing = fetch_pricing(api_key)
-        est = estimate_total_cost(pricing)
+        est = 0.0
+        for model in selected_models:
+            for _ in BENCHMARKS:
+                est += estimate_cost(model["id"], 150, MAX_TOKENS, pricing)
         print(f"\nEstimated maximum total cost for this run: ${est:.4f} "
-              f"({len(MODELS)} models x {len(BENCHMARKS)} benchmarks, "
+              f"({len(selected_models)} model(s) x up to {len(BENCHMARKS)} benchmarks, "
               f"assuming full {MAX_TOKENS}-token outputs)\n")
     else:
         print("Mode: DRY RUN (no API calls, sample data will be generated).\n")
@@ -431,11 +449,11 @@ def run(dry_run: bool) -> None:
     total_calls = sum(
         len(BENCHMARKS) if model["id"] not in MODEL_BENCHMARK_LIMITS
         else len(MODEL_BENCHMARK_LIMITS[model["id"]])
-        for model in MODELS
+        for model in selected_models
     )
     call_index = 0
 
-    for model in MODELS:
+    for model in selected_models:
         allowed = MODEL_BENCHMARK_LIMITS.get(model["id"])
         benches = [b for b in BENCHMARKS if not allowed or b["id"] in allowed]
         for bench in benches:
@@ -477,24 +495,58 @@ def run(dry_run: bool) -> None:
             if not dry_run and call_index < total_calls:
                 time.sleep(RATE_LIMIT_SLEEP_SECONDS)
 
+    # Partial runs merge into existing results so we can add models without
+    # re-running the full matrix.
+    existing = None
+    if model_filter and RESULTS_PATH.exists():
+        try:
+            with open(RESULTS_PATH, encoding="utf-8") as f:
+                existing = json.load(f)
+        except Exception as exc:
+            print(f"Warning: could not load existing results for merge ({exc}).")
+
+    if existing and isinstance(existing.get("results"), list):
+        selected_ids = {m["id"] for m in selected_models}
+        kept = [r for r in existing["results"] if r.get("model_id") not in selected_ids]
+        merged_results = kept + results
+        # Prefer the canonical MODELS list, but preserve any unknown extras.
+        existing_models = existing.get("models") or []
+        known_ids = {m["id"] for m in MODELS}
+        extras = [m for m in existing_models if m.get("id") not in known_ids]
+        models_out = MODELS + extras
+        prior_cost = float(existing.get("total_estimated_cost_usd") or 0.0)
+        prior_cost_kept = sum(
+            float(r.get("estimated_cost_usd") or 0.0)
+            for r in kept
+        )
+        total_cost_out = round(prior_cost_kept + total_cost, 6)
+        dry_run_out = bool(existing.get("dry_run")) and dry_run
+        print(f"Merging {len(results)} new result(s) into existing file "
+              f"({len(kept)} prior rows kept).")
+    else:
+        merged_results = results
+        models_out = MODELS
+        total_cost_out = round(total_cost, 6)
+        dry_run_out = dry_run
+
     output = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
-        "dry_run": dry_run,
-        "models": MODELS,
+        "dry_run": dry_run_out,
+        "models": models_out,
         "benchmarks": [
             {"id": b["id"], "name": b["name"], "prompt": b["prompt"], "scoring": b["scoring"]}
             for b in BENCHMARKS
         ],
-        "results": results,
-        "total_estimated_cost_usd": round(total_cost, 6),
+        "results": merged_results,
+        "total_estimated_cost_usd": total_cost_out,
     }
 
     RESULTS_PATH.parent.mkdir(parents=True, exist_ok=True)
     with open(RESULTS_PATH, "w", encoding="utf-8") as f:
         json.dump(output, f, indent=2, ensure_ascii=False)
 
-    print(f"\nDone. {len(results)} results written to {RESULTS_PATH}")
-    print(f"Total estimated cost: ${total_cost:.6f}")
+    print(f"\nDone. {len(merged_results)} results written to {RESULTS_PATH}")
+    print(f"Run estimated cost: ${total_cost:.6f}  |  file total: ${total_cost_out:.6f}")
 
 
 def main() -> None:
@@ -506,10 +558,12 @@ def main() -> None:
                        help="Generate sample data without API calls (default).")
     group.add_argument("--run-real", action="store_true",
                        help="Make real API calls (requires VENICE_INFERENCE_KEY).")
+    parser.add_argument("--model", metavar="ID",
+                        help="Run only one model id/display name; merges into existing results.json.")
     args = parser.parse_args()
 
     dry_run = not args.run_real  # default to dry-run
-    run(dry_run)
+    run(dry_run, model_filter=args.model)
 
 
 if __name__ == "__main__":

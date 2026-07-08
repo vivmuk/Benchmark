@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-07T11:42:08.847965+00:00",
+  "generated_at": "2026-07-08T21:28:29.904884+00:00",
   "dry_run": false,
   "prompt_file": "prompts/brick_breaker_maximum.md",
   "max_tokens": 16384,
@@ -23,6 +23,10 @@
     {
       "id": "minimax-m3-preview",
       "display": "MiniMax M3"
+    },
+    {
+      "id": "grok-4-5",
+      "display": "Grok 4.5"
     }
   ],
   "results": [
@@ -100,6 +104,21 @@
       "raw_chars": 0,
       "note": "real Venice API run",
       "error": "Malformed response"
+    },
+    {
+      "model_id": "grok-4-5",
+      "display": "Grok 4.5",
+      "status": "ok",
+      "latency": 187.0,
+      "prompt_tokens": 400,
+      "completion_tokens": 17587,
+      "total_tokens": 17987,
+      "estimated_cost_usd": 0.1205,
+      "score": 100,
+      "html": "arcade/grok-4-5-brick.html",
+      "raw_chars": 20173,
+      "note": "real Venice API run (one-shot brick, max_tokens=16384)",
+      "error": null
     }
   ]
 }

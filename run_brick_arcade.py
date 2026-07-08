@@ -51,7 +51,7 @@ OUTPUT_DIR        = SITE_DIR / "arcade"
 RESULTS_PATH      = SITE_DIR / "data" / "brick_arcade.json"
 DATA_RESULTS_JSON = SITE_DIR / "data" / "results.json"
 
-# 5 models, mirrors run_benchmarks.py.MODELS minus claude-fable-5 (excluded
+# Models mirror run_benchmarks.py.MODELS minus claude-fable-5 (excluded
 # by MODEL_BENCHMARK_LIMITS in the main runner; this script stays simple but
 # honors the same boundary).
 MODELS = [
@@ -60,6 +60,7 @@ MODELS = [
     {"id": "zai-org-glm-5-2",    "display": "GLM 5.2"},
     {"id": "deepseek-v4-pro",    "display": "DeepSeek V4"},
     {"id": "minimax-m3-preview", "display": "MiniMax M3"},
+    {"id": "grok-4-5",           "display": "Grok 4.5"},
 ]
 
 MAX_TOKENS         = 16384  # Per the C-prompt directive "Don't limit them" — kept well above the

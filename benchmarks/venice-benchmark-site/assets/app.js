@@ -19,6 +19,7 @@
     "GLM 5.2":     "#FF2E93",  // magenta
     "DeepSeek V4": "#22d3ee",  // cyan (kept for chart legibility vs cobalt)
     "MiniMax M3":  "#F4F2EE",  // paper
+    "Grok 4.5":    "#9ca3af",  // graphite (xAI-adjacent, distinct on dark)
   };
 
   const FALLBACK_DATA = {
