@@ -39,13 +39,19 @@ RATE_LIMIT_SLEEP_SECONDS = 1.0
 REQUEST_TIMEOUT_SECONDS = 180
 
 MODELS = [
-    {"id": "openai-gpt-55",      "display": "GPT-5.5"},
-    {"id": "claude-fable-5",     "display": "Fable 5"},
-    {"id": "claude-opus-4-8",    "display": "Opus 4.8"},
-    {"id": "zai-org-glm-5-2",    "display": "GLM 5.2"},
-    {"id": "deepseek-v4-pro",    "display": "DeepSeek V4"},
-    {"id": "minimax-m3-preview", "display": "MiniMax M3"},
-    {"id": "grok-4-5",           "display": "Grok 4.5"},
+    {"id": "openai-gpt-56-luna",     "display": "GPT-5.6 Luna"},
+    {"id": "openai-gpt-56-luna-pro", "display": "GPT-5.6 Luna Pro"},
+    {"id": "openai-gpt-56-sol",      "display": "GPT-5.6 Sol"},
+    {"id": "openai-gpt-56-sol-pro",  "display": "GPT-5.6 Sol Pro"},
+    {"id": "openai-gpt-56-terra",    "display": "GPT-5.6 Terra"},
+    {"id": "openai-gpt-56-terra-pro","display": "GPT-5.6 Terra Pro"},
+    {"id": "openai-gpt-55",          "display": "GPT-5.5"},
+    {"id": "claude-fable-5",         "display": "Fable 5"},
+    {"id": "claude-opus-4-8",        "display": "Opus 4.8"},
+    {"id": "zai-org-glm-5-2",        "display": "GLM 5.2"},
+    {"id": "deepseek-v4-pro",        "display": "DeepSeek V4"},
+    {"id": "minimax-m3-preview",     "display": "MiniMax M3"},
+    {"id": "grok-4-5",               "display": "Grok 4.5"},
 ]
 
 # Optional per-model benchmark allowlists. Empty = all models run all tracks
@@ -55,13 +61,19 @@ MODEL_BENCHMARK_LIMITS = {}
 # Approximate fallback pricing (USD per 1M tokens: input, output).
 # Used if the /models endpoint does not return pricing.
 FALLBACK_PRICING = {
-    "openai-gpt-55":      {"input": 10.00, "output": 30.00},
-    "claude-fable-5":     {"input": 8.00,  "output": 24.00},
-    "claude-opus-4-8":    {"input": 15.00, "output": 75.00},
-    "zai-org-glm-5-2":    {"input": 1.00,  "output": 3.00},
-    "deepseek-v4-pro":    {"input": 0.60,  "output": 2.20},
-    "minimax-m3-preview": {"input": 0.40,  "output": 1.60},
-    "grok-4-5":           {"input": 2.27,  "output": 6.80},
+    "openai-gpt-56-luna":      {"input": 1.25,  "output": 7.5},
+    "openai-gpt-56-luna-pro":  {"input": 1.25,  "output": 7.5},
+    "openai-gpt-56-sol":       {"input": 6.25,  "output": 37.5},
+    "openai-gpt-56-sol-pro":   {"input": 6.25,  "output": 37.5},
+    "openai-gpt-56-terra":     {"input": 3.125, "output": 18.75},
+    "openai-gpt-56-terra-pro": {"input": 3.125, "output": 18.75},
+    "openai-gpt-55":           {"input": 10.00, "output": 30.00},
+    "claude-fable-5":          {"input": 8.00,  "output": 24.00},
+    "claude-opus-4-8":         {"input": 15.00, "output": 75.00},
+    "zai-org-glm-5-2":         {"input": 1.00,  "output": 3.00},
+    "deepseek-v4-pro":         {"input": 0.60,  "output": 2.20},
+    "minimax-m3-preview":      {"input": 0.40,  "output": 1.60},
+    "grok-4-5":                {"input": 2.27,  "output": 6.80},
 }
 DEFAULT_PRICING = {"input": 5.00, "output": 15.00}
 
