@@ -1,6 +1,6 @@
 # BenchmarkViv
 
-Long-horizon benchmark suite and interactive showcase for Venice API models.
+Practical benchmark suite and interactive showcase for Venice API models.
 
 ## Local preview
 

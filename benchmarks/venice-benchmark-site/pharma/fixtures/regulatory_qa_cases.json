@@ -1,0 +1,89 @@
+{
+  "fixture_version": "1.0.0",
+  "benchmark_id": "pharma_regulatory_comprehension",
+  "description": "Regulatory comprehension scenarios referencing publicly available ICH and FDA guidelines. Questions test accurate recall and citation of regulatory requirements.",
+  "cases": [
+    {
+      "case_id": "reg_case_001",
+      "title": "ICH E6(R2) Monitor responsibilities",
+      "scenario": "A clinical research organization (CRO) is designing a monitoring plan for a Phase III randomized controlled trial in oncology. The sponsor plans to use centralized monitoring only, with no on-site visits.",
+      "questions": [
+        {
+          "q_id": "reg_001_q1",
+          "question": "Does ICH E6(R2) permit centralized-only monitoring without any on-site visits? What does the guideline say about the monitor's responsibilities for verifying data at investigative sites?",
+          "expected_answer_summary": "ICH E6(R2) Section 5.18 describes monitoring purposes including verifying that data are recorded accurately. While Section 5.18.3 acknowledges centralized statistical methods, the guideline still requires on-site monitoring for source data verification (5.18.4). A purely centralized approach without any on-site visits would not fully comply with E6(R2) expectations.",
+          "required_references": ["ICH E6", "5.18", "monitor", "source data", "verification"],
+          "validation_terms": ["ICH E6", "monitor", "source data", "verification", "on-site", "5.18"]
+        },
+        {
+          "q_id": "reg_001_q2",
+          "question": "What are the investigator's responsibilities for obtaining informed consent under ICH E6(R2)?",
+          "expected_answer_summary": "ICH E6(R2) Section 4.8 specifies that the investigator is responsible for obtaining informed consent from each subject prior to participation. Consent must be documented in writing, the subject must be informed of all aspects that are relevant (including risks, benefits, alternatives), and sufficient time must be given for consideration. For subjects unable to provide consent, legally acceptable representatives may consent on their behalf per applicable regulations.",
+          "required_references": ["ICH E6", "4.8", "informed consent", "investigator"],
+          "validation_terms": ["ICH E6", "4.8", "informed consent", "investigator", "documented", "written"]
+        }
+      ]
+    },
+    {
+      "case_id": "reg_case_002",
+      "title": "21 CFR 312 IND requirements",
+      "scenario": "A biotech startup is preparing to file an Investigational New Drug (IND) application with the FDA for a first-in-human Phase I study of a novel small molecule. They have completed GLP-compliant toxicology studies in two species.",
+      "questions": [
+        {
+          "q_id": "reg_002_q1",
+          "question": "What are the key contents required in an IND application under 21 CFR 312.23?",
+          "expected_answer_summary": "21 CFR 312.23 specifies IND contents including: (1) Form FDA 1571, (2) Table of Contents, (3) Introductory Statement, (4) Investigator's Brochure, (5) Protocol(s) for planned studies, (6) Chemistry, Manufacturing, and Controls (CMC) information, (7) Pharmacology and Toxicology information, (8) Previous human experience with the drug, and (9) Additional information (e.g., drugs of biological origin, radioisotopes, etc.).",
+          "required_references": ["21 CFR 312", "312.23", "IND"],
+          "validation_terms": ["21 CFR 312", "312.23", "IND", "protocol", "chemistry", "manufacturing", "controls", "pharmacology", "toxicology", "investigator brochure"]
+        },
+        {
+          "q_id": "reg_002_q2",
+          "question": "Under 21 CFR 312, how long does the FDA have to review an IND before the sponsor may begin the clinical study? What happens if FDA places a clinical hold?",
+          "expected_answer_summary": "Under 21 CFR 312.40, an IND becomes effective 30 calendar days after FDA receives the submission, unless FDA notifies the sponsor of a clinical hold before that time. If FDA issues a clinical hold (312.42), the sponsor may not begin the study until the hold is lifted. The sponsor must resolve the issues identified by FDA and receive written notification that the hold has been lifted.",
+          "required_references": ["21 CFR 312", "312.40", "312.42", "30 days", "clinical hold"],
+          "validation_terms": ["21 CFR 312", "312.40", "30", "clinical hold", "312.42"]
+        }
+      ]
+    },
+    {
+      "case_id": "reg_case_003",
+      "title": "ICH E9 Statistical Principles",
+      "scenario": "A sponsor is designing a Phase III confirmatory trial and must pre-specify the statistical analysis plan. They are considering changing the primary endpoint mid-trial after seeing interim trends.",
+      "questions": [
+        {
+          "q_id": "reg_003_q1",
+          "question": "According to ICH E9, what are the requirements for pre-specifying the primary endpoint and analysis plan in a confirmatory trial? Can the primary endpoint be changed after the trial has begun?",
+          "expected_answer_summary": "ICH E9 (Statistical Principles for Clinical Trials) Section V (Statistical Methods, Section 5.1 and 5.2) requires that the primary endpoint be pre-specified in the protocol. The statistical analysis plan should be finalized before database lock and ideally before unblinding. Changing the primary endpoint after trial initiation undermines the confirmatory nature of the trial and introduces risks of bias. Any changes should be documented, justified, and the implications for Type I error controlled.",
+          "required_references": ["ICH E9", "primary endpoint", "pre-specif", "protocol", "confirmatory"],
+          "validation_terms": ["ICH E9", "primary", "endpoint", "pre-specif", "protocol", "confirmatory", "bias", "Type I"]
+        }
+      ]
+    },
+    {
+      "case_id": "reg_case_004",
+      "title": "ICH E2A Clinical Safety Data Management",
+      "scenario": "During a Phase II trial, a serious adverse event (SAE) occurs that is both unexpected and suspected to be related to the investigational product. The site investigator reports it to the sponsor.",
+      "questions": [
+        {
+          "q_id": "reg_004_q1",
+          "question": "Under ICH E2A and applicable regulations, what are the reporting timelines for an unexpected, suspected serious adverse reaction (SUSAR)?",
+          "expected_answer_summary": "Under ICH E2A (Clinical Safety Data Management: Definitions and Standards for Expedited Reporting), fatal and life-threatening SUSARs must be reported to regulatory authorities as soon as possible but no later than 7 calendar days after the sponsor becomes aware. Other SUSARs must be reported within 15 calendar days. Follow-up reports must be submitted as additional information becomes available. In the US, 21 CFR 312.32 governs IND safety reporting with similar timelines.",
+          "required_references": ["ICH E2A", "SUSAR", "7 calendar days", "15 calendar days", "expedited"],
+          "validation_terms": ["ICH E2A", "SUSAR", "7", "15", "calendar days", "expedited", "fatal", "life-threatening"]
+        }
+      ]
+    }
+  ],
+  "scoring_guide": {
+    "per_question_max": 100,
+    "per_case_aggregate": "mean",
+    "overall_aggregate": "mean",
+    "detection_scoring": {
+      "reference_term_hit": 5,
+      "key_concept_present": 8,
+      "specific_section_cited": 10,
+      "fabricated_section_penalty": -15,
+      "completeness_bonus": 5
+    }
+  }
+}

@@ -7,67 +7,45 @@
   const BENCHMARKS = [
     { id: "intent-understanding", label: "Intent Understanding" },
     { id: "one-shot-ui", label: "One-Shot UI" },
-    { id: "long-horizon-agent", label: "Long-Horizon Agent" },
     { id: "brick-breaker-realism", label: "Brick Breaker" },
+    { id: "startup-in-a-weekend", label: "Startup in a Weekend" },
   ];
 
-  // Model colors mapped onto the Riso 4-ink palette (cobalt / magenta / acid).
+  // One saturated, accessible identity per model. These values are used in every chart.
   const MODEL_COLORS = {
-    "GPT-5.5":     "#0066FF",  // cobalt
-    "Fable 5":     "#8B9A00",  // acid (readable on light)
-    "Opus 4.8":    "#8b5cf6",  // kept violet (legible on dark, distinct)
-    "GLM 5.2":     "#FF2E93",  // magenta
-    "DeepSeek V4": "#22d3ee",  // cyan (kept for chart legibility vs cobalt)
-    "MiniMax M3":  "#6B7280",  // slate
-    "Grok 4.5":    "#111827",  // graphite
+    "GPT-5.6 Luna":      "#2563EB",
+    "GPT-5.6 Luna Pro":  "#7C3AED",
+    "GPT-5.6 Sol":       "#F97316",
+    "GPT-5.6 Sol Pro":   "#DC2626",
+    "GPT-5.6 Terra":     "#10B981",
+    "GPT-5.6 Terra Pro": "#00A6A6",
+    "GPT-5.5":           "#E11D74",
+    "Fable 5":           "#84A800",
+    "Opus 4.8":          "#9333EA",
+    "GLM 5.2":           "#EC4899",
+    "DeepSeek V4":       "#0891B2",
+    "MiniMax M3":        "#D97706",
+    "Grok 4.5":          "#4F46E5",
   };
 
-  const FALLBACK_DATA = {
-    generated: "2026-07-05T00:00:00Z",
-    source: "fallback",
-    results: [
-      { model: "GPT-5.5", benchmark: "intent-understanding", score: 88.0, latency: 16.6, tokens: 2988, cost: 0.055 },
-      { model: "GPT-5.5", benchmark: "one-shot-ui", score: 89.0, latency: 16.4, tokens: 3771, cost: 0.079 },
-      { model: "GPT-5.5", benchmark: "long-horizon-agent", score: 100.0, latency: 27.3, tokens: 3788, cost: 0.079 },
-      { model: "GPT-5.5", benchmark: "brick-breaker-realism", score: 0.0, latency: 34.2, tokens: 3801, cost: 0.079 },
-      { model: "Fable 5", benchmark: "intent-understanding", score: 82.0, latency: 16.7, tokens: 3603, cost: 0.042 },
-      { model: "Fable 5", benchmark: "one-shot-ui", score: 89.0, latency: 21.7, tokens: 4813, cost: 0.071 },
-      { model: "Fable 5", benchmark: "long-horizon-agent", score: 100.0, latency: 31.4, tokens: 4826, cost: 0.071 },
-      { model: "Fable 5", benchmark: "brick-breaker-realism", score: 45.0, latency: 24.7, tokens: 4868, cost: 0.072 },
-      { model: "Opus 4.8", benchmark: "intent-understanding", score: 82.0, latency: 13.2, tokens: 3528, cost: 0.099 },
-      { model: "Opus 4.8", benchmark: "one-shot-ui", score: 89.0, latency: 20.0, tokens: 4821, cost: 0.195 },
-      { model: "Opus 4.8", benchmark: "long-horizon-agent", score: 100.0, latency: 28.6, tokens: 4834, cost: 0.195 },
-      { model: "Opus 4.8", benchmark: "brick-breaker-realism", score: 55.0, latency: 24.8, tokens: 4876, cost: 0.196 },
-      { model: "GLM 5.2", benchmark: "intent-understanding", score: 70.0, latency: 9.6, tokens: 2279, cost: 0.003 },
-      { model: "GLM 5.2", benchmark: "one-shot-ui", score: 82.0, latency: 18.6, tokens: 3748, cost: 0.008 },
-      { model: "GLM 5.2", benchmark: "long-horizon-agent", score: 100.0, latency: 32.4, tokens: 3764, cost: 0.008 },
-      { model: "GLM 5.2", benchmark: "brick-breaker-realism", score: 85.0, latency: 20.7, tokens: 3776, cost: 0.008 },
-      { model: "DeepSeek V4", benchmark: "intent-understanding", score: 86.0, latency: 12.0, tokens: 2600, cost: 0.008 },
-      { model: "DeepSeek V4", benchmark: "one-shot-ui", score: 85.0, latency: 18.0, tokens: 4100, cost: 0.015 },
-      { model: "DeepSeek V4", benchmark: "long-horizon-agent", score: 96.0, latency: 30.0, tokens: 4200, cost: 0.016 },
-      { model: "DeepSeek V4", benchmark: "brick-breaker-realism", score: 78.0, latency: 22.0, tokens: 4000, cost: 0.015 },
-      { model: "MiniMax M3", benchmark: "intent-understanding", score: 78.0, latency: 8.0, tokens: 2100, cost: 0.004 },
-      { model: "MiniMax M3", benchmark: "one-shot-ui", score: 80.0, latency: 14.0, tokens: 3500, cost: 0.007 },
-      { model: "MiniMax M3", benchmark: "long-horizon-agent", score: 90.0, latency: 24.0, tokens: 3600, cost: 0.007 },
-      { model: "MiniMax M3", benchmark: "brick-breaker-realism", score: 65.0, latency: 16.0, tokens: 3400, cost: 0.007 },
-    ],
-  };
+  const FALLBACK_DATA = { generated: "", source: "fallback", results: [] };
 
-  // VivIndex weights — long-horizon agentic weighted highest (hardest task),
-  // brick-breaker lowest (single heuristic). Documented in Methodology.
+  // VivIndex weights prioritize execution-ready planning while retaining interactive
+  // and UI capability. The published methodology documents this choice.
   const VIVINDEX_WEIGHTS = {
     "intent-understanding": 0.25,
-    "one-shot-ui": 0.25,
-    "long-horizon-agent": 0.30,
+    "one-shot-ui": 0.20,
     "brick-breaker-realism": 0.20,
+    "startup-in-a-weekend": 0.35,
   };
 
   const state = {
     data: [],
+    runSummary: { attempted: 0, scored: 0, excluded: 0 },
     isLive: false,
     sort: { key: "score", dir: -1 },
     filter: { text: "", benchmark: "all" },
-    charts: { leaderboard: null, costValue: null, vivIndex: null, speed: null, latency: null, sparklines: [] },
+    charts: { leaderboard: null, benchmark: null, costValue: null, vivIndex: null, speed: null, latency: null, sparklines: [] },
   };
 
   const $ = (sel, root = document) => root.querySelector(sel);
@@ -142,8 +120,8 @@
     return `rgba(${r}, ${g}, ${b}, ${alpha})`;
   }
 
-  // Live data emits e.g. "long_horizon_agentic"; the UI uses "long-horizon-agent".
-  const ID_ALIASES = { "long-horizon-agentic": "long-horizon-agent" };
+  // JSON benchmark ids use underscores; the UI uses hyphens.
+  const ID_ALIASES = { "startup_in_a_weekend": "startup-in-a-weekend" };
   function normalizeId(id) {
     const n = String(id).replace(/_/g, "-");
     return ID_ALIASES[n] || n;
@@ -160,7 +138,19 @@
       const modelMap = Object.fromEntries((json.models || []).map((m) => [m.id, m.display]));
       const benchMap = Object.fromEntries((json.benchmarks || []).map((b) => [b.id, b.name]));
 
-      state.data = json.results.map((r) => ({
+      const scored = json.results.filter((r) => {
+        // An API timeout or other failed call is not a score of zero. Keep it
+        // out of all score, latency, and cost aggregates while retaining its
+        // existence in the completeness indicator below.
+        const status = r.status == null ? "ok" : String(r.status).toLowerCase();
+        return ["ok", "success", "completed"].includes(status) && Number.isFinite(Number(r.score));
+      });
+      state.runSummary = {
+        attempted: json.results.length,
+        scored: scored.length,
+        excluded: json.results.length - scored.length,
+      };
+      state.data = scored.map((r) => ({
         model: modelMap[r.model_id] || r.model_id || r.model,
         benchmark: normalizeId(r.benchmark_id || r.benchmark),
         score: r.score,
@@ -171,15 +161,16 @@
       }));
       state.isLive = true;
       if (status) {
-        status.textContent = "● Live data";
+        status.textContent = `● ${state.runSummary.scored}/${state.runSummary.attempted} scored runs`;
         status.classList.remove("fallback");
       }
     } catch (err) {
       console.warn("[BenchmarkViv] fallback data:", err.message);
       state.data = FALLBACK_DATA.results;
+      state.runSummary = { attempted: 0, scored: 0, excluded: 0 };
       state.isLive = false;
       if (status) {
-        status.textContent = "● Sample data";
+        status.textContent = "● Results unavailable";
         status.classList.add("fallback");
       }
     }
@@ -218,7 +209,7 @@
             callbacks: {
               label: (ctx) => {
                 const a = aggs[ctx.dataIndex];
-                const base = ` VivIndex: ${ctx.raw} (weighted: agentic 30%, intent 25%, UI 25%, brick 20%)`;
+                const base = ` VivIndex: ${ctx.raw} (weighted: startup 35%, intent 25%, UI 20%, brick 20%)`;
                 return a.fullCoverage ? base : [base, ` ⚠ Partial coverage: evaluated on ${a.trackCount} of ${BENCHMARKS.length} tracks`];
               },
             },
@@ -357,6 +348,43 @@
     });
   }
 
+  function renderBenchmarkChart() {
+    const canvas = $("#benchmarkChart");
+    if (!canvas || typeof Chart === "undefined") return;
+    const models = uniqueModels(state.data);
+    if (state.charts.benchmark) state.charts.benchmark.destroy();
+    state.charts.benchmark = new Chart(canvas, {
+      type: "bar",
+      data: {
+        labels: BENCHMARKS.map((b) => b.label),
+        datasets: models.map((model) => ({
+          label: model,
+          data: BENCHMARKS.map((b) => {
+            const row = state.data.find((r) => r.model === model && r.benchmark === b.id);
+            return row ? row.score : null;
+          }),
+          backgroundColor: modelColor(model, 0.72),
+          borderColor: modelColor(model),
+          borderWidth: 1,
+          borderRadius: 4,
+        })),
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: { mode: "index", intersect: false },
+        plugins: {
+          legend: { position: "bottom", labels: { usePointStyle: true, boxWidth: 8, padding: 14 } },
+          tooltip: { callbacks: { label: (ctx) => ` ${ctx.dataset.label}: ${ctx.raw ?? "not run"}` } },
+        },
+        scales: {
+          x: { stacked: false, grid: { display: false }, ticks: { color: "rgba(18,18,26,0.78)", maxRotation: 0 } },
+          y: { min: 0, max: 100, title: { display: true, text: "Score / 100" }, grid: { color: "rgba(18,18,26,0.09)" }, ticks: { color: "rgba(18,18,26,0.62)" } },
+        },
+      },
+    });
+  }
+
   function renderCostValueChart() {
     const canvas = $("#costValueChart");
     if (!canvas || typeof Chart === "undefined") return;
@@ -410,75 +438,6 @@
           },
         },
       },
-    });
-  }
-
-  function renderTable() {
-    const tbody = $("#leaderboardBody");
-    if (!tbody) return;
-
-    let rows = state.data.filter((r) => {
-      if (state.filter.benchmark !== "all" && r.benchmark !== state.filter.benchmark) return false;
-      if (state.filter.text) {
-        const hay = `${r.model} ${benchmarkLabel(r.benchmark)}`.toLowerCase();
-        if (!hay.includes(state.filter.text.toLowerCase())) return false;
-      }
-      return true;
-    });
-
-    const { key, dir } = state.sort;
-    rows = rows.slice().sort((a, b) => {
-      let av = a[key], bv = b[key];
-      if (key === "rank") av = -a.score, bv = -b.score;
-      if (typeof av === "string") return av.localeCompare(bv) * dir;
-      return (av - bv) * dir;
-    });
-
-    $$("th[data-sort]").forEach((th) => {
-      th.classList.remove("sorted-asc", "sorted-desc");
-      if (th.dataset.sort === key) th.classList.add(dir === 1 ? "sorted-asc" : "sorted-desc");
-    });
-
-    tbody.innerHTML = rows.map((r, i) => `
-      <tr>
-        <td class="rank">${i + 1}</td>
-        <td class="model-name"><span class="model-dot" style="background:${modelColor(r.model)}"></span>${r.model}</td>
-        <td>${benchmarkLabel(r.benchmark)}</td>
-        <td>
-          <strong>${fmtScore(r.score)}</strong>
-          <div class="score-bar u-score-animate" style="--score:${Math.max(0, Math.min(100, r.score))}%"></div>
-        </td>
-        <td>${fmtLatency(r.latency)}</td>
-        <td>${fmtTokens(r.tokens)}</td>
-        <td>${fmtCost(r.cost)}</td>
-      </tr>
-    `).join("");
-
-    if (rows.length === 0) {
-      tbody.innerHTML = `<tr><td colspan="7" style="text-align:center;padding:2rem;color:var(--ink-2)">No results match your filters.</td></tr>`;
-    }
-  }
-
-  function initTableControls() {
-    $$("th[data-sort]").forEach((th) => {
-      th.addEventListener("click", () => {
-        const key = th.dataset.sort;
-        if (state.sort.key === key) state.sort.dir *= -1;
-        else { state.sort.key = key; state.sort.dir = key === "model" || key === "benchmark" ? 1 : -1; }
-        renderTable();
-      });
-    });
-
-    const search = $("#tableSearch");
-    if (search) search.addEventListener("input", () => { state.filter.text = search.value; renderTable(); });
-
-    $$("#benchmarkFilters .filter-chip").forEach((chip) => {
-      chip.addEventListener("click", () => {
-        $$("#benchmarkFilters .filter-chip").forEach((c) => c.classList.remove("is-active"));
-        chip.classList.add("is-active");
-        state.filter.benchmark = chip.dataset.filter;
-        renderTable();
-      });
     });
   }
 
@@ -538,10 +497,16 @@
     const el = (id, v) => { const e = $(id); if (e) e.textContent = v; };
     el("#statModels", uniqueModels(state.data).length);
     el("#statBenchmarks", BENCHMARKS.length);
-    el("#statRuns", state.data.length);
+    el("#statRuns", `${state.runSummary.scored}/${state.runSummary.attempted}`);
     el("#statTopScore", top ? top.vivIndex.toFixed(1) : "—");
     const leader = $("#statVivLeader");
     if (leader && top) leader.textContent = top.model;
+    const dataNote = $("#dataNote span");
+    if (dataNote) {
+      dataNote.textContent = state.runSummary.excluded
+        ? `${state.runSummary.scored} scored runs; ${state.runSummary.excluded} failed or timed-out run is excluded from score, cost, and latency aggregates. Partial-coverage models are labelled in VivIndex.`
+        : `${state.runSummary.scored} scored runs across ${BENCHMARKS.length} tracks. All models have complete track coverage.`;
+    }
   }
 
   function initMobileNav() {
@@ -642,10 +607,9 @@
     await loadData();
     renderVivIndexChart();
     renderLeaderboardChart();
+    renderBenchmarkChart();
     renderCostValueChart();
     renderSpeedCharts();
-    initTableControls();
-    renderTable();
     renderComparison();
     populateStats();
     initReveal();

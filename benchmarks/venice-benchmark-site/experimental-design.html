@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/styles.css?v=2" />
+  <link rel="stylesheet" href="assets/styles.css?v=4" />
 </head>
 <body>
   <nav class="navbar vt-nav">
@@ -64,15 +64,21 @@
               <dt>Messages</dt><dd>One user turn only: the track prompt</dd>
               <dt>Temperature</dt><dd>0.5 for every model and every track</dd>
               <dt>Leaderboard max_tokens</dt><dd>2048</dd>
-              <dt>Arcade max_tokens</dt><dd>16384</dd>
+              <dt>Arcade max_tokens</dt><dd>model maximum practical allowance, capped by the recorded safety ceiling</dd>
               <dt>Timeout</dt><dd>180s leaderboard · 480s arcade</dd>
             </dl>
           </article>
 
           <article class="protocol-card">
             <h3>Model set</h3>
-            <p>Seven Venice-hosted models, full-coverage on all four tracks after the Fable 5 completion pass.</p>
+            <p>Thirteen Venice-hosted models across four published tracks. Coverage is shown explicitly; missing or failed runs are never converted into a zero score.</p>
             <ul>
+              <li>GPT-5.6 Luna <code>openai-gpt-56-luna</code></li>
+              <li>GPT-5.6 Luna Pro <code>openai-gpt-56-luna-pro</code></li>
+              <li>GPT-5.6 Sol <code>openai-gpt-56-sol</code></li>
+              <li>GPT-5.6 Sol Pro <code>openai-gpt-56-sol-pro</code></li>
+              <li>GPT-5.6 Terra <code>openai-gpt-56-terra</code></li>
+              <li>GPT-5.6 Terra Pro <code>openai-gpt-56-terra-pro</code></li>
               <li>GPT-5.5 <code>openai-gpt-55</code></li>
               <li>Fable 5 <code>claude-fable-5</code></li>
               <li>Opus 4.8 <code>claude-opus-4-8</code></li>
@@ -89,7 +95,7 @@
               <li>Identical prompt text for every model on a given track.</li>
               <li>No system prompt, no few-shot examples, no tool definitions.</li>
               <li>No retries after a successful HTTP 200 (even if content is weak).</li>
-              <li>Failed HTTP/auth/timeouts score 0 and remain visible.</li>
+              <li>Failed HTTP/auth/timeouts remain visible but are excluded from score, cost, and latency aggregates.</li>
               <li>Cost uses Venice pricing when available, otherwise fixed fallback rates.</li>
               <li>Raw responses are stored in <code>data/results.json</code> for audit.</li>
             </ul>
@@ -121,17 +127,17 @@
           <div class="prompt-block">VivIndex = Σ (score_track × weight_track) / Σ (weights for tracks present)
 
 Weights:
-  long_horizon_agentic     0.30
+  startup_in_a_weekend     0.35
   intent_understanding     0.25
-  one_shot_ui              0.25
+  one_shot_ui              0.20
   brick_breaker_realism    0.20</div>
           <div class="weight-bars" aria-hidden="true">
-            <div class="weight-row"><div class="weight-track"><div class="weight-fill" style="width:100%"></div></div><strong>30%</strong></div>
-            <div class="weight-row"><div class="weight-track"><div class="weight-fill" style="width:83%"></div></div><strong>25%</strong></div>
-            <div class="weight-row"><div class="weight-track"><div class="weight-fill" style="width:83%"></div></div><strong>25%</strong></div>
-            <div class="weight-row"><div class="weight-track"><div class="weight-fill" style="width:67%"></div></div><strong>20%</strong></div>
+            <div class="weight-row"><div class="weight-track"><div class="weight-fill" style="width:100%"></div></div><strong>35%</strong></div>
+            <div class="weight-row"><div class="weight-track"><div class="weight-fill" style="width:72%"></div></div><strong>25%</strong></div>
+            <div class="weight-row"><div class="weight-track"><div class="weight-fill" style="width:57%"></div></div><strong>20%</strong></div>
+            <div class="weight-row"><div class="weight-track"><div class="weight-fill" style="width:57%"></div></div><strong>20%</strong></div>
           </div>
-          <p style="margin-top:1rem">If a model is missing a track, weights for present tracks are renormalized. That protects specialized partial runs from being zero-penalized — but the current public matrix is full-coverage (4/4) for every model.</p>
+          <p style="margin-top:1rem">If a model is missing a track, weights for present tracks are renormalized and its partial coverage is labelled. A failed request is excluded rather than converted into a zero score.</p>
         </div>
       </div>
     </section>
@@ -172,20 +178,6 @@ Weights:
             </div>
           </article>
 
-          <article class="prompt-card" id="prompt-agentic">
-            <h3>03 · Long-Horizon Agentic Task</h3>
-            <p><strong>Why it exists:</strong> long-horizon work fails on step coverage, tool reality, and failure-mode blindness. Weighted highest in VivIndex.</p>
-            <div class="prompt-block">Plan and outline a multi-step system to build an AI research assistant that: (1) monitors arXiv for papers, (2) summarizes them, (3) stores them in a vector DB, (4) answers user questions with citations. List the steps, tools needed, and potential failure modes.</div>
-            <div class="score-box">
-              <h4>Scoring heuristic (0–100)</h4>
-              <ul class="score-list">
-                <li><strong>Steps (0–40):</strong> numbered steps / “step N”; ≥4 steps awards full 40.</li>
-                <li><strong>Tools (0–30):</strong> terms such as api, arxiv, vector, database, embedding, llm, pinecone, chroma, weaviate, faiss, langchain, cron.</li>
-                <li><strong>Failure modes (0–30):</strong> failure/fail/error/hallucinat/rate limit/downtime/stale/risk/edge case.</li>
-              </ul>
-            </div>
-          </article>
-
           <article class="prompt-card" id="prompt-brick">
             <h3>04 · Brick Breaker Realism (leaderboard track)</h3>
             <p><strong>Why it exists:</strong> a hard one-shot interactive artifact under the same 2048-token budget as the other tracks. This is the scored matrix track — not the Arcade capability run.</p>
@@ -199,6 +191,36 @@ Weights:
                 <li><strong>Physics (15):</strong> collision + angle/reflection math.</li>
                 <li><strong>FX / responsive (15):</strong> particles, Web Audio, resize/media queries.</li>
                 <li><strong>Polish (15):</strong> neon/glow/gradient/shadow + length > 3000 chars.</li>
+              </ul>
+            </div>
+          </article>
+          <article class="prompt-card" id="prompt-startup">
+            <h3>04 · Startup in a Weekend</h3>
+            <p><strong>Why it exists:</strong> production usefulness depends on realistic planning — architecture, concrete schemas, APIs, deployment, costs, risks, and explicit scope boundaries under a tight deadline.</p>
+            <div class="prompt-block">You have 7 days and a team of 3 engineers to build an MVP for a B2B SaaS product: an AI-powered contract review assistant for legal teams. Users upload contracts (PDF/Word), the system extracts clauses, flags risks, suggests redlines, and produces a summary report.
+
+Deliver a complete, buildable plan. Your response must include all of the following:
+1. System architecture (text description of components and data flow).
+2. Database schema with concrete tables/collections and key fields.
+3. Backend API endpoints with HTTP methods, paths, and example request/response shapes.
+4. Authentication and authorization strategy.
+5. Frontend key screens and navigation.
+6. AI/LLM pipeline for clause extraction, risk classification, and redline generation.
+7. Deployment stack and infrastructure (name concrete services).
+8. Observability, logging, and error handling.
+9. Day-by-day 7-day schedule with deliverables per day.
+10. Cost estimate for infrastructure and AI usage at 100 active users/month.
+11. Top 5 technical risks and specific mitigations.
+12. What is explicitly out of MVP scope.
+
+Be specific: name concrete languages, frameworks, cloud services, and libraries.</div>
+            <div class="score-box">
+              <h4>Scoring heuristic (0–100)</h4>
+              <ul class="score-list">
+                <li><strong>Section coverage (0–48):</strong> 12 required sections, 4 pts each.</li>
+                <li><strong>Tech specificity (0–24):</strong> concrete languages, frameworks, cloud services, libraries.</li>
+                <li><strong>Quantitative / schedule rigor (0–16):</strong> cost numbers, day-by-day schedule, 100-user estimate.</li>
+                <li><strong>Risk &amp; scope quality (0–12):</strong> ≥5 risk/mitigation lines and ≥2 scope/out-of-scope lines.</li>
               </ul>
             </div>
           </article>
@@ -241,26 +263,21 @@ Weights:
           <h3>How Arcade differs from leaderboard Brick</h3>
           <ul>
             <li>Leaderboard Brick uses the Realism prompt + <code>max_tokens=2048</code> and contributes to VivIndex.</li>
-            <li>Arcade uses the Maximum prompt + <code>max_tokens=16384</code> and is judged primarily by playability in the browser.</li>
+            <li>Arcade uses the Maximum prompt + each model’s practical output allowance (with a recorded safety ceiling) and is judged primarily by browser validation and playability.</li>
             <li>Arcade still records a heuristic score for ranking cards, but the point is to play what each model shipped.</li>
           </ul>
-          <div class="prompt-block">Generate a single self-contained HTML file containing the most advanced,
-fully-featured Brick Breaker game you are capable of producing in one prompt.
+          <div class="prompt-block">Create the most polished, technically ambitious Brick Breaker game you can within this response. Return exactly one complete, standalone HTML document and nothing else.
 
-Use everything you know:
-  - Canvas (and WebGL where it earns complexity)
-  - Ball physics with angle reflection off paddle (subtle spin on contact)
-  - Multi-ball, multiple levels with progression, persistent best score in localStorage
-  - Power-ups (multi-ball, paddle extend, slow ball, sticky paddle, laser, life)
-  - Particle trails on ball motion + explosions on brick break
-  - Web Audio API for synthesized sound effects (no external audio assets)
-  - Score, lives, level, start screen, in-game HUD, game-over, victory
-  - Mobile gestures (touch to launch, swipe to move paddle) and keyboard (arrows / WASD)
-  - Accessibility: prefers-reduced-motion fallback, color contrast for HUD, focus rings
+Hard constraints:
+- It must run locally by opening the .html file: no CDN, package, network request, external image, font, audio, asset, API, or build step.
+- Use only HTML, CSS, and vanilla JavaScript. Canvas is required. Web Audio API may be used after a user gesture.
+- Begin with &lt;!doctype html&gt; and end with &lt;/html&gt;. Do not wrap the answer in Markdown fences.
 
-Inline all CSS, JS, and audio. No external libraries, no CDN imports, no fetched images.
-Make it feel polished and production-quality. Output only the HTML file, starting with
-<!DOCTYPE html> and ending with </html>. Nothing else.</div>
+Build a complete game, not a prototype. Include a distinctive art direction, a responsive high-DPI Canvas renderer, deterministic game loop, polished ball/paddle/brick collision resolution, multiple levels with varied layouts, progressive difficulty, lives/score/combo, pause/restart, keyboard + mouse + touch controls, and usable mobile layout.
+
+Push quality where it helps: power-ups with clear effects, particles/screen shake/trails, boss or special bricks, local high-score persistence, synthesized audio, settings for sound and reduced motion, onboarding, high-contrast text, visible focus states, and an accessible non-canvas status/instruction layer. Handle tab visibility, resize, and game-over/victory states gracefully.
+
+Prefer robust, maintainable code over commentary. Do not claim features that are not implemented.</div>
           <p style="margin-top:0.9rem">If extraction fails, the raw response is kept and the card shows a failure state instead of inventing a playable game.</p>
         </div>
       </div>
@@ -311,6 +328,6 @@ Make it feel polished and production-quality. Output only the HTML file, startin
     </div>
   </footer>
 
-  <script src="assets/app.js?v=2"></script>
+  <script src="assets/app.js?v=4"></script>
 </body>
 </html>

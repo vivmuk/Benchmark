@@ -1,12 +1,40 @@
 {
-  "generated_at": "2026-07-08T21:28:29.904884+00:00",
+  "generated_at": "2026-07-10T01:40:58.430496+00:00",
   "dry_run": false,
   "prompt_file": "prompts/brick_breaker_maximum.md",
   "max_tokens": 16384,
   "models": [
     {
+      "id": "openai-gpt-56-luna",
+      "display": "GPT-5.6 Luna"
+    },
+    {
+      "id": "openai-gpt-56-luna-pro",
+      "display": "GPT-5.6 Luna Pro"
+    },
+    {
+      "id": "openai-gpt-56-sol",
+      "display": "GPT-5.6 Sol"
+    },
+    {
+      "id": "openai-gpt-56-sol-pro",
+      "display": "GPT-5.6 Sol Pro"
+    },
+    {
+      "id": "openai-gpt-56-terra",
+      "display": "GPT-5.6 Terra"
+    },
+    {
+      "id": "openai-gpt-56-terra-pro",
+      "display": "GPT-5.6 Terra Pro"
+    },
+    {
       "id": "openai-gpt-55",
       "display": "GPT-5.5"
+    },
+    {
+      "id": "claude-fable-5",
+      "display": "Fable 5"
     },
     {
       "id": "claude-opus-4-8",
@@ -31,70 +59,230 @@
   ],
   "results": [
     {
+      "model_id": "openai-gpt-56-luna",
+      "display": "GPT-5.6 Luna",
+      "status": "ok",
+      "latency": 44.72,
+      "prompt_tokens": 1921,
+      "completion_tokens": 8246,
+      "total_tokens": 10167,
+      "estimated_cost_usd": 0.0642,
+      "score": 93,
+      "html": "arcade/openai-gpt-56-luna-brick.html",
+      "raw_chars": 23938,
+      "note": "real Venice API run",
+      "error": null,
+      "browser_validation": {
+        "passed": false,
+        "status": "pending",
+        "note": "Legacy artifact retained for playback; browser validation is pending."
+      }
+    },
+    {
+      "model_id": "openai-gpt-56-luna-pro",
+      "display": "GPT-5.6 Luna Pro",
+      "status": "ok",
+      "latency": 51.62,
+      "prompt_tokens": 25476,
+      "completion_tokens": 18247,
+      "total_tokens": 43723,
+      "estimated_cost_usd": 0.1687,
+      "score": 100,
+      "html": "arcade/openai-gpt-56-luna-pro-brick.html",
+      "raw_chars": 15521,
+      "note": "real Venice API run",
+      "error": null,
+      "browser_validation": {
+        "passed": false,
+        "status": "pending",
+        "note": "Legacy artifact retained for playback; browser validation is pending."
+      }
+    },
+    {
+      "model_id": "openai-gpt-56-sol",
+      "display": "GPT-5.6 Sol",
+      "status": "ok",
+      "latency": 181.26,
+      "prompt_tokens": 1921,
+      "completion_tokens": 16384,
+      "total_tokens": 18305,
+      "estimated_cost_usd": 0.6264,
+      "score": 90,
+      "html": "arcade/openai-gpt-56-sol-brick.html",
+      "raw_chars": 41495,
+      "note": "real Venice API run",
+      "error": null,
+      "browser_validation": {
+        "passed": false,
+        "status": "pending",
+        "note": "Legacy artifact retained for playback; browser validation is pending."
+      }
+    },
+    {
+      "model_id": "openai-gpt-56-sol-pro",
+      "display": "GPT-5.6 Sol Pro",
+      "status": "error",
+      "latency": 315.14,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "estimated_cost_usd": 0.0,
+      "score": 0,
+      "html": "arcade/openai-gpt-56-sol-pro-brick.raw.txt",
+      "raw_chars": 0,
+      "note": "real Venice API run (retry)",
+      "error": "{\"error\":\"Inference processing failed\"}",
+      "browser_validation": {
+        "passed": false,
+        "status": "not_applicable",
+        "note": "No local standalone HTML is available for this run."
+      }
+    },
+    {
+      "model_id": "openai-gpt-56-terra",
+      "display": "GPT-5.6 Terra",
+      "status": "error",
+      "latency": 63.82,
+      "prompt_tokens": 1921,
+      "completion_tokens": 12671,
+      "total_tokens": 14592,
+      "estimated_cost_usd": 0.2436,
+      "score": 100,
+      "html": null,
+      "raw_chars": 41049,
+      "note": "Historical run metadata retained; no local playable artifact is published.",
+      "error": "Generated HTML artifact is not present in the published arcade directory.",
+      "browser_validation": {
+        "passed": false,
+        "status": "not_applicable",
+        "note": "No local standalone HTML is available for this run."
+      }
+    },
+    {
+      "model_id": "openai-gpt-56-terra-pro",
+      "display": "GPT-5.6 Terra Pro",
+      "status": "error",
+      "latency": 314.81,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "estimated_cost_usd": 0.0,
+      "score": 0,
+      "html": "arcade/openai-gpt-56-terra-pro-brick.raw.txt",
+      "raw_chars": 0,
+      "note": "real Venice API run",
+      "error": "{\"error\":\"Inference processing failed\"}",
+      "browser_validation": {
+        "passed": false,
+        "status": "not_applicable",
+        "note": "No local standalone HTML is available for this run."
+      }
+    },
+    {
       "model_id": "openai-gpt-55",
       "display": "GPT-5.5",
-      "status": "ok",
-      "latency": 255.32,
+      "status": "error",
+      "latency": 193.91,
       "prompt_tokens": 1917,
       "completion_tokens": 16384,
       "total_tokens": 18301,
-      "estimated_cost_usd": 0.5107,
+      "estimated_cost_usd": 0.6264,
       "score": 83,
-      "html": "arcade/openai-gpt-55-brick.html",
-      "raw_chars": 20725,
-      "note": "real Venice API run",
-      "error": null
+      "html": null,
+      "raw_chars": 31345,
+      "note": "Historical run metadata retained; no local playable artifact is published.",
+      "error": "Generated HTML artifact is not present in the published arcade directory.",
+      "browser_validation": {
+        "passed": false,
+        "status": "not_applicable",
+        "note": "No local standalone HTML is available for this run."
+      }
+    },
+    {
+      "model_id": "claude-fable-5",
+      "display": "Fable 5",
+      "status": "error",
+      "latency": 164.23,
+      "prompt_tokens": 3099,
+      "completion_tokens": 16384,
+      "total_tokens": 19483,
+      "estimated_cost_usd": 1.0202,
+      "score": 90,
+      "html": null,
+      "raw_chars": 26695,
+      "note": "Historical run metadata retained; no local playable artifact is published.",
+      "error": "Generated HTML artifact is not present in the published arcade directory.",
+      "browser_validation": {
+        "passed": false,
+        "status": "not_applicable",
+        "note": "No local standalone HTML is available for this run."
+      }
     },
     {
       "model_id": "claude-opus-4-8",
       "display": "Opus 4.8",
-      "status": "ok",
-      "latency": 165.89,
+      "status": "error",
+      "latency": 166.12,
       "prompt_tokens": 3107,
       "completion_tokens": 16384,
       "total_tokens": 19491,
-      "estimated_cost_usd": 1.2754,
+      "estimated_cost_usd": 0.5102,
       "score": 90,
-      "html": "arcade/claude-opus-4-8-brick.html",
-      "raw_chars": 34344,
-      "note": "real Venice API run",
-      "error": null
+      "html": null,
+      "raw_chars": 32686,
+      "note": "Historical run metadata retained; no local playable artifact is published.",
+      "error": "Generated HTML artifact is not present in the published arcade directory.",
+      "browser_validation": {
+        "passed": false,
+        "status": "not_applicable",
+        "note": "No local standalone HTML is available for this run."
+      }
     },
     {
       "model_id": "zai-org-glm-5-2",
       "display": "GLM 5.2",
-      "status": "ok",
-      "latency": 127.46,
+      "status": "error",
+      "latency": 221.5,
       "prompt_tokens": 1891,
       "completion_tokens": 16384,
       "total_tokens": 18275,
-      "estimated_cost_usd": 0.051,
-      "score": 90,
-      "html": "arcade/zai-org-glm-5-2-brick.html",
-      "raw_chars": 53250,
-      "note": "real Venice API run",
-      "error": null
+      "estimated_cost_usd": 0.0747,
+      "score": 100,
+      "html": null,
+      "raw_chars": 49906,
+      "note": "Historical run metadata retained; no local playable artifact is published.",
+      "error": "Generated HTML artifact is not present in the published arcade directory.",
+      "browser_validation": {
+        "passed": false,
+        "status": "not_applicable",
+        "note": "No local standalone HTML is available for this run."
+      }
     },
     {
       "model_id": "deepseek-v4-pro",
       "display": "DeepSeek V4",
       "status": "ok",
-      "latency": 251.81,
+      "latency": 286.25,
       "prompt_tokens": 1979,
       "completion_tokens": 16385,
       "total_tokens": 18364,
-      "estimated_cost_usd": 0.0372,
-      "score": 90,
+      "estimated_cost_usd": 0.0574,
+      "score": 83,
       "html": "arcade/deepseek-v4-pro-brick.html",
-      "raw_chars": 39199,
+      "raw_chars": 44545,
       "note": "real Venice API run",
-      "error": null
+      "error": null,
+      "browser_validation": {
+        "passed": false,
+        "status": "pending",
+        "note": "Legacy artifact retained for playback; browser validation is pending."
+      }
     },
     {
       "model_id": "minimax-m3-preview",
       "display": "MiniMax M3",
       "status": "error",
-      "latency": 81.27,
+      "latency": 68.71,
       "prompt_tokens": 0,
       "completion_tokens": 0,
       "total_tokens": 0,
@@ -103,22 +291,33 @@
       "html": "arcade/minimax-m3-preview-brick.raw.txt",
       "raw_chars": 0,
       "note": "real Venice API run",
-      "error": "Malformed response"
+      "error": "Malformed response",
+      "browser_validation": {
+        "passed": false,
+        "status": "not_applicable",
+        "note": "No local standalone HTML is available for this run."
+      }
     },
     {
       "model_id": "grok-4-5",
       "display": "Grok 4.5",
       "status": "ok",
-      "latency": 187.0,
-      "prompt_tokens": 400,
-      "completion_tokens": 17587,
-      "total_tokens": 17987,
-      "estimated_cost_usd": 0.1205,
+      "latency": 109.62,
+      "prompt_tokens": 2083,
+      "completion_tokens": 16013,
+      "total_tokens": 18096,
+      "estimated_cost_usd": 0.1136,
       "score": 100,
       "html": "arcade/grok-4-5-brick.html",
-      "raw_chars": 20173,
-      "note": "real Venice API run (one-shot brick, max_tokens=16384)",
-      "error": null
+      "raw_chars": 38906,
+      "note": "real Venice API run",
+      "error": null,
+      "browser_validation": {
+        "passed": false,
+        "status": "pending",
+        "note": "Legacy artifact retained for playback; browser validation is pending."
+      }
     }
-  ]
+  ],
+  "protocol": "Legacy Arcade results are reconciled against files present in arcade/. A game is only marked playable when its standalone HTML exists. Browser validation is pending for legacy artifacts; the next full generation will use the canonical roster and manifest protocol."
 }

@@ -1,0 +1,1513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#160718">
+  <title>Rangoli Breaker — Festival Brick Breaker</title>
+  <style>
+    :root {
+      --saffron: #ff9933;
+      --white: #fffdf4;
+      --green: #138808;
+      --gold: #f6c453;
+      --maroon: #4a0d24;
+      --indigo: #24105c;
+      --night: #09051c;
+      --panel: rgba(17, 7, 29, 0.92);
+      --focus: #fff176;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      min-height: 100%;
+      margin: 0;
+    }
+
+    body {
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      padding:
+        max(10px, env(safe-area-inset-top))
+        max(10px, env(safe-area-inset-right))
+        max(10px, env(safe-area-inset-bottom))
+        max(10px, env(safe-area-inset-left));
+      color: var(--white);
+      background:
+        radial-gradient(circle at 50% 15%, #38135d 0%, #160718 42%, #07030f 100%);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .game-shell {
+      position: relative;
+      width: min(96vw, 1100px);
+      max-height: 94vh;
+      aspect-ratio: 8 / 5;
+      overflow: hidden;
+      border: 2px solid rgba(246, 196, 83, 0.75);
+      border-radius: 24px;
+      background: #09051c;
+      box-shadow:
+        0 0 0 5px rgba(255, 153, 51, 0.08),
+        0 22px 70px rgba(0, 0, 0, 0.65),
+        0 0 48px rgba(246, 196, 83, 0.14);
+      isolation: isolate;
+    }
+
+    .game-shell::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 8;
+      border-radius: inherit;
+      pointer-events: none;
+      box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+        inset 0 0 45px rgba(255, 153, 51, 0.09);
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      background: #09051c;
+      outline: none;
+      touch-action: none;
+      cursor: crosshair;
+    }
+
+    canvas:focus-visible,
+    button:focus-visible {
+      outline: 4px solid var(--focus);
+      outline-offset: 3px;
+    }
+
+    .hud {
+      position: absolute;
+      top: 12px;
+      left: 14px;
+      right: 14px;
+      z-index: 4;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+      align-items: start;
+      gap: 10px;
+      pointer-events: none;
+    }
+
+    .hud-card {
+      min-height: 44px;
+      padding: 7px 12px;
+      border: 1px solid rgba(246, 196, 83, 0.42);
+      border-radius: 13px;
+      color: #fff;
+      background: rgba(10, 4, 25, 0.88);
+      box-shadow: 0 7px 22px rgba(0, 0, 0, 0.28);
+      backdrop-filter: blur(8px);
+      text-shadow: 0 1px 3px #000;
+    }
+
+    .hud-left,
+    .hud-right {
+      display: flex;
+      align-items: center;
+      gap: clamp(8px, 2vw, 20px);
+      font-weight: 800;
+    }
+
+    .hud-right {
+      justify-self: end;
+      justify-content: flex-end;
+      padding-right: 90px;
+    }
+
+    .hud-center {
+      min-width: 190px;
+      text-align: center;
+    }
+
+    .hud-label {
+      display: block;
+      margin-bottom: 1px;
+      color: #ffd989;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.13em;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .hud-value {
+      display: block;
+      color: #fff;
+      font-size: clamp(13px, 1.65vw, 18px);
+      font-variant-numeric: tabular-nums;
+      line-height: 1.18;
+      white-space: nowrap;
+    }
+
+    .combo {
+      color: #fff176;
+    }
+
+    .controls {
+      position: absolute;
+      top: 17px;
+      right: 20px;
+      z-index: 7;
+      display: flex;
+      gap: 7px;
+    }
+
+    .icon-button {
+      width: 36px;
+      height: 36px;
+      padding: 0;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 10px;
+      color: #fff;
+      background: rgba(10, 4, 25, 0.93);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.28);
+      cursor: pointer;
+      pointer-events: auto;
+    }
+
+    .icon-button:hover {
+      color: #1b0810;
+      background: var(--gold);
+    }
+
+    .power-bar {
+      position: absolute;
+      top: 65px;
+      left: 50%;
+      z-index: 4;
+      display: flex;
+      max-width: 78%;
+      gap: 6px;
+      transform: translateX(-50%);
+      pointer-events: none;
+    }
+
+    .power-chip {
+      padding: 4px 9px;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      border-radius: 999px;
+      color: #fff;
+      background: rgba(74, 13, 36, 0.9);
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.3);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.03em;
+      white-space: nowrap;
+    }
+
+    .overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 6;
+      display: grid;
+      place-items: center;
+      padding: 18px;
+      overflow: auto;
+      background:
+        radial-gradient(circle at center, rgba(36, 16, 92, 0.36), rgba(7, 3, 15, 0.78));
+      transition: opacity 220ms ease, visibility 220ms ease;
+    }
+
+    .overlay.hidden {
+      visibility: hidden;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .panel {
+      width: min(620px, 92%);
+      padding: clamp(20px, 4vw, 38px);
+      overflow: hidden;
+      border: 1px solid rgba(246, 196, 83, 0.7);
+      border-radius: 24px;
+      text-align: center;
+      background:
+        linear-gradient(145deg, rgba(74, 13, 36, 0.97), rgba(24, 8, 49, 0.97));
+      box-shadow:
+        0 22px 60px rgba(0, 0, 0, 0.58),
+        inset 0 0 30px rgba(255, 153, 51, 0.07);
+    }
+
+    .mini-rangoli {
+      display: inline-grid;
+      width: 58px;
+      height: 58px;
+      margin-bottom: 8px;
+      place-items: center;
+      border: 3px solid var(--gold);
+      transform: rotate(45deg);
+      box-shadow:
+        inset 0 0 0 8px var(--maroon),
+        inset 0 0 0 11px var(--saffron);
+    }
+
+    .mini-rangoli::after {
+      content: "";
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 0 5px var(--white);
+    }
+
+    .panel h1 {
+      margin: 7px 0 4px;
+      color: #fff6d8;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(31px, 6vw, 62px);
+      line-height: 0.98;
+      letter-spacing: -0.035em;
+      text-shadow:
+        0 3px 0 #7b2a13,
+        0 0 24px rgba(255, 153, 51, 0.52);
+    }
+
+    .tricolor {
+      height: 5px;
+      width: min(310px, 80%);
+      margin: 13px auto 17px;
+      border-radius: 99px;
+      background: linear-gradient(
+        90deg,
+        var(--saffron) 0 33.33%,
+        var(--white) 33.33% 66.66%,
+        var(--green) 66.66%
+      );
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.18);
+    }
+
+    .panel-subtitle {
+      margin: 0 auto 14px;
+      color: #ffd989;
+      font-size: clamp(14px, 2vw, 19px);
+      font-weight: 800;
+    }
+
+    .panel-body {
+      max-width: 510px;
+      margin: 0 auto 20px;
+      color: #fffdf4;
+      font-size: clamp(12px, 1.5vw, 15px);
+      line-height: 1.55;
+    }
+
+    .instructions {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin: 18px 0;
+    }
+
+    .instruction {
+      padding: 9px 7px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 12px;
+      background: rgba(0, 0, 0, 0.19);
+      font-size: 11px;
+      line-height: 1.3;
+    }
+
+    .instruction strong {
+      display: block;
+      color: #ffd989;
+      font-size: 12px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .primary,
+    .secondary {
+      min-width: 155px;
+      padding: 12px 21px;
+      border-radius: 999px;
+      font-weight: 900;
+      letter-spacing: 0.035em;
+      cursor: pointer;
+    }
+
+    .primary {
+      border: 2px solid #ffd989;
+      color: #250817;
+      background: linear-gradient(180deg, #ffd976, #ff9933);
+      box-shadow:
+        0 7px 0 #9b4515,
+        0 12px 22px rgba(0, 0, 0, 0.3);
+    }
+
+    .primary:hover {
+      filter: brightness(1.12);
+      transform: translateY(-1px);
+    }
+
+    .primary:active {
+      transform: translateY(4px);
+      box-shadow:
+        0 3px 0 #9b4515,
+        0 7px 14px rgba(0, 0, 0, 0.3);
+    }
+
+    .secondary {
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      color: #fff;
+      background: rgba(255, 255, 255, 0.09);
+    }
+
+    .secondary:hover {
+      background: rgba(255, 255, 255, 0.17);
+    }
+
+    .toast {
+      position: absolute;
+      left: 50%;
+      bottom: 52px;
+      z-index: 5;
+      max-width: 80%;
+      padding: 9px 17px;
+      border: 1px solid rgba(246, 196, 83, 0.7);
+      border-radius: 999px;
+      color: #fff;
+      background: rgba(74, 13, 36, 0.94);
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.42);
+      font-weight: 900;
+      text-align: center;
+      transform: translate(-50%, 18px);
+      opacity: 0;
+      pointer-events: none;
+      transition: 220ms ease;
+    }
+
+    .toast.show {
+      transform: translate(-50%, 0);
+      opacity: 1;
+    }
+
+    .sr-only {
+      position: absolute !important;
+      width: 1px !important;
+      height: 1px !important;
+      padding: 0 !important;
+      margin: -1px !important;
+      overflow: hidden !important;
+      clip: rect(0, 0, 0, 0) !important;
+      white-space: nowrap !important;
+      border: 0 !important;
+    }
+
+    @media (max-width: 720px) {
+      body {
+        padding: 4px;
+      }
+
+      .game-shell {
+        width: 100vw;
+        border-radius: 12px;
+      }
+
+      .hud {
+        top: 6px;
+        left: 7px;
+        right: 7px;
+        gap: 5px;
+      }
+
+      .hud-card {
+        min-height: 36px;
+        padding: 5px 7px;
+        border-radius: 9px;
+      }
+
+      .hud-left {
+        gap: 8px;
+      }
+
+      .hud-center {
+        min-width: 115px;
+      }
+
+      .hud-right {
+        padding-right: 70px;
+      }
+
+      .hud-label {
+        font-size: 7px;
+      }
+
+      .hud-value {
+        font-size: 11px;
+      }
+
+      .controls {
+        top: 9px;
+        right: 10px;
+      }
+
+      .icon-button {
+        width: 30px;
+        height: 30px;
+        border-radius: 8px;
+        font-size: 12px;
+      }
+
+      .power-bar {
+        top: 47px;
+      }
+
+      .power-chip {
+        padding: 2px 6px;
+        font-size: 8px;
+      }
+
+      .panel {
+        width: min(590px, 96%);
+        padding: 14px 18px 18px;
+        border-radius: 17px;
+      }
+
+      .mini-rangoli {
+        width: 36px;
+        height: 36px;
+        margin-bottom: 2px;
+      }
+
+      .panel h1 {
+        margin-top: 2px;
+        font-size: clamp(27px, 7vw, 46px);
+      }
+
+      .panel-subtitle {
+        margin-bottom: 7px;
+      }
+
+      .panel-body {
+        margin-bottom: 10px;
+        line-height: 1.35;
+      }
+
+      .instructions {
+        margin: 10px 0 13px;
+      }
+
+      .instruction {
+        padding: 5px;
+        font-size: 9px;
+      }
+
+      .instruction strong {
+        font-size: 10px;
+      }
+
+      .primary,
+      .secondary {
+        min-width: 130px;
+        padding: 8px 16px;
+        font-size: 12px;
+      }
+
+      .toast {
+        bottom: 20px;
+        font-size: 11px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.001ms !important;
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="game-shell" id="gameShell" aria-label="Rangoli Breaker game">
+    <canvas
+      id="gameCanvas"
+      width="960"
+      height="600"
+      tabindex="0"
+      role="application"
+      aria-label="Brick Breaker game. Move with arrow keys or A and D. Press Space or Enter to launch. Press P to pause and M to mute."
+    >
+      Your browser needs Canvas support to play Rangoli Breaker.
+    </canvas>
+
+    <section class="hud" aria-label="Game status">
+      <div class="hud-card hud-left">
+        <div>
+          <span class="hud-label">Score</span>
+          <span class="hud-value" id="scoreValue">0</span>
+        </div>
+        <div>
+          <span class="hud-label">Best</span>
+          <span class="hud-value" id="bestValue">0</span>
+        </div>
+        <div>
+          <span class="hud-label">Streak</span>
+          <span class="hud-value combo" id="comboValue">—</span>
+        </div>
+      </div>
+
+      <div class="hud-card hud-center">
+        <span class="hud-label" id="levelLabel">Festival Journey</span>
+        <span class="hud-value" id="levelValue">Level 1</span>
+      </div>
+
+      <div class="hud-card hud-right">
+        <div>
+          <span class="hud-label">Lives</span>
+          <span class="hud-value" id="livesValue">♥ ♥ ♥</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="controls" aria-label="Game controls">
+      <button class="icon-button" id="pauseButton" type="button" aria-label="Pause game" title="Pause (P)">Ⅱ</button>
+      <button class="icon-button" id="muteButton" type="button" aria-label="Mute sound" title="Mute (M)">♪</button>
+    </div>
+
+    <div class="power-bar" id="powerBar" aria-label="Active power-ups"></div>
+
+    <section class="overlay" id="overlay" role="dialog" aria-modal="true" aria-labelledby="screenTitle">
+      <div class="panel">
+        <div class="mini-rangoli" aria-hidden="true"></div>
+        <h1 id="screenTitle">Rangoli Breaker</h1>
+        <div class="tricolor" aria-hidden="true"></div>
+        <p class="panel-subtitle" id="screenSubtitle">A Festival of Light, Rhythm &amp; Color</p>
+        <div class="panel-body" id="screenBody">
+          Break radiant rangoli formations, collect festive powers, and light every diya across five handcrafted celebrations.
+          <div class="instructions">
+            <div class="instruction"><strong>Move</strong>Arrows, A/D, or swipe</div>
+            <div class="instruction"><strong>Launch / Fire</strong>Space, Enter, or tap</div>
+            <div class="instruction"><strong>Pause</strong>P or Escape</div>
+          </div>
+        </div>
+        <div class="actions">
+          <button class="primary" id="primaryButton" type="button">Begin Celebration</button>
+          <button class="secondary" id="secondaryButton" type="button" hidden>Return to Title</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="toast" id="toast" role="status"></div>
+    <div class="sr-only" id="announcer" aria-live="polite" aria-atomic="true"></div>
+  </main>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const canvas = document.getElementById("gameCanvas");
+      const ctx = canvas.getContext("2d", { alpha: false });
+      const overlay = document.getElementById("overlay");
+      const screenTitle = document.getElementById("screenTitle");
+      const screenSubtitle = document.getElementById("screenSubtitle");
+      const screenBody = document.getElementById("screenBody");
+      const primaryButton = document.getElementById("primaryButton");
+      const secondaryButton = document.getElementById("secondaryButton");
+      const pauseButton = document.getElementById("pauseButton");
+      const muteButton = document.getElementById("muteButton");
+      const powerBar = document.getElementById("powerBar");
+      const toastElement = document.getElementById("toast");
+      const announcer = document.getElementById("announcer");
+
+      const scoreValue = document.getElementById("scoreValue");
+      const bestValue = document.getElementById("bestValue");
+      const comboValue = document.getElementById("comboValue");
+      const levelLabel = document.getElementById("levelLabel");
+      const levelValue = document.getElementById("levelValue");
+      const livesValue = document.getElementById("livesValue");
+
+      const W = 960;
+      const H = 600;
+      const PADDLE_Y = 548;
+      const STORAGE_KEY = "rangoli-breaker-best-v3";
+      const TAU = Math.PI * 2;
+
+      const COLORS = {
+        saffron: "#FF9933",
+        white: "#FFFDF4",
+        green: "#138808",
+        gold: "#F6C453",
+        maroon: "#4A0D24",
+        indigo: "#24105C",
+        violet: "#8E44AD",
+        cyan: "#39D4E8",
+        rose: "#E94E77",
+        night: "#09051C"
+      };
+
+      const brickPalette = [
+        COLORS.saffron,
+        COLORS.gold,
+        COLORS.green,
+        COLORS.rose,
+        "#FAE8B4",
+        "#6B55C9",
+        "#DB7A25"
+      ];
+
+      const powerInfo = {
+        multiball: { label: "Multi-ball", short: "×3", color: "#FF9933" },
+        extend: { label: "Wide Paddle", short: "↔", color: "#39D4E8" },
+        slow: { label: "Calm Orbit", short: "◷", color: "#138808" },
+        sticky: { label: "Sticky Henna", short: "◆", color: "#E94E77" },
+        laser: { label: "Sparkler Lasers", short: "⚡", color: "#F6C453" },
+        life: { label: "Extra Life", short: "+1", color: "#FFFDF4" }
+      };
+
+      const levels = [
+        { name: "Marigold Toran", subtitle: "Garlands at the Palace Gate", build: buildGarland },
+        { name: "Rangoli Diamond", subtitle: "Symmetry of Saffron and Green", build: buildDiamond },
+        { name: "Lotus Mandala", subtitle: "Petals Beneath the Moon", build: buildMandala },
+        { name: "Palace Jali", subtitle: "The Illuminated Courtyard", build: buildPalace },
+        { name: "Diya Finale", subtitle: "A Thousand Lights Awaken", build: buildDiya }
+      ];
+
+      let dpr = 1;
+      let state = "title";
+      let previousState = "title";
+      let score = 0;
+      let best = loadBest();
+      let lives = 3;
+      let levelIndex = 0;
+      let bricks = [];
+      let balls = [];
+      let particles = [];
+      let powerUps = [];
+      let lasers = [];
+      let breakCount = 0;
+      let combo = 0;
+      let comboTimer = 0;
+      let stateTimer = 0;
+      let serveTimer = 0;
+      let laserCooldown = 0;
+      let shake = 0;
+      let gameTime = 0;
+      let lastTime = performance.now();
+      let accumulator = 0;
+      let toastTimer = 0;
+      let pointerActive = false;
+      let pointerTarget = null;
+      let cachedPowerMarkup = "";
+      let muted = false;
+      let audio = null;
+      let audioMaster = null;
+      let noiseBuffer = null;
+
+      const reducedMotionQuery = matchMedia("(prefers-reduced-motion: reduce)");
+      let reducedMotion = reducedMotionQuery.matches;
+      reducedMotionQuery.addEventListener?.("change", event => {
+        reducedMotion = event.matches;
+      });
+
+      const keys = Object.create(null);
+      const stars = Array.from({ length: 92 }, (_, i) => ({
+        x: pseudo(i * 41.73 + 2.2) * W,
+        y: 42 + pseudo(i * 17.17 + 4.7) * 390,
+        r: 0.5 + pseudo(i * 9.11) * 1.45,
+        phase: pseudo(i * 31.9) * TAU
+      }));
+
+      const paddle = {
+        x: W / 2,
+        y: PADDLE_Y,
+        w: 122,
+        h: 18,
+        vx: 0,
+        targetW: 122
+      };
+
+      const effects = {
+        extend: 0,
+        slow: 0,
+        sticky: 0,
+        laser: 0
+      };
+
+      function loadBest() {
+        try {
+          return Math.max(0, Number(localStorage.getItem(STORAGE_KEY)) || 0);
+        } catch {
+          return 0;
+        }
+      }
+
+      function saveBest() {
+        try {
+          localStorage.setItem(STORAGE_KEY, String(best));
+        } catch {
+          // Storage may be disabled; the game remains fully playable.
+        }
+      }
+
+      function resizeCanvas() {
+        dpr = Math.min(2, window.devicePixelRatio || 1);
+        canvas.width = Math.round(W * dpr);
+        canvas.height = Math.round(H * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+
+      function pseudo(value) {
+        const n = Math.sin(value * 12.9898) * 43758.5453;
+        return n - Math.floor(n);
+      }
+
+      function clamp(value, min, max) {
+        return Math.max(min, Math.min(max, value));
+      }
+
+      function lerp(a, b, amount) {
+        return a + (b - a) * amount;
+      }
+
+      function rand(min, max) {
+        return min + Math.random() * (max - min);
+      }
+
+      function roundedRectPath(context, x, y, w, h, radius) {
+        const r = Math.min(radius, w / 2, h / 2);
+        context.beginPath();
+        context.moveTo(x + r, y);
+        context.arcTo(x + w, y, x + w, y + h, r);
+        context.arcTo(x + w, y + h, x, y + h, r);
+        context.arcTo(x, y + h, x, y, r);
+        context.arcTo(x, y, x + w, y, r);
+        context.closePath();
+      }
+
+      function formatNumber(value) {
+        return Math.floor(value).toLocaleString("en-IN");
+      }
+
+      function baseBallSpeed() {
+        return 342 + levelIndex * 24;
+      }
+
+      function resetEffects() {
+        effects.extend = 0;
+        effects.slow = 0;
+        effects.sticky = 0;
+        effects.laser = 0;
+        paddle.targetW = 122;
+        laserCooldown = 0;
+      }
+
+      function addBrick(x, y, w, h, hp, color, kind = "rangoli") {
+        if (x < 38 || x + w > W - 38 || y < 68 || y + h > 454) return;
+        bricks.push({
+          x,
+          y,
+          w,
+          h,
+          hp,
+          maxHp: hp,
+          color,
+          kind,
+          alive: true,
+          flash: 0,
+          seed: Math.random() * 1000
+        });
+      }
+
+      function buildGarland() {
+        for (let row = 0; row < 4; row++) {
+          for (let col = 0; col < 11; col++) {
+            const x = 104 + col * 69;
+            const y = 102 + row * 53 + Math.sin(col * 0.82 + row * 1.4) * 15;
+            const hp = row === 0 && col % 3 === 1 ? 2 : 1;
+            const color = row % 2
+              ? (col % 3 === 0 ? COLORS.green : COLORS.gold)
+              : (col % 3 === 0 ? COLORS.rose : COLORS.saffron);
+            addBrick(x, y, 58, 24, hp, color, "marigold");
+          }
+        }
+        for (let col = 1; col < 10; col += 2) {
+          const x = 104 + col * 69 + 8;
+          const y = 316 + Math.sin(col) * 11;
+          addBrick(x, y, 42, 22, col % 4 === 1 ? 2 : 1, COLORS.gold, "pendant");
+          addBrick(x + 7, y + 27, 28, 17, 1, COLORS.green, "pendant");
+        }
+      }
+
+      function buildDiamond() {
+        const cols = 13;
+        const rows = 9;
+        const bw = 54;
+        const bh = 25;
+        const gapX = 7;
+        const gapY = 7;
+        const startX = (W - (cols * bw + (cols - 1) * gapX)) / 2;
+        const startY = 82;
+
+        for (let row = 0; row < rows; row++) {
+          for (let col = 0; col < cols; col++) {
+            const d = Math.abs(col - 6) + Math.abs(row - 4);
+            if (d <= 6 && !(d === 0)) {
+              const ring = d % 4;
+              const color = [
+                COLORS.indigo,
+                COLORS.green,
+                COLORS.white,
+                COLORS.saffron
+              ][ring];
+              const hp = d <= 2 ? 3 : d <= 4 ? 2 : 1;
+              addBrick(
+                startX + col * (bw + gapX),
+                startY + row * (bh + gapY),
+                bw,
+                bh,
+                hp,
+                color,
+                "diamond"
+              );
+            }
+          }
+        }
+
+        addBrick(W / 2 - 27, startY + 4 * (bh + gapY), 54, 25, 3, COLORS.gold, "center");
+      }
+
+      function buildMandala() {
+        const cx = W / 2;
+        const cy = 239;
+        const rings = [
+          { radius: 0, count: 1, hp: 3 },
+          { radius: 48, count: 5, hp: 2 },
+          { radius: 92, count: 9, hp: 2 },
+          { radius: 140, count: 13, hp: 1 },
+          { radius: 187, count: 17, hp: 1 }
+        ];
+
+        rings.forEach((ring, ri) => {
+          for (let i = 0; i < ring.count; i++) {
+            const angle = ring.count === 1
+              ? 0
+              : -Math.PI / 2 + (i / ring.count) * TAU + ri * 0.13;
+            const x = cx + Math.cos(angle) * ring.radius - 27;
+            const y = cy + Math.sin(angle) * ring.radius * 0.82 - 11;
+            const colors = [COLORS.gold, COLORS.rose, COLORS.saffron, COLORS.green, "#6B55C9"];
+            addBrick(x, y, 54, 23, ring.hp, colors[(i + ri) % colors.length], "lotus");
+          }
+        });
+      }
+
+      function buildPalace() {
+        const bw = 48;
+        const bh = 23;
+        const gx = 7;
+        const gy = 7;
+        const startX = 76;
+        const startY = 91;
+
+        for (let row = 0; row < 10; row++) {
+          for (let col = 0; col < 15; col++) {
+            const tower = col <= 2 || col >= 12;
+            const roof = row <= 1 && (col <= 3 || col >= 11);
+            const centralDome =
+              row <= 4 &&
+              Math.pow((col - 7) / 4.6, 2) + Math.pow((row - 4.1) / 4.1, 2) <= 1;
+            const wall = row >= 4;
+            const archOpening =
+              row >= 6 &&
+              row <= 9 &&
+              (Math.abs(col - 4) <= 1 || Math.abs(col - 7) <= 1 || Math.abs(col - 10) <= 1);
+
+            if ((tower || roof || centralDome || wall) && !archOpening) {
+              const edge = tower || row === 4;
+              const hp = edge && (row + col) % 3 === 0 ? 2 : 1;
+              const color = (row + col) % 4 === 0
+                ? COLORS.gold
+                : (row % 2 ? COLORS.maroon : COLORS.saffron);
+              addBrick(
+                startX + col * (bw + gx),
+                startY + row * (bh + gy),
+                bw,
+                bh,
+                hp,
+                color,
+                "jali"
+              );
+            }
+          }
+        }
+
+        for (const col of [4, 7, 10]) {
+          addBrick(startX + col * (bw + gx), startY + 5 * (bh + gy), bw, bh, 3, COLORS.indigo, "arch");
+        }
+      }
+
+      function buildDiya() {
+        const bw = 48;
+        const bh = 23;
+        const gx = 7;
+        const gy = 7;
+        const startX = 76;
+        const startY = 72;
+
+        for (let row = 0; row < 12; row++) {
+          for (let col = 0; col < 15; col++) {
+            const dx = Math.abs(col - 7);
+            const flame =
+              row <= 4 &&
+              dx <= Math.max(0, 2 - Math.abs(row - 2));
+            const bowl =
+              row >= 5 &&
+              row <= 8 &&
+              dx <= 6 - Math.abs(row - 7);
+            const base =
+              row >= 9 &&
+              row <= 10 &&
+              dx <= 4 - (row - 9);
+            const sideRangoli =
+              (Math.abs(col - 2) + Math.abs(row - 7) <= 2) ||
+              (Math.abs(col - 12) + Math.abs(row - 7) <= 2);
+            const sparks =
+              row < 5 &&
+              ((col === 3 && row === 2) || (col === 11 && row === 1));
+
+            if (flame || bowl || base || sideRangoli || sparks) {
+              let color = COLORS.gold;
+              let hp = 1;
+
+              if (flame) {
+                color = row <= 1 ? COLORS.white : COLORS.saffron;
+                hp = row === 2 ? 3 : 2;
+              } else if (bowl) {
+                color = (row + col) % 3 === 0 ? COLORS.green : COLORS.rose;
+                hp = row === 7 && dx <= 2 ? 3 : 2;
+              } else if (sideRangoli) {
+                color = (row + col) % 2 ? "#6B55C9" : COLORS.saffron;
+              } else if (sparks) {
+                color = COLORS.white;
+                hp = 2;
+              }
+
+              addBrick(
+                startX + col * (bw + gx),
+                startY + row * (bh + gy),
+                bw,
+                bh,
+                hp,
+                color,
+                flame ? "flame" : "diya"
+              );
+            }
+          }
+        }
+      }
+
+      function initLevel(index) {
+        levelIndex = index;
+        bricks = [];
+        powerUps = [];
+        lasers = [];
+        particles = [];
+        breakCount = 0;
+        combo = 0;
+        comboTimer = 0;
+        serveTimer = 0;
+        resetEffects();
+        paddle.x = W / 2;
+        paddle.w = 122;
+        paddle.targetW = 122;
+        paddle.vx = 0;
+        levels[levelIndex].build();
+        balls = [];
+        createBall(true);
+        updateHUD();
+      }
+
+      function createBall(stuck = false, x = paddle.x, y = paddle.y - 13, angleOffset = 0) {
+        const speed = baseBallSpeed() * (effects.slow > 0 ? 0.75 : 1);
+        const angle = angleOffset || rand(-0.35, 0.35);
+        const ball = {
+          x,
+          y,
+          r: 7.2,
+          vx: Math.sin(angle) * speed,
+          vy: -Math.cos(angle) * speed,
+          stuck,
+          offset: clamp(x - paddle.x, -paddle.w / 2 + 10, paddle.w / 2 - 10),
+          trailTick: 0,
+          hue: Math.random()
+        };
+        balls.push(ball);
+        return ball;
+      }
+
+      function launchBalls() {
+        let launched = false;
+        balls.forEach((ball, index) => {
+          if (!ball.stuck) return;
+          const speed = baseBallSpeed() * (effects.slow > 0 ? 0.75 : 1);
+          const angle = clamp(ball.offset / Math.max(1, paddle.w / 2), -1, 1) * 0.75 +
+            (index - (balls.length - 1) / 2) * 0.08;
+          ball.vx = Math.sin(angle) * speed;
+          ball.vy = -Math.abs(Math.cos(angle) * speed);
+          ball.stuck = false;
+          launched = true;
+        });
+
+        if (launched) {
+          playBell(520, 0.12, 0.09);
+          announce("Ball launched");
+        }
+      }
+
+      function startGame() {
+        ensureAudio();
+        score = 0;
+        lives = 3;
+        gameTime = 0;
+        initLevel(0);
+        state = "playing";
+        hideOverlay();
+        showToast("Level 1 · Marigold Toran", 2.2);
+        playCelebration();
+        canvas.focus();
+        updateHUD();
+      }
+
+      function returnToTitle() {
+        state = "title";
+        score = 0;
+        lives = 3;
+        initLevel(0);
+        showScreen("title");
+      }
+
+      function nextLevel() {
+        if (levelIndex + 1 >= levels.length) {
+          winGame();
+          return;
+        }
+
+        const next = levelIndex + 1;
+        const levelBonus = 750 + lives * 150 + next * 250;
+        addScore(levelBonus);
+        initLevel(next);
+        state = "playing";
+        showToast(`Level ${next + 1} · ${levels[next].name}`, 2.4);
+        announce(`Level ${next + 1}, ${levels[next].name}`);
+        playCelebration();
+      }
+
+      function completeLevel() {
+        if (state !== "playing") return;
+        state = "levelclear";
+        stateTimer = 2.15;
+        makeCelebrationBurst(W / 2, H / 2);
+        playCelebration();
+        showToast("Rangoli complete!", 1.8);
+        announce("Level complete");
+      }
+
+      function loseLife() {
+        lives -= 1;
+        combo = 0;
+        comboTimer = 0;
+        resetEffects();
+        paddle.targetW = 122;
+        playDholak(92, 0.32, 0.2);
+        makePetals(paddle.x, paddle.y, COLORS.rose, reducedMotion ? 6 : 18);
+
+        if (lives <= 0) {
+          endGame();
+        } else {
+          serveTimer = 0.8;
+          showToast(`${lives} ${lives === 1 ? "life" : "lives"} remaining`, 1.3);
+          announce(`${lives} lives remaining`);
+        }
+
+        updateHUD();
+      }
+
+      function endGame() {
+        state = "gameover";
+        if (score > best) {
+          best = score;
+          saveBest();
+        }
+        playGameOver();
+        showScreen("gameover");
+        updateHUD();
+      }
+
+      function winGame() {
+        state = "victory";
+        const victoryBonus = 3000 + lives * 500;
+        addScore(victoryBonus);
+        if (score > best) {
+          best = score;
+          saveBest();
+        }
+        makeCelebrationBurst(W / 2, H / 2);
+        playVictory();
+        showScreen("victory");
+        updateHUD();
+      }
+
+      function pauseGame() {
+        if (state !== "playing" && state !== "levelclear") return;
+        previousState = state;
+        state = "paused";
+        showScreen("paused");
+        pauseButton.textContent = "▶";
+        pauseButton.setAttribute("aria-label", "Resume game");
+        announce("Game paused");
+      }
+
+      function resumeGame() {
+        if (state !== "paused") return;
+        ensureAudio();
+        state = previousState === "levelclear" ? "levelclear" : "playing";
+        hideOverlay();
+        pauseButton.textContent = "Ⅱ";
+        pauseButton.setAttribute("aria-label", "Pause game");
+        lastTime = performance.now();
+        accumulator = 0;
+        canvas.focus();
+        announce("Game resumed");
+      }
+
+      function togglePause() {
+        if (state === "paused") resumeGame();
+        else pauseGame();
+      }
+
+      function hideOverlay() {
+        overlay.classList.add("hidden");
+        secondaryButton.hidden = true;
+      }
+
+      function showScreen(type) {
+        overlay.classList.remove("hidden");
+        secondaryButton.hidden = true;
+        secondaryButton.onclick = returnToTitle;
+
+        if (type === "title") {
+          screenTitle.textContent = "Rangoli Breaker";
+          screenSubtitle.textContent = "A Festival of Light, Rhythm & Color";
+          screenBody.innerHTML =
+            `Break radiant rangoli formations, collect festive powers, and light every diya across five handcrafted celebrations.
+            <div class="instructions">
+              <div class="instruction"><strong>Move</strong>Arrows, A/D, or swipe</div>
+              <div class="instruction"><strong>Launch / Fire</strong>Space, Enter, or tap</div>
+              <div class="instruction"><strong>Pause</strong>P or Escape</div>
+            </div>`;
+          primaryButton.textContent = "Begin Celebration";
+          primaryButton.onclick = startGame;
+        } else if (type === "paused") {
+          screenTitle.textContent = "Celebration Paused";
+          screenSubtitle.textContent = "The lamps are still glowing";
+          screenBody.innerHTML =
+            `Take a breath. Your score is <strong>${formatNumber(score)}</strong> and your rangoli will be waiting.`;
+          primaryButton.textContent = "Resume";
+          primaryButton.onclick = resumeGame;
+          secondaryButton.textContent = "Restart Journey";
+          secondaryButton.hidden = false;
+          secondaryButton.onclick = startGame;
+        } else if (type === "gameover") {
+          screenTitle.textContent = "The Last Diya Fades";
+          screenSubtitle.textContent = `Final Score · ${formatNumber(score)}`;
+          screenBody.innerHTML =
+            `Best score: <strong>${formatNumber(Math.max(best, score))}</strong><br>
+             Return to the courtyard and build a brighter celebration.`;
+          primaryButton.textContent = "Celebrate Again";
+          primaryButton.onclick = startGame;
+          secondaryButton.textContent = "Return to Title";
+          secondaryButton.hidden = false;
+        } else if (type === "victory") {
+          screenTitle.textContent = "Festival of Victory!";
+          screenSubtitle.textContent = `Every light is shining · ${formatNumber(score)} points`;
+          screenBody.innerHTML =
+            `You completed all five festival patterns with <strong>${lives}</strong>
+             ${lives === 1 ? "life" : "lives"} remaining.<br>
+             Best score: <strong>${formatNumber(best)}</strong>`;
+          primaryButton.textContent = "Play the Festival Again";
+          primaryButton.onclick = startGame;
+          secondaryButton.textContent = "Return to Title";
+          secondaryButton.hidden = false;
+        }
+
+        setTimeout(() => primaryButton.focus(), 0);
+      }
+
+      function showToast(message, seconds = 1.5) {
+        toastElement.textContent = message;
+        toastElement.classList.add("show");
+        toastTimer = seconds;
+      }
+
+      function announce(message) {
+        announcer.textContent = "";
+        setTimeout(() => {
+          announcer.textContent = message;
+        }, 20);
+      }
+
+      function addScore(points) {
+        score += Math.max(0, Math.floor(points));
+        if (score > best) {
+          best = score;
+        }
+        updateHUD();
+      }
+
+      function updateHUD() {
+        scoreValue.textContent = formatNumber(score);
+        bestValue.textContent = formatNumber(Math.max(best, score));
+        comboValue.textContent = combo > 1 ? `×${combo}` : "—";
+        levelLabel.textContent = levels[levelIndex]?.name || "Festival Journey";
+        levelValue.textContent = `Level ${levelIndex + 1} / ${levels.length}`;
+        livesValue.textContent = lives > 0 ? "♥ ".repeat(lives).trim() : "—";
+        updatePowerBar();
+      }
+
+      function updatePowerBar() {
+        const active = [];
+        if (effects.extend > 0) active.push(`↔ Wide ${Math.ceil(effects.extend)}s`);
+        if (effects.slow > 0) active.push(`◷ Slow ${Math.ceil(effects.slow)}s`);
+        if (effects.sticky > 0) active.push(`◆ Sticky ${Math.ceil(effects.sticky)}s`);
+        if (effects.laser > 0) active.push(`⚡ Laser ${Math.ceil(effects.laser)}s`);
+        const markup = active.map(item => `<span class="power-chip">${item}</span>`).join("");
+
+        if (markup !== cachedPowerMarkup) {
+          cachedPowerMarkup = markup;
+          powerBar.innerHTML = markup;
+        }
+      }
+
+      function activatePower(type) {
+        const info = powerInfo[type];
+        showToast(info.label, 1.2);
+        announce(`${info.label} power-up`);
+        playPowerCue(type);
+
+        if (type === "multiball") {
+          const sources = balls.length ? [...balls] : [createBall(true)];
+          sources.slice(0, 3).forEach(source => {
+            if (balls.length >= 9) return;
+            const speed = Math.hypot(source.vx, source.vy) || baseBallSpeed();
+            const direction = Math.atan2(source.vy, source.vx);
+            for (const delta of [-0.32, 0.32]) {
+              if (balls.length >= 9) break;
+              const ball = createBall(false, source.x, source.y);
+              ball.vx = Math.cos(direction + delta) * speed;
+              ball.vy = Math.sin(direction + delta) * speed;
+              ball.stuck = source.stuck;
+              ball.offset = source.offset + delta * 25;
+            }
+          });
+        } else if (type === "extend") {
+          effects.extend = Math.max(effects.extend, 14);
+          paddle.targetW = 184;
+        } else if (type === "slow") {
+          if (effects.slow <= 0) {
+            balls.forEach(ball => {
+              ball.vx *= 0.75;
+              ball.vy *= 0.75;
+            });
+          }
+          effects.slow = Math.max(effects.slow, 11);
+        } else if (type === "sticky") {
+          effects.sticky = Math.max(effects.sticky, 14);
+        } else if (type === "laser") {
+          effects.laser = Math.max(effects.laser, 13);
+          laserCooldown = 0;
+        } else if (type === "life") {
+          lives = Math.min(6, lives + 1);
+        }
+
+        updateHUD();
+      }
+
+      function choosePowerType() {
+        const roll = Math.random();
+        if (roll < 0.20) return "multiball";
+        if (roll < 0.39) return "extend";
+        if (roll < 0.56) return "slow";
+        if (roll < 0.72) return "sticky";
+        if (roll < 0.91) return "laser";
+        return "life";
+      }
+
+      function spawnPowerUp(brick) {
+        const type = choosePowerType();
+        powerUps.push({
+          x: brick.x + brick.w / 2,
+          y: brick.y + brick.h / 2,
+          vy: 95,
+          radius: 13,
+          type,
+          angle: 0,
+          alive: true
+        });
+      }
+
+      function fireLasers() {
+        if (effects.laser <= 0 || laserCooldown > 0 || state !== "playing") return;
+        const half = paddle.w * 0.37;
+        lasers.push(
+          { x: paddle.x - half, y: paddle.y - 9, vy: -760, alive: true },
+          { x: paddle.x + half, y: paddle.y - 9, vy: -760, alive: true }
+        );
+        laserCooldown = 0.32;
+        playSpark(0.05);
+      }
+
+      function handleAction() {
+        ensureAudio();
+        if (state === "title" || state === "gameover" || state === "victory") return;
+        if (state === "paused") {
+          resumeGame();
+          return;
+        }
+        if (state !== "playing") return;
+
+        if (balls.some(ball => ball.stuck)) launchBalls();
+        else fireLasers();
+      }
+
+      function update(dt) {
+        gameTime += dt;
+
+        if (toastTimer > 0) {
+          toastTimer -= dt;
+          if (toastTimer <= 0) toastElement.classList.remove("show");
+        }
+
+        if (state === "levelclear") {
+          updateParticles(dt);
+          stateTimer -= dt;
+          if (stateTimer <= 0) nextLevel();
+          return;
+        }
+
+        if (state !== "playing") {
+          updateParticles(dt);
+          return;
+        }
+
+        updatePaddle(dt);
+        updateEffects(dt);
+        updateBalls(dt);
+        updateLasers(dt);
+        updatePowerUps(dt);
+        updateParticles(dt);
+
+        if (serveTimer > 0 && balls.length === 0) {
+          serveTimer -= dt;
+          if (serveTimer <= 0) createBall(true);
+        }
+
+        if (comboTimer > 0) {
+          comboTimer -= dt;
+          if (comboTimer <= 0) {
+            combo = 0;
+            updateHUD();
+          }
+        }
+
+        shake = Math.max(0, shake - dt * 18);
+
+        if (bricks.length && bricks.every(brick => !brick.alive)) {
+          completeLevel();
+        }
+      }
+
+      function updatePaddle(dt) {
+        const previousX = paddle.x;
+        let direction = 0;
+
+        if (keys.ArrowLeft || keys.KeyA) direction -= 1;
+        if (keys.ArrowRight || keys.KeyD) direction += 1;
+
+        if (pointerActive && pointerTarget !== null) {
+          const distance = pointerTarget - paddle.x;
+          paddle.x += distance * Math.min(1, dt * 19);
+        } else if (direction !== 0) {
+          paddle.x += direction * 620 * dt;
+        }
+
+        paddle.w = lerp(paddle.w, paddle.targetW, Math.min(1, dt * 9));
+        paddle.x = clamp(paddle.x, paddle.w / 2 + 18, W - paddle.w / 2 - 18);
+        paddle.vx = clamp((paddle.x - previousX) / Math.max(dt, 0.001), -1050, 1050);
+
+        balls.forEach(ball => {
+          if (ball.stuck) {
+            ball.offset = clamp(ball.offset, -paddle.w / 2 + ball.r + 4, paddle.w / 2 - ball.r - 4);
+            ball.x = paddle.x + ball.offset;
+            ball.y = paddle.y - ball.r - 3;
+          }
+        });
+      }
+
+      function updateEffects(dt) {
+        for (const name of ["extend", "slow", "sticky", "laser"]) {
+          if (effects[name] > 0) {
+            effects[name] = Math.max(0, effects[name] - dt);
+          }
+        }
+
+        if (effects.extend <= 0) paddle.targetW = 122;
+
+        if (effects.slow > 0 && effects.slow <= dt) {
+          balls.forEach(ball => {
+            if (!ball.stuck) {
+              ball.vx /= 0.75;
+              ball.vy /= 0.75;
+              normalizeBallSpeed(ball);
+            }
+          });
+        }
+
+        if (effects.laser > 0) {
+          laserCooldown -= dt;
+          if (laserCooldown <= 0) fireLasers();
+        } else {
+          laserCooldown = Math.max(0, laserCooldown - dt);
+        }
+
+        updatePowerBar();
+      }
+
+      function normalizeBallSpeed(ball) {
+        const speed = Math.hypot(ball.vx, ball.vy);
+        if (!speed) return;
+        const minSpeed = effects.slow > 0 ? baseBallSpeed() * 0.7 : baseBallSpeed() * 0.92;
+        const maxSpeed = effects.slow > 0 ? 445 : 590;
+        const desired = clamp(speed, minSpeed, maxSpeed);
+        ball.vx = ball.vx / speed * desired;
+        ball.vy = ball.vy / speed * desired;
+
+        if (Math.abs(ball.vy) < 105) {
+          const sign = ball.vy < 0 ? -1 : 1;
+          ball.vy = sign * 105;
+          const remaining = Math.sqrt(Math.max(1, desired * desired - ball.vy *

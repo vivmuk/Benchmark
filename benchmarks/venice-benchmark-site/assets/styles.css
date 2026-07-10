@@ -4,18 +4,20 @@
  * ============================================ */
 
 :root {
-  --bg: #F7F5F1;
+  --bg: #FFF9ED;
   --surface: #FFFFFF;
-  --surface-2: #F0EDE7;
+  --surface-2: #FFF0CD;
   --text: #12121A;
   --text-dim: rgba(18, 18, 26, 0.64);
   --text-faint: rgba(18, 18, 26, 0.42);
   --rule: rgba(18, 18, 26, 0.10);
   --rule-strong: rgba(18, 18, 26, 0.16);
-  --cobalt: #0057E6;
+  --cobalt: #2563EB;
   --magenta: #E11D74;
-  --acid: #8B9A00;
-  --acid-soft: rgba(139, 154, 0, 0.12);
+  --acid: #84A800;
+  --orange: #F97316;
+  --cyan: #0891B2;
+  --acid-soft: rgba(132, 168, 0, 0.14);
 
   /* legacy aliases used across markup */
   --ink: var(--bg);
@@ -723,6 +725,45 @@ code, pre {
   border-radius: 14px;
   background: var(--surface);
   box-shadow: var(--shadow);
+}
+
+.chart-card-wide {
+  margin-top: 1.4rem;
+}
+
+.data-note {
+  display: flex;
+  align-items: baseline;
+  gap: .65rem;
+  margin: 0 0 1.5rem;
+  padding: .82rem 1rem;
+  border: 1px solid rgba(18, 18, 26, .12);
+  border-left: 3px solid var(--magenta);
+  border-radius: .5rem;
+  background: rgba(255, 255, 255, .55);
+  color: var(--ink-2);
+  font-size: .86rem;
+  line-height: 1.5;
+}
+
+.data-note strong { color: var(--ink); white-space: nowrap; }
+
+@media (max-width: 600px) {
+  .data-note { align-items: flex-start; flex-direction: column; gap: .2rem; }
+}
+
+.chart-note {
+  margin: -0.25rem 0 1rem;
+  color: var(--text-dim);
+  font-size: 0.92rem;
+}
+
+.chart-wrap-xl {
+  height: 480px;
+}
+
+@media (max-width: 700px) {
+  .chart-wrap-xl { height: 580px; }
 }
 
 .chart-card h3 {

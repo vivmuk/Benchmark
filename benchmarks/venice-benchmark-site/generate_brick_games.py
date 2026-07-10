@@ -1,142 +1,64 @@
 #!/usr/bin/env python3
+"""Generate and record the standalone Arcade game for every canonical model.
+
+Dry-run validates roster/prompt wiring only. --run-real spends API credits. The
+manifest is intentionally a record of model output, never a hand-edited game.
 """
-Generate one Brick Breaker game per model — identical prompt, identical settings.
-
-Usage:
-    VENICE_INFERENCE_KEY=... python3 generate_brick_games.py            # all models
-    VENICE_INFERENCE_KEY=... python3 generate_brick_games.py model-id   # one model
-
-Output: games/<model_id>.html + games/manifest.json
-"""
-
-import json
-import os
-import re
-import sys
-import time
+from __future__ import annotations
+import argparse, json, os, re, time
+from datetime import datetime, timezone
 from pathlib import Path
-
 import requests
+from model_registry import MODELS
 
 API_URL = "https://api.venice.ai/api/v1/chat/completions"
-API_KEY = os.environ.get("VENICE_INFERENCE_KEY", "")
+PROMPT_PATH = Path("prompts/brick_breaker_maximum.md")
+OUTPUT_DIR = Path("arcade")
+MANIFEST_PATH = Path("data/brick_arcade.json")
+TEMPERATURE, SAFETY_MAX_TOKENS, TIMEOUT = 0.5, 32768, 600
 
-GAMES_DIR = Path("games")
-MANIFEST_PATH = GAMES_DIR / "manifest.json"
-
-MODELS = [
-    {"id": "openai-gpt-55",      "display": "GPT-5.5"},
-    {"id": "claude-fable-5",     "display": "Fable 5"},
-    {"id": "claude-opus-4-8",    "display": "Opus 4.8"},
-    {"id": "zai-org-glm-5-2",    "display": "GLM 5.2"},
-    {"id": "deepseek-v4-pro",    "display": "DeepSeek V4"},
-    {"id": "minimax-m3-preview", "display": "MiniMax M3"},
-    {"id": "grok-4-5",           "display": "Grok 4.5"},
-]
-
-# EXACT same prompt as the brick_breaker_realism benchmark (data/results.json)
-PROMPT = (
-    "Create a single self-contained HTML file for a realistic Brick Breaker "
-    "game with Canvas. Include: ball physics with angle reflection, paddle "
-    "with mouse/keyboard/touch controls, brick grid with collision detection, "
-    "score/lives/level, start/game-over/victory screens, particle effects on "
-    "brick break, synthesized sound effects with Web Audio API, responsive "
-    "design, dark neon aesthetic."
-)
-
-MAX_TOKENS = 16384
-TEMPERATURE = 0.5
-TIMEOUT = 600
-
+def prompt() -> str:
+    raw = PROMPT_PATH.read_text(encoding="utf-8")
+    match = re.search(r"```text\n(.*?)```", raw, re.S)
+    if not match: raise ValueError("No model-facing ```text block in Arcade prompt")
+    return match.group(1).strip()
 
 def extract_html(text: str) -> str | None:
-    """Pull a complete HTML document out of a model response."""
-    m = re.search(r"```html\s*(.*?)```", text, re.DOTALL | re.IGNORECASE)
-    candidate = m.group(1).strip() if m else text.strip()
-    if "<html" not in candidate.lower():
-        m2 = re.search(r"<!DOCTYPE html.*", text, re.DOTALL | re.IGNORECASE)
-        if m2:
-            candidate = m2.group(0)
-            fence_end = candidate.find("```")
-            if fence_end != -1:
-                candidate = candidate[:fence_end]
-    low = candidate.lower()
-    if "<html" in low and "</html>" in low:
-        return candidate[: low.rfind("</html>") + len("</html>")]
-    return None
+    start = re.search(r"<!doctype html\b|<html\b", text, re.I)
+    if not start: return None
+    end = text.lower().rfind("</html>")
+    return text[start.start():end + 7] if end >= start.start() else None
 
+def validate_html(html: str | None) -> dict:
+    if not html: return {"passed": False, "checks": ["complete_html_document"], "error": "No complete HTML document extracted"}
+    checks = {"complete_html_document": "</html>" in html.lower(), "canvas": "<canvas" in html.lower(), "game_loop": "requestanimationframe" in html.lower(), "no_remote_urls": not bool(re.search(r"https?://|//[^/]+", html))}
+    return {"passed": all(checks.values()), "checks": checks, "error": None}
 
-def generate(model: dict) -> dict:
-    print(f"→ {model['display']} ({model['id']}) ...", flush=True)
-    t0 = time.time()
-    entry = {
-        "model_id": model["id"],
-        "display": model["display"],
-        "prompt": PROMPT,
-        "max_tokens": MAX_TOKENS,
-        "temperature": TEMPERATURE,
-        "status": "error",
-        "file": None,
-        "chars": 0,
-        "latency_s": None,
-        "completion_tokens": None,
-        "error": None,
-    }
-    try:
-        resp = requests.post(
-            API_URL,
-            headers={"Authorization": f"Bearer {API_KEY}"},
-            json={
-                "model": model["id"],
-                "messages": [{"role": "user", "content": PROMPT}],
-                "max_tokens": MAX_TOKENS,
-                "temperature": TEMPERATURE,
-            },
-            timeout=TIMEOUT,
-        )
-        entry["latency_s"] = round(time.time() - t0, 1)
-        if resp.status_code != 200:
-            entry["error"] = f"HTTP {resp.status_code}: {resp.text[:200]}"
-            print(f"  ✗ {entry['error']}")
-            return entry
-        data = resp.json()
-        text = data["choices"][0]["message"]["content"] or ""
-        usage = data.get("usage", {})
-        entry["completion_tokens"] = usage.get("completion_tokens")
-        html = extract_html(text)
-        if not html:
-            entry["error"] = f"no complete HTML document in response ({len(text)} chars)"
-            (GAMES_DIR / f"{model['id']}.raw.txt").write_text(text)
-            print(f"  ✗ {entry['error']} — raw saved")
-            return entry
-        out = GAMES_DIR / f"{model['id']}.html"
-        out.write_text(html)
-        entry.update(status="ok", file=out.name, chars=len(html))
-        print(f"  ✓ {out.name} ({len(html):,} chars, {entry['latency_s']}s)")
-    except Exception as e:  # noqa: BLE001
-        entry["error"] = str(e)[:300]
-        entry["latency_s"] = round(time.time() - t0, 1)
-        print(f"  ✗ {entry['error']}")
-    return entry
+def call(model_id: str, text: str, max_tokens: int) -> tuple[dict, str]:
+    key=os.environ.get("VENICE_INFERENCE_KEY")
+    if not key: raise RuntimeError("Set VENICE_INFERENCE_KEY for --run-real")
+    at=time.time(); response=requests.post(API_URL,headers={"Authorization":f"Bearer {key}","Content-Type":"application/json"},json={"model":model_id,"messages":[{"role":"user","content":text}],"max_tokens":max_tokens,"temperature":TEMPERATURE},timeout=TIMEOUT)
+    if response.status_code != 200: return ({"status":"error","latency":round(time.time()-at,2),"error":response.text[:400]}, "")
+    data=response.json(); out=((data.get("choices") or [{}])[0].get("message") or {}).get("content") or ""; usage=data.get("usage") or {}
+    return ({"status":"ok","latency":round(time.time()-at,2),"prompt_tokens":usage.get("prompt_tokens",0),"completion_tokens":usage.get("completion_tokens",0),"total_tokens":usage.get("total_tokens",0)},out)
 
-
-def main():
-    if not API_KEY:
-        sys.exit("Set VENICE_INFERENCE_KEY")
-    GAMES_DIR.mkdir(exist_ok=True)
-    only = sys.argv[1] if len(sys.argv) > 1 else None
-    manifest = {}
-    if MANIFEST_PATH.exists():
-        manifest = json.loads(MANIFEST_PATH.read_text())
-    for model in MODELS:
-        if only and model["id"] != only:
-            continue
-        manifest[model["id"]] = generate(model)
-        MANIFEST_PATH.write_text(json.dumps(manifest, indent=2))
-        time.sleep(1)
-    ok = [m for m in manifest.values() if m["status"] == "ok"]
-    print(f"\n{len(ok)}/{len(manifest)} games generated. Manifest: {MANIFEST_PATH}")
-
-
-if __name__ == "__main__":
-    main()
+def main() -> None:
+    parser=argparse.ArgumentParser(); parser.add_argument("--run-real",action="store_true"); parser.add_argument("--model"); args=parser.parse_args()
+    selected=[m for m in MODELS if not args.model or args.model in (m["id"],m["display"])]
+    if not selected: raise SystemExit("Unknown model")
+    text=prompt(); OUTPUT_DIR.mkdir(exist_ok=True); results=[]
+    for model in selected:
+        entry={"model_id":model["id"],"display":model["display"],"max_tokens":SAFETY_MAX_TOKENS,"temperature":TEMPERATURE,"html":None,"raw_chars":0,"browser_validation":{"passed":False,"checks":{},"error":"Not generated"}}
+        if not args.run_real:
+            entry.update(status="not_run",note="Dry run: no model invocation.")
+        else:
+            status,raw=call(model["id"],text,SAFETY_MAX_TOKENS); entry.update(status); entry["raw_chars"]=len(raw)
+            html=extract_html(raw); validation=validate_html(html); entry["browser_validation"]=validation
+            if html:
+                path=OUTPUT_DIR/f'{model["id"]}-brick.html'; path.write_text(html,encoding="utf-8"); entry["html"]=str(path)
+            else: (OUTPUT_DIR/f'{model["id"]}-brick.raw.txt').write_text(raw,encoding="utf-8")
+        results.append(entry); print(model["display"],entry["status"])
+        if args.run_real: time.sleep(1)
+    payload={"generated_at":datetime.now(timezone.utc).isoformat(),"dry_run":not args.run_real,"prompt_file":str(PROMPT_PATH),"max_tokens":SAFETY_MAX_TOKENS,"models":MODELS,"results":results,"protocol":"Canonical roster; per-model maximum practical allowance up to the recorded safety ceiling. Browser validation must be completed before publishing a game as playable."}
+    MANIFEST_PATH.write_text(json.dumps(payload,indent=2)+"\n",encoding="utf-8")
+if __name__ == "__main__": main()

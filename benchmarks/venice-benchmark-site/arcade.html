@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/styles.css?v=2" />
+  <link rel="stylesheet" href="assets/styles.css?v=4" />
 </head>
 <body class="arcade-page">
   <nav class="navbar vt-nav">
@@ -30,7 +30,7 @@
     <div class="container hero-content">
       <span class="eyebrow">Arcade</span>
       <h1>One prompt. <em id="arcadeModelCount">Multiple</em> models. Play the outputs.</h1>
-      <p>Each model got the identical Arcade Maximum prompt, temperature 0.5, and a 16,384-token budget. No edits, no retries. What you play is exactly what extracted cleanly from the response.</p>
+      <p>Each model got the identical Arcade Maximum prompt and temperature 0.5. Each uses its model’s practical output allowance, recorded on the card. No output is hand-edited; browser validation status is reported alongside the game.</p>
       <div class="hero-actions">
         <a href="#showcase" class="btn btn-primary">Show lineup</a>
         <a href="experimental-design.html#arcade-design" class="btn btn-ghost">Read the prompt</a>
@@ -87,7 +87,7 @@
     </div>
   </footer>
 
-  <script src="assets/app.js?v=2"></script>
+  <script src="assets/app.js?v=4"></script>
   <script>
     (() => {
       "use strict";
@@ -152,6 +152,8 @@
           <div class="score-bar" style="--score:${Math.max(0, Math.min(100, slot.score || 0))}%"></div>
           ${openLink}
           <p style="margin:0;font:500 0.78rem Geist Mono, monospace;color:var(--text-dim)">${note}</p>
+          <p style="margin:0;font:500 0.72rem Geist Mono, monospace;color:var(--text-faint)">validation: ${escapeHtml((slot.browser_validation && (slot.browser_validation.status || slot.browser_validation.note)) || "not recorded")}</p>
+          <p style="margin:0;font:500 0.72rem Geist Mono, monospace;color:var(--text-faint)">validation: ${escapeHtml((slot.browser_validation && (slot.browser_validation.status || slot.browser_validation.note)) || "not recorded")}</p>
         `;
         return card;
       }
@@ -183,7 +185,7 @@
           if (modelCountEl) modelCountEl.textContent = String(slots.length);
           if (metaSummary) {
             metaSummary.innerHTML = `
-              max_tokens=<strong>${fmtInt(maxTokens)}</strong> · temperature=<strong>0.5</strong> ·
+              maximum output allowance=<strong>${fmtInt(maxTokens)}</strong> · temperature=<strong>0.5</strong> ·
               models in run=<strong>${slots.length}</strong> · playable extractions=<strong>${playable}</strong>.
               ${json.prompt_file ? ` Prompt source: <code>${escapeHtml(json.prompt_file)}</code>.` : ""}
             `;

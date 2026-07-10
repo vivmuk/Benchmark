@@ -1,0 +1,191 @@
+{
+  "fixture_version": "1.0.0",
+  "benchmark_id": "pharma_drug_interaction",
+  "description": "Synthetic patient medication lists with known drug-drug interactions for benchmark evaluation. All pairs are well-documented in public reference sources.",
+  "cases": [
+    {
+      "case_id": "ddi_case_001",
+      "title": "Anticoagulant + NSAID bleeding risk",
+      "medication_list": [
+        {"drug": "warfarin", "dose": "5 mg", "frequency": "once daily", "indication": "atrial fibrillation"},
+        {"drug": "ibuprofen", "dose": "400 mg", "frequency": "three times daily as needed", "indication": "osteoarthritis pain"},
+        {"drug": "lisinopril", "dose": "10 mg", "frequency": "once daily", "indication": "hypertension"}
+      ],
+      "expected_interactions": [
+        {
+          "pair": ["warfarin", "ibuprofen"],
+          "severity": "major",
+          "mechanism_summary": "Pharmacodynamic synergy: NSAIDs inhibit platelet aggregation and can damage gastric mucosa, while warfarin impairs coagulation. Combined effect significantly increases bleeding risk. NSAIDs may also displace warfarin from protein binding sites (pharmacokinetic component).",
+          "reference_notes": "FDA DDI Table; DrugBank DB00682 (warfarin) interactions; standard clinical pharmacology textbooks (e.g., Goodman & Gilman's)"
+        }
+      ],
+      "no_interaction_expected": [
+        ["lisinopril", "warfarin"],
+        ["lisinopril", "ibuprofen"]
+      ],
+      "validation_hints": {
+        "must_detect_pairs": [["warfarin", "ibuprofen"]],
+        "must_not_detect_pairs": [["lisinopril", "warfarin"]],
+        "required_mechanism_terms": ["bleeding", "platelet", "protein binding", "gastric", "pharmacodynamic", "synerg"],
+        "required_severity_for_pair": {"warfarin_ibuprofen": "major"}
+      }
+    },
+    {
+      "case_id": "ddi_case_002",
+      "title": "Statin + CYP3A4 inhibitor rhabdomyolysis risk",
+      "medication_list": [
+        {"drug": "simvastatin", "dose": "40 mg", "frequency": "once daily at bedtime", "indication": "hypercholesterolemia"},
+        {"drug": "clarithromycin", "dose": "500 mg", "frequency": "twice daily", "indication": "community-acquired pneumonia"},
+        {"drug": "metformin", "dose": "1000 mg", "frequency": "twice daily", "indication": "type 2 diabetes"}
+      ],
+      "expected_interactions": [
+        {
+          "pair": ["simvastatin", "clarithromycin"],
+          "severity": "major",
+          "mechanism_summary": "Pharmacokinetic: Clarithromycin is a strong CYP3A4 inhibitor. Simvastatin is a CYP3A4 substrate. Co-administration significantly increases simvastatin plasma concentrations, raising risk of myopathy and rhabdomyolysis. FDA recommends avoiding this combination or limiting simvastatin dose.",
+          "reference_notes": "FDA DDI Table (CYP3A4 substrates/inhibitors); DrugBank DB00603 (simvastatin) metabolism; FDA Safety Communication on simvastatin dose limits"
+        }
+      ],
+      "no_interaction_expected": [
+        ["metformin", "simvastatin"],
+        ["metformin", "clarithromycin"]
+      ],
+      "validation_hints": {
+        "must_detect_pairs": [["simvastatin", "clarithromycin"]],
+        "must_not_detect_pairs": [["metformin", "simvastatin"]],
+        "required_mechanism_terms": ["cyp3a4", "inhibitor", "substrate", "rhabdomyolysis", "myopathy", "pharmacokinetic"],
+        "required_severity_for_pair": {"simvastatin_clarithromycin": "major"}
+      }
+    },
+    {
+      "case_id": "ddi_case_003",
+      "title": "SSRI + triptan serotonin syndrome risk",
+      "medication_list": [
+        {"drug": "sertraline", "dose": "100 mg", "frequency": "once daily", "indication": "major depressive disorder"},
+        {"drug": "sumatriptan", "dose": "50 mg", "frequency": "as needed for migraine", "indication": "acute migraine"},
+        {"drug": "omeprazole", "dose": "20 mg", "frequency": "once daily", "indication": "GERD"}
+      ],
+      "expected_interactions": [
+        {
+          "pair": ["sertraline", "sumatriptan"],
+          "severity": "moderate",
+          "mechanism_summary": "Pharmacodynamic: Both sertraline (SSRI) and sumatriptan (5-HT1B/1D agonist) increase serotonergic activity. Combined use may increase risk of serotonin syndrome, though clinical incidence is low. FDA issued a Drug Safety Communication (2016) noting this class-level concern.",
+          "reference_notes": "FDA Drug Safety Communication 2016 on triptans + SSRIs/SNRIs; DrugBank DB00215 (sertraline) interactions; ICH E2A pharmacovigilance reporting"
+        }
+      ],
+      "no_interaction_expected": [
+        ["omeprazole", "sertraline"],
+        ["omeprazole", "sumatriptan"]
+      ],
+      "validation_hints": {
+        "must_detect_pairs": [["sertraline", "sumatriptan"]],
+        "must_not_detect_pairs": [["omeprazole", "sertraline"]],
+        "required_mechanism_terms": ["serotonin", "serotonergic", "pharmacodynamic", "serotonin syndrome", "ssri", "5-ht"],
+        "required_severity_for_pair": {"sertraline_sumatriptan": "moderate"}
+      }
+    },
+    {
+      "case_id": "ddi_case_004",
+      "title": "QT prolongation polypharmacy",
+      "medication_list": [
+        {"drug": "citalopram", "dose": "40 mg", "frequency": "once daily", "indication": "generalized anxiety disorder"},
+        {"drug": "ondansetron", "dose": "8 mg", "frequency": "twice daily as needed", "indication": "chemotherapy-induced nausea"},
+        {"drug": "azithromycin", "dose": "500 mg", "frequency": "once daily x 3 days", "indication": "respiratory infection"},
+        {"drug": "acetaminophen", "dose": "650 mg", "frequency": "every 6 hours as needed", "indication": "fever"}
+      ],
+      "expected_interactions": [
+        {
+          "pair": ["citalopram", "ondansetron"],
+          "severity": "major",
+          "mechanism_summary": "Pharmacodynamic additive QT prolongation. Both citalopram and ondansetron independently prolong the QT interval. Combined use increases risk of torsades de pointes. FDA has issued warnings for both drugs regarding QT prolongation.",
+          "reference_notes": "FDA citalopram safety communication (max dose 40mg, 20mg in elderly due to QT); FDA ondansetron labeling QT warning; CredibleMeds QTDrugs list"
+        },
+        {
+          "pair": ["citalopram", "azithromycin"],
+          "severity": "major",
+          "mechanism_summary": "Pharmacodynamic additive QT prolongation. Azithromycin is a known QT-prolonging macrolide antibiotic. Combined with citalopram (which has dose-dependent QT effects), risk of serious ventricular arrhythmia increases.",
+          "reference_notes": "FDA azithromycin safety warning (2013) on cardiovascular risk; FDA citalopram QT warning; CredibleMeds QTDrugs list"
+        },
+        {
+          "pair": ["ondansetron", "azithromycin"],
+          "severity": "moderate",
+          "mechanism_summary": "Pharmacodynamic additive QT prolongation. Both agents independently prolong QT interval. Combined use warrants monitoring, especially in patients with additional risk factors.",
+          "reference_notes": "CredibleMeds QTDrugs list; individual drug labeling"
+        }
+      ],
+      "no_interaction_expected": [
+        ["acetaminophen", "citalopram"],
+        ["acetaminophen", "ondansetron"],
+        ["acetaminophen", "azithromycin"]
+      ],
+      "validation_hints": {
+        "must_detect_pairs": [["citalopram", "ondansetron"], ["citalopram", "azithromycin"]],
+        "should_detect_pairs": [["ondansetron", "azithromycin"]],
+        "must_not_detect_pairs": [["acetaminophen", "citalopram"], ["acetaminophen", "ondansetron"]],
+        "required_mechanism_terms": ["qt prolongation", "qt interval", "torsades", "arrhythmia", "pharmacodynamic", "additive"],
+        "required_severity_for_pair": {
+          "citalopram_ondansetron": "major",
+          "citalopram_azithromycin": "major",
+          "ondansetron_azithromycin": "moderate"
+        }
+      }
+    },
+    {
+      "case_id": "ddi_case_005",
+      "title": "Absorption chelation interaction",
+      "medication_list": [
+        {"drug": "ciprofloxacin", "dose": "500 mg", "frequency": "twice daily", "indication": "urinary tract infection"},
+        {"drug": "calcium carbonate", "dose": "600 mg", "frequency": "twice daily", "indication": "calcium supplementation"},
+        {"drug": "levothyroxine", "dose": "75 mcg", "frequency": "once daily on empty stomach", "indication": "hypothyroidism"}
+      ],
+      "expected_interactions": [
+        {
+          "pair": ["ciprofloxacin", "calcium carbonate"],
+          "severity": "moderate",
+          "mechanism_summary": "Pharmacokinetic: Divalent cations (Ca2+) chelate fluoroquinolones including ciprofloxacin, forming insoluble complexes that reduce oral absorption. Administration should be separated by at least 2 hours.",
+          "reference_notes": "FDA ciprofloxacin labeling; DrugBank DB00537 (ciprofloxacin) absorption interactions; standard pharmacology references"
+        },
+        {
+          "pair": ["levothyroxine", "calcium carbonate"],
+          "severity": "moderate",
+          "mechanism_summary": "Pharmacokinetic: Calcium carbonate binds levothyroxine in the GI tract, reducing its absorption. Administration should be separated by at least 4 hours.",
+          "reference_notes": "FDA levothyroxine labeling; DrugBank DB00451 (levothyroxine) absorption interactions"
+        },
+        {
+          "pair": ["ciprofloxacin", "levothyroxine"],
+          "severity": "minor",
+          "mechanism_summary": "Possible reduced levothyroxine absorption when co-administered with fluoroquinolones. Mechanism not fully characterized; separation of dosing recommended.",
+          "reference_notes": "DrugBank interaction data; clinical case reports"
+        }
+      ],
+      "no_interaction_expected": [],
+      "validation_hints": {
+        "must_detect_pairs": [["ciprofloxacin", "calcium carbonate"], ["levothyroxine", "calcium carbonate"]],
+        "should_detect_pairs": [["ciprofloxacin", "levothyroxine"]],
+        "must_not_detect_pairs": [],
+        "required_mechanism_terms": ["chelation", "absorption", "divalent", "calcium", "pharmacokinetic", "insoluble", "complex"],
+        "required_severity_for_pair": {
+          "ciprofloxacin_calcium_carbonate": "moderate",
+          "levothyroxine_calcium_carbonate": "moderate"
+        }
+      }
+    }
+  ],
+  "scoring_guide": {
+    "per_case_max": 100,
+    "aggregate_method": "mean",
+    "detection_scoring": {
+      "true_positive": 10,
+      "false_negative": -8,
+      "false_positive": -5,
+      "true_negative": 5
+    },
+    "quality_scoring": {
+      "severity_match": 5,
+      "mechanism_keyword_hit": 3,
+      "mechanism_completeness": 5,
+      "clinical_action_present": 3,
+      "uncertainty_acknowledged_when_appropriate": 2
+    }
+  }
+}

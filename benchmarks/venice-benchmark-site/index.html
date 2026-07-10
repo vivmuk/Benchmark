@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="BenchmarkViv. Long-horizon AI benchmarks for Venice API models. Intent understanding, one-shot UI generation, agentic tasks, and interactive game generation." />
+  <meta name="description" content="BenchmarkViv. Instructional AI benchmarks for Venice API models: intent, interface generation, execution planning, and interactive game generation." />
   <title>BenchmarkViv</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/styles.css?v=2" />
+  <link rel="stylesheet" href="assets/styles.css?v=4" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <script>
     (function(){
@@ -44,10 +44,10 @@
     <div class="hero-backdrop"></div>
     <div class="container hero-content">
       <span class="eyebrow">Venice API Evaluation</span>
-      <h1>Long-horizon benchmarks for <em>frontier models</em></h1>
-      <p>Independent, repeatable evaluations on the tasks that actually matter. Understanding intent, shipping interfaces in one shot, staying coherent across long agentic runs, and generating playable interactive experiences.</p>
+      <h1>Find the right model for the <em>work in front of you</em></h1>
+      <p>Four practical evaluations, clear visual comparisons, and an Arcade where you can play what the models actually made.</p>
       <div class="hero-actions">
-        <a href="#leaderboard" class="btn btn-primary">Explore Leaderboard</a>
+        <a href="#leaderboard" class="btn btn-primary">Explore the data</a>
         <a href="experimental-design.html" class="btn btn-ghost">Experimental Design</a>
       </div>
       <p class="data-status" id="dataStatus">Loading benchmark data</p>
@@ -66,8 +66,8 @@
           <div class="stat-label">Benchmark tracks</div>
         </div>
         <div class="stat">
-          <div class="stat-value" id="statRuns">65</div>
-          <div class="stat-label">Total evaluation runs</div>
+          <div class="stat-value" id="statRuns">64/65</div>
+          <div class="stat-label">Scored evaluation runs</div>
         </div>
         <div class="stat">
           <div class="stat-value"><span id="statTopScore">-</span><span class="accent">.</span></div>
@@ -85,7 +85,7 @@
     <div class="container">
       <div class="section-head">
         <h2>VivIndex. One number per model.</h2>
-        <p>A weighted composite across all four tracks. Long-Horizon Agentic 30%, Intent Understanding 25%, One-Shot UI 25%, Brick Breaker Realism 20%. Higher is better.</p>
+        <p>A transparent weighted composite across four tracks: Startup in a Weekend 35%, Intent Understanding 25%, One-Shot UI 20%, and Brick Breaker Realism 20%. Higher is better. Use the charts below to see where one number hides a trade-off.</p>
       </div>
       <div class="charts-grid">
         <div class="chart-card">
@@ -99,8 +99,8 @@
   <section id="tracks">
     <div class="container">
       <div class="section-head">
-        <h2>Four evaluation dimensions</h2>
-        <p>Each benchmark isolates a different failure mode that separates demo-quality models from production-ready systems.</p>
+        <h2>Four useful evaluation dimensions</h2>
+        <p>Every lane explains what is tested, why it matters, and what a strong result looks like.</p>
       </div>
       <div class="bench-grid">
         <article class="bench-card reveal">
@@ -125,22 +125,22 @@
         </article>
         <article class="bench-card reveal">
           <div class="bench-icon acid">03</div>
-          <h3>Long-Horizon Agentic Task</h3>
-          <p>Multi-step tool-calling loops spanning 50+ steps. Scored on goal completion, loop avoidance, error recovery, and coherence.</p>
-          <div class="bench-tags">
-            <span>Tool use</span>
-            <span>Recovery</span>
-            <span>50+ steps</span>
-          </div>
-        </article>
-        <article class="bench-card reveal">
-          <div class="bench-icon">04</div>
           <h3>Brick Breaker Realism</h3>
           <p>Generate a fully playable brick breaker game in one shot. Scored on physics accuracy, controls, collision resolution, particles, sound, and responsiveness.</p>
           <div class="bench-tags">
             <span>Physics</span>
             <span>Game dev</span>
             <span>One-shot</span>
+          </div>
+        </article>
+        <article class="bench-card reveal">
+          <div class="bench-icon magenta">04</div>
+          <h3>Startup in a Weekend</h3>
+          <p>Turn a constrained SaaS brief into an execution-ready MVP plan. Scored on architecture, scope control, delivery sequence, and risk awareness.</p>
+          <div class="bench-tags">
+            <span>Architecture</span>
+            <span>Planning</span>
+            <span>Trade-offs</span>
           </div>
         </article>
       </div>
@@ -164,8 +164,12 @@
     <div class="container">
       <div class="section-head">
         <h2>Model performance &amp; cost</h2>
-        <p>Composite scores across all four tracks. Filter, sort, and compare cost per run.</p>
+        <p>Data stays visible: compare performance, price, latency, and every benchmark lane without a dense leaderboard table.</p>
       </div>
+
+      <aside class="data-note" id="dataNote" role="status">
+        <strong>Data completeness</strong><span>Loading run status…</span>
+      </aside>
 
       <div class="charts-grid">
         <div class="chart-card reveal">
@@ -178,32 +182,10 @@
         </div>
       </div>
 
-      <div class="table-controls">
-        <input type="search" id="tableSearch" class="table-search" placeholder="Filter models" aria-label="Filter models" />
-        <div class="filter-chips" id="benchmarkFilters">
-          <button class="filter-chip is-active" data-filter="all">All</button>
-          <button class="filter-chip" data-filter="intent-understanding">Intent</button>
-          <button class="filter-chip" data-filter="one-shot-ui">UI Gen</button>
-          <button class="filter-chip" data-filter="long-horizon-agent">Agentic</button>
-          <button class="filter-chip" data-filter="brick-breaker-realism">Brick</button>
-        </div>
-      </div>
-
-      <div class="table-wrap reveal">
-        <table id="leaderboardTable">
-          <thead>
-            <tr>
-              <th data-sort="rank">#</th>
-              <th data-sort="model">Model</th>
-              <th data-sort="benchmark">Benchmark</th>
-              <th data-sort="score">Score</th>
-              <th data-sort="latency">Latency</th>
-              <th data-sort="tokens">Tokens</th>
-              <th data-sort="cost">Cost</th>
-            </tr>
-          </thead>
-          <tbody id="leaderboardBody"></tbody>
-        </table>
+      <div class="chart-card chart-card-wide reveal">
+        <h3>Score by benchmark track</h3>
+        <p class="chart-note">A grouped view makes strengths and failure modes visible without a dense results table.</p>
+        <div class="chart-wrap chart-wrap-xl"><canvas id="benchmarkChart"></canvas></div>
       </div>
     </div>
   </section>
@@ -253,20 +235,20 @@
           <p>Models must emit a single self-contained HTML file. Scored on visual polish, semantic structure, accessibility, responsiveness, and whether it runs without edits.</p>
         </article>
         <article class="method-card reveal">
-          <h3>3 · Long-Horizon Agentic Task</h3>
-          <p>Models plan and outline a multi-step tool-calling system. Points for step coverage, tool mentions, failure-mode awareness, and logical ordering.</p>
-        </article>
-        <article class="method-card reveal">
-          <h3>4 · Brick Breaker Realism</h3>
+          <h3>3 · Brick Breaker Realism</h3>
           <p>Models generate a playable Canvas game in one shot. Scored on physics plausibility, control responsiveness, collision detection, game states, particle/sound effects, and responsive design.</p>
         </article>
         <article class="method-card reveal">
+          <h3>4 · Startup in a Weekend</h3>
+          <p>Models receive a tight MVP brief for an AI contract-review SaaS. Points for system architecture, concrete database schema, API endpoints, auth strategy, AI pipeline, deployment stack, day-by-day schedule, cost estimate, risk/mitigations, and explicit out-of-scope boundaries.</p>
+        </article>
+        <article class="method-card reveal">
           <h3>5 · VivIndex Composite</h3>
-          <p>Weighted average of the four tracks. Long-Horizon Agentic 30%, Intent Understanding 25%, One-Shot UI 25%, Brick Breaker 20%. Weights favor sustained-coherence tasks. Missing benchmarks are renormalized rather than scored as zero.</p>
+          <p>Weighted average of four tracks. Startup in a Weekend 35%, Intent Understanding 25%, One-Shot UI 20%, Brick Breaker 20%. Missing benchmarks are labelled and weights are renormalized rather than scored as zero.</p>
         </article>
                         <article class="method-card reveal">
           <h3>6 · Full protocol</h3>
-          <p>Exact prompts, scoring math, Arcade design, and non-claims are published on the Experimental Design Play page — the lab notebook for this suite.</p>
+          <p>Exact prompts, scoring math, Arcade design, and non-claims are published on the Experimental Design page — the lab notebook for this suite.</p>
           <p style="margin-top:0.8rem"><a class="btn btn-primary" href="experimental-design.html">Open Experimental Design</a></p>
         </article>
       </div>
@@ -285,6 +267,6 @@
     </div>
   </footer>
 
-  <script src="assets/app.js?v=2"></script>
+  <script src="assets/app.js?v=4"></script>
 </body>
 </html>

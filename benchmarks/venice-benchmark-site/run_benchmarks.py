@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-BenchmarkViv - Long-horizon benchmark runner for the Venice API.
+BenchmarkViv - practical benchmark runner for the Venice API.
 
 Usage:
     python run_benchmarks.py            # dry-run (default, no API calls)
@@ -38,21 +38,8 @@ TEMPERATURE = 0.5
 RATE_LIMIT_SLEEP_SECONDS = 1.0
 REQUEST_TIMEOUT_SECONDS = 180
 
-MODELS = [
-    {"id": "openai-gpt-56-luna",     "display": "GPT-5.6 Luna"},
-    {"id": "openai-gpt-56-luna-pro", "display": "GPT-5.6 Luna Pro"},
-    {"id": "openai-gpt-56-sol",      "display": "GPT-5.6 Sol"},
-    {"id": "openai-gpt-56-sol-pro",  "display": "GPT-5.6 Sol Pro"},
-    {"id": "openai-gpt-56-terra",    "display": "GPT-5.6 Terra"},
-    {"id": "openai-gpt-56-terra-pro","display": "GPT-5.6 Terra Pro"},
-    {"id": "openai-gpt-55",          "display": "GPT-5.5"},
-    {"id": "claude-fable-5",         "display": "Fable 5"},
-    {"id": "claude-opus-4-8",        "display": "Opus 4.8"},
-    {"id": "zai-org-glm-5-2",        "display": "GLM 5.2"},
-    {"id": "deepseek-v4-pro",        "display": "DeepSeek V4"},
-    {"id": "minimax-m3-preview",     "display": "MiniMax M3"},
-    {"id": "grok-4-5",               "display": "Grok 4.5"},
-]
+from model_registry import MODELS
+
 
 # Optional per-model benchmark allowlists. Empty = all models run all tracks
 # for apples-to-apples comparison.
@@ -99,17 +86,6 @@ BENCHMARKS = [
         "scoring": "heuristic placeholder 70-95; real scoring is manual/LLM-judge",
     },
     {
-        "id": "long_horizon_agentic",
-        "name": "Long-Horizon Agentic Task",
-        "prompt": (
-            "Plan and outline a multi-step system to build an AI research assistant "
-            "that: (1) monitors arXiv for papers, (2) summarizes them, (3) stores "
-            "them in a vector DB, (4) answers user questions with citations. List "
-            "the steps, tools needed, and potential failure modes."
-        ),
-        "scoring": "step count >= 4, mentions tools, mentions failure modes; total 100",
-    },
-    {
         "id": "brick_breaker_realism",
         "name": "Brick Breaker Realism",
         "prompt": (
@@ -122,6 +98,78 @@ BENCHMARKS = [
             "aesthetic."
         ),
         "scoring": "heuristic: canvas/RAF, paddle/bricks, game states, physics, particles/sound/responsive, polish; total 100",
+    },
+    # --- Pharma domain benchmarks (future/unregistered) ---
+    {
+        "id": "pharma_drug_interaction",
+        "name": "Pharma: Drug-Drug Interaction Identification",
+        "prompt": (
+            "You are a clinical pharmacist reviewing a patient's medication list. "
+            "For each pair of medications below, identify any clinically significant "
+            "drug-drug interactions. For each interaction found, provide:\n\n"
+            "1. The interacting drug pair\n"
+            "2. Severity classification (Major / Moderate / Minor)\n"
+            "3. The pharmacological mechanism (e.g., CYP enzyme inhibition/induction, "
+            "pharmacodynamic synergy)\n"
+            "4. Recommended clinical action\n\n"
+            "Patient medication list:\n"
+            "- warfarin 5 mg once daily (atrial fibrillation)\n"
+            "- ibuprofen 400 mg three times daily as needed (osteoarthritis pain)\n"
+            "- lisinopril 10 mg once daily (hypertension)\n\n"
+            "Be precise about mechanisms. If you are uncertain about an interaction, "
+            "state that explicitly rather than guessing."
+        ),
+        "scoring": "heuristic: interaction detection (0-35), severity classification (0-20), mechanism accuracy (0-25), clinical action (0-10), avoids hallucination (0-10); total 100",
+    },
+    {
+        "id": "pharma_regulatory_comprehension",
+        "name": "Pharma: Regulatory Guideline Comprehension",
+        "prompt": (
+            "You are a regulatory affairs specialist. Answer the following questions "
+            "about clinical trial regulatory requirements. Cite specific guideline "
+            "sections where possible.\n\n"
+            "Scenario: A clinical research organization (CRO) is designing a monitoring "
+            "plan for a Phase III randomized controlled trial in oncology. The sponsor "
+            "plans to use centralized monitoring only, with no on-site visits.\n\n"
+            "Questions:\n"
+            "1. Does ICH E6(R2) permit centralized-only monitoring without any on-site "
+            "visits? What does the guideline say about the monitor's responsibilities "
+            "for verifying data at investigative sites?\n"
+            "2. What are the investigator's responsibilities for obtaining informed "
+            "consent under ICH E6(R2)?\n\n"
+            "For each answer:\n"
+            "1. State the requirement clearly\n"
+            "2. Cite the relevant guideline section (e.g., ICH E6 Section 5.x)\n"
+            "3. Note any exceptions or conditions\n\n"
+            "If you are unsure of the exact section number, state the principle and "
+            "note that the specific citation should be verified."
+        ),
+        "scoring": "heuristic: requirement accuracy (0-35), citation specificity (0-25), completeness (0-20), avoids fabrication (0-20); total 100",
+    },
+    {
+        "id": "startup_in_a_weekend",
+        "name": "Startup in a Weekend",
+        "prompt": (
+            "You have 7 days and a team of 3 engineers to build an MVP for a B2B SaaS product: "
+            "an AI-powered contract review assistant for legal teams. Users upload contracts "
+            "(PDF/Word), the system extracts clauses, flags risks, suggests redlines, and "
+            "produces a summary report.\n\n"
+            "Deliver a complete, buildable plan. Your response must include all of the following:\n"
+            "1. System architecture (text description of components and data flow).\n"
+            "2. Database schema with concrete tables/collections and key fields.\n"
+            "3. Backend API endpoints with HTTP methods, paths, and example request/response shapes.\n"
+            "4. Authentication and authorization strategy.\n"
+            "5. Frontend key screens and navigation.\n"
+            "6. AI/LLM pipeline for clause extraction, risk classification, and redline generation.\n"
+            "7. Deployment stack and infrastructure (name concrete services).\n"
+            "8. Observability, logging, and error handling.\n"
+            "9. Day-by-day 7-day schedule with deliverables per day.\n"
+            "10. Cost estimate for infrastructure and AI usage at 100 active users/month.\n"
+            "11. Top 5 technical risks and specific mitigations.\n"
+            "12. What is explicitly out of MVP scope.\n\n"
+            "Be specific: name concrete languages, frameworks, cloud services, and libraries."
+        ),
+        "scoring": "heuristic: section coverage, tech specificity, cost numbers, 7-day schedule, risk/mitigations, scope boundaries; total 100",
     },
 ]
 
@@ -214,32 +262,6 @@ def score_one_shot_ui(text: str) -> int:
         return 0
     # Map 1..5 hits onto 70..95.
     return 70 + round((hits - 1) * (25 / 4))
-
-
-def score_long_horizon(text: str) -> int:
-    """step count >= 4, mentions tools, mentions failure modes -> total 100."""
-    if not text:
-        return 0
-    lower = text.lower()
-    score = 0
-    # Step count (0-40): look for numbered steps.
-    step_markers = sum(1 for n in range(1, 11) if f"{n}." in text or f"step {n}" in lower)
-    if step_markers >= 4:
-        score += 40
-    else:
-        score += step_markers * 8
-    # Mentions tools (0-30).
-    tool_words = ("api", "arxiv", "vector", "database", "embedding", "llm",
-                  "pinecone", "chroma", "weaviate", "faiss", "langchain", "cron")
-    tool_hits = sum(1 for w in tool_words if w in lower)
-    score += min(tool_hits * 6, 30)
-    # Mentions failure modes (0-30).
-    failure_words = ("failure", "fail", "error", "hallucinat", "rate limit",
-                     "downtime", "stale", "risk", "edge case")
-    failure_hits = sum(1 for w in failure_words if w in lower)
-    score += min(failure_hits * 8, 30)
-    return min(score, 100)
-
 
 
 
@@ -351,7 +373,6 @@ def score_startup_in_a_weekend(text: str) -> int:
 SCORERS = {
     "intent_understanding": score_intent_understanding,
     "one_shot_ui": score_one_shot_ui,
-    "long_horizon_agentic": score_long_horizon,
     "brick_breaker_realism": score_brick_breaker_realism,
     "startup_in_a_weekend": score_startup_in_a_weekend,
 }
@@ -475,6 +496,8 @@ def fake_response(benchmark_id: str, model_display: str) -> str:
             "## Out of scope\n"
             "Negotiation AI, e-signature, multi-language, enterprise SSO, SOC 2 audit."
         )
+    raise ValueError(f"Unknown benchmark fixture: {benchmark_id}")
+
     return (
         f"({model_display} sample) Plan:\n"
         "1. Step 1: Monitor arXiv via the arXiv API with a cron scheduler.\n"
@@ -515,7 +538,8 @@ def estimate_total_cost(pricing: dict) -> float:
     return round(total, 4)
 
 
-def run(dry_run: bool, model_filter: str | None = None) -> None:
+def run(dry_run: bool, model_filter: str | None = None,
+        benchmark_filter: str | None = None) -> None:
     api_key = os.environ.get(API_KEY_ENV, "")
     pricing = dict(FALLBACK_PRICING)
 
@@ -527,6 +551,14 @@ def run(dry_run: bool, model_filter: str | None = None) -> None:
             print(f"ERROR: model '{model_filter}' not found. Known ids: {known}")
             sys.exit(1)
 
+    selected_benchmarks = BENCHMARKS
+    if benchmark_filter:
+        selected_benchmarks = [b for b in BENCHMARKS if b["id"] == benchmark_filter]
+        if not selected_benchmarks:
+            known = ", ".join(b["id"] for b in BENCHMARKS)
+            print(f"ERROR: benchmark '{benchmark_filter}' not found. Known ids: {known}")
+            sys.exit(1)
+
     if not dry_run:
         if not api_key:
             print(f"ERROR: environment variable {API_KEY_ENV} is not set.")
@@ -534,7 +566,7 @@ def run(dry_run: bool, model_filter: str | None = None) -> None:
         pricing = fetch_pricing(api_key)
         est = 0.0
         for model in selected_models:
-            for _ in BENCHMARKS:
+            for _ in selected_benchmarks:
                 est += estimate_cost(model["id"], 150, MAX_TOKENS, pricing)
         print(f"\nEstimated maximum total cost for this run: ${est:.4f} "
               f"({len(selected_models)} model(s) x up to {len(BENCHMARKS)} benchmarks, "
@@ -545,15 +577,14 @@ def run(dry_run: bool, model_filter: str | None = None) -> None:
     results = []
     total_cost = 0.0
     total_calls = sum(
-        len(BENCHMARKS) if model["id"] not in MODEL_BENCHMARK_LIMITS
-        else len(MODEL_BENCHMARK_LIMITS[model["id"]])
+        len([b for b in selected_benchmarks if model["id"] not in MODEL_BENCHMARK_LIMITS or b["id"] in MODEL_BENCHMARK_LIMITS[model["id"]]])
         for model in selected_models
     )
     call_index = 0
 
     for model in selected_models:
         allowed = MODEL_BENCHMARK_LIMITS.get(model["id"])
-        benches = [b for b in BENCHMARKS if not allowed or b["id"] in allowed]
+        benches = [b for b in selected_benchmarks if not allowed or b["id"] in allowed]
         for bench in benches:
             call_index += 1
             print(f"[{call_index}/{total_calls}] {model['display']} ({model['id']}) "
@@ -596,7 +627,7 @@ def run(dry_run: bool, model_filter: str | None = None) -> None:
     # Partial runs merge into existing results so we can add models without
     # re-running the full matrix.
     existing = None
-    if model_filter and RESULTS_PATH.exists():
+    if (model_filter or benchmark_filter) and RESULTS_PATH.exists():
         try:
             with open(RESULTS_PATH, encoding="utf-8") as f:
                 existing = json.load(f)
@@ -604,8 +635,9 @@ def run(dry_run: bool, model_filter: str | None = None) -> None:
             print(f"Warning: could not load existing results for merge ({exc}).")
 
     if existing and isinstance(existing.get("results"), list):
-        selected_ids = {m["id"] for m in selected_models}
-        kept = [r for r in existing["results"] if r.get("model_id") not in selected_ids]
+        selected_pairs = {(r["model_id"], r["benchmark_id"]) for r in results}
+        kept = [r for r in existing["results"]
+                if (r.get("model_id"), r.get("benchmark_id")) not in selected_pairs]
         merged_results = kept + results
         # Prefer the canonical MODELS list, but preserve any unknown extras.
         existing_models = existing.get("models") or []
@@ -649,7 +681,7 @@ def run(dry_run: bool, model_filter: str | None = None) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="BenchmarkViv - run long-horizon benchmarks against the Venice API."
+        description="BenchmarkViv - run practical benchmarks against the Venice API."
     )
     group = parser.add_mutually_exclusive_group()
     group.add_argument("--dry-run", action="store_true",
@@ -658,10 +690,12 @@ def main() -> None:
                        help="Make real API calls (requires VENICE_INFERENCE_KEY).")
     parser.add_argument("--model", metavar="ID",
                         help="Run only one model id/display name; merges into existing results.json.")
+    parser.add_argument("--benchmark", metavar="ID",
+                        help="Run only one benchmark id; merges only the matching result rows.")
     args = parser.parse_args()
 
     dry_run = not args.run_real  # default to dry-run
-    run(dry_run, model_filter=args.model)
+    run(dry_run, model_filter=args.model, benchmark_filter=args.benchmark)
 
 
 if __name__ == "__main__":

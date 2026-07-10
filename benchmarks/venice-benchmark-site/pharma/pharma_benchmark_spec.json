@@ -1,0 +1,139 @@
+{
+  "spec_version": "1.0.0",
+  "title": "Pharma Domain Benchmark Fixture",
+  "description": "Source-backed, executable benchmark fixtures for evaluating LLM performance on pharmaceutical domain tasks. Designed for dry-run execution with no paid API calls required.",
+  "created": "2026-07-10",
+  "status": "draft",
+  "provenance": {
+    "summary": "All fixture data is derived from publicly available, stable regulatory and reference sources. No proprietary or licensed databases are embedded. URLs cite the canonical public entry points for each source.",
+    "sources": [
+      {
+        "id": "fda-ddi-table",
+        "name": "FDA Drug Development and Drug Interactions Table",
+        "url": "https://www.fda.gov/drugs/drug-interactions-labeling/drug-development-and-drug-interactions-table-substrates-inhibitors-and-inducers",
+        "description": "FDA-maintained table of known drug substrates, inhibitors, and inducers for CYP enzymes and transporters.",
+        "stability": "stable",
+        "license": "US Government public domain"
+      },
+      {
+        "id": "drugbank-public",
+        "name": "DrugBank Public Database",
+        "url": "https://go.drugbank.com/",
+        "description": "Publicly accessible drug information including interactions, mechanisms, and classifications. Fixture data uses only well-established, textbook-level interaction pairs.",
+        "stability": "stable",
+        "license": "Creative Commons Attribution-NonCommercial 4.0 (CC BY-NC 4.0)"
+      },
+      {
+        "id": "ich-e6-r2",
+        "name": "ICH E6(R2) Good Clinical Practice",
+        "url": "https://www.ich.org/page/efficacy-guidelines",
+        "description": "International Council for Harmonisation guideline on Good Clinical Practice. Publicly available consolidated guideline.",
+        "stability": "stable",
+        "license": "ICH public access"
+      },
+      {
+        "id": "fda-21cfr-312",
+        "name": "21 CFR Part 312 — Investigational New Drug Application",
+        "url": "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfcfr/CFRSearch.cfm?CFRPart=312",
+        "description": "US Code of Federal Regulations governing IND submissions and clinical trial conduct.",
+        "stability": "stable",
+        "license": "US Government public domain"
+      },
+      {
+        "id": "clinicaltrials-gov",
+        "name": "ClinicalTrials.gov",
+        "url": "https://clinicaltrials.gov/",
+        "description": "US National Library of Medicine registry of publicly and privately supported clinical studies. Endpoint patterns in fixtures are derived from publicly listed trial designs.",
+        "stability": "stable",
+        "license": "US Government public domain"
+      },
+      {
+        "id": "who-atc",
+        "name": "WHO ATC Classification System",
+        "url": "https://www.whocc.no/atc_ddd_index/",
+        "description": "World Health Organization Anatomical Therapeutic Chemical classification of active substances.",
+        "stability": "stable",
+        "license": "WHO public access"
+      }
+    ]
+  },
+  "benchmarks": [
+    {
+      "id": "pharma_drug_interaction",
+      "name": "Pharma: Drug-Drug Interaction Identification",
+      "version": "1.0.0",
+      "category": "pharma",
+      "description": "Given a patient medication list, identify clinically significant drug-drug interactions (DDIs), classify severity, and describe the pharmacological mechanism.",
+      "prompt_template": "You are a clinical pharmacist reviewing a patient's medication list. For each pair of medications below, identify any clinically significant drug-drug interactions. For each interaction found, provide:\n\n1. The interacting drug pair\n2. Severity classification (Major / Moderate / Minor)\n3. The pharmacological mechanism (e.g., CYP enzyme inhibition/induction, pharmacodynamic synergy)\n4. Recommended clinical action\n\nPatient medication list:\n{medication_list}\n\nBe precise about mechanisms. If you are uncertain about an interaction, state that explicitly rather than guessing.",
+      "fixture_file": "fixtures/drug_interaction_cases.json",
+      "scoring": {
+        "method": "heuristic",
+        "total": 100,
+        "rubric": [
+          {"criterion": "interaction_detection", "weight": 35, "description": "Correctly identifies known interacting pairs from the fixture"},
+          {"criterion": "severity_classification", "weight": 20, "description": "Assigns severity consistent with reference classification"},
+          {"criterion": "mechanism_accuracy", "weight": 25, "description": "Describes pharmacological mechanism using correct terminology (CYP isoforms, transporters, pharmacodynamic effects)"},
+          {"criterion": "clinical_action", "weight": 10, "description": "Provides actionable clinical recommendation"},
+          {"criterion": "avoids_hallucination", "weight": 10, "description": "Does not fabricate interactions that do not exist in reference sources; expresses uncertainty when appropriate"}
+        ]
+      },
+      "validation": {
+        "required_fields": ["interacting_pair", "severity", "mechanism", "clinical_action"],
+        "severity_values": ["major", "moderate", "minor"],
+        "mechanism_keywords": [
+          "cyp3a4", "cyp2d6", "cyp2c9", "cyp2c19", "cyp1a2",
+          "p-gp", "p-glycoprotein", "inhibitor", "inducer", "substrate",
+          "qt prolongation", "serotonin", "bleeding", "rhabdomyolysis",
+          "pharmacodynamic", "pharmacokinetic", "synerg", "additive",
+          "protein binding", "absorption", "chelation"
+        ]
+      }
+    },
+    {
+      "id": "pharma_regulatory_comprehension",
+      "name": "Pharma: Regulatory Guideline Comprehension",
+      "version": "1.0.0",
+      "category": "pharma",
+      "description": "Given a regulatory scenario referencing ICH/FDA guidelines, answer structured compliance questions with specific section citations.",
+      "prompt_template": "You are a regulatory affairs specialist. Answer the following questions about clinical trial regulatory requirements. Cite specific guideline sections where possible.\n\n{scenario}\n\nQuestions:\n{questions}\n\nFor each answer:\n1. State the requirement clearly\n2. Cite the relevant guideline section (e.g., ICH E6 Section 5.x, 21 CFR 312.x)\n3. Note any exceptions or conditions\n\nIf you are unsure of the exact section number, state the principle and note that the specific citation should be verified.",
+      "fixture_file": "fixtures/regulatory_qa_cases.json",
+      "scoring": {
+        "method": "heuristic",
+        "total": 100,
+        "rubric": [
+          {"criterion": "requirement_accuracy", "weight": 35, "description": "Correctly states the regulatory requirement"},
+          {"criterion": "citation_specificity", "weight": 25, "description": "References specific guideline sections (ICH E6, 21 CFR 312, etc.)"},
+          {"criterion": "completeness", "weight": 20, "description": "Addresses all parts of the question including exceptions/conditions"},
+          {"criterion": "avoids_fabrication", "weight": 20, "description": "Does not invent section numbers or requirements; acknowledges uncertainty"}
+        ]
+      },
+      "validation": {
+        "required_fields": ["answer", "guideline_reference"],
+        "reference_patterns": [
+          "ICH E6", "ICH E8", "ICH E9", "ICH E2A", "ICH E2B",
+          "21 CFR 312", "21 CFR 211", "21 CFR 600",
+          "FDA", "EMA", "PMDA",
+          "Section", "section", "§", "part"
+        ]
+      }
+    }
+  ],
+  "execution": {
+    "dry_run_supported": true,
+    "api_key_required": false,
+    "max_tokens_recommended": 2048,
+    "temperature_recommended": 0.3,
+    "notes": "Lower temperature (0.3) recommended for pharma benchmarks to reduce variability in factual recall. Dry-run mode uses pre-built fixture responses for schema validation without API calls."
+  },
+  "caveats": [
+    "FIXTURE DATA IS NOT CLINICAL ADVICE. These benchmarks evaluate LLM text generation quality on pharma topics. They must not be used for actual clinical decision-making.",
+    "Drug interaction fixture data uses well-established, textbook-level pairs from public sources. It is NOT exhaustive and does not cover rare interactions, dose-dependent effects, or patient-specific factors.",
+    "Severity classifications in fixtures are simplified (Major/Moderate/Minor) and may not match the granularity of clinical DDI databases (e.g., Lexicomp, Micromedex).",
+    "Regulatory references cite publicly available guideline versions as of 2024-2025. Regulations change; specific section numbers should be verified against current editions.",
+    "These benchmarks test factual recall and structured reasoning, NOT clinical judgment. A high score does not indicate clinical competence.",
+    "Fixture data is derived from US/EU public regulatory sources. Requirements may differ in other jurisdictions (Japan PMDA, China NMPA, etc.).",
+    "No patient data is used. All medication lists are synthetic.",
+    "Scoring is heuristic and automated. Manual expert review is recommended for production evaluation.",
+    "The benchmark does NOT require or use any paid API endpoints. All validation runs against local fixture data."
+  ]
+}
