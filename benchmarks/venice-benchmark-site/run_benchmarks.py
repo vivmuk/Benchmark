@@ -288,11 +288,72 @@ def score_brick_breaker_realism(text: str) -> int:
         score += 7
     return min(score, 100)
 
+
+def score_startup_in_a_weekend(text: str) -> int:
+    """Score the Startup-in-a-Weekend plan (0-100)."""
+    if not text:
+        return 0
+    import re
+    low = text.lower()
+    score = 0
+
+    # Section coverage (0-48) - 12 sections, 4 pts each
+    sections = [
+        r"\barchitecture\b|data flow|component",
+        r"\bschema\b|tables?\b|collections?|database",
+        r"\bapi\b|\bendpoints?\b|request/response|http method",
+        r"\bauth\b|authentication|authorization|oauth|jwt|rbac",
+        r"\bfrontend\b|\bscreen\b|\bui\b|navigation|dashboard",
+        r"\bllm\b|clause extraction|risk classification|redline|prompt",
+        r"\bdeplo\b|infrastructure|aws|gcp|azure|docker|kubernetes|hosting",
+        r"\bobservability\b|logging|monitoring|error handling|tracing|sentry",
+        r"\bday\s*1\b|\bday\s*7\b|schedule|timeline|phased",
+        r"\bcost\b|\$\d|pricing|estimate|\bmonth\b",
+        r"\brisk\b|mitigation|failure mode",
+        r"\bscope\b|out of scope|defer|not in mvp|post-mvp",
+    ]
+    section_hits = sum(1 for pat in sections if re.search(pat, low))
+    score += section_hits * 4
+
+    # Tech specificity (0-24)
+    tech_terms = [
+        "postgresql", "mysql", "mongodb", "sqlite", "redis",
+        "s3", "blob storage", "gcs", "azure blob",
+        "fastapi", "flask", "django", "express", "next.js", "rails",
+        "react", "vue", "svelte", "typescript", "tailwind",
+        "docker", "kubernetes", "terraform", "pulumi", "github actions",
+        "aws", "gcp", "azure", "vercel", "netlify", "fly.io", "heroku",
+        "openai", "anthropic", "langchain", "llamaindex", "huggingface",
+        "celery", "rq", "kafka", "rabbitmq",
+        "sentry", "datadog", "grafana", "prometheus", "cloudwatch",
+    ]
+    tech_hits = sum(1 for t in tech_terms if t in low)
+    score += min(tech_hits * 2, 24)
+
+    # Quantitative / schedule rigor (0-16)
+    if re.search(r"\$\d{1,4}(\.\d{2})?|\d+\s*(usd|gb|tb|k|m)\b", low):
+        score += 6
+    if re.search(r"\bday\s*1\b.*\bday\s*7\b|\b7-day\b|\bseven days\b", low, re.DOTALL):
+        score += 5
+    if re.search(r"\b100\s+active\b|\b100\s+users\b|\busers/month\b", low):
+        score += 5
+
+    # Risk & scope quality (0-12)
+    risk_lines = [line for line in text.splitlines() if re.search(r"\brisk\b|\bmitigation\b", line.lower())]
+    if len(risk_lines) >= 5:
+        score += 6
+    scope_lines = [line for line in text.splitlines() if re.search(r"\bscope\b|\bout of scope\b|\bdefer\b|\bpost-mvp\b", line.lower())]
+    if len(scope_lines) >= 2:
+        score += 6
+
+    return min(score, 100)
+
 SCORERS = {
     "intent_understanding": score_intent_understanding,
     "one_shot_ui": score_one_shot_ui,
     "long_horizon_agentic": score_long_horizon,
     "brick_breaker_realism": score_brick_breaker_realism,
+    "startup_in_a_weekend": score_startup_in_a_weekend,
 }
 
 # ---------------------------------------------------------------------------
@@ -386,6 +447,33 @@ def fake_response(benchmark_id: str, model_display: str) -> str:
             "const ctx=canvas.getContext('2d');let score=0,lives=3,state='start';"
             "function loop(){requestAnimationFrame(loop);}loop();</script>\n"
             "</body></html>"
+        )
+    if benchmark_id == "startup_in_a_weekend":
+        return (
+            f"({model_display} sample) 7-day build plan for an AI contract review MVP:\n\n"
+            "## Architecture\n"
+            "React frontend + FastAPI backend + PostgreSQL + Redis + S3 + OpenAI GPT-4o.\n\n"
+            "## Database schema\n"
+            "users(id, email), organizations(id, name), contracts(id, user_id, s3_key, status), "
+            "clauses(id, contract_id, type, risk_level, text), redlines(id, clause_id, suggestion).\n\n"
+            "## API endpoints\n"
+            "POST /auth/login (JWT), POST /contracts (upload), GET /contracts/{id}, "
+            "GET /contracts/{id}/report, POST /contracts/{id}/redlines.\n\n"
+            "## AI pipeline\n"
+            "PDF text extraction (PyMuPDF) → clause segmentation → LLM risk classification → redline generation.\n\n"
+            "## Deployment\n"
+            "Docker + AWS ECS/Fargate + RDS PostgreSQL + S3 + CloudFront.\n\n"
+            "## 7-day schedule\n"
+            "Day 1: Auth + DB schema. Day 2: Upload + storage. Day 3: Extraction pipeline. "
+            "Day 4: LLM classification + redlines. Day 5: Frontend report screen. Day 6: Polish + tests. Day 7: Deploy.\n\n"
+            "## Cost estimate at 100 users/month\n"
+            "~$450/month: AWS $250, OpenAI $150, Sentry/Datadog $50.\n\n"
+            "## Risks & mitigations\n"
+            "1. PDF parsing errors → fallback to OCR. 2. LLM hallucinations → constrained prompts + human review loop.\n"
+            "3. Data privacy → encrypt at rest, SOC 2 prep deferred. 4. Latency → async processing + Redis queue.\n"
+            "5. Scope creep → explicit out-of-scope list.\n\n"
+            "## Out of scope\n"
+            "Negotiation AI, e-signature, multi-language, enterprise SSO, SOC 2 audit."
         )
     return (
         f"({model_display} sample) Plan:\n"
