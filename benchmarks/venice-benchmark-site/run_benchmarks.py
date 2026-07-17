@@ -33,7 +33,9 @@ API_KEY_ENV = "VENICE_INFERENCE_KEY"
 
 RESULTS_PATH = Path("data") / "results.json"
 
-MAX_TOKENS = 2048
+# Use the runner's supported maximum completion budget for every model. This
+# avoids truncating answers (and hidden reasoning) on complex benchmark tasks.
+MAX_TOKENS = 8192
 TEMPERATURE = 0.5
 RATE_LIMIT_SLEEP_SECONDS = 1.0
 REQUEST_TIMEOUT_SECONDS = 180
@@ -61,6 +63,8 @@ FALLBACK_PRICING = {
     "deepseek-v4-pro":         {"input": 0.60,  "output": 2.20},
     "minimax-m3-preview":      {"input": 0.40,  "output": 1.60},
     "grok-4-5":                {"input": 2.27,  "output": 6.80},
+    # Live Venice /models pricing supersedes this conservative fallback.
+    "kimi-k3":                 {"input": 1.00,  "output": 3.00},
 }
 DEFAULT_PRICING = {"input": 5.00, "output": 15.00}
 
@@ -370,11 +374,112 @@ def score_startup_in_a_weekend(text: str) -> int:
 
     return min(score, 100)
 
+
+def score_pharma_drug_interaction(text: str) -> int:
+    """Heuristic scorer for Pharma DDI identification (0-100)."""
+    if not text:
+        return 0
+    import re
+    low = text.lower()
+    score = 0
+
+    # Interaction detection (0-35): must mention warfarin+ibuprofen pair
+    if ("warfarin" in low and "ibuprofen" in low and
+            any(w in low for w in ("interact", "risk", "combination", "concomitant", "co-admin"))):
+        score += 25
+    # Should NOT flag lisinopril+warfarin as a major interaction
+    if not ("lisinopril" in low and "warfarin" in low and
+            any(w in low for w in ("major", "severe", "significant interact"))):
+        score += 10
+
+    # Severity classification (0-20)
+    severity_terms = {"major": 0, "moderate": 0, "minor": 0}
+    for sev in severity_terms:
+        if sev in low:
+            severity_terms[sev] = 1
+    if severity_terms["major"] >= 1:
+        score += 12
+    if sum(severity_terms.values()) >= 2:
+        score += 8
+
+    # Mechanism accuracy (0-25)
+    mechanism_terms = [
+        "cyp", "enzyme", "inhibitor", "inducer", "substrate",
+        "pharmacodynamic", "pharmacokinetic", "protein binding",
+        "platelet", "bleeding", "gastric", "mucosa", "coagulat",
+        "nsaid", "anticoagulant", "synerg", "additive"
+    ]
+    mech_hits = sum(1 for t in mechanism_terms if t in low)
+    score += min(mech_hits * 3, 25)
+
+    # Clinical action (0-10)
+    action_terms = ["avoid", "monitor", "discontinue", "alternative", "separate",
+                    "dose adjustment", "contraindicated", "caution", "recommend"]
+    action_hits = sum(1 for t in action_terms if t in low)
+    score += min(action_hits * 3, 10)
+
+    # Avoids hallucination (0-10): bonus for expressing uncertainty
+    uncertainty_terms = ["uncertain", "may", "possible", "potential", "should verify",
+                         "consult", "clinical judgment", "evidence"]
+    unc_hits = sum(1 for t in uncertainty_terms if t in low)
+    score += min(unc_hits * 3, 10)
+
+    return min(score, 100)
+
+
+def score_pharma_regulatory_comprehension(text: str) -> int:
+    """Heuristic scorer for Pharma regulatory comprehension (0-100)."""
+    if not text:
+        return 0
+    import re
+    low = text.lower()
+    score = 0
+
+    # Requirement accuracy (0-35)
+    requirement_terms = [
+        "monitor", "on-site", "source data", "verification",
+        "informed consent", "written", "documented",
+        "investigator", "subject", "prior to"
+    ]
+    req_hits = sum(1 for t in requirement_terms if t in low)
+    score += min(req_hits * 4, 35)
+
+    # Citation specificity (0-25)
+    citation_patterns = [
+        r"ich\s*e6", r"ich\s*e8", r"ich\s*e9", r"ich\s*e2a",
+        r"21\s*cfr\s*312", r"section\s*\d", r"§\s*\d",
+        r"5\.18", r"4\.8", r"312\.23", r"312\.40"
+    ]
+    cite_hits = sum(1 for p in citation_patterns if re.search(p, low))
+    score += min(cite_hits * 5, 25)
+
+    # Completeness (0-20)
+    completeness_terms = [
+        "exception", "condition", "unless", "however", "note",
+        "additionally", "furthermore", "representative", "legally"
+    ]
+    comp_hits = sum(1 for t in completeness_terms if t in low)
+    score += min(comp_hits * 4, 20)
+
+    # Avoids fabrication (0-20): bonus for hedging/uncertainty
+    hedge_terms = [
+        "should be verified", "consult", "confirm", "check",
+        "exact section", "may vary", "approximate", "believe",
+        "to my knowledge", "not certain"
+    ]
+    hedge_hits = sum(1 for t in hedge_terms if t in low)
+    score += min(hedge_hits * 5, 20)
+
+    return min(score, 100)
+
+
 SCORERS = {
     "intent_understanding": score_intent_understanding,
     "one_shot_ui": score_one_shot_ui,
     "brick_breaker_realism": score_brick_breaker_realism,
     "startup_in_a_weekend": score_startup_in_a_weekend,
+    "pharma_drug_interaction": score_pharma_drug_interaction,
+    "pharma_regulatory_comprehension": score_pharma_regulatory_comprehension,
 }
 
 # ---------------------------------------------------------------------------
@@ -415,6 +520,17 @@ def call_venice(api_key: str, model_id: str, prompt: str) -> dict:
         choices = data.get("choices") or []
         if choices:
             content = (choices[0].get("message") or {}).get("content") or ""
+        if not content.strip():
+            return {
+                "status": "error",
+                "http_status": 200,
+                "latency": latency,
+                "error": "API returned no final response content (likely exhausted its completion budget).",
+                "raw_response": "",
+                "prompt_tokens": int(usage.get("prompt_tokens", 0)),
+                "completion_tokens": int(usage.get("completion_tokens", 0)),
+                "total_tokens": int(usage.get("total_tokens", 0)),
+            }
         return {
             "status": "ok",
             "http_status": 200,
@@ -569,7 +685,7 @@ def run(dry_run: bool, model_filter: str | None = None,
             for _ in selected_benchmarks:
                 est += estimate_cost(model["id"], 150, MAX_TOKENS, pricing)
         print(f"\nEstimated maximum total cost for this run: ${est:.4f} "
-              f"({len(selected_models)} model(s) x up to {len(BENCHMARKS)} benchmarks, "
+              f"({len(selected_models)} model(s) x up to {len(selected_benchmarks)} benchmarks, "
               f"assuming full {MAX_TOKENS}-token outputs)\n")
     else:
         print("Mode: DRY RUN (no API calls, sample data will be generated).\n")

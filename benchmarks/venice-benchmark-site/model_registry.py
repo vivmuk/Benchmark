@@ -17,4 +17,5 @@ MODELS = [
     {"id": "deepseek-v4-pro",         "display": "DeepSeek V4"},
     {"id": "minimax-m3-preview",      "display": "MiniMax M3"},
     {"id": "grok-4-5",                "display": "Grok 4.5"},
+    {"id": "kimi-k3",                  "display": "Kimi K3"},
 ]
