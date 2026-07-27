@@ -1,9 +1,29 @@
 {
   "schema_version": "1.0.0",
   "site_selector": "data/changelog.json",
-  "generated_at": "2026-07-27T01:09:59.442450+00:00",
+  "generated_at": "2026-07-27T01:27:58.875370+00:00",
   "format": "zhcli",
   "entries": [
+    {
+      "id": "chg-2026-07-26-vision-gallery",
+      "date": "2026-07-26",
+      "time_utc": "2026-07-27T01:27:58.875288+00:00",
+      "category": "site",
+      "summary": "Vision gallery page: source image, full nano-banana-2 prompt, reverse-prompt instruction, 28-attribute checklist, and all model reconstructions with hit maps.",
+      "details": {
+        "page": "vision.html",
+        "image_model": "nano-banana-2",
+        "assets": [
+          "data/vision/reverse_prompt_source.png",
+          "data/vision/reverse_prompt_source.web.jpg",
+          "data/vision/source_prompt.txt",
+          "data/vision/reverse_prompt_meta.json",
+          "data/vision/reconstructions.json"
+        ],
+        "reconstructions": 14,
+        "checklist_attrs": 28
+      }
+    },
     {
       "id": "chg-2026-07-26-diem-retry",
       "date": "2026-07-26",

@@ -26484,6 +26484,181 @@ body > *:not(.gpu-bg) {
   }
 }
 
+
+/* ===== Vision gallery ===== */
+.vision-figure {
+  padding: 0.75rem;
+  overflow: hidden;
+}
+.vision-figure img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--rule);
+}
+.vision-figure figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  padding: 0.75rem 0.35rem 0.25rem;
+  font-size: 0.9rem;
+  color: var(--text-dim);
+}
+.vision-prompt-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+@media (min-width: 960px) {
+  .vision-prompt-grid {
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: start;
+  }
+}
+.prompt-block {
+  margin-top: 0.85rem;
+  padding: 1rem 1.1rem;
+  background: var(--surface-2);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 0.86rem;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: var(--text);
+  max-height: 28rem;
+  overflow: auto;
+}
+.file-ref {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  color: var(--text-dim);
+}
+.checklist-ol {
+  list-style: none;
+  display: grid;
+  gap: 0.55rem;
+  counter-reset: chk;
+}
+.checklist-ol li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.65rem 0.85rem;
+  align-items: baseline;
+  padding: 0.55rem 0.65rem;
+  border-bottom: 1px solid var(--rule);
+  counter-increment: chk;
+}
+.checklist-ol li::before {
+  content: counter(chk, decimal-leading-zero);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-faint);
+}
+.checklist-ol code {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--cobalt);
+}
+.vision-recon-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.1rem;
+}
+@media (min-width: 1100px) {
+  .vision-recon-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.vision-card {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 1.1rem 1.15rem 1.25rem;
+  box-shadow: var(--shadow);
+}
+.vision-card-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-start;
+}
+.vision-card-head h3 {
+  font-size: 1.15rem;
+  margin-top: 0.15rem;
+}
+.vision-card-head .rank {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-faint);
+  letter-spacing: 0.04em;
+}
+.mono-id {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+.vision-card-meta {
+  margin: 0.55rem 0 0.9rem;
+  font-size: 0.92rem;
+  color: var(--text-dim);
+}
+.vision-card h4 {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-faint);
+  margin: 0.85rem 0 0.45rem;
+}
+.score-pill {
+  min-width: 3.2rem;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 1.05rem;
+  padding: 0.45rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid var(--rule);
+  background: var(--surface-2);
+}
+.score-high { background: rgba(132,168,0,0.18); color: #3f5200; border-color: rgba(132,168,0,0.35); }
+.score-mid { background: rgba(37,99,235,0.12); color: #1d4ed8; border-color: rgba(37,99,235,0.28); }
+.score-low { background: rgba(249,115,22,0.14); color: #c2410c; border-color: rgba(249,115,22,0.3); }
+.score-zero, .score-na { background: rgba(18,18,26,0.06); color: var(--text-dim); }
+.hit-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.hit-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.28rem 0.5rem;
+  border-radius: 999px;
+  border: 1px solid var(--rule);
+  font-size: 0.75rem;
+  background: var(--surface-2);
+}
+.hit-chip code { font-family: var(--font-mono); font-size: 0.72rem; }
+.hit-chip em { font-style: normal; color: var(--text-dim); }
+.hit-yes { background: rgba(132,168,0,0.14); border-color: rgba(132,168,0,0.28); }
+.hit-no { background: rgba(225,29,116,0.08); border-color: rgba(225,29,116,0.22); }
+.hit-na { opacity: 0.75; }
+.vision-note { margin-top: 1.25rem; }
+.muted { color: var(--text-dim); }
+.attribute {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin-bottom: 0.45rem;
+}
+
 </style>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <script>
@@ -26508,6 +26683,7 @@ body > *:not(.gpu-bg) {
       <ul class="nav-links" id="siteNav">
         <li><a href="#leaderboard">Leaderboard</a></li>
         <li><a href="#tracks">Tracks</a></li>
+        <li><a href="vision.html">Vision</a></li>
                 <li><a href="experimental-design.html">Design</a></li>
         <li><a href="about.html">About</a></li>
       </ul>
@@ -26524,6 +26700,7 @@ body > *:not(.gpu-bg) {
       <p>Eight practical evaluations: core capability, pharma domain, value density at a fixed token budget, and multimodal reverse-prompt fidelity.</p>
       <div class="hero-actions">
         <a href="#leaderboard" class="btn btn-primary">Explore the data</a>
+        <a href="vision.html" class="btn btn-ghost">Vision gallery</a>
         <a href="experimental-design.html" class="btn btn-ghost">Experimental Design</a>
       </div>
       <p class="data-status" id="dataStatus">Loading benchmark data</p>
@@ -26577,6 +26754,7 @@ body > *:not(.gpu-bg) {
       <div class="section-head">
         <h2>Eight useful evaluation dimensions</h2>
         <p>Every lane explains what is tested, why it matters, and what a strong result looks like.</p>
+        <p class="section-sub"><a href="vision.html">Open Vision gallery</a> for the reverse-prompt source image, full prompts, checklist, and every reconstruction.</p>
       </div>
       <div class="bench-grid">
         <article class="bench-card reveal">
