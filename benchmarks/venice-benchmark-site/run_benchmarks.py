@@ -8,6 +8,7 @@ Usage:
     python run_benchmarks.py --run-real # real API calls (needs VENICE_INFERENCE_KEY)
 """
 
+from __future__ import annotations                                    # enables PEP 604 union (str|None) on Py <= 3.9
 import argparse
 import json
 import os
@@ -33,12 +34,16 @@ API_KEY_ENV = "VENICE_INFERENCE_KEY"
 
 RESULTS_PATH = Path("data") / "results.json"
 
-# Use the runner's supported maximum completion budget for every model. This
-# avoids truncating answers (and hidden reasoning) on complex benchmark tasks.
-MAX_TOKENS = 8192
+# No artificial cap. Reasoning-heavy models routinely produce longer answers; the
+# benchmark measures "cost to deliver value", which requires we let them actually
+# deliver. Pass --max-tokens on the CLI to lower this if a particular model is
+# spamming (or to enforce a fairness budget for an apples-to-apples run).
+MAX_TOKENS = 32768
 TEMPERATURE = 0.5
 RATE_LIMIT_SLEEP_SECONDS = 1.0
-REQUEST_TIMEOUT_SECONDS = 180
+# Reasoning models on long-context prompts can take several minutes. The 180 s
+# reading timeout used to be the bottleneck for kimi-k3 / opus benchmarks.
+REQUEST_TIMEOUT_SECONDS = 600
 
 from model_registry import MODELS
 
@@ -655,7 +660,18 @@ def estimate_total_cost(pricing: dict) -> float:
 
 
 def run(dry_run: bool, model_filter: str | None = None,
-        benchmark_filter: str | None = None) -> None:
+        benchmark_filter: str | None = None,
+        max_tokens_override: int | None = None,
+        request_timeout_override: float | None = None) -> None:
+    # Per-run cap overrides (see CLI flags). Mutating module globals is the
+    # minimal-blast-radius way; the caller's in-flight process has its own
+    # imported copy and is unaffected.
+    global MAX_TOKENS, REQUEST_TIMEOUT_SECONDS
+    if max_tokens_override is not None:
+        MAX_TOKENS = max_tokens_override
+    if request_timeout_override is not None:
+        REQUEST_TIMEOUT_SECONDS = request_timeout_override
+
     api_key = os.environ.get(API_KEY_ENV, "")
     pricing = dict(FALLBACK_PRICING)
 
@@ -808,10 +824,16 @@ def main() -> None:
                         help="Run only one model id/display name; merges into existing results.json.")
     parser.add_argument("--benchmark", metavar="ID",
                         help="Run only one benchmark id; merges only the matching result rows.")
+    parser.add_argument("--max-tokens", type=int, metavar="N",
+                        help=f"Override completion cap (default {MAX_TOKENS}).")
+    parser.add_argument("--request-timeout", type=float, metavar="SEC",
+                        help=f"Override HTTP read timeout (default {REQUEST_TIMEOUT_SECONDS}s).")
     args = parser.parse_args()
 
     dry_run = not args.run_real  # default to dry-run
-    run(dry_run, model_filter=args.model, benchmark_filter=args.benchmark)
+    run(dry_run, model_filter=args.model, benchmark_filter=args.benchmark,
+        max_tokens_override=args.max_tokens,
+        request_timeout_override=args.request_timeout)
 
 
 if __name__ == "__main__":

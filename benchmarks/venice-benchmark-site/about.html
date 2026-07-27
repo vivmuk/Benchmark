@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="BenchmarkViv - About. Methodology, project history, and a running changelog of every benchmark run, harness change, and site update." />
+  <title>About · BenchmarkViv</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/styles.css?v=6" />
+</head>
+<body>
+  <div class="gpu-bg" aria-hidden="true"><canvas id="gpuCanvas"></canvas></div>
+
+  <nav class="navbar vt-nav">
+    <div class="container">
+      <a href="index.html" class="nav-logo">Benchmark<span>Viv</span></a>
+      <ul class="nav-links" id="siteNav">
+        <li><a href="index.html#leaderboard">Leaderboard</a></li>
+        <li><a href="index.html#tracks">Tracks</a></li>
+                <li><a href="about.html" class="is-current">About</a></li>
+      </ul>
+      <a href="index.html" class="nav-cta">Back to Leaderboard</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <header class="hero vt-hero">
+    <div class="hero-backdrop"></div>
+    <div class="container hero-content">
+      <span class="eyebrow">About</span>
+      <h1>Project history and a running changelog of every benchmark &amp; site update</h1>
+      <p>Six evaluations across text generation, UI design, interactive physics, drug interactions, regulatory comprehension, and start-up planning. Each row in the leaderboard carries a price tag. The full history lives in <code>data/changelog.json</code>.</p>
+      <p class="data-status" id="dataStatus" aria-live="polite">Loading changelog…</p>
+    </div>
+  </header>
+
+  <section id="about">
+    <div class="container about-grid">
+      <div class="card">
+        <span class="attribute">Methodology</span>
+        <h2>What the columns mean</h2>
+        <ul class="plain-list">
+          <li><strong>Score</strong> (0–100) is a hand-tuned rubric per benchmark: intent-class accuracy and structure; UI generation code-runs-and-renders; brick-breaker levels <em>playable</em>; pharma-ddi correct drug-pair identification; regulatory comprehension of WHO/FDA citations; startup-in-a-weekend feasibility.</li>
+          <li><strong>Cost</strong> is reported in USD using Venice's <code>/v1/models</code> pricing at run-time, multiplied by token counts consumed.</li>
+          <li><strong>Latency</strong> is the wall-clock between request and final token. Long-tail latencies (300–510 s) reflect reasoning-heavy models that produce long completion bodies; this is on purpose — see the harness-cap change on 2026-07-24.</li>
+          <li><strong>Score / $</strong> is average score divided by total cost; higher = better value.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <span class="attribute">Sources</span>
+        <h2>Where this lives on disk</h2>
+        <ul class="plain-list">
+          <li><code>data/results.json</code> — every (model, benchmark) pair with status, score, latency, tokens, cost.</li>
+          <li><code>data/changelog.json</code> — the source of truth for this page.</li>
+          <li><code>model_registry.py</code> — model roster; adding a model here is one of two ways to onboard it (the other is editing <code>add()</code> directly).</li>
+          <li><code>run_benchmarks.py --run-real --model &lt;id&gt;</code> — CLI for re-running any model.</li>
+          <li><code>generate_standalone.py</code> — rebuilds <code>benchmarkviv-standalone.html</code> (and now <code>about-standalone.html</code>) for offline use.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="changelog">
+    <div class="container">
+      <h2 class="section-title">Changelog</h2>
+      <p class="section-sub">Newest entries first. Source: <a href="data/changelog.json"><code>data/changelog.json</code></a>.</p>
+      <div id="changelogList" class="changelog-list"></div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>BenchmarkViv · last rebuilt <span id="changelogTs">—</span></p>
+    </div>
+  </footer>
+
+  <script src="assets/app.js?v=6"></script>
+  <script>
+    // Render the live changelog from data/changelog.json.
+    (async function renderChangelog() {
+      var statusEl = document.getElementById('dataStatus');
+      var listEl   = document.getElementById('changelogList');
+      var tsEl     = document.getElementById('changelogTs');
+      try {
+        var data;
+        if (window.CHANGELOG_DATA) {
+          data = window.CHANGELOG_DATA;
+        } else {
+          var res = await fetch('data/changelog.json', { cache: 'no-store' });
+          if (!res.ok) throw new Error('HTTP ' + res.status);
+          data = await res.json();
+        }
+        var entries = (data.entries || []).slice().sort(function(a, b) {
+          return (b.time_utc || '').localeCompare(a.time_utc || '');
+        });
+        tsEl.textContent = (data.generated_at || '').replace('T', ' ').replace('Z', ' UTC');
+        statusEl.textContent = '● ' + entries.length + ' entries · last ' + (entries[0] && entries[0].date || 'unknown');
+        statusEl.classList.add('ready');
+
+        var html = entries.map(function(e) {
+          var cat = (e.category || 'site').toLowerCase();
+          var id  = e.id || '';
+          var date = e.date || (e.time_utc || '').slice(0, 10);
+          var sum = e.summary || '';
+          var det = (e.details || []).map(function(d) {
+            return '<li>' + escapeHtml(d) + '</li>';
+          }).join('');
+          var fields = [];
+          if (e.cost_usd != null) fields.push('<span class="chip">cost $' + Number(e.cost_usd).toFixed(4) + '</span>');
+          if (e.sweep_pairs_succeeded != null) fields.push('<span class="chip ok">' + e.sweep_pairs_succeeded + '/' + ((e.sweep_pairs_succeeded || 0) + (e.sweep_pairs_failed || 0)) + ' succeeded</span>');
+          if (e.sweep_pairs_failed) fields.push('<span class="chip err">' + e.sweep_pairs_failed + ' failed</span>');
+          if (e.rows_replaced) fields.push('<span class="chip">' + e.rows_replaced + ' row replaced</span>');
+          if (e.score_after != null) fields.push('<span class="chip ok">score ' + e.score_after + '</span>');
+          if (e.models_added) for (var i=0;i<e.models_added.length;i++) fields.push('<span class="chip">+' + e.models_added[i] + '</span>');
+          if (e.files_added) for (var i=0;i<e.files_added.length;i++) fields.push('<span class="chip">file added: ' + e.files_added[i].split(' ')[0] + '</span>');
+          if (e.files_modified) for (var i=0;i<e.files_modified.length;i++) fields.push('<span class="chip">file modified</span>');
+          return [
+            '<article class="changelog-entry cat-' + cat + '">',
+            '  <header>',
+            '    <span class="changelog-date">' + escapeHtml(date) + '</span>',
+            '    <span class="changelog-cat">' + escapeHtml(cat) + '</span>',
+            '    <span class="changelog-id mono">' + escapeHtml(id) + '</span>',
+            '  </header>',
+            '  <h3>' + escapeHtml(sum) + '</h3>',
+            det ? ('  <ul class="changelog-details">' + det + '</ul>') : '',
+            fields.length ? ('  <p class="changelog-fields">' + fields.join(' ') + '</p>') : '',
+            '</article>'
+          ].join('\n');
+        }).join('\n');
+        listEl.innerHTML = html || '<p class="muted">No changelog entries yet.</p>';
+      } catch (err) {
+        statusEl.textContent = '● failed to load changelog: ' + err.message;
+        statusEl.classList.add('fallback');
+      }
+      function escapeHtml(s) {
+        return String(s).replace(/[&<>"']/g, function(c) {
+          return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', '\'': '&#39;' }[c];
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

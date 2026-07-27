@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="BenchmarkViv. Instructional AI benchmarks for Venice API models: intent, interface generation, execution planning, and interactive game generation." />
+  <meta name="description" content="BenchmarkViv. Practical AI benchmarks for Venice API models: intent, UI generation, brick physics coding, startup planning, and pharma domain tracks." />
   <title>BenchmarkViv</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/styles.css?v=4" />
+  <link rel="stylesheet" href="assets/styles.css?v=7" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <script>
     (function(){
@@ -32,8 +32,8 @@
       <ul class="nav-links" id="siteNav">
         <li><a href="#leaderboard">Leaderboard</a></li>
         <li><a href="#tracks">Tracks</a></li>
-        <li><a href="arcade.html">Arcade</a></li>
-        <li><a href="experimental-design.html">Design</a></li>
+                <li><a href="experimental-design.html">Design</a></li>
+        <li><a href="about.html">About</a></li>
       </ul>
       <a href="experimental-design.html" class="nav-cta">Experimental Design</a>
       <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button>
@@ -45,7 +45,7 @@
     <div class="container hero-content">
       <span class="eyebrow">Venice API Evaluation</span>
       <h1>Find the right model for the <em>work in front of you</em></h1>
-      <p>Four practical evaluations, clear visual comparisons, and an Arcade where you can play what the models actually made.</p>
+      <p>Eight practical evaluations: core capability, pharma domain, value density at a fixed token budget, and multimodal reverse-prompt fidelity.</p>
       <div class="hero-actions">
         <a href="#leaderboard" class="btn btn-primary">Explore the data</a>
         <a href="experimental-design.html" class="btn btn-ghost">Experimental Design</a>
@@ -58,15 +58,15 @@
     <div class="container">
       <div class="bento">
         <div class="stat">
-          <div class="stat-value" id="statModels">13</div>
+          <div class="stat-value" id="statModels">16</div>
           <div class="stat-label">Models evaluated</div>
         </div>
         <div class="stat">
-          <div class="stat-value" id="statBenchmarks">5</div>
+          <div class="stat-value" id="statBenchmarks">8</div>
           <div class="stat-label">Benchmark tracks</div>
         </div>
         <div class="stat">
-          <div class="stat-value" id="statRuns">64/65</div>
+          <div class="stat-value" id="statRuns">95/96</div>
           <div class="stat-label">Scored evaluation runs</div>
         </div>
         <div class="stat">
@@ -74,7 +74,7 @@
           <div class="stat-label">Top VivIndex · <span id="statVivLeader">-</span></div>
         </div>
         <div class="stat">
-          <div class="stat-value">$<span id="statCost">4.93</span></div>
+          <div class="stat-value">$<span id="statCost">0.62</span></div>
           <div class="stat-label">Est. cost per full run</div>
         </div>
       </div>
@@ -85,7 +85,7 @@
     <div class="container">
       <div class="section-head">
         <h2>VivIndex. One number per model.</h2>
-        <p>A transparent weighted composite across four tracks: Startup in a Weekend 35%, Intent Understanding 25%, One-Shot UI 20%, and Brick Breaker Realism 20%. Higher is better. Use the charts below to see where one number hides a trade-off.</p>
+        <p>A transparent weighted composite across four core tracks: Startup in a Weekend 35%, Intent Understanding 25%, One-Shot UI 20%, and Brick Breaker Realism 20%. Pharma tracks are scored and charted separately. Higher is better.</p>
       </div>
       <div class="charts-grid">
         <div class="chart-card">
@@ -99,7 +99,7 @@
   <section id="tracks">
     <div class="container">
       <div class="section-head">
-        <h2>Four useful evaluation dimensions</h2>
+        <h2>Eight useful evaluation dimensions</h2>
         <p>Every lane explains what is tested, why it matters, and what a strong result looks like.</p>
       </div>
       <div class="bench-grid">
@@ -143,22 +143,51 @@
             <span>Trade-offs</span>
           </div>
         </article>
+        <article class="bench-card reveal">
+          <div class="bench-icon">05</div>
+          <h3>Pharma: Drug-Drug Interaction</h3>
+          <p>Identify clinically significant interactions from a short medication list. Scored on detection, severity, mechanism, and clinical action quality.</p>
+          <div class="bench-tags">
+            <span>Clinical</span>
+            <span>Safety</span>
+            <span>Evidence</span>
+          </div>
+        </article>
+        <article class="bench-card reveal">
+          <div class="bench-icon acid">06</div>
+          <h3>Pharma: Regulatory Comprehension</h3>
+          <p>Apply ICH E6(R2) principles to a monitoring and consent scenario. Scored on requirement accuracy, citation specificity, and avoiding fabrication.</p>
+          <div class="bench-tags">
+            <span>ICH E6</span>
+            <span>Monitoring</span>
+            <span>Consent</span>
+          </div>
+        </article>
+
+        <article class="bench-card reveal">
+          <div class="bench-icon magenta">07</div>
+          <h3>Value Density @1K</h3>
+          <p>Fixed 1024-token budget. Models must return a precise clinical JSON object. Score is checklist-based so verbosity cannot buy points. We also report score per 1K tokens and per dollar.</p>
+          <div class="bench-tags">
+            <span>Fixed budget</span>
+            <span>JSON checklist</span>
+            <span>Anti-verbosity</span>
+          </div>
+        </article>
+        <article class="bench-card reveal">
+          <div class="bench-icon acid">08</div>
+          <h3>Reverse-Prompt Vision</h3>
+          <p>A complex image is generated with nano-banana-2. Vision models reconstruct the generation prompt with no access to the source. A judge scores attribute fidelity against a fixed checklist.</p>
+          <div class="bench-tags">
+            <span>Multimodal</span>
+            <span>Prompt recovery</span>
+            <span>Judge rubric</span>
+          </div>
+        </article>
       </div>
     </div>
   </section>
 
-  <section>
-    <div class="container">
-      <div class="arcade-teaser-card reveal">
-        <div>
-          <span class="eyebrow">Arcade</span>
-          <h2>Same prompt. Multiple models. One Arcade.</h2>
-          <p>Each model generates its own interpretation of the most advanced brick breaker possible. Play them all on the Arcade page.</p>
-        </div>
-        <a href="arcade.html" class="btn btn-primary">Launch Arcade</a>
-      </div>
-    </div>
-  </section>
 
   <section id="leaderboard" class="leaderboard vt-leaderboard">
     <div class="container">
@@ -209,11 +238,34 @@
     </div>
   </section>
 
+
+  <section id="efficiency">
+    <div class="container">
+      <div class="section-head">
+        <h2>Value density & vision fidelity</h2>
+        <p>Value Density measures useful checklist score under a hard 1K-token cap. Reverse-Prompt Vision measures how completely multimodal models recover a complex image prompt they never saw.</p>
+      </div>
+      <div class="charts-grid">
+        <div class="chart-card reveal">
+          <h3>Value Density: score per 1K tokens. Higher is better.</h3>
+          <div class="chart-wrap"><canvas id="valueDensityChart"></canvas></div>
+        </div>
+        <div class="chart-card reveal">
+          <h3>Reverse-Prompt Vision fidelity (0-100)</h3>
+          <div class="chart-wrap chart-wrap-tall"><canvas id="reversePromptChart"></canvas></div>
+        </div>
+      </div>
+      <div class="callout" style="margin-top:1rem">
+        <p><strong>Fixture:</strong> source image generated with <code>nano-banana-2</code>. Non-vision models are skipped on the reverse-prompt track (not zero-scored). Judge model scores reconstructed prompts against a 28-attribute checklist.</p>
+      </div>
+    </div>
+  </section>
+
   <section id="comparison">
     <div class="container">
       <div class="section-head">
         <h2>Per-model profiles</h2>
-        <p>Score distribution across the four benchmark tracks.</p>
+        <p>Score distribution across all six benchmark tracks.</p>
       </div>
       <div class="compare-grid" id="modelComparison"></div>
     </div>
@@ -246,9 +298,22 @@
           <h3>5 · VivIndex Composite</h3>
           <p>Weighted average of four tracks. Startup in a Weekend 35%, Intent Understanding 25%, One-Shot UI 20%, Brick Breaker 20%. Missing benchmarks are labelled and weights are renormalized rather than scored as zero.</p>
         </article>
-                        <article class="method-card reveal">
-          <h3>6 · Full protocol</h3>
-          <p>Exact prompts, scoring math, Arcade design, and non-claims are published on the Experimental Design page — the lab notebook for this suite.</p>
+        <article class="method-card reveal">
+          <h3>6 · Pharma tracks</h3>
+          <p>Drug-drug interaction identification and regulatory guideline comprehension are scored and charted for domain fitness. They are not folded into VivIndex so the composite remains comparable over time.</p>
+        </article>
+
+        <article class="method-card reveal">
+          <h3>7 · Value Density @1K</h3>
+          <p>Identical clinical JSON task, <code>max_tokens=1024</code>. Heuristic checklist on schema validity, required fields, and clinical correctness. Secondary metrics: score/1K tokens and score/USD. Length cannot inflate the primary score.</p>
+        </article>
+        <article class="method-card reveal">
+          <h3>8 · Reverse-Prompt Vision</h3>
+          <p>Complex image from nano-banana-2. Models receive only the image + reconstruct-prompt instruction. A separate judge compares the reconstruction to the hidden source prompt via a fixed attribute checklist. Non-vision models are marked skipped.</p>
+        </article>
+        <article class="method-card reveal">
+          <h3>9 · Full protocol</h3>
+          <p>Exact prompts, scoring math, and non-claims are published on the Experimental Design page — the lab notebook for this suite.</p>
           <p style="margin-top:0.8rem"><a class="btn btn-primary" href="experimental-design.html">Open Experimental Design</a></p>
         </article>
       </div>
@@ -260,13 +325,12 @@
       <div class="footer-logo">Benchmark<span>Viv</span></div>
       <p>Independent benchmark showcase for Venice API models.</p>
       <div class="footer-links">
-        <a href="arcade.html">Arcade</a>
-        <a href="experimental-design.html">Experimental Design</a>
+                <a href="experimental-design.html">Experimental Design</a>
         <a href="#leaderboard">Leaderboard</a>
       </div>
     </div>
   </footer>
 
-  <script src="assets/app.js?v=4"></script>
+  <script src="assets/app.js?v=7"></script>
 </body>
 </html>

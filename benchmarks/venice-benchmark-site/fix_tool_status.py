@@ -3,7 +3,6 @@ root = Path('/Users/vivgatesai/.openclaw/workspace/benchmarks/venice-benchmark-s
 report = []
 for p in [
     root/'index.html',
-    root/'arcade.html',
     root/'experimental-design.html',
     root/'assets/styles.css',
     root/'assets/app.js',

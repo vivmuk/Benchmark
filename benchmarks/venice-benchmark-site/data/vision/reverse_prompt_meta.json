@@ -1,0 +1,124 @@
+{
+  "generated_at": "2026-07-26T17:44:55.959196+00:00",
+  "image_model": "nano-banana-2",
+  "source_prompt": "Ultra-detailed surreal pharmaceutical research laboratory at twilight, wide cinematic 16:9 composition. Center: a translucent teal glass molecular model of a double-helix drug scaffold floating above a brushed-steel bench, with glowing cyan bond lines and amber atom nodes. Left: a wall-sized holographic dashboard titled \"EvidenceGrade AI\" in bold white sans-serif, showing a 5-tier grade ladder (A emerald, B teal, C gold, D orange, F crimson) and a line chart labeled \"Citation Confidence 2019-2026\". Right: a large arched window revealing a rainy neo-Tokyo street with neon kanji signs reflecting on wet asphalt, a red umbrella leaning against the window sill, and a black cat silhouette on the ledge. Foreground: an open leather notebook with handwritten notes \"CYP3A4 interaction risk\" and a fountain pen, next to a white ceramic coffee cup with a teal lid and a cracked porcelain saucer. Ceiling: brass articulated lamps casting warm pools of light; one lamp has a green glass shade. Background shelves: amber glass reagent bottles labeled Aspirin, Warfarin, Ibuprofen in clean black type, a vintage brass microscope, and a small potted monstera plant with one yellow leaf. Atmosphere: volumetric god-rays through rain-streaked glass, subtle film grain, high dynamic range, teal-and-amber complementary color grade, no logos of real companies, no watermarks, photorealistic mixed with holographic UI.",
+  "checklist": [
+    {
+      "id": "lab_setting",
+      "desc": "pharmaceutical / research laboratory setting"
+    },
+    {
+      "id": "twilight",
+      "desc": "twilight or dusk lighting"
+    },
+    {
+      "id": "molecule_center",
+      "desc": "central floating molecular / double-helix model"
+    },
+    {
+      "id": "teal_glass",
+      "desc": "teal/cyan glass or glowing cyan bonds"
+    },
+    {
+      "id": "amber_nodes",
+      "desc": "amber atom nodes or warm accent nodes"
+    },
+    {
+      "id": "holographic_dashboard",
+      "desc": "holographic dashboard or wall display"
+    },
+    {
+      "id": "evidencegrade_title",
+      "desc": "title text EvidenceGrade AI (or close)"
+    },
+    {
+      "id": "grade_ladder",
+      "desc": "5-tier grade ladder A-F with colors"
+    },
+    {
+      "id": "citation_chart",
+      "desc": "chart about citation confidence over years"
+    },
+    {
+      "id": "arched_window",
+      "desc": "large arched window"
+    },
+    {
+      "id": "rainy_city",
+      "desc": "rainy city / neo-Tokyo street outside"
+    },
+    {
+      "id": "neon_kanji",
+      "desc": "neon kanji or Japanese neon signs"
+    },
+    {
+      "id": "red_umbrella",
+      "desc": "red umbrella"
+    },
+    {
+      "id": "black_cat",
+      "desc": "black cat silhouette"
+    },
+    {
+      "id": "notebook",
+      "desc": "open leather notebook"
+    },
+    {
+      "id": "cyp3a4_note",
+      "desc": "handwritten CYP3A4 interaction risk note"
+    },
+    {
+      "id": "fountain_pen",
+      "desc": "fountain pen"
+    },
+    {
+      "id": "coffee_cup",
+      "desc": "ceramic coffee cup with teal lid"
+    },
+    {
+      "id": "cracked_saucer",
+      "desc": "cracked porcelain saucer"
+    },
+    {
+      "id": "brass_lamps",
+      "desc": "brass articulated ceiling lamps"
+    },
+    {
+      "id": "green_shade",
+      "desc": "one lamp with green glass shade"
+    },
+    {
+      "id": "reagent_bottles",
+      "desc": "amber reagent bottles"
+    },
+    {
+      "id": "drug_labels",
+      "desc": "labels Aspirin/Warfarin/Ibuprofen"
+    },
+    {
+      "id": "microscope",
+      "desc": "vintage brass microscope"
+    },
+    {
+      "id": "monstera",
+      "desc": "monstera plant with one yellow leaf"
+    },
+    {
+      "id": "volumetric_light",
+      "desc": "volumetric light / god-rays through glass"
+    },
+    {
+      "id": "teal_amber_grade",
+      "desc": "teal-and-amber color grade"
+    },
+    {
+      "id": "photoreal_hologram_mix",
+      "desc": "photoreal mixed with holographic UI"
+    }
+  ],
+  "judge_model": "openai-gpt-56-luna",
+  "reverse_prompt_instruction": "You are given a single image. Reconstruct the most likely original text-to-image prompt that generated it. Do NOT invent a caption style summary only \u2014 write a generation prompt a diffusion/image model could use. Include concrete visual attributes: subjects, layout (left/center/right/foreground/background), colors, materials, text visible in the image (transcribe exactly if readable), lighting, atmosphere, and style. If text is unreadable, say so. Output ONLY the reconstructed prompt, no preamble.",
+  "image_path": "data/vision/reverse_prompt_source.png",
+  "image_bytes": 10785451,
+  "image_request_id": "N8gMOpQVbpN4i3P6aif1HiLbJ1CHpT1f"
+}

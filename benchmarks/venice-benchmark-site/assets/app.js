@@ -4,11 +4,16 @@
 
   const DATA_URL = "data/results.json";
 
+  // Chart tracks: VivIndex core four + pharma domain tracks shown in score charts.
   const BENCHMARKS = [
     { id: "intent-understanding", label: "Intent Understanding" },
     { id: "one-shot-ui", label: "One-Shot UI" },
     { id: "brick-breaker-realism", label: "Brick Breaker" },
     { id: "startup-in-a-weekend", label: "Startup in a Weekend" },
+    { id: "pharma-drug-interaction", label: "Pharma DDI" },
+    { id: "pharma-regulatory-comprehension", label: "Pharma Regulatory" },
+    { id: "value-density", label: "Value Density @1K" },
+    { id: "reverse-prompt-vision", label: "Reverse-Prompt Vision" },
   ];
 
   // One saturated, accessible identity per model. These values are used in every chart.
@@ -22,22 +27,26 @@
     "GPT-5.5":           "#E11D74",
     "Fable 5":           "#84A800",
     "Opus 4.8":          "#9333EA",
+    "Opus 5":            "#6D28D9",
     "GLM 5.2":           "#EC4899",
     "DeepSeek V4":       "#0891B2",
     "MiniMax M3":        "#D97706",
     "Grok 4.5":          "#4F46E5",
+    "Inkling":           "#0EA5E9",
+    "Kimi K3":           "#F59E0B",
   };
 
   const FALLBACK_DATA = { generated: "", source: "fallback", results: [] };
 
-  // VivIndex weights prioritize execution-ready planning while retaining interactive
-  // and UI capability. The published methodology documents this choice.
+  // VivIndex remains the original four-track composite. Pharma tracks are shown in
+  // charts/profiles but do not enter VivIndex weights (methodology stays stable).
   const VIVINDEX_WEIGHTS = {
     "intent-understanding": 0.25,
     "one-shot-ui": 0.20,
     "brick-breaker-realism": 0.20,
     "startup-in-a-weekend": 0.35,
   };
+  const VIVINDEX_TRACK_COUNT = Object.keys(VIVINDEX_WEIGHTS).length;
 
   const state = {
     data: [],
@@ -45,7 +54,7 @@
     isLive: false,
     sort: { key: "score", dir: -1 },
     filter: { text: "", benchmark: "all" },
-    charts: { leaderboard: null, benchmark: null, costValue: null, vivIndex: null, speed: null, latency: null, sparklines: [] },
+    charts: { leaderboard: null, benchmark: null, costValue: null, vivIndex: null, speed: null, latency: null, valueDensity: null, reversePrompt: null, sparklines: [] },
   };
 
   const $ = (sel, root = document) => root.querySelector(sel);
@@ -80,7 +89,7 @@
       });
       const vivIndex = wTotal > 0 ? wSum / wTotal : 0;
       const trackCount = mr.filter((r) => VIVINDEX_WEIGHTS[r.benchmark] != null && r.score != null).length;
-      const fullCoverage = trackCount >= BENCHMARKS.length;
+      const fullCoverage = trackCount >= VIVINDEX_TRACK_COUNT;
       // Output speed: total completion tokens / total generation time.
       const speedRows = mr.filter((r) => r.completionTokens > 0 && r.latency > 0);
       const tokensPerSec = speedRows.length
@@ -187,7 +196,7 @@
     state.charts.vivIndex = new Chart(canvas, {
       type: "bar",
       data: {
-        labels: aggs.map((a) => a.fullCoverage ? a.model : `${a.model} (${a.trackCount}/${BENCHMARKS.length} tracks)`),
+        labels: aggs.map((a) => a.fullCoverage ? a.model : `${a.model} (${a.trackCount}/${VIVINDEX_TRACK_COUNT} VivIndex tracks)`),
         datasets: [{
           label: "VivIndex",
           data: aggs.map((a) => Number(a.vivIndex.toFixed(1))),
@@ -210,7 +219,7 @@
               label: (ctx) => {
                 const a = aggs[ctx.dataIndex];
                 const base = ` VivIndex: ${ctx.raw} (weighted: startup 35%, intent 25%, UI 20%, brick 20%)`;
-                return a.fullCoverage ? base : [base, ` ⚠ Partial coverage: evaluated on ${a.trackCount} of ${BENCHMARKS.length} tracks`];
+                return a.fullCoverage ? base : [base, ` ⚠ Partial VivIndex coverage: ${a.trackCount} of ${VIVINDEX_TRACK_COUNT} core tracks`];
               },
             },
           },
@@ -491,6 +500,96 @@
     });
   }
 
+
+  function renderValueDensityChart() {
+    const canvas = $("#valueDensityChart");
+    if (!canvas || typeof Chart === "undefined") return;
+    const rows = state.data.filter((r) => r.benchmark === "value-density" && r.score != null && r.tokens > 0);
+    if (!rows.length) return;
+    const byModel = {};
+    rows.forEach((r) => {
+      const v = r.tokens ? r.score / (r.tokens / 1000) : 0;
+      byModel[r.model] = { score: r.score, tokens: r.tokens, yield: v, cost: r.cost };
+    });
+    const aggs = Object.entries(byModel).map(([model, m]) => ({ model, ...m }))
+      .sort((a, b) => b.yield - a.yield);
+    if (state.charts.valueDensity) state.charts.valueDensity.destroy();
+    state.charts.valueDensity = new Chart(canvas, {
+      type: "bar",
+      data: {
+        labels: aggs.map((a) => a.model),
+        datasets: [{
+          label: "Checklist score per 1K tokens",
+          data: aggs.map((a) => Number(a.yield.toFixed(2))),
+          backgroundColor: aggs.map((a) => modelColor(a.model, 0.75)),
+          borderColor: aggs.map((a) => modelColor(a.model)),
+          borderWidth: 1.5,
+          borderRadius: 6,
+          maxBarThickness: 48,
+        }],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: (ctx) => {
+                const a = aggs[ctx.dataIndex];
+                return [
+                  ` Yield: ${ctx.raw} score / 1K tok`,
+                  ` Score: ${a.score}`,
+                  ` Tokens: ${Math.round(a.tokens)}`,
+                  ` Cost: $${(a.cost || 0).toFixed(4)}`,
+                ];
+              },
+            },
+          },
+        },
+        scales: {
+          y: { beginAtZero: true, title: { display: true, text: "Score per 1K total tokens" }, grid: { color: "rgba(18,18,26,0.08)" } },
+          x: { grid: { display: false } },
+        },
+      },
+    });
+  }
+
+  function renderReversePromptChart() {
+    const canvas = $("#reversePromptChart");
+    if (!canvas || typeof Chart === "undefined") return;
+    const rows = state.data.filter((r) => r.benchmark === "reverse-prompt-vision" && r.score != null);
+    if (!rows.length) return;
+    const aggs = rows.map((r) => ({ model: r.model, score: r.score }))
+      .sort((a, b) => b.score - a.score);
+    if (state.charts.reversePrompt) state.charts.reversePrompt.destroy();
+    state.charts.reversePrompt = new Chart(canvas, {
+      type: "bar",
+      data: {
+        labels: aggs.map((a) => a.model),
+        datasets: [{
+          label: "Reverse-prompt fidelity",
+          data: aggs.map((a) => a.score),
+          backgroundColor: aggs.map((a) => modelColor(a.model, 0.75)),
+          borderColor: aggs.map((a) => modelColor(a.model)),
+          borderWidth: 1.5,
+          borderRadius: 6,
+          maxBarThickness: 48,
+        }],
+      },
+      options: {
+        indexAxis: "y",
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { min: 0, max: 100, grid: { color: "rgba(18,18,26,0.08)" } },
+          y: { grid: { display: false } },
+        },
+      },
+    });
+  }
+
   function populateStats() {
     const aggs = modelAggregates(state.data);
     const top = aggs.length ? aggs.reduce((best, a) => (a.vivIndex > best.vivIndex ? a : best)) : null;
@@ -499,13 +598,20 @@
     el("#statBenchmarks", BENCHMARKS.length);
     el("#statRuns", `${state.runSummary.scored}/${state.runSummary.attempted}`);
     el("#statTopScore", top ? top.vivIndex.toFixed(1) : "—");
+    // Average estimated full-suite cost across models with scored runs.
+    const suiteCosts = uniqueModels(state.data).map((model) => {
+      const rows = state.data.filter((r) => r.model === model && r.cost != null);
+      return rows.reduce((a, r) => a + r.cost, 0);
+    }).filter((n) => n > 0);
+    const avgSuite = suiteCosts.length ? suiteCosts.reduce((a, b) => a + b, 0) / suiteCosts.length : null;
+    el("#statCost", avgSuite != null ? avgSuite.toFixed(2) : "—");
     const leader = $("#statVivLeader");
     if (leader && top) leader.textContent = top.model;
     const dataNote = $("#dataNote span");
     if (dataNote) {
       dataNote.textContent = state.runSummary.excluded
-        ? `${state.runSummary.scored} scored runs; ${state.runSummary.excluded} failed or timed-out run is excluded from score, cost, and latency aggregates. Partial-coverage models are labelled in VivIndex.`
-        : `${state.runSummary.scored} scored runs across ${BENCHMARKS.length} tracks. All models have complete track coverage.`;
+        ? `${state.runSummary.scored} scored runs; ${state.runSummary.excluded} failed/excluded from score aggregates. Pharma tracks are charted; VivIndex uses 4 core tracks.`
+        : `${state.runSummary.scored} scored runs across ${BENCHMARKS.length} tracks (${VIVINDEX_TRACK_COUNT}-track VivIndex).`;
     }
   }
 
@@ -610,6 +716,8 @@
     renderBenchmarkChart();
     renderCostValueChart();
     renderSpeedCharts();
+    renderValueDensityChart();
+    renderReversePromptChart();
     renderComparison();
     populateStats();
     initReveal();

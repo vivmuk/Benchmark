@@ -519,19 +519,6 @@ code, pre {
   }
 }
 
-/* Arcade teaser */
-.arcade-teaser-card {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 1.4rem;
-  align-items: center;
-  padding: 1.5rem 1.4rem;
-  border: 1px solid rgba(0, 87, 230, 0.22);
-  background: linear-gradient(135deg, #FFFFFF, #F3F7FF);
-  border-radius: 16px;
-  box-shadow: var(--shadow);
-}
-
 .arcade-teaser-card h2 {
   font-size: clamp(1.25rem, 3vw, 1.55rem);
   margin: 0.45rem 0;
@@ -936,127 +923,8 @@ code, pre {
   font-weight: 600;
 }
 
-.arcade-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
-}
-
-.arcade-card {
-  background: var(--surface);
-  border: 1px solid var(--rule);
-  border-radius: 16px;
-  padding: 1.1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  box-shadow: var(--shadow);
-  transition: border-color 160ms var(--ease), transform 160ms var(--ease);
-}
-
-.arcade-card:hover {
-  border-color: rgba(0, 87, 230, 0.35);
-  transform: translateY(-2px);
-}
-
-.arcade-card header {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 0.6rem;
-  flex-wrap: wrap;
-}
-
-.arcade-card h3 {
-  font: 600 1.05rem var(--font-display);
-  margin: 0;
-}
-
-.arcade-card .slot-num {
-  font: 600 0.7rem var(--font-mono);
-  color: var(--text-dim);
-  padding: 0.22rem 0.48rem;
-  background: var(--surface-2);
-  border-radius: 999px;
-  letter-spacing: 0.05em;
-}
-
-.arcade-card .game-frame-wrap {
-  aspect-ratio: 16 / 11;
-  min-height: 220px;
-}
-
-.arcade-card dl {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 0.5rem;
-  font: 500 0.7rem var(--font-mono);
-  color: var(--text-dim);
-}
-
-.arcade-card dt {
-  display: block;
-}
-
-.arcade-card dd {
-  margin: 0.15rem 0 0;
-  color: var(--text);
-  font: 650 0.92rem var(--font-display);
-  font-variant-numeric: tabular-nums;
-}
-
-.arcade-card .score-bar {
-  width: 100%;
-}
-
-.arcade-card .score-accent {
-  color: var(--acid);
-}
-
-.arcade-card .score-mid {
-  color: var(--cobalt);
-}
-
-.arcade-card .score-low {
-  color: var(--magenta);
-}
-
-.arcade-prompt-box {
-  margin: 0 0 1.5rem;
-  padding: 1rem 1.1rem;
-  border-radius: 12px;
-  background: var(--surface);
-  border: 1px solid var(--rule);
-  box-shadow: var(--shadow);
-  color: var(--text-dim);
-  font-size: 0.92rem;
-}
-
-.arcade-prompt-box strong {
-  color: var(--text);
-  display: block;
-  margin-bottom: 0.4rem;
-}
-
-.arcade-prompt-box code,
-.arcade-prompt-box pre {
-  white-space: pre-wrap;
-  word-break: break-word;
-  font-size: 0.82rem;
-  color: var(--text);
-}
 
 @media (max-width: 860px) {
-  .arcade-grid {
-    grid-template-columns: 1fr;
-  }
-  .arcade-card dl {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-  .arcade-card .game-frame-wrap {
-    min-height: 280px;
-    aspect-ratio: 4 / 5;
-  }
 }
 
 /* Experimental Design page */
