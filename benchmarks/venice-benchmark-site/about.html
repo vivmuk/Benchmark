@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/styles.css?v=8" />
+  <link rel="stylesheet" href="assets/styles.css?v=10" />
 </head>
 <body>
   <div class="gpu-bg" aria-hidden="true"><canvas id="gpuCanvas"></canvas></div>
@@ -32,7 +32,7 @@
     <div class="container hero-content">
       <span class="eyebrow">About</span>
       <h1>Project history and a running changelog of every benchmark &amp; site update</h1>
-      <p>Six evaluations across text generation, UI design, interactive physics, drug interactions, regulatory comprehension, and start-up planning. Each row in the leaderboard carries a price tag. The full history lives in <code>data/changelog.json</code>.</p>
+      <p>Seven evaluations across text generation, UI design, start-up planning, drug interactions, regulatory comprehension, value density, and reverse-prompt vision. Brick Breaker is retired. Each row in the leaderboard carries a price tag. The full history lives in <code>data/changelog.json</code>.</p>
       <p class="data-status" id="dataStatus" aria-live="polite">Loading changelog…</p>
     </div>
   </header>
@@ -43,7 +43,7 @@
         <span class="attribute">Methodology</span>
         <h2>What the columns mean</h2>
         <ul class="plain-list">
-          <li><strong>Score</strong> (0–100) is a hand-tuned rubric per benchmark: intent-class accuracy and structure; UI generation code-runs-and-renders; brick-breaker levels <em>playable</em>; pharma-ddi correct drug-pair identification; regulatory comprehension of WHO/FDA citations; startup-in-a-weekend feasibility.</li>
+          <li><strong>Score</strong> (0–100) is a hand-tuned rubric per benchmark: intent-class accuracy and structure; UI generation code-runs-and-renders; pharma-ddi correct drug-pair identification; regulatory comprehension of WHO/FDA citations; startup-in-a-weekend feasibility.</li>
           <li><strong>Cost</strong> is reported in USD using Venice's <code>/v1/models</code> pricing at run-time, multiplied by token counts consumed.</li>
           <li><strong>Latency</strong> is the wall-clock between request and final token. Long-tail latencies (300–510 s) reflect reasoning-heavy models that produce long completion bodies; this is on purpose — see the harness-cap change on 2026-07-24.</li>
           <li><strong>Score / $</strong> is average score divided by total cost; higher = better value.</li>
@@ -78,7 +78,7 @@
     </div>
   </footer>
 
-  <script src="assets/app.js?v=8"></script>
+  <script src="assets/app.js?v=10"></script>
   <script>
     // Render the live changelog from data/changelog.json.
     (async function renderChangelog() {

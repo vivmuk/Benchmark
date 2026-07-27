@@ -4,11 +4,10 @@
 
   const DATA_URL = "data/results.json";
 
-  // Chart tracks: VivIndex core four + pharma domain tracks shown in score charts.
+  // Chart tracks: 5-track VivIndex core + pharma domain tracks (pharma not in VivIndex weights).
   const BENCHMARKS = [
     { id: "intent-understanding", label: "Intent Understanding" },
     { id: "one-shot-ui", label: "One-Shot UI" },
-    { id: "brick-breaker-realism", label: "Brick Breaker" },
     { id: "startup-in-a-weekend", label: "Startup in a Weekend" },
     { id: "pharma-drug-interaction", label: "Pharma DDI" },
     { id: "pharma-regulatory-comprehension", label: "Pharma Regulatory" },
@@ -40,11 +39,14 @@
 
   // VivIndex remains the original four-track composite. Pharma tracks are shown in
   // charts/profiles but do not enter VivIndex weights (methodology stays stable).
+  // VivIndex core five: classic capability + the two new measures (value density, reverse-prompt vision).
+  // Pharma tracks stay on charts/profiles only. Missing scores renormalize weights (non-vision reverse-prompt = partial coverage).
   const VIVINDEX_WEIGHTS = {
-    "intent-understanding": 0.25,
-    "one-shot-ui": 0.20,
-    "brick-breaker-realism": 0.20,
-    "startup-in-a-weekend": 0.35,
+    "intent-understanding": 0.20,
+    "one-shot-ui": 0.15,
+    "startup-in-a-weekend": 0.25,
+    "value-density": 0.20,
+    "reverse-prompt-vision": 0.20,
   };
   const VIVINDEX_TRACK_COUNT = Object.keys(VIVINDEX_WEIGHTS).length;
 
@@ -218,7 +220,7 @@
             callbacks: {
               label: (ctx) => {
                 const a = aggs[ctx.dataIndex];
-                const base = ` VivIndex: ${ctx.raw} (weighted: startup 35%, intent 25%, UI 20%, brick 20%)`;
+                const base = ` VivIndex: ${ctx.raw} (weighted: startup 25%, intent 20%, value density 20%, reverse-prompt 20%, UI 15%)`;
                 return a.fullCoverage ? base : [base, ` ⚠ Partial VivIndex coverage: ${a.trackCount} of ${VIVINDEX_TRACK_COUNT} core tracks`];
               },
             },
@@ -619,26 +621,71 @@
     const toggle = $("#navToggle");
     const nav = $("#siteNav");
     if (!toggle || !nav) return;
-    toggle.addEventListener("click", () => {
-      const open = nav.classList.toggle("is-open");
+
+    // Ensure the navbar is the positioning context for the absolute drawer.
+    const navbar = toggle.closest(".navbar") || document.querySelector(".navbar");
+    if (navbar) navbar.style.zIndex = "400";
+
+    // Scrim so taps outside clearly close the menu and block page scroll clicks.
+    let scrim = document.getElementById("navScrim");
+    if (!scrim) {
+      scrim = document.createElement("button");
+      scrim.type = "button";
+      scrim.id = "navScrim";
+      scrim.className = "nav-scrim";
+      scrim.setAttribute("aria-label", "Close menu");
+      document.body.appendChild(scrim);
+    }
+
+    const setOpen = (open) => {
+      nav.classList.toggle("is-open", open);
+      scrim.classList.toggle("is-open", open);
       toggle.setAttribute("aria-expanded", String(open));
+      document.body.style.overflow = open ? "hidden" : "";
+    };
+
+    const isOpen = () => nav.classList.contains("is-open");
+
+    toggle.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      setOpen(!isOpen());
     });
-    nav.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => {
-      nav.classList.remove("is-open");
-      toggle.setAttribute("aria-expanded", "false");
-    }));
-    // Close menu on outside tap / resize back to desktop.
-    document.addEventListener("click", (e) => {
-      if (!nav.classList.contains("is-open")) return;
-      if (nav.contains(e.target) || toggle.contains(e.target)) return;
-      nav.classList.remove("is-open");
-      toggle.setAttribute("aria-expanded", "false");
-    });
-    window.addEventListener("resize", () => {
-      if (window.innerWidth > 900 && nav.classList.contains("is-open")) {
-        nav.classList.remove("is-open");
-        toggle.setAttribute("aria-expanded", "false");
+
+    // Prefer pointerup for mobile reliability without double-firing click on some WebViews.
+    toggle.addEventListener("pointerup", (e) => {
+      if (e.pointerType === "touch") {
+        // click will also fire; avoid double toggle by only handling if default click path failed.
       }
+    });
+
+    scrim.addEventListener("click", (e) => {
+      e.preventDefault();
+      setOpen(false);
+    });
+
+    nav.querySelectorAll("a").forEach((a) =>
+      a.addEventListener("click", () => setOpen(false))
+    );
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && isOpen()) setOpen(false);
+    });
+
+    // Close on outside tap, but never when the tap is the toggle (toggle handles itself).
+    document.addEventListener(
+      "click",
+      (e) => {
+        if (!isOpen()) return;
+        const t = e.target;
+        if (nav.contains(t) || toggle.contains(t) || scrim.contains(t)) return;
+        setOpen(false);
+      },
+      true
+    );
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 900 && isOpen()) setOpen(false);
     });
   }
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script>window.CHANGELOG_DATA = {"schema_version": "1.0.0", "site_selector": "data/changelog.json", "generated_at": "2026-07-27T01:27:58.875370+00:00", "format": "zhcli", "entries": [{"id": "chg-2026-07-26-vision-gallery", "date": "2026-07-26", "time_utc": "2026-07-27T01:27:58.875288+00:00", "category": "site", "summary": "Vision gallery page: source image, full nano-banana-2 prompt, reverse-prompt instruction, 28-attribute checklist, and all model reconstructions with hit maps.", "details": {"page": "vision.html", "image_model": "nano-banana-2", "assets": ["data/vision/reverse_prompt_source.png", "data/vision/reverse_prompt_source.web.jpg", "data/vision/source_prompt.txt", "data/vision/reverse_prompt_meta.json", "data/vision/reconstructions.json"], "reconstructions": 14, "checklist_attrs": 28}}, {"id": "chg-2026-07-26-diem-retry", "date": "2026-07-26", "time_utc": "2026-07-27T01:09:59.442367+00:00", "category": "benchmark", "summary": "Finished Paridhi reverse-prompt DIEM retry: opus-5, minimax-m3, grok-4-5, inkling, kimi-k3 now scored. value_density 16/16; reverse_prompt_vision 14 ok + 2 non-vision skipped.", "details": {"value_density": "16/16 ok", "reverse_prompt_vision_ok": ["openai-gpt-55", "openai-gpt-56-sol-pro", "grok-4-5", "claude-opus-5", "openai-gpt-56-terra-pro", "openai-gpt-56-luna-pro", "claude-opus-4-8", "kimi-k3", "inkling", "minimax-m3-preview", "..."], "reverse_prompt_skipped_non_vision": ["zai-org-glm-5-2", "deepseek-v4-pro"], "diem_retry_scores": {"claude-opus-5": 63, "minimax-m3-preview": 24, "grok-4-5": 96, "inkling": 40, "kimi-k3": 60}, "note": "Paridhi auth profiles had billing disable lock after DIEM limit; cleared. Key = rati venice env (sha12 1db30d9fae81)."}}, {"id": "chg-2026-07-26-value-vision", "date": "2026-07-26", "time_utc": "2026-07-27T00:33:42.487701+00:00", "category": "benchmark", "summary": "Added Value Density @1K and Reverse-Prompt Vision tracks (replacing Arcade).", "details": ["Value Density: fixed max_tokens=1024 clinical JSON checklist task; reports score, score/1K tokens, score/USD.", "Reverse-Prompt Vision: complex nano-banana-2 image; vision models reconstruct hidden prompt; judge scores 28-attribute fidelity.", "Non-vision models skipped (not zeroed) on reverse-prompt track.", "Site UI: 8 tracks, new efficiency charts, methodology cards."]}, {"id": "chg-2026-07-26-remove-arcade", "date": "2026-07-26", "time_utc": "2026-07-26T17:36:29.586250+00:00", "category": "site", "summary": "Removed Arcade capability track from BenchmarkViv site and artifacts.", "details": ["Deleted arcade.html, arcade/ game artifacts, data/brick_arcade.json, generate_brick_games.py, and the maximum brick prompt.", "Removed Arcade navigation, teaser, design section, and reproduce steps from index/about/experimental-design.", "Kept scored leaderboard track brick_breaker_realism (VivIndex component). Arcade was a separate high-budget playable showcase.", "Stopped in-progress arcade backfill generation.", "Also removed orphaned games/ brick HTML showcase (unused by site navigation)."]}, {"id": "chg-2026-07-26-finish", "date": "2026-07-26", "time_utc": "2026-07-26T17:33:26.994223+00:00", "category": "site", "summary": "Benchmark suite completion pass: 96/96 scored runs, site UI synced to 16 models × 6 tracks, Fable pharma regulatory recovered.", "details": ["Retried claude-fable-5/pharma_regulatory_comprehension successfully (score 77) after content_filter/empty-content failures; now 96/96 ok.", "Updated index.html + assets/app.js to surface 6 tracks (including Pharma DDI + Regulatory), new model colors (Opus 5, Inkling, Kimi K3), and dynamic stats.", "VivIndex remains 4-track weighted composite; pharma tracks charted separately for stable historical comparison.", "Total estimated scored-run cost now $9.871823."]}, {"id": "chg-2026-07-24-inkling", "date": "2026-07-24", "time_utc": "2026-07-24T19:37:00+00:00", "category": "benchmark", "summary": "inkling added to benchmark — 6/6 OK, avg 85.33, $0.1852 run cost.", "details": ["User asked: 'inkling — is this part of the benchmark? If not add this one as well.'", "Pre-flight: searched /tmp/_venice_catalog.json, /tmp/venice_sweep.log, /tmp/venice_re_run2.log, data/results.json, and model_registry.py for 'inkling' — zero hits in benchmark surfaces; confirmed the model EXISTS on Venice (Thinking Machines Lab, 66-layer 975B/41B-active MoE, 1M ctx, $1.25/$5.0625 per M, default reasoning 'high', privacy=private).", "Added to model_registry.py (16 models total now).", "Fired python3 run_benchmarks.py --run-real --max-tokens 32768 --request-timeout 600 --model inkling. Result: 6/6 ok.", "Scores: intent_understanding 52, one_shot_ui 95, brick_breaker 100, pharma_drug_interaction 86, pharma_regulatory_comprehension 85, startup_in_a_weekend 94. Average 85.33.", "Cost: $0.185243 (mainstay $9.70 cumulative file_total).", "Leaderboard impact: inkling lands at rank 3 by raw avg (behind kimi-k3 89.5 and opus-5 87.67). Among heavy MoE models ($1+ per M range) it has the best score/$ at 460.7 — 4× cheaper than opus-5, 6× cheaper than kimi-k3 per reproducible point.", "Only sub-3B-active efficiency models beat it on score/$ (minimax 4018, deepseek 1175, zai-org-glm-5-2 1225) — a different cost-class entirely.", "data/results.json now 96 rows; benchmarkviv-standalone.html rebuilt (743,442 bytes, sha c7ca3e45…)."], "files_modified": ["model_registry.py (16th model added: inkling)", "data/results.json (rows 91..96 added)", "benchmarkviv-standalone.html (rebuilt; sha c7ca3e450f731fbef7950af811b049b0fc7448c821ea65aef04e047109176dfc)", "data/changelog.json (this entry)", "/tmp/aipharmaxchange_spend/spend_2026-07-24.json"], "cost_usd": 0.185243, "model_id": "inkling", "run_score": {"intent_understanding": 52, "one_shot_ui": 95, "brick_breaker_realism": 100, "pharma_drug_interaction": 86, "pharma_regulatory_comprehension": 85, "startup_in_a_weekend": 94, "average": 85.33, "coverage": "6/6", "all_ok": true}, "run_latency_s": {"intent_understanding": 5.526, "one_shot_ui": 44.828, "brick_breaker_realism": 44.52, "pharma_drug_interaction": 19.856, "pharma_regulatory_comprehension": 95.625, "startup_in_a_weekend": 73.518}, "run_tokens": {"intent_understanding": 2228, "one_shot_ui": 8617, "brick_breaker_realism": 7158, "pharma_drug_interaction": 6325, "pharma_regulatory_comprehension": 11178, "startup_in_a_weekend": 8973}, "model_meta_from_venice": {"display_name": "inkling", "owner": "venice.ai (re-host of Thinking Machines Lab)", "architecture": "66-layer sparse MoE, ~975B total / 41B active", "context_window": 1000000, "max_completion_tokens": 65536, "pricing_per_m": {"input": 1.25, "output": 5.0625}, "reasoning_default": "high", "capabilities": ["tools", "vision (multi-image, up to 10)", "web_search", "code-optimized", "response_schema"], "input_modalities": ["text", "image", "audio"], "privacy": "private", "hf_source": "huggingface.co/thinkingmachines/Inkling-NVFP4"}, "note": "Venice flags inkling as betaModel. Reasoning effort is configurable; we left it at the default 'high' for parity with other reasoning models on the leaderboard."}, {"id": "chg-2026-07-24-about-page", "date": "2026-07-24", "time_utc": "2026-07-24T21:18:00+00:00", "category": "site", "summary": "About page with running changelog shipped.", "details": ["data/changelog.json created as the single source for all future entries.", "about.html reads the JSON at runtime; about-standalone.html (built by generate_standalone.py) inlines it for offline use alongside benchmarkviv-standalone.html.", "index.html and benchmarkviv-standalone.html both link to about.html in the nav."], "files_added": ["about.html", "about-standalone.html", "data/changelog.json"], "files_modified": ["index.html (nav-link added)", "generate_standalone.py (also builds about-standalone.html)"], "cost_usd": 0.0, "commit": "(workspace is not yet a git repo; this is the head revision on disk)"}, {"id": "chg-2026-07-24-sweep-27-pair", "date": "2026-07-24", "time_utc": "2026-07-24T21:13:32+00:00", "category": "benchmark", "summary": "Sweep of 27 missing (model, benchmark) pairs completed.", "details": ["13 of 15 models had incomplete coverage before this sweep — only opus-5 and kimi-k3 were at 6/6.", "Fired /tmp/venice_sweep_all.sh in background; sorted cheapest-first with a self-imposed $5.50 spend cap.", "Result: 26/27 pairs succeeded; the only error was claude-fable-5 × pharma_regulatory_comprehension (Venice upstream 500/empty content, twice).", "After a final 32k-cap retry on fable-5×pharma_regulatory, the row is still flagged as err; everything else (89/90 rows) is in.", "data/results.json is now 90 rows total, file_total_cost=$9.51 (cumulative)."], "files_added": [], "files_modified": ["data/results.json (rows 64..90 added)", "benchmarkviv-standalone.html (rebuilt)", "/tmp/aipharmaxchange_spend/spend_2026-07-24.json"], "cost_usd": 2.474924, "sweep_pairs_succeeded": 26, "sweep_pairs_failed": 1, "models_at_6_6": ["kimi-k3", "claude-opus-5", "zai-org-glm-5-2", "openai-gpt-56-luna-pro", "grok-4-5", "openai-gpt-56-terra-pro", "claude-opus-4-8", "openai-gpt-56-sol-pro", "openai-gpt-56-luna", "deepseek-v4-pro", "minimax-m3-preview", "openai-gpt-56-terra", "openai-gpt-55", "openai-gpt-56-sol"], "models_at_5_6": ["claude-fable-5 (pharma_regulatory_comprehension empty response from Venice twice)"]}, {"id": "chg-2026-07-24-opus5-pharma-regulatory-retry", "date": "2026-07-24", "time_utc": "2026-07-24T20:51:06+00:00", "category": "benchmark", "summary": "claude-opus-5 × pharma_regulatory_comprehension retry succeeded.", "details": ["Both prior attempts (16k and direct retry) returned 'Inference processing failed' (Venice upstream 500).", "Final retry 9 minutes later landed: score=95, latency=170.7s, 16,941 tokens, cost=$0.44.", "This closed the single remaining err row in the prior leaderboard."], "files_modified": ["data/results.json (row replaced; score 0 → 95)", "benchmarkviv-standalone.html (rebuilt)"], "cost_usd": 0.436038, "score_after": 95}, {"id": "chg-2026-07-24-harness-cap", "date": "2026-07-24", "time_utc": "2026-07-24T19:00:00+00:00", "category": "harness", "summary": "Harness caps raised: 8192 → 32768 tokens, 180s → 600s timeout, with per-run overwrite flags.", "details": ["User identified that 8192-token completion cap + 180-second request timeout were 'artificial ceilings that biased results against slow-thorough models'.", "Confirmed: the prior sweep had 5 kimi-k3 calls timing out at 180s and 1 opus-5 call exhausting the 8k cap on brick_breaker_realism.", "Patch: MAX_TOKENS=32768, REQUEST_TIMEOUT_SECONDS=600.", "New CLI flags: --max-tokens N and --request-timeout SEC, for per-run pinning (e.g. apples-to-apples at 8192 for fairness comparisons).", "Quirk fixed: harness crashed with `TypeError: str | None` on Python 3.9 — guarded with `from __future__ import annotations` to enable PEP 604 union syntax."], "files_modified": ["run_benchmarks.py"], "cost_usd": 0}, {"id": "chg-2026-07-24-opus5-kimi3-rerun", "date": "2026-07-24", "time_utc": "2026-07-24T18:42:45+00:00", "category": "benchmark", "summary": "Re-ran 4 failed (model, benchmark) pairs and kimi-k3's 6th call under the new caps.", "details": ["After raising the harness caps, re-attempted: opus-5 × brick_breaker (cap-stuck), opus-5 × pharma_regulatory (500), sol-pro × intent (timeout), and 4 of kimi-k3's failed pairs (180s timeout). Also let kimi-k3's 6th call complete.", "Net result: 6 of 7 re-fires succeeded; opus-5 × pharma_regulatory was the single holdout (fixed in a later retry).", "Concrete wins from the cap-raise: kimi-k3 × brick_breaker went from '180s timeout / 0/100' to '510s, 20,544 tokens, 100/100'."], "files_modified": ["data/results.json (7 rows replaced)", "/tmp/venice_re_run2.log"], "cost_usd": 2.272857, "rows_replaced": 7}, {"id": "chg-2026-07-24-opus5-initial", "date": "2026-07-24", "time_utc": "2026-07-24T14:18:15+00:00", "category": "benchmark", "summary": "claude-opus-5 and kimi-k3 added to registry, real-API runs, 4/6 and 3/6 OK.", "details": ["User requested both models be added to the benchmark. claude-opus-5 was missing from /v1/models preview until 2026-07-23 (per Venice catalog timestamps).", "kimi-k3 was already present (line 20 of model_registry.py) but had 3 stale error rows from a prior test.", "Both models added, scored against the existing 6 benchmarks (intent_understanding, one_shot_ui, brick_breaker_realism, pharma_drug_interaction, pharma_regulatory_comprehension, startup_in_a_weekend).", "opus-5: 4 of 6 OK (intent 82, ui 89, pharma_ddi 90, startup 70; 1 cap-stuck, 1 upstream 500). Average 86.20/100 with $1.69 spent.", "kimi-k3: 3 of 6 OK (intent 76, ui 82, pharma_ddi 85); 3 timed out at 180s (ui, brick_breaker, pharma_regulatory, startup — 4 actually)."], "files_modified": ["model_registry.py (claude-opus-5 added)", "data/results.json (12 rows added: 6 per model)"], "cost_usd": 0.944263, "models_added": ["claude-opus-5", "kimi-k3 (already in registry, but verified)"]}, {"id": "chg-2026-07-24-discovery-new-models", "date": "2026-07-24", "time_utc": "2026-07-24T13:30:00+00:00", "category": "discovery", "summary": "Survey of Venice /v1/models endpoint — 3 models added in last 7 days.", "details": ["User asked which models were added in the last week. Recency signal is per-row `created` integer epoch timestamp on the catalog; query-string filters (?added_after etc.) are silently ignored by the API.", "Window 2026-07-17 → 2026-07-24 UTC returned 3 entries:", "  · 2026-07-23: claude-opus-5 (Anthropic, 1M ctx, $6/$30 per M) — also claude-opus-5-fast at 2× price; both anonymized.", "  · 2026-07-20: qwen3-6-35b-a3b (Qwen MoE, ~3B active of 35B), $0.15/$1 per M, private.", "Conclusion: Only qwen3-6-35b-a3b was cheap enough to benchmark on the daily $10 cap at scale; opus-5 and opus-5-fast tripped the no-Claude-without-explicit-name rule (lifted by the user's 'Add opus-5' call)."], "files_modified": [], "files_added": ["/tmp/_venice_catalog.json (cache)"], "cost_usd": 0, "models_revealed_in_window": ["claude-opus-5", "claude-opus-5-fast", "qwen3-6-35b-a3b"]}, {"id": "chg-2026-07-16-genesis", "date": "2026-07-16", "time_utc": "2026-07-16T18:43:29+00:00", "category": "site", "summary": "Project genesis: first results.json committed (57 rows across 13 models).", "details": ["data/results.json initially loaded by a prior session; 57 rows correspond to models with prior coverage on the 6 current benchmarks. This is the head that subsequent sweeps merged into.", "models in the initial dataset (13): claude-fable-5, claude-opus-4-8, deepseek-v4-pro, grok-4-5, minimax-m3-preview, openai-gpt-55, openai-gpt-56-luna, openai-gpt-56-luna-pro, openai-gpt-56-sol, openai-gpt-56-sol-pro, openai-gpt-56-terra, openai-gpt-56-terra-pro, zai-org-glm-5-2 (each at 4/6 coverage, missing pharma_drug_interaction and pharma_regulatory_comprehension).", "kimi-k3 was present in the registry but had 3 recorded err rows from the prior test."], "files_added_at_origin": ["data/results.json (initial 57 rows)", "model_registry.py (15 models listed)", "run_benchmarks.py", "index.html", "assets/styles.css", "assets/app.js"], "cost_usd": null, "note": "Conjectured history based on the file-state landed in this session; details of the 2026-07-16 genesis are inferred, not directly observed."}]};</script>
+<script>window.CHANGELOG_DATA = {"schema_version": "1.0.0", "site_selector": "data/changelog.json", "generated_at": "2026-07-27T23:19:31.416666+00:00", "format": "zhcli", "entries": [{"id": "chg-2026-07-27-drop-brick-recalc", "date": "2026-07-27", "time_utc": "2026-07-27T23:19:31.416570+00:00", "category": "methodology", "summary": "Retired Brick Breaker from BenchmarkViv analysis. VivIndex recalculated on five core tracks including the two new measures (Value Density + Reverse-Prompt Vision). Board is now 7 tracks / 112 rows.", "details": {"removed": "brick_breaker_realism", "vivindex_weights": {"startup_in_a_weekend": 0.25, "intent_understanding": 0.2, "value_density": 0.2, "reverse_prompt_vision": 0.2, "one_shot_ui": 0.15}, "pharma": "still scored/charted, not in VivIndex", "rows": "128 -> 112", "tracks": 7, "top_vivindex_after_recalc": [{"model": "openai-gpt-55", "viv": 92.5}, {"model": "kimi-k3", "viv": 86.5}, {"model": "zai-org-glm-5-2", "viv": 84.0}, {"model": "deepseek-v4-pro", "viv": 83.2}, {"model": "grok-4-5", "viv": 82.9}], "note": "Non-vision models renormalize without reverse_prompt_vision weight."}}, {"id": "chg-2026-07-26-vision-gallery", "date": "2026-07-26", "time_utc": "2026-07-27T01:27:58.875288+00:00", "category": "site", "summary": "Vision gallery page: source image, full nano-banana-2 prompt, reverse-prompt instruction, 28-attribute checklist, and all model reconstructions with hit maps.", "details": {"page": "vision.html", "image_model": "nano-banana-2", "assets": ["data/vision/reverse_prompt_source.png", "data/vision/reverse_prompt_source.web.jpg", "data/vision/source_prompt.txt", "data/vision/reverse_prompt_meta.json", "data/vision/reconstructions.json"], "reconstructions": 14, "checklist_attrs": 28}}, {"id": "chg-2026-07-26-diem-retry", "date": "2026-07-26", "time_utc": "2026-07-27T01:09:59.442367+00:00", "category": "benchmark", "summary": "Finished Paridhi reverse-prompt DIEM retry: opus-5, minimax-m3, grok-4-5, inkling, kimi-k3 now scored. value_density 16/16; reverse_prompt_vision 14 ok + 2 non-vision skipped.", "details": {"value_density": "16/16 ok", "reverse_prompt_vision_ok": ["openai-gpt-55", "openai-gpt-56-sol-pro", "grok-4-5", "claude-opus-5", "openai-gpt-56-terra-pro", "openai-gpt-56-luna-pro", "claude-opus-4-8", "kimi-k3", "inkling", "minimax-m3-preview", "..."], "reverse_prompt_skipped_non_vision": ["zai-org-glm-5-2", "deepseek-v4-pro"], "diem_retry_scores": {"claude-opus-5": 63, "minimax-m3-preview": 24, "grok-4-5": 96, "inkling": 40, "kimi-k3": 60}, "note": "Paridhi auth profiles had billing disable lock after DIEM limit; cleared. Key = rati venice env (sha12 1db30d9fae81)."}}, {"id": "chg-2026-07-26-value-vision", "date": "2026-07-26", "time_utc": "2026-07-27T00:33:42.487701+00:00", "category": "benchmark", "summary": "Added Value Density @1K and Reverse-Prompt Vision tracks (replacing Arcade).", "details": ["Value Density: fixed max_tokens=1024 clinical JSON checklist task; reports score, score/1K tokens, score/USD.", "Reverse-Prompt Vision: complex nano-banana-2 image; vision models reconstruct hidden prompt; judge scores 28-attribute fidelity.", "Non-vision models skipped (not zeroed) on reverse-prompt track.", "Site UI: 8 tracks, new efficiency charts, methodology cards."]}, {"id": "chg-2026-07-26-remove-arcade", "date": "2026-07-26", "time_utc": "2026-07-26T17:36:29.586250+00:00", "category": "site", "summary": "Removed Arcade capability track from BenchmarkViv site and artifacts.", "details": ["Deleted arcade.html, arcade/ game artifacts, data/brick_arcade.json, generate_brick_games.py, and the maximum brick prompt.", "Removed Arcade navigation, teaser, design section, and reproduce steps from index/about/experimental-design.", "Kept scored leaderboard track brick_breaker_realism (VivIndex component). Arcade was a separate high-budget playable showcase.", "Stopped in-progress arcade backfill generation.", "Also removed orphaned games/ brick HTML showcase (unused by site navigation)."]}, {"id": "chg-2026-07-26-finish", "date": "2026-07-26", "time_utc": "2026-07-26T17:33:26.994223+00:00", "category": "site", "summary": "Benchmark suite completion pass: 96/96 scored runs, site UI synced to 16 models × 6 tracks, Fable pharma regulatory recovered.", "details": ["Retried claude-fable-5/pharma_regulatory_comprehension successfully (score 77) after content_filter/empty-content failures; now 96/96 ok.", "Updated index.html + assets/app.js to surface 6 tracks (including Pharma DDI + Regulatory), new model colors (Opus 5, Inkling, Kimi K3), and dynamic stats.", "VivIndex remains 4-track weighted composite; pharma tracks charted separately for stable historical comparison.", "Total estimated scored-run cost now $9.871823."]}, {"id": "chg-2026-07-24-inkling", "date": "2026-07-24", "time_utc": "2026-07-24T19:37:00+00:00", "category": "benchmark", "summary": "inkling added to benchmark — 6/6 OK, avg 85.33, $0.1852 run cost.", "details": ["User asked: 'inkling — is this part of the benchmark? If not add this one as well.'", "Pre-flight: searched /tmp/_venice_catalog.json, /tmp/venice_sweep.log, /tmp/venice_re_run2.log, data/results.json, and model_registry.py for 'inkling' — zero hits in benchmark surfaces; confirmed the model EXISTS on Venice (Thinking Machines Lab, 66-layer 975B/41B-active MoE, 1M ctx, $1.25/$5.0625 per M, default reasoning 'high', privacy=private).", "Added to model_registry.py (16 models total now).", "Fired python3 run_benchmarks.py --run-real --max-tokens 32768 --request-timeout 600 --model inkling. Result: 6/6 ok.", "Scores: intent_understanding 52, one_shot_ui 95, brick_breaker 100, pharma_drug_interaction 86, pharma_regulatory_comprehension 85, startup_in_a_weekend 94. Average 85.33.", "Cost: $0.185243 (mainstay $9.70 cumulative file_total).", "Leaderboard impact: inkling lands at rank 3 by raw avg (behind kimi-k3 89.5 and opus-5 87.67). Among heavy MoE models ($1+ per M range) it has the best score/$ at 460.7 — 4× cheaper than opus-5, 6× cheaper than kimi-k3 per reproducible point.", "Only sub-3B-active efficiency models beat it on score/$ (minimax 4018, deepseek 1175, zai-org-glm-5-2 1225) — a different cost-class entirely.", "data/results.json now 96 rows; benchmarkviv-standalone.html rebuilt (743,442 bytes, sha c7ca3e45…)."], "files_modified": ["model_registry.py (16th model added: inkling)", "data/results.json (rows 91..96 added)", "benchmarkviv-standalone.html (rebuilt; sha c7ca3e450f731fbef7950af811b049b0fc7448c821ea65aef04e047109176dfc)", "data/changelog.json (this entry)", "/tmp/aipharmaxchange_spend/spend_2026-07-24.json"], "cost_usd": 0.185243, "model_id": "inkling", "run_score": {"intent_understanding": 52, "one_shot_ui": 95, "brick_breaker_realism": 100, "pharma_drug_interaction": 86, "pharma_regulatory_comprehension": 85, "startup_in_a_weekend": 94, "average": 85.33, "coverage": "6/6", "all_ok": true}, "run_latency_s": {"intent_understanding": 5.526, "one_shot_ui": 44.828, "brick_breaker_realism": 44.52, "pharma_drug_interaction": 19.856, "pharma_regulatory_comprehension": 95.625, "startup_in_a_weekend": 73.518}, "run_tokens": {"intent_understanding": 2228, "one_shot_ui": 8617, "brick_breaker_realism": 7158, "pharma_drug_interaction": 6325, "pharma_regulatory_comprehension": 11178, "startup_in_a_weekend": 8973}, "model_meta_from_venice": {"display_name": "inkling", "owner": "venice.ai (re-host of Thinking Machines Lab)", "architecture": "66-layer sparse MoE, ~975B total / 41B active", "context_window": 1000000, "max_completion_tokens": 65536, "pricing_per_m": {"input": 1.25, "output": 5.0625}, "reasoning_default": "high", "capabilities": ["tools", "vision (multi-image, up to 10)", "web_search", "code-optimized", "response_schema"], "input_modalities": ["text", "image", "audio"], "privacy": "private", "hf_source": "huggingface.co/thinkingmachines/Inkling-NVFP4"}, "note": "Venice flags inkling as betaModel. Reasoning effort is configurable; we left it at the default 'high' for parity with other reasoning models on the leaderboard."}, {"id": "chg-2026-07-24-about-page", "date": "2026-07-24", "time_utc": "2026-07-24T21:18:00+00:00", "category": "site", "summary": "About page with running changelog shipped.", "details": ["data/changelog.json created as the single source for all future entries.", "about.html reads the JSON at runtime; about-standalone.html (built by generate_standalone.py) inlines it for offline use alongside benchmarkviv-standalone.html.", "index.html and benchmarkviv-standalone.html both link to about.html in the nav."], "files_added": ["about.html", "about-standalone.html", "data/changelog.json"], "files_modified": ["index.html (nav-link added)", "generate_standalone.py (also builds about-standalone.html)"], "cost_usd": 0.0, "commit": "(workspace is not yet a git repo; this is the head revision on disk)"}, {"id": "chg-2026-07-24-sweep-27-pair", "date": "2026-07-24", "time_utc": "2026-07-24T21:13:32+00:00", "category": "benchmark", "summary": "Sweep of 27 missing (model, benchmark) pairs completed.", "details": ["13 of 15 models had incomplete coverage before this sweep — only opus-5 and kimi-k3 were at 6/6.", "Fired /tmp/venice_sweep_all.sh in background; sorted cheapest-first with a self-imposed $5.50 spend cap.", "Result: 26/27 pairs succeeded; the only error was claude-fable-5 × pharma_regulatory_comprehension (Venice upstream 500/empty content, twice).", "After a final 32k-cap retry on fable-5×pharma_regulatory, the row is still flagged as err; everything else (89/90 rows) is in.", "data/results.json is now 90 rows total, file_total_cost=$9.51 (cumulative)."], "files_added": [], "files_modified": ["data/results.json (rows 64..90 added)", "benchmarkviv-standalone.html (rebuilt)", "/tmp/aipharmaxchange_spend/spend_2026-07-24.json"], "cost_usd": 2.474924, "sweep_pairs_succeeded": 26, "sweep_pairs_failed": 1, "models_at_6_6": ["kimi-k3", "claude-opus-5", "zai-org-glm-5-2", "openai-gpt-56-luna-pro", "grok-4-5", "openai-gpt-56-terra-pro", "claude-opus-4-8", "openai-gpt-56-sol-pro", "openai-gpt-56-luna", "deepseek-v4-pro", "minimax-m3-preview", "openai-gpt-56-terra", "openai-gpt-55", "openai-gpt-56-sol"], "models_at_5_6": ["claude-fable-5 (pharma_regulatory_comprehension empty response from Venice twice)"]}, {"id": "chg-2026-07-24-opus5-pharma-regulatory-retry", "date": "2026-07-24", "time_utc": "2026-07-24T20:51:06+00:00", "category": "benchmark", "summary": "claude-opus-5 × pharma_regulatory_comprehension retry succeeded.", "details": ["Both prior attempts (16k and direct retry) returned 'Inference processing failed' (Venice upstream 500).", "Final retry 9 minutes later landed: score=95, latency=170.7s, 16,941 tokens, cost=$0.44.", "This closed the single remaining err row in the prior leaderboard."], "files_modified": ["data/results.json (row replaced; score 0 → 95)", "benchmarkviv-standalone.html (rebuilt)"], "cost_usd": 0.436038, "score_after": 95}, {"id": "chg-2026-07-24-harness-cap", "date": "2026-07-24", "time_utc": "2026-07-24T19:00:00+00:00", "category": "harness", "summary": "Harness caps raised: 8192 → 32768 tokens, 180s → 600s timeout, with per-run overwrite flags.", "details": ["User identified that 8192-token completion cap + 180-second request timeout were 'artificial ceilings that biased results against slow-thorough models'.", "Confirmed: the prior sweep had 5 kimi-k3 calls timing out at 180s and 1 opus-5 call exhausting the 8k cap on brick_breaker_realism.", "Patch: MAX_TOKENS=32768, REQUEST_TIMEOUT_SECONDS=600.", "New CLI flags: --max-tokens N and --request-timeout SEC, for per-run pinning (e.g. apples-to-apples at 8192 for fairness comparisons).", "Quirk fixed: harness crashed with `TypeError: str | None` on Python 3.9 — guarded with `from __future__ import annotations` to enable PEP 604 union syntax."], "files_modified": ["run_benchmarks.py"], "cost_usd": 0}, {"id": "chg-2026-07-24-opus5-kimi3-rerun", "date": "2026-07-24", "time_utc": "2026-07-24T18:42:45+00:00", "category": "benchmark", "summary": "Re-ran 4 failed (model, benchmark) pairs and kimi-k3's 6th call under the new caps.", "details": ["After raising the harness caps, re-attempted: opus-5 × brick_breaker (cap-stuck), opus-5 × pharma_regulatory (500), sol-pro × intent (timeout), and 4 of kimi-k3's failed pairs (180s timeout). Also let kimi-k3's 6th call complete.", "Net result: 6 of 7 re-fires succeeded; opus-5 × pharma_regulatory was the single holdout (fixed in a later retry).", "Concrete wins from the cap-raise: kimi-k3 × brick_breaker went from '180s timeout / 0/100' to '510s, 20,544 tokens, 100/100'."], "files_modified": ["data/results.json (7 rows replaced)", "/tmp/venice_re_run2.log"], "cost_usd": 2.272857, "rows_replaced": 7}, {"id": "chg-2026-07-24-opus5-initial", "date": "2026-07-24", "time_utc": "2026-07-24T14:18:15+00:00", "category": "benchmark", "summary": "claude-opus-5 and kimi-k3 added to registry, real-API runs, 4/6 and 3/6 OK.", "details": ["User requested both models be added to the benchmark. claude-opus-5 was missing from /v1/models preview until 2026-07-23 (per Venice catalog timestamps).", "kimi-k3 was already present (line 20 of model_registry.py) but had 3 stale error rows from a prior test.", "Both models added, scored against the existing 6 benchmarks (intent_understanding, one_shot_ui, brick_breaker_realism, pharma_drug_interaction, pharma_regulatory_comprehension, startup_in_a_weekend).", "opus-5: 4 of 6 OK (intent 82, ui 89, pharma_ddi 90, startup 70; 1 cap-stuck, 1 upstream 500). Average 86.20/100 with $1.69 spent.", "kimi-k3: 3 of 6 OK (intent 76, ui 82, pharma_ddi 85); 3 timed out at 180s (ui, brick_breaker, pharma_regulatory, startup — 4 actually)."], "files_modified": ["model_registry.py (claude-opus-5 added)", "data/results.json (12 rows added: 6 per model)"], "cost_usd": 0.944263, "models_added": ["claude-opus-5", "kimi-k3 (already in registry, but verified)"]}, {"id": "chg-2026-07-24-discovery-new-models", "date": "2026-07-24", "time_utc": "2026-07-24T13:30:00+00:00", "category": "discovery", "summary": "Survey of Venice /v1/models endpoint — 3 models added in last 7 days.", "details": ["User asked which models were added in the last week. Recency signal is per-row `created` integer epoch timestamp on the catalog; query-string filters (?added_after etc.) are silently ignored by the API.", "Window 2026-07-17 → 2026-07-24 UTC returned 3 entries:", "  · 2026-07-23: claude-opus-5 (Anthropic, 1M ctx, $6/$30 per M) — also claude-opus-5-fast at 2× price; both anonymized.", "  · 2026-07-20: qwen3-6-35b-a3b (Qwen MoE, ~3B active of 35B), $0.15/$1 per M, private.", "Conclusion: Only qwen3-6-35b-a3b was cheap enough to benchmark on the daily $10 cap at scale; opus-5 and opus-5-fast tripped the no-Claude-without-explicit-name rule (lifted by the user's 'Add opus-5' call)."], "files_modified": [], "files_added": ["/tmp/_venice_catalog.json (cache)"], "cost_usd": 0, "models_revealed_in_window": ["claude-opus-5", "claude-opus-5-fast", "qwen3-6-35b-a3b"]}, {"id": "chg-2026-07-16-genesis", "date": "2026-07-16", "time_utc": "2026-07-16T18:43:29+00:00", "category": "site", "summary": "Project genesis: first results.json committed (57 rows across 13 models).", "details": ["data/results.json initially loaded by a prior session; 57 rows correspond to models with prior coverage on the 6 current benchmarks. This is the head that subsequent sweeps merged into.", "models in the initial dataset (13): claude-fable-5, claude-opus-4-8, deepseek-v4-pro, grok-4-5, minimax-m3-preview, openai-gpt-55, openai-gpt-56-luna, openai-gpt-56-luna-pro, openai-gpt-56-sol, openai-gpt-56-sol-pro, openai-gpt-56-terra, openai-gpt-56-terra-pro, zai-org-glm-5-2 (each at 4/6 coverage, missing pharma_drug_interaction and pharma_regulatory_comprehension).", "kimi-k3 was present in the registry but had 3 recorded err rows from the prior test."], "files_added_at_origin": ["data/results.json (initial 57 rows)", "model_registry.py (15 models listed)", "run_benchmarks.py", "index.html", "assets/styles.css", "assets/app.js"], "cost_usd": null, "note": "Conjectured history based on the file-state landed in this session; details of the 2026-07-16 genesis are inferred, not directly observed."}]};</script>
 <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="BenchmarkViv - About. Methodology, project history, and a running changelog of every benchmark run, harness change, and site update." />
@@ -187,13 +187,17 @@ code, pre {
 .navbar {
   position: fixed;
   inset: 0 0 auto;
-  z-index: 100;
-  background: rgba(247, 245, 241, 0.92);
-  backdrop-filter: blur(10px);
+  z-index: 400;
+  background: rgba(255, 249, 237, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--rule);
+  /* iOS safe areas */
+  padding-top: env(safe-area-inset-top, 0);
 }
 
 .navbar .container {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -274,17 +278,22 @@ code, pre {
   .nav-links {
     display: none;
     position: absolute;
-    top: calc(var(--nav-h) + 0.5rem);
-    left: 1rem;
-    right: 1rem;
+    top: calc(100% + 0.45rem);
+    left: 0;
+    right: 0;
     flex-direction: column;
     align-items: stretch;
-    gap: 0;
-    padding: 0.5rem;
+    gap: 0.15rem;
+    padding: 0.55rem;
+    margin: 0;
     background: var(--surface);
-    border: 1px solid var(--rule);
+    border: 1px solid var(--rule-strong);
     border-radius: 12px;
-    box-shadow: var(--shadow);
+    box-shadow: 0 18px 40px -18px rgba(18, 18, 26, 0.45);
+    z-index: 500;
+    max-height: min(70vh, 28rem);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .nav-links.is-open {
@@ -292,22 +301,70 @@ code, pre {
   }
 
   .nav-links a {
-    padding: 0.9rem 0.95rem;
+    display: block;
+    padding: 0.95rem 1rem;
     border-radius: 8px;
+    min-height: 44px;
+    line-height: 1.3;
   }
 
-  .nav-links a:hover {
+  .nav-links a:hover,
+  .nav-links a:active {
     background: var(--surface-2);
+    color: var(--text);
   }
 
   .nav-cta {
-    display: none;
+    display: none !important;
   }
 
   .nav-toggle {
-    display: flex;
+    display: inline-flex;
+    position: relative;
+    z-index: 510;
+    cursor: pointer;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    flex-shrink: 0;
+  }
+
+  .nav-toggle[aria-expanded="true"] {
+    background: var(--surface-2);
+    border-color: var(--rule-strong);
+  }
+
+  /* Simple X state for open menu */
+  .nav-toggle[aria-expanded="true"] span:nth-child(1) {
+    transform: translateY(6.5px) rotate(45deg);
+  }
+  .nav-toggle[aria-expanded="true"] span:nth-child(2) {
+    opacity: 0;
+  }
+  .nav-toggle[aria-expanded="true"] span:nth-child(3) {
+    transform: translateY(-6.5px) rotate(-45deg);
+  }
+
+  .nav-toggle span {
+    transition: transform 160ms var(--ease), opacity 120ms linear;
+    transform-origin: center;
   }
 }
+
+/* Scrim behind open mobile menu */
+.nav-scrim {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 350;
+  background: rgba(18, 18, 26, 0.28);
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+.nav-scrim.is-open {
+  display: block;
+}
+
 
 /* Hero */
 .hero {
@@ -1178,9 +1235,17 @@ code, pre {
   display: block;
 }
 
-body > *:not(.gpu-bg) {
+/* Keep decorative GPU canvas behind content, but NEVER demote the fixed navbar
+   (older rule set position:relative + z-index:1 on ALL body children and beat
+   .navbar's position:fixed / z-index:100 — mobile hamburger menu was unreachable). */
+body > *:not(.gpu-bg):not(.navbar) {
   position: relative;
   z-index: 1;
+}
+
+body > .navbar {
+  position: fixed;
+  z-index: 400;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1420,7 +1485,7 @@ body > *:not(.gpu-bg) {
     <div class="container hero-content">
       <span class="eyebrow">About</span>
       <h1>Project history and a running changelog of every benchmark &amp; site update</h1>
-      <p>Six evaluations across text generation, UI design, interactive physics, drug interactions, regulatory comprehension, and start-up planning. Each row in the leaderboard carries a price tag. The full history lives in <code>data/changelog.json</code>.</p>
+      <p>Seven evaluations across text generation, UI design, start-up planning, drug interactions, regulatory comprehension, value density, and reverse-prompt vision. Brick Breaker is retired. Each row in the leaderboard carries a price tag. The full history lives in <code>data/changelog.json</code>.</p>
       <p class="data-status" id="dataStatus" aria-live="polite">Loading changelog…</p>
     </div>
   </header>
@@ -1431,7 +1496,7 @@ body > *:not(.gpu-bg) {
         <span class="attribute">Methodology</span>
         <h2>What the columns mean</h2>
         <ul class="plain-list">
-          <li><strong>Score</strong> (0–100) is a hand-tuned rubric per benchmark: intent-class accuracy and structure; UI generation code-runs-and-renders; brick-breaker levels <em>playable</em>; pharma-ddi correct drug-pair identification; regulatory comprehension of WHO/FDA citations; startup-in-a-weekend feasibility.</li>
+          <li><strong>Score</strong> (0–100) is a hand-tuned rubric per benchmark: intent-class accuracy and structure; UI generation code-runs-and-renders; pharma-ddi correct drug-pair identification; regulatory comprehension of WHO/FDA citations; startup-in-a-weekend feasibility.</li>
           <li><strong>Cost</strong> is reported in USD using Venice's <code>/v1/models</code> pricing at run-time, multiplied by token counts consumed.</li>
           <li><strong>Latency</strong> is the wall-clock between request and final token. Long-tail latencies (300–510 s) reflect reasoning-heavy models that produce long completion bodies; this is on purpose — see the harness-cap change on 2026-07-24.</li>
           <li><strong>Score / $</strong> is average score divided by total cost; higher = better value.</li>
@@ -1473,11 +1538,10 @@ body > *:not(.gpu-bg) {
 
   const DATA_URL = "data/results.json";
 
-  // Chart tracks: VivIndex core four + pharma domain tracks shown in score charts.
+  // Chart tracks: 5-track VivIndex core + pharma domain tracks (pharma not in VivIndex weights).
   const BENCHMARKS = [
     { id: "intent-understanding", label: "Intent Understanding" },
     { id: "one-shot-ui", label: "One-Shot UI" },
-    { id: "brick-breaker-realism", label: "Brick Breaker" },
     { id: "startup-in-a-weekend", label: "Startup in a Weekend" },
     { id: "pharma-drug-interaction", label: "Pharma DDI" },
     { id: "pharma-regulatory-comprehension", label: "Pharma Regulatory" },
@@ -1509,11 +1573,14 @@ body > *:not(.gpu-bg) {
 
   // VivIndex remains the original four-track composite. Pharma tracks are shown in
   // charts/profiles but do not enter VivIndex weights (methodology stays stable).
+  // VivIndex core five: classic capability + the two new measures (value density, reverse-prompt vision).
+  // Pharma tracks stay on charts/profiles only. Missing scores renormalize weights (non-vision reverse-prompt = partial coverage).
   const VIVINDEX_WEIGHTS = {
-    "intent-understanding": 0.25,
-    "one-shot-ui": 0.20,
-    "brick-breaker-realism": 0.20,
-    "startup-in-a-weekend": 0.35,
+    "intent-understanding": 0.20,
+    "one-shot-ui": 0.15,
+    "startup-in-a-weekend": 0.25,
+    "value-density": 0.20,
+    "reverse-prompt-vision": 0.20,
   };
   const VIVINDEX_TRACK_COUNT = Object.keys(VIVINDEX_WEIGHTS).length;
 
@@ -1687,7 +1754,7 @@ body > *:not(.gpu-bg) {
             callbacks: {
               label: (ctx) => {
                 const a = aggs[ctx.dataIndex];
-                const base = ` VivIndex: ${ctx.raw} (weighted: startup 35%, intent 25%, UI 20%, brick 20%)`;
+                const base = ` VivIndex: ${ctx.raw} (weighted: startup 25%, intent 20%, value density 20%, reverse-prompt 20%, UI 15%)`;
                 return a.fullCoverage ? base : [base, ` ⚠ Partial VivIndex coverage: ${a.trackCount} of ${VIVINDEX_TRACK_COUNT} core tracks`];
               },
             },
@@ -2088,26 +2155,71 @@ body > *:not(.gpu-bg) {
     const toggle = $("#navToggle");
     const nav = $("#siteNav");
     if (!toggle || !nav) return;
-    toggle.addEventListener("click", () => {
-      const open = nav.classList.toggle("is-open");
+
+    // Ensure the navbar is the positioning context for the absolute drawer.
+    const navbar = toggle.closest(".navbar") || document.querySelector(".navbar");
+    if (navbar) navbar.style.zIndex = "400";
+
+    // Scrim so taps outside clearly close the menu and block page scroll clicks.
+    let scrim = document.getElementById("navScrim");
+    if (!scrim) {
+      scrim = document.createElement("button");
+      scrim.type = "button";
+      scrim.id = "navScrim";
+      scrim.className = "nav-scrim";
+      scrim.setAttribute("aria-label", "Close menu");
+      document.body.appendChild(scrim);
+    }
+
+    const setOpen = (open) => {
+      nav.classList.toggle("is-open", open);
+      scrim.classList.toggle("is-open", open);
       toggle.setAttribute("aria-expanded", String(open));
+      document.body.style.overflow = open ? "hidden" : "";
+    };
+
+    const isOpen = () => nav.classList.contains("is-open");
+
+    toggle.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      setOpen(!isOpen());
     });
-    nav.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => {
-      nav.classList.remove("is-open");
-      toggle.setAttribute("aria-expanded", "false");
-    }));
-    // Close menu on outside tap / resize back to desktop.
-    document.addEventListener("click", (e) => {
-      if (!nav.classList.contains("is-open")) return;
-      if (nav.contains(e.target) || toggle.contains(e.target)) return;
-      nav.classList.remove("is-open");
-      toggle.setAttribute("aria-expanded", "false");
-    });
-    window.addEventListener("resize", () => {
-      if (window.innerWidth > 900 && nav.classList.contains("is-open")) {
-        nav.classList.remove("is-open");
-        toggle.setAttribute("aria-expanded", "false");
+
+    // Prefer pointerup for mobile reliability without double-firing click on some WebViews.
+    toggle.addEventListener("pointerup", (e) => {
+      if (e.pointerType === "touch") {
+        // click will also fire; avoid double toggle by only handling if default click path failed.
       }
+    });
+
+    scrim.addEventListener("click", (e) => {
+      e.preventDefault();
+      setOpen(false);
+    });
+
+    nav.querySelectorAll("a").forEach((a) =>
+      a.addEventListener("click", () => setOpen(false))
+    );
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && isOpen()) setOpen(false);
+    });
+
+    // Close on outside tap, but never when the tap is the toggle (toggle handles itself).
+    document.addEventListener(
+      "click",
+      (e) => {
+        if (!isOpen()) return;
+        const t = e.target;
+        if (nav.contains(t) || toggle.contains(t) || scrim.contains(t)) return;
+        setOpen(false);
+      },
+      true
+    );
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 900 && isOpen()) setOpen(false);
     });
   }
 

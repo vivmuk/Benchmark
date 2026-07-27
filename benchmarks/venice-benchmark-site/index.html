@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="BenchmarkViv. Practical AI benchmarks for Venice API models: intent, UI generation, brick physics coding, startup planning, and pharma domain tracks." />
+  <meta name="description" content="BenchmarkViv. Practical AI benchmarks for Venice API models: intent, UI, startup planning, pharma domain, value density, and reverse-prompt vision." />
   <title>BenchmarkViv</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/styles.css?v=8" />
+  <link rel="stylesheet" href="assets/styles.css?v=10" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <script>
     (function(){
@@ -46,7 +46,7 @@
     <div class="container hero-content">
       <span class="eyebrow">Venice API Evaluation</span>
       <h1>Find the right model for the <em>work in front of you</em></h1>
-      <p>Eight practical evaluations: core capability, pharma domain, value density at a fixed token budget, and multimodal reverse-prompt fidelity.</p>
+      <p>Seven practical evaluations: core capability, pharma domain, value density at a fixed token budget, and multimodal reverse-prompt fidelity. Brick Breaker is retired from the board.</p>
       <div class="hero-actions">
         <a href="#leaderboard" class="btn btn-primary">Explore the data</a>
         <a href="vision.html" class="btn btn-ghost">Vision gallery</a>
@@ -64,11 +64,11 @@
           <div class="stat-label">Models evaluated</div>
         </div>
         <div class="stat">
-          <div class="stat-value" id="statBenchmarks">8</div>
+          <div class="stat-value" id="statBenchmarks">7</div>
           <div class="stat-label">Benchmark tracks</div>
         </div>
         <div class="stat">
-          <div class="stat-value" id="statRuns">95/96</div>
+          <div class="stat-value" id="statRuns">—</div>
           <div class="stat-label">Scored evaluation runs</div>
         </div>
         <div class="stat">
@@ -87,7 +87,6 @@
     <div class="container">
       <div class="section-head">
         <h2>VivIndex. One number per model.</h2>
-        <p>A transparent weighted composite across four core tracks: Startup in a Weekend 35%, Intent Understanding 25%, One-Shot UI 20%, and Brick Breaker Realism 20%. Pharma tracks are scored and charted separately. Higher is better.</p>
       </div>
       <div class="charts-grid">
         <div class="chart-card">
@@ -101,7 +100,7 @@
   <section id="tracks">
     <div class="container">
       <div class="section-head">
-        <h2>Eight useful evaluation dimensions</h2>
+        <h2>Seven useful evaluation dimensions</h2>
         <p>Every lane explains what is tested, why it matters, and what a strong result looks like.</p>
         <p class="section-sub"><a href="vision.html">Open Vision gallery</a> for the reverse-prompt source image, full prompts, checklist, and every reconstruction.</p>
       </div>
@@ -126,18 +125,8 @@
             <span>Zero-fix</span>
           </div>
         </article>
-        <article class="bench-card reveal">
-          <div class="bench-icon acid">03</div>
-          <h3>Brick Breaker Realism</h3>
-          <p>Generate a fully playable brick breaker game in one shot. Scored on physics accuracy, controls, collision resolution, particles, sound, and responsiveness.</p>
-          <div class="bench-tags">
-            <span>Physics</span>
-            <span>Game dev</span>
-            <span>One-shot</span>
-          </div>
-        </article>
-        <article class="bench-card reveal">
-          <div class="bench-icon magenta">04</div>
+<article class="bench-card reveal">
+          <div class="bench-icon magenta">03</div>
           <h3>Startup in a Weekend</h3>
           <p>Turn a constrained SaaS brief into an execution-ready MVP plan. Scored on architecture, scope control, delivery sequence, and risk awareness.</p>
           <div class="bench-tags">
@@ -147,7 +136,7 @@
           </div>
         </article>
         <article class="bench-card reveal">
-          <div class="bench-icon">05</div>
+          <div class="bench-icon">04</div>
           <h3>Pharma: Drug-Drug Interaction</h3>
           <p>Identify clinically significant interactions from a short medication list. Scored on detection, severity, mechanism, and clinical action quality.</p>
           <div class="bench-tags">
@@ -157,7 +146,7 @@
           </div>
         </article>
         <article class="bench-card reveal">
-          <div class="bench-icon acid">06</div>
+          <div class="bench-icon acid">05</div>
           <h3>Pharma: Regulatory Comprehension</h3>
           <p>Apply ICH E6(R2) principles to a monitoring and consent scenario. Scored on requirement accuracy, citation specificity, and avoiding fabrication.</p>
           <div class="bench-tags">
@@ -168,7 +157,7 @@
         </article>
 
         <article class="bench-card reveal">
-          <div class="bench-icon magenta">07</div>
+          <div class="bench-icon magenta">06</div>
           <h3>Value Density @1K</h3>
           <p>Fixed 1024-token budget. Models must return a precise clinical JSON object. Score is checklist-based so verbosity cannot buy points. We also report score per 1K tokens and per dollar.</p>
           <div class="bench-tags">
@@ -178,7 +167,7 @@
           </div>
         </article>
         <article class="bench-card reveal">
-          <div class="bench-icon acid">08</div>
+          <div class="bench-icon acid">07</div>
           <h3>Reverse-Prompt Vision</h3>
           <p>A complex image is generated with nano-banana-2. Vision models reconstruct the generation prompt with no access to the source. A judge scores attribute fidelity against a fixed checklist.</p>
           <div class="bench-tags">
@@ -290,7 +279,6 @@
           <p>Models must emit a single self-contained HTML file. Scored on visual polish, semantic structure, accessibility, responsiveness, and whether it runs without edits.</p>
         </article>
         <article class="method-card reveal">
-          <h3>3 · Brick Breaker Realism</h3>
           <p>Models generate a playable Canvas game in one shot. Scored on physics plausibility, control responsiveness, collision detection, game states, particle/sound effects, and responsive design.</p>
         </article>
         <article class="method-card reveal">
@@ -299,7 +287,7 @@
         </article>
         <article class="method-card reveal">
           <h3>5 · VivIndex Composite</h3>
-          <p>Weighted average of four tracks. Startup in a Weekend 35%, Intent Understanding 25%, One-Shot UI 20%, Brick Breaker 20%. Missing benchmarks are labelled and weights are renormalized rather than scored as zero.</p>
+          <p>Weighted average of four tracks. Startup 25%, Intent 20%, Value Density 20%, Reverse-Prompt 20%, UI 15%. Missing benchmarks are labelled and weights are renormalized rather than scored as zero.</p>
         </article>
         <article class="method-card reveal">
           <h3>6 · Pharma tracks</h3>
@@ -334,6 +322,6 @@
     </div>
   </footer>
 
-  <script src="assets/app.js?v=8"></script>
+  <script src="assets/app.js?v=10"></script>
 </body>
 </html>

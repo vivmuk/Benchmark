@@ -1,9 +1,52 @@
 {
   "schema_version": "1.0.0",
   "site_selector": "data/changelog.json",
-  "generated_at": "2026-07-27T01:27:58.875370+00:00",
+  "generated_at": "2026-07-27T23:19:31.416666+00:00",
   "format": "zhcli",
   "entries": [
+    {
+      "id": "chg-2026-07-27-drop-brick-recalc",
+      "date": "2026-07-27",
+      "time_utc": "2026-07-27T23:19:31.416570+00:00",
+      "category": "methodology",
+      "summary": "Retired Brick Breaker from BenchmarkViv analysis. VivIndex recalculated on five core tracks including the two new measures (Value Density + Reverse-Prompt Vision). Board is now 7 tracks / 112 rows.",
+      "details": {
+        "removed": "brick_breaker_realism",
+        "vivindex_weights": {
+          "startup_in_a_weekend": 0.25,
+          "intent_understanding": 0.2,
+          "value_density": 0.2,
+          "reverse_prompt_vision": 0.2,
+          "one_shot_ui": 0.15
+        },
+        "pharma": "still scored/charted, not in VivIndex",
+        "rows": "128 -> 112",
+        "tracks": 7,
+        "top_vivindex_after_recalc": [
+          {
+            "model": "openai-gpt-55",
+            "viv": 92.5
+          },
+          {
+            "model": "kimi-k3",
+            "viv": 86.5
+          },
+          {
+            "model": "zai-org-glm-5-2",
+            "viv": 84.0
+          },
+          {
+            "model": "deepseek-v4-pro",
+            "viv": 83.2
+          },
+          {
+            "model": "grok-4-5",
+            "viv": 82.9
+          }
+        ],
+        "note": "Non-vision models renormalize without reverse_prompt_vision weight."
+      }
+    },
     {
       "id": "chg-2026-07-26-vision-gallery",
       "date": "2026-07-26",
