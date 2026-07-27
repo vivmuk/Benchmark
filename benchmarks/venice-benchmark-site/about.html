@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/styles.css?v=10" />
+  <link rel="stylesheet" href="assets/styles.css?v=11" />
 </head>
 <body>
   <div class="gpu-bg" aria-hidden="true"><canvas id="gpuCanvas"></canvas></div>
@@ -43,10 +43,11 @@
         <span class="attribute">Methodology</span>
         <h2>What the columns mean</h2>
         <ul class="plain-list">
-          <li><strong>Score</strong> (0–100) is a hand-tuned rubric per benchmark: intent-class accuracy and structure; UI generation code-runs-and-renders; pharma-ddi correct drug-pair identification; regulatory comprehension of WHO/FDA citations; startup-in-a-weekend feasibility.</li>
+          <li><strong>Score</strong> (0–100) is a hand-tuned rubric per benchmark: intent-class accuracy and structure; UI generation code-runs-and-renders; startup-in-a-weekend feasibility; value density under a 1K token budget; reverse-prompt vision checklist hits; pharma-ddi drug-pair identification; regulatory comprehension of WHO/FDA citations. Brick Breaker is retired and not scored.</li>
           <li><strong>Cost</strong> is reported in USD using Venice's <code>/v1/models</code> pricing at run-time, multiplied by token counts consumed.</li>
           <li><strong>Latency</strong> is the wall-clock between request and final token. Long-tail latencies (300–510 s) reflect reasoning-heavy models that produce long completion bodies; this is on purpose — see the harness-cap change on 2026-07-24.</li>
           <li><strong>Score / $</strong> is average score divided by total cost; higher = better value.</li>
+          <li><strong>VivIndex</strong> is a five-track weighted composite: startup 25%, intent 20%, value density 20%, reverse-prompt 20%, UI 15%. Pharma is charted separately. Missing core tracks renormalize weights.</li>
         </ul>
       </div>
 
@@ -58,6 +59,8 @@
           <li><code>data/changelog.json</code> — the source of truth for this page.</li>
           <li><code>model_registry.py</code> — model roster; adding a model here is one of two ways to onboard it (the other is editing <code>add()</code> directly).</li>
           <li><code>run_benchmarks.py --run-real --model &lt;id&gt;</code> — CLI for re-running any model.</li>
+          <li><code>run_new_tracks.py</code> — Value Density + Reverse-Prompt Vision runner.</li>
+          <li><code>data/vision/</code> + <code>vision.html</code> — reverse-prompt fixture and gallery.</li>
           <li><code>generate_standalone.py</code> — rebuilds <code>benchmarkviv-standalone.html</code> (and now <code>about-standalone.html</code>) for offline use.</li>
         </ul>
       </div>
@@ -78,7 +81,7 @@
     </div>
   </footer>
 
-  <script src="assets/app.js?v=10"></script>
+  <script src="assets/app.js?v=11"></script>
   <script>
     // Render the live changelog from data/changelog.json.
     (async function renderChangelog() {

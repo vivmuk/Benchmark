@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/styles.css?v=10" />
+  <link rel="stylesheet" href="assets/styles.css?v=11" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <script>
     (function(){
@@ -271,39 +271,39 @@
       </div>
       <div class="method-grid">
         <article class="method-card reveal">
-          <h3>1 · Intent Understanding</h3>
+          <h3>01 · Intent Understanding</h3>
           <p>Models receive ambiguous, underspecified prompts. Points for clarifying questions, structured proposals, and explicit uncertainty before assuming details.</p>
         </article>
         <article class="method-card reveal">
-          <h3>2 · One-Shot UI Generation</h3>
+          <h3>02 · One-Shot UI Generation</h3>
           <p>Models must emit a single self-contained HTML file. Scored on visual polish, semantic structure, accessibility, responsiveness, and whether it runs without edits.</p>
         </article>
         <article class="method-card reveal">
           <p>Models generate a playable Canvas game in one shot. Scored on physics plausibility, control responsiveness, collision detection, game states, particle/sound effects, and responsive design.</p>
         </article>
         <article class="method-card reveal">
-          <h3>4 · Startup in a Weekend</h3>
+          <h3>03 · Startup in a Weekend</h3>
           <p>Models receive a tight MVP brief for an AI contract-review SaaS. Points for system architecture, concrete database schema, API endpoints, auth strategy, AI pipeline, deployment stack, day-by-day schedule, cost estimate, risk/mitigations, and explicit out-of-scope boundaries.</p>
         </article>
         <article class="method-card reveal">
-          <h3>5 · VivIndex Composite</h3>
-          <p>Weighted average of four tracks. Startup 25%, Intent 20%, Value Density 20%, Reverse-Prompt 20%, UI 15%. Missing benchmarks are labelled and weights are renormalized rather than scored as zero.</p>
+          <h3>04 · VivIndex Composite</h3>
+          <p>Weighted average of five tracks. Startup 25%, Intent 20%, Value Density 20%, Reverse-Prompt 20%, UI 15%. Missing benchmarks are labelled and weights are renormalized rather than scored as zero.</p>
         </article>
         <article class="method-card reveal">
-          <h3>6 · Pharma tracks</h3>
+          <h3>05 · Pharma tracks</h3>
           <p>Drug-drug interaction identification and regulatory guideline comprehension are scored and charted for domain fitness. They are not folded into VivIndex so the composite remains comparable over time.</p>
         </article>
 
         <article class="method-card reveal">
-          <h3>7 · Value Density @1K</h3>
+          <h3>06 · Value Density @1K</h3>
           <p>Identical clinical JSON task, <code>max_tokens=1024</code>. Heuristic checklist on schema validity, required fields, and clinical correctness. Secondary metrics: score/1K tokens and score/USD. Length cannot inflate the primary score.</p>
         </article>
         <article class="method-card reveal">
-          <h3>8 · Reverse-Prompt Vision</h3>
+          <h3>07 · Reverse-Prompt Vision</h3>
           <p>Complex image from nano-banana-2. Models receive only the image + reconstruct-prompt instruction. A separate judge compares the reconstruction to the hidden source prompt via a fixed attribute checklist. Non-vision models are marked skipped.</p>
         </article>
         <article class="method-card reveal">
-          <h3>9 · Full protocol</h3>
+          <h3>08 · Full protocol</h3>
           <p>Exact prompts, scoring math, and non-claims are published on the Experimental Design page — the lab notebook for this suite.</p>
           <p style="margin-top:0.8rem"><a class="btn btn-primary" href="experimental-design.html">Open Experimental Design</a></p>
         </article>
@@ -322,6 +322,6 @@
     </div>
   </footer>
 
-  <script src="assets/app.js?v=10"></script>
+  <script src="assets/app.js?v=11"></script>
 </body>
 </html>

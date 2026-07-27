@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="BenchmarkViv Experimental Design Play — full prompts, scoring rules, protocol, and methodology for the Venice API model evaluation." />
+  <meta name="description" content="BenchmarkViv Experimental Design Play — full prompts, scoring rules, protocol, and methodology for BenchmarkViv: seven tracks, five-track VivIndex with Value Density and Reverse-Prompt Vision." />
   <title>Experimental Design · BenchmarkViv</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/styles.css?v=10" />
+  <link rel="stylesheet" href="assets/styles.css?v=11" />
 </head>
 <body>
   <nav class="navbar vt-nav">
@@ -50,7 +50,7 @@
       <div class="container">
         <div class="section-head">
           <h2>Protocol</h2>
-          <p>The leaderboard matrix is a single-shot chat completion per model × track. No tool loops, no multi-turn repair, no cherry-picked retries.</p>
+          <p>The leaderboard matrix is a single-shot completion per model × track (vision track sends image + instruction). No tool loops, no multi-turn repair, no cherry-picked retries. Seven tracks total; Brick Breaker removed from analysis.</p>
         </div>
 
         <div class="protocol-grid">
@@ -69,7 +69,7 @@
 
           <article class="protocol-card">
             <h3>Model set</h3>
-            <p>Sixteen Venice-hosted models across six published tracks. Coverage is shown explicitly; missing or failed runs are never converted into a zero score.</p>
+            <p>Sixteen Venice-hosted models across <strong>seven</strong> published tracks. Brick Breaker is retired. Coverage is shown explicitly; missing or failed runs are never converted into a zero score. Non-vision models are skipped on Reverse-Prompt Vision.</p>
             <ul>
               <li>GPT-5.6 Luna <code>openai-gpt-56-luna</code></li>
               <li>GPT-5.6 Luna Pro <code>openai-gpt-56-luna-pro</code></li>
@@ -80,10 +80,13 @@
               <li>GPT-5.5 <code>openai-gpt-55</code></li>
               <li>Fable 5 <code>claude-fable-5</code></li>
               <li>Opus 4.8 <code>claude-opus-4-8</code></li>
+              <li>Opus 5 <code>claude-opus-5</code></li>
               <li>GLM 5.2 <code>zai-org-glm-5-2</code></li>
               <li>DeepSeek V4 <code>deepseek-v4-pro</code></li>
               <li>MiniMax M3 <code>minimax-m3-preview</code></li>
               <li>Grok 4.5 <code>grok-4-5</code></li>
+              <li>Kimi K3 <code>kimi-k3</code></li>
+              <li>Inkling <code>inkling</code></li>
             </ul>
           </article>
 
@@ -116,24 +119,33 @@
       <div class="container">
         <div class="section-head">
           <h2>VivIndex composite</h2>
-          <p>One headline number per model. Weights favor sustained planning over single-file flash.</p>
+          <p>One headline number per model across five core tracks, including the two new measures (Value Density and Reverse-Prompt Vision). Pharma is charted separately. Brick Breaker is retired.</p>
         </div>
         <div class="protocol-card">
-          <h3>Formula</h3>
+          <h3>Formula (5-track VivIndex)</h3>
           <div class="prompt-block">VivIndex = Σ (score_track × weight_track) / Σ (weights for tracks present)
 
-Weights:
-  startup_in_a_weekend     0.35
-  intent_understanding     0.25
-  one_shot_ui              0.20
-  brick_breaker_realism    0.20</div>
+Weights (core five):
+  startup_in_a_weekend      0.25
+  intent_understanding      0.20
+  value_density             0.20
+  reverse_prompt_vision     0.20
+  one_shot_ui               0.15
+
+Not in VivIndex (charted separately):
+  pharma_drug_interaction
+  pharma_regulatory_comprehension
+
+Retired from analysis:
+  brick_breaker_realism</div>
           <div class="weight-bars" aria-hidden="true">
-            <div class="weight-row"><div class="weight-track"><div class="weight-fill" style="width:100%"></div></div><strong>35%</strong></div>
-            <div class="weight-row"><div class="weight-track"><div class="weight-fill" style="width:72%"></div></div><strong>25%</strong></div>
-            <div class="weight-row"><div class="weight-track"><div class="weight-fill" style="width:57%"></div></div><strong>20%</strong></div>
-            <div class="weight-row"><div class="weight-track"><div class="weight-fill" style="width:57%"></div></div><strong>20%</strong></div>
+            <div class="weight-row"><div class="weight-track"><div class="weight-fill" style="width:100%"></div></div><strong>25% startup</strong></div>
+            <div class="weight-row"><div class="weight-track"><div class="weight-fill" style="width:80%"></div></div><strong>20% intent</strong></div>
+            <div class="weight-row"><div class="weight-track"><div class="weight-fill" style="width:80%"></div></div><strong>20% value density</strong></div>
+            <div class="weight-row"><div class="weight-track"><div class="weight-fill" style="width:80%"></div></div><strong>20% reverse-prompt</strong></div>
+            <div class="weight-row"><div class="weight-track"><div class="weight-fill" style="width:60%"></div></div><strong>15% UI</strong></div>
           </div>
-          <p style="margin-top:1rem">If a model is missing a track, weights for present tracks are renormalized and its partial coverage is labelled. A failed request is excluded rather than converted into a zero score.</p>
+          <p style="margin-top:1rem">If a model is missing a core track (for example non-vision models on reverse-prompt), weights for present tracks are renormalized and partial coverage is labelled. Failed requests are excluded rather than zero-scored. Brick Breaker no longer enters VivIndex or the leaderboard matrix.</p>
         </div>
       </div>
     </section>
@@ -151,11 +163,11 @@ Weights:
             <p><strong>Why it exists:</strong> production assistants get underspecified requests. The failure mode is confident invention instead of clarification.</p>
             <div class="prompt-block">I need something built for my team but I'm not sure what. We are overwhelmed by Slack notifications and duplicate work. Suggest a solution and ask clarifying questions before assuming details.</div>
             <div class="score-box">
-              <h4>Scoring heuristic (0–100)</h4>
+              <h4>Scoring</h4>
               <ul class="score-list">
-                <li><strong>Clarifying questions (0–40):</strong> 10 points per <code>?</code>, capped at 40.</li>
-                <li><strong>Structured proposal (0–30):</strong> markers like <code>- </code>, <code>* </code>, <code>1.</code>, <code>##</code>, <code>**</code> (6 pts each, cap 30).</li>
-                <li><strong>Anti-assumption / hedging (0–30):</strong> presence of words such as clarify, before, depends, assume, confirm, could you (6 pts each, cap 30).</li>
+                <li><strong>Clarifying questions (0–40)</strong></li>
+                <li><strong>Structured proposal (0–30)</strong></li>
+                <li><strong>Anti-assumption / hedging (0–30)</strong></li>
               </ul>
             </div>
           </article>
@@ -165,34 +177,17 @@ Weights:
             <p><strong>Why it exists:</strong> can the model ship a complete, self-contained interface without a repair loop?</p>
             <div class="prompt-block">Generate a single self-contained HTML file for a dark-mode dashboard card showing a user's daily focus score, weekly trend sparkline, and a 'Start Focus' button. Use only HTML/CSS/JS. No external images.</div>
             <div class="score-box">
-              <h4>Scoring heuristic (0 or 70–95)</h4>
+              <h4>Scoring</h4>
               <ul class="score-list">
-                <li>Checks for HTML document markers, CSS, JS/script, a button, and focus+score language.</li>
-                <li>0 hits → 0. Otherwise maps 1–5 hits onto 70–95.</li>
-                <li>This is intentionally a coarse runnable-structure check, not a visual beauty contest.</li>
+                <li>HTML/CSS/JS structure markers, button, focus+score language.</li>
+                <li>Coarse runnable-structure check (not a beauty contest).</li>
               </ul>
             </div>
           </article>
 
-          <article class="prompt-card" id="prompt-brick">
-            <h3>04 · Value Density @1K (leaderboard track)</h3>
-            <p><strong>Why it exists:</strong> a hard one-shot interactive coding artifact under the shared leaderboard protocol. Scored heuristically on canvas/game-loop, physics, controls, and polish signals in the returned HTML.</p>
-            <div class="prompt-block">Create a single self-contained HTML file for a realistic Brick Breaker game with Canvas. Include: ball physics with angle reflection, paddle with mouse/keyboard/touch controls, brick grid with collision detection, score/lives/level, start/game-over/victory screens, particle effects on brick break, synthesized sound effects with Web Audio API, responsive design, dark neon aesthetic.</div>
-            <div class="score-box">
-              <h4>Scoring heuristic (0–100)</h4>
-              <ul class="score-list">
-                <li><strong>Canvas + RAF (20):</strong> <code>&lt;canvas&gt;</code> and <code>requestAnimationFrame</code>.</li>
-                <li><strong>Paddle + bricks (20)</strong></li>
-                <li><strong>Game state (15):</strong> score, lives, game-over/victory language.</li>
-                <li><strong>Physics (15):</strong> collision + angle/reflection math.</li>
-                <li><strong>FX / responsive (15):</strong> particles, Web Audio, resize/media queries.</li>
-                <li><strong>Polish (15):</strong> neon/glow/gradient/shadow + length > 3000 chars.</li>
-              </ul>
-            </div>
-          </article>
           <article class="prompt-card" id="prompt-startup">
-            <h3>04 · Startup in a Weekend</h3>
-            <p><strong>Why it exists:</strong> production usefulness depends on realistic planning — architecture, concrete schemas, APIs, deployment, costs, risks, and explicit scope boundaries under a tight deadline.</p>
+            <h3>03 · Startup in a Weekend</h3>
+            <p><strong>Why it exists:</strong> production usefulness depends on realistic planning under a tight deadline.</p>
             <div class="prompt-block">You have 7 days and a team of 3 engineers to build an MVP for a B2B SaaS product: an AI-powered contract review assistant for legal teams. Users upload contracts (PDF/Word), the system extracts clauses, flags risks, suggests redlines, and produces a summary report.
 
 Deliver a complete, buildable plan. Your response must include all of the following:
@@ -211,19 +206,113 @@ Deliver a complete, buildable plan. Your response must include all of the follow
 
 Be specific: name concrete languages, frameworks, cloud services, and libraries.</div>
             <div class="score-box">
-              <h4>Scoring heuristic (0–100)</h4>
+              <h4>Scoring</h4>
               <ul class="score-list">
-                <li><strong>Section coverage (0–48):</strong> 12 required sections, 4 pts each.</li>
-                <li><strong>Tech specificity (0–24):</strong> concrete languages, frameworks, cloud services, libraries.</li>
-                <li><strong>Quantitative / schedule rigor (0–16):</strong> cost numbers, day-by-day schedule, 100-user estimate.</li>
-                <li><strong>Risk &amp; scope quality (0–12):</strong> ≥5 risk/mitigation lines and ≥2 scope/out-of-scope lines.</li>
+                <li><strong>Section coverage (0–48):</strong> 12 required sections.</li>
+                <li><strong>Tech specificity (0–24)</strong></li>
+                <li><strong>Quantitative / schedule rigor (0–16)</strong></li>
+                <li><strong>Risk &amp; scope quality (0–12)</strong></li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="prompt-card" id="prompt-value-density">
+            <h3>04 · Value Density @1K</h3>
+            <p><strong>Why it exists:</strong> how much correct, structured clinical signal fits inside a hard 1024-token completion budget. One of the two new measures in VivIndex.</p>
+            <div class="prompt-block">Return ONLY a single JSON object (no markdown fences, no commentary) with exactly these keys:
+{
+  "drug_pair": string,                 // the clinically significant interacting pair
+  "severity": "Major"|"Moderate"|"Minor",
+  "mechanism": string,                 // pharmacological mechanism in &lt;= 25 words
+  "clinical_action": string,           // concrete next step in &lt;= 20 words
+  "monitor": [string, string],         // exactly 2 monitoring items
+  "avoid_if": string,                  // one high-risk condition in &lt;= 15 words
+  "confidence": number                 // 0-100 integer
+}
+
+Scenario: patient on warfarin 5 mg daily for atrial fibrillation also takes ibuprofen 400 mg TID PRN for osteoarthritis. Identify the primary interaction only.
+
+Hard rules:
+- Valid JSON only
+- No extra keys
+- No prose outside JSON
+- Be precise, not verbose
+</div>
+            <div class="score-box">
+              <h4>Scoring</h4>
+              <ul class="score-list">
+                <li>Fixed <code>max_tokens=1024</code>.</li>
+                <li>Required JSON field checklist (0–100).</li>
+                <li>Secondary: value per 1k tokens and value per USD (length alone cannot raise score).</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="prompt-card" id="prompt-reverse">
+            <h3>05 · Reverse-Prompt Vision</h3>
+            <p><strong>Why it exists:</strong> multimodal fidelity: reconstruct the generation prompt from a fixed nano-banana-2 image with no access to the source prompt. The other new VivIndex measure. See <a href="vision.html">Vision gallery</a>.</p>
+            <div class="prompt-block">You are given a single image. Reconstruct the most likely original text-to-image prompt that generated it. Do NOT invent a caption style summary only — write a generation prompt a diffusion/image model could use. Include concrete visual attributes: subjects, layout (left/center/right/foreground/background), colors, materials, text visible in the image (transcribe exactly if readable), lighting, atmosphere, and style. If text is unreadable, say so. Output ONLY the reconstructed prompt, no preamble.</div>
+            <div class="score-box">
+              <h4>Scoring</h4>
+              <ul class="score-list">
+                <li>Judge scores reconstructed prompt against a fixed 28-attribute checklist (0–100).</li>
+                <li>Non-vision models: <code>status=skipped</code> (not zero).</li>
+                <li>Artifacts in <code>data/vision/</code>.</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="prompt-card" id="prompt-pharma-ddi">
+            <h3>06 · Pharma DDI</h3>
+            <p><strong>Why it exists:</strong> domain correctness on clinically significant drug-drug interactions. Charted separately; not in VivIndex weights.</p>
+            <div class="prompt-block">You are a clinical pharmacist reviewing a patient's medication list. For each pair of medications below, identify any clinically significant drug-drug interactions. For each interaction found, provide:
+
+1. The interacting drug pair
+2. Severity classification (Major / Moderate / Minor)
+3. The pharmacological mechanism (e.g., CYP enzyme inhibition/induction, pharmacodynamic synergy)
+4. Recommended clinical action
+
+Patient medication list:
+- warfarin 5 mg once daily (atrial fibrillation)
+- ibuprofen 400 mg three times daily as needed (osteoarthritis pain)
+- lisinopril 10 mg once daily (hypertension)
+
+Be precise about mechanisms. If you are uncertain about an interaction, state that explicitly rather than guessing.</div>
+            <div class="score-box">
+              <h4>Scoring</h4>
+              <ul class="score-list">
+                <li>Interaction detection, severity, mechanism, clinical action, anti-hallucination (0–100).</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="prompt-card" id="prompt-pharma-reg">
+            <h3>07 · Pharma Regulatory</h3>
+            <p><strong>Why it exists:</strong> regulatory guideline comprehension for clinical-trial monitoring. Charted separately; not in VivIndex weights.</p>
+            <div class="prompt-block">You are a regulatory affairs specialist. Answer the following questions about clinical trial regulatory requirements. Cite specific guideline sections where possible.
+
+Scenario: A clinical research organization (CRO) is designing a monitoring plan for a Phase III randomized controlled trial in oncology. The sponsor plans to use centralized monitoring only, with no on-site visits.
+
+Questions:
+1. Does ICH E6(R2) permit centralized-only monitoring without any on-site visits? What does the guideline say about the monitor's responsibilities for verifying data at investigative sites?
+2. What are the investigator's responsibilities for obtaining informed consent under ICH E6(R2)?
+
+For each answer:
+1. State the requirement clearly
+2. Cite the relevant guideline section (e.g., ICH E6 Section 5.x)
+3. Note any exceptions or conditions
+
+If you are unsure of the exact section number, state the principle and note that the specific citation should be verified.</div>
+            <div class="score-box">
+              <h4>Scoring</h4>
+              <ul class="score-list">
+                <li>Requirement accuracy, citation specificity, completeness, anti-fabrication (0–100).</li>
               </ul>
             </div>
           </article>
         </div>
       </div>
-    </section>
-
+    
     <section id="scoring">
       <div class="container">
         <div class="section-head">
@@ -235,7 +324,7 @@ Be specific: name concrete languages, frameworks, cloud services, and libraries.
             <p><strong>What heuristics buy us:</strong> anyone can re-score the stored raw responses without an LLM judge. Ties and near-ties should be treated as “same tier,” not destiny.</p>
           </article>
           <article class="callout warning">
-            <p><strong>What heuristics miss:</strong> elegant prose that never asks a question can still lose Intent; a beautiful UI missing one keyword can under-score; a truncated but promising game can look worse than a keyword-stuffed shell.</p>
+            <p><strong>What heuristics miss:</strong> elegant prose that never asks a question can still lose Intent; a beautiful UI missing one keyword can under-score; a strong reverse-prompt that misses checklist text can under-score vs keyword-heavy prose.</p>
           </article>
         </div>
         <div class="protocol-card" style="margin-top:1rem">
@@ -263,7 +352,8 @@ Be specific: name concrete languages, frameworks, cloud services, and libraries.
               <li>Fixed prompts and fixed sampling settings across models.</li>
               <li>Transparent heuristics with stored raw outputs.</li>
               <li>Live Venice latency/cost observations for those runs.</li>
-              <li>Scored Value Density @1K track under the shared leaderboard protocol.</li>
+              <li>Seven scored tracks including Value Density @1K and Reverse-Prompt Vision; Brick Breaker retired.</li>
+              <li>Five-track VivIndex with transparent weights (startup 25%, intent 20%, value density 20%, reverse-prompt 20%, UI 15%).</li>
             </ul>
           </article>
           <article class="protocol-card">
@@ -290,10 +380,12 @@ Be specific: name concrete languages, frameworks, cloud services, and libraries.
       <div class="footer-links">
         <a href="index.html">Results</a>
         <a href="index.html#leaderboard">Leaderboard</a>
+        <a href="vision.html">Vision</a>
+        <a href="about.html">About</a>
       </div>
     </div>
   </footer>
 
-  <script src="assets/app.js?v=10"></script>
+  <script src="assets/app.js?v=11"></script>
 </body>
 </html>
