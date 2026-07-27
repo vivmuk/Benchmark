@@ -11,7 +11,10 @@
       "reconstructed_prompt": "Photorealistic cinematic interior of a futuristic pharmaceutical research laboratory blended with a cozy rainy-night café, wide horizontal composition. On the left, a large transparent teal-glowing holographic dashboard angled toward the viewer displays the exact title “EvidenceGrade AI,” the subtitle “5-tier grade,” five stacked colored rating panels labeled “A,” “B,” “C,” “D,” and “F” in bold white lettering, and a cyan line graph titled “Citation Confidence 2019-2026,” with a rising jagged trend line and a 0–60 vertical scale. In the center foreground, a floating three-dimensional DNA double helix made from luminous turquoise glass-like molecular spheres and rods, with metallic gold molecular nodes and connectors, hovering above a brushed metal laboratory worktable. Behind it, shelves hold amber medicine bottles and laboratory glassware, with readable labels including “Aspirin,” “Warfarin,” and “Ibuprofen,” plus a vintage microscope, test tubes, binders, and a potted monstera plant. In the foreground on the table, an open spiral-bound research notebook contains handwritten notes, with the partially readable heading “CYP3A4 literature risk,” alongside a black-and-gold pen. At right, a white ceramic coffee cup with a green lid sits on a saucer, while a folded red umbrella rests near the window. A black cat sits silhouetted on the windowsill. The right side features a tall arched industrial window covered with rain droplets, revealing a wet neon-lit city street outside with glowing pink, red, cyan, and white East Asian characters on signs; the exterior text is too small and stylized to transcribe reliably. Overhead, multiple articulated industrial pendant lamps with warm cream, green, and bronze shades cast pools of warm light, contrasting with cool teal holographic illumination and rainy blue ambient light. Rich reflections on the metal tabletop, atmospheric haze, volumetric light rays, dark teal walls, brass and glass materials, highly detailed science-fiction editorial aesthetic, realistic depth of field, dramatic teal-and-orange color grading, premium cinematic concept art, ultra-detailed, sharp focus.",
       "score": 0,
       "hit_rate": 0.0,
-      "hits": {}
+      "hits": {},
+      "generated_image": "data/vision/recon_images/openai-gpt-56-luna.web.jpg",
+      "generated_image_png": "data/vision/recon_images/openai-gpt-56-luna.png",
+      "generated_image_model": "nano-banana-2"
     },
     {
       "model_id": "openai-gpt-56-luna-pro",
@@ -48,7 +51,10 @@
         "volumetric_light": true,
         "teal_amber_grade": true,
         "photoreal_hologram_mix": true
-      }
+      },
+      "generated_image": "data/vision/recon_images/openai-gpt-56-luna-pro.web.jpg",
+      "generated_image_png": "data/vision/recon_images/openai-gpt-56-luna-pro.png",
+      "generated_image_model": "nano-banana-2"
     },
     {
       "model_id": "openai-gpt-56-sol",
@@ -56,7 +62,10 @@
       "reconstructed_prompt": "Cinematic photorealistic wide-angle interior of a futuristic pharmacology laboratory at night, viewed across a brushed stainless-steel worktable. Center frame: a large floating 3D molecular/DNA-like structure made of translucent glowing cyan glass rods and spheres with metallic gold atoms, hovering above the table. Left wall: a huge transparent cyan holographic dashboard with crisp white text reading exactly “EvidenceGrade AI” and “5-tier grade”; five stacked color-coded rating boxes labeled “A”, “B”, “C”, “D”, and “F” in green, teal, yellow, orange, and red. Beside them is a line chart titled exactly “Citation Confidence 2019-2026”, with a rising cyan graph, vertical values from 0 to 60, and the same title repeated along the bottom axis. Foreground left: an open spiral-bound leather notebook with handwritten scientific notes and clearly visible text “CYP3A4 interaction risk”, plus a black-and-gold pen resting diagonally across the page. Foreground right: a cracked white ceramic coffee cup with a dark green travel lid on a matching saucer. Background: gray laboratory walls, stainless counter, microscope, white shelves holding amber medicine bottles labeled “Aspirin”, “Warfarin”, and “Ibuprofen”, additional unlabeled or unreadable bottles, binders, test tubes, and a potted monstera plant. Ceiling filled with articulated vintage industrial task lamps, including warm cream and green enamel shades. Right side: a large rain-streaked arched window overlooking a dense neon-lit East Asian city street; pink, cyan, and red vertical signs with mostly unreadable Chinese characters reflect on wet glass. A black cat sits in silhouette on the windowsill beside a closed red umbrella. Moody teal-and-orange lighting, warm pools of lamp light, cyan holographic glow, rainy cyberpunk atmosphere, realistic reflections on steel, volumetric haze, shallow cinematic depth of field, highly detailed materials, symmetrical editorial composition, premium pharmaceutical-tech advertisement, photorealistic 3D render, 16:9.",
       "score": 0,
       "hit_rate": 0.0,
-      "hits": {}
+      "hits": {},
+      "generated_image": "data/vision/recon_images/openai-gpt-56-sol.web.jpg",
+      "generated_image_png": "data/vision/recon_images/openai-gpt-56-sol.png",
+      "generated_image_model": "nano-banana-2"
     },
     {
       "model_id": "openai-gpt-56-sol-pro",
@@ -93,7 +102,10 @@
         "volumetric_light": true,
         "teal_amber_grade": true,
         "photoreal_hologram_mix": true
-      }
+      },
+      "generated_image": "data/vision/recon_images/openai-gpt-56-sol-pro.web.jpg",
+      "generated_image_png": "data/vision/recon_images/openai-gpt-56-sol-pro.png",
+      "generated_image_model": "nano-banana-2"
     },
     {
       "model_id": "openai-gpt-56-terra",
@@ -101,7 +113,10 @@
       "reconstructed_prompt": "Cinematic photorealistic editorial illustration of a moody modern pharmacology research office at night, wide-angle view across a large brushed-steel desk. Left side: a large transparent cyan holographic glass display reading “EvidenceGrade AI” and “5-tier grade,” with stacked color-coded evaluation blocks labeled “A”, “B”, “C”, “D”, “F”; beside them a glowing line graph titled “Citation Confidence 2019-2026,” with a rising cyan trace. Center foreground: a luminous floating molecular structure resembling a DNA helix / drug molecule, made of turquoise glassy bonds and teal glowing rods with reflective gold atom nodes, hovering above the desk. Background: gray-blue wall, white shelves holding amber prescription bottles labeled “Aspirin,” “Warfarin,” and “Ibuprofen,” laboratory tubes, binders, a brass microscope, and a potted monstera plant. Overhead industrial brass swing-arm lamps and green enamel pendant lamps cast warm pools of light against cool teal ambient illumination. Right: tall arched rain-streaked window looking onto a neon-lit East Asian city street at night, pink and cyan vertical signs with partially unreadable Chinese characters, wet reflections and misty atmosphere. On the desk foreground, an open spiral notebook with handwritten notes including “CYP3A4 Citation risk,” a black-and-gold fountain pen, a computer mouse, and a cracked white ceramic coffee cup with a teal lid resting on a saucer. On the right windowsill: a black cat sitting beside a closed red umbrella. Rich teal, cyan, emerald, gold, magenta, and deep charcoal palette; sophisticated scientific noir atmosphere, realistic materials, soft volumetric rain light, sharp detailed composition, high-end cinematic 3D render, 16:9.",
       "score": 0,
       "hit_rate": 0.0,
-      "hits": {}
+      "hits": {},
+      "generated_image": "data/vision/recon_images/openai-gpt-56-terra.web.jpg",
+      "generated_image_png": "data/vision/recon_images/openai-gpt-56-terra.png",
+      "generated_image_model": "nano-banana-2"
     },
     {
       "model_id": "openai-gpt-56-terra-pro",
@@ -138,7 +153,10 @@
         "volumetric_light": false,
         "teal_amber_grade": true,
         "photoreal_hologram_mix": true
-      }
+      },
+      "generated_image": "data/vision/recon_images/openai-gpt-56-terra-pro.web.jpg",
+      "generated_image_png": "data/vision/recon_images/openai-gpt-56-terra-pro.png",
+      "generated_image_model": "nano-banana-2"
     },
     {
       "model_id": "openai-gpt-55",
@@ -175,7 +193,10 @@
         "volumetric_light": true,
         "teal_amber_grade": true,
         "photoreal_hologram_mix": true
-      }
+      },
+      "generated_image": "data/vision/recon_images/openai-gpt-55.web.jpg",
+      "generated_image_png": "data/vision/recon_images/openai-gpt-55.png",
+      "generated_image_model": "nano-banana-2"
     },
     {
       "model_id": "claude-fable-5",
@@ -183,7 +204,10 @@
       "reconstructed_prompt": "A photorealistic wide-format render of a moody pharmacology research lab at night, cinematic lighting. On the left, a large translucent holographic UI panel floats in the air titled \"EvidenceGrade AI\" in bold white sans-serif text; below it a legend labeled \"5-tier grade\" with five colored grade blocks stacked vertically: green \"A\", teal \"B\", yellow-olive \"C\", orange \"D\", red \"F\"; to the right of the legend a glowing teal line chart labeled \"Citation Confidence 2019-2026\" with a y-axis from 0 to 60 showing a rising trend, and the same \"Citation Confidence 2019-2026\" label repeated at the chart's bottom. In the center of the room, a large glowing translucent teal-and-amber 3D DNA double helix / molecular structure model floats above a brushed steel lab table, made of glassy spheres and neon tube bonds. On the table in the foreground: an open leather-bound spiral notebook with handwritten notes, the readable phrase \"CYP3A4 interaction risk\" written in ink next to a fountain pen (other handwriting is small and unreadable), and to the right a white ceramic coffee cup with a teal lid on a cracked white saucer. Background wall: floating white shelves holding amber apothecary/pill bottles with paper labels reading \"Aspirin\", \"Warfarin\", \"Ibuprofen\" (some labels partially unreadable), white binders, and a rack of test tubes; below the shelves a stainless steel bench with a small brass microscope and more amber bottles; a potted monstera plant on the right end of the bench. On the right side, a large arched window overlooks a rainy cyberpunk city street glowing with pink, red, and cyan neon signs bearing Chinese characters (individual characters stylized/unreadable), rain streaking the glass; on the interior windowsill sits a dark cat silhouette figurine and a folded red umbrella leaning against the wall. Ceiling: brass articulated industrial lamps, one with a warm bulb, another with a green glass shade casting green light. Atmosphere: soft teal-and-warm mixed lighting, subtle haze, reflective tabletop, high detail, octane render style, 3D concept art, sci-fi laboratory aesthetic, 16:9 aspect ratio.",
       "score": 0,
       "hit_rate": 0.0,
-      "hits": {}
+      "hits": {},
+      "generated_image": "data/vision/recon_images/claude-fable-5.web.jpg",
+      "generated_image_png": "data/vision/recon_images/claude-fable-5.png",
+      "generated_image_model": "nano-banana-2"
     },
     {
       "model_id": "claude-opus-4-8",
@@ -220,7 +244,10 @@
         "volumetric_light": true,
         "teal_amber_grade": true,
         "photoreal_hologram_mix": true
-      }
+      },
+      "generated_image": "data/vision/recon_images/claude-opus-4-8.web.jpg",
+      "generated_image_png": "data/vision/recon_images/claude-opus-4-8.png",
+      "generated_image_model": "nano-banana-2"
     },
     {
       "model_id": "claude-opus-5",
@@ -257,7 +284,10 @@
         "volumetric_light": true,
         "teal_amber_grade": true,
         "photoreal_hologram_mix": true
-      }
+      },
+      "generated_image": "data/vision/recon_images/claude-opus-5.web.jpg",
+      "generated_image_png": "data/vision/recon_images/claude-opus-5.png",
+      "generated_image_model": "nano-banana-2"
     },
     {
       "model_id": "minimax-m3-preview",
@@ -294,7 +324,10 @@
         "volumetric_light": false,
         "teal_amber_grade": true,
         "photoreal_hologram_mix": true
-      }
+      },
+      "generated_image": "data/vision/recon_images/minimax-m3-preview.web.jpg",
+      "generated_image_png": "data/vision/recon_images/minimax-m3-preview.png",
+      "generated_image_model": "nano-banana-2"
     },
     {
       "model_id": "grok-4-5",
@@ -331,7 +364,10 @@
         "volumetric_light": true,
         "teal_amber_grade": true,
         "photoreal_hologram_mix": true
-      }
+      },
+      "generated_image": "data/vision/recon_images/grok-4-5.web.jpg",
+      "generated_image_png": "data/vision/recon_images/grok-4-5.png",
+      "generated_image_model": "nano-banana-2"
     },
     {
       "model_id": "inkling",
@@ -368,7 +404,10 @@
         "volumetric_light": true,
         "teal_amber_grade": true,
         "photoreal_hologram_mix": true
-      }
+      },
+      "generated_image": "data/vision/recon_images/inkling.web.jpg",
+      "generated_image_png": "data/vision/recon_images/inkling.png",
+      "generated_image_model": "nano-banana-2"
     },
     {
       "model_id": "kimi-k3",
@@ -405,7 +444,12 @@
         "volumetric_light": false,
         "teal_amber_grade": true,
         "photoreal_hologram_mix": true
-      }
+      },
+      "generated_image": "data/vision/recon_images/kimi-k3.web.jpg",
+      "generated_image_png": "data/vision/recon_images/kimi-k3.png",
+      "generated_image_model": "nano-banana-2"
     }
-  ]
+  ],
+  "recon_image_model": "nano-banana-2",
+  "recon_images_generated_at": "2026-07-27T23:42:10.306392+00:00"
 }

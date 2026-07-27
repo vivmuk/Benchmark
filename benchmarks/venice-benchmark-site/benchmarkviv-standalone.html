@@ -19078,6 +19078,104 @@ body > .navbar {
   margin-bottom: 0.45rem;
 }
 
+
+/* ===== Reconstruction image gallery ===== */
+.recon-compare {
+  display: grid;
+  grid-template-columns: minmax(180px, 280px) 1fr;
+  gap: 1.1rem;
+  align-items: start;
+}
+@media (max-width: 800px) {
+  .recon-compare {
+    grid-template-columns: 1fr;
+  }
+}
+.recon-compare-source {
+  margin: 0;
+  padding: 0.65rem;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: calc(var(--nav-h) + 0.75rem);
+}
+.recon-compare-source img {
+  width: 100%;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--rule);
+}
+.recon-compare-source figcaption {
+  margin-top: 0.55rem;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  text-align: center;
+}
+.recon-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 0.75rem;
+}
+.recon-gallery-tile {
+  position: relative;
+  display: block;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--rule);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 160ms var(--ease), border-color 160ms;
+}
+.recon-gallery-tile:hover {
+  transform: translateY(-2px);
+  border-color: var(--rule-strong);
+}
+.recon-gallery-tile img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+}
+.recon-gallery-tile .tile-score {
+  position: absolute;
+  top: 0.45rem;
+  right: 0.45rem;
+  min-width: 2.2rem;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.2rem 0.4rem;
+  border-radius: 999px;
+  border: 1px solid var(--rule);
+  background: rgba(255,255,255,0.92);
+}
+.recon-gallery-tile .tile-name {
+  display: block;
+  padding: 0.45rem 0.55rem 0.55rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+.recon-gen-figure {
+  margin: 0.35rem 0 0.85rem;
+  padding: 0;
+}
+.recon-gen-figure img {
+  width: 100%;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--rule);
+}
+.recon-gen-figure figcaption {
+  margin-top: 0.45rem;
+  font-size: 0.82rem;
+  color: var(--text-dim);
+}
+
+
 </style>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <script>

@@ -1,9 +1,25 @@
 {
   "schema_version": "1.0.0",
   "site_selector": "data/changelog.json",
-  "generated_at": "2026-07-27T23:37:13.350877+00:00",
+  "generated_at": "2026-07-27T23:44:01.280912+00:00",
   "format": "zhcli",
   "entries": [
+    {
+      "id": "chg-2026-07-27-recon-images-nanobanana2",
+      "date": "2026-07-27",
+      "time_utc": "2026-07-27T23:44:01.280816+00:00",
+      "category": "vision",
+      "summary": "Added per-model reconstruction images on Vision gallery, all rendered with nano-banana-2 (same model as the original reverse-prompt fixture).",
+      "details": {
+        "image_model": "nano-banana-2",
+        "resolution": "1K",
+        "aspect_ratio": "16:9",
+        "count": 14,
+        "path": "data/vision/recon_images/",
+        "page": "vision.html#recon-renders",
+        "estimated_cost_usd": 0.8
+      }
+    },
     {
       "id": "chg-2026-07-27-pages-sync-7track",
       "date": "2026-07-27",

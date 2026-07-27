@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build vision.html from reverse-prompt fixture + reconstructions."""
+"""Build vision.html from reverse-prompt fixture + reconstructions + nano-banana-2 renders."""
 from __future__ import annotations
 
 import html
@@ -11,6 +11,8 @@ ROOT = Path(__file__).resolve().parent
 META = json.loads((ROOT / "data/vision/reverse_prompt_meta.json").read_text(encoding="utf-8"))
 RECON = json.loads((ROOT / "data/vision/reconstructions.json").read_text(encoding="utf-8"))
 RESULTS = json.loads((ROOT / "data/results.json").read_text(encoding="utf-8"))
+MANIFEST_PATH = ROOT / "data/vision/recon_images_manifest.json"
+MANIFEST = json.loads(MANIFEST_PATH.read_text(encoding="utf-8")) if MANIFEST_PATH.exists() else {}
 
 SOURCE_PROMPT = META["source_prompt"]
 INSTRUCTION = META["reverse_prompt_instruction"]
@@ -18,8 +20,13 @@ CHECKLIST = META["checklist"]
 IMAGE_MODEL = META.get("image_model", "nano-banana-2")
 JUDGE_MODEL = META.get("judge_model") or RECON.get("judge_model") or "openai-gpt-56-luna"
 GENERATED = RECON.get("generated_at") or META.get("generated_at") or ""
+RECON_IMG_MODEL = RECON.get("recon_image_model") or MANIFEST.get("image_model") or IMAGE_MODEL
+RECON_IMG_BY_MODEL = {
+    r.get("model_id"): r
+    for r in (MANIFEST.get("results") or [])
+    if r.get("status") == "ok"
+}
 
-# Prefer web jpeg; fall back to original png
 WEB_IMG = "data/vision/reverse_prompt_source.web.jpg"
 if not (ROOT / WEB_IMG).exists():
     WEB_IMG = "data/vision/reverse_prompt_source.png"
@@ -62,18 +69,19 @@ def hits_chips(hits: dict | None, checklist: list) -> str:
             cls, mark = "hit-na", "n/a"
         parts.append(
             f'<span class="hit-chip {cls}" title="{esc(desc)}">'
-            f'<code>{esc(cid)}</code> <em>{esc(mark)}</em></span>'
+            f"<code>{esc(cid)}</code> <em>{esc(mark)}</em></span>"
         )
     return '<div class="hit-grid">' + "".join(parts) + "</div>"
 
 
-# reconstructions sorted by score desc
 recon_rows = sorted(
     RECON.get("results") or [],
-    key=lambda r: (-(r.get("score") if isinstance(r.get("score"), (int, float)) else -1), r.get("model_id") or ""),
+    key=lambda r: (
+        -(r.get("score") if isinstance(r.get("score"), (int, float)) else -1),
+        r.get("model_id") or "",
+    ),
 )
 
-# skipped non-vision from results.json
 skipped = [
     r
     for r in RESULTS.get("results") or []
@@ -86,6 +94,7 @@ checklist_html = "\n".join(
 )
 
 recon_cards = []
+gallery_tiles = []
 for i, r in enumerate(recon_rows, 1):
     mid = r.get("model_id") or ""
     disp = r.get("display") or mid
@@ -103,6 +112,38 @@ for i, r in enumerate(recon_rows, 1):
     if hit_n is not None:
         meta_bits.append(f"hits <strong>{hit_n}/{hit_tot}</strong>")
     meta_line = " · ".join(meta_bits) if meta_bits else ""
+
+    img_meta = RECON_IMG_BY_MODEL.get(mid) or {}
+    web = r.get("generated_image") or img_meta.get("web_jpg") or ""
+    png = r.get("generated_image_png") or img_meta.get("png") or ""
+    if web and not (ROOT / web).exists():
+        web = ""
+    if png and not (ROOT / png).exists():
+        png = ""
+
+    if web:
+        png_link = f' · <a href="{esc(png)}">full PNG</a>' if png else ""
+        img_block = f"""
+        <figure class="recon-gen-figure">
+          <a href="{esc(png or web)}" target="_blank" rel="noopener">
+            <img src="{esc(web)}" alt="{esc(RECON_IMG_MODEL)} render of {esc(disp)} reconstructed prompt" loading="lazy" />
+          </a>
+          <figcaption>
+            Rendered with <code>{esc(RECON_IMG_MODEL)}</code> from this model&rsquo;s reconstructed prompt{png_link}
+          </figcaption>
+        </figure>"""
+        gallery_tiles.append(
+            f"""
+        <a class="recon-gallery-tile" href="#recon-{esc(mid)}">
+          <img src="{esc(web)}" alt="{esc(disp)} reconstruction render" loading="lazy" />
+          <span class="tile-score {score_class(score)}">{esc(score if score is not None else "n/a")}</span>
+          <span class="tile-name">{esc(disp)}</span>
+        </a>"""
+        )
+    else:
+        img_block = f"""
+        <p class="muted">No generated image yet for <code>{esc(mid)}</code>.</p>"""
+
     recon_cards.append(
         f"""
       <article class="vision-card reveal" id="recon-{esc(mid)}">
@@ -115,6 +156,8 @@ for i, r in enumerate(recon_rows, 1):
           <div class="score-pill {score_class(score)}">{esc(score if score is not None else "n/a")}</div>
         </header>
         <p class="vision-card-meta">{meta_line}</p>
+        <h4>Image from this prompt ({esc(RECON_IMG_MODEL)})</h4>
+        {img_block}
         <h4>Reconstructed prompt</h4>
         <pre class="prompt-block">{esc(prompt)}</pre>
         <h4>Checklist hits</h4>
@@ -135,17 +178,23 @@ if skipped:
       <p class="muted">These models stay in results.json as <code>status=skipped</code>, not zero-scored.</p>
     </div>"""
 
+gallery_html = (
+    "".join(gallery_tiles)
+    if gallery_tiles
+    else '<p class="muted">No reconstruction renders yet. Run generate_recon_images.py.</p>'
+)
+
 page = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="BenchmarkViv Vision gallery: nano-banana-2 source image, full generation prompt, reverse-prompt instruction, attribute checklist, and every model reconstruction." />
+  <meta name="description" content="BenchmarkViv Vision gallery: nano-banana-2 source image, full prompts, checklist, every model reconstruction, and nano-banana-2 re-renders of each reconstructed prompt." />
   <title>Vision Gallery · BenchmarkViv</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/styles.css?v=8" />
+  <link rel="stylesheet" href="assets/styles.css?v=12" />
 </head>
 <body>
   <div class="gpu-bg" aria-hidden="true"><canvas id="gpuCanvas"></canvas></div>
@@ -169,18 +218,19 @@ page = f"""<!DOCTYPE html>
     <div class="hero-backdrop"></div>
     <div class="container hero-content">
       <span class="eyebrow">Reverse-Prompt Vision</span>
-      <h1>Source image, every prompt, every reconstruction</h1>
+      <h1>Source image, every prompt, every reconstruction, every re-render</h1>
       <p>
         One fixed image from <strong>{esc(IMAGE_MODEL)}</strong>. Models never see the source prompt.
-        They only see the picture, then write a generation prompt. A judge scores them against a
-        {len(CHECKLIST)}-attribute checklist.
+        They only see the picture, then write a generation prompt. We score that prompt, then
+        re-render it with the <strong>same</strong> image model (<code>{esc(RECON_IMG_MODEL)}</code>).
       </p>
       <div class="hero-actions">
         <a href="#source-image" class="btn btn-primary">View source image</a>
+        <a href="#recon-renders" class="btn btn-ghost">Model images</a>
         <a href="#source-prompt" class="btn btn-ghost">Source prompt</a>
         <a href="#reconstructions" class="btn btn-ghost">Reconstructions</a>
       </div>
-      <p class="data-status">Fixture generated {esc(GENERATED)} · judge <code>{esc(JUDGE_MODEL)}</code></p>
+      <p class="data-status">Fixture {esc(GENERATED)} · judge <code>{esc(JUDGE_MODEL)}</code> · re-renders <code>{esc(RECON_IMG_MODEL)}</code></p>
     </div>
   </header>
 
@@ -192,13 +242,35 @@ page = f"""<!DOCTYPE html>
       </div>
       <figure class="vision-figure card">
         <a href="{esc(FULL_IMG)}" target="_blank" rel="noopener">
-          <img src="{esc(WEB_IMG)}" alt="Reverse-prompt source image: surreal pharmaceutical laboratory at twilight generated by {esc(IMAGE_MODEL)}" loading="eager" />
+          <img src="{esc(WEB_IMG)}" alt="Reverse-prompt source image generated by {esc(IMAGE_MODEL)}" loading="eager" />
         </a>
         <figcaption>
           <span><code>{esc(WEB_IMG)}</code> (display)</span>
           <span><a href="{esc(FULL_IMG)}">Full PNG</a> · <a href="data/vision/reverse_prompt_meta.json">meta JSON</a></span>
         </figcaption>
       </figure>
+    </div>
+  </section>
+
+  <section id="recon-renders">
+    <div class="container">
+      <div class="section-head">
+        <h2>Images each model&rsquo;s prompt generates</h2>
+        <p>
+          Same image model as the original fixture: <code>{esc(RECON_IMG_MODEL)}</code>,
+          16:9 · 1K. Each tile is rendered from that model&rsquo;s reconstructed prompt only
+          (not the ground-truth source prompt). Click a tile to jump to the full card.
+        </p>
+      </div>
+      <div class="recon-compare">
+        <figure class="recon-compare-source">
+          <img src="{esc(WEB_IMG)}" alt="Original source image" />
+          <figcaption>Source image ({esc(IMAGE_MODEL)})</figcaption>
+        </figure>
+        <div class="recon-gallery-grid">
+          {gallery_html}
+        </div>
+      </div>
     </div>
   </section>
 
@@ -239,7 +311,7 @@ page = f"""<!DOCTYPE html>
     <div class="container">
       <div class="section-head">
         <h2>Model reconstructions ({len(recon_rows)})</h2>
-        <p>Sorted by score. Each card shows the full reconstructed prompt and per-attribute hits when available.</p>
+        <p>Sorted by score. Each card shows the <strong>{esc(RECON_IMG_MODEL)}</strong> render, full reconstructed prompt, and per-attribute hits.</p>
       </div>
       <div class="vision-recon-grid">
         {''.join(recon_cards)}
@@ -253,11 +325,12 @@ page = f"""<!DOCTYPE html>
       <div class="card">
         <h2>How to read this page</h2>
         <ul class="plain-list">
-          <li><strong>Source prompt</strong> is the only prompt used to make the image.</li>
+          <li><strong>Source prompt</strong> is the only prompt used to make the original image.</li>
           <li><strong>Reverse instruction</strong> is what every model was asked to do with the image alone.</li>
           <li><strong>Checklist</strong> is the scoring rubric (not shown to the model under test).</li>
           <li><strong>Reconstructions</strong> are raw model outputs; judge scores live in <code>data/results.json</code> under <code>reverse_prompt_vision</code>.</li>
-          <li>Artifacts: <code>data/vision/</code> (image, meta, reconstructions.json).</li>
+          <li><strong>Model images</strong> re-render each reconstructed prompt with the same image model as the fixture (<code>{esc(RECON_IMG_MODEL)}</code>).</li>
+          <li>Artifacts: <code>data/vision/</code> including <code>recon_images/</code>.</li>
         </ul>
       </div>
     </div>
@@ -269,7 +342,7 @@ page = f"""<!DOCTYPE html>
     </div>
   </footer>
 
-  <script src="assets/app.js?v=8"></script>
+  <script src="assets/app.js?v=12"></script>
 </body>
 </html>
 """
@@ -277,5 +350,7 @@ page = f"""<!DOCTYPE html>
 out = ROOT / "vision.html"
 out.write_text(page, encoding="utf-8")
 print(f"Wrote {out} ({out.stat().st_size} bytes)")
-print(f"reconstructions: {len(recon_rows)}  checklist: {len(CHECKLIST)}  skipped: {len(skipped)}")
+print(f"reconstructions: {len(recon_rows)}  gallery tiles: {len(gallery_tiles)}  checklist: {len(CHECKLIST)}  skipped: {len(skipped)}")
+print(f"source image model: {IMAGE_MODEL}")
+print(f"recon render model: {RECON_IMG_MODEL}")
 print(f"image: {WEB_IMG}")
