@@ -1546,3 +1546,106 @@ body > .navbar {
   color: var(--text-dim);
 }
 
+
+/* ===== Image lightbox / maximize ===== */
+button.img-zoom,
+.img-zoom {
+  appearance: none;
+  -webkit-appearance: none;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  display: block;
+  width: 100%;
+  cursor: zoom-in;
+  position: relative;
+  border-radius: var(--radius-sm, 10px);
+  overflow: hidden;
+  text-align: left;
+  color: inherit;
+  font: inherit;
+}
+.img-zoom img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: inherit;
+}
+.img-zoom-hint {
+  position: absolute;
+  left: 0.55rem;
+  bottom: 0.55rem;
+  padding: 0.2rem 0.45rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #fff;
+  background: rgba(18, 18, 26, 0.62);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 140ms ease;
+}
+.img-zoom:hover .img-zoom-hint,
+.img-zoom:focus-visible .img-zoom-hint {
+  opacity: 1;
+}
+.recon-gallery-tile.img-zoom {
+  cursor: zoom-in;
+}
+.img-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1.25rem;
+  background: rgba(10, 12, 18, 0.88);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+.img-lightbox[hidden] {
+  display: none !important;
+}
+.img-lightbox img {
+  max-width: min(96vw, 1400px);
+  max-height: min(82vh, 900px);
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.45);
+  background: #0b0f14;
+}
+.img-lightbox-cap {
+  margin: 0;
+  color: rgba(255,255,255,0.88);
+  font-size: 0.92rem;
+  text-align: center;
+  max-width: 90vw;
+}
+.img-lightbox-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.9rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.img-lightbox-close:hover {
+  background: rgba(255,255,255,0.22);
+}
+body.lightbox-open {
+  overflow: hidden;
+}
+

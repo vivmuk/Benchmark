@@ -409,7 +409,11 @@ def judge_reverse_prompt(api_key: str, source_prompt: str, checklist: list, cand
         "hits": {},
     }
     if call["status"] != "ok":
-        return result
+        # Never leave a successful reconstruction unscored: fall back to keywords.
+        fb = heuristic_judge(candidate, checklist, result)
+        fb["judge_status"] = "error_then_heuristic"
+        fb["judge_error"] = call.get("error")
+        return fb
     raw = call["raw_response"]
     raw = re.sub(r"^```(?:json)?\s*", "", raw.strip())
     raw = re.sub(r"\s*```$", "", raw)

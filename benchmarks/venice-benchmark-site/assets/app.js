@@ -775,3 +775,63 @@
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
   else init();
 })();
+
+// ===== Image lightbox (Vision gallery + any .img-zoom) =====
+(function initImageLightbox() {
+  function ensureLightbox() {
+    let box = document.getElementById("imgLightbox");
+    if (box) return box;
+    box = document.createElement("div");
+    box.id = "imgLightbox";
+    box.className = "img-lightbox";
+    box.hidden = true;
+    box.innerHTML =
+      '<button type="button" class="img-lightbox-close" aria-label="Close">×</button>' +
+      '<img id="imgLightboxImg" alt="" />' +
+      '<p id="imgLightboxCap" class="img-lightbox-cap"></p>';
+    document.body.appendChild(box);
+    return box;
+  }
+
+  function openLightbox(src, caption) {
+    if (!src) return;
+    const box = ensureLightbox();
+    const img = box.querySelector("#imgLightboxImg");
+    const cap = box.querySelector("#imgLightboxCap");
+    img.src = src;
+    img.alt = caption || "Enlarged image";
+    cap.textContent = caption || "";
+    box.hidden = false;
+    document.body.classList.add("lightbox-open");
+  }
+
+  function closeLightbox() {
+    const box = document.getElementById("imgLightbox");
+    if (!box) return;
+    box.hidden = true;
+    const img = box.querySelector("#imgLightboxImg");
+    if (img) img.removeAttribute("src");
+    document.body.classList.remove("lightbox-open");
+  }
+
+  document.addEventListener("click", (e) => {
+    const zoom = e.target.closest(".img-zoom");
+    if (zoom) {
+      e.preventDefault();
+      const full = zoom.getAttribute("data-full") || (zoom.querySelector("img") && zoom.querySelector("img").src);
+      const caption = zoom.getAttribute("data-caption") || "";
+      openLightbox(full, caption);
+      return;
+    }
+    const box = document.getElementById("imgLightbox");
+    if (!box || box.hidden) return;
+    if (e.target === box || e.target.classList.contains("img-lightbox-close")) {
+      closeLightbox();
+    }
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeLightbox();
+  });
+})();
+

@@ -1,9 +1,26 @@
 {
   "schema_version": "1.0.0",
   "site_selector": "data/changelog.json",
-  "generated_at": "2026-07-27T23:44:01.280912+00:00",
+  "generated_at": "2026-07-28T00:54:53.105518+00:00",
   "format": "zhcli",
   "entries": [
+    {
+      "id": "chg-2026-07-27-rejudge-zeros-lightbox",
+      "date": "2026-07-27",
+      "time_utc": "2026-07-28T00:54:53.105431+00:00",
+      "category": "vision",
+      "summary": "Re-judged reverse-prompt rows that were stuck at score 0 after judge API errors (Fable 5, Luna, Sol, Terra). Added click-to-enlarge lightbox for Vision images (web JPEGs; full PNGs are not deployed).",
+      "details": {
+        "rejudged": {
+          "openai-gpt-56-luna": 93,
+          "openai-gpt-56-sol": 93,
+          "openai-gpt-56-terra": 93,
+          "claude-fable-5": 63
+        },
+        "note": "Zeros were judge_status=error with empty hits, not empty reconstructions. Fable 5 got a full LLM judge pass (openai-gpt-55); others used checklist heuristic when judge JSON failed.",
+        "lightbox": true
+      }
+    },
     {
       "id": "chg-2026-07-27-recon-images-nanobanana2",
       "date": "2026-07-27",
