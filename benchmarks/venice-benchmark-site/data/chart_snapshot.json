@@ -1,0 +1,238 @@
+[
+  {
+    "id": "openai-gpt-55",
+    "disp": "GPT-5.5",
+    "viv": 92.5,
+    "scores": {
+      "intent-understanding": 82,
+      "one-shot-ui": 89,
+      "startup-in-a-weekend": 94,
+      "pharma-drug-interaction": 86,
+      "pharma-regulatory-comprehension": 78,
+      "value-density": 100,
+      "reverse-prompt-vision": 96
+    }
+  },
+  {
+    "id": "openai-gpt-56-terra",
+    "disp": "GPT-5.6 Terra",
+    "viv": 92.2,
+    "scores": {
+      "intent-understanding": 76,
+      "one-shot-ui": 89,
+      "startup-in-a-weekend": 100,
+      "pharma-drug-interaction": 85,
+      "pharma-regulatory-comprehension": 77,
+      "value-density": 100,
+      "reverse-prompt-vision": 93
+    }
+  },
+  {
+    "id": "openai-gpt-56-sol",
+    "disp": "GPT-5.6 Sol",
+    "viv": 90.9,
+    "scores": {
+      "intent-understanding": 70,
+      "one-shot-ui": 89,
+      "startup-in-a-weekend": 100,
+      "pharma-drug-interaction": 81,
+      "pharma-regulatory-comprehension": 82,
+      "value-density": 100,
+      "reverse-prompt-vision": 93
+    }
+  },
+  {
+    "id": "deepseek-v4-flash-0731",
+    "disp": "DeepSeek V4 Flash 0731",
+    "viv": 89.7,
+    "scores": {
+      "intent-understanding": 70,
+      "one-shot-ui": 95,
+      "pharma-drug-interaction": 89,
+      "startup-in-a-weekend": 94,
+      "brick-breaker-realism": 95,
+      "pharma-regulatory-comprehension": 80,
+      "value-density": 100
+    }
+  },
+  {
+    "id": "openai-gpt-56-luna",
+    "disp": "GPT-5.6 Luna",
+    "viv": 88.6,
+    "scores": {
+      "intent-understanding": 58,
+      "one-shot-ui": 89,
+      "pharma-drug-interaction": 85,
+      "pharma-regulatory-comprehension": 80,
+      "startup-in-a-weekend": 100,
+      "value-density": 100,
+      "reverse-prompt-vision": 93
+    }
+  },
+  {
+    "id": "kimi-k3",
+    "disp": "Kimi K3",
+    "viv": 86.5,
+    "scores": {
+      "intent-understanding": 76,
+      "pharma-drug-interaction": 86,
+      "one-shot-ui": 95,
+      "pharma-regulatory-comprehension": 80,
+      "startup-in-a-weekend": 100,
+      "value-density": 100,
+      "reverse-prompt-vision": 60
+    }
+  },
+  {
+    "id": "zai-org-glm-5-2",
+    "disp": "GLM 5.2",
+    "viv": 84.0,
+    "scores": {
+      "intent-understanding": 82,
+      "one-shot-ui": 82,
+      "startup-in-a-weekend": 74,
+      "pharma-drug-interaction": 90,
+      "pharma-regulatory-comprehension": 80,
+      "value-density": 100
+    }
+  },
+  {
+    "id": "deepseek-v4-pro",
+    "disp": "DeepSeek V4",
+    "viv": 83.2,
+    "scores": {
+      "intent-understanding": 94,
+      "one-shot-ui": 95,
+      "startup-in-a-weekend": 54,
+      "pharma-drug-interaction": 86,
+      "pharma-regulatory-comprehension": 80,
+      "value-density": 100
+    }
+  },
+  {
+    "id": "grok-4-5",
+    "disp": "Grok 4.5",
+    "viv": 82.9,
+    "scores": {
+      "intent-understanding": 82,
+      "one-shot-ui": 82,
+      "startup-in-a-weekend": 60,
+      "pharma-drug-interaction": 83,
+      "pharma-regulatory-comprehension": 85,
+      "value-density": 100,
+      "reverse-prompt-vision": 96
+    }
+  },
+  {
+    "id": "openai-gpt-56-sol-pro",
+    "disp": "GPT-5.6 Sol Pro",
+    "viv": 82.2,
+    "scores": {
+      "one-shot-ui": 89,
+      "startup-in-a-weekend": 60,
+      "intent-understanding": 76,
+      "pharma-drug-interaction": 85,
+      "pharma-regulatory-comprehension": 77,
+      "value-density": 100,
+      "reverse-prompt-vision": 93
+    }
+  },
+  {
+    "id": "claude-opus-5",
+    "disp": "Opus 5",
+    "viv": 79.8,
+    "scores": {
+      "intent-understanding": 82,
+      "one-shot-ui": 89,
+      "pharma-drug-interaction": 90,
+      "startup-in-a-weekend": 70,
+      "pharma-regulatory-comprehension": 95,
+      "value-density": 100,
+      "reverse-prompt-vision": 63
+    }
+  },
+  {
+    "id": "minimax-m3-preview",
+    "disp": "MiniMax M3",
+    "viv": 79.7,
+    "scores": {
+      "intent-understanding": 88,
+      "one-shot-ui": 82,
+      "startup-in-a-weekend": 100,
+      "pharma-drug-interaction": 88,
+      "pharma-regulatory-comprehension": 80,
+      "value-density": 100,
+      "reverse-prompt-vision": 24
+    }
+  },
+  {
+    "id": "claude-fable-5",
+    "disp": "Fable 5",
+    "viv": 78.8,
+    "scores": {
+      "intent-understanding": 88,
+      "one-shot-ui": 89,
+      "startup-in-a-weekend": 61,
+      "pharma-drug-interaction": 86,
+      "pharma-regulatory-comprehension": 0,
+      "value-density": 100,
+      "reverse-prompt-vision": 63
+    }
+  },
+  {
+    "id": "inkling",
+    "disp": "Inkling",
+    "viv": 76.2,
+    "scores": {
+      "intent-understanding": 52,
+      "one-shot-ui": 95,
+      "pharma-drug-interaction": 86,
+      "pharma-regulatory-comprehension": 85,
+      "startup-in-a-weekend": 94,
+      "value-density": 100,
+      "reverse-prompt-vision": 40
+    }
+  },
+  {
+    "id": "claude-opus-4-8",
+    "disp": "Opus 4.8",
+    "viv": 74.9,
+    "scores": {
+      "intent-understanding": 82,
+      "one-shot-ui": 89,
+      "startup-in-a-weekend": 55,
+      "pharma-drug-interaction": 89,
+      "pharma-regulatory-comprehension": 85,
+      "value-density": 100,
+      "reverse-prompt-vision": 57
+    }
+  },
+  {
+    "id": "openai-gpt-56-terra-pro",
+    "disp": "GPT-5.6 Terra Pro",
+    "viv": 73.8,
+    "scores": {
+      "intent-understanding": 76,
+      "one-shot-ui": 89,
+      "startup-in-a-weekend": 64,
+      "pharma-drug-interaction": 89,
+      "pharma-regulatory-comprehension": 72,
+      "value-density": 100,
+      "reverse-prompt-vision": 46
+    }
+  },
+  {
+    "id": "openai-gpt-56-luna-pro",
+    "disp": "GPT-5.6 Luna Pro",
+    "viv": 72.8,
+    "scores": {
+      "intent-understanding": 76,
+      "one-shot-ui": 89,
+      "startup-in-a-weekend": 65,
+      "pharma-drug-interaction": 86,
+      "pharma-regulatory-comprehension": 77,
+      "value-density": 100,
+      "reverse-prompt-vision": 40
+    }
+  }
+]

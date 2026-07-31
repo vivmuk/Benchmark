@@ -1,23 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script>window.BENCHMARK_DATA = {"generated_at": "2026-07-28T00:53:53.521127+00:00", "dry_run": false, "models": [{"id": "openai-gpt-56-luna", "display": "GPT-5.6 Luna"}, {"id": "openai-gpt-56-luna-pro", "display": "GPT-5.6 Luna Pro"}, {"id": "openai-gpt-56-sol", "display": "GPT-5.6 Sol"}, {"id": "openai-gpt-56-sol-pro", "display": "GPT-5.6 Sol Pro"}, {"id": "openai-gpt-56-terra", "display": "GPT-5.6 Terra"}, {"id": "openai-gpt-56-terra-pro", "display": "GPT-5.6 Terra Pro"}, {"id": "openai-gpt-55", "display": "GPT-5.5"}, {"id": "claude-fable-5", "display": "Fable 5"}, {"id": "claude-opus-4-8", "display": "Opus 4.8"}, {"id": "claude-opus-5", "display": "Opus 5"}, {"id": "zai-org-glm-5-2", "display": "GLM 5.2"}, {"id": "deepseek-v4-pro", "display": "DeepSeek V4"}, {"id": "minimax-m3-preview", "display": "MiniMax M3"}, {"id": "grok-4-5", "display": "Grok 4.5"}, {"id": "inkling", "display": "Inkling"}, {"id": "kimi-k3", "display": "Kimi K3"}], "benchmarks": [{"id": "intent_understanding", "name": "Intent Understanding", "prompt": "I need something built for my team but I'm not sure what. We are overwhelmed by Slack notifications and duplicate work. Suggest a solution and ask clarifying questions before assuming details.", "scoring": "manual: clarifying questions (0-40), structured proposal (0-30), avoids hallucination (0-30)"}, {"id": "one_shot_ui", "name": "One-Shot UI Generation", "prompt": "Generate a single self-contained HTML file for a dark-mode dashboard card showing a user's daily focus score, weekly trend sparkline, and a 'Start Focus' button. Use only HTML/CSS/JS. No external images.", "scoring": "heuristic placeholder 70-95; real scoring is manual/LLM-judge"}, {"id": "startup_in_a_weekend", "name": "Startup in a Weekend", "prompt": "You have 7 days and a team of 3 engineers to build an MVP for a B2B SaaS product: an AI-powered contract review assistant for legal teams. Users upload contracts (PDF/Word), the system extracts clauses, flags risks, suggests redlines, and produces a summary report.
-
-Deliver a complete, buildable plan. Your response must include all of the following:
-1. System architecture (text description of components and data flow).
-2. Database schema with concrete tables/collections and key fields.
-3. Backend API endpoints with HTTP methods, paths, and example request/response shapes.
-4. Authentication and authorization strategy.
-5. Frontend key screens and navigation.
-6. AI/LLM pipeline for clause extraction, risk classification, and redline generation.
-7. Deployment stack and infrastructure (name concrete services).
-8. Observability, logging, and error handling.
-9. Day-by-day 7-day schedule with deliverables per day.
-10. Cost estimate for infrastructure and AI usage at 100 active users/month.
-11. Top 5 technical risks and specific mitigations.
-12. What is explicitly out of MVP scope.
-
-Be specific: name concrete languages, frameworks, cloud services, and libraries.", "scoring": "heuristic: section coverage, tech specificity, cost numbers, 7-day schedule, risk/mitigations, scope boundaries; total 100"}, {"id": "pharma_drug_interaction", "name": "Pharma: Drug-Drug Interaction Identification", "prompt": "You are a clinical pharmacist reviewing a patient's medication list. For each pair of medications below, identify any clinically significant drug-drug interactions. For each interaction found, provide:
+<script>window.BENCHMARK_DATA = {"generated_at": "2026-07-31T22:34:00.938886+00:00", "dry_run": false, "models": [{"id": "openai-gpt-56-luna", "display": "GPT-5.6 Luna"}, {"id": "openai-gpt-56-luna-pro", "display": "GPT-5.6 Luna Pro"}, {"id": "openai-gpt-56-sol", "display": "GPT-5.6 Sol"}, {"id": "openai-gpt-56-sol-pro", "display": "GPT-5.6 Sol Pro"}, {"id": "openai-gpt-56-terra", "display": "GPT-5.6 Terra"}, {"id": "openai-gpt-56-terra-pro", "display": "GPT-5.6 Terra Pro"}, {"id": "openai-gpt-55", "display": "GPT-5.5"}, {"id": "claude-fable-5", "display": "Fable 5"}, {"id": "claude-opus-4-8", "display": "Opus 4.8"}, {"id": "claude-opus-5", "display": "Opus 5"}, {"id": "zai-org-glm-5-2", "display": "GLM 5.2"}, {"id": "deepseek-v4-pro", "display": "DeepSeek V4"}, {"id": "deepseek-v4-flash-0731", "display": "DeepSeek V4 Flash 0731"}, {"id": "minimax-m3-preview", "display": "MiniMax M3"}, {"id": "grok-4-5", "display": "Grok 4.5"}, {"id": "inkling", "display": "Inkling"}, {"id": "kimi-k3", "display": "Kimi K3"}], "benchmarks": [{"id": "intent_understanding", "name": "Intent Understanding", "prompt": "I need something built for my team but I'm not sure what. We are overwhelmed by Slack notifications and duplicate work. Suggest a solution and ask clarifying questions before assuming details.", "scoring": "manual: clarifying questions (0-40), structured proposal (0-30), avoids hallucination (0-30)"}, {"id": "one_shot_ui", "name": "One-Shot UI Generation", "prompt": "Generate a single self-contained HTML file for a dark-mode dashboard card showing a user's daily focus score, weekly trend sparkline, and a 'Start Focus' button. Use only HTML/CSS/JS. No external images.", "scoring": "heuristic placeholder 70-95; real scoring is manual/LLM-judge"}, {"id": "brick_breaker_realism", "name": "Brick Breaker Realism", "prompt": "Create a single self-contained HTML file for a realistic Brick Breaker game with Canvas. Include: ball physics with angle reflection, paddle with mouse/keyboard/touch controls, brick grid with collision detection, score/lives/level, start/game-over/victory screens, particle effects on brick break, synthesized sound effects with Web Audio API, responsive design, dark neon aesthetic.", "scoring": "heuristic: canvas/RAF, paddle/bricks, game states, physics, particles/sound/responsive, polish; total 100"}, {"id": "pharma_drug_interaction", "name": "Pharma: Drug-Drug Interaction Identification", "prompt": "You are a clinical pharmacist reviewing a patient's medication list. For each pair of medications below, identify any clinically significant drug-drug interactions. For each interaction found, provide:
 
 1. The interacting drug pair
 2. Severity classification (Major / Moderate / Minor)
@@ -42,25 +26,23 @@ For each answer:
 2. Cite the relevant guideline section (e.g., ICH E6 Section 5.x)
 3. Note any exceptions or conditions
 
-If you are unsure of the exact section number, state the principle and note that the specific citation should be verified.", "scoring": "heuristic: requirement accuracy (0-35), citation specificity (0-25), completeness (0-20), avoids fabrication (0-20); total 100"}, {"id": "value_density", "name": "Value Density @1K", "prompt": "Return ONLY a single JSON object (no markdown fences, no commentary) with exactly these keys:
-{
-  \"drug_pair\": string,                 // the clinically significant interacting pair
-  \"severity\": \"Major\"|\"Moderate\"|\"Minor\",
-  \"mechanism\": string,                 // pharmacological mechanism in <= 25 words
-  \"clinical_action\": string,           // concrete next step in <= 20 words
-  \"monitor\": [string, string],         // exactly 2 monitoring items
-  \"avoid_if\": string,                  // one high-risk condition in <= 15 words
-  \"confidence\": number                 // 0-100 integer
-}
+If you are unsure of the exact section number, state the principle and note that the specific citation should be verified.", "scoring": "heuristic: requirement accuracy (0-35), citation specificity (0-25), completeness (0-20), avoids fabrication (0-20); total 100"}, {"id": "startup_in_a_weekend", "name": "Startup in a Weekend", "prompt": "You have 7 days and a team of 3 engineers to build an MVP for a B2B SaaS product: an AI-powered contract review assistant for legal teams. Users upload contracts (PDF/Word), the system extracts clauses, flags risks, suggests redlines, and produces a summary report.
 
-Scenario: patient on warfarin 5 mg daily for atrial fibrillation also takes ibuprofen 400 mg TID PRN for osteoarthritis. Identify the primary interaction only.
+Deliver a complete, buildable plan. Your response must include all of the following:
+1. System architecture (text description of components and data flow).
+2. Database schema with concrete tables/collections and key fields.
+3. Backend API endpoints with HTTP methods, paths, and example request/response shapes.
+4. Authentication and authorization strategy.
+5. Frontend key screens and navigation.
+6. AI/LLM pipeline for clause extraction, risk classification, and redline generation.
+7. Deployment stack and infrastructure (name concrete services).
+8. Observability, logging, and error handling.
+9. Day-by-day 7-day schedule with deliverables per day.
+10. Cost estimate for infrastructure and AI usage at 100 active users/month.
+11. Top 5 technical risks and specific mitigations.
+12. What is explicitly out of MVP scope.
 
-Hard rules:
-- Valid JSON only
-- No extra keys
-- No prose outside JSON
-- Be precise, not verbose
-", "scoring": "Fixed max_tokens=1024. Checklist of required JSON fields (0-100). Secondary: value_per_1k_tokens = score / (total_tokens/1000); value_per_usd = score / cost. Length alone cannot raise score."}, {"id": "reverse_prompt_vision", "name": "Reverse-Prompt Vision", "prompt": "You are given a single image. Reconstruct the most likely original text-to-image prompt that generated it. Do NOT invent a caption style summary only — write a generation prompt a diffusion/image model could use. Include concrete visual attributes: subjects, layout (left/center/right/foreground/background), colors, materials, text visible in the image (transcribe exactly if readable), lighting, atmosphere, and style. If text is unreadable, say so. Output ONLY the reconstructed prompt, no preamble.", "scoring": "Vision models reconstruct the image generation prompt with no access to the source prompt. Judge model scores reconstructed prompt against a fixed 28-attribute checklist (0-100). Non-vision models are skipped (status=skipped), not zero-scored.", "fixture": {"image": "data/vision/reverse_prompt_source.png", "image_model": "nano-banana-2", "source_prompt_path": "data/vision/source_prompt.txt", "checklist_count": 28, "judge_model": "openai-gpt-56-luna"}}], "results": [{"model_id": "openai-gpt-56-luna", "benchmark_id": "intent_understanding", "status": "ok", "score": 58, "latency": 5.51, "prompt_tokens": 1717, "completion_tokens": 654, "total_tokens": 2371, "estimated_cost_usd": 0.007051, "raw_response": "A likely solution is a **Slack work-intake and deduplication assistant**—but I’d treat this as a hypothesis until I understand your workflow.
+Be specific: name concrete languages, frameworks, cloud services, and libraries.", "scoring": "heuristic: section coverage, tech specificity, cost numbers, 7-day schedule, risk/mitigations, scope boundaries; total 100"}], "results": [{"model_id": "openai-gpt-56-luna", "benchmark_id": "intent_understanding", "status": "ok", "score": 58, "latency": 5.51, "prompt_tokens": 1717, "completion_tokens": 654, "total_tokens": 2371, "estimated_cost_usd": 0.007051, "raw_response": "A likely solution is a **Slack work-intake and deduplication assistant**—but I’d treat this as a hypothesis until I understand your workflow.
 
 It could:
 
@@ -17618,7 +17600,1455 @@ Foreground right: a white crackle-glaze ceramic cup with a teal-green lid on a m
 
 Lighting: dramatic chiaroscuro, warm practical lamps versus cool neon and hologram glow, soft bloom, subtle volumetric haze, shallow depth of field, reflective metal highlights.
 
-Style: photorealistic octane/unreal-engine product-visualization render, sci-fi medical/pharmacogenomics concept art, highly detailed, 8k, crisp UI typography, cinematic color grade of teal and amber.", "error": null, "metrics": {"supports_vision": true, "hit_rate": 0.8571, "hits": {"lab_setting": true, "twilight": false, "molecule_center": true, "teal_glass": true, "amber_nodes": true, "holographic_dashboard": true, "evidencegrade_title": true, "grade_ladder": true, "citation_chart": true, "arched_window": true, "rainy_city": true, "neon_kanji": true, "red_umbrella": true, "black_cat": true, "notebook": true, "cyp3a4_note": true, "fountain_pen": true, "coffee_cup": true, "cracked_saucer": false, "brass_lamps": true, "green_shade": false, "reagent_bottles": true, "drug_labels": true, "microscope": true, "monstera": false, "volumetric_light": true, "teal_amber_grade": true, "photoreal_hologram_mix": true}, "hallucinated_major": ["Clear glass beakers and binders on the background shelves", "Small chrome object beside the fountain pen", "White marble pot for the monstera", "Graph y-axis ticks labeled 0–60", "Faint steam rising from the coffee cup"], "missed_text": [], "judge_model": "openai-gpt-56-luna", "judge_status": "ok", "judge_cost_usd": 0.011778, "model_only_cost_usd": 0.054846, "retry": "diem"}}, {"model_id": "minimax-m3-preview", "benchmark_id": "reverse_prompt_vision", "status": "ok", "score": 24, "latency": 5.282, "prompt_tokens": 2182, "completion_tokens": 602, "total_tokens": 2784, "estimated_cost_usd": 0.016097, "raw_response": "A cinematic interior shot of a cozy scientist's study at night, viewed from a low angle across a wooden desk. In the foreground center, an open spiral notebook with handwritten equations and notes lies next to a black fountain pen, and to the right a white ceramic coffee cup sits on a saucer. Hovering above the desk in the center is a glowing cyan-teal holographic DNA double helix rendered as luminous nodes connected by bright rods, casting a cool blue light onto the table surface. On the left side of the frame, a translucent holographic interface panel displays the title \"EvidenceGrade AI\" in white text, below it \"5-tier grade\" with five colored letter tiles stacked vertically — green \"A\", teal \"B\", yellow \"C\", orange \"D\", red \"F\" — and to the right of those tiles a line graph labeled \"Citation Confidence 2019-2026\" with a rising blue trend line. The background shows a laboratory shelf lined with amber glass reagent bottles, a brass microscope, and a potted monstera plant with broad green leaves. Two pendant lamps hang from the ceiling — one brass/gold dome on the left and one emerald-green glass shade on the right — emitting warm tungsten light. On the right side, a tall arched window reveals a nighttime cityscape with red and pink neon signs in an East Asian urban style, and a black cat sits silhouetted on the windowsill beside a draped red cloth. The overall mood blends warm amber interior lighting with cool cyan holographic glow and vibrant neon exterior light, rendered in a photorealistic cinematic style with shallow depth of field, rich textures, and a moody atmospheric tone.", "error": null, "metrics": {"supports_vision": true, "hit_rate": 0.4643, "hits": {"lab_setting": false, "twilight": false, "molecule_center": true, "teal_glass": true, "amber_nodes": false, "holographic_dashboard": true, "evidencegrade_title": true, "grade_ladder": true, "citation_chart": true, "arched_window": true, "rainy_city": false, "neon_kanji": false, "red_umbrella": false, "black_cat": true, "notebook": false, "cyp3a4_note": false, "fountain_pen": true, "coffee_cup": false, "cracked_saucer": false, "brass_lamps": false, "green_shade": true, "reagent_bottles": true, "drug_labels": false, "microscope": false, "monstera": false, "volumetric_light": false, "teal_amber_grade": true, "photoreal_hologram_mix": true}, "hallucinated_major": ["A wooden desk in a cozy scientist's study", "A spiral notebook with handwritten equations and unspecified notes", "A glowing DNA double helix rather than a drug-scaffold molecular model", "A draped red cloth beside the window instead of a red umbrella", "A rising blue trend line, which is not specified in the source"], "missed_text": ["CYP3A4 interaction risk", "Aspirin", "Warfarin", "Ibuprofen"], "judge_model": "openai-gpt-56-luna", "judge_status": "ok", "judge_cost_usd": 0.01472, "model_only_cost_usd": 0.001377, "retry": "diem"}}, {"model_id": "grok-4-5", "benchmark_id": "reverse_prompt_vision", "status": "ok", "score": 96, "latency": 13.806, "prompt_tokens": 2865, "completion_tokens": 637, "total_tokens": 3502, "estimated_cost_usd": 0.02555, "raw_response": "A photorealistic cinematic interior of a modern high-tech pharmacology laboratory at night, cool blue ambient lighting mixed with warm overhead industrial pendant lamps (one green glass shade), large metallic lab bench in the foreground. On the left a glowing translucent holographic display screen shows \"EvidenceGrade AI\" title, \"5-tier grade\" vertical bars labeled A (green), B (cyan), C (yellow), D (orange), F (red), and a line graph titled \"Citation Confidence 2019-2026\" with an upward-trending cyan line from 2019 to 2026. Center of the image a large floating translucent turquoise-cyan DNA double helix molecule with glowing gold atomic spheres and connecting rods hovering above the bench. Background white shelves holding amber glass medicine bottles labeled Aspirin, Warfarin, Ibuprofen, blue binders, test tubes, and a brass microscope on the counter. Right side a large rainy window looking out onto a wet neon-lit Asian city street at night with glowing pink, blue and red Chinese neon signs, rain streaks on the glass. On the right windowsill a black cat silhouette sitting, a closed red umbrella leaning nearby, a green monstera plant in a white pot. Foreground on the brushed metal desk: an open leather-bound notebook with handwritten notes and the text \"CYP3A4 interaction risk\" written large, a black fountain pen resting on it, a white ceramic coffee cup with teal silicone lid and cracked glaze sitting on a matching saucer. Moody rainy cyberpunk-sci-fi atmosphere, highly detailed, sharp focus, volumetric lighting.", "error": null, "metrics": {"supports_vision": true, "hit_rate": 0.9643, "hits": {"lab_setting": true, "twilight": false, "molecule_center": true, "teal_glass": true, "amber_nodes": true, "holographic_dashboard": true, "evidencegrade_title": true, "grade_ladder": true, "citation_chart": true, "arched_window": true, "rainy_city": true, "neon_kanji": true, "red_umbrella": true, "black_cat": true, "notebook": true, "cyp3a4_note": true, "fountain_pen": true, "coffee_cup": true, "cracked_saucer": true, "brass_lamps": true, "green_shade": true, "reagent_bottles": true, "drug_labels": true, "microscope": true, "monstera": true, "volumetric_light": true, "teal_amber_grade": true, "photoreal_hologram_mix": true}, "hallucinated_major": null, "missed_text": null, "judge_model": "openai-gpt-56-luna", "judge_status": "heuristic_fallback", "judge_cost_usd": 0.014715, "model_only_cost_usd": 0.010835, "retry": "diem"}}, {"model_id": "inkling", "benchmark_id": "reverse_prompt_vision", "status": "ok", "score": 40, "latency": 7.323, "prompt_tokens": 3234, "completion_tokens": 1548, "total_tokens": 4782, "estimated_cost_usd": 0.024981, "raw_response": "Photorealistic cinematic interior, dark teal walls, futuristic science-lab cafe hybrid. Left wall: large glowing cyan digital display titled \"EvidenceGrade AI\" with subtitle \"5-tier grade\", vertical colored boxes A (green), B (cyan), C (yellow/gold), D (orange), F (red/pink), and a line graph labeled \"Citation Confidence 2019-2026\" with y-axis 0-60 and upward-trending cyan line, x-axis text \"Citation Confidence 2019-2026\". Center: glowing cyan glass DNA double helix with gold nodes floating above a dark wooden table; behind it wooden shelves holding amber glass medicine bottles with white labels and a brass microscope on the left shelf. Overhead: brass pendant lamp with warm white shade, green dome lamp, central brass ceiling fixture. Right: large arched window showing rainy cyberpunk city at night with pink/red neon signs and unreadable Asian characters; black cat sitting on the windowsill facing outward; potted monstera with large green leaves and one yellow leaf on the floor near the window. Foreground wooden table: open spiral-bound notebook with handwritten notes and a black pen resting on the right page; white ceramic coffee cup with black lid on a white saucer, small red cocktail umbrella sticking out of the cup. Lighting: warm brass interior bulbs mixed with cool cyan glow from the DNA and display, neon reflections from the window, soft volumetric atmosphere, highly detailed, 8k, shallow depth of field.", "error": null, "metrics": {"supports_vision": true, "hit_rate": 0.6429, "hits": {"lab_setting": true, "twilight": false, "molecule_center": true, "teal_glass": true, "amber_nodes": true, "holographic_dashboard": true, "evidencegrade_title": true, "grade_ladder": true, "citation_chart": true, "arched_window": true, "rainy_city": true, "neon_kanji": false, "red_umbrella": true, "black_cat": true, "notebook": false, "cyp3a4_note": false, "fountain_pen": false, "coffee_cup": false, "cracked_saucer": false, "brass_lamps": false, "green_shade": true, "reagent_bottles": true, "drug_labels": false, "microscope": false, "monstera": true, "volumetric_light": true, "teal_amber_grade": true, "photoreal_hologram_mix": true}, "hallucinated_major": ["Science-lab cafe hybrid setting", "Graph subtitle \"5-tier grade\" and y-axis range 0-60", "Upward-trending cyan chart line", "Spiral-bound notebook instead of a leather notebook", "Black lid on the coffee cup", "Small red cocktail umbrella sticking out of the coffee cup", "Dark wooden table instead of a brushed-steel bench"], "missed_text": ["Handwritten note \"CYP3A4 interaction risk\"", "Reagent bottle labels \"Aspirin\", \"Warfarin\", and \"Ibuprofen\""], "judge_model": "openai-gpt-56-luna", "judge_status": "ok", "judge_cost_usd": 0.013102, "model_only_cost_usd": 0.011879, "retry": "diem-hi-tokens", "max_tokens": 8192}}, {"model_id": "kimi-k3", "benchmark_id": "reverse_prompt_vision", "status": "ok", "score": 60, "latency": 27.51, "prompt_tokens": 3077, "completion_tokens": 714, "total_tokens": 3791, "estimated_cost_usd": 0.037467, "raw_response": "Cinematic photorealistic 3D render of a moody cyberpunk medical research study at night. Foreground: a dark brushed-metal desk holding an open spiral-bound notebook with handwritten notes reading \"CYP3A4 interaction risk\", a black and gold fountain pen resting on the page, and a white ceramic coffee cup with a teal lid on a marble-patterned saucer to the right. Center: a glowing translucent turquoise DNA double helix hologram with gold metallic nodes floating above the desk. Left: a large floating cyan holographic screen displaying \"EvidenceGrade AI\" with subtitle \"5-tier grade\", five colored tier bars labeled A (green), B (teal), C (yellow), D (orange), F (red), and a rising line graph titled \"Citation Confidence 2019-2026\". Background: laboratory shelves with amber glass medicine bottles labeled \"Aspirin\", \"Warfarin\", and \"Ibuprofen\", test tubes, a brass microscope, and a potted monstera plant. Right: a tall arched window revealing a rainy neon-lit city street with glowing red and cyan Japanese signage, wet reflections, a black cat silhouette sitting on the windowsill beside a leaning red umbrella. Ceiling with brass articulated pendant lamps, one with a green glass shade, warm tungsten glow mixing with cool cyan hologram light, atmospheric, rainy night ambiance, ultra-detailed, cinematic lighting, 8k render.", "error": null, "metrics": {"supports_vision": true, "hit_rate": 0.7857, "hits": {"lab_setting": true, "twilight": false, "molecule_center": true, "teal_glass": true, "amber_nodes": true, "holographic_dashboard": true, "evidencegrade_title": true, "grade_ladder": true, "citation_chart": true, "arched_window": true, "rainy_city": true, "neon_kanji": true, "red_umbrella": true, "black_cat": true, "notebook": false, "cyp3a4_note": true, "fountain_pen": true, "coffee_cup": true, "cracked_saucer": false, "brass_lamps": true, "green_shade": true, "reagent_bottles": true, "drug_labels": true, "microscope": false, "monstera": false, "volumetric_light": false, "teal_amber_grade": true, "photoreal_hologram_mix": true}, "hallucinated_major": ["A subtitle reading \"5-tier grade\" on the dashboard", "Test tubes on the background shelves", "A marble-patterned saucer", "The central model is specifically described as DNA rather than a drug scaffold"], "missed_text": [], "judge_model": "openai-gpt-56-luna", "judge_status": "ok", "judge_cost_usd": 0.012541, "model_only_cost_usd": 0.024926, "retry": "diem-hi-tokens", "max_tokens": 8192}}], "total_estimated_cost_usd": 9.823121};</script>
+Style: photorealistic octane/unreal-engine product-visualization render, sci-fi medical/pharmacogenomics concept art, highly detailed, 8k, crisp UI typography, cinematic color grade of teal and amber.", "error": null, "metrics": {"supports_vision": true, "hit_rate": 0.8571, "hits": {"lab_setting": true, "twilight": false, "molecule_center": true, "teal_glass": true, "amber_nodes": true, "holographic_dashboard": true, "evidencegrade_title": true, "grade_ladder": true, "citation_chart": true, "arched_window": true, "rainy_city": true, "neon_kanji": true, "red_umbrella": true, "black_cat": true, "notebook": true, "cyp3a4_note": true, "fountain_pen": true, "coffee_cup": true, "cracked_saucer": false, "brass_lamps": true, "green_shade": false, "reagent_bottles": true, "drug_labels": true, "microscope": true, "monstera": false, "volumetric_light": true, "teal_amber_grade": true, "photoreal_hologram_mix": true}, "hallucinated_major": ["Clear glass beakers and binders on the background shelves", "Small chrome object beside the fountain pen", "White marble pot for the monstera", "Graph y-axis ticks labeled 0–60", "Faint steam rising from the coffee cup"], "missed_text": [], "judge_model": "openai-gpt-56-luna", "judge_status": "ok", "judge_cost_usd": 0.011778, "model_only_cost_usd": 0.054846, "retry": "diem"}}, {"model_id": "minimax-m3-preview", "benchmark_id": "reverse_prompt_vision", "status": "ok", "score": 24, "latency": 5.282, "prompt_tokens": 2182, "completion_tokens": 602, "total_tokens": 2784, "estimated_cost_usd": 0.016097, "raw_response": "A cinematic interior shot of a cozy scientist's study at night, viewed from a low angle across a wooden desk. In the foreground center, an open spiral notebook with handwritten equations and notes lies next to a black fountain pen, and to the right a white ceramic coffee cup sits on a saucer. Hovering above the desk in the center is a glowing cyan-teal holographic DNA double helix rendered as luminous nodes connected by bright rods, casting a cool blue light onto the table surface. On the left side of the frame, a translucent holographic interface panel displays the title \"EvidenceGrade AI\" in white text, below it \"5-tier grade\" with five colored letter tiles stacked vertically — green \"A\", teal \"B\", yellow \"C\", orange \"D\", red \"F\" — and to the right of those tiles a line graph labeled \"Citation Confidence 2019-2026\" with a rising blue trend line. The background shows a laboratory shelf lined with amber glass reagent bottles, a brass microscope, and a potted monstera plant with broad green leaves. Two pendant lamps hang from the ceiling — one brass/gold dome on the left and one emerald-green glass shade on the right — emitting warm tungsten light. On the right side, a tall arched window reveals a nighttime cityscape with red and pink neon signs in an East Asian urban style, and a black cat sits silhouetted on the windowsill beside a draped red cloth. The overall mood blends warm amber interior lighting with cool cyan holographic glow and vibrant neon exterior light, rendered in a photorealistic cinematic style with shallow depth of field, rich textures, and a moody atmospheric tone.", "error": null, "metrics": {"supports_vision": true, "hit_rate": 0.4643, "hits": {"lab_setting": false, "twilight": false, "molecule_center": true, "teal_glass": true, "amber_nodes": false, "holographic_dashboard": true, "evidencegrade_title": true, "grade_ladder": true, "citation_chart": true, "arched_window": true, "rainy_city": false, "neon_kanji": false, "red_umbrella": false, "black_cat": true, "notebook": false, "cyp3a4_note": false, "fountain_pen": true, "coffee_cup": false, "cracked_saucer": false, "brass_lamps": false, "green_shade": true, "reagent_bottles": true, "drug_labels": false, "microscope": false, "monstera": false, "volumetric_light": false, "teal_amber_grade": true, "photoreal_hologram_mix": true}, "hallucinated_major": ["A wooden desk in a cozy scientist's study", "A spiral notebook with handwritten equations and unspecified notes", "A glowing DNA double helix rather than a drug-scaffold molecular model", "A draped red cloth beside the window instead of a red umbrella", "A rising blue trend line, which is not specified in the source"], "missed_text": ["CYP3A4 interaction risk", "Aspirin", "Warfarin", "Ibuprofen"], "judge_model": "openai-gpt-56-luna", "judge_status": "ok", "judge_cost_usd": 0.01472, "model_only_cost_usd": 0.001377, "retry": "diem"}}, {"model_id": "grok-4-5", "benchmark_id": "reverse_prompt_vision", "status": "ok", "score": 96, "latency": 13.806, "prompt_tokens": 2865, "completion_tokens": 637, "total_tokens": 3502, "estimated_cost_usd": 0.02555, "raw_response": "A photorealistic cinematic interior of a modern high-tech pharmacology laboratory at night, cool blue ambient lighting mixed with warm overhead industrial pendant lamps (one green glass shade), large metallic lab bench in the foreground. On the left a glowing translucent holographic display screen shows \"EvidenceGrade AI\" title, \"5-tier grade\" vertical bars labeled A (green), B (cyan), C (yellow), D (orange), F (red), and a line graph titled \"Citation Confidence 2019-2026\" with an upward-trending cyan line from 2019 to 2026. Center of the image a large floating translucent turquoise-cyan DNA double helix molecule with glowing gold atomic spheres and connecting rods hovering above the bench. Background white shelves holding amber glass medicine bottles labeled Aspirin, Warfarin, Ibuprofen, blue binders, test tubes, and a brass microscope on the counter. Right side a large rainy window looking out onto a wet neon-lit Asian city street at night with glowing pink, blue and red Chinese neon signs, rain streaks on the glass. On the right windowsill a black cat silhouette sitting, a closed red umbrella leaning nearby, a green monstera plant in a white pot. Foreground on the brushed metal desk: an open leather-bound notebook with handwritten notes and the text \"CYP3A4 interaction risk\" written large, a black fountain pen resting on it, a white ceramic coffee cup with teal silicone lid and cracked glaze sitting on a matching saucer. Moody rainy cyberpunk-sci-fi atmosphere, highly detailed, sharp focus, volumetric lighting.", "error": null, "metrics": {"supports_vision": true, "hit_rate": 0.9643, "hits": {"lab_setting": true, "twilight": false, "molecule_center": true, "teal_glass": true, "amber_nodes": true, "holographic_dashboard": true, "evidencegrade_title": true, "grade_ladder": true, "citation_chart": true, "arched_window": true, "rainy_city": true, "neon_kanji": true, "red_umbrella": true, "black_cat": true, "notebook": true, "cyp3a4_note": true, "fountain_pen": true, "coffee_cup": true, "cracked_saucer": true, "brass_lamps": true, "green_shade": true, "reagent_bottles": true, "drug_labels": true, "microscope": true, "monstera": true, "volumetric_light": true, "teal_amber_grade": true, "photoreal_hologram_mix": true}, "hallucinated_major": null, "missed_text": null, "judge_model": "openai-gpt-56-luna", "judge_status": "heuristic_fallback", "judge_cost_usd": 0.014715, "model_only_cost_usd": 0.010835, "retry": "diem"}}, {"model_id": "inkling", "benchmark_id": "reverse_prompt_vision", "status": "ok", "score": 40, "latency": 7.323, "prompt_tokens": 3234, "completion_tokens": 1548, "total_tokens": 4782, "estimated_cost_usd": 0.024981, "raw_response": "Photorealistic cinematic interior, dark teal walls, futuristic science-lab cafe hybrid. Left wall: large glowing cyan digital display titled \"EvidenceGrade AI\" with subtitle \"5-tier grade\", vertical colored boxes A (green), B (cyan), C (yellow/gold), D (orange), F (red/pink), and a line graph labeled \"Citation Confidence 2019-2026\" with y-axis 0-60 and upward-trending cyan line, x-axis text \"Citation Confidence 2019-2026\". Center: glowing cyan glass DNA double helix with gold nodes floating above a dark wooden table; behind it wooden shelves holding amber glass medicine bottles with white labels and a brass microscope on the left shelf. Overhead: brass pendant lamp with warm white shade, green dome lamp, central brass ceiling fixture. Right: large arched window showing rainy cyberpunk city at night with pink/red neon signs and unreadable Asian characters; black cat sitting on the windowsill facing outward; potted monstera with large green leaves and one yellow leaf on the floor near the window. Foreground wooden table: open spiral-bound notebook with handwritten notes and a black pen resting on the right page; white ceramic coffee cup with black lid on a white saucer, small red cocktail umbrella sticking out of the cup. Lighting: warm brass interior bulbs mixed with cool cyan glow from the DNA and display, neon reflections from the window, soft volumetric atmosphere, highly detailed, 8k, shallow depth of field.", "error": null, "metrics": {"supports_vision": true, "hit_rate": 0.6429, "hits": {"lab_setting": true, "twilight": false, "molecule_center": true, "teal_glass": true, "amber_nodes": true, "holographic_dashboard": true, "evidencegrade_title": true, "grade_ladder": true, "citation_chart": true, "arched_window": true, "rainy_city": true, "neon_kanji": false, "red_umbrella": true, "black_cat": true, "notebook": false, "cyp3a4_note": false, "fountain_pen": false, "coffee_cup": false, "cracked_saucer": false, "brass_lamps": false, "green_shade": true, "reagent_bottles": true, "drug_labels": false, "microscope": false, "monstera": true, "volumetric_light": true, "teal_amber_grade": true, "photoreal_hologram_mix": true}, "hallucinated_major": ["Science-lab cafe hybrid setting", "Graph subtitle \"5-tier grade\" and y-axis range 0-60", "Upward-trending cyan chart line", "Spiral-bound notebook instead of a leather notebook", "Black lid on the coffee cup", "Small red cocktail umbrella sticking out of the coffee cup", "Dark wooden table instead of a brushed-steel bench"], "missed_text": ["Handwritten note \"CYP3A4 interaction risk\"", "Reagent bottle labels \"Aspirin\", \"Warfarin\", and \"Ibuprofen\""], "judge_model": "openai-gpt-56-luna", "judge_status": "ok", "judge_cost_usd": 0.013102, "model_only_cost_usd": 0.011879, "retry": "diem-hi-tokens", "max_tokens": 8192}}, {"model_id": "kimi-k3", "benchmark_id": "reverse_prompt_vision", "status": "ok", "score": 60, "latency": 27.51, "prompt_tokens": 3077, "completion_tokens": 714, "total_tokens": 3791, "estimated_cost_usd": 0.037467, "raw_response": "Cinematic photorealistic 3D render of a moody cyberpunk medical research study at night. Foreground: a dark brushed-metal desk holding an open spiral-bound notebook with handwritten notes reading \"CYP3A4 interaction risk\", a black and gold fountain pen resting on the page, and a white ceramic coffee cup with a teal lid on a marble-patterned saucer to the right. Center: a glowing translucent turquoise DNA double helix hologram with gold metallic nodes floating above the desk. Left: a large floating cyan holographic screen displaying \"EvidenceGrade AI\" with subtitle \"5-tier grade\", five colored tier bars labeled A (green), B (teal), C (yellow), D (orange), F (red), and a rising line graph titled \"Citation Confidence 2019-2026\". Background: laboratory shelves with amber glass medicine bottles labeled \"Aspirin\", \"Warfarin\", and \"Ibuprofen\", test tubes, a brass microscope, and a potted monstera plant. Right: a tall arched window revealing a rainy neon-lit city street with glowing red and cyan Japanese signage, wet reflections, a black cat silhouette sitting on the windowsill beside a leaning red umbrella. Ceiling with brass articulated pendant lamps, one with a green glass shade, warm tungsten glow mixing with cool cyan hologram light, atmospheric, rainy night ambiance, ultra-detailed, cinematic lighting, 8k render.", "error": null, "metrics": {"supports_vision": true, "hit_rate": 0.7857, "hits": {"lab_setting": true, "twilight": false, "molecule_center": true, "teal_glass": true, "amber_nodes": true, "holographic_dashboard": true, "evidencegrade_title": true, "grade_ladder": true, "citation_chart": true, "arched_window": true, "rainy_city": true, "neon_kanji": true, "red_umbrella": true, "black_cat": true, "notebook": false, "cyp3a4_note": true, "fountain_pen": true, "coffee_cup": true, "cracked_saucer": false, "brass_lamps": true, "green_shade": true, "reagent_bottles": true, "drug_labels": true, "microscope": false, "monstera": false, "volumetric_light": false, "teal_amber_grade": true, "photoreal_hologram_mix": true}, "hallucinated_major": ["A subtitle reading \"5-tier grade\" on the dashboard", "Test tubes on the background shelves", "A marble-patterned saucer", "The central model is specifically described as DNA rather than a drug scaffold"], "missed_text": [], "judge_model": "openai-gpt-56-luna", "judge_status": "ok", "judge_cost_usd": 0.012541, "model_only_cost_usd": 0.024926, "retry": "diem-hi-tokens", "max_tokens": 8192}}, {"model_id": "deepseek-v4-flash-0731", "benchmark_id": "intent_understanding", "status": "ok", "score": 70, "latency": 79.255, "prompt_tokens": 1727, "completion_tokens": 1098, "total_tokens": 2825, "estimated_cost_usd": 0.000282, "raw_response": "This is a really common pain point, and the good news is there are a few distinct solution shapes depending on what's actually driving the chaos. Let me lay out the main directions, then ask you some questions so we can pick the right one.
+
+**The three main directions:**
+
+1. **Notification triage** — a bot or tool that batches, summarizes, or routes your Slack noise so people only see what matters. Think daily digests, keyword routing, or an AI that condenses long threads into action items.
+
+2. **Deduplication / single source of truth** — the fix for duplicate work is usually visibility, not more tooling. A lightweight intake system (a shared request log, a task tracker, or a bot that flags \"this looks like an existing ticket\") so two people don't build the same thing.
+
+3. **A combined assistant** — a bot that lives in Slack, watches for duplicate requests, summarizes threads, and assigns ownership. This is the most ambitious but also the most tailored.
+
+**Before I recommend one, I need to understand your situation. A few questions:**
+
+1. **Team size and structure** — How many people, and are they in one team or across several? Do you have clear owners for different workstreams?
+
+2. **What are the notifications actually?** — Are they @mentions, channel noise, automated alerts from other tools (CI, monitoring, CRM), or a mix? Which ones feel most overwhelming?
+
+3. **What does the duplicate work look like?** — Is it two people unknowingly doing the same task? Repeated questions that get answered over and over? Overlapping projects that should have been one? Or is it more that work gets lost and redone because nobody tracks it?
+
+4. **What do you already use?** — Do you have a project tracker (Linear, Asana, Jira, Trello), a wiki/notion, or anything that's *supposed* to be the source of truth but isn't working? I don't want to recommend a tool that overlaps with something you already have.
+
+5. **Where should the solution live?** — Do you want something that works *inside* Slack (a bot), or are you open to a separate tool people check periodically?
+
+6. **Build vs. buy** — Do you have engineering capacity to build/customize something, or do you need an off-the-shelf tool that works day one?
+
+Answer those and I'll narrow it down to a concrete recommendation — including roughly what it would take to set up. If you're not sure on some of them, just say so and I'll help you figure it out.", "error": null}, {"model_id": "deepseek-v4-flash-0731", "benchmark_id": "one_shot_ui", "status": "ok", "score": 95, "latency": 169.898, "prompt_tokens": 1738, "completion_tokens": 4238, "total_tokens": 5976, "estimated_cost_usd": 0.000735, "raw_response": "```html
+<!DOCTYPE html>
+<html lang=\"en\">
+<head>
+<meta charset=\"UTF-8\">
+<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
+<title>Focus Dashboard Card</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif;
+    background: radial-gradient(1200px 800px at 50% -10%, #1e2434 0%, #0d1017 60%, #090b10 100%);
+    color: #e8ecf4;
+    padding: 20px;
+  }
+
+  .card {
+    width: 380px;
+    max-width: 100%;
+    background: linear-gradient(180deg, #161b26 0%, #12161f 100%);
+    border: 1px solid #242b3a;
+    border-radius: 20px;
+    padding: 28px 26px 24px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* subtle glow accent */
+  .card::before {
+    content: \"\";
+    position: absolute;
+    top: -80px;
+    right: -80px;
+    width: 240px;
+    height: 240px;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 22px;
+  }
+
+  .card-title {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: #aab3c5;
+  }
+
+  .badge {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgba(99, 102, 241, 0.14);
+    color: #a5b4fc;
+    border: 1px solid rgba(99, 102, 241, 0.25);
+  }
+
+  /* Score ring */
+  .score-wrap {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    margin-bottom: 22px;
+  }
+
+  .ring {
+    position: relative;
+    width: 110px;
+    height: 110px;
+    flex-shrink: 0;
+  }
+
+  .ring svg {
+    transform: rotate(-90deg);
+    display: block;
+  }
+
+  .ring .bg {
+    stroke: #232a3a;
+  }
+
+  .ring .fg {
+    stroke: url(#grad);
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .ring-value {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ring-value .num {
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  .ring-value .label {
+    font-size: 10px;
+    color: #7c8698;
+    margin-top: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .score-side {
+    flex: 1;
+  }
+
+  .score-side .status {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .score-side .desc {
+    font-size: 12.5px;
+    color: #8b94a7;
+    line-height: 1.5;
+  }
+
+  .score-side .delta {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #34d399;
+  }
+
+  .score-side .delta svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  .score-side .delta span {
+    color: #7c8698;
+    font-weight: 500;
+  }
+
+  /* Sparkline */
+  .trend-section {
+    margin-bottom: 22px;
+  }
+
+  .trend-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+
+  .trend-header .label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #aab3c5;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .trend-header .avg {
+    font-size: 12px;
+    color: #7c8698;
+  }
+
+  .trend-header .avg strong {
+    color: #e8ecf4;
+    font-weight: 600;
+  }
+
+  .sparkline {
+    width: 100%;
+    height: 46px;
+    display: block;
+  }
+
+  .sparkline .line {
+    fill: none;
+    stroke: url(#sparkGrad);
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .sparkline .area {
+    fill: url(#areaGrad);
+  }
+
+  .sparkline .dot {
+    fill: #a5b4fc;
+    stroke: #12161f;
+    stroke-width: 2;
+  }
+
+  .days {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 6px;
+    font-size: 10px;
+    color: #5f6879;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .days .today {
+    color: #a5b4fc;
+    font-weight: 600;
+  }
+
+  /* Button */
+  .btn {
+    width: 100%;
+    padding: 14px 0;
+    border: none;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    color: #fff;
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    box-shadow: 0 8px 24px rgba(99, 102, 241, 0.35);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(99, 102, 241, 0.45);
+    filter: brightness(1.05);
+  }
+
+  .btn:active {
+    transform: translateY(0);
+    box-shadow: 0 6px 18px rgba(99, 102, 241, 0.3);
+  }
+
+  .btn svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .btn.running {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    box-shadow: 0 8px 24px rgba(16, 185, 129, 0.35);
+  }
+</style>
+</head>
+<body>
+
+<div class=\"card\">
+  <div class=\"card-header\">
+    <div class=\"card-title\">Daily Focus</div>
+    <div class=\"badge\">Today</div>
+  </div>
+
+  <div class=\"score-wrap\">
+    <div class=\"ring\">
+      <svg width=\"110\" height=\"110\" viewBox=\"0 0 110 110\">
+        <defs>
+          <linearGradient id=\"grad\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\">
+            <stop offset=\"0%\" stop-color=\"#6366f1\"/>
+            <stop offset=\"100%\" stop-color=\"#a855f7\"/>
+          </linearGradient>
+        </defs>
+        <circle class=\"bg\" cx=\"55\" cy=\"55\" r=\"46\" fill=\"none\" stroke-width=\"9\"/>
+        <circle class=\"fg\" id=\"ringFg\" cx=\"55\" cy=\"55\" r=\"46\" fill=\"none\" stroke-width=\"9\"
+                stroke-dasharray=\"289.03\" stroke-dashoffset=\"289.03\"/>
+      </svg>
+      <div class=\"ring-value\">
+        <div class=\"num\" id=\"scoreNum\">0</div>
+        <div class=\"label\">/ 100</div>
+      </div>
+    </div>
+
+    <div class=\"score-side\">
+      <div class=\"status\" id=\"statusText\">Great momentum</div>
+      <div class=\"desc\">You stayed deep in flow for <b>4h 20m</b> — above your usual baseline.</div>
+      <div class=\"delta\">
+        <svg viewBox=\"0 0 12 12\" fill=\"none\">
+          <path d=\"M6 2.5v7M6 2.5L3.5 5M6 2.5L8.5 5\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>
+        </svg>
+        +12% <span>vs yesterday</span>
+      </div>
+    </div>
+  </div>
+
+  <div class=\"trend-section\">
+    <div class=\"trend-header\">
+      <div class=\"label\">Weekly Trend</div>
+      <div class=\"avg\">Avg <strong id=\"avgVal\">—</strong></div>
+    </div>
+    <svg class=\"sparkline\" id=\"spark\" viewBox=\"0 0 300 46\" preserveAspectRatio=\"none\">
+      <defs>
+        <linearGradient id=\"sparkGrad\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"0%\">
+          <stop offset=\"0%\" stop-color=\"#6366f1\"/>
+          <stop offset=\"100%\" stop-color=\"#a855f7\"/>
+        </linearGradient>
+        <linearGradient id=\"areaGrad\" x1=\"0%\" y1=\"0%\" x2=\"0%\" y2=\"100%\">
+          <stop offset=\"0%\" stop-color=\"rgba(99,102,241,0.35)\"/>
+          <stop offset=\"100%\" stop-color=\"rgba(99,102,241,0)\"/>
+        </linearGradient>
+      </defs>
+      <path class=\"area\" id=\"sparkArea\"/>
+      <path class=\"line\" id=\"sparkLine\"/>
+      <circle class=\"dot\" id=\"sparkDot\" r=\"3.5\"/>
+    </svg>
+    <div class=\"days\">
+      <span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span class=\"today\">S</span>
+    </div>
+  </div>
+
+  <button class=\"btn\" id=\"startBtn\">
+    <svg id=\"btnIcon\" viewBox=\"0 0 16 16\" fill=\"currentColor\">
+      <path d=\"M4 2.5v11l9-5.5-9-5.5z\"/>
+    </svg>
+    <span id=\"btnText\">Start Focus</span>
+  </button>
+</div>
+
+<script>
+  (function () {
+    // Weekly data (7 days, Mon..Sun). Last value = today's score.
+    const weekly = [62, 70, 58, 74, 81, 68, 86];
+    const targetScore = weekly[weekly.length - 1]; // today = 86
+
+    // Ring geometry
+    const r = 46;
+    const circumference = 2 * Math.PI * r; // ≈ 289.03
+    const ringFg = document.getElementById('ringFg');
+    const scoreNum = document.getElementById('scoreNum');
+    const statusText = document.getElementById('statusText');
+
+    // Sparkline geometry
+    const W = 300, H = 46, PAD = 6;
+    const min = Math.min(...weekly) - 6;
+    const max = Math.max(...weekly) + 6;
+
+    function buildSparkline() {
+      const n = weekly.length;
+      const step = (W - PAD * 2) / (n - 1);
+      const pts = weekly.map((v, i) => {
+        const x = PAD + i * step;
+        const y = H - PAD - ((v - min) / (max - min)) * (H - PAD * 2);
+        return [x, y];
+      });
+
+      // Smooth polyline using Catmull-Rom -> cubic bezier
+      let d = `M ${pts[0][0]} ${pts[0][1]}`;
+      for (let i = 0; i < pts.length - 1; i++) {
+        const p0 = pts[Math.max(0, i - 1)];
+        const p1 = pts[i];
+        const p2 = pts[i + 1];
+        const p3 = pts[Math.min(pts.length - 1, i + 2)];
+        const c1x = p1[0] + (p2[0] - p0[0]) / 6;
+        const c1y = p1[1] + (p2[1] - p0[1]) / 6;
+        const c2x = p2[0] - (p3[0] - p1[0]) / 6;
+        const c2y = p2[1] - (p3[1] - p1[1]) / 6;
+        d += ` C ${c1x.toFixed(2)} ${c1y.toFixed(2)}, ${c2x.toFixed(2)} ${c2y.toFixed(2)}, ${p2[0].toFixed(2)} ${p2[1].toFixed(2)}`;
+      }
+
+      document.getElementById('sparkLine').setAttribute('d', d);
+      document.getElementById('sparkArea').setAttribute('d', d + ` L ${pts[pts.length - 1][0].toFixed(2)} ${H} L ${pts[0][0].toFixed(2)} ${H} Z`);
+
+      // Dot on last point
+      const last = pts[pts.length - 1];
+      document.getElementById('sparkDot').setAttribute('cx', last[0].toFixed(2));
+      document.getElementById('sparkDot').setAttribute('cy', last[1].toFixed(2));
+    }
+
+    // Animate ring + number on load
+    function animateScore() {
+      const duration = 900;
+      const start = performance.now();
+      function frame(now) {
+        const t = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - t, 3); // easeOutCubic
+        const val = Math.round(targetScore * eased);
+        scoreNum.textContent = val;
+        ringFg.style.strokeDashoffset = circumference * (1 - eased);
+        if (t < 1) requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+    }
+
+    // Status text based on score
+    function setStatus(score) {
+      if (score >= 85) statusText.textContent = 'Excellent flow';
+      else if (score >= 70) statusText.textContent = 'Great momentum';
+      else if (score >= 55) statusText.textContent = 'Steady pace';
+      else statusText.textContent = 'Needs a boost';
+    }
+
+    // Avg label
+    const avg = Math.round(weekly.reduce((a, b) => a + b, 0) / weekly.length);
+    document.getElementById('avgVal').textContent = avg;
+
+    // Button toggle
+    const btn = document.getElementById('startBtn');
+    const btnText = document.getElementById('btnText');
+    const btnIcon = document.getElementById('btnIcon');
+    let running = false;
+
+    btn.addEventListener('click', function () {
+      running = !running;
+      if (running) {
+        btn.classList.add('running');
+        btnText.textContent = 'Focusing… 24:59';
+        btnIcon.innerHTML = '<rect x=\"3.5\" y=\"3.5\" width=\"9\" height=\"9\" rx=\"1.5\"/>';
+        // simple countdown demo
+        let secs = 24 * 60 + 59;
+        const timer = setInterval(() => {
+          secs--;
+          if (secs <= 0) { clearInterval(timer); resetBtn(); return; }
+          const m = Math.floor(secs / 60);
+          const s = secs % 60;
+          btnText.textContent = 'Focusing… ' + String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+        }, 1000);
+        btn._timer = timer;
+      } else {
+        resetBtn();
+      }
+    });
+
+    function resetBtn() {
+      if (btn._timer) { clearInterval(btn._timer); btn._timer = null; }
+      btn.classList.remove('running');
+      btnText.textContent = 'Start Focus';
+      btnIcon.innerHTML = '<path d=\"M4 2.5v11l9-5.5-9-5.5z\"/>';
+      running = false;
+    }
+
+    // Init
+    ringFg.style.strokeDasharray = circumference;
+    buildSparkline();
+    setStatus(targetScore);
+    animateScore();
+  })();
+</script>
+
+</body>
+</html>
+```", "error": null}, {"model_id": "deepseek-v4-flash-0731", "benchmark_id": "pharma_drug_interaction", "status": "ok", "score": 89, "latency": 120.252, "prompt_tokens": 1840, "completion_tokens": 2000, "total_tokens": 3840, "estimated_cost_usd": 0.00042, "raw_response": "# Drug-Drug Interaction Review
+
+## Patient Medications
+- **Warfarin** 5 mg daily (atrial fibrillation)
+- **Ibuprofen** 400 mg TID PRN (osteoarthritis)
+- **Lisinopril** 10 mg daily (hypertension)
+
+---
+
+## Interaction 1: Warfarin + Ibuprofen
+
+**Severity: Major**
+
+**Mechanism (multifactorial):**
+1. **Pharmacodynamic synergy (bleeding risk):** Ibuprofen irreversibly inhibits platelet COX-1, reducing thromboxane A₂ synthesis and impairing platelet aggregation. This antiplatelet effect is additive to warfarin's anticoagulant effect, substantially increasing bleeding risk.
+2. **GI mucosal injury:** Ibuprofen disrupts the gastric mucosal barrier (reduced cytoprotective prostaglandins), increasing the risk of GI ulceration and hemorrhage — a risk that is multiplicative when combined with anticoagulation.
+3. **CYP2C9 inhibition (minor contributor):** Ibuprofen is a weak inhibitor of CYP2C9, the enzyme responsible for metabolizing the more potent *S*-enantiomer of warfarin. This can modestly elevate warfarin exposure and INR, though the effect is variable and generally less clinically significant than the pharmacodynamic effects above. Protein-binding displacement of warfarin by ibuprofen is transient and not considered clinically meaningful.
+
+**Recommended action:**
+- **Strongly consider discontinuing ibuprofen** and substituting acetaminophen (up to 3–4 g/day, with liver function monitoring) or a non-pharmacologic approach for osteoarthritis pain.
+- If a COX-2 selective inhibitor is considered, note that while it spares platelets, it does **not** eliminate GI ulceration risk and may still interact via CYP2C9 — use with caution.
+- If ibuprofen must be continued short-term, obtain a baseline INR, recheck INR within 3–5 days of initiation, and monitor closely for signs of GI bleeding (melena, anemia, drop in hemoglobin). Consider gastroprotection with a PPI.
+- Educate the patient on bleeding symptoms and to avoid additional OTC NSAIDs.
+
+---
+
+## Interaction 2: Ibuprofen + Lisinopril
+
+**Severity: Major** (in susceptible patients)
+
+**Mechanism:**
+1. **Reduced antihypertensive efficacy:** NSAIDs inhibit renal prostaglandin synthesis (particularly PGE₂ and prostacyclin), which blunts the vasodilatory and natriuretic effects that contribute to ACE inhibitor efficacy. This can attenuate lisinopril's blood pressure–lowering effect.
+2. **Acute kidney injury risk:** In patients with reduced effective arterial volume (dehydration, heart failure, renal impairment, or concurrent diuretic use), the combination of NSAID-induced afferent arteriolar vasoconstriction and ACE inhibitor-induced efferent arteriolar dilation can critically reduce glomerular filtration, precipitating acute kidney injury. This is the classic \"triple whammy\" when a diuretic is also present.
+
+**Recommended action:**
+- **Monitor blood pressure and serum creatinine** (and potassium) within 1–2 weeks of starting or stopping ibuprofen.
+- **Prefer alternative analgesia** (acetaminophen) in this patient, who is already on warfarin — this avoids the dual problem of NSAID use.
+- If NSAID use is unavoidable, use the lowest effective dose for the shortest duration, ensure adequate hydration, and recheck renal function.
+- Caution: this patient does not appear to be on a diuretic, which lowers (but does not eliminate) the AKI risk.
+
+---
+
+## Interaction 3: Warfarin + Lisinopril
+
+**Severity: Minor / Uncertain**
+
+**Mechanism:** There is no well-established, clinically significant pharmacokinetic interaction between warfarin and lisinopril. Isolated case reports have suggested that some ACE inhibitors may rarely potentiate warfarin's anticoagulant effect, but the evidence is weak, inconsistent, and not mechanistically well-defined. I am **not confident** that a meaningful interaction exists here.
+
+**Recommended action:**
+- No specific monitoring is routinely required beyond standard INR surveillance.
+- If an unexplained INR elevation occurs, consider this as a low-probability contributor, but investigate more common causes (dietary vitamin K changes, other drugs, illness, adherence) first.
+
+---
+
+## Summary Table
+
+| Drug Pair | Severity | Primary Mechanism | Action |
+|-----------|----------|-------------------|--------|
+| Warfarin + Ibuprofen | **Major** | Additive antiplatelet + anticoagulant effect; GI mucosal injury; weak CYP2C9 inhibition | Discontinue ibuprofen; use acetaminophen; if continued, monitor INR closely and consider PPI |
+| Ibuprofen + Lisinopril | **Major** | Reduced antihypertensive effect; risk of AKI via renal hemodynamic changes | Monitor BP and renal function; prefer alternative analgesia; ensure hydration |
+| Warfarin + Lisinopril | Minor/Uncertain | Not well established | Routine INR monitoring only |
+
+---
+
+## Overall Clinical Recommendation
+
+This regimen carries a **significant cumulative bleeding risk** driven primarily by the warfarin–ibuprofen combination, with an additional concern for blood pressure control and renal function from the ibuprofen–lisinopril pair. **Ibuprofen should be discontinued** and replaced with acetaminophen for osteoarthritis pain. If the patient requires ongoing anti-inflammatory therapy, a rheumatology or pain specialist referral may be warranted to explore alternatives (e.g., topical NSAIDs, which have minimal systemic absorption and lower interaction risk). If ibuprofen is temporarily continued, close INR, BP, and renal monitoring is essential.", "error": null}, {"model_id": "deepseek-v4-flash-0731", "benchmark_id": "startup_in_a_weekend", "status": "ok", "score": 94, "latency": 251.739, "prompt_tokens": 1940, "completion_tokens": 4864, "total_tokens": 6804, "estimated_cost_usd": 0.00084, "raw_response": "# AI Contract Review Assistant — 7-Day MVP Build Plan
+
+## 1. System Architecture
+
+**Stack overview:** Next.js frontend + FastAPI backend + Postgres/PGVector + S3 + SQS async job queue + LLM API (Anthropic Claude). Monolith backend with a separate worker process for heavy AI jobs.
+
+**Components:**
+- **Frontend (Next.js 14, React, Tailwind):** Served via Vercel or CloudFront. Talks to the API over HTTPS/JSON.
+- **API Gateway / Backend (FastAPI, Python 3.12):** Stateless REST API. Handles auth, uploads, job status, and report retrieval. Runs on AWS ECS Fargate.
+- **Object Storage (S3):** Raw contract files. Private bucket, presigned URLs for upload/download.
+- **Relational DB (PostgreSQL 16 + pgvector):** Users, organizations, contracts, clauses, risks, redlines, summaries, and embedding vectors.
+- **Queue (SQS):** Uploads enqueue a `contract_processing` job. A separate **Worker (ECS Fargate task)** consumes jobs, runs the AI pipeline, and writes results back to Postgres.
+- **LLM Provider (Anthropic Claude 3.5 Sonnet):** Accessed via API from the worker only. No keys exposed to the frontend.
+- **Search/Embeddings (pgvector):** Clause embeddings for semantic search across a user's contracts.
+
+**Data flow:**
+1. User uploads PDF/DOCX → frontend requests a presigned S3 URL → file uploaded directly to S3.
+2. Frontend POSTs `/contracts` with the S3 key → backend creates a DB row (status `PENDING`) → enqueues SQS message.
+3. Worker picks up the job → downloads file from S3 → parses to text → runs AI pipeline (extract → classify → redline → summarize) → writes clauses/risks/redlines/summary to Postgres → updates status to `COMPLETED`.
+4. Frontend polls `GET /contracts/{id}` (or listens via SSE/WebSocket) until status flips, then renders the review report.
+
+## 2. Database Schema (PostgreSQL)
+
+```
+organizations
+  id UUID PK, name TEXT, plan TEXT, created_at TIMESTAMPTZ
+
+users
+  id UUID PK, org_id UUID FK→organizations, email TEXT UNIQUE,
+  name TEXT, role TEXT ('admin'|'reviewer'), created_at TIMESTAMPTZ
+
+contracts
+  id UUID PK, org_id UUID FK, uploaded_by UUID FK→users,
+  filename TEXT, s3_key TEXT, status TEXT ('PENDING'|'PROCESSING'|'COMPLETED'|'FAILED'),
+  file_type TEXT ('pdf'|'docx'), word_count INT, error_message TEXT,
+  created_at TIMESTAMPTZ, completed_at TIMESTAMPTZ
+
+clauses
+  id UUID PK, contract_id UUID FK→contracts, clause_index INT,
+  title TEXT, category TEXT, raw_text TEXT, page_start INT, page_end INT
+
+risks
+  id UUID PK, contract_id UUID FK, clause_id UUID FK→clauses NULLABLE,
+  risk_type TEXT, severity TEXT ('low'|'medium'|'high'|'critical'),
+  description TEXT, rationale TEXT, embedding VECTOR(1536)
+
+redlines
+  id UUID PK, contract_id UUID FK, clause_id UUID FK→clauses,
+  original_text TEXT, suggested_text TEXT, explanation TEXT, reason TEXT
+
+summaries
+  id UUID PK, contract_id UUID FK UNIQUE, executive_summary TEXT,
+  key_terms JSONB, risk_count JSONB, overall_score INT, generated_at TIMESTAMPTZ
+```
+
+Indexes: `contracts(org_id, created_at)`, `clauses(contract_id)`, `risks(contract_id)`, `risks(embedding)` (IVFFlat or HNSW for pgvector).
+
+## 3. Backend API Endpoints (FastAPI)
+
+**Auth**
+- `POST /auth/login` → `{access_token, user}` (JWT)
+- `POST /auth/refresh` → `{access_token}`
+
+**Contracts**
+- `POST /contracts` — create + request upload
+  - Request: `{filename, file_type, size}`
+  - Response: `{contract_id, upload_url (presigned S3 PUT), status: \"PENDING\"}`
+- `POST /contracts/{id}/confirm` — mark upload complete, enqueue job
+  - Response: `{contract_id, status: \"PROCESSING\"}`
+- `GET /contracts` — list user's org contracts
+  - Response: `[{id, filename, status, created_at, completed_at}]`
+- `GET /contracts/{id}` — full review report
+  - Response: `{contract, summary, clauses: [...], risks: [...], redlines: [...]}`
+- `GET /contracts/{id}/download` — presigned GET URL for original file
+- `DELETE /contracts/{id}` — soft delete
+
+**Search**
+- `GET /search?q=indemnification&contract_id=...` — semantic clause search
+  - Response: `[{clause_id, title, snippet, score}]`
+
+**Health**
+- `GET /health` → `{status: \"ok\"}`
+
+**Example report response shape:**
+```json
+{
+  \"contract\": {\"id\": \"…\", \"filename\": \"msa.pdf\", \"status\": \"COMPLETED\"},
+  \"summary\": {
+    \"executive_summary\": \"…\",
+    \"overall_score\": 72,
+    \"key_terms\": [{\"term\": \"auto-renewal\", \"detail\": \"…\"}],
+    \"risk_count\": {\"critical\": 1, \"high\": 3, \"medium\": 5, \"low\": 2}
+  },
+  \"risks\": [
+    {\"id\": \"…\", \"risk_type\": \"liability\", \"severity\": \"high\",
+     \"clause_id\": \"…\", \"description\": \"Uncapped liability\", \"rationale\": \"…\"}
+  ],
+  \"redlines\": [
+    {\"id\": \"…\", \"clause_id\": \"…\", \"original_text\": \"…\",
+     \"suggested_text\": \"…\", \"explanation\": \"…\"}
+  ]
+}
+```
+
+## 4. Authentication & Authorization
+
+- **Auth provider:** Auth0 (B2B tenant) with OIDC. Frontend uses NextAuth.js; backend validates JWTs via FastAPI dependency (`fastapi-jwt-auth` or `python-jose` + JWKS from Auth0).
+- **JWT claims:** `sub`, `email`, `org_id`, `role`.
+- **Authorization:** Every DB query is scoped by `org_id` from the token — never trust client-supplied org IDs. A FastAPI dependency `get_current_user()` resolves the user and passes `org_id` into all handlers.
+- **Roles:** `admin` (manage users, delete contracts) vs `reviewer` (view/create contracts). Enforced with a `require_role` dependency.
+- **File security:** S3 presigned URLs expire in 5 min; bucket policy denies public reads; server-side encryption (SSE-S3 or KMS).
+- **Rate limiting:** `slowapi` on upload and search endpoints (e.g., 10 uploads/min/user).
+
+## 5. Frontend Key Screens (Next.js + Tailwind)
+
+- **Login** — Auth0 hosted login redirect.
+- **Dashboard (`/`)** — contract list table (filename, status badge, date, score), upload button, search bar.
+- **Upload flow** — modal/dropzone (react-dropzone), progress indicator, then redirect to review page.
+- **Review Report (`/contracts/[id]`)** — the core screen, tabbed layout:
+  - **Summary tab:** executive summary, overall risk score, risk count breakdown, key terms.
+  - **Clauses tab:** extracted clauses with categories, click to expand.
+  - **Risks tab:** risk list filtered by severity, each with description + rationale + the source clause highlighted.
+  - **Redlines tab:** side-by-side original vs suggested text with accept/copy buttons.
+- **Search results** — inline on dashboard, showing matching clauses.
+- **Settings** — org members, plan info (stub for MVP).
+
+Navigation: sidebar (Dashboard, Search, Settings) + top bar with user menu. State via React Query; polling for job status every 3s.
+
+## 6. AI/LLM Pipeline (Worker)
+
+**Libraries:** `anthropic` SDK, `pdf-parse` (PDF→text), `mammoth` (DOCX→text), `pydantic` for structured output.
+
+**Step 1 — Ingestion:** Download from S3 → parse to plain text → normalize whitespace → record word count.
+
+**Step 2 — Clause segmentation:** Split text on clause-numbering regex (`^\s*(\d+(\.\d+)*)\s+[A-Z]` and \"Section/Clause N\"). Fallback to paragraph splitting if no numbering found. Each segment = one clause.
+
+**Step 3 — Single-pass structured extraction (primary path):** Send the full contract text to Claude 3.5 Sonnet with a system prompt defining a strict JSON output schema (via tool/function calling):
+- `clauses: [{index, title, category, text}]`
+- `risks: [{clause_index, risk_type, severity, description, rationale}]`
+- `redlines: [{clause_index, original, suggested, explanation}]`
+- `summary: {executive_summary, key_terms, overall_score}`
+
+Risk taxonomy prompt: liability, indemnification, termination, IP ownership, confidentiality, payment, auto-renewal, governing law, force majeure, data protection. Severity rubric: critical (uncapped liability, data breach exposure), high (one-sided termination, broad indemnity), medium (missing standard protections), low (informational).
+
+**Step 4 — Chunked fallback:** If the contract exceeds ~180k tokens, split into ~50k-token chunks with overlap, run extraction per chunk, then a final aggregation call to merge and produce the summary.
+
+**Step 5 — Embeddings:** Generate embeddings (OpenAI `text-embedding-3-small` or `sentence-transformers/all-MiniLM`) for each clause → store in pgvector for search.
+
+**Step 6 — Persistence:** Write clauses, risks, redlines, summary to Postgres in a transaction; set contract status `COMPLETED`.
+
+**Prompt guardrails:** Instruct the model to quote exact source text for redlines, never invent clauses, and flag uncertainty rather than guess. Retry once on JSON parse failure with the error message fed back.
+
+## 7. Deployment Stack & Infrastructure
+
+- **Frontend:** Vercel (Next.js) — zero-ops, CDN built in.
+- **Backend + Worker:** AWS ECS Fargate (two services: `api` and `worker`), Docker images in ECR. Autoscaling on CPU/memory and SQS queue depth.
+- **Database:** AWS RDS PostgreSQL 16 with pgvector extension. Single `db.t4g.medium` for MVP, Multi-AZ off.
+- **Storage:** S3 private bucket + CloudFront for presigned upload/download and static assets.
+- **Queue:** SQS standard queue `contract-processing.fifo` (FIFO to preserve per-contract ordering).
+- **Secrets:** AWS Secrets Manager (LLM API keys, DB creds, Auth0 secrets).
+- **CI/CD:** GitHub Actions — build, test, push to ECR, deploy ECS task definitions; Vercel auto-deploy on merge.
+- **Networking:** ECS services behind an Application Load Balancer; WAF optional (skip for MVP).
+
+## 8. Observability, Logging & Error Handling
+
+- **Logging:** Structured JSON logs via `structlog` (Python) to CloudWatch Logs. Include `request_id`, `org_id`, `contract_id`, `job_id`.
+- **Tracing:** OpenTelemetry SDK auto-instrumenting FastAPI + Anthropic calls → export to AWS X-Ray. Trace the full job: SQS receive → S3 download → LLM calls → DB writes.
+- **Metrics:** CloudWatch custom metrics — job duration, success/failure rate, LLM latency, token usage per contract, queue depth.
+- **Error handling:** Central FastAPI exception handler returning `{error: {code, message, request_id}}`. Worker retries SQS messages with exponential backoff (max 3 attempts) and a dead-letter queue. Failed contracts get `status: \"FAILED\"` + `error_message` surfaced in the UI.
+- **Alerting:** CloudWatch alarms on job failure rate > 5% and queue depth > 50 → SNS → email/PagerDuty.
+- **Cost guardrail:** Per-contract token counter; hard cap (e.g., 1M tokens/contract) to prevent runaway spend on huge docs.
+
+## 9. Day-by-Day 7-Day Schedule
+
+**Day 1 — Foundations:** Repo setup (monorepo: `frontend/`, `backend/`, `worker/`), Dockerfiles, CI pipeline. Postgres schema + migrations (Alembic). Auth0 tenant + NextAuth wiring. *Deliverable: app skeleton with login and empty dashboard.*
+
+**Day 2 — Upload pipeline:** S3 presigned upload flow, `POST /contracts` + confirm, SQS enqueue, worker skeleton that parses PDF/DOCX to text. *Deliverable: file uploads, parses, status transitions PENDING→PROCESSING.*
+
+**Day 3 — LLM extraction:** Claude integration with structured output for clause extraction + risk classification. Store clauses/risks in DB. *Deliverable: contract returns extracted clauses + risks.*
+
+**Day 4 — Redlines + summary:** Add redline generation and executive summary to the pipeline; chunked fallback for long docs. *Deliverable: full report data available via API.*
+
+**Day 5 — Frontend report UI:** Review report page (Summary/Clauses/Risks/Redlines tabs), status polling, error states. *Deliverable: user can see a full review report.*
+
+**Day 6 — Search + polish:** pgvector embeddings + semantic search endpoint + search UI. Dashboard list, empty states, loading skeletons. *Deliverable: searchable contract library.*
+
+**Day 7 — Hardening + deploy:** Observability (OTel, logging, metrics), error handling, dead-letter queue, ECS + RDS + Vercel production deploy, load test with a few real contracts, docs. *Deliverable: deployed MVP, monitored, ready for 5 pilot users.*
+
+## 10. Cost Estimate (100 active users/month)
+
+Assumptions: 100 users × ~10 contracts/user/month = 1,000 contracts/mo; avg 15k tokens input, 3k output per contract.
+
+- **Compute (ECS Fargate):** 2× `0.25 vCPU / 0.5GB` tasks always-on + burst worker — **~$90/mo**
+- **RDS PostgreSQL (db.t4g.medium):** — **~$60/mo**
+- **S3 + CloudFront:** 1,000 files × ~2MB + egress — **~$15/mo**
+- **SQS:** negligible at this volume — **~$1/mo**
+- **Auth0 (free tier up to 7,500 MAU):** — **$0**
+- **Vercel (Hobby/Pro):** — **~$20/mo**
+- **LLM (Claude 3.5 Sonnet):** per contract ~15k in ($0.045) + 3k out ($0.045) + extraction/aggregation overhead ≈ $0.12–0.20. × 1,000 = — **~$150–200/mo**
+- **Embeddings (text-embedding-3-small):** ~$0.02/1M tokens → negligible — **~$5/mo**
+- **Total: ~$340–390/mo** (~$3.40–3.90 per active user). At 100 users, a $49/user/mo price point gives strong margin; scale cost is dominated by LLM tokens, so negotiate volume pricing early.
+
+## 11. Top 5 Technical Risks & Mitigations
+
+1. **LLM hallucination on clauses/redlines.** *Mitigation:* strict structured output with source-text quoting; require redlines to reference exact clause text; post-validation pass that checks extracted clauses against source; retry-on-failure; human \"flag uncertain\" output rather than inventing.
+2. **Long contracts exceed context window.** *Mitigation:* chunked fallback pipeline with overlap + aggregation call; hard token cap with clear error message; streaming partial results so users see progress.
+3. **Upload/processing failures and stuck jobs.** *Mitigation:* SQS dead-letter queue, retry with backoff, status timeouts (job auto-fails after 10 min), visible error messages in UI, CloudWatch alarms on failure rate.
+4. **Data privacy for legal documents.** *Mitigation:* LLM via API with no-training agreement (Anthropic/OpenAI both offer this); encryption at rest and in transit; org-scoped access; no cross-tenant data leakage; audit log of who viewed each contract.
+5. **Cost overrun from token-heavy documents.** *Mitigation:* per-contract token budget, pre-scan word count to estimate cost before processing, per-org monthly spend caps, dashboard showing token usage.
+
+## 12. Explicitly Out of MVP Scope
+
+- **Multi-document comparison / redline diffing** against previous versions.
+- **Contract generation** (drafting from templates) — review only.
+- **Native Word/Google Docs integration** or browser extensions.
+- **eSignature workflows** (DocuSign/HelloSign integration).
+- **Advanced NLP accuracy tuning** — rely on LLM defaults; no custom fine-tuned models.
+- **Team collaboration** (comments, approvals, assignment, audit trails).
+- **Billing/subscription management** — use a manual invoicing stub.
+- **Custom risk-rubric configuration UI** — rules are hardcoded in prompts.
+- **On-prem/private-cloud deployment** or SOC 2 compliance certification.
+- **Mobile apps** — responsive web only.
+- **Batch uploads, OCR of scanned PDFs, and non-English contracts** — English text-based documents only.", "error": null}, {"model_id": "deepseek-v4-flash-0731", "benchmark_id": "brick_breaker_realism", "status": "ok", "score": 95, "latency": 427.046, "prompt_tokens": 1768, "completion_tokens": 11935, "total_tokens": 13703, "estimated_cost_usd": 0.001846, "raw_response": "Here's a complete, self-contained HTML file for a neon-styled Brick Breaker game with all the features you requested.
+```html
+<!DOCTYPE html>
+<html lang=\"en\">
+<head>
+    <meta charset=\"UTF-8\">
+    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\">
+    <title>Neon Brick Breaker</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #05050f;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'Courier New', monospace;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        #game {
+            background: #0a0a1a;
+            border: 2px solid #00e5ff;
+            box-shadow: 0 0 40px rgba(0, 229, 255, 0.35), inset 0 0 40px rgba(0, 229, 255, 0.08);
+            border-radius: 6px;
+            width: min(96vw, calc(96vh * 4 / 3));
+            height: auto;
+            touch-action: none;
+            cursor: crosshair;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <canvas id=\"game\"></canvas>
+    <script>
+        // ===================== SETUP =====================
+        const canvas = document.getElementById('game');
+        const ctx = canvas.getContext('2d');
+        const W = 800,
+            H = 600;
+        canvas.width = W;
+        canvas.height = H;
+
+        // ===================== AUDIO (Web Audio API) =====================
+        let audioCtx = null;
+
+        function initAudio() {
+            if (!audioCtx) {
+                try {
+                    audioCtx = new(window.AudioContext || window.webkitAudioContext)();
+                } catch (e) { /* audio unavailable */ }
+            }
+            if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+        }
+
+        function playTone(freq, dur, type = 'square', vol = 0.08, delay = 0) {
+            if (!audioCtx) return;
+            const t = audioCtx.currentTime + delay;
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = type;
+            osc.frequency.setValueAtTime(freq, t);
+            gain.gain.setValueAtTime(vol, t);
+            gain.gain.exponentialRampToValueAtTime(0.001, t + dur);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start(t);
+            osc.stop(t + dur);
+        }
+
+        function playSound(name) {
+            if (!audioCtx) return;
+            switch (name) {
+                case 'paddle':
+                    playTone(240, 0.08, 'square', 0.07);
+                    break;
+                case 'wall':
+                    playTone(160, 0.05, 'triangle', 0.05);
+                    break;
+                case 'brick':
+                    playTone(480 + Math.random() * 240, 0.09, 'square', 0.08);
+                    break;
+                case 'life':
+                    playTone(320, 0.25, 'sawtooth', 0.09);
+                    playTone(140, 0.4, 'sawtooth', 0.09, 0.15);
+                    break;
+                case 'level':
+                    [523, 659, 784, 1047].forEach((f, i) => playTone(f, 0.15, 'square', 0.07, i * 0.12));
+                    break;
+                case 'gameover':
+                    [400, 300, 200, 100].forEach((f, i) => playTone(f, 0.22, 'sawtooth', 0.08, i * 0.16));
+                    break;
+                case 'victory':
+                    [523, 659, 784, 1047, 784, 1047, 1319].forEach((f, i) => playTone(f, 0.2, 'square', 0.07, i * 0.15));
+                    break;
+            }
+        }
+
+        // ===================== GAME STATE =====================
+        let state = 'start'; // start | playing | levelComplete | gameOver | victory
+        let level = 1;
+        let score = 0;
+        let lives = 3;
+        let ballAttached = true;
+        const MAX_LEVEL = 5;
+
+        // ===================== OBJECTS =====================
+        const paddle = { w: 110, h: 14, x: W / 2, y: H - 40, speed: 520 };
+        const ball = { x: W / 2, y: H - 40 - 7 - 7, r: 7, vx: 0, vy: 0, speed: 320 };
+
+        let bricks = [];
+        let particles = [];
+        let keys = {};
+        let mouseX = null;
+
+        const brickColors = ['#ff2d95', '#ff6b35', '#ffe600', '#39ff14', '#00e5ff', '#7a5cff', '#ff2d95'];
+        const BRICK_PAD = 4;
+        const BRICK_TOP = 70;
+        const BRICK_COLS = 10;
+        const BRICK_H = 20;
+
+        function buildBricks() {
+            bricks = [];
+            const rows = Math.min(4 + level, 8);
+            const bw = (W - (BRICK_COLS + 1) * BRICK_PAD) / BRICK_COLS;
+            for (let r = 0; r < rows; r++) {
+                bricks[r] = [];
+                for (let c = 0; c < BRICK_COLS; c++) {
+                    bricks[r][c] = {
+                        x: BRICK_PAD + c * (bw + BRICK_PAD),
+                        y: BRICK_TOP + r * (BRICK_H + BRICK_PAD),
+                        w: bw,
+                        h: BRICK_H,
+                        alive: true,
+                        color: brickColors[r % brickColors.length]
+                    };
+                }
+            }
+        }
+
+        function resetBall() {
+            ball.x = paddle.x;
+            ball.y = paddle.y - paddle.h / 2 - ball.r;
+            ball.vx = 0;
+            ball.vy = 0;
+            ballAttached = true;
+        }
+
+        function resetGame() {
+            level = 1;
+            score = 0;
+            lives = 3;
+            ball.speed = 320;
+            buildBricks();
+            resetBall();
+            state = 'playing';
+        }
+
+        function nextLevel() {
+            level++;
+            if (level > MAX_LEVEL) {
+                state = 'victory';
+                playSound('victory');
+                return;
+            }
+            ball.speed = 320 + (level - 1) * 35;
+            buildBricks();
+            resetBall();
+            state = 'playing';
+            playSound('level');
+        }
+
+        function launchBall() {
+            if (!ballAttached) return;
+            ballAttached = false;
+            const angle = -Math.PI / 2 + (Math.random() * 0.4 - 0.2);
+            ball.vx = Math.cos(angle);
+            ball.vy = Math.sin(angle);
+            playSound('paddle');
+        }
+
+        function loseLife() {
+            lives--;
+            playSound('life');
+            if (lives <= 0) {
+                state = 'gameOver';
+                playSound('gameover');
+            } else {
+                resetBall();
+            }
+        }
+
+        function handleAction() {
+            initAudio();
+            if (state === 'start') {
+                state = 'playing';
+                resetBall();
+            } else if (state === 'levelComplete') {
+                nextLevel();
+            } else if (state === 'gameOver' || state === 'victory') {
+                resetGame();
+            } else if (state === 'playing' && ballAttached) {
+                launchBall();
+            }
+        }
+
+        // ===================== INPUT =====================
+        function getCanvasPos(e) {
+            const rect = canvas.getBoundingClientRect();
+            const sx = W / rect.width;
+            const sy = H / rect.height;
+            const cx = e.touches ? e.touches[0].clientX : e.clientX;
+            const cy = e.touches ? e.touches[0].clientY : e.clientY;
+            return { x: (cx - rect.left) * sx, y: (cy - rect.top) * sy };
+        }
+
+        canvas.addEventListener('mousemove', e => {
+            mouseX = getCanvasPos(e).x;
+        });
+        canvas.addEventListener('mousedown', e => {
+            e.preventDefault();
+            mouseX = getCanvasPos(e).x;
+            handleAction();
+        });
+
+        canvas.addEventListener('touchstart', e => {
+            e.preventDefault();
+            const pos = getCanvasPos(e);
+            mouseX = pos.x;
+            handleAction();
+        }, { passive: false });
+        canvas.addEventListener('touchmove', e => {
+            e.preventDefault();
+            mouseX = getCanvasPos(e).x;
+        }, { passive: false });
+
+        window.addEventListener('keydown', e => {
+            if (e.code === 'Space') {
+                e.preventDefault();
+                handleAction();
+            }
+            if (e.code === 'ArrowLeft') keys.left = true;
+            if (e.code === 'ArrowRight') keys.right = true;
+        });
+        window.addEventListener('keyup', e => {
+            if (e.code === 'ArrowLeft') keys.left = false;
+            if (e.code === 'ArrowRight') keys.right = false;
+        });
+
+        // ===================== PHYSICS =====================
+        function update(dt) {
+            // Paddle movement
+            let dir = 0;
+            if (keys.left) dir -= 1;
+            if (keys.right) dir += 1;
+            if (dir !== 0) {
+                paddle.x += dir * paddle.speed * dt;
+                mouseX = null;
+            } else if (mouseX !== null) {
+                paddle.x = mouseX;
+            }
+            paddle.x = Math.max(paddle.w / 2, Math.min(W - paddle.w / 2, paddle.x));
+
+            if (state !== 'playing') return;
+
+            // Attached ball follows paddle
+            if (ballAttached) {
+                ball.x = paddle.x;
+                ball.y = paddle.y - paddle.h / 2 - ball.r;
+                return;
+            }
+
+            // Move ball
+            ball.x += ball.vx * ball.speed * dt;
+            ball.y += ball.vy * ball.speed * dt;
+
+            // Wall collisions
+            if (ball.x - ball.r < 0) { ball.x = ball.r;
+                ball.vx = -ball.vx;
+                playSound('wall'); }
+            if (ball.x + ball.r > W) { ball.x = W - ball.r;
+                ball.vx = -ball.vx;
+                playSound('wall'); }
+            if (ball.y - ball.r < 0) { ball.y = ball.r;
+                ball.vy = -ball.vy;
+                playSound('wall'); }
+            if (ball.y - ball.r > H) {
+                loseLife();
+                return;
+            }
+
+            // Paddle collision
+            if (ball.vy > 0 &&
+                ball.y + ball.r >= paddle.y - paddle.h / 2 &&
+                ball.y + ball.r <= paddle.y + paddle.h / 2 + 6 &&
+                ball.x >= paddle.x - paddle.w / 2 - ball.r &&
+                ball.x <= paddle.x + paddle.w / 2 + ball.r) {
+                const hitPos = (ball.x - paddle.x) / (paddle.w / 2); // -1..1
+                const angle = hitPos * Math.PI / 3;
+                ball.vx = Math.sin(angle);
+                ball.vy = -Math.cos(angle);
+                // ensure minimum upward component
+                if (Math.abs(ball.vy) < 0.3) ball.vy = -0.3;
+                const len = Math.sqrt(ball.vx * ball.vx + ball.vy * ball.vy);
+                ball.vx /= len;
+                ball.vy /= len;
+                ball.y = paddle.y - paddle.h / 2 - ball.r;
+                playSound('paddle');
+            }
+
+            // Brick collision
+            checkBrickCollision();
+        }
+
+        function checkBrickCollision() {
+            for (let r = 0; r < bricks.length; r++) {
+                for (let c = 0; c < bricks[r].length; c++) {
+                    const b = bricks[r][c];
+                    if (!b.alive) continue;
+                    const cx = b.x + b.w / 2,
+                        cy = b.y + b.h / 2;
+                    const dx = ball.x - cx,
+                        dy = ball.y - cy;
+                    const ox = (b.w / 2 + ball.r) - Math.abs(dx);
+                    const oy = (b.h / 2 + ball.r) - Math.abs(dy);
+                    if (ox > 0 && oy > 0) {
+                        if (ox < oy) {
+                            ball.vx = -ball.vx;
+                            ball.x = cx + (dx > 0 ? (b.w / 2 + ball.r) : -(b.w / 2 + ball.r));
+                        } else {
+                            ball.vy = -ball.vy;
+                            ball.y = cy + (dy > 0 ? (b.h / 2 + ball.r) : -(b.h / 2 + ball.r));
+                        }
+                        b.alive = false;
+                        score += 10 * level;
+                        spawnParticles(b.x + b.w / 2, b.y + b.h / 2, b.color);
+                        playSound('brick');
+                        // check level complete
+                        let remaining = 0;
+                        for (let rr = 0; rr < bricks.length; rr++)
+                            for (let cc = 0; cc < bricks[rr].length; cc++)
+                                if (bricks[rr][cc].alive) remaining++;
+                        if (remaining === 0) {
+                            state = 'levelComplete';
+                            playSound('level');
+                        }
+                        return;
+                    }
+                }
+            }
+        }
+
+        // ===================== PARTICLES =====================
+        function spawnParticles(x, y, color) {
+            for (let i = 0; i < 14; i++) {
+                const a = Math.random() * Math.PI * 2;
+                const sp = Math.random() * 180 + 40;
+                particles.push({
+                    x,
+                    y,
+                    vx: Math.cos(a) * sp,
+                    vy: Math.sin(a) * sp,
+                    life: 1,
+                    decay: Math.random() * 0.02 + 0.012,
+                    size: Math.random() * 3.5 + 1,
+                    color
+                });
+            }
+        }
+
+        function updateParticles(dt) {
+            for (let i = particles.length - 1; i >= 0; i--) {
+                const p = particles[i];
+                p.x += p.vx * dt;
+                p.y += p.vy * dt;
+                p.vy += 120 * dt; // gravity
+                p.life -= p.decay;
+                if (p.life <= 0) particles.splice(i, 1);
+            }
+        }
+
+        // ===================== DRAWING =====================
+        function drawBackground() {
+            const grad = ctx.createLinearGradient(0, 0, 0, H);
+            grad.addColorStop(0, '#0a0a1e');
+            grad.addColorStop(1, '#130826');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, W, H);
+            // subtle grid
+            ctx.strokeStyle = 'rgba(0,229,255,0.05)';
+            ctx.lineWidth = 1;
+            for (let x = 0; x <= W; x += 40) {
+                ctx.beginPath();
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x, H);
+                ctx.stroke();
+            }
+            for (let y = 0; y <= H; y += 40) {
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(W, y);
+                ctx.stroke();
+            }
+        }
+
+        function drawPaddle() {
+            ctx.save();
+            ctx.shadowColor = '#00e5ff';
+            ctx.shadowBlur = 18;
+            const grad = ctx.createLinearGradient(paddle.x - paddle.w / 2, 0, paddle.x + paddle.w / 2, 0);
+            grad.addColorStop(0, '#00e5ff');
+            grad.addColorStop(0.5, '#ffffff');
+            grad.addColorStop(1, '#00e5ff');
+            ctx.fillStyle = grad;
+            ctx.beginPath();
+            ctx.roundRect(paddle.x - paddle.w / 2, paddle.y - paddle.h / 2, paddle.w, paddle.h, 6);
+            ctx.fill();
+            ctx.restore();
+        }
+
+        function drawBall() {
+            ctx.save();
+            ctx.shadowColor = '#ff2d95';
+            ctx.shadowBlur = 20;
+            ctx.fillStyle = '#ffd1ec';
+            ctx.beginPath();
+            ctx.arc(ball.x, ball.y, ball.r, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillStyle = 'rgba(255,45,149,0.4)';
+            ctx.beginPath();
+            ctx.arc(ball.x, ball.y, ball.r * 1.6, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
+
+            // launch guide line
+            if (ballAttached && state === 'playing') {
+                ctx.save();
+                ctx.strokeStyle = 'rgba(255,45,149,0.3)';
+                ctx.setLineDash([4, 6]);
+                ctx.lineWidth = 1.5;
+                ctx.beginPath();
+                ctx.moveTo(ball.x, ball.y);
+                ctx.lineTo(ball.x, ball.y - 120);
+                ctx.stroke();
+                ctx.restore();
+            }
+        }
+
+        function drawBricks() {
+            for (let r = 0; r < bricks.length; r++) {
+                for (let c = 0; c < bricks[r].length; c++) {
+                    const b = bricks[r][c];
+                    if (!b.alive) continue;
+                    ctx.save();
+                    ctx.shadowColor = b.color;
+                    ctx.shadowBlur = 12;
+                    ctx.fillStyle = b.color;
+                    ctx.globalAlpha = 0.9;
+                    ctx.beginPath();
+                    ctx.roundRect(b.x, b.y, b.w, b.h, 3);
+                    ctx.fill();
+                    // inner highlight
+                    ctx.globalAlpha = 0.25;
+                    ctx.fillStyle = '#ffffff';
+                    ctx.beginPath();
+                    ctx.roundRect(b.x + 2, b.y + 2, b.w - 4, b.h / 2 - 1, 2);
+                    ctx.fill();
+                    ctx.restore();
+                }
+            }
+        }
+
+        function drawParticles() {
+            for (const p of particles) {
+                ctx.save();
+                ctx.globalAlpha = Math.max(0, p.life);
+                ctx.shadowColor = p.color;
+                ctx.shadowBlur = 8;
+                ctx.fillStyle = p.color;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        function drawHUD() {
+            ctx.save();
+            ctx.font = 'bold 20px \"Courier New\", monospace';
+            ctx.textBaseline = 'top';
+            // Score
+            ctx.shadowColor = '#39ff14';
+            ctx.shadowBlur = 10;
+            ctx.fillStyle = '#39ff14';
+            ctx.fillText('SCORE', 20, 18);
+            ctx.font = 'bold 26px \"Courier New\", monospace';
+            ctx.fillText(String(score).padStart(6, '0'), 20, 42);
+            // Level
+            ctx.shadowColor = '#ffe600';
+            ctx.fillStyle = '#ffe600';
+            ctx.font = 'bold 20px \"Courier New\", monospace';
+            ctx.textAlign = 'center';
+            ctx.fillText('LEVEL ' + level, W / 2, 18);
+            // Lives
+            ctx.shadowColor = '#ff2d95';
+            ctx.fillStyle = '#ff2d95';
+            ctx.textAlign = 'right';
+            let hearts = '';
+            for (let i = 0; i < lives; i++) hearts += '◆ ';
+            ctx.fillText(hearts, W - 20, 22);
+            ctx.restore();
+        }
+
+        function drawOverlay() {
+            if (state === 'playing') return;
+            ctx.save();
+            ctx.fillStyle = 'rgba(5,5,15,0.78)';
+            ctx.fillRect(0, 0, W, H);
+
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            let title = '',
+                sub = '',
+                tColor = '#00e5ff';
+
+            if (state === 'start') {
+                title = 'NEON BREAKER';
+                sub = 'Press SPACE or CLICK to start';
+                tColor = '#00e5ff';
+            } else if (state === 'levelComplete') {
+                title = 'LEVEL ' + level + ' COMPLETE!';
+                sub = 'Press SPACE or CLICK for next level';
+                tColor = '#39ff14';
+            } else if (state === 'gameOver') {
+                title = 'GAME OVER';
+                sub = 'Score: ' + score + '   |   Press SPACE or CLICK to restart';
+                tColor = '#ff2d95';
+            } else if (state === 'victory') {
+                title = 'YOU WIN!';
+                sub = 'Final Score: ' + score + '   |   Press SPACE or CLICK to play again';
+                tColor = '#ffe600';
+            }
+
+            ctx.shadowColor = tColor;
+            ctx.shadowBlur = 30;
+            ctx.fillStyle = tColor;
+            ctx.font = 'bold 52px \"Courier New\", monospace';
+            ctx.fillText(title, W / 2, H / 2 - 40);
+
+            ctx.shadowBlur = 12;
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 18px \"Courier New\", monospace';
+            ctx.fillText(sub, W / 2, H / 2 + 30);
+
+            if (state === 'start') {
+                ctx.shadowBlur = 8;
+                ctx.fillStyle = 'rgba(255,255,255,0.6)';
+                ctx.font = '14px \"Courier New\", monospace';
+                ctx.fillText('Move: Mouse / Arrow Keys / Touch', W / 2, H / 2 + 70);
+            }
+            ctx.restore();
+        }
+
+        function draw() {
+            drawBackground();
+            drawBricks();
+            drawParticles();
+            drawPaddle();
+            drawBall();
+            drawHUD();
+            drawOverlay();
+        }
+
+        // ===================== MAIN LOOP =====================
+        let lastTime = performance.now();
+
+        function loop(t) {
+            const dt = Math.min((t - lastTime) / 1000, 0.05);
+            lastTime = t;
+            update(dt);
+            updateParticles(dt);
+            draw();
+            requestAnimationFrame(loop);
+        }
+
+        // ===================== INIT =====================
+        buildBricks();
+        resetBall();
+        requestAnimationFrame(loop);
+    </script>
+</body>
+</html>
+```
+### Gameplay & Design
+
+Jump right in — the game starts with a neon title screen. Here's how it plays:
+
+- **Core Mechanics:** Control the glowing paddle with your mouse, arrow keys, or by dragging your finger on touch devices. The ball bounces with realistic angle reflection — hit it with the paddle's edge to change its trajectory. Each brick you break adds to your score and triggers a burst of colorful particles.
+- **Progression & Feedback:** You have 3 lives and 5 levels to clear. Each level increases ball speed and brick rows. The game features clear state screens for start, level completion, game over, and victory, so you always know what's happening.
+- **Immersive Audio & Visuals:** Every paddle hit, wall bounce, and brick break generates a unique synthesized sound effect via the Web Audio API. The dark neon aesthetic is reinforced with glowing elements, particle effects, and a subtle grid background for a cohesive, arcade-style feel.
+
+---
+
+**Optimization Tip:** You can adjust the game's difficulty by modifying the `ball.speed` (line ~220) and `MAX_LEVEL` (line ~60) variables to change starting velocity and total level count.", "error": null}, {"model_id": "deepseek-v4-flash-0731", "benchmark_id": "pharma_regulatory_comprehension", "status": "ok", "score": 80, "latency": 158.645, "prompt_tokens": 1877, "completion_tokens": 4288, "total_tokens": 6165, "estimated_cost_usd": 0.000753, "raw_response": "As a regulatory affairs specialist, I'll address both questions based on ICH E6(R2) (Good Clinical Practice), which is the internationally recognized standard for designing, conducting, recording, and reporting clinical trials.
+
+---
+
+### Question 1: Centralized-Only Monitoring (No On-Site Visits)
+
+**Requirement:**
+Yes, ICH E6(R2) explicitly permits a sponsor to use centralized monitoring alone, without any on-site visits, provided the monitoring strategy is risk-based and appropriately documented. The guideline does not mandate on-site visits as a default requirement.
+
+**Relevant Guideline Section:**
+- **ICH E6(R2) Section 5.18.3 (Extent and Nature of Monitoring):** This section states that the sponsor should develop a systematic, prioritized, risk-based approach to monitoring. It explicitly states: *\"The sponsor may use a combination of on-site and centralized monitoring, or centralized monitoring alone.\"* The sponsor must document the rationale for the chosen monitoring strategy in the monitoring plan.
+
+**Monitor's Responsibilities for Verifying Data (Even Without On-Site Visits):**
+- **ICH E6(R2) Section 5.18.5 (Monitoring Procedures):** This section defines the monitor's core responsibilities, which remain applicable regardless of whether monitoring is performed on-site or centrally. The monitor must:
+    - Verify that the data recorded in the Case Report Forms (CRFs) are accurate and complete against the source data (source data verification, or SDV).
+    - Verify that the rights and well-being of human subjects are protected.
+    - Verify that the reported trial data are accurate, complete, and verifiable from source documents.
+    - Verify that the conduct of the trial complies with the currently approved protocol/amendment(s), GCP, and applicable regulatory requirements.
+
+**Exceptions and Conditions:**
+1. **Risk-Based Justification:** The sponsor must demonstrate, in the monitoring plan, that the centralized-only strategy is appropriate based on the trial's objective, design, complexity, blinding, endpoints, and risk level (Section 5.18.3). High-risk trials or those with complex endpoints may warrant on-site monitoring, but it is not a strict regulatory requirement.
+2. **Access to Source Data:** For centralized monitoring to satisfy the monitor's verification duties under Section 5.18.5, the sponsor must ensure the monitor has adequate remote access to source data (e.g., via electronic health records, eCRFs, or remote data review). If source data is not accessible remotely, centralized-only monitoring may be insufficient to meet the verification requirements.
+3. **Documentation:** The monitoring plan must clearly describe the centralized monitoring activities, methods, frequency, and responsibilities (Section 5.18.3). The sponsor must also document that the chosen strategy is sufficient to protect subjects and ensure data integrity.
+4. **Regulatory Expectations:** While ICH E6(R2) permits centralized-only monitoring, some local regulatory authorities (e.g., certain EU Member States or specific FDA guidance) may have additional expectations or require on-site visits for certain high-risk trials. The sponsor should verify local regulatory requirements in each jurisdiction.
+
+---
+
+### Question 2: Investigator's Responsibilities for Obtaining Informed Consent
+
+**Requirement:**
+The investigator is responsible for ensuring that informed consent is obtained from each subject prior to any trial-related procedures, using an IRB/IEC-approved consent form, and that consent is given voluntarily and with full understanding.
+
+**Relevant Guideline Sections (ICH E6(R2) Section 4.8 – Informed Consent of Trial Subjects):**
+- **Section 4.8.1:** The investigator is responsible for ensuring that informed consent is obtained from each subject prior to any trial-related procedures.
+- **Section 4.8.2:** The investigator (or designee) should provide the subject with adequate time to consider participation and the opportunity to ask questions.
+- **Section 4.8.3:** The investigator must use the IRB/IEC-approved written informed consent form, and must not make any changes to it without prior IRB/IEC approval.
+- **Section 4.8.4:** The investigator must not coerce or unduly influence the subject to participate.
+- **Section 4.8.5:** The investigator must ensure that the subject (or legally acceptable representative) is informed about all relevant aspects of the trial, including purpose, procedures, risks, benefits, alternatives, confidentiality, and the voluntary nature of participation (the elements of informed consent).
+- **Section 4.8.6:** The consent form must be signed and personally dated by the subject (or legally acceptable representative) and by the person who conducted the informed consent discussion (typically the investigator or designee).
+- **Section 4.8.7:** A copy of the signed and dated consent form must be provided to the subject.
+- **Section 4.8.8:** If new information becomes available that may affect the subject's willingness to continue, the investigator must inform the subject and obtain re-consent (documented in writing).
+- **Sections 4.8.9–4.8.13:** These cover special situations, including non-therapeutic trials, subjects unable to give consent (using a legally acceptable representative), minors, illiterate subjects, and emergency situations (where consent may be deferred or obtained from a legally acceptable representative).
+
+**Exceptions and Conditions:**
+1. **Delegation:** The investigator may delegate the consent process to a qualified designee, but the investigator retains ultimate responsibility for ensuring compliance (Section 4.8.1).
+2. **Re-consent:** Re-consent is mandatory when new safety or efficacy information arises that could affect the subject's decision to continue (Section 4.8.8).
+3. **Special Populations:** For subjects who cannot provide consent (e.g., cognitively impaired, minors, emergency situations), the investigator must follow the specific procedures in Sections 4.8.9–4.8.13, including obtaining consent from a legally acceptable representative and, where applicable, assent from the subject.
+4. **Documentation:** The consent process must be documented, and the signed consent form must be retained in the subject's records and a copy given to the subject (Section 4.8.7).
+
+---
+
+**Note on Citations:** I have cited the specific ICH E6(R2) sections based on the current version of the guideline. If you are referencing a specific local regulatory framework (e.g., FDA 21 CFR Part 50 or EU Regulation 536/2014), the section numbers may differ, but the underlying principles align with ICH E6(R2). I recommend verifying the exact section numbers against the official ICH E6(R2) document, as minor formatting differences may exist in published versions.", "error": null}, {"model_id": "deepseek-v4-flash-0731", "benchmark_id": "value_density", "status": "ok", "score": 100, "latency": 13.445, "prompt_tokens": 1891, "completion_tokens": 338, "total_tokens": 2229, "estimated_cost_usd": 0.000185, "raw_response": "{
+  \"drug_pair\": \"warfarin + ibuprofen\",
+  \"severity\": \"Major\",
+  \"mechanism\": \"NSAID inhibits platelet aggregation, causes GI mucosal injury, and displaces warfarin from protein binding, increasing bleeding risk.\",
+  \"clinical_action\": \"Switch to acetaminophen or add PPI; monitor INR and bleeding signs.\",
+  \"monitor\": [\"INR\", \"signs of GI bleeding or hemoglobin drop\"],
+  \"avoid_if\": \"history of GI bleeding or peptic ulcer disease\",
+  \"confidence\": 95
+}", "error": null, "metrics": {"budget_max_tokens": 1024, "value_per_1k_tokens": 44.863, "value_per_usd": 540540.541, "details": {"parse_ok": true, "hits": {"required_keys": 7, "no_extra_keys": true, "drug_pair": true, "severity_enum": "Major", "severity_major": true, "mechanism": true, "mechanism_concise": true, "clinical_action": true, "monitor_shape": true, "monitor_content": true, "avoid_if": true, "confidence": true}, "penalties": []}}}, {"model_id": "deepseek-v4-flash-0731", "benchmark_id": "reverse_prompt_vision", "status": "skipped", "score": null, "latency": 0, "prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0, "estimated_cost_usd": 0.0, "raw_response": "", "error": "model does not support vision", "metrics": {"supports_vision": false}}], "total_estimated_cost_usd": 9.828182};</script>
 <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="BenchmarkViv. Practical AI benchmarks for Venice API models: intent, UI, startup planning, pharma domain, value density, and reverse-prompt vision." />
@@ -19279,6 +20709,48 @@ body.lightbox-open {
 }
 
 
+/* ============================================
+ * Featured run section — DeepSeek V4 Flash 0731
+ * ============================================ */
+.vt-feature {
+  padding: 4rem 0;
+  background: linear-gradient(180deg, var(--surface-2) 0%, var(--bg) 100%);
+}
+.feature-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: 2.5rem;
+  align-items: start;
+}
+.feature-media { min-width: 0; }
+.feature-img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  border: 1px solid var(--rule);
+  box-shadow: var(--shadow);
+  display: block;
+}
+.feature-copy h2 {
+  font-family: var(--font-display);
+  font-size: 1.9rem;
+  line-height: 1.15;
+  margin: 0.5rem 0 1rem;
+  color: var(--text);
+}
+.feature-copy h2 em { color: var(--magenta); font-style: normal; }
+.feature-copy p { color: var(--paper-dim); line-height: 1.6; }
+.feature-list {
+  margin: 1.25rem 0;
+  padding-left: 1.1rem;
+  color: var(--paper-dim);
+  line-height: 1.7;
+}
+.feature-chart { margin-top: 1.5rem; }
+@media (max-width: 860px) {
+  .feature-grid { grid-template-columns: 1fr; }
+}
+
 </style>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <script>
@@ -19326,6 +20798,30 @@ body.lightbox-open {
       <p class="data-status" id="dataStatus">Loading benchmark data</p>
     </div>
   </header>
+
+  <section id="flash-feature" class="vt-feature">
+    <div class="container">
+      <div class="feature-grid">
+        <div class="feature-media">
+          <img src="data/deepseek-v4-flash-0731-infographic.png" alt="DeepSeek V4 Flash 0731 benchmark infographic" class="feature-img" />
+        </div>
+        <div class="feature-copy">
+          <span class="eyebrow">Featured Run · New Model</span>
+          <h2>DeepSeek V4 Flash 0731 — <em>#4 of 17</em> on VivIndex</h2>
+          <p>For this cycle we benchmarked <strong>DeepSeek V4 Flash 0731</strong> live against the full roster. It landed <strong>4th of 17</strong> models (VivIndex 89.7) while running at flash-tier cost — the cheapest model on the board per token.</p>
+          <ul class="feature-list">
+            <li><strong>Value Density @1K:</strong> 100 — perfect compact JSON, best per-1k-token value</li>
+            <li><strong>One-Shot UI:</strong> 95 · <strong>Startup in a Weekend:</strong> 94</li>
+            <li><strong>Pharma DDI:</strong> 89 · <strong>Pharma Regulatory:</strong> 80 · <strong>Intent:</strong> 70</li>
+            <li>Vision track skipped (no vision) — not penalized, per board rules.</li>
+          </ul>
+          <div class="feature-chart">
+            <img src="data/deepseek-v4-flash-0731-chart.svg" alt="VivIndex leaderboard chart" class="feature-img" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <section>
     <div class="container">

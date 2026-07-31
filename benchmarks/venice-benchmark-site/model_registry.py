@@ -15,6 +15,7 @@ MODELS = [
     {"id": "claude-opus-5",           "display": "Opus 5"},
     {"id": "zai-org-glm-5-2",         "display": "GLM 5.2"},
     {"id": "deepseek-v4-pro",         "display": "DeepSeek V4"},
+    {"id": "deepseek-v4-flash-0731",   "display": "DeepSeek V4 Flash 0731"},
     {"id": "minimax-m3-preview",      "display": "MiniMax M3"},
     {"id": "grok-4-5",                "display": "Grok 4.5"},
     {"id": "inkling",                "display": "Inkling"},

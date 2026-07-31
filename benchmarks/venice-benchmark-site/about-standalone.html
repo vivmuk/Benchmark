@@ -1662,6 +1662,48 @@ body.lightbox-open {
 }
 
 
+/* ============================================
+ * Featured run section — DeepSeek V4 Flash 0731
+ * ============================================ */
+.vt-feature {
+  padding: 4rem 0;
+  background: linear-gradient(180deg, var(--surface-2) 0%, var(--bg) 100%);
+}
+.feature-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: 2.5rem;
+  align-items: start;
+}
+.feature-media { min-width: 0; }
+.feature-img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  border: 1px solid var(--rule);
+  box-shadow: var(--shadow);
+  display: block;
+}
+.feature-copy h2 {
+  font-family: var(--font-display);
+  font-size: 1.9rem;
+  line-height: 1.15;
+  margin: 0.5rem 0 1rem;
+  color: var(--text);
+}
+.feature-copy h2 em { color: var(--magenta); font-style: normal; }
+.feature-copy p { color: var(--paper-dim); line-height: 1.6; }
+.feature-list {
+  margin: 1.25rem 0;
+  padding-left: 1.1rem;
+  color: var(--paper-dim);
+  line-height: 1.7;
+}
+.feature-chart { margin-top: 1.5rem; }
+@media (max-width: 860px) {
+  .feature-grid { grid-template-columns: 1fr; }
+}
+
 </style>
 </head>
 <body>

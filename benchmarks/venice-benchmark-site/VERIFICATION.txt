@@ -35,3 +35,16 @@ NEXT STEPS
 - Deploy to Railway as static site, or push to GitHub.
 
 UPDATE 2026-07-26: Arcade capability track removed from site. Scored brick_breaker_realism track remains.
+
+UPDATE 2026-07-31: Added DeepSeek V4 Flash 0731 to roster and ran live on all scored tracks.
+- Real API run (--run-real --model deepseek-v4-flash-0731): intent 70, one-shot UI 95, brick 95,
+  pharma DDI 89, pharma regulatory 80, startup 94.
+- Value Density @1K: score 100 (perfect), value_per_1k=44.9.
+- Reverse-Prompt Vision: skipped (model lacks vision) — not penalized.
+- VivIndex (5-track weighted): 89.7 → #4 of 17 models (behind GPT-5.5/5.6 family).
+- Generated data/leaderboard_chart.svg (accurate SVG bar chart) and
+  data/deepseek-v4-flash-0731-infographic.png (Venice gpt-image-2).
+- index.html: added #flash-feature section + CSS; rebuilt benchmarkviv-standalone.html.
+- results.json updated: 120 rows, 17 models, total run cost $9.83 (cumulative).
+- Brick Breaker remains retired from the board (scores still stored in data, not displayed).
+
