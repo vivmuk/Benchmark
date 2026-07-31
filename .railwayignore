@@ -1,0 +1,14 @@
+**/node_modules
+**/.venv
+**/__pycache__
+**/*.pyc
+.git
+.openclaw
+.hg
+.bazaar
+.svn
+.DS_Store
+viv-mind-scaffold
+fable5/node_modules
+proto
+data/vision/recon_images/*.png
