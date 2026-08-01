@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1700" height="1250" viewBox="0 0 1700 1250" font-family="Inter, system-ui, sans-serif">
+<rect width="1700" height="1250" fill="#FEFCF8"/>
+<text x="60" y="78" font-size="44" font-weight="800" fill="#1A1A2E">DeepSeek V4 Flash 0731</text>
+<text x="60" y="128" font-size="22" fill="#7a8294">BenchmarkViv 2026 · real Venice API runs · VivIndex composite rank #4 of 17</text>
+<rect x="60" y="150" width="1580" height="3" fill="#00D4AA"/>
+<rect x="60.0" y="190.0" width="760" height="444" rx="18" fill="#FFFFFF" stroke="#e4e9f2" stroke-width="2"/>
+<text x="94.0" y="236.0" font-size="26" font-weight="800" fill="#1A1A2E">Overall Rank</text>
+<text x="94.0" y="262.0" font-size="16" fill="#7a8294">VivIndex weighted composite</text>
+<text x="94.0" y="340.0" font-size="120" font-weight="900" fill="#1A1A2E">#4</text>
+<text x="264.0" y="335.0" font-size="34" font-weight="700" fill="#7a8294">of 17 models</text>
+<text x="94.0" y="390.0" font-size="17" fill="#7a8294">VivIndex 89.7 / 100</text>
+<rect x="94.0" y="402.0" width="560" height="26" rx="13" fill="#eef1f7"/>
+<rect x="94.0" y="402.0" width="502" height="26" rx="13" fill="#00D4AA"/>
+<text x="610" y="423.0" font-size="20" font-weight="800" fill="#1A1A2E">89.7</text>
+<text x="94.0" y="460.0" font-size="15" fill="#7a8294">Top of the board:</text>
+<text x="94.0" y="494.0" font-size="16" font-weight="700" fill="#1A1A2E">GPT-5.5</text>
+<rect x="304.0" y="481.0" width="352" height="16" rx="8" fill="#d9e0ec"/>
+<text x="664" y="494.0" font-size="14" font-weight="700" fill="#1A1A2E">92.5</text>
+<text x="94.0" y="528.0" font-size="16" font-weight="700" fill="#1A1A2E">GPT-5.6 Terra</text>
+<rect x="304.0" y="515.0" width="350" height="16" rx="8" fill="#d9e0ec"/>
+<text x="662" y="528.0" font-size="14" font-weight="700" fill="#1A1A2E">92.2</text>
+<text x="94.0" y="562.0" font-size="16" font-weight="700" fill="#1A1A2E">GPT-5.6 Sol</text>
+<rect x="304.0" y="549.0" width="345" height="16" rx="8" fill="#d9e0ec"/>
+<text x="657" y="562.0" font-size="14" font-weight="700" fill="#1A1A2E">90.9</text>
+<text x="94.0" y="596.0" font-size="16" font-weight="700" fill="#00D4AA">DeepSeek V4 Flash 0731</text>
+<rect x="304.0" y="583.0" width="341" height="16" rx="8" fill="#00D4AA"/>
+<text x="653" y="596.0" font-size="14" font-weight="700" fill="#1A1A2E">89.7</text>
+<rect x="880.0" y="190.0" width="760" height="444" rx="18" fill="#FFFFFF" stroke="#e4e9f2" stroke-width="2"/>
+<text x="914.0" y="236.0" font-size="26" font-weight="800" fill="#1A1A2E">Where it wins</text>
+<text x="914.0" y="262.0" font-size="16" fill="#7a8294">Scored lanes (higher = better)</text>
+<text x="914.0" y="300.0" font-size="17" fill="#1A1A2E">Value Density @1K</text>
+<rect x="914.0" y="308.0" width="572.0" height="20" rx="10" fill="#eef1f7"/>
+<rect x="914.0" y="308.0" width="572" height="20" rx="10" fill="#00D4AA"/>
+<text x="1500" y="326.0" font-size="19" font-weight="800" fill="#1A1A2E">100</text>
+<text x="914.0" y="344.0" font-size="17" fill="#1A1A2E">One-Shot UI Generation</text>
+<rect x="914.0" y="352.0" width="572.0" height="20" rx="10" fill="#eef1f7"/>
+<rect x="914.0" y="352.0" width="543" height="20" rx="10" fill="#00D4AA"/>
+<text x="1500" y="370.0" font-size="19" font-weight="800" fill="#1A1A2E">95</text>
+<text x="914.0" y="388.0" font-size="17" fill="#1A1A2E">Startup in a Weekend</text>
+<rect x="914.0" y="396.0" width="572.0" height="20" rx="10" fill="#eef1f7"/>
+<rect x="914.0" y="396.0" width="538" height="20" rx="10" fill="#00D4AA"/>
+<text x="1500" y="414.0" font-size="19" font-weight="800" fill="#1A1A2E">94</text>
+<text x="914.0" y="432.0" font-size="17" fill="#1A1A2E">Pharma Drug Interaction</text>
+<rect x="914.0" y="440.0" width="572.0" height="20" rx="10" fill="#eef1f7"/>
+<rect x="914.0" y="440.0" width="509" height="20" rx="10" fill="#00D4AA"/>
+<text x="1500" y="458.0" font-size="19" font-weight="800" fill="#1A1A2E">89</text>
+<text x="914.0" y="476.0" font-size="17" fill="#1A1A2E">Pharma Regulatory</text>
+<rect x="914.0" y="484.0" width="572.0" height="20" rx="10" fill="#eef1f7"/>
+<rect x="914.0" y="484.0" width="458" height="20" rx="10" fill="#00D4AA"/>
+<text x="1500" y="502.0" font-size="19" font-weight="800" fill="#1A1A2E">80</text>
+<text x="914.0" y="520.0" font-size="17" fill="#1A1A2E">Intent Understanding</text>
+<rect x="914.0" y="528.0" width="572.0" height="20" rx="10" fill="#eef1f7"/>
+<rect x="914.0" y="528.0" width="400" height="20" rx="10" fill="#00D4AA"/>
+<text x="1500" y="546.0" font-size="19" font-weight="800" fill="#1A1A2E">70</text>
+<rect x="60.0" y="710.0" width="760" height="444" rx="18" fill="#FFFFFF" stroke="#e4e9f2" stroke-width="2"/>
+<text x="94.0" y="756.0" font-size="26" font-weight="800" fill="#1A1A2E">Pharma domain</text>
+<text x="94.0" y="782.0" font-size="16" fill="#7a8294">Drug-drug interaction + regulatory</text>
+<text x="94.0" y="830.0" font-size="90" font-weight="900" fill="#1A1A2E">89</text>
+<text x="204.0" y="820.0" font-size="22" font-weight="700" fill="#7a8294">Drug-Drug
+Interaction</text>
+<text x="94.0" y="878.0" font-size="15" fill="#7a8294">Board best: 90 (GLM 5.2 / Opus 5)</text>
+<text x="460.0" y="830.0" font-size="90" font-weight="900" fill="#1A1A2E">80</text>
+<text x="570.0" y="820.0" font-size="22" font-weight="700" fill="#7a8294">Regulatory
+Comprehension</text>
+<text x="460.0" y="878.0" font-size="15" fill="#7a8294">Board best: 95 (Opus 5)</text>
+<text x="94.0" y="920.0" font-size="15" fill="#7a8294">vs best-in-class on each lane:</text>
+<text x="94.0" y="960.0" font-size="16" font-weight="700" fill="#1A1A2E">Drug-Drug Interaction</text>
+<rect x="294.0" y="948.0" width="180" height="15" rx="7" fill="#eef1f7"/>
+<rect x="294.0" y="948.0" width="160" height="15" rx="7" fill="#00D4AA"/>
+<text x="498.0" y="960.0" font-size="14" font-weight="800" fill="#1A1A2E">mine 89</text>
+<rect x="294.0" y="964.0" width="162" height="6" rx="3" fill="#0aa97f" opacity="0.6"/>
+<text x="498.0" y="974.0" font-size="13" fill="#7a8294">best 90</text>
+<text x="94.0" y="1000.0" font-size="16" font-weight="700" fill="#1A1A2E">Regulatory</text>
+<rect x="294.0" y="988.0" width="180" height="15" rx="7" fill="#eef1f7"/>
+<rect x="294.0" y="988.0" width="144" height="15" rx="7" fill="#00D4AA"/>
+<text x="498.0" y="1000.0" font-size="14" font-weight="800" fill="#1A1A2E">mine 80</text>
+<rect x="294.0" y="1004.0" width="171" height="6" rx="3" fill="#0aa97f" opacity="0.6"/>
+<text x="498.0" y="1014.0" font-size="13" fill="#7a8294">best 95</text>
+<rect x="880.0" y="710.0" width="760" height="444" rx="18" fill="#FFFFFF" stroke="#e4e9f2" stroke-width="2"/>
+<text x="914.0" y="756.0" font-size="26" font-weight="800" fill="#1A1A2E">Efficiency</text>
+<text x="914.0" y="782.0" font-size="16" fill="#7a8294">Value per token · cost · speed</text>
+<text x="914.0" y="840.0" font-size="72" font-weight="900" fill="#1A1A2E">100</text>
+<text x="1064.0" y="830.0" font-size="22" font-weight="700" fill="#7a8294">Value Density
+@1K</text>
+<text x="914.0" y="882.0" font-size="15" fill="#7a8294">Perfect score, perfect compact JSON</text>
+<rect x="914" y="925.0" width="331" height="70" rx="12" fill="#f4f6fb" stroke="#e4e9f2"/>
+<text x="930" y="955.0" font-size="26" font-weight="800" fill="#00D4AA">44.9</text>
+<text x="930" y="981.0" font-size="14" fill="#7a8294">Value per 1k tokens</text>
+<rect x="1275" y="925.0" width="331" height="70" rx="12" fill="#f4f6fb" stroke="#e4e9f2"/>
+<text x="1291" y="955.0" font-size="26" font-weight="800" fill="#00D4AA">$0.0005</text>
+<text x="1291" y="981.0" font-size="14" fill="#7a8294">Avg cost / scored run</text>
+<rect x="914" y="1011.0" width="331" height="70" rx="12" fill="#f4f6fb" stroke="#e4e9f2"/>
+<text x="930" y="1041.0" font-size="26" font-weight="800" fill="#00D4AA">35</text>
+<text x="930" y="1067.0" font-size="14" fill="#7a8294">Speed (out tok/s)</text>
+<rect x="1275" y="1011.0" width="331" height="70" rx="12" fill="#f4f6fb" stroke="#e4e9f2"/>
+<text x="1291" y="1041.0" font-size="26" font-weight="800" fill="#00D4AA">$0.0032</text>
+<text x="1291" y="1067.0" font-size="14" fill="#7a8294">Total run cost</text>
+</svg>
