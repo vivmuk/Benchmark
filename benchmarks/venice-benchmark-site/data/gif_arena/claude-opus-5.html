@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>cute alpaca dancing</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(145deg, #fce9d8 0%, #ffeede 45%, #ffeedd 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* floating sparkles / dreamy dots */
+    .sparkle {
+      position: absolute;
+      background: #fff3cf;
+      border-radius: 50%;
+      opacity: 0.55;
+      width: 12px;
+      height: 12px;
+      filter: blur(1px);
+      box-shadow: 0 0 12px #ffddaa;
+      animation: floatUp 8s linear infinite;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(20vh) scale(0.6); opacity: 0; }
+      15% { opacity: 0.8; }
+      100% { transform: translateY(-110vh) scale(1.1); opacity: 0; }
+    }
+
+    /* main stage wrapper */
+    .stage {
+      position: relative;
+      width: 520px;
+      height: 560px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      z-index: 3;
+    }
+
+    /* ground shadow */
+    .shadow {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      width: 250px;
+      height: 40px;
+      background: radial-gradient(ellipse, rgba(150, 100, 60, 0.25) 0%, rgba(150, 100, 60, 0) 75%);
+      border-radius: 50%;
+      transform: translateX(-50%);
+      z-index: 1;
+      animation: shadowPump 0.8s infinite alternate ease-in-out;
+    }
+
+    @keyframes shadowPump {
+      0% { transform: translateX(-50%) scaleX(1.0); opacity: 0.8; }
+      100% { transform: translateX(-50%) scaleX(0.9) scaleY(1.1); opacity: 0.5; }
+    }
+
+    /* the dancing alpaca */
+    .alpaca {
+      position: relative;
+      width: 220px;
+      height: 320px;
+      z-index: 5;
+      transform-origin: 50% 100%;
+      animation: wholeBodyDance 0.75s infinite ease-in-out;
+      filter: drop-shadow(0 10px 8px rgba(0,0,0,0.08));
+    }
+
+    @keyframes wholeBodyDance {
+      0% { transform: translateY(0px) rotate(-3deg); }
+      25% { transform: translateY(-16px) rotate(2deg); }
+      50% { transform: translateY(0px) rotate(-2deg); }
+      75% { transform: translateY(-12px) rotate(3deg); }
+      100% { transform: translateY(0px) rotate(-3deg); }
+    }
+
+    /* ===== FLUFFY MAIN BODY (layered cloud shapes) ===== */
+    .body-group {
+      position: absolute;
+      bottom: 60px;
+      left: 30px;
+      width: 160px;
+      height: 130px;
+      animation: bodyBounce 0.75s infinite ease-in-out;
+    }
+
+    @keyframes bodyBounce {
+      0%, 100% { transform: scaleY(1) scaleX(1); }
+      35% { transform: scaleY(1.12) scaleX(0.96); }
+      70% { transform: scaleY(0.96) scaleX(1.08); }
+    }
+
+    .fluff {
+      position: absolute;
+      background: #f8f0e0;  /* warm cream */
+      border-radius: 50% 60% 50% 60%;
+      box-shadow: inset 0 -8px 10px rgba(210, 170, 130, 0.2);
+    }
+
+    .fluff1 { width: 100px; height: 95px; left: 20px; top: 25px; transform: rotate(5deg); }
+    .fluff2 { width: 90px; height: 85px; left: 70px; top: 20px; border-radius: 60% 40% 60% 40%; }
+    .fluff3 { width: 80px; height: 75px; left: 40px; top: 55px; border-radius: 40% 60% 40% 60%; }
+    .fluff4 { width: 115px; height: 70px; left: 25px; top: 60px; border-radius: 50% 50% 40% 60%; }
+
+    /* ===== NECK + HEAD ===== */
+    .neck {
+      position: absolute;
+      left: 82px;
+      top: -5px;
+      width: 50px;
+      height: 110px;
+      background: #f3e8d6;
+      border-radius: 45% 45% 30% 30%;
+      transform: rotate(2deg);
+      z-index: 4;
+      box-shadow: inset -8px -6px 0 rgba(210, 170, 130, 0.15);
+    }
+
+    .head {
+      position: absolute;
+      left: 55px;
+      top: -52px;
+      width: 110px;
+      height: 90px;
+      background: #f5eede;
+      border-radius: 60% 40% 60% 50%;
+      z-index: 10;
+      box-shadow: inset -8px -6px 0 rgba(205, 165, 120, 0.2);
+      animation: headTilt 0.75s infinite ease-in-out alternate;
+    }
+
+    @keyframes headTilt {
+      0% { transform: rotate(-4deg) translateY(0); }
+      100% { transform: rotate(6deg) translateY(-3px); }
+    }
+
+    /* fluffy head top */
+    .head-fluff1 {
+      position: absolute;
+      left: 15px;
+      top: 5px;
+      width: 45px;
+      height: 35px;
+      background: #ede0cd;
+      border-radius: 70% 30% 70% 30%;
+      z-index: -1;
+      transform: rotate(-15deg);
+    }
+
+    .head-fluff2 {
+      position: absolute;
+      right: 12px;
+      top: -8px;
+      width: 40px;
+      height: 38px;
+      background: #ede0cd;
+      border-radius: 30% 70% 30% 70%;
+      z-index: -1;
+    }
+
+    /* ears */
+    .ear {
+      position: absolute;
+      width: 28px;
+      height: 46px;
+      background: #e9d9c0;
+      border-radius: 70% 30% 60% 40%;
+      top: -25px;
+      z-index: 12;
+    }
+
+    .ear.left {
+      left: 2px;
+      transform: rotate(-35deg);
+      animation: earFlickL 1.2s infinite ease-in-out;
+    }
+
+    .ear.right {
+      right: 0px;
+      transform: rotate(30deg);
+      animation: earFlickR 1.2s infinite ease-in-out;
+    }
+
+    @keyframes earFlickL {
+      0%, 100% { transform: rotate(-35deg); }
+      50% { transform: rotate(-50deg); }
+    }
+
+    @keyframes earFlickR {
+      0%, 100% { transform: rotate(35deg); }
+      50% { transform: rotate(50deg); }
+    }
+
+    /* inner ear pink dash */
+    .ear::after {
+      content: '';
+      position: absolute;
+      width: 12px;
+      height: 20px;
+      background: #f0bcae;
+      border-radius: 50%;
+      left: 6px;
+      top: 12px;
+      opacity: 0.7;
+    }
+
+    /* eyes, nose, blush */
+    .eye {
+      position: absolute;
+      width: 16px;
+      height: 18px;
+      background: #3e2a1a;
+      border-radius: 50%;
+      top: 24px;
+      z-index: 15;
+      box-shadow: 0 3px 4px rgba(0,0,0,0.15);
+    }
+
+    .eye.left { left: 28px; transform: translateX(-50%); }
+    .eye.right { right: 18px; transform: translateX(50%); }
+
+    .eye::after {
+      content: '';
+      position: absolute;
+      width: 6px;
+      height: 5px;
+      background: white;
+      border-radius: 50%;
+      top: 3px;
+      left: 2px;
+      opacity: 0.85;
+    }
+
+    .nose {
+      position: absolute;
+      left: 50%;
+      top: 40px;
+      width: 16px;
+      height: 12px;
+      background: #8a5b4b;
+      border-radius: 50%;
+      transform: translateX(-50%);
+      z-index: 16;
+      box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+    }
+
+    .blush {
+      position: absolute;
+      width: 22px;
+      height: 13px;
+      background: #f5ac9c;
+      border-radius: 50%;
+      top: 46px;
+      opacity: 0.6;
+      filter: blur(2px);
+      z-index: 15;
+    }
+
+    .blush.left { left: 8px; }
+    .blush.right { right: 6px; }
+
+    /* ===== POM-POM TAIL (fluffy, animated) ===== */
+    .tail {
+      position: absolute;
+      right: -6px;
+      bottom: 30px;
+      width: 55px;
+      height: 55px;
+      background: #f0e6d2;
+      border-radius: 50%;
+      z-index: 3;
+      box-shadow: inset -8px -8px 0 #dcc6aa, 0 5px 8px rgba(0,0,0,0.05);
+      animation: tailWiggle 1.1s infinite alternate ease-in-out;
+      transform-origin: 0% 50%;
+    }
+
+    .tail::after {
+      content: '';
+      position: absolute;
+      top: -8px;
+      left: 8px;
+      width: 30px;
+      height: 30px;
+      background: #fbf3e5;
+      border-radius: 50%;
+      box-shadow: -4px -4px 6px #e4d2bc;
+    }
+
+    @keyframes tailWiggle {
+      0% { transform: rotate(-18deg) scaleY(1); }
+      100% { transform: rotate(18deg) scaleY(1.3); }
+    }
+
+    /* ===== LEGS (dancing waves) ===== */
+    .leg {
+      position: absolute;
+      bottom: 0px;
+      width: 26px;
+      height: 70px;
+      border-radius: 30% 30% 40% 40%;
+      z-index: 2;
+    }
+
+    .leg.front-left {
+      left: 58px;
+      background: #e2d1bb;
+      box-shadow: inset -6px -4px 0 #c7b39a;
+      animation: legFLeft 0.95s infinite ease-in-out;
+    }
+
+    .leg.front-right {
+      left: 100px;
+      background: #e9ddcd;
+      box-shadow: inset -6px -4px 0 #cfbdab;
+      animation: legFRight 0.95s infinite ease-in-out;
+    }
+
+    .leg.back-left {
+      left: 28px;
+      background: #cbb69e;
+      transform: rotate(-6deg);
+      height: 65px;
+      animation: legBLeft 0.95s infinite ease-in-out;
+    }
+
+    .leg.back-right {
+      left: 150px;
+      background: #d8c6b0;
+      transform: rotate(6deg);
+      height: 65px;
+      animation: legBRight 0.95s infinite ease-in-out;
+    }
+
+    /* fancy leg animations (different rhythm) */
+    @keyframes legFLeft {
+      0%, 20% { transform: rotate(-18deg) translateY(-4px); }
+      40% { transform: rotate(5deg) translateY(0px); }
+      70% { transform: rotate(-15deg) translateY(-3px); }
+      100% { transform: rotate(-18deg) translateY(-4px); }
+    }
+    @keyframes legFRight {
+      0%, 20% { transform: rotate(-5deg) translateY(-5px); }
+      50% { transform: rotate(15deg) translateY(0px); }
+      80% { transform: rotate(-7deg) translateY(-6px); }
+      100% { transform: rotate(-5deg) translateY(-5px); }
+    }
+    @keyframes legBLeft {
+      0%, 30% { transform: rotate(-26deg) translateY(2px); }
+      60% { transform: rotate(2deg) translateY(-6px); }
+      100% { transform: rotate(-26deg) translateY(2px); }
+    }
+    @keyframes legBRight {
+      0%, 30% { transform: rotate(5deg) translateY(6px); }
+      60% { transform: rotate(25deg) translateY(-2px); }
+      100% { transform: rotate(5deg) translateY(6px); }
+    }
+
+    /* tiny hooves */
+    .leg::after {
+      content: '';
+      position: absolute;
+      bottom: 0px;
+      left: 2px;
+      width: 22px;
+      height: 16px;
+      background: #8f7560;
+      border-radius: 40% 40% 30% 30%;
+    }
+
+    /* ===== front arms / little waving limbs ===== */
+    .arm {
+      position: absolute;
+      width: 20px;
+      height: 60px;
+      background: #ddceb8;
+      border-radius: 30%;
+      top: 25px;
+      z-index: 8;
+      transform-origin: 20% 10%;
+      box-shadow: inset -4px -4px 0 #c4ad93;
+    }
+
+    .arm.left {
+      left: 5px;
+      transform: rotate(-55deg);
+      animation: waveLeft 0.9s infinite alternate ease-in-out;
+    }
+
+    .arm.right {
+      right: 0px;
+      transform: rotate(55deg);
+      animation: waveRight 0.9s infinite alternate ease-in-out;
+    }
+
+    @keyframes waveLeft {
+      0% { transform: rotate(-70deg) translateX(-4px); }
+      50% { transform: rotate(-20deg) translateX(10px); }
+      100% { transform: rotate(-70deg) translateX(-4px); }
+    }
+
+    @keyframes waveRight {
+      0% { transform: rotate(75deg) translateX(4px); }
+      50% { transform: rotate(25deg) translateX(-10px); }
+      100% { transform: rotate(75deg) translateX(4px); }
+    }
+
+    /* some sunny pattern in background */
+    .circle-bg1 {
+      position: absolute;
+      width: 380px;
+      height: 380px;
+      background: #ffd7ae20;
+      border-radius: 50%;
+      top: 5%;
+      left: -100px;
+      filter: blur(5px);
+      z-index: 0;
+    }
+
+    .circle-bg2 {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      background: #ffd7ae20;
+      border-radius: 50%;
+      bottom: 5%;
+      right: -80px;
+      filter: blur(5px);
+      z-index: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- dreamy floating sparkles, generated in JS -->
+  <div id="sparkle-container"></div>
+
+  <div class="circle-bg1"></div>
+  <div class="circle-bg2"></div>
+
+  <div class="stage">
+    <div class="shadow"></div>
+
+    <div class="alpaca">
+      <!-- body fluffy group -->
+      <div class="body-group">
+        <div class="fluff fluff1"></div>
+        <div class="fluff fluff2"></div>
+        <div class="fluff fluff3"></div>
+        <div class="fluff fluff4"></div>
+      </div>
+
+      <!-- long neck -->
+      <div class="neck"></div>
+
+      <!-- head + face -->
+      <div class="head">
+        <div class="head-fluff1"></div>
+        <div class="head-fluff2"></div>
+        <div class="ear left"></div>
+        <div class="ear right"></div>
+        <div class="eye left"></div>
+        <div class="eye right"></div>
+        <div class="nose"></div>
+        <div class="blush left"></div>
+        <div class="blush right"></div>
+      </div>
+
+      <!-- pom-pom tail (behind) -->
+      <div class="tail"></div>
+
+      <!-- legs -->
+      <div class="leg back-left"></div>
+      <div class="leg back-right"></div>
+      <div class="leg front-left"></div>
+      <div class="leg front-right"></div>
+
+      <!-- arms -->
+      <div class="arm left"></div>
+      <div class="arm right"></div>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      // create soft floating sparkles/star dots
+      const container = document.getElementById('sparkle-container');
+      if (container) {
+        for (let i = 0; i < 24; i++) {
+          const dot = document.createElement('div');
+          dot.className = 'sparkle';
+          const size = (Math.random() * 12 + 6).toFixed(1);
+          const left = (Math.random() * 100).toFixed(1);
+          const delay = (Math.random() * 8).toFixed(1);
+          const duration = (Math.random() * 5 + 7).toFixed(1);
+          dot.style.width = size + 'px';
+          dot.style.height = size + 'px';
+          dot.style.left = left + '%';
+          dot.style.top = (Math.random() * 50 + 10) + '%';
+          dot.style.animationDelay = delay + 's';
+          dot.style.animationDuration = duration + 's';
+          dot.style.setProperty('--float-dur', duration + 's');
+          container.appendChild(dot);
+        }
+      }
+    })();
+
+    // additional discrete beat on ears / accent using JS? 
+    // but CSS already handles infinite loops. 
+    // just a gentle heartbeat effect - not needed, pure CSS.
+    // We'll only add a tiny "music note" bounce? Not needed.
+    // Yet to provide extra continuous motion, we add a subtle hue shift to alpaca using CSS? already infinite.
+    console.log('🎵 dance! cute alpaca forever 🎵');
+  </script>
+</body>
+</html>

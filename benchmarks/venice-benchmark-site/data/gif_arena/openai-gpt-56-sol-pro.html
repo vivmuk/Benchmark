@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>dancing alpaca · fluffy loop</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background: linear-gradient(145deg, #ffe9b0 0%, #ffd3a5 60%, #fccd8f 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+      overflow: hidden;
+    }
+    .stage {
+      background: radial-gradient(circle at 30% 20%, #fff8db, #ffd895);
+      width: 460px;
+      height: 560px;
+      border-radius: 200px 200px 60px 60px;
+      box-shadow: inset 0 0 45px #d9a86a, 0 25px 30px rgba(120, 70, 20, 0.2);
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: 35px;
+      border: 4px solid #f5b56c;
+    }
+    .meadow {
+      position: absolute;
+      bottom: 12px;
+      width: 100%;
+      height: 80px;
+      background: #9ecb7a;
+      border-radius: 50% / 100% 100% 0 0;
+      opacity: 0.35;
+      filter: blur(2px);
+      z-index: 0;
+    }
+    .alpaca {
+      position: relative;
+      width: 260px;
+      height: 380px;
+      z-index: 5;
+      filter: drop-shadow(0 14px 10px rgba(0,0,0,0.08));
+      transform-origin: 50% 85%;
+      animation: body-dance 1.5s infinite ease-in-out;
+    }
+
+    /* main fluffy body */
+    .body {
+      position: absolute;
+      bottom: 45px;
+      left: 48px;
+      width: 170px;
+      height: 155px;
+      background: #fdf4e0;
+      border-radius: 45% 50% 45% 50% / 60% 55% 40% 45%;
+      box-shadow: inset 6px 0 0 #efe2c8, 0 6px 0 #c9b48c;
+      transform: rotate(-2deg);
+      z-index: 2;
+    }
+    /* wool texture: bumpy patches */
+    .body::before, .body::after {
+      content: '';
+      position: absolute;
+      background: #fff9ec;
+      border-radius: 50%;
+      box-shadow: 0 0 0 3px #efdcb6;
+      opacity: 0.6;
+    }
+    .body::before {
+      width: 50px; height: 40px; top: 12px; left: 18px;
+    }
+    .body::after {
+      width: 60px; height: 50px; bottom: 8px; right: 5px;
+    }
+
+    /* long neck */
+    .neck {
+      position: absolute;
+      bottom: 155px;
+      left: 82px;
+      width: 50px;
+      height: 105px;
+      background: #fbefd5;
+      border-radius: 40% 40% 30% 30%;
+      transform: rotate(4deg);
+      transform-origin: bottom center;
+      box-shadow: inset -4px -2px 0 #e8d7b8;
+      z-index: 1;
+      animation: neck-bob 1.5s infinite ease-in-out;
+    }
+    .head {
+      position: absolute;
+      bottom: 235px;
+      left: 62px;
+      width: 86px;
+      height: 90px;
+      background: #fdf2dc;
+      border-radius: 50% 45% 45% 50% / 55% 50% 50% 55%;
+      z-index: 4;
+      box-shadow: inset 2px -5px 0 #eadfc4, 0 8px 0 #d4bd92;
+      transform: rotate(2deg);
+      animation: head-tilt 1.5s infinite ease-in-out;
+    }
+    .face {
+      position: absolute;
+      bottom: 245px;
+      left: 78px;
+      width: 72px;
+      height: 55px;
+      background: #f3e1c2;
+      border-radius: 50%;
+      z-index: 5;
+    }
+    .eye {
+      position: absolute;
+      width: 8px;
+      height: 12px;
+      background: #2b2013;
+      border-radius: 60% 40% 60% 40%;
+      top: 8px;
+    }
+    .eye.left { left: 12px; }
+    .eye.right { right: 12px; }
+    .eye::after {
+      content: '';
+      position: absolute;
+      width: 3px; height: 3px;
+      background: white;
+      border-radius: 50%;
+      top: 1px; left: 1px;
+    }
+    .snout {
+      position: absolute;
+      bottom: 6px;
+      left: 25px;
+      width: 25px;
+      height: 16px;
+      background: #f3cba7;
+      border-radius: 60% 60% 50% 50%;
+      box-shadow: inset 0 2px 2px rgba(0,0,0,0.1);
+    }
+    .nose {
+      position: absolute;
+      bottom: 2px;
+      left: 8px;
+      width: 8px;
+      height: 6px;
+      background: #795238;
+      border-radius: 50%;
+      box-shadow: 5px 0 0 #795238, 10px 0 0 #795238;
+    }
+    .ear {
+      position: absolute;
+      top: -14px;
+      width: 22px;
+      height: 42px;
+      background: #f7e3c4;
+      border-radius: 60% 40% 40% 60%;
+      transform: rotate(-8deg);
+      box-shadow: inset -2px -2px 0 #dec79a;
+      z-index: 6;
+    }
+    .ear.left { left: -3px; transform: rotate(-15deg); }
+    .ear.right { right: -3px; transform: rotate(10deg); }
+
+    /* fluffy pom tail */
+    .tail {
+      position: absolute;
+      bottom: 45px;
+      right: -8px;
+      width: 45px;
+      height: 55px;
+      background: #fcf2dc;
+      border-radius: 50% 40% 50% 40%;
+      box-shadow: inset 0 0 0 6px #f2dbb0, 0 8px 0 #c9b48c;
+      transform: rotate(-10deg);
+      animation: tail-wag 1.5s infinite ease-in-out;
+      z-index: 3;
+    }
+
+    /* legs with waving motion */
+    .leg {
+      position: absolute;
+      bottom: 0px;
+      width: 26px;
+      height: 68px;
+      background: #f0dcb8;
+      border-radius: 30% 30% 50% 50%;
+      box-shadow: inset -2px -2px 0 #d3b98b;
+      transform-origin: top center;
+    }
+    .leg.back-left {
+      left: 38px;
+      z-index: 1;
+      animation: leg-lift-l 0.75s infinite ease-in-out alternate;
+    }
+    .leg.back-right {
+      left: 150px;
+      z-index: 1;
+      animation: leg-lift-r 0.75s infinite ease-in-out alternate;
+      animation-delay: 0.37s;
+    }
+    .leg.front-left {
+      left: 70px;
+      z-index: 3;
+      background: #ebd5ac;
+      animation: leg-tap-l 1.5s infinite ease-in-out;
+    }
+    .leg.front-right {
+      left: 105px;
+      z-index: 3;
+      background: #ebd5ac;
+      animation: leg-tap-r 1.5s infinite ease-in-out;
+    }
+
+    /* tiny hooves */
+    .leg::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 9px;
+      background: #ba9d74;
+      border-radius: 40%;
+      left: 0;
+    }
+
+    /* animated background decorations */
+    .sparkle {
+      position: absolute;
+      background: #fff0b5;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      filter: drop-shadow(0 0 6px gold);
+      opacity: 0.5;
+      animation: float-spark 4s infinite ease-in-out;
+    }
+    .sparkle:nth-child(1) { top: 50px; left: 80px; animation-delay: 0s; }
+    .sparkle:nth-child(2) { top: 120px; left: 340px; animation-delay: 1.2s; }
+    .sparkle:nth-child(3) { top: 200px; left: 40px; animation-delay: 2.1s; }
+    .sparkle:nth-child(4) { top: 300px; left: 380px; animation-delay: 0.6s; }
+    .sparkle:nth-child(5) { top: 330px; left: 150px; animation-delay: 1.8s; }
+
+    /* KEYFRAMES – joyful alpaca dance */
+    @keyframes body-dance {
+      0%, 100% { transform: translateY(0) rotate(-1deg) scale(1); }
+      25% { transform: translateY(-8px) rotate(1.5deg) scale(1.02, 0.99); }
+      50% { transform: translateY(-4px) rotate(-2deg) scale(1.04, 0.98); }
+      75% { transform: translateY(4px) rotate(0deg) scale(0.98, 1.02); }
+    }
+    @keyframes neck-bob {
+      0%, 100% { transform: rotate(4deg) translateY(0); }
+      30% { transform: rotate(6deg) translateY(-5px); }
+      60% { transform: rotate(1deg) translateY(2px); }
+    }
+    @keyframes head-tilt {
+      0%, 100% { transform: rotate(2deg) translateX(0); }
+      40% { transform: rotate(-4deg) translateX(4px); }
+      70% { transform: rotate(6deg) translateX(-3px); }
+    }
+    @keyframes tail-wag {
+      0%, 100% { transform: rotate(-10deg) scale(1); }
+      30% { transform: rotate(12deg) scale(1.2, 0.8); }
+      60% { transform: rotate(-20deg) scale(0.9, 1.2); }
+    }
+    @keyframes leg-lift-l {
+      from { transform: rotate(14deg) translateX(0); }
+      to { transform: rotate(-10deg) translateX(-4px); }
+    }
+    @keyframes leg-lift-r {
+      from { transform: rotate(-11deg) translateX(3px); }
+      to { transform: rotate(12deg) translateX(-6px); }
+    }
+    @keyframes leg-tap-l {
+      0%, 100% { transform: rotate(0deg) translateY(0); }
+      25% { transform: rotate(-9deg) translateY(-6px); }
+      60% { transform: rotate(5deg) translateY(-2px); }
+    }
+    @keyframes leg-tap-r {
+      0%, 100% { transform: rotate(0deg) translateY(0); }
+      30% { transform: rotate(7deg) translateY(-7px); }
+      70% { transform: rotate(-6deg) translateY(-3px); }
+    }
+    @keyframes float-spark {
+      0%, 100% { transform: translateY(0) scale(1); opacity: 0.2; }
+      50% { transform: translateY(-18px) scale(1.4); opacity: 0.8; }
+    }
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <div class="meadow"></div>
+    <!-- sparkle ambience -->
+    <div class="sparkle"></div><div class="sparkle"></div><div class="sparkle"></div><div class="sparkle"></div><div class="sparkle"></div>
+
+    <div class="alpaca">
+      <!-- neck + head group -->
+      <div class="neck"></div>
+      <div class="head">
+        <div class="ear left"></div>
+        <div class="ear right"></div>
+        <div class="face">
+          <div class="eye left"></div>
+          <div class="eye right"></div>
+          <div class="snout">
+            <div class="nose"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- fluffy body / wool -->
+      <div class="body"></div>
+      <!-- pom tail -->
+      <div class="tail"></div>
+
+      <!-- four dancing legs -->
+      <div class="leg back-left"></div>
+      <div class="leg back-right"></div>
+      <div class="leg front-left"></div>
+      <div class="leg front-right"></div>
+    </div>
+
+    <!-- extra charm: tiny hoof sparkles -->
+    <div style="position: absolute; bottom: 20px; left: 120px; width: 6px; height: 6px; background: #ffe6a0; border-radius: 50%; filter: blur(1px); animation: float-spark 3s infinite;"></div>
+    <div style="position: absolute; bottom: 15px; left: 260px; width: 6px; height: 6px; background: #ffe6a0; border-radius: 50%; filter: blur(1px); animation: float-spark 2.5s infinite reverse;"></div>
+  </div>
+
+  <!-- tiny script for extra lifecycle (just for fine tune, keyframes already endless) -->
+  <script>
+    (function() {
+      // subtle dynamic rhythm: occasionally tempo variation via inline style not required
+      // but we add a playful pulse to the whole alpaca every couple seconds – synergy
+      const alpaca = document.querySelector('.alpaca');
+      if (alpaca) {
+        setInterval(() => {
+          alpaca.style.filter = 'drop-shadow(0 18px 12px rgba(0,0,0,0.15))';
+          setTimeout(() => alpaca.style.filter = '', 120);
+        }, 1300);
+      }
+      // extra ear twitch via adding a small class rotation (pure JS)
+      const earL = document.querySelector('.ear.left');
+      const earR = document.querySelector('.ear.right');
+      if (earL && earR) {
+        setInterval(() => {
+          earL.style.transform = 'rotate(-22deg) scale(1.1)';
+          earR.style.transform = 'rotate(18deg) scale(1.1)';
+          setTimeout(() => {
+            earL.style.transform = 'rotate(-15deg) scale(1)';
+            earR.style.transform = 'rotate(10deg) scale(1)';
+          }, 200);
+        }, 1500);
+      }
+    })();
+  </script>
+</body>
+</html>

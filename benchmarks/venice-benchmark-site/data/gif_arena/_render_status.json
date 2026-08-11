@@ -1,0 +1,34 @@
+{
+  "fps": 12,
+  "seconds": 9,
+  "rendered": {
+    "claude-opus-5": {
+      "gif": "claude-opus-5.gif",
+      "size": 3972996
+    },
+    "deepseek-v4-flash-0731": {
+      "gif": "deepseek-v4-flash-0731.gif",
+      "size": 4477430
+    },
+    "grok-4-5": {
+      "gif": "grok-4-5.gif",
+      "size": 6198615
+    },
+    "kimi-k3-fast-api": {
+      "gif": "kimi-k3-fast-api.gif",
+      "size": 4939912
+    },
+    "minimax-m3-preview": {
+      "gif": "minimax-m3-preview.gif",
+      "size": 2837393
+    },
+    "openai-gpt-56-sol-pro": {
+      "gif": "openai-gpt-56-sol-pro.gif",
+      "size": 2733484
+    },
+    "zai-org-glm-5-2": {
+      "gif": "zai-org-glm-5-2.gif",
+      "size": 4664411
+    }
+  }
+}

@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>dancing alpaca · fluffy boogie</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at 20% 30%, #fff0d4, #fbd6b2 45%, #f8b58e 85%);
+      overflow: hidden;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .stage {
+      position: relative;
+      width: 620px;
+      height: 680px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(155deg, #b5e6c3 0%, #8fd0ae 60%, #64b99a 100%);
+      border-radius: 60px 60px 30px 30px;
+      box-shadow: 0 20px 35px rgba(71, 55, 25, 0.25), inset 0 2px 8px rgba(255, 255, 240, 0.6);
+    }
+
+    /* grass tufts */
+    .stage::before,
+    .stage::after {
+      content: '';
+      position: absolute;
+      bottom: 12px;
+      left: 30px;
+      width: 30px;
+      height: 30px;
+      background: #7bb96e;
+      border-radius: 100% 20% 60% 30%;
+      transform: rotate(15deg);
+    }
+
+    .stage::after {
+      left: auto;
+      right: 40px;
+      width: 36px;
+      height: 36px;
+      background: #8ec77b;
+      border-radius: 80% 10% 70% 40%;
+      transform: rotate(-10deg);
+    }
+
+    .ground-shadow {
+      position: absolute;
+      bottom: 35px;
+      left: 50%;
+      width: 280px;
+      height: 40px;
+      background: radial-gradient(ellipse at center, rgba(20, 30, 20, 0.45), transparent 75%);
+      border-radius: 50%;
+      filter: blur(8px);
+      animation: shadowPulse 1.6s ease-in-out infinite alternate;
+    }
+
+    @keyframes shadowPulse {
+      0% { width: 260px; height: 34px; opacity: 0.4; transform: translateX(-50%) scale(0.95); }
+      100% { width: 300px; height: 44px; opacity: 0.55; transform: translateX(-50%) scale(1.08); }
+    }
+
+    /* ---- main canvas container ---- */
+    .alpaca-wrapper {
+      position: relative;
+      width: 340px;
+      height: 520px;
+      margin-top: 30px;
+      filter: drop-shadow(0 25px 15px rgba(45, 55, 25, 0.25));
+      animation: wholeAlpacaBoogie 1.35s ease-in-out infinite;
+    }
+
+    @keyframes wholeAlpacaBoogie {
+      0%   { transform: translateY(0) rotate(-1.2deg); }
+      25%  { transform: translateY(-14px) rotate(1.5deg); }
+      50%  { transform: translateY(6px) rotate(-1.8deg); }
+      75%  { transform: translateY(-14px) rotate(1.2deg); }
+      100% { transform: translateY(0) rotate(-1.2deg); }
+    }
+
+    /* main alpaca group */
+    .alpaca {
+      position: absolute;
+      inset: 0;
+      transform-origin: 50% 80%;
+    }
+
+    /* fluffy style: rounded shapes, blurs, gradients */
+    .body {
+      position: absolute;
+      width: 180px;
+      height: 140px;
+      background: #f8ede3;
+      background-image: radial-gradient(circle at 30% 40%, #ffffff 0%, #efddc9 60%, #d9bd9c 100%);
+      border-radius: 50% 55% 45% 50% / 60% 55% 45% 40%;
+      top: 130px;
+      left: 70px;
+      box-shadow: inset 8px 10px 15px rgba(143, 100, 60, 0.18), inset -5px -3px 15px rgba(112, 75, 35, 0.15);
+    }
+
+    .body::before {
+      /* fluffy highlight */
+      content: '';
+      position: absolute;
+      width: 55px;
+      height: 45px;
+      background: #fcf2e7;
+      border-radius: 70% 20%;
+      top: -8px;
+      left: 28px;
+      opacity: 0.7;
+      filter: blur(2px);
+    }
+
+    /* long neck */
+    .neck {
+      position: absolute;
+      width: 55px;
+      height: 155px;
+      background: linear-gradient(145deg, #f3e5d8, #dfc8aa);
+      border-radius: 40% 40% 35% 35% / 30% 30% 50% 50%;
+      left: 91px;
+      top: -2px;
+      transform: rotate(7deg);
+      transform-origin: 50% 120%;
+      box-shadow: inset -4px -6px 12px rgba(132, 86, 44, 0.17);
+      animation: neckNod 1.25s ease-in-out infinite alternate;
+    }
+
+    .neck::after {
+      /* darker fluff on neck side */
+      content: '';
+      position: absolute;
+      width: 40px;
+      height: 70px;
+      background: #efe0d0;
+      border-radius: 60%;
+      filter: blur(2px);
+      right: -6px;
+      top: 25px;
+      opacity: 0.5;
+    }
+
+    @keyframes neckNod {
+      0% { transform: rotate(2deg); }
+      100% { transform: rotate(12deg); }
+    }
+
+    /* head */
+    .head {
+      position: absolute;
+      width: 95px;
+      height: 67px;
+      background: #f4e7db;
+      background-image: radial-gradient(circle at 30% 30%, #fcf8f2, #e9d3c0);
+      border-radius: 48% 52% 50% 48% / 58% 48% 52% 42%;
+      left: 75px;
+      top: -44px;
+      box-shadow: inset 5px 6px 12px rgba(110, 75, 44, 0.13);
+      transform: rotate(-3deg);
+      z-index: 3;
+    }
+
+    /* ear left */
+    .ear-l {
+      position: absolute;
+      width: 24px;
+      height: 48px;
+      background: linear-gradient(135deg, #f1d9c4, #d4b393);
+      border-radius: 80% 10% 60% 30%;
+      left: 61px;
+      top: -81px;
+      transform: rotate(-51deg);
+      filter: drop-shadow(2px 5px 4px rgba(30,20,10,0.15));
+      z-index: 2;
+      animation: earLwave 1.4s ease-in-out infinite alternate;
+    }
+
+    .ear-l::after {
+      content: '';
+      position: absolute;
+      width: 14px;
+      height: 25px;
+      background: #ceae8d;
+      border-radius: 80% 30% 65% 20%;
+      left: 4px;
+      top: 10px;
+      opacity: 0.6;
+    }
+
+    /* ear right */
+    .ear-r {
+      position: absolute;
+      width: 25px;
+      height: 50px;
+      background: linear-gradient(45deg, #f4dfcc, #d5b695);
+      border-radius: 20% 90% 35% 80%;
+      right: 64px;
+      top: -84px;
+      transform: rotate(50deg);
+      filter: drop-shadow(2px 5px 4px rgba(30,20,10,0.15));
+      z-index: 2;
+      animation: earRwave 1.4s ease-in-out infinite alternate;
+    }
+
+    .ear-r::after {
+      content: '';
+      position: absolute;
+      width: 13px;
+      height: 24px;
+      background: #dcb792;
+      border-radius: 30% 80% 30% 70%;
+      right: 5px;
+      top: 12px;
+      opacity: 0.7;
+    }
+
+    @keyframes earLwave {
+      0% { transform: rotate(-51deg); }
+      100% { transform: rotate(-68deg); }
+    }
+
+    @keyframes earRwave {
+      0% { transform: rotate(50deg); }
+      100% { transform: rotate(66deg); }
+    }
+
+    /* face features */
+    .eye-l, .eye-r {
+      position: absolute;
+      width: 10px;
+      height: 14px;
+      background: #2d1a0e;
+      border-radius: 90% 10% 90% 10% / 70% 80% 30% 50%;
+      top: 15px;
+      z-index: 5;
+      animation: blink 3.4s infinite ease-in-out;
+    }
+
+    .eye-l {
+      left: 18px;
+    }
+
+    .eye-r {
+      right: 17px;
+      transform: scaleX(-1);
+    }
+
+    @keyframes blink {
+      0%, 90%, 100% { transform: scaleY(1); }
+      93%, 97% { transform: scaleY(0.1); }
+    }
+
+    .nose {
+      position: absolute;
+      width: 22px;
+      height: 17px;
+      background: linear-gradient(145deg, #c7a48b, #b68a6b);
+      border-radius: 50% 50% 45% 55% / 45% 45% 55% 55%;
+      left: 39px;
+      top: 18px;
+      z-index: 6;
+      box-shadow: inset 0 -2px 4px rgba(35, 20, 0, 0.4);
+    }
+
+    .nose::after {
+      content: '';
+      position: absolute;
+      width: 5px;
+      height: 8px;
+      background: #563c28;
+      border-radius: 60%;
+      left: 5px;
+      top: 5px;
+      box-shadow: 10px 0 0 #563c28;
+    }
+
+    .mouth {
+      position: absolute;
+      width: 20px;
+      height: 10px;
+      border-bottom: 4px solid #774d32;
+      border-radius: 0 0 35px 35px;
+      left: 27px;
+      top: 36px;
+      z-index: 6;
+    }
+
+    /* pom-pom tail */
+    .tail {
+      position: absolute;
+      width: 55px;
+      height: 55px;
+      background: radial-gradient(circle at 30% 25%, #f8f3e8 0%, #e2d8c6 58%, #c7ae91 100%);
+      border-radius: 50%;
+      right: -20px;
+      top: 155px;
+      box-shadow: inset -7px -8px 14px rgba(115, 75, 40, 0.25);
+      animation: tailWag 0.85s ease-in-out infinite alternate;
+      transform-origin: 20% 50%;
+    }
+
+    .tail::after {
+      content: '';
+      position: absolute;
+      inset: 8px;
+      background: radial-gradient(circle, #fff9ee, #f2e3d3);
+      border-radius: 50%;
+      filter: blur(1px);
+    }
+
+    @keyframes tailWag {
+      0% { transform: rotate(-18deg) scale(1); }
+      100% { transform: rotate(28deg) scale(1.12, 0.95); }
+    }
+
+    /* legs and arms (all dancing) */
+    .limb {
+      position: absolute;
+      z-index: 6;
+    }
+
+    .leg-li, .leg-ri, .leg-lo, .leg-ro {
+      width: 33px;
+      height: 47px;
+      background: linear-gradient(150deg, #ead7c2, #d2b495);
+      border-radius: 30% 30% 50% 50% / 40% 40% 60% 60%;
+      bottom: -75px;
+      box-shadow: inset -4px -6px 9px rgba(100, 65, 32, 0.22);
+    }
+
+    .leg-li { left: 44px; transform: rotate(-12deg); }
+    .leg-ri { left: 99px; transform: rotate(10deg); }
+    .leg-lo { left: 151px; transform: rotate(-18deg); }
+    .leg-ro { left: 205px; transform: rotate(15deg); }
+
+    /* arm (front legs raised dancing) */
+    .arm-l, .arm-r {
+      width: 30px;
+      height: 70px;
+      background: linear-gradient(145deg, #e9d8c3, #c9ad91);
+      border-radius: 40% 40% 45% 45% / 35% 35% 65% 65%;
+      top: 126px;
+      box-shadow: inset -6px -6px 11px rgba(88, 58, 30, 0.2);
+      animation: armWave 1.3s ease-in-out infinite alternate;
+    }
+
+    .arm-l {
+      left: 17px;
+      transform: rotate(-45deg);
+      transform-origin: top left;
+    }
+
+    .arm-r {
+      left: 252px;
+      transform: rotate(48deg);
+      transform-origin: top right;
+      animation-delay: 0.15s;
+    }
+
+    @keyframes armWave {
+      0% { transform: rotate(-70deg); }
+      100% { transform: rotate(10deg); }
+    }
+
+    .arm-r {
+      animation-name: armWaveR;
+      animation-duration: 1.3s;
+      transform-origin: top right;
+    }
+
+    @keyframes armWaveR {
+      0% { transform: rotate(75deg); }
+      100% { transform: rotate(-8deg); }
+    }
+
+    .leg {
+      animation: legDance 0.75s ease-in-out infinite alternate;
+    }
+
+    @keyframes legDance {
+      0% { transform: translateY(0) rotate(-5deg); }
+      100% { transform: translateY(-8px) rotate(18deg); }
+    }
+    .leg-li { animation-name: legJumpL; }
+    .leg-ri { animation-name: legJumpR; }
+    .leg-lo { animation-name: legJumpL2; }
+    .leg-ro { animation-name: legJumpR2; }
+
+    @keyframes legJumpL {
+      0% { transform: translateY(2px) rotate(-11deg); }
+      100% { transform: translateY(-6px) rotate(-22deg); }
+    }
+    @keyframes legJumpR {
+      0% { transform: translateY(2px) rotate(9deg); }
+      100% { transform: translateY(-7px) rotate(20deg); }
+    }
+    @keyframes legJumpL2 {
+      0% { transform: translateY(-5px) rotate(-20deg); }
+      100% { transform: translateY(3px) rotate(0deg); }
+    }
+    @keyframes legJumpR2 {
+      0% { transform: translateY(-4px) rotate(16deg); }
+      100% { transform: translateY(4px) rotate(-2deg); }
+    }
+
+    /* arms are the front legs waving */
+    .arm-l {
+      animation-name: armSwingL;
+      animation-duration: 0.95s;
+      animation-timing-function: ease-in-out;
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
+      transform-origin: top left;
+    }
+
+    @keyframes armSwingL {
+      0% { transform: rotate(-75deg) translateY(0); }
+      100% { transform: rotate(-10deg) translateY(-11px); }
+    }
+
+    .arm-r {
+      animation-name: armSwingR;
+      animation-duration: 0.95s;
+      animation-delay: 0.1s;
+      animation-direction: alternate;
+      transform-origin: top right;
+    }
+
+    @keyframes armSwingR {
+      0% { transform: rotate(72deg) translateY(-2px); }
+      100% { transform: rotate(2deg) translateY(-14px); }
+    }
+
+    /* stage-decor: little flowers */
+    .sparkle {
+      position: absolute;
+      color: #ffe6ae;
+      font-size: 26px;
+      text-shadow: 0 0 12px #fff0c0;
+      animation: pop 2.4s infinite;
+    }
+
+    .s1 { top: 80px; left: 45px; animation-delay: 0.2s; }
+    .s2 { top: 180px; right: 37px; animation-delay: 0.9s; }
+    .s3 { bottom: 64px; left: 90px; animation-delay: 1.5s; }
+    .s4 { bottom: 30px; right: 110px; animation-delay: 1.1s; }
+
+    @keyframes pop {
+      0%, 100% { transform: scale(0.6); opacity: 0.35; }
+      50% { transform: scale(1.25); opacity: 0.9; }
+    }
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <div class="ground-shadow"></div>
+
+    <div class="alpaca-wrapper">
+      <div class="alpaca">
+        <div class="ear-l"></div>
+        <div class="ear-r"></div>
+        <div class="head">
+          <div class="eye-l"></div>
+          <div class="eye-r"></div>
+          <div class="nose"></div>
+          <div class="mouth"></div>
+        </div>
+        <div class="neck"></div>
+        <div class="body"></div>
+        <div class="tail"></div>
+
+        <!-- legs -->
+        <div class="limb leg leg-li"></div>
+        <div class="limb leg leg-ri"></div>
+        <div class="limb leg leg-lo"></div>
+        <div class="limb leg leg-ro"></div>
+
+        <!-- waving arms / front legs -->
+        <div class="limb arm-l"></div>
+        <div class="limb arm-r"></div>
+
+      </div>
+    </div>
+
+    <!-- tiny sparkle deco -->
+    <div class="sparkle s1">✦</div>
+    <div class="sparkle s2">✧</div>
+    <div class="sparkle s3">✦</div>
+    <div class="sparkle s4">✧</div>
+  </div>
+</body>
+</html>

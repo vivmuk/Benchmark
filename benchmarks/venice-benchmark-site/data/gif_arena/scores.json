@@ -1,0 +1,86 @@
+{
+  "claude-opus-5": {
+    "alpaca_recognizability": 72,
+    "dance_quality": 68,
+    "technical_polish": 78,
+    "creativity": 70,
+    "code_quality": 65,
+    "gif_score": 71,
+    "notes": "Charming fluffy alpaca with recognizable long neck, ears, and pom tail; the layered bounce, head tilt, ear flicks and tail wiggle create a lively dance, though the source appears truncated at the leg definitions and choreography loops on a single rhythm without more varied moves.",
+    "judge_model": "kimi-k3-fast-api",
+    "mode": "vision",
+    "judged_at": "2026-08-11T14:46:09.126082+00:00"
+  },
+  "deepseek-v4-flash-0731": {
+    "alpaca_recognizability": 82,
+    "dance_quality": 78,
+    "technical_polish": 75,
+    "creativity": 84,
+    "code_quality": 72,
+    "gif_score": 78.75,
+    "notes": "Cute fluffy alpaca with distinct neck, legs, and face performs a synchronized multi-part bounce with lively leg waves and floating music notes, though the code is truncated and the stage dominates a bit of the frame.",
+    "judge_model": "kimi-k3-fast-api",
+    "mode": "vision",
+    "judged_at": "2026-08-11T14:46:11.990829+00:00"
+  },
+  "grok-4-5": {
+    "alpaca_recognizability": 82,
+    "dance_quality": 74,
+    "technical_polish": 58,
+    "creativity": 80,
+    "code_quality": 72,
+    "gif_score": 71,
+    "notes": "Charming long-necked alpaca with a cute face, musical notes and multi-part choreography, but the rendered frame shows the legs detached from the body, hurting polish.",
+    "judge_model": "kimi-k3-fast-api",
+    "mode": "vision",
+    "judged_at": "2026-08-11T14:46:16.393349+00:00"
+  },
+  "kimi-k3-fast-api": {
+    "alpaca_recognizability": 78,
+    "dance_quality": 80,
+    "technical_polish": 72,
+    "creativity": 76,
+    "code_quality": 55,
+    "gif_score": 72.15,
+    "notes": "Charming fluffy alpaca with expressive blinking, ear waves, and a lively multi-part boogie, but the truncated source (cut off mid-tail CSS) hurts code completeness and the oddly detached floating feet slightly break polish.",
+    "judge_model": "kimi-k3-fast-api",
+    "mode": "vision",
+    "judged_at": "2026-08-11T14:46:20.130472+00:00"
+  },
+  "minimax-m3-preview": {
+    "alpaca_recognizability": 88,
+    "dance_quality": 80,
+    "technical_polish": 65,
+    "creativity": 78,
+    "code_quality": 55,
+    "gif_score": 73.55,
+    "notes": "Charming, clearly alpaca-like dancer with bounce, sway, and ear twitches, but the provided HTML is truncated mid-keyframes so the full choreography and polish can't be verified.",
+    "judge_model": "kimi-k3-fast-api",
+    "mode": "vision",
+    "judged_at": "2026-08-11T14:46:23.254589+00:00"
+  },
+  "openai-gpt-56-sol-pro": {
+    "alpaca_recognizability": 82,
+    "dance_quality": 78,
+    "technical_polish": 85,
+    "creativity": 76,
+    "code_quality": 88,
+    "gif_score": 82.05,
+    "notes": "A charming, clean-cut alpaca with nice layered CSS shapes; the bob-and-tap dance cycle is lively if a bit repetitive, and the soft stage, sparkles, and tidy keyframes show solid polish.",
+    "judge_model": "kimi-k3-fast-api",
+    "mode": "vision",
+    "judged_at": "2026-08-11T14:46:26.121383+00:00"
+  },
+  "zai-org-glm-5-2": {
+    "alpaca_recognizability": 88,
+    "dance_quality": 78,
+    "technical_polish": 82,
+    "creativity": 80,
+    "code_quality": 72,
+    "gif_score": 80.3,
+    "notes": "A charming, recognizable fluffy alpaca with blinking eyes, ears, and coordinated leg/body bounce choreography in a polished pastel scene, though the source HTML appears truncated mid-way through the arm styles.",
+    "judge_model": "kimi-k3-fast-api",
+    "mode": "vision",
+    "judged_at": "2026-08-11T14:46:29.555405+00:00"
+  }
+}

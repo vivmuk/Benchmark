@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>alpaca boogie · fluff & bounce</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at 20% 20%, #1b2a3a, #0e1a26 70%, #091016);
+            overflow: hidden;
+            font-family: system-ui, 'Segoe UI', sans-serif;
+        }
+        .stage {
+            position: relative;
+            width: 480px;
+            height: 460px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            filter: drop-shadow(0 20px 18px rgba(0,0,0,0.5));
+        }
+        .ground {
+            position: absolute;
+            bottom: 26px;
+            width: 420px;
+            height: 64px;
+            background: linear-gradient(180deg, #5f4a3a, #3f2f24);
+            border-radius: 50% / 100%;
+            opacity: 0.7;
+            filter: blur(1px);
+            z-index: 5;
+        }
+        /* glow disc */
+        .ground::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: -18px;
+            width: 340px;
+            height: 32px;
+            background: #ffd96620;
+            border-radius: 50%;
+            filter: blur(10px);
+        }
+        .dancer {
+            position: relative;
+            z-index: 10;
+            width: 220px;
+            height: 300px;
+            margin-bottom: 34px;
+            transform-origin: bottom center;
+            animation: bodyBounce 0.62s cubic-bezier(0.44, 0.02, 0.5, 1.2) infinite;
+        }
+        /* whole alpaca group */
+        .alpaca {
+            position: absolute;
+            inset: 0;
+            animation: sideSway 1.24s ease-in-out infinite alternate;
+        }
+        @keyframes sideSway {
+            0%   { transform: translateX(-6px) rotate(-1.2deg); }
+            100% { transform: translateX(6px) rotate(1.2deg); }
+        }
+        @keyframes bodyBounce {
+            0%, 100% { transform: translateY(0); }
+            50%      { transform: translateY(-10px); }
+        }
+
+        /* ---- body (fluffy) ---- */
+        .body {
+            position: absolute;
+            width: 126px;
+            height: 96px;
+            background: #f7e9d8;
+            border-radius: 48% 52% 40% 60% / 55% 45% 60% 40%;
+            left: 47px;
+            top: 132px;
+            box-shadow: inset -12px -8px 0 rgba(205, 175, 140, 0.22);
+            overflow: visible;
+            z-index: 3;
+            animation: fluffBreath 1.2s ease-in-out infinite;
+        }
+        @keyframes fluffBreath {
+            0%, 100% { transform: scaleX(1) scaleY(1); }
+            50%      { transform: scaleX(1.03) scaleY(1.01); }
+        }
+        /* flocking texture (curly wool dots) */
+        .body::before,
+        .body::after {
+            content: '';
+            position: absolute;
+            background: rgba(255, 240, 220, 0.6);
+            border-radius: 50%;
+            width: 48px;
+            height: 44px;
+            filter: blur(1px);
+        }
+        .body::before {
+            top: -14px;
+            left: -4px;
+            box-shadow: 24px 14px 0 -6px #f7e9d8, 46px 24px 0 -8px #ede0ce, 10px 30px 0 -4px #fdf1e3;
+        }
+        .body::after {
+            bottom: -16px;
+            right: -6px;
+            box-shadow: -28px 2px 0 -8px #efe0cf, -44px 18px 0 -10px #f3e3d2;
+        }
+
+        /* ---- NECK (long & elegant) ---- */
+        .neck {
+            position: absolute;
+            width: 48px;
+            height: 76px;
+            background: #f3e4d2;
+            left: 74px;
+            top: 58px;
+            border-radius: 40% 40% 32% 32% / 60% 60% 32% 32%;
+            transform: rotate(5deg);
+            z-index: 2;
+            box-shadow: inset -6px -4px 0 #dcc8b2;
+        }
+        .neck::before {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 30px;
+            background: #f7e9d8;
+            border-radius: 50%;
+            left: 2px;
+            top: -12px;
+            filter: blur(2px);
+            opacity: 0.5;
+        }
+
+        /* ---- HEAD with fluffy crown ---- */
+        .head {
+            position: absolute;
+            width: 70px;
+            height: 62px;
+            background: #f9ecdb;
+            left: 68px;
+            top: 12px;
+            border-radius: 48% 52% 45% 55% / 52% 48% 52% 48%;
+            z-index: 5;
+            box-shadow: inset -6px -6px 0 #d8c6b2;
+        }
+        /* top fluff (fringe) */
+        .head::before {
+            content: '';
+            position: absolute;
+            width: 68px;
+            height: 28px;
+            background: #f8ebdb;
+            border-radius: 20px 20px 0 0;
+            top: -10px;
+            left: 1px;
+            box-shadow: 0 -4px 0 2px #e7d6c2, 0 -8px 0 3px #f3e2cc;
+        }
+        /* ears */
+        .ear-left, .ear-right {
+            position: absolute;
+            width: 18px;
+            height: 34px;
+            background: #f3dcc8;
+            border: 2px solid #d6bd9e;
+            border-radius: 60% 60% 30% 30% / 45% 55% 40% 40%;
+            top: -6px;
+            z-index: 6;
+        }
+        .ear-left {
+            left: 0px;
+            transform: rotate(-20deg);
+            animation: earTwitchL 1.2s infinite;
+        }
+        .ear-right {
+            right: -2px;
+            transform: rotate(25deg);
+            animation: earTwitchR 1.2s infinite;
+        }
+        @keyframes earTwitchL {
+            0%, 100% { transform: rotate(-20deg); }
+            50%      { transform: rotate(-10deg); }
+        }
+        @keyframes earTwitchR {
+            0%, 100% { transform: rotate(25deg); }
+            50%      { transform: rotate(12deg); }
+        }
+        /* muzzle (soft snout) */
+        .muzzle {
+            position: absolute;
+            width: 32px;
+            height: 24px;
+            background: #f0c9ad;
+            border-radius: 40% 60% 50% 50%;
+            left: -4px;
+            bottom: -4px;
+            box-shadow: inset -2px -4px 0 #c8865f;
+        }
+        .muzzle::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 2px;
+            width: 8px;
+            height: 6px;
+            background: #593a25;
+            border-radius: 40%;
+        }
+        /* eyes + smile */
+        .eye {
+            position: absolute;
+            width: 8px;
+            height: 9px;
+            background: #2d1d14;
+            border-radius: 50%;
+            top: 20px;
+            box-shadow: 0 0 0 2px #ffdbb4;
+        }
+        .eye.left { left: 10px; }
+        .eye.right { right: 8px; }
+        .smile {
+            position: absolute;
+            width: 18px;
+            height: 10px;
+            border: 2px solid #463227;
+            border-top: 0;
+            border-radius: 0 0 16px 16px;
+            left: 18px;
+            bottom: 8px;
+            transform: rotate(−2deg);
+        }
+
+        /* ---- FRONT LEGS (wave) ---- */
+        .leg {
+            position: absolute;
+            width: 22px;
+            height: 52px;
+            background: #f1e2d0;
+            border-radius: 40% 40% 30% 30% / 80% 80% 20% 20%;
+            bottom: 0px;
+            z-index: 4;
+            box-shadow: inset -4px -2px 0 #d2bd9f;
+        }
+        .leg-front-left {
+            left: 56px;
+            transform-origin: top center;
+            animation: waveLegL 0.55s linear infinite;
+        }
+        .leg-front-right {
+            left: 92px;
+            transform-origin: top center;
+            animation: waveLegR 0.55s linear infinite;
+        }
+        @keyframes waveLegL {
+            0%   { transform: rotate(13deg); }
+            50%  { transform: rotate(-14deg); }
+            100% { transform: rotate(13deg); }
+        }
+        @keyframes waveLegR {
+            0%   { transform: rotate(-14deg); }
+            50%  { transform: rotate(13deg); }
+            100% { transform: rotate(-14deg); }
+        }
+        /* back legs (hidden behind, bounce) */
+        .leg-back {
+            position: absolute;
+            width: 20px;
+            height: 46px;
+            background: #dfcbb6;
+            border-radius: 30% 30% 40% 40% / 60% 60% 30% 30%;
+            bottom: -4px;
+            z-index: 1;
+            box-shadow: inset -2px 2px 0 #b99b7d;
+        }
+        .leg-back-left  { left: 38px; animation: backKickL 0.7s infinite; }
+        .leg-back-right { right: 40px; animation: backKickR 0.7s infinite; }
+        @keyframes backKickL {
+            0%, 100% { transform: translateY(0) rotate(-6deg); }
+            50%      { transform: translateY(-7px) rotate(10deg); }
+        }
+        @keyframes backKickR {
+            0%, 100% { transform: translateY(0) rotate(5deg); }
+            50%      { transform: translateY(-6px) rotate(-9deg); }
+        }
+
+        /* ---- POMPOM TAIL (fluffy ball) ---- */
+        .tail-puff {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: #f8ede0;
+            border-radius: 50%;
+            right: -5px;
+            top: 165px;
+            box-shadow: 0 0 0 6px #edddc4, 0 0 0 10px #f7ead6;
+            z-index: 2;
+            animation: tailWag 0.35s ease-in-out infinite alternate;
+            transform-origin: center;
+        }
+        @keyframes tailWag {
+            0%   { transform: rotate(-12deg) scale(1); }
+            100% { transform: rotate(12deg) scale(1.2); }
+        }
+        /* hidden hair shine on tail */
+        .tail-puff::after {
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 8px;
+            background: #ffffff60;
+            border-radius: 50%;
+            top: 6px;
+            left: 8px;
+            filter: blur(2px);
+        }
+
+        /* floating music notes background */
+        .note {
+            position: absolute;
+            color: #eec88f;
+            font-size: 30px;
+            text-shadow: 0 0 12px #e79b5e40;
+            animation: floatNote 2.8s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
+            opacity: 0.5;
+            user-select: none;
+            z-index: 0;
+        }
+        .note:nth-child(1) { left: 14%; bottom: 130px; animation-delay: 0s; font-size: 40px; }
+        .note:nth-child(2) { left: 80%; bottom: 220px; animation-delay: 0.8s; font-size: 32px; }
+        .note:nth-child(3) { left: 68%; bottom: 90px; animation-delay: 1.5s; font-size: 38px; }
+        .note:nth-child(4) { left: 26%; bottom: 300px; animation-delay: 0.3s; font-size: 28px; }
+        .note:nth-child(5) { left: 52%; bottom: 50px; animation-delay: 1.1s; font-size: 36px; }
+        @keyframes floatNote {
+            0%   { transform: translateY(-14px) scale(0.9); opacity: 0; }
+            15%  { opacity: 0.6; }
+            70%  { opacity: 0.4; }
+            100% { transform: translateY(-140px) scale(1.3); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="stage">
+        <div class="note">♪</div>
+        <div class="note">♫</div>
+        <div class="note">♪</div>
+        <div class="note">♩</div>
+        <div class="note">♬</div>
+
+        <div class="dancer">
+            <div class="alpaca">
+                <!-- head + ears -->
+                <div class="head">
+                    <div class="ear-left"></div>
+                    <div class="ear-right"></div>
+                    <div class="muzzle"></div>
+                    <div class="eye left"></div>
+                    <div class="eye right"></div>
+                    <div class="smile"></div>
+                </div>
+                <!-- neck -->
+                <div class="neck"></div>
+                <!-- body -->
+                <div class="body"></div>
+                <!-- legs (front + back) -->
+                <div class="leg leg-front-left"></div>
+                <div class="leg leg-front-right"></div>
+                <div class="leg-back leg-back-left"></div>
+                <div class="leg-back leg-back-right"></div>
+                <!-- pom-pom tail -->
+                <div class="tail-puff"></div>
+            </div>
+        </div>
+        <div class="ground"></div>
+    </div>
+</body>
+</html>

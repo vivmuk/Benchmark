@@ -1,0 +1,8 @@
+{
+  "model_id": "openai-gpt-56-sol-pro",
+  "model_used": "deepseek-v4-flash-0731",
+  "prompt": "Create a single self-contained HTML document (no external files, no CDN, no images) that shows a cute alpaca dancing. Make it genuinely impressive: a recognizable fluffy alpaca with a long neck, ears,",
+  "generated_at": "2026-08-11T14:41:21.487740+00:00",
+  "chars": 10981,
+  "raw_preview": "```html\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>dancing alpaca \u00b7 fluffy loop</title>\n  <style>\n    * {\n      margin: 0;\n      padding: 0;\n      box-sizing: border-box;\n    }\n    body {\n      background: linear-gradient(145deg, #ffe9b0 0%, #ffd3a5 60%, #fccd8f 100%);\n      min-height: 100vh;\n      display: flex;\n      align-items: center;\n      justify-content: center;\n      font-family: sys"
+}

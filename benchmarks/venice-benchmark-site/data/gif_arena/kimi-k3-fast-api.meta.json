@@ -1,0 +1,8 @@
+{
+  "model_id": "kimi-k3-fast-api",
+  "model_used": "deepseek-v4-flash-0731",
+  "prompt": "Create a single self-contained HTML document (no external files, no CDN, no images) that shows a cute alpaca dancing. Make it genuinely impressive: a recognizable fluffy alpaca with a long neck, ears,",
+  "generated_at": "2026-08-11T14:40:56.398302+00:00",
+  "chars": 13237,
+  "raw_preview": "```html\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>dancing alpaca \u00b7 fluffy boogie</title>\n  <style>\n    * {\n      margin: 0;\n      padding: 0;\n      box-sizing: border-box;\n    }\n\n    body {\n      min-height: 100vh;\n      display: flex;\n      align-items: center;\n      justify-content: center;\n      background: radial-gradient(circle at 20% 30%, #fff0d4, #fbd6b2 45%, #f8b58e 85%);\n      overfl"
+}
