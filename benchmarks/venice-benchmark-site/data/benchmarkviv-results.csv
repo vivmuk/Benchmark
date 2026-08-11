@@ -1,0 +1,129 @@
+model_id,display,benchmark_id,status,score,latency_s,prompt_tokens,completion_tokens,total_tokens,estimated_cost_usd
+openai-gpt-56-luna,GPT-5.6 Luna,intent_understanding,ok,58,5.51,1717,654,2371,0.007051
+openai-gpt-56-luna,GPT-5.6 Luna,one_shot_ui,ok,89,10.635,1727,2048,3775,0.017519
+openai-gpt-56-luna-pro,GPT-5.6 Luna Pro,intent_understanding,ok,76,6.594,9687,1474,11161,0.023164
+openai-gpt-56-luna-pro,GPT-5.6 Luna Pro,one_shot_ui,ok,89,29.539,14609,7195,21804,0.072224
+openai-gpt-56-luna-pro,GPT-5.6 Luna Pro,startup_in_a_weekend,ok,65,34.347,15435,6677,22112,0.069371
+openai-gpt-56-sol,GPT-5.6 Sol,intent_understanding,ok,70,8.67,1717,476,2193,0.028581
+openai-gpt-56-sol,GPT-5.6 Sol,one_shot_ui,ok,89,16.869,1727,2048,3775,0.087594
+openai-gpt-56-sol,GPT-5.6 Sol,startup_in_a_weekend,ok,100,178.483,1929,13964,15893,0.535706
+openai-gpt-56-sol-pro,GPT-5.6 Sol Pro,one_shot_ui,ok,89,45.162,14608,6412,21020,0.33175
+openai-gpt-56-sol-pro,GPT-5.6 Sol Pro,startup_in_a_weekend,ok,60,46.604,15416,6307,21723,0.332863
+openai-gpt-56-terra,GPT-5.6 Terra,intent_understanding,ok,76,5.96,1717,518,2235,0.015078
+openai-gpt-56-terra,GPT-5.6 Terra,one_shot_ui,ok,89,10.875,1727,2048,3775,0.043797
+openai-gpt-56-terra,GPT-5.6 Terra,startup_in_a_weekend,ok,100,93.079,1929,13060,14989,0.250903
+openai-gpt-56-terra-pro,GPT-5.6 Terra Pro,intent_understanding,ok,76,10.111,9843,1593,11436,0.060628
+openai-gpt-56-terra-pro,GPT-5.6 Terra Pro,one_shot_ui,ok,89,39.694,14611,6552,21163,0.168509
+openai-gpt-56-terra-pro,GPT-5.6 Terra Pro,startup_in_a_weekend,ok,64,43.017,15446,6677,22123,0.173462
+openai-gpt-55,GPT-5.5,intent_understanding,ok,82,21.411,1713,1163,2876,0.054319
+openai-gpt-55,GPT-5.5,one_shot_ui,ok,89,30.219,1723,2048,3771,0.087569
+openai-gpt-55,GPT-5.5,startup_in_a_weekend,ok,94,161.65,1925,13518,15443,0.518956
+claude-fable-5,Fable 5,intent_understanding,ok,88,17.216,2749,831,3580,0.082848
+claude-fable-5,Fable 5,one_shot_ui,ok,89,22.949,2765,2048,4813,0.15606
+claude-fable-5,Fable 5,startup_in_a_weekend,ok,61,27.248,3094,2048,5142,0.160008
+claude-opus-4-8,Opus 4.8,intent_understanding,ok,82,15.572,2757,824,3581,0.041262
+claude-opus-4-8,Opus 4.8,one_shot_ui,ok,89,20.908,2773,2048,4821,0.078078
+claude-opus-4-8,Opus 4.8,startup_in_a_weekend,ok,55,25.716,3102,2048,5150,0.080052
+zai-org-glm-5-2,GLM 5.2,intent_understanding,ok,82,31.909,1691,664,2355,0.005289
+zai-org-glm-5-2,GLM 5.2,one_shot_ui,ok,82,25.875,1700,2048,3748,0.011391
+zai-org-glm-5-2,GLM 5.2,startup_in_a_weekend,ok,74,56.74,1901,2048,3949,0.011673
+deepseek-v4-pro,DeepSeek V4,intent_understanding,ok,94,30.125,1772,1516,3288,0.007928
+deepseek-v4-pro,DeepSeek V4,one_shot_ui,ok,95,35.547,1783,2049,3832,0.009706
+deepseek-v4-pro,DeepSeek V4,startup_in_a_weekend,ok,54,43.79,1985,2049,4034,0.010039
+minimax-m3-preview,MiniMax M3,intent_understanding,ok,88,7.386,1779,823,2602,0.001521
+minimax-m3-preview,MiniMax M3,one_shot_ui,ok,82,6.831,1789,2048,3837,0.002994
+minimax-m3-preview,MiniMax M3,startup_in_a_weekend,ok,100,42.548,1990,7946,9936,0.010132
+grok-4-5,Grok 4.5,intent_understanding,ok,82,14.149,1872,1222,3094,0.012559
+grok-4-5,Grok 4.5,one_shot_ui,ok,82,26.747,1885,3886,5771,0.030704
+grok-4-5,Grok 4.5,startup_in_a_weekend,ok,60,26.527,2090,2652,4742,0.022778
+claude-opus-5,Opus 5,intent_understanding,ok,82,33.902,2749,2001,4750,0.076524
+claude-opus-5,Opus 5,one_shot_ui,ok,89,88.763,2765,8192,10957,0.26235
+claude-opus-5,Opus 5,pharma_drug_interaction,ok,90,83.398,2958,6574,9532,0.214968
+claude-opus-5,Opus 5,startup_in_a_weekend,ok,70,100.12,3094,8192,11286,0.264324
+kimi-k3,Kimi K3,intent_understanding,ok,76,74.254,1807,2020,3827,0.044651
+kimi-k3,Kimi K3,pharma_drug_interaction,ok,86,120.658,1924,3959,5883,0.081446
+openai-gpt-56-sol-pro,GPT-5.6 Sol Pro,intent_understanding,ok,76,17.505,9739,1639,11378,0.122331
+kimi-k3,Kimi K3,one_shot_ui,ok,95,307.986,1815,11956,13771,0.230981
+kimi-k3,Kimi K3,pharma_regulatory_comprehension,ok,80,340.92,1959,12018,13977,0.232684
+kimi-k3,Kimi K3,startup_in_a_weekend,ok,100,335.534,2017,10609,12626,0.206483
+claude-opus-5,Opus 5,pharma_regulatory_comprehension,ok,95,170.695,3008,13933,16941,0.436038
+minimax-m3-preview,MiniMax M3,pharma_drug_interaction,ok,88,14.89,1888,1705,3593,0.002612
+minimax-m3-preview,MiniMax M3,pharma_regulatory_comprehension,ok,80,16.816,1930,2086,4016,0.003082
+deepseek-v4-pro,DeepSeek V4,pharma_drug_interaction,ok,86,46.459,1887,1267,3154,0.007296
+deepseek-v4-pro,DeepSeek V4,pharma_regulatory_comprehension,ok,80,65.473,1924,3057,4981,0.013266
+zai-org-glm-5-2,GLM 5.2,pharma_drug_interaction,ok,90,50.587,1808,2510,4318,0.013575
+zai-org-glm-5-2,GLM 5.2,pharma_regulatory_comprehension,ok,80,35.574,1842,2546,4388,0.013781
+grok-4-5,Grok 4.5,pharma_drug_interaction,ok,83,22.207,1983,1244,3227,0.012961
+grok-4-5,Grok 4.5,pharma_regulatory_comprehension,ok,85,37.932,2027,1765,3792,0.016603
+openai-gpt-56-luna,GPT-5.6 Luna,pharma_drug_interaction,ok,85,8.354,1831,1017,2848,0.009916
+openai-gpt-56-luna,GPT-5.6 Luna,pharma_regulatory_comprehension,ok,80,53.003,1867,8362,10229,0.065049
+openai-gpt-56-luna,GPT-5.6 Luna,startup_in_a_weekend,ok,100,110.69,1929,15708,17637,0.120221
+openai-gpt-56-sol,GPT-5.6 Sol,pharma_drug_interaction,ok,81,15.121,1831,753,2584,0.039681
+openai-gpt-56-sol,GPT-5.6 Sol,pharma_regulatory_comprehension,ok,82,91.394,1867,5169,7036,0.205506
+openai-gpt-56-sol-pro,GPT-5.6 Sol Pro,pharma_drug_interaction,ok,85,23.921,10927,2288,13215,0.154094
+openai-gpt-56-sol-pro,GPT-5.6 Sol Pro,pharma_regulatory_comprehension,ok,77,98.364,18233,10872,29105,0.521656
+openai-gpt-56-terra,GPT-5.6 Terra,pharma_drug_interaction,ok,85,8.08,1831,674,2505,0.018359
+openai-gpt-56-terra,GPT-5.6 Terra,pharma_regulatory_comprehension,ok,77,63.97,1867,6182,8049,0.121747
+openai-gpt-56-terra-pro,GPT-5.6 Terra Pro,pharma_drug_interaction,ok,89,17.651,10888,2405,13293,0.079119
+openai-gpt-56-terra-pro,GPT-5.6 Terra Pro,pharma_regulatory_comprehension,ok,72,50.057,17423,9534,26957,0.233209
+openai-gpt-56-luna-pro,GPT-5.6 Luna Pro,pharma_drug_interaction,ok,86,10.17,11040,2412,13452,0.03189
+openai-gpt-56-luna-pro,GPT-5.6 Luna Pro,pharma_regulatory_comprehension,ok,77,54.029,18657,11812,30469,0.111911
+openai-gpt-55,GPT-5.5,pharma_drug_interaction,ok,86,19.843,1827,1033,2860,0.050156
+openai-gpt-55,GPT-5.5,pharma_regulatory_comprehension,ok,78,106.959,1863,7083,8946,0.277256
+claude-fable-5,Fable 5,pharma_drug_interaction,ok,86,25.68,2958,2025,4983,0.156996
+claude-opus-4-8,Opus 4.8,pharma_drug_interaction,ok,89,25.786,2966,2021,4987,0.078426
+claude-opus-4-8,Opus 4.8,pharma_regulatory_comprehension,ok,85,45.957,3016,3282,6298,0.116556
+claude-fable-5,Fable 5,pharma_regulatory_comprehension,error,0,4.612,3008,5,3013,0
+inkling,Inkling,intent_understanding,ok,52,5.526,1658,570,2228,0.004958
+inkling,Inkling,one_shot_ui,ok,95,44.828,1668,6949,8617,0.037264
+inkling,Inkling,pharma_drug_interaction,ok,86,19.856,1772,4553,6325,0.025265
+inkling,Inkling,pharma_regulatory_comprehension,ok,85,95.625,1808,9370,11178,0.049696
+inkling,Inkling,startup_in_a_weekend,ok,94,73.518,1870,7103,8973,0.038296
+openai-gpt-56-luna,GPT-5.6 Luna,value_density,ok,100,3.246,1880,200,2080,0.00385
+openai-gpt-56-luna-pro,GPT-5.6 Luna Pro,value_density,ok,100,6.543,9580,951,10531,0.019107
+openai-gpt-56-sol,GPT-5.6 Sol,value_density,ok,100,3.518,1880,169,2049,0.018087
+openai-gpt-56-sol-pro,GPT-5.6 Sol Pro,value_density,ok,100,9.735,9485,649,10134,0.083619
+openai-gpt-56-terra,GPT-5.6 Terra,value_density,ok,100,1.954,1880,104,1984,0.007825
+openai-gpt-56-terra-pro,GPT-5.6 Terra Pro,value_density,ok,100,3.9,9405,467,9872,0.038147
+openai-gpt-55,GPT-5.5,value_density,ok,100,4.414,1876,217,2093,0.019862
+claude-fable-5,Fable 5,value_density,ok,100,4.921,3011,218,3229,0.049212
+claude-opus-4-8,Opus 4.8,value_density,ok,100,3.082,3019,201,3220,0.024144
+claude-opus-5,Opus 5,value_density,ok,100,5.227,3011,231,3242,0.024996
+zai-org-glm-5-2,GLM 5.2,value_density,ok,100,7.586,1856,316,2172,0.003989
+deepseek-v4-pro,DeepSeek V4,value_density,ok,100,17.267,1938,790,2728,0.005805
+minimax-m3-preview,MiniMax M3,value_density,ok,100,4.864,1937,256,2193,0.000888
+grok-4-5,Grok 4.5,value_density,ok,100,9.343,2030,425,2455,0.007498
+inkling,Inkling,value_density,ok,100,4.003,1821,660,2481,0.005618
+kimi-k3,Kimi K3,value_density,ok,100,10.556,1971,294,2265,0.012904
+openai-gpt-56-luna,GPT-5.6 Luna,reverse_prompt_vision,ok,93,7.486,2887,796,3683,0.083792
+openai-gpt-56-luna-pro,GPT-5.6 Luna Pro,reverse_prompt_vision,ok,40,12.497,13715,2764,16479,0.051615
+openai-gpt-56-sol,GPT-5.6 Sol,reverse_prompt_vision,ok,93,11.417,2887,549,3436,0.1128
+openai-gpt-56-sol-pro,GPT-5.6 Sol Pro,reverse_prompt_vision,ok,93,26.485,13636,2450,16086,0.191946
+openai-gpt-56-terra,GPT-5.6 Terra,reverse_prompt_vision,ok,93,5.642,2887,424,3311,0.09076
+openai-gpt-56-terra-pro,GPT-5.6 Terra Pro,reverse_prompt_vision,ok,46,30.425,13355,2130,15485,0.095124
+openai-gpt-55,GPT-5.5,reverse_prompt_vision,ok,96,11.063,2883,590,3473,0.05491
+claude-fable-5,Fable 5,reverse_prompt_vision,ok,63,15.243,4051,780,4831,0.168881
+claude-opus-4-8,Opus 4.8,reverse_prompt_vision,ok,57,14.838,4059,712,4771,0.059774
+zai-org-glm-5-2,GLM 5.2,reverse_prompt_vision,skipped,,0,0,0,0,0
+deepseek-v4-pro,DeepSeek V4,reverse_prompt_vision,skipped,,0,0,0,0,0
+claude-opus-5,Opus 5,reverse_prompt_vision,ok,63,18.845,4051,1018,5069,0.066624
+minimax-m3-preview,MiniMax M3,reverse_prompt_vision,ok,24,5.282,2182,602,2784,0.016097
+grok-4-5,Grok 4.5,reverse_prompt_vision,ok,96,13.806,2865,637,3502,0.02555
+inkling,Inkling,reverse_prompt_vision,ok,40,7.323,3234,1548,4782,0.024981
+kimi-k3,Kimi K3,reverse_prompt_vision,ok,60,27.51,3077,714,3791,0.037467
+deepseek-v4-flash-0731,DeepSeek V4 Flash 0731,intent_understanding,ok,70,79.255,1727,1098,2825,0.000282
+deepseek-v4-flash-0731,DeepSeek V4 Flash 0731,one_shot_ui,ok,95,169.898,1738,4238,5976,0.000735
+deepseek-v4-flash-0731,DeepSeek V4 Flash 0731,pharma_drug_interaction,ok,89,120.252,1840,2000,3840,0.00042
+deepseek-v4-flash-0731,DeepSeek V4 Flash 0731,startup_in_a_weekend,ok,94,251.739,1940,4864,6804,0.00084
+deepseek-v4-flash-0731,DeepSeek V4 Flash 0731,brick_breaker_realism,ok,95,427.046,1768,11935,13703,0.001846
+deepseek-v4-flash-0731,DeepSeek V4 Flash 0731,pharma_regulatory_comprehension,ok,80,158.645,1877,4288,6165,0.000753
+deepseek-v4-flash-0731,DeepSeek V4 Flash 0731,value_density,ok,100,13.445,1891,338,2229,0.000185
+deepseek-v4-flash-0731,DeepSeek V4 Flash 0731,reverse_prompt_vision,skipped,,0,0,0,0,0
+kimi-k3-fast-api,Kimi K3 Fast API,intent_understanding,ok,76,22.472,1764,1671,3435,0.045535
+kimi-k3-fast-api,Kimi K3 Fast API,one_shot_ui,ok,95,92.531,1772,9420,11192,0.219924
+kimi-k3-fast-api,Kimi K3 Fast API,brick_breaker_realism,ok,93,300.111,1803,29822,31625,0.679109
+kimi-k3-fast-api,Kimi K3 Fast API,pharma_drug_interaction,ok,86,25.344,1881,2321,4202,0.060687
+kimi-k3-fast-api,Kimi K3 Fast API,pharma_regulatory_comprehension,ok,90,88.282,1916,8205,10121,0.193235
+kimi-k3-fast-api,Kimi K3 Fast API,startup_in_a_weekend,ok,100,97.283,1974,7430,9404,0.176058
+kimi-k3-fast-api,Kimi K3 Fast API,value_density,ok,100,4.663,1928,354,2282,0.016641
+kimi-k3-fast-api,Kimi K3 Fast API,reverse_prompt_vision,skipped,,0,0,0,0,0

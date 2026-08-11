@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://benchmarkviv.up.railway.app/</loc></url>
+  <url><loc>https://benchmarkviv.up.railway.app/vision.html</loc></url>
+  <url><loc>https://benchmarkviv.up.railway.app/trends.html</loc></url>
+  <url><loc>https://benchmarkviv.up.railway.app/compare.html</loc></url>
+  <url><loc>https://benchmarkviv.up.railway.app/experimental-design.html</loc></url>
+  <url><loc>https://benchmarkviv.up.railway.app/about.html</loc></url>
+  <url><loc>https://benchmarkviv.up.railway.app/data/benchmarkviv-results.csv</loc></url>
+  <url><loc>https://benchmarkviv.up.railway.app/models/claude-fable-5.html</loc></url>
+  <url><loc>https://benchmarkviv.up.railway.app/models/claude-opus-4-8.html</loc></url>
+  <url><loc>https://benchmarkviv.up.railway.app/models/claude-opus-5.html</loc></url>
+  <url><loc>https://benchmarkviv.up.railway.app/models/deepseek-v4-flash-0731.html</loc></url>
+  <url><loc>https://benchmarkviv.up.railway.app/models/deepseek-v4-pro.html</loc></url>
+  <url><loc>https://benchmarkviv.up.railway.app/models/grok-4-5.html</loc></url>
+  <url><loc>https://benchmarkviv.up.railway.app/models/inkling.html</loc></url>
+  <url><loc>https://benchmarkviv.up.railway.app/models/kimi-k3-fast-api.html</loc></url>
+  <url><loc>https://benchmarkviv.up.railway.app/models/kimi-k3.html</loc></url>
+  <url><loc>https://benchmarkviv.up.railway.app/models/minimax-m3-preview.html</loc></url>
+  <url><loc>https://benchmarkviv.up.railway.app/models/openai-gpt-55.html</loc></url>
+  <url><loc>https://benchmarkviv.up.railway.app/models/openai-gpt-56-luna-pro.html</loc></url>
+  <url><loc>https://benchmarkviv.up.railway.app/models/openai-gpt-56-luna.html</loc></url>
+  <url><loc>https://benchmarkviv.up.railway.app/models/openai-gpt-56-sol-pro.html</loc></url>
+  <url><loc>https://benchmarkviv.up.railway.app/models/openai-gpt-56-sol.html</loc></url>
+  <url><loc>https://benchmarkviv.up.railway.app/models/openai-gpt-56-terra-pro.html</loc></url>
+  <url><loc>https://benchmarkviv.up.railway.app/models/openai-gpt-56-terra.html</loc></url>
+  <url><loc>https://benchmarkviv.up.railway.app/models/zai-org-glm-5-2.html</loc></url>
+</urlset>

@@ -1,0 +1,182 @@
+#!/usr/bin/env python3
+"""Generate compare.html — pick up to 3 models, side-by-side track bars.
+
+Embeds data/chart_snapshot.json (model id, display, VivIndex, per-track
+scores) directly into the page so the comparison runs 100% client-side.
+"""
+from __future__ import annotations
+
+import html
+import json
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent
+DATA = ROOT / "data" / "chart_snapshot.json"
+OUT = ROOT / "compare.html"
+
+def esc(s):
+    return html.escape(str(s))
+
+snapshot = json.loads(DATA.read_text(encoding="utf-8"))
+payload = json.dumps(snapshot, ensure_ascii=False).replace("</script", "<\\/script")
+
+TRACK_ORDER = ["intent-understanding", "one-shot-ui", "startup-in-a-weekend",
+               "value-density", "pharma-drug-interaction",
+               "pharma-regulatory-comprehension", "brick-breaker-realism"]
+TRACK_LABEL = {
+    "intent-understanding": "Intent Understanding",
+    "one-shot-ui": "One-Shot UI",
+    "startup-in-a-weekend": "Startup in a Weekend",
+    "value-density": "Value Density @1K",
+    "pharma-drug-interaction": "Pharma DDI",
+    "pharma-regulatory-comprehension": "Pharma Regulatory",
+    "brick-breaker-realism": "Brick Breaker",
+}
+
+page = f'''<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Compare Models — BenchmarkViv</title>
+<meta name="description" content="Side-by-side model comparison for Venice API models — pick up to three and see every track score at once." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/styles.css?v=15" />
+<style>
+  .c-hero {{ padding: calc(var(--nav-h) + 2.5rem) 0 2rem; }}
+  .c-hero h1 {{ font-size: clamp(1.6rem, 4.5vw, 2.4rem); }}
+  .c-sub {{ color: var(--text-dim); margin-top: .45rem; max-width: 62ch; }}
+  .c-pickers {{ display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 1.5rem; }}
+  .c-pick {{ display: flex; flex-direction: column; gap: .3rem; }}
+  .c-pick label {{ font: 600 .72rem var(--font-mono); color: var(--text-dim); text-transform: uppercase; letter-spacing: .05em; }}
+  .c-pick select {{ font: 600 .95rem var(--font-ui); color: var(--text); background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; padding: .55rem .9rem; min-width: 210px; box-shadow: var(--shadow); }}
+  .c-card {{ background: var(--surface); border: 1px solid var(--rule); border-radius: 14px; padding: 1.4rem 1.3rem; box-shadow: var(--shadow); margin-top: 1.4rem; }}
+  .c-card h2 {{ font-size: 1.05rem; margin-bottom: 1.1rem; }}
+  .c-tbl {{ width: 100%; border-collapse: collapse; }}
+  .c-tbl th {{ text-align: left; font: 600 .72rem var(--font-mono); text-transform: uppercase; letter-spacing: .05em; color: var(--text-dim); padding: .5rem .6rem; border-bottom: 2px solid var(--rule); }}
+  .c-tbl td {{ padding: .55rem .6rem; border-bottom: 1px solid var(--rule); font-size: .92rem; vertical-align: middle; }}
+  .c-tbl tr:last-child td {{ border-bottom: 0; }}
+  .c-tbl .mx {{ font-weight: 700; }}
+  .c-viv {{ font: 800 1.05rem var(--font-display); }}
+  .c-bar {{ height: 10px; border-radius: 999px; background: var(--rule); overflow: hidden; min-width: 90px; }}
+  .c-bar i {{ display: block; height: 100%; border-radius: inherit; }}
+  .c-empty {{ color: var(--text-dim); padding: 1.2rem 0; text-align: center; }}
+  .swatch {{ display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: .35rem; }}
+  @media (max-width: 640px) {{ .c-pick select {{ min-width: 100%; }} .c-tbl {{ font-size: .82rem; }} }}
+</style>
+</head>
+<body>
+<nav class="navbar vt-nav"><div class="container">
+  <a href="index.html" class="nav-logo">Benchmark<span>Viv</span></a>
+  <ul class="nav-links" id="siteNav">
+    <li><a href="index.html#leaderboard">Leaderboard</a></li>
+    <li><a href="index.html#tracks">Tracks</a></li>
+    <li><a href="vision.html">Vision</a></li>
+    <li><a href="trends.html">Trends</a></li>
+    <li><a href="compare.html" class="active">Compare</a></li>
+    <li><a href="experimental-design.html">Design</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button>
+</div></nav>
+
+<main class="container">
+  <section class="c-hero">
+    <h1>Compare Models</h1>
+    <p class="c-sub">Pick up to three models and put every track score on one table. Bars are relative to the best score on each track.</p>
+  </section>
+
+  <section class="c-pickers" id="pickers"></section>
+
+  <section class="c-card" id="result">
+    <h2>Track-by-track</h2>
+    <div id="table"></div>
+  </section>
+</main>
+
+<script>
+window.COMPARE_DATA = {payload};
+const COLORS = ["#00D4AA", "#D9A441", "#4361EE"];
+const TRACK_ORDER = {json.dumps(TRACK_ORDER)};
+const TRACK_LABEL = {json.dumps(TRACK_LABEL)};
+
+function byId(id) {{ return window.COMPARE_DATA.find(m => m.id === id); }}
+
+function renderPickers() {{
+  const wrap = document.getElementById('pickers');
+  wrap.innerHTML = '';
+  for (let s = 0; s < 3; s++) {{
+    const box = document.createElement('div');
+    box.className = 'c-pick';
+    const lab = document.createElement('label');
+    lab.textContent = 'Model ' + String.fromCharCode(65 + s);
+    const sel = document.createElement('select');
+    sel.dataset.slot = s;
+    const opt = document.createElement('option');
+    opt.value = ''; opt.textContent = '— choose —';
+    sel.appendChild(opt);
+    window.COMPARE_DATA.forEach(m => {{
+      const o = document.createElement('option');
+      o.value = m.id; o.textContent = m.disp + (m.viv ? '  · ' + Number(m.viv).toFixed(1) : '');
+      sel.appendChild(o);
+    }});
+    sel.addEventListener('change', renderTable);
+    box.appendChild(lab); box.appendChild(sel);
+    wrap.appendChild(box);
+  }}
+}}
+
+function renderTable() {{
+  const sels = [...document.querySelectorAll('#pickers select')];
+  const picks = sels.map(sel => byId(sel.value)).filter(Boolean);
+  const slotColors = sels.map(sel => COLORS[sels.indexOf(sel)]);
+  const tblBox = document.getElementById('table');
+
+  if (!picks.length) {{
+    tblBox.innerHTML = '<div class="c-empty">Choose at least one model to see scores.</div>';
+    return;
+  }}
+
+  let head = '<tr><th style="min-width:120px">Track</th>';
+  picks.forEach((m, i) => {{
+    head += `<th><span class="swatch" style="background:${{slotColors[i]}}"></span>${{m.disp}}</th>`;
+  }});
+  head += '</tr>';
+
+  let rows = '<tr><td class="mx">VivIndex</td>';
+  const maxViv = Math.max(...picks.map(m => m.viv || 0));
+  picks.forEach((m, i) => {{
+    const w = maxViv ? Math.max(6, (m.viv / maxViv) * 100) : 0;
+    rows += `<td><div class="c-viv">${{Number(m.viv).toFixed(1)}}</div>` +
+            `<div class="c-bar"><i style="width:${{w}}%;background:${{slotColors[i]}}"></i></div></td>`;
+  }});
+  rows += '</tr>';
+
+  TRACK_ORDER.forEach(tid => {{
+    const vals = picks.map(m => (m.scores && m.scores[tid] != null) ? Number(m.scores[tid]) : null);
+    const allNull = vals.every(v => v == null);
+    if (allNull) return;
+    const best = Math.max(...vals.map(v => v == null ? 0 : v));
+    rows += `<tr><td>${{TRACK_LABEL[tid] || tid}}</td>`;
+    picks.forEach((m, i) => {{
+      const v = vals[i];
+      if (v == null) {{ rows += '<td class="muted">—</td>'; return; }}
+      const w = best ? Math.max(6, (v / best) * 100) : 0;
+      rows += `<td><b>${{Math.round(v)}}</b> <span class="c-bar" style="display:inline-flex;vertical-align:middle"><i style="width:${{w}}%;background:${{slotColors[i]}}"></i></span></td>`;
+    }});
+    rows += '</tr>';
+  }});
+
+  tblBox.innerHTML = `<table class="c-tbl">${{head}}${{rows}}</table>`;
+}}
+
+renderPickers();
+renderTable();
+document.querySelectorAll('.navbar .nav-toggle').forEach(b=>b.addEventListener('click',()=>{{const l=document.getElementById('siteNav');l.classList.toggle('open');b.setAttribute('aria-expanded',String(l.classList.contains('open')));}}));
+</script>
+</body>
+</html>'''
+OUT.write_text(page, encoding="utf-8")
+print("compare.html written")
