@@ -44,7 +44,13 @@ html = new_html
 # 3. Inject BENCHMARK_DATA into <head>.
 # `ensure_ascii=False` avoids Python's `\uXXXX` escapes in the JSON output that
 # would otherwise be mis-parsed as re template escapes by re.subn.
+# `</script>` inside raw responses (generated HTML from UI/arcade tracks) would
+# terminate the inline script tag and dump raw text into the page. Escape the
+# closing tag as `\u003c/script` (the JSON string escape, which JS decodes
+# back to the literal). Same for `<!--` to stay safe against legacy comment
+# shenanigans in HTML parsers.
 json_data = json.dumps(data, ensure_ascii=False)
+json_data = json_data.replace("</script", "<\\/script").replace("<!--", "<\\!--")
 inject_script = f'<script>window.BENCHMARK_DATA = {json_data};</script>'
 new_html, n_inject = re.subn(
     r"<head>\s*", f"<head>\n{inject_script}\n", html, count=1

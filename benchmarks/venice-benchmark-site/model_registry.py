@@ -20,4 +20,5 @@ MODELS = [
     {"id": "grok-4-5",                "display": "Grok 4.5"},
     {"id": "inkling",                "display": "Inkling"},
     {"id": "kimi-k3",                  "display": "Kimi K3"},
+    {"id": "kimi-k3-fast-api",          "display": "Kimi K3 Fast API"},
 ]

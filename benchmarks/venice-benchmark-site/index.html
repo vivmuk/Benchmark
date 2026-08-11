@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/styles.css?v=13" />
+  <link rel="stylesheet" href="assets/styles.css?v=14" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <script>
     (function(){
@@ -60,12 +60,18 @@
     <div class="container">
       <div class="feature-grid">
         <div class="feature-media">
-          <img src="data/deepseek-v4-flash-0731-infographic-2x2.png" alt="DeepSeek V4 Flash 0731 benchmark infographic" class="feature-img" />
+          <button type="button" class="img-zoom" data-full="data/deepseek-v4-flash-0731-infographic-2x2.png" data-caption="DeepSeek V4 Flash 0731 — benchmark infographic">
+            <picture>
+              <source media="(max-width: 860px)" srcset="data/deepseek-v4-flash-0731-infographic-mobile.png" />
+              <img src="data/deepseek-v4-flash-0731-infographic-2x2.png" alt="DeepSeek V4 Flash 0731 benchmark infographic" class="feature-img" />
+            </picture>
+            <span class="img-zoom-hint">Tap to zoom</span>
+          </button>
         </div>
         <div class="feature-copy">
           <span class="eyebrow">Featured Run · New Model</span>
-          <h2>DeepSeek V4 Flash 0731 — <em>#4 of 17</em> on VivIndex</h2>
-          <p>For this cycle we benchmarked <strong>DeepSeek V4 Flash 0731</strong> live against the full roster. It landed <strong>4th of 17</strong> models (VivIndex 89.7) while running at flash-tier cost — the cheapest model on the board per token.</p>
+          <h2>DeepSeek V4 Flash 0731 — <em>#5 of 18</em> on VivIndex</h2>
+          <p>For this cycle we benchmarked <strong>DeepSeek V4 Flash 0731</strong> live against the full roster. It landed <strong>5th of 18</strong> models (VivIndex 89.7) while running at flash-tier cost — the cheapest model on the board per token. The top of the board is now <strong>Kimi K3 Fast API</strong> (VivIndex 93.1), new on the board for the 2026-08 cycle.</p>
           <ul class="feature-list">
             <li><strong>Value Density @1K:</strong> 100 — perfect compact JSON, best per-1k-token value</li>
             <li><strong>One-Shot UI:</strong> 95 · <strong>Startup in a Weekend:</strong> 94</li>
@@ -73,7 +79,10 @@
             <li>Vision track skipped (no vision) — not penalized, per board rules.</li>
           </ul>
           <div class="feature-chart">
-            <img src="data/deepseek-v4-flash-0731-chart.svg" alt="VivIndex leaderboard chart" class="feature-img" />
+            <button type="button" class="img-zoom" data-full="data/deepseek-v4-flash-0731-chart.svg" data-caption="VivIndex leaderboard chart">
+              <img src="data/deepseek-v4-flash-0731-chart.svg" alt="VivIndex leaderboard chart" class="feature-img" />
+              <span class="img-zoom-hint">Tap to zoom</span>
+            </button>
           </div>
         </div>
       </div>
@@ -346,6 +355,6 @@
     </div>
   </footer>
 
-  <script src="assets/app.js?v=13"></script>
+  <script src="assets/app.js?v=14"></script>
 </body>
 </html>

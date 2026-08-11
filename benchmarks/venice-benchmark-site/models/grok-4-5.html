@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Grok 4.5 — BenchmarkViv profile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../assets/styles.css?v=14" />
+<style>
+  .p-hero { padding: calc(var(--nav-h) + 2.5rem) 0 2rem; }
+  .p-hero h1 { font-size: clamp(1.6rem, 4.5vw, 2.4rem); display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; }
+  .p-crown { filter: drop-shadow(0 2px 3px rgba(184,134,11,.5)); }
+  .p-sub { color: var(--text-dim); margin-top: .45rem; }
+  .p-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: .9rem; margin-top: 1.6rem; }
+  .p-card { background: var(--surface); border: 1px solid var(--rule); border-radius: 14px; padding: 1.2rem 1.15rem; box-shadow: var(--shadow); }
+  .p-card h3 { font-size: 1rem; margin-bottom: .9rem; }
+  .p-big { font: 800 clamp(2rem, 5vw, 2.8rem) var(--font-display); color: var(--cobalt-dark); line-height: 1; }
+  .p-big.gold { color: var(--gold); }
+  .p-track { display: grid; grid-template-columns: minmax(110px, 1fr) 1.4fr 44px; gap: .7rem; align-items: center; margin-bottom: .65rem; font-size: .88rem; }
+  .p-track-name { color: var(--text); font-weight: 550; }
+  .p-track-bar { height: 12px; background: var(--rule); border-radius: 999px; overflow: hidden; }
+  .p-track-fill { height: 100%; background: linear-gradient(90deg, var(--cobalt-dark), var(--cobalt)); border-radius: inherit; }
+  .p-track-val { font-weight: 700; font-variant-numeric: tabular-nums; text-align: right; }
+  .p-board-row { display: flex; justify-content: space-between; padding: .42rem 0; border-bottom: 1px solid var(--rule); font-weight: 600; gap: .5rem; }
+  .p-board-row:last-child { border-bottom: 0; }
+  .p-board-val { font-variant-numeric: tabular-nums; }
+  .p-kv { display: grid; grid-template-columns: 1fr auto; gap: .4rem .8rem; font-size: .9rem; }
+  .p-kv dt { color: var(--text-dim); }
+  .p-kv dd { margin: 0; font-weight: 650; font-variant-numeric: tabular-nums; }
+  .p-back { display: inline-flex; margin: 1.2rem 0 0; font: 600 .82rem var(--font-mono); color: var(--cobalt-dark); }
+  .muted { color: var(--text-dim); }
+  @media (max-width: 560px) {
+    .p-track { grid-template-columns: 1fr 1.3fr 40px; gap: .5rem; }
+    .p-card { padding: 1rem .9rem; }
+  }
+</style>
+</head>
+<body>
+<nav class="navbar vt-nav"><div class="container">
+  <a href="../index.html" class="nav-logo">Benchmark<span>Viv</span></a>
+  <ul class="nav-links" id="siteNav">
+    <li><a href="../index.html#leaderboard">Leaderboard</a></li>
+    <li><a href="../index.html#tracks">Tracks</a></li>
+    <li><a href="../vision.html">Vision</a></li>
+    <li><a href="../experimental-design.html">Design</a></li>
+    <li><a href="../about.html">About</a></li>
+  </ul>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button>
+</div></nav>
+
+<section class="p-hero">
+  <div class="container">
+    <a class="p-back" href="../index.html#comparison">← All models</a>
+    <h1>Grok 4.5</h1>
+    <p class="p-sub">VivIndex 82.9 · rank #10 of 18 models · 5/5 core tracks</p>
+
+    <div class="p-grid">
+      <div class="p-card">
+        <h3>VivIndex</h3>
+        <div class="p-big ">82.9</div>
+        <p class="muted" style="margin-top:.5rem;font-size:.88rem">Weighted composite of the 5 core tracks. Board best: Kimi K3 Fast API (93.1).</p>
+      </div>
+
+      <div class="p-card">
+        <h3>Every benchmark</h3>
+        <div class="p-track"><span class="p-track-name">Intent Understanding</span><div class="p-track-bar"><div class="p-track-fill" style="width:82%"></div></div><span class="p-track-val">82</span></div><div class="p-track"><span class="p-track-name">One-Shot UI</span><div class="p-track-bar"><div class="p-track-fill" style="width:82%"></div></div><span class="p-track-val">82</span></div><div class="p-track"><span class="p-track-name">Startup in a Weekend</span><div class="p-track-bar"><div class="p-track-fill" style="width:60%"></div></div><span class="p-track-val">60</span></div><div class="p-track"><span class="p-track-name">Value Density @1K</span><div class="p-track-bar"><div class="p-track-fill" style="width:100%"></div></div><span class="p-track-val">100</span></div><div class="p-track"><span class="p-track-name">Pharma DDI</span><div class="p-track-bar"><div class="p-track-fill" style="width:83%"></div></div><span class="p-track-val">83</span></div><div class="p-track"><span class="p-track-name">Pharma Regulatory</span><div class="p-track-bar"><div class="p-track-fill" style="width:85%"></div></div><span class="p-track-val">85</span></div><div class="p-track"><span class="p-track-name">Reverse-Prompt Vision</span><div class="p-track-bar"><div class="p-track-fill" style="width:96%"></div></div><span class="p-track-val">96</span></div>
+      </div>
+
+      <div class="p-card">
+        <h3>Top of the board</h3>
+        <div class="p-board-row"><span style="color:var(--gold)">👑 Kimi K3 Fast API</span><span class="p-board-val">93.1</span></div><div class="p-board-row"><span style="color:var(--text)">GPT-5.5</span><span class="p-board-val">92.5</span></div><div class="p-board-row"><span style="color:var(--text)">GPT-5.6 Terra</span><span class="p-board-val">92.2</span></div><div class="p-board-row"><span style="color:var(--text)">GPT-5.6 Sol</span><span class="p-board-val">90.9</span></div><div class="p-board-row"><span style="color:var(--text)">DeepSeek V4 Flash 0731</span><span class="p-board-val">89.7</span></div>
+      </div>
+
+      <div class="p-card">
+        <h3>Efficiency &amp; cost</h3>
+        <dl class="p-kv">
+          <dt>Avg cost / scored run</dt><dd>$0.0184</dd>
+          <dt>Total run cost</dt><dd>$0.1287</dd>
+          <dt>Output speed</dt><dd>176 tok/s</dd>
+          <dt>Total tokens</dt><dd>26,583</dd>
+          <dt>Value per 1K tokens</dt><dd>40.733</dd>
+        </dl>
+      </div>
+
+      <div class="p-card">
+        <h3>Pharma domain</h3>
+        <dl class="p-kv">
+          <dt>Drug-Drug Interaction</dt><dd>83 <span class="muted">(best 90 · Opus 5)</span></dd>
+          <dt>Regulatory</dt><dd>85 <span class="muted">(best 95 · Opus 5)</span></dd>
+        </dl>
+      </div>
+
+      <div class="p-card">
+        <h3>Notes</h3>
+        <p class="muted" style="font-size:.88rem">Non-vision models are skipped on the reverse-prompt track, not zero-scored. Values come from live Venice API runs recorded in <code>data/results.json</code>. Scores are reproducible with the published protocol.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer"><div class="container">
+  <div class="footer-logo">Benchmark<span>Viv</span></div>
+  <p>Independent benchmark showcase for Venice API models.</p>
+  <div class="footer-links"><a href="../index.html#leaderboard">Leaderboard</a><a href="../experimental-design.html">Experimental Design</a></div>
+</div></footer>
+
+<script>
+(function(){
+  var t = document.getElementById('navToggle'), n = document.getElementById('siteNav');
+  if (t && n) t.addEventListener('click', function(){ n.classList.toggle('is-open'); t.setAttribute('aria-expanded', n.classList.contains('is-open')); });
+})();
+</script>
+</body>
+</html>

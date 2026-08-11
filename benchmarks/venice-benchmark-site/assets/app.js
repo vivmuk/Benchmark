@@ -33,6 +33,7 @@
     "Grok 4.5":          "#4F46E5",
     "Inkling":           "#0EA5E9",
     "Kimi K3":           "#F59E0B",
+    "Kimi K3 Fast API":  "#B45309",
   };
 
   const FALLBACK_DATA = { generated: "", source: "fallback", results: [] };
@@ -162,6 +163,7 @@
         excluded: json.results.length - scored.length,
       };
       state.data = scored.map((r) => ({
+        modelId: r.model_id,
         model: modelMap[r.model_id] || r.model_id || r.model,
         benchmark: normalizeId(r.benchmark_id || r.benchmark),
         score: r.score,
@@ -190,22 +192,22 @@
   function renderVivIndexChart() {
     const canvas = $("#vivIndexChart");
     if (!canvas || typeof Chart === "undefined") return;
-    // Full-coverage models ranked first; partial-coverage models shown
-    // separately (hatched) so renormalization can't inflate their rank.
-    const aggs = modelAggregates(state.data).sort((a, b) =>
-      (b.fullCoverage - a.fullCoverage) || (b.vivIndex - a.vivIndex));
+    // Board rank: raw VivIndex, matching the stats panel, infographics, and
+    // profile pages. Partial-coverage models stay visually hatched so
+    // renormalized scores can't be mistaken for full-coverage numbers.
+    const aggs = modelAggregates(state.data).sort((a, b) => b.vivIndex - a.vivIndex);
     if (state.charts.vivIndex) state.charts.vivIndex.destroy();
     state.charts.vivIndex = new Chart(canvas, {
       type: "bar",
       data: {
-        labels: aggs.map((a) => a.fullCoverage ? a.model : `${a.model} (${a.trackCount}/${VIVINDEX_TRACK_COUNT} VivIndex tracks)`),
+        labels: aggs.map((a) => a.fullCoverage || a.trackCount >= VIVINDEX_TRACK_COUNT ? a.model : `${a.model} (${a.trackCount}/${VIVINDEX_TRACK_COUNT} VivIndex tracks)`),
         datasets: [{
           label: "VivIndex",
           data: aggs.map((a) => Number(a.vivIndex.toFixed(1))),
-          backgroundColor: aggs.map((a) => modelColor(a.model, a.fullCoverage ? 0.78 : 0.28)),
-          borderColor: aggs.map((a) => modelColor(a.model)),
-          borderWidth: 1.5,
-          borderDash: [4, 3],
+          backgroundColor: aggs.map((a, i) => i === 0 ? "rgba(217,164,65,0.85)" : modelColor(a.model, a.fullCoverage ? 0.78 : 0.28)),
+          borderColor: aggs.map((a, i) => i === 0 ? "#B8860B" : modelColor(a.model)),
+          borderWidth: aggs.map((a, i) => i === 0 ? 2.5 : 1.5),
+          borderDash: aggs.map((a, i) => i === 0 ? [] : [4, 3]),
           borderRadius: 6,
           maxBarThickness: 34,
         }],
@@ -457,10 +459,16 @@
     if (!container) return;
     state.charts.sparklines.forEach((c) => c.destroy());
     state.charts.sparklines = [];
-    const aggs = modelAggregates(state.data).sort((a, b) => b.avgScore - a.avgScore);
+    // Board rank = raw VivIndex (same rule as stats panel + infographics),
+    // so the #1 card is always the true leader.
+    const aggs = modelAggregates(state.data).sort((a, b) => b.vivIndex - a.vivIndex);
 
-    container.innerHTML = aggs.map((a, i) => `
-      <article class="compare-card reveal">
+    container.innerHTML = aggs.map((a, i) => {
+      const row = state.data.find((r) => r.model === a.model);
+      const slug = (row && row.modelId ? row.modelId : a.model.toLowerCase()).replace(/_/g, "-");
+      const top = i === 0;
+      return `
+      <article class="compare-card reveal${top ? " is-top" : ""}">
         <header>
           <span class="badge">#${i + 1}</span>
           <h3>${a.model}</h3>
@@ -472,8 +480,10 @@
           <div><dt>Speed</dt><dd>${a.tokensPerSec != null ? a.tokensPerSec.toFixed(0) + " tok/s" : "—"}</dd></div>
         </dl>
         <div class="spark-wrap"><canvas></canvas></div>
+        <a class="profile-link" href="models/${slug}.html">Full profile →</a>
       </article>
-    `).join("");
+    `;
+    }).join("");
 
     aggs.forEach((a, i) => {
       const canvas = container.children[i].querySelector("canvas");

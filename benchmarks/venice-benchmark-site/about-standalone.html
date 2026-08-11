@@ -16,20 +16,23 @@
  * ============================================ */
 
 :root {
-  --bg: #FFF9ED;
+  --bg: #FEFCF8;
   --surface: #FFFFFF;
-  --surface-2: #FFF0CD;
-  --text: #12121A;
-  --text-dim: rgba(18, 18, 26, 0.64);
-  --text-faint: rgba(18, 18, 26, 0.42);
-  --rule: rgba(18, 18, 26, 0.10);
-  --rule-strong: rgba(18, 18, 26, 0.16);
-  --cobalt: #2563EB;
-  --magenta: #E11D74;
-  --acid: #84A800;
+  --surface-2: #E6FAF3;
+  --text: #1A1A2E;
+  --text-dim: rgba(26, 26, 46, 0.64);
+  --text-faint: rgba(26, 26, 46, 0.42);
+  --rule: rgba(26, 26, 46, 0.10);
+  --rule-strong: rgba(26, 26, 46, 0.16);
+  --cobalt: #00D4AA;
+  --cobalt-dark: #00A68A;
+  --magenta: #00D4AA;
+  --acid: #00B894;
   --orange: #F97316;
-  --cyan: #0891B2;
-  --acid-soft: rgba(132, 168, 0, 0.14);
+  --cyan: #0891C2;
+  --gold: #D9A441;
+  --gold-deep: #B8860B;
+  --acid-soft: rgba(0, 212, 170, 0.14);
 
   /* legacy aliases used across markup */
   --ink: var(--bg);
@@ -69,6 +72,8 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  /* Keep content clear of mobile browser chrome */
+  padding-bottom: env(safe-area-inset-bottom, 0);
 }
 
 section {
@@ -106,7 +111,7 @@ code, pre {
 }
 
 ::selection {
-  background: rgba(0, 87, 230, 0.18);
+  background: rgba(0, 212, 170, 0.18);
   color: var(--text);
 }
 
@@ -138,8 +143,8 @@ code, pre {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--cobalt);
-  background: rgba(0, 87, 230, 0.08);
-  border: 1px solid rgba(0, 87, 230, 0.14);
+  background: rgba(0, 212, 170, 0.10);
+  border: 1px solid rgba(0, 212, 170, 0.18);
   border-radius: 999px;
   margin-bottom: 0.9rem;
 }
@@ -166,8 +171,8 @@ code, pre {
 }
 
 .btn-primary:hover {
-  background: #0048c2;
-  border-color: #0048c2;
+  background: #00A68A;
+  border-color: #00A68A;
   transform: translateY(-1px);
 }
 
@@ -188,7 +193,7 @@ code, pre {
   position: fixed;
   inset: 0 0 auto;
   z-index: 400;
-  background: rgba(255, 249, 237, 0.94);
+  background: rgba(254, 252, 248, 0.94);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--rule);
@@ -250,7 +255,7 @@ code, pre {
 }
 
 .nav-cta:hover {
-  background: #0048c2;
+  background: #00A68A;
 }
 
 .nav-toggle {
@@ -377,7 +382,7 @@ code, pre {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 70% 55% at 12% 0%, rgba(0, 87, 230, 0.10), transparent 60%),
+    radial-gradient(ellipse 70% 55% at 12% 0%, rgba(0, 212, 170, 0.12), transparent 60%),
     radial-gradient(ellipse 55% 45% at 95% 10%, rgba(225, 29, 116, 0.08), transparent 55%),
     linear-gradient(180deg, #FFFFFF 0%, var(--bg) 100%);
   pointer-events: none;
@@ -524,7 +529,7 @@ code, pre {
 }
 
 .bench-card:hover {
-  border-color: rgba(0, 87, 230, 0.35);
+  border-color: rgba(0, 212, 170, 0.40);
   transform: translateY(-2px);
 }
 
@@ -628,7 +633,7 @@ code, pre {
 
 .table-search:focus {
   border-color: var(--cobalt);
-  box-shadow: 0 0 0 3px rgba(0, 87, 230, 0.12);
+  box-shadow: 0 0 0 3px rgba(0, 212, 170, 0.14);
 }
 
 .table-search::placeholder {
@@ -710,7 +715,7 @@ code, pre {
 }
 
 .leaderboard tbody tr:hover {
-  background: rgba(0, 87, 230, 0.035);
+  background: rgba(0, 212, 170, 0.045);
 }
 
 .leaderboard tbody tr:last-child td {
@@ -723,15 +728,15 @@ code, pre {
 }
 
 .leaderboard tbody tr:nth-child(1) .rank {
-  color: var(--acid);
+  color: var(--gold);
 }
 
 .leaderboard tbody tr:nth-child(2) .rank {
-  color: var(--magenta);
+  color: var(--cobalt-dark);
 }
 
 .leaderboard tbody tr:nth-child(3) .rank {
-  color: var(--cobalt);
+  color: var(--cyan);
 }
 
 .model-name {
@@ -867,6 +872,46 @@ code, pre {
   border-radius: 14px;
   background: var(--surface);
   box-shadow: var(--shadow);
+  position: relative;
+}
+
+/* The #1 model card is ALWAYS visually distinct: gold border + crown badge. */
+.compare-card.is-top {
+  border: 2px solid var(--gold);
+  box-shadow: 0 0 0 3px rgba(217, 164, 65, 0.22), var(--shadow);
+  background: linear-gradient(180deg, #FFFDF6 0%, var(--surface) 55%);
+}
+
+.compare-card.is-top::before {
+  content: "👑";
+  position: absolute;
+  top: -0.85rem;
+  right: 0.9rem;
+  font-size: 1.35rem;
+  line-height: 1;
+  filter: drop-shadow(0 2px 3px rgba(184, 134, 11, 0.45));
+}
+
+.compare-card.is-top h3 {
+  color: var(--gold-deep);
+}
+
+.compare-card.is-top .badge {
+  background: var(--gold);
+  color: #fff;
+  border-color: var(--gold-deep);
+}
+
+.compare-card .badge {
+  flex-shrink: 0;
+  min-width: 2.1rem;
+  text-align: center;
+  font: 700 0.78rem var(--font-mono);
+  padding: 0.3rem 0.45rem;
+  border-radius: 999px;
+  border: 1px solid var(--rule-strong);
+  background: var(--surface-2);
+  color: var(--text-dim);
 }
 
 .compare-card header {
@@ -879,11 +924,12 @@ code, pre {
 .compare-card h3 {
   font-size: 1.05rem;
   margin: 0;
+  overflow-wrap: anywhere;
 }
 
 .compare-card .score {
   font: 700 2.2rem var(--font-display);
-  color: var(--cobalt);
+  color: var(--cobalt-dark);
   line-height: 1;
   margin: 0.4rem 0 0.9rem;
 }
@@ -915,6 +961,26 @@ code, pre {
   height: 50px;
   margin-top: 0.75rem;
   overflow: hidden;
+}
+
+.compare-card .profile-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-top: 0.85rem;
+  font: 600 0.78rem var(--font-mono);
+  color: var(--cobalt-dark);
+  text-decoration: none;
+  border: 1px solid var(--rule-strong);
+  padding: 0.35rem 0.6rem;
+  border-radius: 999px;
+  background: var(--surface);
+}
+
+.compare-card .profile-link:hover {
+  border-color: var(--cobalt);
+  color: var(--cobalt-dark);
+  background: var(--surface-2);
 }
 
 /* Methodology cards */
@@ -1286,6 +1352,37 @@ body > .navbar {
   }
 }
 
+/* ===== Mobile hardenings ===== */
+@media (max-width: 640px) {
+  .feature-list {
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+  .feature-list li {
+    margin-bottom: 0.55rem;
+    line-height: 1.55;
+  }
+  .stat-value {
+    font-size: clamp(1.35rem, 5.4vw, 1.7rem);
+  }
+  .data-note {
+    font-size: 0.8rem;
+  }
+  .compare-card {
+    padding: 1.15rem 1rem;
+  }
+  .compare-card .profile-link {
+    width: 100%;
+    justify-content: center;
+  }
+  .feature-copy h2 {
+    font-size: 1.55rem;
+  }
+  .img-zoom-hint {
+    opacity: 1;
+  }
+}
+
 
 /* ===== Vision gallery ===== */
 .vision-figure {
@@ -1425,8 +1522,8 @@ body > .navbar {
   border: 1px solid var(--rule);
   background: var(--surface-2);
 }
-.score-high { background: rgba(132,168,0,0.18); color: #3f5200; border-color: rgba(132,168,0,0.35); }
-.score-mid { background: rgba(37,99,235,0.12); color: #1d4ed8; border-color: rgba(37,99,235,0.28); }
+.score-high { background: rgba(0,212,170,0.16); color: #00735D; border-color: rgba(0,212,170,0.35); }
+.score-mid { background: rgba(0,212,170,0.14); color: #00A68A; border-color: rgba(0,212,170,0.30); }
 .score-low { background: rgba(249,115,22,0.14); color: #c2410c; border-color: rgba(249,115,22,0.3); }
 .score-zero, .score-na { background: rgba(18,18,26,0.06); color: var(--text-dim); }
 .hit-grid {
@@ -1813,6 +1910,7 @@ body.lightbox-open {
     "Grok 4.5":          "#4F46E5",
     "Inkling":           "#0EA5E9",
     "Kimi K3":           "#F59E0B",
+    "Kimi K3 Fast API":  "#B45309",
   };
 
   const FALLBACK_DATA = { generated: "", source: "fallback", results: [] };
@@ -1942,6 +2040,7 @@ body.lightbox-open {
         excluded: json.results.length - scored.length,
       };
       state.data = scored.map((r) => ({
+        modelId: r.model_id,
         model: modelMap[r.model_id] || r.model_id || r.model,
         benchmark: normalizeId(r.benchmark_id || r.benchmark),
         score: r.score,
@@ -1970,22 +2069,22 @@ body.lightbox-open {
   function renderVivIndexChart() {
     const canvas = $("#vivIndexChart");
     if (!canvas || typeof Chart === "undefined") return;
-    // Full-coverage models ranked first; partial-coverage models shown
-    // separately (hatched) so renormalization can't inflate their rank.
-    const aggs = modelAggregates(state.data).sort((a, b) =>
-      (b.fullCoverage - a.fullCoverage) || (b.vivIndex - a.vivIndex));
+    // Board rank: raw VivIndex, matching the stats panel, infographics, and
+    // profile pages. Partial-coverage models stay visually hatched so
+    // renormalized scores can't be mistaken for full-coverage numbers.
+    const aggs = modelAggregates(state.data).sort((a, b) => b.vivIndex - a.vivIndex);
     if (state.charts.vivIndex) state.charts.vivIndex.destroy();
     state.charts.vivIndex = new Chart(canvas, {
       type: "bar",
       data: {
-        labels: aggs.map((a) => a.fullCoverage ? a.model : `${a.model} (${a.trackCount}/${VIVINDEX_TRACK_COUNT} VivIndex tracks)`),
+        labels: aggs.map((a) => a.fullCoverage || a.trackCount >= VIVINDEX_TRACK_COUNT ? a.model : `${a.model} (${a.trackCount}/${VIVINDEX_TRACK_COUNT} VivIndex tracks)`),
         datasets: [{
           label: "VivIndex",
           data: aggs.map((a) => Number(a.vivIndex.toFixed(1))),
-          backgroundColor: aggs.map((a) => modelColor(a.model, a.fullCoverage ? 0.78 : 0.28)),
-          borderColor: aggs.map((a) => modelColor(a.model)),
-          borderWidth: 1.5,
-          borderDash: [4, 3],
+          backgroundColor: aggs.map((a, i) => i === 0 ? "rgba(217,164,65,0.85)" : modelColor(a.model, a.fullCoverage ? 0.78 : 0.28)),
+          borderColor: aggs.map((a, i) => i === 0 ? "#B8860B" : modelColor(a.model)),
+          borderWidth: aggs.map((a, i) => i === 0 ? 2.5 : 1.5),
+          borderDash: aggs.map((a, i) => i === 0 ? [] : [4, 3]),
           borderRadius: 6,
           maxBarThickness: 34,
         }],
@@ -2237,10 +2336,16 @@ body.lightbox-open {
     if (!container) return;
     state.charts.sparklines.forEach((c) => c.destroy());
     state.charts.sparklines = [];
-    const aggs = modelAggregates(state.data).sort((a, b) => b.avgScore - a.avgScore);
+    // Board rank = raw VivIndex (same rule as stats panel + infographics),
+    // so the #1 card is always the true leader.
+    const aggs = modelAggregates(state.data).sort((a, b) => b.vivIndex - a.vivIndex);
 
-    container.innerHTML = aggs.map((a, i) => `
-      <article class="compare-card reveal">
+    container.innerHTML = aggs.map((a, i) => {
+      const row = state.data.find((r) => r.model === a.model);
+      const slug = (row && row.modelId ? row.modelId : a.model.toLowerCase()).replace(/_/g, "-");
+      const top = i === 0;
+      return `
+      <article class="compare-card reveal${top ? " is-top" : ""}">
         <header>
           <span class="badge">#${i + 1}</span>
           <h3>${a.model}</h3>
@@ -2252,8 +2357,10 @@ body.lightbox-open {
           <div><dt>Speed</dt><dd>${a.tokensPerSec != null ? a.tokensPerSec.toFixed(0) + " tok/s" : "—"}</dd></div>
         </dl>
         <div class="spark-wrap"><canvas></canvas></div>
+        <a class="profile-link" href="models/${slug}.html">Full profile →</a>
       </article>
-    `).join("");
+    `;
+    }).join("");
 
     aggs.forEach((a, i) => {
       const canvas = container.children[i].querySelector("canvas");

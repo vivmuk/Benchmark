@@ -1,5 +1,19 @@
 [
   {
+    "id": "kimi-k3-fast-api",
+    "disp": "Kimi K3 Fast API",
+    "viv": 93.1,
+    "scores": {
+      "intent-understanding": 76,
+      "one-shot-ui": 95,
+      "brick-breaker-realism": 93,
+      "pharma-drug-interaction": 86,
+      "pharma-regulatory-comprehension": 90,
+      "startup-in-a-weekend": 100,
+      "value-density": 100
+    }
+  },
+  {
     "id": "openai-gpt-55",
     "disp": "GPT-5.5",
     "viv": 92.5,
