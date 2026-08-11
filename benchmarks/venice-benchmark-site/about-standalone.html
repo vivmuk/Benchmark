@@ -26,7 +26,7 @@
   --rule-strong: rgba(26, 26, 46, 0.16);
   --cobalt: #00D4AA;
   --cobalt-dark: #00A68A;
-  --magenta: #00D4AA;
+  --magenta: #E11D74;  /* pink accent for font highlights */
   --acid: #00B894;
   --orange: #F97316;
   --cyan: #0891C2;
@@ -34,9 +34,9 @@
   --gold-deep: #B8860B;
   --acid-soft: rgba(0, 212, 170, 0.14);
 
-  /* legacy aliases used across markup */
-  --ink: var(--bg);
-  --ink-2: var(--surface);
+  /* legacy aliases used across markup (ink = dark text, ink-2 = dim) */
+  --ink: var(--text);
+  --ink-2: var(--text-dim);
   --paper: var(--text);
   --paper-dim: var(--text-dim);
 
@@ -732,11 +732,11 @@ code, pre {
 }
 
 .leaderboard tbody tr:nth-child(2) .rank {
-  color: var(--cobalt-dark);
+  color: var(--magenta);
 }
 
 .leaderboard tbody tr:nth-child(3) .rank {
-  color: var(--cyan);
+  color: var(--cobalt-dark);
 }
 
 .model-name {

@@ -1,9 +1,16 @@
 #!/usr/bin/env python3
 """Generate an accurate SVG bar chart of the BenchmarkViv VivIndex leaderboard,
-highlighting DeepSeek V4 Flash 0731."""
+highlighting one model (default: the current #1).
+
+Usage: make_svg_chart.py [model_id]
+"""
 import json
+import sys
 
 snap = json.load(open("data/chart_snapshot.json"))
+HIGHLIGHT = sys.argv[1] if len(sys.argv) > 1 else snap[0]["id"]
+HIGHLIGHT_DISP = next(o["disp"] for o in snap if o["id"] == HIGHLIGHT)
+HIGHLIGHT_RANK = next(i + 1 for i, o in enumerate(snap) if o["id"] == HIGHLIGHT)
 
 W, H = 1000, 720
 MARGIN_L = 260
@@ -34,11 +41,11 @@ parts = []
 parts.append(f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" font-family="Inter, system-ui, sans-serif">')
 parts.append(f'<rect width="{W}" height="{H}" fill="{cream}"/>')
 parts.append(f'<text x="{MARGIN_L}" y="44" font-size="30" font-weight="700" fill="{indigo}">BenchmarkViv 2026 — VivIndex Leaderboard</text>')
-parts.append(f'<text x="{MARGIN_L}" y="68" font-size="15" fill="{grey}">Weighted composite of 6 scored tracks · DeepSeek V4 Flash 0731 highlighted</text>')
+parts.append(f'<text x="{MARGIN_L}" y="68" font-size="15" fill="{grey}">Weighted composite of 6 scored tracks · {HIGHLIGHT_DISP} highlighted</text>')
 
 for o, y in rows:
     bar_w = plot_w * (o["viv"] / maxv)
-    is_me = o["id"] == "deepseek-v4-flash-0731"
+    is_me = o["id"] == HIGHLIGHT
     fill = teal if is_me else "#dbe4ee"
     label = esc(o["disp"])
     score = str(o["viv"])
@@ -49,8 +56,9 @@ for o, y in rows:
 # footer
 ty = y + 14
 parts.append(f'<rect x="{MARGIN_L}" y="{ty}" width="18" height="18" rx="4" fill="{teal}"/>')
-parts.append(f'<text x="{MARGIN_L+26}" y="{ty+14}" font-size="14" fill="{indigo}">DeepSeek V4 Flash 0731 — #{next(i+1 for i,o in enumerate(snap) if o["id"]=="deepseek-v4-flash-0731")} of {len(snap)}</text>')
+parts.append(f'<text x="{MARGIN_L+26}" y="{ty+14}" font-size="14" fill="{indigo}">{HIGHLIGHT_DISP} — #{HIGHLIGHT_RANK} of {len(snap)}</text>')
 parts.append("</svg>")
 
-open("data/leaderboard_chart.svg", "w").write("\n".join(parts))
-print("wrote data/leaderboard_chart.svg", len(parts), "elements")
+out = f"data/{HIGHLIGHT}-chart.svg"
+open(out, "w").write("\n".join(parts))
+print("wrote", out, len(parts), "elements")

@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="2354" viewBox="0 0 1000 2354" font-family="Inter, system-ui, sans-serif">
+<rect width="1000" height="2354" fill="#FEFCF8"/>
+<text x="40" y="82" font-size="64" font-weight="800" fill="#1A1A2E">Kimi K3 Fast API</text>
+<text x="40" y="134" font-size="30" fill="#7a8294">BenchmarkViv 2026 · real Venice API runs · VivIndex composite rank</text>
+<rect x="40" y="150" width="920" height="3" fill="#00D4AA"/>
+<text x="40" y="170" font-size="20" fill="#7a8294">(scroll — stacked for mobile)</text>
+<rect x="40" y="170" width="920" height="520" rx="18" fill="#FFFFFF" stroke="#e4e9f2" stroke-width="2"/>
+<text x="74" y="216" font-size="38" font-weight="800" fill="#1A1A2E">Overall Rank</text>
+<text x="74" y="242" font-size="30" fill="#7a8294">VivIndex weighted composite</text>
+<text x="74" y="356" font-size="150" font-weight="900" fill="#D9A441">#1</text>
+<text x="167.0" y="352" font-size="63.0" fill="#D9A441">👑</text>
+<text x="197.0" y="352" font-size="56" font-weight="700" fill="#7a8294">of 18 models</text>
+<text x="74" y="388" font-size="30" fill="#7a8294">VivIndex 93.1 / 100</text>
+<rect x="74" y="400" width="560" height="26" rx="13" fill="#EEF1F7"/>
+<rect x="74" y="400" width="521" height="26" rx="13" fill="#00D4AA"/>
+<text x="648" y="421" font-size="56" font-weight="800" fill="#1A1A2E">93.1</text>
+<text x="74" y="452" font-size="24" fill="#7a8294">Top of the board:</text>
+<g transform="translate(74,468)"><path d="M2 14 L2 4 L6.16 11.0 L11.0 2 L15.84 11.0 L20 4 L20 14 Z" fill="#B8860B"/><path d="M2 16 L2 6 L6.16 11.440000000000001 L11.0 4 L15.84 11.440000000000001 L20 6 L20 16" fill="#D9A441"/><rect x="2" y="16" width="18" height="3" rx="1.5" fill="#B8860B"/></g>
+<text x="104" y="486" font-size="30" font-weight="700" fill="#D9A441">Kimi K3 Fast API</text>
+<rect x="274" y="473" width="354" height="16" rx="8" fill="#D9A441"/>
+<text x="636" y="486" font-size="30" font-weight="700" fill="#1A1A2E">93.1</text>
+<text x="724" y="486" font-size="24" font-weight="600" fill="#00A68A">you are here</text>
+<text x="74" y="520" font-size="30" font-weight="700" fill="#1A1A2E">GPT-5.5</text>
+<rect x="274" y="507" width="351" height="16" rx="8" fill="#d9e0ec"/>
+<text x="633" y="520" font-size="30" font-weight="700" fill="#1A1A2E">92.5</text>
+<text x="74" y="554" font-size="30" font-weight="700" fill="#1A1A2E">GPT-5.6 Terra</text>
+<rect x="274" y="541" width="350" height="16" rx="8" fill="#d9e0ec"/>
+<text x="632" y="554" font-size="30" font-weight="700" fill="#1A1A2E">92.2</text>
+<text x="74" y="588" font-size="30" font-weight="700" fill="#1A1A2E">GPT-5.6 Sol</text>
+<rect x="274" y="575" width="346" height="16" rx="8" fill="#d9e0ec"/>
+<text x="628" y="588" font-size="30" font-weight="700" fill="#1A1A2E">90.9</text>
+<rect x="40" y="716" width="920" height="520" rx="18" fill="#FFFFFF" stroke="#e4e9f2" stroke-width="2"/>
+<text x="74" y="762" font-size="38" font-weight="800" fill="#1A1A2E">Where it wins</text>
+<text x="74" y="788" font-size="30" fill="#7a8294">Scored lanes (higher = better)</text>
+<text x="74" y="826" font-size="30" fill="#1A1A2E">Value Density @1K</text>
+<rect x="74" y="834" width="732" height="20" rx="10" fill="#EEF1F7"/>
+<rect x="74" y="834" width="732" height="20" rx="10" fill="#00D4AA"/>
+<text x="820" y="852" font-size="56" font-weight="800" fill="#1A1A2E">100</text>
+<text x="74" y="870" font-size="30" fill="#1A1A2E">One-Shot UI Generation</text>
+<rect x="74" y="878" width="732" height="20" rx="10" fill="#EEF1F7"/>
+<rect x="74" y="878" width="695" height="20" rx="10" fill="#00D4AA"/>
+<text x="820" y="896" font-size="56" font-weight="800" fill="#1A1A2E">95</text>
+<text x="74" y="914" font-size="30" fill="#1A1A2E">Startup in a Weekend</text>
+<rect x="74" y="922" width="732" height="20" rx="10" fill="#EEF1F7"/>
+<rect x="74" y="922" width="732" height="20" rx="10" fill="#00D4AA"/>
+<text x="820" y="940" font-size="56" font-weight="800" fill="#1A1A2E">100</text>
+<text x="74" y="958" font-size="30" fill="#1A1A2E">Pharma Drug Interaction</text>
+<rect x="74" y="966" width="732" height="20" rx="10" fill="#EEF1F7"/>
+<rect x="74" y="966" width="630" height="20" rx="10" fill="#00D4AA"/>
+<text x="820" y="984" font-size="56" font-weight="800" fill="#1A1A2E">86</text>
+<text x="74" y="1002" font-size="30" fill="#1A1A2E">Pharma Regulatory</text>
+<rect x="74" y="1010" width="732" height="20" rx="10" fill="#EEF1F7"/>
+<rect x="74" y="1010" width="659" height="20" rx="10" fill="#00D4AA"/>
+<text x="820" y="1028" font-size="56" font-weight="800" fill="#1A1A2E">90</text>
+<text x="74" y="1046" font-size="30" fill="#1A1A2E">Intent Understanding</text>
+<rect x="74" y="1054" width="732" height="20" rx="10" fill="#EEF1F7"/>
+<rect x="74" y="1054" width="556" height="20" rx="10" fill="#00D4AA"/>
+<text x="820" y="1072" font-size="56" font-weight="800" fill="#1A1A2E">76</text>
+<rect x="40" y="1262" width="920" height="520" rx="18" fill="#FFFFFF" stroke="#e4e9f2" stroke-width="2"/>
+<text x="74" y="1308" font-size="38" font-weight="800" fill="#1A1A2E">Pharma domain</text>
+<text x="74" y="1334" font-size="30" fill="#7a8294">Drug-drug interaction + regulatory</text>
+<text x="74.0" y="1386" font-size="90" font-weight="900" fill="#1A1A2E">86</text>
+<text x="178.0" y="1378" font-size="21" font-weight="700" fill="#7a8294">Drug-Drug
+Interaction</text>
+<text x="74.0" y="1430" font-size="15" fill="#7a8294">Board best: Opus 5 90</text>
+<text x="500.0" y="1386" font-size="90" font-weight="900" fill="#1A1A2E">90</text>
+<text x="604.0" y="1378" font-size="21" font-weight="700" fill="#7a8294">Regulatory
+Comprehension</text>
+<text x="500.0" y="1430" font-size="15" fill="#7a8294">Board best: Opus 5 95</text>
+<text x="74" y="1467" font-size="24" fill="#7a8294">vs best-in-class on each lane:</text>
+<text x="74" y="1509" font-size="24" font-weight="700" fill="#1A1A2E">Drug-Drug Interaction</text>
+<rect x="284" y="1495" width="180" height="18" rx="9" fill="#EEF1F7"/>
+<rect x="284" y="1495" width="155" height="18" rx="9" fill="#00D4AA"/>
+<text x="474" y="1509" font-size="14" font-weight="800" fill="#1A1A2E">86</text>
+<rect x="284" y="1515" width="162" height="6" rx="3" fill="#0aa97f" opacity="0.55"/>
+<text x="474" y="1523" font-size="13" fill="#7a8294">best 90</text>
+<text x="74" y="1551" font-size="24" font-weight="700" fill="#1A1A2E">Regulatory</text>
+<rect x="284" y="1537" width="180" height="18" rx="9" fill="#EEF1F7"/>
+<rect x="284" y="1537" width="162" height="18" rx="9" fill="#00D4AA"/>
+<text x="474" y="1551" font-size="14" font-weight="800" fill="#1A1A2E">90</text>
+<rect x="284" y="1557" width="171" height="6" rx="3" fill="#0aa97f" opacity="0.55"/>
+<text x="474" y="1565" font-size="13" fill="#7a8294">best 95</text>
+<rect x="40" y="1808" width="920" height="520" rx="18" fill="#FFFFFF" stroke="#e4e9f2" stroke-width="2"/>
+<text x="74" y="1854" font-size="38" font-weight="800" fill="#1A1A2E">Efficiency</text>
+<text x="74" y="1880" font-size="30" fill="#7a8294">Value per token · cost · speed</text>
+<text x="74" y="1938" font-size="72" font-weight="900" fill="#1A1A2E">100</text>
+<text x="224" y="1928" font-size="22" font-weight="700" fill="#7a8294">Value Density
+@1K</text>
+<text x="74" y="1980" font-size="15" fill="#7a8294">Perfect score, perfect compact JSON</text>
+<rect x="74" y="2023" width="411" height="70" rx="12" fill="#f4f6fb" stroke="#e4e9f2"/>
+<text x="90" y="2053" font-size="27" font-weight="800" fill="#00A68A">43.8</text>
+<text x="90" y="2081" font-size="14" fill="#7a8294">Value per 1k tokens</text>
+<rect x="515" y="2023" width="411" height="70" rx="12" fill="#f4f6fb" stroke="#e4e9f2"/>
+<text x="531" y="2053" font-size="27" font-weight="800" fill="#00A68A">$0.1187</text>
+<text x="531" y="2081" font-size="14" fill="#7a8294">Avg cost / scored run</text>
+<rect x="74" y="2109" width="411" height="70" rx="12" fill="#f4f6fb" stroke="#e4e9f2"/>
+<text x="90" y="2139" font-size="27" font-weight="800" fill="#00A68A">123</text>
+<text x="90" y="2167" font-size="14" fill="#7a8294">Speed (out tok/s)</text>
+<rect x="515" y="2109" width="411" height="70" rx="12" fill="#f4f6fb" stroke="#e4e9f2"/>
+<text x="531" y="2139" font-size="27" font-weight="800" fill="#00A68A">$0.7121</text>
+<text x="531" y="2167" font-size="14" fill="#7a8294">Total run cost</text>
+</svg>
