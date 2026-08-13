@@ -1,0 +1,8 @@
+{
+  "model_id": "deepseek-v4-pro",
+  "model_used": "deepseek-v4-pro",
+  "prompt": "Create a single self-contained HTML document (no external files, no CDN, no images) that shows a cute alpaca dancing. Make it genuinely impressive: a recognizable fluffy alpaca with a long neck, ears,",
+  "generated_at": "2026-08-13T11:02:37.917410+00:00",
+  "chars": 21808,
+  "raw_preview": "```html\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Dancing Alpaca</title>\n    <style>\n        * {\n            margin: 0;\n            padding: 0;\n            box-sizing: border-box;\n        }\n\n        body {\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            min-height: 100vh;\n            background: linear-gradient(180deg, #87CEEB"
+}

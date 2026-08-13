@@ -1,0 +1,8 @@
+{
+  "model_id": "kimi-k3",
+  "model_used": "kimi-k3",
+  "prompt": "Create a single self-contained HTML document (no external files, no CDN, no images) that shows a cute alpaca dancing. Make it genuinely impressive: a recognizable fluffy alpaca with a long neck, ears,",
+  "generated_at": "2026-08-13T11:04:44.567114+00:00",
+  "chars": 18756,
+  "raw_preview": "```html\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"UTF-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n<title>Dancing Alpaca Party</title>\n<style>\n    :root {\n        --fur: #f6ead9;\n        --fur-dark: #e8d4bc;\n        --fur-light: #fdf6ec;\n        --face: #f0ddc4;\n        --blush: #f4a9a0;\n        --hoof: #8a6f5c;\n        --nose: #6b4f3f;\n        --eye: #3b2a22;\n    }\n\n    * { margin: 0; padding: 0; box-sizing: border-box; }\n\n    html, body {\n        widt"
+}

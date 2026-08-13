@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cute Dancing Alpaca Party!</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
+
+    body {
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      background: #0d0618;
+      font-family: 'Fredoka', 'Comic Sans MS', system-ui, -apple-system, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+    }
+
+    #stage-container {
+      position: relative;
+      width: 100%;
+      max-width: 800px;
+      height: 100vh;
+      max-height: 800px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    svg#stage {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+      filter: drop-shadow(0 15px 25px rgba(0,0,0,0.6));
+    }
+
+    /* UI Overlay */
+    .ui-layer {
+      position: absolute;
+      top: 20px;
+      left: 0;
+      right: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      background: linear-gradient(45deg, #ff007f, #00e5ff, #ffd700, #ff007f);
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientTitle 4s ease infinite;
+      text-shadow: 0 0 20px rgba(255,0,127,0.3);
+    }
+
+    @keyframes gradientTitle {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .badge {
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 6px 18px;
+      border-radius: 20px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #ffe5f1;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+    }
+
+    .controls {
+      position: absolute;
+      bottom: 25px;
+      display: flex;
+      gap: 15px;
+      z-index: 10;
+      pointer-events: auto;
+    }
+
+    .btn {
+      background: linear-gradient(135deg, #ff007f, #7c4dff);
+      border: none;
+      color: white;
+      padding: 12px 24px;
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(255, 0, 127, 0.4);
+      transition: transform 0.2s, box-shadow 0.2s, background 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 10px 25px rgba(255, 0, 127, 0.6);
+    }
+
+    .btn:active {
+      transform: translateY(1px) scale(0.98);
+    }
+
+    .btn-secondary {
+      background: linear-gradient(135deg, #00e5ff, #0077ff);
+      box-shadow: 0 6px 20px rgba(0, 229, 255, 0.4);
+    }
+
+    .btn-secondary:hover {
+      box-shadow: 0 10px 25px rgba(0, 229, 255, 0.6);
+    }
+
+    /* Floating SVG particles */
+    .particle {
+      pointer-events: none;
+      animation: floatUp 2.5s ease-out forwards;
+    }
+
+    @keyframes floatUp {
+      0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(0.6) rotate(0deg);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(var(--dx), var(--dy)) scale(1.4) rotate(var(--dr));
+      }
+    }
+
+    /* CSS Keyframe animations for background components */
+    .spin-slow {
+      transform-origin: 400px 80px;
+      animation: spin 12s linear infinite;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .pulse-beam {
+      animation: beamPulse 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes beamPulse {
+      0% { opacity: 0.15; }
+      100% { opacity: 0.45; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="stage-container">
+    <div class="ui-layer">
+      <h1>Fluffy Groove</h1>
+      <div class="badge" id="move-display">✨ Style: The Fluffy Bounce</div>
+    </div>
+
+    <svg id="stage" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <!-- Background Gradients -->
+        <radialGradient id="bg-glow" cx="50%" cy="40%" r="60%">
+          <stop offset="0%" stop-color="#2a124d" />
+          <stop offset="60%" stop-color="#120624" />
+          <stop offset="100%" stop-color="#070210" />
+        </radialGradient>
+
+        <!-- Stage Floor Gradient -->
+        <radialGradient id="floor-glow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#ff007f" stop-opacity="0.6"/>
+          <stop offset="50%" stop-color="#7c4dff" stop-opacity="0.3"/>
+          <stop offset="100%" stop-color="#00e5ff" stop-opacity="0"/>
+        </radialGradient>
+
+        <!-- Alpaca Wool Gradient -->
+        <linearGradient id="wool-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#FFFFFF" />
+          <stop offset="60%" stop-color="#FFF4E0" />
+          <stop offset="100%" stop-color="#EAD5B7" />
+        </linearGradient>
+
+        <!-- Shading Wool Gradient -->
+        <linearGradient id="wool-dark" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#F3E5CE" />
+          <stop offset="100%" stop-color="#D8BE99" />
+        </linearGradient>
+
+        <!-- Serape Blanket Gradient -->
+        <linearGradient id="serape-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#FF007F" />
+          <stop offset="25%" stop-color="#FFD700" />
+          <stop offset="50%" stop-color="#00E5FF" />
+          <stop offset="75%" stop-color="#9D00FF" />
+          <stop offset="100%" stop-color="#FF007F" />
+        </linearGradient>

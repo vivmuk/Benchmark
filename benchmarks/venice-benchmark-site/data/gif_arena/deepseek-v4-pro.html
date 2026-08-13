@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dancing Alpaca</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(180deg, #87CEEB 0%, #98FB98 50%, #90EE90 100%);
+            font-family: 'Georgia', serif;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Animated background elements */
+        .bg-element {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: floatAround 8s ease-in-out infinite;
+            pointer-events: none;
+        }
+        .bg-element:nth-child(1) {
+            width: 120px;
+            height: 120px;
+            background: #FFD700;
+            top: 10%;
+            left: 15%;
+            animation-delay: 0s;
+        }
+        .bg-element:nth-child(2) {
+            width: 80px;
+            height: 80px;
+            background: #FF69B4;
+            top: 70%;
+            right: 12%;
+            animation-delay: -3s;
+        }
+        .bg-element:nth-child(3) {
+            width: 100px;
+            height: 100px;
+            background: #FFA500;
+            top: 45%;
+            left: 75%;
+            animation-delay: -5s;
+        }
+        .bg-element:nth-child(4) {
+            width: 90px;
+            height: 90px;
+            background: #FFB6C1;
+            top: 20%;
+            right: 20%;
+            animation-delay: -2s;
+        }
+
+        @keyframes floatAround {
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+            25% {
+                transform: translate(30px, -40px) scale(1.1);
+            }
+            50% {
+                transform: translate(-20px, 20px) scale(0.95);
+            }
+            75% {
+                transform: translate(-35px, -15px) scale(1.05);
+            }
+        }
+
+        /* Ground decoration */
+        .ground {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: linear-gradient(0deg, #228B22 0%, #32CD32 50%, transparent 100%);
+            border-radius: 50% 50% 0 0 / 30px 30px 0 0;
+        }
+
+        canvas {
+            display: block;
+            position: relative;
+            z-index: 2;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2));
+        }
+
+        /* Musical notes floating */
+        .note {
+            position: absolute;
+            font-size: 28px;
+            color: #FF1493;
+            opacity: 0.7;
+            animation: noteFloat 3s ease-in infinite;
+            pointer-events: none;
+            z-index: 3;
+        }
+        .note:nth-child(6) {
+            top: 20%;
+            left: 30%;
+            animation-delay: 0s;
+            font-size: 32px;
+            color: #FFD700;
+        }
+        .note:nth-child(7) {
+            top: 30%;
+            right: 28%;
+            animation-delay: 1.5s;
+            font-size: 24px;
+            color: #FF69B4;
+        }
+        .note:nth-child(8) {
+            top: 15%;
+            left: 60%;
+            animation-delay: 0.8s;
+            font-size: 30px;
+            color: #FFA500;
+        }
+
+        @keyframes noteFloat {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.7;
+            }
+            50% {
+                transform: translateY(-60px) rotate(15deg);
+                opacity: 0.2;
+            }
+            100% {
+                transform: translateY(-120px) rotate(-10deg);
+                opacity: 0;
+            }
+        }
+
+        .title {
+            position: absolute;
+            top: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2.5rem;
+            color: #fff;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 215, 0, 0.5);
+            z-index: 5;
+            letter-spacing: 2px;
+            animation: titlePulse 2s ease-in-out infinite;
+        }
+
+        @keyframes titlePulse {
+            0%,
+            100% {
+                transform: translateX(-50%) scale(1);
+            }
+            50% {
+                transform: translateX(-50%) scale(1.05);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-element"></div>
+    <div class="bg-element"></div>
+    <div class="bg-element"></div>
+    <div class="bg-element"></div>
+    <div class="ground"></div>
+
+    <span class="note">♪</span>
+    <span class="note">♫</span>
+    <span class="note">♪</span>
+
+    <h1 class="title">✨ Dancing Alpaca ✨</h1>
+
+    <canvas id="canvas" width="500" height="550"></canvas>
+
+    <script>
+        (function() {
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+
+            // Animation state
+            let time = 0;
+            const danceCycle = 3.5; // seconds for one full dance cycle
+
+            // Alpaca position (center bottom)
+            const baseX = 250;
+            const baseY = 420;
+
+            // Drawing helper: fluffy oval
+            function drawFluffyOval(cx, cy, rx, ry, color, fluffiness = 0.15) {
+                ctx.save();
+                ctx.fillStyle = color;
+                ctx.beginPath();
+                const steps = 24;
+                for (let i = 0; i < steps; i++) {
+                    const angle = (i / steps) * Math.PI * 2;
+                    const wobble = 1 + Math.sin(i * 5 + time * 3) * fluffiness;
+                    const x = cx + Math.cos(angle) * rx * wobble;
+                    const y = cy + Math.sin(angle) * ry * wobble;
+                    if (i === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                }
+                ctx.closePath();
+                ctx.fill();
+
+                // Subtle shading
+                const gradient = ctx.createRadialGradient(cx - rx * 0.2, cy - ry * 0.2, rx * 0.1, cx, cy, rx);
+                gradient.addColorStop(0, 'rgba(255,255,255,0.3)');
+                gradient.addColorStop(1, 'rgba(0,0,0,0.05)');
+                ctx.fillStyle = gradient;
+                ctx.fill();
+                ctx.restore();
+            }
+
+            function drawAlpaca(bounceOffset, leftArmAngle, rightArmAngle, leftLegAngle, rightLegAngle, neckTilt, earWiggle,
+                tailWag) {
+
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                const bodyY = baseY + bounceOffset;
+
+                // --- Shadow ---
+                ctx.save();
+                ctx.fillStyle = 'rgba(0,0,0,0.15)';
+                ctx.beginPath();
+                ctx.ellipse(baseX, baseY + 70, 55, 15, 0, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+
+                // --- Tail (pom-pom) ---
+                const tailX = baseX - 65;
+                const tailY = bodyY - 25 + tailWag * 8;
+                drawFluffyOval(tailX, tailY, 18, 16, '#F5E6D3', 0.2);
+                // Pom-pom detail
+                ctx.save();
+                ctx.fillStyle = '#EDD9C0';
+                ctx.beginPath();
+                ctx.arc(tailX - 2, tailY - 3, 6, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.fillStyle = '#FFF8F0';
+                ctx.beginPath();
+                ctx.arc(tailX + 3, tailY + 2, 5, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+
+                // --- Back legs ---
+                const backLegX = baseX + 20;
+                const backLegTopY = bodyY + 15;
+                const backLegLength = 55;
+
+                const backLeftEndX = backLegX + Math.sin(leftLegAngle) * 15;
+                const backLeftEndY = backLegTopY + backLegLength + Math.cos(leftLegAngle) * 12;
+                const backRightEndX = backLegX + 15 + Math.sin(rightLegAngle) * 15;
+                const backRightEndY = backLegTopY + backLegLength + Math.cos(rightLegAngle) * 12;
+
+                // Left back leg
+                ctx.save();
+                ctx.strokeStyle = '#E8D5C0';
+                ctx.lineWidth = 16;
+                ctx.lineCap = 'round';
+                ctx.beginPath();
+                ctx.moveTo(backLegX, backLegTopY);
+                ctx.lineTo(backLeftEndX, backLeftEndY);
+                ctx.stroke();
+                // Hoof
+                ctx.fillStyle = '#4A3728';
+                ctx.beginPath();
+                ctx.arc(backLeftEndX, backLeftEndY + 2, 7, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+
+                // Right back leg
+                ctx.save();
+                ctx.strokeStyle = '#E0CDB5';
+                ctx.lineWidth = 16;
+                ctx.lineCap = 'round';
+                ctx.beginPath();
+                ctx.moveTo(backLegX + 12, backLegTopY);
+                ctx.lineTo(backRightEndX, backRightEndY);
+                ctx.stroke();
+                ctx.fillStyle = '#4A3728';
+                ctx.beginPath();
+                ctx.arc(backRightEndX, backRightEndY + 2, 7, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+
+                // --- Body (fluffy) ---
+                drawFluffyOval(baseX, bodyY, 55, 38, '#F5E6D3', 0.12);
+
+                // Belly highlight
+                ctx.save();
+                ctx.fillStyle = 'rgba(255,248,240,0.5)';
+                ctx.beginPath();
+                ctx.ellipse(baseX, bodyY + 8, 30, 18, 0, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+
+                // --- Front legs ---
+                const frontLegX = baseX - 25;
+                const frontLegTopY = bodyY + 10;
+
+                const frontLeftEndX = frontLegX + Math.sin(rightLegAngle) * 15;
+                const frontLeftEndY = frontLegTopY + 50 + Math.cos(rightLegAngle) * 12;
+                const frontRightEndX = frontLegX + 18 + Math.sin(leftLegAngle) * 15;
+                const frontRightEndY = frontLegTopY + 50 + Math.cos(leftLegAngle) * 12;
+
+                // Left front leg
+                ctx.save();
+                ctx.strokeStyle = '#E8D5C0';
+                ctx.lineWidth = 14;
+                ctx.lineCap = 'round';
+                ctx.beginPath();
+                ctx.moveTo(frontLegX, frontLegTopY);
+                ctx.lineTo(frontLeftEndX, frontLeftEndY);
+                ctx.stroke();
+                ctx.fillStyle = '#4A3728';
+                ctx.beginPath();
+                ctx.arc(frontLeftEndX, frontLeftEndY + 2, 6, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+
+                // Right front leg
+                ctx.save();
+                ctx.strokeStyle = '#DDC8B0';
+                ctx.lineWidth = 14;
+                ctx.lineCap = 'round';
+                ctx.beginPath();
+                ctx.moveTo(frontLegX + 16, frontLegTopY);
+                ctx.lineTo(frontRightEndX, frontRightEndY);
+                ctx.stroke();
+                ctx.fillStyle = '#4A3728';
+                ctx.beginPath();
+                ctx.arc(frontRightEndX, frontRightEndY + 2, 6, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+
+                // --- Neck ---
+                const neckBaseX = baseX + 25;
+                const neckBaseY = bodyY - 15;
+                const neckLength = 70;
+                const neckAngle = -0.3 + neckTilt * 0.2;
+
+                const neckTopX = neckBaseX + Math.sin(neckAngle) * neckLength;
+                const neckTopY = neckBaseY - Math.cos(neckAngle) * neckLength;
+
+                ctx.save();
+                ctx.strokeStyle = '#F0E0CC';
+                ctx.lineWidth = 28;
+                ctx.lineCap = 'round';
+                ctx.beginPath();
+                ctx.moveTo(neckBaseX, neckBaseY);
+                ctx.lineTo(neckTopX, neckTopY);
+                ctx.stroke();
+                // Neck fluff
+                ctx.strokeStyle = '#F5E6D3';
+                ctx.lineWidth = 30;
+                ctx.beginPath();
+                ctx.moveTo(neckBaseX, neckBaseY);
+                ctx.lineTo(neckTopX, neckTopY);
+                ctx.stroke();
+                ctx.restore();
+
+                // Neck highlight
+                ctx.save();
+                ctx.strokeStyle = 'rgba(255,248,240,0.4)';
+                ctx.lineWidth = 10;
+                ctx.lineCap = 'round';
+                ctx.beginPath();
+                ctx.moveTo(neckBaseX + 4, neckBaseY);
+                ctx.lineTo(neckTopX + 3, neckTopY);
+                ctx.stroke();
+                ctx.restore();
+
+                // --- Head ---
+                const headX = neckTopX + 10;
+                const headY = neckTopY - 20;
+                drawFluffyOval(headX, headY, 28, 24, '#F5E6D3', 0.1);
+
+                // Face details
+                // Snout
+                ctx.save();
+                ctx.fillStyle = '#EDD9C0';
+                ctx.beginPath();
+                ctx.ellipse(headX + 12, headY + 5, 14, 11, 0.1, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.fillStyle = '#E0C8A8';
+                ctx.beginPath();
+                ctx.ellipse(headX + 10, headY + 3, 8, 6, 0, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+
+                // Nose
+                ctx.save();
+                ctx.fillStyle = '#2C1810';
+                ctx.beginPath();
+                ctx.arc(headX + 20, headY + 2, 5, 0, Math.PI * 2);
+                ctx.fill();
+                // Nostrils
+                ctx.fillStyle = '#1A0D08';
+                ctx.beginPath();
+                ctx.arc(headX + 18, headY + 1, 1.8, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.beginPath();
+                ctx.arc(headX + 22, headY + 1, 1.8, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+
+                // Mouth (cute smile)
+                ctx.save();
+                ctx.strokeStyle = '#2C1810';
+                ctx.lineWidth = 1.5;
+                ctx.beginPath();
+                ctx.arc(headX + 16, headY + 8, 7, 0.2, Math.PI - 0.2);
+                ctx.stroke();
+                ctx.restore();
+
+                // Eyes
+                const eyeY = headY - 7;
+                // Left eye
+                ctx.save();
+                ctx.fillStyle = '#FFF';
+                ctx.beginPath();
+                ctx.arc(headX - 2, eyeY, 8, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.fillStyle = '#1A0D08';
+                ctx.beginPath();
+                ctx.arc(headX - 1, eyeY + 1, 5, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.fillStyle = '#FFF';
+                ctx.beginPath();
+                ctx.arc(headX - 2, eyeY - 1, 2, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+
+                // Right eye
+                ctx.save();
+                ctx.fillStyle = '#FFF';
+                ctx.beginPath();
+                ctx.arc(headX + 12, eyeY, 8, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.fillStyle = '#1A0D08';
+                ctx.beginPath();
+                ctx.arc(headX + 13, eyeY + 1, 5, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.fillStyle = '#FFF';
+                ctx.beginPath();
+                ctx.arc(headX + 12, eyeY - 1, 2, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+
+                // Blush
+                ctx.save();
+                ctx.fillStyle = 'rgba(255,182,193,0.5)';
+                ctx.beginPath();
+                ctx.arc(headX - 7, eyeY + 6, 6, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.beginPath();
+                ctx.arc(headX + 19, eyeY + 6, 6, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+
+                // --- Ears ---
+                const earBaseX = headX - 5;
+                const earBaseY = headY - 18;
+
+                // Left ear
+                const leftEarWiggle = earWiggle * 0.3;
+                ctx.save();
+                ctx.translate(earBaseX, earBaseY);
+                ctx.rotate(-0.4 + leftEarWiggle);
+                ctx.fillStyle = '#F0DCC8';
+                ctx.beginPath();
+                ctx.moveTo(0, 0);
+                ctx.lineTo(-12, -40);
+                ctx.lineTo(8, -36);
+                ctx.closePath();
+                ctx.fill();
+                ctx.fillStyle = '#E8C8B0';
+                ctx.beginPath();
+                ctx.moveTo(2, -2);
+                ctx.lineTo(-6, -33);
+                ctx.lineTo(6, -30);
+                ctx.closePath();
+                ctx.fill();
+                ctx.restore();
+
+                // Right ear
+                const rightEarWiggle = earWiggle * 0.3;
+                ctx.save();
+                ctx.translate(earBaseX + 18, earBaseY);
+                ctx.rotate(0.4 - rightEarWiggle);
+                ctx.fillStyle = '#F0DCC8';
+                ctx.beginPath();
+                ctx.moveTo(0, 0);
+                ctx.lineTo(12, -40);
+                ctx.lineTo(-8, -36);
+                ctx.closePath();
+                ctx.fill();
+                ctx.fillStyle = '#E8C8B0';
+                ctx.beginPath();
+                ctx.moveTo(-2, -2);
+                ctx.lineTo(6, -33);
+                ctx.lineTo(-6, -30);
+                ctx.closePath();
+                ctx.fill();
+                ctx.restore();
+
+                // --- Forelock / head fluff ---
+                ctx.save();
+                ctx.fillStyle = '#F5E6D3';
+                ctx.beginPath();
+                ctx.arc(headX, headY - 20, 14, Math.PI, 0);
+                ctx.fill();
+                ctx.fillStyle = '#FFF8F0';
+                ctx.beginPath();
+                ctx.arc(headX - 3, headY - 22, 8, Math.PI, 0);
+                ctx.fill();
+                ctx.restore();
+
+                // --- Left arm wave ---
+                const leftShoulderX = baseX - 25;
+                const leftShoulderY = bodyY - 10;
+                const armLen = 40;
+                const leftElbowX = leftShoulderX + Math.cos(leftArmAngle) * 20;
+                const leftElbowY = leftShoulderY + Math.sin(leftArmAngle) * 20;
+                const leftHandX = leftElbowX + Math.cos(leftArmAngle + 0.6) * armLen;
+                const leftHandY = leftElbowY + Math.sin(leftArmAngle + 0.6) * armLen;
+
+                ctx.save();
+                ctx.strokeStyle = '#E8D5C0';
+                ctx.lineWidth = 12;
+                ctx.lineCap = 'round';
+                ctx.beginPath();
+                ctx.moveTo(leftShoulderX, leftShoulderY);
+                ctx.lineTo(leftElbowX, leftElbowY);
+                ctx.lineTo(leftHandX, leftHandY);
+                ctx.stroke();
+                // Hoof
+                ctx.fillStyle = '#4A3728';
+                ctx.beginPath();
+                ctx.arc(leftHandX, leftHandY, 6, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+
+                // --- Right arm wave ---
+                const rightShoulderX = baseX + 15;
+                const rightShoulderY = bodyY - 10;
+                const rightElbowX = rightShoulderX + Math.cos(rightArmAngle) * 20;
+                const rightElbowY = rightShoulderY + Math.sin(rightArmAngle) * 20;
+                const rightHandX = rightElbowX + Math.cos(rightArmAngle - 0.6) * armLen;
+                const rightHandY = rightElbowY + Math.sin(rightArmAngle - 0.6) * armLen;
+
+                ctx.save();
+                ctx.strokeStyle = '#DDC8B0';
+                ctx.lineWidth = 12;
+                ctx.lineCap = 'round';
+                ctx.beginPath();
+                ctx.moveTo(rightShoulderX, rightShoulderY);
+                ctx.lineTo(rightElbowX, rightElbowY);
+                ctx.lineTo(rightHandX, rightHandY);
+                ctx.stroke();
+                ctx.fillStyle = '#4A3728';
+                ctx.beginPath();
+                ctx.arc(rightHandX, rightHandY, 6, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+
+            function animate(timestamp) {
+                // Convert to seconds
+                const t = timestamp / 1000;
+                time = t;
+
+                // Normalized cycle progress (0 to 1)
+                const cycleProgress = (t % danceCycle) / danceCycle;
+
+                // --- Complex dance animation curves ---
+                // Bounce: bouncy sinusoidal with higher frequency on beats
+                const bounce = Math.sin(t * 8) * 18 + Math.sin(t * 16) * 6;
+
+                // Arm waves: smooth oscillating angles
+                const leftArmAngle = Math.sin(t * 5.5) * 1.2 + Math.cos(t * 3.2) * 0.8 - 0.6;
+                const rightArmAngle = Math.cos(t * 5.8) * 1.2 + Math.sin(t * 3.5) * 0.8 + 0.6;
+
+                // Leg movements: alternating stomps
+                const leftLegAngle = Math.sin(t * 7) * 0.7;
+                const rightLegAngle = Math.cos(t * 7.3) * 0.7;
+
+                // Neck tilt: swaying side to side
+                const neckTilt = Math.sin(t * 3) * 0.6;
+
+                // Ear wiggle: faster, cute movement
+                const earWiggle = Math.sin(t * 12) * 0.5 + Math.sin(t * 18) * 0.3;
+
+                // Tail wag: excited wagging
+                const tailWag = Math.sin(t * 10) * 0.8 + Math.cos(t * 14) * 0.5;
+
+                drawAlpaca(bounce, leftArmAngle, rightArmAngle, leftLegAngle, rightLegAngle, neckTilt, earWiggle, tailWag);
+
+                requestAnimationFrame(animate);
+            }
+
+            // Start the animation
+            requestAnimationFrame(animate);
+        })();
+    </script>
+</body>
+</html>

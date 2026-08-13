@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dancing Alpaca</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@700&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: linear-gradient(135deg, #ffd6e8 0%, #ffb6c1 40%, #ffa07a 100%);
+  overflow: hidden;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Quicksand', sans-serif;
+  color: #4a2c2a;
+}
+
+.scene {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  filter: drop-shadow(0 30px 60px rgba(255, 160, 122, 0.4));
+}
+
+.ground {
+  position: absolute;
+  bottom: 100px;
+  width: 600px;
+  height: 80px;
+  background: linear-gradient(to top, #7cb342 0%, #9ccc65 60%, #c5e1a5 100%);
+  border-radius: 50% / 40px;
+  box-shadow: inset 0 -20px 40px rgba(0,0,0,0.15), 0 20px 40px rgba(0,0,0,0.1);
+}
+
+.ground::after {
+  content: '';
+  position: absolute;
+  top: -15px;
+  left: -30px;
+  right: -30px;
+  height: 35px;
+  background: linear-gradient(to bottom, rgba(124,179,66,0.6) 0%, transparent 100%);
+  border-radius: 50% / 20px;
+  filter: blur(12px);
+}
+
+.floating-shapes {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.floating-shapes span {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.35;
+  animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(110vh) rotate(0deg); opacity: 0.35; }
+  100% { transform: translateY(-20vh) rotate(720deg); opacity: 0; }
+}
+
+.alpaca {
+  position: relative;
+  z-index: 10;
+  animation: bounce 1.2s ease-in-out infinite;
+  transform-origin: bottom center;
+  filter: drop-shadow(0 15px 30px rgba(0,0,0,0.15));
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0) scaleY(1); }
+  25% { transform: translateY(-35px) scaleY(0.92) scaleX(1.08); }
+  60% { transform: translateY(-15px) scaleY(1.05) scaleX(0.96); }
+  80% { transform: translateY(-25px) scaleY(0.95) scaleX(1.04); }
+}
+
+.neck {
+  position: relative;
+  width: 50px;
+  height: 150px;
+  background: linear-gradient(to right, #f5e8dc 0%, #fcf5e6 40%, #f5e8dc 100%);
+  border-radius: 25px;
+  z-index: 3;
+  box-shadow: inset -8px 0 15px rgba(0,0,0,0.08), 4px 0 15px rgba(0,0,0,0.1);
+  animation: neckSway 3s ease-in-out infinite alternate;
+}
+
+@keyframes neckSway {
+  0% { transform: rotate(-4deg); }
+  100% { transform: rotate(4deg); }
+}
+
+.neck::before {
+  content: '';
+  position: absolute;
+  top: -10px; left: 5px; right: 5px;
+  height: 30px;
+  background: inherit;
+  border-radius: 50% 50% 30% 30% / 60% 60% 40% 40%;
+  box-shadow: inset 0 -4px 8px rgba(0,0,0,0.06);
+}
+
+.head {
+  position: absolute;
+  top: -85px;
+  left: -30px;
+  width: 110px;
+  height: 95px;
+  background: linear-gradient(160deg, #fcf5e6 0%, #f5e8dc 50%, #e8d5c0 100%);
+  border-radius: 45% 55% 45% 55% / 55% 45% 55% 45%;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15), inset -10px -5px 20px rgba(255,255,255,0.6);
+  z-index: 4;
+  animation: headBob 2.5s ease-in-out infinite alternate;
+}
+
+@keyframes headBob {
+  0% { transform: rotate(-5deg) translateX(-3px); }
+  100% { transform: rotate(5deg) translateX(3px); }
+}
+
+.snout {
+  position: absolute;
+  bottom: 15px;
+  left: 42px;
+  width: 26px;
+  height: 22px;
+  background: linear-gradient(to bottom, #f8d0a8 0%, #e8b898 100%);
+  border-radius: 50% / 40%;
+  box-shadow: inset 0 -3px 6px rgba(0,0,0,0.15);
+}
+
+.nose {
+  position: absolute;
+  bottom: 4px;
+  left: 3px;
+  width: 8px;
+  height: 6px;
+  background: #5d4037;
+  border-radius: 50%;
+}
+
+.mouth {
+  position: absolute;
+  bottom: 2px;
+  left: 9px;
+  width: 8px;
+  height: 3px;
+  background: #5d4037;
+  border-radius: 50%;
+}
+
+.ear {
+  position: absolute;
+  width: 22px;
+  height: 45px;
+  background: linear-gradient(to bottom, #fcf5e6 0%, #f5e8dc 80%, #e8d5c0 100%);
+  border-radius: 50% 50% 20% 20%;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+  top: -35px;
+  z-index: 2;
+}
+
+.ear.left {
+  left: 0;
+  transform: rotate(-25deg);
+  animation: earWiggle 2s ease-in-out infinite alternate;
+}
+
+.ear.right {
+  right: 0;
+  transform: rotate(25deg);
+  animation: earWiggle 2s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes earWiggle {
+  0% { transform: rotate(-25deg) translateY(0); }
+  50% { transform: rotate(-15deg) translateY(-3px); }
+  100% { transform: rotate(-35deg) translateY(2px); }
+}
+
+.ear::after {
+  content: '';
+  position: absolute;
+  top: 12px; left: 50%;
+  width: 10px; height: 18px;
+  background: #f0d0c0;
+  border-radius: 50%;
+  transform: translateX(-50%);
+  opacity: 0.7;
+}
+
+.eye {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background: radial-gradient(circle at 35% 35%, #3a2a2a 0%, #2d1f1f 50%, #1a0f0f 100%);
+  border-radius: 50%;
+  top: 32px;
+  box-shadow: inset 0 1px 3px rgba(255,255,255,0.4), 0 2px 4px rgba(0,0,0,0.2);
+  animation: blink 4s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%, 90%, 100% { transform: scaleY(1); }
+  93%, 97% { transform: scaleY(0.1); }
+}
+
+.eye.left { left: 22px; }
+.eye.right { right: 22px; }
+
+.eye::after {
+  content: '';
+  position: absolute;
+  top: 2px; left: 3px;
+  width: 4px; height: 4px;
+  background: #fff;
+  border-radius: 50%;
+  opacity: 0.9;
+}
+
+.cheek {
+  position: absolute;
+  width: 14px;
+  height: 10px;
+  background: radial-gradient(circle, #f8b8c8 0%, #f5a0b0 70%, transparent 100%);
+  border-radius: 50%;
+  top: 50px;
+  opacity: 0.7;
+}
+
+.cheek.left { left: 10px; }
+.cheek.right { right: 10px; }
+
+.body {
+  position: relative;
+  width: 140px;
+  height: 160px;
+  background: linear-gradient(135deg, #fcf5e6 0%, #f5e8dc 50%, #e8d5c0 100%);
+  border-radius: 60% 60% 50% 50% / 50% 50% 60% 60%;
+  box-shadow: inset -15px 0 25px rgba(0,0,0,0.06), 0 15px 40px rgba(0,0,0,0.12);
+  z-index: 2;
+  animation: bodySquish 2.4s ease-in-out infinite;
+  overflow: hidden;
+}
+
+@keyframes bodySquish {
+  0%, 100% { transform: scaleX(1) scaleY(1); border-radius: 60% 60% 50% 50% / 50% 50% 60% 60%; }
+  30% { transform: scaleX(1.06) scaleY(0.92); border-radius: 50% 50% 45% 45% / 45% 45% 55% 55%; }
+  70% { transform: scaleX(0.96) scaleY(1.05); border-radius: 65% 65% 55% 55% / 55% 55% 65% 65%; }
+}
+
+.body-fluff {
+  position: absolute;
+  top: 20px;
+  left: 15px;
+  right: 15px;
+  bottom: 20px;
+  background: repeating-radial-gradient(circle at 30% 30%, #fff 0%, #fff 3px, transparent 3px, transparent 8px),
+              repeating-radial-gradient(circle at 70% 70%, #fff3 0%, #fff3 2px, transparent 2px, transparent 10px);
+  border-radius: inherit;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.tail {
+  position: absolute;
+  top: -20px;
+  right: 15px;
+  width: 35px;
+  height: 55px;
+  background: linear-gradient(to bottom, #fcf5e6 0%, #fff 60%, #f5e8dc 100%);
+  border-radius: 50% 50% 20% 20%;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  animation: tailWag 1s ease-in-out infinite alternate;
+  z-index: 1;
+  transform-origin: bottom center;
+}
+
+@keyframes tailWag {
+  0% { transform: rotate(-20deg) scaleX(1); }
+  50% { transform: rotate(30deg) scaleX(1.1); }
+  100% { transform: rotate(-10deg) scaleX(0.9); }
+}
+
+.tail::after {
+  content: '';
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  width: 18px;
+  height: 18px;
+  background: radial-gradient(circle, #fff 30%, #f0e8d8 70%);
+  border-radius: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.leg {
+  position: absolute;
+  width: 22px;
+  height: 75px;
+  background: linear-gradient(to bottom, #f5e8dc 0%, #e8d5c0 60%, #dcbfa8 100%);
+  border-radius: 15px 15px 12px 12px;
+  box-shadow: inset -4px 0 8px rgba(0,0,0,0.1), 4px 4px 10px rgba(0,0,0,0.1);
+  z-index: 1;
+  bottom: -60px;
+}
+
+.leg::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 2px;
+  right: 2px;
+  height: 20px;
+  background: linear-gradient(to bottom, #dcbfa8, #c8a88c);
+  border-radius: 12px 12px 8px 8px;
+}
+
+.leg.front-left { left: 25px; animation: legDanceFL 1.5s ease-in-out infinite; }
+.leg.front-right { right: 25px; animation: legDanceFR 1.5s ease-in-out infinite; }
+.leg.back-left { left: 55px; animation: legDanceBL 1.5s ease-in-out infinite reverse; }
+.leg.back-right { right: 55px; animation: legDanceBR 1.5s ease-in-out infinite reverse; }
+
+@keyframes legDanceFL {
+  0%, 100% { transform: translateY(0) rotate(5deg); }
+  25% { transform: translateY(-25px) rotate(-10deg); }
+  50% { transform: translateY(-10px) rotate(15deg); }
+  75% { transform: translateY(-20px) rotate(-5deg); }
+}
+
+@keyframes legDanceFR {
+  0%, 100% { transform: translateY(0) rotate(-5deg); }
+  25% { transform: translateY(-15px) rotate(10deg); }
+  50% { transform: translateY(-30px) rotate(-15deg); }
+  75% { transform: translateY(-10px) rotate(5deg); }
+}
+
+@keyframes legDanceBL {
+  0%, 100% { transform: translateY(0) rotate(3deg); }
+  30% { transform: translateY(-20px) rotate(-8deg); }
+  60% { transform: translateY(-5px) rotate(12deg); }
+  85% { transform: translateY(-15px) rotate(-4deg); }
+}
+
+@keyframes legDanceBR {
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  30% { transform: translateY(-10px) rotate(8deg); }
+  60% { transform: translateY(-25px) rotate(-12deg); }
+  85% { transform: translateY(-8px) rotate(4deg); }
+}
+
+.music-notes {
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 120px;
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+.note {
+  position: absolute;
+  font-size: 28px;
+  animation: noteFloat 3s ease-in-out infinite;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
+}
+
+.note:nth-child(1) { left: 10px; top: 20px; animation-delay: 0s; color: #e91e63; }
+.note:nth-child(2) { left: 60px; top: 5px; animation-delay: 0.8s; color: #9c27b0; font-size: 22px; }
+.note:nth-child(3) { left: 110px; top: 30px; animation-delay: 1.5s; color: #ff9800; }
+.note:nth-child(4) { left: 150px; top: 10px; animation-delay: 0.4s; color: #e91e63; font-size: 20px; }
+
+@keyframes noteFloat {
+  0%, 100% { transform: translateY(0) rotate(-3deg); opacity: 0.8; }
+  33% { transform: translateY(-20px) rotate(3deg); opacity: 1; }
+  66% { transform: translateY(-35px) rotate(-5deg); opacity: 0.6; }
+}
+
+.title-text {
+  position: absolute;
+  top: 45px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.title-text h1 {
+  font-family: 'Fredoka One', cursive;
+  font-size: 4rem;
+  color: #fff;
+  text-shadow: 3px 3px 0px #ff9800, 6px 6px 0px #e87a50, 0 20px 40px rgba(0,0,0,0.2);
+  letter-spacing: 2px;
+  animation: titleBounce 3s ease-in-out infinite;
+}
+
+.title-text .subtitle {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1.2rem;
+  color: #fff;
+  margin-top: 8px;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  font-weight: 700;
+}
+
+@keyframes titleBounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-8px); }
+}
+
+.footer {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.9rem;
+  color: #fff;
+  opacity: 0.85;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+</style>
+</head>
+<body>
+
+<div class="scene">
+  <div class="floating-shapes" id="shapes"></div>
+  
+  <div class="ground"></div>
+  
+  <div class="title-text">
+    <h1>Alpaca Dance</h1>
+    <div class="subtitle">Fluffy & Funky Forever</div>
+  </div>
+  
+  <div class="alpaca">
+    <div class="music-notes">
+      <span class="note">♪</span>
+      <span class="note">♫</span>
+      <span class="note">♬</span>
+      <span class="note">♩</span>
+    </div>
+    
+    <div class="neck">
+      <div class="body">
+        <div class="body-fluff"></div>
+        <div class="tail"></div>
+      </div>
+      
+      <div class="head">
+        <div class="ear left"></div>
+        <div class="ear right"></div>
+        <div class="eye left"></div>
+        <div class="eye right"></div>
+        <div class="cheek left"></div>
+        <div class="cheek right"></div>
+        <div class="snout">
+          <div class="nose"></div>
+          <div class="mouth"></div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="leg front-left"></div>
+    <div class="leg front-right"></div>
+    <div class="leg back-left"></div>
+    <div class="leg back-right"></div>
+  </div>
+  
+  <div class="footer">A cute alpaca dancing endlessly ★</div>
+</div>
+
+<script>
+const container = document.getElementById('shapes');
+const colors = ['#ffb6c1', '#ffc107', '#4caf50', '#e91e63', '#9c27b0', '#03a9f4'];
+
+for (let i = 0; i < 12; i++) {
+  const span = document.createElement('span');
+  const size = 10 + Math.random() * 40;
+  span.style.width = size + 'px';
+  span.style.height = size + 'px';
+  span.style.left = Math.random() * 100 + '%';
+  span.style.background = colors[Math.floor(Math.random() * colors.length)];
+  span.style.animationDuration = (6 + Math.random() * 8) + 's';
+  span.style.animationDelay = (Math.random() * 5) + 's';
+  container.appendChild(span);
+}
+</script>
+
+</body>
+</html>

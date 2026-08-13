@@ -1,0 +1,8 @@
+{
+  "model_id": "gemini-3-6-flash",
+  "model_used": "gemini-3-6-flash",
+  "prompt": "Create a single self-contained HTML document (no external files, no CDN, no images) that shows a cute alpaca dancing. Make it genuinely impressive: a recognizable fluffy alpaca with a long neck, ears,",
+  "generated_at": "2026-08-13T11:09:58.704387+00:00",
+  "chars": 5928,
+  "raw_preview": "```html\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Cute Dancing Alpaca Party!</title>\n  <style>\n    * {\n      box-sizing: border-box;\n      margin: 0;\n      padding: 0;\n      user-select: none;\n    }\n\n    body {\n      width: 100vw;\n      height: 100vh;\n      overflow: hidden;\n      background: #0d0618;\n      font-family: 'Fredoka', 'Comic Sans MS', system-ui, -apple-system, sans-serif;\n      d"
+}

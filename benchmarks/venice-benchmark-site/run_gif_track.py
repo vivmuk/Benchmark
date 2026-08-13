@@ -167,7 +167,10 @@ def main() -> int:
         }
         try:
             resp = fetch(key, API, payload)
-            text = resp["choices"][0]["message"]["content"]
+            text = resp["choices"][0]["message"]["content"] or ""
+            if not text.strip():
+                print(f"SKIP  {slug}: empty response (finish={resp['choices'][0].get('finish_reason')})")
+                continue
         except Exception as exc:
             print(f"FAIL  {slug}: {exc}")
             continue
