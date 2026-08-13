@@ -1,0 +1,10 @@
+{
+  "lastChecks": {
+    "email": null,
+    "calendar": null,
+    "weather": null,
+    "system": 1752109331
+  },
+  "lastHeartbeat": "2026-07-09T21:02:00-04:00",
+  "notes": "HEARTBEAT.md empty — no periodic checks configured. Quiet OK."
+}

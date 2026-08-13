@@ -20,7 +20,7 @@
   --surface: #FFFFFF;
   --surface-2: #E6FAF3;
   --text: #1A1A2E;
-  --text-dim: rgba(26, 26, 46, 0.64);
+  --text-dim: rgba(26, 26, 46, 0.75);
   --text-faint: rgba(26, 26, 46, 0.42);
   --rule: rgba(26, 26, 46, 0.10);
   --rule-strong: rgba(26, 26, 46, 0.16);
@@ -73,7 +73,7 @@ body {
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
   /* Keep content clear of mobile browser chrome */
-  padding-bottom: env(safe-area-inset-bottom, 0);
+  padding-bottom: env(safe-area-inset-bottom, 1.25rem);
 }
 
 section {
@@ -647,8 +647,8 @@ code, pre {
 }
 
 .filter-chip {
-  min-height: 40px;
-  padding: 0.45rem 0.8rem;
+  min-height: 44px;
+  padding: 0.55rem 0.85rem;
   border: 1px solid var(--rule-strong);
   background: var(--surface);
   font: 500 0.76rem var(--font-mono);
@@ -675,6 +675,25 @@ code, pre {
   background: var(--surface);
   box-shadow: var(--shadow);
   -webkit-overflow-scrolling: touch;
+  position: relative;
+  overflow-y: hidden;
+}
+
+.table-wrap::after {
+  content: '';
+  position: absolute;
+  inset-block: 0;
+  right: 0;
+  width: 32px;
+  background: linear-gradient(90deg, transparent, var(--surface));
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 200ms ease;
+  border-radius: 0 14px 14px 0;
+}
+
+.table-wrap.scrollable::after {
+  opacity: 1;
 }
 
 .leaderboard table {
@@ -1354,6 +1373,9 @@ body > .navbar {
 
 /* ===== Mobile hardenings ===== */
 @media (max-width: 640px) {
+  section {
+    padding: 2.5rem 0;
+  }
   .feature-list {
     overflow-wrap: break-word;
     word-break: break-word;
@@ -1378,8 +1400,48 @@ body > .navbar {
   .feature-copy h2 {
     font-size: 1.55rem;
   }
+  .feature-copy p {
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+  .feature-grid {
+    gap: 1.5rem;
+  }
   .img-zoom-hint {
     opacity: 1;
+  }
+  /* Consistent card padding on mobile */
+  .chart-card {
+    padding: 1rem 0.85rem;
+  }
+  .bench-card {
+    padding: 1.15rem 1rem;
+  }
+  .method-card {
+    padding: 1rem 0.9rem;
+  }
+  .protocol-card, .prompt-card, .callout {
+    padding: 1rem 0.9rem;
+  }
+  .vision-card {
+    padding: 1rem;
+  }
+  .compare-card .score small {
+    font-size: 0.45em;
+  }
+  /* Bottom padding so content isn't behind mobile browser chrome */
+  .vt-feature,
+  .game-demo,
+  .footer {
+    padding-bottom: calc(1.5rem + env(safe-area-inset-bottom, 16px));
+  }
+  /* Touch targets */
+  .filter-chip {
+    min-height: 44px;
+    padding: 0.55rem 0.85rem;
+  }
+  .table-search {
+    min-height: 48px;
   }
 }
 
@@ -2723,6 +2785,14 @@ body.lightbox-open {
 
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") closeLightbox();
+  });
+
+  // ── Scrollable table detection ──
+  document.querySelectorAll(".table-wrap").forEach((wrap) => {
+    const check = () => wrap.classList.toggle("scrollable", wrap.scrollWidth > wrap.clientWidth);
+    check();
+    window.addEventListener("resize", check);
+    new ResizeObserver(check).observe(wrap);
   });
 })();
 

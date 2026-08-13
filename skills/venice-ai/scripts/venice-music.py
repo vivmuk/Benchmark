@@ -108,6 +108,7 @@ def queue_music(
 def retrieve_music(
     api_key: str,
     queue_id: str,
+    model: str | None = None,
     delete_on_completion: bool = True,
 ) -> tuple[str, bytes | None, dict]:
     """
@@ -116,15 +117,17 @@ def retrieve_music(
     """
     url = "https://api.venice.ai/api/v1/audio/retrieve"
 
-    payload = {
+    payload: dict = {
         "queue_id": queue_id,
         "delete_media_on_completion": delete_on_completion,
     }
+    if model:
+        payload["model"] = model
 
     body = json.dumps(payload).encode("utf-8")
     req = urllib.request.Request(
         url,
-        method="GET",
+        method="POST",
         headers={
             "Authorization": f"Bearer {api_key}",
             "Content-Type": "application/json",
@@ -156,14 +159,16 @@ def retrieve_music(
         raise RuntimeError(f"Venice API error ({e.code}): {error_body}") from e
 
 
-def complete_music(api_key: str, queue_id: str) -> bool:
+def complete_music(api_key: str, queue_id: str, model: str | None = None) -> bool:
     """
     Mark music as completed and delete from server storage.
     Use after downloading with --no-delete.
     """
     url = "https://api.venice.ai/api/v1/audio/complete"
 
-    payload = {"queue_id": queue_id}
+    payload: dict = {"queue_id": queue_id}
+    if model:
+        payload["model"] = model
     body = json.dumps(payload).encode("utf-8")
     req = urllib.request.Request(
         url,
@@ -241,7 +246,7 @@ Examples:
     # Handle --complete (cleanup)
     if args.complete:
         try:
-            success = complete_music(api_key, args.complete)
+            success = complete_music(api_key, args.complete, model=args.model)
             if success:
                 print(f"Track {args.complete} cleaned up successfully")
                 return 0
@@ -343,6 +348,7 @@ Examples:
             status, audio_data, timing_info = retrieve_music(
                 api_key=api_key,
                 queue_id=queue_id,
+                model=args.model,
                 delete_on_completion=not args.no_delete,
             )
         except RuntimeError as e:

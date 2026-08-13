@@ -3,7 +3,7 @@
 **Owner:** Vivek M (`vivmuk` / `vivgatesai`)  
 **Maintained by:** Hermes + Paridhi (either agent may update)  
 **Created:** 2026-07-26  
-**Last updated:** 2026-07-26 (Paridhi reverse-prompt DIEM retry finished)  
+**Last updated:** 2026-08-02 (Hita Railway agent provisioned)  
 
 This file is the durable map of projects, agents, prefs, and skills.  
 **No secrets.** Tokens/keys live only in env files / auth stores.
@@ -24,7 +24,7 @@ This file is the durable map of projects, agents, prefs, and skills.
 | Pref | Detail |
 |---|---|
 | Model ban | Never Claude/GPT via Venice key unless user names one explicitly |
-| Agent naming | Sanskrit / Hindu philosophical nouns (`Jiva`, `Rati`, `Paridhi`, `Medhā`, …) |
+| Agent naming | Sanskrit / Hindu philosophical nouns (`Jiva`, `Rati`, `Paridhi`, `Hita`, `Medhā`, …) |
 | Secrets | Zero-echo in chat; stash base64 under `/tmp` if needed; Hermes redact-filter is incomplete for non-UUID secrets |
 | Skill discipline | Design polish briefs → load `viv-design` first (skill is contract) |
 | Model IDs | Live `GET https://api.venice.ai/api/v1/models` first; OpenClaw list lags |
@@ -111,6 +111,21 @@ This file is the durable map of projects, agents, prefs, and skills.
 | Deploy tree | `~/tmp/rati-deploy` |
 | Railway project | `rati` |
 | Notes | Same class as Jiva; keep naming/aesthetic distinct |
+
+### Hita (Railway)
+
+| Field | Value |
+|---|---|
+| Identity | Sanskrit “welfare / benefit”; Rati-class sibling, usefulness-first |
+| Role | Hermes-style Telegram agent on Railway |
+| Deploy tree | `~/tmp/hita-deploy` |
+| Railway project | `hita` (id `05d53aa1-…2599`) |
+| Service | `hita` · volume `hita-volume` → `/root/.hermes` |
+| URL | `https://hita-production.up.railway.app` |
+| Primary model | `deepseek-v4-flash-0731` (Venice; matches Paridhi primary) |
+| Config | `~/tmp/hita-deploy/hermes/cli-config.yaml` + `SOUL.md` |
+| Status (2026-08-02) | Online; gateway up; **Telegram bot token not set yet** |
+| Skills | `jiva-telegram-deploy`, `self-hosted-agent-deployment`, `cloud-agent-provisioning` |
 
 ---
 
@@ -318,6 +333,7 @@ Full catalog lives under `~/.hermes/skills/` (~130+ skills). This map is the **u
 
 | Date | Change |
 |---|---|
+| 2026-07-26 | Vision gallery page (`vision.html`): source image, full nano-banana-2 prompt, reverse instruction, 28-attr checklist, 14 reconstructions; nav + changelog; commit `671503e` |
 | 2026-07-26 | Paridhi task finished: cleared Venice billing disable lock; retried reverse_prompt_vision DIEM failures (opus-5/minimax/grok-4-5/inkling/kimi-k3); local site 128 rows / 8 tracks; standalone rebuilt. Push still open. |
 | 2026-07-26 | Initial living catalog created from Hermes memory, Paridhi workspace/memory/reports, Railway list, skills catalog, and recent recovery work |
 | 2026-07-25 | Paridhi restored (Venice auth + grok-4-5 + gemini-3-6-flash fallback); Hermes on grok-4-5 |

@@ -1,0 +1,450 @@
+{
+  "count": 14,
+  "models": [
+    {
+      "id": "ace-step-15",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {},
+        "maxCompletionTokens": null,
+        "modelSource": "",
+        "pricing": {
+          "durations": {
+            "120": {
+              "diem": 0.05,
+              "max_seconds": 120,
+              "min_seconds": 91,
+              "usd": 0.05
+            },
+            "150": {
+              "diem": 0.06,
+              "max_seconds": 150,
+              "min_seconds": 121,
+              "usd": 0.06
+            },
+            "180": {
+              "diem": 0.07,
+              "max_seconds": 180,
+              "min_seconds": 151,
+              "usd": 0.07
+            },
+            "210": {
+              "diem": 0.08,
+              "max_seconds": 210,
+              "min_seconds": 181,
+              "usd": 0.08
+            },
+            "60": {
+              "diem": 0.03,
+              "max_seconds": 60,
+              "min_seconds": 60,
+              "usd": 0.03
+            },
+            "90": {
+              "diem": 0.04,
+              "max_seconds": 90,
+              "min_seconds": 61,
+              "usd": 0.04
+            }
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "music"
+    },
+    {
+      "id": "elevenlabs-music",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {},
+        "maxCompletionTokens": null,
+        "modelSource": "",
+        "pricing": {
+          "durations": {
+            "120": {
+              "diem": 1.38,
+              "max_seconds": 120,
+              "min_seconds": 61,
+              "usd": 1.38
+            },
+            "180": {
+              "diem": 2.08,
+              "max_seconds": 180,
+              "min_seconds": 121,
+              "usd": 2.08
+            },
+            "240": {
+              "diem": 2.76,
+              "max_seconds": 240,
+              "min_seconds": 181,
+              "usd": 2.76
+            },
+            "300": {
+              "diem": 3.45,
+              "max_seconds": 300,
+              "min_seconds": 241,
+              "usd": 3.45
+            },
+            "360": {
+              "diem": 4.15,
+              "max_seconds": 360,
+              "min_seconds": 301,
+              "usd": 4.15
+            },
+            "420": {
+              "diem": 4.84,
+              "max_seconds": 420,
+              "min_seconds": 361,
+              "usd": 4.84
+            },
+            "480": {
+              "diem": 5.52,
+              "max_seconds": 480,
+              "min_seconds": 421,
+              "usd": 5.52
+            },
+            "540": {
+              "diem": 6.22,
+              "max_seconds": 540,
+              "min_seconds": 481,
+              "usd": 6.22
+            },
+            "60": {
+              "diem": 0.69,
+              "max_seconds": 60,
+              "min_seconds": 3,
+              "usd": 0.69
+            },
+            "600": {
+              "diem": 6.9,
+              "max_seconds": 600,
+              "min_seconds": 541,
+              "usd": 6.9
+            }
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "music"
+    },
+    {
+      "id": "elevenlabs-sound-effects-v2",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {},
+        "maxCompletionTokens": null,
+        "modelSource": "",
+        "pricing": {
+          "per_second": {
+            "diem": 0.0023000000000000004,
+            "usd": 0.0023000000000000004
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "music"
+    },
+    {
+      "id": "elevenlabs-tts-multilingual-v2",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {},
+        "maxCompletionTokens": null,
+        "modelSource": "",
+        "pricing": {
+          "per_thousand_characters": {
+            "diem": 0.11500000000000002,
+            "usd": 0.11500000000000002
+          }
+        },
+        "traits": [],
+        "voices": [
+          "Aria",
+          "Roger",
+          "Sarah",
+          "Laura",
+          "Charlie",
+          "George",
+          "Callum",
+          "River",
+          "Liam",
+          "Charlotte",
+          "Alice",
+          "Matilda",
+          "Will",
+          "Jessica",
+          "Eric",
+          "Chris",
+          "Brian",
+          "Daniel",
+          "Lily",
+          "Bill"
+        ]
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "music"
+    },
+    {
+      "id": "elevenlabs-tts-v3",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {},
+        "maxCompletionTokens": null,
+        "modelSource": "",
+        "pricing": {
+          "per_thousand_characters": {
+            "diem": 0.11500000000000002,
+            "usd": 0.11500000000000002
+          }
+        },
+        "traits": [],
+        "voices": [
+          "Aria",
+          "Roger",
+          "Sarah",
+          "Laura",
+          "Charlie",
+          "George",
+          "Callum",
+          "River",
+          "Liam",
+          "Charlotte",
+          "Alice",
+          "Matilda",
+          "Will",
+          "Jessica",
+          "Eric",
+          "Chris",
+          "Brian",
+          "Daniel",
+          "Lily",
+          "Bill"
+        ]
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "music"
+    },
+    {
+      "id": "lyria-3-pro",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {},
+        "maxCompletionTokens": null,
+        "modelSource": "",
+        "pricing": {
+          "generation": {
+            "diem": 0.1,
+            "usd": 0.1
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "music"
+    },
+    {
+      "id": "minimax-music-v2",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {},
+        "maxCompletionTokens": null,
+        "modelSource": "",
+        "pricing": {
+          "generation": {
+            "diem": 0.04,
+            "usd": 0.04
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "music"
+    },
+    {
+      "id": "minimax-music-v25",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {},
+        "maxCompletionTokens": null,
+        "modelSource": "",
+        "pricing": {
+          "generation": {
+            "diem": 0.18,
+            "usd": 0.18
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "music"
+    },
+    {
+      "id": "minimax-music-v26",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {},
+        "maxCompletionTokens": null,
+        "modelSource": "",
+        "pricing": {
+          "generation": {
+            "diem": 0.18,
+            "usd": 0.18
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "music"
+    },
+    {
+      "id": "mmaudio-v2-text-to-audio",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {},
+        "maxCompletionTokens": null,
+        "modelSource": "",
+        "pricing": {
+          "per_second": {
+            "diem": 0.0009200000000000001,
+            "usd": 0.0009200000000000001
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "music"
+    },
+    {
+      "id": "seed-audio-1-0",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {},
+        "maxCompletionTokens": null,
+        "modelSource": "",
+        "pricing": {
+          "per_second": {
+            "diem": 0.0028750000000000004,
+            "usd": 0.0028750000000000004
+          }
+        },
+        "traits": [],
+        "voices": [
+          "Describe in prompt",
+          "Tim",
+          "Stokie",
+          "Dacey",
+          "Vivi",
+          "Mindy",
+          "Kian",
+          "Jess",
+          "Vienna",
+          "Cedric",
+          "Magnus",
+          "Quentin",
+          "Wukong",
+          "Gigi",
+          "Celeste",
+          "Esther",
+          "Tracy",
+          "Sven",
+          "Felipe",
+          "Usseau",
+          "Enzo",
+          "Minimi",
+          "Jihoon",
+          "Martins",
+          "Han"
+        ]
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "music"
+    },
+    {
+      "id": "sonilo-v1-1-music",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {},
+        "maxCompletionTokens": null,
+        "modelSource": "",
+        "pricing": {
+          "per_second": {
+            "diem": 0.0028750000000000004,
+            "usd": 0.0028750000000000004
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "music"
+    },
+    {
+      "id": "sonilo-v1-1-sound-effects",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {},
+        "maxCompletionTokens": null,
+        "modelSource": "",
+        "pricing": {
+          "per_second": {
+            "diem": 0.0020700000000000002,
+            "usd": 0.0020700000000000002
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "music"
+    },
+    {
+      "id": "stable-audio-25",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {},
+        "maxCompletionTokens": null,
+        "modelSource": "",
+        "pricing": {
+          "generation": {
+            "diem": 0.19,
+            "usd": 0.19
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "music"
+    }
+  ],
+  "object": "list",
+  "type": "music"
+}

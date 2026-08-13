@@ -1,0 +1,449 @@
+{
+  "count": 11,
+  "models": [
+    {
+      "id": "tts-chatterbox-hd",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {},
+        "maxCompletionTokens": null,
+        "pricing": {
+          "input": {
+            "diem": 50,
+            "usd": 50
+          }
+        },
+        "traits": [],
+        "voices": [
+          "Aurora",
+          "Blade",
+          "Britney",
+          "Carl",
+          "Cliff",
+          "Richard",
+          "Rico",
+          "Siobhan",
+          "Vicky"
+        ]
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "tts"
+    },
+    {
+      "id": "tts-elevenlabs-turbo-v2-5",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {},
+        "maxCompletionTokens": null,
+        "pricing": {
+          "input": {
+            "diem": 62.5,
+            "usd": 62.5
+          }
+        },
+        "traits": [],
+        "voices": [
+          "Alice",
+          "Aria",
+          "Bill",
+          "Brian",
+          "Callum",
+          "Charlie",
+          "Charlotte",
+          "Chris",
+          "Daniel",
+          "Eric",
+          "George",
+          "Jessica",
+          "Laura",
+          "Liam",
+          "Lily",
+          "Matilda",
+          "Rachel",
+          "River",
+          "Roger",
+          "Sarah",
+          "Will"
+        ]
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "tts"
+    },
+    {
+      "id": "tts-gemini-3-1-flash",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {},
+        "maxCompletionTokens": null,
+        "pricing": {
+          "input": {
+            "diem": 187.5,
+            "usd": 187.5
+          }
+        },
+        "traits": [],
+        "voices": [
+          "Achernar",
+          "Achird",
+          "Algenib",
+          "Algieba",
+          "Alnilam",
+          "Aoede",
+          "Autonoe",
+          "Callirrhoe",
+          "Charon",
+          "Despina",
+          "Enceladus",
+          "Erinome",
+          "Fenrir",
+          "Gacrux",
+          "Iapetus",
+          "Kore",
+          "Laomedeia",
+          "Leda",
+          "Orus",
+          "Puck",
+          "Pulcherrima",
+          "Rasalgethi",
+          "Sadachbia",
+          "Sadaltager",
+          "Schedar",
+          "Sulafat",
+          "Umbriel",
+          "Vindemiatrix",
+          "Zephyr",
+          "Zubenelgenubi"
+        ]
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "tts"
+    },
+    {
+      "id": "tts-gradium-v1",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {},
+        "maxCompletionTokens": null,
+        "pricing": {
+          "input": {
+            "diem": 47.5,
+            "usd": 47.5
+          }
+        },
+        "traits": [],
+        "voices": [
+          "Alice",
+          "Davi",
+          "Elise",
+          "Emma",
+          "Eva",
+          "Jack",
+          "Kent",
+          "Leo",
+          "Maximilian",
+          "Mia",
+          "Sergio",
+          "Valentina"
+        ]
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "tts"
+    },
+    {
+      "id": "tts-inworld-1-5-max",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {},
+        "maxCompletionTokens": null,
+        "pricing": {
+          "input": {
+            "diem": 12.5,
+            "usd": 12.5
+          }
+        },
+        "traits": [],
+        "voices": [
+          "Alex",
+          "Ashley",
+          "Craig",
+          "Edward",
+          "Elizabeth",
+          "Hades",
+          "Luna",
+          "Mark",
+          "Olivia",
+          "Pixie",
+          "Priya",
+          "Ronald",
+          "Sarah",
+          "Theodore"
+        ]
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "tts"
+    },
+    {
+      "id": "tts-kokoro",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {},
+        "maxCompletionTokens": null,
+        "modelSource": "https://huggingface.co/hexgrad/Kokoro-82M",
+        "pricing": {
+          "input": {
+            "diem": 3.5,
+            "usd": 3.5
+          }
+        },
+        "traits": [],
+        "voices": [
+          "af_alloy",
+          "af_aoede",
+          "af_bella",
+          "af_heart",
+          "af_jadzia",
+          "af_jessica",
+          "af_kore",
+          "af_nicole",
+          "af_nova",
+          "af_river",
+          "af_sarah",
+          "af_sky",
+          "am_adam",
+          "am_echo",
+          "am_eric",
+          "am_fenrir",
+          "am_liam",
+          "am_michael",
+          "am_onyx",
+          "am_puck",
+          "am_santa",
+          "bf_alice",
+          "bf_emma",
+          "bf_lily",
+          "bm_daniel",
+          "bm_fable",
+          "bm_george",
+          "bm_lewis",
+          "ef_dora",
+          "em_alex",
+          "em_santa",
+          "ff_siwis",
+          "hf_alpha",
+          "hf_beta",
+          "hm_omega",
+          "hm_psi",
+          "if_sara",
+          "im_nicola",
+          "jf_alpha",
+          "jf_gongitsune",
+          "jf_nezumi",
+          "jf_tebukuro",
+          "jm_kumo",
+          "pf_dora",
+          "pm_alex",
+          "pm_santa",
+          "zf_xiaobei",
+          "zf_xiaoni",
+          "zf_xiaoxiao",
+          "zf_xiaoyi",
+          "zm_yunjian",
+          "zm_yunxi",
+          "zm_yunxia",
+          "zm_yunyang"
+        ]
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "tts"
+    },
+    {
+      "id": "tts-minimax-speech-02-hd",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {},
+        "maxCompletionTokens": null,
+        "pricing": {
+          "input": {
+            "diem": 125,
+            "usd": 125
+          }
+        },
+        "traits": [],
+        "voices": [
+          "CalmWoman",
+          "CasualGuy",
+          "DeepVoiceMan",
+          "DeterminedMan",
+          "ElegantMan",
+          "ExuberantGirl",
+          "FriendlyPerson",
+          "ImposingManner",
+          "InspirationalGirl",
+          "LivelyGirl",
+          "LovelyGirl",
+          "PatientMan",
+          "SweetGirl",
+          "WiseWoman",
+          "YoungKnight"
+        ]
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "tts"
+    },
+    {
+      "id": "tts-orpheus",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {},
+        "maxCompletionTokens": null,
+        "modelSource": "https://huggingface.co/canopylabs/orpheus-3b-0.1-ft",
+        "pricing": {
+          "input": {
+            "diem": 62.5,
+            "usd": 62.5
+          }
+        },
+        "traits": [],
+        "voices": [
+          "dan",
+          "jess",
+          "leah",
+          "leo",
+          "mia",
+          "tara",
+          "zac",
+          "zoe"
+        ]
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "tts"
+    },
+    {
+      "id": "tts-qwen3-0-6b",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {},
+        "maxCompletionTokens": null,
+        "modelSource": "https://huggingface.co/Qwen/Qwen3-TTS",
+        "pricing": {
+          "input": {
+            "diem": 87.5,
+            "usd": 87.5
+          }
+        },
+        "traits": [],
+        "voices": [
+          "Aiden",
+          "Dylan",
+          "Eric",
+          "Ono_Anna",
+          "Ryan",
+          "Serena",
+          "Sohee",
+          "Uncle_Fu",
+          "Vivian"
+        ]
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "tts"
+    },
+    {
+      "id": "tts-qwen3-1-7b",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {},
+        "maxCompletionTokens": null,
+        "modelSource": "https://huggingface.co/Qwen/Qwen3-TTS",
+        "pricing": {
+          "input": {
+            "diem": 112.5,
+            "usd": 112.5
+          }
+        },
+        "traits": [],
+        "voices": [
+          "Aiden",
+          "Dylan",
+          "Eric",
+          "Ono_Anna",
+          "Ryan",
+          "Serena",
+          "Sohee",
+          "Uncle_Fu",
+          "Vivian"
+        ]
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "tts"
+    },
+    {
+      "id": "tts-xai-v1",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {},
+        "maxCompletionTokens": null,
+        "pricing": {
+          "input": {
+            "diem": 18.75,
+            "usd": 18.75
+          }
+        },
+        "traits": [],
+        "voices": [
+          "altair",
+          "ara",
+          "atlas",
+          "carina",
+          "castor",
+          "celeste",
+          "cosmo",
+          "eve",
+          "helios",
+          "helix",
+          "iris",
+          "kepler",
+          "leo",
+          "lumen",
+          "luna",
+          "lux",
+          "naksh",
+          "orion",
+          "perseus",
+          "rex",
+          "rigel",
+          "sal",
+          "sirius",
+          "ursa",
+          "zagan",
+          "zenith"
+        ]
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "tts"
+    }
+  ],
+  "object": "list",
+  "type": "tts"
+}

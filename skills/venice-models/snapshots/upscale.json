@@ -1,0 +1,36 @@
+{
+  "count": 1,
+  "models": [
+    {
+      "id": "upscaler",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {},
+        "maxCompletionTokens": null,
+        "pricing": {
+          "generation": {
+            "diem": 0.01,
+            "usd": 0.01
+          },
+          "upscale": {
+            "2x": {
+              "diem": 0.02,
+              "usd": 0.02
+            },
+            "4x": {
+              "diem": 0.08,
+              "usd": 0.08
+            }
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "upscale"
+    }
+  ],
+  "object": "list",
+  "type": "upscale"
+}

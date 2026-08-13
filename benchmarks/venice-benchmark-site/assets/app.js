@@ -843,5 +843,13 @@
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") closeLightbox();
   });
+
+  // ── Scrollable table detection ──
+  document.querySelectorAll(".table-wrap").forEach((wrap) => {
+    const check = () => wrap.classList.toggle("scrollable", wrap.scrollWidth > wrap.clientWidth);
+    check();
+    window.addEventListener("resize", check);
+    new ResizeObserver(check).observe(wrap);
+  });
 })();
 
