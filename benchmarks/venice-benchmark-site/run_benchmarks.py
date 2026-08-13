@@ -66,10 +66,18 @@ FALLBACK_PRICING = {
     "claude-opus-4-8":         {"input": 15.00, "output": 75.00},
     "zai-org-glm-5-2":         {"input": 1.00,  "output": 3.00},
     "deepseek-v4-pro":         {"input": 0.60,  "output": 2.20},
+    "deepseek-v4-flash-0731": {"input": 0.175, "output": 0.35},
+    "deepseek-v4-flash-0731-fast": {"input": 0.35, "output": 0.70},
     "minimax-m3-preview":      {"input": 0.40,  "output": 1.60},
     "grok-4-5":                {"input": 2.27,  "output": 6.80},
     # Live Venice /models pricing supersedes this conservative fallback.
     "kimi-k3":                 {"input": 1.00,  "output": 3.00},
+    "qwen-3-8-max":            {"input": 2.50,  "output": 7.50},
+    "qwen-3-8-2-4t-a95b":      {"input": 2.50,  "output": 7.50},
+    "claude-sonnet-5":         {"input": 3.00,  "output": 15.00},
+    "gemini-3-6-flash":        {"input": 1.875, "output": 9.375},
+    "grok-4-6":                {"input": 2.27,  "output": 6.80},
+    "nvidia-nemotron-3-5-lightning-30b-a3b": {"input": 0.10, "output": 0.25},
 }
 DEFAULT_PRICING = {"input": 5.00, "output": 15.00}
 
@@ -93,20 +101,6 @@ BENCHMARKS = [
             "a 'Start Focus' button. Use only HTML/CSS/JS. No external images."
         ),
         "scoring": "heuristic placeholder 70-95; real scoring is manual/LLM-judge",
-    },
-    {
-        "id": "brick_breaker_realism",
-        "name": "Brick Breaker Realism",
-        "prompt": (
-            "Create a single self-contained HTML file for a realistic Brick "
-            "Breaker game with Canvas. Include: ball physics with angle "
-            "reflection, paddle with mouse/keyboard/touch controls, brick grid "
-            "with collision detection, score/lives/level, start/game-over/"
-            "victory screens, particle effects on brick break, synthesized "
-            "sound effects with Web Audio API, responsive design, dark neon "
-            "aesthetic."
-        ),
-        "scoring": "heuristic: canvas/RAF, paddle/bricks, game states, physics, particles/sound/responsive, polish; total 100",
     },
     # --- Pharma domain benchmarks (future/unregistered) ---
     {
@@ -274,51 +268,6 @@ def score_one_shot_ui(text: str) -> int:
 
 
 
-def score_brick_breaker_realism(text: str) -> int:
-    """Heuristic scorer for Brick Breaker Realism (0-100)."""
-    if not text:
-        return 0
-    import re
-    low = text.lower()
-    def has(*patterns):
-        return any(re.search(p, text, re.IGNORECASE) for p in patterns)
-    score = 0
-    # canvas + requestAnimationFrame (20)
-    if has(r"<canvas\b"):
-        score += 10
-    if has(r"requestAnimationFrame\s*\("):
-        score += 10
-    # paddle + brick logic (20)
-    if has(r"\bpaddle\b"):
-        score += 10
-    if has(r"\bbricks?\b"):
-        score += 10
-    # game state (15)
-    if has(r"\bscore\b"):
-        score += 5
-    if has(r"\blives\b"):
-        score += 5
-    if has(r"game\s*over|gameover|victory|you\s*win"):
-        score += 5
-    # physics (15)
-    if has(r"collision|collide|intersect|hittest"):
-        score += 7
-    if has(r"Math\.(cos|sin|atan2)", r"bounceAngle|reflect|relativeIntersect"):
-        score += 8
-    # fx + responsive (15)
-    if has(r"\bparticles?\b"):
-        score += 5
-    if has(r"AudioContext|createOscillator"):
-        score += 5
-    if has(r"resize|@media|window\.innerWidth|devicePixelRatio"):
-        score += 5
-    # polish (15)
-    if has(r"neon|glow|gradient|shadow"):
-        score += 8
-    if len(text) > 3000:
-        score += 7
-    return min(score, 100)
-
 
 def score_startup_in_a_weekend(text: str) -> int:
     """Score the Startup-in-a-Weekend plan (0-100)."""
@@ -481,7 +430,6 @@ def score_pharma_regulatory_comprehension(text: str) -> int:
 SCORERS = {
     "intent_understanding": score_intent_understanding,
     "one_shot_ui": score_one_shot_ui,
-    "brick_breaker_realism": score_brick_breaker_realism,
     "startup_in_a_weekend": score_startup_in_a_weekend,
     "pharma_drug_interaction": score_pharma_drug_interaction,
     "pharma_regulatory_comprehension": score_pharma_regulatory_comprehension,
@@ -579,17 +527,6 @@ def fake_response(benchmark_id: str, model_display: str) -> str:
             "<button onclick='start()'>Start Focus</button></div>\n"
             "<script>function start(){console.log('focus')}</script>\n</body>\n</html>"
         )
-    if benchmark_id == "brick_breaker_realism":
-        return (
-            f"({model_display} sample) <!DOCTYPE html>\n"
-            "<html><head><style>body{margin:0;background:#050510;overflow:hidden}"
-            "canvas{display:block}</style></head>\n"
-            "<body><canvas id='game'></canvas>\n"
-            "<script>const canvas=document.getElementById('game');"
-            "const ctx=canvas.getContext('2d');let score=0,lives=3,state='start';"
-            "function loop(){requestAnimationFrame(loop);}loop();</script>\n"
-            "</body></html>"
-        )
     if benchmark_id == "startup_in_a_weekend":
         return (
             f"({model_display} sample) 7-day build plan for an AI contract review MVP:\n\n"
@@ -616,6 +553,33 @@ def fake_response(benchmark_id: str, model_display: str) -> str:
             "5. Scope creep → explicit out-of-scope list.\n\n"
             "## Out of scope\n"
             "Negotiation AI, e-signature, multi-language, enterprise SSO, SOC 2 audit."
+        )
+    if benchmark_id == "pharma_drug_interaction":
+        return (
+            f"({model_display} sample) Drug-Drug Interaction Analysis:\n\n"
+            "1. Warfarin + Ibuprofen — **Major**\n"
+            "Mechanism: NSAIDs inhibit platelet function and increase gastric bleeding risk; "
+            "ibuprofen may also displace warfarin from protein binding, enhancing anticoagulant effect.\n"
+            "Clinical action: Avoid concurrent use; consider acetaminophen as alternative analgesic.\n\n"
+            "2. Warfarin + Lisinopril — **Minor**\n"
+            "No clinically significant pharmacokinetic interaction expected. ACE inhibitors do not "
+            "meaningfully affect warfarin metabolism or coagulation.\n"
+            "Clinical action: Monitor INR routinely as standard practice.\n\n"
+            "I am uncertain about the exact magnitude of protein binding displacement and would "
+            "recommend verifying with a clinical decision support tool."
+        )
+    if benchmark_id == "pharma_regulatory_comprehension":
+        return (
+            f"({model_display} sample) Regulatory Analysis:\n\n"
+            "1. Centralized-only monitoring under ICH E6(R2):\n"
+            "ICH E6 Section 5.18 states that the monitor should verify source data at investigative sites. "
+            "Centralized monitoring is encouraged as a supplement, but Section 5.18.3 indicates that "
+            "on-site monitoring remains important for source data verification.\n"
+            "Exception: Risk-based approaches may reduce but not eliminate on-site visits.\n\n"
+            "2. Investigator responsibilities for informed consent (Section 4.8):\n"
+            "The investigator must obtain written, dated, and signed informed consent from each subject "
+            "prior to participation. The consent process must be documented.\n"
+            "Note: The exact section number should be verified against the current guideline version."
         )
     raise ValueError(f"Unknown benchmark fixture: {benchmark_id}")
 

@@ -29,11 +29,19 @@
     "Opus 5":            "#6D28D9",
     "GLM 5.2":           "#EC4899",
     "DeepSeek V4":       "#0891B2",
+    "DeepSeek V4 Flash 0731": "#0EA5C4",
+    "DeepSeek V4 Flash 0731 Fast": "#22D3EE",
     "MiniMax M3":        "#D97706",
     "Grok 4.5":          "#4F46E5",
     "Inkling":           "#0EA5E9",
     "Kimi K3":           "#F59E0B",
     "Kimi K3 Fast API":  "#B45309",
+    "Qwen 3.8 Max":      "#9B6BFF",
+    "Qwen 3.8 2.4T":    "#C49BFF",
+    "Sonnet 5":          "#FF9DBA",
+    "Gemini 3.6 Flash":  "#FFB800",
+    "Grok 4.6":          "#FF6B3D",
+    "Nemotron 3.5":      "#76B900",
   };
 
   const FALLBACK_DATA = { generated: "", source: "fallback", results: [] };
