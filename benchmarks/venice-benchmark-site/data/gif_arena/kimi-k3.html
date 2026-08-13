@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dancing Alpaca Party</title>
+<style>
+    :root {
+        --fur: #f6ead9;
+        --fur-dark: #e8d4bc;
+        --fur-light: #fdf6ec;
+        --face: #f0ddc4;
+        --blush: #f4a9a0;
+        --hoof: #8a6f5c;
+        --nose: #6b4f3f;
+        --eye: #3b2a22;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        font-family: 'Segoe UI', 'Comic Sans MS', cursive, sans-serif;
+    }
+
+    body {
+        background: linear-gradient(180deg,
+            #1a1040 0%,
+            #3d1e6d 25%,
+            #7b2d8b 50%,
+            #c94b8a 72%,
+            #f7835e 100%);
+    }
+
+    /* ---------- twinkling stars ---------- */
+    .star {
+        position: absolute;
+        background: #fff;
+        border-radius: 50%;
+        animation: twinkle var(--d) ease-in-out infinite;
+        opacity: 0;
+    }
+    @keyframes twinkle {
+        0%, 100% { opacity: 0; transform: scale(0.6); }
+        50%       { opacity: 1; transform: scale(1.2); }
+    }
+
+    /* ---------- drifting clouds ---------- */
+    .cloud {
+        position: absolute;
+        background: rgba(255,255,255,0.18);
+        border-radius: 999px;
+        filter: blur(2px);
+        animation: drift linear infinite;
+    }
+    .cloud::before, .cloud::after {
+        content: '';
+        position: absolute;
+        background: inherit;
+        border-radius: 50%;
+    }
+    .cloud::before { width: 55%; height: 160%; top: -70%; left: 15%; }
+    .cloud::after  { width: 40%; height: 120%; top: -45%; right: 15%; }
+    @keyframes drift {
+        from { transform: translateX(-30vw); }
+        to   { transform: translateX(120vw); }
+    }
+
+    /* ---------- sun ---------- */
+    .sun {
+        position: absolute;
+        top: 8%;
+        right: 10%;
+        width: 110px;
+        height: 110px;
+        border-radius: 50%;
+        background: radial-gradient(circle at 35% 35%, #fff6c9, #ffd76e 55%, #ffae42);
+        box-shadow: 0 0 60px 25px rgba(255, 200, 90, 0.45);
+        animation: sunPulse 8s ease-in-out infinite;
+    }
+    @keyframes sunPulse {
+        0%, 100% { transform: scale(1); }
+        50%      { transform: scale(1.07); }
+    }
+
+    /* ---------- rolling hills ---------- */
+    .hill {
+        position: absolute;
+        bottom: -12vh;
+        border-radius: 50% 50% 0 0;
+    }
+    .hill.h1 {
+        left: -15%;
+        width: 75%;
+        height: 34vh;
+        background: linear-gradient(180deg, #5eaf7d, #3f8a5e);
+    }
+    .hill.h2 {
+        right: -18%;
+        width: 80%;
+        height: 28vh;
+        background: linear-gradient(180deg, #4b9268, #33714c);
+    }
+
+    /* ---------- ground / dance floor ---------- */
+    .floor {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 15vh;
+        background: linear-gradient(180deg, #3d8a58, #2c6643);
+    }
+    .floor::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image:
+            repeating-linear-gradient(90deg, rgba(255,255,255,0.05) 0 40px, transparent 40px 80px),
+            repeating-linear-gradient(0deg,  rgba(255,255,255,0.05) 0 40px, transparent 40px 80px);
+    }
+
+    /* ---------- bouncing shadow ---------- */
+    .shadow {
+        position: absolute;
+        bottom: 12.5vh;
+        left: 50%;
+        width: 320px;
+        height: 46px;
+        margin-left: -160px;
+        background: radial-gradient(ellipse at center, rgba(20,10,30,0.45), transparent 70%);
+        border-radius: 50%;
+        animation: shadowBounce 3.75s ease-in-out infinite;
+        transform-origin: center;
+    }
+    @keyframes shadowBounce {
+        0%, 100% { transform: scale(1); opacity: 0.9; }
+        12.5%    { transform: scale(0.8); opacity: 0.65; }
+        25%      { transform: scale(1.05); opacity: 0.95; }
+        37.5%    { transform: scale(0.82); opacity: 0.7; }
+        50%      { transform: scale(1); opacity: 0.9; }
+        62.5%    { transform: scale(0.78); opacity: 0.6; }
+        75%      { transform: scale(1.08); opacity: 0.95; }
+        87.5%    { transform: scale(0.85); opacity: 0.7; }
+    }
+
+    /* ============ ALPACA STAGE ============ */
+    .stage {
+        position: absolute;
+        bottom: 13vh;
+        left: 50%;
+        width: 0;
+        height: 0;
+    }
+
+    .alpaca {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 0;
+        animation: bodyGroove 3.75s ease-in-out infinite;
+        transform-origin: center bottom;
+    }
+    /* The big bounce + sway + spin flourish */
+    @keyframes bodyGroove {
+        0%   { transform: translateY(0)     rotate(0deg)   translateX(0); }
+        8%   { transform: translateY(-34px) rotate(-4deg)  translateX(-8px); }
+        16%  { transform: translateY(0)     rotate(3deg)   translateX(4px); }
+        24%  { transform: translateY(-46px) rotate(-3deg)  translateX(-6px); }
+        32%  { transform: translateY(0)     rotate(4deg)   translateX(8px); }
+        40%  { transform: translateY(-30px) rotate(-2deg)  translateX(0); }
+        48%  { transform: translateY(0)     rotate(0deg)   translateX(0); }
+        52%  { transform: translateY(-10px) rotate(0deg)   translateX(0); }
+        56%  { transform: translateY(0)     rotate(180deg) translateX(0); }
+        60%  { transform: translateY(-26px) rotate(360deg) translateX(0); }
+        64%  { transform: translateY(0)     rotate(360deg) translateX(0); }
+        72%  { transform: translateY(-40px) rotate(355deg) translateX(-10px); }
+        80%  { transform: translateY(0)     rotate(363deg) translateX(6px); }
+        88%  { transform: translateY(-28px) rotate(358deg) translateX(-4px); }
+        96%  { transform: translateY(0)     rotate(360deg) translateX(0); }
+        100% { transform: translateY(0)     rotate(360deg) translateX(0); }
+    }
+
+    /* ---------- BODY (fluffy sphere of wool) ---------- */
+    .body {
+        position: absolute;
+        bottom: 55px;
+        left: -110px;
+        width: 220px;
+        height: 170px;
+        background: radial-gradient(circle at 40% 35%, var(--fur-light), var(--fur) 55%, var(--fur-dark));
+        border-radius: 48% 52% 50% 50% / 58% 58% 42% 42%;
+        box-shadow:
+            inset -18px -20px 34px rgba(160,120,85,0.18),
+            inset 12px 14px 26px rgba(255,255,255,0.55);
+        animation: bodySquish 3.75s ease-in-out infinite;
+    }
+    @keyframes bodySquish {
+        0%, 100% { transform: scale(1,1); }
+        12.5%, 62.5% { transform: scale(1.06, 0.92); }
+        25%, 75%  { transform: scale(0.97, 1.04); }
+        37.5%, 87.5% { transform: scale(1.05, 0.93); }
+        50%  { transform: scale(1,1); }
+    }
+
+    /* wool bumps around the body edge */
+    .wool {
+        position: absolute;
+        border-radius: 50%;
+        background: radial-gradient(circle at 35% 30%, var(--fur-light), var(--fur) 60%, var(--fur-dark));
+    }
+    .w1 { width: 78px; height: 74px; top: -30px; left: 8px; }
+    .w2 { width: 88px; height: 82px; top: -42px; left: 66px; }
+    .w3 { width: 78px; height: 74px; top: -32px; left: 130px; }
+    .w4 { width: 66px; height: 62px; top: 22px; left: -28px; }
+    .w5 { width: 66px; height: 62px; top: 22px; right: -28px; }
+    .w6 { width: 70px; height: 64px; bottom: -18px; left: 20px; }
+    .w7 { width: 70px; height: 64px; bottom: -20px; left: 80px; }
+    .w8 { width: 66px; height: 60px; bottom: -16px; left: 138px; }
+
+    /* ---------- NECK ---------- */
+    .neck {
+        position: absolute;
+        bottom: 185px;
+        left: 28px;
+        width: 62px;
+        height: 168px;
+        background: linear-gradient(90deg, var(--fur-dark), var(--fur-light) 45%, var(--fur));
+        border-radius: 34px 34px 26px 26px;
+        transform-origin: 50% 100%;
+        animation: neckSway 3.75s ease-in-out infinite;
+        box-shadow: inset -8px 0 14px rgba(160,120,85,0.15);
+        z-index: 3;
+    }
+    @keyframes neckSway {
+        0%, 100% { transform: rotate(0deg) translateX(0); }
+        12.5%    { transform: rotate(-7deg) translateX(-6px); }
+        25%      { transform: rotate(4deg)  translateX(4px); }
+        37.5%    { transform: rotate(-6deg) translateX(-5px); }
+        50%      { transform: rotate(3deg)  translateX(2px); }
+        62.5%    { transform: rotate(-8deg) translateX(-7px); }
+        75%      { transform: rotate(5deg)  translateX(5px); }
+        87.5%    { transform: rotate(-4deg) translateX(-3px); }
+    }
+
+    /* ---------- HEAD + FACE ---------- */
+    .head {
+        position: absolute;
+        bottom: 335px;
+        left: 2px;
+        width: 112px;
+        height: 96px;
+        background: radial-gradient(circle at 42% 32%, var(--fur-light), var(--fur) 60%, var(--fur-dark));
+        border-radius: 50% 50% 46% 46%;
+        transform-origin: 50% 92%;
+        animation: headBop 3.75s ease-in-out infinite;
+        z-index: 4;
+        box-shadow: inset -8px -8px 16px rgba(160,120,85,0.15);
+    }
+    @keyframes headBop {
+        0%, 100% { transform: rotate(0deg) translateY(0); }
+        12.5%    { transform: rotate(-12deg) translateY(-4px); }
+        25%      { transform: rotate(8deg)   translateY(2px); }
+        37.5%    { transform: rotate(-10deg) translateY(-3px); }
+        50%      { transform: rotate(6deg)   translateY(0); }
+        62.5%    { transform: rotate(-13deg) translateY(-5px); }
+        75%      { transform: rotate(9deg)   translateY(2px); }
+        87.5%    { transform: rotate(-7deg)  translateY(-2px); }
+    }
+
+    /* poofy hair tuft */
+    .tuft {
+        position: absolute;
+        top: -24px;
+        left: 22px;
+        width: 34px;
+        height: 34px;
+        background: radial-gradient(circle at 35% 30%, var(--fur-light), var(--fur));
+        border-radius: 50%;
+    }
+    .tuft.t2 { left: 46px; top: -30px; width: 40px; height: 40px; }
+    .tuft.t3 { left: 68px; top: -20px; width: 30px; height: 30px; }
+
+    /* ears */
+    .ear {
+        position: absolute;
+        top: -8px;
+        width: 26px;
+        height: 52px;
+        background: linear-gradient(180deg, var(--fur-light), var(--fur-dark));
+        border-radius: 14px 14px 10px 10px;
+        transform-origin: 50% 100%;
+        box-shadow: inset 0 -8px 10px rgba(214,148,138,0.55);
+    }
+    .ear.left  { left: 8px;  animation: earL 3.75s ease-in-out infinite; }
+    .ear.right { right: 8px; animation: earR 3.75s ease-in-out infinite; }
+    @keyframes earL {
+        0%, 100% { transform: rotate(-18deg); }
+        15%      { transform: rotate(-38deg); }
+        30%      { transform: rotate(-8deg); }
+        50%      { transform: rotate(-22deg); }
+        65%      { transform: rotate(-44deg); }
+        80%      { transform: rotate(-10deg); }
+    }
+    @keyframes earR {
+        0%, 100% { transform: rotate(18deg); }
+        15%      { transform: rotate(6deg); }
+        30%      { transform: rotate(40deg); }
+        50%      { transform: rotate(24deg); }
+        65%      { transform: rotate(4deg); }
+        80%      { transform: rotate(46deg); }
+    }
+
+    /* eyes */
+    .eye {
+        position: absolute;
+        top: 42px;
+        width: 16px;
+        height: 20px;
+        background: radial-gradient(circle at 35% 30%, #7a5a48, var(--eye) 70%);
+        border-radius: 50%;
+        animation: blink 3.75s linear infinite;
+    }
+    .eye::after {
+        content: '';
+        position: absolute;
+        top: 3px;
+        left: 4px;
+        width: 5px;
+        height: 6px;
+        background: #fff;
+        border-radius: 50%;
+    }
+    .eye.left  { left: 24px; }
+    .eye.right { right: 24px; }
+    @keyframes blink {
+        0%, 46%, 50%, 96%, 100% { transform: scaleY(1); }
+        48%, 98% { transform: scaleY(0.08); }
+    }
+
+    /* muzzle */
+    .muzzle {
+        position: absolute;
+        bottom: 6px;
+        left: 50%;
+        width: 56px;
+        height: 40px;
+        margin-left: -28px;
+        background: var(--face);
+        border-radius: 50% 50% 55% 55%;
+        box-shadow: inset 0 -6px 8px rgba(160,120,85,0.18);
+    }
+    .nose {
+        position: absolute;
+        top: 8px;
+        left: 50%;
+        width: 16px;
+        height: 10px;
+        margin-left: -8px;
+        background: var(--nose);
+        border-radius: 50% 50% 60% 60%;
+    }
+    .mouth {
+        position: absolute;
+        top: 19px;
+        left: 50%;
+        width: 22px;
+        height: 12px;
+        margin-left: -11px;
+        border: 3px solid var(--nose);
+        border-top: none;
+        border-left-color: transparent;
+        border-right-color: transparent;
+        border-radius: 0 0 22px 22px;
+        animation: smile 3.75s ease-in-out infinite;
+    }
+    @keyframes smile {
+        0%, 100% { transform: scaleX(1) scaleY(1); }
+        25%, 75% { transform: scaleX(1.25) scaleY(1.35); }
+        50%      { transform: scaleX(1.1) scaleY(1.15); }
+    }
+
+    /* blush */
+    .blush {
+        position: absolute;
+        top: 52px;
+        width: 18px;
+        height: 11px;
+        background: var(--blush);
+        border-radius: 50%;
+        opacity: 0.75;
+        filter: blur(1px);
+    }
+    .blush.left  { left: 10px; }
+    .blush.right { right: 10px; }
+
+    /* ---------- FRONT ARMS (waving!) ---------- */
+    .arm {
+        position: absolute;
+        width: 30px;
+        height: 96px;
+        background: linear-gradient(90deg, var(--fur-dark), var(--fur-light) 50%, var(--fur));
+        border-radius: 16px;
+        transform-origin: 50% 12%;
+        z-index: 2;
+    }
+    .arm::after { /* hoof */
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        left: 3px;
+        width: 24px;
+        height: 18px;
+        background: var(--hoof);
+        border-radius: 10px;
+    }
+    .arm.left {
+        bottom: 150px;
+        left: -96px;
+        animation: armL 3.75s ease-in-out infinite;
+    }
+    .arm.right {
+        bottom: 150px;
+        left: 66px;
+        animation: armR 3.75s ease-in-out infinite;
+    }
+    @keyframes armL {
+        0%, 100% { transform: rotate(20deg); }
+        10%      { transform: rotate(-130deg); }
+        20%      { transform: rotate(-95deg); }
+        30%      { transform: rotate(-145deg); }
+        40%      { transform: rotate(30deg); }
+        50%      { transform: rotate(55deg); }
+        60%      { transform: rotate(-150deg); }
+        70%      { transform: rotate(-100deg); }
+        80%      { transform: rotate(-140deg); }
+        90%      { transform: rotate(35deg); }
+    }
+    @keyframes armR {
+        0%, 100% { transform: rotate(-20deg); }
+        10%      { transform: rotate(-50deg); }
+        20%      { transform: rotate(140deg); }
+        30%      { transform: rotate(100deg); }
+        40%      { transform: rotate(150deg); }
+        50%      { transform: rotate(-60deg); }
+        60%      { transform: rotate(135deg); }
+        70%      { transform: rotate(95deg); }
+        80%      { transform: rotate(145deg); }
+        90%      { transform: rotate(-35deg); }
+    }
+
+    /* ---------- LEGS ---------- */
+    .leg {
+        position: absolute;
+        bottom: -6px;
+        width: 34px;
+        height: 78px;
+        background: linear-gradient(90deg, var(--fur-dark), var(--fur-light) 50%, var(--fur));
+        border-radius: 16px;
+        transform-origin: 50% 0;
+    }
+    .leg::after { /* hoof */
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        left: 3px;
+        width: 28px;
+        height: 20px;
+        background: var(--hoof);
+        border-radius: 10px 10px 12px 12px;
+    }
+    .leg.bl { left: -78px; animation: legBL 3.75s ease-in-out infinite; }
+    .leg.br { left: 44px;  animation: legBR 3.75s ease-in-out infinite; }
+    @keyframes legBL {
+        0%, 100% { transform: rotate(0deg); }
+        12.5%    { transform: rotate(35deg) translateY(-6px); }
+        25%      { transform: rotate(-8deg); }
+        37.5%    { transform: rotate(40deg) translateY(-8px); }
+        50%      { transform: rotate(0deg); }
+        62.5%    { transform: rotate(-30deg) translateY(-6px); }
+        75%      { transform: rotate(5deg); }
+        87.5%    { transform: rotate(-38deg) translateY(-8px); }
+    }
+    @keyframes legBR {
+        0%, 100% { transform: rotate(0deg); }
+        12.5%    { transform: rotate(-40deg) translateY(-8px); }
+        25%      { transform: rotate(8deg); }
+        37.5%    { transform: rotate(-35deg) translateY(-6px); }
+        50%      { transform: rotate(0deg); }
+        62.5%    { transform: rotate(38deg) translateY(-8px); }
+        75%      { transform: rotate(-5deg); }
+        87.5%    { transform: rotate(30deg) translateY(-6px); }
+    }
+
+    /* ---------- POM-POM TAIL ---------- */
+    .tail {
+        position: absolute;
+        bottom: 150px;
+        left: -142px;
+        width: 58px;
+        height: 58px;
+        transform-origin: 90% 50%;
+        animation: tailWag 0.4687s ease-in-out infinite alternate;
+        z-index: 1;
+    }
+    .tail .puff {
+        position: absolute;
+        border-radius: 50%;
+        background: radial-gradient(circle at 35% 30%, var(--fur-light), var(--fur) 55%, var(--fur-dark));
+    }
+    .p1 { inset: 0; }
+    .p2 { width: 40px; height: 40px; top: -12px; left: 2px; }
+    .p3 { width: 38px; height: 38px; bottom: -12px; left: 4px; }
+    .p4 { width: 40px; height: 40px; top: 6px; left: -14px; }
+    @keyframes tailWag {
+        from { transform: rotate(-22deg) scale(1); }
+        to   { transform: rotate(24deg) scale(1.08); }
+    }
+
+    /* ---------- music notes ---------- */
+    .note {
+        position: absolute;
+        bottom: 320px;
+        font-size: 34px;
+        color: #ffe9f6;
+        text-shadow: 0 0 12px rgba(255,160,220,0.9);
+        opacity: 0;
+        animation: floatNote 3.75s ease-in infinite;
+        font-weight: bold;
+    }
+    .note.n1 { left: -190px; animation-delay: 0.0s; color: #ffd1ec; }
+    .note.n2 { left: 150px;  animation-delay: 1.25s; color: #cdeaff; text-shadow: 0 0 12px rgba(140,210,255,0.9); }
+    .note.n3 { left: -230px; animation-delay: 2.5s; color: #e5ffd1; text-shadow: 0 0 12px rgba(170,255,140,0.9); }
+    @keyframes floatNote {
+        0%   { opacity: 0; transform: translateY(0) rotate(0deg) scale(0.6); }
+        12%  { opacity: 1; }
+        100% { opacity: 0; transform: translateY(-260px) rotate(24deg) scale(1.3); }
+    }
+
+    /* ---------- confetti ---------- */
+    .confetti {
+        position: absolute;
+        top: -4vh;
+        width: 12px;
+        height: 18px;
+        animation: confettiFall linear infinite;
+        border-radius: 3px;
+    }
+    @keyframes confettiFall {
+        0%   { transform: translateY(-5vh) rotate(0deg) rotateY(0deg); opacity: 1; }
+        90

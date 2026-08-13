@@ -1,0 +1,8 @@
+{
+  "model_id": "openai-gpt-55",
+  "model_used": "openai-gpt-55",
+  "prompt": "Create a single self-contained HTML document (no external files, no CDN, no images) that shows a cute alpaca dancing. Make it genuinely impressive: a recognizable fluffy alpaca with a long neck, ears,",
+  "generated_at": "2026-08-13T10:48:48.663174+00:00",
+  "chars": 16985,
+  "raw_preview": "```html\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"UTF-8\" />\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n<title>Dancing Alpaca</title>\n<style>\n  * {\n    box-sizing: border-box;\n  }\n\n  html, body {\n    margin: 0;\n    width: 100%;\n    height: 100%;\n    overflow: hidden;\n    font-family: system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif;\n    background:\n      radial-gradient(circle at 20% 15%, rgba(255,255,255,.75) 0 5%, transparent 16%),\n"
+}

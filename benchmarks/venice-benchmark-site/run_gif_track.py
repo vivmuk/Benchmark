@@ -153,7 +153,7 @@ def main() -> int:
             continue
         key = load_key()
         payload = {
-            "model": args.model_id,
+            "model": mid,
             "messages": [
                 {"role": "system",
                  "content": "You generate flawless self-contained HTML/JS/CSS demos."},
@@ -167,14 +167,17 @@ def main() -> int:
         }
         try:
             resp = fetch(key, API, payload)
-            text = resp["choices"][0]["message"]["content"]
+            text = resp["choices"][0]["message"]["content"] or ""
+            if not text.strip():
+                print(f"SKIP  {slug}: empty response (finish={resp['choices'][0].get('finish_reason')})")
+                continue
         except Exception as exc:
             print(f"FAIL  {slug}: {exc}")
             continue
         html_doc = extract_html(text)
         out.write_text(html_doc, encoding="utf-8")
         meta.write_text(json.dumps(
-            {"model_id": mid, "model_used": args.model_id,
+            {"model_id": mid, "model_used": mid,
              "prompt": args.prompt[:200],
              "generated_at": datetime.now(timezone.utc).isoformat(),
              "chars": len(html_doc),

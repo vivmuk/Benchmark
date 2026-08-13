@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dancing Alpaca</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #1a1430;
+    font-family: Georgia, "Palatino Linotype", serif;
+  }
+  .stage {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% 100%, rgba(255, 180, 80, 0.18), transparent 55%),
+      radial-gradient(ellipse 60% 40% at 20% 10%, rgba(255, 120, 180, 0.15), transparent 50%),
+      radial-gradient(ellipse 50% 35% at 85% 15%, rgba(120, 180, 255, 0.18), transparent 50%),
+      linear-gradient(180deg, #24183e 0%, #3a2458 38%, #5a3a6e 62%, #c97a4a 78%, #e8b06a 100%);
+  }
+  .stars {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .star {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: #fff8e8;
+    border-radius: 50%;
+    animation: twinkle 2.4s ease-in-out infinite;
+    box-shadow: 0 0 6px #fff;
+  }
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.25; transform: scale(0.7); }
+    50% { opacity: 1; transform: scale(1.2); }
+  }
+  .hills {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 34%;
+    background:
+      radial-gradient(ellipse 70% 80% at 15% 100%, #4a8a52 0%, transparent 62%),
+      radial-gradient(ellipse 80% 90% at 78% 110%, #3d7a48 0%, transparent 58%),
+      linear-gradient(180deg, transparent 0%, #4f8f55 40%, #3d7344 100%);
+  }
+  .floor-glow {
+    position: absolute;
+    bottom: 12%;
+    left: 50%;
+    width: 420px;
+    height: 46px;
+    transform: translateX(-50%);
+    background: radial-gradient(ellipse, rgba(255, 210, 120, 0.45), transparent 70%);
+    filter: blur(4px);
+    animation: glowPulse 1.1s ease-in-out infinite;
+  }
+  @keyframes glowPulse {
+    0%, 100% { opacity: 0.55; transform: translateX(-50%) scaleX(1); }
+    50% { opacity: 1; transform: translateX(-50%) scaleX(1.12); }
+  }
+  .title {
+    position: absolute;
+    top: 6%;
+    width: 100%;
+    text-align: center;
+    color: #fff6e4;
+    letter-spacing: 0.18em;
+    font-size: clamp(18px, 3vw, 28px);
+    text-shadow: 0 4px 18px rgba(80, 20, 60, 0.55);
+    animation: titleBob 3s ease-in-out infinite;
+  }
+  .subtitle {
+    display: block;
+    margin-top: 8px;
+    letter-spacing: 0.32em;
+    font-size: 11px;
+    opacity: 0.75;
+  }
+  @keyframes titleBob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+  .scene {
+    position: absolute;
+    left: 50%;
+    bottom: 16%;
+    width: 360px;
+    height: 420px;
+    transform: translateX(-50%);
+  }
+  svg.alpaca {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+  .notes {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .note {
+    position: absolute;
+    color: #ffe9a8;
+    font-size: 22px;
+    opacity: 0;
+    animation: floatNote 3.2s ease-in-out infinite;
+  }
+  .note:nth-child(1) { left: 18%; top: 28%; animation-delay: 0s; }
+  .note:nth-child(2) { left: 74%; top: 22%; animation-delay: 0.8s; }
+  .note:nth-child(3) { left: 10%; top: 48%; animation-delay: 1.6s; }
+  .note:nth-child(4) { left: 82%; top: 42%; animation-delay: 2.2s; }
+  @keyframes floatNote {
+    0% { opacity: 0; transform: translateY(10px) rotate(-8deg) scale(0.7); }
+    20% { opacity: 1; }
+    100% { opacity: 0; transform: translateY(-70px) rotate(18deg) scale(1.1); }
+  }
+  .confetti {
+    position: absolute;
+    width: 8px;
+    height: 12px;
+    border-radius: 2px;
+    animation: confettiFall 4.5s linear infinite;
+  }
+  @keyframes confettiFall {
+    0% { transform: translateY(-20px) rotate(0deg); opacity: 0; }
+    10% { opacity: 1; }
+    100% { transform: translateY(110vh) rotate(420deg); opacity: 0.2; }
+  }
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="stars" id="stars"></div>
+  <div class="hills"></div>
+  <div class="floor-glow"></div>
+  <div class="title">FANDANGO ALPACA<span class="subtitle">FOREVER GROOVE</span></div>
+  <div class="notes">
+    <div class="note">♪</div>
+    <div class="note">♫</div>
+    <div class="note">♩</div>
+    <div class="note">♬</div>
+  </div>
+  <div class="scene">
+    <svg class="alpaca" viewBox="0 0 360 420" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="wool" cx="40%" cy="35%" r="70%">
+          <stop offset="0%" stop-color="#fff4dc"/>
+          <stop offset="55%" stop-color="#f0d2a0"/>
+          <stop offset="100%" stop-color="#d4a86a"/>
+        </radialGradient>
+        <radialGradient id="woolDark" cx="40%" cy="30%" r="75%">
+          <stop offset="0%" stop-color="#efc890"/>
+          <stop offset="100%" stop-color="#c48a4a"/>
+        </radialGradient>
+        <radialGradient id="blush" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#ff9bb0" stop-opacity="0.85"/>
+          <stop offset="100%" stop-color="#ff9bb0" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="legG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#e8c48a"/>
+          <stop offset="100%" stop-color="#c99652"/>
+        </linearGradient>
+        <filter id="soft">
+          <feGaussianBlur stdDeviation="0.6"/>
+        </filter>
+      </defs>
+
+      <!-- shadow -->
+      <ellipse cx="180" cy="392" rx="78" ry="14" fill="rgba(60,30,20,0.28)">
+        <animate attributeName="rx" values="78;92;70;88;78" dur="1.1s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.28;0.18;0.32;0.2;0.28" dur="1.1s" repeatCount="indefinite"/>
+      </ellipse>
+
+      <g id="dancer">
+        <animateTransform attributeName="transform" type="translate" values="0 0; 0 -18; 6 -6; 0 -22; -8 -8; 0 0" dur="1.1s" repeatCount="indefinite"/>
+        <animateTransform attributeName="transform" type="rotate" values="-4 180 260; 5 180 260; -3 180 260; 6 180 260; -4 180 260" dur="1.1s" additive="sum" repeatCount="indefinite"/>
+
+        <!-- back legs -->
+        <g>
+          <animateTransform attributeName="transform" type="rotate" values="8 148 300; -18 148 300; 12 148 300; -10 148 300; 8 148 300" dur="1.1s" repeatCount="indefinite"/>
+          <path d="M138 275 Q132 330 128 365" stroke="url(#legG)" stroke-width="18" stroke-linecap="round" fill="none"/>
+          <ellipse cx="126" cy="372" rx="14" ry="8" fill="#3a2a22"/>
+        </g>
+        <g>
+          <animateTransform attributeName="transform" type="rotate" values="-10 214 300; 16 214 300; -14 214 300; 10 214 300; -10 214 300" dur="1.1s" repeatCount="indefinite"/>
+          <path d="M222 275 Q230 330 236 365" stroke="url(#legG)" stroke-width="18" stroke-linecap="round" fill="none"/>
+          <ellipse cx="238" cy="372" rx="14" ry="8" fill="#3a2a22"/>
+        </g>
+
+        <!-- pom pom tail -->
+        <g>
+          <animateTransform attributeName="transform" type="rotate" values="-25 248 230; 35 248 230; -15 248 230; 40 248 230; -25 248 230" dur="0.7s" repeatCount="indefinite"/>
+          <path d="M240 228 Q268 210 286 198" stroke="#e8c48a" stroke-width="10" fill="none" stroke-linecap="round"/>
+          <circle cx="292" cy="192" r="18" fill="#f4d7a2"/>
+          <circle cx="284" cy="184" r="9" fill="#fff6e4"/>
+          <circle cx="300" cy="200" r="8" fill="#e0b878"/>
+          <circle cx="306" cy="184" r="7" fill="#f0c98a"/>
+        </g>
+
+        <!-- body fluff -->
+        <g>
+          <ellipse cx="180" cy="250" rx="86" ry="62" fill="url(#wool)"/>
+          <circle cx="118" cy="232" r="28" fill="#f3d4a4"/>
+          <circle cx="242" cy="236" r="26" fill="#efc890"/>
+          <circle cx="150" cy="208" r="24" fill="#fff1d4"/>
+          <circle cx="210" cy="206" r="22" fill="#f6dfb4"/>
+          <circle cx="176" cy="292" r="30" fill="#e8c086"/>
+          <circle cx="132" cy="270" r="22" fill="#efc890"/>
+          <circle cx="228" cy="274" r="20" fill="#e6ba7c"/>
+          <circle cx="180" cy="228" r="18" fill="#fff8e8" opacity="0.55"/>
+        </g>
+
+        <!-- front legs -->
+        <g>
+          <animateTransform attributeName="transform" type="rotate" values="-22 150 300; 20 150 300; -16 150 300; 24 150 300; -22 150 300" dur="1.1s" repeatCount="indefinite"/>
+          <path d="M152 278 Q140 325 146 368" stroke="url(#legG)" stroke-width="16" stroke-linecap="round" fill="none"/>
+          <ellipse cx="148" cy="374" rx="13" ry="7.5" fill="#3a2a22"/>
+        </g>
+        <g>
+          <animateTransform attributeName="transform" type="rotate" values="20 208 300; -24 208 300; 18 208 300; -20 208 300; 20 208 300" dur="1.1s" repeatCount="indefinite"/>
+          <path d="M208 278 Q222 325 214 368" stroke="url(#legG)" stroke-width="16" stroke-linecap="round" fill="none"/>
+          <ellipse cx="212" cy="374" rx="13" ry="7.5" fill="#3a2a22"/>
+        </g>
+
+        <!-- long neck -->
+        <g>
+          <animateTransform attributeName="transform" type="rotate" values="-8 180 200; 10 180 200; -6 180 200; 8 180 200; -8 180 200" dur="1.1s" repeatCount="indefinite"/>
+          <path d="M168 210 C160 170 164 130 172 96 C176 80 184 72 196 78 C210 86 208 130 204 168 C200 196 196 214 188 226" fill="url(#woolDark)"/>
+          <circle cx="176" cy="150" r="16" fill="#f0d0a0"/>
+          <circle cx="198" cy="128" r="14" fill="#f6dfb4"/>
+          <circle cx="186" cy="176" r="15" fill="#e8c086"/>
+
+          <!-- head -->
+          <g>
+            <animateTransform attributeName="transform" type="rotate" values="-6 188 78; 8 188 78; -4 188 78; 10 188 78; -6 188 78" dur="0.9s" repeatCount="indefinite"/>
+            <!-- ears -->
+            <g>
+              <animateTransform attributeName="transform" type="rotate" values="0 168 58; -18 168 58; 8 168 58; -12 168 58; 0 168 58" dur="0.55s" repeatCount="indefinite"/>
+              <ellipse cx="160" cy="42" rx="11" ry="24" fill="#efc890" transform="rotate(-18 160 42)"/>
+              <ellipse cx="160" cy="44" rx="5" ry="14" fill="#f4b8b0" transform="rotate(-18 160 44)"/>
+            </g>
+            <g>
+              <animateTransform attributeName="transform" type="rotate" values="0 212 56; 16 212 56; -6 212 56; 14 212 56; 0 212 56" dur="0.55s" repeatCount="indefinite"/>
+              <ellipse cx="220" cy="40" rx="11" ry="24" fill="#efc890" transform="rotate(20 220 40)"/>
+              <ellipse cx="220" cy="42" rx="5" ry="14" fill="#f4b8b0" transform="rotate(20 220 42)"/>
+            </g>
+            <!-- head fluff -->
+            <ellipse cx="188" cy="78" rx="42" ry="36" fill="url(#wool)"/>
+            <circle cx="162" cy="62" r="16" fill="#fff1d4"/>
+            <circle cx="214" cy="60" r="15" fill="#f3d4a4"/>
+            <circle cx="188" cy="50" r="14" fill="#fff8e8"/>
+            <!-- snout -->
+            <ellipse cx="196" cy="92" rx="22" ry="16" fill="#f8e2b8"/>
+            <ellipse cx="188" cy="90" rx="4.2" ry="3.2" fill="#3a2a22"/>
+            <ellipse cx="204" cy="90" rx="4.2" ry="3.2" fill="#3a2a22"/>
+            <ellipse cx="196" cy="100" rx="7" ry="4.5" fill="#c97a7a"/>
+            <path d="M193 100 Q196 104 199 100" stroke="#8a4a4a" stroke-width="1.4" fill="none"/>
+            <!-- eyes -->
+            <ellipse cx="174" cy="76" rx="7.5" ry="8.5" fill="#2a1c16"/>
+            <ellipse cx="202" cy="74" rx="7.5" ry="8.5" fill="#2a1c16"/>
+            <circle cx="176.5" cy="73.5" r="2.4" fill="#fff"/>
+            <circle cx="204.5" cy="71.5" r="2.4" fill="#fff"/>
+            <circle cx="172" cy="78" r="1.1" fill="#fff" opacity="0.7"/>
+            <!-- lashes / smile spark -->
+            <path d="M166 68 Q174 64 182 68" stroke="#2a1c16" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+            <path d="M194 66 Q202 62 210 66" stroke="#2a1c16" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+            <ellipse cx="166" cy="88" rx="10" ry="6" fill="url(#blush)"/>
+            <ellipse cx="214" cy="86" rx="10" ry="6" fill="url(#blush)"/>
+            <!-- bangs -->
+            <circle cx="176" cy="48" r="9" fill="#f0c98a"/>
+            <circle cx="196" cy="44" r="10" fill="#f6dfb4"/>
+            <circle cx="188" cy="40" r="7" fill="#fff4dc"/>
+          </g>
+        </g>
+      </g>
+    </svg>
+  </div>
+</div>
+<script>
+(function () {
+  const stars = document.getElementById('stars');
+  const stage = document.querySelector('.stage');
+  for (let i = 0; i < 48; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    s.style.left = Math.random() * 100 + '%';
+    s.style.top = Math.random() * 58 + '%';
+    s.style.animationDelay = (Math.random() * 2.4) + 's';
+    s.style.animationDuration = (1.6 + Math.random() * 1.8) + 's';
+    stars.appendChild(s);
+  }
+  const colors = ['#ff6b8a', '#ffd166', '#7bdff2', '#b388ff', '#90ee90', '#ff9f6b'];
+  for (let i = 0; i < 18; i++) {
+    const c = document.createElement('div');
+    c.className = 'confetti';
+    c.style.left = (8 + Math.random() * 84) + '%';
+    c.style.top = (-10 - Math.random() * 30) + 'px';
+    c.style.background = colors[i % colors.length];
+    c.style.animationDelay = (Math.random() * 4.5) + 's';
+    c.style.animationDuration = (3.8 + Math.random() * 2.4) + 's';
+    stage.appendChild(c);
+  }
+})();
+</script>
+</body>
+</html>

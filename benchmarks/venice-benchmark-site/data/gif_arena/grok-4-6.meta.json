@@ -1,0 +1,8 @@
+{
+  "model_id": "grok-4-6",
+  "model_used": "grok-4-6",
+  "prompt": "Create a single self-contained HTML document (no external files, no CDN, no images) that shows a cute alpaca dancing. Make it genuinely impressive: a recognizable fluffy alpaca with a long neck, ears,",
+  "generated_at": "2026-08-13T11:04:00.514580+00:00",
+  "chars": 13246,
+  "raw_preview": "```html\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"UTF-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n<title>Dancing Alpaca</title>\n<style>\n  * { box-sizing: border-box; margin: 0; padding: 0; }\n  html, body {\n    width: 100%;\n    height: 100%;\n    overflow: hidden;\n    background: #1a1430;\n    font-family: Georgia, \"Palatino Linotype\", serif;\n  }\n  .stage {\n    position: relative;\n    width: 100%;\n    height: 100%;\n    background:\n      radial-gradient(el"
+}

@@ -2,33 +2,93 @@
   "fps": 12,
   "seconds": 9,
   "rendered": {
+    "claude-fable-5": {
+      "gif": "claude-fable-5.gif",
+      "size": 63998
+    },
+    "claude-opus-4-8": {
+      "gif": "claude-opus-4-8.gif",
+      "size": 8973023
+    },
     "claude-opus-5": {
       "gif": "claude-opus-5.gif",
-      "size": 3972996
+      "size": 3886006
+    },
+    "deepseek-v4-flash-0731-fast": {
+      "gif": "deepseek-v4-flash-0731-fast.gif",
+      "size": 6328120
     },
     "deepseek-v4-flash-0731": {
       "gif": "deepseek-v4-flash-0731.gif",
-      "size": 4477430
+      "size": 4268433
+    },
+    "deepseek-v4-pro": {
+      "gif": "deepseek-v4-pro.gif",
+      "size": 3614413
+    },
+    "gemini-3-6-flash": {
+      "gif": "gemini-3-6-flash.gif",
+      "size": 276220
     },
     "grok-4-5": {
       "gif": "grok-4-5.gif",
-      "size": 6198615
+      "size": 6219559
+    },
+    "grok-4-6": {
+      "gif": "grok-4-6.gif",
+      "size": 3017550
+    },
+    "inkling": {
+      "gif": "inkling.gif",
+      "size": 5249944
     },
     "kimi-k3-fast-api": {
       "gif": "kimi-k3-fast-api.gif",
-      "size": 4939912
+      "size": 5116790
+    },
+    "kimi-k3": {
+      "gif": "kimi-k3.gif",
+      "size": 62306
     },
     "minimax-m3-preview": {
       "gif": "minimax-m3-preview.gif",
-      "size": 2837393
+      "size": 2814875
+    },
+    "nvidia-nemotron-3-5-lightning-30b-a3b": {
+      "gif": "nvidia-nemotron-3-5-lightning-30b-a3b.gif",
+      "size": 745728
+    },
+    "openai-gpt-55": {
+      "gif": "openai-gpt-55.gif",
+      "size": 5111946
+    },
+    "openai-gpt-56-luna-pro": {
+      "gif": "openai-gpt-56-luna-pro.gif",
+      "size": 5537737
+    },
+    "openai-gpt-56-luna": {
+      "gif": "openai-gpt-56-luna.gif",
+      "size": 4861132
     },
     "openai-gpt-56-sol-pro": {
       "gif": "openai-gpt-56-sol-pro.gif",
-      "size": 2733484
+      "size": 2638968
+    },
+    "openai-gpt-56-sol": {
+      "gif": "openai-gpt-56-sol.gif",
+      "size": 3965735
+    },
+    "openai-gpt-56-terra-pro": {
+      "gif": "openai-gpt-56-terra-pro.gif",
+      "size": 2960176
+    },
+    "openai-gpt-56-terra": {
+      "gif": "openai-gpt-56-terra.gif",
+      "size": 2759187
     },
     "zai-org-glm-5-2": {
       "gif": "zai-org-glm-5-2.gif",
-      "size": 4664411
+      "size": 4262038
     }
   }
 }

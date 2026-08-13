@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dancing Alpaca</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #1a0a2e;
+      overflow: hidden;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .canvas-wrapper {
+      position: relative;
+      cursor: default;
+    }
+
+    canvas {
+      display: block;
+      border-radius: 20px;
+      box-shadow: 
+        0 0 0 1px rgba(255, 255, 255, 0.1),
+        0 20px 60px rgba(0, 0, 0, 0.5),
+        0 0 100px rgba(255, 184, 255, 0.3);
+    }
+
+    .controls {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 15px;
+    }
+
+    .control-btn {
+      padding: 10px 20px;
+      background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+      color: white;
+      border: none;
+      border-radius: 25px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .control-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
+    }
+
+    .control-btn:active {
+      transform: translateY(1px);
+    }
+
+    .info {
+      position: absolute;
+      top: 20px;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+  <div class="canvas-wrapper">
+    <canvas id="canvas"></canvas>
+    <div class="info">Dancing Alpaca</div>
+    <div class="controls">
+      <button class="control-btn" id="pauseBtn">Pause</button>
+      <button class="control-btn" id="resumeBtn">Resume</button>
+    </div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const pauseBtn = document.getElementById('pauseBtn');
+    const resumeBtn = document.getElementById('resumeBtn');
+
+    let animationId = null;
+    let isPaused = false;
+    let time = 0;
+
+    // Set canvas size
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight * 0.8;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    // Alpaca colors
+    const colors = {
+      wool: '#f5f0e2',
+      face: '#c9946a',
+      earInside: '#f8c8a8',
+      nose: '#4a3320',
+      eye: '#2d2d2d',
+      pomPom: '#ff69b4',
+      shadow: 'rgba(0, 0, 0, 0.3)',
+      gradientStart: '#ffb347',
+      gradientEnd: '#dd2476'
+    };
+
+    // Drawing functions
+    function drawAlpaca(x, y, scale, rotation, time) {
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.scale(scale, scale);
+      ctx.rotate(rotation);
+
+      const t = time / 1000;
+
+      // Body - main fluffy shape
+      const bodyWidth = 100;
+      const bodyHeight = 70;
+      
+      // Create gradient for body
+      const bodyGrad = ctx.createRadialGradient(0, 0, 0, 0, 0, bodyHeight);
+      bodyGrad.addColorStop(0, '#fff8f0');
+      bodyGrad.addColorStop(0.5, colors.wool);
+      bodyGrad.addColorStop(1, '#e8e0d0');
+      ctx.fillStyle = bodyGrad;
+
+      // Main body ellipse
+      ctx.beginPath();
+      ctx.ellipse(0, 15, bodyWidth * 0.55, bodyHeight * 0.6, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Belly curve
+      ctx.beginPath();
+      ctx.ellipse(0, 25, bodyWidth * 0.4, bodyHeight * 0.45, 0, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+      ctx.fill();
+
+      // Legs - bouncing motion
+      const legOffset = Math.sin(t * 3 + 0) * 8;
+      ctx.fillStyle = colors.wool;
+      
+      // Front left leg
+      ctx.beginPath();
+      ctx.rect(-bodyWidth * 0.35, 35, 12, 25 + Math.sin(t * 4 + 0) * 5);
+      ctx.fill();
+
+      // Front right leg
+      ctx.beginPath();
+      ctx.rect(bodyWidth * 0.15, 35, 12, 25 + Math.sin(t * 4 + 3.14) * 5);
+      ctx.fill();
+
+      // Back left leg
+      ctx.beginPath();
+      ctx.rect(-bodyWidth * 0.45, 50, 10, 20 + Math.sin(t * 4 + 1) * 5);
+      ctx.fill();
+
+      // Back right leg
+      ctx.beginPath();
+      ctx.rect(bodyWidth * 0.35, 50, 10, 20 + Math.sin(t * 4 + 4.2) * 5);
+      ctx.fill();
+
+      // Neck and head
+      ctx.fillStyle = colors.face;
+      ctx.beginPath();
+      ctx.ellipse(-bodyWidth * 0.2, 5, 35, 45, -0.2 + Math.sin(t * 2 + 0.5) * 0.1, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Head details
+      ctx.beginPath();
+      ctx.ellipse(-bodyWidth * 0.2, 5, 25, 35, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Ear
+      ctx.fillStyle = colors.earInside;
+      ctx.beginPath();
+      ctx.moveTo(-bodyWidth * 0.15, -5);
+      ctx.lineTo(-bodyWidth * 0.3, -25);
+      ctx.lineTo(-bodyWidth * 0.05, -20);
+      ctx.closePath();
+      ctx.fill();
+
+      // Ear inside
+      ctx.beginPath();
+      ctx.arc(-bodyWidth * 0.12, -18, 8, 0, Math.PI * 2);
+      ctx.fillStyle = '#ffb6c1';
+      ctx.fill();
+
+      // Eye
+      ctx.fillStyle = colors.eye;
+      ctx.beginPath();
+      ctx.arc(-bodyWidth * 0.12, 8, 6, 0, Math.PI * 2);
+      ctx.fill();
+      // Pupil
+      ctx.beginPath();
+      ctx.arc(-bodyWidth * 0.12, 8, 3, 0, Math.PI * 2);
+      ctx.fillStyle = '#fff';
+      ctx.fill();
+
+      // Mouth
+      ctx.strokeStyle = '#5a4020';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.arc(-bodyWidth * 0.1, 20, 4, 0, Math.PI);
+      ctx.stroke();
+
+      // Long neck curve
+      ctx.strokeStyle = colors.gradientStart;
+      ctx.lineWidth = 6;
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+      for (let i = 0; i < 15; i++) {
+        const t = i / 15;
+        const x = -bodyWidth * 0.15 + t * bodyWidth * 0.3;
+        const y = 5 + t * 40 + Math.sin(t * 10 + time * 0.01) * 5;
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+
+      // Pom-pom tail
+      const tailX = bodyWidth * 0.6;
+      const tailPulse = Math.sin(t * 5) * 3;
+      ctx.fillStyle = colors.pomPom;
+      ctx.beginPath();
+      ctx.arc(tailX + Math.sin(t * 3) * 10, 30 + tailPulse, 12 + Math.abs(Math.cos(t * 3)) * 5, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Tail fluff
+      ctx.fillStyle = 'rgba(255, 105, 180, 0.5)';
+      for (let i = 0; i < 5; i++) {
+        const fluffX = tailX + Math.sin(t * 3 + i) * 15;
+        const fluffY = 30 + Math.cos(t * 2 + i) * 8 + tailPulse;
+        ctx.beginPath();
+        ctx.arc(fluffX, fluffY, 4 + Math.sin(t * 2 + i) * 2, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      ctx.restore();
+    }
+
+    function drawBackground() {
+      ctx.fillStyle = '#1a0a2e';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Gradient background
+      const grad = ctx.createLinearGradient(0, 0, 0, canvas.height);
+      grad.addColorStop(0, '#2d1b4e');
+      grad.addColorStop(0.5, '#1a0a2e');
+      grad.addColorStop(1, '#0d051a');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Sparkles
+      ctx.fillStyle = '#fff';
+      for (let i = 0; i < 20; i++) {
+        const x = (Math.random() * canvas.width);
+        const y = (Math.random() * canvas.height * 0.4);
+        const size = Math.random() * 3 + 1;
+        ctx.globalAlpha = Math.random() * 0.8;
+        ctx.beginPath();
+        ctx.arc(x, y, size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+    }
+
+    function animate() {
+      if (isPaused) return;
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drawBackground();
+
+      // Calculate positions with dance motion
+      const centerX = canvas.width / 2;
+      const centerY = canvas.height * 0.6;
+      const scale = 1 + Math.sin(time * 0.003) * 0.05;
+      const rotation = Math.sin(time * 0.005) * 0.1;
+
+      // Dance bounce factor
+      const bounce = Math.sin(time * 0.01) * 15;
+
+      drawAlpaca(centerX, centerY - bounce, scale, rotation, time);
+
+      time += 16;
+      animationId = requestAnimationFrame(animate);
+    }
+
+    // Initialize animation
+    function init() {
+      animate();
+    }
+
+    // Pause/resume functionality
+    pauseBtn.addEventListener('click', () => {
+      isPaused = true;
+      pauseBtn.textContent = 'Resuming...';
+    });
+
+    resumeBtn.addEventListener('click', () => {
+      isPaused = false;
+      pauseBtn.textContent = 'Pause';
+      if (!animationId) {
+        animate();
+      }
+    });
+
+    // Start on load
+    window.addEventListener('load', init);
+
+    // Double-click to restart
+    canvas.addEventListener('dblclick', () => {
+      isPaused = false;
+      time = 0;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      animate();
+    });
+  </script>
+</body>
+</html>

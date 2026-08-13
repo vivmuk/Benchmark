@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alpaca Fiesta! 🦙</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body { height: 100%; overflow: hidden; }
+
+  body {
+    background: linear-gradient(180deg, #9fd9ff 0%, #cfeaff 40%, #ffe3ee 72%, #ffd6e6 100%);
+    font-family: "Trebuchet MS", "Comic Sans MS", sans-serif;
+    position: relative;
+  }
+
+  /* ---------- SUN ---------- */
+  .sun {
+    position: absolute; top: 55px; right: 90px;
+    width: 90px; height: 90px; border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #fff6c9, #ffd93d 70%);
+    box-shadow: 0 0 60px 25px rgba(255, 217, 61, .55);
+    animation: sunPulse 3s ease-in-out infinite;
+  }
+  .sun::before {
+    content: ''; position: absolute; inset: -26px; border-radius: 50%;
+    border: 6px dotted rgba(255, 205, 40, .8);
+    animation: spin 14s linear infinite;
+  }
+  @keyframes sunPulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.07)} }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ---------- CLOUDS ---------- */
+  .cloud {
+    position: absolute; background: #fff; border-radius: 60px;
+    opacity: .9; filter: drop-shadow(0 6px 10px rgba(120,150,200,.25));
+  }
+  .cloud::before, .cloud::after {
+    content: ''; position: absolute; background: #fff; border-radius: 50%;
+  }
+  .cloud.c1 { width: 150px; height: 46px; top: 90px; left: -180px; animation: drift 26s linear infinite; }
+  .cloud.c1::before { width: 60px; height: 60px; top: -28px; left: 24px; }
+  .cloud.c1::after  { width: 44px; height: 44px; top: -18px; left: 78px; }
+  .cloud.c2 { width: 110px; height: 36px; top: 190px; left: -140px; animation: drift 38s linear infinite 8s; }
+  .cloud.c2::before { width: 46px; height: 46px; top: -22px; left: 16px; }
+  .cloud.c2::after  { width: 34px; height: 34px; top: -14px; left: 58px; }
+  @keyframes drift { to { transform: translateX(calc(100vw + 260px)); } }
+
+  /* ---------- GROUND ---------- */
+  .hill1, .hill2 {
+    position: absolute; border-radius: 50%;
+  }
+  .hill1 {
+    width: 160vw; height: 60vh; left: -30vw; bottom: -34vh;
+    background: linear-gradient(180deg, #a5e08a, #7cc866);
+  }
+  .hill2 {
+    width: 140vw; height: 50vh; right: -50vw; bottom: -30vh;
+    background: linear-gradient(180deg, #8fd47a, #6bbd57);
+  }
+  .flower { position: absolute; width: 14px; height: 14px; border-radius: 50%; z-index: 2; }
+  .flower::before {
+    content:''; position:absolute; inset:3px; border-radius:50%; background:#ffd93d;
+  }
+  .flower.f1 { background:#ff7eb6; left: 12%; bottom: 16vh; animation: flowerSway 2.4s ease-in-out infinite; }
+  .flower.f2 { background:#b28dff; left: 22%; bottom: 9vh;  animation: flowerSway 2.9s ease-in-out infinite .4s; }
+  .flower.f3 { background:#ff9d76; right: 18%; bottom: 14vh; animation: flowerSway 2.6s ease-in-out infinite .8s; }
+  .flower.f4 { background:#7ee3ff; right: 9%;  bottom: 7vh;  animation: flowerSway 3.1s ease-in-out infinite .2s; }
+  .flower.f5 { background:#ff7eb6; left: 6%;   bottom: 6vh;  animation: flowerSway 2.7s ease-in-out infinite .6s; }
+  @keyframes flowerSway { 0%,100%{transform:rotate(-12deg)} 50%{transform:rotate(12deg)} }
+
+  /* ---------- TITLE ---------- */
+  h1 {
+    position: absolute; top: 26px; width: 100%; text-align: center;
+    font-size: clamp(26px, 4.5vw, 46px); color: #fff; letter-spacing: 2px;
+    text-shadow: 0 3px 0 #ff7eb6, 0 6px 14px rgba(180, 60, 120, .35);
+    animation: titleWobble 1.3s ease-in-out infinite; z-index: 5;
+  }
+  @keyframes titleWobble {
+    0%,100% { transform: rotate(-2deg) translateY(0); }
+    50%     { transform: rotate(2deg) translateY(-6px); }
+  }
+
+  /* ---------- ALPACA STAGE ---------- */
+  .stage {
+    position: absolute; left: 50%; bottom: 12vh;
+    transform: translateX(-50%);
+    width: 360px; height: 430px; z-index: 3;
+  }
+
+  .shadow {
+    position: absolute; bottom: -14px; left: 50%;
+    width: 230px; height: 34px; border-radius: 50%;
+    background: rgba(60, 110, 50, .30);
+    transform: translateX(-50%);
+    animation: shadowPulse .65s ease-in-out infinite;
+  }
+  @keyframes shadowPulse {
+    0%,100% { transform: translateX(-50%) scale(1); opacity:.35; }
+    40%     { transform: translateX(-50%) scale(.72); opacity:.18; }
+  }
+
+  /* whole-body groove: bounce + squash */
+  .bouncer {
+    position: absolute; inset: 0; transform-origin: 50% 100%;
+    animation: bounce .65s ease-in-out infinite;
+  }
+  @keyframes bounce {
+    0%,100% { transform: translateY(0) scale(1.04, .96); }
+    40%     { transform: translateY(-34px) scale(.96, 1.06); }
+    70%     { transform: translateY(-6px) scale(1, 1); }
+  }
+
+  /* side-to-side sway (2 bounces per sway = funky groove) */
+  .swayer {
+    position: absolute; inset: 0; transform-origin: 50% 92%;
+    animation: sway 1.3s ease-in-out infinite;
+  }
+  @keyframes sway {
+    0%,100% { transform: rotate(-5deg); }
+    50%     { transform: rotate(5deg); }
+  }
+
+  .alpaca { position: absolute; inset: 0; }
+
+  /* ---------- LEGS ---------- */
+  .leg {
+    position: absolute; bottom: 0; width: 27px; height: 100px;
+    background: linear-gradient(180deg, #fdf3e3, #f7e6cc);
+    border-radius: 13px 13px 11px 11px;
+    transform-origin: 50% 8%;
+  }
+  .leg::after { /* hoof */
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 16px;
+    background: #b9835a; border-radius: 8px 8px 11px 11px;
+  }
+  .leg.back1  { left: 208px; z-index: 1; animation: kickSmall .65s ease-in-out infinite; }
+  .leg.back2  { left: 248px; z-index: 1; animation: kickSmall .65s ease-in-out infinite .325s; }
+  .leg.front1 { left: 88px;  z-index: 4; animation: kickBig  .65s ease-in-out infinite .325s; }
+  .leg.front2 { left: 128px; z-index: 4; animation: kickBig  .65s ease-in-out infinite; }
+  @keyframes kickBig {
+    0%,100% { transform: rotate(0deg); }
+    40%     { transform: rotate(34deg) translateY(-8px); }
+  }
+  @keyframes kickSmall {
+    0%,100% { transform: rotate(0deg); }
+    40%     { transform: rotate(-22deg) translateY(-6px); }
+  }
+
+  /* ---------- BODY ---------- */
+  .body {
+    position: absolute; left: 62px; bottom: 72px;
+    width

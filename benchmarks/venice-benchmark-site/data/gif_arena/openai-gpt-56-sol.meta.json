@@ -1,0 +1,8 @@
+{
+  "model_id": "openai-gpt-56-sol",
+  "model_used": "openai-gpt-56-sol",
+  "prompt": "Create a single self-contained HTML document (no external files, no CDN, no images) that shows a cute alpaca dancing. Make it genuinely impressive: a recognizable fluffy alpaca with a long neck, ears,",
+  "generated_at": "2026-08-13T10:46:15.887546+00:00",
+  "chars": 16046,
+  "raw_preview": "```html\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"UTF-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n<title>Alpaca Dance Party</title>\n<style>\n  :root {\n    --cream: #fff2d2;\n    --cream-light: #fffaf0;\n    --cream-shadow: #e8c999;\n    --brown: #68452f;\n    --pink: #f58ca8;\n    --mint: #65d7bd;\n    --purple: #7964d9;\n    --yellow: #ffd86b;\n  }\n\n  * { box-sizing: border-box; }\n\n  html, body {\n    width: 100%;\n    height: 100%;\n    margin: 0;\n    overflow: "
+}

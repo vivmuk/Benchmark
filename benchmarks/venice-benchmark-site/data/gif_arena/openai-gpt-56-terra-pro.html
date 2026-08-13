@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dancing Alpaca</title>
+<style>
+  :root {
+    --ink: #563b50;
+    --cream: #fff4dc;
+    --fluff: #f9e9c9;
+    --shade: #e8bbad;
+    --pink: #ef8da8;
+    --coral: #ff936e;
+    --sky: #8cd9ed;
+    --mint: #b6efd4;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+    background:
+      radial-gradient(circle at 15% 18%, rgba(255,255,255,.72) 0 3%, transparent 3.3%),
+      radial-gradient(circle at 83% 14%, rgba(255,255,255,.65) 0 2%, transparent 2.3%),
+      radial-gradient(circle at 73% 34%, rgba(255,255,255,.45) 0 1.4%, transparent 1.7%),
+      linear-gradient(180deg, #89d8ee 0%, #b5ebdf 55%, #ffe5b6 55%, #ffd5a0 100%);
+    font-family: system-ui, sans-serif;
+  }
+
+  .scene {
+    position: relative;
+    width: min(92vw, 720px);
+    height: min(92vh, 720px);
+    min-height: 520px;
+  }
+
+  .sun {
+    position: absolute;
+    width: 92px;
+    height: 92px;
+    right: 9%;
+    top: 8%;
+    border-radius: 50%;
+    background: #ffe58e;
+    box-shadow: 0 0 0 12px rgba(255,229,142,.25), 0 0 42px rgba(255,225,117,.65);
+    animation: sunPulse 5s ease-in-out infinite;
+  }
+
+  .cloud {
+    position: absolute;
+    width: 116px;
+    height: 32px;
+    background: rgba(255,255,255,.7);
+    border-radius: 50px;
+    filter: blur(.2px);
+    animation: drift 17s linear infinite;
+  }
+
+  .cloud::before, .cloud::after {
+    content: "";
+    position: absolute;
+    background: inherit;
+    border-radius: 50%;
+  }
+
+  .cloud::before { width: 54px; height: 54px; left: 17px; bottom: 4px; }
+  .cloud::after { width: 42px; height: 42px; right: 15px; bottom: 2px; }
+  .cloud.one { left: -5%; top: 20%; transform: scale(.75); animation-delay: -7s; }
+  .cloud.two { left: 55%; top: 33%; transform: scale(.52); animation-delay: -12s; opacity: .75; }
+
+  .hills {
+    position: absolute;
+    bottom: 28%;
+    left: -10%;
+    width: 120%;
+    height: 22%;
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+    background: #7bceaa;
+    box-shadow: inset 0 -17px rgba(83,179,143,.17);
+  }
+
+  .ground {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 31%;
+    background:
+      radial-gradient(ellipse at 27% 25%, #f6be83 0 2px, transparent 3px),
+      radial-gradient(ellipse at 73% 48%, #f6be83 0 2px, transparent 3px),
+      radial-gradient(ellipse at 12% 66%, #f6be83 0 2px, transparent 3px),
+      linear-gradient(#ffdea6, #ffc989);
+  }
+
+  .caption {
+    position: absolute;
+    top: 7%;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--ink);
+    font-size: clamp(18px, 3vw, 27px);
+    font-weight: 900;
+    letter-spacing: .09em;
+    text-shadow: 0 3px rgba(255,255,255,.42);
+    white-space: nowrap;
+    animation: titleWiggle 15s ease-in-out infinite;
+  }
+
+  .caption small {
+    display: block;
+    margin-top: 4px;
+    color: #d96e83;
+    font-size: .46em;
+    text-align: center;
+    letter-spacing: .22em;
+  }
+
+  .alpaca-wrap {
+    position: absolute;
+    width: 330px;
+    height: 435px;
+    bottom: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: travel 15s ease-in-out infinite;
+  }
+
+  svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  .outline {
+    stroke: var(--ink);
+    stroke-width: 6;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+  }
+
+  .dance-body {
+    transform-origin: 164px 306px;
+    animation: bodyBounce 15s ease-in-out infinite;
+  }
+
+  .head-neck {
+    transform-origin: 171px 210px;
+    animation: neckGroove 15s ease-in-out infinite;
+  }
+
+  .ear-left { transform-origin: 128px 73px; animation: earLeft 15s ease-in-out infinite; }
+  .ear-right { transform-origin: 211px 69px; animation: earRight 15s ease-in-out infinite; }
+
+  .tail {
+    transform-origin: 259px 287px;
+    animation: tailPom 15s ease-in-out infinite;
+  }
+
+  .leg {
+    transform-box: fill-box;
+    transform-origin: center top;
+  }
+
+  .leg.back-left { animation: legBL 15s ease-in-out infinite; }
+  .leg.back-right { animation: legBR 15s ease-in-out infinite; }
+  .leg.front-left { animation: legFL 15s ease-in-out infinite; }
+  .leg.front-right { animation: legFR 15s ease-in-out infinite; }
+
+  .arm {
+    transform-box: fill-box;
+    transform-origin: center top;
+  }
+
+  .arm.left { animation: armLeft 15s ease-in-out infinite; }
+  .arm.right { animation: armRight 15s ease-in-out infinite; }
+
+  .face {
+    transform-origin: 169px 117px;
+    animation: faceHappy 15s ease-in-out infinite;
+  }
+
+  .blink { animation: blink 15s linear infinite; transform-origin: center; }
+
+  .scarf {
+    transform-origin: 173px 196px;
+    animation: scarfFlap 15s ease-in-out infinite;
+  }
+
+  .shadow {
+    transform-origin: 164px 398px;
+    animation: shadowBeat 15s ease-in-out infinite;
+  }
+
+  .note {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: floatNote 15s ease-in-out infinite;
+  }
+
+  .n1 { animation-delay: -1s; }
+  .n2 { animation-delay: -5s; }
+  .n3 { animation-delay: -10s; }
+
+  @keyframes bodyBounce {
+    0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+    7% { transform: translateY(-8px) rotate(-3deg) scale(1.02,.98); }
+    14% { transform: translateY(2px) rotate(2deg); }
+    21% { transform: translateY(-13px) rotate(4deg) scale(.98,1.03); }
+    29% { transform: translateY(0) rotate(-2deg); }
+    36% { transform: translateY(-6px) rotate(0deg); }
+    43% { transform: translateY(-17px) rotate(-4deg) scale(1.03,.97); }
+    50% { transform: translateY(1px) rotate(2deg); }
+    57% { transform: translateY(-10px) rotate(4deg); }
+    64% { transform: translateY(0) rotate(-2deg); }
+    71% { transform: translateY(-14px) rotate(-4deg) scale(.98,1.04); }
+    79% { transform: translateY(1px) rotate(3deg); }
+    86% { transform: translateY(-9px) rotate(-2deg); }
+    93% { transform: translateY(-3px) rotate(2deg); }
+  }
+
+  @keyframes neckGroove {
+    0%,100% { transform: rotate(0); }
+    9%, 31%, 57%, 84% { transform: rotate(-5deg); }
+    18%, 45%, 71%, 93% { transform: rotate(6deg); }
+  }
+
+  @keyframes armLeft {
+    0%,100% { transform: rotate(15deg); }
+    8% { transform: rotate(-35deg); }
+    16% { transform: rotate(43deg); }
+    24% { transform: rotate(-48deg); }
+    32% { transform: rotate(20deg); }
+    48% { transform: rotate(-70deg); }
+    56% { transform: rotate(28deg); }
+    72% { transform: rotate(-50deg); }
+    84% { transform: rotate(48deg); }
+  }
+
+  @keyframes armRight {
+    0%,100% { transform: rotate(-13deg); }
+    8% { transform: rotate(46deg); }
+    16% { transform: rotate(-38deg); }
+    24% { transform: rotate(54deg); }
+    32% { transform: rotate(-20deg); }
+    48% { transform: rotate(64deg); }
+    56% { transform: rotate(-37deg); }
+    72% { transform: rotate(55deg); }
+    84% { transform: rotate(-40deg); }
+  }
+
+  @keyframes legBL {
+    0%,100% { transform: rotate(7deg); }
+    14%, 43%, 71% { transform: rotate(-24deg); }
+    29%, 57%, 86% { transform: rotate(18deg); }
+  }
+
+  @keyframes legBR {
+    0%,100% { transform: rotate(-5deg); }
+    14%, 43%, 71% { transform: rotate(22deg); }
+    29%, 57%, 86% { transform: rotate(-18deg); }
+  }
+
+  @keyframes legFL {
+    0%,100% { transform: rotate(-6deg); }
+    14%, 43%, 71% { transform: rotate(26deg); }
+    29%, 57%, 86% { transform: rotate(-17deg); }
+  }
+
+  @keyframes legFR {
+    0%,100% { transform: rotate(5deg); }
+    14%, 43%, 71% { transform: rotate(-20deg); }
+    29%, 57%, 86% { transform: rotate(20deg); }
+  }
+
+  @keyframes tailPom {
+    0%,100% { transform: rotate(-4deg) scale(1); }
+    10%, 38%, 67%, 91% { transform: rotate(23deg) scale(1.08); }
+    23%, 53%, 79% { transform: rotate(-28deg) scale(.94); }
+  }
+
+  @keyframes earLeft {
+    0%,100% { transform: rotate(0); }
+    15%, 59% { transform: rotate(-16deg); }
+    31%, 82% { transform: rotate(9deg); }
+  }
+
+  @keyframes earRight {
+    0%,100% { transform: rotate(0); }
+    15%, 59% { transform: rotate(15deg); }
+    31%, 82% { transform: rotate(-9deg); }
+  }
+
+  @keyframes scarfFlap {
+    0%,100% { transform: rotate(0); }
+    12%, 42%, 74% { transform: rotate(-12deg); }
+    26%, 57%, 89% { transform: rotate(10deg); }
+  }
+
+  @keyframes blink {
+    0%, 6%, 100% { transform: scaleY(1); }
+    7%, 8% { transform: scaleY(.08); }
+    47%, 48% { transform: scaleY(.08); }
+    75%, 76% { transform: scaleY(.08); }
+  }
+
+  @keyframes faceHappy {
+    0%,100% { transform: translateY(0); }
+    20%, 55%, 85% { transform: translateY(-2px); }
+  }
+
+  @keyframes shadowBeat {
+    0%,100% { transform: scaleX(1); opacity: .25; }
+    7%,21%,43%,57%,71%,86% { transform: scaleX(.72); opacity: .17; }
+  }
+
+  @keyframes travel {
+    0%,100% { margin-left: 0; }
+    25% { margin-left: -16px; }
+    50% { margin-left: 10px; }
+    75% { margin-left: -10px; }
+  }
+
+  @keyframes floatNote {
+    0%,100% { opacity: 0; transform: translateY(16px) rotate(-10deg) scale(.65); }
+    10%,65% { opacity: 1; }
+    78% { opacity: 0; transform: translateY(-75px) rotate(18deg) scale(1.1); }
+  }
+
+  @keyframes drift {
+    from { margin-left: -30px; }
+    to { margin-left: 95px; }
+  }
+
+  @keyframes sunPulse {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+  }
+
+  @keyframes titleWiggle {
+    0%,100% { transform: translateX(-50%) rotate(0); }
+    20% { transform: translateX(-50%) rotate(-2deg); }
+    40% { transform: translateX(-50%) rotate(2deg); }
+    60% { transform: translateX(-50%) rotate(-1deg); }
+  }
+
+  @media (max-height: 580px) {
+    .scene { transform: scale(.83); transform-origin: center; }
+  }
+</style>
+</head>
+<body>
+  <main class="scene" aria-label="A cheerful alpaca dancing">
+    <div class="sun"></div>
+    <div class="cloud one"></div>
+    <div class="cloud two"></div>
+    <div class="hills"></div>
+    <div class="ground"></div>
+    <div class="caption">ALPACA BOOGIE<small>fluff • bounce • repeat</small></div>
+
+    <div class="alpaca-wrap">
+      <svg viewBox="0 0 330 435" role="img" aria-label="A fluffy dancing alpaca">
+        <ellipse class="shadow" cx="166" cy="402" rx="111" ry="17" fill="#a96e69"/>
+
+        <g class="note n1" fill="#d95a8a">
+          <path d="M64 187v-32l25-6v31c-7-6-19-1-17 7 2 9 17 8 17-2v-22l8-2v29c-7-6-18-1-17 7 2 10 17 8 17-2v-42z"/>
+        </g>
+        <g class="note n2" fill="#7559b6">
+          <path d="M268 164v-29l23-5v28c-7-5-17-1-16 7 2 8 16 8 16-2v-20l7-2v26c-7-5-17-1-16 7 2 9 16 8 16-2v-37z"/>
+        </g>
+        <g class="note n3" fill="#ef8a62">
+          <circle cx="43" cy="239" r="7"/><path d="M49 238v-31l17-5v7l-11 3v26z"/>
+        </g>
+
+        <g class="dance-body">
+          <!-- rear legs -->
+          <g class="leg back-left">
+            <path class="outline" fill="#e9b8a9" d="M105 321 C93 342 91 375 96 392 L118 392 C120 371 121 347 128 329Z"/>
+            <path class="outline" fill="#755266" d="M94 390 Q106 382 120 391 L120 401 L92 401Z"/>
+          </g>
+          <g class="leg back-right">
+            <path class="outline" fill="#e9b8a9" d="M213 323 C225 344 232 374 229 393 L208 393 C204 367 198 345 191 330Z"/>
+            <path class="outline" fill="#755266" d="M207 390 Q219 382 233 392 L234 401 L206 401Z"/>
+          </g>
+
+          <!-- tail -->
+          <g class="tail">
+            <path class="outline" fill="#e8b4a7" d="M245 274 Q278 260 287 284 Q298 313 270 323 Q248 322 238 302Z"/>
+            <circle class="outline" cx="278" cy="284" r="18" fill="#f9e9c9"/>
+            <circle class="outline" cx="292" cy="296" r="15" fill="#fff4dc"/>
+            <circle class="outline" cx="275" cy="307" r="17" fill="#f7dbb9"/>
+            <circle cx="282" cy="288" r="3" fill="#e4af9c"/>
+          </g>
+
+          <!-- body -->
+          <path class="outline" fill="var(--fluff)" d="M84 259
+            C68 244 75 216 99 212
+            C90 188 112 171 134 182
+            C146 158 180 163 189 184
+            C218 168 243 190 234 213
+            C264 220 268 250 247 262
+            C267 286 247 325 216 325
+            C198 344 151 342 133 326
+            C94 333 70 293 84 259Z"/>
+          <g fill="#fff8e8" opacity=".9">
+            <circle cx="107" cy="233" r="15"/><circle cx="132" cy="215" r="17"/>
+            <circle cx="163" cy="212" r="18"/><circle cx="197" cy="220" r="16"/>
+            <circle cx="223" cy="243" r="17"/><circle cx="109" cy="272" r="18"/>
+            <circle cx="145" cy="290" r="20"/><circle cx="186" cy="288" r="21"/>
+            <circle cx="218" cy="281" r="17"/>
+          </g>
+
+          <!-- front legs -->
+          <g class="leg front-left">
+            <path class="outline" fill="#f7dbb9" d="M125 317 C118 343 120 371 126 394 L148 394 C148 368 150 343 158 321Z"/>
+            <path class="outline" fill="#755266" d="M123 391 Q136 382 150 392 L151 402 L122 402Z"/>
+          </g>
+          <g class="leg front-right">
+            <path class="outline" fill="#f7dbb9" d="M179 321 C183 347 181 374 178 394 L200 394 C207 368 210 343 205 319Z"/>
+            <path class="outline" fill="#755266" d="M175 392 Q189 382 203 391 L205 402 L176 402Z"/>
+          </g>
+
+          <!-- neck and head -->
+          <g class="head-neck">
+            <path class="outline" fill="#f9e9c9" d="M135 243
+              C137 212 138 188 132 157
+              C126 127 121 100 134 79
+              C151 51 196 52 213 78
+              C225 96 215 126 208 153
+              C201 181 207 210 217 241
+              C201 260 152 264 135 243Z"/>
+
+            <!-- ears -->
+            <g class="ear-left">
+              <path class="outline" fill="#f7dbb9" d="M143 77 Q124 43 132 25 Q151 42 160 74Z"/>
+              <path fill="#e88fa2" d="M140 62 Q134 45 135 38 Q145 49 150 67Z"/>
+            </g>
+            <g class="ear-right">
+              <path class="outline" fill="#f7dbb9" d="M197 75 Q210 39 229 31 Q230 55 211 88Z"/>
+              <path fill="#e88fa2" d="M206 65 Q214 47 222 43 Q220 58 211 73Z"/>
+            </g>
+
+            <!-- fluffy top -->
+            <path class="outline" fill="#fff4dc" d="M130 91
+              Q117 78 129 64 Q140 53 153 63
+              Q159 45 176 55 Q190 44 199 62
+              Q217 54 221 73 Q227 88 211 98
+              Q187 109 159 100Z"/>
+
+            <!-- face -->
+            <g class="face">
+              <path class="outline" fill="#f4c7b4" d="M142 97
+                Q167 82 199 96 L207 125
+                Q193 151 169 151 Q145 150 133 126Z"/>
+              <g class="blink">
+                <path d="M151 113 Q157 108 163 113" fill="none" class="outline" style="stroke-width:4"/>
+                <path d="M181 113 Q187 108 193 113" fill="none" class="outline" style="stroke-width:4"/>
+              </g>
+              <ellipse cx="170" cy="125" rx="8" ry="6" fill="#563b50"/>
+              <path d="M160 134 Q170 143 181 134" fill="none" class="outline" style="stroke-width:4"/>
+              <circle cx="145" cy="126" r="6" fill="#ef8da8" opacity=".6"/>
+              <circle cx="196" cy="126" r="6" fill="#ef8da8" opacity=".6"/>
+            </g>
+
+            <!-- scarf -->
+            <g class="scarf">
+              <path class="outline" fill="#ef718c" d="M130 187 Q171 202 215 186 L217 207 Q174 223 130 206Z"/>
+              <path class="outline" fill="#ef718c" d="M203 204 Q225 216 230 245 Q214 247 198 231 L187 211Z"/>
+              <path d="M143 195 L151 211 M162 199 L170 215 M183 198 L190 213" stroke="#ffd5a0" stroke-width="5" stroke-linecap="round"/>
+            </g>
+          </g>
+
+          <!-- dancing arms -->
+          <g class="arm left">
+            <path class="outline" fill="#f7dbb9" d="M100 250 Q73 258 61 286 Q56 299 66 305 Q76 309 82 296 Q91 275 116 270Z"/>
+            <circle class="outline" cx="65" cy="300" r="11" fill="#f4c7b4"/>
+            <path d="M58 300 l-10 -5 M60 306 l-9 4 M65 309 l-3 10" stroke="#563b50" stroke-width="4" stroke-linecap="round"/>
+          </g>
+          <g class="arm right">
+            <path class="outline" fill="#f7dbb9" d="M226 248 Q253 251 271 275 Q279 286 270 295 Q260 299 252 287 Q240 270 215 267Z"/>
+            <circle class="outline" cx="270" cy="290" r="11" fill="#f4c7b4"/>
+            <path d="M277 290 l10 -5 M276 297 l9 5 M270 300 l2 10" stroke="#563b50" stroke-width="4" stroke-linecap="round"/>
+          </g>
+
+          <!-- tiny body accents -->
+          <path d="M116 304 Q129 310 139 305 M192 306 Q204 311 215 303" fill="none" stroke="#dfad9e" stroke-width="4" stroke-linecap="round"/>
+        </g>
+      </svg>
+    </div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,8 @@
+{
+  "model_id": "inkling",
+  "model_used": "inkling",
+  "prompt": "Create a single self-contained HTML document (no external files, no CDN, no images) that shows a cute alpaca dancing. Make it genuinely impressive: a recognizable fluffy alpaca with a long neck, ears,",
+  "generated_at": "2026-08-13T11:04:25.427660+00:00",
+  "chars": 13059,
+  "raw_preview": "```html\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"UTF-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n<title>Dancing Alpaca</title>\n<style>\n@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@700&display=swap');\n\n* { margin: 0; padding: 0; box-sizing: border-box; }\n\nbody {\n  background: linear-gradient(135deg, #ffd6e8 0%, #ffb6c1 40%, #ffa07a 100%);\n  overflow: hidden;\n  height: 100vh;\n  display: flex;\n  justify-content:"
+}

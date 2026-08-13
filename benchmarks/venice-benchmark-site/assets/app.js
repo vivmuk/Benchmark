@@ -29,11 +29,19 @@
     "Opus 5":            "#6D28D9",
     "GLM 5.2":           "#EC4899",
     "DeepSeek V4":       "#0891B2",
+    "DeepSeek V4 Flash 0731": "#0EA5C4",
+    "DeepSeek V4 Flash 0731 Fast": "#22D3EE",
     "MiniMax M3":        "#D97706",
     "Grok 4.5":          "#4F46E5",
     "Inkling":           "#0EA5E9",
     "Kimi K3":           "#F59E0B",
     "Kimi K3 Fast API":  "#B45309",
+    "Qwen 3.8 Max":      "#9B6BFF",
+    "Qwen 3.8 2.4T":    "#C49BFF",
+    "Sonnet 5":          "#FF9DBA",
+    "Gemini 3.6 Flash":  "#FFB800",
+    "Grok 4.6":          "#FF6B3D",
+    "Nemotron 3.5":      "#76B900",
   };
 
   const FALLBACK_DATA = { generated: "", source: "fallback", results: [] };
@@ -62,6 +70,8 @@
 
   const $ = (sel, root = document) => root.querySelector(sel);
   const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+
+  const isMobile = () => window.innerWidth < 768;
 
   const fmtScore = (n) => (n == null ? "—" : n.toFixed(1));
   const fmtLatency = (n) => (n == null ? "—" : `${n.toFixed(1)}s`);
@@ -229,8 +239,8 @@
           },
         },
         scales: {
-          x: { min: 0, max: 100, grid: { color: "rgba(18,18,26,0.08)" }, ticks: { color: "rgba(18,18,26,0.55)" } },
-          y: { grid: { display: false }, ticks: { color: "rgba(18,18,26,0.75)" } },
+          x: { min: 0, max: 100, grid: { color: "rgba(18,18,26,0.08)" }, ticks: { color: "rgba(18,18,26,0.55)", font: { size: isMobile() ? 10 : 12 } } },
+          y: { grid: { display: false }, ticks: { color: "rgba(18,18,26,0.75)", font: { size: isMobile() ? 10 : 12 }, autoSkip: false } },
         },
       },
     });
@@ -270,6 +280,7 @@
     const latencyCanvas = $("#latencyChart");
     if (typeof Chart === "undefined") return;
     const aggs = modelAggregates(state.data);
+    const mobile = isMobile();
 
     if (speedCanvas) {
       const rows = aggs.filter((a) => a.tokensPerSec != null).sort((a, b) => b.tokensPerSec - a.tokensPerSec);
@@ -285,16 +296,17 @@
             borderColor: rows.map((a) => modelColor(a.model)),
             borderWidth: 1.5,
             borderRadius: 6,
-            maxBarThickness: 56,
+            maxBarThickness: mobile ? 22 : 56,
           }],
         },
         options: {
+          indexAxis: mobile ? "y" : "x",
           responsive: true,
           maintainAspectRatio: false,
           plugins: { legend: { display: false }, tooltip: { callbacks: { label: (c) => ` ${c.raw} tok/s (higher is better)` } } },
           scales: {
-            y: { beginAtZero: true, title: { display: true, text: "Tokens per second" }, grid: { color: "rgba(18,18,26,0.08)" }, ticks: { color: "rgba(18,18,26,0.55)" } },
-            x: { grid: { display: false }, ticks: { color: "rgba(18,18,26,0.75)" } },
+            y: { beginAtZero: true, title: { display: !mobile, text: "Tokens per second" }, grid: { color: "rgba(18,18,26,0.08)" }, ticks: { color: "rgba(18,18,26,0.55)", font: { size: mobile ? 10 : 12 } } },
+            x: { grid: { display: false }, ticks: { color: "rgba(18,18,26,0.75)", font: { size: mobile ? 10 : 12 }, autoSkip: false, maxRotation: mobile ? 0 : 45 } },
           },
         },
       });
@@ -314,16 +326,17 @@
             borderColor: rows.map((a) => modelColor(a.model)),
             borderWidth: 1.5,
             borderRadius: 6,
-            maxBarThickness: 56,
+            maxBarThickness: mobile ? 22 : 56,
           }],
         },
         options: {
+          indexAxis: mobile ? "y" : "x",
           responsive: true,
           maintainAspectRatio: false,
           plugins: { legend: { display: false }, tooltip: { callbacks: { label: (c) => ` ${c.raw}s avg end-to-end (lower is better)` } } },
           scales: {
-            y: { beginAtZero: true, title: { display: true, text: "Seconds (lower is better)" }, grid: { color: "rgba(18,18,26,0.08)" }, ticks: { color: "rgba(18,18,26,0.55)" } },
-            x: { grid: { display: false }, ticks: { color: "rgba(18,18,26,0.75)" } },
+            y: { beginAtZero: true, title: { display: !mobile, text: "Seconds (lower is better)" }, grid: { color: "rgba(18,18,26,0.08)" }, ticks: { color: "rgba(18,18,26,0.55)", font: { size: mobile ? 10 : 12 } } },
+            x: { grid: { display: false }, ticks: { color: "rgba(18,18,26,0.75)", font: { size: mobile ? 10 : 12 }, autoSkip: false, maxRotation: mobile ? 0 : 45 } },
           },
         },
       });
@@ -333,6 +346,7 @@
   function renderLeaderboardChart() {
     const canvas = $("#leaderboardChart");
     if (!canvas || typeof Chart === "undefined") return;
+    const mobile = isMobile();
     const aggs = modelAggregates(state.data).sort((a, b) => b.avgScore - a.avgScore);
     if (state.charts.leaderboard) state.charts.leaderboard.destroy();
     state.charts.leaderboard = new Chart(canvas, {
@@ -346,16 +360,17 @@
           borderColor: aggs.map((a) => modelColor(a.model)),
           borderWidth: 1.5,
           borderRadius: 6,
-          maxBarThickness: 56,
+          maxBarThickness: mobile ? 22 : 56,
         }],
       },
       options: {
+        indexAxis: mobile ? "y" : "x",
         responsive: true,
         maintainAspectRatio: false,
         plugins: { legend: { display: false } },
         scales: {
-          y: { min: 0, max: 100, grid: { color: "rgba(18,18,26,0.08)" }, ticks: { color: "rgba(18,18,26,0.55)" } },
-          x: { grid: { display: false }, ticks: { color: "rgba(18,18,26,0.75)" } },
+          y: { min: 0, max: 100, grid: { color: "rgba(18,18,26,0.08)" }, ticks: { color: "rgba(18,18,26,0.55)", font: { size: mobile ? 10 : 12 } } },
+          x: { grid: { display: false }, ticks: { color: "rgba(18,18,26,0.75)", font: { size: mobile ? 10 : 12 }, autoSkip: false, maxRotation: mobile ? 0 : 45 } },
         },
       },
     });
@@ -364,7 +379,15 @@
   function renderBenchmarkChart() {
     const canvas = $("#benchmarkChart");
     if (!canvas || typeof Chart === "undefined") return;
-    const models = uniqueModels(state.data);
+    const mobile = isMobile();
+    const allModels = uniqueModels(state.data);
+    // On mobile, only show top 8 models by average score to keep the chart readable.
+    const models = mobile
+      ? modelAggregates(state.data)
+          .sort((a, b) => b.avgScore - a.avgScore)
+          .slice(0, 8)
+          .map((a) => a.model)
+      : allModels;
     if (state.charts.benchmark) state.charts.benchmark.destroy();
     state.charts.benchmark = new Chart(canvas, {
       type: "bar",
@@ -383,16 +406,17 @@
         })),
       },
       options: {
+        indexAxis: mobile ? "y" : "x",
         responsive: true,
         maintainAspectRatio: false,
         interaction: { mode: "index", intersect: false },
         plugins: {
-          legend: { position: "bottom", labels: { usePointStyle: true, boxWidth: 8, padding: 14 } },
+          legend: { position: "bottom", labels: { usePointStyle: true, boxWidth: mobile ? 6 : 8, padding: mobile ? 8 : 14, font: { size: mobile ? 9 : 12 } } },
           tooltip: { callbacks: { label: (ctx) => ` ${ctx.dataset.label}: ${ctx.raw ?? "not run"}` } },
         },
         scales: {
-          x: { stacked: false, grid: { display: false }, ticks: { color: "rgba(18,18,26,0.78)", maxRotation: 0 } },
-          y: { min: 0, max: 100, title: { display: true, text: "Score / 100" }, grid: { color: "rgba(18,18,26,0.09)" }, ticks: { color: "rgba(18,18,26,0.62)" } },
+          x: { stacked: false, grid: { display: false }, ticks: { color: "rgba(18,18,26,0.78)", maxRotation: mobile ? 0 : 0, font: { size: mobile ? 9 : 12 } } },
+          y: { min: 0, max: 100, title: { display: !mobile, text: "Score / 100" }, grid: { color: "rgba(18,18,26,0.09)" }, ticks: { color: "rgba(18,18,26,0.62)", font: { size: mobile ? 10 : 12 } } },
         },
       },
     });
@@ -401,6 +425,7 @@
   function renderCostValueChart() {
     const canvas = $("#costValueChart");
     if (!canvas || typeof Chart === "undefined") return;
+    const mobile = isMobile();
     const aggs = modelAggregates(state.data);
     const xMid = median(aggs.map((a) => a.avgCost));
     const yMid = median(aggs.map((a) => a.vivIndex));
@@ -414,8 +439,8 @@
           backgroundColor: modelColor(a.model, 0.65),
           borderColor: modelColor(a.model),
           borderWidth: 2,
-          pointRadius: 8,
-          pointHoverRadius: 10,
+          pointRadius: mobile ? 6 : 8,
+          pointHoverRadius: mobile ? 8 : 10,
         })),
       },
       plugins: [quadrantPlugin],
@@ -424,7 +449,7 @@
         maintainAspectRatio: false,
         plugins: {
           quadrant: { xMid, yMid },
-          legend: { position: "bottom", labels: { usePointStyle: true, boxWidth: 8 } },
+          legend: { display: !mobile, position: "bottom", labels: { usePointStyle: true, boxWidth: 8 } },
           tooltip: {
             callbacks: {
               label: (ctx) => [
@@ -438,16 +463,16 @@
         scales: {
           x: {
             type: "logarithmic",
-            title: { display: true, text: "Avg cost per run (USD, log) — left is cheaper", color: "rgba(18,18,26,0.55)" },
+            title: { display: !mobile, text: "Avg cost per run (USD, log) — left is cheaper", color: "rgba(18,18,26,0.55)" },
             grid: { color: "rgba(18,18,26,0.08)" },
-            ticks: { color: "rgba(18,18,26,0.55)" },
+            ticks: { color: "rgba(18,18,26,0.55)", font: { size: mobile ? 10 : 12 } },
           },
           y: {
             min: 40,
             max: 100,
-            title: { display: true, text: "VivIndex (weighted composite)", color: "rgba(18,18,26,0.55)" },
+            title: { display: !mobile, text: "VivIndex (weighted composite)", color: "rgba(18,18,26,0.55)" },
             grid: { color: "rgba(18,18,26,0.08)" },
-            ticks: { color: "rgba(18,18,26,0.55)" },
+            ticks: { color: "rgba(18,18,26,0.55)", font: { size: mobile ? 10 : 12 } },
           },
         },
       },
@@ -516,6 +541,7 @@
   function renderValueDensityChart() {
     const canvas = $("#valueDensityChart");
     if (!canvas || typeof Chart === "undefined") return;
+    const mobile = isMobile();
     const rows = state.data.filter((r) => r.benchmark === "value-density" && r.score != null && r.tokens > 0);
     if (!rows.length) return;
     const byModel = {};
@@ -537,10 +563,11 @@
           borderColor: aggs.map((a) => modelColor(a.model)),
           borderWidth: 1.5,
           borderRadius: 6,
-          maxBarThickness: 48,
+          maxBarThickness: mobile ? 22 : 48,
         }],
       },
       options: {
+        indexAxis: mobile ? "y" : "x",
         responsive: true,
         maintainAspectRatio: false,
         plugins: {
@@ -560,8 +587,8 @@
           },
         },
         scales: {
-          y: { beginAtZero: true, title: { display: true, text: "Score per 1K total tokens" }, grid: { color: "rgba(18,18,26,0.08)" } },
-          x: { grid: { display: false } },
+          y: { beginAtZero: true, title: { display: !mobile, text: "Score per 1K total tokens" }, grid: { color: "rgba(18,18,26,0.08)" }, ticks: { color: "rgba(18,18,26,0.55)", font: { size: mobile ? 10 : 12 } } },
+          x: { grid: { display: false }, ticks: { color: "rgba(18,18,26,0.75)", font: { size: mobile ? 10 : 12 }, autoSkip: false, maxRotation: mobile ? 0 : 45 } },
         },
       },
     });
@@ -586,7 +613,7 @@
           borderColor: aggs.map((a) => modelColor(a.model)),
           borderWidth: 1.5,
           borderRadius: 6,
-          maxBarThickness: 48,
+          maxBarThickness: isMobile() ? 22 : 48,
         }],
       },
       options: {
@@ -595,8 +622,8 @@
         maintainAspectRatio: false,
         plugins: { legend: { display: false } },
         scales: {
-          x: { min: 0, max: 100, grid: { color: "rgba(18,18,26,0.08)" } },
-          y: { grid: { display: false } },
+          x: { min: 0, max: 100, grid: { color: "rgba(18,18,26,0.08)" }, ticks: { color: "rgba(18,18,26,0.55)", font: { size: isMobile() ? 10 : 12 } } },
+          y: { grid: { display: false }, ticks: { color: "rgba(18,18,26,0.75)", font: { size: isMobile() ? 10 : 12 }, autoSkip: false } },
         },
       },
     });
@@ -765,9 +792,7 @@
     $$(".score-bar").forEach((b) => io.observe(b));
   }
 
-  async function init() {
-    initMobileNav();
-    await loadData();
+  function renderAllCharts() {
     renderVivIndexChart();
     renderLeaderboardChart();
     renderBenchmarkChart();
@@ -775,11 +800,33 @@
     renderSpeedCharts();
     renderValueDensityChart();
     renderReversePromptChart();
+  }
+
+  async function init() {
+    initMobileNav();
+    await loadData();
+    renderAllCharts();
     renderComparison();
     populateStats();
     initReveal();
     initGpuBackground();
     initWaapiScores();
+
+    // Re-render charts when crossing the 768px breakpoint so mobile/desktop
+    // chart configs (horizontal vs vertical bars, legend visibility, top-8
+    // model filtering) update on orientation change or window resize.
+    let wasMobile = isMobile();
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        const nowMobile = isMobile();
+        if (nowMobile !== wasMobile) {
+          wasMobile = nowMobile;
+          renderAllCharts();
+        }
+      }, 200);
+    });
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
