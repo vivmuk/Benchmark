@@ -216,6 +216,7 @@ code, pre {
   font-weight: 700;
   letter-spacing: -0.02em;
   flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .nav-logo span {
@@ -1498,6 +1499,11 @@ body > .navbar {
   }
   .feature-copy h2 {
     font-size: 1.55rem;
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+  .feature-copy h2 em {
+    white-space: nowrap;
   }
   .feature-copy p {
     font-size: 0.95rem;
@@ -1505,6 +1511,18 @@ body > .navbar {
   }
   .feature-grid {
     gap: 1.5rem;
+    overflow: hidden;
+  }
+  .feature-media {
+    overflow: hidden;
+    min-width: 0;
+  }
+  .feature-copy {
+    overflow: hidden;
+    min-width: 0;
+  }
+  .feature-chart {
+    overflow: hidden;
   }
   .img-zoom-hint {
     opacity: 1;
@@ -1512,6 +1530,7 @@ body > .navbar {
   /* Consistent card padding on mobile */
   .chart-card {
     padding: 1rem 0.85rem;
+    overflow: hidden;
   }
   .bench-card {
     padding: 1.15rem 1rem;
@@ -1527,6 +1546,9 @@ body > .navbar {
   }
   .compare-card .score small {
     font-size: 0.45em;
+  }
+  .compare-card {
+    overflow: hidden;
   }
   /* Bottom padding so content isn't behind mobile browser chrome */
   .vt-feature,
