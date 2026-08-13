@@ -1,0 +1,8 @@
+{
+  "model_id": "claude-fable-5",
+  "model_used": "claude-fable-5",
+  "prompt": "Create a single self-contained HTML document (no external files, no CDN, no images) that shows a cute alpaca dancing. Make it genuinely impressive: a recognizable fluffy alpaca with a long neck, ears,",
+  "generated_at": "2026-08-13T10:52:00.370698+00:00",
+  "chars": 6183,
+  "raw_preview": "```html\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"UTF-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n<title>Alpaca Fiesta! \ud83e\udd99</title>\n<style>\n  * { margin: 0; padding: 0; box-sizing: border-box; }\n\n  html, body { height: 100%; overflow: hidden; }\n\n  body {\n    background: linear-gradient(180deg, #9fd9ff 0%, #cfeaff 40%, #ffe3ee 72%, #ffd6e6 100%);\n    font-family: \"Trebuchet MS\", \"Comic Sans MS\", sans-serif;\n    position: relative;\n  }\n\n  /* ---------- SUN"
+}
