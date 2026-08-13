@@ -40,9 +40,9 @@
   --paper: var(--text);
   --paper-dim: var(--text-dim);
 
-  --font-display: "Geist", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-display: "Space Grotesk", "Geist", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-body: "Geist", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --font-mono: "Geist Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --font-mono: "JetBrains Mono", "Geist Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
 
   --radius: 10px;
   --radius-sm: 6px;
@@ -512,6 +512,19 @@ code, pre {
   }
 }
 
+/* Very small screens: stack stats in 1 column so the 5th isn't alone */
+@media (max-width: 400px) {
+  .bento {
+    grid-template-columns: 1fr;
+  }
+  .stat {
+    border-right: none;
+  }
+  .stat:nth-child(n + 2) {
+    border-top: 1px solid var(--rule);
+  }
+}
+
 /* Track cards */
 .bench-grid {
   display: grid;
@@ -584,6 +597,10 @@ code, pre {
 @media (max-width: 1000px) {
   .bench-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .bench-card p {
+    overflow-wrap: break-word;
+    word-break: break-word;
   }
 }
 
@@ -800,11 +817,59 @@ code, pre {
 }
 
 .chart-card {
-  padding: 1.25rem;
+  padding: 1.5rem;
   border: 1px solid var(--rule);
   border-radius: 14px;
   background: var(--surface);
   box-shadow: var(--shadow);
+}
+
+/* ===== Terminal-window chrome on chart & bench cards ===== */
+.terminal-header {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.5rem 0.75rem 0.6rem;
+  margin: -1.5rem -1.5rem 1rem;
+  border-bottom: 1px solid var(--rule);
+  background: rgba(18, 18, 26, 0.03);
+  border-radius: 14px 14px 0 0;
+}
+
+.terminal-dots {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.32rem;
+  flex-shrink: 0;
+}
+
+.terminal-dots::before {
+  content: "";
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: #FF5F57;
+  box-shadow: 17px 0 0 #FEBC2E, 34px 0 0 #28C840;
+}
+
+.terminal-title {
+  flex: 1;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--text-faint);
+  letter-spacing: 0.03em;
+  text-align: right;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Bench card terminal header (smaller padding context) */
+.bench-card .terminal-header {
+  margin: -1.35rem -1.2rem 0.95rem;
+  padding: 0.45rem 0.7rem 0.5rem;
+  border-radius: 14px 14px 0 0;
 }
 
 .chart-card-wide {
@@ -839,7 +904,7 @@ code, pre {
 }
 
 .chart-wrap-xl {
-  height: 480px;
+  height: 540px;
 }
 
 @media (max-width: 700px) {
@@ -853,13 +918,13 @@ code, pre {
 
 .chart-wrap {
   position: relative;
-  height: 280px;
+  height: 360px;
   width: 100%;
   overflow: hidden;
 }
 
 .chart-wrap-tall {
-  height: 340px;
+  height: 420px;
 }
 
 .chart-wrap > canvas {
@@ -871,10 +936,23 @@ code, pre {
     grid-template-columns: 1fr;
   }
   .chart-wrap {
-    height: 250px;
+    height: 300px;
   }
   .chart-wrap-tall {
-    height: 300px;
+    height: 380px;
+  }
+}
+
+/* Mobile-specific chart heights for 18-model readability */
+@media (max-width: 768px) {
+  .chart-wrap {
+    height: 340px;
+  }
+  .chart-wrap-tall {
+    height: 460px;
+  }
+  .chart-wrap-xl {
+    height: 480px;
   }
 }
 
@@ -883,6 +961,24 @@ code, pre {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 0.85rem;
+}
+
+/* On mobile, make compare cards a horizontal scroll carousel */
+@media (max-width: 768px) {
+  .compare-grid {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 0.75rem;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 0.75rem;
+    margin-bottom: -0.75rem;
+  }
+  .compare-grid .compare-card {
+    flex: 0 0 260px;
+    scroll-snap-align: start;
+  }
 }
 
 .compare-card {
@@ -1373,6 +1469,9 @@ body > .navbar {
 
 /* ===== Mobile hardenings ===== */
 @media (max-width: 640px) {
+  body {
+    font-size: 15px;
+  }
   section {
     padding: 2.5rem 0;
   }
@@ -1972,11 +2071,19 @@ body.lightbox-open {
     "Opus 5":            "#6D28D9",
     "GLM 5.2":           "#EC4899",
     "DeepSeek V4":       "#0891B2",
+    "DeepSeek V4 Flash 0731": "#0EA5C4",
+    "DeepSeek V4 Flash 0731 Fast": "#22D3EE",
     "MiniMax M3":        "#D97706",
     "Grok 4.5":          "#4F46E5",
     "Inkling":           "#0EA5E9",
     "Kimi K3":           "#F59E0B",
     "Kimi K3 Fast API":  "#B45309",
+    "Qwen 3.8 Max":      "#9B6BFF",
+    "Qwen 3.8 2.4T":    "#C49BFF",
+    "Sonnet 5":          "#FF9DBA",
+    "Gemini 3.6 Flash":  "#FFB800",
+    "Grok 4.6":          "#FF6B3D",
+    "Nemotron 3.5":      "#76B900",
   };
 
   const FALLBACK_DATA = { generated: "", source: "fallback", results: [] };
@@ -2005,6 +2112,8 @@ body.lightbox-open {
 
   const $ = (sel, root = document) => root.querySelector(sel);
   const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+
+  const isMobile = () => window.innerWidth < 768;
 
   const fmtScore = (n) => (n == null ? "—" : n.toFixed(1));
   const fmtLatency = (n) => (n == null ? "—" : `${n.toFixed(1)}s`);
@@ -2172,8 +2281,8 @@ body.lightbox-open {
           },
         },
         scales: {
-          x: { min: 0, max: 100, grid: { color: "rgba(18,18,26,0.08)" }, ticks: { color: "rgba(18,18,26,0.55)" } },
-          y: { grid: { display: false }, ticks: { color: "rgba(18,18,26,0.75)" } },
+          x: { min: 0, max: 100, grid: { color: "rgba(18,18,26,0.08)" }, ticks: { color: "rgba(18,18,26,0.55)", font: { size: isMobile() ? 10 : 12 } } },
+          y: { grid: { display: false }, ticks: { color: "rgba(18,18,26,0.75)", font: { size: isMobile() ? 10 : 12 }, autoSkip: false } },
         },
       },
     });
@@ -2213,6 +2322,7 @@ body.lightbox-open {
     const latencyCanvas = $("#latencyChart");
     if (typeof Chart === "undefined") return;
     const aggs = modelAggregates(state.data);
+    const mobile = isMobile();
 
     if (speedCanvas) {
       const rows = aggs.filter((a) => a.tokensPerSec != null).sort((a, b) => b.tokensPerSec - a.tokensPerSec);
@@ -2228,16 +2338,17 @@ body.lightbox-open {
             borderColor: rows.map((a) => modelColor(a.model)),
             borderWidth: 1.5,
             borderRadius: 6,
-            maxBarThickness: 56,
+            maxBarThickness: mobile ? 22 : 56,
           }],
         },
         options: {
+          indexAxis: mobile ? "y" : "x",
           responsive: true,
           maintainAspectRatio: false,
           plugins: { legend: { display: false }, tooltip: { callbacks: { label: (c) => ` ${c.raw} tok/s (higher is better)` } } },
           scales: {
-            y: { beginAtZero: true, title: { display: true, text: "Tokens per second" }, grid: { color: "rgba(18,18,26,0.08)" }, ticks: { color: "rgba(18,18,26,0.55)" } },
-            x: { grid: { display: false }, ticks: { color: "rgba(18,18,26,0.75)" } },
+            y: { beginAtZero: true, title: { display: !mobile, text: "Tokens per second" }, grid: { color: "rgba(18,18,26,0.08)" }, ticks: { color: "rgba(18,18,26,0.55)", font: { size: mobile ? 10 : 12 } } },
+            x: { grid: { display: false }, ticks: { color: "rgba(18,18,26,0.75)", font: { size: mobile ? 10 : 12 }, autoSkip: false, maxRotation: mobile ? 0 : 45 } },
           },
         },
       });
@@ -2257,16 +2368,17 @@ body.lightbox-open {
             borderColor: rows.map((a) => modelColor(a.model)),
             borderWidth: 1.5,
             borderRadius: 6,
-            maxBarThickness: 56,
+            maxBarThickness: mobile ? 22 : 56,
           }],
         },
         options: {
+          indexAxis: mobile ? "y" : "x",
           responsive: true,
           maintainAspectRatio: false,
           plugins: { legend: { display: false }, tooltip: { callbacks: { label: (c) => ` ${c.raw}s avg end-to-end (lower is better)` } } },
           scales: {
-            y: { beginAtZero: true, title: { display: true, text: "Seconds (lower is better)" }, grid: { color: "rgba(18,18,26,0.08)" }, ticks: { color: "rgba(18,18,26,0.55)" } },
-            x: { grid: { display: false }, ticks: { color: "rgba(18,18,26,0.75)" } },
+            y: { beginAtZero: true, title: { display: !mobile, text: "Seconds (lower is better)" }, grid: { color: "rgba(18,18,26,0.08)" }, ticks: { color: "rgba(18,18,26,0.55)", font: { size: mobile ? 10 : 12 } } },
+            x: { grid: { display: false }, ticks: { color: "rgba(18,18,26,0.75)", font: { size: mobile ? 10 : 12 }, autoSkip: false, maxRotation: mobile ? 0 : 45 } },
           },
         },
       });
@@ -2276,6 +2388,7 @@ body.lightbox-open {
   function renderLeaderboardChart() {
     const canvas = $("#leaderboardChart");
     if (!canvas || typeof Chart === "undefined") return;
+    const mobile = isMobile();
     const aggs = modelAggregates(state.data).sort((a, b) => b.avgScore - a.avgScore);
     if (state.charts.leaderboard) state.charts.leaderboard.destroy();
     state.charts.leaderboard = new Chart(canvas, {
@@ -2289,16 +2402,17 @@ body.lightbox-open {
           borderColor: aggs.map((a) => modelColor(a.model)),
           borderWidth: 1.5,
           borderRadius: 6,
-          maxBarThickness: 56,
+          maxBarThickness: mobile ? 22 : 56,
         }],
       },
       options: {
+        indexAxis: mobile ? "y" : "x",
         responsive: true,
         maintainAspectRatio: false,
         plugins: { legend: { display: false } },
         scales: {
-          y: { min: 0, max: 100, grid: { color: "rgba(18,18,26,0.08)" }, ticks: { color: "rgba(18,18,26,0.55)" } },
-          x: { grid: { display: false }, ticks: { color: "rgba(18,18,26,0.75)" } },
+          y: { min: 0, max: 100, grid: { color: "rgba(18,18,26,0.08)" }, ticks: { color: "rgba(18,18,26,0.55)", font: { size: mobile ? 10 : 12 } } },
+          x: { grid: { display: false }, ticks: { color: "rgba(18,18,26,0.75)", font: { size: mobile ? 10 : 12 }, autoSkip: false, maxRotation: mobile ? 0 : 45 } },
         },
       },
     });
@@ -2307,7 +2421,15 @@ body.lightbox-open {
   function renderBenchmarkChart() {
     const canvas = $("#benchmarkChart");
     if (!canvas || typeof Chart === "undefined") return;
-    const models = uniqueModels(state.data);
+    const mobile = isMobile();
+    const allModels = uniqueModels(state.data);
+    // On mobile, only show top 8 models by average score to keep the chart readable.
+    const models = mobile
+      ? modelAggregates(state.data)
+          .sort((a, b) => b.avgScore - a.avgScore)
+          .slice(0, 8)
+          .map((a) => a.model)
+      : allModels;
     if (state.charts.benchmark) state.charts.benchmark.destroy();
     state.charts.benchmark = new Chart(canvas, {
       type: "bar",
@@ -2326,16 +2448,17 @@ body.lightbox-open {
         })),
       },
       options: {
+        indexAxis: mobile ? "y" : "x",
         responsive: true,
         maintainAspectRatio: false,
         interaction: { mode: "index", intersect: false },
         plugins: {
-          legend: { position: "bottom", labels: { usePointStyle: true, boxWidth: 8, padding: 14 } },
+          legend: { position: "bottom", labels: { usePointStyle: true, boxWidth: mobile ? 6 : 8, padding: mobile ? 8 : 14, font: { size: mobile ? 9 : 12 } } },
           tooltip: { callbacks: { label: (ctx) => ` ${ctx.dataset.label}: ${ctx.raw ?? "not run"}` } },
         },
         scales: {
-          x: { stacked: false, grid: { display: false }, ticks: { color: "rgba(18,18,26,0.78)", maxRotation: 0 } },
-          y: { min: 0, max: 100, title: { display: true, text: "Score / 100" }, grid: { color: "rgba(18,18,26,0.09)" }, ticks: { color: "rgba(18,18,26,0.62)" } },
+          x: { stacked: false, grid: { display: false }, ticks: { color: "rgba(18,18,26,0.78)", maxRotation: mobile ? 0 : 0, font: { size: mobile ? 9 : 12 } } },
+          y: { min: 0, max: 100, title: { display: !mobile, text: "Score / 100" }, grid: { color: "rgba(18,18,26,0.09)" }, ticks: { color: "rgba(18,18,26,0.62)", font: { size: mobile ? 10 : 12 } } },
         },
       },
     });
@@ -2344,6 +2467,7 @@ body.lightbox-open {
   function renderCostValueChart() {
     const canvas = $("#costValueChart");
     if (!canvas || typeof Chart === "undefined") return;
+    const mobile = isMobile();
     const aggs = modelAggregates(state.data);
     const xMid = median(aggs.map((a) => a.avgCost));
     const yMid = median(aggs.map((a) => a.vivIndex));
@@ -2357,8 +2481,8 @@ body.lightbox-open {
           backgroundColor: modelColor(a.model, 0.65),
           borderColor: modelColor(a.model),
           borderWidth: 2,
-          pointRadius: 8,
-          pointHoverRadius: 10,
+          pointRadius: mobile ? 6 : 8,
+          pointHoverRadius: mobile ? 8 : 10,
         })),
       },
       plugins: [quadrantPlugin],
@@ -2367,7 +2491,7 @@ body.lightbox-open {
         maintainAspectRatio: false,
         plugins: {
           quadrant: { xMid, yMid },
-          legend: { position: "bottom", labels: { usePointStyle: true, boxWidth: 8 } },
+          legend: { display: !mobile, position: "bottom", labels: { usePointStyle: true, boxWidth: 8 } },
           tooltip: {
             callbacks: {
               label: (ctx) => [
@@ -2381,16 +2505,16 @@ body.lightbox-open {
         scales: {
           x: {
             type: "logarithmic",
-            title: { display: true, text: "Avg cost per run (USD, log) — left is cheaper", color: "rgba(18,18,26,0.55)" },
+            title: { display: !mobile, text: "Avg cost per run (USD, log) — left is cheaper", color: "rgba(18,18,26,0.55)" },
             grid: { color: "rgba(18,18,26,0.08)" },
-            ticks: { color: "rgba(18,18,26,0.55)" },
+            ticks: { color: "rgba(18,18,26,0.55)", font: { size: mobile ? 10 : 12 } },
           },
           y: {
             min: 40,
             max: 100,
-            title: { display: true, text: "VivIndex (weighted composite)", color: "rgba(18,18,26,0.55)" },
+            title: { display: !mobile, text: "VivIndex (weighted composite)", color: "rgba(18,18,26,0.55)" },
             grid: { color: "rgba(18,18,26,0.08)" },
-            ticks: { color: "rgba(18,18,26,0.55)" },
+            ticks: { color: "rgba(18,18,26,0.55)", font: { size: mobile ? 10 : 12 } },
           },
         },
       },
@@ -2459,6 +2583,7 @@ body.lightbox-open {
   function renderValueDensityChart() {
     const canvas = $("#valueDensityChart");
     if (!canvas || typeof Chart === "undefined") return;
+    const mobile = isMobile();
     const rows = state.data.filter((r) => r.benchmark === "value-density" && r.score != null && r.tokens > 0);
     if (!rows.length) return;
     const byModel = {};
@@ -2480,10 +2605,11 @@ body.lightbox-open {
           borderColor: aggs.map((a) => modelColor(a.model)),
           borderWidth: 1.5,
           borderRadius: 6,
-          maxBarThickness: 48,
+          maxBarThickness: mobile ? 22 : 48,
         }],
       },
       options: {
+        indexAxis: mobile ? "y" : "x",
         responsive: true,
         maintainAspectRatio: false,
         plugins: {
@@ -2503,8 +2629,8 @@ body.lightbox-open {
           },
         },
         scales: {
-          y: { beginAtZero: true, title: { display: true, text: "Score per 1K total tokens" }, grid: { color: "rgba(18,18,26,0.08)" } },
-          x: { grid: { display: false } },
+          y: { beginAtZero: true, title: { display: !mobile, text: "Score per 1K total tokens" }, grid: { color: "rgba(18,18,26,0.08)" }, ticks: { color: "rgba(18,18,26,0.55)", font: { size: mobile ? 10 : 12 } } },
+          x: { grid: { display: false }, ticks: { color: "rgba(18,18,26,0.75)", font: { size: mobile ? 10 : 12 }, autoSkip: false, maxRotation: mobile ? 0 : 45 } },
         },
       },
     });
@@ -2529,7 +2655,7 @@ body.lightbox-open {
           borderColor: aggs.map((a) => modelColor(a.model)),
           borderWidth: 1.5,
           borderRadius: 6,
-          maxBarThickness: 48,
+          maxBarThickness: isMobile() ? 22 : 48,
         }],
       },
       options: {
@@ -2538,8 +2664,8 @@ body.lightbox-open {
         maintainAspectRatio: false,
         plugins: { legend: { display: false } },
         scales: {
-          x: { min: 0, max: 100, grid: { color: "rgba(18,18,26,0.08)" } },
-          y: { grid: { display: false } },
+          x: { min: 0, max: 100, grid: { color: "rgba(18,18,26,0.08)" }, ticks: { color: "rgba(18,18,26,0.55)", font: { size: isMobile() ? 10 : 12 } } },
+          y: { grid: { display: false }, ticks: { color: "rgba(18,18,26,0.75)", font: { size: isMobile() ? 10 : 12 }, autoSkip: false } },
         },
       },
     });
@@ -2708,9 +2834,7 @@ body.lightbox-open {
     $$(".score-bar").forEach((b) => io.observe(b));
   }
 
-  async function init() {
-    initMobileNav();
-    await loadData();
+  function renderAllCharts() {
     renderVivIndexChart();
     renderLeaderboardChart();
     renderBenchmarkChart();
@@ -2718,11 +2842,33 @@ body.lightbox-open {
     renderSpeedCharts();
     renderValueDensityChart();
     renderReversePromptChart();
+  }
+
+  async function init() {
+    initMobileNav();
+    await loadData();
+    renderAllCharts();
     renderComparison();
     populateStats();
     initReveal();
     initGpuBackground();
     initWaapiScores();
+
+    // Re-render charts when crossing the 768px breakpoint so mobile/desktop
+    // chart configs (horizontal vs vertical bars, legend visibility, top-8
+    // model filtering) update on orientation change or window resize.
+    let wasMobile = isMobile();
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        const nowMobile = isMobile();
+        if (nowMobile !== wasMobile) {
+          wasMobile = nowMobile;
+          renderAllCharts();
+        }
+      }, 200);
+    });
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
