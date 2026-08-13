@@ -500,6 +500,19 @@ code, pre {
   }
 }
 
+/* Very small screens: stack stats in 1 column so the 5th isn't alone */
+@media (max-width: 400px) {
+  .bento {
+    grid-template-columns: 1fr;
+  }
+  .stat {
+    border-right: none;
+  }
+  .stat:nth-child(n + 2) {
+    border-top: 1px solid var(--rule);
+  }
+}
+
 /* Track cards */
 .bench-grid {
   display: grid;
@@ -572,6 +585,10 @@ code, pre {
 @media (max-width: 1000px) {
   .bench-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .bench-card p {
+    overflow-wrap: break-word;
+    word-break: break-word;
   }
 }
 
@@ -888,10 +905,23 @@ code, pre {
     grid-template-columns: 1fr;
   }
   .chart-wrap {
-    height: 250px;
+    height: 300px;
   }
   .chart-wrap-tall {
-    height: 300px;
+    height: 380px;
+  }
+}
+
+/* Mobile-specific chart heights for 18-model readability */
+@media (max-width: 768px) {
+  .chart-wrap {
+    height: 340px;
+  }
+  .chart-wrap-tall {
+    height: 460px;
+  }
+  .chart-wrap-xl {
+    height: 480px;
   }
 }
 
@@ -900,6 +930,24 @@ code, pre {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 0.85rem;
+}
+
+/* On mobile, make compare cards a horizontal scroll carousel */
+@media (max-width: 768px) {
+  .compare-grid {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 0.75rem;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 0.75rem;
+    margin-bottom: -0.75rem;
+  }
+  .compare-grid .compare-card {
+    flex: 0 0 260px;
+    scroll-snap-align: start;
+  }
 }
 
 .compare-card {
@@ -1390,6 +1438,9 @@ body > .navbar {
 
 /* ===== Mobile hardenings ===== */
 @media (max-width: 640px) {
+  body {
+    font-size: 15px;
+  }
   .feature-list {
     overflow-wrap: break-word;
     word-break: break-word;

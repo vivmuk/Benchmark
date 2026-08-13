@@ -1,0 +1,8 @@
+{
+  "model_id": "openai-gpt-56-terra",
+  "model_used": "openai-gpt-56-terra",
+  "prompt": "Create a single self-contained HTML document (no external files, no CDN, no images) that shows a cute alpaca dancing. Make it genuinely impressive: a recognizable fluffy alpaca with a long neck, ears,",
+  "generated_at": "2026-08-13T10:46:59.139509+00:00",
+  "chars": 16182,
+  "raw_preview": "```html\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"UTF-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n<title>Dancing Alpaca</title>\n<style>\n  :root {\n    --ink: #4d3456;\n    --cream: #fff1d7;\n    --fur: #f7d7b2;\n    --fur-light: #ffe9cc;\n    --fur-shadow: #df9f8d;\n    --pink: #ff759c;\n    --mint: #83e5ca;\n    --sky: #8bdcff;\n    --gold: #ffd36f;\n  }\n\n  * { box-sizing: border-box; }\n\n  html, body {\n    width: 100%;\n    height: 100%;\n    margin: 0;\n    overf"
+}

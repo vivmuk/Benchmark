@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dancing Alpaca</title>
+<style>
+  :root {
+    --sky-top: #302b67;
+    --sky-mid: #66529a;
+    --sky-bottom: #f3a6a7;
+    --cream: #fff1d3;
+    --cream-light: #fff9e9;
+    --cream-shadow: #e5c69b;
+    --brown: #704d59;
+    --dark: #342b4d;
+    --coral: #ef6d78;
+    --mint: #83d4c2;
+    --gold: #ffd36b;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    background: var(--sky-top);
+    font-family: "Trebuchet MS", system-ui, sans-serif;
+  }
+
+  body {
+    display: grid;
+    place-items: center;
+  }
+
+  .scene {
+    position: relative;
+    width: min(100vw, 1100px);
+    height: min(100vh, 760px);
+    min-height: 560px;
+    overflow: hidden;
+    isolation: isolate;
+    background:
+      radial-gradient(circle at 50% 25%, rgba(255,255,255,.19), transparent 28%),
+      linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 53%, var(--sky-bottom) 100%);
+  }
+
+  .scene::before,
+  .scene::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(1px);
+    opacity: .18;
+    z-index: -1;
+  }
+
+  .scene::before {
+    width: 440px;
+    height: 440px;
+    left: -130px;
+    top: 280px;
+    background: #ffcfbd;
+  }
+
+  .scene::after {
+    width: 520px;
+    height: 520px;
+    right: -180px;
+    top: 210px;
+    background: #b5eddf;
+  }
+
+  .moon {
+    position: absolute;
+    width: 118px;
+    height: 118px;
+    top: 58px;
+    right: 13%;
+    border-radius: 50%;
+    background: #ffe9ae;
+    box-shadow: 0 0 48px rgba(255, 235, 174, .4);
+    opacity: .9;
+  }
+
+  .moon::after {
+    content: "";
+    position: absolute;
+    width: 102px;
+    height: 102px;
+    left: 28px;
+    top: -8px;
+    border-radius: 50%;
+    background: var(--sky-top);
+  }
+
+  .stars {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .star {
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #fff4cf;
+    box-shadow: 0 0 12px #fff4cf;
+    animation: twinkle 2.6s ease-in-out infinite alternate;
+  }
+
+  .star::before,
+  .star::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    background: inherit;
+    transform: translate(-50%, -50%);
+  }
+
+  .star::before { width: 2px; height: 19px; }
+  .star::after { width: 19px; height: 2px; }
+
+  .s1 { left: 10%; top: 18%; animation-delay: -.4s; }
+  .s2 { left: 23%; top: 9%; width: 5px; height: 5px; animation-delay: -1.3s; }
+  .s3 { left: 39%; top: 15%; animation-delay: -.8s; }
+  .s4 { left: 62%; top: 10%; width: 5px; height: 5px; animation-delay: -1.8s; }
+  .s5 { left: 80%; top: 26%; animation-delay: -.2s; }
+  .s6 { left: 91%; top: 13%; width: 4px; height: 4px; animation-delay: -1.1s; }
+  .s7 { left: 7%; top: 39%; width: 4px; height: 4px; animation-delay: -2s; }
+
+  .cloud {
+    position: absolute;
+    width: 180px;
+    height: 34px;
+    border-radius: 40px;
+    background: rgba(255, 224, 223, .17);
+    filter: blur(.3px);
+    animation: drift 18s linear infinite;
+  }
+
+  .cloud::before,
+  .cloud::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    background: inherit;
+  }
+
+  .cloud::before { width: 70px; height: 70px; left: 28px; bottom: 0; }
+  .cloud::after { width: 92px; height: 92px; left: 83px; bottom: 0; }
+  .cloud.one { left: -210px; top: 32%; animation-delay: -5s; }
+  .cloud.two { left: -260px; top: 47%; width: 240px; opacity: .7; animation-delay: -12s; }
+
+  .floor-glow {
+    position: absolute;
+    left: 50%;
+    bottom: 11%;
+    width: 530px;
+    height: 84px;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background: rgba(255, 231, 195, .23);
+    filter: blur(12px);
+  }
+
+  .stage {
+    position: absolute;
+    left: 50%;
+    bottom: 5%;
+    width: min(92%, 780px);
+    height: 73%;
+    transform: translateX(-50%);
+  }
+
+  svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  .alpaca {
+    transform-box: fill-box;
+    transform-origin: 50% 92%;
+    animation: bodyBounce 1.34s ease-in-out infinite;
+  }
+
+  .body {
+    transform-box: fill-box;
+    transform-origin: 50% 50%;
+    animation: bodySway 2.68s ease-in-out infinite;
+  }
+
+  .neck {
+    transform-box: fill-box;
+    transform-origin: 50% 92%;
+    animation: neckGroove 1.34s ease-in-out infinite;
+  }
+
+  .head {
+    transform-box: fill-box;
+    transform-origin: 48% 90%;
+    animation: headNod 1.34s ease-in-out infinite;
+  }
+
+  .ear-left {
+    transform-box: fill-box;
+    transform-origin: 85% 90%;
+    animation: earLeft 1.34s ease-in-out infinite;
+  }
+
+  .ear-right {
+    transform-box: fill-box;
+    transform-origin: 15% 90%;
+    animation: earRight 1.34s ease-in-out infinite;
+  }
+
+  .leg-front-left,
+  .leg-back-right {
+    transform-box: fill-box;
+    transform-origin: 50% 8%;
+    animation: legA 1.34s ease-in-out infinite;
+  }
+
+  .leg-front-right,
+  .leg-back-left {
+    transform-box: fill-box;
+    transform-origin: 50% 8%;
+    animation: legB 1.34s ease-in-out infinite;
+  }
+
+  .tail {
+    transform-box: fill-box;
+    transform-origin: 8% 50%;
+    animation: tailShake 1.1s ease-in-out infinite;
+  }
+
+  .scarf {
+    transform-box: fill-box;
+    transform-origin: 50% 0%;
+    animation: scarfFlutter 1.34s ease-in-out infinite;
+  }
+
+  .note {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: noteDance 3.2s ease-in-out infinite;
+  }
+
+  .note.n2 { animation-delay: -1.1s; }
+  .note.n3 { animation-delay: -2.1s; }
+
+  .caption {
+    position: absolute;
+    left: 50%;
+    bottom: 3.2%;
+    transform: translateX(-50%);
+    color: rgba(255, 248, 226, .82);
+    font-size: clamp(12px, 1.7vw, 17px);
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    text-align: center;
+    text-shadow: 0 2px 8px rgba(47, 32, 72, .35);
+    white-space: nowrap;
+  }
+
+  @keyframes bodyBounce {
+    0%, 100% { transform: translateY(0) rotate(-1deg); }
+    18% { transform: translateY(9px) rotate(1.2deg); }
+    37% { transform: translateY(-7px) rotate(-1deg); }
+    55% { transform: translateY(6px) rotate(1.8deg); }
+    73% { transform: translateY(-4px) rotate(-1.2deg); }
+  }
+
+  @keyframes bodySway {
+    0%, 100% { transform: rotate(0deg) scaleX(1); }
+    25% { transform: rotate(-2deg) scaleX(1.02); }
+    50% { transform: rotate(1.5deg) scaleX(.98); }
+    75% { transform: rotate(-1deg) scaleX(1.02); }
+  }
+
+  @keyframes neckGroove {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(3deg); }
+    50% { transform: rotate(-2deg); }
+    75% { transform: rotate(2deg); }
+  }
+
+  @keyframes headNod {
+    0%, 100% { transform: rotate(0deg) translateY(0); }
+    20% { transform: rotate(-7deg) translateY(3px); }
+    42% { transform: rotate(4deg) translateY(-3px); }
+    64% { transform: rotate(-4deg) translateY(2px); }
+    82% { transform: rotate(5deg) translateY(-2px); }
+  }
+
+  @keyframes earLeft {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-17deg); }
+    47% { transform: rotate(7deg); }
+    72% { transform: rotate(-9deg); }
+  }
+
+  @keyframes earRight {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(12deg); }
+    48% { transform: rotate(-8deg); }
+    72% { transform: rotate(9deg); }
+  }
+
+  @keyframes legA {
+    0%, 100% { transform: rotate(0deg); }
+    22% { transform: rotate(17deg); }
+    45% { transform: rotate(-9deg); }
+    67% { transform: rotate(11deg); }
+    83% { transform: rotate(-3deg); }
+  }
+
+  @keyframes legB {
+    0%, 100% { transform: rotate(0deg); }
+    22% { transform: rotate(-14deg); }
+    45% { transform: rotate(12deg); }
+    67% { transform: rotate(-10deg); }
+    83% { transform: rotate(4deg); }
+  }
+
+  @keyframes tailShake {
+    0%, 100% { transform: rotate(0deg); }
+    20% { transform: rotate(20deg); }
+    42% { transform: rotate(-15deg); }
+    63% { transform: rotate(18deg); }
+    82% { transform: rotate(-8deg); }
+  }
+
+  @keyframes scarfFlutter {
+    0%, 100% { transform: rotate(0deg) translateY(0); }
+    30% { transform: rotate(-8deg) translateY(3px); }
+    58% { transform: rotate(7deg) translateY(-2px); }
+    82% { transform: rotate(-5deg) translateY(2px); }
+  }
+
+  @keyframes noteDance {
+    0%, 100% { opacity: 0; transform: translateY(16px) rotate(-10deg) scale(.7); }
+    18%, 78% { opacity: .92; }
+    50% { transform: translateY(-54px) rotate(15deg) scale(1.08); }
+    90% { opacity: 0; transform: translateY(-75px) rotate(28deg) scale(.8); }
+  }
+
+  @keyframes twinkle {
+    from { opacity: .3; transform: scale(.65); }
+    to { opacity: 1; transform: scale(1.25); }
+  }
+
+  @keyframes drift {
+    from { transform: translateX(0); }
+    to { transform: translateX(1250px); }
+  }
+
+  @media (max-height: 640px) {
+    .stage { height: 78%; bottom: 7%; }
+    .caption { display: none; }
+  }
+</style>
+</head>
+<body>
+  <main class="scene" aria-label="A cute alpaca dancing under the stars">
+    <div class="moon"></div>
+
+    <div class="stars" aria-hidden="true">
+      <i class="star s1"></i><i class="star s2"></i><i class="star s3"></i>
+      <i class="star s4"></i><i class="star s5"></i><i class="star s6"></i><i class="star s7"></i>
+    </div>
+
+    <div class="cloud one" aria-hidden="true"></div>
+    <div class="cloud two" aria-hidden="true"></div>
+    <div class="floor-glow"></div>
+
+    <section class="stage">
+      <svg viewBox="0 0 800 620" role="img" aria-label="Fluffy cream alpaca doing a joyful dance">
+        <defs>
+          <linearGradient id="wool" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#fffbea"/>
+            <stop offset=".58" stop-color="#fff0d0"/>
+            <stop offset="1" stop-color="#e4c198"/>
+          </linearGradient>
+          <linearGradient id="face" x1="0" y1="0" x2="0" y2="1">
+            <stop stop-color="#9a6c70"/>
+            <stop offset="1" stop-color="#684a5b"/>
+          </linearGradient>
+          <linearGradient id="scarf" x1="0" y1="0" x2="1" y2="1">
+            <stop stop-color="#ff8f8d"/>
+            <stop offset="1" stop-color="#d95072"/>
+          </linearGradient>
+          <filter id="softShadow" x="-30%" y="-30%" width="160%" height="180%">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="7"/>
+            <feOffset dy="8"/>
+            <feComponentTransfer>
+              <feFuncA type="linear" slope=".22"/>
+            </feComponentTransfer>
+            <feMerge>
+              <feMergeNode/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+        </defs>
+
+        <ellipse cx="405" cy="565" rx="205" ry="28" fill="#4d3b68" opacity=".25">
+          <animate attributeName="rx" values="205;175;215;182;205" dur="1.34s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values=".25;.16;.28;.18;.25" dur="1.34s" repeatCount="indefinite"/>
+        </ellipse>
+
+        <g class="alpaca" filter="url(#softShadow)">
+          <!-- tail -->
+          <g class="tail">
+            <path d="M606 363 C664 338 682 378 652 406" fill="none" stroke="#d8ad84" stroke-width="22" stroke-linecap="round"/>
+            <g fill="url(#wool)">
+              <circle cx="651" cy="395" r="28"/>
+              <circle cx="673" cy="378" r="25"/>
+              <circle cx="682" cy="405" r="24"/>
+              <circle cx="659" cy="423" r="25"/>
+              <circle cx="640" cy="414" r="21"/>
+            </g>
+          </g>
+
+          <!-- rear legs -->
+          <g class="leg-back-left">
+            <path d="M523 422 C538 458 536 510 522 548 C518 561 496 559 496 547 L496 426Z" fill="url(#wool)"/>
+            <path d="M496 546 Q512 538 528 548 L531 560 Q509 572 490 558Z" fill="#704d59"/>
+            <path d="M498 551 Q510 545 523 551" fill="none" stroke="#b98582" stroke-width="4" stroke-linecap="round"/>
+          </g>
+          <g class="leg-back-right">
+            <path d="M575 417 C593 458 600 507 591 545 C588 559 566 560 563 547 L550 425Z" fill="url(#wool)"/>
+            <path d="M562 544 Q577 537 593 546 L596 559 Q576 570 558 558Z" fill="#704d59"/>
+            <path d="M565 550 Q578 544 589 550" fill="none" stroke="#b98582" stroke-width="4" stroke-linecap="round"/>
+          </g>
+
+          <!-- fluffy body -->
+          <g class="body">
+            <path d="M275 326
+                     C258 299 285 276 319 281
+                     C324 247 373 241 398 261
+                     C425 236 471 249 480 280
+                     C522 266 556 292 544 323
+                     C584 330 596 365 572 389
+                     C584 421 548 447 515 437
+                     C493 468 449 464 430 443
+                     C399 469 353 457 342 431
+                     C305 446 273 420 282 391
+                     C248 380 247 344 275 326Z"
+                  fill="url(#wool)" stroke="#d4aa82" stroke-width="4"/>
+
+            <path d="M301 323 C335 299 357 311 370 294
+                     M379 278 C403 293 414 275 433 285
+                     M467 303 C489 288 514 305 513 323
+                     M313 405 C337 389 352 409 370 397
+                     M427 424 C449 400 468 419 487 405
+                     M511 374 C531 356 548 371 559 361"
+                  fill="none" stroke="#e0b98f" stroke-width="9" stroke-linecap="round" opacity=".65"/>
+          </g>
+
+          <!-- front legs -->
+          <g class="leg-front-left">
+            <path d="M323 410 C317 455 306 508 317 548 C320 560 342 560 344 548 L365 417Z" fill="url(#wool)"/>
+            <path d="M316 545 Q331 536 346 546 L348 560 Q330 571 311 559Z" fill="#704d59"/>
+            <path d="M319 551 Q331 545 342 551" fill="none" stroke="#b98582" stroke-width="4" stroke-linecap="round"/>
+          </g>
+          <g class="leg-front-right">
+            <path d="M379 418 C378 464 385 511 398 548 C402 560 423 557 422 545 L420 411Z" fill="url(#wool)"/>
+            <path d="M395 544 Q410 536 424 546 L426 559 Q407 570 390 558Z" fill="#704d59"/>
+            <path d="M399 550 Q410 544 420 550" fill="none" stroke="#b98582" stroke-width="4" stroke-linecap="round"/>
+          </g>
+
+          <!-- long neck -->
+          <g class="neck">
+            <path d="M405 340 C402 296 412 239 425 203 C438 169 474 159 501 181
+                     C520 197 515 229 494 247 C477 261 472 303 484 348Z"
+                  fill="url(#wool)" stroke="#d4aa82" stroke-width="4"/>
+            <path d="M434 286 C453 272 469 279 482 268
+                     M427 316 C447 302 468 312 482 301"
+                  fill="none" stroke="#e0b98f" stroke-width="9" stroke-linecap="round" opacity=".7"/>
+          </g>
+
+          <!-- ears -->
+          <g class="ear-left">
+            <path d="M438 173 C404 142 388 94 411 79 C439 82 458 128 464 164Z" fill="url(#wool)" stroke="#d4aa82" stroke-width="4"/>
+            <path d="M426 139 C416 119 412 104 416 98 C429 105 440 126 445 147Z" fill="#e58c9b" opacity=".7"/>
+          </g>
+          <g class="ear-right">
+            <path d="M493 169 C515 124 550 94 569 111 C580 136 544 177 514 188Z" fill="url(#wool)" stroke="#d4aa82" stroke-width="4"/>
+            <path d="M521 158 C535 136 550 124 557 124 C552 143 537 158 522 170Z" fill="#e58c9b" opacity=".7"/>
+          </g>
+
+          <!-- head and face -->
+          <g class="head">
+            <path d="M424 169 C427 136 459 116 496 124
+                     C534 132 552 167 539 199
+                     C530 223 508 239 477 234
+                     C444 229 421 207 424 169Z"
+                  fill="url(#wool)" stroke="#d4aa82" stroke-width="4"/>
+            <path d="M456 165 C459 147 478 138 496 143
+                     C520 149 529 169 522 190
+                     C515 213 495 221 475 213
+                     C456 206 450 186 456 165Z"
+                  fill="url(#face)"/>
+            <ellipse cx="475" cy="171" rx="6" ry="8" fill="#302a46"/>
+            <ellipse cx="505" cy="169" rx="6" ry="8" fill="#302a46"/>
+            <circle cx="473" cy="168" r="2.2" fill="#fff"/>
+            <circle cx="503" cy="166" r="2.2" fill="#fff"/>
+            <path d="M481 194 Q490 202 500 193" fill="none" stroke="#342b4d" stroke-width="4" stroke-linecap="round"/>
+            <circle cx="457" cy="191" r="6" fill="#f39a9f" opacity=".65"/>
+            <circle cx="519" cy="188" r="6" fill="#f39a9f" opacity=".65"/>
+            <path d="M443 142 C452 124 468 117 487 117 C474 105 448 110 434 126Z" fill="#fff9e9"/>
+            <circle cx="455" cy="128" r="11" fill="#fff9e9"/>
+            <circle cx="472" cy="119" r="13" fill="#fff9e9"/>
+            <circle cx="490" cy="121" r="12" fill="#fff9e9"/>
+          </g>
+
+          <!-- jaunty scarf -->
+          <g class="scarf">
+            <path d="M416 234 Q458 252 507 232 L514 254 Q463 274 412 253Z" fill="url(#scarf)" stroke="#c24e6b" stroke-width="3"/>
+            <path d="M491 250 C514 262 532 272 535 302 C513 291 495 279 480 264Z" fill="#e85b77" stroke="#c24e6b" stroke-width="3"/>
+            <path d="M521 281 L534 302 M509 276 L523 299 M496 267 L508 292" stroke="#ffd36b" stroke-width="4" stroke-linecap="round"/>
+          </g>
+        </g>
+
+        <!-- floating musical notes -->

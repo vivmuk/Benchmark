@@ -1,0 +1,8 @@
+{
+  "model_id": "openai-gpt-56-luna-pro",
+  "model_used": "openai-gpt-56-luna-pro",
+  "prompt": "Create a single self-contained HTML document (no external files, no CDN, no images) that shows a cute alpaca dancing. Make it genuinely impressive: a recognizable fluffy alpaca with a long neck, ears,",
+  "generated_at": "2026-08-13T10:45:06.070866+00:00",
+  "chars": 14487,
+  "raw_preview": "```html\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"UTF-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n<title>Alpaca Groove</title>\n<style>\n  :root {\n    --night: #171838;\n    --violet: #3a2867;\n    --pink: #e875a3;\n    --cream: #fff5dc;\n    --wool: #fffaf0;\n    --wool-shadow: #e9d9ca;\n    --brown: #704653;\n    --dark: #29203d;\n    --gold: #ffd66e;\n  }\n\n  * { box-sizing: border-box; }\n\n  html, body {\n    width: 100%;\n    height: 100%;\n    margin: 0;\n    ove"
+}
