@@ -1,49 +1,49 @@
 model_id,display,benchmark_id,status,score,latency_s,prompt_tokens,completion_tokens,total_tokens,estimated_cost_usd
 openai-gpt-56-luna,GPT-5.6 Luna,intent_understanding,ok,58,5.51,1717,654,2371,0.007051
-openai-gpt-56-luna,GPT-5.6 Luna,one_shot_ui,ok,89,10.635,1727,2048,3775,0.017519
+openai-gpt-56-luna,GPT-5.6 Luna,one_shot_ui,ok,28,10.635,1727,2048,3775,0.017519
 openai-gpt-56-luna-pro,GPT-5.6 Luna Pro,intent_understanding,ok,76,6.594,9687,1474,11161,0.023164
-openai-gpt-56-luna-pro,GPT-5.6 Luna Pro,one_shot_ui,ok,89,29.539,14609,7195,21804,0.072224
+openai-gpt-56-luna-pro,GPT-5.6 Luna Pro,one_shot_ui,ok,28,29.539,14609,7195,21804,0.072224
 openai-gpt-56-luna-pro,GPT-5.6 Luna Pro,startup_in_a_weekend,ok,65,34.347,15435,6677,22112,0.069371
 openai-gpt-56-sol,GPT-5.6 Sol,intent_understanding,ok,70,8.67,1717,476,2193,0.028581
-openai-gpt-56-sol,GPT-5.6 Sol,one_shot_ui,ok,89,16.869,1727,2048,3775,0.087594
+openai-gpt-56-sol,GPT-5.6 Sol,one_shot_ui,ok,28,16.869,1727,2048,3775,0.087594
 openai-gpt-56-sol,GPT-5.6 Sol,startup_in_a_weekend,ok,100,178.483,1929,13964,15893,0.535706
-openai-gpt-56-sol-pro,GPT-5.6 Sol Pro,one_shot_ui,ok,89,45.162,14608,6412,21020,0.33175
+openai-gpt-56-sol-pro,GPT-5.6 Sol Pro,one_shot_ui,ok,28,45.162,14608,6412,21020,0.33175
 openai-gpt-56-sol-pro,GPT-5.6 Sol Pro,startup_in_a_weekend,ok,60,46.604,15416,6307,21723,0.332863
 openai-gpt-56-terra,GPT-5.6 Terra,intent_understanding,ok,76,5.96,1717,518,2235,0.015078
-openai-gpt-56-terra,GPT-5.6 Terra,one_shot_ui,ok,89,10.875,1727,2048,3775,0.043797
+openai-gpt-56-terra,GPT-5.6 Terra,one_shot_ui,ok,38,10.875,1727,2048,3775,0.043797
 openai-gpt-56-terra,GPT-5.6 Terra,startup_in_a_weekend,ok,100,93.079,1929,13060,14989,0.250903
 openai-gpt-56-terra-pro,GPT-5.6 Terra Pro,intent_understanding,ok,76,10.111,9843,1593,11436,0.060628
-openai-gpt-56-terra-pro,GPT-5.6 Terra Pro,one_shot_ui,ok,89,39.694,14611,6552,21163,0.168509
+openai-gpt-56-terra-pro,GPT-5.6 Terra Pro,one_shot_ui,ok,38,39.694,14611,6552,21163,0.168509
 openai-gpt-56-terra-pro,GPT-5.6 Terra Pro,startup_in_a_weekend,ok,64,43.017,15446,6677,22123,0.173462
 openai-gpt-55,GPT-5.5,intent_understanding,ok,82,21.411,1713,1163,2876,0.054319
-openai-gpt-55,GPT-5.5,one_shot_ui,ok,89,30.219,1723,2048,3771,0.087569
+openai-gpt-55,GPT-5.5,one_shot_ui,ok,28,30.219,1723,2048,3771,0.087569
 openai-gpt-55,GPT-5.5,startup_in_a_weekend,ok,94,161.65,1925,13518,15443,0.518956
 claude-fable-5,Fable 5,intent_understanding,ok,88,17.216,2749,831,3580,0.082848
-claude-fable-5,Fable 5,one_shot_ui,ok,89,22.949,2765,2048,4813,0.15606
+claude-fable-5,Fable 5,one_shot_ui,ok,38,22.949,2765,2048,4813,0.15606
 claude-fable-5,Fable 5,startup_in_a_weekend,ok,61,27.248,3094,2048,5142,0.160008
 claude-opus-4-8,Opus 4.8,intent_understanding,ok,82,15.572,2757,824,3581,0.041262
-claude-opus-4-8,Opus 4.8,one_shot_ui,ok,89,20.908,2773,2048,4821,0.078078
+claude-opus-4-8,Opus 4.8,one_shot_ui,ok,28,20.908,2773,2048,4821,0.078078
 claude-opus-4-8,Opus 4.8,startup_in_a_weekend,ok,55,25.716,3102,2048,5150,0.080052
 zai-org-glm-5-2,GLM 5.2,intent_understanding,ok,82,31.909,1691,664,2355,0.005289
-zai-org-glm-5-2,GLM 5.2,one_shot_ui,ok,82,25.875,1700,2048,3748,0.011391
+zai-org-glm-5-2,GLM 5.2,one_shot_ui,ok,23,25.875,1700,2048,3748,0.011391
 zai-org-glm-5-2,GLM 5.2,startup_in_a_weekend,ok,74,56.74,1901,2048,3949,0.011673
 deepseek-v4-pro,DeepSeek V4,intent_understanding,ok,94,30.125,1772,1516,3288,0.007928
-deepseek-v4-pro,DeepSeek V4,one_shot_ui,ok,95,35.547,1783,2049,3832,0.009706
+deepseek-v4-pro,DeepSeek V4,one_shot_ui,ok,28,35.547,1783,2049,3832,0.009706
 deepseek-v4-pro,DeepSeek V4,startup_in_a_weekend,ok,54,43.79,1985,2049,4034,0.010039
 minimax-m3-preview,MiniMax M3,intent_understanding,ok,88,7.386,1779,823,2602,0.001521
-minimax-m3-preview,MiniMax M3,one_shot_ui,ok,82,6.831,1789,2048,3837,0.002994
+minimax-m3-preview,MiniMax M3,one_shot_ui,ok,20,6.831,1789,2048,3837,0.002994
 minimax-m3-preview,MiniMax M3,startup_in_a_weekend,ok,100,42.548,1990,7946,9936,0.010132
 grok-4-5,Grok 4.5,intent_understanding,ok,82,14.149,1872,1222,3094,0.012559
-grok-4-5,Grok 4.5,one_shot_ui,ok,82,26.747,1885,3886,5771,0.030704
+grok-4-5,Grok 4.5,one_shot_ui,ok,23,26.747,1885,3886,5771,0.030704
 grok-4-5,Grok 4.5,startup_in_a_weekend,ok,60,26.527,2090,2652,4742,0.022778
 claude-opus-5,Opus 5,intent_understanding,ok,82,33.902,2749,2001,4750,0.076524
-claude-opus-5,Opus 5,one_shot_ui,ok,89,88.763,2765,8192,10957,0.26235
+claude-opus-5,Opus 5,one_shot_ui,ok,40,88.763,2765,8192,10957,0.26235
 claude-opus-5,Opus 5,pharma_drug_interaction,ok,90,83.398,2958,6574,9532,0.214968
 claude-opus-5,Opus 5,startup_in_a_weekend,ok,70,100.12,3094,8192,11286,0.264324
 kimi-k3,Kimi K3,intent_understanding,ok,76,74.254,1807,2020,3827,0.044651
 kimi-k3,Kimi K3,pharma_drug_interaction,ok,86,120.658,1924,3959,5883,0.081446
 openai-gpt-56-sol-pro,GPT-5.6 Sol Pro,intent_understanding,ok,76,17.505,9739,1639,11378,0.122331
-kimi-k3,Kimi K3,one_shot_ui,ok,95,307.986,1815,11956,13771,0.230981
+kimi-k3,Kimi K3,one_shot_ui,ok,66,307.986,1815,11956,13771,0.230981
 kimi-k3,Kimi K3,pharma_regulatory_comprehension,ok,80,340.92,1959,12018,13977,0.232684
 kimi-k3,Kimi K3,startup_in_a_weekend,ok,100,335.534,2017,10609,12626,0.206483
 claude-opus-5,Opus 5,pharma_regulatory_comprehension,ok,95,170.695,3008,13933,16941,0.436038
@@ -75,7 +75,7 @@ claude-opus-4-8,Opus 4.8,pharma_drug_interaction,ok,89,25.786,2966,2021,4987,0.0
 claude-opus-4-8,Opus 4.8,pharma_regulatory_comprehension,ok,85,45.957,3016,3282,6298,0.116556
 claude-fable-5,Fable 5,pharma_regulatory_comprehension,error,0,4.612,3008,5,3013,0
 inkling,Inkling,intent_understanding,ok,52,5.526,1658,570,2228,0.004958
-inkling,Inkling,one_shot_ui,ok,95,44.828,1668,6949,8617,0.037264
+inkling,Inkling,one_shot_ui,ok,68,44.828,1668,6949,8617,0.037264
 inkling,Inkling,pharma_drug_interaction,ok,86,19.856,1772,4553,6325,0.025265
 inkling,Inkling,pharma_regulatory_comprehension,ok,85,95.625,1808,9370,11178,0.049696
 inkling,Inkling,startup_in_a_weekend,ok,94,73.518,1870,7103,8973,0.038296
@@ -112,7 +112,7 @@ grok-4-5,Grok 4.5,reverse_prompt_vision,ok,96,13.806,2865,637,3502,0.02555
 inkling,Inkling,reverse_prompt_vision,ok,40,7.323,3234,1548,4782,0.024981
 kimi-k3,Kimi K3,reverse_prompt_vision,ok,60,27.51,3077,714,3791,0.037467
 deepseek-v4-flash-0731,DeepSeek V4 Flash 0731,intent_understanding,ok,70,79.255,1727,1098,2825,0.000282
-deepseek-v4-flash-0731,DeepSeek V4 Flash 0731,one_shot_ui,ok,95,169.898,1738,4238,5976,0.000735
+deepseek-v4-flash-0731,DeepSeek V4 Flash 0731,one_shot_ui,ok,66,169.898,1738,4238,5976,0.000735
 deepseek-v4-flash-0731,DeepSeek V4 Flash 0731,pharma_drug_interaction,ok,89,120.252,1840,2000,3840,0.00042
 deepseek-v4-flash-0731,DeepSeek V4 Flash 0731,startup_in_a_weekend,ok,94,251.739,1940,4864,6804,0.00084
 deepseek-v4-flash-0731,DeepSeek V4 Flash 0731,brick_breaker_realism,ok,95,427.046,1768,11935,13703,0.001846
@@ -120,10 +120,143 @@ deepseek-v4-flash-0731,DeepSeek V4 Flash 0731,pharma_regulatory_comprehension,ok
 deepseek-v4-flash-0731,DeepSeek V4 Flash 0731,value_density,ok,100,13.445,1891,338,2229,0.000185
 deepseek-v4-flash-0731,DeepSeek V4 Flash 0731,reverse_prompt_vision,skipped,,0,0,0,0,0
 kimi-k3-fast-api,Kimi K3 Fast API,intent_understanding,ok,76,22.472,1764,1671,3435,0.045535
-kimi-k3-fast-api,Kimi K3 Fast API,one_shot_ui,ok,95,92.531,1772,9420,11192,0.219924
+kimi-k3-fast-api,Kimi K3 Fast API,one_shot_ui,ok,66,92.531,1772,9420,11192,0.219924
 kimi-k3-fast-api,Kimi K3 Fast API,brick_breaker_realism,ok,93,300.111,1803,29822,31625,0.679109
 kimi-k3-fast-api,Kimi K3 Fast API,pharma_drug_interaction,ok,86,25.344,1881,2321,4202,0.060687
 kimi-k3-fast-api,Kimi K3 Fast API,pharma_regulatory_comprehension,ok,90,88.282,1916,8205,10121,0.193235
 kimi-k3-fast-api,Kimi K3 Fast API,startup_in_a_weekend,ok,100,97.283,1974,7430,9404,0.176058
 kimi-k3-fast-api,Kimi K3 Fast API,value_density,ok,100,4.663,1928,354,2282,0.016641
 kimi-k3-fast-api,Kimi K3 Fast API,reverse_prompt_vision,skipped,,0,0,0,0,0
+qwen-3-8-max,Qwen 3.8 Max,intent_understanding,ok,76,21.736,1861,858,2719,0.011088
+qwen-3-8-max,Qwen 3.8 Max,one_shot_ui,ok,68,218.824,1870,12193,14063,0.096122
+qwen-3-8-max,Qwen 3.8 Max,pharma_drug_interaction,ok,85,113.462,1988,5073,7061,0.043018
+qwen-3-8-max,Qwen 3.8 Max,pharma_regulatory_comprehension,ok,90,516.463,2019,29728,31747,0.228008
+qwen-3-8-max,Qwen 3.8 Max,startup_in_a_weekend,ok,100,236.911,2090,11429,13519,0.090942
+qwen-3-8-2-4t-a95b,Qwen 3.8 2.4T,intent_understanding,ok,82,18.98,1822,1104,2926,0.012835
+qwen-3-8-2-4t-a95b,Qwen 3.8 2.4T,one_shot_ui,ok,68,90.873,1831,7285,9116,0.059215
+qwen-3-8-2-4t-a95b,Qwen 3.8 2.4T,pharma_drug_interaction,ok,83,94.284,1949,5862,7811,0.048837
+qwen-3-8-2-4t-a95b,Qwen 3.8 2.4T,pharma_regulatory_comprehension,ok,90,368.711,1980,23694,25674,0.182655
+qwen-3-8-2-4t-a95b,Qwen 3.8 2.4T,startup_in_a_weekend,ok,100,199.363,2051,12455,14506,0.09854
+claude-sonnet-5,Sonnet 5,intent_understanding,ok,76,14.032,2757,1009,3766,0.023406
+claude-sonnet-5,Sonnet 5,one_shot_ui,ok,63,48.723,2773,6172,8945,0.100899
+claude-sonnet-5,Sonnet 5,pharma_drug_interaction,ok,89,18.877,2966,1788,4754,0.035718
+claude-sonnet-5,Sonnet 5,pharma_regulatory_comprehension,ok,76,37.971,3016,3543,6559,0.062193
+claude-sonnet-5,Sonnet 5,startup_in_a_weekend,ok,100,153.574,3102,16027,19129,0.249711
+gemini-3-6-flash,Gemini 3.6 Flash,intent_understanding,ok,82,13.195,1815,1239,3054,0.015019
+gemini-3-6-flash,Gemini 3.6 Flash,one_shot_ui,ok,66,37.444,1828,7434,9262,0.073121
+gemini-3-6-flash,Gemini 3.6 Flash,pharma_drug_interaction,ok,80,24.064,1935,3175,5110,0.033394
+gemini-3-6-flash,Gemini 3.6 Flash,pharma_regulatory_comprehension,ok,80,24.429,1978,3573,5551,0.037206
+gemini-3-6-flash,Gemini 3.6 Flash,startup_in_a_weekend,ok,94,62.808,2047,9362,11409,0.091607
+grok-4-6,Grok 4.6,intent_understanding,ok,76,20.996,1872,1202,3074,0.012423
+grok-4-6,Grok 4.6,one_shot_ui,ok,66,43.018,1885,4285,6170,0.033417
+grok-4-6,Grok 4.6,pharma_drug_interaction,ok,82,35.214,1983,2050,4033,0.018441
+grok-4-6,Grok 4.6,pharma_regulatory_comprehension,ok,95,111.322,2027,7075,9102,0.052711
+grok-4-6,Grok 4.6,startup_in_a_weekend,ok,100,154.874,2090,10219,12309,0.074234
+nvidia-nemotron-3-5-lightning-30b-a3b,Nemotron 3.5,intent_understanding,ok,70,1.772,1812,437,2249,0.00029
+nvidia-nemotron-3-5-lightning-30b-a3b,Nemotron 3.5,one_shot_ui,ok,63,9.54,1821,3239,5060,0.000992
+nvidia-nemotron-3-5-lightning-30b-a3b,Nemotron 3.5,pharma_drug_interaction,ok,90,9.479,1932,3190,5122,0.000991
+nvidia-nemotron-3-5-lightning-30b-a3b,Nemotron 3.5,pharma_regulatory_comprehension,ok,77,7.529,1961,2314,4275,0.000775
+nvidia-nemotron-3-5-lightning-30b-a3b,Nemotron 3.5,startup_in_a_weekend,ok,100,20.745,2029,6052,8081,0.001716
+deepseek-v4-flash-0731-fast,DeepSeek V4 Flash 0731 Fast,intent_understanding,ok,70,3.885,1731,588,2319,0.001017
+deepseek-v4-flash-0731-fast,DeepSeek V4 Flash 0731 Fast,one_shot_ui,ok,68,21.858,1742,5285,7027,0.004309
+deepseek-v4-flash-0731-fast,DeepSeek V4 Flash 0731 Fast,pharma_drug_interaction,ok,83,5.942,1844,1211,3055,0.001493
+deepseek-v4-flash-0731-fast,DeepSeek V4 Flash 0731 Fast,pharma_regulatory_comprehension,ok,85,9.672,1881,1912,3793,0.001997
+deepseek-v4-flash-0731-fast,DeepSeek V4 Flash 0731 Fast,startup_in_a_weekend,ok,100,24.383,1944,4798,6742,0.004039
+deepseek-v4-flash-0731-fast,DeepSeek V4 Flash 0731 Fast,value_density,ok,100,1.261,1895,222,2117,0.000819
+qwen-3-8-max,Qwen 3.8 Max,value_density,ok,100,9.12,2036,444,2480,0.00842
+qwen-3-8-2-4t-a95b,Qwen 3.8 2.4T,value_density,ok,100,83.242,1997,519,2516,0.008885
+claude-sonnet-5,Sonnet 5,value_density,ok,100,2.66,3019,202,3221,0.012087
+gemini-3-6-flash,Gemini 3.6 Flash,value_density,ok,100,10.093,1984,986,2970,0.012964
+grok-4-6,Grok 4.6,value_density,ok,100,1.728,2030,92,2122,0.005234
+nvidia-nemotron-3-5-lightning-30b-a3b,Nemotron 3.5,value_density,error,0,3.453,1988,1024,3012,0
+deepseek-v4-flash-0731-fast,DeepSeek V4 Flash 0731 Fast,reverse_prompt_vision,skipped,,0,0,0,0,0
+qwen-3-8-max,Qwen 3.8 Max,reverse_prompt_vision,error,0,25.661,2767,1201,3968,0
+qwen-3-8-2-4t-a95b,Qwen 3.8 2.4T,reverse_prompt_vision,skipped,,0,0,0,0,0
+claude-sonnet-5,Sonnet 5,reverse_prompt_vision,ok,63,11.51,4059,680,4739,0.024928
+gemini-3-6-flash,Gemini 3.6 Flash,reverse_prompt_vision,ok,51,13.16,2939,973,3912,0.017616
+grok-4-6,Grok 4.6,reverse_prompt_vision,ok,54,18.747,2865,1171,4036,0.016907
+nvidia-nemotron-3-5-lightning-30b-a3b,Nemotron 3.5,reverse_prompt_vision,skipped,,0,0,0,0,0
+deepseek-v4-flash,DeepSeek V4 Flash,intent_understanding,ok,76,5.981,1786,483,2269,0.000379
+deepseek-v4-flash,DeepSeek V4 Flash,one_shot_ui,ok,68,39.057,1797,4750,6547,0.001554
+deepseek-v4-flash,DeepSeek V4 Flash,pharma_drug_interaction,ok,86,11.952,1899,1210,3109,0.000595
+deepseek-v4-flash,DeepSeek V4 Flash,pharma_regulatory_comprehension,ok,75,19.829,1936,2124,4060,0.000851
+deepseek-v4-flash,DeepSeek V4 Flash,startup_in_a_weekend,ok,100,50.915,1999,5509,7508,0.001791
+qwen-3-7-max,Qwen 3.7 Max,intent_understanding,ok,64,34.458,1823,1859,3682,0.019887
+qwen-3-7-max,Qwen 3.7 Max,one_shot_ui,ok,66,49.365,1832,3349,5181,0.031906
+qwen-3-7-max,Qwen 3.7 Max,pharma_drug_interaction,ok,86,52.457,1950,3230,5180,0.031267
+qwen-3-7-max,Qwen 3.7 Max,pharma_regulatory_comprehension,ok,80,62.285,1981,3667,5648,0.034868
+qwen-3-7-max,Qwen 3.7 Max,startup_in_a_weekend,ok,94,97.347,2052,5273,7325,0.047988
+qwen-3-7-plus,Qwen 3.7 Plus,intent_understanding,ok,70,37.855,1823,2153,3976,0.005217
+qwen-3-7-plus,Qwen 3.7 Plus,one_shot_ui,ok,66,78.166,1832,4508,6340,0.009932
+qwen-3-7-plus,Qwen 3.7 Plus,pharma_drug_interaction,ok,82,67.119,1950,3826,5776,0.008627
+qwen-3-7-plus,Qwen 3.7 Plus,pharma_regulatory_comprehension,ok,68,70.085,1981,4028,6009,0.009047
+qwen-3-7-plus,Qwen 3.7 Plus,startup_in_a_weekend,ok,94,78.76,2052,4509,6561,0.010044
+grok-4-20,Grok 4.20,intent_understanding,ok,76,20.626,1824,1374,3198,0.006478
+grok-4-20,Grok 4.20,one_shot_ui,ok,73,93.575,1834,8180,10014,0.025754
+grok-4-20,Grok 4.20,pharma_drug_interaction,ok,86,37.655,1931,2791,4722,0.010641
+grok-4-20,Grok 4.20,pharma_regulatory_comprehension,ok,78,50.048,1972,3866,5838,0.013741
+grok-4-20,Grok 4.20,startup_in_a_weekend,ok,100,91.357,2033,6851,8884,0.022275
+claude-opus-5-fast,Opus 5 Fast,intent_understanding,ok,76,8.8,2764,1378,4142,0.115848
+claude-opus-5-fast,Opus 5 Fast,one_shot_ui,ok,68,22.871,2780,6996,9776,0.45312
+claude-opus-5-fast,Opus 5 Fast,pharma_drug_interaction,ok,86,20.588,2973,5023,7996,0.337056
+claude-opus-5-fast,Opus 5 Fast,pharma_regulatory_comprehension,ok,95,65.296,3023,15454,18477,0.963516
+claude-opus-5-fast,Opus 5 Fast,startup_in_a_weekend,ok,100,120.929,3109,27883,30992,1.710288
+claude-opus-4-8-fast,Opus 4.8 Fast,intent_understanding,ok,88,5.401,2772,842,3614,0.083784
+claude-opus-4-8-fast,Opus 4.8 Fast,one_shot_ui,ok,66,13.907,2788,4275,7063,0.289956
+claude-opus-4-8-fast,Opus 4.8 Fast,pharma_drug_interaction,ok,83,7.603,2981,1723,4704,0.139152
+claude-opus-4-8-fast,Opus 4.8 Fast,pharma_regulatory_comprehension,ok,90,17.588,3031,3968,6999,0.274452
+claude-opus-4-8-fast,Opus 4.8 Fast,startup_in_a_weekend,ok,100,32.228,3117,7541,10658,0.489864
+aion-labs-aion-3-0,Aion 3.0,intent_understanding,ok,82,13.278,1737,750,2487,0.012139
+aion-labs-aion-3-0,Aion 3.0,one_shot_ui,ok,66,64.972,1746,4044,5790,0.036878
+aion-labs-aion-3-0,Aion 3.0,pharma_drug_interaction,ok,83,31.889,1854,1736,3590,0.019972
+aion-labs-aion-3-0,Aion 3.0,pharma_regulatory_comprehension,ok,85,58.568,1888,2799,4687,0.028072
+aion-labs-aion-3-0,Aion 3.0,startup_in_a_weekend,ok,100,154.703,1947,10154,12101,0.083456
+aion-labs-aion-3-0-mini,Aion 3.0 Mini,intent_understanding,ok,76,12.498,1770,885,2655,0.003097
+aion-labs-aion-3-0-mini,Aion 3.0 Mini,one_shot_ui,ok,68,64.649,1781,4836,6617,0.010021
+aion-labs-aion-3-0-mini,Aion 3.0 Mini,pharma_drug_interaction,ok,86,13.993,1883,1008,2891,0.003412
+aion-labs-aion-3-0-mini,Aion 3.0 Mini,pharma_regulatory_comprehension,ok,80,27.16,1920,2364,4284,0.005817
+aion-labs-aion-3-0-mini,Aion 3.0 Mini,startup_in_a_weekend,ok,100,93.709,1983,7856,9839,0.015483
+nvidia-nemotron-3-super-120b-a12b,Nemotron 3 Super,intent_understanding,ok,82,12.917,1808,1091,2899,0.000908
+nvidia-nemotron-3-super-120b-a12b,Nemotron 3 Super,one_shot_ui,ok,63,19.705,1817,2000,3817,0.001477
+nvidia-nemotron-3-super-120b-a12b,Nemotron 3 Super,pharma_drug_interaction,ok,83,9.674,1928,923,2851,0.000818
+nvidia-nemotron-3-super-120b-a12b,Nemotron 3 Super,pharma_regulatory_comprehension,ok,68,9.345,1957,1189,3146,0.000988
+nvidia-nemotron-3-super-120b-a12b,Nemotron 3 Super,startup_in_a_weekend,ok,100,82.544,2025,6934,8959,0.004587
+qwen3-235b-a22b-thinking-2507,Qwen3 235B Thinking,intent_understanding,ok,76,13.963,1749,1140,2889,0.004777
+qwen3-235b-a22b-thinking-2507,Qwen3 235B Thinking,one_shot_ui,ok,66,43.881,1758,3145,4903,0.011799
+qwen3-235b-a22b-thinking-2507,Qwen3 235B Thinking,pharma_drug_interaction,ok,86,19.379,1869,1533,3402,0.006207
+qwen3-235b-a22b-thinking-2507,Qwen3 235B Thinking,pharma_regulatory_comprehension,ok,90,20.493,1900,1575,3475,0.006367
+qwen3-235b-a22b-thinking-2507,Qwen3 235B Thinking,startup_in_a_weekend,ok,92,41.956,1964,2870,4834,0.010929
+minimax-m27,MiniMax M27,intent_understanding,ok,58,4.057,1681,432,2113,0.001278
+minimax-m27,MiniMax M27,one_shot_ui,ok,75,41.751,1691,5964,7655,0.00958
+minimax-m27,MiniMax M27,pharma_drug_interaction,ok,89,20.239,1790,1852,3642,0.003449
+minimax-m27,MiniMax M27,pharma_regulatory_comprehension,ok,74,16.779,1832,1315,3147,0.002659
+minimax-m27,MiniMax M27,startup_in_a_weekend,ok,100,63.923,1892,6472,8364,0.010418
+gemini-3-7-flash,Gemini 3.7 Flash,intent_understanding,ok,82,10.354,1815,1121,2936,0.013912
+gemini-3-7-flash,Gemini 3.7 Flash,one_shot_ui,ok,66,35.423,1828,6345,8173,0.062912
+gemini-3-7-flash,Gemini 3.7 Flash,pharma_drug_interaction,ok,83,13.644,1935,1681,3616,0.019387
+gemini-3-7-flash,Gemini 3.7 Flash,pharma_regulatory_comprehension,ok,80,24.897,1978,3596,5574,0.037421
+gemini-3-7-flash,Gemini 3.7 Flash,startup_in_a_weekend,ok,100,65.353,2047,10129,12176,0.098798
+gemini-3-7-flash,Gemini 3.7 Flash,value_density,ok,100,9.746,1984,1090,3074,0.013939
+qwen-3-7-max,Qwen 3.7 Max,value_density,ok,0,19.129,1998,1026,3024,0.013654
+qwen-3-7-plus,Qwen 3.7 Plus,value_density,error,0,19.076,1998,1026,3024,0
+grok-4-20,Grok 4.20,value_density,ok,100,14.568,1979,1497,3476,0.007047
+claude-opus-5-fast,Opus 5 Fast,value_density,ok,100,2.82,3026,228,3254,0.049992
+claude-opus-4-8-fast,Opus 4.8 Fast,value_density,ok,100,1.606,3034,203,3237,0.048588
+deepseek-v4-flash,DeepSeek V4 Flash,value_density,ok,100,3.696,1950,222,2172,0.00033
+aion-labs-aion-3-0,Aion 3.0,value_density,ok,100,10.188,1902,623,2525,0.011805
+aion-labs-aion-3-0-mini,Aion 3.0 Mini,value_density,ok,100,12.304,1934,864,2798,0.003204
+nvidia-nemotron-3-super-120b-a12b,Nemotron 3 Super,value_density,ok,100,8.505,1984,854,2838,0.000782
+qwen3-235b-a22b-thinking-2507,Qwen3 235B Thinking,value_density,error,0,17.244,1921,1024,2945,0
+minimax-m27,MiniMax M27,value_density,ok,100,4.827,1839,416,2255,0.001314
+gemini-3-7-flash,Gemini 3.7 Flash,reverse_prompt_vision,ok,54,15.185,2939,1145,4084,0.019244
+qwen-3-7-max,Qwen 3.7 Max,reverse_prompt_vision,ok,42,23.47,2767,1129,3896,0.019609
+qwen-3-7-plus,Qwen 3.7 Plus,reverse_prompt_vision,ok,89,14.728,2767,635,3402,0.005784
+grok-4-20,Grok 4.20,reverse_prompt_vision,ok,72,17.856,2812,1502,4314,0.010798
+claude-opus-5-fast,Opus 5 Fast,reverse_prompt_vision,ok,93,11.263,4066,1110,5176,0.118626
+claude-opus-4-8-fast,Opus 4.8 Fast,reverse_prompt_vision,ok,93,6.495,4074,839,4913,0.102412
+deepseek-v4-flash,DeepSeek V4 Flash,reverse_prompt_vision,skipped,,0,0,0,0,0
+aion-labs-aion-3-0,Aion 3.0,reverse_prompt_vision,skipped,,0,0,0,0,0
+aion-labs-aion-3-0-mini,Aion 3.0 Mini,reverse_prompt_vision,skipped,,0,0,0,0,0
+nvidia-nemotron-3-super-120b-a12b,Nemotron 3 Super,reverse_prompt_vision,skipped,,0,0,0,0,0
+qwen3-235b-a22b-thinking-2507,Qwen3 235B Thinking,reverse_prompt_vision,skipped,,0,0,0,0,0
+minimax-m27,MiniMax M27,reverse_prompt_vision,skipped,,0,0,0,0,0

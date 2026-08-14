@@ -1,7 +1,7 @@
 {
-  "top_model": "Kimi K3 Fast API",
-  "top_model_id": "kimi-k3-fast-api",
-  "top_viv": 93.1,
-  "n_models": 18,
-  "generated_at": "2026-08-11T14:24:17.531762+00:00"
+  "top_model": "Opus 4.8 Fast",
+  "top_model_id": "claude-opus-4-8-fast",
+  "top_viv": 91.1,
+  "n_models": 37,
+  "generated_at": "2026-08-14T02:50:03.721747+00:00"
 }

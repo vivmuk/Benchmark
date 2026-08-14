@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/styles.css?v=17" />
+  <link rel="stylesheet" href="assets/styles.css?v=13" />
 </head>
 <body>
   <div class="gpu-bg" aria-hidden="true"><canvas id="gpuCanvas"></canvas></div>
@@ -20,10 +20,6 @@
         <li><a href="index.html#leaderboard">Leaderboard</a></li>
         <li><a href="index.html#tracks">Tracks</a></li>
         <li><a href="vision.html" class="is-current" aria-current="page">Vision</a></li>
-        <li><a href="trends.html">Trends</a></li>
-        <li><a href="compare.html">Compare</a></li>
-        <li><a href="gif-arena.html">GIF Arena</a></li>
-
         <li><a href="experimental-design.html">Design</a></li>
         <li><a href="about.html">About</a></li>
       </ul>
@@ -48,7 +44,7 @@
         <a href="#source-prompt" class="btn btn-ghost">Source prompt</a>
         <a href="#reconstructions" class="btn btn-ghost">Reconstructions</a>
       </div>
-      <p class="data-status">Fixture 2026-07-27T01:09:37.742355+00:00 · judge <code>openai-gpt-56-luna</code> · re-renders <code>nano-banana-2</code></p>
+      <p class="data-status">Fixture 2026-08-14T02:51:36.800155+00:00 · judge <code>openai-gpt-56-luna</code> · re-renders <code>nano-banana-2</code></p>
     </div>
   </header>
 
@@ -100,6 +96,16 @@
           <span class="tile-score score-high">96</span>
           <span class="tile-name">GPT-5.5</span>
         </button>
+        <button type="button" class="recon-gallery-tile img-zoom" data-full="data/vision/recon_images/claude-opus-4-8-fast.web.jpg" data-caption="Opus 4.8 Fast · score 93" data-jump="#recon-claude-opus-4-8-fast" aria-label="Enlarge Opus 4.8 Fast image">
+          <img src="data/vision/recon_images/claude-opus-4-8-fast.web.jpg" alt="Opus 4.8 Fast reconstruction render" loading="lazy" />
+          <span class="tile-score score-high">93</span>
+          <span class="tile-name">Opus 4.8 Fast</span>
+        </button>
+        <button type="button" class="recon-gallery-tile img-zoom" data-full="data/vision/recon_images/claude-opus-5-fast.web.jpg" data-caption="Opus 5 Fast · score 93" data-jump="#recon-claude-opus-5-fast" aria-label="Enlarge Opus 5 Fast image">
+          <img src="data/vision/recon_images/claude-opus-5-fast.web.jpg" alt="Opus 5 Fast reconstruction render" loading="lazy" />
+          <span class="tile-score score-high">93</span>
+          <span class="tile-name">Opus 5 Fast</span>
+        </button>
         <button type="button" class="recon-gallery-tile img-zoom" data-full="data/vision/recon_images/openai-gpt-56-luna.web.jpg" data-caption="GPT-5.6 Luna · score 93" data-jump="#recon-openai-gpt-56-luna" aria-label="Enlarge GPT-5.6 Luna image">
           <img src="data/vision/recon_images/openai-gpt-56-luna.web.jpg" alt="GPT-5.6 Luna reconstruction render" loading="lazy" />
           <span class="tile-score score-high">93</span>
@@ -120,6 +126,16 @@
           <span class="tile-score score-high">93</span>
           <span class="tile-name">GPT-5.6 Terra</span>
         </button>
+        <button type="button" class="recon-gallery-tile img-zoom" data-full="data/vision/recon_images/qwen-3-7-plus.web.jpg" data-caption="Qwen 3.7 Plus · score 89" data-jump="#recon-qwen-3-7-plus" aria-label="Enlarge Qwen 3.7 Plus image">
+          <img src="data/vision/recon_images/qwen-3-7-plus.web.jpg" alt="Qwen 3.7 Plus reconstruction render" loading="lazy" />
+          <span class="tile-score score-high">89</span>
+          <span class="tile-name">Qwen 3.7 Plus</span>
+        </button>
+        <button type="button" class="recon-gallery-tile img-zoom" data-full="data/vision/recon_images/grok-4-20.web.jpg" data-caption="Grok 4.20 · score 72" data-jump="#recon-grok-4-20" aria-label="Enlarge Grok 4.20 image">
+          <img src="data/vision/recon_images/grok-4-20.web.jpg" alt="Grok 4.20 reconstruction render" loading="lazy" />
+          <span class="tile-score score-mid">72</span>
+          <span class="tile-name">Grok 4.20</span>
+        </button>
         <button type="button" class="recon-gallery-tile img-zoom" data-full="data/vision/recon_images/claude-fable-5.web.jpg" data-caption="Fable 5 · score 63" data-jump="#recon-claude-fable-5" aria-label="Enlarge Fable 5 image">
           <img src="data/vision/recon_images/claude-fable-5.web.jpg" alt="Fable 5 reconstruction render" loading="lazy" />
           <span class="tile-score score-mid">63</span>
@@ -129,6 +145,11 @@
           <img src="data/vision/recon_images/claude-opus-5.web.jpg" alt="Opus 5 reconstruction render" loading="lazy" />
           <span class="tile-score score-mid">63</span>
           <span class="tile-name">Opus 5</span>
+        </button>
+        <button type="button" class="recon-gallery-tile img-zoom" data-full="data/vision/recon_images/claude-sonnet-5.web.jpg" data-caption="Sonnet 5 · score 63" data-jump="#recon-claude-sonnet-5" aria-label="Enlarge Sonnet 5 image">
+          <img src="data/vision/recon_images/claude-sonnet-5.web.jpg" alt="Sonnet 5 reconstruction render" loading="lazy" />
+          <span class="tile-score score-mid">63</span>
+          <span class="tile-name">Sonnet 5</span>
         </button>
         <button type="button" class="recon-gallery-tile img-zoom" data-full="data/vision/recon_images/kimi-k3.web.jpg" data-caption="Kimi K3 · score 60" data-jump="#recon-kimi-k3" aria-label="Enlarge Kimi K3 image">
           <img src="data/vision/recon_images/kimi-k3.web.jpg" alt="Kimi K3 reconstruction render" loading="lazy" />
@@ -140,10 +161,30 @@
           <span class="tile-score score-mid">57</span>
           <span class="tile-name">Opus 4.8</span>
         </button>
+        <button type="button" class="recon-gallery-tile img-zoom" data-full="data/vision/recon_images/gemini-3-7-flash.web.jpg" data-caption="Gemini 3.7 Flash · score 54" data-jump="#recon-gemini-3-7-flash" aria-label="Enlarge Gemini 3.7 Flash image">
+          <img src="data/vision/recon_images/gemini-3-7-flash.web.jpg" alt="Gemini 3.7 Flash reconstruction render" loading="lazy" />
+          <span class="tile-score score-mid">54</span>
+          <span class="tile-name">Gemini 3.7 Flash</span>
+        </button>
+        <button type="button" class="recon-gallery-tile img-zoom" data-full="data/vision/recon_images/grok-4-6.web.jpg" data-caption="Grok 4.6 · score 54" data-jump="#recon-grok-4-6" aria-label="Enlarge Grok 4.6 image">
+          <img src="data/vision/recon_images/grok-4-6.web.jpg" alt="Grok 4.6 reconstruction render" loading="lazy" />
+          <span class="tile-score score-mid">54</span>
+          <span class="tile-name">Grok 4.6</span>
+        </button>
+        <button type="button" class="recon-gallery-tile img-zoom" data-full="data/vision/recon_images/gemini-3-6-flash.web.jpg" data-caption="Gemini 3.6 Flash · score 51" data-jump="#recon-gemini-3-6-flash" aria-label="Enlarge Gemini 3.6 Flash image">
+          <img src="data/vision/recon_images/gemini-3-6-flash.web.jpg" alt="Gemini 3.6 Flash reconstruction render" loading="lazy" />
+          <span class="tile-score score-mid">51</span>
+          <span class="tile-name">Gemini 3.6 Flash</span>
+        </button>
         <button type="button" class="recon-gallery-tile img-zoom" data-full="data/vision/recon_images/openai-gpt-56-terra-pro.web.jpg" data-caption="GPT-5.6 Terra Pro · score 46" data-jump="#recon-openai-gpt-56-terra-pro" aria-label="Enlarge GPT-5.6 Terra Pro image">
           <img src="data/vision/recon_images/openai-gpt-56-terra-pro.web.jpg" alt="GPT-5.6 Terra Pro reconstruction render" loading="lazy" />
           <span class="tile-score score-low">46</span>
           <span class="tile-name">GPT-5.6 Terra Pro</span>
+        </button>
+        <button type="button" class="recon-gallery-tile img-zoom" data-full="data/vision/recon_images/qwen-3-7-max.web.jpg" data-caption="Qwen 3.7 Max · score 42" data-jump="#recon-qwen-3-7-max" aria-label="Enlarge Qwen 3.7 Max image">
+          <img src="data/vision/recon_images/qwen-3-7-max.web.jpg" alt="Qwen 3.7 Max reconstruction render" loading="lazy" />
+          <span class="tile-score score-low">42</span>
+          <span class="tile-name">Qwen 3.7 Max</span>
         </button>
         <button type="button" class="recon-gallery-tile img-zoom" data-full="data/vision/recon_images/inkling.web.jpg" data-caption="Inkling · score 40" data-jump="#recon-inkling" aria-label="Enlarge Inkling image">
           <img src="data/vision/recon_images/inkling.web.jpg" alt="Inkling reconstruction render" loading="lazy" />
@@ -228,7 +269,7 @@
   <section id="reconstructions">
     <div class="container">
       <div class="section-head">
-        <h2>Model reconstructions (14)</h2>
+        <h2>Model reconstructions (23)</h2>
         <p>Sorted by score. Each card shows the <strong>nano-banana-2</strong> render, full reconstructed prompt, and per-attribute hits.</p>
       </div>
       <div class="vision-recon-grid">
@@ -287,10 +328,92 @@
         <h4>Checklist hits</h4>
         <div class="hit-grid"><span class="hit-chip hit-yes" title="pharmaceutical / research laboratory setting"><code>lab_setting</code> <em>hit</em></span><span class="hit-chip hit-no" title="twilight or dusk lighting"><code>twilight</code> <em>miss</em></span><span class="hit-chip hit-yes" title="central floating molecular / double-helix model"><code>molecule_center</code> <em>hit</em></span><span class="hit-chip hit-yes" title="teal/cyan glass or glowing cyan bonds"><code>teal_glass</code> <em>hit</em></span><span class="hit-chip hit-yes" title="amber atom nodes or warm accent nodes"><code>amber_nodes</code> <em>hit</em></span><span class="hit-chip hit-yes" title="holographic dashboard or wall display"><code>holographic_dashboard</code> <em>hit</em></span><span class="hit-chip hit-yes" title="title text EvidenceGrade AI (or close)"><code>evidencegrade_title</code> <em>hit</em></span><span class="hit-chip hit-yes" title="5-tier grade ladder A-F with colors"><code>grade_ladder</code> <em>hit</em></span><span class="hit-chip hit-yes" title="chart about citation confidence over years"><code>citation_chart</code> <em>hit</em></span><span class="hit-chip hit-yes" title="large arched window"><code>arched_window</code> <em>hit</em></span><span class="hit-chip hit-yes" title="rainy city / neo-Tokyo street outside"><code>rainy_city</code> <em>hit</em></span><span class="hit-chip hit-yes" title="neon kanji or Japanese neon signs"><code>neon_kanji</code> <em>hit</em></span><span class="hit-chip hit-yes" title="red umbrella"><code>red_umbrella</code> <em>hit</em></span><span class="hit-chip hit-yes" title="black cat silhouette"><code>black_cat</code> <em>hit</em></span><span class="hit-chip hit-yes" title="open leather notebook"><code>notebook</code> <em>hit</em></span><span class="hit-chip hit-yes" title="handwritten CYP3A4 interaction risk note"><code>cyp3a4_note</code> <em>hit</em></span><span class="hit-chip hit-yes" title="fountain pen"><code>fountain_pen</code> <em>hit</em></span><span class="hit-chip hit-yes" title="ceramic coffee cup with teal lid"><code>coffee_cup</code> <em>hit</em></span><span class="hit-chip hit-yes" title="cracked porcelain saucer"><code>cracked_saucer</code> <em>hit</em></span><span class="hit-chip hit-yes" title="brass articulated ceiling lamps"><code>brass_lamps</code> <em>hit</em></span><span class="hit-chip hit-yes" title="one lamp with green glass shade"><code>green_shade</code> <em>hit</em></span><span class="hit-chip hit-yes" title="amber reagent bottles"><code>reagent_bottles</code> <em>hit</em></span><span class="hit-chip hit-yes" title="labels Aspirin/Warfarin/Ibuprofen"><code>drug_labels</code> <em>hit</em></span><span class="hit-chip hit-yes" title="vintage brass microscope"><code>microscope</code> <em>hit</em></span><span class="hit-chip hit-yes" title="monstera plant with one yellow leaf"><code>monstera</code> <em>hit</em></span><span class="hit-chip hit-yes" title="volumetric light / god-rays through glass"><code>volumetric_light</code> <em>hit</em></span><span class="hit-chip hit-yes" title="teal-and-amber color grade"><code>teal_amber_grade</code> <em>hit</em></span><span class="hit-chip hit-yes" title="photoreal mixed with holographic UI"><code>photoreal_hologram_mix</code> <em>hit</em></span></div>
       </article>
-      <article class="vision-card reveal" id="recon-openai-gpt-56-luna">
+      <article class="vision-card reveal" id="recon-claude-opus-4-8-fast">
         <header class="vision-card-head">
           <div>
             <span class="rank">#03</span>
+            <h3>Opus 4.8 Fast</h3>
+            <p class="mono-id">claude-opus-4-8-fast</p>
+          </div>
+          <div class="score-pill score-high">93</div>
+        </header>
+        <p class="vision-card-meta">score <strong>93</strong> · hit rate <strong>92.9%</strong> · hits <strong>26/28</strong></p>
+        <h4>Image from this prompt (nano-banana-2)</h4>
+        
+        <figure class="recon-gen-figure">
+          <button type="button" class="img-zoom" data-full="data/vision/recon_images/claude-opus-4-8-fast.web.jpg" data-caption="Opus 4.8 Fast · nano-banana-2 · score 93" aria-label="Enlarge image for Opus 4.8 Fast">
+            <img src="data/vision/recon_images/claude-opus-4-8-fast.web.jpg" alt="nano-banana-2 render of Opus 4.8 Fast reconstructed prompt" loading="lazy" />
+            <span class="img-zoom-hint">Click to enlarge</span>
+          </button>
+          <figcaption>
+            Rendered with <code>nano-banana-2</code> from this model&rsquo;s reconstructed prompt
+            · <a href="#recon-claude-opus-4-8-fast" class="jump-card">card</a>
+          </figcaption>
+        </figure>
+        <h4>Reconstructed prompt</h4>
+        <pre class="prompt-block">A photorealistic 3D-rendered cinematic scene of a moody pharmacology/research laboratory office at night, cyberpunk-tinged atmosphere. 
+
+Center-foreground: a glowing translucent teal-and-gold DNA double helix floating and rotating above a brushed stainless-steel desk, emitting soft cyan light, with molecular bond spheres (gold and glass-cyan atoms). 
+
+Left side: a large semi-transparent holographic UI panel/screen displaying &quot;EvidenceGrade AI&quot; in bold white text at top, a &quot;5-tier grade&quot; legend below with color-coded horizontal bars labeled &quot;A&quot; (green), &quot;B&quot; (blue), &quot;C&quot; (yellow), &quot;D&quot; (orange), &quot;F&quot; (red). To the right of the legend, a line graph titled &quot;Citation Confidence 2019-2026&quot; with y-axis marked 0,10,20,30,40,50,60 and a rising jagged white trend line; axis label &quot;Citation Confidence 2019-2026&quot; repeated along the bottom. 
+
+Foreground desk: an open spiral-bound notebook with handwritten notes, the visible legible text reading &quot;CYP3A4 interaction risk&quot; (other handwriting is blurry/unreadable), a black-and-gold fountain pen resting on the pages, and to the right a white cracked-glaze ceramic coffee cup with a teal takeaway lid on a matching saucer. 
+
+Background: laboratory shelves holding brown apothecary/pharmacy glass bottles with white labels reading &quot;Aspirin,&quot; &quot;Warfarin,&quot; &quot;Ibuprofen,&quot; a brass vintage microscope, small amber vials, and a potted Monstera plant with green-and-yellow variegated leaves. 
+
+Right side: a large arched window with rain-streaked glass looking out onto a wet neon-lit city street, glowing cyan/pink/red Japanese/Chinese neon signage reflections; a black cat silhouette sitting on the windowsill facing outward, a red folded umbrella leaning against the wall below. 
+
+Ceiling: multiple vintage brass articulated task lamps, one with a green enamel shade casting warm and cool mixed lighting. 
+
+Lighting: dramatic teal-and-amber color grading, volumetric glow, soft shadows, high detail, cinematic depth of field, futuristic biotech aesthetic, ultra-detailed octane render, 16:9.
+
+(Note: some handwritten notebook text and small bottle text are stylized/illegible in the image.)</pre>
+        <h4>Checklist hits</h4>
+        <div class="hit-grid"><span class="hit-chip hit-yes" title="pharmaceutical / research laboratory setting"><code>lab_setting</code> <em>hit</em></span><span class="hit-chip hit-no" title="twilight or dusk lighting"><code>twilight</code> <em>miss</em></span><span class="hit-chip hit-yes" title="central floating molecular / double-helix model"><code>molecule_center</code> <em>hit</em></span><span class="hit-chip hit-yes" title="teal/cyan glass or glowing cyan bonds"><code>teal_glass</code> <em>hit</em></span><span class="hit-chip hit-yes" title="amber atom nodes or warm accent nodes"><code>amber_nodes</code> <em>hit</em></span><span class="hit-chip hit-yes" title="holographic dashboard or wall display"><code>holographic_dashboard</code> <em>hit</em></span><span class="hit-chip hit-yes" title="title text EvidenceGrade AI (or close)"><code>evidencegrade_title</code> <em>hit</em></span><span class="hit-chip hit-yes" title="5-tier grade ladder A-F with colors"><code>grade_ladder</code> <em>hit</em></span><span class="hit-chip hit-yes" title="chart about citation confidence over years"><code>citation_chart</code> <em>hit</em></span><span class="hit-chip hit-yes" title="large arched window"><code>arched_window</code> <em>hit</em></span><span class="hit-chip hit-yes" title="rainy city / neo-Tokyo street outside"><code>rainy_city</code> <em>hit</em></span><span class="hit-chip hit-yes" title="neon kanji or Japanese neon signs"><code>neon_kanji</code> <em>hit</em></span><span class="hit-chip hit-yes" title="red umbrella"><code>red_umbrella</code> <em>hit</em></span><span class="hit-chip hit-yes" title="black cat silhouette"><code>black_cat</code> <em>hit</em></span><span class="hit-chip hit-yes" title="open leather notebook"><code>notebook</code> <em>hit</em></span><span class="hit-chip hit-yes" title="handwritten CYP3A4 interaction risk note"><code>cyp3a4_note</code> <em>hit</em></span><span class="hit-chip hit-yes" title="fountain pen"><code>fountain_pen</code> <em>hit</em></span><span class="hit-chip hit-yes" title="ceramic coffee cup with teal lid"><code>coffee_cup</code> <em>hit</em></span><span class="hit-chip hit-yes" title="cracked porcelain saucer"><code>cracked_saucer</code> <em>hit</em></span><span class="hit-chip hit-yes" title="brass articulated ceiling lamps"><code>brass_lamps</code> <em>hit</em></span><span class="hit-chip hit-no" title="one lamp with green glass shade"><code>green_shade</code> <em>miss</em></span><span class="hit-chip hit-yes" title="amber reagent bottles"><code>reagent_bottles</code> <em>hit</em></span><span class="hit-chip hit-yes" title="labels Aspirin/Warfarin/Ibuprofen"><code>drug_labels</code> <em>hit</em></span><span class="hit-chip hit-yes" title="vintage brass microscope"><code>microscope</code> <em>hit</em></span><span class="hit-chip hit-yes" title="monstera plant with one yellow leaf"><code>monstera</code> <em>hit</em></span><span class="hit-chip hit-yes" title="volumetric light / god-rays through glass"><code>volumetric_light</code> <em>hit</em></span><span class="hit-chip hit-yes" title="teal-and-amber color grade"><code>teal_amber_grade</code> <em>hit</em></span><span class="hit-chip hit-yes" title="photoreal mixed with holographic UI"><code>photoreal_hologram_mix</code> <em>hit</em></span></div>
+      </article>
+      <article class="vision-card reveal" id="recon-claude-opus-5-fast">
+        <header class="vision-card-head">
+          <div>
+            <span class="rank">#04</span>
+            <h3>Opus 5 Fast</h3>
+            <p class="mono-id">claude-opus-5-fast</p>
+          </div>
+          <div class="score-pill score-high">93</div>
+        </header>
+        <p class="vision-card-meta">score <strong>93</strong> · hit rate <strong>92.9%</strong> · hits <strong>26/28</strong></p>
+        <h4>Image from this prompt (nano-banana-2)</h4>
+        
+        <figure class="recon-gen-figure">
+          <button type="button" class="img-zoom" data-full="data/vision/recon_images/claude-opus-5-fast.web.jpg" data-caption="Opus 5 Fast · nano-banana-2 · score 93" aria-label="Enlarge image for Opus 5 Fast">
+            <img src="data/vision/recon_images/claude-opus-5-fast.web.jpg" alt="nano-banana-2 render of Opus 5 Fast reconstructed prompt" loading="lazy" />
+            <span class="img-zoom-hint">Click to enlarge</span>
+          </button>
+          <figcaption>
+            Rendered with <code>nano-banana-2</code> from this model&rsquo;s reconstructed prompt
+            · <a href="#recon-claude-opus-5-fast" class="jump-card">card</a>
+          </figcaption>
+        </figure>
+        <h4>Reconstructed prompt</h4>
+        <pre class="prompt-block">A photorealistic 3D-rendered cinematic interior scene of a futuristic apothecary-laboratory at night, wide 16:9 cinematic composition, shallow depth of field, volumetric light.
+
+Foreground center-right: a brushed stainless-steel worktable with soft specular reflections. On the left of the table lies an open notebook with cream pages and gold spiral binding resting on a brown leather cover; handwritten dark ink text on the right page reads &quot;CYP3A4 interaction risk&quot;, with faint illegible cursive scribbles on the left page. A slim black-and-gold fountain pen lies beside it, casting a soft shadow. On the right side of the table sits a white crackle-glaze ceramic coffee cup with a teal-green lid on a matching saucer.
+
+Center of the frame: a large floating holographic DNA double helix / molecular ball-and-stick model, glowing translucent cyan-aqua with luminous gold-amber atom nodes, emitting soft teal light onto the table surface, semi-transparent and backlit.
+
+Left third: a large translucent glass-like holographic UI panel with cool blue tint and thin cyan border, floating in mid-air. Bold white sans-serif heading reads &quot;EvidenceGrade AI&quot;. Below it in smaller white text &quot;5-tier grade&quot; above a vertical stack of five color-coded horizontal bars labeled with large letters: &quot;A&quot; in green, &quot;B&quot; in blue/teal, &quot;C&quot; in yellow, &quot;D&quot; in orange, &quot;F&quot; in crimson/magenta. To the right inside the panel, a line-graph chart titled &quot;Citation Confidence 2019-2026&quot; with pale cyan gridlines, y-axis numbers 0, 10, 20, 30, 40, 50, 60, and a rising jagged white-cyan trend line; a duplicated smaller caption &quot;Citation Confidence 2019-2026&quot; appears along the chart baseline.
+
+Background: pale grey wall with two floating white shelves holding rows of amber and brown apothecary glass bottles with white labels reading &quot;Aspirin&quot;, &quot;Warfarin&quot;, &quot;Ibuprofen&quot; (some labels blurred/illegible), plus clear vials and beige binders. A brass vintage microscope sits on a lower steel bench at left-center, next to a small monstera plant in a white marble pot at center-right. Overhead: three adjustable articulated metal task lamps — a brass lamp at upper left, a warm white dome pendant at top center, and a green enamel dome lamp at upper right — all casting warm pools of light.
+
+Right side: a tall arched window with grey frame looking out onto a rain-slick cyberpunk street at night, glowing pink, cyan and red neon Japanese/Chinese kanji signage reflected in wet pavement, rain streaks on the glass. A black cat silhouette sits on the windowsill facing the window; a red umbrella leans against the wall below.
+
+Lighting: moody low-key ambient with warm tungsten highlights, cool cyan hologram glow, neon color spill from the window, soft reflections and subtle bloom. Atmosphere: quiet, high-tech, cozy-noir, scientific. Style: hyperrealistic CGI product-visualization render, Octane/Unreal Engine quality, ray-traced reflections, 8K detail, sharp focus on holograms and notebook text.</pre>
+        <h4>Checklist hits</h4>
+        <div class="hit-grid"><span class="hit-chip hit-yes" title="pharmaceutical / research laboratory setting"><code>lab_setting</code> <em>hit</em></span><span class="hit-chip hit-no" title="twilight or dusk lighting"><code>twilight</code> <em>miss</em></span><span class="hit-chip hit-yes" title="central floating molecular / double-helix model"><code>molecule_center</code> <em>hit</em></span><span class="hit-chip hit-yes" title="teal/cyan glass or glowing cyan bonds"><code>teal_glass</code> <em>hit</em></span><span class="hit-chip hit-yes" title="amber atom nodes or warm accent nodes"><code>amber_nodes</code> <em>hit</em></span><span class="hit-chip hit-yes" title="holographic dashboard or wall display"><code>holographic_dashboard</code> <em>hit</em></span><span class="hit-chip hit-yes" title="title text EvidenceGrade AI (or close)"><code>evidencegrade_title</code> <em>hit</em></span><span class="hit-chip hit-yes" title="5-tier grade ladder A-F with colors"><code>grade_ladder</code> <em>hit</em></span><span class="hit-chip hit-yes" title="chart about citation confidence over years"><code>citation_chart</code> <em>hit</em></span><span class="hit-chip hit-yes" title="large arched window"><code>arched_window</code> <em>hit</em></span><span class="hit-chip hit-yes" title="rainy city / neo-Tokyo street outside"><code>rainy_city</code> <em>hit</em></span><span class="hit-chip hit-yes" title="neon kanji or Japanese neon signs"><code>neon_kanji</code> <em>hit</em></span><span class="hit-chip hit-yes" title="red umbrella"><code>red_umbrella</code> <em>hit</em></span><span class="hit-chip hit-yes" title="black cat silhouette"><code>black_cat</code> <em>hit</em></span><span class="hit-chip hit-yes" title="open leather notebook"><code>notebook</code> <em>hit</em></span><span class="hit-chip hit-yes" title="handwritten CYP3A4 interaction risk note"><code>cyp3a4_note</code> <em>hit</em></span><span class="hit-chip hit-yes" title="fountain pen"><code>fountain_pen</code> <em>hit</em></span><span class="hit-chip hit-yes" title="ceramic coffee cup with teal lid"><code>coffee_cup</code> <em>hit</em></span><span class="hit-chip hit-yes" title="cracked porcelain saucer"><code>cracked_saucer</code> <em>hit</em></span><span class="hit-chip hit-yes" title="brass articulated ceiling lamps"><code>brass_lamps</code> <em>hit</em></span><span class="hit-chip hit-no" title="one lamp with green glass shade"><code>green_shade</code> <em>miss</em></span><span class="hit-chip hit-yes" title="amber reagent bottles"><code>reagent_bottles</code> <em>hit</em></span><span class="hit-chip hit-yes" title="labels Aspirin/Warfarin/Ibuprofen"><code>drug_labels</code> <em>hit</em></span><span class="hit-chip hit-yes" title="vintage brass microscope"><code>microscope</code> <em>hit</em></span><span class="hit-chip hit-yes" title="monstera plant with one yellow leaf"><code>monstera</code> <em>hit</em></span><span class="hit-chip hit-yes" title="volumetric light / god-rays through glass"><code>volumetric_light</code> <em>hit</em></span><span class="hit-chip hit-yes" title="teal-and-amber color grade"><code>teal_amber_grade</code> <em>hit</em></span><span class="hit-chip hit-yes" title="photoreal mixed with holographic UI"><code>photoreal_hologram_mix</code> <em>hit</em></span></div>
+      </article>
+      <article class="vision-card reveal" id="recon-openai-gpt-56-luna">
+        <header class="vision-card-head">
+          <div>
+            <span class="rank">#05</span>
             <h3>GPT-5.6 Luna</h3>
             <p class="mono-id">openai-gpt-56-luna</p>
           </div>
@@ -317,7 +440,7 @@
       <article class="vision-card reveal" id="recon-openai-gpt-56-sol">
         <header class="vision-card-head">
           <div>
-            <span class="rank">#04</span>
+            <span class="rank">#06</span>
             <h3>GPT-5.6 Sol</h3>
             <p class="mono-id">openai-gpt-56-sol</p>
           </div>
@@ -344,7 +467,7 @@
       <article class="vision-card reveal" id="recon-openai-gpt-56-sol-pro">
         <header class="vision-card-head">
           <div>
-            <span class="rank">#05</span>
+            <span class="rank">#07</span>
             <h3>GPT-5.6 Sol Pro</h3>
             <p class="mono-id">openai-gpt-56-sol-pro</p>
           </div>
@@ -371,7 +494,7 @@
       <article class="vision-card reveal" id="recon-openai-gpt-56-terra">
         <header class="vision-card-head">
           <div>
-            <span class="rank">#06</span>
+            <span class="rank">#08</span>
             <h3>GPT-5.6 Terra</h3>
             <p class="mono-id">openai-gpt-56-terra</p>
           </div>
@@ -395,10 +518,64 @@
         <h4>Checklist hits</h4>
         <div class="hit-grid"><span class="hit-chip hit-yes" title="pharmaceutical / research laboratory setting"><code>lab_setting</code> <em>hit</em></span><span class="hit-chip hit-no" title="twilight or dusk lighting"><code>twilight</code> <em>miss</em></span><span class="hit-chip hit-yes" title="central floating molecular / double-helix model"><code>molecule_center</code> <em>hit</em></span><span class="hit-chip hit-yes" title="teal/cyan glass or glowing cyan bonds"><code>teal_glass</code> <em>hit</em></span><span class="hit-chip hit-yes" title="amber atom nodes or warm accent nodes"><code>amber_nodes</code> <em>hit</em></span><span class="hit-chip hit-yes" title="holographic dashboard or wall display"><code>holographic_dashboard</code> <em>hit</em></span><span class="hit-chip hit-yes" title="title text EvidenceGrade AI (or close)"><code>evidencegrade_title</code> <em>hit</em></span><span class="hit-chip hit-yes" title="5-tier grade ladder A-F with colors"><code>grade_ladder</code> <em>hit</em></span><span class="hit-chip hit-yes" title="chart about citation confidence over years"><code>citation_chart</code> <em>hit</em></span><span class="hit-chip hit-yes" title="large arched window"><code>arched_window</code> <em>hit</em></span><span class="hit-chip hit-yes" title="rainy city / neo-Tokyo street outside"><code>rainy_city</code> <em>hit</em></span><span class="hit-chip hit-yes" title="neon kanji or Japanese neon signs"><code>neon_kanji</code> <em>hit</em></span><span class="hit-chip hit-yes" title="red umbrella"><code>red_umbrella</code> <em>hit</em></span><span class="hit-chip hit-yes" title="black cat silhouette"><code>black_cat</code> <em>hit</em></span><span class="hit-chip hit-yes" title="open leather notebook"><code>notebook</code> <em>hit</em></span><span class="hit-chip hit-yes" title="handwritten CYP3A4 interaction risk note"><code>cyp3a4_note</code> <em>hit</em></span><span class="hit-chip hit-yes" title="fountain pen"><code>fountain_pen</code> <em>hit</em></span><span class="hit-chip hit-yes" title="ceramic coffee cup with teal lid"><code>coffee_cup</code> <em>hit</em></span><span class="hit-chip hit-yes" title="cracked porcelain saucer"><code>cracked_saucer</code> <em>hit</em></span><span class="hit-chip hit-yes" title="brass articulated ceiling lamps"><code>brass_lamps</code> <em>hit</em></span><span class="hit-chip hit-no" title="one lamp with green glass shade"><code>green_shade</code> <em>miss</em></span><span class="hit-chip hit-yes" title="amber reagent bottles"><code>reagent_bottles</code> <em>hit</em></span><span class="hit-chip hit-yes" title="labels Aspirin/Warfarin/Ibuprofen"><code>drug_labels</code> <em>hit</em></span><span class="hit-chip hit-yes" title="vintage brass microscope"><code>microscope</code> <em>hit</em></span><span class="hit-chip hit-yes" title="monstera plant with one yellow leaf"><code>monstera</code> <em>hit</em></span><span class="hit-chip hit-yes" title="volumetric light / god-rays through glass"><code>volumetric_light</code> <em>hit</em></span><span class="hit-chip hit-yes" title="teal-and-amber color grade"><code>teal_amber_grade</code> <em>hit</em></span><span class="hit-chip hit-yes" title="photoreal mixed with holographic UI"><code>photoreal_hologram_mix</code> <em>hit</em></span></div>
       </article>
+      <article class="vision-card reveal" id="recon-qwen-3-7-plus">
+        <header class="vision-card-head">
+          <div>
+            <span class="rank">#09</span>
+            <h3>Qwen 3.7 Plus</h3>
+            <p class="mono-id">qwen-3-7-plus</p>
+          </div>
+          <div class="score-pill score-high">89</div>
+        </header>
+        <p class="vision-card-meta">score <strong>89</strong> · hit rate <strong>89.3%</strong> · hits <strong>25/28</strong></p>
+        <h4>Image from this prompt (nano-banana-2)</h4>
+        
+        <figure class="recon-gen-figure">
+          <button type="button" class="img-zoom" data-full="data/vision/recon_images/qwen-3-7-plus.web.jpg" data-caption="Qwen 3.7 Plus · nano-banana-2 · score 89" aria-label="Enlarge image for Qwen 3.7 Plus">
+            <img src="data/vision/recon_images/qwen-3-7-plus.web.jpg" alt="nano-banana-2 render of Qwen 3.7 Plus reconstructed prompt" loading="lazy" />
+            <span class="img-zoom-hint">Click to enlarge</span>
+          </button>
+          <figcaption>
+            Rendered with <code>nano-banana-2</code> from this model&rsquo;s reconstructed prompt
+            · <a href="#recon-qwen-3-7-plus" class="jump-card">card</a>
+          </figcaption>
+        </figure>
+        <h4>Reconstructed prompt</h4>
+        <pre class="prompt-block">A dimly lit cyberpunk laboratory study room, photorealistic 3D render, cinematic lighting. On the left wall, a large glowing holographic digital display reading &quot;EvidenceGrade AI&quot; with a &quot;5-tier grade&quot; vertical bar chart showing A in green, B in teal, C in yellow, D in orange, F in red, alongside a line graph titled &quot;Citation Confidence 2019-2026&quot; with a rising blue line. Center of the image, a glowing cyan-teal DNA double helix molecular structure with gold spherical nodes floats above a brushed metal desk. On the desk foreground, an open leather-bound notebook with handwritten text &quot;CYP3A4 interaction risk&quot; and a fountain pen, next to a cracked white ceramic coffee cup with a teal lid on a saucer. Background shelves hold brown apothecary glass bottles labeled &quot;Aspirin&quot;, &quot;Warfarin&quot;, &quot;Ibuprofen&quot;, a brass microscope, glass test tubes, and a potted monstera plant. Overhead, brass articulated pendant lamps and a green glass pendant lamp cast warm light. On the right, a large arched window reveals a rainy neon-lit cyberpunk city street at night with pink and red Chinese character neon signs, a black cat silhouette sitting on the windowsill, and a red umbrella leaning against the wall. Moody atmospheric lighting, teal and orange color palette, highly detailed, Unreal Engine 5 style render.</pre>
+        <h4>Checklist hits</h4>
+        <div class="hit-grid"><span class="hit-chip hit-yes" title="pharmaceutical / research laboratory setting"><code>lab_setting</code> <em>hit</em></span><span class="hit-chip hit-no" title="twilight or dusk lighting"><code>twilight</code> <em>miss</em></span><span class="hit-chip hit-yes" title="central floating molecular / double-helix model"><code>molecule_center</code> <em>hit</em></span><span class="hit-chip hit-yes" title="teal/cyan glass or glowing cyan bonds"><code>teal_glass</code> <em>hit</em></span><span class="hit-chip hit-no" title="amber atom nodes or warm accent nodes"><code>amber_nodes</code> <em>miss</em></span><span class="hit-chip hit-yes" title="holographic dashboard or wall display"><code>holographic_dashboard</code> <em>hit</em></span><span class="hit-chip hit-yes" title="title text EvidenceGrade AI (or close)"><code>evidencegrade_title</code> <em>hit</em></span><span class="hit-chip hit-yes" title="5-tier grade ladder A-F with colors"><code>grade_ladder</code> <em>hit</em></span><span class="hit-chip hit-yes" title="chart about citation confidence over years"><code>citation_chart</code> <em>hit</em></span><span class="hit-chip hit-yes" title="large arched window"><code>arched_window</code> <em>hit</em></span><span class="hit-chip hit-yes" title="rainy city / neo-Tokyo street outside"><code>rainy_city</code> <em>hit</em></span><span class="hit-chip hit-yes" title="neon kanji or Japanese neon signs"><code>neon_kanji</code> <em>hit</em></span><span class="hit-chip hit-yes" title="red umbrella"><code>red_umbrella</code> <em>hit</em></span><span class="hit-chip hit-yes" title="black cat silhouette"><code>black_cat</code> <em>hit</em></span><span class="hit-chip hit-yes" title="open leather notebook"><code>notebook</code> <em>hit</em></span><span class="hit-chip hit-yes" title="handwritten CYP3A4 interaction risk note"><code>cyp3a4_note</code> <em>hit</em></span><span class="hit-chip hit-yes" title="fountain pen"><code>fountain_pen</code> <em>hit</em></span><span class="hit-chip hit-yes" title="ceramic coffee cup with teal lid"><code>coffee_cup</code> <em>hit</em></span><span class="hit-chip hit-yes" title="cracked porcelain saucer"><code>cracked_saucer</code> <em>hit</em></span><span class="hit-chip hit-yes" title="brass articulated ceiling lamps"><code>brass_lamps</code> <em>hit</em></span><span class="hit-chip hit-yes" title="one lamp with green glass shade"><code>green_shade</code> <em>hit</em></span><span class="hit-chip hit-yes" title="amber reagent bottles"><code>reagent_bottles</code> <em>hit</em></span><span class="hit-chip hit-yes" title="labels Aspirin/Warfarin/Ibuprofen"><code>drug_labels</code> <em>hit</em></span><span class="hit-chip hit-yes" title="vintage brass microscope"><code>microscope</code> <em>hit</em></span><span class="hit-chip hit-yes" title="monstera plant with one yellow leaf"><code>monstera</code> <em>hit</em></span><span class="hit-chip hit-no" title="volumetric light / god-rays through glass"><code>volumetric_light</code> <em>miss</em></span><span class="hit-chip hit-yes" title="teal-and-amber color grade"><code>teal_amber_grade</code> <em>hit</em></span><span class="hit-chip hit-yes" title="photoreal mixed with holographic UI"><code>photoreal_hologram_mix</code> <em>hit</em></span></div>
+      </article>
+      <article class="vision-card reveal" id="recon-grok-4-20">
+        <header class="vision-card-head">
+          <div>
+            <span class="rank">#10</span>
+            <h3>Grok 4.20</h3>
+            <p class="mono-id">grok-4-20</p>
+          </div>
+          <div class="score-pill score-mid">72</div>
+        </header>
+        <p class="vision-card-meta">score <strong>72</strong> · hit rate <strong>85.7%</strong> · hits <strong>24/28</strong></p>
+        <h4>Image from this prompt (nano-banana-2)</h4>
+        
+        <figure class="recon-gen-figure">
+          <button type="button" class="img-zoom" data-full="data/vision/recon_images/grok-4-20.web.jpg" data-caption="Grok 4.20 · nano-banana-2 · score 72" aria-label="Enlarge image for Grok 4.20">
+            <img src="data/vision/recon_images/grok-4-20.web.jpg" alt="nano-banana-2 render of Grok 4.20 reconstructed prompt" loading="lazy" />
+            <span class="img-zoom-hint">Click to enlarge</span>
+          </button>
+          <figcaption>
+            Rendered with <code>nano-banana-2</code> from this model&rsquo;s reconstructed prompt
+            · <a href="#recon-grok-4-20" class="jump-card">card</a>
+          </figcaption>
+        </figure>
+        <h4>Reconstructed prompt</h4>
+        <pre class="prompt-block">A futuristic cyberpunk pharmacology laboratory at night, cinematic composition, large holographic blue display on left wall titled &quot;EvidenceGrade AI&quot; with &quot;5-tier grade&quot; showing colored horizontal bars labeled A (green), B (teal), C (yellow), D (orange), F (red), line graph titled &quot;Citation Confidence 2019-2026&quot; showing upward trend, floating glowing translucent turquoise and gold ball-and-stick molecular structure hovering above center of stainless steel desk, foreground open leather notebook with visible handwritten text &quot;CYP3A4 interaction risk&quot;, fountain pen, cracked white ceramic coffee cup with teal lid on saucer, background white shelves holding amber glass bottles labeled Aspirin, Warfarin, Ibuprofen, brass microscope, potted monstera plant, large arched window on right showing rainy night cyberpunk city street with pink and blue neon Japanese kanji signs, black cat sitting on windowsill beside closed red umbrella, warm overhead articulated brass lamps with one green shade casting dramatic volumetric lighting and god rays, cool blue holographic glow, moody atmospheric rain streaks on window, highly detailed, photorealistic, intricate textures, cinematic color grading, 8k resolution.</pre>
+        <h4>Checklist hits</h4>
+        <div class="hit-grid"><span class="hit-chip hit-yes" title="pharmaceutical / research laboratory setting"><code>lab_setting</code> <em>hit</em></span><span class="hit-chip hit-no" title="twilight or dusk lighting"><code>twilight</code> <em>miss</em></span><span class="hit-chip hit-yes" title="central floating molecular / double-helix model"><code>molecule_center</code> <em>hit</em></span><span class="hit-chip hit-yes" title="teal/cyan glass or glowing cyan bonds"><code>teal_glass</code> <em>hit</em></span><span class="hit-chip hit-yes" title="amber atom nodes or warm accent nodes"><code>amber_nodes</code> <em>hit</em></span><span class="hit-chip hit-yes" title="holographic dashboard or wall display"><code>holographic_dashboard</code> <em>hit</em></span><span class="hit-chip hit-yes" title="title text EvidenceGrade AI (or close)"><code>evidencegrade_title</code> <em>hit</em></span><span class="hit-chip hit-yes" title="5-tier grade ladder A-F with colors"><code>grade_ladder</code> <em>hit</em></span><span class="hit-chip hit-yes" title="chart about citation confidence over years"><code>citation_chart</code> <em>hit</em></span><span class="hit-chip hit-yes" title="large arched window"><code>arched_window</code> <em>hit</em></span><span class="hit-chip hit-yes" title="rainy city / neo-Tokyo street outside"><code>rainy_city</code> <em>hit</em></span><span class="hit-chip hit-yes" title="neon kanji or Japanese neon signs"><code>neon_kanji</code> <em>hit</em></span><span class="hit-chip hit-yes" title="red umbrella"><code>red_umbrella</code> <em>hit</em></span><span class="hit-chip hit-yes" title="black cat silhouette"><code>black_cat</code> <em>hit</em></span><span class="hit-chip hit-yes" title="open leather notebook"><code>notebook</code> <em>hit</em></span><span class="hit-chip hit-yes" title="handwritten CYP3A4 interaction risk note"><code>cyp3a4_note</code> <em>hit</em></span><span class="hit-chip hit-yes" title="fountain pen"><code>fountain_pen</code> <em>hit</em></span><span class="hit-chip hit-yes" title="ceramic coffee cup with teal lid"><code>coffee_cup</code> <em>hit</em></span><span class="hit-chip hit-no" title="cracked porcelain saucer"><code>cracked_saucer</code> <em>miss</em></span><span class="hit-chip hit-yes" title="brass articulated ceiling lamps"><code>brass_lamps</code> <em>hit</em></span><span class="hit-chip hit-yes" title="one lamp with green glass shade"><code>green_shade</code> <em>hit</em></span><span class="hit-chip hit-yes" title="amber reagent bottles"><code>reagent_bottles</code> <em>hit</em></span><span class="hit-chip hit-yes" title="labels Aspirin/Warfarin/Ibuprofen"><code>drug_labels</code> <em>hit</em></span><span class="hit-chip hit-yes" title="vintage brass microscope"><code>microscope</code> <em>hit</em></span><span class="hit-chip hit-no" title="monstera plant with one yellow leaf"><code>monstera</code> <em>miss</em></span><span class="hit-chip hit-yes" title="volumetric light / god-rays through glass"><code>volumetric_light</code> <em>hit</em></span><span class="hit-chip hit-no" title="teal-and-amber color grade"><code>teal_amber_grade</code> <em>miss</em></span><span class="hit-chip hit-yes" title="photoreal mixed with holographic UI"><code>photoreal_hologram_mix</code> <em>hit</em></span></div>
+      </article>
       <article class="vision-card reveal" id="recon-claude-fable-5">
         <header class="vision-card-head">
           <div>
-            <span class="rank">#07</span>
+            <span class="rank">#11</span>
             <h3>Fable 5</h3>
             <p class="mono-id">claude-fable-5</p>
           </div>
@@ -425,7 +602,7 @@
       <article class="vision-card reveal" id="recon-claude-opus-5">
         <header class="vision-card-head">
           <div>
-            <span class="rank">#08</span>
+            <span class="rank">#12</span>
             <h3>Opus 5</h3>
             <p class="mono-id">claude-opus-5</p>
           </div>
@@ -467,10 +644,37 @@ Style: photorealistic octane/unreal-engine product-visualization render, sci-fi 
         <h4>Checklist hits</h4>
         <div class="hit-grid"><span class="hit-chip hit-yes" title="pharmaceutical / research laboratory setting"><code>lab_setting</code> <em>hit</em></span><span class="hit-chip hit-no" title="twilight or dusk lighting"><code>twilight</code> <em>miss</em></span><span class="hit-chip hit-yes" title="central floating molecular / double-helix model"><code>molecule_center</code> <em>hit</em></span><span class="hit-chip hit-yes" title="teal/cyan glass or glowing cyan bonds"><code>teal_glass</code> <em>hit</em></span><span class="hit-chip hit-yes" title="amber atom nodes or warm accent nodes"><code>amber_nodes</code> <em>hit</em></span><span class="hit-chip hit-yes" title="holographic dashboard or wall display"><code>holographic_dashboard</code> <em>hit</em></span><span class="hit-chip hit-yes" title="title text EvidenceGrade AI (or close)"><code>evidencegrade_title</code> <em>hit</em></span><span class="hit-chip hit-yes" title="5-tier grade ladder A-F with colors"><code>grade_ladder</code> <em>hit</em></span><span class="hit-chip hit-yes" title="chart about citation confidence over years"><code>citation_chart</code> <em>hit</em></span><span class="hit-chip hit-yes" title="large arched window"><code>arched_window</code> <em>hit</em></span><span class="hit-chip hit-yes" title="rainy city / neo-Tokyo street outside"><code>rainy_city</code> <em>hit</em></span><span class="hit-chip hit-yes" title="neon kanji or Japanese neon signs"><code>neon_kanji</code> <em>hit</em></span><span class="hit-chip hit-yes" title="red umbrella"><code>red_umbrella</code> <em>hit</em></span><span class="hit-chip hit-yes" title="black cat silhouette"><code>black_cat</code> <em>hit</em></span><span class="hit-chip hit-yes" title="open leather notebook"><code>notebook</code> <em>hit</em></span><span class="hit-chip hit-yes" title="handwritten CYP3A4 interaction risk note"><code>cyp3a4_note</code> <em>hit</em></span><span class="hit-chip hit-yes" title="fountain pen"><code>fountain_pen</code> <em>hit</em></span><span class="hit-chip hit-yes" title="ceramic coffee cup with teal lid"><code>coffee_cup</code> <em>hit</em></span><span class="hit-chip hit-no" title="cracked porcelain saucer"><code>cracked_saucer</code> <em>miss</em></span><span class="hit-chip hit-yes" title="brass articulated ceiling lamps"><code>brass_lamps</code> <em>hit</em></span><span class="hit-chip hit-no" title="one lamp with green glass shade"><code>green_shade</code> <em>miss</em></span><span class="hit-chip hit-yes" title="amber reagent bottles"><code>reagent_bottles</code> <em>hit</em></span><span class="hit-chip hit-yes" title="labels Aspirin/Warfarin/Ibuprofen"><code>drug_labels</code> <em>hit</em></span><span class="hit-chip hit-yes" title="vintage brass microscope"><code>microscope</code> <em>hit</em></span><span class="hit-chip hit-no" title="monstera plant with one yellow leaf"><code>monstera</code> <em>miss</em></span><span class="hit-chip hit-yes" title="volumetric light / god-rays through glass"><code>volumetric_light</code> <em>hit</em></span><span class="hit-chip hit-yes" title="teal-and-amber color grade"><code>teal_amber_grade</code> <em>hit</em></span><span class="hit-chip hit-yes" title="photoreal mixed with holographic UI"><code>photoreal_hologram_mix</code> <em>hit</em></span></div>
       </article>
+      <article class="vision-card reveal" id="recon-claude-sonnet-5">
+        <header class="vision-card-head">
+          <div>
+            <span class="rank">#13</span>
+            <h3>Sonnet 5</h3>
+            <p class="mono-id">claude-sonnet-5</p>
+          </div>
+          <div class="score-pill score-mid">63</div>
+        </header>
+        <p class="vision-card-meta">score <strong>63</strong> · hit rate <strong>78.6%</strong> · hits <strong>22/28</strong></p>
+        <h4>Image from this prompt (nano-banana-2)</h4>
+        
+        <figure class="recon-gen-figure">
+          <button type="button" class="img-zoom" data-full="data/vision/recon_images/claude-sonnet-5.web.jpg" data-caption="Sonnet 5 · nano-banana-2 · score 63" aria-label="Enlarge image for Sonnet 5">
+            <img src="data/vision/recon_images/claude-sonnet-5.web.jpg" alt="nano-banana-2 render of Sonnet 5 reconstructed prompt" loading="lazy" />
+            <span class="img-zoom-hint">Click to enlarge</span>
+          </button>
+          <figcaption>
+            Rendered with <code>nano-banana-2</code> from this model&rsquo;s reconstructed prompt
+            · <a href="#recon-claude-sonnet-5" class="jump-card">card</a>
+          </figcaption>
+        </figure>
+        <h4>Reconstructed prompt</h4>
+        <pre class="prompt-block">A cinematic 3D-rendered pharmaceutical laboratory scene at night, blending noir-tech and cyberpunk aesthetics. Center foreground: a glowing translucent teal-and-gold DNA double helix model floats above a brushed steel table, illuminated from within. Left background: a large holographic glass display panel with a cyan neon border reads &quot;EvidenceGrade AI&quot; in bold white text, below it &quot;5-tier grade&quot; with colored bars labeled A (green), B (teal-blue), C (yellow), D (orange), F (red/pink); beside the tiers a line graph titled &quot;Citation Confidence 2019-2026&quot; shows an upward trending cyan line on a dark grid background. Behind the DNA model, wooden shelves hold labeled amber medicine bottles reading &quot;Aspirin,&quot; &quot;Warfarin,&quot; and &quot;Ibuprofen,&quot; alongside a brass vintage microscope, stacked binders, and a potted monstera plant with large green leaves. Overhead, several industrial adjustable brass desk lamps with warm yellow bulbs and one green-shaded lamp cast warm pools of light across the room, contrasting with cool blue ambient shadows. Foreground table holds an open spiral-bound leather notebook with handwritten text &quot;CYP3A4 interaction risk&quot; and additional illegible cursive notes, a fountain pen resting beside it, and a marbled ceramic coffee cup with a teal lid on a matching saucer to the right. Far right: a tall arched window reveals a rainy nighttime cityscape with vibrant pink, red, and cyan neon signs bearing unreadable Chinese characters reflecting off wet glass; a black cat sits on the windowsill beside a furled red umbrella hooked on the frame. Overall mood is moody, atmospheric, and hyper-detailed, with a cool blue-teal color grade accented by warm lamp light and neon glow, photorealistic materials (brushed metal, glass, leather, brass), shallow depth of field, and a high-tech noir sci-fi advertisement style.</pre>
+        <h4>Checklist hits</h4>
+        <div class="hit-grid"><span class="hit-chip hit-yes" title="pharmaceutical / research laboratory setting"><code>lab_setting</code> <em>hit</em></span><span class="hit-chip hit-no" title="twilight or dusk lighting"><code>twilight</code> <em>miss</em></span><span class="hit-chip hit-yes" title="central floating molecular / double-helix model"><code>molecule_center</code> <em>hit</em></span><span class="hit-chip hit-yes" title="teal/cyan glass or glowing cyan bonds"><code>teal_glass</code> <em>hit</em></span><span class="hit-chip hit-no" title="amber atom nodes or warm accent nodes"><code>amber_nodes</code> <em>miss</em></span><span class="hit-chip hit-yes" title="holographic dashboard or wall display"><code>holographic_dashboard</code> <em>hit</em></span><span class="hit-chip hit-yes" title="title text EvidenceGrade AI (or close)"><code>evidencegrade_title</code> <em>hit</em></span><span class="hit-chip hit-yes" title="5-tier grade ladder A-F with colors"><code>grade_ladder</code> <em>hit</em></span><span class="hit-chip hit-yes" title="chart about citation confidence over years"><code>citation_chart</code> <em>hit</em></span><span class="hit-chip hit-yes" title="large arched window"><code>arched_window</code> <em>hit</em></span><span class="hit-chip hit-yes" title="rainy city / neo-Tokyo street outside"><code>rainy_city</code> <em>hit</em></span><span class="hit-chip hit-no" title="neon kanji or Japanese neon signs"><code>neon_kanji</code> <em>miss</em></span><span class="hit-chip hit-yes" title="red umbrella"><code>red_umbrella</code> <em>hit</em></span><span class="hit-chip hit-yes" title="black cat silhouette"><code>black_cat</code> <em>hit</em></span><span class="hit-chip hit-yes" title="open leather notebook"><code>notebook</code> <em>hit</em></span><span class="hit-chip hit-yes" title="handwritten CYP3A4 interaction risk note"><code>cyp3a4_note</code> <em>hit</em></span><span class="hit-chip hit-yes" title="fountain pen"><code>fountain_pen</code> <em>hit</em></span><span class="hit-chip hit-yes" title="ceramic coffee cup with teal lid"><code>coffee_cup</code> <em>hit</em></span><span class="hit-chip hit-no" title="cracked porcelain saucer"><code>cracked_saucer</code> <em>miss</em></span><span class="hit-chip hit-yes" title="brass articulated ceiling lamps"><code>brass_lamps</code> <em>hit</em></span><span class="hit-chip hit-yes" title="one lamp with green glass shade"><code>green_shade</code> <em>hit</em></span><span class="hit-chip hit-yes" title="amber reagent bottles"><code>reagent_bottles</code> <em>hit</em></span><span class="hit-chip hit-yes" title="labels Aspirin/Warfarin/Ibuprofen"><code>drug_labels</code> <em>hit</em></span><span class="hit-chip hit-yes" title="vintage brass microscope"><code>microscope</code> <em>hit</em></span><span class="hit-chip hit-no" title="monstera plant with one yellow leaf"><code>monstera</code> <em>miss</em></span><span class="hit-chip hit-no" title="volumetric light / god-rays through glass"><code>volumetric_light</code> <em>miss</em></span><span class="hit-chip hit-yes" title="teal-and-amber color grade"><code>teal_amber_grade</code> <em>hit</em></span><span class="hit-chip hit-yes" title="photoreal mixed with holographic UI"><code>photoreal_hologram_mix</code> <em>hit</em></span></div>
+      </article>
       <article class="vision-card reveal" id="recon-kimi-k3">
         <header class="vision-card-head">
           <div>
-            <span class="rank">#09</span>
+            <span class="rank">#14</span>
             <h3>Kimi K3</h3>
             <p class="mono-id">kimi-k3</p>
           </div>
@@ -497,7 +701,7 @@ Style: photorealistic octane/unreal-engine product-visualization render, sci-fi 
       <article class="vision-card reveal" id="recon-claude-opus-4-8">
         <header class="vision-card-head">
           <div>
-            <span class="rank">#10</span>
+            <span class="rank">#15</span>
             <h3>Opus 4.8</h3>
             <p class="mono-id">claude-opus-4-8</p>
           </div>
@@ -529,10 +733,105 @@ Moody atmospheric lighting, teal and amber color grade, volumetric glow, shallow
         <h4>Checklist hits</h4>
         <div class="hit-grid"><span class="hit-chip hit-yes" title="pharmaceutical / research laboratory setting"><code>lab_setting</code> <em>hit</em></span><span class="hit-chip hit-no" title="twilight or dusk lighting"><code>twilight</code> <em>miss</em></span><span class="hit-chip hit-yes" title="central floating molecular / double-helix model"><code>molecule_center</code> <em>hit</em></span><span class="hit-chip hit-yes" title="teal/cyan glass or glowing cyan bonds"><code>teal_glass</code> <em>hit</em></span><span class="hit-chip hit-no" title="amber atom nodes or warm accent nodes"><code>amber_nodes</code> <em>miss</em></span><span class="hit-chip hit-yes" title="holographic dashboard or wall display"><code>holographic_dashboard</code> <em>hit</em></span><span class="hit-chip hit-yes" title="title text EvidenceGrade AI (or close)"><code>evidencegrade_title</code> <em>hit</em></span><span class="hit-chip hit-yes" title="5-tier grade ladder A-F with colors"><code>grade_ladder</code> <em>hit</em></span><span class="hit-chip hit-yes" title="chart about citation confidence over years"><code>citation_chart</code> <em>hit</em></span><span class="hit-chip hit-yes" title="large arched window"><code>arched_window</code> <em>hit</em></span><span class="hit-chip hit-yes" title="rainy city / neo-Tokyo street outside"><code>rainy_city</code> <em>hit</em></span><span class="hit-chip hit-yes" title="neon kanji or Japanese neon signs"><code>neon_kanji</code> <em>hit</em></span><span class="hit-chip hit-yes" title="red umbrella"><code>red_umbrella</code> <em>hit</em></span><span class="hit-chip hit-yes" title="black cat silhouette"><code>black_cat</code> <em>hit</em></span><span class="hit-chip hit-no" title="open leather notebook"><code>notebook</code> <em>miss</em></span><span class="hit-chip hit-yes" title="handwritten CYP3A4 interaction risk note"><code>cyp3a4_note</code> <em>hit</em></span><span class="hit-chip hit-yes" title="fountain pen"><code>fountain_pen</code> <em>hit</em></span><span class="hit-chip hit-no" title="ceramic coffee cup with teal lid"><code>coffee_cup</code> <em>miss</em></span><span class="hit-chip hit-yes" title="cracked porcelain saucer"><code>cracked_saucer</code> <em>hit</em></span><span class="hit-chip hit-no" title="brass articulated ceiling lamps"><code>brass_lamps</code> <em>miss</em></span><span class="hit-chip hit-yes" title="one lamp with green glass shade"><code>green_shade</code> <em>hit</em></span><span class="hit-chip hit-yes" title="amber reagent bottles"><code>reagent_bottles</code> <em>hit</em></span><span class="hit-chip hit-yes" title="labels Aspirin/Warfarin/Ibuprofen"><code>drug_labels</code> <em>hit</em></span><span class="hit-chip hit-yes" title="vintage brass microscope"><code>microscope</code> <em>hit</em></span><span class="hit-chip hit-no" title="monstera plant with one yellow leaf"><code>monstera</code> <em>miss</em></span><span class="hit-chip hit-yes" title="volumetric light / god-rays through glass"><code>volumetric_light</code> <em>hit</em></span><span class="hit-chip hit-yes" title="teal-and-amber color grade"><code>teal_amber_grade</code> <em>hit</em></span><span class="hit-chip hit-yes" title="photoreal mixed with holographic UI"><code>photoreal_hologram_mix</code> <em>hit</em></span></div>
       </article>
+      <article class="vision-card reveal" id="recon-gemini-3-7-flash">
+        <header class="vision-card-head">
+          <div>
+            <span class="rank">#16</span>
+            <h3>Gemini 3.7 Flash</h3>
+            <p class="mono-id">gemini-3-7-flash</p>
+          </div>
+          <div class="score-pill score-mid">54</div>
+        </header>
+        <p class="vision-card-meta">score <strong>54</strong> · hit rate <strong>60.7%</strong> · hits <strong>17/28</strong></p>
+        <h4>Image from this prompt (nano-banana-2)</h4>
+        
+        <figure class="recon-gen-figure">
+          <button type="button" class="img-zoom" data-full="data/vision/recon_images/gemini-3-7-flash.web.jpg" data-caption="Gemini 3.7 Flash · nano-banana-2 · score 54" aria-label="Enlarge image for Gemini 3.7 Flash">
+            <img src="data/vision/recon_images/gemini-3-7-flash.web.jpg" alt="nano-banana-2 render of Gemini 3.7 Flash reconstructed prompt" loading="lazy" />
+            <span class="img-zoom-hint">Click to enlarge</span>
+          </button>
+          <figcaption>
+            Rendered with <code>nano-banana-2</code> from this model&rsquo;s reconstructed prompt
+            · <a href="#recon-gemini-3-7-flash" class="jump-card">card</a>
+          </figcaption>
+        </figure>
+        <h4>Reconstructed prompt</h4>
+        <pre class="prompt-block">A cinematic photo of a cozy modern laboratory desk setup at night. In the center, a translucent glowing cyan and gold DNA double-helix floats above a brushed metal tabletop. 
+
+To the left, a bright cyan holographic HUD display reads &quot;EvidenceGrade AI&quot; with a &quot;5-tier grade&quot; color chart showing &quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;F&quot; alongside a line chart titled &quot;Citation Confidence 2019-2026&quot;. On the desk foreground lies an open leather-bound journal with a fountain pen and handwritten notes titled &quot;CYP3A4 interaction risk&quot;, next to a ceramic travel coffee cup on a saucer.
+
+In the background, shelves hold amber apothecary jars labeled &quot;Aspirin&quot;, &quot;Warfarin&quot;, and &quot;Ibuprofen&quot;, a vintage brass microscope, and a potted monstera plant under warm vintage pendant lamps. To the right, a large arched window reveals a rainy city street illuminated by vibrant neon signs, with a black cat and a red umbrella resting on the windowsill. Photorealistic, warm and cool contrasting lighting, 8k, highly detailed.</pre>
+        <h4>Checklist hits</h4>
+        <div class="hit-grid"><span class="hit-chip hit-yes" title="pharmaceutical / research laboratory setting"><code>lab_setting</code> <em>hit</em></span><span class="hit-chip hit-no" title="twilight or dusk lighting"><code>twilight</code> <em>miss</em></span><span class="hit-chip hit-yes" title="central floating molecular / double-helix model"><code>molecule_center</code> <em>hit</em></span><span class="hit-chip hit-yes" title="teal/cyan glass or glowing cyan bonds"><code>teal_glass</code> <em>hit</em></span><span class="hit-chip hit-no" title="amber atom nodes or warm accent nodes"><code>amber_nodes</code> <em>miss</em></span><span class="hit-chip hit-yes" title="holographic dashboard or wall display"><code>holographic_dashboard</code> <em>hit</em></span><span class="hit-chip hit-yes" title="title text EvidenceGrade AI (or close)"><code>evidencegrade_title</code> <em>hit</em></span><span class="hit-chip hit-yes" title="5-tier grade ladder A-F with colors"><code>grade_ladder</code> <em>hit</em></span><span class="hit-chip hit-yes" title="chart about citation confidence over years"><code>citation_chart</code> <em>hit</em></span><span class="hit-chip hit-yes" title="large arched window"><code>arched_window</code> <em>hit</em></span><span class="hit-chip hit-yes" title="rainy city / neo-Tokyo street outside"><code>rainy_city</code> <em>hit</em></span><span class="hit-chip hit-no" title="neon kanji or Japanese neon signs"><code>neon_kanji</code> <em>miss</em></span><span class="hit-chip hit-yes" title="red umbrella"><code>red_umbrella</code> <em>hit</em></span><span class="hit-chip hit-yes" title="black cat silhouette"><code>black_cat</code> <em>hit</em></span><span class="hit-chip hit-yes" title="open leather notebook"><code>notebook</code> <em>hit</em></span><span class="hit-chip hit-yes" title="handwritten CYP3A4 interaction risk note"><code>cyp3a4_note</code> <em>hit</em></span><span class="hit-chip hit-yes" title="fountain pen"><code>fountain_pen</code> <em>hit</em></span><span class="hit-chip hit-no" title="ceramic coffee cup with teal lid"><code>coffee_cup</code> <em>miss</em></span><span class="hit-chip hit-no" title="cracked porcelain saucer"><code>cracked_saucer</code> <em>miss</em></span><span class="hit-chip hit-no" title="brass articulated ceiling lamps"><code>brass_lamps</code> <em>miss</em></span><span class="hit-chip hit-no" title="one lamp with green glass shade"><code>green_shade</code> <em>miss</em></span><span class="hit-chip hit-no" title="amber reagent bottles"><code>reagent_bottles</code> <em>miss</em></span><span class="hit-chip hit-yes" title="labels Aspirin/Warfarin/Ibuprofen"><code>drug_labels</code> <em>hit</em></span><span class="hit-chip hit-yes" title="vintage brass microscope"><code>microscope</code> <em>hit</em></span><span class="hit-chip hit-no" title="monstera plant with one yellow leaf"><code>monstera</code> <em>miss</em></span><span class="hit-chip hit-no" title="volumetric light / god-rays through glass"><code>volumetric_light</code> <em>miss</em></span><span class="hit-chip hit-no" title="teal-and-amber color grade"><code>teal_amber_grade</code> <em>miss</em></span><span class="hit-chip hit-yes" title="photoreal mixed with holographic UI"><code>photoreal_hologram_mix</code> <em>hit</em></span></div>
+      </article>
+      <article class="vision-card reveal" id="recon-grok-4-6">
+        <header class="vision-card-head">
+          <div>
+            <span class="rank">#17</span>
+            <h3>Grok 4.6</h3>
+            <p class="mono-id">grok-4-6</p>
+          </div>
+          <div class="score-pill score-mid">54</div>
+        </header>
+        <p class="vision-card-meta">score <strong>54</strong> · hit rate <strong>75.0%</strong> · hits <strong>21/28</strong></p>
+        <h4>Image from this prompt (nano-banana-2)</h4>
+        
+        <figure class="recon-gen-figure">
+          <button type="button" class="img-zoom" data-full="data/vision/recon_images/grok-4-6.web.jpg" data-caption="Grok 4.6 · nano-banana-2 · score 54" aria-label="Enlarge image for Grok 4.6">
+            <img src="data/vision/recon_images/grok-4-6.web.jpg" alt="nano-banana-2 render of Grok 4.6 reconstructed prompt" loading="lazy" />
+            <span class="img-zoom-hint">Click to enlarge</span>
+          </button>
+          <figcaption>
+            Rendered with <code>nano-banana-2</code> from this model&rsquo;s reconstructed prompt
+            · <a href="#recon-grok-4-6" class="jump-card">card</a>
+          </figcaption>
+        </figure>
+        <h4>Reconstructed prompt</h4>
+        <pre class="prompt-block">Cinematic photorealistic night laboratory interior, wide shot. Left: large floating holographic HUD titled “EvidenceGrade AI” with a 5-tier grade legend (A green, B teal, C gold, D orange, F magenta) and a glowing cyan line chart labeled “Citation Confidence 2019-2026” trending upward. Center: a large translucent teal DNA double helix with gold spherical nodes hovering above a brushed stainless-steel workbench. Background: white shelves of amber glass medicine bottles labeled Aspirin, Warfarin, Ibuprofen, white binders, test tubes, a microscope on a metal counter, and a green monstera plant. Right: tall rain-streaked arched window looking onto a wet neon-lit Asian city street at night with pink Chinese neon signs; a black cat sits on the windowsill beside a closed red umbrella. Foreground table: open leather notebook with handwritten notes including “CYP3A4 interaction risk,” a fountain pen, and a cracked white ceramic cup with teal lid on a saucer. Overhead industrial brass pendant lamps, one green glass shade. Moody cinematic lighting, warm gold mixed with cool cyan hologram glow, rainy night atmosphere, highly detailed, 8k.</pre>
+        <h4>Checklist hits</h4>
+        <div class="hit-grid"><span class="hit-chip hit-yes" title="pharmaceutical / research laboratory setting"><code>lab_setting</code> <em>hit</em></span><span class="hit-chip hit-no" title="twilight or dusk lighting"><code>twilight</code> <em>miss</em></span><span class="hit-chip hit-yes" title="central floating molecular / double-helix model"><code>molecule_center</code> <em>hit</em></span><span class="hit-chip hit-yes" title="teal/cyan glass or glowing cyan bonds"><code>teal_glass</code> <em>hit</em></span><span class="hit-chip hit-yes" title="amber atom nodes or warm accent nodes"><code>amber_nodes</code> <em>hit</em></span><span class="hit-chip hit-yes" title="holographic dashboard or wall display"><code>holographic_dashboard</code> <em>hit</em></span><span class="hit-chip hit-yes" title="title text EvidenceGrade AI (or close)"><code>evidencegrade_title</code> <em>hit</em></span><span class="hit-chip hit-yes" title="5-tier grade ladder A-F with colors"><code>grade_ladder</code> <em>hit</em></span><span class="hit-chip hit-yes" title="chart about citation confidence over years"><code>citation_chart</code> <em>hit</em></span><span class="hit-chip hit-yes" title="large arched window"><code>arched_window</code> <em>hit</em></span><span class="hit-chip hit-yes" title="rainy city / neo-Tokyo street outside"><code>rainy_city</code> <em>hit</em></span><span class="hit-chip hit-no" title="neon kanji or Japanese neon signs"><code>neon_kanji</code> <em>miss</em></span><span class="hit-chip hit-yes" title="red umbrella"><code>red_umbrella</code> <em>hit</em></span><span class="hit-chip hit-yes" title="black cat silhouette"><code>black_cat</code> <em>hit</em></span><span class="hit-chip hit-yes" title="open leather notebook"><code>notebook</code> <em>hit</em></span><span class="hit-chip hit-yes" title="handwritten CYP3A4 interaction risk note"><code>cyp3a4_note</code> <em>hit</em></span><span class="hit-chip hit-yes" title="fountain pen"><code>fountain_pen</code> <em>hit</em></span><span class="hit-chip hit-yes" title="ceramic coffee cup with teal lid"><code>coffee_cup</code> <em>hit</em></span><span class="hit-chip hit-no" title="cracked porcelain saucer"><code>cracked_saucer</code> <em>miss</em></span><span class="hit-chip hit-no" title="brass articulated ceiling lamps"><code>brass_lamps</code> <em>miss</em></span><span class="hit-chip hit-yes" title="one lamp with green glass shade"><code>green_shade</code> <em>hit</em></span><span class="hit-chip hit-yes" title="amber reagent bottles"><code>reagent_bottles</code> <em>hit</em></span><span class="hit-chip hit-yes" title="labels Aspirin/Warfarin/Ibuprofen"><code>drug_labels</code> <em>hit</em></span><span class="hit-chip hit-no" title="vintage brass microscope"><code>microscope</code> <em>miss</em></span><span class="hit-chip hit-no" title="monstera plant with one yellow leaf"><code>monstera</code> <em>miss</em></span><span class="hit-chip hit-no" title="volumetric light / god-rays through glass"><code>volumetric_light</code> <em>miss</em></span><span class="hit-chip hit-yes" title="teal-and-amber color grade"><code>teal_amber_grade</code> <em>hit</em></span><span class="hit-chip hit-yes" title="photoreal mixed with holographic UI"><code>photoreal_hologram_mix</code> <em>hit</em></span></div>
+      </article>
+      <article class="vision-card reveal" id="recon-gemini-3-6-flash">
+        <header class="vision-card-head">
+          <div>
+            <span class="rank">#18</span>
+            <h3>Gemini 3.6 Flash</h3>
+            <p class="mono-id">gemini-3-6-flash</p>
+          </div>
+          <div class="score-pill score-mid">51</div>
+        </header>
+        <p class="vision-card-meta">score <strong>51</strong> · hit rate <strong>60.7%</strong> · hits <strong>17/28</strong></p>
+        <h4>Image from this prompt (nano-banana-2)</h4>
+        
+        <figure class="recon-gen-figure">
+          <button type="button" class="img-zoom" data-full="data/vision/recon_images/gemini-3-6-flash.web.jpg" data-caption="Gemini 3.6 Flash · nano-banana-2 · score 51" aria-label="Enlarge image for Gemini 3.6 Flash">
+            <img src="data/vision/recon_images/gemini-3-6-flash.web.jpg" alt="nano-banana-2 render of Gemini 3.6 Flash reconstructed prompt" loading="lazy" />
+            <span class="img-zoom-hint">Click to enlarge</span>
+          </button>
+          <figcaption>
+            Rendered with <code>nano-banana-2</code> from this model&rsquo;s reconstructed prompt
+            · <a href="#recon-gemini-3-6-flash" class="jump-card">card</a>
+          </figcaption>
+        </figure>
+        <h4>Reconstructed prompt</h4>
+        <pre class="prompt-block">A cinematic photorealistic sci-fi laboratory interior. 
+
+Foreground: An open leather notebook on a metallic table with handwritten text &quot;CYP3A4 interaction risk&quot; and a pen; on the right, a cracked white ceramic coffee cup on a saucer, a red umbrella leaning on the windowsill, and a black cat sitting looking out the window.
+
+Center: A translucent, glowing cyan and gold 3D DNA double helix floating in mid-air above the desk.
+
+Left: A glowing semi-transparent holographic HUD screen displaying text &quot;EvidenceGrade AI&quot;, a color-coded &quot;5-tier grade&quot; chart (A, B, C, D, F), and a line graph titled &quot;Citation Confidence 2019-2026&quot;.
+
+Background: Lab shelves with glass bottles labeled &quot;Aspirin&quot;, &quot;Warfarin&quot;, &quot;Ibuprofen&quot;, a brass microscope, and a potted monstera plant. Warm overhead brass industrial lamps. 
+
+Right: A large arched rainy window overlooking a dark, neon-lit cyberpunk city street with foreign neon signage at night. Soft volumetric lighting, atmospheric cyan and amber hues, high detail 3D render style.</pre>
+        <h4>Checklist hits</h4>
+        <div class="hit-grid"><span class="hit-chip hit-yes" title="pharmaceutical / research laboratory setting"><code>lab_setting</code> <em>hit</em></span><span class="hit-chip hit-no" title="twilight or dusk lighting"><code>twilight</code> <em>miss</em></span><span class="hit-chip hit-yes" title="central floating molecular / double-helix model"><code>molecule_center</code> <em>hit</em></span><span class="hit-chip hit-yes" title="teal/cyan glass or glowing cyan bonds"><code>teal_glass</code> <em>hit</em></span><span class="hit-chip hit-no" title="amber atom nodes or warm accent nodes"><code>amber_nodes</code> <em>miss</em></span><span class="hit-chip hit-yes" title="holographic dashboard or wall display"><code>holographic_dashboard</code> <em>hit</em></span><span class="hit-chip hit-yes" title="title text EvidenceGrade AI (or close)"><code>evidencegrade_title</code> <em>hit</em></span><span class="hit-chip hit-yes" title="5-tier grade ladder A-F with colors"><code>grade_ladder</code> <em>hit</em></span><span class="hit-chip hit-yes" title="chart about citation confidence over years"><code>citation_chart</code> <em>hit</em></span><span class="hit-chip hit-yes" title="large arched window"><code>arched_window</code> <em>hit</em></span><span class="hit-chip hit-yes" title="rainy city / neo-Tokyo street outside"><code>rainy_city</code> <em>hit</em></span><span class="hit-chip hit-no" title="neon kanji or Japanese neon signs"><code>neon_kanji</code> <em>miss</em></span><span class="hit-chip hit-yes" title="red umbrella"><code>red_umbrella</code> <em>hit</em></span><span class="hit-chip hit-yes" title="black cat silhouette"><code>black_cat</code> <em>hit</em></span><span class="hit-chip hit-yes" title="open leather notebook"><code>notebook</code> <em>hit</em></span><span class="hit-chip hit-yes" title="handwritten CYP3A4 interaction risk note"><code>cyp3a4_note</code> <em>hit</em></span><span class="hit-chip hit-no" title="fountain pen"><code>fountain_pen</code> <em>miss</em></span><span class="hit-chip hit-no" title="ceramic coffee cup with teal lid"><code>coffee_cup</code> <em>miss</em></span><span class="hit-chip hit-no" title="cracked porcelain saucer"><code>cracked_saucer</code> <em>miss</em></span><span class="hit-chip hit-no" title="brass articulated ceiling lamps"><code>brass_lamps</code> <em>miss</em></span><span class="hit-chip hit-no" title="one lamp with green glass shade"><code>green_shade</code> <em>miss</em></span><span class="hit-chip hit-no" title="amber reagent bottles"><code>reagent_bottles</code> <em>miss</em></span><span class="hit-chip hit-yes" title="labels Aspirin/Warfarin/Ibuprofen"><code>drug_labels</code> <em>hit</em></span><span class="hit-chip hit-no" title="vintage brass microscope"><code>microscope</code> <em>miss</em></span><span class="hit-chip hit-no" title="monstera plant with one yellow leaf"><code>monstera</code> <em>miss</em></span><span class="hit-chip hit-yes" title="volumetric light / god-rays through glass"><code>volumetric_light</code> <em>hit</em></span><span class="hit-chip hit-yes" title="teal-and-amber color grade"><code>teal_amber_grade</code> <em>hit</em></span><span class="hit-chip hit-yes" title="photoreal mixed with holographic UI"><code>photoreal_hologram_mix</code> <em>hit</em></span></div>
+      </article>
       <article class="vision-card reveal" id="recon-openai-gpt-56-terra-pro">
         <header class="vision-card-head">
           <div>
-            <span class="rank">#11</span>
+            <span class="rank">#19</span>
             <h3>GPT-5.6 Terra Pro</h3>
             <p class="mono-id">openai-gpt-56-terra-pro</p>
           </div>
@@ -556,10 +855,37 @@ Moody atmospheric lighting, teal and amber color grade, volumetric glow, shallow
         <h4>Checklist hits</h4>
         <div class="hit-grid"><span class="hit-chip hit-yes" title="pharmaceutical / research laboratory setting"><code>lab_setting</code> <em>hit</em></span><span class="hit-chip hit-no" title="twilight or dusk lighting"><code>twilight</code> <em>miss</em></span><span class="hit-chip hit-yes" title="central floating molecular / double-helix model"><code>molecule_center</code> <em>hit</em></span><span class="hit-chip hit-yes" title="teal/cyan glass or glowing cyan bonds"><code>teal_glass</code> <em>hit</em></span><span class="hit-chip hit-yes" title="amber atom nodes or warm accent nodes"><code>amber_nodes</code> <em>hit</em></span><span class="hit-chip hit-yes" title="holographic dashboard or wall display"><code>holographic_dashboard</code> <em>hit</em></span><span class="hit-chip hit-yes" title="title text EvidenceGrade AI (or close)"><code>evidencegrade_title</code> <em>hit</em></span><span class="hit-chip hit-yes" title="5-tier grade ladder A-F with colors"><code>grade_ladder</code> <em>hit</em></span><span class="hit-chip hit-yes" title="chart about citation confidence over years"><code>citation_chart</code> <em>hit</em></span><span class="hit-chip hit-yes" title="large arched window"><code>arched_window</code> <em>hit</em></span><span class="hit-chip hit-yes" title="rainy city / neo-Tokyo street outside"><code>rainy_city</code> <em>hit</em></span><span class="hit-chip hit-no" title="neon kanji or Japanese neon signs"><code>neon_kanji</code> <em>miss</em></span><span class="hit-chip hit-yes" title="red umbrella"><code>red_umbrella</code> <em>hit</em></span><span class="hit-chip hit-yes" title="black cat silhouette"><code>black_cat</code> <em>hit</em></span><span class="hit-chip hit-no" title="open leather notebook"><code>notebook</code> <em>miss</em></span><span class="hit-chip hit-no" title="handwritten CYP3A4 interaction risk note"><code>cyp3a4_note</code> <em>miss</em></span><span class="hit-chip hit-no" title="fountain pen"><code>fountain_pen</code> <em>miss</em></span><span class="hit-chip hit-yes" title="ceramic coffee cup with teal lid"><code>coffee_cup</code> <em>hit</em></span><span class="hit-chip hit-no" title="cracked porcelain saucer"><code>cracked_saucer</code> <em>miss</em></span><span class="hit-chip hit-yes" title="brass articulated ceiling lamps"><code>brass_lamps</code> <em>hit</em></span><span class="hit-chip hit-no" title="one lamp with green glass shade"><code>green_shade</code> <em>miss</em></span><span class="hit-chip hit-yes" title="amber reagent bottles"><code>reagent_bottles</code> <em>hit</em></span><span class="hit-chip hit-yes" title="labels Aspirin/Warfarin/Ibuprofen"><code>drug_labels</code> <em>hit</em></span><span class="hit-chip hit-no" title="vintage brass microscope"><code>microscope</code> <em>miss</em></span><span class="hit-chip hit-no" title="monstera plant with one yellow leaf"><code>monstera</code> <em>miss</em></span><span class="hit-chip hit-no" title="volumetric light / god-rays through glass"><code>volumetric_light</code> <em>miss</em></span><span class="hit-chip hit-yes" title="teal-and-amber color grade"><code>teal_amber_grade</code> <em>hit</em></span><span class="hit-chip hit-yes" title="photoreal mixed with holographic UI"><code>photoreal_hologram_mix</code> <em>hit</em></span></div>
       </article>
+      <article class="vision-card reveal" id="recon-qwen-3-7-max">
+        <header class="vision-card-head">
+          <div>
+            <span class="rank">#20</span>
+            <h3>Qwen 3.7 Max</h3>
+            <p class="mono-id">qwen-3-7-max</p>
+          </div>
+          <div class="score-pill score-low">42</div>
+        </header>
+        <p class="vision-card-meta">score <strong>42</strong> · hit rate <strong>53.6%</strong> · hits <strong>15/28</strong></p>
+        <h4>Image from this prompt (nano-banana-2)</h4>
+        
+        <figure class="recon-gen-figure">
+          <button type="button" class="img-zoom" data-full="data/vision/recon_images/qwen-3-7-max.web.jpg" data-caption="Qwen 3.7 Max · nano-banana-2 · score 42" aria-label="Enlarge image for Qwen 3.7 Max">
+            <img src="data/vision/recon_images/qwen-3-7-max.web.jpg" alt="nano-banana-2 render of Qwen 3.7 Max reconstructed prompt" loading="lazy" />
+            <span class="img-zoom-hint">Click to enlarge</span>
+          </button>
+          <figcaption>
+            Rendered with <code>nano-banana-2</code> from this model&rsquo;s reconstructed prompt
+            · <a href="#recon-qwen-3-7-max" class="jump-card">card</a>
+          </figcaption>
+        </figure>
+        <h4>Reconstructed prompt</h4>
+        <pre class="prompt-block">A highly detailed, photorealistic 3D render of a cozy, dimly lit futuristic study desk blending vintage apothecary and cyberpunk aesthetics. On the left, a large glowing holographic screen displays &quot;EvidenceGrade AI&quot; with a &quot;5-tier grade&quot; color-coded bar chart (A in green, B in teal, C in yellow, D in orange, F in red) and a line graph titled &quot;Citation Confidence 2019-2026&quot; showing an upward trend. In the center foreground, an open leather-bound notebook on a wooden desk shows handwritten text &quot;CYP3A4 interaction risk&quot; next to a pen, with a white coffee cup and teal lid on a saucer to the right. Floating above the center of the desk is a glowing, translucent cyan and gold 3D DNA double helix structure. The background features shelves with brown apothecary jars labeled &quot;Aspirin&quot;, &quot;Warfarin&quot;, and &quot;Ibuprofen&quot;, a vintage brass microscope, and a potted monstera plant. Overhead, industrial brass adjustable lamps cast warm and green light. On the right, a large arched window reveals a rainy, neon-lit city street at night with pink and blue neon signs featuring Asian characters. A black cat silhouette sits on the windowsill next to a folded red umbrella. Cinematic lighting, moody atmosphere, octane render, Unreal Engine 5, 8k resolution, highly detailed.</pre>
+        <h4>Checklist hits</h4>
+        <div class="hit-grid"><span class="hit-chip hit-no" title="pharmaceutical / research laboratory setting"><code>lab_setting</code> <em>miss</em></span><span class="hit-chip hit-no" title="twilight or dusk lighting"><code>twilight</code> <em>miss</em></span><span class="hit-chip hit-yes" title="central floating molecular / double-helix model"><code>molecule_center</code> <em>hit</em></span><span class="hit-chip hit-no" title="teal/cyan glass or glowing cyan bonds"><code>teal_glass</code> <em>miss</em></span><span class="hit-chip hit-no" title="amber atom nodes or warm accent nodes"><code>amber_nodes</code> <em>miss</em></span><span class="hit-chip hit-yes" title="holographic dashboard or wall display"><code>holographic_dashboard</code> <em>hit</em></span><span class="hit-chip hit-yes" title="title text EvidenceGrade AI (or close)"><code>evidencegrade_title</code> <em>hit</em></span><span class="hit-chip hit-yes" title="5-tier grade ladder A-F with colors"><code>grade_ladder</code> <em>hit</em></span><span class="hit-chip hit-yes" title="chart about citation confidence over years"><code>citation_chart</code> <em>hit</em></span><span class="hit-chip hit-yes" title="large arched window"><code>arched_window</code> <em>hit</em></span><span class="hit-chip hit-yes" title="rainy city / neo-Tokyo street outside"><code>rainy_city</code> <em>hit</em></span><span class="hit-chip hit-no" title="neon kanji or Japanese neon signs"><code>neon_kanji</code> <em>miss</em></span><span class="hit-chip hit-yes" title="red umbrella"><code>red_umbrella</code> <em>hit</em></span><span class="hit-chip hit-yes" title="black cat silhouette"><code>black_cat</code> <em>hit</em></span><span class="hit-chip hit-yes" title="open leather notebook"><code>notebook</code> <em>hit</em></span><span class="hit-chip hit-yes" title="handwritten CYP3A4 interaction risk note"><code>cyp3a4_note</code> <em>hit</em></span><span class="hit-chip hit-no" title="fountain pen"><code>fountain_pen</code> <em>miss</em></span><span class="hit-chip hit-no" title="ceramic coffee cup with teal lid"><code>coffee_cup</code> <em>miss</em></span><span class="hit-chip hit-no" title="cracked porcelain saucer"><code>cracked_saucer</code> <em>miss</em></span><span class="hit-chip hit-yes" title="brass articulated ceiling lamps"><code>brass_lamps</code> <em>hit</em></span><span class="hit-chip hit-no" title="one lamp with green glass shade"><code>green_shade</code> <em>miss</em></span><span class="hit-chip hit-no" title="amber reagent bottles"><code>reagent_bottles</code> <em>miss</em></span><span class="hit-chip hit-yes" title="labels Aspirin/Warfarin/Ibuprofen"><code>drug_labels</code> <em>hit</em></span><span class="hit-chip hit-yes" title="vintage brass microscope"><code>microscope</code> <em>hit</em></span><span class="hit-chip hit-no" title="monstera plant with one yellow leaf"><code>monstera</code> <em>miss</em></span><span class="hit-chip hit-no" title="volumetric light / god-rays through glass"><code>volumetric_light</code> <em>miss</em></span><span class="hit-chip hit-no" title="teal-and-amber color grade"><code>teal_amber_grade</code> <em>miss</em></span><span class="hit-chip hit-yes" title="photoreal mixed with holographic UI"><code>photoreal_hologram_mix</code> <em>hit</em></span></div>
+      </article>
       <article class="vision-card reveal" id="recon-inkling">
         <header class="vision-card-head">
           <div>
-            <span class="rank">#12</span>
+            <span class="rank">#21</span>
             <h3>Inkling</h3>
             <p class="mono-id">inkling</p>
           </div>
@@ -586,7 +912,7 @@ Moody atmospheric lighting, teal and amber color grade, volumetric glow, shallow
       <article class="vision-card reveal" id="recon-openai-gpt-56-luna-pro">
         <header class="vision-card-head">
           <div>
-            <span class="rank">#13</span>
+            <span class="rank">#22</span>
             <h3>GPT-5.6 Luna Pro</h3>
             <p class="mono-id">openai-gpt-56-luna-pro</p>
           </div>
@@ -613,7 +939,7 @@ Moody atmospheric lighting, teal and amber color grade, volumetric glow, shallow
       <article class="vision-card reveal" id="recon-minimax-m3-preview">
         <header class="vision-card-head">
           <div>
-            <span class="rank">#14</span>
+            <span class="rank">#23</span>
             <h3>MiniMax M3</h3>
             <p class="mono-id">minimax-m3-preview</p>
           </div>
@@ -641,7 +967,7 @@ Moody atmospheric lighting, teal and amber color grade, volumetric glow, shallow
       
     <div class="card vision-note">
       <h3>Not run (no vision)</h3>
-      <ul class="plain-list"><li><code>zai-org-glm-5-2</code> — model does not support vision</li><li><code>deepseek-v4-pro</code> — model does not support vision</li></ul>
+      <ul class="plain-list"><li><code>zai-org-glm-5-2</code> — model does not support vision</li><li><code>deepseek-v4-pro</code> — model does not support vision</li><li><code>deepseek-v4-flash-0731</code> — model does not support vision</li><li><code>kimi-k3-fast-api</code> — vision not available in this run</li><li><code>deepseek-v4-flash-0731-fast</code> — model does not support vision</li><li><code>qwen-3-8-2-4t-a95b</code> — model does not support vision</li><li><code>nvidia-nemotron-3-5-lightning-30b-a3b</code> — model does not support vision</li><li><code>deepseek-v4-flash</code> — model does not support vision</li><li><code>aion-labs-aion-3-0</code> — model does not support vision</li><li><code>aion-labs-aion-3-0-mini</code> — model does not support vision</li><li><code>nvidia-nemotron-3-super-120b-a12b</code> — model does not support vision</li><li><code>qwen3-235b-a22b-thinking-2507</code> — model does not support vision</li><li><code>minimax-m27</code> — model does not support vision</li></ul>
       <p class="muted">These models stay in results.json as <code>status=skipped</code>, not zero-scored.</p>
     </div>
     </div>
@@ -671,10 +997,10 @@ Moody atmospheric lighting, teal and amber color grade, volumetric glow, shallow
 
   <footer class="footer">
     <div class="container">
-      <p>BenchmarkViv Vision · built 2026-07-28 00:54 UTC · <a href="index.html">Leaderboard</a> · <a href="about.html">About</a></p>
+      <p>BenchmarkViv Vision · built 2026-08-14 02:55 UTC · <a href="index.html">Leaderboard</a> · <a href="about.html">About</a></p>
     </div>
   </footer>
 
-  <script src="assets/app.js?v=15"></script>
+  <script src="assets/app.js?v=13"></script>
 </body>
 </html>

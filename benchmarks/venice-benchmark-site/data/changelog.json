@@ -1,9 +1,34 @@
 {
   "schema_version": "1.0.0",
   "site_selector": "data/changelog.json",
-  "generated_at": "2026-08-14T01:10:31.644748+00:00",
+  "generated_at": "2026-08-14T02:55:16.202155+00:00",
   "format": "zhcli",
   "entries": [
+    {
+      "id": "chg-2026-08-14-static-regenerate",
+      "date": "2026-08-14",
+      "time_utc": "2026-08-14T02:55:16.202010+00:00",
+      "category": "site",
+      "summary": "Regenerate all static data assets for the 37-model board: compare, trends, model profiles, leaderboard SVG, vision gallery (23 recon images), CSV, summary",
+      "details": {
+        "regenerated": [
+          "data/chart_snapshot.json (37 models, Opus 4.8 Fast #1 @ 91.1)",
+          "compare.html (37 pickable models)",
+          "trends.html + trends.json (37 series, final point 2026-08-14)",
+          "data/leaderboard_chart.svg (37 models)",
+          "models/*.html (37 profile pages)",
+          "vision.html + data/vision/recon_images/ (23 reconstuctions, 9 new renders)",
+          "data/benchmarkviv-results.csv (261 rows)",
+          "data/summary.json (Opus 4.8 Fast, 37 models)"
+        ],
+        "gif_arena": "STILL STALE — 22 old models; needs full pipeline re-run to add 15 new models",
+        "totals": {
+          "models": 37,
+          "rows": 261
+        },
+        "note": "run_new_tracks.py overwrites reconstructions.json per-run; rebuild_reconstructions.py reconstructs full vision-ok set from results.json"
+      }
+    },
     {
       "id": "chg-2026-08-14-batch-run",
       "date": "2026-08-14",
