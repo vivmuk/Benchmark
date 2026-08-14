@@ -28,4 +28,17 @@ MODELS = [
     {"id": "gemini-3-6-flash",          "display": "Gemini 3.6 Flash"},
     {"id": "grok-4-6",                  "display": "Grok 4.6"},
     {"id": "nvidia-nemotron-3-5-lightning-30b-a3b", "display": "Nemotron 3.5"},
+    # ---- Phase 2: new models ----
+    {"id": "gemini-3-7-flash",              "display": "Gemini 3.7 Flash"},
+    {"id": "qwen-3-7-max",                  "display": "Qwen 3.7 Max"},
+    {"id": "qwen-3-7-plus",                 "display": "Qwen 3.7 Plus"},
+    {"id": "grok-4-20",                     "display": "Grok 4.20"},
+    {"id": "claude-opus-5-fast",            "display": "Opus 5 Fast"},
+    {"id": "claude-opus-4-8-fast",          "display": "Opus 4.8 Fast"},
+    {"id": "deepseek-v4-flash",             "display": "DeepSeek V4 Flash"},
+    {"id": "aion-labs-aion-3-0",           "display": "Aion 3.0"},
+    {"id": "aion-labs-aion-3-0-mini",      "display": "Aion 3.0 Mini"},
+    {"id": "nvidia-nemotron-3-super-120b-a12b", "display": "Nemotron 3 Super"},
+    {"id": "qwen3-235b-a22b-thinking-2507", "display": "Qwen3 235B Thinking"},
+    {"id": "minimax-m27",                   "display": "MiniMax M27"},
 ]

@@ -1,9 +1,25 @@
 {
   "schema_version": "1.0.0",
   "site_selector": "data/changelog.json",
-  "generated_at": "2026-07-28T00:54:53.105518+00:00",
+  "generated_at": "2026-08-14T01:10:31.644748+00:00",
   "format": "zhcli",
   "entries": [
+    {
+      "id": "chg-2026-08-14-batch-run",
+      "date": "2026-08-14",
+      "time_utc": "2026-08-14T01:10:31.644617+00:00",
+      "category": "benchmark",
+      "summary": "Full sweep: complete 7 partial models (value_density + vision), add 12 new models (7 benchmarks each), rescore One-Shot UI with honest heuristic",
+      "details": {
+        "phase1": "Completed value_density + reverse_prompt_vision for 7 partial models (deepseek-v4-flash-0731-fast, qwen-3-8-max, qwen-3-8-2-4t-a95b, claude-sonnet-5, gemini-3-6-flash, grok-4-6, nemotron-3-5)",
+        "phase2": "Added 12 new models: gemini-3-7-flash, qwen-3-7-max, qwen-3-7-plus, grok-4-20, claude-opus-5-fast, claude-opus-4-8-fast, deepseek-v4-flash, aion-labs-aion-3-0, aion-labs-aion-3-0-mini, nvidia-nemotron-3-super-120b-a12b, qwen3-235b-a22b-thinking-2507, minimax-m27",
+        "scorer_fix": "Rewrote One-Shot UI scorer from generous 70-95 baseline to honest 0-100 structure-based scoring",
+        "rescored": "26 old-model one_shot_ui scores corrected using new scorer (no API calls needed)",
+        "total_models": 37,
+        "total_rows": 261,
+        "total_cost_usd": 19.23
+      }
+    },
     {
       "id": "chg-2026-07-27-rejudge-zeros-lightbox",
       "date": "2026-07-27",

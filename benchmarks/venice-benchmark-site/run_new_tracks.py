@@ -12,6 +12,7 @@ Reverse Prompt Vision:
 """
 from __future__ import annotations
 
+import argparse
 import base64
 import json
 import os
@@ -558,6 +559,16 @@ def merge_results(new_rows: list[dict], new_benchmarks: list[dict]) -> dict:
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--model", type=str, action="append", dest="model_ids",
+                        help="Run only specific model(s). Repeatable. Omit to run all.")
+    args = parser.parse_args()
+    selected = [m for m in MODELS if not args.model_ids or m["id"] in args.model_ids]
+    if args.model_ids:
+        missed = set(args.model_ids) - {m["id"] for m in selected}
+        if missed:
+            print(f"WARNING: requested models not in registry: {missed}")
+
     api_key = load_api_key()
     pricing = rb.fetch_pricing(api_key)
     vision_map = vision_capable(api_key)
@@ -615,10 +626,10 @@ def main() -> None:
         },
     ]
 
-    n_models = len(MODELS)
+    n_models = len(selected)
     # ---- Value density ----
     print(f"\n=== Value Density @1K ({n_models} models, max_tokens={VALUE_BUDGET_TOKENS}) ===")
-    for i, model in enumerate(MODELS, 1):
+    for i, model in enumerate(selected, 1):
         mid, disp = model["id"], model["display"]
         print(f"[{i}/{n_models}] {disp} value_density ...", end=" ", flush=True)
         call = call_text(api_key, mid, VALUE_DENSITY["prompt"], VALUE_BUDGET_TOKENS)
@@ -678,7 +689,7 @@ def main() -> None:
     # ---- Reverse prompt vision ----
     print(f"\n=== Reverse-Prompt Vision ({n_models} models, judge={JUDGE_MODEL}) ===")
     reconstructions = []
-    for i, model in enumerate(MODELS, 1):
+    for i, model in enumerate(selected, 1):
         mid, disp = model["id"], model["display"]
         supports = vision_map.get(mid)
         if supports is False:

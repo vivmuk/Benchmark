@@ -78,6 +78,19 @@ FALLBACK_PRICING = {
     "gemini-3-6-flash":        {"input": 1.875, "output": 9.375},
     "grok-4-6":                {"input": 2.27,  "output": 6.80},
     "nvidia-nemotron-3-5-lightning-30b-a3b": {"input": 0.10, "output": 0.25},
+    # ---- Phase 2: new models ----
+    "gemini-3-7-flash":              {"input": 1.875, "output": 9.375},
+    "qwen-3-7-max":                  {"input": 2.50,  "output": 7.50},
+    "qwen-3-7-plus":                 {"input": 2.50,  "output": 7.50},
+    "grok-4-20":                     {"input": 5.00,  "output": 15.00},
+    "claude-opus-5-fast":            {"input": 12.00, "output": 60.00},
+    "claude-opus-4-8-fast":          {"input": 12.00, "output": 60.00},
+    "deepseek-v4-flash":             {"input": 0.15,  "output": 0.30},
+    "aion-labs-aion-3-0":            {"input": 2.00,  "output": 6.00},
+    "aion-labs-aion-3-0-mini":       {"input": 0.50,  "output": 1.50},
+    "nvidia-nemotron-3-super-120b-a12b": {"input": 0.50, "output": 1.50},
+    "qwen3-235b-a22b-thinking-2507": {"input": 3.00,  "output": 9.00},
+    "minimax-m27":                   {"input": 0.50,  "output": 2.00},
 }
 DEFAULT_PRICING = {"input": 5.00, "output": 15.00}
 
@@ -249,22 +262,100 @@ def score_intent_understanding(text: str) -> int:
 
 
 def score_one_shot_ui(text: str) -> int:
-    """Heuristic placeholder score in 70-95 range if it looks like a valid answer."""
-    if not text:
+    """Heuristic score for one-shot HTML generation (0-100).
+
+    Penalizes incomplete/near-empty responses. Rewards UI completeness,
+    not just tag presence. Empty or placeholder-only output scores 0.
+    """
+    if not text or not text.strip():
         return 0
     lower = text.lower()
-    checks = [
-        "<html" in lower or "<!doctype" in lower,
-        "<style" in lower or "css" in lower,
-        "<script" in lower or "javascript" in lower,
-        "button" in lower,
-        "focus" in lower and "score" in lower,
-    ]
-    hits = sum(checks)
-    if hits == 0:
+
+    # Structural completeness (35 points)
+    # A truly complete HTML page has these structural elements
+    has_doctype = "<!doctype" in lower
+    has_html_tag = "<html" in lower
+    has_head = "<head" in lower
+    has_body = "<body" in lower
+    has_closing_html = "</html>" in lower
+
+    structure_score = 0
+    if has_doctype and has_html_tag and has_head and has_body and has_closing_html:
+        structure_score = 35
+    elif has_doctype and has_html_tag and has_body and has_closing_html:
+        structure_score = 25
+    elif has_html_tag and has_body:
+        structure_score = 15
+    elif has_html_tag or has_doctype:
+        structure_score = 5
+
+    # If no HTML tag at all, this isn't generating a UI — score 0
+    if not has_html_tag:
         return 0
-    # Map 1..5 hits onto 70..95.
-    return 70 + round((hits - 1) * (25 / 4))
+
+    # Embedded CSS (15 points) — must have actual CSS rules, not just a <style> tag
+    css_rules_found = 0
+    if "<style" in lower:
+        # Rough heuristic: count CSS rule markers (curly braces)
+        style_start = lower.find("<style")
+        style_section = lower[style_start:lower.find("</style>", style_start)] if "</style>" in lower else lower[style_start:]
+        css_rules_found = style_section.count("{") + style_section.count("@")
+        if css_rules_found >= 3:
+            css_score = 15
+        elif css_rules_found >= 1:
+            css_score = 8
+        else:
+            css_score = 0
+    else:
+        css_score = 0
+
+    # Interactive JS (15 points)
+    js_found = "<script" in lower and "</script>" in lower
+    has_event = any(e in lower for e in ("onclick", "onchange", "oninput", "onsubmit", "addEventListener"))
+    if js_found and has_event:
+        js_score = 15
+    elif js_found:
+        js_score = 8
+    else:
+        js_score = 0
+
+    # Visual UI elements (20 points)
+    has_button = "button" in lower
+    has_form_input = "input" in lower or "<form" in lower
+    has_card = "card" in lower or "container" in lower
+    has_focus_display = ("focus" in lower or "score" in lower) or ("sparkline" in lower or "chart" in lower)
+    ui_score = sum([
+        5 if has_button else 0,
+        5 if has_form_input else 0,
+        5 if has_card else 0,
+        5 if has_focus_display else 0,
+    ])
+
+    # Responsiveness (5 points)
+    has_viewport = "viewport" in lower or "meta name" in lower
+    has_media_query = "@media" in lower
+    has_flex = "flex" in lower or "grid" in lower
+    responsive_score = 0
+    if has_viewport and has_media_query:
+        responsive_score = 5
+    elif has_viewport and has_flex:
+        responsive_score = 3
+    elif has_viewport:
+        responsive_score = 2
+
+    # Verbosity penalty (up to -10) — very long responses that still lack structure
+    length_penalty = 0
+    if len(text) > 3000 and (not has_head or not has_body):
+        length_penalty = -10
+
+    # Anti-windowing penalty (-10) — raw text with minor HTML interspersed
+    words = text.split()
+    html_ratio = sum(1 for w in words if w.startswith("<")) / max(len(words), 1)
+    if html_ratio < 0.15 and len(words) > 50:
+        length_penalty = min(length_penalty, -10)
+
+    total = structure_score + css_score + js_score + ui_score + responsive_score + length_penalty
+    return max(0, min(100, int(total)))
 
 
 
