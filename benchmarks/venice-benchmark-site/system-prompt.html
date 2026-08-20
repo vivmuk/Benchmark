@@ -316,6 +316,16 @@
           <span class="sp-tab-title">Cursor IDE</span>
           <span class="sp-tab-vendor">Anysphere · ~5.5K tokens</span>
         </button>
+        <button class="sp-tab" data-edition="6" onclick="spSelectTab(6)">
+          <span class="sp-tab-num">EDITION #6</span>
+          <span class="sp-tab-title">Copilot CLI</span>
+          <span class="sp-tab-vendor">Microsoft · ~8K tokens</span>
+        </button>
+        <button class="sp-tab" data-edition="7" onclick="spSelectTab(7)">
+          <span class="sp-tab-num">EDITION #7</span>
+          <span class="sp-tab-title">Codex GPT-5.6</span>
+          <span class="sp-tab-vendor">OpenAI · ~90K tokens</span>
+        </button>
       </div>
 
       <!-- Content Panels -->
@@ -363,6 +373,14 @@
         <div class="sp-edition-panel" id="spPanel5">
           <iframe src="system-prompt-lab/system-prompt-lab-005-cursor-ide.html" loading="lazy" id="spIframe5" onload="spResizeIframe(5)"></iframe>
         </div>
+        <!-- Edition 6 -->
+        <div class="sp-edition-panel" id="spPanel6">
+          <iframe src="system-prompt-lab/system-prompt-lab-006-copilot-cli.html" loading="lazy" id="spIframe6" onload="spResizeIframe(6)"></iframe>
+        </div>
+        <!-- Edition 7 -->
+        <div class="sp-edition-panel" id="spPanel7">
+          <iframe src="system-prompt-lab/system-prompt-lab-007-codex-gpt-5-6.html" loading="lazy" id="spIframe7" onload="spResizeIframe(7)"></iframe>
+        </div>
 
       </div>
     </div>
@@ -380,8 +398,8 @@
         <div class="sp-curriculum-item done"><span class="sp-check">✅</span> #3 Claude Opus 4.7</div>
         <div class="sp-curriculum-item done"><span class="sp-check">✅</span> #4 Gemini 3.1 Pro</div>
         <div class="sp-curriculum-item done"><span class="sp-check">✅</span> #5 Cursor IDE</div>
-        <div class="sp-curriculum-item pending"><span class="sp-check">⬜</span> #6 Copilot CLI/VS Code</div>
-        <div class="sp-curriculum-item pending"><span class="sp-check">⬜</span> #7 Codex</div>
+        <div class="sp-curriculum-item done"><span class="sp-check">✅</span> #6 Copilot CLI/VS Code</div>
+        <div class="sp-curriculum-item done"><span class="sp-check">✅</span> #7 Codex GPT-5.6</div>
         <div class="sp-curriculum-item pending"><span class="sp-check">⬜</span> #8 Perplexity</div>
         <div class="sp-curriculum-item pending"><span class="sp-check">⬜</span> #9 Deep Research</div>
         <div class="sp-curriculum-item pending"><span class="sp-check">⬜</span> #10 Devin</div>
@@ -410,6 +428,8 @@
       3: { date: 'Aug 14, 2026', lines: '183 lines', category: 'Foundational', source: 'asgeirtj/system_prompts_leaks' },
       4: { date: 'Aug 15, 2026', lines: '273 lines', category: 'Foundational', source: 'asgeirtj/system_prompts_leaks' },
       5: { date: 'Aug 18, 2026', lines: '322 lines', category: 'Agentic Coding', source: 'asgeirtj/system_prompts_leaks' },
+      6: { date: 'Aug 18, 2026', lines: '~600 lines', category: 'Agentic Coding', source: 'asgeirtj/system_prompts_leaks' },
+      7: { date: 'Aug 20, 2026', lines: '11,103 lines', category: 'Agentic Coding', source: 'asgeirtj/system_prompts_leaks' },
     };
 
     function spSelectTab(num) {
