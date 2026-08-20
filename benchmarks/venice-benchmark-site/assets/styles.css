@@ -1971,3 +1971,112 @@ body.lightbox-open {
 @media (max-width: 860px) {
   .feature-grid { grid-template-columns: 1fr; }
 }
+
+/* ══════════════════════════════════════════════════════════
+   MATERIAL MODERN overlay (2026-08-20) — teal + orange + dark blue
+   MD3 tokens layered on the light lab base.
+   ══════════════════════════════════════════════════════════ */
+:root {
+  /* brand palette */
+  --md-primary: #00A98F;        /* teal 600 */
+  --md-primary-hover: #00897B;
+  --md-primary-container: #CCFBF1;
+  --md-on-primary: #FFFFFF;
+  --md-secondary: #1A3A6B;      /* dark blue */
+  --md-secondary-container: #E3EAF5;
+  --md-tertiary: #F97316;       /* orange — more prominent */
+  --md-tertiary-hover: #EA580C;
+  --md-tertiary-container: #FFEDD5;
+  --md-bg: #F7F8FA;
+  --md-surface: #FFFFFF;
+  --md-surface-1: #FFFFFF;
+  --md-surface-2: #F1F4F8;
+  --md-surface-3: #E8EDF3;
+  --md-outline: #C9D2DD;
+  --md-outline-variant: #E2E8F0;
+  --md-on-surface: #16232F;
+  --md-on-surface-variant: #4A5A6A;
+
+  /* elevation */
+  --md-elev-1: 0 1px 2px rgba(16,32,48,.08), 0 1px 3px rgba(16,32,48,.06);
+  --md-elev-2: 0 2px 6px rgba(16,32,48,.10), 0 1px 4px rgba(16,32,48,.06);
+  --md-elev-3: 0 6px 16px rgba(16,32,48,.12), 0 2px 6px rgba(16,32,48,.08);
+
+  --md-shape-m: 14px;
+  --md-shape-l: 20px;
+  --md-state-hover: rgba(0,169,143,.08);
+  --md-state-press: rgba(0,169,143,.14);
+}
+
+body { background: var(--md-bg); }
+
+/* cards → elevated material surfaces */
+.card, .panel, section.card, .benchmark-card, .stat-card,
+.hero-card, table.card, .grid > .card {
+  background: var(--md-surface);
+  border: 1px solid var(--md-outline-variant);
+  border-radius: var(--md-shape-m);
+  box-shadow: var(--md-elev-1);
+  transition: box-shadow .2s var(--ease), transform .2s var(--ease);
+}
+.card:hover, .stat-card:hover { box-shadow: var(--md-elev-2); }
+
+/* primary buttons / chips → filled teal */
+button.primary, .btn-primary, .chip.active, .tab.active,
+.filter-chip[data-active="true"], nav .active {
+  background: var(--md-primary) !important;
+  color: var(--md-on-primary) !important;
+  border-radius: 999px !important;
+  border: none !important;
+  box-shadow: var(--md-elev-1);
+}
+button.primary:hover, .btn-primary:hover, .chip.active:hover { background: var(--md-primary-hover) !important; }
+
+/* secondary buttons → outlined dark blue */
+button:not(.primary):not(.icon-btn), .btn-secondary, .chip:not(.active) {
+  border: 1px solid var(--md-outline) !important;
+  border-radius: 999px !important;
+  color: var(--md-secondary) !important;
+  background: var(--md-surface) !important;
+  font-weight: 600;
+  transition: background .15s, border-color .15s;
+}
+button:not(.primary):hover { background: var(--md-state-hover); border-color: var(--md-primary) !important; }
+
+/* orange accents: hero, badges, featured */
+.hero, header.hero, .featured, .badge-hot, .top-1, .crown {
+  accent-color: var(--md-tertiary);
+}
+.hero h1 span, .accent-orange { color: var(--md-tertiary) !important; }
+.stat-value { color: var(--md-primary); }
+.kbd, .pill-new { background: var(--md-tertiary-container); color: #9A3412; }
+
+/* ripple (JS adds .ripple spans) */
+.ripple-host { position: relative; overflow: hidden; }
+.ripple { position: absolute; border-radius: 50%; transform: scale(0); animation: ripple .5s var(--ease) forwards; background: rgba(0,169,143,.25); pointer-events: none; }
+@keyframes ripple { to { transform: scale(3.2); opacity: 0; } }
+
+/* model selector popover */
+.model-select-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--md-surface); border: 1px solid var(--md-outline);
+  border-radius: 999px; padding: 8px 16px; font-weight: 600;
+  color: var(--md-secondary); cursor: pointer; box-shadow: var(--md-elev-1);
+}
+.model-select-btn:hover { background: var(--md-state-hover); }
+.model-select-pop {
+  position: absolute; z-index: 500; margin-top: 6px;
+  background: var(--md-surface); border: 1px solid var(--md-outline-variant);
+  border-radius: var(--md-shape-l); box-shadow: var(--md-elev-3);
+  padding: 12px; width: min(420px, 92vw); max-height: 60vh; overflow: auto;
+}
+.model-select-pop .quick { display: flex; gap: 6px; margin-bottom: 10px; flex-wrap: wrap; }
+.model-select-pop .quick button { font-size: 11px; padding: 5px 12px; }
+.model-row { display: flex; align-items: center; gap: 10px; padding: 7px 8px; border-radius: 10px; cursor: pointer; }
+.model-row:hover { background: var(--md-surface-2); }
+.model-row input { accent-color: var(--md-primary); width: 16px; height: 16px; }
+.model-row .dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.model-row .name { font-size: 13px; color: var(--md-on-surface); flex: 1; }
+.model-row .vi { font-family: var(--font-mono); font-size: 11px; color: var(--md-on-surface-variant); }
+
+@media (prefers-reduced-motion: reduce) { .ripple { display: none; } }

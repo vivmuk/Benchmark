@@ -15,34 +15,56 @@
     { id: "reverse-prompt-vision", label: "Reverse-Prompt Vision" },
   ];
 
-  // One saturated, accessible identity per model. These values are used in every chart.
-  const MODEL_COLORS = {
-    "GPT-5.6 Luna":      "#2563EB",
-    "GPT-5.6 Luna Pro":  "#7C3AED",
-    "GPT-5.6 Sol":       "#F97316",
-    "GPT-5.6 Sol Pro":   "#DC2626",
-    "GPT-5.6 Terra":     "#10B981",
-    "GPT-5.6 Terra Pro": "#00A6A6",
-    "GPT-5.5":           "#E11D74",
-    "Fable 5":           "#84A800",
-    "Opus 4.8":          "#9333EA",
-    "Opus 5":            "#6D28D9",
-    "GLM 5.2":           "#EC4899",
-    "DeepSeek V4":       "#0891B2",
-    "DeepSeek V4 Flash 0731": "#0EA5C4",
-    "DeepSeek V4 Flash 0731 Fast": "#22D3EE",
-    "MiniMax M3":        "#D97706",
-    "Grok 4.5":          "#4F46E5",
-    "Inkling":           "#0EA5E9",
-    "Kimi K3":           "#F59E0B",
-    "Kimi K3 Fast API":  "#B45309",
-    "Qwen 3.8 Max":      "#9B6BFF",
-    "Qwen 3.8 2.4T":    "#C49BFF",
-    "Sonnet 5":          "#FF9DBA",
-    "Gemini 3.6 Flash":  "#FFB800",
-    "Grok 4.6":          "#FF6B3D",
-    "Nemotron 3.5":      "#76B900",
+  // Provider-based colors (single source: provider_colors.py). Every model in a
+  // provider shares its base hue so the whole provider reads as one color.
+  const PROVIDER_COLORS = {
+    openai:  "#7C3AED",   // GPT
+    claude:  "#F97316",   // orange
+    deepseek:"#2563EB",   // blue
+    gemini:  "#06B6D4",
+    grok:    "#EF4444",
+    qwen:    "#8B5CF6",
+    kimi:    "#F59E0B",
+    minimax: "#EC4899",
+    glm:     "#00C2A8",
+    nvidia:  "#76B900",
+    mistral: "#D90429",
+    aion:    "#F43F5E",
+    inkling: "#64748B",
+    xiaomi:  "#FF6900",
+    other:   "#64748B",
   };
+  const PROVIDER_OF = {
+    "GPT-5.6 Luna": "openai", "GPT-5.6 Luna Pro": "openai", "GPT-5.6 Sol": "openai",
+    "GPT-5.6 Sol Pro": "openai", "GPT-5.6 Terra": "openai", "GPT-5.6 Terra Pro": "openai",
+    "GPT-5.5": "openai", "OpenAI GPT": "openai",
+    "Fable 5": "claude", "Opus 4.8": "claude", "Opus 5": "claude", "Sonnet 5": "claude",
+    "Opus 5 Fast": "claude", "Opus 4.8 Fast": "claude",
+    "DeepSeek V4": "deepseek", "DeepSeek V4 Flash 0731": "deepseek",
+    "DeepSeek V4 Flash 0731 Fast": "deepseek", "DeepSeek V4 Flash": "deepseek",
+    "DeepSeek V4 Pro 0813": "deepseek",
+    "Gemini 3.6 Flash": "gemini", "Gemini 3.7 Flash": "gemini",
+    "Grok 4.5": "grok", "Grok 4.6": "grok", "Grok 4.20": "grok",
+    "Qwen 3.8 Max": "qwen", "Qwen 3.8 2.4T": "qwen", "Qwen 3.7 Max": "qwen",
+    "Qwen 3.7 Plus": "qwen", "Qwen 3.8 27B": "qwen", "Qwen3 235B Thinking": "qwen",
+    "Kimi K3": "kimi", "Kimi K3 Fast API": "kimi",
+    "MiniMax M3": "minimax", "MiniMax M27": "minimax",
+    "GLM 5.2": "glm", "GLM 5.3": "glm",
+    "Nemotron 3.5": "nvidia", "Nemotron 3 Super": "nvidia",
+    "Aion 3.0": "aion", "Aion 3.0 Mini": "aion",
+    "Inkling": "inkling",
+  };
+  function providerOf(name) {
+    return PROVIDER_OF[name] || "other";
+  }
+  function modelColor(name, alpha = 1) {
+    const hex = PROVIDER_COLORS[providerOf(name)] || PROVIDER_COLORS.other;
+    if (alpha >= 1) return hex;
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+  }
 
   const FALLBACK_DATA = { generated: "", source: "fallback", results: [] };
 
@@ -65,6 +87,8 @@
     isLive: false,
     sort: { key: "score", dir: -1 },
     filter: { text: "", benchmark: "all" },
+    selected: null,           // Set of model display-names shown on charts; null = all
+    modelList: [],            // [{model, provider, vivIndex}] for the selector
     charts: { leaderboard: null, benchmark: null, costValue: null, vivIndex: null, speed: null, latency: null, valueDensity: null, reversePrompt: null, sparklines: [] },
   };
 
@@ -92,7 +116,10 @@
   }
 
   function modelAggregates(rows) {
-    return uniqueModels(rows).map((model) => {
+    if (state.selectedModels && state.selectedModels.size) {
+      rows = rows.filter((r) => state.selectedModels.has(r.model));
+    }
+    let aggs = uniqueModels(rows).map((model) => {
       const mr = rows.filter((r) => r.model === model);
       // VivIndex: weighted composite over benchmarks present, renormalized.
       let wSum = 0, wTotal = 0;
@@ -124,6 +151,11 @@
         }),
       };
     });
+    // Respect the active model selection (default = top 15). state.selected === null = show all.
+    if (state.selected && state.selected.size) {
+      aggs = aggs.filter((a) => state.selected.has(a.model));
+    }
+    return aggs.sort((a, b) => b.vivIndex - a.vivIndex);
   }
 
   function median(nums) {
@@ -131,15 +163,6 @@
     if (!s.length) return 0;
     const m = Math.floor(s.length / 2);
     return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
-  }
-
-  function modelColor(model, alpha = 1) {
-    const hex = MODEL_COLORS[model] || "#94a3b8";
-    if (alpha >= 1) return hex;
-    const r = parseInt(hex.slice(1, 3), 16);
-    const g = parseInt(hex.slice(3, 5), 16);
-    const b = parseInt(hex.slice(5, 7), 16);
-    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
   }
 
   // JSON benchmark ids use underscores; the UI uses hyphens.
@@ -802,9 +825,80 @@
     renderReversePromptChart();
   }
 
+  
+  // ── Model selector (Material popover, checkboxes, top-15 default) ──────────
+  function initModelSelector() {
+    const host = document.querySelector(".site-nav, header, .toolbar, main");
+    if (!host || document.getElementById("modelSelectBtn")) return;
+    const aggs = modelAggregates(state.data).sort((a, b) => b.vivIndex - a.vivIndex);
+    const allModels = aggs.map((a) => ({ name: a.model, vi: a.vivIndex }));
+    const saved = localStorage.getItem("bv_selected_models");
+    let selected = new Set();
+    if (saved) { try { selected = new Set(JSON.parse(saved)); } catch (e) {} }
+    if (!selected.size) allModels.slice(0, 15).forEach((m) => selected.add(m.name));
+    state.selectedModels = selected;
+
+    const btn = document.createElement("button");
+    btn.id = "modelSelectBtn";
+    btn.className = "model-select-btn";
+    btn.innerHTML = `<span style="width:12px;height:12px;border-radius:50%;background:var(--md-primary)"></span> Models <span id="msCount" style="font-family:var(--font-mono);font-size:11px;color:var(--md-primary)">${selected.size}</span> ▾`;
+    btn.onclick = (e) => { e.stopPropagation(); pop.style.display = pop.style.display === "block" ? "none" : "block"; };
+
+    const pop = document.createElement("div");
+    pop.className = "model-select-pop";
+    pop.style.display = "none";
+    pop.innerHTML = `
+      <div class="quick">
+        <button data-act="top15">Top 15</button>
+        <button data-act="all">All</button>
+        <button data-act="clear">Clear</button>
+        <button data-act="done" class="primary" style="background:var(--md-primary);color:#fff;border:none;border-radius:999px;padding:6px 14px;font-weight:600;cursor:pointer">Done</button>
+      </div>
+      ${allModels.map((m) => {
+        const prov = providerOf(m.name);
+        const color = PROVIDER_COLORS[prov] || PROVIDER_COLORS.other;
+        return `<label class="model-row"><input type="checkbox" value="${m.name.replace(/"/g, "&quot;")}" ${selected.has(m.name) ? "checked" : ""}>
+          <span class="dot" style="background:${color}"></span>
+          <span class="name">${m.name}</span>
+          <span class="vi">${m.vi ? m.vi.toFixed(1) : "—"}</span></label>`;
+      }).join("")}`;
+    pop.querySelectorAll(".quick button").forEach((b) => b.onclick = () => {
+      const act = b.dataset.act;
+      if (act === "top15") { selected = new Set(allModels.slice(0, 15).map((m) => m.name)); }
+      else if (act === "all") { selected = new Set(allModels.map((m) => m.name)); }
+      else if (act === "clear") { selected = new Set(); }
+      else if (act === "done") { pop.style.display = "none"; }
+      pop.querySelectorAll("input").forEach((i) => i.checked = selected.has(i.value));
+      apply();
+    });
+    pop.addEventListener("change", (e) => {
+      if (e.target.type === "checkbox") {
+        e.target.checked ? selected.add(e.target.value) : selected.delete(e.target.value);
+        apply();
+      }
+    });
+    document.addEventListener("click", (e) => { if (!pop.contains(e.target) && e.target !== btn) pop.style.display = "none"; });
+
+    function apply() {
+      state.selectedModels = selected;
+      localStorage.setItem("bv_selected_models", JSON.stringify([...selected]));
+      const c = document.getElementById("msCount"); if (c) c.textContent = selected.size;
+      renderAllCharts();
+      if (typeof renderComparison === "function") renderComparison();
+      if (typeof populateStats === "function") populateStats();
+    }
+
+    const wrap = document.createElement("div");
+    wrap.style.position = "relative";
+    wrap.style.display = "inline-block";
+    wrap.appendChild(btn); wrap.appendChild(pop);
+    host.insertBefore(wrap, host.firstChild);
+  }
+
   async function init() {
     initMobileNav();
     await loadData();
+    initModelSelector();
     renderAllCharts();
     renderComparison();
     populateStats();
@@ -899,4 +993,3 @@
     new ResizeObserver(check).observe(wrap);
   });
 })();
-

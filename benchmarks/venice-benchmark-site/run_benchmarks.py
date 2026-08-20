@@ -91,6 +91,10 @@ FALLBACK_PRICING = {
     "nvidia-nemotron-3-super-120b-a12b": {"input": 0.50, "output": 1.50},
     "qwen3-235b-a22b-thinking-2507": {"input": 3.00,  "output": 9.00},
     "minimax-m27":                   {"input": 0.50,  "output": 2.00},
+    # ---- 2026-08 additions (live /models pricing supersedes) ----
+    "z-ai-glm-5-3":                   {"input": 1.00,  "output": 3.00},
+    "qwen-3-8-27b":                   {"input": 0.50,  "output": 1.50},
+    "deepseek-v4-pro-0813":           {"input": 0.60,  "output": 2.20},
 }
 DEFAULT_PRICING = {"input": 5.00, "output": 15.00}
 

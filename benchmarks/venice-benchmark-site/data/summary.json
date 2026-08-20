@@ -2,6 +2,6 @@
   "top_model": "Opus 4.8 Fast",
   "top_model_id": "claude-opus-4-8-fast",
   "top_viv": 91.1,
-  "n_models": 37,
-  "generated_at": "2026-08-14T02:50:03.721747+00:00"
+  "n_models": 40,
+  "generated_at": "2026-08-20T03:47:30.531923+00:00"
 }

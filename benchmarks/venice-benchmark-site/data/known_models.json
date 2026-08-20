@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-11T14:25:13.304294+00:00",
+  "generated_at": "2026-08-17T13:00:15.067417+00:00",
   "models": {
     "gemini-3-6-flash": {
       "id": "gemini-3-6-flash",
@@ -440,6 +440,11 @@
       "id": "e2ee-deepseek-v4-flash",
       "first_seen": "2026-08-11T14:25:13.099558+00:00",
       "display": "e2ee-deepseek-v4-flash"
+    },
+    "deepseek-v4-pro-0813": {
+      "id": "deepseek-v4-pro-0813",
+      "first_seen": "2026-08-17T13:00:04.914802+00:00",
+      "display": "deepseek-v4-pro-0813"
     }
   }
 }

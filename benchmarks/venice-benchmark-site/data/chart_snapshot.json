@@ -14,6 +14,20 @@
     }
   },
   {
+    "id": "qwen-3-8-27b",
+    "disp": "Qwen 3.8 27B",
+    "viv": 90.5,
+    "scores": {
+      "intent-understanding": 82,
+      "one-shot-ui": 66,
+      "pharma-drug-interaction": 89,
+      "pharma-regulatory-comprehension": 100,
+      "startup-in-a-weekend": 100,
+      "value-density": 100,
+      "reverse-prompt-vision": 96
+    }
+  },
+  {
     "id": "qwen-3-8-2-4t-a95b",
     "disp": "Qwen 3.8 2.4T",
     "viv": 89.5,
@@ -93,6 +107,19 @@
     }
   },
   {
+    "id": "z-ai-glm-5-3",
+    "disp": "GLM 5.3",
+    "viv": 88.0,
+    "scores": {
+      "intent-understanding": 76,
+      "one-shot-ui": 68,
+      "pharma-drug-interaction": 86,
+      "pharma-regulatory-comprehension": 90,
+      "startup-in-a-weekend": 100,
+      "value-density": 100
+    }
+  },
+  {
     "id": "kimi-k3-fast-api",
     "disp": "Kimi K3 Fast API",
     "viv": 87.6,
@@ -101,6 +128,19 @@
       "one-shot-ui": 66,
       "brick-breaker-realism": 93,
       "pharma-drug-interaction": 86,
+      "pharma-regulatory-comprehension": 90,
+      "startup-in-a-weekend": 100,
+      "value-density": 100
+    }
+  },
+  {
+    "id": "deepseek-v4-pro-0813",
+    "disp": "DeepSeek V4 Pro 0813",
+    "viv": 87.4,
+    "scores": {
+      "intent-understanding": 70,
+      "one-shot-ui": 73,
+      "pharma-drug-interaction": 85,
       "pharma-regulatory-comprehension": 90,
       "startup-in-a-weekend": 100,
       "value-density": 100

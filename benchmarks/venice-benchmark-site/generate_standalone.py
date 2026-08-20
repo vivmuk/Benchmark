@@ -50,10 +50,10 @@ html = new_html
 # back to the literal). Same for `<!--` to stay safe against legacy comment
 # shenanigans in HTML parsers.
 json_data = json.dumps(data, ensure_ascii=False)
-json_data = json_data.replace("</script", "<\\/script").replace("<!--", "<\\!--")
+json_data = json_data.replace("</script", "\\u003c/script").replace("<!--", "\\u003c!--")
 inject_script = f'<script>window.BENCHMARK_DATA = {json_data};</script>'
 new_html, n_inject = re.subn(
-    r"<head>\s*", f"<head>\n{inject_script}\n", html, count=1
+    r"<head>\s*", lambda m: "<head>\n" + inject_script + "\n", html, count=1
 )
 print(f"  attach BENCHMARK_DATA in <head>  -> {n_inject} replacement(s)")
 html = new_html

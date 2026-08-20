@@ -117,6 +117,28 @@ def build_page(d, model):
     rank = next((i + 1 for i, (name, _) in enumerate(board_all) if name == disp), None)
     is_top = rank == 1
     met = metrics(d, mid)
+    # per-model GIF (gif arena)
+    import os as _os
+    gif_path = f"../data/gif_arena/{mid}.gif"
+    gif_html = ""
+    meta_p = ROOT / "data" / "gif_arena" / f"{mid}.meta.json"
+    if (ROOT / "data" / "gif_arena" / f"{mid}.gif").exists():
+        gj = {}
+        if meta_p.exists():
+            try: gj = json.loads(meta_p.read_text())
+            except Exception: gj = {}
+        axes = gj.get("scores") or gj.get("axes") or {}
+        score = gj.get("overall") or gj.get("score")
+        badges = " ".join(f'<span class="pill-new" style="margin-right:6px">{esc(k)}: {v}</span>' for k, v in axes.items())
+        gif_html = (
+            f'<section class="card p-gif" style="margin-top:1.5rem;padding:1.25rem">'
+            f'<h2 style="font-size:1.05rem;margin-bottom:.7rem">🎬 GIF Arena'
+            + (f' <span class="pill-new">overall {score}</span>' if score else "")
+            + '</h2>'
+            + f'<img src="{gif_path}" alt="{esc(disp)} dancing alpaca" loading="lazy" style="max-width:100%;border-radius:12px;box-shadow:var(--md-elev-2)" />'
+            + (f'<div style="margin-top:.6rem">{badges}</div>' if badges else "")
+            + '</section>'
+        )
     vd = score_of(d, mid, "value_density")
     rp = score_of(d, mid, "reverse_prompt_vision")
     ddi = score_of(d, mid, "pharma_drug_interaction")

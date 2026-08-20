@@ -260,3 +260,24 @@ aion-labs-aion-3-0-mini,Aion 3.0 Mini,reverse_prompt_vision,skipped,,0,0,0,0,0
 nvidia-nemotron-3-super-120b-a12b,Nemotron 3 Super,reverse_prompt_vision,skipped,,0,0,0,0,0
 qwen3-235b-a22b-thinking-2507,Qwen3 235B Thinking,reverse_prompt_vision,skipped,,0,0,0,0,0
 minimax-m27,MiniMax M27,reverse_prompt_vision,skipped,,0,0,0,0,0
+qwen-3-8-27b,Qwen 3.8 27B,intent_understanding,ok,82,5.696,1818,707,2525,0.00308
+qwen-3-8-27b,Qwen 3.8 27B,one_shot_ui,ok,66,64.907,1827,6808,8635,0.022608
+qwen-3-8-27b,Qwen 3.8 27B,pharma_drug_interaction,ok,89,53.587,1945,3677,5622,0.012642
+qwen-3-8-27b,Qwen 3.8 27B,pharma_regulatory_comprehension,ok,100,55.125,1976,9072,11048,0.02992
+qwen-3-8-27b,Qwen 3.8 27B,startup_in_a_weekend,ok,100,138.117,2047,22555,24602,0.073097
+z-ai-glm-5-3,GLM 5.3,intent_understanding,ok,76,46.084,1742,1461,3203,0.011084
+z-ai-glm-5-3,GLM 5.3,one_shot_ui,ok,68,542.088,1751,30023,31774,0.168191
+z-ai-glm-5-3,GLM 5.3,pharma_drug_interaction,ok,86,83.266,1859,3309,5168,0.021453
+z-ai-glm-5-3,GLM 5.3,pharma_regulatory_comprehension,ok,90,536.679,1893,26014,27907,0.14639
+z-ai-glm-5-3,GLM 5.3,startup_in_a_weekend,ok,100,311.036,1952,12235,14187,0.070708
+deepseek-v4-pro-0813,DeepSeek V4 Pro 0813,intent_understanding,ok,70,3.324,1727,436,2163,0.005008
+deepseek-v4-pro-0813,DeepSeek V4 Pro 0813,one_shot_ui,ok,73,18.122,1738,5845,7583,0.0318
+deepseek-v4-pro-0813,DeepSeek V4 Pro 0813,pharma_drug_interaction,ok,85,10.676,1840,1676,3516,0.011332
+deepseek-v4-pro-0813,DeepSeek V4 Pro 0813,pharma_regulatory_comprehension,ok,90,27.355,1877,6121,7998,0.033396
+deepseek-v4-pro-0813,DeepSeek V4 Pro 0813,startup_in_a_weekend,ok,100,42.65,1940,9420,11360,0.04983
+z-ai-glm-5-3,GLM 5.3,value_density,ok,100,9.869,1907,289,2196,0.004927
+qwen-3-8-27b,Qwen 3.8 27B,value_density,ok,100,3.102,1993,446,2439,0.002324
+deepseek-v4-pro-0813,DeepSeek V4 Pro 0813,value_density,ok,100,1.994,1891,222,2113,0.004219
+z-ai-glm-5-3,GLM 5.3,reverse_prompt_vision,skipped,,0,0,0,0,0
+qwen-3-8-27b,Qwen 3.8 27B,reverse_prompt_vision,ok,96,7.777,2762,1102,3864,0.007931
+deepseek-v4-pro-0813,DeepSeek V4 Pro 0813,reverse_prompt_vision,skipped,,0,0,0,0,0

@@ -41,4 +41,8 @@ MODELS = [
     {"id": "nvidia-nemotron-3-super-120b-a12b", "display": "Nemotron 3 Super"},
     {"id": "qwen3-235b-a22b-thinking-2507", "display": "Qwen3 235B Thinking"},
     {"id": "minimax-m27",                   "display": "MiniMax M27"},
+    # ---- 2026-08: models added in the last two weeks (live catalogue `created` >= 2026-08-05) ----
+    {"id": "z-ai-glm-5-3",                  "display": "GLM 5.3"},
+    {"id": "qwen-3-8-27b",                  "display": "Qwen 3.8 27B"},
+    {"id": "deepseek-v4-pro-0813",          "display": "DeepSeek V4 Pro 0813"},
 ]
