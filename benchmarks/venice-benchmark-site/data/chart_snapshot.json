@@ -68,6 +68,20 @@
     }
   },
   {
+    "id": "stealth-ox-alpha",
+    "disp": "Stealth Ox Alpha",
+    "viv": 88.7,
+    "scores": {
+      "intent-understanding": 76,
+      "one-shot-ui": 66,
+      "pharma-drug-interaction": 83,
+      "pharma-regulatory-comprehension": 90,
+      "startup-in-a-weekend": 100,
+      "value-density": 100,
+      "reverse-prompt-vision": 93
+    }
+  },
+  {
     "id": "nvidia-nemotron-3-super-120b-a12b",
     "disp": "Nemotron 3 Super",
     "viv": 88.6,

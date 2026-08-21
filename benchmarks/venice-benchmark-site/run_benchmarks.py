@@ -55,6 +55,7 @@ MODEL_BENCHMARK_LIMITS = {}
 # Approximate fallback pricing (USD per 1M tokens: input, output).
 # Used if the /models endpoint does not return pricing.
 FALLBACK_PRICING = {
+    "stealth-ox-alpha": {"input": 0.0, "output": 0.0},
     "openai-gpt-56-luna":      {"input": 1.25,  "output": 7.5},
     "openai-gpt-56-luna-pro":  {"input": 1.25,  "output": 7.5},
     "openai-gpt-56-sol":       {"input": 6.25,  "output": 37.5},

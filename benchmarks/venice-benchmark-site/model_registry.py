@@ -3,6 +3,7 @@
 Canonical model roster for scored benchmarks and the public site.
 """
 MODELS = [
+    {"id": "stealth-ox-alpha",       "display": "Stealth Ox Alpha"},
     {"id": "openai-gpt-56-luna",      "display": "GPT-5.6 Luna"},
     {"id": "openai-gpt-56-luna-pro",  "display": "GPT-5.6 Luna Pro"},
     {"id": "openai-gpt-56-sol",       "display": "GPT-5.6 Sol"},

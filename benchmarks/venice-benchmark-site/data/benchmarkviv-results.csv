@@ -281,3 +281,10 @@ deepseek-v4-pro-0813,DeepSeek V4 Pro 0813,value_density,ok,100,1.994,1891,222,21
 z-ai-glm-5-3,GLM 5.3,reverse_prompt_vision,skipped,,0,0,0,0,0
 qwen-3-8-27b,Qwen 3.8 27B,reverse_prompt_vision,ok,96,7.777,2762,1102,3864,0.007931
 deepseek-v4-pro-0813,DeepSeek V4 Pro 0813,reverse_prompt_vision,skipped,,0,0,0,0,0
+stealth-ox-alpha,Stealth Ox Alpha,intent_understanding,ok,76,10.468,1802,474,2276,0
+stealth-ox-alpha,Stealth Ox Alpha,one_shot_ui,ok,66,65.108,1811,3581,5392,0
+stealth-ox-alpha,Stealth Ox Alpha,pharma_drug_interaction,ok,83,16.315,1919,867,2786,0
+stealth-ox-alpha,Stealth Ox Alpha,pharma_regulatory_comprehension,ok,90,97.764,1953,3209,5162,0
+stealth-ox-alpha,Stealth Ox Alpha,startup_in_a_weekend,ok,100,101.202,2012,5676,7688,0
+stealth-ox-alpha,Stealth Ox Alpha,value_density,ok,100,6.043,1967,170,2137,0
+stealth-ox-alpha,Stealth Ox Alpha,reverse_prompt_vision,ok,93,35.859,3062,574,3636,0.003203
