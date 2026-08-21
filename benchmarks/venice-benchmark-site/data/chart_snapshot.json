@@ -10,7 +10,9 @@
       "pharma-regulatory-comprehension": 90,
       "startup-in-a-weekend": 100,
       "value-density": 100,
-      "reverse-prompt-vision": 93
+      "reverse-prompt-vision": 93,
+      "agentic-tool-use": 80,
+      "long-context-reasoning": 85
     }
   },
   {
@@ -24,7 +26,9 @@
       "pharma-regulatory-comprehension": 100,
       "startup-in-a-weekend": 100,
       "value-density": 100,
-      "reverse-prompt-vision": 96
+      "reverse-prompt-vision": 96,
+      "agentic-tool-use": 30,
+      "long-context-reasoning": 85
     }
   },
   {
@@ -37,7 +41,9 @@
       "pharma-drug-interaction": 83,
       "pharma-regulatory-comprehension": 90,
       "startup-in-a-weekend": 100,
-      "value-density": 100
+      "value-density": 100,
+      "agentic-tool-use": 80,
+      "long-context-reasoning": 85
     }
   },
   {
@@ -50,7 +56,9 @@
       "pharma-drug-interaction": 83,
       "pharma-regulatory-comprehension": 85,
       "startup-in-a-weekend": 100,
-      "value-density": 100
+      "value-density": 100,
+      "agentic-tool-use": 94,
+      "long-context-reasoning": 85
     }
   },
   {
@@ -64,7 +72,8 @@
       "pharma-regulatory-comprehension": 95,
       "startup-in-a-weekend": 100,
       "value-density": 100,
-      "reverse-prompt-vision": 93
+      "reverse-prompt-vision": 93,
+      "agentic-tool-use": 80
     }
   },
   {
@@ -78,7 +87,9 @@
       "pharma-regulatory-comprehension": 90,
       "startup-in-a-weekend": 100,
       "value-density": 100,
-      "reverse-prompt-vision": 93
+      "reverse-prompt-vision": 93,
+      "agentic-tool-use": 80,
+      "long-context-reasoning": 85
     }
   },
   {
@@ -91,7 +102,9 @@
       "pharma-drug-interaction": 83,
       "pharma-regulatory-comprehension": 68,
       "startup-in-a-weekend": 100,
-      "value-density": 100
+      "value-density": 100,
+      "agentic-tool-use": 80,
+      "long-context-reasoning": 65
     }
   },
   {
@@ -104,7 +117,9 @@
       "pharma-drug-interaction": 86,
       "pharma-regulatory-comprehension": 75,
       "startup-in-a-weekend": 100,
-      "value-density": 100
+      "value-density": 100,
+      "agentic-tool-use": 80,
+      "long-context-reasoning": 85
     }
   },
   {
@@ -117,7 +132,9 @@
       "pharma-drug-interaction": 86,
       "pharma-regulatory-comprehension": 80,
       "startup-in-a-weekend": 100,
-      "value-density": 100
+      "value-density": 100,
+      "agentic-tool-use": 80,
+      "long-context-reasoning": 85
     }
   },
   {
@@ -130,7 +147,9 @@
       "pharma-drug-interaction": 86,
       "pharma-regulatory-comprehension": 90,
       "startup-in-a-weekend": 100,
-      "value-density": 100
+      "value-density": 100,
+      "agentic-tool-use": 80,
+      "long-context-reasoning": 85
     }
   },
   {

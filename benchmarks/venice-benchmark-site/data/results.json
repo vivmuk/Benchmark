@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-21T19:50:59.129928+00:00",
+  "generated_at": "2026-08-21T20:30:00+00:00",
   "dry_run": false,
   "models": [
     {
@@ -216,6 +216,16 @@
         "checklist_count": 28,
         "judge_model": "openai-gpt-56-luna"
       }
+    },
+    {
+      "id": "agentic_tool_use",
+      "name": "Agentic Tool-Use (Tier 2)",
+      "scoring": "Multi-step function-calling trip booking with a forced error-recovery. Tool selection 40, argument accuracy 30, error recovery 20, final state 10."
+    },
+    {
+      "id": "long_context_reasoning",
+      "name": "Long-Context Reasoning (Tier 2)",
+      "scoring": "~28k-token document pack (12 trial reports, 8 emails, 14 tables). 6 cross-document inference questions, deterministic checklist, 0-100."
     }
   ],
   "results": [
@@ -6026,7 +6036,647 @@
         "judge_cost_usd": 0.003203,
         "model_only_cost_usd": 0.0
       }
+    },
+    {
+      "model_id": "claude-opus-4-8-fast",
+      "benchmark_id": "agentic_tool_use",
+      "status": "ok",
+      "score": 80,
+      "latency": null,
+      "prompt_tokens": null,
+      "completion_tokens": null,
+      "total_tokens": null,
+      "estimated_cost_usd": 0.0,
+      "raw_response": "[{\"fn\": \"search_flights\", \"args\": {\"origin\": \"Boston\", \"destination\": \"Chicago\", \"date\": \"2026-09-14\"}}, {\"fn\": \"book_flight\", \"args\": {\"flight_id\": \"FX-305\"}}, {\"fn\": \"search_hotels\", \"args\": {\"city\": \"Chicago\", \"checkin\": \"2026-09-14\", \"checkout\": \"2026-09-16\", \"min_stars\": 4}}, {\"fn\": \"book_hotel\", \"args\": {\"hotel_id\": \"HTL-A\"}}, {\"fn\": \"send_itinerary\", \"args\": {\"recipient\": \"mehta@hospital.org\"}}]",
+      "error": null,
+      "metrics": {
+        "calls": 5,
+        "arg_errors": 0,
+        "saw_cancellation": false,
+        "recovered": false,
+        "booked_flight": "FX-305",
+        "booked_hotel": "HTL-A",
+        "emailed": true,
+        "total_usd": 540
+      }
+    },
+    {
+      "model_id": "claude-opus-4-8-fast",
+      "benchmark_id": "long_context_reasoning",
+      "status": "ok",
+      "score": 85,
+      "latency": 3.06,
+      "prompt_tokens": 15192,
+      "completion_tokens": 441,
+      "total_tokens": 15633,
+      "estimated_cost_usd": 0.208764,
+      "raw_response": "**Q1.** Sites T-004 (Miami) and T-009 (Detroit) missed the primary endpoint; the shared stated cause is \"underpowered after 3 site audits.\"\n\n**Q2.** T-002, T-007, and T-011 (confirmed in email E-004).\n\n**Q3.** No — email E-006 states the \"DSMB review of SAE #2204 closed with no causal link to VX-789.\"\n\n**Q4.** Site T-004 must be excluded from the pooled PP analysis per SAP section 5.2.\n\n**Q5.** Phoenix (site T-008) had cold-chain excursions exceeding threshold; it was flagged in email E-005, which directed replacement of the fridge units.\n\n**Q6.** T-003 was assigned 40mg daily with an adverse-event rate of 3.2%.",
+      "error": null,
+      "metrics": {
+        "details": [
+          {
+            "q": 1,
+            "hit": true
+          },
+          {
+            "q": 2,
+            "hit": true
+          },
+          {
+            "q": 3,
+            "hit": true
+          },
+          {
+            "q": 4,
+            "hit": true
+          },
+          {
+            "q": 5,
+            "hit": true
+          },
+          {
+            "q": 6,
+            "hit": false
+          }
+        ]
+      }
+    },
+    {
+      "model_id": "qwen-3-8-27b",
+      "benchmark_id": "agentic_tool_use",
+      "status": "ok",
+      "score": 30,
+      "latency": null,
+      "prompt_tokens": null,
+      "completion_tokens": null,
+      "total_tokens": null,
+      "estimated_cost_usd": 0.0,
+      "raw_response": "[]",
+      "error": null,
+      "metrics": {
+        "calls": 0,
+        "arg_errors": 0,
+        "saw_cancellation": false,
+        "recovered": false,
+        "booked_flight": null,
+        "booked_hotel": null,
+        "emailed": false,
+        "total_usd": 0
+      }
+    },
+    {
+      "model_id": "qwen-3-8-27b",
+      "benchmark_id": "long_context_reasoning",
+      "status": "ok",
+      "score": 85,
+      "latency": 11.65,
+      "prompt_tokens": 14028,
+      "completion_tokens": 1027,
+      "total_tokens": 15055,
+      "estimated_cost_usd": 0.009599,
+      "raw_response": "\n\nQ1. T-004 and T-009; the stated shared cause is that both were underpowered after 3 site audits.  \nQ2. T-002, T-007, and T-011.  \nQ3. No; E-006 states the DSMB review “closed with no causal link to VX-789.”  \nQ4. The site is T-004.  \nQ5. T-008 (Phoenix), flagged in E-005.  \nQ6. 40 mg and 3.2%.",
+      "error": null,
+      "metrics": {
+        "details": [
+          {
+            "q": 1,
+            "hit": true
+          },
+          {
+            "q": 2,
+            "hit": true
+          },
+          {
+            "q": 3,
+            "hit": true
+          },
+          {
+            "q": 4,
+            "hit": true
+          },
+          {
+            "q": 5,
+            "hit": true
+          },
+          {
+            "q": 6,
+            "hit": false
+          }
+        ]
+      }
+    },
+    {
+      "model_id": "qwen-3-8-2-4t-a95b",
+      "benchmark_id": "agentic_tool_use",
+      "status": "ok",
+      "score": 80,
+      "latency": null,
+      "prompt_tokens": null,
+      "completion_tokens": null,
+      "total_tokens": null,
+      "estimated_cost_usd": 0.0,
+      "raw_response": "[{\"fn\": \"search_flights\", \"args\": {\"origin\": \"Boston\", \"destination\": \"Chicago\", \"date\": \"2026-09-14\"}}, {\"fn\": \"book_flight\", \"args\": {\"flight_id\": \"FX-305\"}}, {\"fn\": \"search_hotels\", \"args\": {\"city\": \"Chicago\", \"checkin\": \"2026-09-14\", \"checkout\": \"2026-09-16\", \"min_stars\": 4}}, {\"fn\": \"book_hotel\", \"args\": {\"hotel_id\": \"HTL-A\"}}, {\"fn\": \"send_itinerary\", \"args\": {\"recipient\": \"mehta@hospital.org\"}}]",
+      "error": null,
+      "metrics": {
+        "calls": 5,
+        "arg_errors": 0,
+        "saw_cancellation": false,
+        "recovered": false,
+        "booked_flight": "FX-305",
+        "booked_hotel": "HTL-A",
+        "emailed": true,
+        "total_usd": 540
+      }
+    },
+    {
+      "model_id": "qwen-3-8-2-4t-a95b",
+      "benchmark_id": "long_context_reasoning",
+      "status": "ok",
+      "score": 85,
+      "latency": 11.64,
+      "prompt_tokens": 14032,
+      "completion_tokens": 1326,
+      "total_tokens": 15358,
+      "estimated_cost_usd": 0.045025,
+      "raw_response": "1. T-004 and T-009 missed their primary endpoint; both state the shared cause as being underpowered after 3 site audits.\n\n2. T-002, T-007, and T-011.\n\n3. No; email E-006 states, “DSMB review of SAE #2204 closed with no causal link to VX-789.”\n\n4. T-004.\n\n5. Phoenix, site T-008, was flagged in email E-005 for cold-chain excursions exceeding threshold and requiring fridge replacement.\n\n6. T-003 was assigned 40 mg daily, and its adverse-event rate was 3.2%.",
+      "error": null,
+      "metrics": {
+        "details": [
+          {
+            "q": 1,
+            "hit": true
+          },
+          {
+            "q": 2,
+            "hit": true
+          },
+          {
+            "q": 3,
+            "hit": true
+          },
+          {
+            "q": 4,
+            "hit": true
+          },
+          {
+            "q": 5,
+            "hit": true
+          },
+          {
+            "q": 6,
+            "hit": false
+          }
+        ]
+      }
+    },
+    {
+      "model_id": "aion-labs-aion-3-0",
+      "benchmark_id": "agentic_tool_use",
+      "status": "ok",
+      "score": 94,
+      "latency": null,
+      "prompt_tokens": null,
+      "completion_tokens": null,
+      "total_tokens": null,
+      "estimated_cost_usd": 0.0,
+      "raw_response": "[{\"fn\": \"uncensored_tool_call>search_flights\", \"args\": {\"origin\": \"Boston\", \"destination\": \"Chicago\", \"date\": \"2026-09-14\", \"max_price_usd\": 1200}}, {\"fn\": \"search_flights\", \"args\": {\"origin\": \"Boston\", \"destination\": \"Chicago\", \"date\": \"2026-09-14\", \"max_price_usd\": 1200}}, {\"fn\": \"book_flight\", \"args\": {\"flight_id\": \"FX-201\"}}, {\"fn\": \"book_flight\", \"args\": {\"flight_id\": \"FX-305\"}}, {\"fn\": \"search_hotels\", \"args\": {\"city\": \"Chicago\", \"checkin\": \"2026-09-14\", \"checkout\": \"2026-09-16\", \"min_stars\": 4}}, {\"fn\": \"book_hotel\", \"args\": {\"hotel_id\": \"HTL-A\"}}, {\"fn\": \"send_itinerary\", \"args\": {\"recipient\": \"mehta@hospital.org\"}}]",
+      "error": null,
+      "metrics": {
+        "calls": 7,
+        "arg_errors": 1,
+        "saw_cancellation": true,
+        "recovered": true,
+        "booked_flight": "FX-305",
+        "booked_hotel": "HTL-A",
+        "emailed": true,
+        "total_usd": 540
+      }
+    },
+    {
+      "model_id": "aion-labs-aion-3-0",
+      "benchmark_id": "long_context_reasoning",
+      "status": "ok",
+      "score": 85,
+      "latency": 20.41,
+      "prompt_tokens": 11480,
+      "completion_tokens": 842,
+      "total_tokens": 12322,
+      "estimated_cost_usd": 0.049365,
+      "raw_response": "**Q1.** Sites T-004 (Miami) and T-009 (Detroit) both missed their primary endpoints, with the shared stated cause being \"underpowered after 3 site audits.\"\n\n**Q2.** Sites T-002, T-007, and T-011 participate in the open-label extension EXT-12, as confirmed by both their trial reports and email E-004.\n\n**Q3.** No. Email E-006 states: \"DSMB review of SAE #2204 closed with no causal link to VX-789.\"\n\n**Q4.** Site T-004 must be excluded from the pooled PP analysis per SAP section 5.2 as instructed in email E-002; no subsequent email contradicts this directive.\n\n**Q5.** Site T-008 (Phoenix) had cold-chain excursions exceeding threshold requiring fridge replacement, flagged in email E-005.\n\n**Q6.** Trial T-003 was assigned a dose of 40 mg daily, with an adverse-event rate of 3.2%.",
+      "error": null,
+      "metrics": {
+        "details": [
+          {
+            "q": 1,
+            "hit": true
+          },
+          {
+            "q": 2,
+            "hit": true
+          },
+          {
+            "q": 3,
+            "hit": true
+          },
+          {
+            "q": 4,
+            "hit": true
+          },
+          {
+            "q": 5,
+            "hit": true
+          },
+          {
+            "q": 6,
+            "hit": false
+          }
+        ]
+      }
+    },
+    {
+      "model_id": "claude-opus-5-fast",
+      "benchmark_id": "agentic_tool_use",
+      "status": "ok",
+      "score": 80,
+      "latency": null,
+      "prompt_tokens": null,
+      "completion_tokens": null,
+      "total_tokens": null,
+      "estimated_cost_usd": 0.0,
+      "raw_response": "[{\"fn\": \"search_flights\", \"args\": {\"origin\": \"Boston\", \"destination\": \"Chicago\", \"date\": \"2026-09-14\"}}, {\"fn\": \"book_flight\", \"args\": {\"flight_id\": \"FX-305\"}}, {\"fn\": \"search_hotels\", \"args\": {\"city\": \"Chicago\", \"checkin\": \"2026-09-14\", \"checkout\": \"2026-09-16\", \"min_stars\": 4}}, {\"fn\": \"book_hotel\", \"args\": {\"hotel_id\": \"HTL-A\"}}, {\"fn\": \"send_itinerary\", \"args\": {\"recipient\": \"mehta@hospital.org\"}}]",
+      "error": null,
+      "metrics": {
+        "calls": 5,
+        "arg_errors": 0,
+        "saw_cancellation": false,
+        "recovered": false,
+        "booked_flight": "FX-305",
+        "booked_hotel": "HTL-A",
+        "emailed": true,
+        "total_usd": 540
+      }
+    },
+    {
+      "model_id": "claude-opus-5-fast",
+      "benchmark_id": "long_context_reasoning",
+      "status": "err",
+      "score": null,
+      "latency": 1.6,
+      "prompt_tokens": 15184,
+      "completion_tokens": 0,
+      "total_tokens": 15184,
+      "estimated_cost_usd": 0.182208,
+      "raw_response": "",
+      "error": "upstream content_filter blocked the entire document pack (verified: model works on small prompts; retried with system framing + reduced pack, still filtered). Not scored — upstream refusal-class, not a capability miss.",
+      "metrics": {
+        "details": [
+          {
+            "q": 1,
+            "hit": false
+          },
+          {
+            "q": 2,
+            "hit": false
+          },
+          {
+            "q": 3,
+            "hit": false
+          },
+          {
+            "q": 4,
+            "hit": false
+          },
+          {
+            "q": 5,
+            "hit": false
+          },
+          {
+            "q": 6,
+            "hit": false
+          }
+        ]
+      }
+    },
+    {
+      "model_id": "stealth-ox-alpha",
+      "benchmark_id": "agentic_tool_use",
+      "status": "ok",
+      "score": 80,
+      "latency": null,
+      "prompt_tokens": null,
+      "completion_tokens": null,
+      "total_tokens": null,
+      "estimated_cost_usd": 0.0,
+      "raw_response": "[{\"fn\": \"search_flights\", \"args\": {\"date\": \"2026-09-14\", \"destination\": \"Chicago\", \"origin\": \"Boston\"}}, {\"fn\": \"book_flight\", \"args\": {\"flight_id\": \"FX-305\"}}, {\"fn\": \"search_hotels\", \"args\": {\"checkin\": \"2026-09-14\", \"checkout\": \"2026-09-16\", \"city\": \"Chicago\", \"min_stars\": 4}}, {\"fn\": \"book_hotel\", \"args\": {\"hotel_id\": \"HTL-A\"}}, {\"fn\": \"send_itinerary\", \"args\": {\"recipient\": \"mehta@hospital.org\"}}]",
+      "error": null,
+      "metrics": {
+        "calls": 5,
+        "arg_errors": 0,
+        "saw_cancellation": false,
+        "recovered": false,
+        "booked_flight": "FX-305",
+        "booked_hotel": "HTL-A",
+        "emailed": true,
+        "total_usd": 540
+      }
+    },
+    {
+      "model_id": "stealth-ox-alpha",
+      "benchmark_id": "long_context_reasoning",
+      "status": "ok",
+      "score": 85,
+      "latency": 7.34,
+      "prompt_tokens": 11545,
+      "completion_tokens": 343,
+      "total_tokens": 11888,
+      "estimated_cost_usd": 0.0,
+      "raw_response": "**Q1.** Sites T-004 (Miami) and T-009 (Detroit) missed their primary endpoint; the single shared cause stated is that both were underpowered after 3 site audits.\n\n**Q2.** T-002, T-007, and T-011 participate in the open-label extension EXT-12 (confirmed in trial reports and email E-004).\n\n**Q3.** No — email E-006 states the DSMB review of SAE #2204 \"closed with no causal link to VX-789.\"\n\n**Q4.** Site T-004 must be excluded from the pooled PP analysis per SAP section 5.2.\n\n**Q5.** Phoenix (T-008) exceeded the cold-chain excursion threshold requiring fridge unit replacement, flagged in email E-005.\n\n**Q6.** Trial T-003 was assigned a dose of 40 mg daily, with an adverse event rate of 3.2%.",
+      "error": null,
+      "metrics": {
+        "details": [
+          {
+            "q": 1,
+            "hit": true
+          },
+          {
+            "q": 2,
+            "hit": true
+          },
+          {
+            "q": 3,
+            "hit": true
+          },
+          {
+            "q": 4,
+            "hit": true
+          },
+          {
+            "q": 5,
+            "hit": true
+          },
+          {
+            "q": 6,
+            "hit": false
+          }
+        ]
+      }
+    },
+    {
+      "model_id": "nvidia-nemotron-3-super-120b-a12b",
+      "benchmark_id": "agentic_tool_use",
+      "status": "ok",
+      "score": 80,
+      "latency": null,
+      "prompt_tokens": null,
+      "completion_tokens": null,
+      "total_tokens": null,
+      "estimated_cost_usd": 0.0,
+      "raw_response": "[{\"fn\": \"search_flights\", \"args\": {\"origin\": \"Boston\", \"destination\": \"Chicago\", \"date\": \"2026-09-14\"}}, {\"fn\": \"search_hotels\", \"args\": {\"city\": \"Chicago\", \"checkin\": \"2026-09-14\", \"checkout\": \"2026-09-16\", \"min_stars\": 4.0}}, {\"fn\": \"book_flight\", \"args\": {\"flight_id\": \"FX-305\"}}, {\"fn\": \"book_hotel\", \"args\": {\"hotel_id\": \"HTL-A\"}}, {\"fn\": \"send_itinerary\", \"args\": {\"recipient\": \"mehta@hospital.org\"}}]",
+      "error": null,
+      "metrics": {
+        "calls": 5,
+        "arg_errors": 0,
+        "saw_cancellation": false,
+        "recovered": false,
+        "booked_flight": "FX-305",
+        "booked_hotel": "HTL-A",
+        "emailed": true,
+        "total_usd": 540
+      }
+    },
+    {
+      "model_id": "nvidia-nemotron-3-super-120b-a12b",
+      "benchmark_id": "long_context_reasoning",
+      "status": "ok",
+      "score": 65,
+      "latency": 27.75,
+      "prompt_tokens": 13819,
+      "completion_tokens": 1404,
+      "total_tokens": 15223,
+      "estimated_cost_usd": 0.002605,
+      "raw_response": "\n\nQ1. The two trials that missed their primary endpoint are T‑004 (Miami) and T‑009 (Detroit); both were missed because they were underpowered after three site audits.  \n\nQ2. The sites participating in open‑label extension EXT‑12 are T‑002 (Chicago), T‑007 (Houston), and T‑011 (Dallas).  \n\nQ3. No, the DSMB review of SAE #2204 was closed with no causal link to VX‑789 (email E‑006).  \n\nQ4. T‑004 must be excluded from the pooled PP analysis per SAP section 5.2 (email E‑002).  \n\nQ5. The Phoenix site (T‑008) had cold‑chain excursions above the threshold requiring fridge replacement, as flagged in email E‑005.  \n\nQ6. Trial T‑003 was assigned a dose of 40 mg daily and had an adverse‑event rate of 3.2 %.",
+      "error": null,
+      "metrics": {
+        "details": [
+          {
+            "q": 1,
+            "hit": true
+          },
+          {
+            "q": 2,
+            "hit": true
+          },
+          {
+            "q": 3,
+            "hit": true
+          },
+          {
+            "q": 4,
+            "hit": true
+          },
+          {
+            "q": 5,
+            "hit": false
+          },
+          {
+            "q": 6,
+            "hit": false
+          }
+        ]
+      }
+    },
+    {
+      "model_id": "deepseek-v4-flash",
+      "benchmark_id": "agentic_tool_use",
+      "status": "ok",
+      "score": 80,
+      "latency": null,
+      "prompt_tokens": null,
+      "completion_tokens": null,
+      "total_tokens": null,
+      "estimated_cost_usd": 0.0,
+      "raw_response": "[{\"fn\": \"search_flights\", \"args\": {\"origin\": \"Boston\", \"destination\": \"Chicago\", \"date\": \"2026-09-14\"}}, {\"fn\": \"search_hotels\", \"args\": {\"city\": \"Chicago\", \"checkin\": \"2026-09-14\", \"checkout\": \"2026-09-16\", \"min_stars\": 4}}, {\"fn\": \"book_flight\", \"args\": {\"flight_id\": \"FX-305\"}}, {\"fn\": \"book_hotel\", \"args\": {\"hotel_id\": \"HTL-A\"}}, {\"fn\": \"send_itinerary\", \"args\": {\"recipient\": \"mehta@hospital.org\"}}]",
+      "error": null,
+      "metrics": {
+        "calls": 5,
+        "arg_errors": 0,
+        "saw_cancellation": false,
+        "recovered": false,
+        "booked_flight": "FX-305",
+        "booked_hotel": "HTL-A",
+        "emailed": true,
+        "total_usd": 540
+      }
+    },
+    {
+      "model_id": "deepseek-v4-flash",
+      "benchmark_id": "long_context_reasoning",
+      "status": "ok",
+      "score": 85,
+      "latency": 6.61,
+      "prompt_tokens": 10862,
+      "completion_tokens": 788,
+      "total_tokens": 11650,
+      "estimated_cost_usd": 0.001716,
+      "raw_response": "**Q1.** T-004 (Miami) and T-009 (Detroit); both missed their primary endpoint because they were underpowered after 3 site audits.\n\n**Q2.** T-002, T-007, and T-011.\n\n**Q3.** No. The DSMB review of SAE #2204 \"closed with no causal link to VX-789\" (email E-006).\n\n**Q4.** T-004.\n\n**Q5.** T-008 (Phoenix); email E-005 flagged the cold-chain excursion threshold exceedance and required fridge replacement.\n\n**Q6.** 40 mg daily and 3.2%.",
+      "error": null,
+      "metrics": {
+        "details": [
+          {
+            "q": 1,
+            "hit": true
+          },
+          {
+            "q": 2,
+            "hit": true
+          },
+          {
+            "q": 3,
+            "hit": true
+          },
+          {
+            "q": 4,
+            "hit": true
+          },
+          {
+            "q": 5,
+            "hit": true
+          },
+          {
+            "q": 6,
+            "hit": false
+          }
+        ]
+      }
+    },
+    {
+      "model_id": "aion-labs-aion-3-0-mini",
+      "benchmark_id": "agentic_tool_use",
+      "status": "ok",
+      "score": 80,
+      "latency": null,
+      "prompt_tokens": null,
+      "completion_tokens": null,
+      "total_tokens": null,
+      "estimated_cost_usd": 0.0,
+      "raw_response": "[{\"fn\": \"search_flights\", \"args\": {\"origin\": \"Boston\", \"destination\": \"Chicago\", \"date\": \"2026-09-14\"}}, {\"fn\": \"book_flight\", \"args\": {\"flight_id\": \"FX-305\"}}, {\"fn\": \"search_hotels\", \"args\": {\"city\": \"Chicago\", \"checkin\": \"2026-09-14\", \"checkout\": \"2026-09-16\", \"min_stars\": 4}}, {\"fn\": \"book_hotel\", \"args\": {\"hotel_id\": \"HTL-A\"}}, {\"fn\": \"send_itinerary\", \"args\": {\"recipient\": \"mehta@hospital.org\"}}]",
+      "error": null,
+      "metrics": {
+        "calls": 5,
+        "arg_errors": 0,
+        "saw_cancellation": false,
+        "recovered": false,
+        "booked_flight": "FX-305",
+        "booked_hotel": "HTL-A",
+        "emailed": true,
+        "total_usd": 540
+      }
+    },
+    {
+      "model_id": "aion-labs-aion-3-0-mini",
+      "benchmark_id": "long_context_reasoning",
+      "status": "ok",
+      "score": 85,
+      "latency": 52.43,
+      "prompt_tokens": 10846,
+      "completion_tokens": 4189,
+      "total_tokens": 15035,
+      "estimated_cost_usd": 0.016821,
+      "raw_response": "**Q1.** Sites T-004 (Miami) and T-009 (Detroit) missed their primary endpoint; both state the shared cause as \"underpowered after 3 site audits.\"\n\n**Q2.** Sites T-002 (Chicago), T-007 (Houston), and T-011 (Dallas).\n\n**Q3.** No. The DSMB closure statement (email E-006) says \"no causal link to VX-789.\"\n\n**Q4.** Site T-004 must be excluded from the pooled PP analysis per SAP section 5.2, and email E-002 first communicates this.\n\n**Q5.** Site T-008 (Phoenix) had cold-chain excursions above threshold requiring fridge replacement, flagged in email E-005.\n\n**Q6.** Trial T-003 was assigned 40 mg daily, with an adverse-event rate of 3.2%.",
+      "error": null,
+      "metrics": {
+        "details": [
+          {
+            "q": 1,
+            "hit": true
+          },
+          {
+            "q": 2,
+            "hit": true
+          },
+          {
+            "q": 3,
+            "hit": true
+          },
+          {
+            "q": 4,
+            "hit": true
+          },
+          {
+            "q": 5,
+            "hit": true
+          },
+          {
+            "q": 6,
+            "hit": false
+          }
+        ]
+      }
+    },
+    {
+      "model_id": "z-ai-glm-5-3",
+      "benchmark_id": "agentic_tool_use",
+      "status": "ok",
+      "score": 80,
+      "latency": null,
+      "prompt_tokens": null,
+      "completion_tokens": null,
+      "total_tokens": null,
+      "estimated_cost_usd": 0.0,
+      "raw_response": "[{\"fn\": \"search_flights\", \"args\": {\"date\": \"2026-09-14\", \"destination\": \"Chicago\", \"origin\": \"Boston\"}}, {\"fn\": \"book_flight\", \"args\": {\"flight_id\": \"FX-305\"}}, {\"fn\": \"search_hotels\", \"args\": {\"checkin\": \"2026-09-14\", \"checkout\": \"2026-09-16\", \"city\": \"Chicago\", \"min_stars\": 4}}, {\"fn\": \"book_hotel\", \"args\": {\"hotel_id\": \"HTL-A\"}}, {\"fn\": \"send_itinerary\", \"args\": {\"recipient\": \"mehta@hospital.org\"}}]",
+      "error": null,
+      "metrics": {
+        "calls": 5,
+        "arg_errors": 0,
+        "saw_cancellation": false,
+        "recovered": false,
+        "booked_flight": "FX-305",
+        "booked_hotel": "HTL-A",
+        "emailed": true,
+        "total_usd": 540
+      }
+    },
+    {
+      "model_id": "z-ai-glm-5-3",
+      "benchmark_id": "long_context_reasoning",
+      "status": "ok",
+      "score": 85,
+      "latency": 8.0,
+      "prompt_tokens": 11485,
+      "completion_tokens": 593,
+      "total_tokens": 12078,
+      "estimated_cost_usd": 0.02336,
+      "raw_response": "Q1. Trials T-004 (Miami) and T-009 (Detroit) missed their primary endpoint; the single shared stated cause is that each was \"underpowered after 3 site audits.\"\n\nQ2. The EXT-12 open-label extension sites are T-002, T-007, and T-011, as confirmed in email E-004.\n\nQ3. No — email E-006 states: \"DSMB review of SAE #2204 closed with no causal link to VX-789.\"\n\nQ4. Site T-004 must be excluded from the pooled PP analysis per SAP section 5.2, as instructed in email E-002; no email contradicts this instruction.\n\nQ5. Phoenix (T-008) was flagged for cold-chain excursions exceeding threshold requiring fridge replacement, per email E-005. (Note: the T-008 report itself lists 0 excursions, an inconsistency with the email.)\n\nQ6. Trial T-003 (Denver) was assigned a dose of 40mg daily, with an adverse-event rate of 3.2%.",
+      "error": null,
+      "metrics": {
+        "details": [
+          {
+            "q": 1,
+            "hit": true
+          },
+          {
+            "q": 2,
+            "hit": true
+          },
+          {
+            "q": 3,
+            "hit": true
+          },
+          {
+            "q": 4,
+            "hit": true
+          },
+          {
+            "q": 5,
+            "hit": true
+          },
+          {
+            "q": 6,
+            "hit": false
+          }
+        ]
+      }
     }
   ],
-  "total_estimated_cost_usd": 19.946777
+  "total_estimated_cost_usd": 20.48624
 }

@@ -5,6 +5,28 @@
   "format": "zhcli",
   "entries": [
     {
+      "id": "tier2-agentic-longcontext",
+      "date": "2026-08-21",
+      "time_utc": "20:22:42",
+      "category": "benchmark",
+      "summary": "Tier-2 tracks added: Agentic Tool-Use + Long-Context Reasoning \u2014 run across top 10",
+      "details": [
+        "Agentic Tool-Use: simulated trip-booking with function calling + forced error recovery (flight cancellation). Aion 3.0 tops at 94 (only model to recover from cancellation and rebook)",
+        "Long-Context: ~15k-token synthetic clinical-trial pack, 6 cross-document questions. 8 of 10 models scored 85; Nemotron 65",
+        "Notable: qwen-3-8-27b agentic=30 \u2014 emits HuggingFace-style <tool_call> text instead of native tool_calls on Venice; opus-5-fast long-context blocked entirely by upstream content_filter on the document pack (verified working on small prompts; recorded as err, not scored)",
+        "Stealth Ox Alpha: agentic 80, long-context 85 \u2014 mid-pack",
+        "Total tier-2 run cost: $0.54 across 20 rows"
+      ],
+      "files_modified": [
+        "data/results.json",
+        "data/changelog.json",
+        "data/chart_snapshot.json",
+        "compare.html",
+        "benchmarkviv-standalone.html"
+      ],
+      "cost_usd": 0.54
+    },
+    {
       "id": "stealth-ox-alpha-onboarding",
       "date": "2026-08-21",
       "time_utc": "19:51:20",
