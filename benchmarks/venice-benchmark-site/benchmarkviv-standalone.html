@@ -2081,7 +2081,144 @@ button:not(.primary):hover { background: var(--md-state-hover); border-color: va
 .ripple { position: absolute; border-radius: 50%; transform: scale(0); animation: ripple .5s var(--ease) forwards; background: rgba(0,169,143,.25); pointer-events: none; }
 @keyframes ripple { to { transform: scale(3.2); opacity: 0; } }
 
-/* model selector popover */
+
+/* ── Comparison board toolbar: search / sort / provider chips ────────── */
+.board-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 1rem 0 1.25rem;
+}
+.board-search {
+  flex: 1 1 15rem;
+  min-width: 0;
+  padding: 0.55rem 0.9rem;
+  font: 500 0.92rem var(--font-body);
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--rule-strong);
+  border-radius: 999px !important; /* intentional pill, not an img-zoom */
+  outline: none;
+}
+.board-search:focus-visible {
+  border-color: var(--cobalt);
+  box-shadow: 0 0 0 3px var(--acid-soft);
+}
+.board-sort,
+.board-provider {
+  flex: 0 1 auto;
+  max-width: 100%;
+  padding: 0.5rem 0.8rem;
+  font: 600 0.88rem var(--font-body);
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--rule-strong);
+  border-radius: 10px !important;
+  cursor: pointer;
+}
+.board-count {
+  font: 600 0.82rem var(--font-mono);
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+.board-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 0 0 1.1rem;
+}
+.board-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.32rem 0.8rem;
+  font: 600 0.8rem var(--font-body);
+  color: var(--text-dim);
+  background: var(--surface);
+  border: 1px solid var(--rule-strong);
+  border-radius: 999px !important; /* chip pill by design */
+  cursor: pointer;
+  transition: border-color 140ms ease, color 140ms ease, background 140ms ease;
+}
+.board-chip:hover { border-color: var(--cobalt); color: var(--text); }
+.board-chip[aria-pressed="true"] {
+  background: var(--acid-soft);
+  border-color: var(--cobalt);
+  color: var(--text);
+}
+.board-chip .chip-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.35em;
+  height: 1.35em;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--brand, var(--text-faint));
+  color: #fff;
+  font: 700 0.62em var(--font-mono);
+}
+.cmp-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--brand, var(--text-faint));
+  color: #fff;
+  font: 700 0.72rem var(--font-mono);
+}
+.cmp-byl {
+  margin: -0.5rem 0 0.35rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--text-dim);
+}
+@media (max-width: 480px) {
+  .board-search { flex-basis: 100%; }
+  .board-sort,
+  .board-provider { flex: 1 1 auto; }
+}
+
+/* ── Sticky mobile back-to-board shortcut ───────────────────────────── */
+.board-jump {
+  position: fixed;
+  left: 50%;
+  bottom: 1rem;
+  transform: translateX(-50%) translateY(200%);
+  z-index: 300;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.6rem 1.1rem;
+  font: 600 0.85rem var(--font-body);
+  color: #fff;
+  text-decoration: none;
+  background: var(--indigo, #1A1A2E);
+  border-radius: 999px;
+  box-shadow: 0 10px 24px rgba(26, 26, 46, 0.28);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 220ms var(--ease), opacity 220ms ease;
+}
+.board-jump.is-visible {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+.board-jump:hover { background: #26264a; }
+@media (min-width: 769px) {
+  .board-jump { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .board-jump { transition: none; }
+  .board-chip { transition: none; }
+}
+
 .model-select-btn {
   display: inline-flex; align-items: center; gap: 8px;
   background: var(--md-surface); border: 1px solid var(--md-outline);
@@ -2105,6 +2242,25 @@ button:not(.primary):hover { background: var(--md-state-hover); border-color: va
 .model-row .vi { font-family: var(--font-mono); font-size: 11px; color: var(--md-on-surface-variant); }
 
 @media (prefers-reduced-motion: reduce) { .ripple { display: none; } }
+
+/* ══════════════════════════════════════════════════════════
+   LEADERBOARD IMAGE CLIP FIX (2026-08-21) — keep LAST in file.
+   The Material overlay's `button:not(.primary)` rule resolves to
+   border-radius: 999px !important + inherited overflow clipping, which
+   turned the 41-row VivIndex leaderboard chart frame into a circle and
+   hid the top/bottom model rows. img-zoom buttons must never be pills.
+   ══════════════════════════════════════════════════════════ */
+button.img-zoom,
+.img-zoom,
+.img-zoom .feature-img,
+.feature-img {
+  border-radius: var(--radius, 10px) !important;
+  overflow: visible !important;
+}
+.img-zoom .img-zoom-hint {
+  overflow: hidden;
+}
+
 
 </style>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
@@ -2392,9 +2548,23 @@ button:not(.primary):hover { background: var(--md-state-hover); border-color: va
   <section id="comparison">
     <div class="container">
       <div class="section-head">
-        <h2>Per-model profiles</h2>
-        <p>Score distribution across all six benchmark tracks.</p>
+        <h2>All models, one glance</h2>
+        <p>Search, filter by company, and sort. Tap any card for its full profile.</p>
       </div>
+      <div class="board-tools">
+        <input class="board-search" id="modelSearch" type="search" placeholder="Search model or company…" aria-label="Search models" autocomplete="off" />
+        <select class="board-sort" id="modelSort" aria-label="Sort models">
+          <option value="viv">Sort · Best first</option>
+          <option value="cost">Sort · Cheapest</option>
+          <option value="speed">Sort · Fastest</option>
+          <option value="alpha">Sort · A–Z</option>
+        </select>
+        <select class="board-provider" id="providerFilter" aria-label="Filter by company">
+          <option value="all">All companies</option>
+        </select>
+        <span class="board-count" id="modelCount"></span>
+      </div>
+      <div class="board-chips" id="providerChips" role="group" aria-label="Filter by company"></div>
       <div class="compare-grid" id="modelComparison"></div>
     </div>
   </section>
@@ -2454,6 +2624,8 @@ button:not(.primary):hover { background: var(--md-state-hover); border-color: va
       </div>
     </div>
   </footer>
+
+  <a href="#comparison" class="board-jump" id="boardJump" aria-hidden="true" tabindex="-1">↓ Model board</a>
 
   <script>
 /* BenchmarkViv — assets/app.js */
@@ -2523,6 +2695,29 @@ button:not(.primary):hover { background: var(--md-state-hover); border-color: va
     const b = parseInt(hex.slice(5, 7), 16);
     return `rgba(${r}, ${g}, ${b}, ${alpha})`;
   }
+
+  // Company brand logo glyphs + display names for the comparison board.
+  const PROVIDER_BRAND = {
+    openai:   { glyph: "O",  name: "OpenAI" },
+    claude:   { glyph: "An", name: "Anthropic" },
+    deepseek: { glyph: "DS", name: "DeepSeek" },
+    gemini:   { glyph: "G",  name: "Google Gemini" },
+    grok:     { glyph: "X",  name: "xAI" },
+    qwen:     { glyph: "Q",  name: "Alibaba Qwen" },
+    kimi:     { glyph: "K",  name: "Moonshot Kimi" },
+    minimax:  { glyph: "MM", name: "MiniMax" },
+    glm:      { glyph: "Z",  name: "Z-AI / GLM" },
+    nvidia:   { glyph: "N",  name: "NVIDIA" },
+    mistral:  { glyph: "Mi", name: "Mistral" },
+    aion:     { glyph: "A",  name: "Aion Labs" },
+    inkling:  { glyph: "I",  name: "Inkling" },
+    xiaomi:   { glyph: "Xi", name: "Xiaomi" },
+    other:    { glyph: "?",  name: "Other" },
+  };
+  function providerBrand(name) {
+    return PROVIDER_BRAND[providerOf(name)] || PROVIDER_BRAND.other;
+  }
+
 
   const FALLBACK_DATA = { generated: "", source: "fallback", results: [] };
 
@@ -2963,20 +3158,45 @@ button:not(.primary):hover { background: var(--md-state-hover); border-color: va
     if (!container) return;
     state.charts.sparklines.forEach((c) => c.destroy());
     state.charts.sparklines = [];
-    // Board rank = raw VivIndex (same rule as stats panel + infographics),
-    // so the #1 card is always the true leader.
-    const aggs = modelAggregates(state.data).sort((a, b) => b.vivIndex - a.vivIndex);
+
+    // Read live board controls (search + sort + provider filter).
+    const searchEl = $("#modelSearch");
+    const sortEl = $("#modelSort");
+    const provEl = $("#providerFilter");
+    const q = (searchEl ? searchEl.value || "" : "").trim().toLowerCase();
+    const sortKey = sortEl ? sortEl.value || "viv" : "viv";
+    const provKey = provEl ? provEl.value || "all" : "all";
+
+    let aggs = modelAggregates(state.data);
+    // Provider filter
+    if (provKey !== "all") aggs = aggs.filter((a) => providerOf(a.model) === provKey);
+    // Text search across model name + provider brand name
+    if (q) aggs = aggs.filter((a) =>
+      a.model.toLowerCase().includes(q) || providerBrand(a.model).name.toLowerCase().includes(q));
+    // Sort
+    if (sortKey === "cost") aggs = aggs.sort((a, b) => a.avgCost - b.avgCost);
+    else if (sortKey === "speed") aggs = aggs.sort((a, b) => (b.tokensPerSec || 0) - (a.tokensPerSec || 0));
+    else if (sortKey === "alpha") aggs = aggs.sort((a, b) => a.model.localeCompare(b.model));
+    else aggs = aggs.sort((a, b) => b.vivIndex - a.vivIndex);
+
+    // Live count
+    const countEl = $("#modelCount");
+    if (countEl) countEl.textContent = `${aggs.length} model${aggs.length === 1 ? "" : "s"}`;
 
     container.innerHTML = aggs.map((a, i) => {
       const row = state.data.find((r) => r.model === a.model);
       const slug = (row && row.modelId ? row.modelId : a.model.toLowerCase()).replace(/_/g, "-");
-      const top = i === 0;
+      const top = i === 0 && sortKey === "viv";
+      const brand = providerBrand(a.model);
+      const provColor = modelColor(a.model);
       return `
       <article class="compare-card reveal${top ? " is-top" : ""}">
         <header>
           <span class="badge">#${i + 1}</span>
+          <span class="cmp-logo" style="--brand:${provColor}" title="${brand.name}" aria-label="${brand.name}">${brand.glyph}</span>
           <h3>${a.model}</h3>
         </header>
+        <div class="cmp-byl">${brand.name}</div>
         <div class="score">${a.vivIndex.toFixed(1)}<small style="font-size:.45em;color:var(--ink-2);font-weight:500"> VivIndex</small></div>
         <dl>
           <div><dt>Latency</dt><dd>${a.avgLatency.toFixed(1)}s</dd></div>
@@ -2990,7 +3210,7 @@ button:not(.primary):hover { background: var(--md-state-hover); border-color: va
     }).join("");
 
     aggs.forEach((a, i) => {
-      const canvas = container.children[i].querySelector("canvas");
+      const canvas = container.children[i] ? container.children[i].querySelector("canvas") : null;
       if (!canvas || typeof Chart === "undefined") return;
       state.charts.sparklines.push(new Chart(canvas, {
         type: "line",
@@ -3351,10 +3571,91 @@ button:not(.primary):hover { background: var(--md-state-hover); border-color: va
     host.insertBefore(wrap, host.firstChild);
   }
 
-  async function init() {
+  // ── Board toolbar: provider chips, live search/sort re-render, sticky mobile shortcut ──
+  function initBoardControls() {
+    const searchEl = $("#modelSearch");
+    const sortEl = $("#modelSort");
+    const provSelect = $("#providerFilter");
+    const chipsHost = $("#providerChips");
+    if (!searchEl && !sortEl && !provSelect) return;
+
+    // Build provider chips from the full roster (discover, don't hardcode) —
+    // independent of the active chart-selection so no provider is hidden.
+    const provKeys = [...new Set(uniqueModels(state.data).map((m) => providerOf(m)))]
+      .filter((k) => PROVIDER_BRAND[k]);
+    let activeProv = "all";
+
+    if (chipsHost) {
+      const mkChip = (value, label, color) => {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.className = "board-chip";
+        b.setAttribute("aria-pressed", String(value === activeProv));
+        b.dataset.prov = value;
+        b.innerHTML = (color ? `<span class="chip-logo" style="--brand:${color}">${PROVIDER_BRAND[value].glyph}</span>` : "") + label;
+        b.addEventListener("click", () => {
+          activeProv = value;
+          if (provSelect) provSelect.value = value === "all" ? "all" : value;
+          chipsHost.querySelectorAll(".board-chip").forEach((c) =>
+            c.setAttribute("aria-pressed", String(c.dataset.prov === activeProv)));
+          renderComparison();
+        });
+        return b;
+      };
+      chipsHost.appendChild(mkChip("all", "All providers", null));
+      provKeys.forEach((k) => chipsHost.appendChild(mkChip(k, PROVIDER_BRAND[k].name, PROVIDER_COLORS[k] || PROVIDER_COLORS.other)));
+    }
+
+    // Keep the <select> fallback in sync with chips.
+    if (provSelect) {
+      provKeys.forEach((k) => {
+        if ([...provSelect.options].some((o) => o.value === k)) return;
+        const o = document.createElement("option");
+        o.value = k;
+        o.textContent = PROVIDER_BRAND[k].name;
+        provSelect.appendChild(o);
+      });
+      provSelect.addEventListener("change", () => {
+        activeProv = provSelect.value;
+        if (chipsHost) chipsHost.querySelectorAll(".board-chip").forEach((c) =>
+          c.setAttribute("aria-pressed", String(c.dataset.prov === activeProv)));
+        renderComparison();
+      });
+    }
+
+    // Live filter: debounce so fast typing doesn't thrash Chart.js sparklines.
+    if (searchEl) {
+      let t;
+      searchEl.addEventListener("input", () => {
+        clearTimeout(t);
+        t = setTimeout(renderComparison, 160);
+      });
+    }
+    if (sortEl) sortEl.addEventListener("change", renderComparison);
+
+    // Sticky "back to board" pill on mobile: shows once the board has been
+    // scrolled past, hides when it is on screen. Disabled for reduced motion
+    // users only in the sense that transitions are disabled; visibility logic stays.
+    const board = $("#comparison");
+    const jump = $("#boardJump");
+    if (board && jump && "IntersectionObserver" in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          const past = !e.isIntersecting && e.boundingClientRect.top < 0;
+          jump.classList.toggle("is-visible", past);
+          jump.setAttribute("aria-hidden", String(!past));
+          jump.tabIndex = past ? 0 : -1;
+        });
+      }, { threshold: 0 });
+      io.observe(board);
+    }
+  }
+
+    async function init() {
     initMobileNav();
     await loadData();
     initModelSelector();
+    initBoardControls();
     renderAllCharts();
     renderComparison();
     populateStats();

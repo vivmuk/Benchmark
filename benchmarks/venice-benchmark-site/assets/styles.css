@@ -2056,7 +2056,144 @@ button:not(.primary):hover { background: var(--md-state-hover); border-color: va
 .ripple { position: absolute; border-radius: 50%; transform: scale(0); animation: ripple .5s var(--ease) forwards; background: rgba(0,169,143,.25); pointer-events: none; }
 @keyframes ripple { to { transform: scale(3.2); opacity: 0; } }
 
-/* model selector popover */
+
+/* ── Comparison board toolbar: search / sort / provider chips ────────── */
+.board-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 1rem 0 1.25rem;
+}
+.board-search {
+  flex: 1 1 15rem;
+  min-width: 0;
+  padding: 0.55rem 0.9rem;
+  font: 500 0.92rem var(--font-body);
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--rule-strong);
+  border-radius: 999px !important; /* intentional pill, not an img-zoom */
+  outline: none;
+}
+.board-search:focus-visible {
+  border-color: var(--cobalt);
+  box-shadow: 0 0 0 3px var(--acid-soft);
+}
+.board-sort,
+.board-provider {
+  flex: 0 1 auto;
+  max-width: 100%;
+  padding: 0.5rem 0.8rem;
+  font: 600 0.88rem var(--font-body);
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--rule-strong);
+  border-radius: 10px !important;
+  cursor: pointer;
+}
+.board-count {
+  font: 600 0.82rem var(--font-mono);
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+.board-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 0 0 1.1rem;
+}
+.board-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.32rem 0.8rem;
+  font: 600 0.8rem var(--font-body);
+  color: var(--text-dim);
+  background: var(--surface);
+  border: 1px solid var(--rule-strong);
+  border-radius: 999px !important; /* chip pill by design */
+  cursor: pointer;
+  transition: border-color 140ms ease, color 140ms ease, background 140ms ease;
+}
+.board-chip:hover { border-color: var(--cobalt); color: var(--text); }
+.board-chip[aria-pressed="true"] {
+  background: var(--acid-soft);
+  border-color: var(--cobalt);
+  color: var(--text);
+}
+.board-chip .chip-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.35em;
+  height: 1.35em;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--brand, var(--text-faint));
+  color: #fff;
+  font: 700 0.62em var(--font-mono);
+}
+.cmp-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--brand, var(--text-faint));
+  color: #fff;
+  font: 700 0.72rem var(--font-mono);
+}
+.cmp-byl {
+  margin: -0.5rem 0 0.35rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--text-dim);
+}
+@media (max-width: 480px) {
+  .board-search { flex-basis: 100%; }
+  .board-sort,
+  .board-provider { flex: 1 1 auto; }
+}
+
+/* ── Sticky mobile back-to-board shortcut ───────────────────────────── */
+.board-jump {
+  position: fixed;
+  left: 50%;
+  bottom: 1rem;
+  transform: translateX(-50%) translateY(200%);
+  z-index: 300;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.6rem 1.1rem;
+  font: 600 0.85rem var(--font-body);
+  color: #fff;
+  text-decoration: none;
+  background: var(--indigo, #1A1A2E);
+  border-radius: 999px;
+  box-shadow: 0 10px 24px rgba(26, 26, 46, 0.28);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 220ms var(--ease), opacity 220ms ease;
+}
+.board-jump.is-visible {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+.board-jump:hover { background: #26264a; }
+@media (min-width: 769px) {
+  .board-jump { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .board-jump { transition: none; }
+  .board-chip { transition: none; }
+}
+
 .model-select-btn {
   display: inline-flex; align-items: center; gap: 8px;
   background: var(--md-surface); border: 1px solid var(--md-outline);
@@ -2080,3 +2217,23 @@ button:not(.primary):hover { background: var(--md-state-hover); border-color: va
 .model-row .vi { font-family: var(--font-mono); font-size: 11px; color: var(--md-on-surface-variant); }
 
 @media (prefers-reduced-motion: reduce) { .ripple { display: none; } }
+
+/* ══════════════════════════════════════════════════════════
+   LEADERBOARD IMAGE CLIP FIX (2026-08-21) — keep LAST in file.
+   The Material overlay's `button:not(.primary)` rule resolves to
+   border-radius: 999px !important + inherited overflow clipping, which
+   turned the 41-row VivIndex leaderboard chart frame into a circle and
+   hid the top/bottom model rows. img-zoom buttons must never be pills.
+   ══════════════════════════════════════════════════════════ */
+button.img-zoom.img-zoom,
+button.img-zoom,
+.img-zoom,
+.img-zoom .feature-img,
+.feature-img {
+  border-radius: var(--radius, 10px) !important;
+  overflow: visible !important;
+}
+.img-zoom .img-zoom-hint {
+  overflow: hidden;
+}
+

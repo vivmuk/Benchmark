@@ -66,6 +66,29 @@
     return `rgba(${r}, ${g}, ${b}, ${alpha})`;
   }
 
+  // Company brand logo glyphs + display names for the comparison board.
+  const PROVIDER_BRAND = {
+    openai:   { glyph: "O",  name: "OpenAI" },
+    claude:   { glyph: "An", name: "Anthropic" },
+    deepseek: { glyph: "DS", name: "DeepSeek" },
+    gemini:   { glyph: "G",  name: "Google Gemini" },
+    grok:     { glyph: "X",  name: "xAI" },
+    qwen:     { glyph: "Q",  name: "Alibaba Qwen" },
+    kimi:     { glyph: "K",  name: "Moonshot Kimi" },
+    minimax:  { glyph: "MM", name: "MiniMax" },
+    glm:      { glyph: "Z",  name: "Z-AI / GLM" },
+    nvidia:   { glyph: "N",  name: "NVIDIA" },
+    mistral:  { glyph: "Mi", name: "Mistral" },
+    aion:     { glyph: "A",  name: "Aion Labs" },
+    inkling:  { glyph: "I",  name: "Inkling" },
+    xiaomi:   { glyph: "Xi", name: "Xiaomi" },
+    other:    { glyph: "?",  name: "Other" },
+  };
+  function providerBrand(name) {
+    return PROVIDER_BRAND[providerOf(name)] || PROVIDER_BRAND.other;
+  }
+
+
   const FALLBACK_DATA = { generated: "", source: "fallback", results: [] };
 
   // VivIndex remains the original four-track composite. Pharma tracks are shown in
@@ -507,24 +530,56 @@
     if (!container) return;
     state.charts.sparklines.forEach((c) => c.destroy());
     state.charts.sparklines = [];
-    // Board rank = raw VivIndex (same rule as stats panel + infographics),
-    // so the #1 card is always the true leader.
-    const aggs = modelAggregates(state.data).sort((a, b) => b.vivIndex - a.vivIndex);
+
+    // Read live board controls (search + sort + provider filter).
+    const searchEl = $("#modelSearch");
+    const sortEl = $("#modelSort");
+    const provEl = $("#providerFilter");
+    const q = (searchEl ? searchEl.value || "" : "").trim().toLowerCase();
+    const sortKey = sortEl ? sortEl.value || "viv" : "viv";
+    const provKey = provEl ? provEl.value || "all" : "all";
+
+    let aggs = modelAggregates(state.data);
+    // Provider filter
+    if (provKey !== "all") aggs = aggs.filter((a) => providerOf(a.model) === provKey);
+    // Text search across model name + provider brand name
+    if (q) aggs = aggs.filter((a) =>
+      a.model.toLowerCase().includes(q) || providerBrand(a.model).name.toLowerCase().includes(q));
+    // Sort (null-safe: missing cost/speed sinks to the bottom, never NaN)
+    const byNum = (get) => (a, b) => {
+      const va = get(a), vb = get(b);
+      if (va == null && vb == null) return b.vivIndex - a.vivIndex;
+      if (va == null) return 1;
+      if (vb == null) return -1;
+      return va - vb;
+    };
+    if (sortKey === "cost") aggs = aggs.sort(byNum((a) => (Number.isFinite(a.avgCost) && a.avgCost > 0 ? a.avgCost : null)));
+    else if (sortKey === "speed") aggs = aggs.sort((a, b) => (b.tokensPerSec || 0) - (a.tokensPerSec || 0));
+    else if (sortKey === "alpha") aggs = aggs.sort((a, b) => a.model.localeCompare(b.model));
+    else aggs = aggs.sort((a, b) => b.vivIndex - a.vivIndex);
+
+    // Live count
+    const countEl = $("#modelCount");
+    if (countEl) countEl.textContent = `${aggs.length} model${aggs.length === 1 ? "" : "s"}`;
 
     container.innerHTML = aggs.map((a, i) => {
       const row = state.data.find((r) => r.model === a.model);
       const slug = (row && row.modelId ? row.modelId : a.model.toLowerCase()).replace(/_/g, "-");
-      const top = i === 0;
+      const top = i === 0 && sortKey === "viv";
+      const brand = providerBrand(a.model);
+      const provColor = modelColor(a.model);
       return `
       <article class="compare-card reveal${top ? " is-top" : ""}">
         <header>
           <span class="badge">#${i + 1}</span>
+          <span class="cmp-logo" style="--brand:${provColor}" title="${brand.name}" aria-label="${brand.name}">${brand.glyph}</span>
           <h3>${a.model}</h3>
         </header>
+        <div class="cmp-byl">${brand.name}</div>
         <div class="score">${a.vivIndex.toFixed(1)}<small style="font-size:.45em;color:var(--ink-2);font-weight:500"> VivIndex</small></div>
         <dl>
           <div><dt>Latency</dt><dd>${a.avgLatency.toFixed(1)}s</dd></div>
-          <div><dt>Cost/run</dt><dd>$${a.avgCost.toFixed(3)}</dd></div>
+          <div><dt>Cost/run</dt><dd>${Number.isFinite(a.avgCost) && a.avgCost > 0 ? "$" + a.avgCost.toFixed(3) : "—"}</dd></div>
           <div><dt>Speed</dt><dd>${a.tokensPerSec != null ? a.tokensPerSec.toFixed(0) + " tok/s" : "—"}</dd></div>
         </dl>
         <div class="spark-wrap"><canvas></canvas></div>
@@ -534,7 +589,7 @@
     }).join("");
 
     aggs.forEach((a, i) => {
-      const canvas = container.children[i].querySelector("canvas");
+      const canvas = container.children[i] ? container.children[i].querySelector("canvas") : null;
       if (!canvas || typeof Chart === "undefined") return;
       state.charts.sparklines.push(new Chart(canvas, {
         type: "line",
@@ -895,10 +950,91 @@
     host.insertBefore(wrap, host.firstChild);
   }
 
-  async function init() {
+  // ── Board toolbar: provider chips, live search/sort re-render, sticky mobile shortcut ──
+  function initBoardControls() {
+    const searchEl = $("#modelSearch");
+    const sortEl = $("#modelSort");
+    const provSelect = $("#providerFilter");
+    const chipsHost = $("#providerChips");
+    if (!searchEl && !sortEl && !provSelect) return;
+
+    // Build provider chips from the full roster (discover, don't hardcode) —
+    // independent of the active chart-selection so no provider is hidden.
+    const provKeys = [...new Set(uniqueModels(state.data).map((m) => providerOf(m)))]
+      .filter((k) => PROVIDER_BRAND[k]);
+    let activeProv = "all";
+
+    if (chipsHost) {
+      const mkChip = (value, label, color) => {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.className = "board-chip";
+        b.setAttribute("aria-pressed", String(value === activeProv));
+        b.dataset.prov = value;
+        b.innerHTML = (color ? `<span class="chip-logo" style="--brand:${color}">${PROVIDER_BRAND[value].glyph}</span>` : "") + label;
+        b.addEventListener("click", () => {
+          activeProv = value;
+          if (provSelect) provSelect.value = value === "all" ? "all" : value;
+          chipsHost.querySelectorAll(".board-chip").forEach((c) =>
+            c.setAttribute("aria-pressed", String(c.dataset.prov === activeProv)));
+          renderComparison();
+        });
+        return b;
+      };
+      chipsHost.appendChild(mkChip("all", "All providers", null));
+      provKeys.forEach((k) => chipsHost.appendChild(mkChip(k, PROVIDER_BRAND[k].name, PROVIDER_COLORS[k] || PROVIDER_COLORS.other)));
+    }
+
+    // Keep the <select> fallback in sync with chips.
+    if (provSelect) {
+      provKeys.forEach((k) => {
+        if ([...provSelect.options].some((o) => o.value === k)) return;
+        const o = document.createElement("option");
+        o.value = k;
+        o.textContent = PROVIDER_BRAND[k].name;
+        provSelect.appendChild(o);
+      });
+      provSelect.addEventListener("change", () => {
+        activeProv = provSelect.value;
+        if (chipsHost) chipsHost.querySelectorAll(".board-chip").forEach((c) =>
+          c.setAttribute("aria-pressed", String(c.dataset.prov === activeProv)));
+        renderComparison();
+      });
+    }
+
+    // Live filter: debounce so fast typing doesn't thrash Chart.js sparklines.
+    if (searchEl) {
+      let t;
+      searchEl.addEventListener("input", () => {
+        clearTimeout(t);
+        t = setTimeout(renderComparison, 160);
+      });
+    }
+    if (sortEl) sortEl.addEventListener("change", renderComparison);
+
+    // Sticky "back to board" pill on mobile: shows once the board has been
+    // scrolled past, hides when it is on screen. Disabled for reduced motion
+    // users only in the sense that transitions are disabled; visibility logic stays.
+    const board = $("#comparison");
+    const jump = $("#boardJump");
+    if (board && jump && "IntersectionObserver" in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          const past = !e.isIntersecting && e.boundingClientRect.top < 0;
+          jump.classList.toggle("is-visible", past);
+          jump.setAttribute("aria-hidden", String(!past));
+          jump.tabIndex = past ? 0 : -1;
+        });
+      }, { threshold: 0 });
+      io.observe(board);
+    }
+  }
+
+    async function init() {
     initMobileNav();
     await loadData();
     initModelSelector();
+    initBoardControls();
     renderAllCharts();
     renderComparison();
     populateStats();

@@ -21,7 +21,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/styles.css?v=16" />
+  <link rel="stylesheet" href="assets/styles.css?v=17" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <script>
     (function(){
@@ -307,9 +307,23 @@
   <section id="comparison">
     <div class="container">
       <div class="section-head">
-        <h2>Per-model profiles</h2>
-        <p>Score distribution across all six benchmark tracks.</p>
+        <h2>All models, one glance</h2>
+        <p>Search, filter by company, and sort. Tap any card for its full profile.</p>
       </div>
+      <div class="board-tools">
+        <input class="board-search" id="modelSearch" type="search" placeholder="Search model or company…" aria-label="Search models" autocomplete="off" />
+        <select class="board-sort" id="modelSort" aria-label="Sort models">
+          <option value="viv">Sort · Best first</option>
+          <option value="cost">Sort · Cheapest</option>
+          <option value="speed">Sort · Fastest</option>
+          <option value="alpha">Sort · A–Z</option>
+        </select>
+        <select class="board-provider" id="providerFilter" aria-label="Filter by company">
+          <option value="all">All companies</option>
+        </select>
+        <span class="board-count" id="modelCount"></span>
+      </div>
+      <div class="board-chips" id="providerChips" role="group" aria-label="Filter by company"></div>
       <div class="compare-grid" id="modelComparison"></div>
     </div>
   </section>
@@ -370,6 +384,8 @@
     </div>
   </footer>
 
-  <script src="assets/app.js?v=16"></script>
+  <a href="#comparison" class="board-jump" id="boardJump" aria-hidden="true" tabindex="-1">↓ Model board</a>
+
+  <script src="assets/app.js?v=17"></script>
 </body>
 </html>
