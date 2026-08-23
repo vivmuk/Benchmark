@@ -361,6 +361,12 @@ addEventListener('scroll', () => {
   document.documentElement.style.setProperty('--tok', p.toFixed(3));
 }, { passive: true });
 </script>
-<script src="../prompt-lab-assets/scrollcraft.js" defer></script>
+<script src="../prompt-lab-assets/scrollcraft.js"></script>
+<script>
+  (function() {{
+    function go() {{ try {{ ScrollCraft.mount(document.body); }} catch(e) {{ document.querySelectorAll('[data-sc-in],[data-sc-cue]').forEach(function(el) {{ el.style.opacity = 1; el.style.transform = 'none'; }}); }} }}
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go); else go();
+  }})();
+</script>
 </body>
 </html>
