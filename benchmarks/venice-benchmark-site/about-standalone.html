@@ -2237,6 +2237,7 @@ button:not(.primary):hover { background: var(--md-state-hover); border-color: va
    turned the 41-row VivIndex leaderboard chart frame into a circle and
    hid the top/bottom model rows. img-zoom buttons must never be pills.
    ══════════════════════════════════════════════════════════ */
+button.img-zoom.img-zoom,
 button.img-zoom,
 .img-zoom,
 .img-zoom .feature-img,
@@ -2874,8 +2875,15 @@ button.img-zoom,
     // Text search across model name + provider brand name
     if (q) aggs = aggs.filter((a) =>
       a.model.toLowerCase().includes(q) || providerBrand(a.model).name.toLowerCase().includes(q));
-    // Sort
-    if (sortKey === "cost") aggs = aggs.sort((a, b) => a.avgCost - b.avgCost);
+    // Sort (null-safe: missing cost/speed sinks to the bottom, never NaN)
+    const byNum = (get) => (a, b) => {
+      const va = get(a), vb = get(b);
+      if (va == null && vb == null) return b.vivIndex - a.vivIndex;
+      if (va == null) return 1;
+      if (vb == null) return -1;
+      return va - vb;
+    };
+    if (sortKey === "cost") aggs = aggs.sort(byNum((a) => (Number.isFinite(a.avgCost) && a.avgCost > 0 ? a.avgCost : null)));
     else if (sortKey === "speed") aggs = aggs.sort((a, b) => (b.tokensPerSec || 0) - (a.tokensPerSec || 0));
     else if (sortKey === "alpha") aggs = aggs.sort((a, b) => a.model.localeCompare(b.model));
     else aggs = aggs.sort((a, b) => b.vivIndex - a.vivIndex);
@@ -2901,7 +2909,7 @@ button.img-zoom,
         <div class="score">${a.vivIndex.toFixed(1)}<small style="font-size:.45em;color:var(--ink-2);font-weight:500"> VivIndex</small></div>
         <dl>
           <div><dt>Latency</dt><dd>${a.avgLatency.toFixed(1)}s</dd></div>
-          <div><dt>Cost/run</dt><dd>$${a.avgCost.toFixed(3)}</dd></div>
+          <div><dt>Cost/run</dt><dd>${Number.isFinite(a.avgCost) && a.avgCost > 0 ? "$" + a.avgCost.toFixed(3) : "—"}</dd></div>
           <div><dt>Speed</dt><dd>${a.tokensPerSec != null ? a.tokensPerSec.toFixed(0) + " tok/s" : "—"}</dd></div>
         </dl>
         <div class="spark-wrap"><canvas></canvas></div>

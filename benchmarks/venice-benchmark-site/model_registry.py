@@ -46,4 +46,5 @@ MODELS = [
     {"id": "z-ai-glm-5-3",                  "display": "GLM 5.3"},
     {"id": "qwen-3-8-27b",                  "display": "Qwen 3.8 27B"},
     {"id": "deepseek-v4-pro-0813",          "display": "DeepSeek V4 Pro 0813"},
+    {"id": "z-ai-glm-5-3-flash",            "display": "GLM 5.3 Flash"},
 ]

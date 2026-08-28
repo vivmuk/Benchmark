@@ -7,26 +7,26 @@
 <rect x="40" y="170" width="920" height="520" rx="18" fill="#FFFFFF" stroke="#e4e9f2" stroke-width="2"/>
 <text x="74" y="216" font-size="38" font-weight="800" fill="#1A1A2E">Overall Rank</text>
 <text x="74" y="242" font-size="30" fill="#7a8294">VivIndex weighted composite</text>
-<text x="74" y="356" font-size="150" font-weight="900" fill="#1A1A2E">#5</text>
-<text x="197.0" y="352" font-size="56" font-weight="700" fill="#7a8294">of 18 models</text>
-<text x="74" y="388" font-size="30" fill="#7a8294">VivIndex 89.7 / 100</text>
+<text x="74" y="356" font-size="150" font-weight="900" fill="#1A1A2E">#18</text>
+<text x="197.0" y="352" font-size="56" font-weight="700" fill="#7a8294">of 42 models</text>
+<text x="74" y="388" font-size="30" fill="#7a8294">VivIndex 84.2 / 100</text>
 <rect x="74" y="400" width="560" height="26" rx="13" fill="#EEF1F7"/>
-<rect x="74" y="400" width="502" height="26" rx="13" fill="#00D4AA"/>
-<text x="648" y="421" font-size="56" font-weight="800" fill="#1A1A2E">89.7</text>
+<rect x="74" y="400" width="472" height="26" rx="13" fill="#00D4AA"/>
+<text x="648" y="421" font-size="56" font-weight="800" fill="#1A1A2E">84.2</text>
 <text x="74" y="452" font-size="24" fill="#7a8294">Top of the board:</text>
 <g transform="translate(74,468)"><path d="M2 14 L2 4 L6.16 11.0 L11.0 2 L15.84 11.0 L20 4 L20 14 Z" fill="#B8860B"/><path d="M2 16 L2 6 L6.16 11.440000000000001 L11.0 4 L15.84 11.440000000000001 L20 6 L20 16" fill="#D9A441"/><rect x="2" y="16" width="18" height="3" rx="1.5" fill="#B8860B"/></g>
-<text x="104" y="486" font-size="30" font-weight="700" fill="#D9A441">Kimi K3 Fast API</text>
-<rect x="274" y="473" width="354" height="16" rx="8" fill="#D9A441"/>
-<text x="636" y="486" font-size="30" font-weight="700" fill="#1A1A2E">93.1</text>
-<text x="74" y="520" font-size="30" font-weight="700" fill="#1A1A2E">GPT-5.5</text>
-<rect x="274" y="507" width="351" height="16" rx="8" fill="#d9e0ec"/>
-<text x="633" y="520" font-size="30" font-weight="700" fill="#1A1A2E">92.5</text>
-<text x="74" y="554" font-size="30" font-weight="700" fill="#1A1A2E">GPT-5.6 Terra</text>
-<rect x="274" y="541" width="350" height="16" rx="8" fill="#d9e0ec"/>
-<text x="632" y="554" font-size="30" font-weight="700" fill="#1A1A2E">92.2</text>
+<text x="104" y="486" font-size="30" font-weight="700" fill="#D9A441">Opus 4.8 Fast</text>
+<rect x="274" y="473" width="346" height="16" rx="8" fill="#D9A441"/>
+<text x="628" y="486" font-size="30" font-weight="700" fill="#1A1A2E">91.1</text>
+<text x="74" y="520" font-size="30" font-weight="700" fill="#1A1A2E">Qwen 3.8 27B</text>
+<rect x="274" y="507" width="344" height="16" rx="8" fill="#d9e0ec"/>
+<text x="626" y="520" font-size="30" font-weight="700" fill="#1A1A2E">90.5</text>
+<text x="74" y="554" font-size="30" font-weight="700" fill="#1A1A2E">Qwen 3.8 2.4T</text>
+<rect x="274" y="541" width="340" height="16" rx="8" fill="#d9e0ec"/>
+<text x="622" y="554" font-size="30" font-weight="700" fill="#1A1A2E">89.5</text>
 <text x="74" y="588" font-size="30" font-weight="700" fill="#00D4AA">DeepSeek V4 Flash 0731</text>
-<rect x="274" y="575" width="341" height="16" rx="8" fill="#00D4AA"/>
-<text x="623" y="588" font-size="30" font-weight="700" fill="#1A1A2E">89.7</text>
+<rect x="274" y="575" width="320" height="16" rx="8" fill="#00D4AA"/>
+<text x="602" y="588" font-size="30" font-weight="700" fill="#1A1A2E">84.2</text>
 <text x="724" y="588" font-size="24" font-weight="600" fill="#00A68A">you are here</text>
 <rect x="40" y="716" width="920" height="520" rx="18" fill="#FFFFFF" stroke="#e4e9f2" stroke-width="2"/>
 <text x="74" y="762" font-size="38" font-weight="800" fill="#1A1A2E">Where it wins</text>
@@ -37,8 +37,8 @@
 <text x="820" y="852" font-size="56" font-weight="800" fill="#1A1A2E">100</text>
 <text x="74" y="870" font-size="30" fill="#1A1A2E">One-Shot UI Generation</text>
 <rect x="74" y="878" width="732" height="20" rx="10" fill="#EEF1F7"/>
-<rect x="74" y="878" width="695" height="20" rx="10" fill="#00D4AA"/>
-<text x="820" y="896" font-size="56" font-weight="800" fill="#1A1A2E">95</text>
+<rect x="74" y="878" width="483" height="20" rx="10" fill="#00D4AA"/>
+<text x="820" y="896" font-size="56" font-weight="800" fill="#1A1A2E">66</text>
 <text x="74" y="914" font-size="30" fill="#1A1A2E">Startup in a Weekend</text>
 <rect x="74" y="922" width="732" height="20" rx="10" fill="#EEF1F7"/>
 <rect x="74" y="922" width="688" height="20" rx="10" fill="#00D4AA"/>
@@ -65,7 +65,7 @@ Interaction</text>
 <text x="500.0" y="1386" font-size="90" font-weight="900" fill="#1A1A2E">80</text>
 <text x="604.0" y="1378" font-size="21" font-weight="700" fill="#7a8294">Regulatory
 Comprehension</text>
-<text x="500.0" y="1430" font-size="15" fill="#7a8294">Board best: Opus 5 95</text>
+<text x="500.0" y="1430" font-size="15" fill="#7a8294">Board best: Qwen 3.8 27B 100</text>
 <text x="74" y="1467" font-size="24" fill="#7a8294">vs best-in-class on each lane:</text>
 <text x="74" y="1509" font-size="24" font-weight="700" fill="#1A1A2E">Drug-Drug Interaction</text>
 <rect x="284" y="1495" width="180" height="18" rx="9" fill="#EEF1F7"/>
@@ -77,8 +77,8 @@ Comprehension</text>
 <rect x="284" y="1537" width="180" height="18" rx="9" fill="#EEF1F7"/>
 <rect x="284" y="1537" width="144" height="18" rx="9" fill="#00D4AA"/>
 <text x="474" y="1551" font-size="14" font-weight="800" fill="#1A1A2E">80</text>
-<rect x="284" y="1557" width="171" height="6" rx="3" fill="#0aa97f" opacity="0.55"/>
-<text x="474" y="1565" font-size="13" fill="#7a8294">best 95</text>
+<rect x="284" y="1557" width="180" height="6" rx="3" fill="#0aa97f" opacity="0.55"/>
+<text x="474" y="1565" font-size="13" fill="#7a8294">best 100</text>
 <rect x="40" y="1808" width="920" height="520" rx="18" fill="#FFFFFF" stroke="#e4e9f2" stroke-width="2"/>
 <text x="74" y="1854" font-size="38" font-weight="800" fill="#1A1A2E">Efficiency</text>
 <text x="74" y="1880" font-size="30" fill="#7a8294">Value per token · cost · speed</text>

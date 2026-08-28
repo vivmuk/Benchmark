@@ -308,3 +308,14 @@ aion-labs-aion-3-0-mini,Aion 3.0 Mini,agentic_tool_use,ok,80,0,,,,0
 aion-labs-aion-3-0-mini,Aion 3.0 Mini,long_context_reasoning,ok,85,52.43,10846,4189,15035,0.016821
 z-ai-glm-5-3,GLM 5.3,agentic_tool_use,ok,80,0,,,,0
 z-ai-glm-5-3,GLM 5.3,long_context_reasoning,ok,85,8.0,11485,593,12078,0.02336
+z-ai-glm-5-3-flash,GLM 5.3 Flash,intent_understanding,ok,82,47.311,1695,580,2275,0.000544
+z-ai-glm-5-3-flash,GLM 5.3 Flash,pharma_drug_interaction,ok,85,74.648,1812,1080,2892,0.000812
+z-ai-glm-5-3-flash,GLM 5.3 Flash,pharma_regulatory_comprehension,ok,85,225.394,1846,3051,4897,0.001802
+z-ai-glm-5-3-flash,GLM 5.3 Flash,value_density,ok,100,9.652,1860,155,2015,0.000356
+z-ai-glm-5-3-flash,GLM 5.3 Flash,reverse_prompt_vision,skipped,,0,0,0,0,0
+z-ai-glm-5-3-flash,GLM 5.3 Flash,one_shot_ui,ok,66,208.871,1704,3435,5139,0.001973
+z-ai-glm-5-3-flash,GLM 5.3 Flash,agentic_tool_use,ok,100,23.633,1906,288,2194,0.00043
+z-ai-glm-5-3-flash,GLM 5.3 Flash,long_context_reasoning,ok,100,26.224,4469,175,4644,0.000758
+z-ai-glm-5-3-flash,GLM 5.3 Flash,startup_in_a_weekend,ok,100,81.448,1905,5395,7300,0.002983
+deepseek-v4-pro-0813,DeepSeek V4 Pro 0813,agentic_tool_use,ok,100,5.64,1951,1737,3688,0.011817
+deepseek-v4-pro-0813,DeepSeek V4 Pro 0813,long_context_reasoning,ok,100,1.748,4404,352,4756,0.009009

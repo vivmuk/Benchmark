@@ -96,6 +96,7 @@ FALLBACK_PRICING = {
     "z-ai-glm-5-3":                   {"input": 1.00,  "output": 3.00},
     "qwen-3-8-27b":                   {"input": 0.50,  "output": 1.50},
     "deepseek-v4-pro-0813":           {"input": 0.60,  "output": 2.20},
+    "z-ai-glm-5-3-flash":            {"input": 0.15,  "output": 0.50},
 }
 DEFAULT_PRICING = {"input": 5.00, "output": 15.00}
 
