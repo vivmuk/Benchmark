@@ -850,10 +850,22 @@
       frame = requestAnimationFrame(draw);
     }
     resize();
-    draw();
     window.addEventListener("resize", resize);
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
-    reduced.addEventListener?.("change", () => { if (reduced.matches && frame) cancelAnimationFrame(frame); else if (!frame) draw(); });
+    // Run the particle loop ONLY while the canvas is on screen and the tab is
+    // visible. A rAF loop that never stops is what made this page eat a CPU.
+    let onScreen = true;
+    const io = new IntersectionObserver((entries) => {
+      onScreen = entries[0].isIntersecting;
+      if (onScreen && !frame && !document.hidden && !reduced.matches) draw();
+      if (!onScreen && frame) { cancelAnimationFrame(frame); frame = 0; }
+    }, { threshold: 0.01 });
+    io.observe(canvas);
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden && frame) { cancelAnimationFrame(frame); frame = 0; }
+      else if (!document.hidden && onScreen && !frame && !reduced.matches) draw();
+    });
+    reduced.addEventListener?.("change", () => { if (reduced.matches && frame) { cancelAnimationFrame(frame); frame = 0; } });
   }
 
   function initWaapiScores() {

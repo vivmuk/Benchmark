@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Prompt Lab — eight system prompts, dissected</title>
+<meta name="description" content="Eight leaked system prompts torn down token by token. A typographic archive, a podcast, and a plain-language field guide.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23070707'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #070707; --bone: #F3F0E8; --bone-dim: #b8b3a6; --cobalt: #174CFF; --cobalt-lift: #4a74ff;
+  --mono: "JetBrains Mono", ui-monospace, monospace;
+  --disp: "Archivo Black", "Arial Black", sans-serif;
+  --body: "Archivo", system-ui, sans-serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { background: var(--ink); color: var(--bone); font-family: var(--body); overflow-x: hidden; }
+::selection { background: var(--cobalt); color: var(--bone); }
+a { color: inherit; }
+
+/* visible by default. JS only ADDS motion. */
+.meta-strip { position: fixed; top: 0; left: 0; right: 0; z-index: 50; display: flex; justify-content: space-between;
+  padding: 12px 22px; font-family: var(--mono); font-size: .66rem; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--bone-dim); background: color-mix(in srgb, var(--ink) 85%, transparent); backdrop-filter: blur(8px);
+  border-bottom: 1px solid #1c1c1c; }
+.meta-strip b { color: var(--bone); }
+.meta-strip nav { display: flex; gap: 18px; }
+.meta-strip a { text-decoration: none; }
+.meta-strip a:hover { color: var(--cobalt-lift); }
+
+/* HERO — the poster word */
+.hero { min-height: 100svh; display: flex; flex-direction: column; justify-content: center; padding: 110px 5vw 40px; position: relative; }
+.hero .greet { font-family: var(--mono); font-size: .72rem; letter-spacing: .3em; text-transform: uppercase; color: var(--bone-dim); margin-bottom: 3vh; }
+.hero .greet b { color: var(--cobalt-lift); }
+.poster { font-family: var(--disp); font-size: clamp(4rem, 21vw, 20rem); line-height: .86; letter-spacing: -.03em;
+  text-transform: uppercase; user-select: none; }
+.poster .ln { display: block; }
+.poster .glyph { display: inline-block; position: relative; }
+/* pigment fill confined to letter interiors on hover */
+.poster .glyph[data-art] .fill { position: absolute; inset: 12% 6%; background-size: cover; background-position: center;
+  -webkit-background-clip: text; background-clip: text; color: transparent; z-index: 1; opacity: 0; transition: opacity .5s ease; }
+.poster .glyph:hover .fill { opacity: 1; }
+.poster .glyph .base { position: relative; z-index: 2; pointer-events: none; color: var(--bone);
+  -webkit-text-stroke: 0; }
+.poster .glyph .fill-glow { position: absolute; inset: 0; color: transparent; -webkit-text-stroke: 1px var(--cobalt); opacity: 0; transition: opacity .3s; }
+.poster .glyph:hover .fill-glow { opacity: .6; }
+.hero .under { margin-top: 4vh; display: flex; gap: 4vw; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; }
+.hero .under p { max-width: 46ch; color: var(--bone-dim); font-size: clamp(.95rem, 1.4vw, 1.1rem); line-height: 1.6; }
+.hero .under p b { color: var(--bone); }
+.hero .tick { font-family: var(--mono); font-size: .68rem; color: var(--bone-dim); letter-spacing: .1em; text-align: right; }
+.hero .tick .big { display: block; font-size: 1.6rem; color: var(--bone); letter-spacing: 0; margin-bottom: 4px; }
+
+/* INVERSION — bone section */
+.invert { background: var(--bone); color: var(--ink); }
+.invert .meta-strip { background: color-mix(in srgb, var(--bone) 88%, transparent); border-color: #d8d3c6; color: #6b675c; }
+.sec { padding: 12vh 5vw; max-width: 1180px; margin: 0 auto; }
+.kick { font-family: var(--mono); font-size: .66rem; letter-spacing: .3em; text-transform: uppercase; color: #6b675c; margin-bottom: 14px; }
+.invert .kick, .kick.c { color: var(--cobalt); }
+.sec h2 { font-family: var(--disp); font-size: clamp(2rem, 6vw, 4.4rem); line-height: .95; letter-spacing: -.02em; text-transform: uppercase; margin-bottom: 3vh; }
+.sec .lede { max-width: 62ch; color: #55524a; font-size: 1.02rem; line-height: 1.65; margin-bottom: 5vh; }
+.sec .lede b { color: var(--ink); }
+
+/* stat plate */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); border-top: 2px solid var(--ink); }
+.stat { padding: 22px 18px 26px 0; border-bottom: 1px solid #d8d3c6; }
+.stat .n { font-family: var(--disp); font-size: clamp(2.2rem, 4.5vw, 3.6rem); line-height: 1; }
+.stat .n i { font-style: normal; color: var(--cobalt); }
+.stat .l { font-family: var(--mono); font-size: .64rem; letter-spacing: .16em; text-transform: uppercase; color: #6b675c; margin-top: 8px; }
+
+/* lessons as a numbered manifest */
+.manifest { border-top: 2px solid var(--ink); }
+.mrow { display: grid; grid-template-columns: 70px 1fr 2fr; gap: 22px; padding: 26px 0; border-bottom: 1px solid #d8d3c6; align-items: baseline; }
+.mrow .no { font-family: var(--disp); font-size: 1.5rem; color: var(--cobalt); }
+.mrow h3 { font-size: 1.15rem; font-weight: 700; letter-spacing: -.01em; }
+.mrow p { color: #55524a; font-size: .95rem; line-height: 1.6; }
+.mrow .src { display: block; font-family: var(--mono); font-size: .62rem; color: #8a8578; margin-top: 8px; letter-spacing: .08em; }
+@media (max-width: 760px) { .mrow { grid-template-columns: 48px 1fr; } .mrow p { grid-column: 2; } }
+
+/* podcast plate — back to ink, pigment art as the plate */
+.ink-2 { background: var(--ink); }
+.pod { display: grid; grid-template-columns: minmax(230px, 340px) 1fr; gap: 5vw; align-items: start; }
+.pod .plate { position: relative; border: 1px solid #262626; overflow: hidden; }
+.pod .plate img { width: 100%; display: block; filter: grayscale(30%) contrast(105%); }
+.pod .plate::after { content: "EP 01"; position: absolute; top: 12px; left: 12px; font-family: var(--mono);
+  font-size: .62rem; letter-spacing: .2em; color: var(--bone); background: var(--cobalt); padding: 4px 9px; }
+audio { width: 100%; margin-top: 14px; }
+.pod .tag { font-family: var(--mono); font-size: .66rem; letter-spacing: .24em; text-transform: uppercase; color: var(--cobalt-lift); }
+.pod h3 { font-family: var(--disp); font-size: clamp(1.3rem, 2.6vw, 2rem); text-transform: uppercase; margin: 10px 0 12px; letter-spacing: -.01em; }
+.pod p { color: var(--bone-dim); max-width: 56ch; line-height: 1.65; }
+.cast { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-top: 22px; }
+.cast div { border: 1px solid #262626; padding: 11px 13px; font-family: var(--mono); font-size: .68rem; color: var(--bone-dim); }
+.cast b { display: block; color: var(--bone); font-size: .78rem; margin-bottom: 3px; }
+.cast .m { color: var(--cobalt-lift); }
+
+/* editions — the ledger (peak) */
+.ledger { border-top: 2px solid var(--ink); }
+.lrow { display: grid; grid-template-columns: 84px 1.4fr 2fr 120px 90px; gap: 18px; align-items: baseline;
+  padding: 22px 0; border-bottom: 1px solid #d8d3c6; text-decoration: none; transition: background .25s; }
+.lrow:hover { background: rgba(23,76,255,.06); }
+.lrow .en { font-family: var(--mono); font-size: .66rem; color: var(--cobalt); letter-spacing: .14em; }
+.lrow h3 { font-family: var(--disp); font-size: 1.05rem; text-transform: uppercase; letter-spacing: 0; }
+.lrow .d { color: #55524a; font-size: .88rem; line-height: 1.5; }
+.lrow .v { font-family: var(--mono); font-size: .66rem; color: #6b675c; text-transform: uppercase; letter-spacing: .08em; }
+.lrow .t { font-family: var(--mono); font-size: .72rem; color: var(--ink); text-align: right; }
+.lrow .t .bar { height: 3px; background: #d8d3c6; margin-top: 6px; position: relative; }
+.lrow .t .bar i { position: absolute; left: 0; top: 0; bottom: 0; background: var(--cobalt); }
+@media (max-width: 860px) { .lrow { grid-template-columns: 60px 1fr 90px; } .lrow .d, .lrow .v { display: none; } }
+
+/* guide cards */
+.guide { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 0; border-top: 2px solid var(--ink); }
+.gcard { border-bottom: 1px solid #d8d3c6; border-right: 1px solid #d8d3c6; padding: 24px 22px 28px; }
+.gcard:nth-child(2n) { border-right: none; }
+.gcard h3 { font-size: 1rem; font-weight: 700; margin-bottom: 10px; }
+.gcard p { color: #55524a; font-size: .9rem; line-height: 1.6; }
+.gcard .ex { margin-top: 14px; font-family: var(--mono); font-size: .72rem; line-height: 1.7; background: var(--ink); color: var(--bone);
+  padding: 12px 14px; border-radius: 8px; white-space: pre-wrap; }
+.gcard .ex .bad { color: #ff7a90; } .gcard .ex .good { color: #7ee2a8; }
+
+/* close — full inversion plate */
+.close-plate { background: var(--bone); min-height: 92svh; display: flex; align-items: center; }
+.close-plate .inner { max-width: 1180px; margin: 0 auto; padding: 10vh 5vw; }
+.close-plate h2 { font-family: var(--disp); font-size: clamp(2.4rem, 8vw, 7rem); line-height: .92; text-transform: uppercase; letter-spacing: -.03em; }
+.close-plate h2 em { font-style: normal; color: var(--cobalt); }
+.close-plate p { margin-top: 3.5vh; max-width: 52ch; color: #55524a; font-size: 1.05rem; line-height: 1.7; }
+.close-plate .fin { display: inline-block; margin-top: 4vh; font-family: var(--mono); font-size: .74rem; letter-spacing: .18em;
+  text-transform: uppercase; text-decoration: none; color: var(--bone); background: var(--ink); padding: 13px 26px; transition: background .3s; }
+.close-plate .fin:hover { background: var(--cobalt); }
+footer { border-top: 1px solid #262626; padding: 22px 5vw; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+  font-family: var(--mono); font-size: .64rem; color: var(--bone-dim); }
+footer a { text-decoration: none; } footer a:hover { color: var(--cobalt-lift); }
+
+/* motion that only ADDS (content is visible without JS) */
+.rise { opacity: 0; transform: translateY(26px); transition: opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); }
+.rise.in { opacity: 1; transform: none; }
+.no-js .rise, .no-js .poster .glyph .fill { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .rise { opacity: 1; transform: none; transition: none; } .poster .glyph .fill { opacity: 0 !important; } }
+</style>
+</head>
+<body class="no-js">
+
+<header class="meta-strip">
+  <span><b>PROMPT_LAB</b> — system prompts, dissected</span>
+  <nav>
+    <a href="#podcast">Podcast</a><a href="#lessons">Lessons</a><a href="#editions">Editions</a><a href="#guide">Guide</a><a href="index.html">BenchmarkViv</a>
+  </nav>
+</header>
+
+<main>
+<section class="hero" id="top">
+  <p class="greet">Eight leaked system prompts · <b>~93,000 tokens</b> of hidden instruction · read so you don't have to</p>
+  <h1 class="poster" id="poster" aria-label="PROMPT LAB">
+    <span class="ln">
+      <span class="glyph" data-art="a">P<span class="fill" style="background-image:url(prompt-lab-assets/pigment-cobalt.jpg)">P</span><span class="fill-glow">P</span></span><span class="glyph">R</span><span class="glyph">O</span><span class="glyph">M</span><span class="glyph">P</span><span class="glyph">T</span>
+    </span>
+    <span class="ln">
+      <span class="glyph">L</span><span class="glyph" data-art="a">A<span class="fill" style="background-image:url(prompt-lab-assets/pigment-cobalt.jpg)">A</span><span class="fill-glow">A</span></span><span class="glyph">B</span>
+    </span>
+  </h1>
+  <div class="under">
+    <p>Anthropic, OpenAI, Google, Cursor, Microsoft and Perplexity write hidden rules that steer their AI. We tore all eight down, token by token, and rebuilt the lessons into a ledger you can actually use. <b>Hover the letters — the ink is real pigment.</b></p>
+    <div class="tick">
+      <span class="big" id="tokcount">0</span>
+      tokens counted
+    </div>
+  </div>
+</section>
+
+<section class="invert" id="lessons">
+  <div class="sec">
+    <p class="kick rise">The distillate</p>
+    <h2 class="rise">Seven lessons<br>that transfer.</h2>
+    <p class="lede rise">Everything the eight teardowns taught, compressed into patterns you can carry into any AI project — from a weekend script to a production agent.</p>
+
+    <div class="stats rise">
+      <div class="stat"><div class="n">8</div><div class="l">prompts dissected</div></div>
+      <div class="stat"><div class="n">93<i>K</i></div><div class="l">tokens analyzed</div></div>
+      <div class="stat"><div class="n">44</div><div class="l">sections</div></div>
+      <div class="stat"><div class="n">176</div><div class="l">analysis cards</div></div>
+    </div>
+
+    <div class="manifest">
+      <div class="mrow rise"><span class="no">01</span><h3>Prompt economy is real</h3><p>The smallest prompt (Perplexity, ~2K tokens) works because it only injects the product delta. Every unnecessary instruction dilutes the ones that matter.<span class="src">→ PERPLEXITY · EDITION 08</span></p></div>
+      <div class="mrow rise"><span class="no">02</span><h3>Structure beats prose</h3><p>Claude Opus scopes rules with nested XML; GPT-5.6 resolves conflicts with an ordered refusal cascade. When instructions collide, structure is the referee.<span class="src">→ OPUS · GPT-5.6 · GEMINI</span></p></div>
+      <div class="mrow rise"><span class="no">03</span><h3>Think in channels, not messages</h3><p>Codex separates private reasoning, visible tool calls, and the final answer. Give the model a scratchpad.<span class="src">→ CODEX · EDITION 07</span></p></div>
+      <div class="mrow rise"><span class="no">04</span><h3>Memory is architecture, not prompting</h3><p>Copilot CLI's three-layer memory with REM consolidation and Cursor's auto-injected context: persistent memory comes from structures, not from asking nicely.<span class="src">→ COPILOT CLI · CURSOR</span></p></div>
+      <div class="mrow rise"><span class="no">05</span><h3>Orchestrator + workers wins</h3><p>A GPT orchestrator shipping Anthropic sub-agents; a rescue agent that calls Claude Code. Specialized workers, strict boundaries.<span class="src">→ COPILOT CLI · CURSOR</span></p></div>
+      <div class="mrow rise"><span class="no">06</span><h3>Define your terms like a lawyer</h3><p>Codex gates critical actions on undefined "high-impact decisions." Vague thresholds are the #1 failure source in every prompt we read.<span class="src">→ CODEX · PERPLEXITY</span></p></div>
+      <div class="mrow rise"><span class="no">07</span><h3>Teach the harness, not just the model</h3><p>Citation contracts, channel systems, rendering specs: winning products specify the interface between model and product.<span class="src">→ CURSOR · CODEX · PERPLEXITY</span></p></div>
+    </div>
+  </div>
+</section>
+
+<section class="ink-2" id="podcast">
+  <div class="sec">
+    <p class="kick c rise">Audio overview</p>
+    <h2 class="rise">The podcast.</h2>
+    <div class="pod rise">
+      <div>
+        <div class="plate"><img src="prompt-lab-assets/podcast-art.png" alt="Prompt Lab podcast plate" loading="lazy"></div>
+        <audio controls preload="metadata" src="prompt-lab-assets/spl-podcast-ep01.mp3"></audio>
+      </div>
+      <div>
+        <span class="tag">Episode 01 · Anatomy of a System Prompt · 7 min</span>
+        <h3>Eight prompts.<br>Seven lessons.<br>Zero fluff.</h3>
+        <p>Maya and Theo walk the spectrum from Perplexity's 2K-token minimalism to GPT-5.6's 28.5K-token legal codex, with a cameo from the small-prompt side of the spectrum. New episode every Saturday, 9 PM ET.</p>
+        <div class="cast">
+          <div><b>Maya · host</b>tts-gradium-v1 · <span class="m">Valentina</span></div>
+          <div><b>Theo · co-host</b>tts-elevenlabs-turbo · <span class="m">Callum</span></div>
+          <div><b>Narrator</b>tts-xai-v1 · <span class="m">carina</span></div>
+          <div><b>Echo · cameo</b>tts-gemini-3-1-flash · <span class="m">Charon</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="invert" id="editions">
+  <div class="sec">
+    <p class="kick rise">The archive</p>
+    <h2 class="rise">The ledger.</h2>
+    <p class="lede rise">Every teardown, rebuilt as an interactive scroll document. Each row's bar shows its token weight against the largest prompt in the series.</p>
+    <div class="ledger">
+      <a class="lrow rise" href="system-prompt-lab/system-prompt-lab-001-claude-code-fable-5.html">
+        <span class="en">ED 01</span>
+        <h3>Claude Code Fable 5</h3>
+        <span class="d">Terminal agent · the pilot. Tool-use protocol, context compaction, the autonomy model that set the template.</span>
+        <span class="v">Anthropic · Agentic</span>
+        <span class="t">~18K<span class="bar"><i style="width:63%"></i></span></span>
+      </a>
+      <a class="lrow rise" href="system-prompt-lab/system-prompt-lab-002-gpt56-sol-extra-high.html">
+        <span class="en">ED 02</span>
+        <h3>GPT-5.6 SOL Extra High</h3>
+        <span class="d">The largest prompt in the series. Ordered refusal cascade, 2,661 lines: the maximalist philosophy.</span>
+        <span class="v">OpenAI · Foundational</span>
+        <span class="t">~28.5K<span class="bar"><i style="width:100%"></i></span></span>
+      </a>
+      <a class="lrow rise" href="system-prompt-lab/system-prompt-lab-003-claude-opus-4-7.html">
+        <span class="en">ED 03</span>
+        <h3>Claude Opus 4.7</h3>
+        <span class="d">The economy play. Nested XML scoping, meta-refusal triggers, tool-conditional epistemology.</span>
+        <span class="v">Anthropic · Foundational</span>
+        <span class="t">~6.1K<span class="bar"><i style="width:21%"></i></span></span>
+      </a>
+      <a class="lrow rise" href="system-prompt-lab/system-prompt-lab-004-gemini-3-1-pro.html">
+        <span class="en">ED 04</span>
+        <h3>Gemini 3.1 Pro</h3>
+        <span class="d">The 5-step data-protection cascade, Interactive Widget Architect, invisible incorporation protocol.</span>
+        <span class="v">Google · Foundational</span>
+        <span class="t">~9.7K<span class="bar"><i style="width:34%"></i></span></span>
+      </a>
+      <a class="lrow rise" href="system-prompt-lab/system-prompt-lab-005-cursor-ide.html">
+        <span class="en">ED 05</span>
+        <h3>Cursor IDE</h3>
+        <span class="d">The citation moat: every code claim cites file and line. Auto-context, 7 subagent types, cross-model rescue.</span>
+        <span class="v">Anysphere · Agentic</span>
+        <span class="t">~5.5K<span class="bar"><i style="width:19%"></i></span></span>
+      </a>
+      <a class="lrow rise" href="system-prompt-lab/system-prompt-lab-006-copilot-cli.html">
+        <span class="en">ED 06</span>
+        <h3>GitHub Copilot CLI</h3>
+        <span class="d">The multi-model fleet. GPT orchestrator + Claude sub-agents, SQL memory with REM consolidation.</span>
+        <span class="v">Microsoft · Agentic</span>
+        <span class="t">~18K<span class="bar"><i style="width:63%"></i></span></span>
+      </a>
+      <a class="lrow rise" href="system-prompt-lab/system-prompt-lab-007-codex-gpt-5-agent-mode.html">
+        <span class="en">ED 07</span>
+        <h3>GPT-5 Agent Mode</h3>
+        <span class="d">Three channels: private reasoning, visible tools, final answer. Memento context management.</span>
+        <span class="v">OpenAI · Agentic</span>
+        <span class="t">~5.8K<span class="bar"><i style="width:20%"></i></span></span>
+      </a>
+      <a class="lrow rise" href="system-prompt-lab/system-prompt-lab-008-perplexity-ai.html">
+        <span class="en">ED 08</span>
+        <h3>Perplexity AI</h3>
+        <span class="d">The minimalist bet. A rendering contract in 169 lines: formatting as the product delta.</span>
+        <span class="v">Perplexity · Specialized</span>
+        <span class="t">~2K<span class="bar"><i style="width:7%"></i></span></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="ink-2" id="guide">
+  <div class="sec">
+    <p class="kick c rise">For everyone</p>
+    <h2 class="rise">Field guide.</h2>
+    <p class="lede rise" style="color:var(--bone-dim)">No jargon required. Six habits distilled from how the best AI teams on Earth write their instructions — for your day-to-day, whatever you use AI for.</p>
+    <div class="guide" style="border-color:#262626">
+      <div class="gcard rise">
+        <h3>1 · Be specific, not polite</h3><p>Precision gets results; politeness wastes tokens.</p>
+        <div class="ex"><span class="bad">✗ “Summarize this briefly”</span>
+<span class="good">✓ “Summarize in under 80 words, 3 bullets, no intro”</span></div>
+      </div>
+      <div class="gcard rise">
+        <h3>2 · Give every rule its own box</h3><p>Labeled sections resolve conflicts that flat paragraphs can't.</p>
+        <div class="ex"><span class="bad">✗ “Casual but professional, detailed but short”</span>
+<span class="good">✓ “TONE: casual. LENGTH: short. AUDIENCE: engineers.”</span></div>
+      </div>
+      <div class="gcard rise">
+        <h3>3 · Ask for thinking space</h3><p>OpenAI's agent prompt gives the AI a private scratchpad first. Answers get measurably better.</p>
+        <div class="ex"><span class="bad">✗ “What's wrong with this code?”</span>
+<span class="good">✓ “First list what you know, what's missing. Then answer.”</span></div>
+      </div>
+      <div class="gcard rise">
+        <h3>4 · Build memory, don't ask for it</h3><p>Keep a profile block and paste it in, like Copilot's session store does.</p>
+        <div class="ex"><span class="bad">✗ “Remember my preferences”</span>
+<span class="good">✓ “CONTEXT: I'm a lawyer. Precise terms. No bullets.”</span></div>
+      </div>
+      <div class="gcard rise">
+        <h3>5 · Split big jobs into roles</h3><p>Scout, critic, executor. Three passes beat one mega-prompt.</p>
+        <div class="ex"><span class="bad">✗ One giant prompt</span>
+<span class="good">✓ Pass 1: outline. Pass 2: critique. Pass 3: final.</span></div>
+      </div>
+      <div class="gcard rise">
+        <h3>6 · Numbers are enforceable</h3><p>Adjectives aren't. If it matters, attach a number.</p>
+        <div class="ex"><span class="bad">✗ “Keep it concise”</span>
+<span class="good">✓ “Max 150 words. Max 3 sources. Nothing older than 2024.”</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="close-plate">
+  <div class="inner">
+    <p class="kick rise">The close</p>
+    <h2 class="rise">The prompt<br>is the <em>product.</em></h2>
+    <p class="rise">Ninety-three thousand tokens of hidden instruction, one archive. New editions every weeknight at 9:15. A new podcast every Saturday at 9.</p>
+    <a class="fin rise" href="#top">Back to the top ↑</a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <span>PROMPT_LAB · prompts from public leaks (CC0) · pigment art via Venice AI</span>
+  <span><a href="index.html">BenchmarkViv</a> · <a href="system-prompt.html">classic editions</a></span>
+</footer>
+
+<script>
+(function () {
+  document.body.classList.remove('no-js');
+
+  // token counter — the only animation on the hero
+  var el = document.getElementById('tokcount');
+  var target = 93000, start = null;
+  function count(ts) {
+    if (!start) start = ts;
+    var p = Math.min(1, (ts - start) / 1600);
+    el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3))).toLocaleString();
+    if (p < 1) requestAnimationFrame(count);
+  }
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) requestAnimationFrame(count);
+  else el.textContent = '93,000';
+
+  // rise reveals
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.rise').forEach(function (el) { io.observe(el); });
+})();
+</script>
+</body>
+</html>
