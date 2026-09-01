@@ -64,6 +64,7 @@ FALLBACK_PRICING = {
     "openai-gpt-56-terra-pro": {"input": 3.125, "output": 18.75},
     "openai-gpt-55":           {"input": 10.00, "output": 30.00},
     "claude-fable-5":          {"input": 8.00,  "output": 24.00},
+    "claude-fable-5-1":        {"input": 10.00, "output": 50.00},
     "claude-opus-4-8":         {"input": 15.00, "output": 75.00},
     "zai-org-glm-5-2":         {"input": 1.00,  "output": 3.00},
     "deepseek-v4-pro":         {"input": 0.60,  "output": 2.20},

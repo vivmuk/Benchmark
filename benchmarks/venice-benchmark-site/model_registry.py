@@ -12,6 +12,7 @@ MODELS = [
     {"id": "openai-gpt-56-terra-pro", "display": "GPT-5.6 Terra Pro"},
     {"id": "openai-gpt-55",           "display": "GPT-5.5"},
     {"id": "claude-fable-5",          "display": "Fable 5"},
+    {"id": "claude-fable-5-1",        "display": "Fable 5.1"},
     {"id": "claude-opus-4-8",         "display": "Opus 4.8"},
     {"id": "claude-opus-5",           "display": "Opus 5"},
     {"id": "zai-org-glm-5-2",         "display": "GLM 5.2"},

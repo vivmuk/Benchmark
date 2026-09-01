@@ -197,6 +197,20 @@
     }
   },
   {
+    "id": "claude-fable-5-1",
+    "disp": "Fable 5.1",
+    "viv": 86.9,
+    "scores": {
+      "intent-understanding": 64,
+      "one-shot-ui": 66,
+      "pharma-drug-interaction": 86,
+      "startup-in-a-weekend": 100,
+      "value-density": 100,
+      "reverse-prompt-vision": 96,
+      "pharma-regulatory-comprehension": 90
+    }
+  },
+  {
     "id": "deepseek-v4-flash-0731-fast",
     "disp": "DeepSeek V4 Flash 0731 Fast",
     "viv": 86.5,
