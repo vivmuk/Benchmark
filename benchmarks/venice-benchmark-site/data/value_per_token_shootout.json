@@ -1,0 +1,140 @@
+[
+  {
+    "status": "ok",
+    "latency": 1.66,
+    "content": "{\"drug_pair\":\"Warfarin + Ibuprofen\",\"severity\":\"Major\",\"mechanism\":\"NSAID inhibits platelet aggregation, irritates GI mucosa, and displaces warfarin from protein binding, increasing bleeding risk.\",\"clinical_action\":\"Stop ibuprofen; switch to acetaminophen or topical NSAID for osteoarthritis pain.\",\"monitor\":[\"INR\",\"Signs of GI bleeding (melena, hematemesis, drop in hemoglobin)\"],\"avoid_if\":\"History of peptic ulcer or GI bleed\",\"confidence\":95}",
+    "reasoning": "",
+    "finish_reason": "stop",
+    "prompt_tokens": 3034,
+    "completion_tokens": 204,
+    "total_tokens": 3238,
+    "reasoning_tokens": null,
+    "usage_keys": [
+      "prompt_tokens",
+      "completion_tokens",
+      "total_tokens",
+      "prompt_tokens_details",
+      "cache_creation_input_tokens"
+    ],
+    "msg_keys": [
+      "role",
+      "content",
+      "refusal"
+    ],
+    "score": 100,
+    "value_per_token": 0.03088,
+    "value_per_1k": 30.883,
+    "value_per_usd": 2055.6,
+    "cost_usd": 0.048648,
+    "eval_details": {
+      "parse_ok": true,
+      "hits": {
+        "required_keys": 7,
+        "no_extra_keys": true,
+        "drug_pair": true,
+        "severity_enum": "Major",
+        "severity_major": true,
+        "mechanism": true,
+        "mechanism_concise": true,
+        "clinical_action": true,
+        "monitor_shape": true,
+        "monitor_content": true,
+        "avoid_if": true,
+        "confidence": true
+      },
+      "penalties": []
+    }
+  },
+  {
+    "status": "ok",
+    "latency": 8.18,
+    "content": "{\"drug_pair\":\"warfarin + ibuprofen\",\"severity\":\"Major\",\"mechanism\":\"NSAID inhibits platelet COX-1 and causes gastric mucosal injury; additive bleeding risk with warfarin anticoagulation, plus possible CYP2C9 competition raising INR.\",\"clinical_action\":\"Discontinue ibuprofen; switch to acetaminophen or topical NSAID for osteoarthritis pain.\",\"monitor\":[\"INR\",\"Signs of GI bleeding (melena, hemoglobin/hematocrit)\"],\"avoid_if\":\"History of peptic ulcer disease or prior GI bleed\",\"confidence\":95}",
+    "reasoning": "",
+    "finish_reason": "stop",
+    "prompt_tokens": 3011,
+    "completion_tokens": 231,
+    "total_tokens": 3242,
+    "reasoning_tokens": null,
+    "usage_keys": [
+      "prompt_tokens",
+      "completion_tokens",
+      "total_tokens",
+      "prompt_tokens_details",
+      "cache_creation_input_tokens"
+    ],
+    "msg_keys": [
+      "role",
+      "content",
+      "refusal"
+    ],
+    "score": 100,
+    "value_per_token": 0.03085,
+    "value_per_1k": 30.845,
+    "value_per_usd": 2000.3,
+    "cost_usd": 0.049992,
+    "eval_details": {
+      "parse_ok": true,
+      "hits": {
+        "required_keys": 7,
+        "no_extra_keys": true,
+        "drug_pair": true,
+        "severity_enum": "Major",
+        "severity_major": true,
+        "mechanism": true,
+        "mechanism_concise": true,
+        "clinical_action": true,
+        "monitor_shape": true,
+        "monitor_content": true,
+        "avoid_if": true,
+        "confidence": true
+      },
+      "penalties": []
+    }
+  },
+  {
+    "status": "ok",
+    "latency": 6.86,
+    "content": "{\"drug_pair\":\"warfarin + ibuprofen\",\"severity\":\"Major\",\"mechanism\":\"NSAID inhibits platelet COX-1 and damages gastric mucosa; additive bleeding risk with warfarin anticoagulation, possible CYP2C9 displacement raising INR.\",\"clinical_action\":\"Stop ibuprofen; switch to acetaminophen or topical NSAID; check INR within one week.\",\"monitor\":[\"INR\",\"Signs of GI bleeding (melena, hematemesis, hemoglobin drop)\"],\"avoid_if\":\"History of peptic ulcer or prior GI bleed\",\"confidence\":95}",
+    "reasoning": "",
+    "finish_reason": "stop",
+    "prompt_tokens": 3021,
+    "completion_tokens": 214,
+    "total_tokens": 3235,
+    "reasoning_tokens": null,
+    "usage_keys": [
+      "prompt_tokens",
+      "completion_tokens",
+      "total_tokens",
+      "prompt_tokens_details",
+      "cache_creation_input_tokens"
+    ],
+    "msg_keys": [
+      "role",
+      "content",
+      "refusal"
+    ],
+    "score": 100,
+    "value_per_token": 0.03091,
+    "value_per_1k": 30.912,
+    "value_per_usd": 2444.4,
+    "cost_usd": 0.04091,
+    "eval_details": {
+      "parse_ok": true,
+      "hits": {
+        "required_keys": 7,
+        "no_extra_keys": true,
+        "drug_pair": true,
+        "severity_enum": "Major",
+        "severity_major": true,
+        "mechanism": true,
+        "mechanism_concise": true,
+        "clinical_action": true,
+        "monitor_shape": true,
+        "monitor_content": true,
+        "avoid_if": true,
+        "confidence": true
+      },
+      "penalties": []
+    }
+  }
+]

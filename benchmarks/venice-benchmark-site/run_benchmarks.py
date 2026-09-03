@@ -82,6 +82,7 @@ FALLBACK_PRICING = {
     "nvidia-nemotron-3-5-lightning-30b-a3b": {"input": 0.10, "output": 0.25},
     # ---- Phase 2: new models ----
     "gemini-3-7-flash":              {"input": 1.875, "output": 9.375},
+    "gemini-3-8-flash":              {"input": 0.9375, "output": 4.6875},
     "qwen-3-7-max":                  {"input": 2.50,  "output": 7.50},
     "qwen-3-7-plus":                 {"input": 2.50,  "output": 7.50},
     "grok-4-20":                     {"input": 5.00,  "output": 15.00},
