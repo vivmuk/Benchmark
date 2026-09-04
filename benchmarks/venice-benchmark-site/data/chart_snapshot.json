@@ -307,6 +307,20 @@
     }
   },
   {
+    "id": "openai-gpt-6-astra",
+    "disp": "GPT-6 Astra",
+    "viv": 83.0,
+    "scores": {
+      "intent-understanding": 82,
+      "one-shot-ui": 68,
+      "pharma-drug-interaction": 84,
+      "pharma-regulatory-comprehension": 73,
+      "startup-in-a-weekend": 100,
+      "value-density": 100,
+      "reverse-prompt-vision": 57
+    }
+  },
+  {
     "id": "claude-sonnet-5",
     "disp": "Sonnet 5",
     "viv": 82.2,

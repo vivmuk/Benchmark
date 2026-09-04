@@ -40,6 +40,9 @@ RESULTS_PATH = Path("data") / "results.json"
 # spamming (or to enforce a fairness budget for an apples-to-apples run).
 MAX_TOKENS = 32768
 TEMPERATURE = 0.5
+# Models that reject any non-default `temperature` (the API only accepts the
+# default value 1). Omit the field entirely for these rather than sending 0.5.
+TEMPERATURE_LOCKED_MODELS = {"openai-gpt-56-luna", "openai-gpt-6-astra"}
 RATE_LIMIT_SLEEP_SECONDS = 1.0
 # Reasoning models on long-context prompts can take several minutes. The 180 s
 # reading timeout used to be the bottleneck for kimi-k3 / opus benchmarks.
@@ -99,6 +102,7 @@ FALLBACK_PRICING = {
     "qwen-3-8-27b":                   {"input": 0.50,  "output": 1.50},
     "deepseek-v4-pro-0813":           {"input": 0.60,  "output": 2.20},
     "z-ai-glm-5-3-flash":            {"input": 0.15,  "output": 0.50},
+    "openai-gpt-6-astra":            {"input": 12.5,  "output": 62.5},
 }
 DEFAULT_PRICING = {"input": 5.00, "output": 15.00}
 
@@ -544,8 +548,9 @@ def call_venice(api_key: str, model_id: str, prompt: str) -> dict:
         "model": model_id,
         "messages": [{"role": "user", "content": prompt}],
         "max_tokens": MAX_TOKENS,
-        "temperature": TEMPERATURE,
     }
+    if model_id not in TEMPERATURE_LOCKED_MODELS:
+        payload["temperature"] = TEMPERATURE
     headers = {
         "Authorization": f"Bearer {api_key}",
         "Content-Type": "application/json",

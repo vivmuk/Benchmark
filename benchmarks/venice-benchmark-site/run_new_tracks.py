@@ -255,8 +255,9 @@ def call_text(api_key: str, model_id: str, prompt: str, max_tokens: int) -> dict
         "model": model_id,
         "messages": [{"role": "user", "content": prompt}],
         "max_tokens": max_tokens,
-        "temperature": TEMPERATURE,
     }
+    if model_id not in rb.TEMPERATURE_LOCKED_MODELS:
+        payload["temperature"] = TEMPERATURE
     headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
     start = time.monotonic()
     try:
@@ -278,6 +279,9 @@ def call_text(api_key: str, model_id: str, prompt: str, max_tokens: int) -> dict
         usage = data.get("usage") or {}
         msg = ((data.get("choices") or [{}])[0].get("message") or {})
         content = msg.get("content") or ""
+        if not str(content).strip() and msg.get("reasoning_content"):
+            # Reasoning models may emit visible text only in reasoning_content.
+            content = msg.get("reasoning_content") or ""
         if not str(content).strip():
             # some models put text only in reasoning; still an error for this track
             return {
@@ -322,8 +326,9 @@ def call_vision(api_key: str, model_id: str, prompt: str, image_data_url: str, m
             }
         ],
         "max_tokens": max_tokens,
-        "temperature": TEMPERATURE,
     }
+    if model_id not in rb.TEMPERATURE_LOCKED_MODELS:
+        payload["temperature"] = TEMPERATURE
     headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
     start = time.monotonic()
     try:
@@ -395,7 +400,7 @@ def judge_reverse_prompt(api_key: str, source_prompt: str, checklist: list, cand
         "}\n"
         "Be conservative: mark true only if clearly present in the candidate."
     )
-    call = call_text(api_key, JUDGE_MODEL, judge_prompt, max_tokens=1500)
+    call = call_text(api_key, JUDGE_MODEL, judge_prompt, max_tokens=4000)
     cost = rb.estimate_cost(
         JUDGE_MODEL, call.get("prompt_tokens") or 0, call.get("completion_tokens") or 0, pricing
     )
