@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="BenchmarkViv - TikZ Evolution. One fixed single-alpaca TikZ prompt, rendered by each model in a family, ordered by release date." />
+  <title>TikZ Evolution · BenchmarkViv</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/styles.css?v=17" />
+  <style>
+    .evo-row { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 8px; }
+    .evo-card { width: 220px; background: var(--surface); border: 1px solid var(--rule); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; display: flex; flex-direction: column; }
+    .evo-img { background: #F7F8FA; aspect-ratio: 1 / 1; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .evo-img img { width: 100%; height: 100%; object-fit: contain; }
+    .evo-img-fail { background: repeating-linear-gradient(45deg, #F1F4F8, #F1F4F8 8px, #E8EDF3 8px, #E8EDF3 16px); }
+    .evo-img-fail span { color: var(--text-faint); font-family: var(--font-mono); font-size: 12px; }
+    .evo-meta { padding: 12px 14px 14px; border-top: 1px solid var(--rule); }
+    .evo-name { display: block; font-family: var(--font-display); font-weight: 600; color: var(--text); font-size: 15px; }
+    .evo-date { display: block; margin-top: 3px; font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); }
+    .evo-family { margin-bottom: 40px; }
+    .evo-family .section-head { margin-bottom: 20px; }
+  </style>
+</head>
+<body>
+  <div class="gpu-bg" aria-hidden="true"><canvas id="gpuCanvas"></canvas></div>
+  <nav class="navbar vt-nav">
+    <div class="container">
+      <a href="index.html" class="nav-logo">Benchmark<span>Viv</span></a>
+      <ul class="nav-links" id="siteNav">
+        <li><a href="index.html#leaderboard">Leaderboard</a></li>
+        <li><a href="index.html#tracks">Tracks</a></li>
+        <li><a href="vision.html">Vision</a></li>
+        <li><a href="trends.html">Trends</a></li>
+        <li><a href="compare.html">Compare</a></li>
+        <li><a href="evolution.html" class="is-current">Evolution</a></li>
+        <li><a href="gif-arena.html">GIF Arena</a></li>
+        <li><a href="system-prompt.html">System Prompts</a></li>
+        <li><a href="prompt-lab.html" style="color: var(--cobalt); font-weight: 600;">Prompt Lab</a></li>
+        <li><a href="experimental-design.html">Design</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+      <a href="index.html" class="nav-cta">Back to Leaderboard</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <header class="hero vt-hero">
+    <div class="hero-backdrop"></div>
+    <div class="container hero-content">
+      <span class="eyebrow">TikZ Evolution</span>
+      <h1>One alpaca, every generation</h1>
+      <p>Every model below received the <em>exact same</em> prompt — draw a single cartoon alpaca in TikZ — with no temperature override and no other variation. Each family is ordered left-to-right by release date, so the progression (and the drift) of a fixed visual task becomes visible across a model lineage.</p>
+    </div>
+  </header>
+
+  <main class="container" style="margin-top: 32px;">
+  <section class="evo-family container">
+    <div class="section-head"><h2>OpenAI <em>GPT</em></h2>
+      <p class="section-sub">6 of 8 rendered · same prompt · release order</p></div>
+    <div class="evo-row">
+      <div class="evo-card evo-ok">
+        <div class="evo-img"><img src="assets/evolution/openai-gpt-55.png" alt="GPT-5.5 TikZ alpaca" loading="lazy" /></div>
+        <div class="evo-meta">
+          <span class="evo-name">GPT-5.5</span>
+          <span class="evo-date">2026-04-23</span>
+        </div>
+      </div>
+      <div class="evo-card evo-ok">
+        <div class="evo-img"><img src="assets/evolution/openai-gpt-56-luna.png" alt="GPT-5.6 Luna TikZ alpaca" loading="lazy" /></div>
+        <div class="evo-meta">
+          <span class="evo-name">GPT-5.6 Luna</span>
+          <span class="evo-date">2026-07-09</span>
+        </div>
+      </div>
+      <div class="evo-card evo-fail">
+        <div class="evo-img evo-img-fail"><span>unavailable</span></div>
+        <div class="evo-meta">
+          <span class="evo-name">GPT-5.6 Luna Pro</span>
+          <span class="evo-date">2026-07-09</span>
+        </div>
+      </div>
+      <div class="evo-card evo-ok">
+        <div class="evo-img"><img src="assets/evolution/openai-gpt-56-sol.png" alt="GPT-5.6 Sol TikZ alpaca" loading="lazy" /></div>
+        <div class="evo-meta">
+          <span class="evo-name">GPT-5.6 Sol</span>
+          <span class="evo-date">2026-07-09</span>
+        </div>
+      </div>
+      <div class="evo-card evo-ok">
+        <div class="evo-img"><img src="assets/evolution/openai-gpt-56-sol-pro.png" alt="GPT-5.6 Sol Pro TikZ alpaca" loading="lazy" /></div>
+        <div class="evo-meta">
+          <span class="evo-name">GPT-5.6 Sol Pro</span>
+          <span class="evo-date">2026-07-09</span>
+        </div>
+      </div>
+      <div class="evo-card evo-ok">
+        <div class="evo-img"><img src="assets/evolution/openai-gpt-56-terra.png" alt="GPT-5.6 Terra TikZ alpaca" loading="lazy" /></div>
+        <div class="evo-meta">
+          <span class="evo-name">GPT-5.6 Terra</span>
+          <span class="evo-date">2026-07-09</span>
+        </div>
+      </div>
+      <div class="evo-card evo-fail">
+        <div class="evo-img evo-img-fail"><span>unavailable</span></div>
+        <div class="evo-meta">
+          <span class="evo-name">GPT-5.6 Terra Pro</span>
+          <span class="evo-date">2026-07-09</span>
+        </div>
+      </div>
+      <div class="evo-card evo-ok">
+        <div class="evo-img"><img src="assets/evolution/openai-gpt-6-astra.png" alt="GPT-6 Astra TikZ alpaca" loading="lazy" /></div>
+        <div class="evo-meta">
+          <span class="evo-name">GPT-6 Astra</span>
+          <span class="evo-date">2026-09-05</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="evo-family container">
+    <div class="section-head"><h2>Anthropic <em>Claude</em></h2>
+      <p class="section-sub">7 of 7 rendered · same prompt · release order</p></div>
+    <div class="evo-row">
+      <div class="evo-card evo-ok">
+        <div class="evo-img"><img src="assets/evolution/claude-opus-4-8.png" alt="Opus 4.8 TikZ alpaca" loading="lazy" /></div>
+        <div class="evo-meta">
+          <span class="evo-name">Opus 4.8</span>
+          <span class="evo-date">2026-05-28</span>
+        </div>
+      </div>
+      <div class="evo-card evo-ok">
+        <div class="evo-img"><img src="assets/evolution/claude-opus-4-8-fast.png" alt="Opus 4.8 Fast TikZ alpaca" loading="lazy" /></div>
+        <div class="evo-meta">
+          <span class="evo-name">Opus 4.8 Fast</span>
+          <span class="evo-date">2026-05-28</span>
+        </div>
+      </div>
+      <div class="evo-card evo-ok">
+        <div class="evo-img"><img src="assets/evolution/claude-fable-5.png" alt="Fable 5 TikZ alpaca" loading="lazy" /></div>
+        <div class="evo-meta">
+          <span class="evo-name">Fable 5</span>
+          <span class="evo-date">2026-06-10</span>
+        </div>
+      </div>
+      <div class="evo-card evo-ok">
+        <div class="evo-img"><img src="assets/evolution/claude-sonnet-5.png" alt="Sonnet 5 TikZ alpaca" loading="lazy" /></div>
+        <div class="evo-meta">
+          <span class="evo-name">Sonnet 5</span>
+          <span class="evo-date">2026-06-29</span>
+        </div>
+      </div>
+      <div class="evo-card evo-ok">
+        <div class="evo-img"><img src="assets/evolution/claude-opus-5.png" alt="Opus 5 TikZ alpaca" loading="lazy" /></div>
+        <div class="evo-meta">
+          <span class="evo-name">Opus 5</span>
+          <span class="evo-date">2026-07-23</span>
+        </div>
+      </div>
+      <div class="evo-card evo-ok">
+        <div class="evo-img"><img src="assets/evolution/claude-opus-5-fast.png" alt="Opus 5 Fast TikZ alpaca" loading="lazy" /></div>
+        <div class="evo-meta">
+          <span class="evo-name">Opus 5 Fast</span>
+          <span class="evo-date">2026-07-23</span>
+        </div>
+      </div>
+      <div class="evo-card evo-ok">
+        <div class="evo-img"><img src="assets/evolution/claude-fable-5-1.png" alt="Fable 5.1 TikZ alpaca" loading="lazy" /></div>
+        <div class="evo-meta">
+          <span class="evo-name">Fable 5.1</span>
+          <span class="evo-date">2026-08-29</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="evo-family container">
+    <div class="section-head"><h2>Google <em>Gemini</em></h2>
+      <p class="section-sub">3 of 3 rendered · same prompt · release order</p></div>
+    <div class="evo-row">
+      <div class="evo-card evo-ok">
+        <div class="evo-img"><img src="assets/evolution/gemini-3-6-flash.png" alt="Gemini 3.6 Flash TikZ alpaca" loading="lazy" /></div>
+        <div class="evo-meta">
+          <span class="evo-name">Gemini 3.6 Flash</span>
+          <span class="evo-date">2026-07-09</span>
+        </div>
+      </div>
+      <div class="evo-card evo-ok">
+        <div class="evo-img"><img src="assets/evolution/gemini-3-7-flash.png" alt="Gemini 3.7 Flash TikZ alpaca" loading="lazy" /></div>
+        <div class="evo-meta">
+          <span class="evo-name">Gemini 3.7 Flash</span>
+          <span class="evo-date">2026-08-14</span>
+        </div>
+      </div>
+      <div class="evo-card evo-ok">
+        <div class="evo-img"><img src="assets/evolution/gemini-3-8-flash.png" alt="Gemini 3.8 Flash TikZ alpaca" loading="lazy" /></div>
+        <div class="evo-meta">
+          <span class="evo-name">Gemini 3.8 Flash</span>
+          <span class="evo-date">2026-09-02</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="evo-family container">
+    <div class="section-head"><h2>Z.ai <em>GLM</em></h2>
+      <p class="section-sub">1 of 3 rendered · same prompt · release order</p></div>
+    <div class="evo-row">
+      <div class="evo-card evo-fail">
+        <div class="evo-img evo-img-fail"><span>unavailable</span></div>
+        <div class="evo-meta">
+          <span class="evo-name">GLM 5.2</span>
+          <span class="evo-date">2026-06-16</span>
+        </div>
+      </div>
+      <div class="evo-card evo-fail">
+        <div class="evo-img evo-img-fail"><span>unavailable</span></div>
+        <div class="evo-meta">
+          <span class="evo-name">GLM 5.3</span>
+          <span class="evo-date">2026-08-18</span>
+        </div>
+      </div>
+      <div class="evo-card evo-ok">
+        <div class="evo-img"><img src="assets/evolution/z-ai-glm-5-3-flash.png" alt="GLM 5.3 Flash TikZ alpaca" loading="lazy" /></div>
+        <div class="evo-meta">
+          <span class="evo-name">GLM 5.3 Flash</span>
+          <span class="evo-date">2026-08-21</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="evo-family container">
+    <div class="section-head"><h2>MiniMax <em>MiniMax</em></h2>
+      <p class="section-sub">2 of 2 rendered · same prompt · release order</p></div>
+    <div class="evo-row">
+      <div class="evo-card evo-ok">
+        <div class="evo-img"><img src="assets/evolution/minimax-m27.png" alt="MiniMax M27 TikZ alpaca" loading="lazy" /></div>
+        <div class="evo-meta">
+          <span class="evo-name">MiniMax M27</span>
+          <span class="evo-date">2026-03-18</span>
+        </div>
+      </div>
+      <div class="evo-card evo-ok">
+        <div class="evo-img"><img src="assets/evolution/minimax-m3-preview.png" alt="MiniMax M3 TikZ alpaca" loading="lazy" /></div>
+        <div class="evo-meta">
+          <span class="evo-name">MiniMax M3</span>
+          <span class="evo-date">2026-06-12</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-logo">Benchmark<span>Viv</span></div>
+      <p>TikZ Evolution — a fixed single-alpaca prompt across model families, ordered by release date.</p>
+      <div class="footer-links">
+        <a href="index.html">Leaderboard</a>
+        <a href="about.html">About</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
