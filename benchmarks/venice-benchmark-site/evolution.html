@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Patrick+Hand&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/styles.css?v=17" />
   <style>
     .evo-row { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 8px; }
@@ -21,6 +22,35 @@
     .evo-date { display: block; margin-top: 3px; font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); }
     .evo-family { margin-bottom: 40px; }
     .evo-family .section-head { margin-bottom: 20px; }
+
+    /* ---- Chalkboard — Prompt & Methodology ---- */
+    .chalkboard {
+      background: #1e362b;
+      background-image:
+        radial-gradient(ellipse at 15% 20%, rgba(255,255,255,0.05), transparent 55%),
+        radial-gradient(ellipse at 85% 75%, rgba(255,255,255,0.035), transparent 55%),
+        radial-gradient(circle at 40% 50%, rgba(0,0,0,0.14), transparent 60%);
+      border: 12px solid transparent;
+      border-image: linear-gradient(135deg, #8a6139, #c9a06b 30%, #8a6139 55%, #5e4020 80%, #8a6139) 1;
+      border-radius: 16px;
+      box-shadow: inset 0 0 70px rgba(0,0,0,0.42), 0 22px 50px rgba(10,14,12,0.45);
+      padding: 40px 44px;
+      color: #f4efe2;
+      margin-bottom: 40px;
+    }
+    .chalkboard-inner { max-width: 960px; margin: 0 auto; }
+    .chalk-title-row { display: flex; align-items: baseline; gap: 18px; flex-wrap: wrap; margin-bottom: 22px; }
+    .chalk-title { font-family: 'Caveat', 'Comic Sans MS', cursive; font-size: 2.7rem; font-weight: 700; color: #fffdf5; text-shadow: 0 0 6px rgba(255,255,255,0.25), 0 1px 1px rgba(0,0,0,0.4); letter-spacing: 0.5px; }
+    .chalk-doodle { font-family: 'Caveat', cursive; font-size: 1.8rem; color: #bcd8c7; opacity: 0.8; }
+    .chalk-box { border: 2px dashed rgba(244,239,226,0.35); border-radius: 8px; padding: 16px 20px; margin-bottom: 16px; background: rgba(255,255,255,0.03); }
+    .chalk-label { font-family: 'Caveat', cursive; font-size: 1.4rem; color: #9fd4b6; margin-bottom: 8px; text-shadow: 0 0 4px rgba(159,212,182,0.4); }
+    .chalk-mono { font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; line-height: 1.65; color: #e8efe9; white-space: pre-wrap; word-break: break-word; margin: 0; }
+    .chalk-rule { height: 2px; margin: 26px 0; background: repeating-linear-gradient(90deg, rgba(244,239,226,0.5) 0 18px, transparent 18px 30px); opacity: 0.5; }
+    .chalk-subtitle { font-family: 'Caveat', cursive; font-size: 1.9rem; color: #fff; display: block; margin-bottom: 14px; text-shadow: 0 0 5px rgba(255,255,255,0.2); }
+    .chalk-method { list-style: none; margin: 0; padding: 0; display: grid; gap: 13px; }
+    .chalk-method li { position: relative; padding-left: 28px; font-family: 'Caveat', cursive; font-size: 1.35rem; color: #eef2ea; line-height: 1.4; }
+    .chalk-method li::before { content: '\2192'; position: absolute; left: 0; color: #9fd4b6; font-weight: 700; font-family: 'Caveat', cursive; }
+    .chalk-method strong { color: #fff; text-shadow: 0 0 4px rgba(255,255,255,0.2); }
   </style>
 </head>
 <body>
@@ -53,6 +83,36 @@
       <p>Every model below received the <em>exact same</em> prompt — draw a single cartoon alpaca in TikZ — with no temperature override and no other variation. Each family is ordered left-to-right by release date, so the progression (and the drift) of a fixed visual task becomes visible across a model lineage.</p>
     </div>
   </header>
+
+  <section class="chalkboard">
+    <div class="chalkboard-inner">
+      <div class="chalk-title-row">
+        <span class="chalk-title">The Prompt &amp; Methodology</span>
+        <span class="chalk-doodle">~ ~ ~ ~ ~ ~ ~</span>
+      </div>
+
+      <div class="chalk-box">
+        <div class="chalk-label">System prompt</div>
+        <p class="chalk-mono">You are an expert TikZ illustrator. Emit complete, compilable, self-contained LaTeX only.</p>
+      </div>
+
+      <div class="chalk-box">
+        <div class="chalk-label">User prompt — identical for every model, every family</div>
+        <p class="chalk-mono">Create a complete, compilable LaTeX document using the standalone documentclass and ONLY the tikz package (libraries: backgrounds, decorations.pathmorphing, snakes, calc are allowed). The picture must draw a SINGLE cute cartoon alpaca, centered, fluffy light-cream body, long neck, small head with two ears and a fluffy tuft on top, four little legs, a friendly face. Use bright pleasing colors and clean thick dark outlines, on a soft plain background. Do NOT include any text, labels, captions, watermarks, or other animals. Do NOT use \includegraphics or external images. Output ONLY the raw LaTeX source inside one ```latex code fence, nothing else before or after.</p>
+      </div>
+
+      <div class="chalk-rule"></div>
+
+      <span class="chalk-subtitle">How this page was made</span>
+      <ul class="chalk-method">
+        <li><strong>One fixed prompt</strong> — every model, in every family, received the byte-for-byte same alpaca prompt. The only variable is the model itself.</li>
+        <li><strong>Grouped by family, ordered by release date</strong> — each row runs oldest → newest, so you see a lineage evolve and drift, not a cross-vendor shootout.</li>
+        <li><strong>Full token budget</strong> — no generation was capped; each model got its full allowed max output tokens.</li>
+        <li><strong>Temperature guarded</strong> — models that reject non-default temperature omit the field entirely.</li>
+        <li><strong>Unedited output</strong> — standalone TikZ → Tectonic compile → PNG raster. What you see is exactly what each model emitted.</li>
+      </ul>
+    </div>
+  </section>
 
   <main class="container" style="margin-top: 32px;">
   <section class="evo-family container">
