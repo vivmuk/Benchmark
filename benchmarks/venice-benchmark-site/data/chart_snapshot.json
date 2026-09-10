@@ -377,6 +377,33 @@
     }
   },
   {
+    "id": "mercury-2-5",
+    "disp": "Mercury 2.5",
+    "viv": 81.2,
+    "scores": {
+      "intent-understanding": 58,
+      "one-shot-ui": 66,
+      "pharma-drug-interaction": 89,
+      "pharma-regulatory-comprehension": 60,
+      "startup-in-a-weekend": 94,
+      "value-density": 100
+    }
+  },
+  {
+    "id": "qwen-3-8-flash",
+    "disp": "Qwen 3.8 Flash",
+    "viv": 81.2,
+    "scores": {
+      "intent-understanding": 76,
+      "one-shot-ui": 68,
+      "pharma-drug-interaction": 89,
+      "pharma-regulatory-comprehension": 90,
+      "startup-in-a-weekend": 100,
+      "value-density": 100,
+      "reverse-prompt-vision": 54
+    }
+  },
+  {
     "id": "grok-4-6",
     "disp": "Grok 4.6",
     "viv": 80.9,

@@ -38,6 +38,9 @@ VALUE_BUDGET_TOKENS = 1024
 JUDGE_MODEL = "openai-gpt-56-luna"
 TEMPERATURE = 0.3
 REQUEST_TIMEOUT = 600
+# Models whose default reasoning_effort is "high" and silently burn the token
+# budget (no reasoning_content); force "none" so value-density @1K can emit content.
+REASONING_EFFORT_NONE_MODELS = {"mercury-2-5"}
 
 # ---------------------------------------------------------------------------
 # Auth
@@ -258,6 +261,8 @@ def call_text(api_key: str, model_id: str, prompt: str, max_tokens: int) -> dict
     }
     if model_id not in rb.TEMPERATURE_LOCKED_MODELS:
         payload["temperature"] = TEMPERATURE
+    if model_id in REASONING_EFFORT_NONE_MODELS:
+        payload["reasoning_effort"] = "none"
     headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
     start = time.monotonic()
     try:

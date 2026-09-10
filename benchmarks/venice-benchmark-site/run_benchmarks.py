@@ -103,6 +103,9 @@ FALLBACK_PRICING = {
     "deepseek-v4-pro-0813":           {"input": 0.60,  "output": 2.20},
     "z-ai-glm-5-3-flash":            {"input": 0.15,  "output": 0.50},
     "openai-gpt-6-astra":            {"input": 12.5,  "output": 62.5},
+    # ---- 2026-09 additions ----
+    "mercury-2-5":                    {"input": 0.05,  "output": 0.1875},
+    "qwen-3-8-flash":                 {"input": 0.14,  "output": 0.49},
 }
 DEFAULT_PRICING = {"input": 5.00, "output": 15.00}
 
@@ -576,7 +579,12 @@ def call_venice(api_key: str, model_id: str, prompt: str) -> dict:
         content = ""
         choices = data.get("choices") or []
         if choices:
-            content = (choices[0].get("message") or {}).get("content") or ""
+            msg = (choices[0].get("message") or {})
+            content = msg.get("content") or ""
+            if not str(content).strip() and msg.get("reasoning_content"):
+                # Reasoning models (always-on thinking) burn the token budget on
+                # hidden reasoning and leave `content` empty; fall back like run_new_tracks.
+                content = msg.get("reasoning_content") or ""
         if not content.strip():
             return {
                 "status": "error",
