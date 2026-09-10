@@ -43,6 +43,9 @@ TEMPERATURE = 0.5
 # Models that reject any non-default `temperature` (the API only accepts the
 # default value 1). Omit the field entirely for these rather than sending 0.5.
 TEMPERATURE_LOCKED_MODELS = {"openai-gpt-56-luna", "openai-gpt-6-astra"}
+# Models whose default reasoning_effort is verbose enough to hang the read
+# timeout; force a lower effort on core tracks so they complete.
+REASONING_EFFORT_LOW_MODELS = {"deepseek-v4-1-flash"}
 RATE_LIMIT_SLEEP_SECONDS = 1.0
 # Reasoning models on long-context prompts can take several minutes. The 180 s
 # reading timeout used to be the bottleneck for kimi-k3 / opus benchmarks.
@@ -106,6 +109,7 @@ FALLBACK_PRICING = {
     # ---- 2026-09 additions ----
     "mercury-2-5":                    {"input": 0.05,  "output": 0.1875},
     "qwen-3-8-flash":                 {"input": 0.14,  "output": 0.49},
+    "deepseek-v4-1-flash":            {"input": 0.375, "output": 1.50},
 }
 DEFAULT_PRICING = {"input": 5.00, "output": 15.00}
 
@@ -554,6 +558,8 @@ def call_venice(api_key: str, model_id: str, prompt: str) -> dict:
     }
     if model_id not in TEMPERATURE_LOCKED_MODELS:
         payload["temperature"] = TEMPERATURE
+    if model_id in REASONING_EFFORT_LOW_MODELS:
+        payload["reasoning_effort"] = "low"
     headers = {
         "Authorization": f"Bearer {api_key}",
         "Content-Type": "application/json",

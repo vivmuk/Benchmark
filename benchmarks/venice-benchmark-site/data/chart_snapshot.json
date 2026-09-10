@@ -418,6 +418,20 @@
     }
   },
   {
+    "id": "deepseek-v4-1-flash",
+    "disp": "DeepSeek V4.1 Flash",
+    "viv": 80.6,
+    "scores": {
+      "intent-understanding": 76,
+      "one-shot-ui": 68,
+      "pharma-drug-interaction": 86,
+      "pharma-regulatory-comprehension": 59,
+      "startup-in-a-weekend": 100,
+      "value-density": 100,
+      "reverse-prompt-vision": 51
+    }
+  },
+  {
     "id": "gemini-3-6-flash",
     "disp": "Gemini 3.6 Flash",
     "viv": 80.0,
