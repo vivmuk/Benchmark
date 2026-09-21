@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-07T13:00:04.684647+00:00",
+  "generated_at": "2026-09-21T13:00:09.769042+00:00",
   "models": {
     "gemini-3-6-flash": {
       "id": "gemini-3-6-flash",
@@ -475,6 +475,11 @@
       "id": "e2ee-kimi-k2-6",
       "first_seen": "2026-09-07T13:00:04.684616+00:00",
       "display": "e2ee-kimi-k2-6"
+    },
+    "e2ee-kimi-k3-p": {
+      "id": "e2ee-kimi-k3-p",
+      "first_seen": "2026-09-14T13:00:05.859147+00:00",
+      "display": "e2ee-kimi-k3-p"
     }
   }
 }

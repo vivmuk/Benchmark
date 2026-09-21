@@ -54,4 +54,7 @@ MODELS = [
     {"id": "mercury-2-5",                "display": "Mercury 2.5"},
     {"id": "qwen-3-8-flash",             "display": "Qwen 3.8 Flash"},
     {"id": "deepseek-v4-1-flash",        "display": "DeepSeek V4.1 Flash"},
+    # ---- 2026-09: latest additions ----
+    {"id": "grok-4-7",                  "display": "Grok 4.7"},
+    {"id": "openai-gpt-6-astra-pro",     "display": "GPT-6 Astra Pro"},
 ]

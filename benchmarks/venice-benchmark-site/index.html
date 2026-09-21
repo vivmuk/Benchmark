@@ -234,6 +234,23 @@
     </div>
   </section>
 
+  <section id="track-leaders">
+    <div class="container">
+      <div class="section-head">
+        <h2>Track leaders — who wins each benchmark</h2>
+        <p>Every evaluation dimension has a single leading model, scored on that lane alone — before they're blended into the weighted VivIndex.</p>
+      </div>
+      <div class="tl-grid" id="trackLeadersGrid"></div>
+    </div>
+    <style>
+      .tl-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1rem;}
+      .tl-card{background:var(--surface,#fff);border:1px solid var(--rule,rgba(26,26,46,.1));border-radius:12px;padding:1rem 1.1rem;box-shadow:var(--shadow,0 10px 30px -18px rgba(18,18,26,.28));}
+      .tl-track{font:600 .72rem var(--font-mono,"JetBrains Mono",monospace);text-transform:uppercase;letter-spacing:.05em;color:var(--text-dim,rgba(26,26,46,.75));margin-bottom:.4rem;}
+      .tl-leader{font-size:.95rem;color:var(--text,#1A1A2E);}
+      .tl-leader b{color:var(--cobalt,#00D4AA);font-size:1.1rem;margin-left:.25rem;}
+    </style>
+  </section>
+
 
   <section id="leaderboard" class="leaderboard vt-leaderboard">
     <div class="container">
@@ -390,5 +407,27 @@
   <a href="#comparison" class="board-jump" id="boardJump" aria-hidden="true" tabindex="-1">↓ Model board</a>
 
   <script src="assets/app.js?v=14"></script>
+  <script>
+    (function () {
+      var host = document.getElementById("trackLeadersGrid");
+      if (!host) return;
+      fetch("data/results.json", { cache: "no-store" }).then(function (r) { return r.json(); }).then(function (d) {
+        var models = {}, bnames = {};
+        (d.models || []).forEach(function (m) { models[m.id] = m.display; });
+        (d.benchmarks || []).forEach(function (b) { bnames[b.id] = b.name; });
+        var best = {};
+        (d.results || []).forEach(function (row) {
+          if (row.status !== "ok" || row.score == null) return;
+          var b = row.benchmark_id;
+          if (!best[b] || row.score > best[b].score) best[b] = { score: row.score, model: row.model_id };
+        });
+        host.innerHTML = (d.benchmarks || []).map(function (b) {
+          var L = best[b.id]; if (!L) return "";
+          var nm = models[L.model] || L.model;
+          return '<div class="tl-card"><div class="tl-track">' + b.name + '</div><div class="tl-leader">' + nm + ' <b>' + L.score + '</b></div></div>';
+        }).join("");
+      }).catch(function () {});
+    })();
+  </script>
 </body>
 </html>

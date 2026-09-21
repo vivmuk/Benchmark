@@ -252,6 +252,20 @@
     }
   },
   {
+    "id": "openai-gpt-6-astra-pro",
+    "disp": "GPT-6 Astra Pro",
+    "viv": 85.3,
+    "scores": {
+      "intent-understanding": 88,
+      "one-shot-ui": 68,
+      "pharma-drug-interaction": 78,
+      "pharma-regulatory-comprehension": 82,
+      "startup-in-a-weekend": 95,
+      "value-density": 100,
+      "reverse-prompt-vision": 69
+    }
+  },
+  {
     "id": "minimax-m27",
     "disp": "MiniMax M27",
     "viv": 84.8,
@@ -457,6 +471,20 @@
       "startup-in-a-weekend": 100,
       "value-density": 100,
       "reverse-prompt-vision": 93
+    }
+  },
+  {
+    "id": "grok-4-7",
+    "disp": "Grok 4.7",
+    "viv": 77.9,
+    "scores": {
+      "intent-understanding": 58,
+      "one-shot-ui": 66,
+      "pharma-drug-interaction": 82,
+      "pharma-regulatory-comprehension": 78,
+      "startup-in-a-weekend": 100,
+      "value-density": 100,
+      "reverse-prompt-vision": 57
     }
   },
   {
