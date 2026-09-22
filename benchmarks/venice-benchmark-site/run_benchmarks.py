@@ -112,6 +112,7 @@ FALLBACK_PRICING = {
     "deepseek-v4-1-flash":            {"input": 0.375, "output": 1.50},
     "grok-4-7":                      {"input": 2.27,  "output": 6.80},
     "openai-gpt-6-astra-pro":         {"input": 12.5,  "output": 62.5},
+    "claude-opus-5-5":                {"input": 4.8,   "output": 24.0},
 }
 DEFAULT_PRICING = {"input": 5.00, "output": 15.00}
 

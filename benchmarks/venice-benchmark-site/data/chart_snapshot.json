@@ -279,6 +279,20 @@
     }
   },
   {
+    "id": "claude-opus-5-5",
+    "disp": "Claude Opus 5.5",
+    "viv": 84.8,
+    "scores": {
+      "intent-understanding": 82,
+      "one-shot-ui": 68,
+      "pharma-drug-interaction": 86,
+      "pharma-regulatory-comprehension": 86,
+      "startup-in-a-weekend": 100,
+      "value-density": 100,
+      "reverse-prompt-vision": 66
+    }
+  },
+  {
     "id": "openai-gpt-56-terra",
     "disp": "GPT-5.6 Terra",
     "viv": 84.5,
