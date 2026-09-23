@@ -58,4 +58,6 @@ MODELS = [
     {"id": "grok-4-7",                  "display": "Grok 4.7"},
     {"id": "openai-gpt-6-astra-pro",     "display": "GPT-6 Astra Pro"},
     {"id": "claude-opus-5-5",            "display": "Claude Opus 5.5"},
+    {"id": "openai-gpt-6-sol",           "display": "GPT-6 Sol"},
+    {"id": "openai-gpt-6-luna",          "display": "GPT-6 Luna"},
 ]

@@ -460,6 +460,20 @@
     }
   },
   {
+    "id": "openai-gpt-6-luna",
+    "disp": "GPT-6 Luna",
+    "viv": 80.6,
+    "scores": {
+      "intent-understanding": 82,
+      "one-shot-ui": 68,
+      "pharma-drug-interaction": 79,
+      "pharma-regulatory-comprehension": 73,
+      "startup-in-a-weekend": 100,
+      "value-density": 100,
+      "reverse-prompt-vision": 45
+    }
+  },
+  {
     "id": "gemini-3-6-flash",
     "disp": "Gemini 3.6 Flash",
     "viv": 80.0,
@@ -499,6 +513,20 @@
       "startup-in-a-weekend": 100,
       "value-density": 100,
       "reverse-prompt-vision": 57
+    }
+  },
+  {
+    "id": "openai-gpt-6-sol",
+    "disp": "GPT-6 Sol",
+    "viv": 75.8,
+    "scores": {
+      "intent-understanding": 64,
+      "one-shot-ui": 66,
+      "pharma-drug-interaction": 81,
+      "pharma-regulatory-comprehension": 68,
+      "startup-in-a-weekend": 89,
+      "value-density": 100,
+      "reverse-prompt-vision": 54
     }
   },
   {

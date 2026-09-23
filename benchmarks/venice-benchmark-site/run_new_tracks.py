@@ -40,7 +40,7 @@ TEMPERATURE = 0.3
 REQUEST_TIMEOUT = 600
 # Models whose default reasoning_effort is "high" and silently burn the token
 # budget (no reasoning_content); force "none" so value-density @1K can emit content.
-REASONING_EFFORT_NONE_MODELS = {"mercury-2-5", "deepseek-v4-1-flash", "grok-4-7", "openai-gpt-6-astra-pro"}
+REASONING_EFFORT_NONE_MODELS = {"mercury-2-5", "deepseek-v4-1-flash", "grok-4-7", "openai-gpt-6-astra-pro", "openai-gpt-6-sol", "openai-gpt-6-luna"}
 
 # ---------------------------------------------------------------------------
 # Auth

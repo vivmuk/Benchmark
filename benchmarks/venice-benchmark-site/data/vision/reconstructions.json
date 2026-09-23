@@ -1,20 +1,20 @@
 {
-  "generated_at": "2026-09-22T19:02:03.949377+00:00",
+  "generated_at": "2026-09-23T01:52:25.220907+00:00",
   "source_image": "data/vision/reverse_prompt_source.png",
   "image_model": "nano-banana-2",
   "source_prompt": "Ultra-detailed surreal pharmaceutical research laboratory at twilight, wide cinematic 16:9 composition. Center: a translucent teal glass molecular model of a double-helix drug scaffold floating above a brushed-steel bench, with glowing cyan bond lines and amber atom nodes. Left: a wall-sized holographic dashboard titled \"EvidenceGrade AI\" in bold white sans-serif, showing a 5-tier grade ladder (A emerald, B teal, C gold, D orange, F crimson) and a line chart labeled \"Citation Confidence 2019-2026\". Right: a large arched window revealing a rainy neo-Tokyo street with neon kanji signs reflecting on wet asphalt, a red umbrella leaning against the window sill, and a black cat silhouette on the ledge. Foreground: an open leather notebook with handwritten notes \"CYP3A4 interaction risk\" and a fountain pen, next to a white ceramic coffee cup with a teal lid and a cracked porcelain saucer. Ceiling: brass articulated lamps casting warm pools of light; one lamp has a green glass shade. Background shelves: amber glass reagent bottles labeled Aspirin, Warfarin, Ibuprofen in clean black type, a vintage brass microscope, and a small potted monstera plant with one yellow leaf. Atmosphere: volumetric god-rays through rain-streaked glass, subtle film grain, high dynamic range, teal-and-amber complementary color grade, no logos of real companies, no watermarks, photorealistic mixed with holographic UI.",
   "judge_model": "openai-gpt-56-luna",
   "results": [
     {
-      "model_id": "claude-opus-5-5",
-      "display": "Claude Opus 5.5",
-      "reconstructed_prompt": "Cinematic photorealistic interior of a moody, futuristic pharmacology research lab at night, wide 16:9 composition, 3D render with a subtle cyberpunk aesthetic. On the left, a large translucent holographic display panel glows cyan and floats in the air. Its top reads \"EvidenceGrade AI\" in bold white sans-serif letters. Below that, a subheading reads \"5-tier grade\", followed by a vertical stack of five colored grade bars: green \"A\", teal \"B\", yellow \"C\", orange \"D\", and red-pink \"F\". To the right of the bars is a glowing line chart titled \"Citation Confidence 2019-2026\", with a y-axis running from 0 to 60 and a rising jagged cyan trend line. The x-axis label repeats \"Citation Confidence 2019-2026\". In the center, a glowing turquoise glass DNA double helix / molecular ball-and-stick model floats above a brushed stainless steel lab table, with small amber-gold spheres at some of the nodes. In the background, a gray plaster wall holds two floating shelves of brown amber apothecary bottles with white labels. The top shelf reads \"Aspirin\", \"Warfarin\", and one blank label, and the bottom shelf reads \"Aspirin\", \"Warfarin\", \"Ibuprofen\". Also on the shelves are binders, test tubes, and small bottles. A brass vintage microscope sits on the back steel counter, next to a potted monstera plant with one yellow leaf in a white pot. Articulated brass industrial lamps hang from the ceiling, several with warm glowing bulbs and one with a green glass shade. In the foreground, an open spiral-bound notebook rests in a brown leather folio with a black fountain pen. The left page has unreadable handwritten notes, and the right page has handwritten text reading \"CYP3A4 interaction risk\". On the right, a white cracked ceramic coffee cup with a teal lid sits on a saucer. A large arched window on the right side shows a rainy night city street full of glowing pink, red, and blue neon signs with Chinese characters, which are mostly illegible or pseudo-characters, with \"酒店\" partially visible. On the window sill, a black cat silhouette sits beside a red folded umbrella with a wooden hook handle. The lighting mixes warm lamp glow with cool cyan hologram light and pink neon reflections, with soft volumetric haze, reflective metal surfaces, and rain-streaked glass. The atmosphere is cozy yet high-tech, rendered with shallow depth of field and a highly detailed, octane-render style.",
-      "score": 66,
-      "hit_rate": 0.8929,
+      "model_id": "openai-gpt-6-luna",
+      "display": "GPT-6 Luna",
+      "reconstructed_prompt": "A polished, cinematic 16:9 digital illustration of a quiet futuristic research laboratory at night, viewed straight on. In the center, a small translucent turquoise molecular humanoid hologram stands on a desk, its body assembled from glowing cyan bonds and glossy glass-like molecular nodes with a few amber nodes; a soft teal glow reflects across the tabletop. On the left, a large angled transparent dark-teal display panel outlined in cyan reads “EvidenceGrade AI” at the top, “5-tier grade,” and shows five colored grade bars labeled “A,” “B,” “C,” “D,” and “F.” Beside them is a rising line graph titled “Citation Confidence 2019-2026,” with a year axis and confidence scale; retain the readable wording and make any tiny chart labels unobtrusive. Along the back wall, laboratory shelves hold small medicine bottles labeled “Aspirin,” “Warfarin,” and “Ibuprofen,” alongside glassware and equipment. A brass microscope sits on the counter left of the hologram; a leafy potted plant sits to its right. In the foreground, an open lined spiral notebook bears the handwritten title “CYP3A4 interaction risk,” with a dark pen laid across the page; a white ceramic mug rests on a saucer at lower right. At the right, a tall arched window reveals a rainy, blue-toned city at night, crowded with glowing pink, cyan, and violet signs; the distant sign lettering is decorative and mostly unreadable. A black cat sits in silhouette on the windowsill, beside a closed red umbrella leaning against the desk. Warm hanging brass task lamps cast pools of amber light, contrasting with cool teal holographic glow and neon city reflections. Atmospheric, tidy but lived-in, sophisticated science-fiction workspace, crisp clean linework, detailed materials, soft volumetric lighting, subtle reflections, restrained teal-and-amber palette with vivid neon accents, high-quality stylized 3D illustration.",
+      "score": 45,
+      "hit_rate": 0.5357,
       "hits": {
         "lab_setting": true,
         "twilight": false,
-        "molecule_center": true,
+        "molecule_center": false,
         "teal_glass": true,
         "amber_nodes": true,
         "holographic_dashboard": true,
@@ -26,20 +26,20 @@
         "neon_kanji": false,
         "red_umbrella": true,
         "black_cat": true,
-        "notebook": true,
+        "notebook": false,
         "cyp3a4_note": true,
-        "fountain_pen": true,
-        "coffee_cup": true,
+        "fountain_pen": false,
+        "coffee_cup": false,
         "cracked_saucer": false,
-        "brass_lamps": true,
-        "green_shade": true,
-        "reagent_bottles": true,
+        "brass_lamps": false,
+        "green_shade": false,
+        "reagent_bottles": false,
         "drug_labels": true,
-        "microscope": true,
-        "monstera": true,
+        "microscope": false,
+        "monstera": false,
         "volumetric_light": true,
         "teal_amber_grade": true,
-        "photoreal_hologram_mix": true
+        "photoreal_hologram_mix": false
       }
     }
   ]
