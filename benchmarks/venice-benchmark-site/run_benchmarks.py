@@ -45,7 +45,7 @@ TEMPERATURE = 0.5
 TEMPERATURE_LOCKED_MODELS = {"openai-gpt-56-luna", "openai-gpt-6-astra", "openai-gpt-6-astra-pro", "openai-gpt-6-luna"}
 # Models whose default reasoning_effort is verbose enough to hang the read
 # timeout; force a lower effort on core tracks so they complete.
-REASONING_EFFORT_LOW_MODELS = {"deepseek-v4-1-flash", "grok-4-7", "openai-gpt-6-astra-pro", "openai-gpt-6-sol", "openai-gpt-6-luna"}
+REASONING_EFFORT_LOW_MODELS = {"mercury-2-5", "deepseek-v4-1-flash", "grok-4-7", "openai-gpt-6-astra-pro", "openai-gpt-6-sol", "openai-gpt-6-luna"}
 RATE_LIMIT_SLEEP_SECONDS = 1.0
 # Reasoning models on long-context prompts can take several minutes. The 180 s
 # reading timeout used to be the bottleneck for kimi-k3 / opus benchmarks.
@@ -759,7 +759,7 @@ def run(dry_run: bool, model_filter: str | None = None,
     if request_timeout_override is not None:
         REQUEST_TIMEOUT_SECONDS = request_timeout_override
 
-    api_key = os.environ.get(API_KEY_ENV, "")
+    api_key = os.environ.get("VENICE_API_KEY") or os.environ.get(API_KEY_ENV, "")
     pricing = dict(FALLBACK_PRICING)
 
     selected_models = MODELS

@@ -47,7 +47,7 @@ REASONING_EFFORT_NONE_MODELS = {"mercury-2-5", "deepseek-v4-1-flash", "grok-4-7"
 # ---------------------------------------------------------------------------
 
 def load_api_key() -> str:
-    key = os.environ.get("VENICE_INFERENCE_KEY") or os.environ.get("VENICE_API_KEY")
+    key = os.environ.get("VENICE_API_KEY") or os.environ.get("VENICE_INFERENCE_KEY")
     if key:
         return key
     db = Path.home() / ".openclaw/agents/main/agent/openclaw-agent.sqlite"

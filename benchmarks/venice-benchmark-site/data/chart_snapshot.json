@@ -335,6 +335,19 @@
     }
   },
   {
+    "id": "mercury-2-5",
+    "disp": "Mercury 2.5",
+    "viv": 83.1,
+    "scores": {
+      "value-density": 100,
+      "intent-understanding": 58,
+      "one-shot-ui": 66,
+      "pharma-drug-interaction": 90,
+      "pharma-regulatory-comprehension": 59,
+      "startup-in-a-weekend": 100
+    }
+  },
+  {
     "id": "openai-gpt-6-astra",
     "disp": "GPT-6 Astra",
     "viv": 83.0,
@@ -402,19 +415,6 @@
       "pharma-regulatory-comprehension": 82,
       "value-density": 100,
       "reverse-prompt-vision": 93
-    }
-  },
-  {
-    "id": "mercury-2-5",
-    "disp": "Mercury 2.5",
-    "viv": 81.2,
-    "scores": {
-      "intent-understanding": 58,
-      "one-shot-ui": 66,
-      "pharma-drug-interaction": 89,
-      "pharma-regulatory-comprehension": 60,
-      "startup-in-a-weekend": 94,
-      "value-density": 100
     }
   },
   {
