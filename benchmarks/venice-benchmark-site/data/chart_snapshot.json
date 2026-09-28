@@ -77,6 +77,19 @@
     }
   },
   {
+    "id": "aion-labs-aion-3-5",
+    "disp": "Aion 3.5",
+    "viv": 89.1,
+    "scores": {
+      "intent-understanding": 82,
+      "one-shot-ui": 66,
+      "pharma-drug-interaction": 89,
+      "pharma-regulatory-comprehension": 90,
+      "startup-in-a-weekend": 100,
+      "value-density": 100
+    }
+  },
+  {
     "id": "claude-opus-5-fast",
     "disp": "Opus 5 Fast",
     "viv": 89.0,
@@ -321,6 +334,34 @@
     }
   },
   {
+    "id": "claude-opus-5-5-fast",
+    "disp": "Opus 5.5 Fast",
+    "viv": 83.6,
+    "scores": {
+      "intent-understanding": 82,
+      "one-shot-ui": 68,
+      "pharma-drug-interaction": 89,
+      "startup-in-a-weekend": 100,
+      "value-density": 100,
+      "reverse-prompt-vision": 60,
+      "pharma-regulatory-comprehension": 90
+    }
+  },
+  {
+    "id": "claude-sonnet-5-5",
+    "disp": "Sonnet 5.5",
+    "viv": 83.6,
+    "scores": {
+      "intent-understanding": 76,
+      "one-shot-ui": 68,
+      "pharma-drug-interaction": 86,
+      "pharma-regulatory-comprehension": 100,
+      "startup-in-a-weekend": 100,
+      "value-density": 100,
+      "reverse-prompt-vision": 66
+    }
+  },
+  {
     "id": "openai-gpt-55",
     "disp": "GPT-5.5",
     "viv": 83.3,
@@ -335,6 +376,20 @@
     }
   },
   {
+    "id": "xiaomi-mimo-v2-6-flash",
+    "disp": "MiMo V2.6 Flash",
+    "viv": 83.3,
+    "scores": {
+      "intent-understanding": 88,
+      "one-shot-ui": 66,
+      "pharma-drug-interaction": 89,
+      "pharma-regulatory-comprehension": 90,
+      "startup-in-a-weekend": 100,
+      "value-density": 100,
+      "reverse-prompt-vision": 54
+    }
+  },
+  {
     "id": "mercury-2-5",
     "disp": "Mercury 2.5",
     "viv": 83.1,
@@ -345,6 +400,19 @@
       "pharma-drug-interaction": 90,
       "pharma-regulatory-comprehension": 59,
       "startup-in-a-weekend": 100
+    }
+  },
+  {
+    "id": "aion-labs-aion-3-5-mini",
+    "disp": "Aion 3.5 Mini",
+    "viv": 83.1,
+    "scores": {
+      "intent-understanding": 58,
+      "one-shot-ui": 66,
+      "pharma-drug-interaction": 86,
+      "pharma-regulatory-comprehension": 85,
+      "startup-in-a-weekend": 100,
+      "value-density": 100
     }
   },
   {

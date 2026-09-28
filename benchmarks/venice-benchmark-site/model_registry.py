@@ -60,4 +60,9 @@ MODELS = [
     {"id": "claude-opus-5-5",            "display": "Claude Opus 5.5"},
     {"id": "openai-gpt-6-sol",           "display": "GPT-6 Sol"},
     {"id": "openai-gpt-6-luna",          "display": "GPT-6 Luna"},
+    {"id": "xiaomi-mimo-v2-6-flash",     "display": "MiMo V2.6 Flash"},
+    {"id": "claude-opus-5-5-fast",       "display": "Opus 5.5 Fast"},
+    {"id": "claude-sonnet-5-5",          "display": "Sonnet 5.5"},
+    {"id": "aion-labs-aion-3-5",         "display": "Aion 3.5"},
+    {"id": "aion-labs-aion-3-5-mini",    "display": "Aion 3.5 Mini"},
 ]

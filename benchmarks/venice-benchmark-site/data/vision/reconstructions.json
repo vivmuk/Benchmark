@@ -1,46 +1,8 @@
 {
-  "generated_at": "2026-09-23T01:52:25.220907+00:00",
+  "generated_at": "2026-09-28T21:09:52.699720+00:00",
   "source_image": "data/vision/reverse_prompt_source.png",
   "image_model": "nano-banana-2",
   "source_prompt": "Ultra-detailed surreal pharmaceutical research laboratory at twilight, wide cinematic 16:9 composition. Center: a translucent teal glass molecular model of a double-helix drug scaffold floating above a brushed-steel bench, with glowing cyan bond lines and amber atom nodes. Left: a wall-sized holographic dashboard titled \"EvidenceGrade AI\" in bold white sans-serif, showing a 5-tier grade ladder (A emerald, B teal, C gold, D orange, F crimson) and a line chart labeled \"Citation Confidence 2019-2026\". Right: a large arched window revealing a rainy neo-Tokyo street with neon kanji signs reflecting on wet asphalt, a red umbrella leaning against the window sill, and a black cat silhouette on the ledge. Foreground: an open leather notebook with handwritten notes \"CYP3A4 interaction risk\" and a fountain pen, next to a white ceramic coffee cup with a teal lid and a cracked porcelain saucer. Ceiling: brass articulated lamps casting warm pools of light; one lamp has a green glass shade. Background shelves: amber glass reagent bottles labeled Aspirin, Warfarin, Ibuprofen in clean black type, a vintage brass microscope, and a small potted monstera plant with one yellow leaf. Atmosphere: volumetric god-rays through rain-streaked glass, subtle film grain, high dynamic range, teal-and-amber complementary color grade, no logos of real companies, no watermarks, photorealistic mixed with holographic UI.",
   "judge_model": "openai-gpt-56-luna",
-  "results": [
-    {
-      "model_id": "openai-gpt-6-luna",
-      "display": "GPT-6 Luna",
-      "reconstructed_prompt": "A polished, cinematic 16:9 digital illustration of a quiet futuristic research laboratory at night, viewed straight on. In the center, a small translucent turquoise molecular humanoid hologram stands on a desk, its body assembled from glowing cyan bonds and glossy glass-like molecular nodes with a few amber nodes; a soft teal glow reflects across the tabletop. On the left, a large angled transparent dark-teal display panel outlined in cyan reads “EvidenceGrade AI” at the top, “5-tier grade,” and shows five colored grade bars labeled “A,” “B,” “C,” “D,” and “F.” Beside them is a rising line graph titled “Citation Confidence 2019-2026,” with a year axis and confidence scale; retain the readable wording and make any tiny chart labels unobtrusive. Along the back wall, laboratory shelves hold small medicine bottles labeled “Aspirin,” “Warfarin,” and “Ibuprofen,” alongside glassware and equipment. A brass microscope sits on the counter left of the hologram; a leafy potted plant sits to its right. In the foreground, an open lined spiral notebook bears the handwritten title “CYP3A4 interaction risk,” with a dark pen laid across the page; a white ceramic mug rests on a saucer at lower right. At the right, a tall arched window reveals a rainy, blue-toned city at night, crowded with glowing pink, cyan, and violet signs; the distant sign lettering is decorative and mostly unreadable. A black cat sits in silhouette on the windowsill, beside a closed red umbrella leaning against the desk. Warm hanging brass task lamps cast pools of amber light, contrasting with cool teal holographic glow and neon city reflections. Atmospheric, tidy but lived-in, sophisticated science-fiction workspace, crisp clean linework, detailed materials, soft volumetric lighting, subtle reflections, restrained teal-and-amber palette with vivid neon accents, high-quality stylized 3D illustration.",
-      "score": 45,
-      "hit_rate": 0.5357,
-      "hits": {
-        "lab_setting": true,
-        "twilight": false,
-        "molecule_center": false,
-        "teal_glass": true,
-        "amber_nodes": true,
-        "holographic_dashboard": true,
-        "evidencegrade_title": true,
-        "grade_ladder": true,
-        "citation_chart": true,
-        "arched_window": true,
-        "rainy_city": true,
-        "neon_kanji": false,
-        "red_umbrella": true,
-        "black_cat": true,
-        "notebook": false,
-        "cyp3a4_note": true,
-        "fountain_pen": false,
-        "coffee_cup": false,
-        "cracked_saucer": false,
-        "brass_lamps": false,
-        "green_shade": false,
-        "reagent_bottles": false,
-        "drug_labels": true,
-        "microscope": false,
-        "monstera": false,
-        "volumetric_light": true,
-        "teal_amber_grade": true,
-        "photoreal_hologram_mix": false
-      }
-    }
-  ]
+  "results": []
 }
