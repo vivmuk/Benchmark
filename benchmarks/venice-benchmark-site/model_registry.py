@@ -65,4 +65,5 @@ MODELS = [
     {"id": "claude-sonnet-5-5",          "display": "Sonnet 5.5"},
     {"id": "aion-labs-aion-3-5",         "display": "Aion 3.5"},
     {"id": "aion-labs-aion-3-5-mini",    "display": "Aion 3.5 Mini"},
+    {"id": "openai-gpt-61-sol",          "display": "GPT-6.1 Sol"},
 ]

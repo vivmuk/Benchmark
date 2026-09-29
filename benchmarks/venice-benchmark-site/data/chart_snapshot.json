@@ -251,6 +251,20 @@
     }
   },
   {
+    "id": "openai-gpt-61-sol",
+    "disp": "GPT-6.1 Sol",
+    "viv": 86.0,
+    "scores": {
+      "intent-understanding": 82,
+      "one-shot-ui": 68,
+      "pharma-drug-interaction": 82,
+      "pharma-regulatory-comprehension": 77,
+      "startup-in-a-weekend": 100,
+      "value-density": 100,
+      "reverse-prompt-vision": 72
+    }
+  },
+  {
     "id": "grok-4-20",
     "disp": "Grok 4.20",
     "viv": 85.6,

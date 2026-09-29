@@ -45,7 +45,7 @@ TEMPERATURE = 0.5
 TEMPERATURE_LOCKED_MODELS = {"openai-gpt-56-luna", "openai-gpt-6-astra", "openai-gpt-6-astra-pro", "openai-gpt-6-luna"}
 # Models whose default reasoning_effort is verbose enough to hang the read
 # timeout; force a lower effort on core tracks so they complete.
-REASONING_EFFORT_LOW_MODELS = {"mercury-2-5", "deepseek-v4-1-flash", "grok-4-7", "openai-gpt-6-astra-pro", "openai-gpt-6-sol", "openai-gpt-6-luna", "xiaomi-mimo-v2-6-flash"}
+REASONING_EFFORT_LOW_MODELS = {"mercury-2-5", "deepseek-v4-1-flash", "grok-4-7", "openai-gpt-6-astra-pro", "openai-gpt-6-sol", "openai-gpt-6-luna", "xiaomi-mimo-v2-6-flash", "openai-gpt-61-sol"}
 RATE_LIMIT_SLEEP_SECONDS = 1.0
 # Reasoning models on long-context prompts can take several minutes. The 180 s
 # reading timeout used to be the bottleneck for kimi-k3 / opus benchmarks.
@@ -120,6 +120,7 @@ FALLBACK_PRICING = {
     "claude-sonnet-5-5":              {"input": 3.75,  "output": 18.75},
     "aion-labs-aion-3-5":             {"input": 3.75,  "output": 7.5},
     "aion-labs-aion-3-5-mini":        {"input": 0.875, "output": 1.75},
+    "openai-gpt-61-sol":              {"input": 2.5,   "output": 12.5},
 }
 DEFAULT_PRICING = {"input": 5.00, "output": 15.00}
 
