@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Prompt Guides — BenchmarkViv</title>
+<meta name="description" content="Prompting guides for the latest Anthropic and OpenAI models, compared against their predecessors, with a copyable instruction guide for agents and prompt optimizers." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/styles.css?v=17" />
+<style>
+  .pg-hero { padding: calc(var(--nav-h) + 2.5rem) 0 1.5rem; border-bottom: 1px solid var(--rule); }
+  .pg-hero h1 { font-size: clamp(1.6rem, 4.5vw, 2.5rem); margin-bottom: .4rem; }
+  .pg-sub { color: var(--text-dim); max-width: 72ch; line-height: 1.55; }
+  .pg-sub a { color: var(--cobalt); }
+  .pg-sec { padding: 1.8rem 0; border-bottom: 1px solid var(--rule); }
+  .pg-sec h2 { font-size: 1.3rem; margin-bottom: .4rem; }
+  .pg-sec h3 { font-size: 1.02rem; margin: 1.1rem 0 .35rem; }
+  .pg-sec p, .pg-sec li { color: var(--text-dim); line-height: 1.6; font-size: .95rem; }
+  .pg-sec ul { margin: .4rem 0 .6rem 1.2rem; }
+  .pg-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; margin-top: .8rem; }
+  .pg-card { background: var(--surface); border: 1px solid var(--rule); border-radius: 12px; padding: 1.1rem 1.2rem; }
+  .pg-card h4 { margin: 0 0 .4rem; font-size: .95rem; display: flex; align-items: center; gap: .5rem; }
+  .pg-card .tag { font: 600 .64rem var(--font-mono); text-transform: uppercase; letter-spacing: .05em; padding: .15rem .5rem; border-radius: 999px; }
+  .tag.new { background: var(--acid-soft); color: var(--cobalt-dark); }
+  .tag.prev { background: rgba(217,164,65,.16); color: var(--gold-deep); }
+  .pg-card ul { margin-left: 1.1rem; }
+  .pg-card li { font-size: .88rem; }
+  .roster { columns: 2; column-gap: 2rem; }
+  .roster .grp { break-inside: avoid; margin-bottom: 1rem; }
+  .roster h4 { margin: 0 0 .3rem; font: 600 .72rem var(--font-mono); text-transform: uppercase; letter-spacing: .06em; color: var(--cobalt); }
+  .roster ul { list-style: none; margin: 0; padding: 0; }
+  .roster li { font-size: .85rem; color: var(--text-dim); padding: .12rem 0; }
+  .roster li b { color: var(--text); font-weight: 600; }
+  /* copyable guide */
+  .pg-guide { position: relative; }
+  .pg-guide pre { background: #101018; color: #d9e2e8; border-radius: 12px; padding: 1.2rem 1.3rem; font: 400 .82rem/1.55 var(--font-mono); overflow-x: auto; white-space: pre-wrap; word-break: break-word; }
+  .pg-copy { position: absolute; top: .6rem; right: .6rem; font: 600 .74rem var(--font-mono); border: 1px solid var(--rule); background: var(--surface); color: var(--text); border-radius: 8px; padding: .35rem .7rem; cursor: pointer; }
+  .pg-copy:hover { border-color: var(--cobalt); color: var(--cobalt-dark); }
+  @media (max-width: 640px) { .roster { columns: 1; } }
+</style>
+</head>
+<body>
+<nav class="navbar vt-nav">
+  <div class="container">
+    <a href="index.html" class="nav-logo">Benchmark<span>Viv</span></a>
+    <ul class="nav-links" id="siteNav">
+      <li><a href="index.html#leaderboard">Leaderboard</a></li>
+      <li><a href="index.html#tracks">Tracks</a></li>
+      <li><a href="vision.html">Vision</a></li>
+      <li><a href="trends.html">Trends</a></li>
+      <li><a href="compare.html">Compare</a></li>
+      <li><a href="evolution.html">Evolution</a></li>
+      <li><a href="gif-arena.html">GIF Arena</a></li>
+      <li><a href="image-benchmark.html">Image Models</a></li>
+      <li><a href="system-prompt.html">System Prompts</a></li>
+      <li><a href="prompt-lab.html">Prompt Lab</a></li>
+      <li><a href="prompt-guides.html" class="active">Prompt Guides</a></li>
+      <li><a href="experimental-design.html">Design</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <a href="experimental-design.html" class="nav-cta">Experimental Design</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<main class="container">
+  <section class="pg-hero">
+    <h1>Prompt Guides</h1>
+    <p class="pg-sub">Prompting patterns for the latest models — with what changed from the previous generation. Source: <a href="https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5" target="_blank" rel="noopener">Prompting Claude Opus 5.5</a> (Anthropic docs) and the Claude Opus 5 prompting guide.</p>
+  </section>
+
+  <section class="pg-sec">
+    <h2>Anthropic — Claude</h2>
+    <div class="pg-cols">
+      <div class="pg-card">
+        <h4><span class="tag new">Latest</span> Claude Opus 5.5</h4>
+        <ul>
+          <li>Thinking is <b>always on</b> — rejects <code>thinking: disabled</code>. Omit it or use <code>adaptive</code>.</li>
+          <li>Default effort = <b>medium</b> (Opus 5 defaulted to high). Set it explicitly.</li>
+          <li>Effort calibration: start medium → drop to low to cut latency/cost → step up to high/xhigh only when measured.</li>
+          <li>Long agentic turns: <code>max_tokens=128000</code> (thinking counts toward it).</li>
+          <li>~30% faster + fewer output tokens than Opus 5.</li>
+          <li>Progress updates come back as <code>thinking</code> blocks (empty by default) — set <code>display:"updates"</code>.</li>
+          <li>Unattended agents: a text-only <code>end_turn</code> is a report, not completion — keep working + a checklist.</li>
+          <li>Don't ask it to reproduce internal reasoning → <code>reasoning_extraction</code> refusal. Use <code>display:"summarized"</code>.</li>
+          <li>New safeties: biology (same as Fable 5.1), cybersecurity, reasoning_extraction.</li>
+          <li>Frontend looks generic without explicit design tokens.</li>
+        </ul>
+      </div>
+      <div class="pg-card">
+        <h4><span class="tag prev">Previous</span> Claude Opus 5</h4>
+        <ul>
+          <li>Thinking on by default; <code>disabled</code> accepted at high or below.</li>
+          <li>Default effort = <b>high</b>.</li>
+          <li>Verbose by default — needs an explicit conciseness instruction.</li>
+          <li>Strong agentic coding when given the full spec up front.</li>
+        </ul>
+        <h3>Claude Fable 5.1</h3>
+        <ul>
+          <li>Shares 3 breaking changes with Opus 5.5: thinking can't be disabled; forced tool use errors; thinking blocks tied to model+conversation.</li>
+          <li>Same new biology safeguard as Opus 5.5.</li>
+        </ul>
+      </div>
+    </div>
+    <p style="margin-top:1rem"><b>Key difference:</b> Opus 5.5 flips thinking to always-on, lowers the default effort from high→medium, changes how progress/tool-call text is returned, and adds end_turn-report + reasoning_extraction/biology safeguards. Opus 5 prompts still work; just set effort explicitly and add an unattended-agent continuation instruction.</p>
+  </section>
+
+  <section class="pg-sec">
+    <h2>OpenAI — GPT-6.x vs GPT-5.6</h2>
+    <div class="pg-cols">
+      <div class="pg-card">
+        <h4><span class="tag new">Latest</span> GPT-6.1 Sol · GPT-6 Sol / Luna / Astra / Astra Pro</h4>
+        <ul>
+          <li><b>GPT-6.1 Sol</b> is the current flagship (VivIndex 86.0, #18) — a big step over GPT-6 Sol (75.8).</li>
+          <li><b>GPT-6 Astra / Astra Pro</b> — top reasoning tier.</li>
+          <li><b>GPT-6 Luna</b> — low-cost / fast tier.</li>
+          <li>Reasoning on by default (often "high") — calibrate effort down for latency-sensitive work; generous max_tokens for long agentic runs.</li>
+          <li>Prefer 6.1 Sol / Astra for knowledge + coding; Luna for cheap/fast.</li>
+        </ul>
+      </div>
+      <div class="pg-card">
+        <h4><span class="tag prev">Previous</span> GPT-5.6 Sol / Luna / Terra</h4>
+        <ul>
+          <li>Superseded by the GPT-6.x line.</li>
+          <li>Seed prompts as-is — they perform well; move quality-sensitive work to GPT-6.1 Sol / Astra.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="pg-sec">
+    <h2>All models on the site</h2>
+    <div class="roster">
+      <div class="grp"><h4>Anthropic</h4><ul><li><b>Claude Opus 5.5</b></li><li>Opus 5.5 Fast</li><li><b>Opus 5</b> · Opus 5 Fast</li><li><b>Opus 4.8</b> · Opus 4.8 Fast</li><li><b>Sonnet 5.5</b> · Sonnet 5</li><li><b>Fable 5.1</b> · Fable 5</li></ul></div>
+      <div class="grp"><h4>OpenAI</h4><ul><li><b>GPT-6.1 Sol</b></li><li><b>GPT-6 Sol</b> · GPT-6 Luna</li><li><b>GPT-6 Astra</b> · GPT-6 Astra Pro</li><li><b>GPT-5.5</b></li><li>GPT-5.6 Sol / Luna / Terra (+ Pro)</li></ul></div>
+      <div class="grp"><h4>xAI</h4><ul><li><b>Grok 4.7</b></li><li>Grok 4.20 · Grok 4.6 · Grok 4.5</li></ul></div>
+      <div class="grp"><h4>Google</h4><ul><li>Gemini 3.8 Flash</li><li>Gemini 3.7 Flash · Gemini 3.6 Flash</li></ul></div>
+      <div class="grp"><h4>DeepSeek</h4><ul><li><b>DeepSeek V4.1 Flash</b></li><li>DeepSeek V4 Pro 0813 · DeepSeek V4</li><li>V4 Flash (+ 0731 / Fast variants)</li></ul></div>
+      <div class="grp"><h4>Qwen</h4><ul><li>Qwen 3.8 Max · 3.8 2.4T · 3.8 27B · 3.8 Flash</li><li>Qwen 3.7 Max · 3.7 Plus</li><li>Qwen3 235B Thinking</li></ul></div>
+      <div class="grp"><h4>Aion</h4><ul><li><b>Aion 3.5</b> · Aion 3.5 Mini</li><li>Aion 3.0 · Aion 3.0 Mini</li></ul></div>
+      <div class="grp"><h4>Other</h4><ul><li>Kimi K3 · K3 Fast API</li><li>GLM 5.3 · 5.3 Flash · 5.2</li><li>MiniMax M3 · M27</li><li>NVIDIA Nemotron 3 Super · 3.5</li><li>MiMo V2.6 Flash · Mercury 2.5</li><li>Stealth Ox Alpha · Inkling</li></ul></div>
+    </div>
+    <p style="margin-top:.5rem;font-size:.8rem;color:var(--text-faint)">59 models total. <b>Bold</b> = latest/recommended in each line.</p>
+  </section>
+
+  <section class="pg-sec pg-guide">
+    <h2>Copyable instruction guide</h2>
+    <p style="color:var(--text-dim);margin:.2rem 0 .7rem">Paste this into your agents' prompt optimizer (or their system prompt) to make them prompt these models correctly.</p>
+    <button class="pg-copy" id="copyGuide">Copy</button>
+    <pre id="guideText">## UNIVERSAL RULES (all reasoning models)
+1. Set reasoning `effort` explicitly every call; default to the model's documented default.
+2. `max_tokens` must leave room for hidden thinking — use the model's max for long agentic turns (Anthropic: 128000).
+3. A text-only end-of-turn with no tool call is a progress REPORT, not completion — continue if open tasks remain (cap 2-3 auto-continuations).
+4. Never instruct a reasoning model to "show your chain-of-thought"; read summarized thinking via the API instead.
+5. Give tools for visual/diagram work rather than asking it to think through pixels.
+6. Supply explicit frontend design tokens when generating UI.
+
+## Claude Opus 5.5 (latest)
+- Thinking always on: omit `thinking`, or send `{"type":"adaptive"}`. Never `disabled`.
+- effort = `medium` (default); drop to `low` for speed, step to `high/xhigh/max` only when measured.
+- max_tokens=128000 for long agentic coding.
+- Progress updates are `thinking` blocks (empty by default) → set `display:"updates"`.
+- Unattended: add "keep working, don't end the turn with a summary" + an open-items checklist; auto-continue ≤ 3×.
+- Don't ask for internal reasoning in the reply (reasoning_extraction refusal) → `display:"summarized"`.
+- Frontend: give explicit colors/fonts/layout.
+
+## Claude Opus 5 (previous)
+- thinking default; `disabled` OK at ≤high. effort default `high`.
+- Verbose → add a conciseness instruction. Full spec up front, leave it to run.
+
+## Claude Fable 5.1 / Sonnet 5.5
+- thinking always-on (Fable 5.1); medium effort; same new safeties.
+
+## GPT-6.1 Sol / GPT-6 Sol / Luna / Astra (latest)
+- Reasoning on, effort "high" default — calibrate down. 6.1 Sol for quality, Luna for cheap/fast.
+- Generous max_tokens for long agentic work.
+
+## GPT-5.6 Sol / Luna / Terra (previous)
+- Superseded; prompts port as-is.</pre>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-logo">Benchmark<span>Viv</span></div>
+    <p>Independent benchmark showcase for Venice API models.</p>
+    <div class="footer-links">
+      <a href="experimental-design.html">Experimental Design</a>
+      <a href="index.html#leaderboard">Leaderboard</a>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/app.js?v=14"></script>
+<script>
+  document.getElementById('copyGuide').addEventListener('click', function(){
+    var t = document.getElementById('guideText').innerText;
+    navigator.clipboard.writeText(t).then(function(){
+      var b = document.getElementById('copyGuide'); b.textContent = 'Copied ✓';
+      setTimeout(function(){ b.textContent = 'Copy'; }, 1600);
+    });
+  });
+</script>
+</body>
+</html>
