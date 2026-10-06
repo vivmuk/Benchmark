@@ -16,17 +16,8 @@ EXCLUDE = {"bria-bg-remover"}
 MODELS = [m for m in constraints if m not in EXCLUDE]
 
 PROMPTS = {
-    "1-infographic": (
-        "A massive detailed infographic in a whimsical watercolor illustration style, "
-        "summarizing the complete history of generative AI from its origins to today. "
-        "Hand-painted watercolor aesthetic with soft washes, delicate ink linework and brush textures. "
-        "A flowing vertical timeline with illustrated milestones: early neural networks and perceptrons "
-        "(1950s-60s), backpropagation and the AI winter, statistical language models, the rise of deep "
-        "learning and GANs (2014), transformer attention models (2017), GPT language models, diffusion "
-        "image generators, CLIP, multimodal models, and frontier reasoning and video models of today. "
-        "Each era marked with a small hand-drawn icon, soft pastel color-coded sections, sweeping arrows, "
-        "decorative flourishes and handwritten-style labels. Rich detail, legible text, warm cream paper, "
-        "storybook scientific-poster feel, entirely hand-painted watercolor, no photorealism."
+    "1-open": (
+        "Create a Water Whimsical detailed infographic summarizing the complete history of GenAI since 2000 to today."
     ),
     "2-portrait": (
         "A breathtaking portrait of the most beautiful girl in the world, standing gracefully in golden "
@@ -36,23 +27,21 @@ PROMPTS = {
         "soft bokeh background, cinematic golden-hour lighting, shallow depth of field, ultra-detailed, "
         "elegant, photorealistic beauty portrait."
     ),
-    "3-ceos": (
-        "A group portrait of corporate CEOs gathered at a leadership retreat, sitting together in an "
-        "elegant mountain lodge with a scenic pine forest and lake backdrop. A diverse group of confident "
-        "executives in smart-casual attire, engaged in warm conversation, some smiling and relaxed. "
-        "Wood-paneled lodge interior, warm natural light streaming in, professional editorial corporate "
-        "photography, candid authentic energy, high detail."
+    "3-open": (
+        "A group portrait of corporate CEOs gathered at a leadership retreat, sitting together"
     ),
 }
 
-# desired aspect ratios per category, in priority order
+# desired aspect ratios per category; None = omit entirely (model default) for the open intent prompts
 CAT_AR = {
-    "1-infographic": ["9:16", "3:4", "2:3", "1:1"],
+    "1-open": None,
     "2-portrait": ["2:3", "3:4", "9:16", "1:1"],
-    "3-ceos": ["16:9", "3:2", "21:9", "1:1"],
+    "3-open": None,
 }
 
 def pick_ar(model_ar, cat_key):
+    if not CAT_AR.get(cat_key):
+        return None
     if not model_ar:
         return None
     for a in CAT_AR[cat_key]:

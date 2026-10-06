@@ -12,29 +12,20 @@ models = OrderedDict()
 for r in manifest:
     models.setdefault(r["model"], {})[r["cat"]] = r
 
-CATS = ["1-infographic", "2-portrait", "3-ceos"]
+CATS = ["1-open", "2-portrait", "3-open"]
 CAT_TITLES = {
-    "1-infographic": "Infographic — History of Generative AI (watercolor)",
+    "1-open": "Infographic — History of GenAI since 2000 (watercolor, Whimsical)",
     "2-portrait": "Portrait — Girl in the Sands",
-    "3-ceos": "Group — CEOs at a Retreat",
+    "3-open": "Group — CEOs at a Leadership Retreat",
 }
 CAT_SHORT = {
-    "1-infographic": "Infographic",
+    "1-open": "Infographic",
     "2-portrait": "Portrait",
-    "3-ceos": "CEOs",
+    "3-open": "CEOs",
 }
 PROMPTS = {
-    "1-infographic": (
-        "A massive detailed infographic in a whimsical watercolor illustration style, "
-        "summarizing the complete history of generative AI from its origins to today. "
-        "Hand-painted watercolor aesthetic with soft washes, delicate ink linework and brush textures. "
-        "A flowing vertical timeline with illustrated milestones: early neural networks and perceptrons "
-        "(1950s-60s), backpropagation and the AI winter, statistical language models, the rise of deep "
-        "learning and GANs (2014), transformer attention models (2017), GPT language models, diffusion "
-        "image generators, CLIP, multimodal models, and frontier reasoning and video models of today. "
-        "Each era marked with a small hand-drawn icon, soft pastel color-coded sections, sweeping arrows, "
-        "decorative flourishes and handwritten-style labels. Rich detail, legible text, warm cream paper, "
-        "storybook scientific-poster feel, entirely hand-painted watercolor, no photorealism."
+    "1-open": (
+        "Create a Water Whimsical detailed infographic summarizing the complete history of GenAI since 2000 to today."
     ),
     "2-portrait": (
         "A breathtaking portrait of the most beautiful girl in the world, standing gracefully in golden "
@@ -44,12 +35,8 @@ PROMPTS = {
         "soft bokeh background, cinematic golden-hour lighting, shallow depth of field, ultra-detailed, "
         "elegant, photorealistic beauty portrait."
     ),
-    "3-ceos": (
-        "A group portrait of corporate CEOs gathered at a leadership retreat, sitting together in an "
-        "elegant mountain lodge with a scenic pine forest and lake backdrop. A diverse group of confident "
-        "executives in smart-casual attire, engaged in warm conversation, some smiling and relaxed. "
-        "Wood-paneled lodge interior, warm natural light streaming in, professional editorial corporate "
-        "photography, candid authentic energy, high detail."
+    "3-open": (
+        "A group portrait of corporate CEOs gathered at a leadership retreat, sitting together"
     ),
 }
 
