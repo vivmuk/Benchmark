@@ -17,7 +17,7 @@ MODELS = [m for m in constraints if m not in EXCLUDE]
 
 PROMPTS = {
     "1-open": (
-        "Create a Water Whimsical detailed infographic summarizing the complete history of GenAI since 2000 to today."
+        "Create a Watercolor Whimsical style detailed infographic summarizing the complete history of GenAI from 2000 all the way today"
     ),
     "2-portrait": (
         "A breathtaking portrait of the most beautiful girl in the world, standing gracefully in golden "
