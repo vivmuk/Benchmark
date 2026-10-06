@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-28T13:00:11.667448+00:00",
+  "generated_at": "2026-10-05T13:00:03.967499+00:00",
   "models": {
     "gemini-3-6-flash": {
       "id": "gemini-3-6-flash",
@@ -490,6 +490,11 @@
       "id": "aion-labs-aion-3-5-mini",
       "first_seen": "2026-09-28T13:00:11.667412+00:00",
       "display": "aion-labs-aion-3-5-mini"
+    },
+    "abliteration-abliterated-model-large-v2": {
+      "id": "abliteration-abliterated-model-large-v2",
+      "first_seen": "2026-10-05T13:00:03.967459+00:00",
+      "display": "abliteration-abliterated-model-large-v2"
     }
   }
 }
