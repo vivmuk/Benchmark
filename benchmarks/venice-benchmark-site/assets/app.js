@@ -738,7 +738,7 @@
     if (!toggle || !nav) return;
 
     // Ensure the navbar is the positioning context for the absolute drawer.
-    const navbar = toggle.closest(".navbar") || document.querySelector(".navbar");
+    const navbar = toggle.closest(".sidenav") || document.querySelector(".sidenav");
     if (navbar) navbar.style.zIndex = "400";
 
     // Scrim so taps outside clearly close the menu and block page scroll clicks.
