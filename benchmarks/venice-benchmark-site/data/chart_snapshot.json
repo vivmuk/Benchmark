@@ -181,6 +181,19 @@
     }
   },
   {
+    "id": "abliteration-abliterated-model-large-v2",
+    "disp": "Abliterated Large v2",
+    "viv": 88.0,
+    "scores": {
+      "intent-understanding": 76,
+      "one-shot-ui": 68,
+      "pharma-drug-interaction": 82,
+      "startup-in-a-weekend": 100,
+      "value-density": 100,
+      "pharma-regulatory-comprehension": 80
+    }
+  },
+  {
     "id": "kimi-k3-fast-api",
     "disp": "Kimi K3 Fast API",
     "viv": 87.6,
@@ -444,6 +457,20 @@
     }
   },
   {
+    "id": "deepseek-v4-1-flash-uncensored",
+    "disp": "DeepSeek V4.1 Flash Uncensored",
+    "viv": 83.0,
+    "scores": {
+      "intent-understanding": 76,
+      "one-shot-ui": 68,
+      "pharma-drug-interaction": 90,
+      "pharma-regulatory-comprehension": 85,
+      "startup-in-a-weekend": 100,
+      "value-density": 100,
+      "reverse-prompt-vision": 63
+    }
+  },
+  {
     "id": "claude-sonnet-5",
     "disp": "Sonnet 5",
     "viv": 82.2,
@@ -581,6 +608,20 @@
       "startup-in-a-weekend": 100,
       "value-density": 100,
       "reverse-prompt-vision": 93
+    }
+  },
+  {
+    "id": "claude-haiku-5-5",
+    "disp": "Claude Haiku 5.5",
+    "viv": 79.1,
+    "scores": {
+      "intent-understanding": 70,
+      "one-shot-ui": 66,
+      "pharma-drug-interaction": 90,
+      "pharma-regulatory-comprehension": 85,
+      "startup-in-a-weekend": 100,
+      "value-density": 100,
+      "reverse-prompt-vision": 51
     }
   },
   {

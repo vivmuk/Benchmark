@@ -45,7 +45,7 @@ TEMPERATURE = 0.5
 TEMPERATURE_LOCKED_MODELS = {"openai-gpt-56-luna", "openai-gpt-6-astra", "openai-gpt-6-astra-pro", "openai-gpt-6-luna"}
 # Models whose default reasoning_effort is verbose enough to hang the read
 # timeout; force a lower effort on core tracks so they complete.
-REASONING_EFFORT_LOW_MODELS = {"mercury-2-5", "deepseek-v4-1-flash", "grok-4-7", "openai-gpt-6-astra-pro", "openai-gpt-6-sol", "openai-gpt-6-luna", "xiaomi-mimo-v2-6-flash", "openai-gpt-61-sol"}
+REASONING_EFFORT_LOW_MODELS = {"mercury-2-5", "deepseek-v4-1-flash", "grok-4-7", "openai-gpt-6-astra-pro", "openai-gpt-6-sol", "openai-gpt-6-luna", "xiaomi-mimo-v2-6-flash", "openai-gpt-61-sol", "abliteration-abliterated-model-large-v2"}
 RATE_LIMIT_SLEEP_SECONDS = 1.0
 # Reasoning models on long-context prompts can take several minutes. The 180 s
 # reading timeout used to be the bottleneck for kimi-k3 / opus benchmarks.
@@ -62,6 +62,9 @@ MODEL_BENCHMARK_LIMITS = {}
 # Used if the /models endpoint does not return pricing.
 FALLBACK_PRICING = {
     "stealth-ox-alpha": {"input": 0.0, "output": 0.0},
+    "claude-haiku-5-5":                    {"input": 0.125, "output": 0.625},
+    "deepseek-v4-1-flash-uncensored":      {"input": 0.30,  "output": 1.20},
+    "abliteration-abliterated-model-large-v2": {"input": 3.00, "output": 5.00},
     "openai-gpt-56-luna":      {"input": 1.25,  "output": 7.5},
     "openai-gpt-56-luna-pro":  {"input": 1.25,  "output": 7.5},
     "openai-gpt-56-sol":       {"input": 6.25,  "output": 37.5},

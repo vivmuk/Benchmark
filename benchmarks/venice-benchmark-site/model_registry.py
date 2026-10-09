@@ -66,4 +66,7 @@ MODELS = [
     {"id": "aion-labs-aion-3-5",         "display": "Aion 3.5"},
     {"id": "aion-labs-aion-3-5-mini",    "display": "Aion 3.5 Mini"},
     {"id": "openai-gpt-61-sol",          "display": "GPT-6.1 Sol"},
+    {"id": "claude-haiku-5-5",                  "display": "Claude Haiku 5.5"},
+    {"id": "deepseek-v4-1-flash-uncensored",    "display": "DeepSeek V4.1 Flash Uncensored"},
+    {"id": "abliteration-abliterated-model-large-v2", "display": "Abliterated Large v2"},
 ]
