@@ -1,8 +1,46 @@
 {
-  "generated_at": "2026-10-09T02:59:10.698550+00:00",
+  "generated_at": "2026-10-13T20:09:40.631563+00:00",
   "source_image": "data/vision/reverse_prompt_source.png",
   "image_model": "nano-banana-2",
   "source_prompt": "Ultra-detailed surreal pharmaceutical research laboratory at twilight, wide cinematic 16:9 composition. Center: a translucent teal glass molecular model of a double-helix drug scaffold floating above a brushed-steel bench, with glowing cyan bond lines and amber atom nodes. Left: a wall-sized holographic dashboard titled \"EvidenceGrade AI\" in bold white sans-serif, showing a 5-tier grade ladder (A emerald, B teal, C gold, D orange, F crimson) and a line chart labeled \"Citation Confidence 2019-2026\". Right: a large arched window revealing a rainy neo-Tokyo street with neon kanji signs reflecting on wet asphalt, a red umbrella leaning against the window sill, and a black cat silhouette on the ledge. Foreground: an open leather notebook with handwritten notes \"CYP3A4 interaction risk\" and a fountain pen, next to a white ceramic coffee cup with a teal lid and a cracked porcelain saucer. Ceiling: brass articulated lamps casting warm pools of light; one lamp has a green glass shade. Background shelves: amber glass reagent bottles labeled Aspirin, Warfarin, Ibuprofen in clean black type, a vintage brass microscope, and a small potted monstera plant with one yellow leaf. Atmosphere: volumetric god-rays through rain-streaked glass, subtle film grain, high dynamic range, teal-and-amber complementary color grade, no logos of real companies, no watermarks, photorealistic mixed with holographic UI.",
   "judge_model": "openai-gpt-56-luna",
-  "results": []
+  "results": [
+    {
+      "model_id": "muse-wonder",
+      "display": "Muse Wonder",
+      "reconstructed_prompt": "Cozy futuristic pharmacogenomics laboratory office interior at night, photorealistic cinematic 3D render, wide interior view. In the center foreground, a brushed dark metal table reflecting warm light, with an open spiral-bound notebook on a brown leather cover on the left side of the table, handwritten text on the right page reading \"CYP3A4 Interaction Risk\" and a black and gold fountain pen resting on it, smaller handwritten notes on the left page unreadable, and on the right side of the table a white cracked-marble coffee cup with a teal silicone lid on a matching saucer. Floating in the center above the table, a glowing translucent teal DNA double helix hologram with gold spherical nodes connected to a molecular structure below it, emitting cyan light. On the left wall, a large vertical floating holographic display with cyan neon border, title text at the top reading \"EvidenceGrade AI\", below it \"5-tier grade\" with five stacked colored bars labeled \"A\" in green, \"B\" in teal-blue, \"C\" in yellow, \"D\" in orange, and \"F\" in pink-red, and on the right side of the display a line graph titled \"Citation Confidence 2019-2026\" with y-axis 0 to 60 and a rising cyan line, caption below reading \"Citation Confidence 2019-2026\". In the center background, white wall shelves with small brown amber medicine bottles with white labels reading \"Aspirin\", \"Warfarin\", and \"Ibuprofen\", binders, test tubes, a brass vintage microscope on a counter below, and a potted monstera plant with green leaves and one yellow leaf in a white textured pot. On the ceiling, brass articulated industrial pendant lamps with warm glowing bulbs, one with a green enamel shade. On the right, a large arched multi-pane window looking out onto a rainy cyberpunk city street at night with wet reflections and glowing pink, red, and cyan neon signs with Chinese characters, most text unreadable, rain droplets on glass; on the windowsill a black cat silhouette sitting and looking outside, and a closed red umbrella with a curved dark handle leaning against the wall below. Warm cozy interior lighting contrasting with cool blue and neon pink exterior light, reflective surfaces, detailed materials, atmospheric, high detail.",
+      "score": 54,
+      "hit_rate": 0.75,
+      "hits": {
+        "lab_setting": true,
+        "twilight": false,
+        "molecule_center": true,
+        "teal_glass": true,
+        "amber_nodes": true,
+        "holographic_dashboard": true,
+        "evidencegrade_title": true,
+        "grade_ladder": true,
+        "citation_chart": true,
+        "arched_window": true,
+        "rainy_city": true,
+        "neon_kanji": false,
+        "red_umbrella": true,
+        "black_cat": true,
+        "notebook": true,
+        "cyp3a4_note": true,
+        "fountain_pen": true,
+        "coffee_cup": false,
+        "cracked_saucer": false,
+        "brass_lamps": true,
+        "green_shade": false,
+        "reagent_bottles": true,
+        "drug_labels": true,
+        "microscope": true,
+        "monstera": true,
+        "volumetric_light": false,
+        "teal_amber_grade": false,
+        "photoreal_hologram_mix": true
+      }
+    }
+  ]
 }

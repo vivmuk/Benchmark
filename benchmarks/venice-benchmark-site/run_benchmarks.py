@@ -65,6 +65,7 @@ FALLBACK_PRICING = {
     "claude-haiku-5-5":                    {"input": 0.125, "output": 0.625},
     "deepseek-v4-1-flash-uncensored":      {"input": 0.30,  "output": 1.20},
     "abliteration-abliterated-model-large-v2": {"input": 3.00, "output": 5.00},
+    "muse-wonder":                          {"input": 5.00,  "output": 25.00},
     "openai-gpt-56-luna":      {"input": 1.25,  "output": 7.5},
     "openai-gpt-56-luna-pro":  {"input": 1.25,  "output": 7.5},
     "openai-gpt-56-sol":       {"input": 6.25,  "output": 37.5},

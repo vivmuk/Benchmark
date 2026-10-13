@@ -69,4 +69,5 @@ MODELS = [
     {"id": "claude-haiku-5-5",                  "display": "Claude Haiku 5.5"},
     {"id": "deepseek-v4-1-flash-uncensored",    "display": "DeepSeek V4.1 Flash Uncensored"},
     {"id": "abliteration-abliterated-model-large-v2", "display": "Abliterated Large v2"},
+    {"id": "muse-wonder",                    "display": "Muse Wonder"},
 ]

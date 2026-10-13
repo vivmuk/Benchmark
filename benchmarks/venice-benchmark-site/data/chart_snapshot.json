@@ -597,6 +597,20 @@
     }
   },
   {
+    "id": "muse-wonder",
+    "disp": "Muse Wonder",
+    "viv": 79.7,
+    "scores": {
+      "intent-understanding": 70,
+      "one-shot-ui": 66,
+      "pharma-drug-interaction": 83,
+      "pharma-regulatory-comprehension": 85,
+      "startup-in-a-weekend": 100,
+      "value-density": 100,
+      "reverse-prompt-vision": 54
+    }
+  },
+  {
     "id": "openai-gpt-56-luna",
     "disp": "GPT-5.6 Luna",
     "viv": 79.4,
