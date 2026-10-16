@@ -40,7 +40,7 @@ TEMPERATURE = 0.3
 REQUEST_TIMEOUT = 600
 # Models whose default reasoning_effort is "high" and silently burn the token
 # budget (no reasoning_content); force "none" so value-density @1K can emit content.
-REASONING_EFFORT_NONE_MODELS = {"mercury-2-5", "deepseek-v4-1-flash", "grok-4-7", "openai-gpt-6-astra-pro", "openai-gpt-6-sol", "openai-gpt-6-luna", "xiaomi-mimo-v2-6-flash", "openai-gpt-61-sol"}
+REASONING_EFFORT_NONE_MODELS = {"mercury-2-5", "deepseek-v4-1-flash", "grok-4-7", "openai-gpt-6-astra-pro", "openai-gpt-6-sol", "openai-gpt-6-luna", "xiaomi-mimo-v2-6-flash", "openai-gpt-61-sol", "muse-spark-open", "qwen3-6-35b-a3b"}
 
 # ---------------------------------------------------------------------------
 # Auth
@@ -334,6 +334,8 @@ def call_vision(api_key: str, model_id: str, prompt: str, image_data_url: str, m
     }
     if model_id not in rb.TEMPERATURE_LOCKED_MODELS:
         payload["temperature"] = TEMPERATURE
+    if model_id in REASONING_EFFORT_NONE_MODELS:
+        payload["reasoning_effort"] = "none"
     headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
     start = time.monotonic()
     try:

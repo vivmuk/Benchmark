@@ -70,4 +70,10 @@ MODELS = [
     {"id": "deepseek-v4-1-flash-uncensored",    "display": "DeepSeek V4.1 Flash Uncensored"},
     {"id": "abliteration-abliterated-model-large-v2", "display": "Abliterated Large v2"},
     {"id": "muse-wonder",                    "display": "Muse Wonder"},
+    {"id": "muse-spark-open",                 "display": "Muse Spark Open"},
+    {"id": "gemini-4-argon",                  "display": "Gemini 4 Argon"},
+    {"id": "openai-gpt-61-sol-ultrafast",     "display": "GPT-6.1 Sol Ultrafast"},
+    {"id": "hy4-preview",                     "display": "HY4 Preview"},
+    {"id": "qwen3-6-35b-a3b",                 "display": "Qwen3 35B A3B"},
+    {"id": "gemini-3-5-flash-lite",           "display": "Gemini 3.5 Flash Lite"},
 ]

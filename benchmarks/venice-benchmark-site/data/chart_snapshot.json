@@ -361,6 +361,34 @@
     }
   },
   {
+    "id": "openai-gpt-61-sol-ultrafast",
+    "disp": "GPT-6.1 Sol Ultrafast",
+    "viv": 84.2,
+    "scores": {
+      "intent-understanding": 88,
+      "one-shot-ui": 68,
+      "pharma-drug-interaction": 79,
+      "pharma-regulatory-comprehension": 85,
+      "startup-in-a-weekend": 100,
+      "value-density": 100,
+      "reverse-prompt-vision": 57
+    }
+  },
+  {
+    "id": "muse-spark-open",
+    "disp": "Muse Spark Open",
+    "viv": 83.9,
+    "scores": {
+      "intent-understanding": 82,
+      "one-shot-ui": 66,
+      "pharma-drug-interaction": 86,
+      "pharma-regulatory-comprehension": 80,
+      "startup-in-a-weekend": 100,
+      "value-density": 100,
+      "reverse-prompt-vision": 63
+    }
+  },
+  {
     "id": "claude-opus-5-5-fast",
     "disp": "Opus 5.5 Fast",
     "viv": 83.6,
@@ -541,6 +569,19 @@
     }
   },
   {
+    "id": "hy4-preview",
+    "disp": "HY4 Preview",
+    "viv": 81.2,
+    "scores": {
+      "intent-understanding": 58,
+      "pharma-drug-interaction": 90,
+      "pharma-regulatory-comprehension": 90,
+      "value-density": 100,
+      "one-shot-ui": 66,
+      "startup-in-a-weekend": 94
+    }
+  },
+  {
     "id": "grok-4-6",
     "disp": "Grok 4.6",
     "viv": 80.9,
@@ -580,6 +621,20 @@
       "startup-in-a-weekend": 100,
       "value-density": 100,
       "reverse-prompt-vision": 45
+    }
+  },
+  {
+    "id": "gemini-4-argon",
+    "disp": "Gemini 4 Argon",
+    "viv": 80.3,
+    "scores": {
+      "intent-understanding": 70,
+      "one-shot-ui": 66,
+      "pharma-drug-interaction": 83,
+      "pharma-regulatory-comprehension": 85,
+      "startup-in-a-weekend": 100,
+      "value-density": 100,
+      "reverse-prompt-vision": 57
     }
   },
   {
@@ -705,6 +760,34 @@
       "pharma-drug-interaction": 90,
       "pharma-regulatory-comprehension": 80,
       "value-density": 100
+    }
+  },
+  {
+    "id": "qwen3-6-35b-a3b",
+    "disp": "Qwen3 35B A3B",
+    "viv": 72.8,
+    "scores": {
+      "intent-understanding": 58,
+      "one-shot-ui": 66,
+      "pharma-drug-interaction": 83,
+      "pharma-regulatory-comprehension": 77,
+      "startup-in-a-weekend": 94,
+      "value-density": 100,
+      "reverse-prompt-vision": 39
+    }
+  },
+  {
+    "id": "gemini-3-5-flash-lite",
+    "disp": "Gemini 3.5 Flash Lite",
+    "viv": 72.7,
+    "scores": {
+      "intent-understanding": 64,
+      "one-shot-ui": 66,
+      "pharma-drug-interaction": 83,
+      "pharma-regulatory-comprehension": 68,
+      "startup-in-a-weekend": 96,
+      "value-density": 100,
+      "reverse-prompt-vision": 30
     }
   },
   {
