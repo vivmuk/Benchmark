@@ -499,6 +499,20 @@
     }
   },
   {
+    "id": "deepseek-v4-1-flash-1017",
+    "disp": "DeepSeek V4.1 Flash 1017",
+    "viv": 82.4,
+    "scores": {
+      "intent-understanding": 82,
+      "one-shot-ui": 68,
+      "pharma-drug-interaction": 88,
+      "pharma-regulatory-comprehension": 90,
+      "startup-in-a-weekend": 100,
+      "value-density": 100,
+      "reverse-prompt-vision": 54
+    }
+  },
+  {
     "id": "claude-sonnet-5",
     "disp": "Sonnet 5",
     "viv": 82.2,

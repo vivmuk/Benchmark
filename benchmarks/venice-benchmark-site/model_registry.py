@@ -76,4 +76,5 @@ MODELS = [
     {"id": "hy4-preview",                     "display": "HY4 Preview"},
     {"id": "qwen3-6-35b-a3b",                 "display": "Qwen3 35B A3B"},
     {"id": "gemini-3-5-flash-lite",           "display": "Gemini 3.5 Flash Lite"},
+    {"id": "deepseek-v4-1-flash-1017",        "display": "DeepSeek V4.1 Flash 1017"},
 ]
