@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-18T17:33:38.192435+00:00",
+  "generated_at": "2026-10-20T01:22:56.269514+00:00",
   "dry_run": false,
   "models": [
     {
@@ -109,6 +109,10 @@
     {
       "id": "nvidia-nemotron-3-5-lightning-30b-a3b",
       "display": "Nemotron 3.5"
+    },
+    {
+      "id": "nvidia-nemotron-3-5-super-vl-120b-a12b",
+      "display": "Nemotron 3.5 Super VL"
     },
     {
       "id": "gemini-3-7-flash",
@@ -11268,7 +11272,168 @@
         "judge_cost_usd": 0.002285,
         "model_only_cost_usd": 0.001133
       }
+    },
+    {
+      "model_id": "nvidia-nemotron-3-5-super-vl-120b-a12b",
+      "benchmark_id": "intent_understanding",
+      "status": "ok",
+      "score": 82,
+      "latency": 2.81,
+      "prompt_tokens": 1820,
+      "completion_tokens": 1372,
+      "total_tokens": 3192,
+      "estimated_cost_usd": 0.00217,
+      "raw_response": "Here is a practical direction, followed by questions I need answered before recommending a specific build.\n\n**Suggested approach:** Build a notification triage and deduplication layer that sits between your noisy sources and your team. Instead of every alert hitting Slack in real time, the layer would:\n- Ingest notifications from whatever systems are firing them (CI/CD, sales alerts, support tickets, @mentions, automated reports, etc.)\n- Deduplicate identical or near-identical items so the same issue doesn’t ping multiple channels\n- Batch non-urgent items into scheduled digests (e.g., every 2 hours or end of day) rather than interrupting constantly\n- Push actionable work into a single source of truth—your existing project tracker—so tasks aren’t duplicated across Slack threads, email, and spreadsheets\n- Let individuals set quiet hours, keyword filters, and escalation rules so only true emergencies break through\n\nYou can start lightweight with Slack Workflow Builder and existing app integrations, or build a small custom middleware bot if your stack requires it.\n\n**Clarifying questions:**\n1. How many people are on the team, and are they in one time zone or distributed?\n2. What tools are you already using besides Slack (e.g., Jira, Linear, Asana, Trello, GitHub, Zendesk, email)?\n3. What kinds of notifications are causing the overload (deploys, sales leads, support tickets, internal @mentions, automated reports, something else)?\n4. What does “duplicate work” look like—same ticket entered twice, same question asked in multiple channels, or people unknowingly doing the same task?\n5. Who or what is sending the notifications (humans, bots, CI/CD pipelines, external integrations)?\n6. Do you want fewer notifications, a single inbox, automated triage, or all of the above?\n7. Is there engineering bandwidth to build something custom, or do you need a no-code/low-code setup using Slack Workflow Builder and existing integrations?\n\nOnce you answer those, I can suggest a specific architecture, tool stack, or implementation plan.",
+      "error": null
+    },
+    {
+      "model_id": "nvidia-nemotron-3-5-super-vl-120b-a12b",
+      "benchmark_id": "one_shot_ui",
+      "status": "ok",
+      "score": 66,
+      "latency": 5.811,
+      "prompt_tokens": 1829,
+      "completion_tokens": 4873,
+      "total_tokens": 6702,
+      "estimated_cost_usd": 0.006548,
+      "raw_response": "```html\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"UTF-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n<title>Focus Score Dashboard</title>\n<style>\n  * {\n    box-sizing: border-box;\n    margin: 0;\n    padding: 0;\n  }\n  body {\n    background: #0f172a;\n    color: #e2e8f0;\n    font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    min-height: 100vh;\n    padding: 1rem;\n  }\n  .card {\n    background: #1e293b;\n    border: 1px solid #334155;\n    border-radius: 16px;\n    padding: 24px;\n    width: 100%;\n    max-width: 340px;\n    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);\n  }\n  .header {\n    display: flex;\n    flex-direction: column;\n    gap: 4px;\n    margin-bottom: 24px;\n  }\n  .label {\n    font-size: 0.8rem;\n    text-transform: uppercase;\n    letter-spacing: 0.08em;\n    color: #94a3b8;\n    font-weight: 600;\n  }\n  .score-wrapper {\n    display: flex;\n    align-items: baseline;\n    gap: 4px;\n  }\n  .score {\n    font-size: 3.5rem;\n    font-weight: 800;\n    color: #ffffff;\n    line-height: 1;\n  }\n  .sub-score {\n    font-size: 1.25rem;\n    color: #64748b;\n    font-weight: 500;\n  }\n  .sparkline-wrap {\n    margin-bottom: 24px;\n    position: relative;\n    height: 60px;\n  }\n  .sparkline-label {\n    position: absolute;\n    bottom: -22px;\n    left: 0;\n    font-size: 0.75rem;\n    color: #64748b;\n    font-weight: 600;\n    text-transform: uppercase;\n    letter-spacing: 0.05em;\n  }\n  svg {\n    width: 100%;\n    height: 100%;\n    display: block;\n  }\n  .sparkline-path {\n    fill: none;\n    stroke: #6366f1;\n    stroke-width: 2;\n    stroke-linecap: round;\n    stroke-linejoin: round;\n  }\n  .sparkline-dot {\n    fill: #6366f1;\n  }\n  .start-btn {\n    width: 100%;\n    padding: 14px;\n    background: #6366f1;\n    color: #ffffff;\n    border: none;\n    border-radius: 10px;\n    font-size: 1rem;\n    font-weight: 600;\n    cursor: pointer;\n    transition: all 0.2s ease;\n    box-shadow: 0 4px 6px -1px rgba(99, 102, 241, 0.4);\n  }\n  .start-btn:hover {\n    background: #4f46e5;\n    transform: translateY(-1px);\n  }\n  .start-btn:active {\n    transform: translateY(0);\n  }\n  .start-btn:disabled {\n    opacity: 0.6;\n    cursor: not-allowed;\n    transform: none;\n  }\n  .start-btn.focusing {\n    background: #10b981;\n  }\n  .start-btn.focusing:hover {\n    background: #059669;\n  }\n</style>\n</head>\n<body>\n<div class=\"card\">\n  <div class=\"header\">\n    <div class=\"label\">Daily Focus Score</div>\n    <div class=\"score-wrapper\">\n      <div class=\"score\" id=\"score\">0</div>\n      <div class=\"sub-score\">/ 100</div>\n    </div>\n  </div>\n  <div class=\"sparkline-wrap\">\n    <svg viewBox=\"0 0 340 60\" preserveAspectRatio=\"none\">\n      <path class=\"sparkline-path\" id=\"sparklinePath\" d=\"\"></path>\n    </svg>\n    <div class=\"sparkline-label\">Weekly Trend</div>\n  </div>\n  <button class=\"start-btn\" id=\"startBtn\">Start Focus</button>\n</div>\n\n<script>\n  const scoreEl = document.getElementById('score');\n  const pathEl = document.getElementById('sparklinePath');\n  const btn = document.getElementById('startBtn');\n\n  // Generate 7 data points for the weekly trend\n  const data = Array.from({ length: 7 }, () => Math.floor(Math.random() * 35) + 60);\n  const currentScore = data[data.length - 1];\n\n  // Animate the score counting up\n  const duration = 1000;\n  const startTime = performance.now();\n\n  function animateScore(now) {\n    const elapsed = now - startTime;\n    const progress = Math.min(elapsed / duration, 1);\n    const ease = 1 - (1 - progress) * (1 - progress); // ease-out quad\n    scoreEl.textContent = Math.floor(ease * currentScore);\n    if (progress < 1) {\n      requestAnimationFrame(animateScore);\n    }\n  }\n  requestAnimationFrame(animateScore);\n\n  // Build the sparkline path\n  const width = 340;\n  const height = 60;\n  const padding = 16;\n  const plotWidth = width - padding * 2;\n  const plotHeight = height - padding * 2;\n  const step = plotWidth / (data.length - 1);\n\n  const minVal = 50;\n  const maxVal = 100;\n  const getY = (val) => {\n    const t = (val - minVal) / (maxVal - minVal);\n    return height - padding - t * plotHeight;\n  };\n\n  let d = `M ${padding} ${getY(data[0])}`;\n  for (let i = 1; i < data.length; i++) {\n    const x = padding + i * step;\n    const y = getY(data[i]);\n    d += ` L ${x} ${y}`;\n  }\n  pathEl.setAttribute('d', d);\n\n  // Add data point dots\n  const svg = pathEl.parentElement;\n  data.forEach((val, i) => {\n    const x = padding + i * step;\n    const y = getY(val);\n    const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');\n    circle.setAttribute('cx', x);\n    circle.setAttribute('cy', y);\n    circle.setAttribute('r', 3);\n    circle.setAttribute('class', 'sparkline-dot');\n    svg.appendChild(circle);\n  });\n\n  // Start Focus button logic\n  let focusing = false;\n  let seconds = 0;\n  btn.addEventListener('click', () => {\n    if (!focusing) {\n      focusing = true;\n      btn.textContent = 'Focusing...';\n      btn.classList.add('focusing');\n      btn.disabled = true;\n      seconds = 0;\n\n      const interval = setInterval(() => {\n        seconds++;\n        if (seconds >= 5) {\n          clearInterval(interval);\n          focusing = false;\n          btn.textContent = 'Start Focus';\n          btn.classList.remove('focusing');\n          btn.disabled = false;\n          // Simulate a score bump after a focus session\n          const newScore = Math.min(100, Math.floor(Math.random() * 12) + currentScore);\n          scoreEl.textContent = newScore;\n        }\n      }, 1000);\n    }\n  });\n</script>\n</body>\n</html>\n```",
+      "error": null
+    },
+    {
+      "model_id": "nvidia-nemotron-3-5-super-vl-120b-a12b",
+      "benchmark_id": "pharma_drug_interaction",
+      "status": "ok",
+      "score": 88,
+      "latency": 4.36,
+      "prompt_tokens": 1940,
+      "completion_tokens": 2599,
+      "total_tokens": 4539,
+      "estimated_cost_usd": 0.003734,
+      "raw_response": "Here is the pair-by-pair review.\n\n**1. Warfarin + Ibuprofen**\n\n- **Severity:** Major\n- **Mechanism:** Primarily pharmacodynamic synergy. Ibuprofen reversibly inhibits cyclooxygenase-1 (COX-1), reducing platelet thromboxane A2 and impairing platelet aggregation, while also causing direct gastric mucosal injury and increasing the risk of peptic ulceration and gastrointestinal bleeding. Warfarin inhibits vitamin K epoxide reductase (VKORC1), decreasing γ-carboxylation of clotting factors II, VII, IX, and X and of proteins C and S. The combination substantially increases bleeding risk, especially gastrointestinal and intracranial hemorrhage. A minor pharmacokinetic component exists (ibuprofen can transiently displace warfarin from albumin and is a weak CYP2C9 inhibitor), but this is not the main driver of the interaction.\n- **Recommended clinical action:** Avoid concurrent use whenever possible. Prefer acetaminophen for osteoarthritis pain. If an NSAID is unavoidable, use the lowest effective dose for the shortest duration, monitor INR closely after initiation or dose changes, assess bleeding risk, consider proton-pump inhibitor gastroprotection, and counsel the patient on signs of bleeding (melena, hematuria, unusual bruising, headache).\n\n**2. Warfarin + Lisinopril**\n\n- **Severity:** No well-established clinically significant interaction (uncertain/minor at most)\n- **Mechanism:** There is no consistent, reproducible pharmacokinetic or pharmacodynamic interaction demonstrated in controlled studies. Some case reports and anecdotal data suggest ACE inhibitors may potentiate warfarin (elevated INR or bleeding), but the mechanism is unclear and speculative; possible roles for subtle effects on platelet function or vitamin K metabolism have not been firmly established.\n- **Recommended clinical action:** No specific interaction-based contraindication. Continue routine INR monitoring per standard warfarin management. If lisinopril is started or its dose is changed, check INR within the usual monitoring window and evaluate unexpected INR elevation for other causes (dietary vitamin K changes, intercurrent illness, other medications) before attributing it to lisinopril. I am explicitly uncertain about a clinically meaningful interaction here.\n\n**3. Ibuprofen + Lisinopril**\n\n- **Severity:** Moderate (can be Major in high-risk patients: chronic kidney disease, elderly, heart failure, volume depletion, or concomitant diuretics)\n- **Mechanism:** Pharmacodynamic/hemodynamic. Ibuprofen inhibits renal prostaglandin synthesis (COX-1/COX-2), reducing afferent arteriolar vasodilation and renal blood flow. Lisinopril inhibits angiotensin-converting enzyme, decreasing angiotensin II–mediated efferent arteriolar constriction. Together they can reduce glomerular filtration pressure and precipitate acute kidney injury. Ibuprofen also promotes sodium and water retention, which can blunt lisinopril’s antihypertensive effect. Both agents raise serum potassium—ACE inhibitors by reducing aldosterone, NSAIDs via hyporeninemic hypoaldosteronism and reduced renal potassium excretion—increasing hyperkalemia risk.\n- **Recommended clinical action:** Avoid routine co-administration, especially in patients with CKD, heart failure, dehydration, or advanced age. If used together, monitor serum creatinine/eGFR and potassium within 1–2 weeks of initiation or dose changes and periodically thereafter. Monitor blood pressure, as the NSAID may attenuate lisinopril efficacy. Use the lowest effective ibuprofen dose for the shortest duration; consider acetaminophen or a topical NSAID instead. Ensure adequate hydration and advise the patient to hold the NSAID during intercurrent illness or volume depletion.\n\n**Overall summary:** The most clinically significant interaction on this list is warfarin–ibuprofen (Major bleeding risk). The ibuprofen–lisinopril interaction is Moderate and centers on renal function, blood pressure control, and potassium. The warfarin–lisinopril pairing lacks a well-established interaction, though routine INR vigilance remains appropriate.",
+      "error": null
+    },
+    {
+      "model_id": "nvidia-nemotron-3-5-super-vl-120b-a12b",
+      "benchmark_id": "pharma_regulatory_comprehension",
+      "status": "ok",
+      "score": 80,
+      "latency": 4.562,
+      "prompt_tokens": 1969,
+      "completion_tokens": 2607,
+      "total_tokens": 4576,
+      "estimated_cost_usd": 0.003751,
+      "raw_response": "**Question 1: Centralized-only monitoring under ICH E6(R2)**\n\n**Requirement:** ICH E6(R2) does not explicitly prohibit centralized-only monitoring, but it requires the monitor to verify that trial data are accurately recorded by comparing them with source documents, and to confirm that the rights and well-being of human subjects are protected. Because source data verification (SDV) generally requires direct access to source records, centralized-only monitoring is typically insufficient when source records exist only on paper at the investigative site. Centralized monitoring may supplement an on-site program, but it cannot fully replace on-site monitoring unless the sponsor has remote access to validated electronic source data and the monitoring plan documents a risk-based justification for reduced or eliminated site visits.\n\n**Citation:** ICH E6(R2), Section 5.18 (Monitoring), including Section 5.18.1 (monitoring plan based on risk assessment) and Section 5.18.2 (monitoring procedures, including verification of data against source documents). *Note: Please verify the exact subsection numbering against your local copy of the guideline, as numbering can vary slightly by regional adoption.*\n\n**Exceptions or conditions:** Centralized-only monitoring may be acceptable in limited circumstances—such as trials using electronic data capture with remote access to electronic source documents (e-source)—if a documented risk assessment supports it and critical data can still be verified. Regulatory authorities (e.g., FDA, EMA) may still expect some on-site monitoring for high-risk sites, high-risk procedures, or critical data points.\n\n---\n\n**Question 2: Investigator responsibilities for informed consent under ICH E6(R2)**\n\n**Requirement:** The investigator is responsible for obtaining informed consent from each trial subject, or from the subject’s legally acceptable representative if the subject is incapable of providing consent. Consent must be obtained before the subject undergoes any trial-specific procedures, and the process must be documented using an informed consent form approved by the IRB/IEC. The investigator must ensure the form is signed and dated by the subject (or legally acceptable representative) and the person conducting the consent discussion, and that the subject receives a copy.\n\n**Citation:** ICH E6(R2), Section 4.8 (Informed Consent), particularly Sections 4.8.1 (investigator obtains consent), 4.8.2 (consent obtained prior to trial-specific procedures), 4.8.10 (signature and dating), and 4.8.11 (copy provided to the subject). *Note: Please verify the exact subsection numbering against your local copy of the guideline.*\n\n**Exceptions or conditions:** Consent may be waived or altered only where applicable local regulations permit (for example, certain emergency research provisions). The investigator must also inform subjects of new information that may affect their willingness to continue participation (Section 4.8.13) and ensure the consent form is updated when necessary (Section 4.8.12).",
+      "error": null
+    },
+    {
+      "model_id": "nvidia-nemotron-3-5-super-vl-120b-a12b",
+      "benchmark_id": "startup_in_a_weekend",
+      "status": "ok",
+      "score": 94,
+      "latency": 15.325,
+      "prompt_tokens": 2037,
+      "completion_tokens": 9237,
+      "total_tokens": 11274,
+      "estimated_cost_usd": 0.012056,
+      "raw_response": "Here is a complete, buildable 7-day MVP plan for the AI-powered contract review assistant.\n\n## 1. System Architecture\n\n**Components**\n- **Frontend:** Next.js 14 (App Router), TypeScript, Tailwind CSS, shadcn/ui, hosted on Vercel.\n- **API:** Python 3.12, FastAPI, Pydantic v2, SQLAlchemy 2.0 (async), Alembic for migrations, containerized with Docker.\n- **Worker:** Celery with Redis broker, same Python image, runs as a separate ECS service.\n- **Object Storage:** Amazon S3 (private bucket, presigned URLs for upload/download).\n- **Database:** Amazon RDS PostgreSQL 16 with the `pgvector` extension.\n- **Cache/Queue:** Amazon ElastiCache Redis.\n- **LLM:** OpenAI API (GPT-4o, 128k context) via the official `openai` Python SDK, structured outputs enforced with Pydantic.\n- **Text Extraction:** `pdfplumber` (PDF), `python-docx` (Word), `pdf2image` + `pytesseract` (OCR fallback for scanned pages).\n- **CI/CD:** GitHub Actions building/pushing to Amazon ECR, deploying to AWS ECS Fargate.\n\n**Data Flow**\n1. User drags a PDF or .docx into the browser.\n2. Frontend requests a presigned S3 POST URL from the API; the file uploads directly to S3.\n3. API creates a `contracts` row with status `uploading`, then enqueues a Celery task `analyze_contract`.\n4. Worker downloads the file from S3, extracts text (OCR fallback if needed), chunks it, and sends it to GPT-4o.\n5. LLM extracts clauses, classifies risk, drafts redlines, and writes a summary.\n6. Worker writes results to PostgreSQL, marks the contract `completed`, and publishes a completion event.\n7. Frontend polls (or receives a WebSocket/SSE update) and renders the review workspace and report.\n\n## 2. Database Schema\n\nPostgreSQL 16 with `pgvector`. All tables are multi-tenant by `org_id`.\n\n- **organizations** — `id` UUID PK, `name` text, `slug` text unique, `created_at` timestamptz, `settings` jsonb.\n- **users** — `id` UUID PK, `org_id` UUID FK, `email` text unique, `password_hash` text, `role` enum(`owner`, `admin`, `member`, `viewer`), `is_active` boolean, `created_at` timestamptz.\n- **contracts** — `id` UUID PK, `org_id` UUID FK, `user_id` UUID FK, `filename` text, `s3_key` text, `file_size_bytes` bigint, `content_type` text, `status` enum(`uploading`, `processing`, `completed`, `failed`), `total_pages` integer, `created_at` timestamptz, `completed_at` timestamptz.\n- **clauses** — `id` UUID PK, `contract_id` UUID FK, `clause_type` text (e.g., `termination`, `indemnity`, `confidentiality`, `limitation_of_liability`), `clause_text` text, `start_page` integer, `start_char` integer, `end_char` integer, `risk_level` enum(`low`, `medium`, `high`), `risk_rationale` text, `confidence` float, `created_at` timestamptz.\n- **risk_flags** — `id` UUID PK, `clause_id` UUID FK, `flag_type` text, `severity` enum(`low`, `medium`, `high`), `description` text, `playbook_reference` text, `created_at` timestamptz.\n- **redlines** — `id` UUID PK, `clause_id` UUID FK, `original_text` text, `suggested_text` text, `explanation` text, `status` enum(`pending`, `accepted`, `rejected`, `ignored`), `decided_by` UUID FK, `decided_at` timestamptz, `created_at` timestamptz.\n- **reports** — `id` UUID PK, `contract_id` UUID FK, `executive_summary` text, `overall_risk_score` float (0–100), `top_issues` jsonb, `generated_at` timestamptz, `pdf_s3_key` text.\n- **audit_logs** — `id` UUID PK, `org_id` UUID FK, `user_id` UUID FK, `action` text, `entity_type` text, `entity_id` UUID, `metadata` jsonb, `created_at` timestamptz.\n\n## 3. Backend API Endpoints\n\n**Authentication**\n- `POST /api/v1/auth/register`  \n  Request: `{ \"email\": \"...\", \"password\": \"...\", \"org_name\": \"Acme Corp\" }`  \n  Response: `{ \"access_token\": \"...\", \"refresh_token\": \"...\", \"user\": { \"id\": \"...\", \"email\": \"...\", \"role\": \"owner\" } }`\n- `POST /api/v1/auth/login`  \n  Request: `{ \"email\": \"...\", \"password\": \"...\" }`  \n  Response: `{ \"access_token\": \"...\", \"refresh_token\": \"...\" }`\n- `POST /api/v1/auth/refresh`  \n  Request: `{ \"refresh_token\": \"...\" }`  \n  Response: `{ \"access_token\": \"...\" }`\n\n**Contracts**\n- `POST /api/v1/contracts` (multipart/form-data)  \n  Request: file field `file`  \n  Response (202): `{ \"contract_id\": \"uuid\", \"status\": \"uploading\", \"upload_url\": \"https://s3...presigned\" }`\n- `GET /api/v1/contracts/{id}`  \n  Response: `{ \"id\": \"...\", \"filename\": \"...\", \"status\": \"completed\", \"risk_summary\": { \"high\": 2, \"medium\": 5, \"low\": 12 }, \"report_id\": \"...\" }`\n- `GET /api/v1/contracts/{id}/clauses`  \n  Response: `[ { \"id\": \"...\", \"clause_type\": \"termination\", \"clause_text\": \"...\", \"risk_level\": \"high\", \"risk_rationale\": \"...\", \"confidence\": 0.94, \"start_page\": 3 } ]`\n- `POST /api/v1/contracts/{id}/analyze`  \n  Response: `{ \"job_id\": \"celery-task-uuid\" }`\n- `GET /api/v1/contracts/{id}/report`  \n  Response: `{ \"executive_summary\": \"...\", \"overall_risk_score\": 68, \"top_issues\": [...], \"clauses\": [...], \"redlines\": [...] }`\n- `PATCH /api/v1/contracts/{id}/redlines/{redline_id}`  \n  Request: `{ \"status\": \"accepted\" }`  \n  Response: `{ \"id\": \"...\", \"status\": \"accepted\", \"decided_by\": \"...\", \"decided_at\": \"...\" }`\n\n**Me**\n- `GET /api/v1/me`  \n  Response: `{ \"user\": { \"id\": \"...\", \"email\": \"...\", \"role\": \"member\" }, \"org\": { \"id\": \"...\", \"name\": \"Acme Corp\" } }`\n\n## 4. Authentication and Authorization Strategy\n\n- **Tokens:** JWT access token (15-minute TTL) passed in `Authorization: Bearer` header; refresh token (7-day TTL) in an `HttpOnly`, `Secure`, `SameSite=Strict` cookie.\n- **Passwords:** Argon2id hashing via `passlib[argon2]`.\n- **Multi-tenancy:** Every JWT contains `org_id`; all database queries are automatically filtered by `org_id` using SQLAlchemy row-level policies or a repository pattern.\n- **RBAC:** Four roles. `owner` manages org settings and billing; `admin` invites/removes users; `member` uploads and reviews contracts; `viewer` read-only.\n- **Session invalidation:** Refresh tokens are blocklisted in Redis on logout or password change.\n- **API keys:** Reserved for future service-to-service integrations (not MVP).\n\n## 5. Frontend Key Screens and Navigation\n\n**Stack:** Next.js 14 App Router, TypeScript, Tailwind CSS, shadcn/ui, React Hook Form + Zod, TanStack Query, `pdf.js` for client-side preview, `diff-match-patch` for redline diff rendering.\n\n**Screens**\n- `/login` — email/password login, org selection.\n- `/dashboard` — organization contract list, recent activity, risk distribution chart (high/medium/low counts).\n- `/contracts/upload` — drag-and-drop upload, file-type validation (PDF/Word only), max size check.\n- `/contracts/[id]` — review workspace: left sidebar clause list with risk chips, main panel document preview and side-by-side redline diff, accept/reject buttons per redline.\n- `/contracts/[id]/report` — executive summary, overall risk score, top issues, export to PDF button.\n- `/settings/org` — member management, role changes, invite flow.\n\n**Navigation:** Fixed left sidebar (Dashboard, Contracts, Reports, Settings), top bar with org switcher and user profile dropdown.\n\n## 6. AI/LLM Pipeline\n\n**Ingestion**\n- PDF: `pdfplumber` with layout preservation; `.docx`: `python-docx`.\n- If extracted text is below a confidence threshold or the page is image-only, convert page to image via `pdf2image` and run `pytesseract` OCR.\n\n**Chunking**\n- `RecursiveCharacterTextSplitter` from LangChain, `chunk_size=4000`, `chunk_overlap=400`, section-aware splitting on common legal headings.\n\n**Clause Extraction**\n- System prompt includes a clause library (termination, indemnity, confidentiality, limitation of liability, payment, IP, governing law, etc.).\n- GPT-4o with structured output (Pydantic model) returns clause type, text, page, and character offsets.\n- Temperature: `0.1`.\n\n**Risk Classification**\n- Each clause is classified against a hardcoded playbook. LLM outputs `risk_level` (low/medium/high), `risk_rationale`, and `confidence`.\n- Risk flags are stored separately for UI filtering.\n\n**Redline Generation**\n- LLM receives the original clause, its risk classification, and the playbook position; it outputs `suggested_text` and `explanation`.\n- Frontend renders the diff using `diff-match-patch`.\n\n**Summary Report**\n- Map-reduce approach: summarize each clause group, then a final synthesis prompt produces `executive_summary`, `overall_risk_score` (0–100), and `top_issues`.\n\n**Evaluation**\n- 20-contract golden set reviewed by a lawyer; LLM-as-judge scoring on extraction accuracy and risk correctness before production cutover.\n\n## 7. Deployment Stack and Infrastructure\n\n- **Frontend:** Vercel (Next.js).\n- **API & Worker:** AWS ECS Fargate (two services: `api` and `worker`), Docker images in Amazon ECR.\n- **Database:** Amazon RDS PostgreSQL 16 (`db.t3.micro`, single AZ for MVP), `pgvector` extension enabled.\n- **Storage:** Amazon S3 (private bucket, lifecycle rule to expire uploads after 30 days).\n- **Cache/Queue:** Amazon ElastiCache Redis (`cache.t3.micro`).\n- **DNS/CDN:** Amazon Route53, Amazon CloudFront (optional edge caching for static assets).\n- **CI/CD:** GitHub Actions (lint, test, build Docker, push to ECR, update ECS service).\n- **Secrets:** AWS Secrets Manager for OpenAI API key and database credentials.\n- **Monitoring:** Amazon CloudWatch Logs and Metrics, AWS X-Ray for tracing.\n\n## 8. Observability, Logging, and Error Handling\n\n- **Logging:** `structlog` structured JSON logs to stdout, shipped to CloudWatch Logs. Every request gets a `correlation_id` via FastAPI middleware.\n- **Tracing:** OpenTelemetry Python instrumentation exported to AWS X-Ray; frontend traces via OpenTelemetry Web.\n- **Error tracking:** Sentry SDK for Python (backend) and React (frontend), release tracking enabled.\n- **Health checks:** `GET /health` verifies PostgreSQL connectivity, Redis ping, and S3 list-bucket permission.\n- **Resilience:** Celery tasks use exponential backoff with a maximum of 3 retries; failed LLM jobs go to a dead-letter queue. `pybreaker` circuit breaker wraps the OpenAI client.\n- **Alerting:** CloudWatch alarms on 5xx rate > 5%, Celery queue depth > 50, and OpenAI API latency p95 > 10s.\n\n## 9. Day-by-Day 7-Day Schedule\n\n- **Day 1:** Repo scaffolding, Docker, GitHub Actions, RDS Postgres + pgvector, Alembic migrations, auth (register/login/JWT refresh), organization and user models. Deliverable: authenticated API skeleton with migrated DB.\n- **Day 2:** S3 presigned uploads, file validation, text extraction service (`pdfplumber`, `python-docx`, OCR fallback), upload endpoint, contract status state machine. Deliverable: upload a contract and retrieve extracted text via API.\n- **Day 3:** Celery worker, LLM pipeline (clause extraction, risk classification, redline generation, summary), store results in Postgres, analysis endpoint. Deliverable: end-to-end analysis of one contract with JSON results.\n- **Day 4:** Report generation (PDF via `reportlab` or `weasyprint`), report endpoint, frontend dashboard and upload screen. Deliverable: frontend can upload a contract and view a basic report.\n- **Day 5:** Frontend review workspace (clause list, risk chips, redline diff viewer, accept/reject), RBAC UI, org settings screen. Deliverable: complete browser-based review flow.\n- **Day 6:** Unit and integration tests, observability (Sentry, X-Ray, structured logging), staging deploy, bug triage. Deliverable: staging environment, zero critical bugs.\n- **Day 7:** Production deploy, UAT with one legal beta user, API runbook and handoff documentation, cutover. Deliverable: live MVP on production domain.\n\n## 10. Cost Estimate (100 Active Users/Month)\n\nAssumptions: 100 users × 5 contracts/month = 500 contracts; average 10 pages; ~15,000 LLM tokens per contract (extraction + risk + redline + summary) = ~7.5M tokens/month.\n\n| Item | Estimate (USD/month) |\n|---|---|\n| OpenAI GPT-4o (~$8 per 1M tokens blended) | $60 |\n| RDS PostgreSQL db.t3.micro | $16 |\n| Amazon S3 storage + requests | $5 |\n| ECS Fargate (API + worker, spot where possible) | $75 |\n| ElastiCache Redis cache.t3.micro | $15 |\n| CloudWatch logs/metrics | $10 |\n| Sentry (free tier) | $0 |\n| Vercel (optional Pro) | $20 |\n| **Total** | **~$201** |\n\nRealistic range: **$180–$300/month** depending on contract length and LLM token mix.\n\n## 11. Top 5 Technical Risks and Mitigations\n\n1. **LLM hallucination or incorrect risk classification.**  \n   Mitigation: confidence scores per clause, citations to source text, human-in-the-loop accept/reject workflow, lawyer-reviewed golden set, and a clear “AI-assisted, not legal advice” disclaimer in the UI.\n\n2. **Failed text extraction from scanned, image-heavy, or complexly formatted contracts.**  \n   Mitigation: OCR fallback (`pdf2image` + `pytesseract`), pre-upload file validation, page-level chunking, a “failed parse” status with manual re-upload option, and support email for edge cases.\n\n3. **Context window limits for very long contracts.**  \n   Mitigation: section-based map-reduce processing, extract clauses per chunk then merge, hierarchical summarization, and a maximum page warning in the UI.\n\n4. **Data privacy / PII exposure in contracts.**  \n   Mitigation: encryption at rest (S3, RDS) and in transit (TLS), zero-data-retention requests honored, role-based org isolation, optional 30-day deletion policy, and access audit logs.\n\n5. **OpenAI API rate limits or latency spikes.**  \n   Mitigation: Celery queue with exponential backoff, per-org rate limiting, circuit breaker (`pybreaker`), cached results for repeated analyses, and status polling so the UI never blocks.\n\n## 12. Out of MVP Scope\n\n- E-signature integration (DocuSign, Adobe Sign).\n- Native Microsoft Word or Google Docs add-in.\n- Contract version control and multi-version redline history.\n- Automated negotiation or counterparty collaboration.\n- Billing, subscriptions, payments, or invoicing.\n- Multi-language support (English only).\n- Model fine-tuning or custom training.\n- SOC 2 Type II, ISO 27001, or HIPAA compliance.\n- SLAs with uptime guarantees.\n- Mobile applications.\n- Cross-contract analytics or benchmarking.",
+      "error": null
+    },
+    {
+      "model_id": "nvidia-nemotron-3-5-super-vl-120b-a12b",
+      "benchmark_id": "value_density",
+      "status": "ok",
+      "score": 100,
+      "latency": 1.417,
+      "prompt_tokens": 1996,
+      "completion_tokens": 105,
+      "total_tokens": 2101,
+      "estimated_cost_usd": 0.00063,
+      "raw_response": "{\"drug_pair\":\"warfarin-ibuprofen\",\"severity\":\"Major\",\"mechanism\":\"Ibuprofen displaces warfarin from plasma proteins, inhibits platelet aggregation, and causes gastric mucosal irritation, increasing bleeding risk.\",\"clinical_action\":\"Avoid concurrent use; consider acetaminophen instead and monitor INR closely.\",\"monitor\":[\"INR\",\"signs of bleeding\"],\"avoid_if\":\"history of gastrointestinal bleeding or peptic ulcer disease\",\"confidence\":95}",
+      "error": null,
+      "metrics": {
+        "budget_max_tokens": 1024,
+        "value_per_1k_tokens": 47.596,
+        "value_per_usd": 158730.159,
+        "details": {
+          "parse_ok": true,
+          "hits": {
+            "required_keys": 7,
+            "no_extra_keys": true,
+            "drug_pair": true,
+            "severity_enum": "Major",
+            "severity_major": true,
+            "mechanism": true,
+            "mechanism_concise": true,
+            "clinical_action": true,
+            "monitor_shape": true,
+            "monitor_content": true,
+            "avoid_if": true,
+            "confidence": true
+          },
+          "penalties": []
+        }
+      }
+    },
+    {
+      "model_id": "nvidia-nemotron-3-5-super-vl-120b-a12b",
+      "benchmark_id": "reverse_prompt_vision",
+      "status": "ok",
+      "score": 37,
+      "latency": 1.747,
+      "prompt_tokens": 2806,
+      "completion_tokens": 266,
+      "total_tokens": 3072,
+      "estimated_cost_usd": 0.003322,
+      "raw_response": "Cinematic photorealistic interior of a moody laboratory or study, wide shot, center composition, a glowing translucent DNA double helix floating in the center of the room with teal and gold molecular spheres, left side a large wall-mounted digital screen displaying \"EvidenceGrade AI\" in white bold text, below it a \"5-tier grade\" chart with colored bars A green, B teal, C yellow, D orange, F red, and a line graph labeled \"Citation Confidence 2019-2026\" with rising blue line, right side a large arched window looking out onto a rainy neon-lit Asian city street at night with glowing vertical signs in Chinese and Japanese characters, foreground a wooden desk with an open spiral notebook showing handwritten text including \"CYP2A4 interaction risk\", a black fountain pen, a white ceramic coffee cup with a teal lid on a saucer, background shelves with laboratory bottles labeled \"Aspirin\", \"Warfarin\", \"Ibuprofen\", a brass microscope, a potted Monstera plant with yellow leaf, warm industrial pendant lamps with brass fixtures and green glass shades, soft volumetric lighting, cyberpunk meets vintage laboratory aesthetic, 8k resolution, highly detailed, depth of field, atmospheric reflections on wet surfaces",
+      "error": null,
+      "metrics": {
+        "supports_vision": true,
+        "hit_rate": 0.5714,
+        "hits": {
+          "lab_setting": true,
+          "twilight": false,
+          "molecule_center": true,
+          "teal_glass": false,
+          "amber_nodes": true,
+          "holographic_dashboard": true,
+          "evidencegrade_title": true,
+          "grade_ladder": true,
+          "citation_chart": true,
+          "arched_window": true,
+          "rainy_city": true,
+          "neon_kanji": true,
+          "red_umbrella": false,
+          "black_cat": false,
+          "notebook": false,
+          "cyp3a4_note": false,
+          "fountain_pen": true,
+          "coffee_cup": true,
+          "cracked_saucer": false,
+          "brass_lamps": false,
+          "green_shade": true,
+          "reagent_bottles": false,
+          "drug_labels": true,
+          "microscope": false,
+          "monstera": true,
+          "volumetric_light": true,
+          "teal_amber_grade": false,
+          "photoreal_hologram_mix": false
+        },
+        "hallucinated_major": [
+          "Wooden desk instead of the source's brushed-steel bench",
+          "DNA double helix rather than a double-helix drug scaffold",
+          "Rising blue line in the citation chart",
+          "Spiral notebook rather than an open leather notebook"
+        ],
+        "missed_text": [
+          "CYP3A4 interaction risk"
+        ],
+        "judge_model": "openai-gpt-56-luna",
+        "judge_status": "ok",
+        "judge_cost_usd": 0.002288,
+        "model_only_cost_usd": 0.001034
+      }
     }
   ],
-  "total_estimated_cost_usd": 35.47567
+  "total_estimated_cost_usd": 35.507881
 }

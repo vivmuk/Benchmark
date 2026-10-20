@@ -722,6 +722,20 @@
     }
   },
   {
+    "id": "nvidia-nemotron-3-5-super-vl-120b-a12b",
+    "disp": "Nemotron 3.5 Super VL",
+    "viv": 77.2,
+    "scores": {
+      "intent-understanding": 82,
+      "one-shot-ui": 66,
+      "pharma-drug-interaction": 88,
+      "pharma-regulatory-comprehension": 80,
+      "startup-in-a-weekend": 94,
+      "value-density": 100,
+      "reverse-prompt-vision": 37
+    }
+  },
+  {
     "id": "openai-gpt-6-sol",
     "disp": "GPT-6 Sol",
     "viv": 75.8,

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-12T13:00:03.612608+00:00",
+  "generated_at": "2026-10-19T13:00:04.645175+00:00",
   "models": {
     "gemini-3-6-flash": {
       "id": "gemini-3-6-flash",
@@ -500,6 +500,11 @@
       "id": "openai-gpt-61-sol-ultrafast",
       "first_seen": "2026-10-12T13:00:03.612568+00:00",
       "display": "openai-gpt-61-sol-ultrafast"
+    },
+    "nvidia-nemotron-3-5-super-vl-120b-a12b": {
+      "id": "nvidia-nemotron-3-5-super-vl-120b-a12b",
+      "first_seen": "2026-10-19T13:00:04.645109+00:00",
+      "display": "nvidia-nemotron-3-5-super-vl-120b-a12b"
     }
   }
 }

@@ -30,6 +30,7 @@ MODELS = [
     {"id": "gemini-3-6-flash",          "display": "Gemini 3.6 Flash"},
     {"id": "grok-4-6",                  "display": "Grok 4.6"},
     {"id": "nvidia-nemotron-3-5-lightning-30b-a3b", "display": "Nemotron 3.5"},
+    {"id": "nvidia-nemotron-3-5-super-vl-120b-a12b", "display": "Nemotron 3.5 Super VL"},
     # ---- Phase 2: new models ----
     {"id": "gemini-3-7-flash",              "display": "Gemini 3.7 Flash"},
     {"id": "gemini-3-8-flash",              "display": "Gemini 3.8 Flash"},

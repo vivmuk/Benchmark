@@ -97,6 +97,7 @@ FALLBACK_PRICING = {
     "gemini-3-6-flash":        {"input": 1.875, "output": 9.375},
     "grok-4-6":                {"input": 2.27,  "output": 6.80},
     "nvidia-nemotron-3-5-lightning-30b-a3b": {"input": 0.10, "output": 0.25},
+    "nvidia-nemotron-3-5-super-vl-120b-a12b": {"input": 0.25, "output": 1.25},
     # ---- Phase 2: new models ----
     "gemini-3-7-flash":              {"input": 1.875, "output": 9.375},
     "gemini-3-8-flash":              {"input": 0.9375, "output": 4.6875},
