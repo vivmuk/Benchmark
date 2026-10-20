@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-19T13:00:04.645175+00:00",
+  "generated_at": "2026-10-20T01:27:28.922707+00:00",
   "models": {
     "gemini-3-6-flash": {
       "id": "gemini-3-6-flash",
@@ -505,6 +505,16 @@
       "id": "nvidia-nemotron-3-5-super-vl-120b-a12b",
       "first_seen": "2026-10-19T13:00:04.645109+00:00",
       "display": "nvidia-nemotron-3-5-super-vl-120b-a12b"
+    },
+    "minimax-m3-1-flash": {
+      "id": "minimax-m3-1-flash",
+      "first_seen": "2026-10-20T01:27:28.922649+00:00",
+      "display": "minimax-m3-1-flash"
+    },
+    "mercury-3": {
+      "id": "mercury-3",
+      "first_seen": "2026-10-20T01:27:28.922649+00:00",
+      "display": "mercury-3"
     }
   }
 }

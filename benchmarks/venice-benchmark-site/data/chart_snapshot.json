@@ -471,6 +471,19 @@
     }
   },
   {
+    "id": "mercury-3",
+    "disp": "Mercury 3",
+    "viv": 83.1,
+    "scores": {
+      "intent-understanding": 64,
+      "one-shot-ui": 68,
+      "pharma-drug-interaction": 83,
+      "startup-in-a-weekend": 94,
+      "pharma-regulatory-comprehension": 80,
+      "value-density": 100
+    }
+  },
+  {
     "id": "openai-gpt-6-astra",
     "disp": "GPT-6 Astra",
     "viv": 83.0,
@@ -899,6 +912,20 @@
       "startup-in-a-weekend": 100,
       "value-density": 100,
       "reverse-prompt-vision": 0
+    }
+  },
+  {
+    "id": "minimax-m3-1-flash",
+    "disp": "MiniMax M3.1 Flash",
+    "viv": 68.0,
+    "scores": {
+      "intent-understanding": 88,
+      "one-shot-ui": 68,
+      "pharma-drug-interaction": 90,
+      "pharma-regulatory-comprehension": 100,
+      "value-density": 100,
+      "reverse-prompt-vision": 12,
+      "startup-in-a-weekend": 71
     }
   },
   {
