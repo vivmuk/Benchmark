@@ -306,6 +306,19 @@
     }
   },
   {
+    "id": "qwen3-235b-a22b-thinking-2507",
+    "disp": "Qwen3 235B Thinking",
+    "viv": 85.1,
+    "scores": {
+      "intent-understanding": 76,
+      "one-shot-ui": 66,
+      "pharma-drug-interaction": 86,
+      "pharma-regulatory-comprehension": 90,
+      "startup-in-a-weekend": 92,
+      "value-density": 100
+    }
+  },
+  {
     "id": "minimax-m27",
     "disp": "MiniMax M27",
     "viv": 84.8,
@@ -994,19 +1007,6 @@
       "pharma-drug-interaction": 90,
       "pharma-regulatory-comprehension": 77,
       "startup-in-a-weekend": 100,
-      "value-density": 0
-    }
-  },
-  {
-    "id": "qwen3-235b-a22b-thinking-2507",
-    "disp": "Qwen3 235B Thinking",
-    "viv": 60.1,
-    "scores": {
-      "intent-understanding": 76,
-      "one-shot-ui": 66,
-      "pharma-drug-interaction": 86,
-      "pharma-regulatory-comprehension": 90,
-      "startup-in-a-weekend": 92,
       "value-density": 0
     }
   },

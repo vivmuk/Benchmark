@@ -1,46 +1,8 @@
 {
-  "generated_at": "2026-10-20T10:18:56.721627+00:00",
+  "generated_at": "2026-10-21T13:01:39.762059+00:00",
   "source_image": "data/vision/reverse_prompt_source.png",
   "image_model": "nano-banana-2",
   "source_prompt": "Ultra-detailed surreal pharmaceutical research laboratory at twilight, wide cinematic 16:9 composition. Center: a translucent teal glass molecular model of a double-helix drug scaffold floating above a brushed-steel bench, with glowing cyan bond lines and amber atom nodes. Left: a wall-sized holographic dashboard titled \"EvidenceGrade AI\" in bold white sans-serif, showing a 5-tier grade ladder (A emerald, B teal, C gold, D orange, F crimson) and a line chart labeled \"Citation Confidence 2019-2026\". Right: a large arched window revealing a rainy neo-Tokyo street with neon kanji signs reflecting on wet asphalt, a red umbrella leaning against the window sill, and a black cat silhouette on the ledge. Foreground: an open leather notebook with handwritten notes \"CYP3A4 interaction risk\" and a fountain pen, next to a white ceramic coffee cup with a teal lid and a cracked porcelain saucer. Ceiling: brass articulated lamps casting warm pools of light; one lamp has a green glass shade. Background shelves: amber glass reagent bottles labeled Aspirin, Warfarin, Ibuprofen in clean black type, a vintage brass microscope, and a small potted monstera plant with one yellow leaf. Atmosphere: volumetric god-rays through rain-streaked glass, subtle film grain, high dynamic range, teal-and-amber complementary color grade, no logos of real companies, no watermarks, photorealistic mixed with holographic UI.",
   "judge_model": "openai-gpt-56-luna",
-  "results": [
-    {
-      "model_id": "minimax-m3-1-flash",
-      "display": "MiniMax M3.1 Flash",
-      "reconstructed_prompt": "A cinematic 16:9 photorealistic 3D render of a futuristic forensic laboratory and study at night, viewed across a broad matte blue-gray desk. Center frame, a large translucent cyan DNA double helix made of glowing glass-like molecular nodes floats above the desk, with subtle reflections on the tabletop. On the left, an angled wall-mounted black holographic display outlined in bright cyan shows the large white title “EvidenceGrade AI,” the heading “5-tier grade,” and five stacked colored grade panels labeled “A” in green, “B” in turquoise, “C” in yellow, “D” in orange, and “F” in magenta-red. Beside them is a cyan line graph titled “Citation Confidence 2019-2026,” with a vertical scale from 0 to 60 and a rising jagged line. Behind the helix are white laboratory shelves holding amber medicine bottles labeled “Aspirin,” “Warfarin,” and “Ibuprofen,” glass test tubes, upright binders, a brass microscope, and a leafy green plant. Over",
-      "score": 12,
-      "hit_rate": 0.3214,
-      "hits": {
-        "lab_setting": true,
-        "twilight": false,
-        "molecule_center": true,
-        "teal_glass": true,
-        "amber_nodes": false,
-        "holographic_dashboard": true,
-        "evidencegrade_title": true,
-        "grade_ladder": true,
-        "citation_chart": true,
-        "arched_window": false,
-        "rainy_city": false,
-        "neon_kanji": false,
-        "red_umbrella": false,
-        "black_cat": false,
-        "notebook": false,
-        "cyp3a4_note": false,
-        "fountain_pen": false,
-        "coffee_cup": false,
-        "cracked_saucer": false,
-        "brass_lamps": false,
-        "green_shade": false,
-        "reagent_bottles": false,
-        "drug_labels": true,
-        "microscope": false,
-        "monstera": false,
-        "volumetric_light": false,
-        "teal_amber_grade": false,
-        "photoreal_hologram_mix": true
-      }
-    }
-  ]
+  "results": []
 }

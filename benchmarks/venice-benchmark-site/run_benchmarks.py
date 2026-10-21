@@ -45,7 +45,7 @@ TEMPERATURE = 0.5
 TEMPERATURE_LOCKED_MODELS = {"openai-gpt-56-luna", "openai-gpt-6-astra", "openai-gpt-6-astra-pro", "openai-gpt-6-luna"}
 # Models whose default reasoning_effort is verbose enough to hang the read
 # timeout; force a lower effort on core tracks so they complete.
-REASONING_EFFORT_LOW_MODELS = {"mercury-2-5", "mercury-3", "deepseek-v4-1-flash", "deepseek-v4-1-flash-1017", "grok-4-7", "openai-gpt-6-astra-pro", "openai-gpt-6-sol", "openai-gpt-6-luna", "xiaomi-mimo-v2-6-flash", "openai-gpt-61-sol", "openai-gpt-61-sol-ultrafast", "abliteration-abliterated-model-large-v2"}
+REASONING_EFFORT_LOW_MODELS = {"mercury-2-5", "mercury-3", "deepseek-v4-1-flash", "deepseek-v4-1-flash-1017", "grok-4-7", "openai-gpt-6-astra-pro", "openai-gpt-6-sol", "openai-gpt-6-luna", "xiaomi-mimo-v2-6-flash", "openai-gpt-61-sol", "openai-gpt-61-sol-ultrafast", "abliteration-abliterated-model-large-v2", "qwen3-235b-a22b-thinking-2507"}
 RATE_LIMIT_SLEEP_SECONDS = 1.0
 # Reasoning models on long-context prompts can take several minutes. The 180 s
 # reading timeout used to be the bottleneck for kimi-k3 / opus benchmarks.
