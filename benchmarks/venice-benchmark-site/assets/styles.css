@@ -2110,6 +2110,21 @@ button:not(.primary):hover { background: var(--md-state-hover); border-color: va
   border-radius: 10px !important;
   cursor: pointer;
 }
+.board-limit {
+  flex: 0 0 auto;
+  padding: 0.5rem 0.9rem;
+  font: 600 0.84rem var(--font-body);
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--rule-strong);
+  border-radius: 999px;
+  cursor: pointer;
+}
+.board-limit[aria-pressed="true"] {
+  color: #fff;
+  background: var(--cobalt, #0057e6);
+  border-color: transparent;
+}
 .board-count {
   font: 600 0.82rem var(--font-mono);
   color: var(--text-dim);

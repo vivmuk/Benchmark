@@ -27,6 +27,11 @@ PROVIDER_COLORS = {
     "aion":        ("Aion Labs",     "#F43F5E"),  # rose
     "inkling":     ("Inkling",       "#64748B"),  # slate
     "xiaomi":      ("Xiaomi",        "#FF6900"),  # orange
+    "stealth":     ("Stealth",       "#94A3B8"),  # unlabelled beta
+    "inception":   ("Inception Labs","#22D3EE"),  # mercury cyan
+    "meta":        ("Meta",          "#0EA5E9"),  # muse sky
+    "tencent":     ("Tencent",       "#2563EB"),  # hunyuan blue
+    "community":   ("Community",     "#A3A3A3"),  # abliterated slate
     "other":       ("Other",         "#64748B"),  # slate
 }
 
@@ -56,10 +61,20 @@ def provider_of(model_id: str) -> str:
         return "mistral"
     if mid.startswith("aion"):
         return "aion"
-    if mid.startswith(("inkling",)):
+    if mid.startswith("inkling"):
         return "inkling"
     if mid.startswith("xiaomi"):
         return "xiaomi"
+    if mid.startswith("stealth"):
+        return "stealth"
+    if mid.startswith("mercury"):
+        return "inception"
+    if mid.startswith("muse"):
+        return "meta"
+    if mid.startswith("hy4"):
+        return "tencent"
+    if mid.startswith("abliteration"):
+        return "community"
     return "other"
 
 def provider_color(model_id: str) -> str:

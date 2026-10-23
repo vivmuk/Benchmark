@@ -21,7 +21,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/styles.css?v=18" />
+  <link rel="stylesheet" href="assets/styles.css?v=19" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <script>
     (function(){
@@ -118,7 +118,7 @@
     <div class="container hero-content">
       <span class="eyebrow">Venice API Evaluation</span>
       <h1>Find the right model for the <em>work in front of you</em></h1>
-      <p>Nine practical evaluations: core capability, agentic tool use, long-context reasoning, pharma domain, value density at a fixed token budget, and multimodal reverse-prompt fidelity. Brick Breaker is retired from the board.</p>
+      <p><span id="heroModelCount">73</span> models, <span id="heroTrackCount">7</span> active evaluation tracks, <span id="heroRunCount">510</span> scored runs, <span id="heroCostTotal">$35.59</span> of measured API spend. Core capability, agentic tool use, long-context reasoning, pharma domain, value density at a fixed token budget, and multimodal reverse-prompt fidelity. Brick Breaker is retired from the board.</p>
       <div class="hero-actions">
         <a href="#leaderboard" class="btn btn-primary">Explore the data</a>
         <a href="vision.html" class="btn btn-ghost">Vision gallery</a>
@@ -142,20 +142,14 @@
         </div>
         <div class="feature-copy">
           <span class="eyebrow">Featured Run · Latest Addition</span>
-          <h2>GLM 5.3 Flash — <em>#5 of 42</em> on VivIndex</h2>
-          <p>For this cycle we benchmarked <strong>GLM 5.3 Flash</strong> live against the full roster. It landed at <strong>#5 of 42</strong> models (VivIndex 89.1) with perfect scores on four of its five core tracks — at a run cost of about a penny.</p>
+          <h2><span id="featureModel">GLM 5.3 Flash</span> — <em><span id="featureRank">#5</span> <span id="featureOf">of 73</span></em> on VivIndex</h2>
+          <p>For this cycle we benchmarked <strong id="featureModelCopy">GLM 5.3 Flash</strong> live against the full roster. It landed at <strong><span id="featureRankCopy">#5</span> of <span id="featureOfCopy">73</span></strong> models (VivIndex <span id="featureScore">89.1</span>) with perfect scores on four of its five core tracks — at a run cost of about a penny.</p>
           <ul class="feature-list">
             <li><strong>Agentic Tool Use:</strong> 100 · <strong>Long-Context Reasoning:</strong> 100 · <strong>Startup:</strong> 100 · <strong>Value Density @1K:</strong> 100</li>
             <li><strong>Intent:</strong> 82 · <strong>One-Shot UI:</strong> 66</li>
             <li><strong>Pharma DDI:</strong> 85 · <strong>Pharma Regulatory:</strong> 85 · <strong>Reverse-Prompt Vision:</strong> skipped (no vision — not penalized)</li>
             <li><strong>Run cost:</strong> ~$0.01 across all tracks — best cost-per-point on the board.</li>
           </ul>
-          <div class="feature-chart">
-            <button type="button" class="img-zoom" data-full="data/leaderboard_chart.svg?v=2" data-caption="VivIndex leaderboard chart">
-              <img src="data/leaderboard_chart.svg?v=2" alt="VivIndex leaderboard chart" class="feature-img" />
-              <span class="img-zoom-hint">Tap to zoom</span>
-            </button>
-          </div>
         </div>
       </div>
     </div>
@@ -165,12 +159,12 @@
     <div class="container">
       <div class="bento">
         <div class="stat">
-          <div class="stat-value" id="statModels">42</div>
+          <div class="stat-value" id="statModels">73</div>
           <div class="stat-label">Models evaluated</div>
         </div>
         <div class="stat">
-          <div class="stat-value" id="statBenchmarks">9</div>
-          <div class="stat-label">Benchmark tracks</div>
+          <div class="stat-value" id="statBenchmarks">7</div>
+          <div class="stat-label">Active tracks</div>
         </div>
         <div class="stat">
           <div class="stat-value" id="statRuns">—</div>
@@ -182,7 +176,7 @@
         </div>
         <div class="stat">
           <div class="stat-value">$<span id="statCost">0.62</span></div>
-          <div class="stat-label">Est. cost per full run</div>
+          <div class="stat-label">Avg. cost per full run</div>
         </div>
       </div>
     </div>
@@ -205,8 +199,8 @@
   <section id="tracks">
     <div class="container">
       <div class="section-head">
-        <h2>Seven useful evaluation dimensions</h2>
-        <p>Every lane explains what is tested, why it matters, and what a strong result looks like.</p>
+        <h2>Seven core dimensions. Two live experiments.</h2>
+        <p>Each lane explains what is tested, why it matters, and what a strong result looks like. Agentic tool use and long-context reasoning are experimental top-10 tracks, listed with their real coverage below.</p>
         <p class="section-sub"><a href="vision.html">Open Vision gallery</a> for the reverse-prompt source image, full prompts, checklist, and every reconstruction.</p>
       </div>
       <div class="bench-grid">
@@ -285,6 +279,27 @@
     </div>
   </section>
 
+  <section id="track-coverage">
+    <div class="container">
+      <div class="section-head">
+        <h2>Every track, and how much of the roster it actually covers</h2>
+        <p>Experimental tracks run on a top-10 subset, and non-vision models are skipped on the reverse-prompt lane. Coverage is published here so a partial score is never read as a full one.</p>
+      </div>
+      <div class="coverage-grid" id="trackCoverageGrid"></div>
+    </div>
+    <style>
+      .coverage-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}
+      .coverage-card{background:var(--surface,#fff);border:1px solid var(--rule,rgba(26,26,46,.1));border-radius:14px;padding:1rem 1.1rem;box-shadow:var(--shadow,0 10px 30px -18px rgba(18,18,26,.28))}
+      .coverage-card h3{font-size:.98rem;margin:0 0 .35rem}
+      .coverage-card p{font-size:.8rem;line-height:1.45;color:var(--text-dim,rgba(26,26,46,.7));margin:.45rem 0 0}
+      .coverage-badges{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.1rem}
+      .coverage-badge{font:600 .66rem var(--font-mono,"JetBrains Mono",monospace);text-transform:uppercase;letter-spacing:.06em;padding:.22rem .5rem;border-radius:999px;background:rgba(0,90,200,.09);color:#0a4fae}
+      .coverage-badge--partial{background:rgba(249,115,22,.13);color:#a34a0d}
+      .coverage-badge--retired{background:rgba(90,90,110,.12);color:#555}
+      .coverage-badge--exp{background:rgba(0,194,168,.14);color:#00695c}
+    </style>
+  </section>
+
   <section id="track-leaders">
     <div class="container">
       <div class="section-head">
@@ -316,18 +331,15 @@
 
       <div class="charts-grid">
         <div class="chart-card reveal">
-          <h3>Average score by model</h3>
-          <div class="chart-wrap"><canvas id="leaderboardChart"></canvas></div>
-        </div>
-        <div class="chart-card reveal">
           <h3>VivIndex vs. cost per run</h3>
+          <p class="chart-note">Cheaper is left, better is up. The scatter is the whole cost-performance story; scroll on for speed, value density and vision fidelity.</p>
           <div class="chart-wrap"><canvas id="costValueChart"></canvas></div>
         </div>
       </div>
 
       <div class="chart-card chart-card-wide reveal">
         <h3>Score by benchmark track</h3>
-        <p class="chart-note">A grouped view makes strengths and failure modes visible without a dense results table.</p>
+        <p class="chart-note">A grouped view makes strengths and failure modes visible without a dense results table. Charts show the current model selection; the board below always shows every model.</p>
         <div class="chart-wrap chart-wrap-xl"><canvas id="benchmarkChart"></canvas></div>
       </div>
     </div>
@@ -379,7 +391,7 @@
     <div class="container">
       <div class="section-head">
         <h2>All models, one glance</h2>
-        <p>Search, filter by company, and sort. Tap any card for its full profile.</p>
+        <p><span id="boardCountLabel">Every model in the roster</span>. Search, filter by company, and sort. Tap any card for its full profile.</p>
       </div>
       <div class="board-tools">
         <input class="board-search" id="modelSearch" type="search" placeholder="Search model or company…" aria-label="Search models" autocomplete="off" />
@@ -392,6 +404,7 @@
         <select class="board-provider" id="providerFilter" aria-label="Filter by company">
           <option value="all">All companies</option>
         </select>
+        <button class="board-limit" id="boardLimitToggle" type="button" aria-pressed="false">Show top 15</button>
         <span class="board-count" id="modelCount"></span>
       </div>
       <div class="board-chips" id="providerChips" role="group" aria-label="Filter by company"></div>
@@ -457,26 +470,39 @@
 
   <a href="#comparison" class="board-jump" id="boardJump" aria-hidden="true" tabindex="-1">↓ Model board</a>
 
-  <script src="assets/app.js?v=14"></script>
+  <script src="assets/app.js?v=15"></script>
   <script>
     (function () {
-      var host = document.getElementById("trackLeadersGrid");
-      if (!host) return;
-      fetch("data/results.json", { cache: "no-store" }).then(function (r) { return r.json(); }).then(function (d) {
-        var models = {}, bnames = {};
+      var leadersHost = document.getElementById("trackLeadersGrid");
+      var coverageHost = document.getElementById("trackCoverageGrid");
+      if (!leadersHost && !coverageHost) return;
+      fetch("data/results-lite.json", { cache: "no-store" }).then(function (r) { return r.json(); }).then(function (d) {
+        var models = {}, best = {};
         (d.models || []).forEach(function (m) { models[m.id] = m.display; });
-        (d.benchmarks || []).forEach(function (b) { bnames[b.id] = b.name; });
-        var best = {};
         (d.results || []).forEach(function (row) {
-          if (row.status !== "ok" || row.score == null) return;
+          if (String(row.status || "ok").toLowerCase() !== "ok" || row.score == null) return;
           var b = row.benchmark_id;
           if (!best[b] || row.score > best[b].score) best[b] = { score: row.score, model: row.model_id };
         });
-        host.innerHTML = (d.benchmarks || []).map(function (b) {
-          var L = best[b.id]; if (!L) return "";
-          var nm = models[L.model] || L.model;
-          return '<div class="tl-card"><div class="tl-track">' + b.name + '</div><div class="tl-leader">' + nm + ' <b>' + L.score + '</b></div></div>';
-        }).join("");
+        var tracks = d.benchmarks || [];
+        if (leadersHost) {
+          leadersHost.innerHTML = tracks.filter(function (b) { return !b.retired; }).map(function (b) {
+            var L = best[b.id]; if (!L) return "";
+            var nm = models[L.model] || L.model;
+            var badge = b.coverage === "partial" ? '<span class="coverage-badge coverage-badge--partial">' + b.scoredRuns + "/" + (d.models || []).length + ' models</span>' : "";
+            return '<div class="tl-card"><div class="tl-track">' + b.name + "</div><div class=\"tl-leader\">" + nm + " <b>" + L.score + "</b></div>" + badge + "</div>";
+          }).join("");
+        }
+        if (coverageHost) {
+          coverageHost.innerHTML = tracks.map(function (b) {
+            var cls = b.retired ? "coverage-badge--retired" : b.kind === "experimental" ? "coverage-badge--exp" : b.coverage === "partial" ? "coverage-badge--partial" : "";
+            var label = b.retired ? "retired" : b.kind === "experimental" ? "experimental" : b.kind === "domain" ? "domain" : "core";
+            var weight = b.in_vivindex ? "VivIndex " + Math.round((b.weight || 0) * 100) + "%" : "not in VivIndex";
+            return '<article class="coverage-card"><div class="coverage-badges"><span class="coverage-badge ' + cls + '">' + label + "</span>" +
+              '<span class="coverage-badge">' + b.scoredRuns + " runs</span>" +
+              '<span class="coverage-badge">' + weight + "</span></div><h3>" + b.name + "</h3><p>" + (b.description || "") + "</p></article>";
+          }).join("");
+        }
       }).catch(function () {});
     })();
   </script>
