@@ -40,7 +40,7 @@ TEMPERATURE = 0.3
 REQUEST_TIMEOUT = 600
 # Models whose default reasoning_effort is "high" and silently burn the token
 # budget (no reasoning_content); force "none" so value-density @1K can emit content.
-REASONING_EFFORT_NONE_MODELS = {"mercury-2-5", "mercury-3", "deepseek-v4-1-flash", "deepseek-v4-1-flash-1017", "grok-4-7", "openai-gpt-6-astra-pro", "openai-gpt-6-sol", "openai-gpt-6-luna", "xiaomi-mimo-v2-6-flash", "openai-gpt-61-sol", "muse-spark-open", "qwen3-6-35b-a3b", "nvidia-nemotron-3-5-super-vl-120b-a12b", "qwen3-235b-a22b-thinking-2507"}
+REASONING_EFFORT_NONE_MODELS = {"mercury-2-5", "mercury-3", "deepseek-v4-1-flash", "deepseek-v4-1-flash-1017", "grok-4-7", "openai-gpt-6-astra-pro", "openai-gpt-6-sol", "openai-gpt-6-luna", "xiaomi-mimo-v2-6-flash", "openai-gpt-61-sol", "muse-spark-open", "qwen3-6-35b-a3b", "nvidia-nemotron-3-5-super-vl-120b-a12b", "qwen3-235b-a22b-thinking-2507", "abliteration-abliterated-model-large-flash", "kimi-k3-1-pro", "kimi-k3-1-pro-highspeed"}
 
 # ---------------------------------------------------------------------------
 # Auth

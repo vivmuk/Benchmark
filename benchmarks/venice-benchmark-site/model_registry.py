@@ -80,4 +80,7 @@ MODELS = [
     {"id": "deepseek-v4-1-flash-1017",        "display": "DeepSeek V4.1 Flash 1017"},
     {"id": "mercury-3",                        "display": "Mercury 3"},
     {"id": "minimax-m3-1-flash",               "display": "MiniMax M3.1 Flash"},
+    {"id": "kimi-k3-1-pro",                    "display": "Kimi K3.1 Pro"},
+    {"id": "kimi-k3-1-pro-highspeed",          "display": "Kimi K3.1 Pro Highspeed"},
+    {"id": "abliteration-abliterated-model-large-flash", "display": "Abliterated Large Flash"},
 ]

@@ -292,6 +292,20 @@
     }
   },
   {
+    "id": "kimi-k3-1-pro",
+    "disp": "Kimi K3.1 Pro",
+    "viv": 85.4,
+    "scores": {
+      "intent-understanding": 88,
+      "one-shot-ui": 68,
+      "pharma-drug-interaction": 86,
+      "pharma-regulatory-comprehension": 82,
+      "startup-in-a-weekend": 100,
+      "value-density": 100,
+      "reverse-prompt-vision": 63
+    }
+  },
+  {
     "id": "openai-gpt-6-astra-pro",
     "disp": "GPT-6 Astra Pro",
     "viv": 85.3,
@@ -357,6 +371,20 @@
       "pharma-regulatory-comprehension": 77,
       "value-density": 100,
       "reverse-prompt-vision": 93
+    }
+  },
+  {
+    "id": "kimi-k3-1-pro-highspeed",
+    "disp": "Kimi K3.1 Pro Highspeed",
+    "viv": 84.5,
+    "scores": {
+      "intent-understanding": 88,
+      "one-shot-ui": 68,
+      "pharma-drug-interaction": 86,
+      "pharma-regulatory-comprehension": 82,
+      "startup-in-a-weekend": 94,
+      "value-density": 100,
+      "reverse-prompt-vision": 66
     }
   },
   {
@@ -773,6 +801,20 @@
       "startup-in-a-weekend": 89,
       "value-density": 100,
       "reverse-prompt-vision": 54
+    }
+  },
+  {
+    "id": "abliteration-abliterated-model-large-flash",
+    "disp": "Abliterated Large Flash",
+    "viv": 74.3,
+    "scores": {
+      "intent-understanding": 58,
+      "one-shot-ui": 68,
+      "pharma-drug-interaction": 90,
+      "pharma-regulatory-comprehension": 73,
+      "startup-in-a-weekend": 94,
+      "value-density": 100,
+      "reverse-prompt-vision": 45
     }
   },
   {
