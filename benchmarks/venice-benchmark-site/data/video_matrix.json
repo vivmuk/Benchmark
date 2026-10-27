@@ -1,0 +1,1496 @@
+{
+ "t2v_prompts": {
+  "1-cinematic": "A golden retriever running through a sunlit field of tall grass at golden hour, slow motion, cinematic depth of field, photorealistic, warm light",
+  "2-creative": "A tiny astronaut sailing a paper boat across a puddle that reflects a galaxy, whimsical miniature world, macro shot, dreamy lighting"
+ },
+ "sections": {
+  "1-cinematic": "Realism test - golden retriever at golden hour (text-to-video)",
+  "2-creative": "Creative test - tiny astronaut galaxy puddle (text-to-video)",
+  "3-motion": "Image-to-video - faithfulness + motion from the shared portrait",
+  "4-lincoln": "Reference-to-video - famous-person identity preservation (Lincoln)"
+ },
+ "i2v_prompt": "the subject slowly turns her head toward the camera and smiles, hair sways gently in the breeze, subtle camera push-in, cinematic lighting",
+ "r2v_prompt": "the person comes alive, turns toward the camera, subtle blink and expression change, photorealistic",
+ "jobs": [
+  {
+   "model": "kling-v4-text-to-video",
+   "pid": "1-cinematic",
+   "prompt": "A golden retriever running through a sunlit field of tall grass at golden hour, slow motion, cinematic depth of field, photorealistic, warm light",
+   "dur": "3s",
+   "res": "720p",
+   "est_quote": 0.59
+  },
+  {
+   "model": "kling-v4-text-to-video",
+   "pid": "2-creative",
+   "prompt": "A tiny astronaut sailing a paper boat across a puddle that reflects a galaxy, whimsical miniature world, macro shot, dreamy lighting",
+   "dur": "3s",
+   "res": "720p",
+   "est_quote": 0.59
+  },
+  {
+   "model": "kling-v4-image-to-video",
+   "pid": "3-motion",
+   "prompt": "the subject slowly turns her head toward the camera and smiles, hair sways gently in the breeze, subtle camera push-in, cinematic lighting",
+   "dur": "3s",
+   "res": "720p",
+   "image": "assets/video-benchmark/source-portrait.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "kling-v4-reference-to-video",
+   "pid": "4-lincoln",
+   "prompt": "the person comes alive, turns toward the camera, subtle blink and expression change, photorealistic",
+   "dur": "3s",
+   "res": "720p",
+   "image": "assets/video-benchmark/reference-lincoln-768.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "flux-3-max-text-to-video",
+   "pid": "1-cinematic",
+   "prompt": "A golden retriever running through a sunlit field of tall grass at golden hour, slow motion, cinematic depth of field, photorealistic, warm light",
+   "dur": "5s",
+   "res": "720p",
+   "est_quote": 0.32
+  },
+  {
+   "model": "flux-3-max-text-to-video",
+   "pid": "2-creative",
+   "prompt": "A tiny astronaut sailing a paper boat across a puddle that reflects a galaxy, whimsical miniature world, macro shot, dreamy lighting",
+   "dur": "5s",
+   "res": "720p",
+   "est_quote": 0.32
+  },
+  {
+   "model": "flux-3-max-image-to-video",
+   "pid": "3-motion",
+   "prompt": "the subject slowly turns her head toward the camera and smiles, hair sways gently in the breeze, subtle camera push-in, cinematic lighting",
+   "dur": "5s",
+   "res": "720p",
+   "image": "assets/video-benchmark/source-portrait.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "grok-imagine-1-5-lite-text-to-video",
+   "pid": "1-cinematic",
+   "prompt": "A golden retriever running through a sunlit field of tall grass at golden hour, slow motion, cinematic depth of field, photorealistic, warm light",
+   "dur": "1s",
+   "res": "480p",
+   "est_quote": 0.02
+  },
+  {
+   "model": "grok-imagine-1-5-lite-text-to-video",
+   "pid": "2-creative",
+   "prompt": "A tiny astronaut sailing a paper boat across a puddle that reflects a galaxy, whimsical miniature world, macro shot, dreamy lighting",
+   "dur": "1s",
+   "res": "480p",
+   "est_quote": 0.02
+  },
+  {
+   "model": "grok-imagine-1-5-lite-image-to-video",
+   "pid": "3-motion",
+   "prompt": "the subject slowly turns her head toward the camera and smiles, hair sways gently in the breeze, subtle camera push-in, cinematic lighting",
+   "dur": "1s",
+   "res": "480p",
+   "image": "assets/video-benchmark/source-portrait.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "seedance-2-5-us-text-to-video-private",
+   "pid": "1-cinematic",
+   "prompt": "A golden retriever running through a sunlit field of tall grass at golden hour, slow motion, cinematic depth of field, photorealistic, warm light",
+   "dur": "4s",
+   "res": "480p",
+   "est_quote": 1.16
+  },
+  {
+   "model": "seedance-2-5-us-text-to-video-private",
+   "pid": "2-creative",
+   "prompt": "A tiny astronaut sailing a paper boat across a puddle that reflects a galaxy, whimsical miniature world, macro shot, dreamy lighting",
+   "dur": "4s",
+   "res": "480p",
+   "est_quote": 1.16
+  },
+  {
+   "model": "seedance-2-5-us-image-to-video-private",
+   "pid": "3-motion",
+   "prompt": "the subject slowly turns her head toward the camera and smiles, hair sways gently in the breeze, subtle camera push-in, cinematic lighting",
+   "dur": "4s",
+   "res": "480p",
+   "image": "assets/video-benchmark/source-portrait.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "seedance-2-5-us-reference-to-video-private",
+   "pid": "4-lincoln",
+   "prompt": "the person comes alive, turns toward the camera, subtle blink and expression change, photorealistic",
+   "dur": "4s",
+   "res": "480p",
+   "image": "assets/video-benchmark/reference-lincoln-768.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "wan-3-0-pro-text-to-video",
+   "pid": "1-cinematic",
+   "prompt": "A golden retriever running through a sunlit field of tall grass at golden hour, slow motion, cinematic depth of field, photorealistic, warm light",
+   "dur": "2s",
+   "res": "1080p",
+   "est_quote": 0.47
+  },
+  {
+   "model": "wan-3-0-pro-text-to-video",
+   "pid": "2-creative",
+   "prompt": "A tiny astronaut sailing a paper boat across a puddle that reflects a galaxy, whimsical miniature world, macro shot, dreamy lighting",
+   "dur": "2s",
+   "res": "1080p",
+   "est_quote": 0.47
+  },
+  {
+   "model": "wan-3-0-pro-image-to-video",
+   "pid": "3-motion",
+   "prompt": "the subject slowly turns her head toward the camera and smiles, hair sways gently in the breeze, subtle camera push-in, cinematic lighting",
+   "dur": "2s",
+   "res": "1080p",
+   "image": "assets/video-benchmark/source-portrait.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "wan-3-0-pro-reference-to-video",
+   "pid": "4-lincoln",
+   "prompt": "the person comes alive, turns toward the camera, subtle blink and expression change, photorealistic",
+   "dur": "2s",
+   "res": "1080p",
+   "image": "assets/video-benchmark/reference-lincoln-768.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "wan-3-0-prime-pro-text-to-video",
+   "pid": "1-cinematic",
+   "prompt": "A golden retriever running through a sunlit field of tall grass at golden hour, slow motion, cinematic depth of field, photorealistic, warm light",
+   "dur": "2s",
+   "res": "1080p",
+   "est_quote": 0.66
+  },
+  {
+   "model": "wan-3-0-prime-pro-text-to-video",
+   "pid": "2-creative",
+   "prompt": "A tiny astronaut sailing a paper boat across a puddle that reflects a galaxy, whimsical miniature world, macro shot, dreamy lighting",
+   "dur": "2s",
+   "res": "1080p",
+   "est_quote": 0.66
+  },
+  {
+   "model": "wan-3-0-prime-pro-image-to-video",
+   "pid": "3-motion",
+   "prompt": "the subject slowly turns her head toward the camera and smiles, hair sways gently in the breeze, subtle camera push-in, cinematic lighting",
+   "dur": "2s",
+   "res": "1080p",
+   "image": "assets/video-benchmark/source-portrait.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "wan-3-0-prime-pro-reference-to-video",
+   "pid": "4-lincoln",
+   "prompt": "the person comes alive, turns toward the camera, subtle blink and expression change, photorealistic",
+   "dur": "2s",
+   "res": "1080p",
+   "image": "assets/video-benchmark/reference-lincoln-768.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "minimax-h3-max-turbo-text-to-video",
+   "pid": "1-cinematic",
+   "prompt": "A golden retriever running through a sunlit field of tall grass at golden hour, slow motion, cinematic depth of field, photorealistic, warm light",
+   "dur": "5s",
+   "res": "480P",
+   "est_quote": 0.1
+  },
+  {
+   "model": "minimax-h3-max-turbo-text-to-video",
+   "pid": "2-creative",
+   "prompt": "A tiny astronaut sailing a paper boat across a puddle that reflects a galaxy, whimsical miniature world, macro shot, dreamy lighting",
+   "dur": "5s",
+   "res": "480P",
+   "est_quote": 0.1
+  },
+  {
+   "model": "minimax-h3-max-turbo-image-to-video",
+   "pid": "3-motion",
+   "prompt": "the subject slowly turns her head toward the camera and smiles, hair sways gently in the breeze, subtle camera push-in, cinematic lighting",
+   "dur": "5s",
+   "res": "480P",
+   "image": "assets/video-benchmark/source-portrait.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "gemini-omni-flash-1-1-text-to-video",
+   "pid": "1-cinematic",
+   "prompt": "A golden retriever running through a sunlit field of tall grass at golden hour, slow motion, cinematic depth of field, photorealistic, warm light",
+   "dur": "4s",
+   "res": "360p",
+   "est_quote": 0.47
+  },
+  {
+   "model": "gemini-omni-flash-1-1-text-to-video",
+   "pid": "2-creative",
+   "prompt": "A tiny astronaut sailing a paper boat across a puddle that reflects a galaxy, whimsical miniature world, macro shot, dreamy lighting",
+   "dur": "4s",
+   "res": "360p",
+   "est_quote": 0.47
+  },
+  {
+   "model": "gemini-omni-flash-1-1-image-to-video",
+   "pid": "3-motion",
+   "prompt": "the subject slowly turns her head toward the camera and smiles, hair sways gently in the breeze, subtle camera push-in, cinematic lighting",
+   "dur": "4s",
+   "res": "360p",
+   "image": "assets/video-benchmark/source-portrait.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "gemini-omni-flash-1-1-reference-to-video",
+   "pid": "4-lincoln",
+   "prompt": "the person comes alive, turns toward the camera, subtle blink and expression change, photorealistic",
+   "dur": "4s",
+   "res": "360p",
+   "image": "assets/video-benchmark/reference-lincoln-768.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "minimax-h3-max-text-to-video",
+   "pid": "1-cinematic",
+   "prompt": "A golden retriever running through a sunlit field of tall grass at golden hour, slow motion, cinematic depth of field, photorealistic, warm light",
+   "dur": "5s",
+   "res": "480P",
+   "est_quote": 0.2
+  },
+  {
+   "model": "minimax-h3-max-text-to-video",
+   "pid": "2-creative",
+   "prompt": "A tiny astronaut sailing a paper boat across a puddle that reflects a galaxy, whimsical miniature world, macro shot, dreamy lighting",
+   "dur": "5s",
+   "res": "480P",
+   "est_quote": 0.2
+  },
+  {
+   "model": "minimax-h3-max-image-to-video",
+   "pid": "3-motion",
+   "prompt": "the subject slowly turns her head toward the camera and smiles, hair sways gently in the breeze, subtle camera push-in, cinematic lighting",
+   "dur": "5s",
+   "res": "480P",
+   "image": "assets/video-benchmark/source-portrait.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "minimax-h3-max-reference-to-video",
+   "pid": "4-lincoln",
+   "prompt": "the person comes alive, turns toward the camera, subtle blink and expression change, photorealistic",
+   "dur": "5s",
+   "res": "480P",
+   "image": "assets/video-benchmark/reference-lincoln-768.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "wan-3-0-prime-text-to-video",
+   "pid": "1-cinematic",
+   "prompt": "A golden retriever running through a sunlit field of tall grass at golden hour, slow motion, cinematic depth of field, photorealistic, warm light",
+   "dur": "2s",
+   "res": "480p",
+   "est_quote": 0.18
+  },
+  {
+   "model": "wan-3-0-prime-text-to-video",
+   "pid": "2-creative",
+   "prompt": "A tiny astronaut sailing a paper boat across a puddle that reflects a galaxy, whimsical miniature world, macro shot, dreamy lighting",
+   "dur": "2s",
+   "res": "480p",
+   "est_quote": 0.18
+  },
+  {
+   "model": "wan-3-0-prime-image-to-video",
+   "pid": "3-motion",
+   "prompt": "the subject slowly turns her head toward the camera and smiles, hair sways gently in the breeze, subtle camera push-in, cinematic lighting",
+   "dur": "2s",
+   "res": "480p",
+   "image": "assets/video-benchmark/source-portrait.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "wan-3-0-prime-reference-to-video",
+   "pid": "4-lincoln",
+   "prompt": "the person comes alive, turns toward the camera, subtle blink and expression change, photorealistic",
+   "dur": "2s",
+   "res": "480p",
+   "image": "assets/video-benchmark/reference-lincoln-768.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "wan-2-2-enhanced-image-to-video",
+   "pid": "3-motion",
+   "prompt": "the subject slowly turns her head toward the camera and smiles, hair sways gently in the breeze, subtle camera push-in, cinematic lighting",
+   "dur": "5s",
+   "res": "480p",
+   "image": "assets/video-benchmark/source-portrait.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "ltx-2-5-fast-image-to-video",
+   "pid": "3-motion",
+   "prompt": "the subject slowly turns her head toward the camera and smiles, hair sways gently in the breeze, subtle camera push-in, cinematic lighting",
+   "dur": "6s",
+   "res": "720p",
+   "image": "assets/video-benchmark/source-portrait.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "ltx-2-5-fast-text-to-video",
+   "pid": "1-cinematic",
+   "prompt": "A golden retriever running through a sunlit field of tall grass at golden hour, slow motion, cinematic depth of field, photorealistic, warm light",
+   "dur": "6s",
+   "res": "720p",
+   "est_quote": 0.59
+  },
+  {
+   "model": "ltx-2-5-fast-text-to-video",
+   "pid": "2-creative",
+   "prompt": "A tiny astronaut sailing a paper boat across a puddle that reflects a galaxy, whimsical miniature world, macro shot, dreamy lighting",
+   "dur": "6s",
+   "res": "720p",
+   "est_quote": 0.59
+  },
+  {
+   "model": "ltx-2-5-pro-image-to-video",
+   "pid": "3-motion",
+   "prompt": "the subject slowly turns her head toward the camera and smiles, hair sways gently in the breeze, subtle camera push-in, cinematic lighting",
+   "dur": "6s",
+   "res": "720p",
+   "image": "assets/video-benchmark/source-portrait.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "ltx-2-5-pro-text-to-video",
+   "pid": "1-cinematic",
+   "prompt": "A golden retriever running through a sunlit field of tall grass at golden hour, slow motion, cinematic depth of field, photorealistic, warm light",
+   "dur": "6s",
+   "res": "720p",
+   "est_quote": 0.79
+  },
+  {
+   "model": "ltx-2-5-pro-text-to-video",
+   "pid": "2-creative",
+   "prompt": "A tiny astronaut sailing a paper boat across a puddle that reflects a galaxy, whimsical miniature world, macro shot, dreamy lighting",
+   "dur": "6s",
+   "res": "720p",
+   "est_quote": 0.79
+  },
+  {
+   "model": "seedance-2-5-text-to-video-basic",
+   "pid": "1-cinematic",
+   "prompt": "A golden retriever running through a sunlit field of tall grass at golden hour, slow motion, cinematic depth of field, photorealistic, warm light",
+   "dur": "4s",
+   "res": "480p",
+   "est_quote": 0.51
+  },
+  {
+   "model": "seedance-2-5-text-to-video-basic",
+   "pid": "2-creative",
+   "prompt": "A tiny astronaut sailing a paper boat across a puddle that reflects a galaxy, whimsical miniature world, macro shot, dreamy lighting",
+   "dur": "4s",
+   "res": "480p",
+   "est_quote": 0.51
+  },
+  {
+   "model": "seedance-2-5-image-to-video-basic",
+   "pid": "3-motion",
+   "prompt": "the subject slowly turns her head toward the camera and smiles, hair sways gently in the breeze, subtle camera push-in, cinematic lighting",
+   "dur": "4s",
+   "res": "480p",
+   "image": "assets/video-benchmark/source-portrait.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "seedance-2-5-reference-to-video-basic",
+   "pid": "4-lincoln",
+   "prompt": "the person comes alive, turns toward the camera, subtle blink and expression change, photorealistic",
+   "dur": "4s",
+   "res": "480p",
+   "image": "assets/video-benchmark/reference-lincoln-768.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "minimax-h3-enhanced-text-to-video",
+   "pid": "1-cinematic",
+   "prompt": "A golden retriever running through a sunlit field of tall grass at golden hour, slow motion, cinematic depth of field, photorealistic, warm light",
+   "dur": "5s",
+   "res": "768P",
+   "est_quote": 0.81
+  },
+  {
+   "model": "minimax-h3-enhanced-text-to-video",
+   "pid": "2-creative",
+   "prompt": "A tiny astronaut sailing a paper boat across a puddle that reflects a galaxy, whimsical miniature world, macro shot, dreamy lighting",
+   "dur": "5s",
+   "res": "768P",
+   "est_quote": 0.81
+  },
+  {
+   "model": "minimax-h3-enhanced-reference-to-video",
+   "pid": "4-lincoln",
+   "prompt": "the person comes alive, turns toward the camera, subtle blink and expression change, photorealistic",
+   "dur": "5s",
+   "res": "768P",
+   "image": "assets/video-benchmark/reference-lincoln-768.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "flux-3-text-to-video",
+   "pid": "1-cinematic",
+   "prompt": "A golden retriever running through a sunlit field of tall grass at golden hour, slow motion, cinematic depth of field, photorealistic, warm light",
+   "dur": "5s",
+   "res": "720p",
+   "est_quote": 0.94
+  },
+  {
+   "model": "flux-3-text-to-video",
+   "pid": "2-creative",
+   "prompt": "A tiny astronaut sailing a paper boat across a puddle that reflects a galaxy, whimsical miniature world, macro shot, dreamy lighting",
+   "dur": "5s",
+   "res": "720p",
+   "est_quote": 0.94
+  },
+  {
+   "model": "flux-3-image-to-video",
+   "pid": "3-motion",
+   "prompt": "the subject slowly turns her head toward the camera and smiles, hair sways gently in the breeze, subtle camera push-in, cinematic lighting",
+   "dur": "5s",
+   "res": "720p",
+   "image": "assets/video-benchmark/source-portrait.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "wan-3-0-text-to-video",
+   "pid": "1-cinematic",
+   "prompt": "A golden retriever running through a sunlit field of tall grass at golden hour, slow motion, cinematic depth of field, photorealistic, warm light",
+   "dur": "2s",
+   "res": "480p",
+   "est_quote": 0.13
+  },
+  {
+   "model": "wan-3-0-text-to-video",
+   "pid": "2-creative",
+   "prompt": "A tiny astronaut sailing a paper boat across a puddle that reflects a galaxy, whimsical miniature world, macro shot, dreamy lighting",
+   "dur": "2s",
+   "res": "480p",
+   "est_quote": 0.13
+  },
+  {
+   "model": "wan-3-0-image-to-video",
+   "pid": "3-motion",
+   "prompt": "the subject slowly turns her head toward the camera and smiles, hair sways gently in the breeze, subtle camera push-in, cinematic lighting",
+   "dur": "2s",
+   "res": "480p",
+   "image": "assets/video-benchmark/source-portrait.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "wan-3-0-reference-to-video",
+   "pid": "4-lincoln",
+   "prompt": "the person comes alive, turns toward the camera, subtle blink and expression change, photorealistic",
+   "dur": "2s",
+   "res": "480p",
+   "image": "assets/video-benchmark/reference-lincoln-768.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "minimax-h3-text-to-video",
+   "pid": "1-cinematic",
+   "prompt": "A golden retriever running through a sunlit field of tall grass at golden hour, slow motion, cinematic depth of field, photorealistic, warm light",
+   "dur": "5s",
+   "res": "768P",
+   "est_quote": 0.81
+  },
+  {
+   "model": "minimax-h3-text-to-video",
+   "pid": "2-creative",
+   "prompt": "A tiny astronaut sailing a paper boat across a puddle that reflects a galaxy, whimsical miniature world, macro shot, dreamy lighting",
+   "dur": "5s",
+   "res": "768P",
+   "est_quote": 0.81
+  },
+  {
+   "model": "minimax-h3-image-to-video",
+   "pid": "3-motion",
+   "prompt": "the subject slowly turns her head toward the camera and smiles, hair sways gently in the breeze, subtle camera push-in, cinematic lighting",
+   "dur": "5s",
+   "res": "768P",
+   "image": "assets/video-benchmark/source-portrait.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "minimax-h3-reference-to-video",
+   "pid": "4-lincoln",
+   "prompt": "the person comes alive, turns toward the camera, subtle blink and expression change, photorealistic",
+   "dur": "5s",
+   "res": "768P",
+   "image": "assets/video-benchmark/reference-lincoln-768.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "grok-imagine-1-5-reference-to-video-private",
+   "pid": "4-lincoln",
+   "prompt": "the person comes alive, turns toward the camera, subtle blink and expression change, photorealistic",
+   "dur": "1s",
+   "res": "480p",
+   "image": "assets/video-benchmark/reference-lincoln-768.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "gemini-omni-flash-text-to-video",
+   "pid": "1-cinematic",
+   "prompt": "A golden retriever running through a sunlit field of tall grass at golden hour, slow motion, cinematic depth of field, photorealistic, warm light",
+   "dur": "4s",
+   "res": null,
+   "est_quote": 0.55
+  },
+  {
+   "model": "gemini-omni-flash-text-to-video",
+   "pid": "2-creative",
+   "prompt": "A tiny astronaut sailing a paper boat across a puddle that reflects a galaxy, whimsical miniature world, macro shot, dreamy lighting",
+   "dur": "4s",
+   "res": null,
+   "est_quote": 0.55
+  },
+  {
+   "model": "gemini-omni-flash-image-to-video",
+   "pid": "3-motion",
+   "prompt": "the subject slowly turns her head toward the camera and smiles, hair sways gently in the breeze, subtle camera push-in, cinematic lighting",
+   "dur": "4s",
+   "res": null,
+   "image": "assets/video-benchmark/source-portrait.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "gemini-omni-flash-reference-to-video",
+   "pid": "4-lincoln",
+   "prompt": "the person comes alive, turns toward the camera, subtle blink and expression change, photorealistic",
+   "dur": "4s",
+   "res": null,
+   "image": "assets/video-benchmark/reference-lincoln-768.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "seedance-2-0-mini-text-to-video-basic",
+   "pid": "1-cinematic",
+   "prompt": "A golden retriever running through a sunlit field of tall grass at golden hour, slow motion, cinematic depth of field, photorealistic, warm light",
+   "dur": "4s",
+   "res": "480p",
+   "est_quote": 0.18
+  },
+  {
+   "model": "seedance-2-0-mini-text-to-video-basic",
+   "pid": "2-creative",
+   "prompt": "A tiny astronaut sailing a paper boat across a puddle that reflects a galaxy, whimsical miniature world, macro shot, dreamy lighting",
+   "dur": "4s",
+   "res": "480p",
+   "est_quote": 0.18
+  },
+  {
+   "model": "seedance-2-0-mini-image-to-video-basic",
+   "pid": "3-motion",
+   "prompt": "the subject slowly turns her head toward the camera and smiles, hair sways gently in the breeze, subtle camera push-in, cinematic lighting",
+   "dur": "4s",
+   "res": "480p",
+   "image": "assets/video-benchmark/source-portrait.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "seedance-2-0-mini-reference-to-video-basic",
+   "pid": "4-lincoln",
+   "prompt": "the person comes alive, turns toward the camera, subtle blink and expression change, photorealistic",
+   "dur": "4s",
+   "res": "480p",
+   "image": "assets/video-benchmark/reference-lincoln-768.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "happyhorse-1-1-text-to-video",
+   "pid": "1-cinematic",
+   "prompt": "A golden retriever running through a sunlit field of tall grass at golden hour, slow motion, cinematic depth of field, photorealistic, warm light",
+   "dur": "3s",
+   "res": "720p",
+   "est_quote": 0.46
+  },
+  {
+   "model": "happyhorse-1-1-text-to-video",
+   "pid": "2-creative",
+   "prompt": "A tiny astronaut sailing a paper boat across a puddle that reflects a galaxy, whimsical miniature world, macro shot, dreamy lighting",
+   "dur": "3s",
+   "res": "720p",
+   "est_quote": 0.46
+  },
+  {
+   "model": "happyhorse-1-1-image-to-video",
+   "pid": "3-motion",
+   "prompt": "the subject slowly turns her head toward the camera and smiles, hair sways gently in the breeze, subtle camera push-in, cinematic lighting",
+   "dur": "3s",
+   "res": "720p",
+   "image": "assets/video-benchmark/source-portrait.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "happyhorse-1-1-reference-to-video",
+   "pid": "4-lincoln",
+   "prompt": "the person comes alive, turns toward the camera, subtle blink and expression change, photorealistic",
+   "dur": "3s",
+   "res": "720p",
+   "image": "assets/video-benchmark/reference-lincoln-768.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "kling-v3-turbo-pro-text-to-video",
+   "pid": "1-cinematic",
+   "prompt": "A golden retriever running through a sunlit field of tall grass at golden hour, slow motion, cinematic depth of field, photorealistic, warm light",
+   "dur": "3s",
+   "res": null,
+   "est_quote": 0.46
+  },
+  {
+   "model": "kling-v3-turbo-pro-text-to-video",
+   "pid": "2-creative",
+   "prompt": "A tiny astronaut sailing a paper boat across a puddle that reflects a galaxy, whimsical miniature world, macro shot, dreamy lighting",
+   "dur": "3s",
+   "res": null,
+   "est_quote": 0.46
+  },
+  {
+   "model": "kling-v3-turbo-pro-image-to-video",
+   "pid": "3-motion",
+   "prompt": "the subject slowly turns her head toward the camera and smiles, hair sways gently in the breeze, subtle camera push-in, cinematic lighting",
+   "dur": "3s",
+   "res": null,
+   "image": "assets/video-benchmark/source-portrait.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "kling-v3-turbo-standard-text-to-video",
+   "pid": "1-cinematic",
+   "prompt": "A golden retriever running through a sunlit field of tall grass at golden hour, slow motion, cinematic depth of field, photorealistic, warm light",
+   "dur": "3s",
+   "res": null,
+   "est_quote": 0.37
+  },
+  {
+   "model": "kling-v3-turbo-standard-text-to-video",
+   "pid": "2-creative",
+   "prompt": "A tiny astronaut sailing a paper boat across a puddle that reflects a galaxy, whimsical miniature world, macro shot, dreamy lighting",
+   "dur": "3s",
+   "res": null,
+   "est_quote": 0.37
+  },
+  {
+   "model": "kling-v3-turbo-standard-image-to-video",
+   "pid": "3-motion",
+   "prompt": "the subject slowly turns her head toward the camera and smiles, hair sways gently in the breeze, subtle camera push-in, cinematic lighting",
+   "dur": "3s",
+   "res": null,
+   "image": "assets/video-benchmark/source-portrait.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "wan-2-7-enhanced-text-to-video",
+   "pid": "1-cinematic",
+   "prompt": "A golden retriever running through a sunlit field of tall grass at golden hour, slow motion, cinematic depth of field, photorealistic, warm light",
+   "dur": "5s",
+   "res": "720p",
+   "est_quote": 0.64
+  },
+  {
+   "model": "wan-2-7-enhanced-text-to-video",
+   "pid": "2-creative",
+   "prompt": "A tiny astronaut sailing a paper boat across a puddle that reflects a galaxy, whimsical miniature world, macro shot, dreamy lighting",
+   "dur": "5s",
+   "res": "720p",
+   "est_quote": 0.64
+  },
+  {
+   "model": "grok-imagine-1-5-text-to-video-private",
+   "pid": "1-cinematic",
+   "prompt": "A golden retriever running through a sunlit field of tall grass at golden hour, slow motion, cinematic depth of field, photorealistic, warm light",
+   "dur": "1s",
+   "res": "480p",
+   "est_quote": 0.09
+  },
+  {
+   "model": "grok-imagine-1-5-text-to-video-private",
+   "pid": "2-creative",
+   "prompt": "A tiny astronaut sailing a paper boat across a puddle that reflects a galaxy, whimsical miniature world, macro shot, dreamy lighting",
+   "dur": "1s",
+   "res": "480p",
+   "est_quote": 0.09
+  },
+  {
+   "model": "grok-imagine-1-5-image-to-video-private",
+   "pid": "3-motion",
+   "prompt": "the subject slowly turns her head toward the camera and smiles, hair sways gently in the breeze, subtle camera push-in, cinematic lighting",
+   "dur": "1s",
+   "res": "480p",
+   "image": "assets/video-benchmark/source-portrait.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "wan-2-7-enhanced-image-to-video",
+   "pid": "3-motion",
+   "prompt": "the subject slowly turns her head toward the camera and smiles, hair sways gently in the breeze, subtle camera push-in, cinematic lighting",
+   "dur": "5s",
+   "res": "720p",
+   "image": "assets/video-benchmark/source-portrait.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "happyhorse-1-0-reference-to-video",
+   "pid": "4-lincoln",
+   "prompt": "the person comes alive, turns toward the camera, subtle blink and expression change, photorealistic",
+   "dur": "3s",
+   "res": "720p",
+   "image": "assets/video-benchmark/reference-lincoln-768.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "happyhorse-1-0-image-to-video",
+   "pid": "3-motion",
+   "prompt": "the subject slowly turns her head toward the camera and smiles, hair sways gently in the breeze, subtle camera push-in, cinematic lighting",
+   "dur": "3s",
+   "res": "720p",
+   "image": "assets/video-benchmark/source-portrait.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "happyhorse-1-0-text-to-video",
+   "pid": "1-cinematic",
+   "prompt": "A golden retriever running through a sunlit field of tall grass at golden hour, slow motion, cinematic depth of field, photorealistic, warm light",
+   "dur": "3s",
+   "res": "720p",
+   "est_quote": 0.46
+  },
+  {
+   "model": "happyhorse-1-0-text-to-video",
+   "pid": "2-creative",
+   "prompt": "A tiny astronaut sailing a paper boat across a puddle that reflects a galaxy, whimsical miniature world, macro shot, dreamy lighting",
+   "dur": "3s",
+   "res": "720p",
+   "est_quote": 0.46
+  },
+  {
+   "model": "kling-v3-4k-text-to-video",
+   "pid": "1-cinematic",
+   "prompt": "A golden retriever running through a sunlit field of tall grass at golden hour, slow motion, cinematic depth of field, photorealistic, warm light",
+   "dur": "3s",
+   "res": null,
+   "est_quote": 1.39
+  },
+  {
+   "model": "kling-v3-4k-text-to-video",
+   "pid": "2-creative",
+   "prompt": "A tiny astronaut sailing a paper boat across a puddle that reflects a galaxy, whimsical miniature world, macro shot, dreamy lighting",
+   "dur": "3s",
+   "res": null,
+   "est_quote": 1.39
+  },
+  {
+   "model": "kling-v3-4k-reference-to-video",
+   "pid": "4-lincoln",
+   "prompt": "the person comes alive, turns toward the camera, subtle blink and expression change, photorealistic",
+   "dur": "3s",
+   "res": null,
+   "image": "assets/video-benchmark/reference-lincoln-768.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "kling-o3-4k-text-to-video",
+   "pid": "1-cinematic",
+   "prompt": "A golden retriever running through a sunlit field of tall grass at golden hour, slow motion, cinematic depth of field, photorealistic, warm light",
+   "dur": "3s",
+   "res": null,
+   "est_quote": 1.39
+  },
+  {
+   "model": "kling-o3-4k-text-to-video",
+   "pid": "2-creative",
+   "prompt": "A tiny astronaut sailing a paper boat across a puddle that reflects a galaxy, whimsical miniature world, macro shot, dreamy lighting",
+   "dur": "3s",
+   "res": null,
+   "est_quote": 1.39
+  },
+  {
+   "model": "kling-o3-4k-image-to-video",
+   "pid": "3-motion",
+   "prompt": "the subject slowly turns her head toward the camera and smiles, hair sways gently in the breeze, subtle camera push-in, cinematic lighting",
+   "dur": "3s",
+   "res": null,
+   "image": "assets/video-benchmark/source-portrait.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "kling-o3-4k-reference-to-video",
+   "pid": "4-lincoln",
+   "prompt": "the person comes alive, turns toward the camera, subtle blink and expression change, photorealistic",
+   "dur": "3s",
+   "res": null,
+   "image": "assets/video-benchmark/reference-lincoln-768.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "grok-imagine-image-to-video-private",
+   "pid": "3-motion",
+   "prompt": "the subject slowly turns her head toward the camera and smiles, hair sways gently in the breeze, subtle camera push-in, cinematic lighting",
+   "dur": "1s",
+   "res": "480p",
+   "image": "assets/video-benchmark/source-portrait.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "grok-imagine-reference-to-video-private",
+   "pid": "4-lincoln",
+   "prompt": "the person comes alive, turns toward the camera, subtle blink and expression change, photorealistic",
+   "dur": "1s",
+   "res": "480p",
+   "image": "assets/video-benchmark/reference-lincoln-768.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "grok-imagine-text-to-video-private",
+   "pid": "1-cinematic",
+   "prompt": "A golden retriever running through a sunlit field of tall grass at golden hour, slow motion, cinematic depth of field, photorealistic, warm light",
+   "dur": "1s",
+   "res": "480p",
+   "est_quote": 0.06
+  },
+  {
+   "model": "grok-imagine-text-to-video-private",
+   "pid": "2-creative",
+   "prompt": "A tiny astronaut sailing a paper boat across a puddle that reflects a galaxy, whimsical miniature world, macro shot, dreamy lighting",
+   "dur": "1s",
+   "res": "480p",
+   "est_quote": 0.06
+  },
+  {
+   "model": "pixverse-c1-text-to-video",
+   "pid": "1-cinematic",
+   "prompt": "A golden retriever running through a sunlit field of tall grass at golden hour, slow motion, cinematic depth of field, photorealistic, warm light",
+   "dur": "3s",
+   "res": "360p",
+   "est_quote": 0.13
+  },
+  {
+   "model": "pixverse-c1-text-to-video",
+   "pid": "2-creative",
+   "prompt": "A tiny astronaut sailing a paper boat across a puddle that reflects a galaxy, whimsical miniature world, macro shot, dreamy lighting",
+   "dur": "3s",
+   "res": "360p",
+   "est_quote": 0.13
+  },
+  {
+   "model": "pixverse-c1-image-to-video",
+   "pid": "3-motion",
+   "prompt": "the subject slowly turns her head toward the camera and smiles, hair sways gently in the breeze, subtle camera push-in, cinematic lighting",
+   "dur": "3s",
+   "res": "360p",
+   "image": "assets/video-benchmark/source-portrait.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "pixverse-c1-reference-to-video",
+   "pid": "4-lincoln",
+   "prompt": "the person comes alive, turns toward the camera, subtle blink and expression change, photorealistic",
+   "dur": "3s",
+   "res": "360p",
+   "image": "assets/video-benchmark/reference-lincoln-768.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "wan-2-7-text-to-video",
+   "pid": "1-cinematic",
+   "prompt": "A golden retriever running through a sunlit field of tall grass at golden hour, slow motion, cinematic depth of field, photorealistic, warm light",
+   "dur": "5s",
+   "res": "720p",
+   "est_quote": 0.55
+  },
+  {
+   "model": "wan-2-7-text-to-video",
+   "pid": "2-creative",
+   "prompt": "A tiny astronaut sailing a paper boat across a puddle that reflects a galaxy, whimsical miniature world, macro shot, dreamy lighting",
+   "dur": "5s",
+   "res": "720p",
+   "est_quote": 0.55
+  },
+  {
+   "model": "wan-2-7-image-to-video",
+   "pid": "3-motion",
+   "prompt": "the subject slowly turns her head toward the camera and smiles, hair sways gently in the breeze, subtle camera push-in, cinematic lighting",
+   "dur": "5s",
+   "res": "720p",
+   "image": "assets/video-benchmark/source-portrait.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "wan-2-7-reference-to-video",
+   "pid": "4-lincoln",
+   "prompt": "the person comes alive, turns toward the camera, subtle blink and expression change, photorealistic",
+   "dur": "5s",
+   "res": "720p",
+   "image": "assets/video-benchmark/reference-lincoln-768.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "seedance-2-0-fast-text-to-video-basic",
+   "pid": "1-cinematic",
+   "prompt": "A golden retriever running through a sunlit field of tall grass at golden hour, slow motion, cinematic depth of field, photorealistic, warm light",
+   "dur": "4s",
+   "res": "480p",
+   "est_quote": 0.28
+  },
+  {
+   "model": "seedance-2-0-fast-text-to-video-basic",
+   "pid": "2-creative",
+   "prompt": "A tiny astronaut sailing a paper boat across a puddle that reflects a galaxy, whimsical miniature world, macro shot, dreamy lighting",
+   "dur": "4s",
+   "res": "480p",
+   "est_quote": 0.28
+  },
+  {
+   "model": "seedance-2-0-fast-image-to-video-basic",
+   "pid": "3-motion",
+   "prompt": "the subject slowly turns her head toward the camera and smiles, hair sways gently in the breeze, subtle camera push-in, cinematic lighting",
+   "dur": "4s",
+   "res": "480p",
+   "image": "assets/video-benchmark/source-portrait.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "seedance-2-0-fast-reference-to-video-basic",
+   "pid": "4-lincoln",
+   "prompt": "the person comes alive, turns toward the camera, subtle blink and expression change, photorealistic",
+   "dur": "4s",
+   "res": "480p",
+   "image": "assets/video-benchmark/reference-lincoln-768.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "seedance-2-0-text-to-video-basic",
+   "pid": "1-cinematic",
+   "prompt": "A golden retriever running through a sunlit field of tall grass at golden hour, slow motion, cinematic depth of field, photorealistic, warm light",
+   "dur": "4s",
+   "res": "480p",
+   "est_quote": 0.76
+  },
+  {
+   "model": "seedance-2-0-text-to-video-basic",
+   "pid": "2-creative",
+   "prompt": "A tiny astronaut sailing a paper boat across a puddle that reflects a galaxy, whimsical miniature world, macro shot, dreamy lighting",
+   "dur": "4s",
+   "res": "480p",
+   "est_quote": 0.76
+  },
+  {
+   "model": "seedance-2-0-image-to-video-basic",
+   "pid": "3-motion",
+   "prompt": "the subject slowly turns her head toward the camera and smiles, hair sways gently in the breeze, subtle camera push-in, cinematic lighting",
+   "dur": "4s",
+   "res": "480p",
+   "image": "assets/video-benchmark/source-portrait.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "seedance-2-0-reference-to-video-basic",
+   "pid": "4-lincoln",
+   "prompt": "the person comes alive, turns toward the camera, subtle blink and expression change, photorealistic",
+   "dur": "4s",
+   "res": "480p",
+   "image": "assets/video-benchmark/reference-lincoln-768.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "seedance-1-5-pro-text-to-video-basic",
+   "pid": "1-cinematic",
+   "prompt": "A golden retriever running through a sunlit field of tall grass at golden hour, slow motion, cinematic depth of field, photorealistic, warm light",
+   "dur": "4s",
+   "res": "480p",
+   "est_quote": 0.1
+  },
+  {
+   "model": "seedance-1-5-pro-text-to-video-basic",
+   "pid": "2-creative",
+   "prompt": "A tiny astronaut sailing a paper boat across a puddle that reflects a galaxy, whimsical miniature world, macro shot, dreamy lighting",
+   "dur": "4s",
+   "res": "480p",
+   "est_quote": 0.1
+  },
+  {
+   "model": "seedance-1-5-pro-image-to-video-basic",
+   "pid": "3-motion",
+   "prompt": "the subject slowly turns her head toward the camera and smiles, hair sways gently in the breeze, subtle camera push-in, cinematic lighting",
+   "dur": "4s",
+   "res": "480p",
+   "image": "assets/video-benchmark/source-portrait.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "kling-o3-standard-reference-to-video",
+   "pid": "4-lincoln",
+   "prompt": "the person comes alive, turns toward the camera, subtle blink and expression change, photorealistic",
+   "dur": "3s",
+   "res": null,
+   "image": "assets/video-benchmark/reference-lincoln-768.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "kling-o3-pro-reference-to-video",
+   "pid": "4-lincoln",
+   "prompt": "the person comes alive, turns toward the camera, subtle blink and expression change, photorealistic",
+   "dur": "3s",
+   "res": null,
+   "image": "assets/video-benchmark/reference-lincoln-768.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "ltx-2-v2-3-fast-image-to-video",
+   "pid": "3-motion",
+   "prompt": "the subject slowly turns her head toward the camera and smiles, hair sways gently in the breeze, subtle camera push-in, cinematic lighting",
+   "dur": "6s",
+   "res": "1080p",
+   "image": "assets/video-benchmark/source-portrait.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "ltx-2-v2-3-fast-text-to-video",
+   "pid": "1-cinematic",
+   "prompt": "A golden retriever running through a sunlit field of tall grass at golden hour, slow motion, cinematic depth of field, photorealistic, warm light",
+   "dur": "6s",
+   "res": "1080p",
+   "est_quote": 0.4
+  },
+  {
+   "model": "ltx-2-v2-3-fast-text-to-video",
+   "pid": "2-creative",
+   "prompt": "A tiny astronaut sailing a paper boat across a puddle that reflects a galaxy, whimsical miniature world, macro shot, dreamy lighting",
+   "dur": "6s",
+   "res": "1080p",
+   "est_quote": 0.4
+  },
+  {
+   "model": "ltx-2-v2-3-full-image-to-video",
+   "pid": "3-motion",
+   "prompt": "the subject slowly turns her head toward the camera and smiles, hair sways gently in the breeze, subtle camera push-in, cinematic lighting",
+   "dur": "6s",
+   "res": "1080p",
+   "image": "assets/video-benchmark/source-portrait.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "ltx-2-v2-3-full-text-to-video",
+   "pid": "1-cinematic",
+   "prompt": "A golden retriever running through a sunlit field of tall grass at golden hour, slow motion, cinematic depth of field, photorealistic, warm light",
+   "dur": "6s",
+   "res": "1080p",
+   "est_quote": 0.53
+  },
+  {
+   "model": "ltx-2-v2-3-full-text-to-video",
+   "pid": "2-creative",
+   "prompt": "A tiny astronaut sailing a paper boat across a puddle that reflects a galaxy, whimsical miniature world, macro shot, dreamy lighting",
+   "dur": "6s",
+   "res": "1080p",
+   "est_quote": 0.53
+  },
+  {
+   "model": "kling-o3-pro-text-to-video",
+   "pid": "1-cinematic",
+   "prompt": "A golden retriever running through a sunlit field of tall grass at golden hour, slow motion, cinematic depth of field, photorealistic, warm light",
+   "dur": "3s",
+   "res": null,
+   "est_quote": 0.46
+  },
+  {
+   "model": "kling-o3-pro-text-to-video",
+   "pid": "2-creative",
+   "prompt": "A tiny astronaut sailing a paper boat across a puddle that reflects a galaxy, whimsical miniature world, macro shot, dreamy lighting",
+   "dur": "3s",
+   "res": null,
+   "est_quote": 0.46
+  },
+  {
+   "model": "kling-o3-pro-image-to-video",
+   "pid": "3-motion",
+   "prompt": "the subject slowly turns her head toward the camera and smiles, hair sways gently in the breeze, subtle camera push-in, cinematic lighting",
+   "dur": "3s",
+   "res": null,
+   "image": "assets/video-benchmark/source-portrait.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "kling-o3-standard-text-to-video",
+   "pid": "1-cinematic",
+   "prompt": "A golden retriever running through a sunlit field of tall grass at golden hour, slow motion, cinematic depth of field, photorealistic, warm light",
+   "dur": "3s",
+   "res": null,
+   "est_quote": 0.37
+  },
+  {
+   "model": "kling-o3-standard-text-to-video",
+   "pid": "2-creative",
+   "prompt": "A tiny astronaut sailing a paper boat across a puddle that reflects a galaxy, whimsical miniature world, macro shot, dreamy lighting",
+   "dur": "3s",
+   "res": null,
+   "est_quote": 0.37
+  },
+  {
+   "model": "kling-o3-standard-image-to-video",
+   "pid": "3-motion",
+   "prompt": "the subject slowly turns her head toward the camera and smiles, hair sways gently in the breeze, subtle camera push-in, cinematic lighting",
+   "dur": "3s",
+   "res": null,
+   "image": "assets/video-benchmark/source-portrait.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "kling-v3-pro-text-to-video",
+   "pid": "1-cinematic",
+   "prompt": "A golden retriever running through a sunlit field of tall grass at golden hour, slow motion, cinematic depth of field, photorealistic, warm light",
+   "dur": "3s",
+   "res": null,
+   "est_quote": 0.55
+  },
+  {
+   "model": "kling-v3-pro-text-to-video",
+   "pid": "2-creative",
+   "prompt": "A tiny astronaut sailing a paper boat across a puddle that reflects a galaxy, whimsical miniature world, macro shot, dreamy lighting",
+   "dur": "3s",
+   "res": null,
+   "est_quote": 0.55
+  },
+  {
+   "model": "kling-v3-pro-image-to-video",
+   "pid": "3-motion",
+   "prompt": "the subject slowly turns her head toward the camera and smiles, hair sways gently in the breeze, subtle camera push-in, cinematic lighting",
+   "dur": "3s",
+   "res": null,
+   "image": "assets/video-benchmark/source-portrait.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "kling-v3-standard-text-to-video",
+   "pid": "1-cinematic",
+   "prompt": "A golden retriever running through a sunlit field of tall grass at golden hour, slow motion, cinematic depth of field, photorealistic, warm light",
+   "dur": "3s",
+   "res": null,
+   "est_quote": 0.42
+  },
+  {
+   "model": "kling-v3-standard-text-to-video",
+   "pid": "2-creative",
+   "prompt": "A tiny astronaut sailing a paper boat across a puddle that reflects a galaxy, whimsical miniature world, macro shot, dreamy lighting",
+   "dur": "3s",
+   "res": null,
+   "est_quote": 0.42
+  },
+  {
+   "model": "kling-v3-standard-image-to-video",
+   "pid": "3-motion",
+   "prompt": "the subject slowly turns her head toward the camera and smiles, hair sways gently in the breeze, subtle camera push-in, cinematic lighting",
+   "dur": "3s",
+   "res": null,
+   "image": "assets/video-benchmark/source-portrait.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "vidu-q3-text-to-video",
+   "pid": "1-cinematic",
+   "prompt": "A golden retriever running through a sunlit field of tall grass at golden hour, slow motion, cinematic depth of field, photorealistic, warm light",
+   "dur": "3s",
+   "res": "360p",
+   "est_quote": 0.27
+  },
+  {
+   "model": "vidu-q3-text-to-video",
+   "pid": "2-creative",
+   "prompt": "A tiny astronaut sailing a paper boat across a puddle that reflects a galaxy, whimsical miniature world, macro shot, dreamy lighting",
+   "dur": "3s",
+   "res": "360p",
+   "est_quote": 0.27
+  },
+  {
+   "model": "vidu-q3-image-to-video",
+   "pid": "3-motion",
+   "prompt": "the subject slowly turns her head toward the camera and smiles, hair sways gently in the breeze, subtle camera push-in, cinematic lighting",
+   "dur": "3s",
+   "res": "360p",
+   "image": "assets/video-benchmark/source-portrait.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "pixverse-v5.6-text-to-video",
+   "pid": "1-cinematic",
+   "prompt": "A golden retriever running through a sunlit field of tall grass at golden hour, slow motion, cinematic depth of field, photorealistic, warm light",
+   "dur": "5s",
+   "res": "360p",
+   "est_quote": 1.01
+  },
+  {
+   "model": "pixverse-v5.6-text-to-video",
+   "pid": "2-creative",
+   "prompt": "A tiny astronaut sailing a paper boat across a puddle that reflects a galaxy, whimsical miniature world, macro shot, dreamy lighting",
+   "dur": "5s",
+   "res": "360p",
+   "est_quote": 1.01
+  },
+  {
+   "model": "pixverse-v5.6-image-to-video",
+   "pid": "3-motion",
+   "prompt": "the subject slowly turns her head toward the camera and smiles, hair sways gently in the breeze, subtle camera push-in, cinematic lighting",
+   "dur": "5s",
+   "res": "360p",
+   "image": "assets/video-benchmark/source-portrait.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "wan-2.6-flash-image-to-video",
+   "pid": "3-motion",
+   "prompt": "the subject slowly turns her head toward the camera and smiles, hair sways gently in the breeze, subtle camera push-in, cinematic lighting",
+   "dur": "5s",
+   "res": "720p",
+   "image": "assets/video-benchmark/source-portrait.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "wan-2.6-image-to-video",
+   "pid": "3-motion",
+   "prompt": "the subject slowly turns her head toward the camera and smiles, hair sways gently in the breeze, subtle camera push-in, cinematic lighting",
+   "dur": "5s",
+   "res": "720p",
+   "image": "assets/video-benchmark/source-portrait.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "wan-2.6-text-to-video",
+   "pid": "1-cinematic",
+   "prompt": "A golden retriever running through a sunlit field of tall grass at golden hour, slow motion, cinematic depth of field, photorealistic, warm light",
+   "dur": "5s",
+   "res": "720p",
+   "est_quote": 0.55
+  },
+  {
+   "model": "wan-2.6-text-to-video",
+   "pid": "2-creative",
+   "prompt": "A tiny astronaut sailing a paper boat across a puddle that reflects a galaxy, whimsical miniature world, macro shot, dreamy lighting",
+   "dur": "5s",
+   "res": "720p",
+   "est_quote": 0.55
+  },
+  {
+   "model": "longcat-distilled-image-to-video",
+   "pid": "3-motion",
+   "prompt": "the subject slowly turns her head toward the camera and smiles, hair sways gently in the breeze, subtle camera push-in, cinematic lighting",
+   "dur": "5s",
+   "res": "720p",
+   "image": "assets/video-benchmark/source-portrait.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "longcat-distilled-text-to-video",
+   "pid": "1-cinematic",
+   "prompt": "A golden retriever running through a sunlit field of tall grass at golden hour, slow motion, cinematic depth of field, photorealistic, warm light",
+   "dur": "5s",
+   "res": "720p",
+   "est_quote": 0.09
+  },
+  {
+   "model": "longcat-distilled-text-to-video",
+   "pid": "2-creative",
+   "prompt": "A tiny astronaut sailing a paper boat across a puddle that reflects a galaxy, whimsical miniature world, macro shot, dreamy lighting",
+   "dur": "5s",
+   "res": "720p",
+   "est_quote": 0.09
+  },
+  {
+   "model": "longcat-image-to-video",
+   "pid": "3-motion",
+   "prompt": "the subject slowly turns her head toward the camera and smiles, hair sways gently in the breeze, subtle camera push-in, cinematic lighting",
+   "dur": "5s",
+   "res": "720p",
+   "image": "assets/video-benchmark/source-portrait.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "longcat-text-to-video",
+   "pid": "1-cinematic",
+   "prompt": "A golden retriever running through a sunlit field of tall grass at golden hour, slow motion, cinematic depth of field, photorealistic, warm light",
+   "dur": "5s",
+   "res": "720p",
+   "est_quote": 0.25
+  },
+  {
+   "model": "longcat-text-to-video",
+   "pid": "2-creative",
+   "prompt": "A tiny astronaut sailing a paper boat across a puddle that reflects a galaxy, whimsical miniature world, macro shot, dreamy lighting",
+   "dur": "5s",
+   "res": "720p",
+   "est_quote": 0.25
+  },
+  {
+   "model": "wan-2.5-preview-image-to-video",
+   "pid": "3-motion",
+   "prompt": "the subject slowly turns her head toward the camera and smiles, hair sways gently in the breeze, subtle camera push-in, cinematic lighting",
+   "dur": "5s",
+   "res": "480p",
+   "image": "assets/video-benchmark/source-portrait.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "wan-2.5-preview-text-to-video",
+   "pid": "1-cinematic",
+   "prompt": "A golden retriever running through a sunlit field of tall grass at golden hour, slow motion, cinematic depth of field, photorealistic, warm light",
+   "dur": "5s",
+   "res": "480p",
+   "est_quote": 0.28
+  },
+  {
+   "model": "wan-2.5-preview-text-to-video",
+   "pid": "2-creative",
+   "prompt": "A tiny astronaut sailing a paper boat across a puddle that reflects a galaxy, whimsical miniature world, macro shot, dreamy lighting",
+   "dur": "5s",
+   "res": "480p",
+   "est_quote": 0.28
+  },
+  {
+   "model": "ovi-image-to-video",
+   "pid": "3-motion",
+   "prompt": "the subject slowly turns her head toward the camera and smiles, hair sways gently in the breeze, subtle camera push-in, cinematic lighting",
+   "dur": "5s",
+   "res": null,
+   "image": "assets/video-benchmark/source-portrait.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "kling-2.5-turbo-pro-text-to-video",
+   "pid": "1-cinematic",
+   "prompt": "A golden retriever running through a sunlit field of tall grass at golden hour, slow motion, cinematic depth of field, photorealistic, warm light",
+   "dur": "5s",
+   "res": null,
+   "est_quote": 0.39
+  },
+  {
+   "model": "kling-2.5-turbo-pro-text-to-video",
+   "pid": "2-creative",
+   "prompt": "A tiny astronaut sailing a paper boat across a puddle that reflects a galaxy, whimsical miniature world, macro shot, dreamy lighting",
+   "dur": "5s",
+   "res": null,
+   "est_quote": 0.39
+  },
+  {
+   "model": "kling-2.5-turbo-pro-image-to-video",
+   "pid": "3-motion",
+   "prompt": "the subject slowly turns her head toward the camera and smiles, hair sways gently in the breeze, subtle camera push-in, cinematic lighting",
+   "dur": "5s",
+   "res": null,
+   "image": "assets/video-benchmark/source-portrait.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "kling-2.6-pro-text-to-video",
+   "pid": "1-cinematic",
+   "prompt": "A golden retriever running through a sunlit field of tall grass at golden hour, slow motion, cinematic depth of field, photorealistic, warm light",
+   "dur": "5s",
+   "res": null,
+   "est_quote": 0.77
+  },
+  {
+   "model": "kling-2.6-pro-text-to-video",
+   "pid": "2-creative",
+   "prompt": "A tiny astronaut sailing a paper boat across a puddle that reflects a galaxy, whimsical miniature world, macro shot, dreamy lighting",
+   "dur": "5s",
+   "res": null,
+   "est_quote": 0.77
+  },
+  {
+   "model": "kling-2.6-pro-image-to-video",
+   "pid": "3-motion",
+   "prompt": "the subject slowly turns her head toward the camera and smiles, hair sways gently in the breeze, subtle camera push-in, cinematic lighting",
+   "dur": "5s",
+   "res": null,
+   "image": "assets/video-benchmark/source-portrait.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "veo3.1-fast-text-to-video",
+   "pid": "1-cinematic",
+   "prompt": "A golden retriever running through a sunlit field of tall grass at golden hour, slow motion, cinematic depth of field, photorealistic, warm light",
+   "dur": "4s",
+   "res": "720p",
+   "est_quote": 0.66
+  },
+  {
+   "model": "veo3.1-fast-text-to-video",
+   "pid": "2-creative",
+   "prompt": "A tiny astronaut sailing a paper boat across a puddle that reflects a galaxy, whimsical miniature world, macro shot, dreamy lighting",
+   "dur": "4s",
+   "res": "720p",
+   "est_quote": 0.66
+  },
+  {
+   "model": "veo3.1-fast-image-to-video",
+   "pid": "3-motion",
+   "prompt": "the subject slowly turns her head toward the camera and smiles, hair sways gently in the breeze, subtle camera push-in, cinematic lighting",
+   "dur": "4s",
+   "res": "720p",
+   "image": "assets/video-benchmark/source-portrait.jpg",
+   "est_quote": null
+  },
+  {
+   "model": "veo3.1-full-text-to-video",
+   "pid": "1-cinematic",
+   "prompt": "A golden retriever running through a sunlit field of tall grass at golden hour, slow motion, cinematic depth of field, photorealistic, warm light",
+   "dur": "4s",
+   "res": "720p",
+   "est_quote": 1.76
+  },
+  {
+   "model": "veo3.1-full-text-to-video",
+   "pid": "2-creative",
+   "prompt": "A tiny astronaut sailing a paper boat across a puddle that reflects a galaxy, whimsical miniature world, macro shot, dreamy lighting",
+   "dur": "4s",
+   "res": "720p",
+   "est_quote": 1.76
+  },
+  {
+   "model": "veo3.1-full-image-to-video",
+   "pid": "3-motion",
+   "prompt": "the subject slowly turns her head toward the camera and smiles, hair sways gently in the breeze, subtle camera push-in, cinematic lighting",
+   "dur": "4s",
+   "res": "720p",
+   "image": "assets/video-benchmark/source-portrait.jpg",
+   "est_quote": null
+  }
+ ],
+ "skipped": {
+  "skip-v2v": [
+   "gemini-omni-flash-1-1-video-to-video",
+   "happyhorse-1-0-video-to-video",
+   "grok-imagine-video-to-video-private",
+   "wan-2-7-video-to-video"
+  ],
+  "skip-other": [
+   "minimax-h3-max-recast",
+   "minimax-h3-max-multi-angle",
+   "flux-3-first-last-frame-to-video",
+   "flux-3-extend-video",
+   "kling-v3-pro-motion-control",
+   "kling-v3-standard-motion-control",
+   "runway-gen4-5",
+   "runway-gen4-5-text",
+   "pixverse-c1-transition",
+   "pixverse-v5.6-transition",
+   "runway-gen4-turbo"
+  ]
+ }
+}
