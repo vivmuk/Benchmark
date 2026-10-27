@@ -776,6 +776,20 @@
     }
   },
   {
+    "id": "openai-gpt-61-terra",
+    "disp": "GPT-6.1 Terra",
+    "viv": 77.5,
+    "scores": {
+      "intent-understanding": 64,
+      "one-shot-ui": 66,
+      "pharma-drug-interaction": 81,
+      "pharma-regulatory-comprehension": 69,
+      "startup-in-a-weekend": 100,
+      "value-density": 100,
+      "reverse-prompt-vision": 49
+    }
+  },
+  {
     "id": "nvidia-nemotron-3-5-super-vl-120b-a12b",
     "disp": "Nemotron 3.5 Super VL",
     "viv": 77.2,

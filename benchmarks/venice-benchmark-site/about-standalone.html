@@ -2122,6 +2122,21 @@ button:not(.primary):hover { background: var(--md-state-hover); border-color: va
   border-radius: 10px !important;
   cursor: pointer;
 }
+.board-limit {
+  flex: 0 0 auto;
+  padding: 0.5rem 0.9rem;
+  font: 600 0.84rem var(--font-body);
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--rule-strong);
+  border-radius: 999px;
+  cursor: pointer;
+}
+.board-limit[aria-pressed="true"] {
+  color: #fff;
+  background: var(--cobalt, #0057e6);
+  border-color: transparent;
+}
 .board-count {
   font: 600 0.82rem var(--font-mono);
   color: var(--text-dim);
@@ -2426,10 +2441,12 @@ button:focus-visible {
 (() => {
   "use strict";
 
-  const DATA_URL = "data/results.json";
+  const DATA_URL = "data/results-lite.json";
 
-  // Chart tracks: 5-track VivIndex core + pharma domain tracks (pharma not in VivIndex weights).
-  const BENCHMARKS = [
+  // Chart tracks: declared by the dataset (data/results-lite.json) so a new
+  // track cannot exist in rows but stay invisible on the site. This literal is
+  // only the offline fallback and the shape every renderer expects.
+  let BENCHMARKS = [
     { id: "intent-understanding", label: "Intent Understanding" },
     { id: "one-shot-ui", label: "One-Shot UI" },
     { id: "startup-in-a-weekend", label: "Startup in a Weekend" },
@@ -2438,6 +2455,8 @@ button:focus-visible {
     { id: "value-density", label: "Value Density @1K" },
     { id: "reverse-prompt-vision", label: "Reverse-Prompt Vision" },
   ];
+  let TRACK_META = [];
+  let MODEL_PROVIDER = {};
 
   // Provider-based colors (single source: provider_colors.py). Every model in a
   // provider shares its base hue so the whole provider reads as one color.
@@ -2456,6 +2475,11 @@ button:focus-visible {
     aion:    "#F43F5E",
     inkling: "#64748B",
     xiaomi:  "#FF6900",
+    stealth: "#94A3B8",
+    inception: "#22D3EE",
+    meta:    "#0EA5E9",
+    tencent: "#2563EB",
+    community: "#A3A3A3",
     other:   "#64748B",
   };
   const PROVIDER_OF = {
@@ -2479,7 +2503,30 @@ button:focus-visible {
     "Inkling": "inkling",
   };
   function providerOf(name) {
-    return PROVIDER_OF[name] || "other";
+    if (MODEL_PROVIDER[name]) return MODEL_PROVIDER[name];
+    if (PROVIDER_OF[name]) return PROVIDER_OF[name];
+    // Last-resort inference for a model the dataset did not label. Keeping the
+    // fallback here (rather than a name allowlist) means a newly added model is
+    // coloured by its family even before the export catches up.
+    const n = String(name || "").toLowerCase();
+    if (/(gpt|openai)/.test(n)) return "openai";
+    if (/(claude|opus|sonnet|fable|haiku)/.test(n)) return "claude";
+    if (n.includes("deepseek")) return "deepseek";
+    if (n.includes("gemini")) return "gemini";
+    if (n.includes("grok")) return "grok";
+    if (n.includes("qwen")) return "qwen";
+    if (n.includes("kimi")) return "kimi";
+    if (n.includes("minimax")) return "minimax";
+    if (n.includes("glm")) return "glm";
+    if (n.includes("nemotron") || n.includes("nvidia")) return "nvidia";
+    if (n.includes("mistral")) return "mistral";
+    if (n.includes("aion")) return "aion";
+    if (n.includes("inkling")) return "inkling";
+    if (n.includes("mimo") || n.includes("xiaomi")) return "xiaomi";
+    if (n.includes("mercury")) return "inception";
+    if (n.includes("stealth")) return "stealth";
+    if (n.includes("muse")) return "meta";
+    return "other";
   }
   function modelColor(name, alpha = 1) {
     const hex = PROVIDER_COLORS[providerOf(name)] || PROVIDER_COLORS.other;
@@ -2506,6 +2553,11 @@ button:focus-visible {
     aion:     { glyph: "A",  name: "Aion Labs" },
     inkling:  { glyph: "I",  name: "Inkling" },
     xiaomi:   { glyph: "Xi", name: "Xiaomi" },
+    stealth:  { glyph: "S",  name: "Stealth" },
+    inception:{ glyph: "In", name: "Inception Labs" },
+    meta:     { glyph: "M",  name: "Meta" },
+    tencent:  { glyph: "T",  name: "Tencent" },
+    community:{ glyph: "C",  name: "Community" },
     other:    { glyph: "?",  name: "Other" },
   };
   function providerBrand(name) {
@@ -2535,6 +2587,9 @@ button:focus-visible {
     sort: { key: "score", dir: -1 },
     filter: { text: "", benchmark: "all" },
     selected: null,           // Set of model display-names shown on charts; null = all
+    selectedModels: null,     // Popover selection; charts only, never the board
+    trackMeta: [],            // declared tracks with coverage, from the export
+    totals: null,             // dataset totals
     modelList: [],            // [{model, provider, vivIndex}] for the selector
     charts: { leaderboard: null, benchmark: null, costValue: null, vivIndex: null, speed: null, latency: null, valueDensity: null, reversePrompt: null, sparklines: [] },
   };
@@ -2562,8 +2617,9 @@ button:focus-visible {
     return nums.length ? nums.reduce((a, b) => a + b, 0) / nums.length : 0;
   }
 
-  function modelAggregates(rows) {
-    if (state.selectedModels && state.selectedModels.size) {
+  function modelAggregates(rows, opts = {}) {
+    const applySelection = opts.applySelection !== false;
+    if (applySelection && state.selectedModels && state.selectedModels.size) {
       rows = rows.filter((r) => state.selectedModels.has(r.model));
     }
     let aggs = uniqueModels(rows).map((model) => {
@@ -2598,8 +2654,10 @@ button:focus-visible {
         }),
       };
     });
-    // Respect the active model selection (default = top 15). state.selected === null = show all.
-    if (state.selected && state.selected.size) {
+    // Respect the active model selection (default = top 15) for charts only.
+    // opts.applySelection === false is the model board: it always shows the
+    // full roster, even when the chart selector is narrowed.
+    if (applySelection && state.selected && state.selected.size) {
       aggs = aggs.filter((a) => state.selected.has(a.model));
     }
     return aggs.sort((a, b) => b.vivIndex - a.vivIndex);
@@ -2630,6 +2688,34 @@ button:focus-visible {
       const modelMap = Object.fromEntries((json.models || []).map((m) => [m.id, m.display]));
       const benchMap = Object.fromEntries((json.benchmarks || []).map((b) => [b.id, b.name]));
 
+      // The dataset is the source of truth for the roster, the provider of
+      // every model, and the declared track list. Renderers only read these.
+      MODEL_PROVIDER = Object.fromEntries(
+        (json.models || []).map((m) => [m.display, m.provider || "other"])
+      );
+      TRACK_META = (json.benchmarks || []).map((b) => ({
+        id: String(b.id).replace(/_/g, "-"),
+        rawId: b.id,
+        label: b.short || b.name,
+        name: b.name,
+        kind: b.kind || "core",
+        coverage: b.coverage || "full",
+        scoredRuns: b.scoredRuns || 0,
+        totalRuns: b.totalRuns || 0,
+        inVivIndex: !!b.in_vivindex,
+        retired: !!b.retired,
+      }));
+      if (TRACK_META.length) {
+        // Charts read active tracks only. Retired experiments stay declared
+        // (so their rows are never orphaned) but do not get a lane.
+        BENCHMARKS = TRACK_META.filter((t) => t.kind !== "retired").map((t) => ({
+          id: t.id,
+          label: t.label,
+        }));
+      }
+      state.totals = json.totals || null;
+      state.trackMeta = TRACK_META;
+
       const scored = json.results.filter((r) => {
         // An API timeout or other failed call is not a score of zero. Keep it
         // out of all score, latency, and cost aggregates while retaining its
@@ -2641,6 +2727,7 @@ button:focus-visible {
         attempted: json.results.length,
         scored: scored.length,
         excluded: json.results.length - scored.length,
+        skipped: json.results.filter((r) => String(r.status || "").toLowerCase() === "skipped").length,
       };
       state.data = scored.map((r) => ({
         modelId: r.model_id,
@@ -2963,7 +3050,7 @@ button:focus-visible {
     const sortKey = sortEl ? sortEl.value || "viv" : "viv";
     const provKey = provEl ? provEl.value || "all" : "all";
 
-    let aggs = modelAggregates(state.data);
+    let aggs = modelAggregates(state.data, { applySelection: false });
     // Provider filter
     if (provKey !== "all") aggs = aggs.filter((a) => providerOf(a.model) === provKey);
     // Text search across model name + provider brand name
@@ -2981,6 +3068,12 @@ button:focus-visible {
     else if (sortKey === "speed") aggs = aggs.sort((a, b) => (b.tokensPerSec || 0) - (a.tokensPerSec || 0));
     else if (sortKey === "alpha") aggs = aggs.sort((a, b) => a.model.localeCompare(b.model));
     else aggs = aggs.sort((a, b) => b.vivIndex - a.vivIndex);
+
+    // The board is exhaustive by default; the toggle keeps a short list one tap
+    // away without making the top-15 slice the only thing anyone can see.
+    const limitToggle = $("#boardLimitToggle");
+    const limited = limitToggle && limitToggle.getAttribute("aria-pressed") === "true";
+    if (limited) aggs = aggs.slice(0, 15);
 
     // Live count
     const countEl = $("#modelCount");
@@ -3132,11 +3225,13 @@ button:focus-visible {
   }
 
   function populateStats() {
-    const aggs = modelAggregates(state.data);
+    const aggs = modelAggregates(state.data, { applySelection: false });
     const top = aggs.length ? aggs.reduce((best, a) => (a.vivIndex > best.vivIndex ? a : best)) : null;
     const el = (id, v) => { const e = $(id); if (e) e.textContent = v; };
+    const activeTracks = (state.trackMeta || []).filter((t) => t.kind !== "retired");
+    const costTotal = state.totals && state.totals.estimatedCostUsd;
     el("#statModels", uniqueModels(state.data).length);
-    el("#statBenchmarks", BENCHMARKS.length);
+    el("#statBenchmarks", activeTracks.length || BENCHMARKS.length);
     el("#statRuns", `${state.runSummary.scored}/${state.runSummary.attempted}`);
     el("#statTopScore", top ? top.vivIndex.toFixed(1) : "—");
     // Average estimated full-suite cost across models with scored runs.
@@ -3148,11 +3243,32 @@ button:focus-visible {
     el("#statCost", avgSuite != null ? avgSuite.toFixed(2) : "—");
     const leader = $("#statVivLeader");
     if (leader && top) leader.textContent = top.model;
+    // Fill the narrative from the same numbers, so prose cannot drift from data.
+    const setText = (id, text) => { const e = $(id); if (e) e.textContent = text; };
+    setText("#heroModelCount", String(uniqueModels(state.data).length));
+    setText("#heroTrackCount", String(activeTracks.length || BENCHMARKS.length));
+    setText("#heroRunCount", String(state.runSummary.scored));
+    setText("#heroCostTotal", costTotal ? `$${Number(costTotal).toFixed(2)}` : "—");
+    setText("#boardCountLabel", `${aggs.length} models · all of them, not a top-15 slice`);
+    // Feature spotlight: rank is computed, never typed.
+    const feature = aggs.find((a) => /glm 5\.3 flash/i.test(a.model));
+    if (feature) {
+      const rank = aggs.filter((a) => a.vivIndex > feature.vivIndex).length + 1;
+      setText("#featureRank", `#${rank}`);
+      setText("#featureOf", `of ${aggs.length}`);
+      setText("#featureScore", feature.vivIndex.toFixed(1));
+      setText("#featureModel", feature.model);
+      setText("#featureModelCopy", feature.model);
+      setText("#featureRankCopy", `#${rank}`);
+      setText("#featureOfCopy", String(aggs.length));
+    }
     const dataNote = $("#dataNote span");
     if (dataNote) {
+      const skipped = state.runSummary.skipped || 0;
+      const errored = Math.max(0, state.runSummary.excluded - skipped);
       dataNote.textContent = state.runSummary.excluded
-        ? `${state.runSummary.scored} scored runs; ${state.runSummary.excluded} failed/excluded from score aggregates. Pharma tracks are charted; VivIndex uses 4 core tracks.`
-        : `${state.runSummary.scored} scored runs across ${BENCHMARKS.length} tracks (${VIVINDEX_TRACK_COUNT}-track VivIndex).`;
+        ? `${state.runSummary.scored} scored runs; ${skipped} skipped (non-vision), ${errored} errored — neither is scored as zero. Pharma stays charted; VivIndex uses ${VIVINDEX_TRACK_COUNT} weighted tracks.`
+        : `${state.runSummary.scored} scored runs across ${activeTracks.length || BENCHMARKS.length} active tracks (${VIVINDEX_TRACK_COUNT}-track VivIndex).`;
     }
   }
 
@@ -3447,6 +3563,17 @@ button:focus-visible {
       });
     }
     if (sortEl) sortEl.addEventListener("change", renderComparison);
+
+    const limitToggle = $("#boardLimitToggle");
+    if (limitToggle) {
+      limitToggle.addEventListener("click", () => {
+        const nowLimited = limitToggle.getAttribute("aria-pressed") !== "true";
+        limitToggle.setAttribute("aria-pressed", String(nowLimited));
+        limitToggle.textContent = nowLimited ? "Show all models" : "Show top 15";
+        renderComparison();
+        populateStats();
+      });
+    }
 
     // Sticky "back to board" pill on mobile: shows once the board has been
     // scrolled past, hides when it is on screen. Disabled for reduced motion

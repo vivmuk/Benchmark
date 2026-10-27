@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-26T13:00:10.392346+00:00",
+  "generated_at": "2026-10-27T13:00:07.578756+00:00",
   "models": {
     "gemini-3-6-flash": {
       "id": "gemini-3-6-flash",
@@ -515,6 +515,11 @@
       "id": "mercury-3",
       "first_seen": "2026-10-20T01:27:28.922649+00:00",
       "display": "mercury-3"
+    },
+    "openai-gpt-61-terra": {
+      "id": "openai-gpt-61-terra",
+      "first_seen": "2026-10-27T13:00:07.578659+00:00",
+      "display": "openai-gpt-61-terra"
     }
   }
 }
