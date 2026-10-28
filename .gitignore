@@ -8,3 +8,9 @@ arcade/*.raw.txt
 
 # Don't commit the in-progress brick_arcade.json from a partial run
 benchmarks/venice-benchmark-site/data/brick_arcade.json.tmp
+
+backup-tokenclean-*/
+.openclaw/
+fable5/
+crowd-rush/
+DREAMS.md

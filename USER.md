@@ -1,21 +1,7 @@
-# USER.md - About Your Human
+# USER.md — About Your Human
 
-_Learn about the person you're helping. Update this as you go._
-
-- **Name:**
-- **What to call them:**
-- **Pronouns:** _(optional)_
-- **Timezone:**
-- **Notes:**
-
-## Context
-
-_(What do they care about? What projects are they working on? What annoys them? What makes them laugh? Build this over time.)_
-
----
-
-The more you know, the better you can help. But remember — you're learning about a person, not building a dossier. Respect the difference.
-
-## Related
-
-- [Agent workspace](/concepts/agent-workspace)
+- **Name:** Vivek M (GitHub `vivmuk` / `vivgatesai`)
+- **Telegram:** chat_id `6808691714`
+- **Prefers:** Venice API for all AI tasks; evidence-first, no fabricated completion claims.
+- **Workstreams:** BenchmarkViv site, Messy Action site, coding tasks.
+- **Browser hygiene:** When opening the browser (Safari/Chrome) to fetch Messy Action videos, close it afterward and stop the reel playback/streaming once done — never leave the browser or the video running on the machine afterwards.
