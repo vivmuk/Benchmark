@@ -4,7 +4,7 @@ Usage: video_bench_driver.py [budget_usd]  (default 20)
 Reads data/video_matrix.json (jobs) + assets/video-benchmark/manifest.json (state).
 Runs the next tranche within budget, saves clips, rebuilds the page, commits, pushes, verifies.
 """
-import json, os, sys, time, base64, subprocess, urllib.request, urllib.error
+import json, os, sys, time, base64, re, subprocess, urllib.request, urllib.error
 
 KEY = os.environ.get("VENICE_INFERENCE_KEY", "")
 if len(KEY) < 20:
@@ -91,7 +91,26 @@ for j in jobs:
         else:
             j["status"] = "FAILED"; j["err"] = txt[:200]; print(f"[FAIL] {j['model']} {j['pid']}: {txt[:150]}", flush=True)
     else:
-        j["status"] = "FAILED"; j["err"] = txt[:200]; print(f"[FAIL] {j['model']} {j['pid']}: {txt[:150]}", flush=True)
+        # Venice video queue now requires aspect_ratio; parse allowed values from the
+        # validation error and retry once instead of failing the job.
+        if "aspect_ratio" in txt and "Required" in txt:
+            m = re.search(r'"expected":"([^"]+)"', txt)
+            vals = re.findall(r"'([^']+)'", m.group(1)) if m else []
+            pick = ("16:9" if "16:9" in vals else "auto" if "auto" in vals
+                    else "adaptive" if "adaptive" in vals else (vals[0] if vals else "16:9"))
+            body["aspect_ratio"] = pick
+            code, ct, resp = post("video/queue", body)
+            txt = resp.decode(errors="ignore")
+        if code == 200 and "queue_id" in txt:
+            d = json.loads(resp)
+            j["queue_id"] = d["queue_id"]; j["status"] = "QUEUED"
+            j["download_url"] = d.get("download_url")
+            queued.append(j); spent += j.get("est_quote") or 0.0
+            manifest.append({"model": j["model"], "pid": j["pid"], "file": None,
+                             "duration": j.get("dur"), "resolution": j.get("res"),
+                             "quote": j.get("est_quote"), "ok": False, "status": "QUEUED"})
+        else:
+            j["status"] = "FAILED"; j["err"] = txt[:200]; print(f"[FAIL] {j['model']} {j['pid']}: {txt[:150]}", flush=True)
     time.sleep(0.5)
 
 save_manifest()

@@ -84,4 +84,5 @@ MODELS = [
     {"id": "kimi-k3-1-pro-highspeed",          "display": "Kimi K3.1 Pro Highspeed"},
     {"id": "abliteration-abliterated-model-large-flash", "display": "Abliterated Large Flash"},
     {"id": "openai-gpt-61-terra",             "display": "GPT-6.1 Terra"},
+    {"id": "deepseek-v4-1-flash-1017-uncensored", "display": "DeepSeek V4.1 Flash 1017 Uncensored"},
 ]

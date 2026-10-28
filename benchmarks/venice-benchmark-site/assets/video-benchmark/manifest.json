@@ -410,5 +410,235 @@
   "quote": 0.1,
   "ok": true,
   "status": "COMPLETED"
+ },
+ {
+  "model": "flux-3-max-text-to-video",
+  "pid": "1-cinematic",
+  "file": "flux-3-max-text-to-video-1-cinematic.mp4",
+  "duration": "5s",
+  "resolution": "720p",
+  "quote": 0.32,
+  "ok": true,
+  "status": "COMPLETED"
+ },
+ {
+  "model": "flux-3-text-to-video",
+  "pid": "1-cinematic",
+  "file": "flux-3-text-to-video-1-cinematic.mp4",
+  "duration": "5s",
+  "resolution": "720p",
+  "quote": 0.94,
+  "ok": true,
+  "status": "COMPLETED"
+ },
+ {
+  "model": "gemini-omni-flash-1-1-text-to-video",
+  "pid": "1-cinematic",
+  "file": "gemini-omni-flash-1-1-text-to-video-1-cinematic.mp4",
+  "duration": "4s",
+  "resolution": "360p",
+  "quote": 0.47,
+  "ok": true,
+  "status": "COMPLETED"
+ },
+ {
+  "model": "gemini-omni-flash-text-to-video",
+  "pid": "1-cinematic",
+  "file": "gemini-omni-flash-text-to-video-1-cinematic.mp4",
+  "duration": "4s",
+  "resolution": null,
+  "quote": 0.55,
+  "ok": true,
+  "status": "COMPLETED"
+ },
+ {
+  "model": "grok-imagine-1-5-lite-text-to-video",
+  "pid": "1-cinematic",
+  "file": null,
+  "duration": "1s",
+  "resolution": "480p",
+  "quote": 0.02,
+  "ok": false,
+  "status": "QUEUED"
+ },
+ {
+  "model": "grok-imagine-1-5-text-to-video-private",
+  "pid": "1-cinematic",
+  "file": null,
+  "duration": "1s",
+  "resolution": "480p",
+  "quote": 0.09,
+  "ok": false,
+  "status": "QUEUED"
+ },
+ {
+  "model": "grok-imagine-text-to-video-private",
+  "pid": "1-cinematic",
+  "file": null,
+  "duration": "1s",
+  "resolution": "480p",
+  "quote": 0.06,
+  "ok": false,
+  "status": "QUEUED"
+ },
+ {
+  "model": "happyhorse-1-0-text-to-video",
+  "pid": "1-cinematic",
+  "file": "happyhorse-1-0-text-to-video-1-cinematic.mp4",
+  "duration": "3s",
+  "resolution": "720p",
+  "quote": 0.46,
+  "ok": true,
+  "status": "COMPLETED"
+ },
+ {
+  "model": "happyhorse-1-1-text-to-video",
+  "pid": "1-cinematic",
+  "file": "happyhorse-1-1-text-to-video-1-cinematic.mp4",
+  "duration": "3s",
+  "resolution": "720p",
+  "quote": 0.46,
+  "ok": true,
+  "status": "COMPLETED"
+ },
+ {
+  "model": "kling-2.5-turbo-pro-text-to-video",
+  "pid": "1-cinematic",
+  "file": "kling-2.5-turbo-pro-text-to-video-1-cinematic.mp4",
+  "duration": "5s",
+  "resolution": null,
+  "quote": 0.39,
+  "ok": true,
+  "status": "COMPLETED"
+ },
+ {
+  "model": "kling-2.6-pro-text-to-video",
+  "pid": "1-cinematic",
+  "file": "kling-2.6-pro-text-to-video-1-cinematic.mp4",
+  "duration": "5s",
+  "resolution": null,
+  "quote": 0.77,
+  "ok": true,
+  "status": "COMPLETED"
+ },
+ {
+  "model": "kling-o3-4k-text-to-video",
+  "pid": "1-cinematic",
+  "file": "kling-o3-4k-text-to-video-1-cinematic.mp4",
+  "duration": "3s",
+  "resolution": null,
+  "quote": 1.39,
+  "ok": true,
+  "status": "COMPLETED"
+ },
+ {
+  "model": "kling-o3-pro-text-to-video",
+  "pid": "1-cinematic",
+  "file": "kling-o3-pro-text-to-video-1-cinematic.mp4",
+  "duration": "3s",
+  "resolution": null,
+  "quote": 0.46,
+  "ok": true,
+  "status": "COMPLETED"
+ },
+ {
+  "model": "kling-o3-standard-text-to-video",
+  "pid": "1-cinematic",
+  "file": "kling-o3-standard-text-to-video-1-cinematic.mp4",
+  "duration": "3s",
+  "resolution": null,
+  "quote": 0.37,
+  "ok": true,
+  "status": "COMPLETED"
+ },
+ {
+  "model": "kling-v3-4k-text-to-video",
+  "pid": "1-cinematic",
+  "file": "kling-v3-4k-text-to-video-1-cinematic.mp4",
+  "duration": "3s",
+  "resolution": null,
+  "quote": 1.39,
+  "ok": true,
+  "status": "COMPLETED"
+ },
+ {
+  "model": "kling-v3-pro-text-to-video",
+  "pid": "1-cinematic",
+  "file": "kling-v3-pro-text-to-video-1-cinematic.mp4",
+  "duration": "3s",
+  "resolution": null,
+  "quote": 0.55,
+  "ok": true,
+  "status": "COMPLETED"
+ },
+ {
+  "model": "kling-v3-standard-text-to-video",
+  "pid": "1-cinematic",
+  "file": "kling-v3-standard-text-to-video-1-cinematic.mp4",
+  "duration": "3s",
+  "resolution": null,
+  "quote": 0.42,
+  "ok": true,
+  "status": "COMPLETED"
+ },
+ {
+  "model": "kling-v3-turbo-pro-text-to-video",
+  "pid": "1-cinematic",
+  "file": "kling-v3-turbo-pro-text-to-video-1-cinematic.mp4",
+  "duration": "3s",
+  "resolution": null,
+  "quote": 0.46,
+  "ok": true,
+  "status": "COMPLETED"
+ },
+ {
+  "model": "kling-v3-turbo-standard-text-to-video",
+  "pid": "1-cinematic",
+  "file": "kling-v3-turbo-standard-text-to-video-1-cinematic.mp4",
+  "duration": "3s",
+  "resolution": null,
+  "quote": 0.37,
+  "ok": true,
+  "status": "COMPLETED"
+ },
+ {
+  "model": "kling-v4-text-to-video",
+  "pid": "1-cinematic",
+  "file": "kling-v4-text-to-video-1-cinematic.mp4",
+  "duration": "3s",
+  "resolution": "720p",
+  "quote": 0.59,
+  "ok": true,
+  "status": "COMPLETED"
+ },
+ {
+  "model": "ltx-2-5-pro-text-to-video",
+  "pid": "2-creative",
+  "file": "ltx-2-5-pro-text-to-video-2-creative.mp4",
+  "duration": "6s",
+  "resolution": "720p",
+  "quote": 0.79,
+  "ok": true,
+  "status": "COMPLETED"
+ },
+ {
+  "model": "ltx-2-v2-3-fast-text-to-video",
+  "pid": "2-creative",
+  "file": "ltx-2-v2-3-fast-text-to-video-2-creative.mp4",
+  "duration": "6s",
+  "resolution": "1080p",
+  "quote": 0.4,
+  "ok": true,
+  "status": "COMPLETED"
+ },
+ {
+  "model": "minimax-h3-max-text-to-video",
+  "pid": "2-creative",
+  "file": "minimax-h3-max-text-to-video-2-creative.mp4",
+  "duration": "5s",
+  "resolution": "480P",
+  "quote": 0.2,
+  "ok": true,
+  "status": "COMPLETED"
  }
 ]

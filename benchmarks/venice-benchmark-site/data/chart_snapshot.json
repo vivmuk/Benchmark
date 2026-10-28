@@ -762,6 +762,20 @@
     }
   },
   {
+    "id": "deepseek-v4-1-flash-1017-uncensored",
+    "disp": "DeepSeek V4.1 Flash 1017 Uncensored",
+    "viv": 78.2,
+    "scores": {
+      "intent-understanding": 58,
+      "one-shot-ui": 68,
+      "pharma-drug-interaction": 82,
+      "pharma-regulatory-comprehension": 95,
+      "startup-in-a-weekend": 100,
+      "value-density": 97,
+      "reverse-prompt-vision": 60
+    }
+  },
+  {
     "id": "grok-4-7",
     "disp": "Grok 4.7",
     "viv": 77.9,

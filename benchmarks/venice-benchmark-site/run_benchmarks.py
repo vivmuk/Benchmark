@@ -45,7 +45,7 @@ TEMPERATURE = 0.5
 TEMPERATURE_LOCKED_MODELS = {"openai-gpt-56-luna", "openai-gpt-6-astra", "openai-gpt-6-astra-pro", "openai-gpt-6-luna"}
 # Models whose default reasoning_effort is verbose enough to hang the read
 # timeout; force a lower effort on core tracks so they complete.
-REASONING_EFFORT_LOW_MODELS = {"mercury-2-5", "mercury-3", "deepseek-v4-1-flash", "deepseek-v4-1-flash-1017", "grok-4-7", "openai-gpt-6-astra-pro", "openai-gpt-6-sol", "openai-gpt-6-luna", "xiaomi-mimo-v2-6-flash", "openai-gpt-61-sol", "openai-gpt-61-sol-ultrafast", "abliteration-abliterated-model-large-v2", "qwen3-235b-a22b-thinking-2507", "abliteration-abliterated-model-large-flash", "kimi-k3-1-pro", "kimi-k3-1-pro-highspeed", "openai-gpt-61-terra"}
+REASONING_EFFORT_LOW_MODELS = {"mercury-2-5", "mercury-3", "deepseek-v4-1-flash", "deepseek-v4-1-flash-1017", "grok-4-7", "openai-gpt-6-astra-pro", "openai-gpt-6-sol", "openai-gpt-6-luna", "xiaomi-mimo-v2-6-flash", "openai-gpt-61-sol", "openai-gpt-61-sol-ultrafast", "abliteration-abliterated-model-large-v2", "qwen3-235b-a22b-thinking-2507", "abliteration-abliterated-model-large-flash", "kimi-k3-1-pro", "kimi-k3-1-pro-highspeed", "openai-gpt-61-terra", "deepseek-v4-1-flash-1017-uncensored"}
 RATE_LIMIT_SLEEP_SECONDS = 1.0
 # Reasoning models on long-context prompts can take several minutes. The 180 s
 # reading timeout used to be the bottleneck for kimi-k3 / opus benchmarks.
@@ -73,7 +73,8 @@ FALLBACK_PRICING = {
     "hy4-preview":                          {"input": 1.0425, "output": 3.12625},
     "qwen3-6-35b-a3b":                      {"input": 0.10,  "output": 1.00},
     "gemini-3-5-flash-lite":                {"input": 0.375, "output": 3.125},
-    "deepseek-v4-1-flash-1017":             {"input": 0.30,  "output": 1.20},
+    "deepseek-v4-1-flash-1017":             {"input": 0.33,  "output": 1.32},
+    "deepseek-v4-1-flash-1017-uncensored":  {"input": 0.33,  "output": 1.32},
     "kimi-k3-1-pro":                        {"input": 3.00,  "output": 15.00},
     "kimi-k3-1-pro-highspeed":              {"input": 6.00,  "output": 30.00},
     "abliteration-abliterated-model-large-flash": {"input": 1.25, "output": 2.50},
