@@ -16,12 +16,29 @@ os.chdir(SITE)
 matrix = json.load(open("data/video_matrix.json"))
 manifest_path = os.path.join(OUT, "manifest.json")
 manifest = json.load(open(manifest_path)) if os.path.exists(manifest_path) else []
-done = {(r["model"], r["pid"]) for r in manifest if r.get("ok") or r.get("charged")}
+done = {(r["model"], r["pid"]) for r in manifest if (r.get("ok") or r.get("charged")) and not (r.get("status") in ("QUEUED", "PROCESSING", "RETRIED") and r.get("queue_id"))}
 
 budget = float(sys.argv[1]) if len(sys.argv) > 1 else 20.0
 ORDER = {"1-cinematic": 0, "2-creative": 1, "3-motion": 2, "4-lincoln": 3}
 jobs = [j for j in matrix["jobs"] if (j["model"], j["pid"]) not in done]
 jobs.sort(key=lambda j: (ORDER.get(j["pid"], 9), j["model"]))
+
+# Recover jobs queued+charged by a previous interrupted run: the queue_id is persisted
+# in the manifest/state file, so they can be retrieved without paying again.
+IN_FLIGHT = ("QUEUED", "PROCESSING", "RETRIED")
+for j in jobs:
+    for r in manifest:
+        if r["model"] == j["model"] and r["pid"] == j["pid"] and r.get("queue_id") and r.get("status") in IN_FLIGHT:
+            j["queue_id"] = r["queue_id"]; j["status"] = r["status"]; j["download_url"] = r.get("download_url")
+STATE = os.path.join(SITE, "data", "video_bench_state.json")
+try:
+    _st = json.load(open(STATE))
+    for j in jobs:
+        s = _st.get(f"{j['model']}|{j['pid']}")
+        if s and s.get("queue_id") and s.get("status") in IN_FLIGHT and not j.get("queue_id"):
+            j.update(s)
+except Exception:
+    pass
 
 # i2v/r2v jobs need their source image; if it is missing, defer them to a later tranche
 def needs_image(j):
@@ -43,9 +60,18 @@ def save_manifest():
     man = [r for r in manifest]
     json.dump(man, open(manifest_path, "w"), indent=1)
 
+STATE = os.path.join(SITE, "data", "video_bench_state.json")
+
+def save_state():
+    st = {f"{j['model']}|{j['pid']}": {k: j[k] for k in ("queue_id", "status", "download_url") if j.get(k)}
+          for j in jobs if j.get("queue_id")}
+    json.dump(st, open(STATE, "w"), indent=1)
+
 # --- queue within budget ---
 queued, spent = [], 0.0
 for j in jobs:
+    if j.get("queue_id"):  # restored from an earlier run — already charged, never re-queue
+        continue
     q = j.get("est_quote")
     if q is None:
         code, ct, resp = post("video/quote", {k: v for k, v in
@@ -76,7 +102,8 @@ for j in jobs:
         # merge into manifest as pending
         manifest.append({"model": j["model"], "pid": j["pid"], "file": None,
                          "duration": j.get("dur"), "resolution": j.get("res"),
-                         "quote": j.get("est_quote"), "ok": False, "status": "QUEUED"})
+                         "quote": j.get("est_quote"), "ok": False, "status": "QUEUED",
+                         "queue_id": j["queue_id"], "download_url": j.get("download_url")})
     elif "consent" in txt.lower() or "screening" in txt.lower():
         body["consents"] = {"seedance": {"confirmed_terms_and_privacy": True,
             "confirmed_legal_right": True, "confirmed_screening_acknowledged": True}}
@@ -87,7 +114,8 @@ for j in jobs:
             queued.append(j); spent += j.get("est_quote") or 0.0
             manifest.append({"model": j["model"], "pid": j["pid"], "file": None,
                              "duration": j.get("dur"), "resolution": j.get("res"),
-                             "quote": j.get("est_quote"), "ok": False, "status": "QUEUED"})
+                             "quote": j.get("est_quote"), "ok": False, "status": "QUEUED",
+                             "queue_id": j["queue_id"], "download_url": j.get("download_url")})
         else:
             j["status"] = "FAILED"; j["err"] = txt[:200]; print(f"[FAIL] {j['model']} {j['pid']}: {txt[:150]}", flush=True)
     else:
@@ -108,7 +136,8 @@ for j in jobs:
             queued.append(j); spent += j.get("est_quote") or 0.0
             manifest.append({"model": j["model"], "pid": j["pid"], "file": None,
                              "duration": j.get("dur"), "resolution": j.get("res"),
-                             "quote": j.get("est_quote"), "ok": False, "status": "QUEUED"})
+                             "quote": j.get("est_quote"), "ok": False, "status": "QUEUED",
+                             "queue_id": j["queue_id"], "download_url": j.get("download_url")})
         else:
             j["status"] = "FAILED"; j["err"] = txt[:200]; print(f"[FAIL] {j['model']} {j['pid']}: {txt[:150]}", flush=True)
     time.sleep(0.5)
@@ -119,7 +148,7 @@ print(f"queued {len(queued)} jobs, est spend ${spent:.2f} (budget ${budget:.2f})
 # --- poll loop ---
 deadline = time.time() + 3000
 while time.time() < deadline:
-    pending = [j for j in jobs if j.get("status") in ("QUEUED", "PROCESSING", "RETRIED")]
+    pending = [j for j in jobs if j.get("queue_id") and j.get("status") in ("QUEUED", "PROCESSING", "RETRIED")]
     if not pending: break
     for j in pending:
         code, ct, resp = post("video/retrieve", {"model": j["model"], "queue_id": j["queue_id"]}, timeout=180)
@@ -166,6 +195,7 @@ while time.time() < deadline:
     n_ok = sum(1 for j in jobs if j.get("status") == "COMPLETED")
     print(f"-- {n_ok}/{len(jobs)} done", flush=True)
     save_manifest()
+    save_state()
     if pending: time.sleep(12)
 
 n_ok = sum(1 for j in jobs if j.get("status") == "COMPLETED")
