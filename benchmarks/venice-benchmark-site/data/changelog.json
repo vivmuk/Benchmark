@@ -1,9 +1,128 @@
 {
   "schema_version": "1.0.0",
   "site_selector": "data/changelog.json",
-  "generated_at": "2026-07-28T00:54:53.105518+00:00",
+  "generated_at": "2026-08-14T02:55:16.202155+00:00",
   "format": "zhcli",
   "entries": [
+    {
+      "id": "tier2-agentic-longcontext",
+      "date": "2026-08-21",
+      "time_utc": "20:22:42",
+      "category": "benchmark",
+      "summary": "Tier-2 tracks added: Agentic Tool-Use + Long-Context Reasoning \u2014 run across top 10",
+      "details": [
+        "Agentic Tool-Use: simulated trip-booking with function calling + forced error recovery (flight cancellation). Aion 3.0 tops at 94 (only model to recover from cancellation and rebook)",
+        "Long-Context: ~15k-token synthetic clinical-trial pack, 6 cross-document questions. 8 of 10 models scored 85; Nemotron 65",
+        "Notable: qwen-3-8-27b agentic=30 \u2014 emits HuggingFace-style <tool_call> text instead of native tool_calls on Venice; opus-5-fast long-context blocked entirely by upstream content_filter on the document pack (verified working on small prompts; recorded as err, not scored)",
+        "Stealth Ox Alpha: agentic 80, long-context 85 \u2014 mid-pack",
+        "Total tier-2 run cost: $0.54 across 20 rows"
+      ],
+      "files_modified": [
+        "data/results.json",
+        "data/changelog.json",
+        "data/chart_snapshot.json",
+        "compare.html",
+        "benchmarkviv-standalone.html"
+      ],
+      "cost_usd": 0.54
+    },
+    {
+      "id": "stealth-ox-alpha-onboarding",
+      "date": "2026-08-21",
+      "time_utc": "19:51:20",
+      "category": "benchmark",
+      "summary": "Added Stealth Ox Alpha (stealth-ox-alpha) \u2014 free beta reasoning model; debuts at #6 of 41 with VivIndex 88.7",
+      "details": [
+        "Pre-flight: not in results.json or model_registry.py; confirmed live on Venice /v1/models (betaModel, free $0 pricing, 1M ctx, vision+reasoning+web-search)",
+        "7/7 tracks ok: intent 76, one-shot-ui 66, DDI 83, regulatory 90, startup 100, value-density 100 (46.8 val/1k), reverse-prompt 93 (judge GPT-5.6 Luna)",
+        "Run cost $0.000 (free beta); reverse-prompt judge cost $0.0032",
+        "Leaderboard impact: #6 of 41, between Opus 5 Fast and next tier; startup-in-a-weekend perfect 100"
+      ],
+      "files_modified": [
+        "model_registry.py",
+        "run_benchmarks.py",
+        "data/results.json",
+        "data/changelog.json"
+      ],
+      "cost_usd": 0.0032,
+      "run_score": {
+        "vivindex": 88.7,
+        "rank": 6,
+        "of": 41
+      }
+    },
+    {
+      "id": "chg-20260820-new3-material",
+      "date": "2026-08-20",
+      "time_utc": "03:59",
+      "category": "benchmark",
+      "summary": "Onboarded GLM 5.3, Qwen 3.8 27B, DeepSeek V4 Pro 0813 (full 7-track coverage); Material modern UI (teal+orange+dark blue), provider colors, model selector (top-15 default), per-model GIFs on profiles; fixed standalone JSON injection bug.",
+      "details": [
+        "Pre-flight: 3 models added to registry by Paridhi 08-19; GLM 5.3 & DeepSeek V4 Pro had 0 rows (first run hit OpenClaw key DIEM spend cap \u2014 reran on alternate key, error rows purged).",
+        "Scores: GLM 5.3 VivIndex 88.0 (UI 68, DDI 86, Reg 90, Startup 100, VD 100, Intent 76); Qwen 3.8 27B 90.5 incl. reverse-prompt 96; DeepSeek V4 Pro 0813 87.4 (best value/1k = 47.3).",
+        "Qwen 3.8 27B enters the board at #2 overall.",
+        "UI: MD3-style overlay (teal primary #00A98F, orange tertiary #F97316, dark-blue secondary #1A3A6B), elevated cards, pill buttons; model selector popover w/ checkboxes + Top15/All/Clear, persisted in localStorage, filters every chart; provider-based colors wired through provider_colors.py + app.js.",
+        "make_model_pages.py now embeds each model's GIF-Arena animation + judge badges.",
+        "BUGFIX: generate_standalone re.subn replacement-template mangled JSON escapes (\\n \u2192 newline, \\! invalid escape) making BENCHMARK_DATA unparseable \u2014 standalone showed 'Results unavailable'. Fixed with lambda replacement + \\u003c escaping.",
+        "Run cost: $0.42 (GLM) + $0.13 (DSP) + $0.02 (new tracks) \u2248 $0.57. File total: $19.94."
+      ],
+      "files_modified": [
+        "model_registry.py",
+        "run_benchmarks.py",
+        "run_new_model.py",
+        "assets/app.js",
+        "assets/styles.css",
+        "make_model_pages.py",
+        "generate_standalone.py",
+        "provider_colors.py",
+        "data/results.json",
+        "index.html",
+        "benchmarkviv-standalone.html",
+        "models/*.html"
+      ],
+      "cost_usd": 0.57
+    },
+    {
+      "id": "chg-2026-08-14-static-regenerate",
+      "date": "2026-08-14",
+      "time_utc": "2026-08-14T02:55:16.202010+00:00",
+      "category": "site",
+      "summary": "Regenerate all static data assets for the 37-model board: compare, trends, model profiles, leaderboard SVG, vision gallery (23 recon images), CSV, summary",
+      "details": {
+        "regenerated": [
+          "data/chart_snapshot.json (37 models, Opus 4.8 Fast #1 @ 91.1)",
+          "compare.html (37 pickable models)",
+          "trends.html + trends.json (37 series, final point 2026-08-14)",
+          "data/leaderboard_chart.svg (37 models)",
+          "models/*.html (37 profile pages)",
+          "vision.html + data/vision/recon_images/ (23 reconstuctions, 9 new renders)",
+          "data/benchmarkviv-results.csv (261 rows)",
+          "data/summary.json (Opus 4.8 Fast, 37 models)"
+        ],
+        "gif_arena": "STILL STALE \u2014 22 old models; needs full pipeline re-run to add 15 new models",
+        "totals": {
+          "models": 37,
+          "rows": 261
+        },
+        "note": "run_new_tracks.py overwrites reconstructions.json per-run; rebuild_reconstructions.py reconstructs full vision-ok set from results.json"
+      }
+    },
+    {
+      "id": "chg-2026-08-14-batch-run",
+      "date": "2026-08-14",
+      "time_utc": "2026-08-14T01:10:31.644617+00:00",
+      "category": "benchmark",
+      "summary": "Full sweep: complete 7 partial models (value_density + vision), add 12 new models (7 benchmarks each), rescore One-Shot UI with honest heuristic",
+      "details": {
+        "phase1": "Completed value_density + reverse_prompt_vision for 7 partial models (deepseek-v4-flash-0731-fast, qwen-3-8-max, qwen-3-8-2-4t-a95b, claude-sonnet-5, gemini-3-6-flash, grok-4-6, nemotron-3-5)",
+        "phase2": "Added 12 new models: gemini-3-7-flash, qwen-3-7-max, qwen-3-7-plus, grok-4-20, claude-opus-5-fast, claude-opus-4-8-fast, deepseek-v4-flash, aion-labs-aion-3-0, aion-labs-aion-3-0-mini, nvidia-nemotron-3-super-120b-a12b, qwen3-235b-a22b-thinking-2507, minimax-m27",
+        "scorer_fix": "Rewrote One-Shot UI scorer from generous 70-95 baseline to honest 0-100 structure-based scoring",
+        "rescored": "26 old-model one_shot_ui scores corrected using new scorer (no API calls needed)",
+        "total_models": 37,
+        "total_rows": 261,
+        "total_cost_usd": 19.23
+      }
+    },
     {
       "id": "chg-2026-07-27-rejudge-zeros-lightbox",
       "date": "2026-07-27",
@@ -192,7 +311,7 @@
       "date": "2026-07-26",
       "time_utc": "2026-07-26T17:33:26.994223+00:00",
       "category": "site",
-      "summary": "Benchmark suite completion pass: 96/96 scored runs, site UI synced to 16 models × 6 tracks, Fable pharma regulatory recovered.",
+      "summary": "Benchmark suite completion pass: 96/96 scored runs, site UI synced to 16 models \u00d7 6 tracks, Fable pharma regulatory recovered.",
       "details": [
         "Retried claude-fable-5/pharma_regulatory_comprehension successfully (score 77) after content_filter/empty-content failures; now 96/96 ok.",
         "Updated index.html + assets/app.js to surface 6 tracks (including Pharma DDI + Regulatory), new model colors (Opus 5, Inkling, Kimi K3), and dynamic stats.",
@@ -205,17 +324,17 @@
       "date": "2026-07-24",
       "time_utc": "2026-07-24T19:37:00+00:00",
       "category": "benchmark",
-      "summary": "inkling added to benchmark — 6/6 OK, avg 85.33, $0.1852 run cost.",
+      "summary": "inkling added to benchmark \u2014 6/6 OK, avg 85.33, $0.1852 run cost.",
       "details": [
-        "User asked: 'inkling — is this part of the benchmark? If not add this one as well.'",
-        "Pre-flight: searched /tmp/_venice_catalog.json, /tmp/venice_sweep.log, /tmp/venice_re_run2.log, data/results.json, and model_registry.py for 'inkling' — zero hits in benchmark surfaces; confirmed the model EXISTS on Venice (Thinking Machines Lab, 66-layer 975B/41B-active MoE, 1M ctx, $1.25/$5.0625 per M, default reasoning 'high', privacy=private).",
+        "User asked: 'inkling \u2014 is this part of the benchmark? If not add this one as well.'",
+        "Pre-flight: searched /tmp/_venice_catalog.json, /tmp/venice_sweep.log, /tmp/venice_re_run2.log, data/results.json, and model_registry.py for 'inkling' \u2014 zero hits in benchmark surfaces; confirmed the model EXISTS on Venice (Thinking Machines Lab, 66-layer 975B/41B-active MoE, 1M ctx, $1.25/$5.0625 per M, default reasoning 'high', privacy=private).",
         "Added to model_registry.py (16 models total now).",
         "Fired python3 run_benchmarks.py --run-real --max-tokens 32768 --request-timeout 600 --model inkling. Result: 6/6 ok.",
         "Scores: intent_understanding 52, one_shot_ui 95, brick_breaker 100, pharma_drug_interaction 86, pharma_regulatory_comprehension 85, startup_in_a_weekend 94. Average 85.33.",
         "Cost: $0.185243 (mainstay $9.70 cumulative file_total).",
-        "Leaderboard impact: inkling lands at rank 3 by raw avg (behind kimi-k3 89.5 and opus-5 87.67). Among heavy MoE models ($1+ per M range) it has the best score/$ at 460.7 — 4× cheaper than opus-5, 6× cheaper than kimi-k3 per reproducible point.",
-        "Only sub-3B-active efficiency models beat it on score/$ (minimax 4018, deepseek 1175, zai-org-glm-5-2 1225) — a different cost-class entirely.",
-        "data/results.json now 96 rows; benchmarkviv-standalone.html rebuilt (743,442 bytes, sha c7ca3e45…)."
+        "Leaderboard impact: inkling lands at rank 3 by raw avg (behind kimi-k3 89.5 and opus-5 87.67). Among heavy MoE models ($1+ per M range) it has the best score/$ at 460.7 \u2014 4\u00d7 cheaper than opus-5, 6\u00d7 cheaper than kimi-k3 per reproducible point.",
+        "Only sub-3B-active efficiency models beat it on score/$ (minimax 4018, deepseek 1175, zai-org-glm-5-2 1225) \u2014 a different cost-class entirely.",
+        "data/results.json now 96 rows; benchmarkviv-standalone.html rebuilt (743,442 bytes, sha c7ca3e45\u2026)."
       ],
       "files_modified": [
         "model_registry.py (16th model added: inkling)",
@@ -311,10 +430,10 @@
       "category": "benchmark",
       "summary": "Sweep of 27 missing (model, benchmark) pairs completed.",
       "details": [
-        "13 of 15 models had incomplete coverage before this sweep — only opus-5 and kimi-k3 were at 6/6.",
+        "13 of 15 models had incomplete coverage before this sweep \u2014 only opus-5 and kimi-k3 were at 6/6.",
         "Fired /tmp/venice_sweep_all.sh in background; sorted cheapest-first with a self-imposed $5.50 spend cap.",
-        "Result: 26/27 pairs succeeded; the only error was claude-fable-5 × pharma_regulatory_comprehension (Venice upstream 500/empty content, twice).",
-        "After a final 32k-cap retry on fable-5×pharma_regulatory, the row is still flagged as err; everything else (89/90 rows) is in.",
+        "Result: 26/27 pairs succeeded; the only error was claude-fable-5 \u00d7 pharma_regulatory_comprehension (Venice upstream 500/empty content, twice).",
+        "After a final 32k-cap retry on fable-5\u00d7pharma_regulatory, the row is still flagged as err; everything else (89/90 rows) is in.",
         "data/results.json is now 90 rows total, file_total_cost=$9.51 (cumulative)."
       ],
       "files_added": [],
@@ -351,14 +470,14 @@
       "date": "2026-07-24",
       "time_utc": "2026-07-24T20:51:06+00:00",
       "category": "benchmark",
-      "summary": "claude-opus-5 × pharma_regulatory_comprehension retry succeeded.",
+      "summary": "claude-opus-5 \u00d7 pharma_regulatory_comprehension retry succeeded.",
       "details": [
         "Both prior attempts (16k and direct retry) returned 'Inference processing failed' (Venice upstream 500).",
         "Final retry 9 minutes later landed: score=95, latency=170.7s, 16,941 tokens, cost=$0.44.",
         "This closed the single remaining err row in the prior leaderboard."
       ],
       "files_modified": [
-        "data/results.json (row replaced; score 0 → 95)",
+        "data/results.json (row replaced; score 0 \u2192 95)",
         "benchmarkviv-standalone.html (rebuilt)"
       ],
       "cost_usd": 0.436038,
@@ -369,13 +488,13 @@
       "date": "2026-07-24",
       "time_utc": "2026-07-24T19:00:00+00:00",
       "category": "harness",
-      "summary": "Harness caps raised: 8192 → 32768 tokens, 180s → 600s timeout, with per-run overwrite flags.",
+      "summary": "Harness caps raised: 8192 \u2192 32768 tokens, 180s \u2192 600s timeout, with per-run overwrite flags.",
       "details": [
         "User identified that 8192-token completion cap + 180-second request timeout were 'artificial ceilings that biased results against slow-thorough models'.",
         "Confirmed: the prior sweep had 5 kimi-k3 calls timing out at 180s and 1 opus-5 call exhausting the 8k cap on brick_breaker_realism.",
         "Patch: MAX_TOKENS=32768, REQUEST_TIMEOUT_SECONDS=600.",
         "New CLI flags: --max-tokens N and --request-timeout SEC, for per-run pinning (e.g. apples-to-apples at 8192 for fairness comparisons).",
-        "Quirk fixed: harness crashed with `TypeError: str | None` on Python 3.9 — guarded with `from __future__ import annotations` to enable PEP 604 union syntax."
+        "Quirk fixed: harness crashed with `TypeError: str | None` on Python 3.9 \u2014 guarded with `from __future__ import annotations` to enable PEP 604 union syntax."
       ],
       "files_modified": [
         "run_benchmarks.py"
@@ -389,9 +508,9 @@
       "category": "benchmark",
       "summary": "Re-ran 4 failed (model, benchmark) pairs and kimi-k3's 6th call under the new caps.",
       "details": [
-        "After raising the harness caps, re-attempted: opus-5 × brick_breaker (cap-stuck), opus-5 × pharma_regulatory (500), sol-pro × intent (timeout), and 4 of kimi-k3's failed pairs (180s timeout). Also let kimi-k3's 6th call complete.",
-        "Net result: 6 of 7 re-fires succeeded; opus-5 × pharma_regulatory was the single holdout (fixed in a later retry).",
-        "Concrete wins from the cap-raise: kimi-k3 × brick_breaker went from '180s timeout / 0/100' to '510s, 20,544 tokens, 100/100'."
+        "After raising the harness caps, re-attempted: opus-5 \u00d7 brick_breaker (cap-stuck), opus-5 \u00d7 pharma_regulatory (500), sol-pro \u00d7 intent (timeout), and 4 of kimi-k3's failed pairs (180s timeout). Also let kimi-k3's 6th call complete.",
+        "Net result: 6 of 7 re-fires succeeded; opus-5 \u00d7 pharma_regulatory was the single holdout (fixed in a later retry).",
+        "Concrete wins from the cap-raise: kimi-k3 \u00d7 brick_breaker went from '180s timeout / 0/100' to '510s, 20,544 tokens, 100/100'."
       ],
       "files_modified": [
         "data/results.json (7 rows replaced)",
@@ -411,7 +530,7 @@
         "kimi-k3 was already present (line 20 of model_registry.py) but had 3 stale error rows from a prior test.",
         "Both models added, scored against the existing 6 benchmarks (intent_understanding, one_shot_ui, brick_breaker_realism, pharma_drug_interaction, pharma_regulatory_comprehension, startup_in_a_weekend).",
         "opus-5: 4 of 6 OK (intent 82, ui 89, pharma_ddi 90, startup 70; 1 cap-stuck, 1 upstream 500). Average 86.20/100 with $1.69 spent.",
-        "kimi-k3: 3 of 6 OK (intent 76, ui 82, pharma_ddi 85); 3 timed out at 180s (ui, brick_breaker, pharma_regulatory, startup — 4 actually)."
+        "kimi-k3: 3 of 6 OK (intent 76, ui 82, pharma_ddi 85); 3 timed out at 180s (ui, brick_breaker, pharma_regulatory, startup \u2014 4 actually)."
       ],
       "files_modified": [
         "model_registry.py (claude-opus-5 added)",
@@ -428,12 +547,12 @@
       "date": "2026-07-24",
       "time_utc": "2026-07-24T13:30:00+00:00",
       "category": "discovery",
-      "summary": "Survey of Venice /v1/models endpoint — 3 models added in last 7 days.",
+      "summary": "Survey of Venice /v1/models endpoint \u2014 3 models added in last 7 days.",
       "details": [
         "User asked which models were added in the last week. Recency signal is per-row `created` integer epoch timestamp on the catalog; query-string filters (?added_after etc.) are silently ignored by the API.",
-        "Window 2026-07-17 → 2026-07-24 UTC returned 3 entries:",
-        "  · 2026-07-23: claude-opus-5 (Anthropic, 1M ctx, $6/$30 per M) — also claude-opus-5-fast at 2× price; both anonymized.",
-        "  · 2026-07-20: qwen3-6-35b-a3b (Qwen MoE, ~3B active of 35B), $0.15/$1 per M, private.",
+        "Window 2026-07-17 \u2192 2026-07-24 UTC returned 3 entries:",
+        "  \u00b7 2026-07-23: claude-opus-5 (Anthropic, 1M ctx, $6/$30 per M) \u2014 also claude-opus-5-fast at 2\u00d7 price; both anonymized.",
+        "  \u00b7 2026-07-20: qwen3-6-35b-a3b (Qwen MoE, ~3B active of 35B), $0.15/$1 per M, private.",
         "Conclusion: Only qwen3-6-35b-a3b was cheap enough to benchmark on the daily $10 cap at scale; opus-5 and opus-5-fast tripped the no-Claude-without-explicit-name rule (lifted by the user's 'Add opus-5' call)."
       ],
       "files_modified": [],

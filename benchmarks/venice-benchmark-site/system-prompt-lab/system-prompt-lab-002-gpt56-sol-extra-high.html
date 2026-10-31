@@ -1,0 +1,579 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>System Prompt Lab #02 — GPT-5.6 SOL Extra High</title>
+<meta name="description" content="Architectural teardown of the GPT-5.6 SOL Extra High system prompt. Edition #02 of the System Prompt Lab.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%2307080c'/></svg>">
+<link rel="stylesheet" href="../prompt-lab-assets/scrollcraft.css">
+<style>
+:root {
+  --sc-canvas: #07080c; --sc-surface: #10131c; --sc-ink: #e6ecff; --sc-ink-soft: #8b95b3;
+  --sc-accent: #c084fc; --sc-accent-ink: #07080c;
+  --sc-font-display: "Space Grotesk", system-ui, sans-serif;
+  --sc-font-text: "Space Grotesk", system-ui, sans-serif;
+  --an-line: #1e2436; --an-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+html { background: var(--sc-canvas); }
+/* edition chrome */
+.an-bar { position: fixed; top: 0; left: 0; right: 0; z-index: 40; display: flex; justify-content: space-between; align-items: center;
+  padding: 14px 22px; background: color-mix(in srgb, var(--sc-canvas) 82%, transparent); backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--an-line); font-family: var(--an-mono); font-size: .72rem; }
+.an-bar a { color: var(--sc-ink-soft); text-decoration: none; letter-spacing: .08em; }
+.an-bar a:hover { color: var(--sc-accent); }
+.an-bar .crumb b { color: var(--sc-accent); font-weight: 600; }
+.an-tokens { position: fixed; right: 16px; bottom: 16px; z-index: 40; font-family: var(--an-mono); font-size: .68rem;
+  color: var(--sc-ink-soft); background: color-mix(in srgb, var(--sc-surface) 90%, transparent);
+  border: 1px solid var(--an-line); border-radius: 10px; padding: 8px 12px; min-width: 150px; }
+.an-tokens .bar { height: 3px; background: var(--an-line); border-radius: 2px; margin-top: 6px; overflow: hidden; }
+.an-tokens .bar i { display: block; height: 100%; width: calc(var(--tok, 0) * 1.000 * 100%); background: var(--sc-accent); }
+.an-tokens .lab { display: flex; justify-content: space-between; gap: 10px; }
+.an-tokens .lab b { color: var(--sc-ink); }
+
+/* hero */
+.an-hero { position: relative; }
+.an-hero__inner { padding: 18vh 6vw 10vh; max-width: 880px; }
+.an-hero__kick { font-family: var(--an-mono); font-size: .74rem; letter-spacing: .3em; text-transform: uppercase; color: var(--sc-accent); margin-bottom: 20px; }
+.an-hero h1 { font-family: var(--sc-font-display); font-size: clamp(2.2rem, 6vw, 4rem); line-height: 1.05; letter-spacing: -.02em; margin-bottom: 16px; }
+.an-hero__sub { color: var(--sc-ink-soft); font-size: 1.05rem; max-width: 56ch; }
+.an-meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; margin-top: 36px; }
+.an-meta__item { border: 1px solid var(--an-line); border-radius: 10px; padding: 10px 12px; background: var(--sc-surface); }
+.an-meta__k { display: block; font-family: var(--an-mono); font-size: .62rem; text-transform: uppercase; letter-spacing: .14em; color: var(--sc-ink-soft); }
+.an-meta__v { font-size: .88rem; }
+
+/* chapters */
+.an-chapter-wrap { display: block; }
+.an-chapter { width: min(860px, 92vw); margin: 0 auto; padding: 10vh 0 6vh; }
+.an-chapter__head { display: flex; align-items: baseline; gap: 16px; margin-bottom: 28px; border-bottom: 1px solid var(--an-line); padding-bottom: 14px; }
+.an-chapter__num { font-family: var(--an-mono); color: var(--sc-accent); font-size: .8rem; letter-spacing: .2em; }
+.an-chapter__title { font-family: var(--sc-font-display); font-size: clamp(1.2rem, 2.6vw, 1.7rem); letter-spacing: -.01em; }
+.an-prompt { margin: 0 0 22px; }
+.an-prompt__label { font-family: var(--an-mono); font-size: .62rem; text-transform: uppercase; letter-spacing: .18em; color: var(--sc-ink-soft); margin-bottom: 8px; }
+.an-prompt__code { font-family: var(--an-mono); font-size: .78rem; line-height: 1.7; color: #a5d6ff; background: #0a0c10;
+  border: 1px solid var(--an-line); border-left: 3px solid var(--sc-accent); border-radius: 10px; padding: 16px;
+  overflow-x: auto; white-space: pre-wrap; word-break: break-word; }
+.an-cards { display: grid; gap: 12px; }
+.an-card { border: 1px solid var(--an-line); border-left-width: 3px; border-radius: 12px; background: var(--sc-surface); padding: 16px 18px; }
+.an-card--good { border-left-color: #4ade80; } .an-card--bad { border-left-color: #f87171; }
+.an-card--sota { border-left-color: #60a5fa; } .an-card--evolution { border-left-color: #c084fc; }
+.an-card__head { display: flex; gap: 10px; align-items: center; font-size: .9rem; font-weight: 600; margin-bottom: 10px; }
+.an-card__list { list-style: none; margin: 0; padding: 0; }
+.an-card__list li { position: relative; padding-left: 18px; color: var(--sc-ink-soft); font-size: .88rem; line-height: 1.65; margin-bottom: 10px; }
+.an-card__list li:last-child { margin-bottom: 0; }
+.an-card__list li::before { content: '▸'; position: absolute; left: 0; color: var(--sc-accent); opacity: .8; }
+
+/* takeaway close */
+.an-close { display: grid; place-items: center; }
+.an-close__inner { width: min(760px, 90vw); padding: 16vh 0; text-align: left; }
+.an-close h2 { font-family: var(--sc-font-display); font-size: clamp(1.4rem, 3vw, 2rem); margin-bottom: 18px; }
+.an-close p { color: var(--sc-ink-soft); font-size: 1rem; line-height: 1.75; }
+.an-close .next { margin-top: 40px; font-family: var(--an-mono); font-size: .78rem; }
+.an-close .next a { color: var(--sc-accent); text-decoration: none; border-bottom: 1px solid; padding-bottom: 2px; }
+@media (prefers-reduced-motion: reduce) { .an-bar, .an-tokens { position: static; } }
+</style>
+</head>
+<body>
+<span data-sc-progress></span>
+<div class="sc-grain" aria-hidden="true"></div>
+
+<header class="an-bar">
+  <span class="crumb"><a href="../prompt-lab.html">PROMPT_LAB</a> / <b>ED 02</b></span>
+  <span>OpenAI · ~28.5K tokens</span>
+</header>
+<aside class="an-tokens" aria-hidden="true">
+  <div class="lab"><span>tokens</span><b>~28.5K</b></div>
+  <div class="bar"><i id="tokbar"></i></div>
+</aside>
+
+<main>
+  <section class="an-hero" data-sc-act="flow" data-sc-span="1.2" data-sc-drift="#07080c">
+    <div class="an-hero__inner">
+      <div class="an-hero__kick" data-sc-cue="0 0.5 0">EDITION 02 · OpenAI · BEHAVIORAL CODEX · THE MAXIMALIST</div>
+      <h1 data-sc-kinetic="lines">GPT-5.6 SOL Extra High</h1>
+      <p class="an-hero__sub" data-sc-cue="0.3 0.9">GPT-5.6 SOL Extra High - OpenAI Flagship Consumer Assistant Prompt</p>
+      <div class="an-meta" data-sc-in data-sc-stagger="80"><div class="an-meta__item"><span class="an-meta__k">vendor</span><span class="an-meta__v">OpenAI</span></div><div class="an-meta__item"><span class="an-meta__k">tokens</span><span class="an-meta__v">~28.5K</span></div><div class="an-meta__item"><span class="an-meta__k">phase</span><span class="an-meta__v">behavioral codex</span></div><div class="an-meta__item"><span class="an-meta__k">series</span><span class="an-meta__v">edition 02 / 08</span></div></div>
+    </div>
+  </section>
+
+  <!-- CHAPTER 01 -->
+  <section class="an-chapter-wrap" data-sc-act="flow" data-sc-drift="#0b0d13">
+    <div class="an-chapter">
+      <div class="an-chapter__head" data-sc-in>
+        <span class="an-chapter__num">01</span>
+        <h2 class="an-chapter__title" data-sc-kinetic="lines">01Identity, Trustworthiness &amp; Factuality Protocol</h2>
+      </div>
+      <figure class="an-prompt" data-sc-in>
+  <figcaption class="an-prompt__label">excerpt from the prompt</figcaption>
+  <pre class="an-prompt__code">You are ChatGPT, a large language model trained by OpenAI.
+Current date: 2026-07-10
+
+# Environment
+* Tools are provided for PDF creation and editing. You *must* read
+  `/home/oai/skills/pdfs/SKILL.md` for instructions for PDF related tasks.
+
+## Trustworthiness and Factuality
+ALWAYS be honest about things you failed to do or are not sure about. NEVER
+make claims that sound convincing but aren't supported by evidence or logic.
+
+To ensure user trust and safety, you MUST search the web for any queries that
+require information around or after your knowledge cutoff (December 2025). If
+you remotely think it is possible a fact might have changed after December 2025,
+you MUST search online.
+
+When providing explanations that rely on specific facts and data, always
+include citations. Use citations whenever you bring up something that isn't
+purely reasoning or general background knowledge.
+
+If you are asked what model you are, you should say GPT-5.6 Thinking. You are
+a reasoning model with a hidden chain of thought.
+
+You are ALLOWED to answer questions about images with people and make
+statements about them.
+Not allowed:
+- identifying real people in images
+- identifying real TV/movie character …</pre>
+</figure>
+      <div class="an-cards" data-sc-in data-sc-stagger="90">
+<div class="an-card an-card--good">
+  <div class="an-card__head"><span class="an-card__icon">✅</span><span>✅ What It Does Well</span></div>
+  <ul class="an-card__list"><li>Temporal honesty mandate - The knowledge cutoff (December 2025) is treated as a hard boundary. The prompt uses "MUST" (capitalized) for any fact that could have changed since then. This is a categorical rule, not a suggestion, and it eliminates the most common failure mode of consumer LLMs: confident hallucination about recent events.</li>
+<li>Layered identity - "GPT-5.6 Thinking" reveals the model is a reasoning model with hidden chain-of-thought. This sets user expectations correctly: the model will think before answering, and the thinking is private. This is honest and prevents users from being confused by latency.</li>
+<li>Image person-policy nuance - Instead of blanket-refusing all people-in-image questions, the prompt defines a precise allow/deny list. Identifying real people: denied. Identifying animated characters: allowed. Answering appropriate questions about people: allowed. This avoids the over-refusal problem that plagued earlier ChatGPT versions.</li>
+<li>Ad transparency protocol - 20+ lines dedicated to how the model should handle ads. It cannot see ad content, cannot insert ads, and must redirect users to UI controls. This is a trust-critical boundary that prevents users from thinking the model is shilling products.</li>
+<li>"Show, don't tell" compliance rule - The prompt forbids the model from explaining its own compliance: "NEVER explain compliance to any instructions explicitly; let your compliance speak for itself." This eliminates the annoying "As an AI language model, I..." preambles that users hate.</li></ul>
+</div>
+<div class="an-card an-card--bad">
+  <div class="an-card__head"><span class="an-card__icon">⚠️</span><span>⚠ What It Doesn't Do Well</span></div>
+  <ul class="an-card__list"><li>Undefined "inappropriate" - The word "inappropriate" appears in the image-person policy but is never defined. The model must infer what counts as inappropriate, which means edge cases will produce inconsistent behavior across conversations.</li>
+<li>Ad policy is reactive, not proactive - The ad handling section is 20 lines of if-then rules, but there's no architectural mechanism to prevent ad-related hallucination. If a user claims "you showed me an ad about X," the model has no way to verify - it must rely on the template response.</li>
+<li>Knowledge cutoff as hard date - December 2025 is treated as a binary threshold, but some facts (math theorems, historical events) are stable across the cutoff while others (stock prices, who is CEO) are not. The prompt does not distinguish between stable and volatile knowledge, forcing unnecessary web searches for stable facts.</li>
+<li>"MUST search" is unfalsifiable - The instruction "if you remotely think it is possible a fact might have changed" sets the threshold so low that nearly any factual claim triggers a search. This wastes tokens and adds latency for commonly-known facts that happen to be post-cutoff.</li></ul>
+</div>
+<div class="an-card an-card--sota">
+  <div class="an-card__head"><span class="an-card__icon">🎯</span><span>🎯 State of the Art</span></div>
+  <ul class="an-card__list"><li>Categorical vs. context-gated refusal - This prompt represents the industry shift from categorical refusals ("never identify people") to context-gated refusals ("identifying real people: denied; identifying animated characters: allowed"). This is the current SOTA approach, replacing the blunt refusal cascades of GPT-4 era prompts.</li>
+<li>Hidden CoT disclosure - Explicitly telling the model it has "a hidden chain of thought" and instructing it to disclose this when asked is a transparency pattern that Anthropic and Google have not yet adopted in their consumer prompts. OpenAI is ahead here.</li>
+<li>Lazy-loaded skill files - The environment section instructs the model to read SKILL.md files on-demand for PDF/docx/slides/spreadsheets. This is a "prompt-as-OS" pattern where the system prompt is a bootloader and domain skills are loaded as needed, keeping the base prompt lean.</li></ul>
+</div>
+<div class="an-card an-card--evolution">
+  <div class="an-card__head"><span class="an-card__icon">📈</span><span>📈 How It's Evolving</span></div>
+  <ul class="an-card__list"><li>From GPT-4o to GPT-5.6: identity complexity explosion - GPT-4o's prompt was ~1,700 lines. GPT-5.6 is 2,661 lines, a 56% increase. Most growth is in tool definitions and citation protocol, not identity/safety. The identity section itself has actually gotten shorter and more precise.</li>
+<li>Knowledge cutoff moved from implicit to explicit - Earlier prompts said "your training data has a cutoff." GPT-5.6 names a specific date (December 2025) and makes web search mandatory for post-cutoff facts. This is a direct response to the "stale knowledge" criticism that GPT-4 faced.</li>
+<li>Ad handling section is entirely new - No prior OpenAI prompt had ad-related instructions. This section's existence signals that OpenAI has monetized the Free/Go tiers with ads and needed prompt-level guardrails to prevent the model from becoming an ad-pushing machine.</li>
+<li>"Show, don't tell" is an evolution from anti-sycophancy - GPT-4o had "don't be sycophantic." GPT-5.6 escalates to a blanket ban on compliance meta-commentary, which is a stronger and more precise formulation.</li></ul>
+</div>
+      </div>
+    </div>
+  </section>
+  <!-- CHAPTER 02 -->
+  <section class="an-chapter-wrap" data-sc-act="flow" data-sc-drift="#0b0d13">
+    <div class="an-chapter">
+      <div class="an-chapter__head" data-sc-in>
+        <span class="an-chapter__num">02</span>
+        <h2 class="an-chapter__title" data-sc-kinetic="lines">02Writing Blocks System &amp; Response Style Architecture</h2>
+      </div>
+      <figure class="an-prompt" data-sc-in>
+  <figcaption class="an-prompt__label">excerpt from the prompt</figcaption>
+  <pre class="an-prompt__code"># Writing Blocks
+
+Use writing blocks for finished reusable writing artifacts. This includes not
+only first drafts, but also complete transformed versions of text the user
+supplied.
+
+Primary-artifact test:
+- Use a writing block when the assistant is delivering the actual finished text
+  as one of the main usable outputs.
+- Do NOT use a writing block when the text is only an example, option,
+  explanation, brainstorm, outline, quote for discussion, code, recipe, factual
+  answer, or wording fragment supporting a broader answer.
+
+Variant choice:
+- Use variant="chat_message" for rewritten texts, Slack replies, DMs
+- Use variant="social_post" for rewritten captions, social posts, tweets
+- Use variant="document" for paragraphs, essays, reports, speeches, stories
+- Use variant="email" for email rewrites or email drafts
+
+Syntax:
+:::writing{variant="" id=""}
+
+:::
+
+Use a unique random 5-digit id. Use no more than 3 writing blocks.
+
+## Writing Style
+Aim for readable, accessible responses. Do NOT use incomplete sentences or
+abbreviations. Keep markdown lists and bullet points to an absolute minimum.
+
+Never switch languages mid-conversation unless the user does first.
+
+NEVER use these phrases:  …</pre>
+</figure>
+      <div class="an-cards" data-sc-in data-sc-stagger="90">
+<div class="an-card an-card--good">
+  <div class="an-card__head"><span class="an-card__icon">✅</span><span>✅ What It Does Well</span></div>
+  <ul class="an-card__list"><li>Structured writing artifact protocol - The writing-block system with variant tags (chat_message, social_post, document, email) and metadata (subject, recipient) is essentially a mini markup language for user-facing text artifacts. This enables the ChatGPT UI to render different artifact types differently (e.g., an email draft with a "Send" button vs. a social post with a character counter).</li>
+<li>Primary-artifact test - The decision rule for when to use a writing block vs. inline text is crisp: "is this the main usable output?" This prevents the model from wrapping every paragraph in a writing block, which would degrade the conversational experience.</li>
+<li>Banned phrase list - Explicitly forbidding "If you want", "If you mean", "Short answer:", "Short version:", and "I can ..." eliminates the most common filler patterns. This is a targeted intervention against AI-isms that make responses feel machine-generated.</li>
+<li>Oververbosity dial - A single integer (4 out of 10) controls response length. This is developer-overridable, allowing different surfaces (API vs. consumer) to tune verbosity without rewriting the style section.</li>
+<li>Follow-up limiting - "Limit any follow-up suggestions to zero or one maximum" and "Do not use bullet points or lists when offering follow-ups" directly combats the "helpful assistant" pattern of ending every response with 5 suggested next steps.</li></ul>
+</div>
+<div class="an-card an-card--bad">
+  <div class="an-card__head"><span class="an-card__icon">⚠️</span><span>⚠ What It Doesn't Do Well</span></div>
+  <ul class="an-card__list"><li>Writing block limit is arbitrary - "No more than 3 writing blocks" has no stated rationale. For complex tasks (e.g., translating a multi-section document), 3 blocks may be insufficient. The model must either truncate or inline the rest, degrading the artifact quality.</li>
+<li>Email metadata edge cases - "Use recipient only when that exact valid email address appears in the conversation" prevents invented addresses, but what about when the user says "email my boss"? The model must search contacts first, but this isn't stated in the writing-block section - it's buried in the Gmail tool namespace 1,000 lines later.</li>
+<li>Style rules can conflict - "Keep markdown lists to an absolute minimum" conflicts with the Rich UI section's requirement to use tables for calendar events. The model must infer which rule wins based on context, which is not always clear.</li></ul>
+</div>
+<div class="an-card an-card--sota">
+  <div class="an-card__head"><span class="an-card__icon">🎯</span><span>🎯 State of the Art</span></div>
+  <ul class="an-card__list"><li>Artifact typing with UI binding - The variant system (chat_message, social_post, document, email) is unique among consumer AI prompts. Neither Claude nor Gemini has an equivalent structured-output protocol for writing artifacts. This enables the ChatGPT UI to provide surface-specific affordances (e.g., a "Copy to clipboard" button for social posts, a "Send" button for emails).</li>
+<li>Preamble/postamble pattern - The instruction to add a concise preamble before and postamble after writing blocks is a UX pattern borrowed from human-assistant collaboration. The preamble sets context; the postamble offers adjustments. This is more sophisticated than Claude's "here's your output" approach.</li>
+<li>Anti-pattern blacklisting - The banned phrase list ("If you want", "Short answer:", etc.) is a direct, targeted approach to eliminating AI-isms. This is more surgical than Claude's vague "be natural" instruction.</li></ul>
+</div>
+<div class="an-card an-card--evolution">
+  <div class="an-card__head"><span class="an-card__icon">📈</span><span>📈 How It's Evolving</span></div>
+  <ul class="an-card__list"><li>Writing blocks are new in GPT-5.x - GPT-4o had no structured writing artifact system. This was introduced in the GPT-5 series as part of the "canvas" / artifact UI evolution. It signals OpenAI's move toward making ChatGPT a writing tool, not just a chatbot.</li>
+<li>Oververbosity dial replaced "be concise" - Earlier prompts used vague instructions like "be concise but thorough." The numeric oververbosity scale (1-10) is a quantitative replacement that allows programmatic control and A/B testing of response length.</li>
+<li>Banned phrases expanded significantly - GPT-4o banned 2-3 phrases. GPT-5.6 bans 5+ and adds structural bans ("don't end with I can...", "don't use lists for follow-ups"). This reflects accumulated learning about which phrases users find most annoying.</li></ul>
+</div>
+      </div>
+    </div>
+  </section>
+  <!-- CHAPTER 03 -->
+  <section class="an-chapter-wrap" data-sc-act="flow" data-sc-drift="#0b0d13">
+    <div class="an-chapter">
+      <div class="an-chapter__head" data-sc-in>
+        <span class="an-chapter__num">03</span>
+        <h2 class="an-chapter__title" data-sc-kinetic="lines">03Dual-Channel Tool Architecture: Analysis vs. Commentary</h2>
+      </div>
+      <figure class="an-prompt" data-sc-in>
+  <figcaption class="an-prompt__label">excerpt from the prompt</figcaption>
+  <pre class="an-prompt__code">## Namespace: python
+### Target channel: analysis
+### Description
+Use this tool to execute Python code in your chain of thought. You should
+*NOT* use this tool to show code or visualizations to the user. Rather, this
+tool should be used for your private, internal reasoning such as analyzing
+input images, files, or content from the web. python must *ONLY* be called in
+the analysis channel, to ensure that the code is *not* visible to the user.
+
+IMPORTANT: Calls to python MUST go in the analysis channel. NEVER use python
+in the commentary channel.
+
+## Namespace: python_user_visible
+### Target channel: commentary
+### Description
+Use this tool to execute Python code that should be visible to the user.
+Do NOT use it for private reasoning or analysis. Use it for user-visible
+outputs such as: Plots and charts, Tables and dataframes, Spreadsheets,
+Generated files.
+
+Calls to python_user_visible must appear only in the commentary channel.
+Never call it from the analysis channel.
+
+## Namespace: web
+### Target channel: analysis
+### Description
+Tool for accessing the internet.
+
+## Namespace: user_info
+### Target channel: analysis
+### Description
+Gets the user's current location and local time.
+
+ …</pre>
+</figure>
+      <div class="an-cards" data-sc-in data-sc-stagger="90">
+<div class="an-card an-card--good">
+  <div class="an-card__head"><span class="an-card__icon">✅</span><span>✅ What It Does Well</span></div>
+  <ul class="an-card__list"><li>Analysis/commentary channel separation - This is the most architecturally significant pattern in the prompt. Private reasoning (python, web search, user_info, file_search, summary_reader) goes to the "analysis" channel - invisible to the user. User-visible actions (genui widgets, gmail, calendar, image_gen, python_user_visible) go to "commentary." This creates a clean separation between the model's thinking and its output, which is the foundation of the hidden chain-of-thought architecture.</li>
+<li>Dual Python environments - Having both "python" (analysis, private) and "python_user_visible" (commentary, public) is a clever design. The model can do private data analysis (e.g., parse a file, compute statistics) in the hidden channel, then present a clean chart in the visible channel. This prevents users from seeing messy intermediate code while still allowing interactive outputs.</li>
+<li>Summary reader for CoT disclosure - The summary_reader tool can retrieve previous chain-of-thought messages that are "safe to show to the user." This is a controlled transparency mechanism: instead of either hiding all CoT or showing all CoT, the model can selectively disclose safe reasoning when asked. This is architecturally novel.</li>
+<li>"Juice" parameter - The cryptic "# Juice: 112" at the end is likely a compute budget or token allocation signal. This is an internal control mechanism that limits how much reasoning the model can do, similar to a thinking-token budget. It's an elegant way to cap costs without visible quality degradation.</li></ul>
+</div>
+<div class="an-card an-card--bad">
+  <div class="an-card__head"><span class="an-card__icon">⚠️</span><span>⚠ What It Doesn't Do Well</span></div>
+  <ul class="an-card__list"><li>Channel routing is manual - The model must remember which channel each tool targets. There's no enforcement mechanism in the prompt itself; it relies entirely on the model's compliance. A single misrouted tool call (e.g., python in commentary) would leak private reasoning to the user. The prompt says "NEVER" but provides no fallback.</li>
+<li>"Juice" is undefined - The value 112 appears with no explanation. If the model doesn't know what juice controls, it cannot reason about tradeoffs (e.g., should I spend juice on a web search or save it for the final answer?). This is likely a server-side control, but its presence in the prompt without explanation is confusing.</li>
+<li>web.run in analysis but genui in commentary - The web tool is analysis-only (private), but genui (UI widgets) is commentary-only (public). However, genui requires data from web.run to populate widgets. The model must call web.run in analysis, extract results, then call genui in commentary - a multi-hop cross-channel flow that is error-prone and not explicitly documented.</li>
+<li>Summary reader cap of 20 messages - The 20-message cap on CoT retrieval is arbitrary and may be insufficient for long conversations. The model has no way to request more or to know which messages were deemed "safe."</li></ul>
+</div>
+<div class="an-card an-card--sota">
+  <div class="an-card__head"><span class="an-card__icon">🎯</span><span>🎯 State of the Art</span></div>
+  <ul class="an-card__list"><li>Channel-based attention routing - The 4-channel system (analysis, commentary, final, summary) is the most sophisticated output-routing architecture in any leaked consumer AI prompt. Claude Code has a similar concept (tool results vs. user messages) but doesn't formalize it into named channels. This is OpenAI's proprietary innovation.</li>
+<li>Selective CoT disclosure - The summary_reader tool with safety-filtered CoT retrieval is unique. No other AI lab's prompt has a mechanism for the model to retrieve and selectively disclose its own past reasoning. This is a response to the "show me your thinking" user demand while maintaining safety.</li>
+<li>Tool isolation by channel - Rather than giving the model all tools and hoping it uses them correctly, OpenAI assigns each tool to a specific channel. This is a permission model disguised as a routing instruction - tools in the analysis channel are effectively sandboxed from user view.</li></ul>
+</div>
+<div class="an-card an-card--evolution">
+  <div class="an-card__head"><span class="an-card__icon">📈</span><span>📈 How It's Evolving</span></div>
+  <ul class="an-card__list"><li>Channels are new in GPT-5.x - GPT-4o had no channel architecture. The model had tools and used them in a single output stream. The 4-channel system is a direct response to the hidden chain-of-thought feature in reasoning models, which requires separating private reasoning from user-visible output.</li>
+<li>python_user_visible is a split from python - In GPT-4o, there was one Python tool. GPT-5.6 splits it into two: private (analysis) and public (commentary). This split was forced by the channel architecture - the model needed a way to show code output to users without leaking the analysis code.</li>
+<li>Summary reader is entirely new - This tool did not exist in any prior OpenAI prompt. It's a response to user pressure for CoT transparency after OpenAI hidden the reasoning trace in o1/GPT-5 models. The "safe to show" filter suggests a server-side safety review of CoT before disclosure.</li>
+<li>"Juice" as compute budget - Earlier prompts had no visible compute budget signal. The introduction of "Juice" (even if opaque) signals that OpenAI is now managing reasoning costs at the prompt level, not just the infrastructure level.</li></ul>
+</div>
+      </div>
+    </div>
+  </section>
+  <!-- CHAPTER 04 -->
+  <section class="an-chapter-wrap" data-sc-act="flow" data-sc-drift="#0b0d13">
+    <div class="an-chapter">
+      <div class="an-chapter__head" data-sc-in>
+        <span class="an-chapter__num">04</span>
+        <h2 class="an-chapter__title" data-sc-kinetic="lines">04Web Search, Citation Protocol &amp; Rich UI Element System</h2>
+      </div>
+      <figure class="an-prompt" data-sc-in>
+  <figcaption class="an-prompt__label">excerpt from the prompt</figcaption>
+  <pre class="an-prompt__code">## Citations
+Results are returned by "web.run". Each message from web.run is called a
+"source" and identified by their reference ID, which is the first occurrence
+of 【turn\d+\w+\d+】 (e.g. 【turn2search5】).
+
+Citations to a single source must be written as
+【cite|turn\d+\w+\d+】 (e.g. 【cite|turn2search5】).
+
+Citations must not be placed inside markdown bold, italics, or code fences.
+You must NOT write reference ID turn\d+\w+\d+ verbatim in the response text
+without putting them between 【...】.
+
+- If you make factual statements that are not common knowledge, you must cite
+  the 5 most load-bearing/important statements in your response.
+- factual statements that are likely (&gt;10% chance) to have changed since June
+  2024 must have citations
+
+## Word limits
+* Do not quote more than 25 words verbatim from a single non-lyrical source
+* Song lyric quotations are limited to 10 words
+* Reddit quotations may be longer when presented as direct quotes and cited
+
+## Rich UI elements
+### Stock price chart
+### Sports schedule
+### Sports standings
+### Weather forecast
+### Navigation list
+### Image carousel
+### Product carousel</pre>
+</figure>
+      <div class="an-cards" data-sc-in data-sc-stagger="90">
+<div class="an-card an-card--good">
+  <div class="an-card__head"><span class="an-card__icon">✅</span><span>✅ What It Does Well</span></div>
+  <ul class="an-card__list"><li>Custom citation syntax - The 【cite|turnXsearchY】 bracket notation is a purpose-built citation format that the ChatGPT UI parses and renders as clickable source links. This is not markdown - it's a domain-specific markup that enables inline citations without disrupting the text flow. The design is clean and unambiguous.</li>
+<li>Load-bearing citation requirement - "Cite the 5 most load-bearing/important statements" is a precision targeting rule. Instead of requiring citations for every factual claim (which would clutter responses), the model must identify the 5 claims that, if wrong, would most damage the response's value. This is a quality-over-quantity approach to sourcing.</li>
+<li>Copyright word limits by source type - 25 words for non-lyrical sources, 10 words for song lyrics, longer for Reddit quotes. This is a legally-informed copyright compliance system that differentiates source types by their legal exposure. The Reddit exception acknowledges that Reddit content is user-generated and has different fair-use considerations.</li>
+<li>Rich UI element catalog - 7 distinct widget types (stock chart, sports schedule, sports standings, weather forecast, navigation list, image carousel, product carousel) with precise trigger conditions. Each has "when to use" and "when not to use" rules. This transforms ChatGPT from a text-only assistant into a multi-modal information dashboard.</li>
+<li>Product exclusion list - A 15-category exclusion list for product carousels (firearms, explosives, adult products, prescription drugs, alcohol, etc.) is embedded directly in the prompt. This prevents the model from recommending regulated or dangerous products, which is a liability-critical boundary.</li></ul>
+</div>
+<div class="an-card an-card--bad">
+  <div class="an-card__head"><span class="an-card__icon">⚠️</span><span>⚠ What It Doesn't Do Well</span></div>
+  <ul class="an-card__list"><li>Citation syntax is fragile - The regex-based citation format (【cite|turn\d+\w+\d+】) requires the model to generate exact regex-matching strings. A single character error (wrong turn number, missing pipe) breaks the citation link silently. There's no error recovery mechanism.</li>
+<li>"5 most load-bearing" is subjective - The model must judge which 5 statements are most load-bearing, which is a meta-reasoning task. Different models (or the same model at different temperatures) will make different judgments, leading to inconsistent citation density across conversations.</li>
+<li>June 2024 citation threshold is stale - The instruction says "facts likely to have changed since June 2024 must have citations," but the knowledge cutoff is December 2025. The 18-month gap between these dates means the model must cite facts it already knows with high confidence, wasting citation budget on stable knowledge.</li>
+<li>Rich UI rules can conflict - "Only use one rich UI element per response" conflicts with "insert at the beginning" (image carousel) and "insert at the end" (navigation list). If both are relevant, the model must choose, but no priority rule is given.</li></ul>
+</div>
+<div class="an-card an-card--sota">
+  <div class="an-card__head"><span class="an-card__icon">🎯</span><span>🎯 State of the Art</span></div>
+  <ul class="an-card__list"><li>Inline citation rendering - The custom bracket syntax for citations is more sophisticated than Perplexity's superscript approach or Gemini's "sources" footer. Inline citations that the UI parses and renders as interactive links is the current SOTA for citation UX in AI assistants.</li>
+<li>Widget-trigger conditions - Each Rich UI element has explicit "must use if" and "do not use when" rules. This is a decision-tree approach to widget selection that prevents the model from decorating responses with unnecessary widgets. No competitor has this level of widget-gating precision.</li>
+<li>Multi-source citation diversity - "You must base your answer on sources from diverse domains" and "more than half of citations from widely recognized authoritative outlets" are quality criteria for source selection, not just source retrieval. This is a meta-citation requirement that most AI assistants lack entirely.</li></ul>
+</div>
+<div class="an-card an-card--evolution">
+  <div class="an-card__head"><span class="an-card__icon">📈</span><span>📈 How It's Evolving</span></div>
+  <ul class="an-card__list"><li>Citation system has grown from 0 to 80+ lines - GPT-4o had minimal citation instructions. GPT-5.6 has a full citation protocol with syntax, placement rules, diversity requirements, and word limits. This reflects the competitive pressure from Perplexity and the demand for source-backed answers.</li>
+<li>Rich UI elements expanded from 2 to 7 - GPT-4o had weather and stock charts. GPT-5.6 adds sports schedules, standings, navigation lists, image carousels, and product carousels. Each new widget type corresponds to a new ChatGPT feature shipped between GPT-4o and GPT-5.6.</li>
+<li>Product carousel exclusion list is new - The 15-category exclusion list for product recommendations did not exist in earlier prompts. It was likely added after legal review of the product carousel feature, which could expose OpenAI to liability for recommending regulated products.</li>
+<li>Dedicated data tools - Weather, stocks, sports, and time now have dedicated tool endpoints that take precedence over web search when sources conflict. This is a shift from "search everything" to "use the authoritative API first," which improves response accuracy and reduces web search costs.</li></ul>
+</div>
+      </div>
+    </div>
+  </section>
+  <!-- CHAPTER 05 -->
+  <section class="an-chapter-wrap" data-sc-act="flow" data-sc-drift="#0b0d13">
+    <div class="an-chapter">
+      <div class="an-chapter__head" data-sc-in>
+        <span class="an-chapter__num">05</span>
+        <h2 class="an-chapter__title" data-sc-kinetic="lines">05Automations System: Built-in Scheduling &amp; Condition Monitoring</h2>
+      </div>
+      <figure class="an-prompt" data-sc-in>
+  <figcaption class="an-prompt__label">excerpt from the prompt</figcaption>
+  <pre class="an-prompt__code">## Namespace: automations
+### Target channel: commentary
+### Description
+Use the automations tool when the user asks you to do something later,
+repeatedly, or when a future condition becomes true, including reminders,
+recurring summaries, scheduled searches, and conditional checks.
+
+To create a task, provide:
+* title: a short card headline, usually 2-5 words
+* prompt: the instruction that will be sent back to you on future runs
+* schedule: an iCal VEVENT schedule
+* timing_mode: exact_schedule, flexible_schedule, or condition_watch
+
+### Timing rules
+* If the user names an explicit clock time, use exact_schedule
+* Dayparts without a named clock time are flexible_schedule
+  (8 a.m. for morning, 3 p.m. for afternoon, 7 p.m. for evening)
+* condition_watch must be recurring
+* Highest frequency: once every hour
+
+### When to suggest automations
+Prefer suggesting an automation whenever ongoing monitoring, recurring
+follow-up, or scheduled delivery would be meaningfully useful, even if the
+user only asked for a one-time answer. Do NOT create the automation unless
+the user asks for it.
+
+Examples:
+- "I can monitor this and let you know if there are major new developments.
+  Want me to set that …</pre>
+</figure>
+      <div class="an-cards" data-sc-in data-sc-stagger="90">
+<div class="an-card an-card--good">
+  <div class="an-card__head"><span class="an-card__icon">✅</span><span>✅ What It Does Well</span></div>
+  <ul class="an-card__list"><li>iCal VEVENT scheduling - Using the standard iCal VEVENT/RRULE format for scheduling is a smart choice. It's a well-defined standard that handles recurrence (daily, weekly, monthly), exceptions (UNTIL, COUNT), and timezone-aware DTSTART. This avoids inventing a custom scheduling DSL that would require more prompt space and be more error-prone.</li>
+<li>Three timing modes - exact_schedule (user-named time), flexible_schedule (dayparts with approximate times), and condition_watch (recurring checks until a condition is met) cover the full spectrum of scheduling needs. The mapping from user language to timing mode is explicit and deterministic.</li>
+<li>Suggestion vs. creation boundary - "Prefer suggesting an automation" but "Do NOT create the automation unless the user asks for it." This is a consent boundary that prevents the model from creating automated tasks without explicit user approval. The suggestions are conversational and opt-in.</li>
+<li>dtstart_offset_json - For relative one-time schedules ("in 4 hours"), the prompt uses JSON arguments to Python dateutil.relativedelta instead of calculating absolute timestamps. This eliminates timezone calculation errors, which are the most common bug in scheduling systems.</li>
+<li>7 concrete examples - The examples section covers Tahoe skiing, market reports, email monitoring, AI news watching, Flora briefings, laundry reminders, and gym reminders. Each shows the exact title, prompt, schedule, and timing_mode. This is few-shot learning at the prompt level.</li></ul>
+</div>
+<div class="an-card an-card--bad">
+  <div class="an-card__head"><span class="an-card__icon">⚠️</span><span>⚠ What It Doesn't Do Well</span></div>
+  <ul class="an-card__list"><li>Hourly frequency cap is limiting - "The highest frequency is once every hour." For stock price monitoring or breaking news alerts, hourly is too slow. The prompt acknowledges this ("interpret continuously as once per hour") but doesn't offer a workaround.</li>
+<li>condition_watch has no exit condition - A condition_watch automation is recurring, but what happens when the condition becomes true? The prompt says "notify me if..." but doesn't specify whether the automation auto-disables after notification. This could lead to duplicate notifications or orphaned automations.</li>
+<li>No conflict detection - If a user creates "remind me to do laundry at 3pm" and then creates another "remind me to call mom at 3pm," there's no instruction to check for scheduling conflicts. The model creates both independently.</li></ul>
+</div>
+<div class="an-card an-card--sota">
+  <div class="an-card__head"><span class="an-card__icon">🎯</span><span>🎯 State of the Art</span></div>
+  <ul class="an-card__list"><li>Agentic scheduling as first-class capability - No other consumer AI assistant has a built-in scheduling/automation system at this level. Siri has shortcuts, Google Assistant has routines, but ChatGPT's automations system is the only one that lets the AI create its own future tasks with natural-language prompts. This is a step toward autonomous agent behavior.</li>
+<li>Self-addressed future prompts - The automation prompt is written as "an instruction that will be sent back to you on future runs." The model is essentially writing a prompt for its future self. This is a form of temporal self-delegation that is architecturally novel in consumer AI.</li>
+<li>Daypart-to-time mapping - The explicit mapping (morning = 8am, afternoon = 3pm, evening = 7pm) is a practical heuristic that bridges human language to machine scheduling. This is more sophisticated than any competitor's time-parsing approach.</li></ul>
+</div>
+<div class="an-card an-card--evolution">
+  <div class="an-card__head"><span class="an-card__icon">📈</span><span>📈 How It's Evolving</span></div>
+  <ul class="an-card__list"><li>Automations are entirely new in GPT-5.x - No prior OpenAI prompt had a scheduling system. This was introduced alongside the ChatGPT "tasks" feature in 2025-2026 and represents OpenAI's move from reactive chatbot to proactive agent.</li>
+<li>From "I can't do things later" to "I can schedule things" - Earlier ChatGPT versions explicitly could not perform future actions. The automations namespace is a fundamental capability expansion that changes the product's identity from "chat" to "agent."</li>
+<li>Suggestion pattern borrowed from Google Assistant - The "Want me to set that up?" opt-in pattern mirrors how Google Assistant suggests routines. OpenAI has adopted this UX pattern while making it more conversational and less scripted.</li></ul>
+</div>
+      </div>
+    </div>
+  </section>
+  <!-- CHAPTER 06 -->
+  <section class="an-chapter-wrap" data-sc-act="flow" data-sc-drift="#0b0d13">
+    <div class="an-chapter">
+      <div class="an-chapter__head" data-sc-in>
+        <span class="an-chapter__num">06</span>
+        <h2 class="an-chapter__title" data-sc-kinetic="lines">06Bio/Memory System, Developer Instructions &amp; User Updates Protocol</h2>
+      </div>
+      <figure class="an-prompt" data-sc-in>
+  <figcaption class="an-prompt__label">excerpt from the prompt</figcaption>
+  <pre class="an-prompt__code">## Namespace: bio
+### Target channel: commentary
+### Description
+The bio tool allows you to persist information across conversations, so you
+can deliver more personalized and helpful responses over time. The
+corresponding user facing feature is known to users as "memory".
+
+#### When to use the bio tool
+- The user is requesting for you to save or forget information
+- Anytime the user message includes phrases like "remember that...",
+  "store this", "add to memory", "note that...", "forget that..."
+- Anytime you determine the user is requesting to save/forget: ALWAYS call bio
+
+#### When NOT to use the bio tool
+Don't store random, trivial, or overly personal facts. Avoid:
+- Overly-personal details that could feel creepy
+- Short-lived facts that won't matter soon
+- Random details that lack clear future relevance
+
+Never store sensitive data unless clearly requested:
+- Race, ethnicity, or religion
+- Criminal record details
+- Precise geolocation
+- Explicit identification of personal attributes
+- Political affiliation
+- Health information
+
+# Developer Instructions
+CADENCE: Share updates on average every 15 seconds or 2-3 tool calls
+(whichever comes first).
+
+Update length: Keep most updates …</pre>
+</figure>
+      <div class="an-cards" data-sc-in data-sc-stagger="90">
+<div class="an-card an-card--good">
+  <div class="an-card__head"><span class="an-card__icon">✅</span><span>✅ What It Does Well</span></div>
+  <ul class="an-card__list"><li>Memory sensitivity taxonomy - The bio tool has a detailed taxonomy of what not to store: race, ethnicity, religion, criminal record, geolocation, political affiliation, health information. This is a privacy-by-design pattern that prevents the model from accumulating sensitive user data in long-term memory. The exception ("unless clearly requested") respects user autonomy while defaulting to privacy.</li>
+<li>Always-call-on-trigger rule - "Anytime the user message includes phrases like 'remember that...' you should ALWAYS call the bio tool, even if the information has already been stored, appears extremely trivial or fleeting." This eliminates the judgment call that would cause the model to skip memory writes when it deems information unimportant, which would frustrate users who explicitly asked to remember something.</li>
+<li>Asynchronous work prohibition - "You are incapable of performing work asynchronously... UNDER NO CIRCUMSTANCE should you tell the user to sit tight, wait." This is a critical trust boundary that prevents the model from making promises it cannot keep. It forces the model to deliver results in the current response, which is the only thing it can actually guarantee.</li>
+<li>Update cadence protocol - The 15-second / 2-3 tool call cadence for user updates is a UX pattern that keeps the user informed during long reasoning chains. The 60-word cap prevents verbose updates that would themselves become noise. This is borrowed from human work culture (standup updates) and adapted for AI.</li>
+<li>Partial completion over clarification - "Partial completion is MUCH better than clarifications or promising to do work later." This is an anti-laziness instruction that prevents the model from weaseling out of hard tasks by asking unnecessary clarifying questions. It forces best-effort responses.</li></ul>
+</div>
+<div class="an-card an-card--bad">
+  <div class="an-card__head"><span class="an-card__icon">⚠️</span><span>⚠ What It Doesn't Do Well</span></div>
+  <ul class="an-card__list"><li>"Creepy" is undefined - The instruction says "avoid overly-personal details that could feel creepy" but doesn't define what's creepy. This is a judgment call that varies by user and culture. The model must infer the boundary, which will produce inconsistent memory behaviors.</li>
+<li>Sensitive data exception is broad - "Unless clearly requested by the user" allows the user to override the sensitive-data protections. But there's no verification mechanism - a prompt injection could trick the model into thinking the user requested to store health information. The exception is a security hole.</li>
+<li>Hardcoded timezone - "The user's timezone is Atlantic/Reykjavik" is hardcoded for this specific leaked prompt (from user Asgeir's account). In production, this would be dynamic, but its presence as a hardcoded value means any timezone-dependent instruction that follows is user-specific, not generalizable.</li>
+<li>Update cadence conflicts with image gen - "Do NOT give any plans or updates when using the image_gen tool" is an exception to the update cadence rule, but it's mentioned only in the cadence section, not in the image_gen section. A model reading the image_gen section alone wouldn't know to suppress updates.</li></ul>
+</div>
+<div class="an-card an-card--sota">
+  <div class="an-card__head"><span class="an-card__icon">🎯</span><span>🎯 State of the Art</span></div>
+  <ul class="an-card__list"><li>Persistent memory with sensitivity filters - The bio tool's sensitivity taxonomy is the most detailed memory-safety protocol in any consumer AI prompt. Claude's memory system (in Claude Mobile) has similar protections but doesn't enumerate categories as precisely. This is a privacy-engineering SOTA pattern.</li>
+<li>Streaming update protocol - The 15-second update cadence with 60-word caps is unique to OpenAI. Neither Claude nor Gemini has a streaming-update protocol in their prompts. This reflects ChatGPT's real-time UI where users watch the model think, which is a product differentiator.</li>
+<li>Anti-deferral instruction - "Never tell the user to wait" is a strong anti-laziness pattern that no other AI lab implements as explicitly. This forces the model to always produce output in the current turn, which is the right behavior for a synchronous chat product.</li></ul>
+</div>
+<div class="an-card an-card--evolution">
+  <div class="an-card__head"><span class="an-card__icon">📈</span><span>📈 How It's Evolving</span></div>
+  <ul class="an-card__list"><li>Memory system evolved from "Custom Instructions" to "bio tool" - GPT-4o had custom instructions (static user-provided context). GPT-5.6 has the bio tool, which is a dynamic, model-managed memory system. This is a fundamental shift from user-curated context to AI-curated context, with privacy guardrails.</li>
+<li>Sensitive data categories expanded - Earlier prompts had a shorter list of prohibited storage categories. GPT-5.6 adds trade union membership, explicit identification of personal attributes, and a nuanced distinction between "directly asserting" and "plausible mentions."</li>
+<li>Update protocol is new - The streaming-update cadence did not exist in GPT-4o prompts. It was introduced when ChatGPT added the "watch me think" UI feature, which made the model's intermediate states visible to users. The update protocol manages this visibility.</li>
+<li>Anti-deferral language escalated - GPT-4o said "don't promise future work." GPT-5.6 says "UNDER NO CIRCUMSTANCE" and "you are incapable of performing work asynchronously." The escalation reflects accumulated problems with models deferring work and then never delivering.</li></ul>
+</div>
+      </div>
+    </div>
+  </section>
+  <!-- CLOSE -->
+  <section data-sc-act="pin" data-sc-span="2.2" data-sc-drift="#0b0d13">
+    <div data-sc-stage class="an-close">
+      <div class="an-close__inner">
+        <div class="an-hero__kick" data-sc-cue="0 0.4">The takeaway</div>
+        <h2 data-sc-cue="0.15 0.6">System Prompt Lab #2</h2>
+        <p data-sc-cue="0.3 0.75">The Big Takeaway
+  
+    GPT-5.6's prompt is the most complex consumer AI system prompt ever leaked - 2,661 lines managing 15+ tool namespaces across a 4-channel architecture.
+    The key innovation is channel-based tool isolation: private reasoning and user-visible output are structurally separated, making the hidden chain-of-thought an architectural feature rather than a behavioral suggestion.
+    The writing-blocks system, citation protocol, and automations framework transform ChatGPT from a chatbot into a multi-surface information agent.
+    But the prompt's size (~28.5K tokens) is itself a design constraint - every additional instruction is a tax on every conversation.
+  
+
+
+
+  System Prompt Lab #2 · GPT-5.6 SOL Extra High · Source: asgeirtj/system_prompts_leaks (CC0-1.0)
+  Analysis by GLM 5.2 via Venice AI · Powered by Hermes Agent</p>
+        <p data-sc-cue="0.45 0.85" style="margin-top:14px">Deep Dive: The Channel Architecture as Prompt-as-OS
+  
+    The most architecturally significant pattern in GPT-5.6's prompt is the 4-channel system: analysis (private reasoning), commentary (user-visible output), final (the completed response), and summary (context compression). This is not just a message-routing convention - it's a full attention isolation architecture that solves three fundamental problems:
+  
+  
+    1. Hidden Chain-of-Thought: By routing all reasoning tools (python, web, file_search, user_info) to the analysis channel, OpenAI ensures that the model's private computation never leaks to the user. The user sees only commentary and final messages. This is the prompt-level mechanism that makes GPT-5.6 a "reasoning model" - the thinking is structurally hidden, not just conventionally hidden.
+  
+  
+    2. Tool Permission Model: Each tool is assigned to a channel, which acts as its permission boundary. Tools in the analysis channel can access private data (user location, web results, uploaded files) but cannot produce user-visible output. Tools in the commentary channel can produce user-visible output but cannot access private reasoning. This is a capability-based secur</p>
+        <p class="next" data-sc-cue="0.6 0.95"><a href="../prompt-lab.html">Back to the Lab ↩</a></p>
+      </div>
+    </div>
+  </section>
+</main>
+<script>
+document.documentElement.style.setProperty('--tok', 0);
+addEventListener('scroll', () => {
+  const p = Math.min(1, scrollY / (document.body.scrollHeight - innerHeight));
+  document.documentElement.style.setProperty('--tok', p.toFixed(3));
+}, { passive: true });
+</script>
+<script src="../prompt-lab-assets/scrollcraft.js"></script>
+<script>
+  (function() {{
+    function go() {{ try {{ ScrollCraft.mount(document.body); }} catch(e) {{ document.querySelectorAll('[data-sc-in],[data-sc-cue]').forEach(function(el) {{ el.style.opacity = 1; el.style.transform = 'none'; }}); }} }}
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go); else go();
+  }})();
+</script>
+</body>
+</html>

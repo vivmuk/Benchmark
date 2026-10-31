@@ -19,10 +19,14 @@ ROOT = Path(__file__).resolve().parent
 RESULTS_PATH = ROOT / "data" / "results.json"
 
 def load_key():
-    txt = open("/Users/vivgatesai/.openclaw/service-env/ai.openclaw.gateway.env").read()
-    m = re.search(r"^(?:export )?VENICE_API_KEY=[\'\"]?(.*?)[\'\"]?$", txt, re.M)
-    return m.group(1)
-
+    for name in ("VENICE_INFERENCE_KEY", "VENICE_API_KEY"):
+        v = os.environ.get(name)
+        if v:
+            return v
+    import sqlite3
+    con = sqlite3.connect(f"file:{Path.home() / '.openclaw/agents/main/agent/openclaw-agent.sqlite'}?mode=ro", uri=True)
+    j = json.loads(con.execute("select store_json from auth_profile_store where store_key='primary'").fetchone()[0])
+    return (j.get("profiles") or {}).get("venice:cloud", {}).get("key")
 def main():
     target = sys.argv[1] if len(sys.argv) > 1 else None
     if not target:
@@ -37,7 +41,8 @@ def main():
     env = dict(os.environ, VENICE_INFERENCE_KEY=key)
     print(f"\n=== Core tracks for {target} ===", flush=True)
     proc = subprocess.run(
-        [sys.executable, "run_benchmarks.py", "--run-real", "--model", target],
+        [sys.executable, "run_benchmarks.py", "--run-real", "--model", target,
+         "--request-timeout", "240"],
         env=env, cwd=ROOT, capture_output=True, text=True, timeout=3600)
     print(proc.stdout[-4000:])
     if proc.returncode != 0:

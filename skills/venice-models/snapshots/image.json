@@ -1,0 +1,1828 @@
+{
+  "count": 37,
+  "models": [
+    {
+      "id": "bria-bg-remover",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {
+          "promptCharacterLimit": 1500,
+          "steps": {
+            "default": 20,
+            "max": 50
+          },
+          "widthHeightDivisor": 1
+        },
+        "maxCompletionTokens": null,
+        "pricing": {
+          "generation": {
+            "diem": 0.03,
+            "usd": 0.03
+          },
+          "upscale": {
+            "2x": {
+              "diem": 0.02,
+              "usd": 0.02
+            },
+            "4x": {
+              "diem": 0.08,
+              "usd": 0.08
+            }
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "image"
+    },
+    {
+      "id": "chroma",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {
+          "promptCharacterLimit": 7500,
+          "steps": {
+            "default": 10,
+            "max": 10
+          },
+          "widthHeightDivisor": 8
+        },
+        "maxCompletionTokens": null,
+        "modelSource": "https://huggingface.co/lodestones/Chroma1-HD",
+        "pricing": {
+          "generation": {
+            "diem": 0.01,
+            "usd": 0.01
+          },
+          "upscale": {
+            "2x": {
+              "diem": 0.02,
+              "usd": 0.02
+            },
+            "4x": {
+              "diem": 0.08,
+              "usd": 0.08
+            }
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "image"
+    },
+    {
+      "id": "flux-2-max",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {
+          "aspectRatios": [
+            "auto",
+            "1:1",
+            "3:2",
+            "16:9",
+            "21:9",
+            "9:16",
+            "2:3",
+            "3:4",
+            "4:5"
+          ],
+          "defaultAspectRatio": "auto",
+          "promptCharacterLimit": 3000,
+          "steps": {
+            "default": 20,
+            "max": 50
+          },
+          "widthHeightDivisor": 1
+        },
+        "maxCompletionTokens": null,
+        "pricing": {
+          "generation": {
+            "diem": 0.09,
+            "usd": 0.09
+          },
+          "upscale": {
+            "2x": {
+              "diem": 0.02,
+              "usd": 0.02
+            },
+            "4x": {
+              "diem": 0.08,
+              "usd": 0.08
+            }
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "image"
+    },
+    {
+      "id": "flux-2-pro",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {
+          "aspectRatios": [
+            "1:1",
+            "3:2",
+            "16:9",
+            "21:9",
+            "9:16",
+            "2:3",
+            "3:4",
+            "4:5"
+          ],
+          "defaultAspectRatio": "1:1",
+          "promptCharacterLimit": 3000,
+          "steps": {
+            "default": 20,
+            "max": 50
+          },
+          "widthHeightDivisor": 1
+        },
+        "maxCompletionTokens": null,
+        "pricing": {
+          "generation": {
+            "diem": 0.03,
+            "usd": 0.03
+          },
+          "upscale": {
+            "2x": {
+              "diem": 0.02,
+              "usd": 0.02
+            },
+            "4x": {
+              "diem": 0.08,
+              "usd": 0.08
+            }
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "image"
+    },
+    {
+      "id": "gpt-image-1-5",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {
+          "aspectRatios": [
+            "1:1",
+            "3:2",
+            "2:3"
+          ],
+          "defaultAspectRatio": "1:1",
+          "promptCharacterLimit": 5000,
+          "steps": {
+            "default": 20,
+            "max": 50
+          },
+          "widthHeightDivisor": 1
+        },
+        "maxCompletionTokens": null,
+        "pricing": {
+          "generation": {
+            "diem": 0.26,
+            "usd": 0.26
+          },
+          "upscale": {
+            "2x": {
+              "diem": 0.02,
+              "usd": 0.02
+            },
+            "4x": {
+              "diem": 0.08,
+              "usd": 0.08
+            }
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "image"
+    },
+    {
+      "id": "gpt-image-2",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {
+          "aspectRatios": [
+            "1:1",
+            "3:2",
+            "16:9",
+            "21:9",
+            "9:16",
+            "2:3",
+            "3:4",
+            "4:5"
+          ],
+          "defaultAspectRatio": "1:1",
+          "defaultQuality": "high",
+          "defaultResolution": "1K",
+          "promptCharacterLimit": 10000,
+          "qualities": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "resolutions": [
+            "1K",
+            "2K",
+            "4K"
+          ],
+          "steps": {
+            "default": 20,
+            "max": 50
+          },
+          "widthHeightDivisor": 1
+        },
+        "maxCompletionTokens": null,
+        "pricing": {
+          "quality": {
+            "1K": {
+              "high": {
+                "diem": 0.26,
+                "usd": 0.26
+              },
+              "low": {
+                "diem": 0.02,
+                "usd": 0.02
+              },
+              "medium": {
+                "diem": 0.07,
+                "usd": 0.07
+              }
+            },
+            "2K": {
+              "high": {
+                "diem": 0.5,
+                "usd": 0.5
+              },
+              "low": {
+                "diem": 0.03,
+                "usd": 0.03
+              },
+              "medium": {
+                "diem": 0.13,
+                "usd": 0.13
+              }
+            },
+            "4K": {
+              "high": {
+                "diem": 0.83,
+                "usd": 0.83
+              },
+              "low": {
+                "diem": 0.05,
+                "usd": 0.05
+              },
+              "medium": {
+                "diem": 0.21,
+                "usd": 0.21
+              }
+            }
+          },
+          "resolutions": {
+            "1K": {
+              "diem": 0.27,
+              "usd": 0.27
+            },
+            "2K": {
+              "diem": 0.51,
+              "usd": 0.51
+            },
+            "4K": {
+              "diem": 0.84,
+              "usd": 0.84
+            }
+          },
+          "upscale": {
+            "2x": {
+              "diem": 0.02,
+              "usd": 0.02
+            },
+            "4x": {
+              "diem": 0.08,
+              "usd": 0.08
+            }
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "image"
+    },
+    {
+      "id": "grok-imagine-image",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {
+          "aspectRatios": [
+            "1:1",
+            "16:9",
+            "9:16",
+            "3:4",
+            "3:2",
+            "2:3"
+          ],
+          "defaultAspectRatio": "1:1",
+          "defaultResolution": "1K",
+          "promptCharacterLimit": 7500,
+          "resolutions": [
+            "1K",
+            "2K"
+          ],
+          "steps": {
+            "default": 20,
+            "max": 50
+          },
+          "widthHeightDivisor": 1
+        },
+        "maxCompletionTokens": null,
+        "pricing": {
+          "resolutions": {
+            "1K": {
+              "diem": 0.03,
+              "usd": 0.03
+            },
+            "2K": {
+              "diem": 0.04,
+              "usd": 0.04
+            }
+          },
+          "upscale": {
+            "2x": {
+              "diem": 0.02,
+              "usd": 0.02
+            },
+            "4x": {
+              "diem": 0.08,
+              "usd": 0.08
+            }
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "image"
+    },
+    {
+      "id": "grok-imagine-image-quality",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {
+          "aspectRatios": [
+            "1:1",
+            "16:9",
+            "9:16",
+            "3:4",
+            "3:2",
+            "2:3"
+          ],
+          "defaultAspectRatio": "1:1",
+          "defaultResolution": "1K",
+          "promptCharacterLimit": 7500,
+          "resolutions": [
+            "1K",
+            "2K"
+          ],
+          "steps": {
+            "default": 20,
+            "max": 50
+          },
+          "widthHeightDivisor": 1
+        },
+        "maxCompletionTokens": null,
+        "pricing": {
+          "resolutions": {
+            "1K": {
+              "diem": 0.06,
+              "usd": 0.06
+            },
+            "2K": {
+              "diem": 0.09,
+              "usd": 0.09
+            }
+          },
+          "upscale": {
+            "2x": {
+              "diem": 0.02,
+              "usd": 0.02
+            },
+            "4x": {
+              "diem": 0.08,
+              "usd": 0.08
+            }
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "image"
+    },
+    {
+      "id": "hunyuan-image-v3",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {
+          "aspectRatios": [
+            "1:1",
+            "3:2",
+            "16:9",
+            "21:9",
+            "9:16",
+            "2:3",
+            "3:4",
+            "4:5"
+          ],
+          "defaultAspectRatio": "1:1",
+          "promptCharacterLimit": 3000,
+          "steps": {
+            "default": 20,
+            "max": 50
+          },
+          "widthHeightDivisor": 1
+        },
+        "maxCompletionTokens": null,
+        "pricing": {
+          "generation": {
+            "diem": 0.09,
+            "usd": 0.09
+          },
+          "upscale": {
+            "2x": {
+              "diem": 0.02,
+              "usd": 0.02
+            },
+            "4x": {
+              "diem": 0.08,
+              "usd": 0.08
+            }
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "image"
+    },
+    {
+      "id": "ideogram-v4",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {
+          "aspectRatios": [
+            "1:1",
+            "3:2",
+            "16:9",
+            "21:9",
+            "9:16",
+            "2:3",
+            "3:4",
+            "4:5"
+          ],
+          "defaultAspectRatio": "1:1",
+          "promptCharacterLimit": 10000,
+          "steps": {
+            "default": 20,
+            "max": 50
+          },
+          "widthHeightDivisor": 1
+        },
+        "maxCompletionTokens": null,
+        "pricing": {
+          "generation": {
+            "diem": 0.06,
+            "usd": 0.06
+          },
+          "upscale": {
+            "2x": {
+              "diem": 0.02,
+              "usd": 0.02
+            },
+            "4x": {
+              "diem": 0.08,
+              "usd": 0.08
+            }
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "image"
+    },
+    {
+      "id": "imagineart-1.5-pro",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {
+          "aspectRatios": [
+            "1:1",
+            "3:2",
+            "16:9",
+            "9:16",
+            "2:3",
+            "3:4",
+            "4:5"
+          ],
+          "defaultAspectRatio": "1:1",
+          "promptCharacterLimit": 10000,
+          "steps": {
+            "default": 20,
+            "max": 50
+          },
+          "widthHeightDivisor": 1
+        },
+        "maxCompletionTokens": null,
+        "pricing": {
+          "generation": {
+            "diem": 0.06,
+            "usd": 0.06
+          },
+          "upscale": {
+            "2x": {
+              "diem": 0.02,
+              "usd": 0.02
+            },
+            "4x": {
+              "diem": 0.08,
+              "usd": 0.08
+            }
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "image"
+    },
+    {
+      "id": "krea-2-turbo",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {
+          "aspectRatios": [
+            "1:1",
+            "3:2",
+            "16:9",
+            "21:9",
+            "9:16",
+            "2:3",
+            "3:4",
+            "4:5"
+          ],
+          "defaultAspectRatio": "1:1",
+          "defaultResolution": "1K",
+          "promptCharacterLimit": 5000,
+          "resolutions": [
+            "1K",
+            "2K"
+          ],
+          "steps": {
+            "default": 20,
+            "max": 50
+          },
+          "widthHeightDivisor": 1
+        },
+        "maxCompletionTokens": null,
+        "pricing": {
+          "resolutions": {
+            "1K": {
+              "diem": 0.04,
+              "usd": 0.04
+            },
+            "2K": {
+              "diem": 0.06,
+              "usd": 0.06
+            }
+          },
+          "upscale": {
+            "2x": {
+              "diem": 0.02,
+              "usd": 0.02
+            },
+            "4x": {
+              "diem": 0.08,
+              "usd": 0.08
+            }
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "image"
+    },
+    {
+      "id": "krea-v2-large",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {
+          "aspectRatios": [
+            "1:1",
+            "3:2",
+            "16:9",
+            "2:3",
+            "9:16"
+          ],
+          "defaultAspectRatio": "1:1",
+          "maxStyleReferences": 3,
+          "promptCharacterLimit": 5000,
+          "steps": {
+            "default": 20,
+            "max": 50
+          },
+          "supportsStyleReferenceStrength": true,
+          "widthHeightDivisor": 1
+        },
+        "maxCompletionTokens": null,
+        "pricing": {
+          "generation": {
+            "diem": 0.07,
+            "usd": 0.07
+          },
+          "upscale": {
+            "2x": {
+              "diem": 0.02,
+              "usd": 0.02
+            },
+            "4x": {
+              "diem": 0.08,
+              "usd": 0.08
+            }
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "image"
+    },
+    {
+      "id": "krea-v2-medium",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {
+          "aspectRatios": [
+            "1:1",
+            "3:2",
+            "16:9",
+            "2:3",
+            "9:16"
+          ],
+          "defaultAspectRatio": "1:1",
+          "maxStyleReferences": 3,
+          "promptCharacterLimit": 5000,
+          "steps": {
+            "default": 20,
+            "max": 50
+          },
+          "supportsStyleReferenceStrength": true,
+          "widthHeightDivisor": 1
+        },
+        "maxCompletionTokens": null,
+        "pricing": {
+          "generation": {
+            "diem": 0.04,
+            "usd": 0.04
+          },
+          "upscale": {
+            "2x": {
+              "diem": 0.02,
+              "usd": 0.02
+            },
+            "4x": {
+              "diem": 0.08,
+              "usd": 0.08
+            }
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "image"
+    },
+    {
+      "id": "luma-uni-1",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {
+          "aspectRatios": [
+            "1:1",
+            "3:2",
+            "16:9",
+            "9:16",
+            "2:3"
+          ],
+          "defaultAspectRatio": "1:1",
+          "maxStyleReferences": 3,
+          "promptCharacterLimit": 6000,
+          "steps": {
+            "default": 20,
+            "max": 50
+          },
+          "supportsStyleReferenceStrength": false,
+          "widthHeightDivisor": 1
+        },
+        "maxCompletionTokens": null,
+        "pricing": {
+          "generation": {
+            "diem": 0.05,
+            "usd": 0.05
+          },
+          "upscale": {
+            "2x": {
+              "diem": 0.02,
+              "usd": 0.02
+            },
+            "4x": {
+              "diem": 0.08,
+              "usd": 0.08
+            }
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "image"
+    },
+    {
+      "id": "luma-uni-1-max",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {
+          "aspectRatios": [
+            "1:1",
+            "3:2",
+            "16:9",
+            "9:16",
+            "2:3"
+          ],
+          "defaultAspectRatio": "1:1",
+          "maxStyleReferences": 3,
+          "promptCharacterLimit": 6000,
+          "steps": {
+            "default": 20,
+            "max": 50
+          },
+          "supportsStyleReferenceStrength": false,
+          "widthHeightDivisor": 1
+        },
+        "maxCompletionTokens": null,
+        "pricing": {
+          "generation": {
+            "diem": 0.12,
+            "usd": 0.12
+          },
+          "upscale": {
+            "2x": {
+              "diem": 0.02,
+              "usd": 0.02
+            },
+            "4x": {
+              "diem": 0.08,
+              "usd": 0.08
+            }
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "image"
+    },
+    {
+      "id": "lustify-sdxl",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {
+          "promptCharacterLimit": 1500,
+          "steps": {
+            "default": 20,
+            "max": 50
+          },
+          "widthHeightDivisor": 8
+        },
+        "maxCompletionTokens": null,
+        "modelSource": "https://civitai.com/models/573152/lustify-sdxl-nsfw-checkpoint",
+        "pricing": {
+          "generation": {
+            "diem": 0.01,
+            "usd": 0.01
+          },
+          "upscale": {
+            "2x": {
+              "diem": 0.02,
+              "usd": 0.02
+            },
+            "4x": {
+              "diem": 0.08,
+              "usd": 0.08
+            }
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "image"
+    },
+    {
+      "id": "lustify-v7",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {
+          "promptCharacterLimit": 1500,
+          "steps": {
+            "default": 20,
+            "max": 50
+          },
+          "widthHeightDivisor": 8
+        },
+        "maxCompletionTokens": null,
+        "modelSource": "https://civitai.com/models/573152/lustify-sdxl-nsfw-checkpoint",
+        "pricing": {
+          "generation": {
+            "diem": 0.01,
+            "usd": 0.01
+          },
+          "upscale": {
+            "2x": {
+              "diem": 0.02,
+              "usd": 0.02
+            },
+            "4x": {
+              "diem": 0.08,
+              "usd": 0.08
+            }
+          }
+        },
+        "traits": [
+          "most_uncensored"
+        ]
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "image"
+    },
+    {
+      "id": "lustify-v8",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {
+          "promptCharacterLimit": 1500,
+          "steps": {
+            "default": 30,
+            "max": 50
+          },
+          "widthHeightDivisor": 8
+        },
+        "maxCompletionTokens": null,
+        "modelSource": "https://civitai.com/models/573152/lustify-sdxl-nsfw-checkpoint",
+        "pricing": {
+          "generation": {
+            "diem": 0.01,
+            "usd": 0.01
+          },
+          "upscale": {
+            "2x": {
+              "diem": 0.02,
+              "usd": 0.02
+            },
+            "4x": {
+              "diem": 0.08,
+              "usd": 0.08
+            }
+          }
+        },
+        "traits": [
+          "most_uncensored"
+        ]
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "image"
+    },
+    {
+      "id": "nano-banana-2",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {
+          "aspectRatios": [
+            "1:1",
+            "3:2",
+            "16:9",
+            "21:9",
+            "9:16",
+            "2:3",
+            "3:4",
+            "4:5"
+          ],
+          "defaultAspectRatio": "1:1",
+          "defaultResolution": "1K",
+          "promptCharacterLimit": 32768,
+          "resolutions": [
+            "1K",
+            "2K",
+            "4K"
+          ],
+          "steps": {
+            "default": 20,
+            "max": 50
+          },
+          "widthHeightDivisor": 1
+        },
+        "maxCompletionTokens": null,
+        "pricing": {
+          "resolutions": {
+            "1K": {
+              "diem": 0.1,
+              "usd": 0.1
+            },
+            "2K": {
+              "diem": 0.14,
+              "usd": 0.14
+            },
+            "4K": {
+              "diem": 0.19,
+              "usd": 0.19
+            }
+          },
+          "upscale": {
+            "2x": {
+              "diem": 0.02,
+              "usd": 0.02
+            },
+            "4x": {
+              "diem": 0.08,
+              "usd": 0.08
+            }
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "image"
+    },
+    {
+      "id": "nano-banana-2-lite",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {
+          "aspectRatios": [
+            "1:1",
+            "3:2",
+            "16:9",
+            "21:9",
+            "9:16",
+            "2:3",
+            "3:4",
+            "4:5"
+          ],
+          "defaultAspectRatio": "1:1",
+          "promptCharacterLimit": 10000,
+          "steps": {
+            "default": 20,
+            "max": 50
+          },
+          "widthHeightDivisor": 1
+        },
+        "maxCompletionTokens": null,
+        "pricing": {
+          "generation": {
+            "diem": 0.06,
+            "usd": 0.06
+          },
+          "upscale": {
+            "2x": {
+              "diem": 0.02,
+              "usd": 0.02
+            },
+            "4x": {
+              "diem": 0.08,
+              "usd": 0.08
+            }
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "image"
+    },
+    {
+      "id": "nano-banana-pro",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {
+          "aspectRatios": [
+            "1:1",
+            "3:2",
+            "16:9",
+            "21:9",
+            "9:16",
+            "2:3",
+            "3:4",
+            "4:5"
+          ],
+          "defaultAspectRatio": "1:1",
+          "defaultResolution": "1K",
+          "promptCharacterLimit": 32768,
+          "resolutions": [
+            "1K",
+            "2K",
+            "4K"
+          ],
+          "steps": {
+            "default": 20,
+            "max": 50
+          },
+          "widthHeightDivisor": 1
+        },
+        "maxCompletionTokens": null,
+        "pricing": {
+          "resolutions": {
+            "1K": {
+              "diem": 0.18,
+              "usd": 0.18
+            },
+            "2K": {
+              "diem": 0.23,
+              "usd": 0.23
+            },
+            "4K": {
+              "diem": 0.35,
+              "usd": 0.35
+            }
+          },
+          "upscale": {
+            "2x": {
+              "diem": 0.02,
+              "usd": 0.02
+            },
+            "4x": {
+              "diem": 0.08,
+              "usd": 0.08
+            }
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "image"
+    },
+    {
+      "id": "qwen-image",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {
+          "aspectRatios": [
+            "1:1",
+            "3:2",
+            "16:9",
+            "21:9",
+            "9:16",
+            "2:3",
+            "3:4",
+            "4:5"
+          ],
+          "defaultAspectRatio": "1:1",
+          "promptCharacterLimit": 2048,
+          "steps": {
+            "default": 20,
+            "max": 50
+          },
+          "widthHeightDivisor": 1
+        },
+        "maxCompletionTokens": null,
+        "modelSource": "https://huggingface.co/Qwen/Qwen-Image",
+        "pricing": {
+          "generation": {
+            "diem": 0.03,
+            "usd": 0.03
+          },
+          "upscale": {
+            "2x": {
+              "diem": 0.02,
+              "usd": 0.02
+            },
+            "4x": {
+              "diem": 0.08,
+              "usd": 0.08
+            }
+          }
+        },
+        "traits": [
+          "highest_quality"
+        ]
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "image"
+    },
+    {
+      "id": "qwen-image-2",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {
+          "aspectRatios": [
+            "1:1",
+            "3:2",
+            "16:9",
+            "21:9",
+            "9:16",
+            "2:3",
+            "3:4",
+            "4:5"
+          ],
+          "defaultAspectRatio": "1:1",
+          "promptCharacterLimit": 10000,
+          "steps": {
+            "default": 20,
+            "max": 50
+          },
+          "widthHeightDivisor": 1
+        },
+        "maxCompletionTokens": null,
+        "pricing": {
+          "generation": {
+            "diem": 0.05,
+            "usd": 0.05
+          },
+          "upscale": {
+            "2x": {
+              "diem": 0.02,
+              "usd": 0.02
+            },
+            "4x": {
+              "diem": 0.08,
+              "usd": 0.08
+            }
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "image"
+    },
+    {
+      "id": "qwen-image-2-pro",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {
+          "aspectRatios": [
+            "1:1",
+            "3:2",
+            "16:9",
+            "21:9",
+            "9:16",
+            "2:3",
+            "3:4",
+            "4:5"
+          ],
+          "defaultAspectRatio": "1:1",
+          "promptCharacterLimit": 10000,
+          "steps": {
+            "default": 20,
+            "max": 50
+          },
+          "widthHeightDivisor": 1
+        },
+        "maxCompletionTokens": null,
+        "pricing": {
+          "generation": {
+            "diem": 0.1,
+            "usd": 0.1
+          },
+          "upscale": {
+            "2x": {
+              "diem": 0.02,
+              "usd": 0.02
+            },
+            "4x": {
+              "diem": 0.08,
+              "usd": 0.08
+            }
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "image"
+    },
+    {
+      "id": "qwen-image-3",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {
+          "aspectRatios": [
+            "1:1",
+            "3:2",
+            "16:9",
+            "21:9",
+            "9:16",
+            "2:3",
+            "3:4",
+            "4:5"
+          ],
+          "defaultAspectRatio": "1:1",
+          "defaultResolution": "1K",
+          "promptCharacterLimit": 10000,
+          "resolutions": [
+            "1K",
+            "2K"
+          ],
+          "steps": {
+            "default": 20,
+            "max": 50
+          },
+          "widthHeightDivisor": 1
+        },
+        "maxCompletionTokens": null,
+        "modelSource": "https://www.alibabacloud.com/help/en/model-studio/models",
+        "pricing": {
+          "resolutions": {
+            "1K": {
+              "diem": 0.04,
+              "usd": 0.04
+            },
+            "2K": {
+              "diem": 0.04,
+              "usd": 0.04
+            }
+          },
+          "upscale": {
+            "2x": {
+              "diem": 0.02,
+              "usd": 0.02
+            },
+            "4x": {
+              "diem": 0.08,
+              "usd": 0.08
+            }
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "image"
+    },
+    {
+      "id": "qwen-image-3-pro",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {
+          "aspectRatios": [
+            "1:1",
+            "3:2",
+            "16:9",
+            "21:9",
+            "9:16",
+            "2:3",
+            "3:4",
+            "4:5"
+          ],
+          "defaultAspectRatio": "1:1",
+          "defaultResolution": "1K",
+          "promptCharacterLimit": 10000,
+          "resolutions": [
+            "1K",
+            "2K"
+          ],
+          "steps": {
+            "default": 20,
+            "max": 50
+          },
+          "widthHeightDivisor": 1
+        },
+        "maxCompletionTokens": null,
+        "modelSource": "https://www.alibabacloud.com/help/en/model-studio/models",
+        "pricing": {
+          "resolutions": {
+            "1K": {
+              "diem": 0.05,
+              "usd": 0.05
+            },
+            "2K": {
+              "diem": 0.09,
+              "usd": 0.09
+            }
+          },
+          "upscale": {
+            "2x": {
+              "diem": 0.02,
+              "usd": 0.02
+            },
+            "4x": {
+              "diem": 0.08,
+              "usd": 0.08
+            }
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "image"
+    },
+    {
+      "id": "recraft-v4",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {
+          "aspectRatios": [
+            "1:1",
+            "3:2",
+            "16:9",
+            "21:9",
+            "9:16",
+            "2:3",
+            "3:4",
+            "4:5"
+          ],
+          "defaultAspectRatio": "1:1",
+          "promptCharacterLimit": 10000,
+          "steps": {
+            "default": 20,
+            "max": 50
+          },
+          "widthHeightDivisor": 1
+        },
+        "maxCompletionTokens": null,
+        "pricing": {
+          "generation": {
+            "diem": 0.05,
+            "usd": 0.05
+          },
+          "upscale": {
+            "2x": {
+              "diem": 0.02,
+              "usd": 0.02
+            },
+            "4x": {
+              "diem": 0.08,
+              "usd": 0.08
+            }
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "image"
+    },
+    {
+      "id": "recraft-v4-pro",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {
+          "aspectRatios": [
+            "1:1",
+            "3:2",
+            "16:9",
+            "21:9",
+            "9:16",
+            "2:3",
+            "3:4",
+            "4:5"
+          ],
+          "defaultAspectRatio": "1:1",
+          "promptCharacterLimit": 10000,
+          "steps": {
+            "default": 20,
+            "max": 50
+          },
+          "widthHeightDivisor": 1
+        },
+        "maxCompletionTokens": null,
+        "pricing": {
+          "generation": {
+            "diem": 0.29,
+            "usd": 0.29
+          },
+          "upscale": {
+            "2x": {
+              "diem": 0.02,
+              "usd": 0.02
+            },
+            "4x": {
+              "diem": 0.08,
+              "usd": 0.08
+            }
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "image"
+    },
+    {
+      "id": "seedream-v4",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {
+          "aspectRatios": [
+            "1:1",
+            "3:2",
+            "16:9",
+            "21:9",
+            "9:16",
+            "2:3",
+            "3:4",
+            "4:5"
+          ],
+          "defaultAspectRatio": "1:1",
+          "promptCharacterLimit": 10000,
+          "steps": {
+            "default": 20,
+            "max": 50
+          },
+          "widthHeightDivisor": 1
+        },
+        "maxCompletionTokens": null,
+        "pricing": {
+          "generation": {
+            "diem": 0.05,
+            "usd": 0.05
+          },
+          "upscale": {
+            "2x": {
+              "diem": 0.02,
+              "usd": 0.02
+            },
+            "4x": {
+              "diem": 0.08,
+              "usd": 0.08
+            }
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "image"
+    },
+    {
+      "id": "seedream-v5-lite",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {
+          "aspectRatios": [
+            "1:1",
+            "3:2",
+            "16:9",
+            "21:9",
+            "9:16",
+            "2:3",
+            "3:4",
+            "4:5"
+          ],
+          "defaultAspectRatio": "1:1",
+          "promptCharacterLimit": 10000,
+          "steps": {
+            "default": 20,
+            "max": 50
+          },
+          "widthHeightDivisor": 1
+        },
+        "maxCompletionTokens": null,
+        "pricing": {
+          "generation": {
+            "diem": 0.05,
+            "usd": 0.05
+          },
+          "upscale": {
+            "2x": {
+              "diem": 0.02,
+              "usd": 0.02
+            },
+            "4x": {
+              "diem": 0.08,
+              "usd": 0.08
+            }
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "image"
+    },
+    {
+      "id": "seedream-v5-pro",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {
+          "aspectRatios": [
+            "1:1",
+            "3:2",
+            "16:9",
+            "9:16",
+            "2:3",
+            "3:4"
+          ],
+          "defaultAspectRatio": "1:1",
+          "defaultResolution": "1K",
+          "promptCharacterLimit": 10000,
+          "resolutions": [
+            "1K",
+            "2K"
+          ],
+          "steps": {
+            "default": 20,
+            "max": 50
+          },
+          "widthHeightDivisor": 1
+        },
+        "maxCompletionTokens": null,
+        "pricing": {
+          "resolutions": {
+            "1K": {
+              "diem": 0.06,
+              "usd": 0.06
+            },
+            "2K": {
+              "diem": 0.11,
+              "usd": 0.11
+            }
+          },
+          "upscale": {
+            "2x": {
+              "diem": 0.02,
+              "usd": 0.02
+            },
+            "4x": {
+              "diem": 0.08,
+              "usd": 0.08
+            }
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "image"
+    },
+    {
+      "id": "venice-sd35",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {
+          "promptCharacterLimit": 1500,
+          "steps": {
+            "default": 25,
+            "max": 30
+          },
+          "widthHeightDivisor": 16
+        },
+        "maxCompletionTokens": null,
+        "modelSource": "https://huggingface.co/stabilityai/stable-diffusion-3.5-large",
+        "pricing": {
+          "generation": {
+            "diem": 0.01,
+            "usd": 0.01
+          },
+          "upscale": {
+            "2x": {
+              "diem": 0.02,
+              "usd": 0.02
+            },
+            "4x": {
+              "diem": 0.08,
+              "usd": 0.08
+            }
+          }
+        },
+        "traits": [
+          "eliza-default"
+        ]
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "image"
+    },
+    {
+      "id": "wai-Illustrious",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {
+          "promptCharacterLimit": 1500,
+          "steps": {
+            "default": 25,
+            "max": 30
+          },
+          "widthHeightDivisor": 16
+        },
+        "maxCompletionTokens": null,
+        "modelSource": "https://civitai.com/models/827184?modelVersionId=1761560",
+        "pricing": {
+          "generation": {
+            "diem": 0.01,
+            "usd": 0.01
+          },
+          "upscale": {
+            "2x": {
+              "diem": 0.02,
+              "usd": 0.02
+            },
+            "4x": {
+              "diem": 0.08,
+              "usd": 0.08
+            }
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "image"
+    },
+    {
+      "id": "wan-2-7-pro-text-to-image",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {
+          "aspectRatios": [
+            "1:1",
+            "3:2",
+            "16:9",
+            "21:9",
+            "9:16",
+            "2:3",
+            "3:4",
+            "4:5"
+          ],
+          "defaultAspectRatio": "1:1",
+          "promptCharacterLimit": 3000,
+          "steps": {
+            "default": 20,
+            "max": 50
+          },
+          "widthHeightDivisor": 1
+        },
+        "maxCompletionTokens": null,
+        "pricing": {
+          "generation": {
+            "diem": 0.09375,
+            "usd": 0.09375
+          },
+          "upscale": {
+            "2x": {
+              "diem": 0.02,
+              "usd": 0.02
+            },
+            "4x": {
+              "diem": 0.08,
+              "usd": 0.08
+            }
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "image"
+    },
+    {
+      "id": "wan-2-7-text-to-image",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {
+          "aspectRatios": [
+            "1:1",
+            "3:2",
+            "16:9",
+            "21:9",
+            "9:16",
+            "2:3",
+            "3:4",
+            "4:5"
+          ],
+          "defaultAspectRatio": "1:1",
+          "promptCharacterLimit": 3000,
+          "steps": {
+            "default": 20,
+            "max": 50
+          },
+          "widthHeightDivisor": 1
+        },
+        "maxCompletionTokens": null,
+        "pricing": {
+          "generation": {
+            "diem": 0.0375,
+            "usd": 0.0375
+          },
+          "upscale": {
+            "2x": {
+              "diem": 0.02,
+              "usd": 0.02
+            },
+            "4x": {
+              "diem": 0.08,
+              "usd": 0.08
+            }
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "image"
+    },
+    {
+      "id": "z-image-turbo",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {
+          "promptCharacterLimit": 7500,
+          "steps": {
+            "default": 8,
+            "max": 8
+          },
+          "widthHeightDivisor": 8
+        },
+        "maxCompletionTokens": null,
+        "modelSource": "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo",
+        "pricing": {
+          "generation": {
+            "diem": 0.01,
+            "usd": 0.01
+          },
+          "upscale": {
+            "2x": {
+              "diem": 0.02,
+              "usd": 0.02
+            },
+            "4x": {
+              "diem": 0.08,
+              "usd": 0.08
+            }
+          }
+        },
+        "traits": [
+          "default",
+          "fastest"
+        ]
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "image"
+    }
+  ],
+  "object": "list",
+  "type": "image"
+}

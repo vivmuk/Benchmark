@@ -1,0 +1,5518 @@
+{
+  "count": 109,
+  "models": [
+    {
+      "id": "aion-labs-aion-3-0",
+      "model_spec": {
+        "availableContextTokens": 128000,
+        "capabilities": {
+          "defaultReasoningEffort": "low",
+          "optimizedForCode": false,
+          "quantization": "not-available",
+          "reasoningEffortOptions": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": false,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": true,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": false,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 32768,
+        "modelSource": "https://openrouter.ai/aion-labs/aion-3.0",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.9375,
+            "usd": 0.9375
+          },
+          "input": {
+            "diem": 3.75,
+            "usd": 3.75
+          },
+          "output": {
+            "diem": 7.5,
+            "usd": 7.5
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "aion-labs-aion-3-0-mini",
+      "model_spec": {
+        "availableContextTokens": 128000,
+        "capabilities": {
+          "defaultReasoningEffort": "low",
+          "optimizedForCode": false,
+          "quantization": "not-available",
+          "reasoningEffortOptions": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": false,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": true,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": false,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 32768,
+        "modelSource": "https://openrouter.ai/aion-labs/aion-3.0-mini",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.225,
+            "usd": 0.225
+          },
+          "input": {
+            "diem": 0.875,
+            "usd": 0.875
+          },
+          "output": {
+            "diem": 1.75,
+            "usd": 1.75
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "claude-fable-5",
+      "model_spec": {
+        "availableContextTokens": 1000000,
+        "capabilities": {
+          "defaultReasoningEffort": "high",
+          "maxImages": 10,
+          "optimizedForCode": true,
+          "quantization": "not-available",
+          "reasoningEffortOptions": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": true,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": true,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 128000,
+        "modelSource": "",
+        "pricing": {
+          "cache_input": {
+            "diem": 1.2,
+            "usd": 1.2
+          },
+          "cache_write": {
+            "diem": 15,
+            "usd": 15
+          },
+          "input": {
+            "diem": 12,
+            "usd": 12
+          },
+          "output": {
+            "diem": 60,
+            "usd": 60
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "claude-opus-4-5",
+      "model_spec": {
+        "availableContextTokens": 198000,
+        "capabilities": {
+          "maxImages": 10,
+          "optimizedForCode": true,
+          "quantization": "not-available",
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": true,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": false,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 32768,
+        "modelSource": "",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.6,
+            "usd": 0.6
+          },
+          "cache_write": {
+            "diem": 7.5,
+            "usd": 7.5
+          },
+          "input": {
+            "diem": 6,
+            "usd": 6
+          },
+          "output": {
+            "diem": 30,
+            "usd": 30
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "claude-opus-4-6",
+      "model_spec": {
+        "availableContextTokens": 1000000,
+        "capabilities": {
+          "maxImages": 10,
+          "optimizedForCode": true,
+          "quantization": "not-available",
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": true,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": false,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 128000,
+        "modelSource": "",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.6,
+            "usd": 0.6
+          },
+          "cache_write": {
+            "diem": 7.5,
+            "usd": 7.5
+          },
+          "input": {
+            "diem": 6,
+            "usd": 6
+          },
+          "output": {
+            "diem": 30,
+            "usd": 30
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "claude-opus-4-7",
+      "model_spec": {
+        "availableContextTokens": 1000000,
+        "capabilities": {
+          "maxImages": 10,
+          "optimizedForCode": true,
+          "quantization": "not-available",
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": true,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": false,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 128000,
+        "modelSource": "",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.6,
+            "usd": 0.6
+          },
+          "cache_write": {
+            "diem": 7.5,
+            "usd": 7.5
+          },
+          "input": {
+            "diem": 6,
+            "usd": 6
+          },
+          "output": {
+            "diem": 30,
+            "usd": 30
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "claude-opus-4-8",
+      "model_spec": {
+        "availableContextTokens": 1000000,
+        "capabilities": {
+          "maxImages": 10,
+          "optimizedForCode": true,
+          "quantization": "not-available",
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": true,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": false,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 128000,
+        "modelSource": "",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.6,
+            "usd": 0.6
+          },
+          "cache_write": {
+            "diem": 7.5,
+            "usd": 7.5
+          },
+          "input": {
+            "diem": 6,
+            "usd": 6
+          },
+          "output": {
+            "diem": 30,
+            "usd": 30
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "claude-opus-4-8-fast",
+      "model_spec": {
+        "availableContextTokens": 1000000,
+        "capabilities": {
+          "maxImages": 10,
+          "optimizedForCode": true,
+          "quantization": "not-available",
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": true,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": false,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 128000,
+        "modelSource": "",
+        "pricing": {
+          "cache_input": {
+            "diem": 1.2,
+            "usd": 1.2
+          },
+          "cache_write": {
+            "diem": 15,
+            "usd": 15
+          },
+          "input": {
+            "diem": 12,
+            "usd": 12
+          },
+          "output": {
+            "diem": 60,
+            "usd": 60
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "claude-opus-5",
+      "model_spec": {
+        "availableContextTokens": 1000000,
+        "capabilities": {
+          "maxImages": 10,
+          "optimizedForCode": true,
+          "quantization": "not-available",
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": true,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": false,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 128000,
+        "modelSource": "",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.6,
+            "usd": 0.6
+          },
+          "cache_write": {
+            "diem": 7.5,
+            "usd": 7.5
+          },
+          "input": {
+            "diem": 6,
+            "usd": 6
+          },
+          "output": {
+            "diem": 30,
+            "usd": 30
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "claude-opus-5-fast",
+      "model_spec": {
+        "availableContextTokens": 1000000,
+        "capabilities": {
+          "maxImages": 10,
+          "optimizedForCode": true,
+          "quantization": "not-available",
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": true,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": false,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 128000,
+        "modelSource": "",
+        "pricing": {
+          "cache_input": {
+            "diem": 1.2,
+            "usd": 1.2
+          },
+          "cache_write": {
+            "diem": 15,
+            "usd": 15
+          },
+          "input": {
+            "diem": 12,
+            "usd": 12
+          },
+          "output": {
+            "diem": 60,
+            "usd": 60
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "claude-sonnet-4-5",
+      "model_spec": {
+        "availableContextTokens": 198000,
+        "capabilities": {
+          "maxImages": 10,
+          "optimizedForCode": true,
+          "quantization": "not-available",
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": true,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": false,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 64000,
+        "modelSource": "",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.375,
+            "usd": 0.375
+          },
+          "cache_write": {
+            "diem": 4.69,
+            "usd": 4.69
+          },
+          "input": {
+            "diem": 3.75,
+            "usd": 3.75
+          },
+          "output": {
+            "diem": 18.75,
+            "usd": 18.75
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "claude-sonnet-4-6",
+      "model_spec": {
+        "availableContextTokens": 1000000,
+        "capabilities": {
+          "maxImages": 10,
+          "optimizedForCode": true,
+          "quantization": "not-available",
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": true,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": false,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 64000,
+        "modelSource": "",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.36,
+            "usd": 0.36
+          },
+          "cache_write": {
+            "diem": 4.5,
+            "usd": 4.5
+          },
+          "input": {
+            "diem": 3.6,
+            "usd": 3.6
+          },
+          "output": {
+            "diem": 18,
+            "usd": 18
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "claude-sonnet-5",
+      "model_spec": {
+        "availableContextTokens": 1000000,
+        "capabilities": {
+          "maxImages": 10,
+          "optimizedForCode": true,
+          "quantization": "not-available",
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": true,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": false,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 64000,
+        "modelSource": "",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.3,
+            "usd": 0.3
+          },
+          "cache_write": {
+            "diem": 3.75,
+            "usd": 3.75
+          },
+          "input": {
+            "diem": 3,
+            "usd": 3
+          },
+          "output": {
+            "diem": 15,
+            "usd": 15
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "deepseek-v3.2",
+      "model_spec": {
+        "availableContextTokens": 160000,
+        "capabilities": {
+          "defaultReasoningEffort": "low",
+          "optimizedForCode": false,
+          "quantization": "not-available",
+          "reasoningEffortOptions": [
+            "none",
+            "low",
+            "medium",
+            "high"
+          ],
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": false,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": true,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": false,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 32768,
+        "modelSource": "https://huggingface.co/deepseek-ai/DeepSeek-V3.2",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.16,
+            "usd": 0.16
+          },
+          "input": {
+            "diem": 0.33,
+            "usd": 0.33
+          },
+          "output": {
+            "diem": 0.48,
+            "usd": 0.48
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "deepseek-v4-flash",
+      "model_spec": {
+        "availableContextTokens": 1000000,
+        "capabilities": {
+          "optimizedForCode": true,
+          "quantization": "not-available",
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": false,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": false,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": false,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 32768,
+        "modelSource": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.028,
+            "usd": 0.028
+          },
+          "input": {
+            "diem": 0.138,
+            "usd": 0.138
+          },
+          "output": {
+            "diem": 0.275,
+            "usd": 0.275
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "deepseek-v4-flash-0731",
+      "model_spec": {
+        "availableContextTokens": 1000000,
+        "capabilities": {
+          "defaultReasoningEffort": "high",
+          "optimizedForCode": true,
+          "quantization": "not-available",
+          "reasoningEffortOptions": [
+            "none",
+            "low",
+            "high",
+            "max"
+          ],
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": false,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": true,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": false,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 32768,
+        "modelSource": "https://deepinfra.com/deepseek-ai/DeepSeek-V4-Flash-0731/api",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.035,
+            "usd": 0.035
+          },
+          "input": {
+            "diem": 0.175,
+            "usd": 0.175
+          },
+          "output": {
+            "diem": 0.35,
+            "usd": 0.35
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "deepseek-v4-flash-0731-fast",
+      "model_spec": {
+        "availableContextTokens": 1000000,
+        "capabilities": {
+          "defaultReasoningEffort": "high",
+          "optimizedForCode": true,
+          "quantization": "not-available",
+          "reasoningEffortOptions": [
+            "none",
+            "low",
+            "high",
+            "max"
+          ],
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": false,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": true,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": false,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 32768,
+        "modelSource": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-0731",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.0875,
+            "usd": 0.0875
+          },
+          "input": {
+            "diem": 0.35,
+            "usd": 0.35
+          },
+          "output": {
+            "diem": 0.7,
+            "usd": 0.7
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "deepseek-v4-pro",
+      "model_spec": {
+        "availableContextTokens": 1000000,
+        "capabilities": {
+          "optimizedForCode": true,
+          "quantization": "not-available",
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": false,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": false,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": false,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 32768,
+        "modelSource": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.33,
+            "usd": 0.33
+          },
+          "input": {
+            "diem": 1.65,
+            "usd": 1.65
+          },
+          "output": {
+            "diem": 3.301,
+            "usd": 3.301
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "e2ee-deepseek-v4-flash",
+      "model_spec": {
+        "availableContextTokens": 1000000,
+        "capabilities": {
+          "optimizedForCode": true,
+          "quantization": "fp8",
+          "supportsAudioInput": false,
+          "supportsE2EE": true,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": false,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": false,
+          "supportsResponseSchema": false,
+          "supportsTeeAttestation": true,
+          "supportsVideoInput": false,
+          "supportsVision": false,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 8192,
+        "modelSource": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.038,
+            "usd": 0.038
+          },
+          "input": {
+            "diem": 0.182,
+            "usd": 0.182
+          },
+          "output": {
+            "diem": 0.373,
+            "usd": 0.373
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "e2ee-gemma-3-27b-p",
+      "model_spec": {
+        "availableContextTokens": 40000,
+        "capabilities": {
+          "optimizedForCode": false,
+          "quantization": "not-available",
+          "supportsAudioInput": false,
+          "supportsE2EE": true,
+          "supportsFunctionCalling": false,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": false,
+          "supportsReasoning": false,
+          "supportsReasoningEffort": false,
+          "supportsResponseSchema": false,
+          "supportsTeeAttestation": true,
+          "supportsVideoInput": false,
+          "supportsVision": false,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 4096,
+        "modelSource": "https://huggingface.co/google/gemma-3-27b-it",
+        "pricing": {
+          "input": {
+            "diem": 0.14,
+            "usd": 0.14
+          },
+          "output": {
+            "diem": 0.5,
+            "usd": 0.5
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "e2ee-gemma-4-26b-a4b-uncensored-p",
+      "model_spec": {
+        "availableContextTokens": 64000,
+        "capabilities": {
+          "optimizedForCode": false,
+          "quantization": "fp8",
+          "supportsAudioInput": false,
+          "supportsE2EE": true,
+          "supportsFunctionCalling": false,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": false,
+          "supportsReasoning": false,
+          "supportsReasoningEffort": false,
+          "supportsResponseSchema": false,
+          "supportsTeeAttestation": true,
+          "supportsVideoInput": false,
+          "supportsVision": false,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 4096,
+        "modelSource": "https://www.redpill.ai/models/phala/gemma-4-26b-a4b-uncensored",
+        "pricing": {
+          "input": {
+            "diem": 0.19,
+            "usd": 0.19
+          },
+          "output": {
+            "diem": 0.88,
+            "usd": 0.88
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "e2ee-gemma-4-31b",
+      "model_spec": {
+        "availableContextTokens": 32000,
+        "capabilities": {
+          "optimizedForCode": false,
+          "quantization": "not-available",
+          "supportsAudioInput": false,
+          "supportsE2EE": true,
+          "supportsFunctionCalling": false,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": false,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": false,
+          "supportsResponseSchema": false,
+          "supportsTeeAttestation": true,
+          "supportsVideoInput": false,
+          "supportsVision": false,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 4096,
+        "modelSource": "https://huggingface.co/google/gemma-4-31B-it",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.028,
+            "usd": 0.028
+          },
+          "input": {
+            "diem": 0.139,
+            "usd": 0.139
+          },
+          "output": {
+            "diem": 0.43,
+            "usd": 0.43
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "e2ee-glm-5-1",
+      "model_spec": {
+        "availableContextTokens": 200000,
+        "capabilities": {
+          "optimizedForCode": false,
+          "quantization": "fp8",
+          "supportsAudioInput": false,
+          "supportsE2EE": true,
+          "supportsFunctionCalling": false,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": false,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": false,
+          "supportsResponseSchema": false,
+          "supportsTeeAttestation": true,
+          "supportsVideoInput": false,
+          "supportsVision": false,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 32768,
+        "modelSource": "https://huggingface.co/zai-org/GLM-5.1",
+        "pricing": {
+          "input": {
+            "diem": 1.1,
+            "usd": 1.1
+          },
+          "output": {
+            "diem": 4.15,
+            "usd": 4.15
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "e2ee-glm-5-2-p",
+      "model_spec": {
+        "availableContextTokens": 524288,
+        "capabilities": {
+          "defaultReasoningEffort": "low",
+          "optimizedForCode": true,
+          "quantization": "not-available",
+          "reasoningEffortOptions": [
+            "none",
+            "low",
+            "medium",
+            "high"
+          ],
+          "supportsAudioInput": false,
+          "supportsE2EE": true,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": false,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": true,
+          "supportsResponseSchema": false,
+          "supportsTeeAttestation": true,
+          "supportsVideoInput": false,
+          "supportsVision": false,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 32768,
+        "modelSource": "https://huggingface.co/zai-org/GLM-5.2",
+        "pricing": {
+          "input": {
+            "diem": 1.75,
+            "usd": 1.75
+          },
+          "output": {
+            "diem": 5.75,
+            "usd": 5.75
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "e2ee-gpt-oss-120b-p",
+      "model_spec": {
+        "availableContextTokens": 128000,
+        "capabilities": {
+          "defaultReasoningEffort": "low",
+          "optimizedForCode": false,
+          "quantization": "not-available",
+          "reasoningEffortOptions": [
+            "none",
+            "low",
+            "medium",
+            "high"
+          ],
+          "supportsAudioInput": false,
+          "supportsE2EE": true,
+          "supportsFunctionCalling": false,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": false,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": true,
+          "supportsResponseSchema": false,
+          "supportsTeeAttestation": true,
+          "supportsVideoInput": false,
+          "supportsVision": false,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 32768,
+        "modelSource": "https://huggingface.co/openai/gpt-oss-120b",
+        "pricing": {
+          "input": {
+            "diem": 0.13,
+            "usd": 0.13
+          },
+          "output": {
+            "diem": 0.65,
+            "usd": 0.65
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "e2ee-gpt-oss-20b-p",
+      "model_spec": {
+        "availableContextTokens": 128000,
+        "capabilities": {
+          "defaultReasoningEffort": "low",
+          "optimizedForCode": false,
+          "quantization": "not-available",
+          "reasoningEffortOptions": [
+            "none",
+            "low",
+            "medium",
+            "high"
+          ],
+          "supportsAudioInput": false,
+          "supportsE2EE": true,
+          "supportsFunctionCalling": false,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": false,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": true,
+          "supportsResponseSchema": false,
+          "supportsTeeAttestation": true,
+          "supportsVideoInput": false,
+          "supportsVision": false,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 32768,
+        "modelSource": "https://huggingface.co/openai/gpt-oss-20b",
+        "pricing": {
+          "input": {
+            "diem": 0.05,
+            "usd": 0.05
+          },
+          "output": {
+            "diem": 0.19,
+            "usd": 0.19
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "e2ee-qwen-2-5-7b-p",
+      "model_spec": {
+        "availableContextTokens": 32000,
+        "capabilities": {
+          "optimizedForCode": false,
+          "quantization": "not-available",
+          "supportsAudioInput": false,
+          "supportsE2EE": true,
+          "supportsFunctionCalling": false,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": false,
+          "supportsReasoning": false,
+          "supportsReasoningEffort": false,
+          "supportsResponseSchema": false,
+          "supportsTeeAttestation": true,
+          "supportsVideoInput": false,
+          "supportsVision": false,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 4096,
+        "modelSource": "https://huggingface.co/Qwen/Qwen2.5-7B-Instruct",
+        "pricing": {
+          "input": {
+            "diem": 0.05,
+            "usd": 0.05
+          },
+          "output": {
+            "diem": 0.13,
+            "usd": 0.13
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "e2ee-qwen3-6-27b",
+      "model_spec": {
+        "availableContextTokens": 256000,
+        "capabilities": {
+          "optimizedForCode": true,
+          "quantization": "fp8",
+          "supportsAudioInput": false,
+          "supportsE2EE": true,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": false,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": false,
+          "supportsResponseSchema": false,
+          "supportsTeeAttestation": true,
+          "supportsVideoInput": false,
+          "supportsVision": false,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 32768,
+        "modelSource": "https://huggingface.co/Qwen/Qwen3.6-27B-FP8",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.171,
+            "usd": 0.171
+          },
+          "input": {
+            "diem": 0.346,
+            "usd": 0.346
+          },
+          "output": {
+            "diem": 3.46,
+            "usd": 3.46
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "e2ee-qwen3-6-35b-a3b",
+      "model_spec": {
+        "availableContextTokens": 32000,
+        "capabilities": {
+          "optimizedForCode": true,
+          "quantization": "fp8",
+          "supportsAudioInput": false,
+          "supportsE2EE": true,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": false,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": false,
+          "supportsResponseSchema": false,
+          "supportsTeeAttestation": true,
+          "supportsVideoInput": false,
+          "supportsVision": false,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 4096,
+        "modelSource": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B-FP8",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.06,
+            "usd": 0.06
+          },
+          "input": {
+            "diem": 0.182,
+            "usd": 0.182
+          },
+          "output": {
+            "diem": 1.18,
+            "usd": 1.18
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "e2ee-qwen3-6-35b-a3b-uncensored-p",
+      "model_spec": {
+        "availableContextTokens": 128000,
+        "capabilities": {
+          "optimizedForCode": false,
+          "quantization": "fp8",
+          "supportsAudioInput": false,
+          "supportsE2EE": true,
+          "supportsFunctionCalling": false,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": false,
+          "supportsReasoning": false,
+          "supportsReasoningEffort": false,
+          "supportsResponseSchema": false,
+          "supportsTeeAttestation": true,
+          "supportsVideoInput": false,
+          "supportsVision": false,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 4096,
+        "modelSource": "https://www.redpill.ai/models/phala/qwen3.6-35b-a3b-uncensored",
+        "pricing": {
+          "input": {
+            "diem": 0.38,
+            "usd": 0.38
+          },
+          "output": {
+            "diem": 1.88,
+            "usd": 1.88
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "e2ee-qwen3-vl-30b-a3b-p",
+      "model_spec": {
+        "availableContextTokens": 128000,
+        "capabilities": {
+          "optimizedForCode": false,
+          "quantization": "not-available",
+          "supportsAudioInput": false,
+          "supportsE2EE": true,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": false,
+          "supportsReasoning": false,
+          "supportsReasoningEffort": false,
+          "supportsResponseSchema": false,
+          "supportsTeeAttestation": true,
+          "supportsVideoInput": false,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 4096,
+        "modelSource": "https://huggingface.co/Qwen/Qwen3-VL-30B-A3B-Instruct",
+        "pricing": {
+          "input": {
+            "diem": 0.25,
+            "usd": 0.25
+          },
+          "output": {
+            "diem": 0.9,
+            "usd": 0.9
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "gemini-3-1-pro-preview",
+      "model_spec": {
+        "availableContextTokens": 1000000,
+        "capabilities": {
+          "defaultReasoningEffort": "low",
+          "maxImages": 20,
+          "optimizedForCode": false,
+          "quantization": "not-available",
+          "reasoningEffortOptions": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "supportsAudioInput": true,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": true,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": true,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": true,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 32768,
+        "modelSource": "https://deepmind.google/models/gemini/pro/",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.5,
+            "usd": 0.5
+          },
+          "cache_write": {
+            "diem": 0.5,
+            "usd": 0.5
+          },
+          "extended": {
+            "cache_input": {
+              "diem": 0.5,
+              "usd": 0.5
+            },
+            "cache_write": {
+              "diem": 0.5,
+              "usd": 0.5
+            },
+            "context_token_threshold": 200000,
+            "input": {
+              "diem": 5,
+              "usd": 5
+            },
+            "output": {
+              "diem": 22.5,
+              "usd": 22.5
+            }
+          },
+          "input": {
+            "diem": 2.5,
+            "usd": 2.5
+          },
+          "output": {
+            "diem": 15,
+            "usd": 15
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "gemini-3-5-flash",
+      "model_spec": {
+        "availableContextTokens": 1000000,
+        "capabilities": {
+          "defaultReasoningEffort": "high",
+          "maxImages": 20,
+          "optimizedForCode": false,
+          "quantization": "not-available",
+          "reasoningEffortOptions": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "supportsAudioInput": true,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": true,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": true,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": true,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 65536,
+        "modelSource": "https://deepmind.google/models/gemini/flash/",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.155,
+            "usd": 0.155
+          },
+          "cache_write": {
+            "diem": 0.086,
+            "usd": 0.086
+          },
+          "input": {
+            "diem": 1.55,
+            "usd": 1.55
+          },
+          "output": {
+            "diem": 9.45,
+            "usd": 9.45
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "gemini-3-5-flash-lite",
+      "model_spec": {
+        "availableContextTokens": 1000000,
+        "capabilities": {
+          "optimizedForCode": false,
+          "quantization": "not-available",
+          "supportsAudioInput": true,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": false,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": false,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": true,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 65536,
+        "pricing": {
+          "cache_input": {
+            "diem": 0.0375,
+            "usd": 0.0375
+          },
+          "input": {
+            "diem": 0.375,
+            "usd": 0.375
+          },
+          "output": {
+            "diem": 3.125,
+            "usd": 3.125
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "gemini-3-6-flash",
+      "model_spec": {
+        "availableContextTokens": 1000000,
+        "capabilities": {
+          "optimizedForCode": false,
+          "quantization": "not-available",
+          "supportsAudioInput": true,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": false,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": false,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": true,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 65536,
+        "pricing": {
+          "cache_input": {
+            "diem": 0.1875,
+            "usd": 0.1875
+          },
+          "input": {
+            "diem": 1.875,
+            "usd": 1.875
+          },
+          "output": {
+            "diem": 9.375,
+            "usd": 9.375
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "gemini-3-flash-preview",
+      "model_spec": {
+        "availableContextTokens": 256000,
+        "capabilities": {
+          "defaultReasoningEffort": "high",
+          "maxImages": 10,
+          "optimizedForCode": false,
+          "quantization": "not-available",
+          "reasoningEffortOptions": [
+            "none",
+            "low",
+            "medium",
+            "high"
+          ],
+          "supportsAudioInput": true,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": true,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": true,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": true,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 65536,
+        "modelSource": "https://deepmind.google/models/gemini/flash/",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.07,
+            "usd": 0.07
+          },
+          "input": {
+            "diem": 0.7,
+            "usd": 0.7
+          },
+          "output": {
+            "diem": 3.75,
+            "usd": 3.75
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "gemma-4-uncensored",
+      "model_spec": {
+        "availableContextTokens": 256000,
+        "capabilities": {
+          "optimizedForCode": false,
+          "quantization": "int4",
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": true,
+          "supportsMultipleImages": false,
+          "supportsReasoning": false,
+          "supportsReasoningEffort": false,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 8192,
+        "modelSource": "https://huggingface.co/Jiunsong/supergemma4-26b-uncensored-gguf-v2",
+        "pricing": {
+          "input": {
+            "diem": 0.1625,
+            "usd": 0.1625
+          },
+          "output": {
+            "diem": 0.5,
+            "usd": 0.5
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "google-gemma-3-27b-it",
+      "model_spec": {
+        "availableContextTokens": 198000,
+        "capabilities": {
+          "maxImages": 10,
+          "optimizedForCode": false,
+          "quantization": "fp8",
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": true,
+          "supportsReasoning": false,
+          "supportsReasoningEffort": false,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 16384,
+        "modelSource": "https://huggingface.co/google/gemma-3-27b-it",
+        "pricing": {
+          "input": {
+            "diem": 0.12,
+            "usd": 0.12
+          },
+          "output": {
+            "diem": 0.2,
+            "usd": 0.2
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "google-gemma-4-26b-a4b-it",
+      "model_spec": {
+        "availableContextTokens": 256000,
+        "capabilities": {
+          "defaultReasoningEffort": "low",
+          "maxImages": 10,
+          "optimizedForCode": false,
+          "quantization": "bf16",
+          "reasoningEffortOptions": [
+            "none",
+            "low",
+            "medium",
+            "high"
+          ],
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": true,
+          "supportsMultipleImages": true,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": true,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": true,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 8192,
+        "modelSource": "https://huggingface.co/google/gemma-4-26B-A4B-it",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.05,
+            "usd": 0.05
+          },
+          "input": {
+            "diem": 0.13,
+            "usd": 0.13
+          },
+          "output": {
+            "diem": 0.4,
+            "usd": 0.4
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "google-gemma-4-31b-it",
+      "model_spec": {
+        "availableContextTokens": 256000,
+        "capabilities": {
+          "defaultReasoningEffort": "low",
+          "maxImages": 10,
+          "optimizedForCode": false,
+          "quantization": "bf16",
+          "reasoningEffortOptions": [
+            "none",
+            "low",
+            "medium",
+            "high"
+          ],
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": true,
+          "supportsMultipleImages": true,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": true,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": true,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 8192,
+        "modelSource": "https://huggingface.co/google/gemma-4-31B-it",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.09,
+            "usd": 0.09
+          },
+          "input": {
+            "diem": 0.12,
+            "usd": 0.12
+          },
+          "output": {
+            "diem": 0.36,
+            "usd": 0.36
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "grok-4-20",
+      "model_spec": {
+        "availableContextTokens": 2000000,
+        "capabilities": {
+          "maxImages": 10,
+          "optimizedForCode": false,
+          "quantization": "not-available",
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": true,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": false,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": true
+        },
+        "constraints": {},
+        "maxCompletionTokens": 128000,
+        "modelSource": "https://docs.x.ai/developers/models",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.23,
+            "usd": 0.23
+          },
+          "extended": {
+            "cache_input": {
+              "diem": 0.45,
+              "usd": 0.45
+            },
+            "context_token_threshold": 200000,
+            "input": {
+              "diem": 2.83,
+              "usd": 2.83
+            },
+            "output": {
+              "diem": 5.67,
+              "usd": 5.67
+            }
+          },
+          "input": {
+            "diem": 1.42,
+            "usd": 1.42
+          },
+          "output": {
+            "diem": 2.83,
+            "usd": 2.83
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "grok-4-20-multi-agent",
+      "model_spec": {
+        "availableContextTokens": 2000000,
+        "capabilities": {
+          "maxImages": 10,
+          "optimizedForCode": false,
+          "quantization": "not-available",
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": false,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": true,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": false,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": true
+        },
+        "constraints": {},
+        "maxCompletionTokens": 128000,
+        "modelSource": "https://x.ai/api",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.23,
+            "usd": 0.23
+          },
+          "extended": {
+            "cache_input": {
+              "diem": 0.45,
+              "usd": 0.45
+            },
+            "context_token_threshold": 200000,
+            "input": {
+              "diem": 2.83,
+              "usd": 2.83
+            },
+            "output": {
+              "diem": 5.67,
+              "usd": 5.67
+            }
+          },
+          "input": {
+            "diem": 1.42,
+            "usd": 1.42
+          },
+          "output": {
+            "diem": 2.83,
+            "usd": 2.83
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "grok-4-3",
+      "model_spec": {
+        "availableContextTokens": 1000000,
+        "capabilities": {
+          "defaultReasoningEffort": "low",
+          "maxImages": 10,
+          "optimizedForCode": false,
+          "quantization": "not-available",
+          "reasoningEffortOptions": [
+            "none",
+            "low",
+            "medium",
+            "high"
+          ],
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": true,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": true,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": true
+        },
+        "constraints": {},
+        "maxCompletionTokens": 32000,
+        "modelSource": "https://docs.x.ai/developers/models",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.23,
+            "usd": 0.23
+          },
+          "extended": {
+            "cache_input": {
+              "diem": 0.45,
+              "usd": 0.45
+            },
+            "context_token_threshold": 200000,
+            "input": {
+              "diem": 2.83,
+              "usd": 2.83
+            },
+            "output": {
+              "diem": 5.67,
+              "usd": 5.67
+            }
+          },
+          "input": {
+            "diem": 1.42,
+            "usd": 1.42
+          },
+          "output": {
+            "diem": 2.83,
+            "usd": 2.83
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "grok-4-5",
+      "model_spec": {
+        "availableContextTokens": 500000,
+        "capabilities": {
+          "defaultReasoningEffort": "high",
+          "maxImages": 10,
+          "optimizedForCode": true,
+          "quantization": "not-available",
+          "reasoningEffortOptions": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": true,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": true,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": true
+        },
+        "constraints": {},
+        "maxCompletionTokens": 32000,
+        "modelSource": "https://docs.x.ai/developers/models",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.34,
+            "usd": 0.34
+          },
+          "extended": {
+            "cache_input": {
+              "diem": 0.68,
+              "usd": 0.68
+            },
+            "context_token_threshold": 200000,
+            "input": {
+              "diem": 4.53,
+              "usd": 4.53
+            },
+            "output": {
+              "diem": 13.6,
+              "usd": 13.6
+            }
+          },
+          "input": {
+            "diem": 2.27,
+            "usd": 2.27
+          },
+          "output": {
+            "diem": 6.8,
+            "usd": 6.8
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "grok-build-0-1",
+      "model_spec": {
+        "availableContextTokens": 256000,
+        "capabilities": {
+          "maxImages": 10,
+          "optimizedForCode": true,
+          "quantization": "not-available",
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": true,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": false,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 65536,
+        "modelSource": "https://docs.x.ai/developers/models/grok-build-0.1",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.2,
+            "usd": 0.2
+          },
+          "extended": {
+            "cache_input": {
+              "diem": 0.4,
+              "usd": 0.4
+            },
+            "context_token_threshold": 200000,
+            "input": {
+              "diem": 2,
+              "usd": 2
+            },
+            "output": {
+              "diem": 4,
+              "usd": 4
+            }
+          },
+          "input": {
+            "diem": 1,
+            "usd": 1
+          },
+          "output": {
+            "diem": 2,
+            "usd": 2
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "hermes-3-llama-3.1-405b",
+      "model_spec": {
+        "availableContextTokens": 128000,
+        "capabilities": {
+          "optimizedForCode": false,
+          "quantization": "fp8",
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": false,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": false,
+          "supportsReasoning": false,
+          "supportsReasoningEffort": false,
+          "supportsResponseSchema": false,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": false,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 16384,
+        "modelSource": "https://huggingface.co/NousResearch/Hermes-3-Llama-3.1-405B",
+        "pricing": {
+          "input": {
+            "diem": 1.1,
+            "usd": 1.1
+          },
+          "output": {
+            "diem": 3,
+            "usd": 3
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "inkling",
+      "model_spec": {
+        "availableContextTokens": 524288,
+        "capabilities": {
+          "defaultReasoningEffort": "high",
+          "maxImages": 10,
+          "optimizedForCode": true,
+          "quantization": "fp8",
+          "reasoningEffortOptions": [
+            "none",
+            "low",
+            "medium",
+            "high"
+          ],
+          "supportsAudioInput": true,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": true,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": true,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 65536,
+        "modelSource": "https://huggingface.co/thinkingmachines/Inkling-NVFP4",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.2125,
+            "usd": 0.2125
+          },
+          "input": {
+            "diem": 1.25,
+            "usd": 1.25
+          },
+          "output": {
+            "diem": 5.0625,
+            "usd": 5.0625
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "kimi-k2-5",
+      "model_spec": {
+        "availableContextTokens": 256000,
+        "capabilities": {
+          "defaultReasoningEffort": "high",
+          "maxImages": 10,
+          "optimizedForCode": true,
+          "quantization": "not-available",
+          "reasoningEffortOptions": [
+            "none",
+            "low",
+            "medium",
+            "high"
+          ],
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": true,
+          "supportsMultipleImages": true,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": true,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 65536,
+        "modelSource": "https://github.com/MoonshotAI/Kimi-K2.5",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.22,
+            "usd": 0.22
+          },
+          "input": {
+            "diem": 0.56,
+            "usd": 0.56
+          },
+          "output": {
+            "diem": 3.5,
+            "usd": 3.5
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "kimi-k2-6",
+      "model_spec": {
+        "availableContextTokens": 256000,
+        "capabilities": {
+          "defaultReasoningEffort": "high",
+          "maxImages": 10,
+          "optimizedForCode": true,
+          "quantization": "int4",
+          "reasoningEffortOptions": [
+            "none",
+            "low",
+            "medium",
+            "high"
+          ],
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": true,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": true,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 65536,
+        "modelSource": "https://huggingface.co/moonshotai/Kimi-K2.6",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.16,
+            "usd": 0.16
+          },
+          "input": {
+            "diem": 0.75,
+            "usd": 0.75
+          },
+          "output": {
+            "diem": 3.5,
+            "usd": 3.5
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "kimi-k2-7-code",
+      "model_spec": {
+        "availableContextTokens": 256000,
+        "capabilities": {
+          "defaultReasoningEffort": "high",
+          "maxImages": 10,
+          "optimizedForCode": true,
+          "quantization": "int4",
+          "reasoningEffortOptions": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": true,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": true,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 65536,
+        "modelSource": "https://huggingface.co/moonshotai/Kimi-K2.7-Code",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.16,
+            "usd": 0.16
+          },
+          "input": {
+            "diem": 0.75,
+            "usd": 0.75
+          },
+          "output": {
+            "diem": 3.5,
+            "usd": 3.5
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "kimi-k3",
+      "model_spec": {
+        "availableContextTokens": 1000000,
+        "capabilities": {
+          "maxImages": 10,
+          "optimizedForCode": true,
+          "quantization": "not-available",
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": true,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": false,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 131072,
+        "modelSource": "https://huggingface.co/moonshotai/Kimi-K3",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.375,
+            "usd": 0.375
+          },
+          "input": {
+            "diem": 3.75,
+            "usd": 3.75
+          },
+          "output": {
+            "diem": 18.75,
+            "usd": 18.75
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "kimi-k3-fast-api",
+      "model_spec": {
+        "availableContextTokens": 1000000,
+        "capabilities": {
+          "maxImages": 10,
+          "optimizedForCode": true,
+          "quantization": "not-available",
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": true,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": false,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 131072,
+        "modelSource": "https://huggingface.co/moonshotai/Kimi-K3",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.45,
+            "usd": 0.45
+          },
+          "input": {
+            "diem": 4.5,
+            "usd": 4.5
+          },
+          "output": {
+            "diem": 22.5,
+            "usd": 22.5
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "llama-3.2-3b",
+      "model_spec": {
+        "availableContextTokens": 128000,
+        "capabilities": {
+          "optimizedForCode": false,
+          "quantization": "fp16",
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": false,
+          "supportsReasoning": false,
+          "supportsReasoningEffort": false,
+          "supportsResponseSchema": false,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": false,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 4096,
+        "modelSource": "https://huggingface.co/meta-llama/Llama-3.2-3B",
+        "pricing": {
+          "input": {
+            "diem": 0.15,
+            "usd": 0.15
+          },
+          "output": {
+            "diem": 0.6,
+            "usd": 0.6
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "llama-3.3-70b",
+      "model_spec": {
+        "availableContextTokens": 128000,
+        "capabilities": {
+          "optimizedForCode": false,
+          "quantization": "fp8",
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": false,
+          "supportsReasoning": false,
+          "supportsReasoningEffort": false,
+          "supportsResponseSchema": false,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": false,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 4096,
+        "modelSource": "https://huggingface.co/meta-llama/Llama-3.3-70B-Instruct",
+        "pricing": {
+          "input": {
+            "diem": 0.7,
+            "usd": 0.7
+          },
+          "output": {
+            "diem": 2.8,
+            "usd": 2.8
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "mercury-2",
+      "model_spec": {
+        "availableContextTokens": 128000,
+        "capabilities": {
+          "defaultReasoningEffort": "high",
+          "optimizedForCode": false,
+          "quantization": "not-available",
+          "reasoningEffortOptions": [
+            "none",
+            "low",
+            "medium",
+            "high"
+          ],
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": false,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": true,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": false,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 50000,
+        "modelSource": "https://www.inceptionlabs.ai/models",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.03125,
+            "usd": 0.03125
+          },
+          "input": {
+            "diem": 0.3125,
+            "usd": 0.3125
+          },
+          "output": {
+            "diem": 0.9375,
+            "usd": 0.9375
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "minimax-m25",
+      "model_spec": {
+        "availableContextTokens": 198000,
+        "capabilities": {
+          "defaultReasoningEffort": "low",
+          "optimizedForCode": true,
+          "quantization": "not-available",
+          "reasoningEffortOptions": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": false,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": true,
+          "supportsResponseSchema": false,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": false,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 32768,
+        "pricing": {
+          "cache_input": {
+            "diem": 0.03,
+            "usd": 0.03
+          },
+          "input": {
+            "diem": 0.27,
+            "usd": 0.27
+          },
+          "output": {
+            "diem": 0.95,
+            "usd": 0.95
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "minimax-m27",
+      "model_spec": {
+        "availableContextTokens": 198000,
+        "capabilities": {
+          "defaultReasoningEffort": "low",
+          "optimizedForCode": true,
+          "quantization": "not-available",
+          "reasoningEffortOptions": [
+            "none",
+            "low",
+            "medium",
+            "high"
+          ],
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": false,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": true,
+          "supportsResponseSchema": false,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": false,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 32768,
+        "pricing": {
+          "cache_input": {
+            "diem": 0.06875,
+            "usd": 0.06875
+          },
+          "input": {
+            "diem": 0.375,
+            "usd": 0.375
+          },
+          "output": {
+            "diem": 1.5,
+            "usd": 1.5
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "minimax-m3-preview",
+      "model_spec": {
+        "availableContextTokens": 524288,
+        "capabilities": {
+          "maxImages": 10,
+          "optimizedForCode": true,
+          "quantization": "fp8",
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": true,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": false,
+          "supportsResponseSchema": false,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": true,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 65536,
+        "modelSource": "https://huggingface.co/MiniMaxAI/MiniMax-M3",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.06,
+            "usd": 0.06
+          },
+          "input": {
+            "diem": 0.3,
+            "usd": 0.3
+          },
+          "output": {
+            "diem": 1.2,
+            "usd": 1.2
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "mistral-small-2603",
+      "model_spec": {
+        "availableContextTokens": 256000,
+        "capabilities": {
+          "defaultReasoningEffort": "high",
+          "maxImages": 10,
+          "optimizedForCode": true,
+          "quantization": "fp8",
+          "reasoningEffortOptions": [
+            "none",
+            "high"
+          ],
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": true,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": true,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 65536,
+        "modelSource": "https://huggingface.co/mistralai/Mistral-Small-4-119B-2603",
+        "pricing": {
+          "input": {
+            "diem": 0.1875,
+            "usd": 0.1875
+          },
+          "output": {
+            "diem": 0.75,
+            "usd": 0.75
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "mistral-small-3-2-24b-instruct",
+      "model_spec": {
+        "availableContextTokens": 256000,
+        "capabilities": {
+          "optimizedForCode": false,
+          "quantization": "fp8",
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": false,
+          "supportsReasoning": false,
+          "supportsReasoningEffort": false,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": false,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 16384,
+        "modelSource": "https://huggingface.co/mistralai/Mistral-Small-3.2-24B-Instruct-2506",
+        "pricing": {
+          "input": {
+            "diem": 0.09375,
+            "usd": 0.09375
+          },
+          "output": {
+            "diem": 0.25,
+            "usd": 0.25
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "nvidia-nemotron-3-nano-30b-a3b",
+      "model_spec": {
+        "availableContextTokens": 128000,
+        "capabilities": {
+          "optimizedForCode": false,
+          "quantization": "fp8",
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": false,
+          "supportsReasoning": false,
+          "supportsReasoningEffort": false,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": false,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 16384,
+        "modelSource": "https://huggingface.co/nvidia/Nemotron-3-Nano-30B-A3B",
+        "pricing": {
+          "input": {
+            "diem": 0.075,
+            "usd": 0.075
+          },
+          "output": {
+            "diem": 0.3,
+            "usd": 0.3
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "nvidia-nemotron-3-super-120b-a12b",
+      "model_spec": {
+        "availableContextTokens": 256000,
+        "capabilities": {
+          "defaultReasoningEffort": "low",
+          "optimizedForCode": false,
+          "quantization": "bf16",
+          "reasoningEffortOptions": [
+            "none",
+            "low",
+            "medium",
+            "high"
+          ],
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": false,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": true,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": false,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 32768,
+        "modelSource": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B",
+        "pricing": {
+          "input": {
+            "diem": 0.125,
+            "usd": 0.125
+          },
+          "output": {
+            "diem": 0.625,
+            "usd": 0.625
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "nvidia-nemotron-3-ultra-550b-a55b",
+      "model_spec": {
+        "availableContextTokens": 256000,
+        "capabilities": {
+          "defaultReasoningEffort": "low",
+          "optimizedForCode": false,
+          "quantization": "fp8",
+          "reasoningEffortOptions": [
+            "none",
+            "low",
+            "medium",
+            "high"
+          ],
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": false,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": true,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": false,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 32768,
+        "modelSource": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.1875,
+            "usd": 0.1875
+          },
+          "input": {
+            "diem": 0.625,
+            "usd": 0.625
+          },
+          "output": {
+            "diem": 3.125,
+            "usd": 3.125
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "olafangensan-glm-4.7-flash-heretic",
+      "model_spec": {
+        "availableContextTokens": 200000,
+        "capabilities": {
+          "defaultReasoningEffort": "low",
+          "optimizedForCode": false,
+          "quantization": "fp8",
+          "reasoningEffortOptions": [
+            "none",
+            "low",
+            "medium",
+            "high"
+          ],
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": false,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": true,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": false,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 24000,
+        "modelSource": "https://huggingface.co/Olafangensan/GLM-4.7-Flash-heretic",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.035,
+            "usd": 0.035
+          },
+          "input": {
+            "diem": 0.07,
+            "usd": 0.07
+          },
+          "output": {
+            "diem": 0.4,
+            "usd": 0.4
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "openai-gpt-4o-2024-11-20",
+      "model_spec": {
+        "availableContextTokens": 128000,
+        "capabilities": {
+          "maxImages": 10,
+          "optimizedForCode": false,
+          "quantization": "not-available",
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": true,
+          "supportsMultipleImages": true,
+          "supportsReasoning": false,
+          "supportsReasoningEffort": false,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 16384,
+        "modelSource": "https://developers.openai.com/api/docs/models/gpt-4o",
+        "pricing": {
+          "input": {
+            "diem": 3.125,
+            "usd": 3.125
+          },
+          "output": {
+            "diem": 12.5,
+            "usd": 12.5
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "openai-gpt-4o-mini-2024-07-18",
+      "model_spec": {
+        "availableContextTokens": 128000,
+        "capabilities": {
+          "maxImages": 10,
+          "optimizedForCode": false,
+          "quantization": "not-available",
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": true,
+          "supportsMultipleImages": true,
+          "supportsReasoning": false,
+          "supportsReasoningEffort": false,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 16384,
+        "modelSource": "https://developers.openai.com/api/docs/models/gpt-4o-mini",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.09375,
+            "usd": 0.09375
+          },
+          "input": {
+            "diem": 0.1875,
+            "usd": 0.1875
+          },
+          "output": {
+            "diem": 0.75,
+            "usd": 0.75
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "openai-gpt-52",
+      "model_spec": {
+        "availableContextTokens": 256000,
+        "capabilities": {
+          "defaultReasoningEffort": "high",
+          "optimizedForCode": false,
+          "quantization": "not-available",
+          "reasoningEffortOptions": [
+            "none",
+            "minimal",
+            "low",
+            "medium",
+            "high"
+          ],
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": false,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": true,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": false,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 65536,
+        "modelSource": "https://developers.openai.com/api/docs/models/gpt-5.2",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.219,
+            "usd": 0.219
+          },
+          "input": {
+            "diem": 2.19,
+            "usd": 2.19
+          },
+          "output": {
+            "diem": 17.5,
+            "usd": 17.5
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "openai-gpt-52-codex",
+      "model_spec": {
+        "availableContextTokens": 256000,
+        "capabilities": {
+          "defaultReasoningEffort": "high",
+          "maxImages": 10,
+          "optimizedForCode": true,
+          "quantization": "not-available",
+          "reasoningEffortOptions": [
+            "none",
+            "minimal",
+            "low",
+            "medium",
+            "high"
+          ],
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": true,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": true,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 65536,
+        "modelSource": "https://developers.openai.com/api/docs/models/gpt-5.2-codex",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.219,
+            "usd": 0.219
+          },
+          "input": {
+            "diem": 2.19,
+            "usd": 2.19
+          },
+          "output": {
+            "diem": 17.5,
+            "usd": 17.5
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "openai-gpt-53-codex",
+      "model_spec": {
+        "availableContextTokens": 400000,
+        "capabilities": {
+          "defaultReasoningEffort": "high",
+          "maxImages": 10,
+          "optimizedForCode": true,
+          "quantization": "not-available",
+          "reasoningEffortOptions": [
+            "none",
+            "minimal",
+            "low",
+            "medium",
+            "high"
+          ],
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": true,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": true,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 128000,
+        "modelSource": "https://developers.openai.com/api/docs/models/gpt-5.3-codex",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.219,
+            "usd": 0.219
+          },
+          "input": {
+            "diem": 2.19,
+            "usd": 2.19
+          },
+          "output": {
+            "diem": 17.5,
+            "usd": 17.5
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "openai-gpt-54",
+      "model_spec": {
+        "availableContextTokens": 1000000,
+        "capabilities": {
+          "defaultReasoningEffort": "high",
+          "maxImages": 10,
+          "optimizedForCode": false,
+          "quantization": "not-available",
+          "reasoningEffortOptions": [
+            "none",
+            "minimal",
+            "low",
+            "medium",
+            "high"
+          ],
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": true,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": true,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 131072,
+        "modelSource": "https://developers.openai.com/api/docs/models/gpt-5.4",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.313,
+            "usd": 0.313
+          },
+          "input": {
+            "diem": 3.13,
+            "usd": 3.13
+          },
+          "output": {
+            "diem": 18.8,
+            "usd": 18.8
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "openai-gpt-54-mini",
+      "model_spec": {
+        "availableContextTokens": 400000,
+        "capabilities": {
+          "defaultReasoningEffort": "high",
+          "maxImages": 10,
+          "optimizedForCode": false,
+          "quantization": "not-available",
+          "reasoningEffortOptions": [
+            "none",
+            "minimal",
+            "low",
+            "medium",
+            "high"
+          ],
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": true,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": true,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 128000,
+        "modelSource": "https://developers.openai.com/api/docs/models/gpt-5.4-mini",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.09375,
+            "usd": 0.09375
+          },
+          "input": {
+            "diem": 0.9375,
+            "usd": 0.9375
+          },
+          "output": {
+            "diem": 5.625,
+            "usd": 5.625
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "openai-gpt-54-pro",
+      "model_spec": {
+        "availableContextTokens": 1000000,
+        "capabilities": {
+          "defaultReasoningEffort": "medium",
+          "maxImages": 10,
+          "optimizedForCode": false,
+          "quantization": "not-available",
+          "reasoningEffortOptions": [
+            "none",
+            "minimal",
+            "low",
+            "medium",
+            "high"
+          ],
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": true,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": true,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 128000,
+        "modelSource": "https://developers.openai.com/api/docs/models/gpt-5.4-pro",
+        "pricing": {
+          "extended": {
+            "context_token_threshold": 272000,
+            "input": {
+              "diem": 75,
+              "usd": 75
+            },
+            "output": {
+              "diem": 337.5,
+              "usd": 337.5
+            }
+          },
+          "input": {
+            "diem": 37.5,
+            "usd": 37.5
+          },
+          "output": {
+            "diem": 225,
+            "usd": 225
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "openai-gpt-55",
+      "model_spec": {
+        "availableContextTokens": 1000000,
+        "capabilities": {
+          "defaultReasoningEffort": "high",
+          "maxImages": 10,
+          "optimizedForCode": false,
+          "quantization": "not-available",
+          "reasoningEffortOptions": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ],
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": true,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": true,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 131072,
+        "modelSource": "https://developers.openai.com/api/docs/models/gpt-5.5",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.625,
+            "usd": 0.625
+          },
+          "extended": {
+            "cache_input": {
+              "diem": 1.25,
+              "usd": 1.25
+            },
+            "context_token_threshold": 272000,
+            "input": {
+              "diem": 12.5,
+              "usd": 12.5
+            },
+            "output": {
+              "diem": 56.25,
+              "usd": 56.25
+            }
+          },
+          "input": {
+            "diem": 6.25,
+            "usd": 6.25
+          },
+          "output": {
+            "diem": 37.5,
+            "usd": 37.5
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "openai-gpt-55-pro",
+      "model_spec": {
+        "availableContextTokens": 1000000,
+        "capabilities": {
+          "defaultReasoningEffort": "medium",
+          "maxImages": 10,
+          "optimizedForCode": false,
+          "quantization": "not-available",
+          "reasoningEffortOptions": [
+            "medium",
+            "high",
+            "xhigh"
+          ],
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": true,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": true,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 128000,
+        "modelSource": "https://developers.openai.com/api/docs/models/gpt-5.5-pro",
+        "pricing": {
+          "input": {
+            "diem": 37.5,
+            "usd": 37.5
+          },
+          "output": {
+            "diem": 225,
+            "usd": 225
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "openai-gpt-56-luna",
+      "model_spec": {
+        "availableContextTokens": 1000000,
+        "capabilities": {
+          "defaultReasoningEffort": "high",
+          "maxImages": 10,
+          "optimizedForCode": false,
+          "quantization": "not-available",
+          "reasoningEffortOptions": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": true,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": true,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 128000,
+        "modelSource": "https://openrouter.ai/openai/gpt-5.6-luna",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.02666667,
+            "usd": 0.02666667
+          },
+          "cache_write": {
+            "diem": 0.33333334,
+            "usd": 0.33333334
+          },
+          "input": {
+            "diem": 0.26666667,
+            "usd": 0.26666667
+          },
+          "output": {
+            "diem": 1.6,
+            "usd": 1.6
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "openai-gpt-56-luna-pro",
+      "model_spec": {
+        "availableContextTokens": 1000000,
+        "capabilities": {
+          "defaultReasoningEffort": "medium",
+          "maxImages": 10,
+          "optimizedForCode": false,
+          "quantization": "not-available",
+          "reasoningEffortOptions": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": true,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": true,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 128000,
+        "modelSource": "https://openrouter.ai/openai/gpt-5.6-luna-pro",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.125,
+            "usd": 0.125
+          },
+          "cache_write": {
+            "diem": 1.5625,
+            "usd": 1.5625
+          },
+          "extended": {
+            "cache_input": {
+              "diem": 0.25,
+              "usd": 0.25
+            },
+            "cache_write": {
+              "diem": 3.125,
+              "usd": 3.125
+            },
+            "context_token_threshold": 272000,
+            "input": {
+              "diem": 2.5,
+              "usd": 2.5
+            },
+            "output": {
+              "diem": 11.25,
+              "usd": 11.25
+            }
+          },
+          "input": {
+            "diem": 1.25,
+            "usd": 1.25
+          },
+          "output": {
+            "diem": 7.5,
+            "usd": 7.5
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "openai-gpt-56-sol",
+      "model_spec": {
+        "availableContextTokens": 1000000,
+        "capabilities": {
+          "defaultReasoningEffort": "high",
+          "maxImages": 10,
+          "optimizedForCode": false,
+          "quantization": "not-available",
+          "reasoningEffortOptions": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": true,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": true,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 128000,
+        "modelSource": "https://openrouter.ai/openai/gpt-5.6-sol",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.625,
+            "usd": 0.625
+          },
+          "cache_write": {
+            "diem": 7.8125,
+            "usd": 7.8125
+          },
+          "input": {
+            "diem": 6.25,
+            "usd": 6.25
+          },
+          "output": {
+            "diem": 37.5,
+            "usd": 37.5
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "openai-gpt-56-sol-pro",
+      "model_spec": {
+        "availableContextTokens": 1000000,
+        "capabilities": {
+          "defaultReasoningEffort": "medium",
+          "maxImages": 10,
+          "optimizedForCode": false,
+          "quantization": "not-available",
+          "reasoningEffortOptions": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": true,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": true,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 128000,
+        "modelSource": "https://openrouter.ai/openai/gpt-5.6-sol-pro",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.625,
+            "usd": 0.625
+          },
+          "cache_write": {
+            "diem": 7.8125,
+            "usd": 7.8125
+          },
+          "extended": {
+            "cache_input": {
+              "diem": 1.25,
+              "usd": 1.25
+            },
+            "cache_write": {
+              "diem": 15.625,
+              "usd": 15.625
+            },
+            "context_token_threshold": 272000,
+            "input": {
+              "diem": 12.5,
+              "usd": 12.5
+            },
+            "output": {
+              "diem": 56.25,
+              "usd": 56.25
+            }
+          },
+          "input": {
+            "diem": 6.25,
+            "usd": 6.25
+          },
+          "output": {
+            "diem": 37.5,
+            "usd": 37.5
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "openai-gpt-56-terra",
+      "model_spec": {
+        "availableContextTokens": 1000000,
+        "capabilities": {
+          "defaultReasoningEffort": "high",
+          "maxImages": 10,
+          "optimizedForCode": false,
+          "quantization": "not-available",
+          "reasoningEffortOptions": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": true,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": true,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 128000,
+        "modelSource": "https://openrouter.ai/openai/gpt-5.6-terra",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.3125,
+            "usd": 0.3125
+          },
+          "cache_write": {
+            "diem": 3.90625,
+            "usd": 3.90625
+          },
+          "input": {
+            "diem": 3.125,
+            "usd": 3.125
+          },
+          "output": {
+            "diem": 18.75,
+            "usd": 18.75
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "openai-gpt-56-terra-pro",
+      "model_spec": {
+        "availableContextTokens": 1000000,
+        "capabilities": {
+          "defaultReasoningEffort": "medium",
+          "maxImages": 10,
+          "optimizedForCode": false,
+          "quantization": "not-available",
+          "reasoningEffortOptions": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": true,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": true,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 128000,
+        "modelSource": "https://openrouter.ai/openai/gpt-5.6-terra-pro",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.3125,
+            "usd": 0.3125
+          },
+          "cache_write": {
+            "diem": 3.90625,
+            "usd": 3.90625
+          },
+          "extended": {
+            "cache_input": {
+              "diem": 0.625,
+              "usd": 0.625
+            },
+            "cache_write": {
+              "diem": 7.8125,
+              "usd": 7.8125
+            },
+            "context_token_threshold": 272000,
+            "input": {
+              "diem": 6.25,
+              "usd": 6.25
+            },
+            "output": {
+              "diem": 28.125,
+              "usd": 28.125
+            }
+          },
+          "input": {
+            "diem": 3.125,
+            "usd": 3.125
+          },
+          "output": {
+            "diem": 18.75,
+            "usd": 18.75
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "openai-gpt-oss-120b",
+      "model_spec": {
+        "availableContextTokens": 128000,
+        "capabilities": {
+          "defaultReasoningEffort": "low",
+          "optimizedForCode": false,
+          "quantization": "not-available",
+          "reasoningEffortOptions": [
+            "none",
+            "low",
+            "medium",
+            "high"
+          ],
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": false,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": true,
+          "supportsResponseSchema": false,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": false,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 16384,
+        "modelSource": "https://huggingface.co/openai/gpt-oss-120b",
+        "pricing": {
+          "input": {
+            "diem": 0.07,
+            "usd": 0.07
+          },
+          "output": {
+            "diem": 0.3,
+            "usd": 0.3
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "qwen-3-6-max-preview",
+      "model_spec": {
+        "availableContextTokens": 256000,
+        "capabilities": {
+          "optimizedForCode": true,
+          "quantization": "not-available",
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": false,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": false,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": false,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {
+          "temperature": {
+            "default": 0.7
+          },
+          "top_p": {
+            "default": 0.8
+          }
+        },
+        "maxCompletionTokens": 65536,
+        "modelSource": "https://www.alibabacloud.com/help/en/model-studio/models",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.1625,
+            "usd": 0.1625
+          },
+          "cache_write": {
+            "diem": 2.03125,
+            "usd": 2.03125
+          },
+          "extended": {
+            "cache_input": {
+              "diem": 0.25,
+              "usd": 0.25
+            },
+            "cache_write": {
+              "diem": 3.125,
+              "usd": 3.125
+            },
+            "context_token_threshold": 128000,
+            "input": {
+              "diem": 2.5,
+              "usd": 2.5
+            },
+            "output": {
+              "diem": 15,
+              "usd": 15
+            }
+          },
+          "input": {
+            "diem": 1.625,
+            "usd": 1.625
+          },
+          "output": {
+            "diem": 9.75,
+            "usd": 9.75
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "qwen-3-6-plus",
+      "model_spec": {
+        "availableContextTokens": 1000000,
+        "capabilities": {
+          "maxImages": 10,
+          "optimizedForCode": true,
+          "quantization": "not-available",
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": true,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": false,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": true,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {
+          "temperature": {
+            "default": 0.7
+          },
+          "top_p": {
+            "default": 0.8
+          }
+        },
+        "maxCompletionTokens": 65536,
+        "modelSource": "https://www.alibabacloud.com/blog/qwen3-6-plus-towards-real-world-agents_603005",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.0625,
+            "usd": 0.0625
+          },
+          "cache_write": {
+            "diem": 0.78,
+            "usd": 0.78
+          },
+          "extended": {
+            "cache_input": {
+              "diem": 0.0625,
+              "usd": 0.0625
+            },
+            "cache_write": {
+              "diem": 0.78,
+              "usd": 0.78
+            },
+            "context_token_threshold": 256000,
+            "input": {
+              "diem": 2.5,
+              "usd": 2.5
+            },
+            "output": {
+              "diem": 7.5,
+              "usd": 7.5
+            }
+          },
+          "input": {
+            "diem": 0.625,
+            "usd": 0.625
+          },
+          "output": {
+            "diem": 3.75,
+            "usd": 3.75
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "qwen-3-7-max",
+      "model_spec": {
+        "availableContextTokens": 1000000,
+        "capabilities": {
+          "maxImages": 10,
+          "optimizedForCode": true,
+          "quantization": "not-available",
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": true,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": false,
+          "supportsResponseSchema": false,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": true,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 65536,
+        "modelSource": "https://www.alibabacloud.com/help/en/model-studio/models",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.27,
+            "usd": 0.27
+          },
+          "cache_write": {
+            "diem": 3.35,
+            "usd": 3.35
+          },
+          "input": {
+            "diem": 2.7,
+            "usd": 2.7
+          },
+          "output": {
+            "diem": 8.05,
+            "usd": 8.05
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "qwen-3-7-plus",
+      "model_spec": {
+        "availableContextTokens": 1000000,
+        "capabilities": {
+          "maxImages": 10,
+          "optimizedForCode": true,
+          "quantization": "not-available",
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": true,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": false,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": true,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {
+          "temperature": {
+            "default": 0.7
+          },
+          "top_p": {
+            "default": 0.8
+          }
+        },
+        "maxCompletionTokens": 65536,
+        "modelSource": "https://www.alibabacloud.com/help/en/model-studio/models",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.05,
+            "usd": 0.05
+          },
+          "cache_write": {
+            "diem": 0.625,
+            "usd": 0.625
+          },
+          "extended": {
+            "cache_input": {
+              "diem": 0.15,
+              "usd": 0.15
+            },
+            "cache_write": {
+              "diem": 1.875,
+              "usd": 1.875
+            },
+            "context_token_threshold": 256000,
+            "input": {
+              "diem": 1.5,
+              "usd": 1.5
+            },
+            "output": {
+              "diem": 6,
+              "usd": 6
+            }
+          },
+          "input": {
+            "diem": 0.5,
+            "usd": 0.5
+          },
+          "output": {
+            "diem": 2,
+            "usd": 2
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "qwen-3-8-max",
+      "model_spec": {
+        "availableContextTokens": 1000000,
+        "capabilities": {
+          "maxImages": 10,
+          "optimizedForCode": true,
+          "quantization": "not-available",
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": true,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": false,
+          "supportsResponseSchema": false,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": true,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 131072,
+        "modelSource": "https://www.alibabacloud.com/help/en/model-studio/models",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.3125,
+            "usd": 0.3125
+          },
+          "cache_write": {
+            "diem": 3.125,
+            "usd": 3.125
+          },
+          "input": {
+            "diem": 2.5,
+            "usd": 2.5
+          },
+          "output": {
+            "diem": 7.5,
+            "usd": 7.5
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "qwen3-235b-a22b-instruct-2507",
+      "model_spec": {
+        "availableContextTokens": 128000,
+        "capabilities": {
+          "optimizedForCode": false,
+          "quantization": "fp8",
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": false,
+          "supportsReasoning": false,
+          "supportsReasoningEffort": false,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": false,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 16384,
+        "modelSource": "https://huggingface.co/Qwen/Qwen3-235B-A22B-Instruct-2507-FP8",
+        "pricing": {
+          "input": {
+            "diem": 0.15,
+            "usd": 0.15
+          },
+          "output": {
+            "diem": 0.75,
+            "usd": 0.75
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "qwen3-235b-a22b-thinking-2507",
+      "model_spec": {
+        "availableContextTokens": 128000,
+        "capabilities": {
+          "defaultReasoningEffort": "low",
+          "optimizedForCode": false,
+          "quantization": "fp8",
+          "reasoningEffortOptions": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": false,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": true,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": false,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 16384,
+        "modelSource": "https://huggingface.co/Qwen/Qwen3-235B-A22B-Thinking-2507-FP8",
+        "pricing": {
+          "input": {
+            "diem": 0.45,
+            "usd": 0.45
+          },
+          "output": {
+            "diem": 3.5,
+            "usd": 3.5
+          }
+        },
+        "traits": [
+          "default_reasoning"
+        ]
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "qwen3-5-35b-a3b",
+      "model_spec": {
+        "availableContextTokens": 256000,
+        "capabilities": {
+          "defaultReasoningEffort": "low",
+          "maxImages": 10,
+          "optimizedForCode": true,
+          "quantization": "not-available",
+          "reasoningEffortOptions": [
+            "none",
+            "low",
+            "medium",
+            "high"
+          ],
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": true,
+          "supportsMultipleImages": true,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": true,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": true,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {
+          "repetition_penalty": {
+            "default": 1
+          },
+          "temperature": {
+            "default": 1
+          },
+          "top_p": {
+            "default": 0.95
+          }
+        },
+        "maxCompletionTokens": 16384,
+        "modelSource": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.15625,
+            "usd": 0.15625
+          },
+          "input": {
+            "diem": 0.3125,
+            "usd": 0.3125
+          },
+          "output": {
+            "diem": 1.25,
+            "usd": 1.25
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "qwen3-5-397b-a17b",
+      "model_spec": {
+        "availableContextTokens": 128000,
+        "capabilities": {
+          "defaultReasoningEffort": "low",
+          "maxImages": 5,
+          "optimizedForCode": true,
+          "quantization": "not-available",
+          "reasoningEffortOptions": [
+            "none",
+            "low",
+            "medium",
+            "high"
+          ],
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": true,
+          "supportsMultipleImages": true,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": true,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": true,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 32768,
+        "modelSource": "https://huggingface.co/Qwen/Qwen3.5-397B-A17B",
+        "pricing": {
+          "input": {
+            "diem": 0.75,
+            "usd": 0.75
+          },
+          "output": {
+            "diem": 4.5,
+            "usd": 4.5
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "qwen3-5-9b",
+      "model_spec": {
+        "availableContextTokens": 256000,
+        "capabilities": {
+          "defaultReasoningEffort": "low",
+          "maxImages": 10,
+          "optimizedForCode": false,
+          "quantization": "fp8",
+          "reasoningEffortOptions": [
+            "none",
+            "low",
+            "medium",
+            "high"
+          ],
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": true,
+          "supportsMultipleImages": true,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": true,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 32768,
+        "modelSource": "https://huggingface.co/Qwen/Qwen3.5-9B",
+        "pricing": {
+          "input": {
+            "diem": 0.1,
+            "usd": 0.1
+          },
+          "output": {
+            "diem": 0.15,
+            "usd": 0.15
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "qwen3-6-27b",
+      "model_spec": {
+        "availableContextTokens": 256000,
+        "capabilities": {
+          "defaultReasoningEffort": "low",
+          "maxImages": 10,
+          "optimizedForCode": true,
+          "quantization": "fp8",
+          "reasoningEffortOptions": [
+            "none",
+            "low",
+            "medium",
+            "high"
+          ],
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": true,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": true,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": true,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {
+          "temperature": {
+            "default": 1
+          },
+          "top_p": {
+            "default": 0.95
+          }
+        },
+        "maxCompletionTokens": 65536,
+        "modelSource": "https://qwen.ai/blog?id=qwen3.6-27b",
+        "pricing": {
+          "input": {
+            "diem": 0.325,
+            "usd": 0.325
+          },
+          "output": {
+            "diem": 3.25,
+            "usd": 3.25
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "qwen3-6-35b-a3b",
+      "model_spec": {
+        "availableContextTokens": 256000,
+        "capabilities": {
+          "maxImages": 3,
+          "optimizedForCode": true,
+          "quantization": "fp8",
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": true,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": false,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {
+          "temperature": {
+            "default": 1
+          },
+          "top_p": {
+            "default": 0.95
+          }
+        },
+        "maxCompletionTokens": 65536,
+        "modelSource": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B-FP8",
+        "pricing": {
+          "input": {
+            "diem": 0.1,
+            "usd": 0.1
+          },
+          "output": {
+            "diem": 1,
+            "usd": 1
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "qwen3-coder-480b-a35b-instruct-turbo",
+      "model_spec": {
+        "availableContextTokens": 256000,
+        "capabilities": {
+          "optimizedForCode": true,
+          "quantization": "fp8",
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": true,
+          "supportsMultipleImages": false,
+          "supportsReasoning": false,
+          "supportsReasoningEffort": false,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": false,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 65536,
+        "modelSource": "https://huggingface.co/Qwen/Qwen3-Coder-480B-A35B-Instruct-Turbo",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.04,
+            "usd": 0.04
+          },
+          "input": {
+            "diem": 0.35,
+            "usd": 0.35
+          },
+          "output": {
+            "diem": 1.5,
+            "usd": 1.5
+          }
+        },
+        "traits": [
+          "default_code"
+        ]
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "qwen3-next-80b",
+      "model_spec": {
+        "availableContextTokens": 256000,
+        "capabilities": {
+          "optimizedForCode": false,
+          "quantization": "fp16",
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": false,
+          "supportsReasoning": false,
+          "supportsReasoningEffort": false,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": false,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 16384,
+        "modelSource": "https://huggingface.co/Qwen/Qwen3-Next-80B-A3B-Instruct",
+        "pricing": {
+          "input": {
+            "diem": 0.35,
+            "usd": 0.35
+          },
+          "output": {
+            "diem": 1.9,
+            "usd": 1.9
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "qwen3-vl-235b-a22b",
+      "model_spec": {
+        "availableContextTokens": 128000,
+        "capabilities": {
+          "maxImages": 10,
+          "optimizedForCode": false,
+          "quantization": "fp8",
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": true,
+          "supportsReasoning": false,
+          "supportsReasoningEffort": false,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 16384,
+        "modelSource": "https://huggingface.co/Qwen/Qwen3-VL-235B-A22B-Instruct",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.1,
+            "usd": 0.1
+          },
+          "input": {
+            "diem": 0.21,
+            "usd": 0.21
+          },
+          "output": {
+            "diem": 1.9,
+            "usd": 1.9
+          }
+        },
+        "traits": [
+          "default_vision"
+        ]
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "seed-2-1-turbo",
+      "model_spec": {
+        "availableContextTokens": 256000,
+        "capabilities": {
+          "maxImages": 10,
+          "maxVideos": 4,
+          "optimizedForCode": true,
+          "quantization": "not-available",
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": true,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": false,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": true,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 65536,
+        "modelSource": "https://console.byteplus.com/ark/region:ark+ap-southeast-1/model/detail?Id=dola-seed-2-1-turbo",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.125,
+            "usd": 0.125
+          },
+          "input": {
+            "diem": 0.625,
+            "usd": 0.625
+          },
+          "output": {
+            "diem": 3.125,
+            "usd": 3.125
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "venice-uncensored-1-2",
+      "model_spec": {
+        "availableContextTokens": 128000,
+        "capabilities": {
+          "maxImages": 10,
+          "optimizedForCode": false,
+          "quantization": "fp16",
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": true,
+          "supportsReasoning": false,
+          "supportsReasoningEffort": false,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 8192,
+        "modelSource": "https://huggingface.co/cognitivecomputations/Dolphin-Mistral-24B-Venice-Edition",
+        "pricing": {
+          "input": {
+            "diem": 0.2,
+            "usd": 0.2
+          },
+          "output": {
+            "diem": 0.9,
+            "usd": 0.9
+          }
+        },
+        "traits": [
+          "most_uncensored"
+        ]
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "venice-uncensored-role-play",
+      "model_spec": {
+        "availableContextTokens": 128000,
+        "capabilities": {
+          "maxImages": 10,
+          "optimizedForCode": false,
+          "quantization": "fp8",
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": true,
+          "supportsReasoning": false,
+          "supportsReasoningEffort": false,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 4096,
+        "modelSource": "https://huggingface.co/dphnAI/24B-3.2-RP-K2-final",
+        "pricing": {
+          "input": {
+            "diem": 0.5,
+            "usd": 0.5
+          },
+          "output": {
+            "diem": 2,
+            "usd": 2
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "xiaomi-mimo-v2-5",
+      "model_spec": {
+        "availableContextTokens": 1000000,
+        "capabilities": {
+          "defaultReasoningEffort": "high",
+          "maxImages": 10,
+          "optimizedForCode": true,
+          "quantization": "fp8",
+          "reasoningEffortOptions": [
+            "none",
+            "low",
+            "medium",
+            "high"
+          ],
+          "supportsAudioInput": true,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": true,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": true,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": true,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 65536,
+        "modelSource": "https://huggingface.co/XiaomiMiMo/MiMo-V2.5",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.05,
+            "usd": 0.05
+          },
+          "input": {
+            "diem": 0.14,
+            "usd": 0.14
+          },
+          "output": {
+            "diem": 0.28,
+            "usd": 0.28
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "xiaomi-mimo-v2-omni",
+      "model_spec": {
+        "availableContextTokens": 256000,
+        "capabilities": {
+          "maxImages": 10,
+          "optimizedForCode": false,
+          "quantization": "not-available",
+          "supportsAudioInput": true,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": true,
+          "supportsReasoning": false,
+          "supportsReasoningEffort": false,
+          "supportsResponseSchema": false,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": true,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 65536,
+        "modelSource": "https://mimo.xiaomi.com/mimo-v2-omni",
+        "pricing": {
+          "input": {
+            "diem": 0.5,
+            "usd": 0.5
+          },
+          "output": {
+            "diem": 2.5,
+            "usd": 2.5
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "z-ai-glm-5-turbo",
+      "model_spec": {
+        "availableContextTokens": 200000,
+        "capabilities": {
+          "defaultReasoningEffort": "high",
+          "optimizedForCode": true,
+          "quantization": "not-available",
+          "reasoningEffortOptions": [
+            "none",
+            "low",
+            "medium",
+            "high"
+          ],
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": false,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": true,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": false,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 32768,
+        "modelSource": "https://huggingface.co/zai-org/GLM-5",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.24,
+            "usd": 0.24
+          },
+          "input": {
+            "diem": 1.2,
+            "usd": 1.2
+          },
+          "output": {
+            "diem": 4,
+            "usd": 4
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "z-ai-glm-5v-turbo",
+      "model_spec": {
+        "availableContextTokens": 200000,
+        "capabilities": {
+          "defaultReasoningEffort": "high",
+          "maxImages": 10,
+          "optimizedForCode": true,
+          "quantization": "not-available",
+          "reasoningEffortOptions": [
+            "none",
+            "low",
+            "medium",
+            "high"
+          ],
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": true,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": true,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": true,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 32768,
+        "modelSource": "https://docs.z.ai/guides/vlm/glm-5v-turbo",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.3,
+            "usd": 0.3
+          },
+          "input": {
+            "diem": 1.5,
+            "usd": 1.5
+          },
+          "output": {
+            "diem": 5,
+            "usd": 5
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "zai-org-glm-4.6",
+      "model_spec": {
+        "availableContextTokens": 198000,
+        "capabilities": {
+          "defaultReasoningEffort": "low",
+          "optimizedForCode": false,
+          "quantization": "fp4",
+          "reasoningEffortOptions": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": false,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": true,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": false,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 16384,
+        "modelSource": "https://huggingface.co/zai-org/GLM-4.6",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.08,
+            "usd": 0.08
+          },
+          "input": {
+            "diem": 0.43,
+            "usd": 0.43
+          },
+          "output": {
+            "diem": 1.75,
+            "usd": 1.75
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "zai-org-glm-4.7",
+      "model_spec": {
+        "availableContextTokens": 198000,
+        "capabilities": {
+          "defaultReasoningEffort": "low",
+          "optimizedForCode": false,
+          "quantization": "fp4",
+          "reasoningEffortOptions": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": false,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": true,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": false,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 16384,
+        "modelSource": "https://huggingface.co/zai-org/GLM-4.7",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.11,
+            "usd": 0.11
+          },
+          "input": {
+            "diem": 0.55,
+            "usd": 0.55
+          },
+          "output": {
+            "diem": 2.65,
+            "usd": 2.65
+          }
+        },
+        "traits": [
+          "default",
+          "most_intelligent",
+          "function_calling_default"
+        ]
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "zai-org-glm-4.7-flash",
+      "model_spec": {
+        "availableContextTokens": 128000,
+        "capabilities": {
+          "defaultReasoningEffort": "high",
+          "optimizedForCode": false,
+          "quantization": "fp8",
+          "reasoningEffortOptions": [
+            "none",
+            "low",
+            "medium",
+            "high"
+          ],
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": false,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": true,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": false,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 16384,
+        "modelSource": "https://huggingface.co/zai-org/GLM-4.7-Flash",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.01,
+            "usd": 0.01
+          },
+          "input": {
+            "diem": 0.06,
+            "usd": 0.06
+          },
+          "output": {
+            "diem": 0.4,
+            "usd": 0.4
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "zai-org-glm-5",
+      "model_spec": {
+        "availableContextTokens": 198000,
+        "capabilities": {
+          "defaultReasoningEffort": "low",
+          "optimizedForCode": true,
+          "quantization": "fp8",
+          "reasoningEffortOptions": [
+            "none",
+            "low",
+            "medium",
+            "high"
+          ],
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": false,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": true,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": false,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 32000,
+        "modelSource": "https://huggingface.co/zai-org/GLM-5",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.2,
+            "usd": 0.2
+          },
+          "input": {
+            "diem": 1,
+            "usd": 1
+          },
+          "output": {
+            "diem": 3.2,
+            "usd": 3.2
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "zai-org-glm-5-1",
+      "model_spec": {
+        "availableContextTokens": 200000,
+        "capabilities": {
+          "defaultReasoningEffort": "low",
+          "optimizedForCode": false,
+          "quantization": "fp8",
+          "reasoningEffortOptions": [
+            "none",
+            "low",
+            "medium",
+            "high"
+          ],
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": false,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": true,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": false,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 80000,
+        "modelSource": "https://huggingface.co/zai-org/GLM-5.1",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.286,
+            "usd": 0.286
+          },
+          "input": {
+            "diem": 1.54,
+            "usd": 1.54
+          },
+          "output": {
+            "diem": 4.84,
+            "usd": 4.84
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    },
+    {
+      "id": "zai-org-glm-5-2",
+      "model_spec": {
+        "availableContextTokens": 1000000,
+        "capabilities": {
+          "defaultReasoningEffort": "max",
+          "optimizedForCode": true,
+          "quantization": "fp8",
+          "reasoningEffortOptions": [
+            "none",
+            "high",
+            "max"
+          ],
+          "supportsAudioInput": false,
+          "supportsE2EE": false,
+          "supportsFunctionCalling": true,
+          "supportsLogProbs": false,
+          "supportsMultipleImages": false,
+          "supportsReasoning": true,
+          "supportsReasoningEffort": true,
+          "supportsResponseSchema": true,
+          "supportsTeeAttestation": false,
+          "supportsVideoInput": false,
+          "supportsVision": false,
+          "supportsWebSearch": true,
+          "supportsXSearch": false
+        },
+        "constraints": {},
+        "maxCompletionTokens": 131072,
+        "modelSource": "https://huggingface.co/zai-org/GLM-5.2",
+        "pricing": {
+          "cache_input": {
+            "diem": 0.26,
+            "usd": 0.26
+          },
+          "input": {
+            "diem": 1.4,
+            "usd": 1.4
+          },
+          "output": {
+            "diem": 4.4,
+            "usd": 4.4
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "text"
+    }
+  ],
+  "object": "list",
+  "type": "text"
+}

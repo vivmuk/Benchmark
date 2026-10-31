@@ -1,0 +1,243 @@
+{
+  "count": 9,
+  "models": [
+    {
+      "id": "gemini-embedding-2-preview",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {},
+        "embeddingDimensions": 3072,
+        "maxCompletionTokens": null,
+        "maxInputTokens": 2048,
+        "pricing": {
+          "input": {
+            "diem": 0.25,
+            "usd": 0.25
+          },
+          "output": {
+            "diem": 0.25,
+            "usd": 0.25
+          }
+        },
+        "supportsCustomDimensions": true,
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "embedding"
+    },
+    {
+      "id": "text-embedding-3-large",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {},
+        "embeddingDimensions": 3072,
+        "maxCompletionTokens": null,
+        "maxInputTokens": 8191,
+        "pricing": {
+          "input": {
+            "diem": 0.1625,
+            "usd": 0.1625
+          },
+          "output": {
+            "diem": 0.1625,
+            "usd": 0.1625
+          }
+        },
+        "supportsCustomDimensions": true,
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "embedding"
+    },
+    {
+      "id": "text-embedding-3-small",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {},
+        "embeddingDimensions": 1536,
+        "maxCompletionTokens": null,
+        "maxInputTokens": 8191,
+        "pricing": {
+          "input": {
+            "diem": 0.025,
+            "usd": 0.025
+          },
+          "output": {
+            "diem": 0.025,
+            "usd": 0.025
+          }
+        },
+        "supportsCustomDimensions": true,
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "embedding"
+    },
+    {
+      "id": "text-embedding-bge-en-icl",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {},
+        "embeddingDimensions": 4096,
+        "maxCompletionTokens": null,
+        "maxInputTokens": 8192,
+        "modelSource": "https://huggingface.co/BAAI/bge-en-icl",
+        "pricing": {
+          "input": {
+            "diem": 0.0125,
+            "usd": 0.0125
+          },
+          "output": {
+            "diem": 0.0125,
+            "usd": 0.0125
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "embedding"
+    },
+    {
+      "id": "text-embedding-bge-m3",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {},
+        "embeddingDimensions": 1024,
+        "maxCompletionTokens": null,
+        "maxInputTokens": 8192,
+        "modelSource": "https://huggingface.co/BAAI/bge-m3",
+        "pricing": {
+          "input": {
+            "diem": 0.15,
+            "usd": 0.15
+          },
+          "output": {
+            "diem": 0.6,
+            "usd": 0.6
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "embedding"
+    },
+    {
+      "id": "text-embedding-multilingual-e5-large-instruct",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {},
+        "embeddingDimensions": 1024,
+        "maxCompletionTokens": null,
+        "maxInputTokens": 512,
+        "modelSource": "https://huggingface.co/intfloat/multilingual-e5-large-instruct",
+        "pricing": {
+          "input": {
+            "diem": 0.0125,
+            "usd": 0.0125
+          },
+          "output": {
+            "diem": 0.0125,
+            "usd": 0.0125
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "embedding"
+    },
+    {
+      "id": "text-embedding-nemotron-embed-vl-1b-v2",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {},
+        "embeddingDimensions": 2048,
+        "maxCompletionTokens": null,
+        "maxInputTokens": 32768,
+        "modelSource": "https://huggingface.co/nvidia/llama-nemotron-embed-vl-1b-v2",
+        "pricing": {
+          "input": {
+            "diem": 0.0125,
+            "usd": 0.0125
+          },
+          "output": {
+            "diem": 0.0125,
+            "usd": 0.0125
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "embedding"
+    },
+    {
+      "id": "text-embedding-qwen3-0-6b",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {},
+        "embeddingDimensions": 1024,
+        "maxCompletionTokens": null,
+        "maxInputTokens": 32768,
+        "modelSource": "https://huggingface.co/Qwen/Qwen3-Embedding-0.6B",
+        "pricing": {
+          "input": {
+            "diem": 0.0125,
+            "usd": 0.0125
+          },
+          "output": {
+            "diem": 0.0125,
+            "usd": 0.0125
+          }
+        },
+        "supportsCustomDimensions": true,
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "embedding"
+    },
+    {
+      "id": "text-embedding-qwen3-8b",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {},
+        "embeddingDimensions": 4096,
+        "maxCompletionTokens": null,
+        "maxInputTokens": 32768,
+        "modelSource": "https://huggingface.co/Qwen/Qwen3-Embedding-8B",
+        "pricing": {
+          "input": {
+            "diem": 0.0125,
+            "usd": 0.0125
+          },
+          "output": {
+            "diem": 0.0125,
+            "usd": 0.0125
+          }
+        },
+        "supportsCustomDimensions": true,
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "embedding"
+    }
+  ],
+  "object": "list",
+  "type": "embedding"
+}

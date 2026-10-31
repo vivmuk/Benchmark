@@ -1,0 +1,1682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>World Models in Medical Affairs — Model Shootout</title>
+<style>
+  :root {
+    --teal:#00D4AA; --indigo:#1A1A2E; --cream:#FEFCF8; --gold:#D9A441;
+    --grey:#7a8294; --line:#e8ecf3;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+         background:var(--cream); color:var(--indigo); line-height:1.6; }
+  header { background:var(--indigo); color:#fff; padding:56px 24px 40px; text-align:center; }
+  header h1 { font-size:2.4rem; font-weight:800; letter-spacing:-0.02em; }
+  header p { color:#b8c0d4; margin-top:10px; font-size:1.05rem; max-width:620px; margin-inline:auto; }
+  .kicker { color:var(--teal); text-transform:uppercase; letter-spacing:0.18em; font-size:0.72rem; font-weight:700; }
+  main { max-width:1180px; margin:0 auto; padding:36px 20px 80px; }
+  h2 { font-size:1.5rem; margin:40px 0 16px; font-weight:750; }
+  .card { background:#fff; border:1px solid var(--line); border-radius:16px; padding:24px 26px;
+          box-shadow:0 1px 2px rgba(26,26,46,0.04); }
+  table { width:100%; border-collapse:collapse; font-size:0.92rem; }
+  th, td { text-align:left; padding:12px 14px; border-bottom:1px solid var(--line); }
+  th { color:var(--grey); text-transform:uppercase; font-size:0.7rem; letter-spacing:0.08em; }
+  td.num { font-variant-numeric:tabular-nums; text-align:right; font-weight:600; }
+  td.name { font-weight:700; }
+  .winner { background:linear-gradient(90deg,#fff8e8,#fffdf5); }
+  .rankcard { border:1px solid var(--line); border-radius:14px; padding:20px 22px; margin:14px 0; background:#fff; }
+  .rchead { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
+  .rcname { font-weight:800; font-size:1.1rem; }
+  .rcscore { color:var(--teal); font-weight:700; }
+  .rcnote { color:#4a5264; font-size:0.92rem; }
+  .summary { background:#f2fbf8; border:1px solid #cdeee6; border-radius:14px; padding:20px 22px; margin-top:8px; }
+  .summary strong { color:#007d62; }
+  .frames { display:flex; flex-direction:column; gap:28px; }
+  .frame { width:100%; height:720px; border:1px solid var(--line); border-radius:16px; background:#fff; }
+  .framelabel { font-weight:800; margin-bottom:8px; color:var(--indigo); }
+  .champion { display:inline-block; background:var(--gold); color:#241c04; font-weight:800;
+              padding:2px 12px; border-radius:999px; font-size:0.85rem; margin-left:8px; }
+  footer { text-align:center; color:var(--grey); padding:30px; font-size:0.85rem; }
+</style>
+</head>
+<body>
+<header>
+  <div class="kicker">BenchmarkViv · Model Shootout</div>
+  <h1>World Models in Medical Affairs</h1>
+  <p>Three frontier models wrote the same brief into a self-contained HTML article.
+     Compared on verbosity, cost, and UI craft — then graded by Grok 4.6.</p>
+</header>
+
+<main>
+  <h2>Head-to-head</h2>
+  <div class="card">
+    <table>
+      <thead><tr>
+        <th>Model</th><th>Output tokens</th><th>Total tokens</th><th>Cost</th>
+        <th>Latency</th><th>Substance</th><th>Design</th>
+      </tr></thead>
+      <tbody>
+    <tr>
+      <td class="name">Opus 4.8 Fast</td>
+      <td class="num">9,222</td>
+      <td class="num">12,048</td>
+      <td class="num">$0.5872</td>
+      <td class="num">39.96s</td>
+      <td class="num">81</td>
+      <td class="num">86</td>
+    </tr>
+    <tr>
+      <td class="name">Fable 5</td>
+      <td class="num">10,104</td>
+      <td class="num">12,907</td>
+      <td class="num">$0.6399</td>
+      <td class="num">132.81s</td>
+      <td class="num">87</td>
+      <td class="num">88</td>
+    </tr>
+    <tr>
+      <td class="name">Fable 5.1</td>
+      <td class="num">24,060</td>
+      <td class="num">26,873</td>
+      <td class="num">$1.2311</td>
+      <td class="num">346.83s</td>
+      <td class="num">95</td>
+      <td class="num">93</td>
+    </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Grok 4.6 verdict — winner: claude-fable-5-1</h2>
+  
+    <div class="rankcard">
+      <div class="rchead"><span class="rcname">Opus 4.8 Fast</span>
+        <span class="rcscore">S 81 · D 86</span></div>
+      <p class="rcnote">Elegant magazine essay with a clean LLM-vs-world-model distinction, six applications, a structural-shift table, and a strong &#x27;hypothesis engine not truth engine&#x27; close. Prose is polished but thinner than the others: applications stay high-level, no ML lineage, few concrete rollouts. Design is restrained and typographically excellent (drop cap, gold quotes, definition box, 01–05 numbering) but less distinctive than the two Fable pieces.</p>
+    </div>
+    <div class="rankcard">
+      <div class="rchead"><span class="rcname">Fable 5</span>
+        <span class="rcscore">S 87 · D 88</span></div>
+      <p class="rcnote">Sharper strategic argument than Opus: evidence as portfolio optimization, counterfactual impact as the missing CFO metric, &#x27;astrology with a GPU budget.&#x27; Six applications plus four cards, four identity shifts, three failure modes. Memorable lines throughout. Still less function-by-function and less technically grounded than 5.1. Design is cohesive teal/gold/cream with a strong dark hero, card grid, and well-crafted table—more visual personality than Opus, slightly less ambitious than 5.1.</p>
+    </div>
+    <div class="rankcard">
+      <div class="rchead"><span class="rcname">Fable 5.1</span>
+        <span class="rcscore">S 95 · D 93</span></div>
+      <p class="rcnote">Best answer to applications + transformation by a wide margin: encoder/dynamics/decoder definition, Ha–Schmidhuber/Dreamer/JEPA lineage, hybrid-systems honesty for 2026, ten function-level applications with specific rollouts (cardiometabolic evidence policy, belief-dynamics ethics, MSL transcript), then epistemology/roles/metrics/org politics. Failure modes and a 2026–2029 sequence are unusually serious. Design is the most crafted—night masthead, Observe→Act loop, CSS-counter apps, mono rehearsal, timeline, print CSS—serving the argument rather than decorating it.</p>
+    </div>
+  <div class="summary">claude-fable-5-1 wins both axes: it is the only piece that treats world models as a real ML object, maps them onto medical affairs function by function with testable examples, and then follows through on transformation (plan-as-prediction, insights-as-state, custodianship of a shared disease model) plus governance and a staged build path. claude-fable-5 is the runner-up—punchier and more economically sharp than Opus, with a more distinctive UI, but still an essay of theses rather than a working map. Opus 4.8 Fast is the most classically written of the three and a very competent editorial layout, yet it stays one abstraction layer above the job.</div>
+
+  <h2>The three essays</h2>
+  <div class="frames">
+    <div><div class="framelabel">1 · Opus 4.8 Fast</div><iframe class="frame" srcdoc="&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+&lt;title&gt;World Models in Medical Affairs&lt;/title&gt;
+&lt;style&gt;
+  :root {
+    --ink: #14181f;
+    --ink-soft: #3a4453;
+    --muted: #6b7688;
+    --line: #e4e8ef;
+    --accent: #1f6feb;
+    --accent-deep: #0b3a8f;
+    --wash: #f6f8fc;
+    --wash-warm: #fbf9f4;
+    --gold: #b58234;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+
+  body {
+    margin: 0;
+    background:
+      radial-gradient(1200px 600px at 80% -10%, #eef4ff 0%, rgba(238,244,255,0) 60%),
+      radial-gradient(1000px 500px at -10% 10%, #fbf6ef 0%, rgba(251,246,239,0) 55%),
+      #ffffff;
+    color: var(--ink);
+    font-family: &quot;Iowan Old Style&quot;, &quot;Palatino Linotype&quot;, Palatino, Georgia, &quot;Times New Roman&quot;, serif;
+    line-height: 1.7;
+    font-size: 19px;
+  }
+
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- Masthead ---------- */
+  header.hero {
+    padding: 88px 0 56px;
+    border-bottom: 1px solid var(--line);
+  }
+  .kicker {
+    font-family: ui-sans-serif, system-ui, -apple-system, &quot;Segoe UI&quot;, Roboto, Helvetica, Arial, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--accent);
+    margin: 0 0 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .kicker::before {
+    content: &quot;&quot;;
+    width: 34px; height: 2px;
+    background: var(--accent);
+    display: inline-block;
+  }
+  h1 {
+    font-size: clamp(38px, 6vw, 58px);
+    line-height: 1.06;
+    letter-spacing: -0.02em;
+    margin: 0 0 24px;
+    font-weight: 700;
+  }
+  .dek {
+    font-size: 21px;
+    color: var(--ink-soft);
+    font-style: italic;
+    margin: 0 0 30px;
+    max-width: 620px;
+  }
+  .byline {
+    font-family: ui-sans-serif, system-ui, -apple-system, &quot;Segoe UI&quot;, Roboto, sans-serif;
+    font-size: 13.5px;
+    color: var(--muted);
+    letter-spacing: 0.02em;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    align-items: center;
+  }
+  .byline .dot { color: var(--line); }
+
+  /* ---------- Body ---------- */
+  article { padding: 52px 0 40px; }
+
+  article p { margin: 0 0 24px; }
+
+  .lead::first-letter {
+    float: left;
+    font-size: 74px;
+    line-height: 0.82;
+    padding: 8px 12px 0 0;
+    color: var(--accent-deep);
+    font-weight: 700;
+  }
+
+  h2 {
+    font-family: ui-sans-serif, system-ui, -apple-system, &quot;Segoe UI&quot;, Roboto, sans-serif;
+    font-size: 27px;
+    letter-spacing: -0.01em;
+    margin: 52px 0 8px;
+    line-height: 1.2;
+  }
+  h2 .num {
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+    margin-right: 12px;
+    font-weight: 800;
+  }
+  h3 {
+    font-family: ui-sans-serif, system-ui, -apple-system, &quot;Segoe UI&quot;, Roboto, sans-serif;
+    font-size: 19px;
+    margin: 32px 0 6px;
+    color: var(--ink);
+  }
+  .section-rule {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, var(--accent) 0%, var(--line) 40%, transparent 100%);
+    margin: 8px 0 24px;
+  }
+
+  a { color: var(--accent-deep); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+
+  strong { font-weight: 700; color: var(--ink); }
+  em { color: var(--ink-soft); }
+
+  /* ---------- Pull quote ---------- */
+  blockquote {
+    margin: 40px 0;
+    padding: 4px 0 4px 28px;
+    border-left: 3px solid var(--gold);
+    font-size: 25px;
+    line-height: 1.4;
+    font-style: italic;
+    color: var(--ink);
+  }
+  blockquote cite {
+    display: block;
+    margin-top: 14px;
+    font-size: 14px;
+    font-style: normal;
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  /* ---------- Callout ---------- */
+  .callout {
+    background: var(--wash);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 26px 28px;
+    margin: 36px 0;
+    font-size: 17px;
+    line-height: 1.6;
+  }
+  .callout .tag {
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .callout p:last-child { margin-bottom: 0; }
+
+  /* ---------- Definition box ---------- */
+  .define {
+    background: var(--wash-warm);
+    border-left: 4px solid var(--gold);
+    border-radius: 0 12px 12px 0;
+    padding: 24px 28px;
+    margin: 36px 0;
+  }
+  .define h4 {
+    margin: 0 0 8px;
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .define p { margin: 0; font-size: 17.5px; }
+
+  /* ---------- Table ---------- */
+  .table-wrap { overflow-x: auto; margin: 36px 0; }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    font-size: 15px;
+  }
+  caption {
+    text-align: left;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 12px;
+    font-family: ui-sans-serif, system-ui, sans-serif;
+  }
+  th, td {
+    text-align: left;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  thead th {
+    background: var(--ink);
+    color: #fff;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+  thead th:first-child { border-radius: 10px 0 0 0; }
+  thead th:last-child { border-radius: 0 10px 0 0; }
+  tbody tr:nth-child(even) { background: var(--wash); }
+  td.from { color: var(--muted); }
+  td.to { color: var(--accent-deep); font-weight: 600; }
+
+  /* ---------- List ---------- */
+  ul.ticks { list-style: none; padding: 0; margin: 24px 0; }
+  ul.ticks li {
+    position: relative;
+    padding: 0 0 16px 34px;
+    margin: 0;
+  }
+  ul.ticks li::before {
+    content: &quot;&quot;;
+    position: absolute;
+    left: 4px; top: 10px;
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 4px rgba(31,111,235,0.14);
+  }
+
+  /* ---------- Footer ---------- */
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 40px 0 80px;
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    font-size: 14px;
+    color: var(--muted);
+  }
+  footer .sig {
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: 0.02em;
+  }
+
+  ::selection { background: #cfe0ff; color: var(--ink); }
+
+  @media (max-width: 520px) {
+    body { font-size: 18px; }
+    header.hero { padding: 60px 0 40px; }
+    blockquote { font-size: 21px; }
+  }
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;div class=&quot;wrap&quot;&gt;
+  &lt;header class=&quot;hero&quot;&gt;
+    &lt;p class=&quot;kicker&quot;&gt;Frontiers &amp;middot; AI in Life Sciences&lt;/p&gt;
+    &lt;h1&gt;World Models in Medical Affairs&lt;/h1&gt;
+    &lt;p class=&quot;dek&quot;&gt;Generative systems that learn how disease, evidence, and human behavior actually behave are about to reshape the most human-facing function in pharma.&lt;/p&gt;
+    &lt;div class=&quot;byline&quot;&gt;
+      &lt;span&gt;An essay on the next decade&lt;/span&gt;
+      &lt;span class=&quot;dot&quot;&gt;&amp;bull;&lt;/span&gt;
+      &lt;span&gt;Strategy &amp;amp; Scientific Communication&lt;/span&gt;
+      &lt;span class=&quot;dot&quot;&gt;&amp;bull;&lt;/span&gt;
+      &lt;span&gt;~14 min read&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/header&gt;
+
+  &lt;article&gt;
+    &lt;p class=&quot;lead&quot;&gt;Medical Affairs has always been the function that &lt;em&gt;translates&lt;/em&gt;. It stands between the clean abstraction of a clinical trial and the messy reality of practicing clinicians, health systems, payers, and patients. Its currency is evidence, and its craft is judgment about how that evidence lands in the world. For thirty years, the tools have been static: slide decks, publications, advisory boards, a well-briefed field team. World models threaten &amp;mdash; and promise &amp;mdash; to change the substrate underneath all of it.&lt;/p&gt;
+
+    &lt;p&gt;To understand why, it helps to be precise about what a world model actually is, because the term is thrown around loosely.&lt;/p&gt;
+
+    &lt;div class=&quot;define&quot;&gt;
+      &lt;h4&gt;What we mean by a world model&lt;/h4&gt;
+      &lt;p&gt;A &lt;strong&gt;world model&lt;/strong&gt; is an AI system that learns a compressed, internal representation of how some domain &lt;em&gt;evolves&lt;/em&gt; &amp;mdash; the latent dynamics, causal structure, and counterfactual behavior of a system &amp;mdash; so that it can simulate, predict, and plan rather than merely retrieve or classify. Unlike a chatbot that maps text to text, a world model maps &lt;em&gt;states&lt;/em&gt; to &lt;em&gt;plausible next states&lt;/em&gt;. It can answer &quot;what would happen if&amp;hellip;&quot; not just &quot;what has been written about&amp;hellip;&quot;&lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;p&gt;That distinction is the whole story. A large language model can summarize the literature on a therapy. A world model of a disease can simulate a cohort of virtual patients progressing through that disease under different interventions, generating the evidence the literature doesn&#x27;t yet contain. One reflects the world as recorded; the other rehearses the world as it might unfold.&lt;/p&gt;
+
+    &lt;p&gt;Medical Affairs is, at its core, a discipline of anticipation: anticipating what clinicians will ask, what evidence gaps a launch will expose, how a health system will respond to a new standard of care. Anticipation is exactly what world models are built to do.&lt;/p&gt;
+
+    &lt;h2&gt;&lt;span class=&quot;num&quot;&gt;01&lt;/span&gt;The Applications&lt;/h2&gt;
+    &lt;div class=&quot;section-rule&quot;&gt;&lt;/div&gt;
+
+    &lt;p&gt;Let&#x27;s move from the abstract to the concrete. Below are the domains where world models will find purchase first &amp;mdash; not because they are the most glamorous, but because the value is legible and the data already exists.&lt;/p&gt;
+
+    &lt;h3&gt;Disease and patient-journey simulation&lt;/h3&gt;
+    &lt;p&gt;The most direct application is a generative model of disease progression. Trained on registries, electronic health records, claims, and trial data, such a model can produce &lt;strong&gt;synthetic patient cohorts&lt;/strong&gt; whose trajectories are statistically faithful to real populations. Medical teams can then ask questions that no single dataset answers: How does the addition of a new therapy shift the natural history of a subpopulation? Where in the journey does diagnostic delay do the most damage? Which comorbidity clusters change the risk calculus?&lt;/p&gt;
+    &lt;p&gt;This is not idle simulation. It reframes &lt;strong&gt;unmet need&lt;/strong&gt; from a static bullet point on a strategy slide into a dynamic, queryable object.&lt;/p&gt;
+
+    &lt;h3&gt;In-silico evidence generation&lt;/h3&gt;
+    &lt;p&gt;Evidence generation is Medical Affairs&#x27; heaviest lift and its longest timeline. World models compress it. Synthetic control arms, already accepted in narrow regulatory contexts, are the primitive form. The mature form is a model that can pressure-test a real-world evidence study &lt;em&gt;before&lt;/em&gt; a single site is opened &amp;mdash; estimating power, surfacing likely confounders, and flagging where the observed data will diverge from the assumed dynamics. Studies get designed against a simulated reality first, and only the survivors reach the field.&lt;/p&gt;
+
+    &lt;blockquote&gt;
+      The next generation of evidence will be &lt;em&gt;rehearsed in simulation&lt;/em&gt; before it is ever collected in the world.
+      &lt;cite&gt;The operating premise of world-model-driven evidence&lt;/cite&gt;
+    &lt;/blockquote&gt;
+
+    &lt;h3&gt;Scientific-narrative stress-testing&lt;/h3&gt;
+    &lt;p&gt;Every launch rests on a scientific narrative &amp;mdash; a chain of claims connecting mechanism to outcome to value. World models let teams war-game that narrative against simulated skeptics: a model of a cardiologist&#x27;s likely objections, a model of a payer&#x27;s evidence thresholds, a model of how a competitor&#x27;s data will reframe the conversation. This is red-teaming for medical storytelling, and it turns the advisory board from the &lt;em&gt;only&lt;/em&gt; feedback mechanism into the &lt;em&gt;final&lt;/em&gt; one.&lt;/p&gt;
+
+    &lt;h3&gt;Field medical intelligence and MSL augmentation&lt;/h3&gt;
+    &lt;p&gt;The Medical Science Liaison is the human sensor network of the industry. A world model can act as the liaison&#x27;s co-pilot &amp;mdash; not a script, but a simulator. Before a key scientific exchange, an MSL can rehearse against a model of a specific KOL&#x27;s published positions and probable questions. After the interaction, the same model helps interpret the signal: is this one physician&#x27;s idiosyncrasy, or the leading edge of a shift in clinical thinking? Aggregated, these interactions feed back into a living model of the scientific community&#x27;s evolving beliefs.&lt;/p&gt;
+
+    &lt;h3&gt;Personalized medical education&lt;/h3&gt;
+    &lt;p&gt;Static CME and one-size-fits-all decks assume a homogeneous audience. A world model of a learner &amp;mdash; their specialty, their prior knowledge, their misconceptions &amp;mdash; enables education that adapts in real time, closing genuine knowledge gaps rather than broadcasting into them. The scientific content stays rigorously the same; the path through it becomes individual.&lt;/p&gt;
+
+    &lt;h3&gt;Health-system and access modeling&lt;/h3&gt;
+    &lt;p&gt;Finally, the widest lens: modeling how an intervention propagates through a health system. Uptake, guideline adoption, referral pattern shifts, budget impact &amp;mdash; these are dynamical, feedback-laden processes that spreadsheets caricature and world models can actually represent. Medical Affairs gains the ability to reason about its impact at the level of populations and systems, not just individual engagements.&lt;/p&gt;
+
+    &lt;div class=&quot;callout&quot;&gt;
+      &lt;div class=&quot;tag&quot;&gt;The through-line&lt;/div&gt;
+      &lt;p&gt;Every one of these applications shares a shape: replacing a &lt;strong&gt;static artifact&lt;/strong&gt; (a study, a deck, a briefing, a curriculum) with a &lt;strong&gt;queryable dynamical system&lt;/strong&gt;. That is the actual transformation. The deliverables are downstream.&lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;h2&gt;&lt;span class=&quot;num&quot;&gt;02&lt;/span&gt;The Transformation&lt;/h2&gt;
+    &lt;div class=&quot;section-rule&quot;&gt;&lt;/div&gt;
+
+    &lt;p&gt;Applications are additive; transformation is structural. If world models merely made existing tasks faster, they&#x27;d be a productivity story. They are more than that because they change what Medical Affairs is &lt;em&gt;for&lt;/em&gt;. Four shifts define the arc.&lt;/p&gt;
+
+    &lt;div class=&quot;table-wrap&quot;&gt;
+      &lt;table&gt;
+        &lt;caption&gt;The structural shift in Medical Affairs&lt;/caption&gt;
+        &lt;thead&gt;
+          &lt;tr&gt;&lt;th&gt;Dimension&lt;/th&gt;&lt;th&gt;Today&lt;/th&gt;&lt;th&gt;With world models&lt;/th&gt;&lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody&gt;
+          &lt;tr&gt;&lt;td&gt;Evidence posture&lt;/td&gt;&lt;td class=&quot;from&quot;&gt;Reactive; generated in response to gaps as they surface&lt;/td&gt;&lt;td class=&quot;to&quot;&gt;Anticipatory; gaps simulated and closed before they appear&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;Insight cadence&lt;/td&gt;&lt;td class=&quot;from&quot;&gt;Episodic &amp;mdash; advisory boards, congresses, quarterly reviews&lt;/td&gt;&lt;td class=&quot;to&quot;&gt;Continuous &amp;mdash; a living model updated by every interaction&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;Unit of work&lt;/td&gt;&lt;td class=&quot;from&quot;&gt;The artifact (deck, publication, briefing)&lt;/td&gt;&lt;td class=&quot;to&quot;&gt;The simulation (a queryable model of the domain)&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;MSL role&lt;/td&gt;&lt;td class=&quot;from&quot;&gt;Information carrier and relationship holder&lt;/td&gt;&lt;td class=&quot;to&quot;&gt;Interpreter, curator, and human validator of the model&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;Speed to insight&lt;/td&gt;&lt;td class=&quot;from&quot;&gt;Weeks to months&lt;/td&gt;&lt;td class=&quot;to&quot;&gt;Hours &amp;mdash; bounded by judgment, not logistics&lt;/td&gt;&lt;/tr&gt;
+        &lt;/tbody&gt;
+      &lt;/table&gt;
+    &lt;/div&gt;
+
+    &lt;h3&gt;From reactive to anticipatory&lt;/h3&gt;
+    &lt;p&gt;The deepest change is temporal. Today, Medical Affairs largely responds &amp;mdash; to questions, to competitive data, to emerging safety signals. A function equipped with world models operates ahead of the curve, because simulation lets it inhabit likely futures before they arrive. The strategic value of the function shifts from &lt;em&gt;answering well&lt;/em&gt; to &lt;em&gt;anticipating correctly&lt;/em&gt;.&lt;/p&gt;
+
+    &lt;h3&gt;From artifacts to living models&lt;/h3&gt;
+    &lt;p&gt;The publication, the platform slide, the medical information response &amp;mdash; these become &lt;em&gt;renderings&lt;/em&gt; of an underlying model rather than the primary work product. When the model updates, every downstream artifact can update with it. Consistency stops being a governance headache enforced by review committees and becomes a property of the system.&lt;/p&gt;
+
+    &lt;h3&gt;The human center of gravity moves&lt;/h3&gt;
+    &lt;p&gt;None of this removes the human; it relocates them. Judgment about what to simulate, skepticism about what a model asserts, the relationships that make a KOL trust a scientific exchange, and the ethical responsibility for what gets communicated &amp;mdash; these become &lt;em&gt;more&lt;/em&gt; central, not less. The MSL of the coming decade is less a walking database and more a scientist who interrogates models, validates their outputs against clinical reality, and carries the trust that no simulation can generate.&lt;/p&gt;
+
+    &lt;blockquote&gt;
+      Automate the retrieval, elevate the judgment. The function that thrives will be the one that treats the model as a colleague to be challenged, not an oracle to be obeyed.
+    &lt;/blockquote&gt;
+
+    &lt;h2&gt;&lt;span class=&quot;num&quot;&gt;03&lt;/span&gt;The Hard Parts&lt;/h2&gt;
+    &lt;div class=&quot;section-rule&quot;&gt;&lt;/div&gt;
+
+    &lt;p&gt;An honest essay names its own failure modes. World models in Medical Affairs face constraints that are not merely technical &amp;mdash; they are regulatory, ethical, and epistemic, and they are severe.&lt;/p&gt;
+
+    &lt;ul class=&quot;ticks&quot;&gt;
+      &lt;li&gt;&lt;strong&gt;Fidelity and hallucination.&lt;/strong&gt; A world model that confidently simulates a plausible-but-wrong disease trajectory is more dangerous than a chatbot that fabricates a citation, because its output &lt;em&gt;looks like evidence&lt;/em&gt;. Validation against ground truth cannot be optional.&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Regulatory acceptance.&lt;/strong&gt; The line between internal decision-support and externally communicable evidence is bright and heavily policed. Simulated cohorts can inform strategy long before regulators will accept them in a label. Confusing the two is a compliance catastrophe.&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Data provenance and bias.&lt;/strong&gt; A world model inherits the blind spots of its training data. Populations underrepresented in registries and trials will be underrepresented in the model&#x27;s imagined futures &amp;mdash; entrenching, at scale, the very inequities Medical Affairs should be surfacing.&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;The separation of church and state.&lt;/strong&gt; Medical Affairs&#x27; credibility rests on its non-promotional independence. Any world model touching medical work must be firewalled &amp;mdash; in governance and in fact &amp;mdash; from commercial incentives, or the function forfeits the trust that is its entire reason to exist.&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Interpretability.&lt;/strong&gt; A recommendation a medical director cannot explain to a regulator, an ethics committee, or a physician is a recommendation they cannot use.&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;div class=&quot;callout&quot;&gt;
+      &lt;div class=&quot;tag&quot;&gt;The governing principle&lt;/div&gt;
+      &lt;p&gt;Treat every world model as a &lt;strong&gt;hypothesis engine&lt;/strong&gt;, not a truth engine. Its job is to generate sharper questions and better-designed studies &amp;mdash; not to substitute simulated evidence for the real thing. The moment that boundary blurs, the science is compromised.&lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;h2&gt;&lt;span class=&quot;num&quot;&gt;04&lt;/span&gt;What To Do About It&lt;/h2&gt;
+    &lt;div class=&quot;section-rule&quot;&gt;&lt;/div&gt;
+
+    &lt;p&gt;For leaders who find this persuasive rather than speculative, the near-term moves are unglamorous and correct:&lt;/p&gt;
+
+    &lt;ul class=&quot;ticks&quot;&gt;
+      &lt;li&gt;Invest in &lt;strong&gt;data infrastructure&lt;/strong&gt; before models. A world model is only as good as the longitudinal, well-governed data it learns from. This is the constraint, and it is boring, and it is where the winners will separate from the pretenders.&lt;/li&gt;
+      &lt;li&gt;Pilot in &lt;strong&gt;low-stakes, high-learning&lt;/strong&gt; domains first &amp;mdash; internal study design, MSL rehearsal, insight synthesis &amp;mdash; where errors are caught before they reach a physician or a patient.&lt;/li&gt;
+      &lt;li&gt;Build &lt;strong&gt;validation into the workflow&lt;/strong&gt;, not around it. Every simulated output should carry its uncertainty and its provenance as first-class attributes.&lt;/li&gt;
+      &lt;li&gt;Reskill the field. The scarce talent of the next decade is the medical professional who is fluent in &lt;em&gt;both&lt;/em&gt; clinical science and model interrogation. Start growing them now.&lt;/li&gt;
+      &lt;li&gt;Write the &lt;strong&gt;governance&lt;/strong&gt; before the pressure to cut corners arrives. Decide, in the cold light of day, where the line between decision-support and evidence sits.&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;h2&gt;&lt;span class=&quot;num&quot;&gt;05&lt;/span&gt;The Bet&lt;/h2&gt;
+    &lt;div class=&quot;section-rule&quot;&gt;&lt;/div&gt;
+
+    &lt;p&gt;Here is the plainest version of the argument. Medical Affairs exists because there is a gap between what a trial proves and what the world needs to know. World models are the first tools that can &lt;em&gt;model that gap directly&lt;/em&gt; &amp;mdash; simulating the futures, the objections, the patients, and the systems that the evidence base has not yet caught up to.&lt;/p&gt;
+
+    &lt;p&gt;Used carelessly, they will manufacture false confidence at industrial scale. Used well, they will let the most scientifically rigorous function in the industry think faster, anticipate further, and serve patients better &amp;mdash; not by replacing scientific judgment, but by giving it a far larger canvas to work on.&lt;/p&gt;
+
+    &lt;p&gt;The transformation will not announce itself with a single product launch. It will arrive the way most real change does: quietly, as the static artifacts of today are gradually replaced by living models, until one day the question &quot;what would happen if?&quot; is one the function can actually answer.&lt;/p&gt;
+
+    &lt;blockquote&gt;
+      Medical Affairs has always translated evidence into understanding. World models let it translate &lt;em&gt;uncertainty into foresight&lt;/em&gt; &amp;mdash; and that is a different, and larger, job.
+    &lt;/blockquote&gt;
+  &lt;/article&gt;
+
+  &lt;footer&gt;
+    &lt;p class=&quot;sig&quot;&gt;World Models in Medical Affairs&lt;/p&gt;
+    &lt;p&gt;An essay on the applications and transformation ahead. Written to provoke strategy, not to prescribe it &amp;mdash; every claim here is a hypothesis to be tested against your own data, your own regulators, and your own patients.&lt;/p&gt;
+  &lt;/footer&gt;
+&lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;"></iframe></div>
+    <div><div class="framelabel">2 · Fable 5</div><iframe class="frame" srcdoc="&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+&lt;title&gt;World Models in Medical Affairs&lt;/title&gt;
+&lt;style&gt;
+  :root {
+    --ink: #1a2332;
+    --ink-soft: #3d4a5c;
+    --ink-muted: #6b7789;
+    --paper: #faf9f6;
+    --paper-raised: #ffffff;
+    --accent: #0e6e5c;
+    --accent-bright: #12907a;
+    --accent-wash: #e8f3f0;
+    --gold: #b8860b;
+    --hairline: #e2ddd4;
+    --shadow: 0 1px 3px rgba(26,35,50,0.06), 0 8px 24px rgba(26,35,50,0.07);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: Georgia, &#x27;Times New Roman&#x27;, serif;
+    font-size: 19px;
+    line-height: 1.72;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    background: linear-gradient(160deg, #0b2e28 0%, #0e4a3e 55%, #12604f 100%);
+    color: #f2f0ea;
+    padding: 7rem 1.5rem 6rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: &quot;&quot;;
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 80% 20%, rgba(255,255,255,0.07), transparent),
+      radial-gradient(ellipse 50% 60% at 15% 90%, rgba(184,134,11,0.12), transparent);
+    pointer-events: none;
+  }
+  .hero-inner {
+    max-width: 760px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .kicker {
+    font-family: &#x27;Helvetica Neue&#x27;, Helvetica, Arial, sans-serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #9fd4c6;
+    margin-bottom: 1.4rem;
+  }
+  .hero h1 {
+    font-size: clamp(2.4rem, 5.5vw, 3.9rem);
+    line-height: 1.12;
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    margin-bottom: 1.5rem;
+  }
+  .hero .dek {
+    font-size: clamp(1.05rem, 2vw, 1.25rem);
+    line-height: 1.6;
+    color: #cfe6df;
+    max-width: 620px;
+    font-style: italic;
+  }
+  .hero-rule {
+    width: 64px;
+    height: 3px;
+    background: var(--gold);
+    margin-top: 2.2rem;
+    border-radius: 2px;
+  }
+
+  /* ---------- ARTICLE BODY ---------- */
+  .article {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 4.5rem 1.5rem 2rem;
+  }
+
+  .article p { margin-bottom: 1.5rem; color: var(--ink-soft); }
+  .article p strong { color: var(--ink); }
+
+  .lede::first-letter {
+    float: left;
+    font-size: 4.6rem;
+    line-height: 0.82;
+    padding: 0.08em 0.12em 0 0;
+    color: var(--accent);
+    font-weight: 400;
+  }
+
+  h2 {
+    font-size: 1.75rem;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    margin: 3.5rem 0 1.2rem;
+    color: var(--ink);
+    line-height: 1.25;
+  }
+  .h2-number {
+    display: block;
+    font-family: &#x27;Helvetica Neue&#x27;, Helvetica, Arial, sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent-bright);
+    margin-bottom: 0.55rem;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 2.4rem 0 0.9rem;
+    color: var(--ink);
+  }
+
+  /* ---------- PULL QUOTE ---------- */
+  .pullquote {
+    margin: 3rem 0;
+    padding: 0 0 0 1.8rem;
+    border-left: 3px solid var(--gold);
+    font-size: 1.45rem;
+    line-height: 1.5;
+    font-style: italic;
+    color: var(--ink);
+  }
+  .pullquote .attribution {
+    display: block;
+    margin-top: 0.8rem;
+    font-size: 0.85rem;
+    font-style: normal;
+    font-family: &#x27;Helvetica Neue&#x27;, Helvetica, Arial, sans-serif;
+    letter-spacing: 0.06em;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+  }
+
+  /* ---------- CARDS ---------- */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.2rem;
+    margin: 2.2rem 0 2.8rem;
+  }
+  .card {
+    background: var(--paper-raised);
+    border: 1px solid var(--hairline);
+    border-radius: 10px;
+    padding: 1.6rem 1.5rem;
+    box-shadow: var(--shadow);
+  }
+  .card h4 {
+    font-family: &#x27;Helvetica Neue&#x27;, Helvetica, Arial, sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 0.6rem;
+    letter-spacing: 0.01em;
+  }
+  .card p {
+    font-size: 0.94rem;
+    line-height: 1.62;
+    margin: 0;
+    color: var(--ink-soft);
+  }
+
+  /* ---------- CALLOUT ---------- */
+  .callout {
+    background: var(--accent-wash);
+    border-radius: 10px;
+    padding: 1.8rem 2rem;
+    margin: 2.5rem 0;
+    border: 1px solid #d3e8e2;
+  }
+  .callout .callout-label {
+    font-family: &#x27;Helvetica Neue&#x27;, Helvetica, Arial, sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.7rem;
+  }
+  .callout p {
+    font-size: 1rem;
+    margin: 0;
+    color: var(--ink-soft);
+  }
+  .callout p + p { margin-top: 0.9rem; }
+
+  /* ---------- TABLE ---------- */
+  .table-wrap { overflow-x: auto; margin: 2.2rem 0 2.8rem; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: &#x27;Helvetica Neue&#x27;, Helvetica, Arial, sans-serif;
+    font-size: 0.9rem;
+    background: var(--paper-raised);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+  th {
+    background: #10473c;
+    color: #eef7f4;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 0.9rem 1.1rem;
+  }
+  td {
+    padding: 0.95rem 1.1rem;
+    border-top: 1px solid var(--hairline);
+    color: var(--ink-soft);
+    line-height: 1.55;
+    vertical-align: top;
+  }
+  td:first-child { font-weight: 600; color: var(--ink); white-space: nowrap; }
+  tr:nth-child(even) td { background: #fbfaf7; }
+
+  /* ---------- LISTS ---------- */
+  .article ul, .article ol {
+    margin: 0 0 1.6rem 1.4rem;
+    color: var(--ink-soft);
+  }
+  .article li { margin-bottom: 0.55rem; padding-left: 0.3rem; }
+  .article li::marker { color: var(--accent-bright); }
+
+  /* ---------- SECTION DIVIDER ---------- */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    justify-content: center;
+    margin: 3.5rem 0;
+    color: var(--gold);
+    font-size: 1.1rem;
+    letter-spacing: 0.6em;
+  }
+  .divider::before, .divider::after {
+    content: &quot;&quot;;
+    height: 1px;
+    width: 72px;
+    background: var(--hairline);
+  }
+
+  /* ---------- FOOTER ---------- */
+  .coda {
+    background: var(--paper-raised);
+    border-top: 1px solid var(--hairline);
+    margin-top: 4rem;
+    padding: 3rem 1.5rem 4rem;
+  }
+  .coda-inner {
+    max-width: 760px;
+    margin: 0 auto;
+    font-family: &#x27;Helvetica Neue&#x27;, Helvetica, Arial, sans-serif;
+    font-size: 0.85rem;
+    color: var(--ink-muted);
+    line-height: 1.7;
+  }
+  .coda-inner .sig {
+    font-weight: 600;
+    color: var(--ink-soft);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    margin-bottom: 0.5rem;
+  }
+
+  @media (max-width: 640px) {
+    body { font-size: 17.5px; }
+    .hero { padding: 5rem 1.25rem 4rem; }
+    .pullquote { font-size: 1.25rem; }
+    .callout { padding: 1.4rem 1.3rem; }
+  }
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;header class=&quot;hero&quot;&gt;
+  &lt;div class=&quot;hero-inner&quot;&gt;
+    &lt;div class=&quot;kicker&quot;&gt;Frontier Intelligence &amp;middot; Life Sciences&lt;/div&gt;
+    &lt;h1&gt;World Models in Medical Affairs&lt;/h1&gt;
+    &lt;p class=&quot;dek&quot;&gt;The next generation of AI doesn&#x27;t just answer questions about the healthcare ecosystem — it simulates the ecosystem itself. That single shift will rewrite how medical affairs plans, engages, and proves its value.&lt;/p&gt;
+    &lt;div class=&quot;hero-rule&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/header&gt;
+
+&lt;main class=&quot;article&quot;&gt;
+
+  &lt;p class=&quot;lede&quot;&gt;For a decade, medical affairs has been told that artificial intelligence would transform its work, and for a decade the transformation has amounted to faster literature searches, tidier insight dashboards, and chatbots that draft slide decks. Useful, certainly. Transformative, no. The reason is architectural: large language models are engines of retrospection. They compress what has been written and reflect it back. They can tell you what the field &lt;em&gt;said&lt;/em&gt;. They cannot tell you what the field &lt;em&gt;will do&lt;/em&gt;. World models change that — and in changing it, they change the fundamental economics of medical strategy.&lt;/p&gt;
+
+  &lt;p&gt;A world model is an AI system that learns an internal, causal simulation of an environment. Rather than predicting the next word, it predicts the next &lt;em&gt;state of the world&lt;/em&gt;: if this action is taken, what happens downstream? Pioneered in robotics and reinforcement learning — where agents learn to &quot;imagine&quot; the consequences of movement before committing to it — the paradigm is now migrating into domains where the environment isn&#x27;t a warehouse floor but a healthcare system: prescribers, payers, patients, guidelines committees, competitors, and regulators, all interacting over time.&lt;/p&gt;
+
+  &lt;p&gt;Medical affairs sits at the exact center of that system. It is the function whose entire mandate is to understand how scientific evidence propagates through a clinical ecosystem and to shape that propagation ethically. Which makes it, arguably, the single most natural home for world-model technology in the pharmaceutical enterprise.&lt;/p&gt;
+
+  &lt;blockquote class=&quot;pullquote&quot;&gt;
+    Language models compress the past. World models rehearse the future. Medical affairs is a function that lives entirely in the gap between those two things.
+  &lt;/blockquote&gt;
+
+  &lt;h2&gt;&lt;span class=&quot;h2-number&quot;&gt;Part One&lt;/span&gt;What a World Model Actually Is — and Isn&#x27;t&lt;/h2&gt;
+
+  &lt;p&gt;Strip away the hype and a world model has three defining properties. First, it maintains a &lt;strong&gt;persistent internal state&lt;/strong&gt;: a structured representation of the entities in its environment — in our case, a therapeutic landscape&#x27;s stakeholders, evidence base, and treatment dynamics — that evolves over time. Second, it learns &lt;strong&gt;transition dynamics&lt;/strong&gt;: not correlations, but the causal grammar of how one state leads to another. When a pivotal readout hits, how does prescribing sentiment shift, over what timescale, mediated by which channels? Third, it supports &lt;strong&gt;counterfactual rollout&lt;/strong&gt;: the ability to fork the simulation, inject a hypothetical action, and watch consequences unfold across simulated months or years.&lt;/p&gt;
+
+  &lt;p&gt;This is categorically different from a predictive analytics dashboard, which fits curves to historical data, and from an LLM copilot, which retrieves and rephrases. A world model is a rehearsal space. It lets a medical team ask &quot;what happens if we do X?&quot; and receive not an opinion but a simulated trajectory — with uncertainty bounds, sensitivity to assumptions, and the ability to replay the scenario a thousand times with the dice rolled differently.&lt;/p&gt;
+
+  &lt;div class=&quot;callout&quot;&gt;
+    &lt;div class=&quot;callout-label&quot;&gt;A Working Definition&lt;/div&gt;
+    &lt;p&gt;A medical affairs world model is a learned, continuously updated simulation of a therapeutic ecosystem — its evidence, stakeholders, care pathways, and information flows — that can be queried counterfactually to forecast how scientific actions will propagate through clinical practice over time.&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;h2&gt;&lt;span class=&quot;h2-number&quot;&gt;Part Two&lt;/span&gt;The Applications: Where Simulation Meets Strategy&lt;/h2&gt;
+
+  &lt;h3&gt;1. Evidence Generation as Portfolio Optimization&lt;/h3&gt;
+  &lt;p&gt;Today, integrated evidence plans are built by committee: a list of data gaps, a list of possible studies, and a negotiation about budget. A world model inverts the process. Feed it the current evidence base, the guideline landscape, payer evidentiary standards, and competitor pipelines, then simulate: &lt;em&gt;which study, delivered at which time, moves clinical practice the most per dollar?&lt;/em&gt; The model can reveal non-obvious truths — that a modest real-world comparative effectiveness study published eighteen months before a guideline review cycle outperforms a larger RCT that lands six months after it; that a specific data gap is the binding constraint on formulary access in three major markets while another, more scientifically glamorous gap moves nothing. Evidence generation stops being a wish list and becomes a solved optimization problem, re-solved continuously as the world shifts.&lt;/p&gt;
+
+  &lt;h3&gt;2. Synthetic Trial Arms and In-Silico Patient Populations&lt;/h3&gt;
+  &lt;p&gt;World models trained on longitudinal patient data — claims, EHR, registries — learn the natural history of disease as a generative dynamical system. That yields digital patient cohorts whose disease trajectories are statistically faithful to reality. Medical affairs can use them to construct external control arms for single-arm studies, to stress-test subgroup hypotheses before committing to a Phase IV protocol, to estimate how a therapy would perform in populations excluded from the pivotal trials, and to pre-answer the &quot;but what about elderly renal-impaired patients?&quot; question before an advisory board asks it. The regulatory acceptance of synthetic controls is already advancing; world models make their generation systematic rather than bespoke.&lt;/p&gt;
+
+  &lt;h3&gt;3. Simulating Scientific Narrative Propagation&lt;/h3&gt;
+  &lt;p&gt;How does an idea move through medicine? A congress presentation seeds a network of experts; publications follow; skeptics push back; guideline committees deliberate; community prescribers absorb the consensus with a lag measured in years. This diffusion process is exactly the kind of complex system world models are built to learn. Medical teams can simulate a data disclosure strategy — which congress, which endpoint framing, which sequence of publications — and forecast the resulting shape of scientific opinion twelve months out. Crucially, this includes adversarial simulation: how will a competitor&#x27;s medical team reframe the same data? Where will legitimate methodological criticism land hardest? Strategy meetings stop debating hypotheticals and start comparing simulation outputs.&lt;/p&gt;
+
+  &lt;h3&gt;4. The Rehearsable KOL Engagement&lt;/h3&gt;
+  &lt;p&gt;Advisory boards are expensive, unrepeatable, and frequently squandered on questions whose answers were predictable. A world model that has ingested an expert community&#x27;s published positions, trial involvements, congress discourse, and prescribing context can simulate an advisory board &lt;em&gt;before&lt;/em&gt; it happens — surfacing which questions will produce genuine disagreement (and therefore genuine insight) versus which will yield polite consensus and wasted honoraria. MSLs gain the same advantage at the individual level: rehearsing a scientific exchange against a simulated interlocutor grounded in that expert&#x27;s actual intellectual positions, so the real conversation starts three moves deeper.&lt;/p&gt;
+
+  &lt;h3&gt;5. Insight Synthesis That Actually Predicts&lt;/h3&gt;
+  &lt;p&gt;Field medical insights today are a graveyard of tagged verbatims. The problem was never collection; it was inference. A world model treats each field insight as an observation of the ecosystem&#x27;s hidden state — a noisy sensor reading from one node in the network. Aggregated across hundreds of MSL interactions, the model updates its estimate of where clinical opinion actually sits and, more importantly, where it is &lt;em&gt;heading&lt;/em&gt;. The insight function shifts from descriptive (&quot;physicians are asking about durability data&quot;) to predictive (&quot;durability concerns will become the dominant objection in this segment within two quarters unless addressed — here are the three interventions that change that trajectory&quot;).&lt;/p&gt;
+
+  &lt;h3&gt;6. Launch, Lifecycle, and Crisis Wargaming&lt;/h3&gt;
+  &lt;p&gt;Every launch plan is a bet on how a complex adaptive system will respond. World models make the bet testable in advance. Simulate the launch under a pessimistic label, under an aggressive competitor response, under a safety signal emerging at month nine. Identify which assumptions the plan is fragile to. The same machinery serves crisis response: when an unexpected safety publication drops, the team that can simulate the information cascade over the next 72 hours — which stakeholders react, in what order, with what informational needs — responds with precision instead of panic.&lt;/p&gt;
+
+  &lt;div class=&quot;card-grid&quot;&gt;
+    &lt;div class=&quot;card&quot;&gt;
+      &lt;h4&gt;Guideline Horizon Scanning&lt;/h4&gt;
+      &lt;p&gt;Model guideline committees as deliberative systems with known evidentiary thresholds. Forecast which accumulating evidence will tip a recommendation, when the tipping point arrives, and which single study closes the gap fastest.&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;card&quot;&gt;
+      &lt;h4&gt;Medical Education Targeting&lt;/h4&gt;
+      &lt;p&gt;Simulate knowledge diffusion across a prescriber network to find the minimal set of educational interventions that maximizes appropriate use — replacing spray-and-pray CME investment with network-aware precision.&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;card&quot;&gt;
+      &lt;h4&gt;Publication Sequencing&lt;/h4&gt;
+      &lt;p&gt;Treat the publication plan as a scheduling problem inside the simulation: journal, timing, and order optimized against congress calendars, competitor readouts, and guideline review windows.&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;card&quot;&gt;
+      &lt;h4&gt;Payer Evidence Forecasting&lt;/h4&gt;
+      &lt;p&gt;Simulate HTA body deliberations against the evolving evidence package to predict access outcomes market by market — and identify the cheapest incremental study that flips a negative assessment.&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;divider&quot;&gt;&amp;#10022;&lt;/div&gt;
+
+  &lt;h2&gt;&lt;span class=&quot;h2-number&quot;&gt;Part Three&lt;/span&gt;The Transformation: From Function to Nervous System&lt;/h2&gt;
+
+  &lt;p&gt;Applications are the visible layer. The deeper story is what world models do to the identity of medical affairs itself. Four shifts stand out.&lt;/p&gt;
+
+  &lt;h3&gt;From Reactive to Anticipatory&lt;/h3&gt;
+  &lt;p&gt;Medical affairs has historically been a downstream function: R&amp;amp;D produces data, medical communicates it, and insights flow back as a trailing indicator. A world model collapses that lag. When the function can forecast the ecosystem&#x27;s response to evidence before the evidence exists, it earns a seat upstream — shaping trial design, endpoint selection, and development strategy with quantified predictions about downstream adoption. The perennial aspiration of being a &quot;strategic partner&quot; finally acquires a mechanism.&lt;/p&gt;
+
+  &lt;h3&gt;From Anecdote to Instrument&lt;/h3&gt;
+  &lt;p&gt;The chronic wound of medical affairs is unmeasurable impact. Share of voice and insight counts are proxies that convince no CFO. A world model provides the missing counterfactual: simulate the ecosystem &lt;em&gt;with&lt;/em&gt; and &lt;em&gt;without&lt;/em&gt; the medical intervention, and the delta is the impact. When a medical director can say &quot;this evidence program shifted the simulated probability of guideline inclusion from 34% to 61%, validated against realized outcomes,&quot; the budget conversation changes permanently.&lt;/p&gt;
+
+  &lt;blockquote class=&quot;pullquote&quot;&gt;
+    The function that can quantify its own counterfactual is the function that stops begging for budget and starts allocating it.
+    &lt;span class=&quot;attribution&quot;&gt;The core economic argument&lt;/span&gt;
+  &lt;/blockquote&gt;
+
+  &lt;h3&gt;From Headcount to Leverage&lt;/h3&gt;
+  &lt;p&gt;The MSL role transforms most visibly. When simulation handles rehearsal, prioritization, and insight triage, the human contribution concentrates in what simulation cannot replicate: trust, judgment, and the credibility of a scientist standing in the room. Paradoxically, world models make the human MSL &lt;em&gt;more&lt;/em&gt; valuable per interaction while making each interaction rarer and higher-stakes. Teams will get smaller and dramatically more senior. The same logic runs through publications, med info, and medical education — every role bifurcates into &quot;what the simulation does&quot; and &quot;what only a trusted human can do,&quot; and compensation will follow the second category.&lt;/p&gt;
+
+  &lt;h3&gt;From Silos to a Shared Model of Reality&lt;/h3&gt;
+  &lt;p&gt;Perhaps the most underrated effect: a world model becomes the single substrate on which medical, commercial, market access, and R&amp;amp;D can argue productively. Today those functions fight with incompatible mental models and cherry-picked data. A shared, auditable simulation forces disagreements to become explicit — you either dispute the model&#x27;s assumptions (a resolvable, empirical question) or you accept its rollouts. Cross-functional strategy shifts from rhetoric to model criticism, which is a far healthier failure mode.&lt;/p&gt;
+
+  &lt;div class=&quot;table-wrap&quot;&gt;
+    &lt;table&gt;
+      &lt;thead&gt;
+        &lt;tr&gt;
+          &lt;th&gt;Dimension&lt;/th&gt;
+          &lt;th&gt;Medical Affairs Today&lt;/th&gt;
+          &lt;th&gt;World-Model-Native Medical Affairs&lt;/th&gt;
+        &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+        &lt;tr&gt;
+          &lt;td&gt;Insight generation&lt;/td&gt;
+          &lt;td&gt;Retrospective tagging of field verbatims&lt;/td&gt;
+          &lt;td&gt;Continuous state estimation of ecosystem opinion, with forecasted trajectories&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;Evidence planning&lt;/td&gt;
+          &lt;td&gt;Committee-driven gap lists, annual cycles&lt;/td&gt;
+          &lt;td&gt;Continuously re-optimized portfolio, ranked by simulated impact per dollar&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;Stakeholder engagement&lt;/td&gt;
+          &lt;td&gt;Coverage-based, activity-metric driven&lt;/td&gt;
+          &lt;td&gt;Network-aware, rehearsed, concentrated on highest-leverage exchanges&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;Impact measurement&lt;/td&gt;
+          &lt;td&gt;Proxy metrics; unfalsifiable narratives&lt;/td&gt;
+          &lt;td&gt;Counterfactual deltas validated against realized outcomes&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;Strategic posture&lt;/td&gt;
+          &lt;td&gt;Downstream communicator of R&amp;amp;D output&lt;/td&gt;
+          &lt;td&gt;Upstream forecaster shaping development and launch decisions&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;Team structure&lt;/td&gt;
+          &lt;td&gt;Large, coverage-oriented field forces&lt;/td&gt;
+          &lt;td&gt;Smaller, senior teams operating a simulation-augmented nervous system&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+  &lt;/div&gt;
+
+  &lt;h2&gt;&lt;span class=&quot;h2-number&quot;&gt;Part Four&lt;/span&gt;The Honest Caveats&lt;/h2&gt;
+
+  &lt;p&gt;Sharp writing requires saying what the vendor decks won&#x27;t. Three failure modes deserve permanent vigilance.&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;The simulation is not the territory.&lt;/strong&gt; A world model of a healthcare ecosystem is trained on data generated by a past regime of behavior. Structural breaks — a novel modality, a pandemic, a policy shock — invalidate learned dynamics precisely when foresight matters most. Mature teams will treat model outputs as instruments to be calibrated, tracking forecast-versus-realized performance with the same rigor applied to any diagnostic. A world model that isn&#x27;t continuously scored against reality is astrology with a GPU budget.&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;Simulating influence is adjacent to engineering it.&lt;/strong&gt; The same machinery that identifies the optimal path for legitimate scientific exchange can identify the optimal path for manipulation. The compliance frameworks governing medical affairs were written for a world where influence was slow and human-limited; they will need rewriting for a world where a model can compute the persuasion-maximizing sequence of scientific communications. The functions that build governance &lt;em&gt;into&lt;/em&gt; the simulation layer — constraining objectives to appropriate use and patient outcomes rather than raw uptake — will define the ethical standard. Those that don&#x27;t will define the scandal.&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;Garbage dynamics in, confident garbage out.&lt;/strong&gt; World models fail more dangerously than LLMs because their outputs arrive dressed as forecasts with error bars. A hallucinated citation is checkable; a subtly miscalibrated transition dynamic quietly poisons every downstream decision for a year. The organizational muscle that matters is not prompt engineering but model criticism — and medical affairs, staffed with people trained to interrogate clinical evidence, is better equipped for that discipline than any other commercial-adjacent function in pharma. That is not a coincidence; it is the reason the technology belongs here.&lt;/p&gt;
+
+  &lt;div class=&quot;callout&quot;&gt;
+    &lt;div class=&quot;callout-label&quot;&gt;The Bottom Line&lt;/div&gt;
+    &lt;p&gt;World models will not replace medical affairs. They will replace the version of medical affairs that measured itself in activities, planned in annual cycles, and could not prove its own impact. What remains — and what grows — is a function that operates a living simulation of its therapeutic world, intervenes in that world with rehearsed precision, and quantifies the difference it makes.&lt;/p&gt;
+    &lt;p&gt;The organizations that treat this as an IT procurement will get dashboards. The organizations that treat it as a redefinition of the medical mandate will get, for the first time, a genuinely predictive science of scientific engagement. The gap between those two outcomes will be the defining competitive divide in medical affairs over the coming decade.&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;divider&quot;&gt;&amp;#10022;&lt;/div&gt;
+
+  &lt;p&gt;Every generation of medical affairs leaders inherits a question: is this a communications function or a strategic one? The answer has always depended on what the function could see that others couldn&#x27;t. For decades, that edge was relationships — the MSL who knew what the field was really thinking. World models don&#x27;t eliminate that edge. They industrialize it. The function that has always claimed to be the company&#x27;s window into the clinical world is about to be handed something better than a window: a working model of the view.&lt;/p&gt;
+
+&lt;/main&gt;
+
+&lt;footer class=&quot;coda&quot;&gt;
+  &lt;div class=&quot;coda-inner&quot;&gt;
+    &lt;div class=&quot;sig&quot;&gt;World Models in Medical Affairs&lt;/div&gt;
+    An essay on simulation-native strategy in the life sciences. The perspectives expressed are analytical projections regarding an emerging technology paradigm; specific outcomes will vary by therapeutic area, market, and regulatory environment.
+  &lt;/div&gt;
+&lt;/footer&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;"></iframe></div>
+    <div><div class="framelabel">3 · Fable 5.1</div><iframe class="frame" srcdoc="&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+&lt;title&gt;World Models in Medical Affairs&lt;/title&gt;
+&lt;style&gt;
+  :root{
+    --ink:#1b1a17;
+    --ink-soft:#4a4740;
+    --ink-mute:#7b776d;
+    --paper:#f7f3ea;
+    --paper-deep:#efe9dc;
+    --rule:#d9d2c2;
+    --accent:#0f5c5a;
+    --accent-soft:#e2eeec;
+    --accent-ink:#0b4341;
+    --ember:#a8471f;
+    --ember-soft:#f4e6dd;
+    --night:#121a1c;
+    --night-2:#1b2629;
+    --night-text:#e9e4d8;
+    --serif:&quot;Iowan Old Style&quot;,&quot;Palatino Linotype&quot;,Palatino,&quot;Book Antiqua&quot;,&quot;Charter&quot;,Georgia,&quot;Times New Roman&quot;,serif;
+    --sans:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Inter,Roboto,&quot;Helvetica Neue&quot;,Arial,sans-serif;
+    --mono:&quot;SF Mono&quot;,SFMono-Regular,Menlo,Consolas,&quot;Liberation Mono&quot;,monospace;
+    --measure:70ch;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--serif);
+    font-size:19px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  ::selection{background:var(--accent);color:#fff}
+
+  /* ---------- Masthead ---------- */
+  .masthead{
+    background:
+      radial-gradient(1200px 600px at 85% -10%, rgba(15,92,90,.55), transparent 60%),
+      radial-gradient(800px 500px at 0% 110%, rgba(168,71,31,.35), transparent 60%),
+      linear-gradient(180deg,var(--night),var(--night-2));
+    color:var(--night-text);
+    padding:clamp(56px,9vw,120px) 24px clamp(48px,7vw,96px);
+    position:relative;
+    overflow:hidden;
+  }
+  .masthead::after{
+    content:&quot;&quot;;
+    position:absolute;inset:0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+    background-size:48px 48px;
+    mask-image:radial-gradient(ellipse at center, black 30%, transparent 80%);
+    -webkit-mask-image:radial-gradient(ellipse at center, black 30%, transparent 80%);
+    pointer-events:none;
+  }
+  .masthead .inner{position:relative;z-index:1;max-width:980px;margin:0 auto}
+  .kicker{
+    font-family:var(--sans);
+    font-size:12px;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:#9fd3cf;
+    display:flex;align-items:center;gap:14px;
+    margin-bottom:28px;
+  }
+  .kicker::before{content:&quot;&quot;;width:36px;height:1px;background:#9fd3cf;opacity:.7}
+  h1.title{
+    font-weight:400;
+    font-size:clamp(44px,7.2vw,92px);
+    line-height:.98;
+    letter-spacing:-.02em;
+    margin:0 0 28px;
+    max-width:16ch;
+  }
+  h1.title em{font-style:italic;color:#c9e8e5}
+  .dek{
+    font-size:clamp(19px,2.1vw,25px);
+    line-height:1.45;
+    color:#cfc9bb;
+    max-width:60ch;
+    margin:0 0 40px;
+  }
+  .byline{
+    font-family:var(--sans);
+    font-size:13px;
+    color:#9a9587;
+    display:flex;flex-wrap:wrap;gap:8px 28px;
+    border-top:1px solid rgba(255,255,255,.12);
+    padding-top:22px;
+  }
+  .byline b{color:#e9e4d8;font-weight:600}
+
+  /* ---------- Layout ---------- */
+  .wrap{max-width:980px;margin:0 auto;padding:0 24px}
+  article{padding:64px 0 40px}
+  .prose{max-width:var(--measure);margin:0 auto}
+  .prose p{margin:0 0 1.35em}
+  .prose p.lead{font-size:1.18em;line-height:1.5;color:var(--ink)}
+  .prose p.lead::first-letter{
+    float:left;
+    font-size:4.6em;
+    line-height:.78;
+    padding:.08em .12em 0 0;
+    color:var(--accent);
+    font-weight:400;
+  }
+  .prose a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(15,92,90,.35)}
+  .prose strong{font-weight:600;color:var(--ink)}
+  .prose em{font-style:italic}
+
+  h2{
+    font-weight:400;
+    font-size:clamp(30px,4vw,42px);
+    line-height:1.12;
+    letter-spacing:-.015em;
+    margin:2.4em 0 .7em;
+    max-width:var(--measure);
+    margin-left:auto;margin-right:auto;
+    position:relative;
+  }
+  h2 .num{
+    display:block;
+    font-family:var(--sans);
+    font-size:12px;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin-bottom:14px;
+    font-weight:600;
+  }
+  h3{
+    font-weight:600;
+    font-size:1.22em;
+    line-height:1.3;
+    margin:2em 0 .5em;
+    letter-spacing:-.005em;
+  }
+  h3 .tag{
+    display:inline-block;
+    font-family:var(--sans);
+    font-size:11px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--accent-ink);
+    background:var(--accent-soft);
+    padding:3px 8px;
+    border-radius:3px;
+    vertical-align:middle;
+    margin-right:10px;
+    font-weight:600;
+    position:relative;top:-2px;
+  }
+
+  hr.sep{
+    border:0;height:1px;background:var(--rule);
+    max-width:var(--measure);margin:3.2em auto;
+    position:relative;
+  }
+  hr.sep::after{
+    content:&quot;◆&quot;;
+    position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+    background:var(--paper);padding:0 14px;color:var(--ink-mute);font-size:11px;
+  }
+
+  /* ---------- Pull quotes ---------- */
+  .pull{
+    max-width:var(--measure);
+    margin:2.6em auto;
+    padding:0 0 0 28px;
+    border-left:3px solid var(--accent);
+    font-size:1.42em;
+    line-height:1.32;
+    letter-spacing:-.01em;
+    color:var(--accent-ink);
+    font-style:italic;
+  }
+  .pull span{display:block;font-style:normal;font-family:var(--sans);font-size:.5em;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-mute);margin-top:14px}
+
+  /* ---------- Asides / callouts ---------- */
+  .aside{
+    max-width:var(--measure);
+    margin:2.4em auto;
+    background:var(--paper-deep);
+    border:1px solid var(--rule);
+    border-radius:6px;
+    padding:26px 28px;
+    font-size:.92em;
+  }
+  .aside h4{
+    margin:0 0 12px;
+    font-family:var(--sans);
+    font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--accent);font-weight:600;
+  }
+  .aside p:last-child{margin-bottom:0}
+  .aside.ember{background:var(--ember-soft);border-color:#e3c7b6}
+  .aside.ember h4{color:var(--ember)}
+
+  /* ---------- Definition list ---------- */
+  .defs{max-width:var(--measure);margin:2em auto;display:grid;gap:18px}
+  .def{
+    display:grid;grid-template-columns:160px 1fr;gap:20px;
+    padding:18px 0;border-top:1px solid var(--rule);
+  }
+  .def:last-child{border-bottom:1px solid var(--rule)}
+  .def dt{font-family:var(--sans);font-weight:600;font-size:.85em;color:var(--accent-ink);letter-spacing:.01em;padding-top:3px}
+  .def dd{margin:0;font-size:.95em;color:var(--ink-soft)}
+
+  /* ---------- Loop diagram ---------- */
+  .loop{
+    max-width:var(--measure);
+    margin:2.6em auto;
+    background:var(--night);
+    color:var(--night-text);
+    border-radius:8px;
+    padding:34px 28px 28px;
+    position:relative;
+  }
+  .loop .label{
+    font-family:var(--sans);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#9fd3cf;
+    margin-bottom:22px;
+  }
+  .loop .row{
+    display:grid;
+    grid-template-columns:1fr auto 1fr auto 1fr auto 1fr;
+    align-items:stretch;gap:0;
+  }
+  .node{
+    background:var(--night-2);
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:6px;
+    padding:16px 14px;
+    min-height:118px;
+  }
+  .node b{display:block;font-family:var(--sans);font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:#fff;margin-bottom:8px}
+  .node small{display:block;font-size:13.5px;line-height:1.45;color:#b9b3a5;font-family:var(--sans)}
+  .arrow{
+    display:flex;align-items:center;justify-content:center;
+    color:#9fd3cf;padding:0 8px;font-size:22px;
+  }
+  .loop .back{
+    margin-top:16px;
+    font-family:var(--sans);font-size:12.5px;color:#9a9587;
+    display:flex;align-items:center;gap:10px;
+  }
+  .loop .back::before{content:&quot;↺&quot;;font-size:18px;color:#9fd3cf}
+  .loop .caption{margin-top:18px;font-size:14px;color:#b9b3a5;line-height:1.5;font-family:var(--sans)}
+
+  /* ---------- Table ---------- */
+  .tablewrap{max-width:var(--measure);margin:2.4em auto;overflow-x:auto}
+  table{width:100%;border-collapse:collapse;font-size:.88em;font-family:var(--sans)}
+  thead th{
+    text-align:left;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-mute);
+    padding:0 14px 12px;border-bottom:2px solid var(--ink);font-weight:600;
+  }
+  tbody td{padding:14px;border-bottom:1px solid var(--rule);vertical-align:top;line-height:1.5}
+  tbody td:first-child{font-weight:600;color:var(--accent-ink);width:24%}
+  tbody tr:hover{background:rgba(15,92,90,.04)}
+
+  /* ---------- Numbered applications ---------- */
+  .apps{max-width:var(--measure);margin:1.6em auto 2.4em;counter-reset:app}
+  .app{
+    counter-increment:app;
+    display:grid;grid-template-columns:64px 1fr;gap:18px;
+    padding:26px 0;border-top:1px solid var(--rule);
+  }
+  .app:last-child{border-bottom:1px solid var(--rule)}
+  .app::before{
+    content:counter(app,decimal-leading-zero);
+    font-family:var(--sans);font-size:30px;font-weight:300;color:var(--accent);
+    line-height:1;padding-top:4px;letter-spacing:-.03em;
+  }
+  .app h3{margin:0 0 .5em;font-size:1.18em}
+  .app p{margin:0 0 .9em;font-size:.97em}
+  .app p:last-child{margin-bottom:0}
+  .app .ex{
+    background:var(--accent-soft);border-left:2px solid var(--accent);
+    padding:12px 16px;border-radius:0 4px 4px 0;font-size:.92em;color:var(--accent-ink);margin-top:12px;
+  }
+  .app .ex b{font-family:var(--sans);font-size:11px;letter-spacing:.14em;text-transform:uppercase;display:block;margin-bottom:6px;color:var(--accent)}
+
+  /* ---------- Rehearsal transcript ---------- */
+  .transcript{
+    max-width:var(--measure);margin:2.4em auto;
+    font-family:var(--mono);font-size:13.5px;line-height:1.6;
+    background:#fffdf7;border:1px solid var(--rule);border-radius:6px;padding:22px 24px;
+    color:var(--ink-soft);
+  }
+  .transcript .t{color:var(--ink-mute);font-size:11px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:14px}
+  .transcript .line{margin:0 0 10px;display:grid;grid-template-columns:92px 1fr;gap:12px}
+  .transcript .who{color:var(--accent);font-weight:600}
+  .transcript .sys{color:var(--ember)}
+  .transcript .sys+span{color:var(--ember);font-style:italic}
+
+  /* ---------- Timeline ---------- */
+  .timeline{max-width:var(--measure);margin:2.4em auto;display:grid;gap:0}
+  .tl{
+    display:grid;grid-template-columns:130px 1fr;gap:22px;
+    padding:22px 0;border-top:1px solid var(--rule);position:relative;
+  }
+  .tl:last-child{border-bottom:1px solid var(--rule)}
+  .tl .when{font-family:var(--sans);font-weight:600;font-size:.82em;color:var(--accent-ink);letter-spacing:.04em;text-transform:uppercase;padding-top:4px}
+  .tl .when small{display:block;font-weight:400;color:var(--ink-mute);text-transform:none;letter-spacing:0;margin-top:4px;font-size:.95em}
+  .tl .what{font-size:.95em;color:var(--ink-soft)}
+  .tl .what b{color:var(--ink);font-weight:600}
+
+  /* ---------- Two-column facts ---------- */
+  .grid2{max-width:var(--measure);margin:2em auto;display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .card{
+    background:#fffdf7;border:1px solid var(--rule);border-radius:6px;padding:20px 22px;font-size:.9em;
+  }
+  .card h4{margin:0 0 8px;font-family:var(--sans);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ember);font-weight:600}
+  .card p{margin:0;color:var(--ink-soft)}
+
+  /* ---------- Footer ---------- */
+  footer{
+    margin-top:80px;
+    border-top:1px solid var(--rule);
+    padding:40px 24px 64px;
+    font-family:var(--sans);font-size:13px;color:var(--ink-mute);
+  }
+  footer .inner{max-width:var(--measure);margin:0 auto}
+  footer p{margin:0 0 10px}
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:720px){
+    body{font-size:17.5px}
+    .def{grid-template-columns:1fr;gap:6px}
+    .grid2{grid-template-columns:1fr}
+    .loop .row{grid-template-columns:1fr}
+    .arrow{transform:rotate(90deg);padding:6px 0}
+    .app{grid-template-columns:44px 1fr;gap:12px}
+    .app::before{font-size:22px}
+    .tl{grid-template-columns:1fr;gap:8px}
+    .transcript .line{grid-template-columns:1fr;gap:2px}
+  }
+  @media print{
+    .masthead{background:#fff;color:#000}
+    .masthead .inner *{color:#000!important}
+    .loop{background:#fff;color:#000;border:1px solid #000}
+    .node{background:#fff;color:#000;border-color:#000}
+    .node b,.node small{color:#000}
+    .arrow,.loop .label{color:#000}
+  }
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;header class=&quot;masthead&quot;&gt;
+  &lt;div class=&quot;inner&quot;&gt;
+    &lt;div class=&quot;kicker&quot;&gt;Essay · Medical Affairs · Applied AI&lt;/div&gt;
+    &lt;h1 class=&quot;title&quot;&gt;World Models in &lt;em&gt;Medical Affairs&lt;/em&gt;&lt;/h1&gt;
+    &lt;p class=&quot;dek&quot;&gt;Medical affairs has always run on a model of the world—it just lived in the heads of medical directors and field scientists. That model is about to become explicit, computable, and testable. Here is what that means, function by function.&lt;/p&gt;
+    &lt;div class=&quot;byline&quot;&gt;
+      &lt;span&gt;&lt;b&gt;Reading time&lt;/b&gt; ~28 minutes&lt;/span&gt;
+      &lt;span&gt;&lt;b&gt;Audience&lt;/b&gt; Medical affairs leaders, MSLs, evidence &amp;amp; insights teams, digital &amp;amp; data partners&lt;/span&gt;
+      &lt;span&gt;&lt;b&gt;Published&lt;/b&gt; September 2026&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/header&gt;
+
+&lt;article&gt;
+&lt;div class=&quot;wrap&quot;&gt;
+
+&lt;div class=&quot;prose&quot;&gt;
+  &lt;p class=&quot;lead&quot;&gt;Every good medical director already carries a world model. Ask one why a particular phase III readout will or won&#x27;t shift a guideline, and you will get a fluent chain of causes: who sits on the committee, which endpoint the payers actually care about, how the competitor&#x27;s data was received at last year&#x27;s congress, which three centres set the tone for the rest of the country. That reasoning is a simulation. It takes a state of the world, a proposed action, and predicts what happens next. It is also entirely private, unreproducible, decays when the person leaves, and cannot be run ten thousand times with different assumptions before Monday.&lt;/p&gt;
+
+  &lt;p&gt;The technical idea of a &lt;strong&gt;world model&lt;/strong&gt;—an AI system that learns the dynamics of an environment well enough to predict the consequences of actions inside it—is the thing that turns that private simulation into a shared instrument. It is a different category of tool from the large language models that have occupied medical affairs for the past three years. An LLM predicts the next token. A world model predicts the next &lt;em&gt;state&lt;/em&gt;. The former is good at drafting your slide deck. The latter is good at telling you what the slide deck will do.&lt;/p&gt;
+
+  &lt;p&gt;This essay does two things. First, it maps the concrete applications of world models across the medical affairs remit—evidence generation, field medical, scientific communications, medical information, launch, lifecycle, and compliance. Second, it argues that these applications, taken together, don&#x27;t just make medical affairs more efficient. They change what the function &lt;em&gt;is&lt;/em&gt;: from the organisation&#x27;s interpreter of science to the organisation&#x27;s custodian of its model of the disease and the ecosystem around it. That is a larger role than the one medical affairs holds today, and a more accountable one.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;h2&gt;&lt;span class=&quot;num&quot;&gt;Part I&lt;/span&gt;What a world model actually is&lt;/h2&gt;
+
+&lt;div class=&quot;prose&quot;&gt;
+  &lt;p&gt;The phrase has become fashionable enough to be dangerous, so it is worth being precise. In machine learning, a world model is a learned system with three components. An &lt;strong&gt;encoder&lt;/strong&gt; that compresses raw observations—images, text, sensor readings, records—into a compact latent state. A &lt;strong&gt;dynamics model&lt;/strong&gt; that predicts how that latent state evolves over time, and how it responds to actions. And, typically, a &lt;strong&gt;decoder&lt;/strong&gt; or predictor that turns latent futures back into something legible: a predicted observation, a reward, an outcome.&lt;/p&gt;
+
+  &lt;p&gt;The lineage is not new. The 2018 paper by David Ha and Jürgen Schmidhuber titled, plainly, &lt;em&gt;World Models&lt;/em&gt;, showed an agent learning to play a racing game entirely inside its own learned simulation—&quot;dreaming&quot; of the track, training on the dream, then transferring to reality. Danijar Hafner&#x27;s Dreamer family extended this to a wide range of control tasks, learning policies by imagining trajectories in latent space rather than acting expensively in the real environment. Yann LeCun&#x27;s Joint Embedding Predictive Architecture argued for predicting in abstract representation space rather than pixel space—predicting what &lt;em&gt;matters&lt;/em&gt; about the future, not every detail of it. Generative video systems from the major labs have been described by their makers as nascent world simulators, because to generate a coherent minute of footage you must implicitly model objects, causality, and persistence.&lt;/p&gt;
+
+  &lt;p&gt;Three properties fall out of this architecture, and each of them is exactly what medical affairs has lacked.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;dl class=&quot;defs&quot;&gt;
+  &lt;div class=&quot;def&quot;&gt;
+    &lt;dt&gt;Counterfactual reasoning&lt;/dt&gt;
+    &lt;dd&gt;A world model can be asked &quot;what if?&quot; and answer by rolling the dynamics forward under a hypothetical action. Not what happened, not what usually happens—what &lt;em&gt;would&lt;/em&gt; happen if we did this instead of that. Descriptive analytics cannot do this. Dashboards cannot do this. Most LLM deployments cannot do this except by confident guessing.&lt;/dd&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;def&quot;&gt;
+    &lt;dt&gt;Latent state&lt;/dt&gt;
+    &lt;dd&gt;The model maintains an internal estimate of the true state of the environment, updated as new observations arrive and persisting between them. It does not restart from zero at each query. A field insight from Lyon in March and a publication in June update the &lt;em&gt;same&lt;/em&gt; belief about the same oncologist community.&lt;/dd&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;def&quot;&gt;
+    &lt;dt&gt;Planning by imagination&lt;/dt&gt;
+    &lt;dd&gt;Because rollouts inside the model are cheap, you can evaluate thousands of candidate strategies before committing to one in the real world, where a misjudged evidence plan costs eighteen months and a misjudged congress strategy costs a launch window. This is the property that matters most: the model becomes a rehearsal space for decisions that are otherwise unrehearsable.&lt;/dd&gt;
+  &lt;/div&gt;
+&lt;/dl&gt;
+
+&lt;div class=&quot;aside&quot;&gt;
+  &lt;h4&gt;A necessary distinction&lt;/h4&gt;
+  &lt;p&gt;Not every system marketed as a &quot;world model&quot; is one. A retrieval-augmented chatbot over your medical information database is not a world model; it has no dynamics. A predictive model that forecasts next quarter&#x27;s inquiry volume is closer, but it models a single variable, not a state. A digital twin that ingests real-world data, maintains a latent representation of a patient population, and can be queried about the consequences of a label change under three different competitor scenarios—that is a world model. The test is simple: &lt;strong&gt;can you act on it, and does it tell you what your action does?&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;prose&quot;&gt;
+  &lt;p&gt;It is also worth being honest about where the frontier sits in 2026. The most mature world models live in robotics, games, and video, where environments are observable, dynamics are physical, and feedback arrives in milliseconds. Medical affairs operates in an environment that is partially observable, socially mediated, and slow—the consequences of a scientific engagement strategy unfold over years and are tangled with everything else that happened in the meantime. The world models that matter for this function will not be pixel-perfect simulators. They will be &lt;strong&gt;hybrid systems&lt;/strong&gt;: LLMs supplying language and domain priors, structured dynamics models supplying disease and market mechanics, causal inference supplying discipline about what can and cannot be learned from observational data, and human medical judgment supplying the reward function. That is less glamorous than a single end-to-end neural simulator. It is also what will actually get built.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;h2&gt;&lt;span class=&quot;num&quot;&gt;Part II&lt;/span&gt;Why medical affairs is the natural home&lt;/h2&gt;
+
+&lt;div class=&quot;prose&quot;&gt;
+  &lt;p&gt;There is a tidy argument that the first serious pharmaceutical world models belong to R&amp;amp;D—disease progression, trial simulation, molecule behaviour. Those are being built, and they are important. But medical affairs is a more interesting and, in some ways, more urgent host, for three reasons.&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;First, medical affairs is the function whose job is literally to model the environment.&lt;/strong&gt; Commercial models the market. Regulatory models the agency. Clinical models the trial. Medical affairs is asked to hold the whole scientific ecosystem in view at once: the evidence base and its gaps, the community of clinicians and their beliefs, the guideline bodies and their processes, the payers&#x27; evidence requirements, the emerging safety picture, the competitor pipeline, and the patient experience that all of this is supposed to serve. No other function&#x27;s mandate is so explicitly about integrating a complex, multi-actor system into a coherent picture and acting on it.&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;Second, its feedback loops are the slowest in the company, which makes simulation the most valuable.&lt;/strong&gt; A sales team learns within a quarter whether a message works. A medical affairs team that decides to prioritise a mechanistic publication over a real-world comparative effectiveness study may not learn whether that was right until a guideline committee convenes two years later—and even then, the signal is confounded beyond recognition. When you cannot learn efficiently from reality, you learn from a model of reality or you do not learn at all. Medical affairs today mostly does not learn at all; it accumulates experience, which is different.&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;Third, medical affairs sits on the observation stream that no one else has.&lt;/strong&gt; Field medical teams conduct hundreds of thousands of scientific exchanges a year. Medical information receives the unfiltered questions of clinicians and patients. Advisory boards produce structured expert judgment. Congress teams watch how data lands in real time. This is an extraordinary sensor network pointed at the scientific ecosystem. It is currently used to produce &quot;insights&quot; reports—anecdotes, themes, word clouds—that are read once and filed. A world model turns those observations into what they should always have been: &lt;strong&gt;state updates&lt;/strong&gt;.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;blockquote class=&quot;pull&quot;&gt;
+  Medical affairs already possesses the sensors and the mandate. What it has lacked is the dynamics—a way to connect what it observes to what it should do next, and to test that connection before betting on it.
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;prose&quot;&gt;
+  &lt;p&gt;There is a fourth, more political reason. Medical affairs is the non-promotional function. A world model of a disease area, if it is going to be trusted by clinicians, regulators, and the company&#x27;s own scientists, needs an owner whose incentives are aligned with getting the science right rather than with the number. Locating the model in medical affairs is not merely convenient; it is a governance choice about whose judgment is encoded in the company&#x27;s picture of the world.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;loop&quot;&gt;
+  &lt;div class=&quot;label&quot;&gt;The medical affairs loop, made explicit&lt;/div&gt;
+  &lt;div class=&quot;row&quot;&gt;
+    &lt;div class=&quot;node&quot;&gt;&lt;b&gt;Observe&lt;/b&gt;&lt;small&gt;Field insights, medical information inquiries, advisory board outputs, publications, congress signals, real-world data, guideline drafts, safety reports.&lt;/small&gt;&lt;/div&gt;
+    &lt;div class=&quot;arrow&quot;&gt;→&lt;/div&gt;
+    &lt;div class=&quot;node&quot;&gt;&lt;b&gt;Update state&lt;/b&gt;&lt;small&gt;Encode observations into a persistent latent estimate of the ecosystem: evidence maturity, belief distributions, guideline trajectories, unmet-need structure.&lt;/small&gt;&lt;/div&gt;
+    &lt;div class=&quot;arrow&quot;&gt;→&lt;/div&gt;
+    &lt;div class=&quot;node&quot;&gt;&lt;b&gt;Imagine&lt;/b&gt;&lt;small&gt;Roll forward candidate actions—evidence plans, engagement sequences, communication choices—under uncertainty, thousands of times, cheaply.&lt;/small&gt;&lt;/div&gt;
+    &lt;div class=&quot;arrow&quot;&gt;→&lt;/div&gt;
+    &lt;div class=&quot;node&quot;&gt;&lt;b&gt;Act&lt;/b&gt;&lt;small&gt;Commit to the plan with the best expected outcome and acceptable risk. Instrument it so its results become the next observations.&lt;/small&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;back&quot;&gt;Every real outcome re-enters as an observation, tightening the model. The loop is the product; the model is how it closes.&lt;/div&gt;
+  &lt;div class=&quot;caption&quot;&gt;This is not a new process. It is the process medical affairs has always followed implicitly. What changes is that steps two and three stop being intuition and become artefacts that can be inspected, challenged, versioned, and improved.&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;h2&gt;&lt;span class=&quot;num&quot;&gt;Part III&lt;/span&gt;The applications, function by function&lt;/h2&gt;
+
+&lt;div class=&quot;prose&quot;&gt;
+  &lt;p&gt;The following are not speculative in the sense of requiring undiscovered science. Each rests on capabilities that exist now in adjacent fields, and several are being prototyped inside pharmaceutical companies as this is written. What separates them from production is data engineering, validation, and organisational will—not research breakthroughs. They are ordered roughly by how directly they touch the core of medical strategy.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;apps&quot;&gt;
+
+  &lt;div class=&quot;app&quot;&gt;
+    &lt;h3&gt;Integrated evidence generation as policy optimisation&lt;/h3&gt;
+    &lt;p&gt;The integrated evidence plan is the most consequential document medical affairs produces and the least tested. It commits tens of millions to a portfolio of studies—phase IV, real-world, health economic, investigator-initiated—on the theory that the resulting evidence will move clinical practice, guidelines, and reimbursement in a particular direction. That theory is almost never written down as a model, which means it is never falsified.&lt;/p&gt;
+    &lt;p&gt;A world model of the evidence ecosystem makes the theory explicit. It represents the current evidence base as a state: which questions are answered, at what quality, for which populations. It represents the actors who consume evidence—guideline committees, HTA bodies, formulary committees, high-influence clinicians—and their evidence thresholds. And it models the dynamics: how a new study of a given design, size, and endpoint shifts the beliefs of those actors, how long that shift takes to propagate, and what competitors are likely to add to the evidence base in the meantime. Against that model, an evidence plan is a &lt;em&gt;policy&lt;/em&gt;, and the question &quot;which studies should we fund, in what sequence?&quot; becomes a search problem with a measurable objective.&lt;/p&gt;
+    &lt;div class=&quot;ex&quot;&gt;&lt;b&gt;Rollout&lt;/b&gt;Two candidate plans for a cardiometabolic asset. Plan A front-loads a large pragmatic trial against the standard of care; Plan B funds three smaller real-world studies in distinct populations plus a mechanistic paper. The model, calibrated on how the relevant guideline body has historically weighted evidence types, projects Plan A reaching a guideline-relevant evidence threshold eleven months later but with a 2.3× higher probability of a class recommendation. Plan B moves practice faster in two subpopulations but never clears the threshold for a broad recommendation. The medical director now argues about the reward function, which is the right argument.&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;app&quot;&gt;
+    &lt;h3&gt;Digital twins of patient populations and disease trajectories&lt;/h3&gt;
+    &lt;p&gt;Real-world data has been available to medical affairs for a decade; the constraint has never been access but interpretation. A population-level digital twin—a world model trained on claims, registries, electronic health records, and trial data—maintains a representation of how a disease actually unfolds in practice: who is diagnosed when, who gets treated with what, who discontinues, who progresses, where the pathway breaks. The twin can be queried about the current state (&quot;where is undertreatment concentrated?&quot;) and rolled forward under interventions (&quot;if adherence in this segment improved by twenty points, what happens to outcomes and downstream costs?&quot;).&lt;/p&gt;
+    &lt;p&gt;For medical affairs, this transforms three activities. &lt;strong&gt;Evidence gap identification&lt;/strong&gt; stops being a literature review and becomes a query against the twin: where does the model&#x27;s uncertainty widen, and does that uncertainty matter to any decision-maker? &lt;strong&gt;Investigator-initiated study prioritisation&lt;/strong&gt; gains a common yardstick: which proposals, if successful, most reduce decision-relevant uncertainty in the twin? &lt;strong&gt;Label and lifecycle strategy&lt;/strong&gt; can be stress-tested: a proposed expansion into a new population is simulated against realistic treatment patterns before a single protocol is written.&lt;/p&gt;
+    &lt;p&gt;The twin also becomes the shared object across medical, HEOR, and clinical development. Today those functions maintain incompatible mental and spreadsheet models of the same disease. A single, versioned, validated population model is a governance artefact as much as a technical one.&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;app&quot;&gt;
+    &lt;h3&gt;Models of the scientific community and belief dynamics&lt;/h3&gt;
+    &lt;p&gt;This is the application that most sharply distinguishes medical affairs world models from R&amp;amp;D ones, and the one that demands the most care. Clinical practice does not change when evidence appears; it changes when clinicians&#x27; beliefs change, and belief change propagates through a social structure—department heads, society leadership, the handful of investigators whose editorials get read, the residents who become attendings carrying what they were taught. Medical affairs has always known this. Key opinion leader mapping is a crude attempt to represent it.&lt;/p&gt;
+    &lt;p&gt;A belief-dynamics world model represents the clinical community as a network of agents, each holding a distribution over clinical questions—first-line preference, comfort with a mechanism, perceived safety burden—and each influenced by evidence, peers, and experience with varying weights. The model is trained on longitudinal signals: prescribing behaviour where available, publication and citation patterns, congress discourse, survey data, and, critically, the field medical team&#x27;s own structured observations from scientific exchange. It is then used to simulate how a scientific communication—a publication, a symposium, a set of advisory board outputs—propagates. Which communities will move, how fast, and what will stall the movement.&lt;/p&gt;
+    &lt;div class=&quot;ex&quot;&gt;&lt;b&gt;Rollout&lt;/b&gt;A haematology team is debating whether to prioritise a long-term follow-up publication or a mechanistic review ahead of a major congress. The belief model projects that the follow-up data resolves the dominant residual concern for community oncologists but is largely priced in by academic centres, while the mechanistic review shifts academic sentiment on a second-line question the company had considered settled. The decision is made with a view of &lt;em&gt;who&lt;/em&gt; moves, not just whether something gets published.&lt;/div&gt;
+    &lt;p&gt;The ethical boundary here is real and should be drawn early. Modelling the aggregate belief dynamics of a professional community is legitimate scientific communication strategy—it is what a good medical director does intuitively. Modelling individual clinicians in order to find psychological levers is manipulation and, in most jurisdictions, a compliance breach waiting to happen. The architecture should enforce the distinction: community-level state, not individual dossiers. This is covered further in Part V.&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;app&quot;&gt;
+    &lt;h3&gt;Field medical: insights as state updates, engagement as policy&lt;/h3&gt;
+    &lt;p&gt;Medical science liaisons are the most expensive and most under-leveraged sensors in the pharmaceutical industry. They conduct nuanced scientific conversations with the most informed clinicians in the world, then summarise them in a CRM free-text field that is later mined for &quot;themes.&quot; The information loss is enormous. The insight that a leading transplant centre has quietly changed its induction protocol, or that a regional network is misreading a subgroup analysis, is an observation about the state of the world that should immediately update the company&#x27;s model of it.&lt;/p&gt;
+    &lt;p&gt;With a world model in place, the MSL&#x27;s insight is captured as a structured observation—what belief, held by which community, has shifted in which direction, with what confidence—and encoded into the latent state. Two things follow. The company&#x27;s picture of the ecosystem updates continuously rather than quarterly. And the MSL&#x27;s own planning inverts: instead of being handed a target list and a deck, the MSL is shown where the model&#x27;s uncertainty is highest and its decision relevance greatest, and asked to go reduce it. The MSL becomes an active learning agent for the organisation&#x27;s understanding, which is a far more dignified description of the role than &quot;scientific resource.&quot;&lt;/p&gt;
+    &lt;p&gt;Engagement planning itself becomes a policy over the model. Given the current state, which conversations—with which institutions, on which topics, in what sequence—most efficiently move decision-relevant beliefs toward the evidence? This replaces both the tiered-target approach and its cynical cousin, the activity quota, with something closer to what medical affairs claims to be doing: strategic scientific exchange.&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;app&quot;&gt;
+    &lt;h3&gt;Rehearsal environments for scientific exchange&lt;/h3&gt;
+    &lt;p&gt;The same model that predicts how a clinical community responds to evidence can generate a plausible individual interlocutor for practice. A world model of a scientific community, combined with a language model, becomes a training simulator: an MSL preparing for a difficult conversation with a sceptical academic rheumatologist can rehearse against a simulated rheumatologist whose objections are drawn from the actual distribution of objections the model has observed in that community, whose knowledge is bounded by what that community has actually read, and whose reactions to the MSL&#x27;s answers are grounded in learned dynamics rather than an LLM&#x27;s tendency to agree.&lt;/p&gt;
+    &lt;div class=&quot;transcript&quot;&gt;
+      &lt;div class=&quot;t&quot;&gt;Rehearsal · simulated academic rheumatologist · community priors: high scepticism on long-term safety, low familiarity with subgroup readout&lt;/div&gt;
+      &lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;who&quot;&gt;MSL&lt;/span&gt;&lt;span&gt;The 104-week extension showed no new safety signals, and the infection rate converged with placebo after week 52.&lt;/span&gt;&lt;/div&gt;
+      &lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;who&quot;&gt;SIM&lt;/span&gt;&lt;span&gt;Converged with placebo in whom? Half your placebo arm crossed over. I&#x27;ve seen this before—you&#x27;re comparing survivors. What does the exposure-adjusted rate look like in patients who were on drug from day one?&lt;/span&gt;&lt;/div&gt;
+      &lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;who&quot;&gt;MSL&lt;/span&gt;&lt;span&gt;Exposure-adjusted, the rate in continuous-treatment patients was—&lt;/span&gt;&lt;/div&gt;
+      &lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;sys&quot;&gt;MODEL NOTE&lt;/span&gt;&lt;span&gt;Objection drawn from top-3 residual concerns in this community. Convergence-with-placebo framing tests as weak here (predicted persuasion delta: low). Consider leading with exposure-adjusted data.&lt;/span&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;p&gt;This is the most immediately deployable application and, not coincidentally, the one where world-model grounding matters most. Rehearsal against an unconditioned LLM teaches MSLs to handle a generic, agreeable clinician. Rehearsal against a model that has learned what real clinicians in this therapeutic area actually push back on teaches them to handle Tuesday.&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;app&quot;&gt;
+    &lt;h3&gt;Medical information and scientific response&lt;/h3&gt;
+    &lt;p&gt;Medical information sits at the edge of the sensor network, receiving unsolicited questions that reveal what clinicians and patients are confused about, worried about, or planning. Today these are counted and categorised. As observations feeding a world model, they become early indicators: a rise in inquiries about a specific drug interaction in one region may be the first visible trace of a practice change, a competitor&#x27;s messaging, or an emerging safety concern, and the model can weigh those hypotheses against everything else it knows.&lt;/p&gt;
+    &lt;p&gt;The world model also improves the response side. A scientific response letter is an action with downstream consequences—how it is worded affects whether the clinician prescribes appropriately, escalates a concern, or shares it with colleagues. A model can project the likely effect of alternative framings on decision-relevant beliefs and flag when a technically accurate response is likely to be misunderstood by its actual audience. Forecasting inquiry volume and topic mix around launches, label changes, and safety communications—so that content and staffing are ready before the wave—is a smaller but real dividend.&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;app&quot;&gt;
+    &lt;h3&gt;Launch readiness and scenario stress-testing&lt;/h3&gt;
+    &lt;p&gt;Medical launch readiness is typically a checklist: publications in flight, advisory boards held, MSLs trained, medical information content approved. It is rarely a &lt;em&gt;simulation&lt;/em&gt;. Yet a launch is precisely the moment when the ecosystem is most dynamic and the cost of being wrong is highest—competitor readouts land, guideline committees convene, early adopters have experiences that ripple outward, and the company&#x27;s evidence either meets the questions clinicians are actually asking or it does not.&lt;/p&gt;
+    &lt;p&gt;A world model turns readiness into a set of stress tests. If a competitor&#x27;s head-to-head trial reads out positive two months before launch, what happens to the belief state, and which of our planned communications become irrelevant or newly critical? If the initial real-world experience surfaces a tolerability issue that was marginal in the trial, how fast does it propagate, and what evidence do we need in hand to contextualise it? If the guideline update slips a year, does our evidence plan still make sense? None of these scenarios is exotic. All of them are currently handled by war-gaming exercises whose outputs are slide decks. A model makes them repeatable, quantitative, and revisable as the situation evolves.&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;app&quot;&gt;
+    &lt;h3&gt;Publication and congress strategy&lt;/h3&gt;
+    &lt;p&gt;Publication planning is sequencing under uncertainty: which analyses to submit where, in what order, timed against which congresses, aware that the evidence base is being simultaneously shaped by others. Medical affairs does this with Gantt charts and judgment. A world model does it with rollouts. Given the projected state of the ecosystem at each congress date, and the projected effect of each publication on decision-relevant beliefs, which sequence maximises the probability that the right question is settled before the moment it matters—the guideline meeting, the HTA submission, the formulary review?&lt;/p&gt;
+    &lt;p&gt;The congress itself becomes an observation event of unusual richness. What is presented, what is asked in the sessions, what is discussed in the corridors and on the professional social platforms, which posters draw the crowd—all of it updates the belief state, and a team equipped with a model knows within days, not months, whether the data landed as expected and where the residual concerns have moved.&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;app&quot;&gt;
+    &lt;h3&gt;Safety communication and signal contextualisation&lt;/h3&gt;
+    &lt;p&gt;Pharmacovigilance owns signal detection; medical affairs owns the explanation. When a signal emerges, the question for medical affairs is how it will be received, what context is needed, and what will happen to appropriate use if the communication is handled badly. A world model that includes disease dynamics, treatment patterns, and community beliefs can project the consequences: how many patients are likely to be inappropriately discontinued under different communication strategies, how the signal interacts with existing concerns in each clinical community, and what evidence would most efficiently resolve the uncertainty. This turns risk communication from an exercise in caution into an exercise in outcomes.&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;app&quot;&gt;
+    &lt;h3&gt;Compliance as a simulated boundary&lt;/h3&gt;
+    &lt;p&gt;The line between scientific exchange and promotion is a judgment about how communications will be perceived and what effect they will have. That is a prediction, and predictions can be modelled. A world model that has learned how different communities respond to different framings can flag when a proposed engagement plan or communication, while technically non-promotional, is likely to function promotionally in practice—concentrating on prescribing-adjacent topics with high-volume prescribers, for example, rather than on decision-relevant scientific uncertainty. This gives compliance a prospective instrument rather than a retrospective audit, and it gives medical affairs a defensible record: this plan was chosen because it most efficiently reduced scientific uncertainty, and here is the model that shows it.&lt;/p&gt;
+    &lt;p&gt;The same property cuts the other way, and the industry should be candid about it. A model that can identify where communications would be most persuasive can be misused to design communications that are persuasive rather than accurate. The safeguard is architectural and cultural: the reward function must be defined in terms of alignment between clinical belief and evidence, not in terms of behaviour, and the model must be owned by the function whose mandate is the former.&lt;/p&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;hr class=&quot;sep&quot;&gt;
+
+&lt;h2&gt;&lt;span class=&quot;num&quot;&gt;Part IV&lt;/span&gt;How the function is transformed&lt;/h2&gt;
+
+&lt;div class=&quot;prose&quot;&gt;
+  &lt;p&gt;Enumerating applications understates the change. Any one of them could be bolted onto medical affairs as it currently exists. Taken together, and taken seriously, they alter the function&#x27;s epistemology, its operating rhythm, its people, its position in the company, and the way it is judged. Each of these deserves its own treatment.&lt;/p&gt;
+
+  &lt;h3&gt;From retrospective to prospective&lt;/h3&gt;
+  &lt;p&gt;Medical affairs today is a fundamentally retrospective function in its analytics. It reports what happened: how many engagements, how many insights, how many publications, what the advisory board said. The strategic layer on top is prospective but informal—it lives in the medical plan, a document that asserts what the team will do and why, and is rarely revisited against outcomes. World models make prospective reasoning the default mode. The question shifts from &quot;what did we do?&quot; to &quot;what do we expect to happen, why, and how will we know if we were wrong?&quot; This is a small change in phrasing and a large change in intellectual discipline.&lt;/p&gt;
+
+  &lt;h3&gt;From insights to state&lt;/h3&gt;
+  &lt;p&gt;The insights industry that has grown up inside medical affairs—the templates, the taxonomies, the quarterly synthesis decks—exists because the function knows its observations are valuable and has never had a place to put them. A latent state is that place. An insight ceases to be a quotation and becomes an update: this belief, in this community, moved this much. The implications for how field teams capture observations are significant and mostly positive. Structured capture aligned to a model&#x27;s state variables is more demanding than free text but far more consequential, and MSLs, who are scientists, tend to prefer consequence to convenience once they see the loop close.&lt;/p&gt;
+
+  &lt;h3&gt;Strategy becomes a hypothesis&lt;/h3&gt;
+  &lt;p&gt;When the medical plan is expressed as a policy against a world model, it acquires the properties of a scientific hypothesis. It makes predictions. It can be wrong. And when it is wrong, the disagreement between prediction and outcome is informative—it tells you where the model, and therefore the team&#x27;s understanding of the ecosystem, was mistaken. This is uncomfortable for a culture that has historically been evaluated on activity and rewarded for confidence. It is also exactly what a scientific function should want. Medical affairs has long argued that it deserves a seat at the strategic table because it thinks scientifically. World models are how it proves it.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;blockquote class=&quot;pull&quot;&gt;
+  The medical plan stops being a promise and becomes a prediction. Predictions can be wrong, and a function that can be wrong in specific, measurable ways is a function that can learn.
+  &lt;span&gt;On the epistemics of strategy&lt;/span&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;prose&quot;&gt;
+  &lt;h3&gt;The MSL role is reconstructed&lt;/h3&gt;
+  &lt;p&gt;The medical science liaison has spent two decades caught between two descriptions: the scientific peer who engages in genuine bidirectional exchange, and the field resource whose value is measured in reach and frequency. World models resolve this in favour of the former, and they do it structurally rather than rhetorically. An MSL whose observations directly update the organisation&#x27;s model of the ecosystem, and whose engagements are chosen to reduce that model&#x27;s decision-relevant uncertainty, is doing epistemic work that no activity metric captures and no commercial function replicates. The role becomes harder—it demands more structured observation, more deliberate inquiry, more comfort with being directed by a model&#x27;s uncertainty rather than a target list—and considerably more consequential.&lt;/p&gt;
+  &lt;p&gt;Rehearsal environments change how MSLs are developed. Onboarding to a new therapeutic area can include hundreds of simulated exchanges against community-grounded interlocutors before the first real one. Difficult upcoming conversations can be practised. And the model&#x27;s feedback—which framings tested weak, which objections were not anticipated—is specific in a way that manager ride-alongs rarely are.&lt;/p&gt;
+
+  &lt;h3&gt;New roles, new teams&lt;/h3&gt;
+  &lt;p&gt;Medical affairs will need people it does not currently employ in numbers: data engineers who can build the observation pipelines, causal inference specialists who can keep the dynamics honest, and a new kind of medical strategist—call it a medical simulation lead or an evidence dynamics lead—whose job is to own the model, interrogate it, and translate between its outputs and the medical director&#x27;s judgment. This is not an argument for replacing medical directors with data scientists. It is an argument that the medical director&#x27;s role now includes being the person who decides whether the model is right, which is a role only someone with deep therapeutic knowledge can play.&lt;/p&gt;
+  &lt;p&gt;The insights function is the most obviously reshaped. Its current work—synthesising observations into themes—is largely absorbed by the state update. Its new work is model stewardship: defining state variables, validating that observations are encoded correctly, monitoring for drift, and running the retrospective comparisons between prediction and outcome that keep the whole system honest. That is a more technical and more strategic remit than the one it holds today.&lt;/p&gt;
+
+  &lt;h3&gt;The company&#x27;s centre of gravity shifts&lt;/h3&gt;
+  &lt;p&gt;This is the change most likely to be resisted and most worth fighting for. The function that owns the company&#x27;s operative model of the disease and the ecosystem around it becomes the function that other functions must reason with. Commercial forecasts must be reconciled with the population twin. Clinical development&#x27;s protocol choices must be defended against the evidence ecosystem model. Market access strategy must engage with the belief dynamics that the model represents. This does not make medical affairs the boss of anyone. It makes medical affairs the custodian of a shared reality that everyone else&#x27;s plans are checked against—which is, arguably, what a science-based organisation should have wanted all along.&lt;/p&gt;
+  &lt;p&gt;The model&#x27;s non-promotional ownership is what makes this credible. A disease model owned by commercial would be, correctly, suspected of motivated reasoning. A disease model owned by medical affairs, validated against external data, and governed with the same seriousness as a pharmacovigilance system, can be trusted by internal scientists, by regulators, and eventually by the clinical community itself.&lt;/p&gt;
+
+  &lt;h3&gt;Metrics finally mean something&lt;/h3&gt;
+  &lt;p&gt;Medical affairs has never had a satisfying answer to the question &quot;what is your impact?&quot; Activity metrics are meaningless; outcome metrics are confounded; the honest answer—&quot;we help the science be understood correctly, and that matters in ways we cannot isolate&quot;—does not survive a budget review. A world model provides the missing piece: a counterfactual baseline. What did the model project would happen without the intervention, what happened with it, and how much of the difference is attributable to the plan rather than to noise? These estimates will be imperfect and should be reported with their uncertainty. They are nonetheless the first genuinely defensible impact measure the function has had.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;tablewrap&quot;&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;&lt;th&gt;Dimension&lt;/th&gt;&lt;th&gt;Medical affairs today&lt;/th&gt;&lt;th&gt;Medical affairs with world models&lt;/th&gt;&lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;td&gt;Core analytic mode&lt;/td&gt;&lt;td&gt;Retrospective reporting on activity and themes&lt;/td&gt;&lt;td&gt;Prospective simulation of actions against a persistent state; retrospective comparison of prediction to outcome&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;What an insight is&lt;/td&gt;&lt;td&gt;A quotation or theme, synthesised quarterly&lt;/td&gt;&lt;td&gt;A structured observation that updates a latent state variable, in near real time&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;The medical plan&lt;/td&gt;&lt;td&gt;A narrative document of intended activities and rationale&lt;/td&gt;&lt;td&gt;A policy chosen from many simulated alternatives, with explicit predictions and a reward function that can be debated&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;Evidence generation&lt;/td&gt;&lt;td&gt;Portfolio of studies prioritised by expert consensus&lt;/td&gt;&lt;td&gt;Portfolio optimised against a model of which evidence moves which decision-makers, in what time&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;MSL planning&lt;/td&gt;&lt;td&gt;Tiered target lists, reach and frequency&lt;/td&gt;&lt;td&gt;Engagements directed toward highest decision-relevant uncertainty; MSL as active learner&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;MSL development&lt;/td&gt;&lt;td&gt;Deck training, manager ride-alongs&lt;/td&gt;&lt;td&gt;Rehearsal against community-grounded simulated clinicians with specific feedback&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;Launch readiness&lt;/td&gt;&lt;td&gt;Checklist of deliverables&lt;/td&gt;&lt;td&gt;Stress-tested against competitor, guideline, and safety scenarios; plans revised as state updates&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;Compliance posture&lt;/td&gt;&lt;td&gt;Retrospective review of materials and activities&lt;/td&gt;&lt;td&gt;Prospective flagging of plans likely to function promotionally; auditable rationale for chosen strategy&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;Relationship to other functions&lt;/td&gt;&lt;td&gt;Advisor and reviewer&lt;/td&gt;&lt;td&gt;Custodian of the shared disease and ecosystem model that other functions&#x27; plans are reconciled against&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;Impact measurement&lt;/td&gt;&lt;td&gt;Activity counts; anecdotal outcome attribution&lt;/td&gt;&lt;td&gt;Counterfactual estimates against a model baseline, reported with uncertainty&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;h2&gt;&lt;span class=&quot;num&quot;&gt;Part V&lt;/span&gt;Where this goes wrong&lt;/h2&gt;
+
+&lt;div class=&quot;prose&quot;&gt;
+  &lt;p&gt;An essay this enthusiastic owes the reader a clear account of the failure modes, and there are several that are specific to this domain rather than generic AI cautions.&lt;/p&gt;
+
+  &lt;h3&gt;Confident dynamics, wrong dynamics&lt;/h3&gt;
+  &lt;p&gt;A world model trained on how a clinical community responded to evidence over the past decade will produce confident, fluent projections about how it will respond next year. Those projections are only as good as the assumption that the dynamics are stable. They are not always stable. A new mechanism of action, a reimbursement shock, a high-profile safety withdrawal in an adjacent class, or a generational shift in the committee can change how evidence is weighted in ways the model has never observed. The model will not know that it does not know. The mitigation is uncertainty quantification that is taken seriously—models that widen their intervals when out of distribution, and medical directors who treat a narrow interval on a novel situation as a red flag rather than a comfort.&lt;/p&gt;
+
+  &lt;h3&gt;Optimising the proxy&lt;/h3&gt;
+  &lt;p&gt;Any reward function can be gamed, including by well-intentioned people. If the model&#x27;s objective is &quot;shift community belief toward the evidence,&quot; and belief is measured by a proxy—survey responses, engagement sentiment, prescribing—then strategies that move the proxy without moving genuine understanding will be preferred. The guard is partly technical (multiple, diverse measurements of the state) and partly cultural (a medical leadership that asks, of every plan the model favours, &quot;does this make clinicians &lt;em&gt;understand&lt;/em&gt; more, or merely behave differently?&quot;).&lt;/p&gt;
+
+  &lt;h3&gt;Sparse data, rare disease&lt;/h3&gt;
+  &lt;p&gt;In large therapeutic areas the observation stream is rich enough to learn dynamics. In rare disease, with a few hundred treating physicians worldwide and a handful of relevant publications a year, it is not. World models in these settings will be mostly prior and very little data, which means they will mostly encode the beliefs of whoever built them. That is not useless—making expert priors explicit and testable is valuable—but it should be labelled honestly, and the temptation to dress up structured expert opinion as learned dynamics should be resisted.&lt;/p&gt;
+
+  &lt;h3&gt;Feedback loops that close on themselves&lt;/h3&gt;
+  &lt;p&gt;A model that directs MSLs toward high-uncertainty communities will generate more observations from those communities, which will reduce their uncertainty, which will redirect attention elsewhere. That is the intended behaviour. But a model that directs attention toward communities where engagement has historically produced measurable belief change will generate more observations from receptive communities and fewer from resistant ones—and will therefore learn that resistant communities are less important, when in fact they are merely less observed. Active learning systems are vulnerable to this, and the fix is deliberate exploration: a portion of engagement that goes where the model does not expect payoff, precisely to check the model.&lt;/p&gt;
+
+  &lt;h3&gt;The individual-modelling line&lt;/h3&gt;
+  &lt;p&gt;Belief-dynamics models work at the level of communities. The data that trains them often arrives at the level of individuals—this physician said this in this exchange. There will be pressure, technical and commercial, to let the model resolve individuals: to predict what Dr. X believes and how to move her. This should be refused, and the refusal should be built into the architecture, the data governance, and the contracts with vendors. Aggregate belief modelling is legitimate scientific strategy. Individual belief modelling for the purpose of influence is manipulation of a clinician&#x27;s medical judgment, and no compliance framework in any major jurisdiction will look kindly on it once it is understood. The reputational risk to medical affairs—the function whose entire value depends on being trusted as non-promotional—is existential.&lt;/p&gt;
+
+  &lt;h3&gt;Mistaking the dashboard for the model&lt;/h3&gt;
+  &lt;p&gt;The most likely failure is the most mundane: an organisation buys an &quot;AI insights platform,&quot; relabels it a world model, receives nicer dashboards, and changes nothing about how it makes decisions. The test in Part I applies. If the system cannot be asked what an action would do, and cannot be shown to have been wrong, it is not a world model, and none of the transformation described here follows.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;aside ember&quot;&gt;
+  &lt;h4&gt;Governance, not just guardrails&lt;/h4&gt;
+  &lt;p&gt;A medical affairs world model that influences evidence investment, field deployment, and safety communication is a system whose errors have clinical consequences. It should be governed the way pharmacovigilance systems are governed: documented assumptions, version control, validation against held-out outcomes, change control on the reward function, periodic external review, and a named medical owner who is accountable for its use. Regulators in the major markets have published or signalled frameworks for AI in the regulated life sciences over the past two years; the companies that treat their medical world models as regulated instruments from the start will be the ones that can still use them when scrutiny arrives.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;h2&gt;&lt;span class=&quot;num&quot;&gt;Part VI&lt;/span&gt;A realistic sequence&lt;/h2&gt;
+
+&lt;div class=&quot;prose&quot;&gt;
+  &lt;p&gt;Nothing in this essay requires a moonshot. The path from where most medical affairs organisations are to where this describes is incremental, and each step returns value on its own.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;timeline&quot;&gt;
+  &lt;div class=&quot;tl&quot;&gt;
+    &lt;div class=&quot;when&quot;&gt;Now&lt;small&gt;2026–2027&lt;/small&gt;&lt;/div&gt;
+    &lt;div class=&quot;what&quot;&gt;&lt;b&gt;Make the implicit model explicit.&lt;/b&gt; Write down the state variables medical affairs actually cares about in each therapeutic area—evidence maturity by question, belief distributions by community, guideline trajectory, unmet-need structure. Restructure insight capture around them. Stand up a population digital twin on existing real-world data, even a crude one, and use it for evidence gap identification. Deploy rehearsal environments for MSLs, grounded in whatever community data exists. None of this requires new science; all of it requires deciding that the model is the product.&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;tl&quot;&gt;
+    &lt;div class=&quot;when&quot;&gt;Next&lt;small&gt;2027–2029&lt;/small&gt;&lt;/div&gt;
+    &lt;div class=&quot;what&quot;&gt;&lt;b&gt;Close the loop.&lt;/b&gt; Connect the observation stream—field, medical information, congress, literature—to the state. Begin making explicit predictions in medical plans and recording them. Build the first belief-dynamics models in data-rich therapeutic areas and use them to stress-test publication sequencing and launch scenarios. Start reporting counterfactual impact estimates alongside activity metrics, with honest uncertainty. Establish the governance regime before the model is trusted enough to be dangerous.&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;tl&quot;&gt;
+    &lt;div class=&quot;when&quot;&gt;Then&lt;small&gt;2029 and beyond&lt;/small&gt;&lt;/div&gt;
+    &lt;div class=&quot;what&quot;&gt;&lt;b&gt;Integrate and share.&lt;/b&gt; Merge the population twin and the ecosystem model into a single disease-area world model that is the reference for medical, HEOR, clinical, and commercial planning. Optimise integrated evidence plans as policies against it. Explore, cautiously and transparently, sharing validated components with the clinical and academic community—a disease model that clinicians can interrogate is a scientific contribution, and the function that offers it becomes something more than a pharmaceutical department.&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;grid2&quot;&gt;
+  &lt;div class=&quot;card&quot;&gt;
+    &lt;h4&gt;Start here if you lead a therapeutic area&lt;/h4&gt;
+    &lt;p&gt;Pick your next medical plan and, before writing it, write down what you expect to be true about the ecosystem in eighteen months if the plan works—and what would be true if it does not. You have just specified a world model&#x27;s state and a prediction. Everything else is engineering.&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;card&quot;&gt;
+    &lt;h4&gt;Start here if you lead field medical&lt;/h4&gt;
+    &lt;p&gt;Ask your team to capture, for every meaningful exchange, one thing: which belief, in which community, moved which way. Aggregate it monthly. You will have a crude latent state within a quarter and a reason to build the real one within a year.&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;card&quot;&gt;
+    &lt;h4&gt;Start here if you lead insights&lt;/h4&gt;
+    &lt;p&gt;Stop producing theme decks. Start producing a versioned document called &quot;What we believe about this ecosystem and why,&quot; with confidence levels and the observations that support each claim. That document is the model, in prose. Your next job is to make it computable.&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;card&quot;&gt;
+    &lt;h4&gt;Start here if you lead the function&lt;/h4&gt;
+    &lt;p&gt;Decide, publicly, that medical affairs will own the company&#x27;s model of the disease. Hire the two people who can build it. Set the governance before the first output. And prepare to be wrong in specific, documented ways—because that is the whole point.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;hr class=&quot;sep&quot;&gt;
+
+&lt;div class=&quot;prose&quot;&gt;
+  &lt;p&gt;Medical affairs has spent twenty years arguing that it is a strategic scientific function, not a support function, and has been frustrated that the argument never quite lands. The frustration is understandable but the argument has been made in the wrong currency. Strategic influence in a pharmaceutical company accrues to whoever holds the most credible model of the future. Commercial has its forecast. Clinical has its development plan. Finance has its P&amp;amp;L. Medical affairs has had judgment—excellent, hard-won, and invisible.&lt;/p&gt;
+
+  &lt;p&gt;World models make that judgment visible. They take what the best medical directors already do in their heads—hold the ecosystem in view, imagine consequences, choose—and render it as an artefact that can be inspected, shared, challenged, and improved. In doing so they expose medical affairs to a discipline it has never faced: being measurably wrong. That is not a cost. It is the price of being the function whose model of the world the rest of the company reasons with, and it is a price medical affairs should be eager to pay.&lt;/p&gt;
+
+  &lt;p&gt;The clinical community will change its mind about your science whether or not you understand how. The question is whether your organisation&#x27;s picture of that process is a set of anecdotes in a CRM and a confident narrative in a slide deck, or a living, tested, accountable model of the world. For the function whose job it is to get the science right, that is not really a choice.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/article&gt;
+
+&lt;footer&gt;
+  &lt;div class=&quot;inner&quot;&gt;
+    &lt;p&gt;&lt;strong&gt;On terminology.&lt;/strong&gt; &quot;World model&quot; is used throughout in its machine-learning sense: a learned system that maintains a latent estimate of an environment&#x27;s state and predicts how that state evolves under actions. The lineage referenced—Ha &amp;amp; Schmidhuber&#x27;s 2018 &lt;em&gt;World Models&lt;/em&gt;, the Dreamer family, joint-embedding predictive architectures, and generative video systems described as world simulators—is real; the medical affairs applications are extrapolations from those capabilities to this domain, not descriptions of specific commercial products.&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;On scope.&lt;/strong&gt; Nothing here should be read as endorsing the modelling of individual clinicians for the purpose of influence. Community-level belief dynamics are a legitimate object of scientific communication strategy; individual-level targeting is not, and the architecture and governance described are intended to enforce that boundary.&lt;/p&gt;
+    &lt;p&gt;Set in system serif and sans-serif stacks. No external resources.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/footer&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;"></iframe></div>
+  </div>
+</main>
+<footer>BenchmarkViv · generated 2026-09-01 20:03</footer>
+</body>
+</html>

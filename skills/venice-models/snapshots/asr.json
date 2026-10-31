@@ -1,0 +1,103 @@
+{
+  "count": 5,
+  "models": [
+    {
+      "id": "elevenlabs/scribe-v2",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {},
+        "maxCompletionTokens": null,
+        "pricing": {
+          "per_audio_second": {
+            "diem": 0.000167,
+            "usd": 0.000167
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "asr"
+    },
+    {
+      "id": "fal-ai/wizper",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {},
+        "maxCompletionTokens": null,
+        "pricing": {
+          "per_audio_second": {
+            "diem": 0.0001,
+            "usd": 0.0001
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "asr"
+    },
+    {
+      "id": "nvidia/parakeet-tdt-0.6b-v3",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {},
+        "maxCompletionTokens": null,
+        "modelSource": "https://huggingface.co/nvidia/parakeet-tdt-0.6b-v3",
+        "pricing": {
+          "per_audio_second": {
+            "diem": 0.0001,
+            "usd": 0.0001
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "asr"
+    },
+    {
+      "id": "openai/whisper-large-v3",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {},
+        "maxCompletionTokens": null,
+        "pricing": {
+          "per_audio_second": {
+            "diem": 0.0001,
+            "usd": 0.0001
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "asr"
+    },
+    {
+      "id": "stt-xai-v1",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {},
+        "maxCompletionTokens": null,
+        "pricing": {
+          "per_audio_second": {
+            "diem": 3.1480000000000004e-05,
+            "usd": 3.1480000000000004e-05
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "asr"
+    }
+  ],
+  "object": "list",
+  "type": "asr"
+}

@@ -12,6 +12,7 @@ Reverse Prompt Vision:
 """
 from __future__ import annotations
 
+import argparse
 import base64
 import json
 import os
@@ -37,13 +38,16 @@ VALUE_BUDGET_TOKENS = 1024
 JUDGE_MODEL = "openai-gpt-56-luna"
 TEMPERATURE = 0.3
 REQUEST_TIMEOUT = 600
+# Models whose default reasoning_effort is "high" and silently burn the token
+# budget (no reasoning_content); force "none" so value-density @1K can emit content.
+REASONING_EFFORT_NONE_MODELS = {"mercury-2-5", "mercury-3", "deepseek-v4-1-flash", "deepseek-v4-1-flash-1017", "grok-4-7", "openai-gpt-6-astra-pro", "openai-gpt-6-sol", "openai-gpt-6-luna", "xiaomi-mimo-v2-6-flash", "openai-gpt-61-sol", "muse-spark-open", "qwen3-6-35b-a3b", "nvidia-nemotron-3-5-super-vl-120b-a12b", "qwen3-235b-a22b-thinking-2507", "abliteration-abliterated-model-large-flash", "kimi-k3-1-pro", "kimi-k3-1-pro-highspeed", "openai-gpt-61-terra", "deepseek-v4-1-flash-1017-uncensored"}
 
 # ---------------------------------------------------------------------------
 # Auth
 # ---------------------------------------------------------------------------
 
 def load_api_key() -> str:
-    key = os.environ.get("VENICE_INFERENCE_KEY") or os.environ.get("VENICE_API_KEY")
+    key = os.environ.get("VENICE_API_KEY") or os.environ.get("VENICE_INFERENCE_KEY")
     if key:
         return key
     db = Path.home() / ".openclaw/agents/main/agent/openclaw-agent.sqlite"
@@ -254,8 +258,11 @@ def call_text(api_key: str, model_id: str, prompt: str, max_tokens: int) -> dict
         "model": model_id,
         "messages": [{"role": "user", "content": prompt}],
         "max_tokens": max_tokens,
-        "temperature": TEMPERATURE,
     }
+    if model_id not in rb.TEMPERATURE_LOCKED_MODELS:
+        payload["temperature"] = TEMPERATURE
+    if model_id in REASONING_EFFORT_NONE_MODELS:
+        payload["reasoning_effort"] = "none"
     headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
     start = time.monotonic()
     try:
@@ -277,6 +284,9 @@ def call_text(api_key: str, model_id: str, prompt: str, max_tokens: int) -> dict
         usage = data.get("usage") or {}
         msg = ((data.get("choices") or [{}])[0].get("message") or {})
         content = msg.get("content") or ""
+        if not str(content).strip() and msg.get("reasoning_content"):
+            # Reasoning models may emit visible text only in reasoning_content.
+            content = msg.get("reasoning_content") or ""
         if not str(content).strip():
             # some models put text only in reasoning; still an error for this track
             return {
@@ -321,8 +331,11 @@ def call_vision(api_key: str, model_id: str, prompt: str, image_data_url: str, m
             }
         ],
         "max_tokens": max_tokens,
-        "temperature": TEMPERATURE,
     }
+    if model_id not in rb.TEMPERATURE_LOCKED_MODELS:
+        payload["temperature"] = TEMPERATURE
+    if model_id in REASONING_EFFORT_NONE_MODELS:
+        payload["reasoning_effort"] = "none"
     headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
     start = time.monotonic()
     try:
@@ -394,7 +407,7 @@ def judge_reverse_prompt(api_key: str, source_prompt: str, checklist: list, cand
         "}\n"
         "Be conservative: mark true only if clearly present in the candidate."
     )
-    call = call_text(api_key, JUDGE_MODEL, judge_prompt, max_tokens=1500)
+    call = call_text(api_key, JUDGE_MODEL, judge_prompt, max_tokens=4000)
     cost = rb.estimate_cost(
         JUDGE_MODEL, call.get("prompt_tokens") or 0, call.get("completion_tokens") or 0, pricing
     )
@@ -558,6 +571,16 @@ def merge_results(new_rows: list[dict], new_benchmarks: list[dict]) -> dict:
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--model", type=str, action="append", dest="model_ids",
+                        help="Run only specific model(s). Repeatable. Omit to run all.")
+    args = parser.parse_args()
+    selected = [m for m in MODELS if not args.model_ids or m["id"] in args.model_ids]
+    if args.model_ids:
+        missed = set(args.model_ids) - {m["id"] for m in selected}
+        if missed:
+            print(f"WARNING: requested models not in registry: {missed}")
+
     api_key = load_api_key()
     pricing = rb.fetch_pricing(api_key)
     vision_map = vision_capable(api_key)
@@ -615,10 +638,10 @@ def main() -> None:
         },
     ]
 
-    n_models = len(MODELS)
+    n_models = len(selected)
     # ---- Value density ----
     print(f"\n=== Value Density @1K ({n_models} models, max_tokens={VALUE_BUDGET_TOKENS}) ===")
-    for i, model in enumerate(MODELS, 1):
+    for i, model in enumerate(selected, 1):
         mid, disp = model["id"], model["display"]
         print(f"[{i}/{n_models}] {disp} value_density ...", end=" ", flush=True)
         call = call_text(api_key, mid, VALUE_DENSITY["prompt"], VALUE_BUDGET_TOKENS)
@@ -678,7 +701,7 @@ def main() -> None:
     # ---- Reverse prompt vision ----
     print(f"\n=== Reverse-Prompt Vision ({n_models} models, judge={JUDGE_MODEL}) ===")
     reconstructions = []
-    for i, model in enumerate(MODELS, 1):
+    for i, model in enumerate(selected, 1):
         mid, disp = model["id"], model["display"]
         supports = vision_map.get(mid)
         if supports is False:

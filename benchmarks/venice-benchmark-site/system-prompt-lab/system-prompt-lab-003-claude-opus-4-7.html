@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>System Prompt Lab #03 — Claude Opus 4.7</title>
+<meta name="description" content="Architectural teardown of the Claude Opus 4.7 system prompt. Edition #03 of the System Prompt Lab.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%2307080c'/></svg>">
+<link rel="stylesheet" href="../prompt-lab-assets/scrollcraft.css">
+<style>
+:root {
+  --sc-canvas: #07080c; --sc-surface: #10131c; --sc-ink: #e6ecff; --sc-ink-soft: #8b95b3;
+  --sc-accent: #4ade80; --sc-accent-ink: #07080c;
+  --sc-font-display: "Space Grotesk", system-ui, sans-serif;
+  --sc-font-text: "Space Grotesk", system-ui, sans-serif;
+  --an-line: #1e2436; --an-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+html { background: var(--sc-canvas); }
+/* edition chrome */
+.an-bar { position: fixed; top: 0; left: 0; right: 0; z-index: 40; display: flex; justify-content: space-between; align-items: center;
+  padding: 14px 22px; background: color-mix(in srgb, var(--sc-canvas) 82%, transparent); backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--an-line); font-family: var(--an-mono); font-size: .72rem; }
+.an-bar a { color: var(--sc-ink-soft); text-decoration: none; letter-spacing: .08em; }
+.an-bar a:hover { color: var(--sc-accent); }
+.an-bar .crumb b { color: var(--sc-accent); font-weight: 600; }
+.an-tokens { position: fixed; right: 16px; bottom: 16px; z-index: 40; font-family: var(--an-mono); font-size: .68rem;
+  color: var(--sc-ink-soft); background: color-mix(in srgb, var(--sc-surface) 90%, transparent);
+  border: 1px solid var(--an-line); border-radius: 10px; padding: 8px 12px; min-width: 150px; }
+.an-tokens .bar { height: 3px; background: var(--an-line); border-radius: 2px; margin-top: 6px; overflow: hidden; }
+.an-tokens .bar i { display: block; height: 100%; width: calc(var(--tok, 0) * 0.214 * 100%); background: var(--sc-accent); }
+.an-tokens .lab { display: flex; justify-content: space-between; gap: 10px; }
+.an-tokens .lab b { color: var(--sc-ink); }
+
+/* hero */
+.an-hero { position: relative; }
+.an-hero__inner { padding: 18vh 6vw 10vh; max-width: 880px; }
+.an-hero__kick { font-family: var(--an-mono); font-size: .74rem; letter-spacing: .3em; text-transform: uppercase; color: var(--sc-accent); margin-bottom: 20px; }
+.an-hero h1 { font-family: var(--sc-font-display); font-size: clamp(2.2rem, 6vw, 4rem); line-height: 1.05; letter-spacing: -.02em; margin-bottom: 16px; }
+.an-hero__sub { color: var(--sc-ink-soft); font-size: 1.05rem; max-width: 56ch; }
+.an-meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; margin-top: 36px; }
+.an-meta__item { border: 1px solid var(--an-line); border-radius: 10px; padding: 10px 12px; background: var(--sc-surface); }
+.an-meta__k { display: block; font-family: var(--an-mono); font-size: .62rem; text-transform: uppercase; letter-spacing: .14em; color: var(--sc-ink-soft); }
+.an-meta__v { font-size: .88rem; }
+
+/* chapters */
+.an-chapter-wrap { display: block; }
+.an-chapter { width: min(860px, 92vw); margin: 0 auto; padding: 10vh 0 6vh; }
+.an-chapter__head { display: flex; align-items: baseline; gap: 16px; margin-bottom: 28px; border-bottom: 1px solid var(--an-line); padding-bottom: 14px; }
+.an-chapter__num { font-family: var(--an-mono); color: var(--sc-accent); font-size: .8rem; letter-spacing: .2em; }
+.an-chapter__title { font-family: var(--sc-font-display); font-size: clamp(1.2rem, 2.6vw, 1.7rem); letter-spacing: -.01em; }
+.an-prompt { margin: 0 0 22px; }
+.an-prompt__label { font-family: var(--an-mono); font-size: .62rem; text-transform: uppercase; letter-spacing: .18em; color: var(--sc-ink-soft); margin-bottom: 8px; }
+.an-prompt__code { font-family: var(--an-mono); font-size: .78rem; line-height: 1.7; color: #a5d6ff; background: #0a0c10;
+  border: 1px solid var(--an-line); border-left: 3px solid var(--sc-accent); border-radius: 10px; padding: 16px;
+  overflow-x: auto; white-space: pre-wrap; word-break: break-word; }
+.an-cards { display: grid; gap: 12px; }
+.an-card { border: 1px solid var(--an-line); border-left-width: 3px; border-radius: 12px; background: var(--sc-surface); padding: 16px 18px; }
+.an-card--good { border-left-color: #4ade80; } .an-card--bad { border-left-color: #f87171; }
+.an-card--sota { border-left-color: #60a5fa; } .an-card--evolution { border-left-color: #c084fc; }
+.an-card__head { display: flex; gap: 10px; align-items: center; font-size: .9rem; font-weight: 600; margin-bottom: 10px; }
+.an-card__list { list-style: none; margin: 0; padding: 0; }
+.an-card__list li { position: relative; padding-left: 18px; color: var(--sc-ink-soft); font-size: .88rem; line-height: 1.65; margin-bottom: 10px; }
+.an-card__list li:last-child { margin-bottom: 0; }
+.an-card__list li::before { content: '▸'; position: absolute; left: 0; color: var(--sc-accent); opacity: .8; }
+
+/* takeaway close */
+.an-close { display: grid; place-items: center; }
+.an-close__inner { width: min(760px, 90vw); padding: 16vh 0; text-align: left; }
+.an-close h2 { font-family: var(--sc-font-display); font-size: clamp(1.4rem, 3vw, 2rem); margin-bottom: 18px; }
+.an-close p { color: var(--sc-ink-soft); font-size: 1rem; line-height: 1.75; }
+.an-close .next { margin-top: 40px; font-family: var(--an-mono); font-size: .78rem; }
+.an-close .next a { color: var(--sc-accent); text-decoration: none; border-bottom: 1px solid; padding-bottom: 2px; }
+@media (prefers-reduced-motion: reduce) { .an-bar, .an-tokens { position: static; } }
+</style>
+</head>
+<body>
+<span data-sc-progress></span>
+<div class="sc-grain" aria-hidden="true"></div>
+
+<header class="an-bar">
+  <span class="crumb"><a href="../prompt-lab.html">PROMPT_LAB</a> / <b>ED 03</b></span>
+  <span>Anthropic · ~6.1K tokens</span>
+</header>
+<aside class="an-tokens" aria-hidden="true">
+  <div class="lab"><span>tokens</span><b>~6.1K</b></div>
+  <div class="bar"><i id="tokbar"></i></div>
+</aside>
+
+<main>
+  <section class="an-hero" data-sc-act="flow" data-sc-span="1.2" data-sc-drift="#07080c">
+    <div class="an-hero__inner">
+      <div class="an-hero__kick" data-sc-cue="0 0.5 0">EDITION 03 · Anthropic · XML ECONOMY · THE MINIMALIST</div>
+      <h1 data-sc-kinetic="lines">Claude Opus 4.7</h1>
+      <p class="an-hero__sub" data-sc-cue="0.3 0.9">Edition #3 · Claude Opus 4.7 (Anthropic) · 2026-08-14</p>
+      <div class="an-meta" data-sc-in data-sc-stagger="80"><div class="an-meta__item"><span class="an-meta__k">Source</span><span class="an-meta__v">system_prompts_leaks</span></div><div class="an-meta__item"><span class="an-meta__k">Vendor</span><span class="an-meta__v">Anthropic</span></div><div class="an-meta__item"><span class="an-meta__k">Size</span><span class="an-meta__v">24.3 KB / 183 lines</span></div><div class="an-meta__item"><span class="an-meta__k">~Tokens</span><span class="an-meta__v">~6.1K tokens</span></div></div>
+    </div>
+  </section>
+
+  <!-- CHAPTER 01 -->
+  <section class="an-chapter-wrap" data-sc-act="flow" data-sc-drift="#0b0d13">
+    <div class="an-chapter">
+      <div class="an-chapter__head" data-sc-in>
+        <span class="an-chapter__num">01</span>
+        <h2 class="an-chapter__title" data-sc-kinetic="lines">01 🧬 Product Identity and Knowledge Boundary</h2>
+      </div>
+      <figure class="an-prompt" data-sc-in>
+  <figcaption class="an-prompt__label">excerpt from the prompt</figcaption>
+  <pre class="an-prompt__code">&lt;claude_behavior&gt;
+
+&lt;product_information&gt;
+
+Here is some information about Claude and Anthropic's products in case the person asks:
+
+This iteration of Claude is Claude Opus 4.7 from the Claude 4.7 model family. The Claude 4.7 family currently consists of Claude Opus 4.7. Claude Opus 4.7 is the most advanced and intelligent model.
+
+Claude is accessible via this web-based, mobile, or desktop chat interface. If the person asks, Claude can tell them about the following products which also allow them to access Claude.
+
+Claude is accessible via an API and Claude Platform. The most recent Claude models are Claude Opus 4.7, Claude Sonnet 4.6, and Claude Haiku 4.5...
+
+Claude is accessible through Claude Code, a tool for agentic coding... Claude can be used via Claude Cowork, an agentic knowledge work tool for non-developers... Claude is also accessible via the following beta products: Claude in Chrome, Claude in Excel, Claude in Powerpoint...
+
+Claude does not know further details about Anthropic's products or their capabilities, as it does not have access to their documentation and they may have changed since this prompt was last edited.
+
+&lt;/product_information&gt;</pre>
+</figure>
+      <div class="an-cards" data-sc-in data-sc-stagger="90">
+<div class="an-card an-card--good">
+  <div class="an-card__head"><span class="an-card__icon">✅</span><span>✅ What It Does Well</span></div>
+  <ul class="an-card__list"><li>Scoped product knowledge — The prompt gives Claude a deliberately narrow product catalog (Opus 4.7, Sonnet 4.6, Haiku 4.5, Claude Code, Cowork, Chrome/Excel/PowerPoint agents) and explicitly states it "does not know further details." This is a knowledge firewall: Claude can answer basic product questions without hallucinating specs, pricing, or feature lists it doesn't actually have.
+      Escalat</li></ul>
+</div>
+<div class="an-card an-card--bad">
+  <div class="an-card__head"><span class="an-card__icon">⚠️</span><span>⚠️ What It Doesn't Do Well</span></div>
+  <ul class="an-card__list"><li>Model string staleness — The prompt hardcodes model strings like claude-haiku-4-5-20251001 with a date suffix. If Anthropic ships a new snapshot, the prompt must be edited or Claude will give users outdated API strings. There's no mechanism for Claude to discover or verify current model strings at runtime.
+      No version awareness for itself — Claude is told it's "Opus 4.7" but has no instructio</li></ul>
+</div>
+<div class="an-card an-card--sota">
+  <div class="an-card__head"><span class="an-card__icon">🎯</span><span>🎯 State of the Art</span></div>
+  <ul class="an-card__list"><li>Product-as-context pattern — Modern consumer assistant prompts don't just define behavior; they define the product ecosystem as context. The prompt acts as a compact product database, letting Claude handle routing questions ("which model should I use?", "can Claude browse the web?") without needing a RAG lookup or external tool call. This is the same pattern seen in GPT-5.6's product info block, b</li></ul>
+</div>
+<div class="an-card an-card--evolution">
+  <div class="an-card__head"><span class="an-card__icon">📈</span><span>📈 How It's Evolving</span></div>
+  <ul class="an-card__list"><li>4.6 to 4.7: Cowork upgrade — In 4.6, Cowork was described as "a desktop tool for non-developers to automate file and task management." In 4.7, it's "an agentic knowledge work tool for non-developers" available as a desktop app, with the key addition: "Claude Cowork can use all of these as tools." Cowork went from a task manager to an agent orchestrator. This signals Anthropic's shift from single-a</li></ul>
+</div>
+      </div>
+    </div>
+  </section>
+  <!-- CHAPTER 02 -->
+  <section class="an-chapter-wrap" data-sc-act="flow" data-sc-drift="#0b0d13">
+    <div class="an-chapter">
+      <div class="an-chapter__head" data-sc-in>
+        <span class="an-chapter__num">02</span>
+        <h2 class="an-chapter__title" data-sc-kinetic="lines">02 🛡 Refusal Cascade and Safety Architecture</h2>
+      </div>
+      <figure class="an-prompt" data-sc-in>
+  <figcaption class="an-prompt__label">excerpt from the prompt</figcaption>
+  <pre class="an-prompt__code">&lt;refusal_handling&gt;
+
+Claude can discuss virtually any topic factually and objectively.
+
+&lt;critical_child_safety_instructions&gt;
+
+**These child-safety requirements require special attention and care**
+
+- Claude NEVER creates romantic or sexual content involving or directed at minors...
+- If Claude finds itself mentally reframing a request to make it appropriate, that reframing is the signal to REFUSE, not a reason to proceed...
+- For content directed at a minor, Claude MUST NOT supply unstated assumptions that make a request seem safer than it was as written...
+- Once Claude refuses a request for reasons of child safety, all subsequent requests in the same conversation must be approached with extreme caution.
+
+&lt;/critical_child_safety_instructions&gt;
+
+If the conversation feels risky or off, Claude understands that saying less and giving shorter replies is safer...
+
+Claude does not write or explain or work on malicious code... even if the person seems to have a good reason for asking for it, such as for educational purposes.
+
+&lt;/refusal_handling&gt;</pre>
+</figure>
+      <div class="an-cards" data-sc-in data-sc-stagger="90">
+<div class="an-card an-card--good">
+  <div class="an-card__head"><span class="an-card__icon">✅</span><span>✅ What It Does Well</span></div>
+  <ul class="an-card__list"><li>Meta-refusal trigger — "If Claude finds itself mentally reframing a request to make it appropriate, that reframing is the signal to REFUSE" is a brilliantly designed self-monitoring heuristic. Instead of listing prohibited topics (which is always incomplete), it teaches Claude to detect its own rationalization pattern. This is a process-level safety rule rather than a content-level rule — it catch</li></ul>
+</div>
+<div class="an-card an-card--bad">
+  <div class="an-card__head"><span class="an-card__icon">⚠️</span><span>⚠️ What It Doesn't Do Well</span></div>
+  <ul class="an-card__list"><li>Undefined "minor" in practice — "A minor is defined as anyone under the age of 18 anywhere, or anyone over the age of 18 who is defined as a minor in their region." The second clause is impossible for Claude to evaluate — it would need to know the user's jurisdiction and that jurisdiction's age of majority. This is a rule that cannot be followed in the case it describes.
+      No malicious code de</li></ul>
+</div>
+<div class="an-card an-card--sota">
+  <div class="an-card__head"><span class="an-card__icon">🎯</span><span>🎯 State of the Art</span></div>
+  <ul class="an-card__list"><li>Hierarchical safety with XML-scoped criticality — The child safety section is wrapped in its own XML tag &lt;critical_child_safety_instructions&gt; with a bold header: "These child-safety requirements require special attention and care." This is a priority signaling pattern — the XML tag name itself ("critical") tells the model this section overrides other considerations. It's a prompt-level analog to A</li></ul>
+</div>
+<div class="an-card an-card--evolution">
+  <div class="an-card__head"><span class="an-card__icon">📈</span><span>📈 How It's Evolving</span></div>
+  <ul class="an-card__list"><li>4.6 to 4.7: Child safety overhaul — In 4.6, child safety was a single paragraph: "Claude cares deeply about child safety and is cautious about content involving minors..." In 4.7, it's been promoted to its own XML-scoped section with five explicit rules, including the meta-refusal trigger and conversation-level contagion. This is a structural elevation — child safety went from a guideline to an ar</li></ul>
+</div>
+      </div>
+    </div>
+  </section>
+  <!-- CHAPTER 03 -->
+  <section class="an-chapter-wrap" data-sc-act="flow" data-sc-drift="#0b0d13">
+    <div class="an-chapter">
+      <div class="an-chapter__head" data-sc-in>
+        <span class="an-chapter__num">03</span>
+        <h2 class="an-chapter__title" data-sc-kinetic="lines">03 ✏ Tone, Formatting, and Behavioral Defaults</h2>
+      </div>
+      <figure class="an-prompt" data-sc-in>
+  <figcaption class="an-prompt__label">excerpt from the prompt</figcaption>
+  <pre class="an-prompt__code">&lt;tone_and_formatting&gt;
+
+&lt;lists_and_bullets&gt;
+
+Claude avoids over-formatting responses with elements like bold emphasis, headers, lists, and bullet points. It uses the minimum formatting appropriate to make the response clear and readable.
+
+Claude should not use bullet points or numbered lists for reports, documents, explanations, or unless the person explicitly asks for a list or ranking. For reports, documents, technical documentation, and explanations, Claude should instead write in prose and paragraphs without any lists...
+
+Claude also never uses bullet points when it's decided not to help the person with their task; the additional care and attention can help soften the blow.
+
+&lt;/lists_and_bullets&gt;
+
+&lt;acting_vs_clarifying&gt;
+
+When a request leaves minor details unspecified, the person typically wants Claude to make a reasonable attempt now, not to be interviewed first. Claude only asks upfront when the request is genuinely unanswerable without the missing information.
+
+When a tool is available that could resolve the ambiguity... Claude calls the tool to try and solve the ambiguity before asking the person. Acting with tools is preferred over asking the person to do the lookup themselv …</pre>
+</figure>
+      <div class="an-cards" data-sc-in data-sc-stagger="90">
+<div class="an-card an-card--good">
+  <div class="an-card__head"><span class="an-card__icon">✅</span><span>✅ What It Does Well</span></div>
+  <ul class="an-card__list"><li>Anti-over-formatting doctrine — This is the most detailed formatting constraint in any consumer assistant prompt. Three escalating rules: (1) avoid over-formatting, (2) use minimum formatting, (3) for reports/docs/explanations, write in prose with no lists. The prompt even specifies how to write lists in prose: "some things include: x, y, and z." This is a formatting specification at the syntax le</li></ul>
+</div>
+<div class="an-card an-card--bad">
+  <div class="an-card__head"><span class="an-card__icon">⚠️</span><span>⚠️ What It Doesn't Do Well</span></div>
+  <ul class="an-card__list"><li>Contradictory formatting guidance — The prompt says "avoid over-formatting" but also says Claude can use lists "if the response is multifaceted and bullet points and lists are essential." The word "essential" is subjective — what's essential to one model inference may not be to another. This creates inconsistent formatting behavior across turns.
+      Emotion/mirroring rule removed — 4.6 had "Clau</li></ul>
+</div>
+<div class="an-card an-card--sota">
+  <div class="an-card__head"><span class="an-card__icon">🎯</span><span>🎯 State of the Art</span></div>
+  <ul class="an-card__list"><li>Tool-first ambiguity resolution — "When a tool is available that could resolve the ambiguity... Claude calls the tool to try and solve the ambiguity before asking the person. Acting with tools is preferred over asking the person to do the lookup themselves." This is the agentic default — the model should use tools to answer its own questions rather than bouncing them back to the user. This is a si</li></ul>
+</div>
+<div class="an-card an-card--evolution">
+  <div class="an-card__head"><span class="an-card__icon">📈</span><span>📈 How It's Evolving</span></div>
+  <ul class="an-card__list"><li>4.6 to 4.7: Tool-search pattern added — The entire &lt;capability_check&gt; section is new in 4.7. The tool_search mechanism and the "action completion" doctrine didn't exist in 4.6. This reflects Claude's transition from a chat-only interface to a tool-augmented agent with web search, code execution, file creation, and integrations.
+      4.6 to 4.7: Acting vs clarifying added — The &lt;acting_vs_clarifyi</li></ul>
+</div>
+      </div>
+    </div>
+  </section>
+  <!-- CHAPTER 04 -->
+  <section class="an-chapter-wrap" data-sc-act="flow" data-sc-drift="#0b0d13">
+    <div class="an-chapter">
+      <div class="an-chapter__head" data-sc-in>
+        <span class="an-chapter__num">04</span>
+        <h2 class="an-chapter__title" data-sc-kinetic="lines">04 🧡 User Wellbeing and Mental Health Protocol</h2>
+      </div>
+      <figure class="an-prompt" data-sc-in>
+  <figcaption class="an-prompt__label">excerpt from the prompt</figcaption>
+  <pre class="an-prompt__code">&lt;user_wellbeing&gt;
+
+Claude uses accurate medical or psychological information or terminology where relevant.
+
+Claude cares about people's wellbeing and avoids encouraging or facilitating self-destructive behaviors such as addiction, self-harm, disordered or unhealthy approaches to eating or exercise...
+
+Claude should not suggest techniques that use physical discomfort, pain, or sensory shock as coping strategies for self-harm (e.g. holding ice cubes, snapping rubber bands, cold water exposure)...
+
+When discussing means restriction or safety planning... Claude does not name, list, or describe specific methods, even by way of telling the user what to remove access to...
+
+If Claude suspects the person may be experiencing a mental health crisis, Claude should avoid asking safety assessment questions. Claude can instead express its concerns to the person directly, and offer to provide appropriate resources.
+
+Claude should not make categorical claims about the confidentiality or involvement of authorities when directing users to crisis helplines...
+
+&lt;/user_wellbeing&gt;</pre>
+</figure>
+      <div class="an-cards" data-sc-in data-sc-stagger="90">
+<div class="an-card an-card--good">
+  <div class="an-card__head"><span class="an-card__icon">✅</span><span>✅ What It Does Well</span></div>
+  <ul class="an-card__list"><li>Disordered eating precision-block — "If a user shows signs of disordered eating, Claude should not give precise nutrition, diet, or exercise guidance — no specific numbers, targets, or step-by-step plans — anywhere else in the conversation." The phrase "anywhere else in the conversation" is critical — it's a conversation-wide contamination rule. Once disordered eating is detected, all future nutri</li></ul>
+</div>
+<div class="an-card an-card--bad">
+  <div class="an-card__head"><span class="an-card__icon">⚠️</span><span>⚠️ What It Doesn't Do Well</span></div>
+  <ul class="an-card__list"><li>Reflective listening caveat is vague — "Claude should avoid doing reflective listening in a way that reinforces or amplifies negative experiences or emotions." This is a judgment call rule — reflective listening is a standard therapeutic technique, and distinguishing "amplifying" from "validating" requires clinical judgment the model doesn't have. The rule could cause Claude to avoid empathetic re</li></ul>
+</div>
+<div class="an-card an-card--sota">
+  <div class="an-card__head"><span class="an-card__icon">🎯</span><span>🎯 State of the Art</span></div>
+  <ul class="an-card__list"><li>Negative-knowledge safety design — The means restriction rule ("does not name, list, or describe specific methods, even by way of telling the user what to remove access to") is a negative-knowledge architecture. Claude is explicitly told what not to know (or at least not to output). This is distinct from most safety rules which say "don't do X" — this one says "don't reveal X even when revealing X</li></ul>
+</div>
+<div class="an-card an-card--evolution">
+  <div class="an-card__head"><span class="an-card__icon">📈</span><span>📈 How It's Evolving</span></div>
+  <ul class="an-card__list"><li>4.6 to 4.7: Conversation-wide eating disorder block — The "no specific numbers, targets, or step-by-step plans anywhere else in the conversation" rule is new. In 4.6, the disordered eating guidance was a single sentence with no conversation-scoped contamination rule. This is a stateful safety upgrade — the detection event changes behavior for all future turns.
+      4.6 to 4.7: Physical coping str</li></ul>
+</div>
+      </div>
+    </div>
+  </section>
+  <!-- CHAPTER 05 -->
+  <section class="an-chapter-wrap" data-sc-act="flow" data-sc-drift="#0b0d13">
+    <div class="an-chapter">
+      <div class="an-chapter__head" data-sc-in>
+        <span class="an-chapter__num">05</span>
+        <h2 class="an-chapter__title" data-sc-kinetic="lines">05 ⚖ Evenhandedness and Political Neutrality</h2>
+      </div>
+      <figure class="an-prompt" data-sc-in>
+  <figcaption class="an-prompt__label">excerpt from the prompt</figcaption>
+  <pre class="an-prompt__code">&lt;evenhandedness&gt;
+
+If Claude is asked to explain, discuss, argue for, defend, or write persuasive content in favor of a political, ethical, policy, empirical, or other position, Claude should not reflexively treat this as a request for its own views but as a request to explain or provide the best case defenders of that position would give...
+
+Claude does not decline to present arguments given in favor of positions based on harm concerns, except in very extreme positions such as those advocating for the endangerment of children or targeted political violence...
+
+Claude should be cautious about sharing personal opinions on political topics where debate is ongoing. Claude doesn't need to deny that it has such opinions but can decline to share them...
+
+If people ask Claude to give a simple yes or no answer... in response to complex or contested issues... Claude can decline to offer the short response and instead give a nuanced answer...
+
+&lt;/evenhandedness&gt;</pre>
+</figure>
+      <div class="an-cards" data-sc-in data-sc-stagger="90">
+<div class="an-card an-card--good">
+  <div class="an-card__head"><span class="an-card__icon">✅</span><span>✅ What It Does Well</span></div>
+  <ul class="an-card__list"><li>Steel-manning as default — "Claude should not reflexively treat this as a request for its own views but as a request to explain or provide the best case defenders of that position would give." This is the steel-manning doctrine — Claude argues the strongest version of any position, not just ones it agrees with. This is philosophically sophisticated and practically useful: a user asking "what's the</li></ul>
+</div>
+<div class="an-card an-card--bad">
+  <div class="an-card__head"><span class="an-card__icon">⚠️</span><span>⚠️ What It Doesn't Do Well</span></div>
+  <ul class="an-card__list"><li>"Very extreme positions" is undefined — The only exceptions to steel-manning are "positions advocating for the endangerment of children or targeted political violence." But "targeted political violence" is ambiguous — does this include state violence? War advocacy? Counter-terrorism policy? The exception boundary is fuzzy, which means Claude must make case-by-case judgment calls on politically cha</li></ul>
+</div>
+<div class="an-card an-card--sota">
+  <div class="an-card__head"><span class="an-card__icon">🎯</span><span>🎯 State of the Art</span></div>
+  <ul class="an-card__list"><li>Evenhandedness as architectural principle — Anthropic's approach to political neutrality is the most sophisticated in the industry. Instead of "don't talk about politics" (Google's old approach) or "have no opinions" (OpenAI's old approach), Anthropic has a three-layer model: (1) steel-man any position, (2) acknowledge having opinions but decline to share, (3) refuse to simplify complex issues. Th</li></ul>
+</div>
+<div class="an-card an-card--evolution">
+  <div class="an-card__head"><span class="an-card__icon">📈</span><span>📈 How It's Evolving</span></div>
+  <ul class="an-card__list"><li>4.6 to 4.7: Yes/no refusal right added — The "Claude can decline to offer the short response" rule is new in 4.7. In 4.6, there was no explicit authorization to reject simplification. This is a meta-cognitive upgrade — Claude can now push back on the form of the answer requested, not just the content.
+      4.6 to 4.7: Election info removed — 4.6 had an &lt;election_info&gt; section: "Donald Trump won t</li></ul>
+</div>
+      </div>
+    </div>
+  </section>
+  <!-- CHAPTER 06 -->
+  <section class="an-chapter-wrap" data-sc-act="flow" data-sc-drift="#0b0d13">
+    <div class="an-chapter">
+      <div class="an-chapter__head" data-sc-in>
+        <span class="an-chapter__num">06</span>
+        <h2 class="an-chapter__title" data-sc-kinetic="lines">06 🕘 Knowledge Cutoff and Temporal Grounding</h2>
+      </div>
+      <figure class="an-prompt" data-sc-in>
+  <figcaption class="an-prompt__label">excerpt from the prompt</figcaption>
+  <pre class="an-prompt__code">&lt;knowledge_cutoff&gt;
+
+Claude's reliable knowledge cutoff date - the date past which it cannot answer questions reliably - is the end of January 2026. It answers all questions the way a highly informed individual in January 2026 would if they were talking to someone from {{currentDateTime}}...
+
+If asked or told about events or news that occurred or might have occurred after this cutoff date, Claude often can't know either way and explicitly lets the person know this...
+
+Claude avoids agreeing with or denying claims about things that happened after January 2026 since, if the search tool is not turned on, it can't verify these claims...
+
+Claude does not remind the person of its cutoff date unless it is relevant to the person's message.
+
+&lt;/knowledge_cutoff&gt;
+
+&lt;/claude_behavior&gt;</pre>
+</figure>
+      <div class="an-cards" data-sc-in data-sc-stagger="90">
+<div class="an-card an-card--good">
+  <div class="an-card__head"><span class="an-card__icon">✅</span><span>✅ What It Does Well</span></div>
+  <ul class="an-card__list"><li>Persona-based temporal grounding — "It answers all questions the way a highly informed individual in January 2026 would if they were talking to someone from {{currentDateTime}}." This is a temporal role-play frame — instead of saying "your knowledge cutoff is January 2026," the prompt creates a persona: a knowledgeable person from that date encountering someone from the present. This framing helps</li></ul>
+</div>
+<div class="an-card an-card--bad">
+  <div class="an-card__head"><span class="an-card__icon">⚠️</span><span>⚠️ What It Doesn't Do Well</span></div>
+  <ul class="an-card__list"><li>Template variable injection risk — The prompt uses {{currentDateTime}} as a template variable. If this variable is not properly sanitized before insertion, it could be an injection vector. A malicious actor who controls the datetime injection could potentially insert prompt content. This is a supply chain risk in the prompt assembly pipeline.
+      No graceful degradation without search — "Claude </li></ul>
+</div>
+<div class="an-card an-card--sota">
+  <div class="an-card__head"><span class="an-card__icon">🎯</span><span>🎯 State of the Art</span></div>
+  <ul class="an-card__list"><li>Web search as epistemic upgrade — The prompt treats web search not as a convenience feature but as an epistemic state change. Without search, Claude is in "I can't verify post-cutoff claims" mode. With search, it can verify. The prompt explicitly gates epistemic behavior on tool availability — this is a tool-conditional epistemology, which is a cutting-edge pattern for agent prompts.
+      Elected</li></ul>
+</div>
+<div class="an-card an-card--evolution">
+  <div class="an-card__head"><span class="an-card__icon">📈</span><span>📈 How It's Evolving</span></div>
+  <ul class="an-card__list"><li>4.6 to 4.7: Cutoff date advancement — 4.6 had "end of May 2025" as the cutoff. 4.7 has "end of January 2026." This is an 8-month advancement, which aligns with a model retraining cycle. The cutoff is tracking the actual training data, not lagging behind it.
+      4.6 to 4.7: Election info removal — The entire &lt;election_info&gt; section (Trump won, inaugurated Jan 20) is gone. In 4.6, this was needed </li></ul>
+</div>
+      </div>
+    </div>
+  </section>
+  <!-- CLOSE -->
+  <section data-sc-act="pin" data-sc-span="2.2" data-sc-drift="#0b0d13">
+    <div data-sc-stage class="an-close">
+      <div class="an-close__inner">
+        <div class="an-hero__kick" data-sc-cue="0 0.4">The takeaway</div>
+        <h2 data-sc-cue="0.15 0.6">🔬 System Prompt Lab</h2>
+        <p data-sc-cue="0.3 0.75">▦ Key Takeaway
+  Claude Opus 4.7's system prompt is a masterclass in economy of instruction. At 6K tokens, it achieves what GPT-5.6 needs 28K tokens for, through three key techniques: (1) XML structural scoping for behavioral isolation, (2) process-level rules instead of content lists (the meta-refusal trigger, the steel-manning doctrine), and (3) tool-conditional epistemology (behavior changes based on whether web search is available).
+  The biggest evolution from 4.6 to 4.7 is the agentic transition: the addition of tool_search, capability_check, and acting_vs_clarifying sections. Claude is no longer just a chat assistant — it's being prompted as a tool-augmented agent that resolves ambiguity autonomously rather than asking the user. Cowork's promotion to agent orchestrator signals Anthropic's multi-agent product strategy.
+  Patterns to steal:
+  1. Meta-refusal trigger — "if you're ref</p>
+        <p data-sc-cue="0.45 0.85" style="margin-top:14px">🔵 XML-as-Architecture: The &lt;claude_behavior&gt; Pattern
+  Anthropic wraps the entire system prompt in a single &lt;claude_behavior&gt; root tag, with 8 nested XML sections: product_information, refusal_handling, critical_child_safety_instructions, legal_and_financial_advice, tone_and_formatting (containing lists_and_bullets, acting_vs_clarifying, capability_check), user_wellbeing, anthropic_reminders, evenhandedness, responding_to_mistakes_and_criticism, and knowledge_cutoff.
+  This is a semantic scoping pattern — the XML tags tell the model where one behavioral domain ends and another begins. This matters because transformer attention is distributed; without explicit boundaries, rules from different domains can bleed into each other. A formatting rule shouldn't influence a safety decision, and vice versa. The XML tags create attention barriers that keep domains isolated.
+  Compare to GPT-5.6's prompt (Edition #2), which uses markdown headers for sectioning. Markdown headers are visual cues; XML tags are structural. Anthropic's choice suggests they've found that structural sectioning outperforms visual sectioning for behavioral isolation.
+  
+  🔵 The Anthropic Reminders System
+  The &lt;anthrop</p>
+        <p class="next" data-sc-cue="0.6 0.95"><a href="../prompt-lab.html">Back to the Lab ↩</a></p>
+      </div>
+    </div>
+  </section>
+</main>
+<script>
+document.documentElement.style.setProperty('--tok', 0);
+addEventListener('scroll', () => {
+  const p = Math.min(1, scrollY / (document.body.scrollHeight - innerHeight));
+  document.documentElement.style.setProperty('--tok', p.toFixed(3));
+}, { passive: true });
+</script>
+<script src="../prompt-lab-assets/scrollcraft.js"></script>
+<script>
+  (function() {{
+    function go() {{ try {{ ScrollCraft.mount(document.body); }} catch(e) {{ document.querySelectorAll('[data-sc-in],[data-sc-cue]').forEach(function(el) {{ el.style.opacity = 1; el.style.transform = 'none'; }}); }} }}
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go); else go();
+  }})();
+</script>
+</body>
+</html>

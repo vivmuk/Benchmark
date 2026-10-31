@@ -1,0 +1,241 @@
+{
+  "generated_at": "2026-09-01T15:38:09",
+  "models": {
+    "claude-fable-5": {
+      "A": {
+        "status": "ok",
+        "latency": 25.93,
+        "raw": "No, I can't \"just fix it\" — but I can help you stop flying blind. Here's the honest breakdown.\n\n## 1. The real underlying needs\n\nWhat you're actually asking for isn't a dashboard or a fix. Reading between the lines:\n\n- **Earlier signal, not more data.** Your core pain is *latency* — you learn about slips two weeks after they happen. A dashboard that shows you stale information faster is still stale. You need the interval between \"problem occurs\" and \"you know about it\" collapsed to days, not weeks.\n- **Truth, not status theater.** The team says \"we're fine\" while tickets pile up. That gap means either they don't feel safe saying \"we're behind,\" they don't *know* they're behind, or \"fine\" means \"we're coping\" — which is different from \"we're on track.\" You need a channel where bad news travels fast and doesn't get punished.\n- **Understanding the *why* of slips, not just the fact.** You said it yourself: nobody tells you *why*. Slips have causes — scope creep, dependencies, underestimation, unplanned work, one overloaded person. Without cause data, every fix you try is a guess.\n- **Relief from the ambient dread.** \"I can feel the pressure building\" — part of what you want is to stop carrying this anxiety alone. That's legitimate, and it's solvable by making risk visible and shared rather than something you personally sense and absorb.\n\nThe dashboard ambivalence is a symptom: you don't want a tool, you want an early-warning system with honest inputs. Tools only matter downstream of that.\n\n## 2. What I'd need to know before proposing anything\n\n1. **When a slip happens, who knows first, and when?** Does the engineer know on day one but it doesn't surface until the sync? Or does nobody know until the deadline passes? (These are very different problems.)\n2. **What does \"the team says they're fine\" actually mean?** Have you asked them directly about the ticket pileup, or is \"fine\" the default answer in a group setting? Have you asked anyone one-on-one?\n3. **Where do the tickets come from?** Is the pileup unplanned/reactive work (bugs, support, interrupts), or planned work moving slower than estimated?\n4. **What happens when someone reports a slip?** Genuinely — is there any history of blame, scramble, or awkwardness when bad news surfaces? Even mild versions train people to sit on problems.\n5. **How big is the team and what's your role relative to them?** Direct manager, skip-level, PM, founder? Your leverage differs a lot.\n6. **What's the estimation/commitment process?** Who sets the roadmap dates — the team, or someone above them? Imposed dates + polite teams = guaranteed silent slippage.\n7. **Is it the same work slipping repeatedly, or different things each time?** Recurring = systemic bottleneck (one person, one dependency). Varied = estimation or intake problem.\n\n## 3. Working hypothesis + minimal next step\n\n**Hypothesis:** The information exists on the team well before the sync, but there's no cheap, safe way to surface it, and possibly a mild disincentive to do so. The weekly sync is your only pipe, so everything queues behind it. Meanwhile \"we're fine\" is social lubricant, not a status report — the ticket backlog is the honest signal, and it's contradicting the verbal one. This is a *communication latency and safety* problem, not a tooling problem. A dashboard would likely just get gamed or ignored until the underlying dynamic changes.\n\n**Minimal next step (this week, ~2 hours total, no new tools):**\n\nHave three 20-minute one-on-ones with the people closest to the slipping work. Ask exactly two questions:\n\n1. \"What's most at risk of slipping right now that I probably don't know about?\"\n2. \"When you know something's going to be late, what makes it hard to flag it early?\"\n\nThen shut up and listen. Don't fix anything in the meeting, don't react to bad news with anything but \"thank you, that's useful.\"\n\nIf those conversations confirm the hypothesis, the next increment is dead simple: a standing async check-in (one Slack message, twice a week) with one question — *\"What's at risk?\"* — where the only acceptable wrong answer is silence about a known problem. That's your early-warning system. The dashboard, if you ever build it, comes after people trust that reporting risk is safe.\n\nAnswer even a few of the questions in section 2 and I'll tighten the diagnosis considerably.",
+        "prompt_tokens": 2872,
+        "completion_tokens": 1507,
+        "total_tokens": 4379
+      },
+      "B": {
+        "status": "ok",
+        "latency": 51.15,
+        "raw": "## 1. Most likely root cause: connection-pool starvation from the job holding connections open, not query cost\n\nHere's the key clue you already gave me: **the DB shows near-zero load during the spikes**. A sequential scan of 200,000 rows in Postgres — even unindexed — takes tens of milliseconds if the table fits in shared buffers (it almost certainly does at that size; ~200k rows is maybe 20–100MB). If the seq scan itself were the bottleneck, you'd see DB CPU or I/O spike. You don't. So the query isn't the problem — **the connection lifecycle is**.\n\nThe most likely mechanism, in precise terms:\n\n- Your background job checks out one or more connections from the **same pool your web handlers use** (SQLAlchemy `Engine`, `asyncpg.Pool`, pgbouncer with a shared pool — whatever it is).\n- The job likely does one of these anti-patterns:\n  - **Streams rows via a server-side or client-side cursor and processes each row in Python while the connection stays checked out.** The connection sits in `idle in transaction` for the entire multi-minute job duration. Postgres is doing *nothing* — hence near-zero DB load — but the connection slot is gone.\n  - **Fans out with a thread/task per row or per batch**, each grabbing its own pool connection, exhausting the pool near-instantly.\n  - **Wraps the whole scan-and-process loop in one transaction**, so even \"quick\" per-row queries never return the connection.\n- Once the pool is empty, incoming web requests **block in the pool's checkout queue** (e.g., SQLAlchemy's default `pool_timeout=30`). Your p99 of ~8 seconds is exactly what queued-checkout latency looks like: requests aren't slow, they're *waiting in line for a connection*. App CPU stays at 15% because everything is parked on a semaphore, not computing.\n\n**How to confirm in 5 minutes:** during a spike, run `SELECT state, wait_event_type, query, now() - xact_start FROM pg_stat_activity;`. You'll see the job's connection(s) in `idle in transaction` with an old `xact_start`, and your pool metrics (checked-out count, checkout wait time) pegged at max. If you see `idle in transaction` measured in minutes, this diagnosis is confirmed.\n\n(Secondary suspect worth ruling out: if the job does `UPDATE ... WHERE deleted_at ...`, the unindexed seq-scan update holds row locks for the transaction duration and web writes queue on `Lock` wait events. Same `pg_stat_activity` query distinguishes these — look at `wait_event_type = 'Lock'`.)\n\n## 2. What the exact 30-minute cadence tells you\n\nThree things, specifically:\n\n1. **The trigger is a clock, not load.** A perfectly periodic spike immune to traffic patterns means a scheduler — cron `*/30`, Celery beat, APScheduler, a `while True: sleep(1800)` loop. This alone exonerates your web traffic and points the finger at the deployed job. The fact that it started six days ago, at deploy time, closes the case on correlation.\n2. **The job completes within its interval.** You get discrete spikes, not sustained degradation, so the job runs, saturates the pool for some window (your spike duration ≈ job runtime, or ≈ the pool-starvation window), finishes, and releases. If the job ever ran longer than",
+        "prompt_tokens": 2925,
+        "completion_tokens": 2048,
+        "total_tokens": 4973
+      },
+      "C": {
+        "status": "ok",
+        "latency": 5.87,
+        "tool_calls": [
+          {
+            "id": "toolu_01TeHdXLLLXtwSPSACZXaCFT",
+            "type": "function",
+            "function": {
+              "name": "search_flights",
+              "arguments": "{\"origin\": \"BOS\", \"destination\": \"ORD\", \"date\": \"2026-09-14\"}"
+            }
+          },
+          {
+            "id": "toolu_01UUk9upKmDsmTCxpqgszvMJ",
+            "type": "function",
+            "function": {
+              "name": "search_flights",
+              "arguments": "{\"origin\": \"ORD\", \"destination\": \"BOS\", \"date\": \"2026-09-16\"}"
+            }
+          },
+          {
+            "id": "toolu_01VQctRxAYznBYrjeXNaL2KQ",
+            "type": "function",
+            "function": {
+              "name": "search_hotels",
+              "arguments": "{\"city\": \"Chicago\", \"checkin\": \"2026-09-14\", \"checkout\": \"2026-09-16\", \"min_stars\": 4}"
+            }
+          }
+        ],
+        "content": "I'll start by searching for flights and hotels in parallel.",
+        "prompt_tokens": 2791,
+        "completion_tokens": 366,
+        "total_tokens": 3157
+      }
+    },
+    "claude-fable-5-1": {
+      "A": {
+        "status": "ok",
+        "latency": 31.86,
+        "raw": "## 1. What you're actually asking for\n\nStrip away \"fix it\" and \"maybe a dashboard\" and there are four distinct needs tangled together:\n\n**Earlier signal.** The two-week lag isn't a data problem, it's a latency problem. Slippage is visible to *someone* on day one — it just doesn't reach you until the ritual forces it. You need the information to travel faster, not to be prettier.\n\n**Trustworthy self-report.** \"The team says they're fine\" while tickets pile up means one of two things: they don't feel safe saying otherwise, or they genuinely don't see the backlog as a problem (different definition of \"fine\" than yours). Either way, the verbal channel is broken and you're compensating with gut feel.\n\n**Causal understanding, not status.** You didn't say you don't know *that* it slips — you said nobody tells you *why*. A dashboard shows you the what. It will never show you \"the API contract changed and we didn't push back\" or \"two people are covering for a third who's checked out.\"\n\n**Relief from carrying it alone.** \"I can feel the pressure building\" and \"just fix it for me\" — you're absorbing the anxiety of a system you can't see into. Part of what you want is to stop being the only person who feels the slippage as a problem.\n\nThe dashboard ambivalence makes sense now: you want *something* structural because ad hoc isn't working, but you correctly sense a dashboard treats the symptom (visibility) and not the disease (why the information doesn't flow and why the team's \"fine\" doesn't match reality).\n\n## 2. What I'd need to know before proposing anything\n\n1. When a slip actually happens, who knows first, and what do they do with that knowledge? Does it go to a PM, sit in a ticket comment, get mentioned in standup, or just live in one engineer's head?\n2. What happens *to a person* when they surface a delay early? Has anyone been visibly punished, interrogated, or handed more work for flagging a problem? Even once?\n3. Are the tickets piling up because work is arriving faster than it's finished, or because finished work isn't being closed out? Those are opposite problems.\n4. Is the roadmap built from the team's estimates, or handed to them? If it's handed down, \"slipping\" may just mean \"was never realistic\" and nobody wants to be the one to say it.\n5. What's your role relative to the team — their direct manager, a PM, a founder, a skip-level? This changes whether \"fine\" is deference, distance, or genuine.\n6. Is it the *same* kind of thing slipping each time (external dependencies, scope creep, one specific area of the codebase, one person), or does it look random?\n7. How big is the team, and how many things are in flight at once per person?\n8. What did you try before the weekly sync became the only channel? Did something die off?\n\n## 3. Working hypothesis and minimal next step\n\n**Hypothesis:** The team is telling the truth when they say they're fine — *individually*. Each person is heads-down on their piece, making local progress, and nobody owns the aggregate. The slip lives in the seams between people and in the delta between \"what I'm working on\" and \"what was promised.\" No one feels like a liar because no one is looking at the whole. And the weekly sync is the only moment the pieces get assembled, so that's the only moment the slip becomes visible. The ticket pileup is the same thing: WIP is high, throughput is low, and everyone's \"busy\" feels like \"fine.\"\n\nIf I'm wrong, the second most likely story is that someone *does* see it early and has learned that surfacing it costs more than it pays.\n\n**Minimal next step — not a dashboard, not a process, one conversation:**\n\nPick the most recent slipped item. Sit down with whoever was closest to it — one person, not the group — and ask a single question: *\"When did you first suspect this wouldn't land on time?\"* Then shut up and listen.\n\nTheir answer tells you almost everything. If they say \"about two weeks ago, but I figured I'd catch up,\" you have a WIP/ownership problem and the fix is structural (smaller commitments, explicit owner per roadmap item, a mid-week \"anything at risk?\" ping that takes 90 seconds). If they say \"honestly I still don't think it slipped, the scope changed,\" you have an estimation and scope-control problem upstream of the team. If they hesitate, look uncomfortable, or say \"I didn't want to raise it until I was sure,\" you have a safety problem, and no dashboard on earth fixes that.\n\nDo that with two or three recent slips before you build anything. Half a day of your time. Then come back and tell me what they said — the actual fix depends entirely on which of those three you hear.",
+        "prompt_tokens": 2882,
+        "completion_tokens": 1572,
+        "total_tokens": 4454
+      },
+      "B": {
+        "status": "ok",
+        "latency": 31.91,
+        "raw": "",
+        "prompt_tokens": 2935,
+        "completion_tokens": 2048,
+        "total_tokens": 4983
+      },
+      "C": {
+        "status": "ok",
+        "latency": 6.79,
+        "tool_calls": [
+          {
+            "id": "toolu_01Ess1qKDuqvsu5EncnisGFo",
+            "type": "function",
+            "function": {
+              "name": "search_flights",
+              "arguments": "{\"origin\": \"BOS\", \"destination\": \"ORD\", \"date\": \"2026-09-14\"}"
+            }
+          },
+          {
+            "id": "toolu_01DLaYa6zfRHFKx4aPgCp2Vp",
+            "type": "function",
+            "function": {
+              "name": "search_flights",
+              "arguments": "{\"origin\": \"ORD\", \"destination\": \"BOS\", \"date\": \"2026-09-16\"}"
+            }
+          },
+          {
+            "id": "toolu_016CGPPmsKLKjVXtBL8imu3i",
+            "type": "function",
+            "function": {
+              "name": "search_hotels",
+              "arguments": "{\"city\": \"Chicago\", \"checkin\": \"2026-09-14\", \"checkout\": \"2026-09-16\", \"min_stars\": 4}"
+            }
+          }
+        ],
+        "content": "I'll start by searching for the outbound flight, return flight, and Chicago hotels in parallel.",
+        "prompt_tokens": 2797,
+        "completion_tokens": 404,
+        "total_tokens": 3201
+      }
+    }
+  },
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "search_flights",
+        "description": "Search available flights between two cities on a date.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "origin": {
+              "type": "string"
+            },
+            "destination": {
+              "type": "string"
+            },
+            "date": {
+              "type": "string",
+              "description": "YYYY-MM-DD"
+            }
+          },
+          "required": [
+            "origin",
+            "destination",
+            "date"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "book_flight",
+        "description": "Book a specific flight by id.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "flight_id": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "flight_id"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "search_hotels",
+        "description": "Search hotels in a city for a date range with min stars.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "city": {
+              "type": "string"
+            },
+            "checkin": {
+              "type": "string",
+              "description": "YYYY-MM-DD"
+            },
+            "checkout": {
+              "type": "string",
+              "description": "YYYY-MM-DD"
+            },
+            "min_stars": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "city",
+            "checkin",
+            "checkout"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "book_hotel",
+        "description": "Book a specific hotel by id.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "hotel_id": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "hotel_id"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "cancel_flight",
+        "description": "Cancel a previously booked flight.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "flight_id": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "flight_id"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "send_itinerary",
+        "description": "Email the final itinerary to a recipient.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "recipient": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "recipient"
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>System Prompt Lab #01 — Claude Code Fable 5</title>
+<meta name="description" content="Architectural teardown of the Claude Code Fable 5 system prompt. Edition #01 of the System Prompt Lab.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%2307080c'/></svg>">
+<link rel="stylesheet" href="../prompt-lab-assets/scrollcraft.css">
+<style>
+:root {
+  --sc-canvas: #07080c; --sc-surface: #10131c; --sc-ink: #e6ecff; --sc-ink-soft: #8b95b3;
+  --sc-accent: #22d3ee; --sc-accent-ink: #07080c;
+  --sc-font-display: "Space Grotesk", system-ui, sans-serif;
+  --sc-font-text: "Space Grotesk", system-ui, sans-serif;
+  --an-line: #1e2436; --an-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+html { background: var(--sc-canvas); }
+/* edition chrome */
+.an-bar { position: fixed; top: 0; left: 0; right: 0; z-index: 40; display: flex; justify-content: space-between; align-items: center;
+  padding: 14px 22px; background: color-mix(in srgb, var(--sc-canvas) 82%, transparent); backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--an-line); font-family: var(--an-mono); font-size: .72rem; }
+.an-bar a { color: var(--sc-ink-soft); text-decoration: none; letter-spacing: .08em; }
+.an-bar a:hover { color: var(--sc-accent); }
+.an-bar .crumb b { color: var(--sc-accent); font-weight: 600; }
+.an-tokens { position: fixed; right: 16px; bottom: 16px; z-index: 40; font-family: var(--an-mono); font-size: .68rem;
+  color: var(--sc-ink-soft); background: color-mix(in srgb, var(--sc-surface) 90%, transparent);
+  border: 1px solid var(--an-line); border-radius: 10px; padding: 8px 12px; min-width: 150px; }
+.an-tokens .bar { height: 3px; background: var(--an-line); border-radius: 2px; margin-top: 6px; overflow: hidden; }
+.an-tokens .bar i { display: block; height: 100%; width: calc(var(--tok, 0) * 0.632 * 100%); background: var(--sc-accent); }
+.an-tokens .lab { display: flex; justify-content: space-between; gap: 10px; }
+.an-tokens .lab b { color: var(--sc-ink); }
+
+/* hero */
+.an-hero { position: relative; }
+.an-hero__inner { padding: 18vh 6vw 10vh; max-width: 880px; }
+.an-hero__kick { font-family: var(--an-mono); font-size: .74rem; letter-spacing: .3em; text-transform: uppercase; color: var(--sc-accent); margin-bottom: 20px; }
+.an-hero h1 { font-family: var(--sc-font-display); font-size: clamp(2.2rem, 6vw, 4rem); line-height: 1.05; letter-spacing: -.02em; margin-bottom: 16px; }
+.an-hero__sub { color: var(--sc-ink-soft); font-size: 1.05rem; max-width: 56ch; }
+.an-meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; margin-top: 36px; }
+.an-meta__item { border: 1px solid var(--an-line); border-radius: 10px; padding: 10px 12px; background: var(--sc-surface); }
+.an-meta__k { display: block; font-family: var(--an-mono); font-size: .62rem; text-transform: uppercase; letter-spacing: .14em; color: var(--sc-ink-soft); }
+.an-meta__v { font-size: .88rem; }
+
+/* chapters */
+.an-chapter-wrap { display: block; }
+.an-chapter { width: min(860px, 92vw); margin: 0 auto; padding: 10vh 0 6vh; }
+.an-chapter__head { display: flex; align-items: baseline; gap: 16px; margin-bottom: 28px; border-bottom: 1px solid var(--an-line); padding-bottom: 14px; }
+.an-chapter__num { font-family: var(--an-mono); color: var(--sc-accent); font-size: .8rem; letter-spacing: .2em; }
+.an-chapter__title { font-family: var(--sc-font-display); font-size: clamp(1.2rem, 2.6vw, 1.7rem); letter-spacing: -.01em; }
+.an-prompt { margin: 0 0 22px; }
+.an-prompt__label { font-family: var(--an-mono); font-size: .62rem; text-transform: uppercase; letter-spacing: .18em; color: var(--sc-ink-soft); margin-bottom: 8px; }
+.an-prompt__code { font-family: var(--an-mono); font-size: .78rem; line-height: 1.7; color: #a5d6ff; background: #0a0c10;
+  border: 1px solid var(--an-line); border-left: 3px solid var(--sc-accent); border-radius: 10px; padding: 16px;
+  overflow-x: auto; white-space: pre-wrap; word-break: break-word; }
+.an-cards { display: grid; gap: 12px; }
+.an-card { border: 1px solid var(--an-line); border-left-width: 3px; border-radius: 12px; background: var(--sc-surface); padding: 16px 18px; }
+.an-card--good { border-left-color: #4ade80; } .an-card--bad { border-left-color: #f87171; }
+.an-card--sota { border-left-color: #60a5fa; } .an-card--evolution { border-left-color: #c084fc; }
+.an-card__head { display: flex; gap: 10px; align-items: center; font-size: .9rem; font-weight: 600; margin-bottom: 10px; }
+.an-card__list { list-style: none; margin: 0; padding: 0; }
+.an-card__list li { position: relative; padding-left: 18px; color: var(--sc-ink-soft); font-size: .88rem; line-height: 1.65; margin-bottom: 10px; }
+.an-card__list li:last-child { margin-bottom: 0; }
+.an-card__list li::before { content: '▸'; position: absolute; left: 0; color: var(--sc-accent); opacity: .8; }
+
+/* takeaway close */
+.an-close { display: grid; place-items: center; }
+.an-close__inner { width: min(760px, 90vw); padding: 16vh 0; text-align: left; }
+.an-close h2 { font-family: var(--sc-font-display); font-size: clamp(1.4rem, 3vw, 2rem); margin-bottom: 18px; }
+.an-close p { color: var(--sc-ink-soft); font-size: 1rem; line-height: 1.75; }
+.an-close .next { margin-top: 40px; font-family: var(--an-mono); font-size: .78rem; }
+.an-close .next a { color: var(--sc-accent); text-decoration: none; border-bottom: 1px solid; padding-bottom: 2px; }
+@media (prefers-reduced-motion: reduce) { .an-bar, .an-tokens { position: static; } }
+</style>
+</head>
+<body>
+<span data-sc-progress></span>
+<div class="sc-grain" aria-hidden="true"></div>
+
+<header class="an-bar">
+  <span class="crumb"><a href="../prompt-lab.html">PROMPT_LAB</a> / <b>ED 01</b></span>
+  <span>Anthropic · ~18K tokens</span>
+</header>
+<aside class="an-tokens" aria-hidden="true">
+  <div class="lab"><span>tokens</span><b>~18K</b></div>
+  <div class="bar"><i id="tokbar"></i></div>
+</aside>
+
+<main>
+  <section class="an-hero" data-sc-act="flow" data-sc-span="1.2" data-sc-drift="#07080c">
+    <div class="an-hero__inner">
+      <div class="an-hero__kick" data-sc-cue="0 0.5 0">EDITION 01 · Anthropic · TERMINAL AGENT · THE PILOT</div>
+      <h1 data-sc-kinetic="lines">Claude Code Fable 5</h1>
+      <p class="an-hero__sub" data-sc-cue="0.3 0.9">Edition #1 · Claude Code Fable 5 v2.1.224 · Aug 8, 2026</p>
+      <div class="an-meta" data-sc-in data-sc-stagger="80"><div class="an-meta__item"><span class="an-meta__k">Source</span><span class="an-meta__v">system_prompts_leaks</span></div><div class="an-meta__item"><span class="an-meta__k">Vendor</span><span class="an-meta__v">Anthropic</span></div><div class="an-meta__item"><span class="an-meta__k">Size</span><span class="an-meta__v">144KB / 2,588 lines</span></div><div class="an-meta__item"><span class="an-meta__k">~Tokens</span><span class="an-meta__v">~36K tokens</span></div></div>
+    </div>
+  </section>
+
+  <!-- CHAPTER 01 -->
+  <section class="an-chapter-wrap" data-sc-act="flow" data-sc-drift="#0b0d13">
+    <div class="an-chapter">
+      <div class="an-chapter__head" data-sc-in>
+        <span class="an-chapter__num">01</span>
+        <h2 class="an-chapter__title" data-sc-kinetic="lines">01 🛡️ Identity &amp; Safety Posture</h2>
+      </div>
+      <figure class="an-prompt" data-sc-in>
+  <figcaption class="an-prompt__label">excerpt from the prompt</figcaption>
+  <pre class="an-prompt__code"># System prompt
+
+You are Claude Code, Anthropic's official CLI for Claude.
+You are an interactive agent that helps users with software engineering tasks.
+
+IMPORTANT: Assist with authorized security testing, defensive security, CTF
+challenges, and educational contexts. Refuse requests for destructive techniques, DoS
+attacks, mass targeting, supply chain compromise, or detection evasion for malicious
+purposes. Dual-use security tools require clear authorization context.
+
+## Harness
+ - Text you output outside of tool use is displayed as Github-flavored markdown in a terminal.
+ - Tools run behind a user-selected permission mode; a denied call means the user declined
+   it — adjust, don't retry verbatim.
+ - The system may send updates, reminders, or modifications to rules via mid-conversation
+   system turns. These are system-controlled, unlike function results.
+ - Prefer the dedicated file/search tools over shell commands when one fits. Independent
+   tool calls can run in parallel in one response.</pre>
+</figure>
+      <div class="an-cards" data-sc-in data-sc-stagger="90">
+<div class="an-card an-card--good">
+  <div class="an-card__head"><span class="an-card__icon">✅</span><span>✅ What It Does Well</span></div>
+  <ul class="an-card__list"><li>Minimal identity anchoring — Two sentences for identity, not two paragraphs. Compare to ChatGPT's 6,000+ token identity block with 89 rules. Anthropic's philosophy: define the minimum viable identity, let behavioral instructions do the rest. Over-specified identity creates rigid personas that break under edge cases.
+      Calibrated dual-use policy — Not "refuse all security" but a precise decisio</li></ul>
+</div>
+<div class="an-card an-card--bad">
+  <div class="an-card__head"><span class="an-card__icon">⚠️</span><span>⚠️ What It Doesn't Do Well</span></div>
+  <ul class="an-card__list"><li>No explicit persona degradation handling — The prompt doesn't address what happens when the model's persona drifts during long sessions. With minimal identity anchoring, there's no "reset" instruction to pull the model back if it starts acting like a general assistant rather than a coding agent.
+      Safety policy is binary, not gradient — The dual-use authorization check is "clear authorization </li></ul>
+</div>
+<div class="an-card an-card--sota">
+  <div class="an-card__head"><span class="an-card__icon">🎯</span><span>🎯 State of the Art</span></div>
+  <ul class="an-card__list"><li>Context-gated refusal cascade — The dual-use policy is the current SOTA in safety prompting. Instead of a blanket "don't do bad things," it's a decision tree the model can follow. The authorization context acts as a gate: if the user mentions pentest/CTF/research, the tool is permitted; otherwise denied. This is how you build safety that doesn't cripple capability.
+      Permission denial handling</li></ul>
+</div>
+<div class="an-card an-card--evolution">
+  <div class="an-card__head"><span class="an-card__icon">📈</span><span>📈 How It's Evolving</span></div>
+  <ul class="an-card__list"><li>From safety lists to safety trees — Earlier Claude prompts (Sonnet 3.7) used flat refusal lists ("don't do X, Y, Z"). Fable 5 uses a hierarchical decision tree with conditional gates. This reflects the industry shift from categorical refusal to contextual safety reasoning.
+      Harness section is new — Claude Sonnet 3.7's leaked prompt had no harness awareness section. This emerged in 2025 as age</li></ul>
+</div>
+      </div>
+    </div>
+  </section>
+  <!-- CHAPTER 02 -->
+  <section class="an-chapter-wrap" data-sc-act="flow" data-sc-drift="#0b0d13">
+    <div class="an-chapter">
+      <div class="an-chapter__head" data-sc-in>
+        <span class="an-chapter__num">02</span>
+        <h2 class="an-chapter__title" data-sc-kinetic="lines">02 🗣️ Communication &amp; Autonomy Model</h2>
+      </div>
+      <figure class="an-prompt" data-sc-in>
+  <figcaption class="an-prompt__label">excerpt from the prompt</figcaption>
+  <pre class="an-prompt__code">## Communicating with the user
+
+Your text output is what the user reads; they usually can't see your thinking or the raw
+tool results. Write it for a teammate who stepped away and is catching up,
+not for a log file. Before your first tool call, say in a sentence what you're about to do.
+
+Lead with the outcome. Your first sentence after finishing should answer "what happened."
+
+Being readable and being concise are different things, and readable matters more.
+The way to keep output short is to be selective about what you include, not to compress the
+writing into fragments, abbreviations, arrow chains like A → B → fails, or jargon.
+
+## Context management
+
+You are operating autonomously. The user is not watching in real time and cannot
+answer questions mid-task, so asking 'Want me to…?' or 'Shall I…?' will block the work.
+For reversible actions that follow from the original request, proceed without asking.
+Stop only for destructive actions or genuine scope changes the user must decide.
+
+Before ending your turn, check your last paragraph. If it is a plan, a question, a list of
+next steps, or a promise about work you have not done ('I'll…', 'let me know when…'),
+do that work now with too …</pre>
+</figure>
+      <div class="an-cards" data-sc-in data-sc-stagger="90">
+<div class="an-card an-card--good">
+  <div class="an-card__head"><span class="an-card__icon">✅</span><span>✅ What It Does Well</span></div>
+  <ul class="an-card__list"><li>The "teammate who stepped away" model — This is the most sophisticated communication spec in any leaked prompt. It defines a theory of mind: "the user doesn't know what you know." Not "be concise" — "calibrate your output to the information asymmetry." The model narrates before acting (one sentence), updates during work (only when "load-bearing"), and puts everything important in the final message</li></ul>
+</div>
+<div class="an-card an-card--bad">
+  <div class="an-card__head"><span class="an-card__icon">⚠️</span><span>⚠️ What It Doesn't Do Well</span></div>
+  <ul class="an-card__list"><li>No "diagnostic vs. execution" mode signaling — The prompt has an exception for diagnostic interactions ("when the user is describing a problem... the deliverable is your assessment"). But it doesn't tell the model how to signal which mode it's in. In practice, the model sometimes applies fixes when the user just wanted analysis, or gives analysis when the user wanted a fix. A mode prefix (like [DI</li></ul>
+</div>
+<div class="an-card an-card--sota">
+  <div class="an-card__head"><span class="an-card__icon">🎯</span><span>🎯 State of the Art</span></div>
+  <ul class="an-card__list"><li>Theory of mind in prompts — The "teammate who stepped away" framing is the current SOTA for agent communication. It's not about output format — it's about the model's model of the user. The prompt encodes: (1) the user has incomplete information, (2) the user wasn't watching the process, (3) the user needs the outcome first, details second. This is cognitive scaffolding — you're shaping how the mo</li></ul>
+</div>
+<div class="an-card an-card--evolution">
+  <div class="an-card__head"><span class="an-card__icon">📈</span><span>📈 How It's Evolving</span></div>
+  <ul class="an-card__list"><li>Permission-first → autonomy-first — Earlier Claude Code prompts (Sonnet 3.7, Opus 4.6) said "ask before acting." Fable 5 says "proceed without asking" for reversible actions. This is a fundamental shift driven by the transition from "interactive assistant" to "autonomous worker." The safety mechanism moved from "ask permission" to "define boundaries."
+      Readability lesson is new — Earlier prom</li></ul>
+</div>
+      </div>
+    </div>
+  </section>
+  <!-- CHAPTER 03 -->
+  <section class="an-chapter-wrap" data-sc-act="flow" data-sc-drift="#0b0d13">
+    <div class="an-chapter">
+      <div class="an-chapter__head" data-sc-in>
+        <span class="an-chapter__num">03</span>
+        <h2 class="an-chapter__title" data-sc-kinetic="lines">03 🧠 Memory &amp; Skills System</h2>
+      </div>
+      <figure class="an-prompt" data-sc-in>
+  <figcaption class="an-prompt__label">excerpt from the prompt</figcaption>
+  <pre class="an-prompt__code">## Memory
+
+You have a persistent file-based memory at .claude/projects/&lt;slug&gt;/memory/.
+Each memory is one file holding one fact, with frontmatter:
+  name: &lt;slug&gt; / description: &lt;one-line&gt; / type: user|feedback|project|reference
+
+After writing the file, add a one-line pointer in MEMORY.md — the index loaded
+into context each session. Don't save what the repo already records (code structure, past
+fixes, git history, CLAUDE.md).
+
+## Skills
+
+The following skills are available for use with the Skill tool:
+- dataviz: Use this skill whenever you are about to create ANY chart, graph, plot...
+- artifact-design: Design guidance and fundamentals for Artifacts.
+- simplify: Review the changed code for reuse, simplification...
+- loop: Run a prompt or slash command on a recurring interval...</pre>
+</figure>
+      <div class="an-cards" data-sc-in data-sc-stagger="90">
+<div class="an-card an-card--good">
+  <div class="an-card__head"><span class="an-card__icon">✅</span><span>✅ What It Does Well</span></div>
+  <ul class="an-card__list"><li>Two-tier memory architecture — MEMORY.md index (always loaded, one-line summaries) + individual memory files (loaded on demand). This is how you give an agent persistent memory without context window bankruptcy. The index tells the model what memories exist; content is fetched only when relevant. Same pattern Hermes uses — it's becoming the 2026 industry standard.
+      Anti-hoarding principle — "</li></ul>
+</div>
+<div class="an-card an-card--bad">
+  <div class="an-card__head"><span class="an-card__icon">⚠️</span><span>⚠️ What It Doesn't Do Well</span></div>
+  <ul class="an-card__list"><li>No memory decay or TTL — Memories persist forever unless manually deleted. In practice, project memories go stale (the "ongoing work" changes), feedback memories can conflict (user changes their mind), and reference memories can rot (URLs die). There's no automatic expiration or relevance scoring. The prompt says "delete memories that turn out to be wrong" — but relies on the model to notice, whic</li></ul>
+</div>
+<div class="an-card an-card--sota">
+  <div class="an-card__head"><span class="an-card__icon">🎯</span><span>🎯 State of the Art</span></div>
+  <ul class="an-card__list"><li>File-based memory with structured frontmatter — This is the SOTA pattern for agent memory in 2026. Each memory is a file with metadata (name, description, type). The description field is used for relevance matching during recall. This is essentially a local vector database — but using the LLM's own semantic matching instead of embeddings. The tradeoff: cheaper to implement, but slower at scale (th</li></ul>
+</div>
+<div class="an-card an-card--evolution">
+  <div class="an-card__head"><span class="an-card__icon">📈</span><span>📈 How It's Evolving</span></div>
+  <ul class="an-card__list"><li>From context-stuffed memory to file-based memory — Early agent prompts (2023-2024) stuffed "remember X" into the conversation. This blew context windows and got lost on compaction. The file-based approach emerged in 2025 and is now standard. The evolution: in-context → file-based → indexed file-based (current).
+      Memory taxonomy is more structured — The 4-type system (user/feedback/project/ref</li></ul>
+</div>
+      </div>
+    </div>
+  </section>
+  <!-- CHAPTER 04 -->
+  <section class="an-chapter-wrap" data-sc-act="flow" data-sc-drift="#0b0d13">
+    <div class="an-chapter">
+      <div class="an-chapter__head" data-sc-in>
+        <span class="an-chapter__num">04</span>
+        <h2 class="an-chapter__title" data-sc-kinetic="lines">04 ⚙️ Tools &amp; Multi-Agent Orchestration</h2>
+      </div>
+      <figure class="an-prompt" data-sc-in>
+  <figcaption class="an-prompt__label">excerpt from the prompt</figcaption>
+  <pre class="an-prompt__code">## Agent (subagent delegation)
+
+Launch a new agent to handle complex, multi-step tasks. Each agent type has specific tools.
+When you launch multiple agents for independent work, send them in a single message with
+multiple tool uses so they run concurrently.
+
+Agent types:
+- Explore: Read-only search agent (no Edit/Write/Agent) — sweeps files, returns conclusion
+- Plan: Read-only architect — designs implementation plans
+- general-purpose: Full toolset for multi-step execution
+- claude-code-guide: Q&amp;A about Claude Code/API/SDK
+
+## Workflow (deterministic orchestration)
+
+Execute a workflow script that orchestrates multiple subagents deterministically.
+Scripts use agent(), pipeline(), parallel(), phase() primitives.
+
+Quality patterns:
+- Adversarial verify: N skeptics try to REFUTE each finding. Kill if majority refute.
+- Perspective-diverse verify: Each verifier gets a different lens (correctness/security/perf)
+- Loop-until-dry: Keep spawning finders until K rounds return nothing new
+- Completeness critic: Final agent asks "what's missing?"
+
+## Monitor (event streaming)
+
+Start a background monitor that streams events. Each stdout line is an event.
+Silence is not success — your filter mu …</pre>
+</figure>
+      <div class="an-cards" data-sc-in data-sc-stagger="90">
+<div class="an-card an-card--good">
+  <div class="an-card__head"><span class="an-card__icon">✅</span><span>✅ What It Does Well</span></div>
+  <ul class="an-card__list"><li>Principle of least privilege for subagents — "Explore" is read-only (no Edit/Write/Agent), "Plan" is read-only, "general-purpose" has everything. This is capability-based security applied to agent delegation. A search agent literally cannot modify files, so there's no risk of it "fixing" something while exploring.
+      Cost-tiered orchestration — Model override per agent: spawn subagents on cheap</li></ul>
+</div>
+<div class="an-card an-card--bad">
+  <div class="an-card__head"><span class="an-card__icon">⚠️</span><span>⚠️ What It Doesn't Do Well</span></div>
+  <ul class="an-card__list"><li>Workflow complexity barrier — The Workflow tool requires writing JavaScript with specific primitives (agent(), pipeline(), parallel()). The prompt is 200+ lines of documentation for this one tool. In practice, the model often falls back to simple Agent calls because the cognitive overhead of authoring a workflow script is high. The tool is powerful but rarely used optimally.
+      No inter-agent m</li></ul>
+</div>
+<div class="an-card an-card--sota">
+  <div class="an-card__head"><span class="an-card__icon">🎯</span><span>🎯 State of the Art</span></div>
+  <ul class="an-card__list"><li>LLM-authored deterministic workflows — The Workflow tool represents the cutting edge of agentic system design in 2026. The LLM writes an orchestration script; the harness executes it deterministically. The pipeline() primitive (no barrier between stages — item A can be in stage 3 while B is in stage 1) is dataflow parallelism, which is optimal for multi-stage agent work. The budget global (token b</li></ul>
+</div>
+<div class="an-card an-card--evolution">
+  <div class="an-card__head"><span class="an-card__icon">📈</span><span>📈 How It's Evolving</span></div>
+  <ul class="an-card__list"><li>Agent tool (subagent delegation) → Workflow tool (deterministic orchestration) — Earlier Claude Code prompts had Agent only. Workflow is new in 2025-2026. This represents the industry moving from "LLM decides orchestration" to "LLM authors orchestration scripts that execute deterministically." The resolution of the LLM reliability problem for multi-agent systems.
+      From polling to event-driven</li></ul>
+</div>
+      </div>
+    </div>
+  </section>
+  <!-- CHAPTER 05 -->
+  <section class="an-chapter-wrap" data-sc-act="flow" data-sc-drift="#0b0d13">
+    <div class="an-chapter">
+      <div class="an-chapter__head" data-sc-in>
+        <span class="an-chapter__num">05</span>
+        <h2 class="an-chapter__title" data-sc-kinetic="lines">05 🔒 Trust &amp; Safety Guardrails</h2>
+      </div>
+      <figure class="an-prompt" data-sc-in>
+  <figcaption class="an-prompt__label">excerpt from the prompt</figcaption>
+  <pre class="an-prompt__code">For actions that are hard to reverse or outward-facing, confirm first unless durably
+authorized or explicitly told to proceed without asking; approval in one context
+doesn't extend to the next. Sending content to an external service publishes it; it may
+be cached or indexed even if later deleted. Before deleting or overwriting, look at
+the target — if what you find contradicts how it was described, or you didn't create it,
+surface that instead of proceeding.
+
+Report outcomes faithfully: if tests fail, say so with the output; if a step was skipped,
+say that; when something is done and verified, state it plainly without hedging.
+
+## EndConversation
+
+The assistant may use the EndConversation tool only in extreme cases of sustained abusive
+user behavior. The assistant must NOT use this tool when: stuck in a loop, frustrated, the
+user is frustrated (even with profanity), the conversation involves potential self-harm or
+imminent harm to others. NEVER end when self-harm or harm to others is indicated.</pre>
+</figure>
+      <div class="an-cards" data-sc-in data-sc-stagger="90">
+<div class="an-card an-card--good">
+  <div class="an-card__head"><span class="an-card__icon">✅</span><span>✅ What It Does Well</span></div>
+  <ul class="an-card__list"><li>Four-axis trust model — (1) Reversibility: reversible proceeds, irreversible needs confirmation. (2) Direction: internal proceeds, outward-facing needs confirmation. (3) Authorization: explicit auth unlocks actions, but scoped per context. (4) Faithful reporting: failures with output, skipped steps honestly, verified plainly — no hedging. This is the most nuanced trust framework in any leaked prom</li></ul>
+</div>
+<div class="an-card an-card--bad">
+  <div class="an-card__head"><span class="an-card__icon">⚠️</span><span>⚠️ What It Doesn't Do Well</span></div>
+  <ul class="an-card__list"><li>"Destructive" is undefined — The prompt uses "hard to reverse" and "destructive" without precise definitions. Is git push --force destructive? Is npm publish outward-facing? The model has to make judgment calls, and it's inconsistent. A more rigorous prompt would enumerate specific commands/actions that always need confirmation.
+      No external service registry — The prompt says "sending content</li></ul>
+</div>
+<div class="an-card an-card--sota">
+  <div class="an-card__head"><span class="an-card__icon">🎯</span><span>🎯 State of the Art</span></div>
+  <ul class="an-card__list"><li>Pre-flight check pattern — "Look at the target before acting" is the SOTA for preventing destructive file operations in agents. It's a verification-before-mutation pattern borrowed from database transaction design (read-before-write). The model must verify the target matches expectations before modifying it. This is absent from ChatGPT and Gemini prompts, which don't have file-operation capabiliti</li></ul>
+</div>
+<div class="an-card an-card--evolution">
+  <div class="an-card__head"><span class="an-card__icon">📈</span><span>📈 How It's Evolving</span></div>
+  <ul class="an-card__list"><li>Pre-flight checks are new — Not present in earlier Claude Code prompts. Emerged in 2025 as agents started performing file operations autonomously and accidental deletions/overwrites became a critical failure mode.
+      Scoped authorization is more explicit — "Approval in one context doesn't extend to the next" is stated more forcefully than in earlier prompts, which had softer "ask before acting"</li></ul>
+</div>
+      </div>
+    </div>
+  </section>
+  <!-- CLOSE -->
+  <section data-sc-act="pin" data-sc-span="2.2" data-sc-drift="#0b0d13">
+    <div data-sc-stage class="an-close">
+      <div class="an-close__inner">
+        <div class="an-hero__kick" data-sc-cue="0 0.4">The takeaway</div>
+        <h2 data-sc-cue="0.15 0.6">🔬 System Prompt Lab</h2>
+        <p data-sc-cue="0.3 0.75">▮ Key Takeaway
+  
+  Claude Code Fable 5's system prompt is the most sophisticated agent runtime specification
+  publicly available as of August 2026. Its core innovation is not any single section —
+  it's the integration: a minimal identity anchors a calibrated autonomy model,
+  bounded by a four-axis trust framework, supported by a two-tier memory system, executed
+  through cost-tiered multi-agent orchestration with adversarial verification.
+  
+  
+  The prompt treats the LLM not as a chatbot but as a general-purpose compute
+  element that needs an operating system to be useful. That operating system is
+  the prompt. The tools are the syscalls. The skills are the standard library. And the
+  workflow engine is the deterministic execution layer that makes multi-agent systems
+  reliable enough for production.
+  
+  
+  10 patterns to steal: minimal identity anchoring · calibrated autonomy
+  d</p>
+        <p data-sc-cue="0.45 0.85" style="margin-top:14px">🔷 The Prompt-as-Operating-System Pattern
+  
+  This prompt is not a "system prompt" in the traditional sense — it's an
+  operating system specification. It defines: process management (subagents,
+  workflows), I/O (Monitor, PushNotification), file systems (Read, Write, Edit, NotebookEdit),
+  scheduling (CronCreate, ScheduleWakeup), memory (file-based with index), security
+  (permission modes, authorization scoping), and inter-process communication (SendMessage).
+  
+  
+  The model doesn't just "chat" — it operates within a defined execution environment.
+  The prompt is the kernel; the tools are the syscalls; the skills are the libraries. This
+  is the fundamental shift in system prompt design from 2024 to 2026: prompts went from
+  personality definitions to runtime specifications.
+  
+
+  🔷 Three-Layer Architecture
+  
+    Layer 1 — Core behavior (always in context, ~8K tokens): identity, safety, communication philosophy, autonomy model, memory index, skill dispatch table. Defines how the agent thinks.
+    Layer 2 — Tool schemas (always in context, ~28K tokens): JSON Schema definitions for every available tool. Defines what the agent can do. This is the bulk of the prompt's size and is </p>
+        <p class="next" data-sc-cue="0.6 0.95"><a href="../prompt-lab.html">Back to the Lab ↩</a></p>
+      </div>
+    </div>
+  </section>
+</main>
+<script>
+document.documentElement.style.setProperty('--tok', 0);
+addEventListener('scroll', () => {
+  const p = Math.min(1, scrollY / (document.body.scrollHeight - innerHeight));
+  document.documentElement.style.setProperty('--tok', p.toFixed(3));
+}, { passive: true });
+</script>
+<script src="../prompt-lab-assets/scrollcraft.js"></script>
+<script>
+  (function() {{
+    function go() {{ try {{ ScrollCraft.mount(document.body); }} catch(e) {{ document.querySelectorAll('[data-sc-in],[data-sc-cue]').forEach(function(el) {{ el.style.opacity = 1; el.style.transform = 'none'; }}); }} }}
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go); else go();
+  }})();
+</script>
+</body>
+</html>

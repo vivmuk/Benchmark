@@ -4,9 +4,18 @@ via the Venice image API."""
 import base64, json, os, re, requests, sys
 
 KEY = ""
-txt = open("/Users/vivgatesai/.openclaw/service-env/ai.openclaw.gateway.env").read()
-m = re.search(r"^(?:export )?VENICE_API_KEY=[\'\"]?(.*?)[\'\"]?$", txt, re.M)
-KEY = m.group(1)
+try:
+    txt = open("/Users/vivgatesai/.openclaw/service-env/ai.openclaw.gateway.env").read()
+    m = re.search(r"^(?:export )?VENICE_API_KEY=[\'\\\"]?(.*?)[\'\\\"]?$", txt, re.M)
+    if m:
+        KEY = m.group(1)
+    else:
+        # try common alternative names
+        m2 = re.search(r"(?:export\s+)?(\w*API_KEY\w*)\s*=\s*[\'\\\"]?(.*?)[\'\\\"]?\s*$", txt, re.M)
+        if m2:
+            KEY = m2.group(2)
+except Exception as exc:
+    print("key file note:", exc)
 
 # ---- compute comparison snapshot ----
 data = json.load(open("data/results.json"))

@@ -2,10 +2,12 @@
 (() => {
   "use strict";
 
-  const DATA_URL = "data/results.json";
+  const DATA_URL = "data/results-lite.json";
 
-  // Chart tracks: 5-track VivIndex core + pharma domain tracks (pharma not in VivIndex weights).
-  const BENCHMARKS = [
+  // Chart tracks: declared by the dataset (data/results-lite.json) so a new
+  // track cannot exist in rows but stay invisible on the site. This literal is
+  // only the offline fallback and the shape every renderer expects.
+  let BENCHMARKS = [
     { id: "intent-understanding", label: "Intent Understanding" },
     { id: "one-shot-ui", label: "One-Shot UI" },
     { id: "startup-in-a-weekend", label: "Startup in a Weekend" },
@@ -14,35 +16,115 @@
     { id: "value-density", label: "Value Density @1K" },
     { id: "reverse-prompt-vision", label: "Reverse-Prompt Vision" },
   ];
+  let TRACK_META = [];
+  let MODEL_PROVIDER = {};
 
-  // One saturated, accessible identity per model. These values are used in every chart.
-  const MODEL_COLORS = {
-    "GPT-5.6 Luna":      "#2563EB",
-    "GPT-5.6 Luna Pro":  "#7C3AED",
-    "GPT-5.6 Sol":       "#F97316",
-    "GPT-5.6 Sol Pro":   "#DC2626",
-    "GPT-5.6 Terra":     "#10B981",
-    "GPT-5.6 Terra Pro": "#00A6A6",
-    "GPT-5.5":           "#E11D74",
-    "Fable 5":           "#84A800",
-    "Opus 4.8":          "#9333EA",
-    "Opus 5":            "#6D28D9",
-    "GLM 5.2":           "#EC4899",
-    "DeepSeek V4":       "#0891B2",
-    "DeepSeek V4 Flash 0731": "#0EA5C4",
-    "DeepSeek V4 Flash 0731 Fast": "#22D3EE",
-    "MiniMax M3":        "#D97706",
-    "Grok 4.5":          "#4F46E5",
-    "Inkling":           "#0EA5E9",
-    "Kimi K3":           "#F59E0B",
-    "Kimi K3 Fast API":  "#B45309",
-    "Qwen 3.8 Max":      "#9B6BFF",
-    "Qwen 3.8 2.4T":    "#C49BFF",
-    "Sonnet 5":          "#FF9DBA",
-    "Gemini 3.6 Flash":  "#FFB800",
-    "Grok 4.6":          "#FF6B3D",
-    "Nemotron 3.5":      "#76B900",
+  // Provider-based colors (single source: provider_colors.py). Every model in a
+  // provider shares its base hue so the whole provider reads as one color.
+  const PROVIDER_COLORS = {
+    openai:  "#7C3AED",   // GPT
+    claude:  "#F97316",   // orange
+    deepseek:"#2563EB",   // blue
+    gemini:  "#06B6D4",
+    grok:    "#EF4444",
+    qwen:    "#8B5CF6",
+    kimi:    "#F59E0B",
+    minimax: "#EC4899",
+    glm:     "#00C2A8",
+    nvidia:  "#76B900",
+    mistral: "#D90429",
+    aion:    "#F43F5E",
+    inkling: "#64748B",
+    xiaomi:  "#FF6900",
+    stealth: "#94A3B8",
+    inception: "#22D3EE",
+    meta:    "#0EA5E9",
+    tencent: "#2563EB",
+    community: "#A3A3A3",
+    other:   "#64748B",
   };
+  const PROVIDER_OF = {
+    "GPT-5.6 Luna": "openai", "GPT-5.6 Luna Pro": "openai", "GPT-5.6 Sol": "openai",
+    "GPT-5.6 Sol Pro": "openai", "GPT-5.6 Terra": "openai", "GPT-5.6 Terra Pro": "openai",
+    "GPT-5.5": "openai", "OpenAI GPT": "openai",
+    "Fable 5": "claude", "Opus 4.8": "claude", "Opus 5": "claude", "Sonnet 5": "claude",
+    "Opus 5 Fast": "claude", "Opus 4.8 Fast": "claude",
+    "DeepSeek V4": "deepseek", "DeepSeek V4 Flash 0731": "deepseek",
+    "DeepSeek V4 Flash 0731 Fast": "deepseek", "DeepSeek V4 Flash": "deepseek",
+    "DeepSeek V4 Pro 0813": "deepseek",
+    "Gemini 3.6 Flash": "gemini", "Gemini 3.7 Flash": "gemini",
+    "Grok 4.5": "grok", "Grok 4.6": "grok", "Grok 4.20": "grok",
+    "Qwen 3.8 Max": "qwen", "Qwen 3.8 2.4T": "qwen", "Qwen 3.7 Max": "qwen",
+    "Qwen 3.7 Plus": "qwen", "Qwen 3.8 27B": "qwen", "Qwen3 235B Thinking": "qwen",
+    "Kimi K3": "kimi", "Kimi K3 Fast API": "kimi",
+    "MiniMax M3": "minimax", "MiniMax M27": "minimax",
+    "GLM 5.2": "glm", "GLM 5.3": "glm",
+    "Nemotron 3.5": "nvidia", "Nemotron 3 Super": "nvidia",
+    "Aion 3.0": "aion", "Aion 3.0 Mini": "aion",
+    "Inkling": "inkling",
+  };
+  function providerOf(name) {
+    if (MODEL_PROVIDER[name]) return MODEL_PROVIDER[name];
+    if (PROVIDER_OF[name]) return PROVIDER_OF[name];
+    // Last-resort inference for a model the dataset did not label. Keeping the
+    // fallback here (rather than a name allowlist) means a newly added model is
+    // coloured by its family even before the export catches up.
+    const n = String(name || "").toLowerCase();
+    if (/(gpt|openai)/.test(n)) return "openai";
+    if (/(claude|opus|sonnet|fable|haiku)/.test(n)) return "claude";
+    if (n.includes("deepseek")) return "deepseek";
+    if (n.includes("gemini")) return "gemini";
+    if (n.includes("grok")) return "grok";
+    if (n.includes("qwen")) return "qwen";
+    if (n.includes("kimi")) return "kimi";
+    if (n.includes("minimax")) return "minimax";
+    if (n.includes("glm")) return "glm";
+    if (n.includes("nemotron") || n.includes("nvidia")) return "nvidia";
+    if (n.includes("mistral")) return "mistral";
+    if (n.includes("aion")) return "aion";
+    if (n.includes("inkling")) return "inkling";
+    if (n.includes("mimo") || n.includes("xiaomi")) return "xiaomi";
+    if (n.includes("mercury")) return "inception";
+    if (n.includes("stealth")) return "stealth";
+    if (n.includes("muse")) return "meta";
+    return "other";
+  }
+  function modelColor(name, alpha = 1) {
+    const hex = PROVIDER_COLORS[providerOf(name)] || PROVIDER_COLORS.other;
+    if (alpha >= 1) return hex;
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+  }
+
+  // Company brand logo glyphs + display names for the comparison board.
+  const PROVIDER_BRAND = {
+    openai:   { glyph: "O",  name: "OpenAI" },
+    claude:   { glyph: "An", name: "Anthropic" },
+    deepseek: { glyph: "DS", name: "DeepSeek" },
+    gemini:   { glyph: "G",  name: "Google Gemini" },
+    grok:     { glyph: "X",  name: "xAI" },
+    qwen:     { glyph: "Q",  name: "Alibaba Qwen" },
+    kimi:     { glyph: "K",  name: "Moonshot Kimi" },
+    minimax:  { glyph: "MM", name: "MiniMax" },
+    glm:      { glyph: "Z",  name: "Z-AI / GLM" },
+    nvidia:   { glyph: "N",  name: "NVIDIA" },
+    mistral:  { glyph: "Mi", name: "Mistral" },
+    aion:     { glyph: "A",  name: "Aion Labs" },
+    inkling:  { glyph: "I",  name: "Inkling" },
+    xiaomi:   { glyph: "Xi", name: "Xiaomi" },
+    stealth:  { glyph: "S",  name: "Stealth" },
+    inception:{ glyph: "In", name: "Inception Labs" },
+    meta:     { glyph: "M",  name: "Meta" },
+    tencent:  { glyph: "T",  name: "Tencent" },
+    community:{ glyph: "C",  name: "Community" },
+    other:    { glyph: "?",  name: "Other" },
+  };
+  function providerBrand(name) {
+    return PROVIDER_BRAND[providerOf(name)] || PROVIDER_BRAND.other;
+  }
+
 
   const FALLBACK_DATA = { generated: "", source: "fallback", results: [] };
 
@@ -65,6 +147,11 @@
     isLive: false,
     sort: { key: "score", dir: -1 },
     filter: { text: "", benchmark: "all" },
+    selected: null,           // Set of model display-names shown on charts; null = all
+    selectedModels: null,     // Popover selection; charts only, never the board
+    trackMeta: [],            // declared tracks with coverage, from the export
+    totals: null,             // dataset totals
+    modelList: [],            // [{model, provider, vivIndex}] for the selector
     charts: { leaderboard: null, benchmark: null, costValue: null, vivIndex: null, speed: null, latency: null, valueDensity: null, reversePrompt: null, sparklines: [] },
   };
 
@@ -91,8 +178,12 @@
     return nums.length ? nums.reduce((a, b) => a + b, 0) / nums.length : 0;
   }
 
-  function modelAggregates(rows) {
-    return uniqueModels(rows).map((model) => {
+  function modelAggregates(rows, opts = {}) {
+    const applySelection = opts.applySelection !== false;
+    if (applySelection && state.selectedModels && state.selectedModels.size) {
+      rows = rows.filter((r) => state.selectedModels.has(r.model));
+    }
+    let aggs = uniqueModels(rows).map((model) => {
       const mr = rows.filter((r) => r.model === model);
       // VivIndex: weighted composite over benchmarks present, renormalized.
       let wSum = 0, wTotal = 0;
@@ -124,6 +215,13 @@
         }),
       };
     });
+    // Respect the active model selection (default = top 15) for charts only.
+    // opts.applySelection === false is the model board: it always shows the
+    // full roster, even when the chart selector is narrowed.
+    if (applySelection && state.selected && state.selected.size) {
+      aggs = aggs.filter((a) => state.selected.has(a.model));
+    }
+    return aggs.sort((a, b) => b.vivIndex - a.vivIndex);
   }
 
   function median(nums) {
@@ -131,15 +229,6 @@
     if (!s.length) return 0;
     const m = Math.floor(s.length / 2);
     return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
-  }
-
-  function modelColor(model, alpha = 1) {
-    const hex = MODEL_COLORS[model] || "#94a3b8";
-    if (alpha >= 1) return hex;
-    const r = parseInt(hex.slice(1, 3), 16);
-    const g = parseInt(hex.slice(3, 5), 16);
-    const b = parseInt(hex.slice(5, 7), 16);
-    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
   }
 
   // JSON benchmark ids use underscores; the UI uses hyphens.
@@ -160,6 +249,34 @@
       const modelMap = Object.fromEntries((json.models || []).map((m) => [m.id, m.display]));
       const benchMap = Object.fromEntries((json.benchmarks || []).map((b) => [b.id, b.name]));
 
+      // The dataset is the source of truth for the roster, the provider of
+      // every model, and the declared track list. Renderers only read these.
+      MODEL_PROVIDER = Object.fromEntries(
+        (json.models || []).map((m) => [m.display, m.provider || "other"])
+      );
+      TRACK_META = (json.benchmarks || []).map((b) => ({
+        id: String(b.id).replace(/_/g, "-"),
+        rawId: b.id,
+        label: b.short || b.name,
+        name: b.name,
+        kind: b.kind || "core",
+        coverage: b.coverage || "full",
+        scoredRuns: b.scoredRuns || 0,
+        totalRuns: b.totalRuns || 0,
+        inVivIndex: !!b.in_vivindex,
+        retired: !!b.retired,
+      }));
+      if (TRACK_META.length) {
+        // Charts read active tracks only. Retired experiments stay declared
+        // (so their rows are never orphaned) but do not get a lane.
+        BENCHMARKS = TRACK_META.filter((t) => t.kind !== "retired").map((t) => ({
+          id: t.id,
+          label: t.label,
+        }));
+      }
+      state.totals = json.totals || null;
+      state.trackMeta = TRACK_META;
+
       const scored = json.results.filter((r) => {
         // An API timeout or other failed call is not a score of zero. Keep it
         // out of all score, latency, and cost aggregates while retaining its
@@ -171,6 +288,7 @@
         attempted: json.results.length,
         scored: scored.length,
         excluded: json.results.length - scored.length,
+        skipped: json.results.filter((r) => String(r.status || "").toLowerCase() === "skipped").length,
       };
       state.data = scored.map((r) => ({
         modelId: r.model_id,
@@ -484,24 +602,62 @@
     if (!container) return;
     state.charts.sparklines.forEach((c) => c.destroy());
     state.charts.sparklines = [];
-    // Board rank = raw VivIndex (same rule as stats panel + infographics),
-    // so the #1 card is always the true leader.
-    const aggs = modelAggregates(state.data).sort((a, b) => b.vivIndex - a.vivIndex);
+
+    // Read live board controls (search + sort + provider filter).
+    const searchEl = $("#modelSearch");
+    const sortEl = $("#modelSort");
+    const provEl = $("#providerFilter");
+    const q = (searchEl ? searchEl.value || "" : "").trim().toLowerCase();
+    const sortKey = sortEl ? sortEl.value || "viv" : "viv";
+    const provKey = provEl ? provEl.value || "all" : "all";
+
+    let aggs = modelAggregates(state.data, { applySelection: false });
+    // Provider filter
+    if (provKey !== "all") aggs = aggs.filter((a) => providerOf(a.model) === provKey);
+    // Text search across model name + provider brand name
+    if (q) aggs = aggs.filter((a) =>
+      a.model.toLowerCase().includes(q) || providerBrand(a.model).name.toLowerCase().includes(q));
+    // Sort (null-safe: missing cost/speed sinks to the bottom, never NaN)
+    const byNum = (get) => (a, b) => {
+      const va = get(a), vb = get(b);
+      if (va == null && vb == null) return b.vivIndex - a.vivIndex;
+      if (va == null) return 1;
+      if (vb == null) return -1;
+      return va - vb;
+    };
+    if (sortKey === "cost") aggs = aggs.sort(byNum((a) => (Number.isFinite(a.avgCost) && a.avgCost > 0 ? a.avgCost : null)));
+    else if (sortKey === "speed") aggs = aggs.sort((a, b) => (b.tokensPerSec || 0) - (a.tokensPerSec || 0));
+    else if (sortKey === "alpha") aggs = aggs.sort((a, b) => a.model.localeCompare(b.model));
+    else aggs = aggs.sort((a, b) => b.vivIndex - a.vivIndex);
+
+    // The board is exhaustive by default; the toggle keeps a short list one tap
+    // away without making the top-15 slice the only thing anyone can see.
+    const limitToggle = $("#boardLimitToggle");
+    const limited = limitToggle && limitToggle.getAttribute("aria-pressed") === "true";
+    if (limited) aggs = aggs.slice(0, 15);
+
+    // Live count
+    const countEl = $("#modelCount");
+    if (countEl) countEl.textContent = `${aggs.length} model${aggs.length === 1 ? "" : "s"}`;
 
     container.innerHTML = aggs.map((a, i) => {
       const row = state.data.find((r) => r.model === a.model);
       const slug = (row && row.modelId ? row.modelId : a.model.toLowerCase()).replace(/_/g, "-");
-      const top = i === 0;
+      const top = i === 0 && sortKey === "viv";
+      const brand = providerBrand(a.model);
+      const provColor = modelColor(a.model);
       return `
       <article class="compare-card reveal${top ? " is-top" : ""}">
         <header>
           <span class="badge">#${i + 1}</span>
+          <span class="cmp-logo" style="--brand:${provColor}" title="${brand.name}" aria-label="${brand.name}">${brand.glyph}</span>
           <h3>${a.model}</h3>
         </header>
+        <div class="cmp-byl">${brand.name}</div>
         <div class="score">${a.vivIndex.toFixed(1)}<small style="font-size:.45em;color:var(--ink-2);font-weight:500"> VivIndex</small></div>
         <dl>
           <div><dt>Latency</dt><dd>${a.avgLatency.toFixed(1)}s</dd></div>
-          <div><dt>Cost/run</dt><dd>$${a.avgCost.toFixed(3)}</dd></div>
+          <div><dt>Cost/run</dt><dd>${Number.isFinite(a.avgCost) && a.avgCost > 0 ? "$" + a.avgCost.toFixed(3) : "—"}</dd></div>
           <div><dt>Speed</dt><dd>${a.tokensPerSec != null ? a.tokensPerSec.toFixed(0) + " tok/s" : "—"}</dd></div>
         </dl>
         <div class="spark-wrap"><canvas></canvas></div>
@@ -511,7 +667,7 @@
     }).join("");
 
     aggs.forEach((a, i) => {
-      const canvas = container.children[i].querySelector("canvas");
+      const canvas = container.children[i] ? container.children[i].querySelector("canvas") : null;
       if (!canvas || typeof Chart === "undefined") return;
       state.charts.sparklines.push(new Chart(canvas, {
         type: "line",
@@ -630,11 +786,13 @@
   }
 
   function populateStats() {
-    const aggs = modelAggregates(state.data);
+    const aggs = modelAggregates(state.data, { applySelection: false });
     const top = aggs.length ? aggs.reduce((best, a) => (a.vivIndex > best.vivIndex ? a : best)) : null;
     const el = (id, v) => { const e = $(id); if (e) e.textContent = v; };
+    const activeTracks = (state.trackMeta || []).filter((t) => t.kind !== "retired");
+    const costTotal = state.totals && state.totals.estimatedCostUsd;
     el("#statModels", uniqueModels(state.data).length);
-    el("#statBenchmarks", BENCHMARKS.length);
+    el("#statBenchmarks", activeTracks.length || BENCHMARKS.length);
     el("#statRuns", `${state.runSummary.scored}/${state.runSummary.attempted}`);
     el("#statTopScore", top ? top.vivIndex.toFixed(1) : "—");
     // Average estimated full-suite cost across models with scored runs.
@@ -646,11 +804,32 @@
     el("#statCost", avgSuite != null ? avgSuite.toFixed(2) : "—");
     const leader = $("#statVivLeader");
     if (leader && top) leader.textContent = top.model;
+    // Fill the narrative from the same numbers, so prose cannot drift from data.
+    const setText = (id, text) => { const e = $(id); if (e) e.textContent = text; };
+    setText("#heroModelCount", String(uniqueModels(state.data).length));
+    setText("#heroTrackCount", String(activeTracks.length || BENCHMARKS.length));
+    setText("#heroRunCount", String(state.runSummary.scored));
+    setText("#heroCostTotal", costTotal ? `$${Number(costTotal).toFixed(2)}` : "—");
+    setText("#boardCountLabel", `${aggs.length} models · all of them, not a top-15 slice`);
+    // Feature spotlight: rank is computed, never typed.
+    const feature = aggs.find((a) => /glm 5\.3 flash/i.test(a.model));
+    if (feature) {
+      const rank = aggs.filter((a) => a.vivIndex > feature.vivIndex).length + 1;
+      setText("#featureRank", `#${rank}`);
+      setText("#featureOf", `of ${aggs.length}`);
+      setText("#featureScore", feature.vivIndex.toFixed(1));
+      setText("#featureModel", feature.model);
+      setText("#featureModelCopy", feature.model);
+      setText("#featureRankCopy", `#${rank}`);
+      setText("#featureOfCopy", String(aggs.length));
+    }
     const dataNote = $("#dataNote span");
     if (dataNote) {
+      const skipped = state.runSummary.skipped || 0;
+      const errored = Math.max(0, state.runSummary.excluded - skipped);
       dataNote.textContent = state.runSummary.excluded
-        ? `${state.runSummary.scored} scored runs; ${state.runSummary.excluded} failed/excluded from score aggregates. Pharma tracks are charted; VivIndex uses 4 core tracks.`
-        : `${state.runSummary.scored} scored runs across ${BENCHMARKS.length} tracks (${VIVINDEX_TRACK_COUNT}-track VivIndex).`;
+        ? `${state.runSummary.scored} scored runs; ${skipped} skipped (non-vision), ${errored} errored — neither is scored as zero. Pharma stays charted; VivIndex uses ${VIVINDEX_TRACK_COUNT} weighted tracks.`
+        : `${state.runSummary.scored} scored runs across ${activeTracks.length || BENCHMARKS.length} active tracks (${VIVINDEX_TRACK_COUNT}-track VivIndex).`;
     }
   }
 
@@ -660,7 +839,7 @@
     if (!toggle || !nav) return;
 
     // Ensure the navbar is the positioning context for the absolute drawer.
-    const navbar = toggle.closest(".navbar") || document.querySelector(".navbar");
+    const navbar = toggle.closest(".sidenav") || document.querySelector(".sidenav");
     if (navbar) navbar.style.zIndex = "400";
 
     // Scrim so taps outside clearly close the menu and block page scroll clicks.
@@ -772,10 +951,22 @@
       frame = requestAnimationFrame(draw);
     }
     resize();
-    draw();
     window.addEventListener("resize", resize);
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
-    reduced.addEventListener?.("change", () => { if (reduced.matches && frame) cancelAnimationFrame(frame); else if (!frame) draw(); });
+    // Run the particle loop ONLY while the canvas is on screen and the tab is
+    // visible. A rAF loop that never stops is what made this page eat a CPU.
+    let onScreen = true;
+    const io = new IntersectionObserver((entries) => {
+      onScreen = entries[0].isIntersecting;
+      if (onScreen && !frame && !document.hidden && !reduced.matches) draw();
+      if (!onScreen && frame) { cancelAnimationFrame(frame); frame = 0; }
+    }, { threshold: 0.01 });
+    io.observe(canvas);
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden && frame) { cancelAnimationFrame(frame); frame = 0; }
+      else if (!document.hidden && onScreen && !frame && !reduced.matches) draw();
+    });
+    reduced.addEventListener?.("change", () => { if (reduced.matches && frame) { cancelAnimationFrame(frame); frame = 0; } });
   }
 
   function initWaapiScores() {
@@ -802,9 +993,172 @@
     renderReversePromptChart();
   }
 
-  async function init() {
+  
+  // ── Model selector (Material popover, checkboxes, top-15 default) ──────────
+  function initModelSelector() {
+    const host = document.querySelector(".site-nav, header, .toolbar, main");
+    if (!host || document.getElementById("modelSelectBtn")) return;
+    const aggs = modelAggregates(state.data).sort((a, b) => b.vivIndex - a.vivIndex);
+    const allModels = aggs.map((a) => ({ name: a.model, vi: a.vivIndex }));
+    const saved = localStorage.getItem("bv_selected_models");
+    let selected = new Set();
+    if (saved) { try { selected = new Set(JSON.parse(saved)); } catch (e) {} }
+    if (!selected.size) allModels.slice(0, 15).forEach((m) => selected.add(m.name));
+    state.selectedModels = selected;
+
+    const btn = document.createElement("button");
+    btn.id = "modelSelectBtn";
+    btn.className = "model-select-btn";
+    btn.innerHTML = `<span style="width:12px;height:12px;border-radius:50%;background:var(--md-primary)"></span> Models <span id="msCount" style="font-family:var(--font-mono);font-size:11px;color:var(--md-primary)">${selected.size}</span> ▾`;
+    btn.onclick = (e) => { e.stopPropagation(); pop.style.display = pop.style.display === "block" ? "none" : "block"; };
+
+    const pop = document.createElement("div");
+    pop.className = "model-select-pop";
+    pop.style.display = "none";
+    pop.innerHTML = `
+      <div class="quick">
+        <button data-act="top15">Top 15</button>
+        <button data-act="all">All</button>
+        <button data-act="clear">Clear</button>
+        <button data-act="done" class="primary" style="background:var(--md-primary);color:#fff;border:none;border-radius:999px;padding:6px 14px;font-weight:600;cursor:pointer">Done</button>
+      </div>
+      ${allModels.map((m) => {
+        const prov = providerOf(m.name);
+        const color = PROVIDER_COLORS[prov] || PROVIDER_COLORS.other;
+        return `<label class="model-row"><input type="checkbox" value="${m.name.replace(/"/g, "&quot;")}" ${selected.has(m.name) ? "checked" : ""}>
+          <span class="dot" style="background:${color}"></span>
+          <span class="name">${m.name}</span>
+          <span class="vi">${m.vi ? m.vi.toFixed(1) : "—"}</span></label>`;
+      }).join("")}`;
+    pop.querySelectorAll(".quick button").forEach((b) => b.onclick = () => {
+      const act = b.dataset.act;
+      if (act === "top15") { selected = new Set(allModels.slice(0, 15).map((m) => m.name)); }
+      else if (act === "all") { selected = new Set(allModels.map((m) => m.name)); }
+      else if (act === "clear") { selected = new Set(); }
+      else if (act === "done") { pop.style.display = "none"; }
+      pop.querySelectorAll("input").forEach((i) => i.checked = selected.has(i.value));
+      apply();
+    });
+    pop.addEventListener("change", (e) => {
+      if (e.target.type === "checkbox") {
+        e.target.checked ? selected.add(e.target.value) : selected.delete(e.target.value);
+        apply();
+      }
+    });
+    document.addEventListener("click", (e) => { if (!pop.contains(e.target) && e.target !== btn) pop.style.display = "none"; });
+
+    function apply() {
+      state.selectedModels = selected;
+      localStorage.setItem("bv_selected_models", JSON.stringify([...selected]));
+      const c = document.getElementById("msCount"); if (c) c.textContent = selected.size;
+      renderAllCharts();
+      if (typeof renderComparison === "function") renderComparison();
+      if (typeof populateStats === "function") populateStats();
+    }
+
+    const wrap = document.createElement("div");
+    wrap.style.position = "relative";
+    wrap.style.display = "inline-block";
+    wrap.appendChild(btn); wrap.appendChild(pop);
+    host.insertBefore(wrap, host.firstChild);
+  }
+
+  // ── Board toolbar: provider chips, live search/sort re-render, sticky mobile shortcut ──
+  function initBoardControls() {
+    const searchEl = $("#modelSearch");
+    const sortEl = $("#modelSort");
+    const provSelect = $("#providerFilter");
+    const chipsHost = $("#providerChips");
+    if (!searchEl && !sortEl && !provSelect) return;
+
+    // Build provider chips from the full roster (discover, don't hardcode) —
+    // independent of the active chart-selection so no provider is hidden.
+    const provKeys = [...new Set(uniqueModels(state.data).map((m) => providerOf(m)))]
+      .filter((k) => PROVIDER_BRAND[k]);
+    let activeProv = "all";
+
+    if (chipsHost) {
+      const mkChip = (value, label, color) => {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.className = "board-chip";
+        b.setAttribute("aria-pressed", String(value === activeProv));
+        b.dataset.prov = value;
+        b.innerHTML = (color ? `<span class="chip-logo" style="--brand:${color}">${PROVIDER_BRAND[value].glyph}</span>` : "") + label;
+        b.addEventListener("click", () => {
+          activeProv = value;
+          if (provSelect) provSelect.value = value === "all" ? "all" : value;
+          chipsHost.querySelectorAll(".board-chip").forEach((c) =>
+            c.setAttribute("aria-pressed", String(c.dataset.prov === activeProv)));
+          renderComparison();
+        });
+        return b;
+      };
+      chipsHost.appendChild(mkChip("all", "All providers", null));
+      provKeys.forEach((k) => chipsHost.appendChild(mkChip(k, PROVIDER_BRAND[k].name, PROVIDER_COLORS[k] || PROVIDER_COLORS.other)));
+    }
+
+    // Keep the <select> fallback in sync with chips.
+    if (provSelect) {
+      provKeys.forEach((k) => {
+        if ([...provSelect.options].some((o) => o.value === k)) return;
+        const o = document.createElement("option");
+        o.value = k;
+        o.textContent = PROVIDER_BRAND[k].name;
+        provSelect.appendChild(o);
+      });
+      provSelect.addEventListener("change", () => {
+        activeProv = provSelect.value;
+        if (chipsHost) chipsHost.querySelectorAll(".board-chip").forEach((c) =>
+          c.setAttribute("aria-pressed", String(c.dataset.prov === activeProv)));
+        renderComparison();
+      });
+    }
+
+    // Live filter: debounce so fast typing doesn't thrash Chart.js sparklines.
+    if (searchEl) {
+      let t;
+      searchEl.addEventListener("input", () => {
+        clearTimeout(t);
+        t = setTimeout(renderComparison, 160);
+      });
+    }
+    if (sortEl) sortEl.addEventListener("change", renderComparison);
+
+    const limitToggle = $("#boardLimitToggle");
+    if (limitToggle) {
+      limitToggle.addEventListener("click", () => {
+        const nowLimited = limitToggle.getAttribute("aria-pressed") !== "true";
+        limitToggle.setAttribute("aria-pressed", String(nowLimited));
+        limitToggle.textContent = nowLimited ? "Show all models" : "Show top 15";
+        renderComparison();
+        populateStats();
+      });
+    }
+
+    // Sticky "back to board" pill on mobile: shows once the board has been
+    // scrolled past, hides when it is on screen. Disabled for reduced motion
+    // users only in the sense that transitions are disabled; visibility logic stays.
+    const board = $("#comparison");
+    const jump = $("#boardJump");
+    if (board && jump && "IntersectionObserver" in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          const past = !e.isIntersecting && e.boundingClientRect.top < 0;
+          jump.classList.toggle("is-visible", past);
+          jump.setAttribute("aria-hidden", String(!past));
+          jump.tabIndex = past ? 0 : -1;
+        });
+      }, { threshold: 0 });
+      io.observe(board);
+    }
+  }
+
+    async function init() {
     initMobileNav();
     await loadData();
+    initModelSelector();
+    initBoardControls();
     renderAllCharts();
     renderComparison();
     populateStats();
@@ -890,5 +1244,12 @@
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") closeLightbox();
   });
-})();
 
+  // ── Scrollable table detection ──
+  document.querySelectorAll(".table-wrap").forEach((wrap) => {
+    const check = () => wrap.classList.toggle("scrollable", wrap.scrollWidth > wrap.clientWidth);
+    check();
+    window.addEventListener("resize", check);
+    new ResizeObserver(check).observe(wrap);
+  });
+})();

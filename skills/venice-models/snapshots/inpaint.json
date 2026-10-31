@@ -1,0 +1,919 @@
+{
+  "count": 20,
+  "models": [
+    {
+      "id": "firered-image-edit",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {
+          "aspectRatios": [
+            "auto",
+            "1:1",
+            "3:2",
+            "16:9",
+            "21:9",
+            "9:16",
+            "2:3",
+            "3:4",
+            "4:5"
+          ],
+          "combineImages": true,
+          "promptCharacterLimit": 5000,
+          "singleImageAspectRatio": true
+        },
+        "maxCompletionTokens": null,
+        "pricing": {
+          "inpaint": {
+            "diem": 0.04,
+            "usd": 0.04
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "inpaint"
+    },
+    {
+      "id": "flux-2-max-edit",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {
+          "aspectRatios": [
+            "auto",
+            "1:1",
+            "3:2",
+            "16:9",
+            "21:9",
+            "9:16",
+            "2:3",
+            "3:4",
+            "4:5"
+          ],
+          "combineImages": true,
+          "maxInputImages": 6,
+          "promptCharacterLimit": 3000,
+          "singleImageAspectRatio": true
+        },
+        "maxCompletionTokens": null,
+        "pricing": {
+          "inpaint": {
+            "diem": 0.12,
+            "usd": 0.12
+          },
+          "inputImages": {
+            "additional": {
+              "diem": 0.0345,
+              "usd": 0.0345
+            },
+            "included": 1
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "inpaint"
+    },
+    {
+      "id": "gpt-image-1-5-edit",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {
+          "aspectRatios": [
+            "auto",
+            "1:1",
+            "3:2",
+            "2:3"
+          ],
+          "combineImages": true,
+          "maxInputImages": 6,
+          "promptCharacterLimit": 5000,
+          "singleImageAspectRatio": true
+        },
+        "maxCompletionTokens": null,
+        "pricing": {
+          "inpaint": {
+            "diem": 0.31,
+            "usd": 0.31
+          },
+          "inputImages": {
+            "additional": {
+              "diem": 0.028060000000000005,
+              "usd": 0.028060000000000005
+            },
+            "included": 1
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "inpaint"
+    },
+    {
+      "id": "gpt-image-2-edit",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {
+          "aspectRatios": [
+            "1:1",
+            "3:2",
+            "16:9",
+            "21:9",
+            "9:16",
+            "2:3",
+            "3:4",
+            "4:5"
+          ],
+          "combineImages": true,
+          "defaultQuality": "high",
+          "defaultResolution": "1K",
+          "maxInputImages": 6,
+          "promptCharacterLimit": 10000,
+          "qualities": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "resolutions": [
+            "1K",
+            "2K",
+            "4K"
+          ],
+          "singleImageAspectRatio": true
+        },
+        "maxCompletionTokens": null,
+        "pricing": {
+          "inpaint": {
+            "diem": 0.34,
+            "usd": 0.34
+          },
+          "inputImages": {
+            "additional": {
+              "diem": 0.009200000000000002,
+              "usd": 0.009200000000000002
+            },
+            "included": 1
+          },
+          "quality": {
+            "1K": {
+              "high": {
+                "diem": 0.34,
+                "usd": 0.34
+              },
+              "low": {
+                "diem": 0.03,
+                "usd": 0.03
+              },
+              "medium": {
+                "diem": 0.08,
+                "usd": 0.08
+              }
+            },
+            "2K": {
+              "high": {
+                "diem": 0.52,
+                "usd": 0.52
+              },
+              "low": {
+                "diem": 0.03,
+                "usd": 0.03
+              },
+              "medium": {
+                "diem": 0.14,
+                "usd": 0.14
+              }
+            },
+            "4K": {
+              "high": {
+                "diem": 0.84,
+                "usd": 0.84
+              },
+              "low": {
+                "diem": 0.04,
+                "usd": 0.04
+              },
+              "medium": {
+                "diem": 0.22,
+                "usd": 0.22
+              }
+            }
+          },
+          "resolutions": {
+            "1K": {
+              "diem": 0.34,
+              "usd": 0.34
+            },
+            "2K": {
+              "diem": 0.52,
+              "usd": 0.52
+            },
+            "4K": {
+              "diem": 0.84,
+              "usd": 0.84
+            }
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "inpaint"
+    },
+    {
+      "id": "grok-imagine-edit",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {
+          "aspectRatios": [
+            "auto",
+            "1:1",
+            "16:9",
+            "9:16",
+            "3:4",
+            "3:2",
+            "2:3"
+          ],
+          "combineImages": true,
+          "defaultResolution": "1K",
+          "promptCharacterLimit": 7500,
+          "resolutions": [
+            "1K",
+            "2K"
+          ],
+          "singleImageAspectRatio": true
+        },
+        "maxCompletionTokens": null,
+        "pricing": {
+          "inpaint": {
+            "diem": 0.03,
+            "usd": 0.03
+          },
+          "inputImages": {
+            "additional": {
+              "diem": 0.0023000000000000004,
+              "usd": 0.0023000000000000004
+            },
+            "included": 0
+          },
+          "resolutions": {
+            "1K": {
+              "diem": 0.03,
+              "usd": 0.03
+            },
+            "2K": {
+              "diem": 0.04,
+              "usd": 0.04
+            }
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "inpaint"
+    },
+    {
+      "id": "grok-imagine-quality-edit",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {
+          "aspectRatios": [
+            "auto",
+            "1:1",
+            "16:9",
+            "9:16",
+            "3:4",
+            "3:2",
+            "2:3"
+          ],
+          "combineImages": true,
+          "defaultResolution": "1K",
+          "promptCharacterLimit": 7500,
+          "resolutions": [
+            "1K",
+            "2K"
+          ],
+          "singleImageAspectRatio": true
+        },
+        "maxCompletionTokens": null,
+        "pricing": {
+          "inpaint": {
+            "diem": 0.06,
+            "usd": 0.06
+          },
+          "inputImages": {
+            "additional": {
+              "diem": 0.011500000000000002,
+              "usd": 0.011500000000000002
+            },
+            "included": 0
+          },
+          "resolutions": {
+            "1K": {
+              "diem": 0.06,
+              "usd": 0.06
+            },
+            "2K": {
+              "diem": 0.09,
+              "usd": 0.09
+            }
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "inpaint"
+    },
+    {
+      "id": "luma-uni-1-edit",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {
+          "aspectRatios": [
+            "auto",
+            "1:1",
+            "3:2",
+            "16:9",
+            "21:9",
+            "9:16",
+            "2:3",
+            "3:4",
+            "4:5"
+          ],
+          "combineImages": false,
+          "promptCharacterLimit": 6000,
+          "singleImageAspectRatio": false
+        },
+        "maxCompletionTokens": null,
+        "pricing": {
+          "inpaint": {
+            "diem": 0.06,
+            "usd": 0.06
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "inpaint"
+    },
+    {
+      "id": "luma-uni-1-max-edit",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {
+          "aspectRatios": [
+            "auto",
+            "1:1",
+            "3:2",
+            "16:9",
+            "21:9",
+            "9:16",
+            "2:3",
+            "3:4",
+            "4:5"
+          ],
+          "combineImages": false,
+          "promptCharacterLimit": 6000,
+          "singleImageAspectRatio": false
+        },
+        "maxCompletionTokens": null,
+        "pricing": {
+          "inpaint": {
+            "diem": 0.13,
+            "usd": 0.13
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "inpaint"
+    },
+    {
+      "id": "nano-banana-2-edit",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {
+          "aspectRatios": [
+            "auto",
+            "1:1",
+            "3:2",
+            "16:9",
+            "21:9",
+            "9:16",
+            "2:3",
+            "3:4",
+            "4:5"
+          ],
+          "combineImages": true,
+          "defaultResolution": "1K",
+          "maxInputImages": 6,
+          "promptCharacterLimit": 32768,
+          "resolutions": [
+            "1K",
+            "2K",
+            "4K"
+          ],
+          "singleImageAspectRatio": true
+        },
+        "maxCompletionTokens": null,
+        "pricing": {
+          "inpaint": {
+            "diem": 0.1,
+            "usd": 0.1
+          },
+          "resolutions": {
+            "1K": {
+              "diem": 0.1,
+              "usd": 0.1
+            },
+            "2K": {
+              "diem": 0.14,
+              "usd": 0.14
+            },
+            "4K": {
+              "diem": 0.19,
+              "usd": 0.19
+            }
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "inpaint"
+    },
+    {
+      "id": "nano-banana-2-lite-edit",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {
+          "aspectRatios": [
+            "auto",
+            "1:1",
+            "3:2",
+            "16:9",
+            "21:9",
+            "9:16",
+            "2:3",
+            "3:4",
+            "4:5"
+          ],
+          "combineImages": true,
+          "maxInputImages": 6,
+          "promptCharacterLimit": 10000,
+          "singleImageAspectRatio": true
+        },
+        "maxCompletionTokens": null,
+        "pricing": {
+          "inpaint": {
+            "diem": 0.06,
+            "usd": 0.06
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "inpaint"
+    },
+    {
+      "id": "nano-banana-pro-edit",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {
+          "aspectRatios": [
+            "auto",
+            "1:1",
+            "3:2",
+            "16:9",
+            "21:9",
+            "9:16",
+            "2:3",
+            "3:4",
+            "4:5"
+          ],
+          "combineImages": true,
+          "defaultResolution": "1K",
+          "maxInputImages": 6,
+          "promptCharacterLimit": 32768,
+          "resolutions": [
+            "1K",
+            "2K",
+            "4K"
+          ],
+          "singleImageAspectRatio": true
+        },
+        "maxCompletionTokens": null,
+        "pricing": {
+          "inpaint": {
+            "diem": 0.18,
+            "usd": 0.18
+          },
+          "resolutions": {
+            "1K": {
+              "diem": 0.18,
+              "usd": 0.18
+            },
+            "2K": {
+              "diem": 0.23,
+              "usd": 0.23
+            },
+            "4K": {
+              "diem": 0.35,
+              "usd": 0.35
+            }
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "inpaint"
+    },
+    {
+      "id": "qwen-edit-uncensored",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {
+          "aspectRatios": [
+            "auto",
+            "1:1",
+            "3:2",
+            "16:9",
+            "21:9",
+            "9:16",
+            "2:3",
+            "3:4",
+            "4:5"
+          ],
+          "combineImages": true,
+          "promptCharacterLimit": 1500,
+          "singleImageAspectRatio": true
+        },
+        "maxCompletionTokens": null,
+        "pricing": {
+          "inpaint": {
+            "diem": 0.04,
+            "usd": 0.04
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "inpaint"
+    },
+    {
+      "id": "qwen-image-2-edit",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {
+          "aspectRatios": [
+            "1:1",
+            "3:2",
+            "16:9",
+            "21:9",
+            "9:16",
+            "2:3",
+            "3:4",
+            "4:5"
+          ],
+          "combineImages": true,
+          "promptCharacterLimit": 10000,
+          "singleImageAspectRatio": true
+        },
+        "maxCompletionTokens": null,
+        "pricing": {
+          "inpaint": {
+            "diem": 0.05,
+            "usd": 0.05
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "inpaint"
+    },
+    {
+      "id": "qwen-image-2-pro-edit",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {
+          "aspectRatios": [
+            "1:1",
+            "3:2",
+            "16:9",
+            "21:9",
+            "9:16",
+            "2:3",
+            "3:4",
+            "4:5"
+          ],
+          "combineImages": true,
+          "promptCharacterLimit": 10000,
+          "singleImageAspectRatio": true
+        },
+        "maxCompletionTokens": null,
+        "pricing": {
+          "inpaint": {
+            "diem": 0.1,
+            "usd": 0.1
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "inpaint"
+    },
+    {
+      "id": "qwen-image-3-edit",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {
+          "aspectRatios": [
+            "auto",
+            "1:1",
+            "3:2",
+            "16:9",
+            "21:9",
+            "9:16",
+            "2:3",
+            "3:4",
+            "4:5"
+          ],
+          "combineImages": true,
+          "defaultResolution": "1K",
+          "promptCharacterLimit": 10000,
+          "resolutions": [
+            "1K",
+            "2K"
+          ],
+          "singleImageAspectRatio": true
+        },
+        "maxCompletionTokens": null,
+        "pricing": {
+          "inpaint": {
+            "diem": 0.04,
+            "usd": 0.04
+          },
+          "inputImages": {
+            "additional": {
+              "diem": 0.0034500000000000004,
+              "usd": 0.0034500000000000004
+            },
+            "included": 0
+          },
+          "resolutions": {
+            "1K": {
+              "diem": 0.04,
+              "usd": 0.04
+            },
+            "2K": {
+              "diem": 0.04,
+              "usd": 0.04
+            }
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "inpaint"
+    },
+    {
+      "id": "qwen-image-3-pro-edit",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {
+          "aspectRatios": [
+            "auto",
+            "1:1",
+            "3:2",
+            "16:9",
+            "21:9",
+            "9:16",
+            "2:3",
+            "3:4",
+            "4:5"
+          ],
+          "combineImages": true,
+          "defaultResolution": "1K",
+          "promptCharacterLimit": 10000,
+          "resolutions": [
+            "1K",
+            "2K"
+          ],
+          "singleImageAspectRatio": true
+        },
+        "maxCompletionTokens": null,
+        "pricing": {
+          "inpaint": {
+            "diem": 0.05,
+            "usd": 0.05
+          },
+          "inputImages": {
+            "additional": {
+              "diem": 0.0034500000000000004,
+              "usd": 0.0034500000000000004
+            },
+            "included": 0
+          },
+          "resolutions": {
+            "1K": {
+              "diem": 0.05,
+              "usd": 0.05
+            },
+            "2K": {
+              "diem": 0.09,
+              "usd": 0.09
+            }
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "inpaint"
+    },
+    {
+      "id": "seedream-v4-edit",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {
+          "aspectRatios": [
+            "auto",
+            "1:1",
+            "3:2",
+            "16:9",
+            "9:16",
+            "2:3",
+            "3:4",
+            "4:5"
+          ],
+          "combineImages": true,
+          "maxInputImages": 6,
+          "promptCharacterLimit": 10000,
+          "singleImageAspectRatio": true
+        },
+        "maxCompletionTokens": null,
+        "pricing": {
+          "inpaint": {
+            "diem": 0.05,
+            "usd": 0.05
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "inpaint"
+    },
+    {
+      "id": "seedream-v5-lite-edit",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {
+          "aspectRatios": [
+            "auto",
+            "1:1",
+            "3:2",
+            "16:9",
+            "9:16",
+            "2:3",
+            "3:4",
+            "4:5"
+          ],
+          "combineImages": true,
+          "maxInputImages": 6,
+          "promptCharacterLimit": 10000,
+          "singleImageAspectRatio": true
+        },
+        "maxCompletionTokens": null,
+        "pricing": {
+          "inpaint": {
+            "diem": 0.05,
+            "usd": 0.05
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "inpaint"
+    },
+    {
+      "id": "seedream-v5-pro-edit",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {
+          "aspectRatios": [
+            "auto",
+            "1:1",
+            "3:2",
+            "16:9",
+            "9:16",
+            "2:3",
+            "3:4"
+          ],
+          "combineImages": true,
+          "defaultResolution": "1K",
+          "maxInputImages": 6,
+          "promptCharacterLimit": 10000,
+          "resolutions": [
+            "1K",
+            "2K"
+          ],
+          "singleImageAspectRatio": true
+        },
+        "maxCompletionTokens": null,
+        "pricing": {
+          "inpaint": {
+            "diem": 0.06,
+            "usd": 0.06
+          },
+          "inputImages": {
+            "additional": {
+              "diem": 0.0034500000000000004,
+              "usd": 0.0034500000000000004
+            },
+            "included": 1
+          },
+          "resolutions": {
+            "1K": {
+              "diem": 0.06,
+              "usd": 0.06
+            },
+            "2K": {
+              "diem": 0.11,
+              "usd": 0.11
+            }
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "inpaint"
+    },
+    {
+      "id": "wan-2-7-pro-edit",
+      "model_spec": {
+        "availableContextTokens": null,
+        "capabilities": {},
+        "constraints": {
+          "aspectRatios": [
+            "auto"
+          ],
+          "combineImages": true,
+          "defaultResolution": "1K",
+          "maxInputImages": 6,
+          "promptCharacterLimit": 5000,
+          "resolutions": [
+            "1K",
+            "2K"
+          ],
+          "singleImageAspectRatio": true
+        },
+        "maxCompletionTokens": null,
+        "pricing": {
+          "inpaint": {
+            "diem": 0.094,
+            "usd": 0.094
+          }
+        },
+        "traits": []
+      },
+      "object": "model",
+      "owned_by": "venice.ai",
+      "type": "inpaint"
+    }
+  ],
+  "object": "list",
+  "type": "inpaint"
+}

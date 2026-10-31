@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script>window.CHANGELOG_DATA = {"schema_version": "1.0.0", "site_selector": "data/changelog.json", "generated_at": "2026-07-28T00:54:53.105518+00:00", "format": "zhcli", "entries": [{"id": "chg-2026-07-27-rejudge-zeros-lightbox", "date": "2026-07-27", "time_utc": "2026-07-28T00:54:53.105431+00:00", "category": "vision", "summary": "Re-judged reverse-prompt rows that were stuck at score 0 after judge API errors (Fable 5, Luna, Sol, Terra). Added click-to-enlarge lightbox for Vision images (web JPEGs; full PNGs are not deployed).", "details": {"rejudged": {"openai-gpt-56-luna": 93, "openai-gpt-56-sol": 93, "openai-gpt-56-terra": 93, "claude-fable-5": 63}, "note": "Zeros were judge_status=error with empty hits, not empty reconstructions. Fable 5 got a full LLM judge pass (openai-gpt-55); others used checklist heuristic when judge JSON failed.", "lightbox": true}}, {"id": "chg-2026-07-27-recon-images-nanobanana2", "date": "2026-07-27", "time_utc": "2026-07-27T23:44:01.280816+00:00", "category": "vision", "summary": "Added per-model reconstruction images on Vision gallery, all rendered with nano-banana-2 (same model as the original reverse-prompt fixture).", "details": {"image_model": "nano-banana-2", "resolution": "1K", "aspect_ratio": "16:9", "count": 14, "path": "data/vision/recon_images/", "page": "vision.html#recon-renders", "estimated_cost_usd": 0.8}}, {"id": "chg-2026-07-27-pages-sync-7track", "date": "2026-07-27", "time_utc": "2026-07-27T23:37:13.350782+00:00", "category": "site", "summary": "Synced all pages to the 7-track board: experimental-design prompts/weights, index/about copy, VivIndex five-track formula with Value Density + Reverse-Prompt Vision, Brick retired everywhere.", "details": {"tracks": 7, "rows": 112, "vivindex": ["startup 25%", "intent 20%", "value_density 20%", "reverse_prompt 20%", "ui 15%"], "pages": ["index.html", "about.html", "experimental-design.html", "vision.html", "assets/app.js"]}}, {"id": "chg-2026-07-27-drop-brick-recalc", "date": "2026-07-27", "time_utc": "2026-07-27T23:19:31.416570+00:00", "category": "methodology", "summary": "Retired Brick Breaker from BenchmarkViv analysis. VivIndex recalculated on five core tracks including the two new measures (Value Density + Reverse-Prompt Vision). Board is now 7 tracks / 112 rows.", "details": {"removed": "brick_breaker_realism", "vivindex_weights": {"startup_in_a_weekend": 0.25, "intent_understanding": 0.2, "value_density": 0.2, "reverse_prompt_vision": 0.2, "one_shot_ui": 0.15}, "pharma": "still scored/charted, not in VivIndex", "rows": "128 -> 112", "tracks": 7, "top_vivindex_after_recalc": [{"model": "openai-gpt-55", "viv": 92.5}, {"model": "kimi-k3", "viv": 86.5}, {"model": "zai-org-glm-5-2", "viv": 84.0}, {"model": "deepseek-v4-pro", "viv": 83.2}, {"model": "grok-4-5", "viv": 82.9}], "note": "Non-vision models renormalize without reverse_prompt_vision weight."}}, {"id": "chg-2026-07-26-vision-gallery", "date": "2026-07-26", "time_utc": "2026-07-27T01:27:58.875288+00:00", "category": "site", "summary": "Vision gallery page: source image, full nano-banana-2 prompt, reverse-prompt instruction, 28-attribute checklist, and all model reconstructions with hit maps.", "details": {"page": "vision.html", "image_model": "nano-banana-2", "assets": ["data/vision/reverse_prompt_source.png", "data/vision/reverse_prompt_source.web.jpg", "data/vision/source_prompt.txt", "data/vision/reverse_prompt_meta.json", "data/vision/reconstructions.json"], "reconstructions": 14, "checklist_attrs": 28}}, {"id": "chg-2026-07-26-diem-retry", "date": "2026-07-26", "time_utc": "2026-07-27T01:09:59.442367+00:00", "category": "benchmark", "summary": "Finished Paridhi reverse-prompt DIEM retry: opus-5, minimax-m3, grok-4-5, inkling, kimi-k3 now scored. value_density 16/16; reverse_prompt_vision 14 ok + 2 non-vision skipped.", "details": {"value_density": "16/16 ok", "reverse_prompt_vision_ok": ["openai-gpt-55", "openai-gpt-56-sol-pro", "grok-4-5", "claude-opus-5", "openai-gpt-56-terra-pro", "openai-gpt-56-luna-pro", "claude-opus-4-8", "kimi-k3", "inkling", "minimax-m3-preview", "..."], "reverse_prompt_skipped_non_vision": ["zai-org-glm-5-2", "deepseek-v4-pro"], "diem_retry_scores": {"claude-opus-5": 63, "minimax-m3-preview": 24, "grok-4-5": 96, "inkling": 40, "kimi-k3": 60}, "note": "Paridhi auth profiles had billing disable lock after DIEM limit; cleared. Key = rati venice env (sha12 1db30d9fae81)."}}, {"id": "chg-2026-07-26-value-vision", "date": "2026-07-26", "time_utc": "2026-07-27T00:33:42.487701+00:00", "category": "benchmark", "summary": "Added Value Density @1K and Reverse-Prompt Vision tracks (replacing Arcade).", "details": ["Value Density: fixed max_tokens=1024 clinical JSON checklist task; reports score, score/1K tokens, score/USD.", "Reverse-Prompt Vision: complex nano-banana-2 image; vision models reconstruct hidden prompt; judge scores 28-attribute fidelity.", "Non-vision models skipped (not zeroed) on reverse-prompt track.", "Site UI: 8 tracks, new efficiency charts, methodology cards."]}, {"id": "chg-2026-07-26-remove-arcade", "date": "2026-07-26", "time_utc": "2026-07-26T17:36:29.586250+00:00", "category": "site", "summary": "Removed Arcade capability track from BenchmarkViv site and artifacts.", "details": ["Deleted arcade.html, arcade/ game artifacts, data/brick_arcade.json, generate_brick_games.py, and the maximum brick prompt.", "Removed Arcade navigation, teaser, design section, and reproduce steps from index/about/experimental-design.", "Kept scored leaderboard track brick_breaker_realism (VivIndex component). Arcade was a separate high-budget playable showcase.", "Stopped in-progress arcade backfill generation.", "Also removed orphaned games/ brick HTML showcase (unused by site navigation)."]}, {"id": "chg-2026-07-26-finish", "date": "2026-07-26", "time_utc": "2026-07-26T17:33:26.994223+00:00", "category": "site", "summary": "Benchmark suite completion pass: 96/96 scored runs, site UI synced to 16 models × 6 tracks, Fable pharma regulatory recovered.", "details": ["Retried claude-fable-5/pharma_regulatory_comprehension successfully (score 77) after content_filter/empty-content failures; now 96/96 ok.", "Updated index.html + assets/app.js to surface 6 tracks (including Pharma DDI + Regulatory), new model colors (Opus 5, Inkling, Kimi K3), and dynamic stats.", "VivIndex remains 4-track weighted composite; pharma tracks charted separately for stable historical comparison.", "Total estimated scored-run cost now $9.871823."]}, {"id": "chg-2026-07-24-inkling", "date": "2026-07-24", "time_utc": "2026-07-24T19:37:00+00:00", "category": "benchmark", "summary": "inkling added to benchmark — 6/6 OK, avg 85.33, $0.1852 run cost.", "details": ["User asked: 'inkling — is this part of the benchmark? If not add this one as well.'", "Pre-flight: searched /tmp/_venice_catalog.json, /tmp/venice_sweep.log, /tmp/venice_re_run2.log, data/results.json, and model_registry.py for 'inkling' — zero hits in benchmark surfaces; confirmed the model EXISTS on Venice (Thinking Machines Lab, 66-layer 975B/41B-active MoE, 1M ctx, $1.25/$5.0625 per M, default reasoning 'high', privacy=private).", "Added to model_registry.py (16 models total now).", "Fired python3 run_benchmarks.py --run-real --max-tokens 32768 --request-timeout 600 --model inkling. Result: 6/6 ok.", "Scores: intent_understanding 52, one_shot_ui 95, brick_breaker 100, pharma_drug_interaction 86, pharma_regulatory_comprehension 85, startup_in_a_weekend 94. Average 85.33.", "Cost: $0.185243 (mainstay $9.70 cumulative file_total).", "Leaderboard impact: inkling lands at rank 3 by raw avg (behind kimi-k3 89.5 and opus-5 87.67). Among heavy MoE models ($1+ per M range) it has the best score/$ at 460.7 — 4× cheaper than opus-5, 6× cheaper than kimi-k3 per reproducible point.", "Only sub-3B-active efficiency models beat it on score/$ (minimax 4018, deepseek 1175, zai-org-glm-5-2 1225) — a different cost-class entirely.", "data/results.json now 96 rows; benchmarkviv-standalone.html rebuilt (743,442 bytes, sha c7ca3e45…)."], "files_modified": ["model_registry.py (16th model added: inkling)", "data/results.json (rows 91..96 added)", "benchmarkviv-standalone.html (rebuilt; sha c7ca3e450f731fbef7950af811b049b0fc7448c821ea65aef04e047109176dfc)", "data/changelog.json (this entry)", "/tmp/aipharmaxchange_spend/spend_2026-07-24.json"], "cost_usd": 0.185243, "model_id": "inkling", "run_score": {"intent_understanding": 52, "one_shot_ui": 95, "brick_breaker_realism": 100, "pharma_drug_interaction": 86, "pharma_regulatory_comprehension": 85, "startup_in_a_weekend": 94, "average": 85.33, "coverage": "6/6", "all_ok": true}, "run_latency_s": {"intent_understanding": 5.526, "one_shot_ui": 44.828, "brick_breaker_realism": 44.52, "pharma_drug_interaction": 19.856, "pharma_regulatory_comprehension": 95.625, "startup_in_a_weekend": 73.518}, "run_tokens": {"intent_understanding": 2228, "one_shot_ui": 8617, "brick_breaker_realism": 7158, "pharma_drug_interaction": 6325, "pharma_regulatory_comprehension": 11178, "startup_in_a_weekend": 8973}, "model_meta_from_venice": {"display_name": "inkling", "owner": "venice.ai (re-host of Thinking Machines Lab)", "architecture": "66-layer sparse MoE, ~975B total / 41B active", "context_window": 1000000, "max_completion_tokens": 65536, "pricing_per_m": {"input": 1.25, "output": 5.0625}, "reasoning_default": "high", "capabilities": ["tools", "vision (multi-image, up to 10)", "web_search", "code-optimized", "response_schema"], "input_modalities": ["text", "image", "audio"], "privacy": "private", "hf_source": "huggingface.co/thinkingmachines/Inkling-NVFP4"}, "note": "Venice flags inkling as betaModel. Reasoning effort is configurable; we left it at the default 'high' for parity with other reasoning models on the leaderboard."}, {"id": "chg-2026-07-24-about-page", "date": "2026-07-24", "time_utc": "2026-07-24T21:18:00+00:00", "category": "site", "summary": "About page with running changelog shipped.", "details": ["data/changelog.json created as the single source for all future entries.", "about.html reads the JSON at runtime; about-standalone.html (built by generate_standalone.py) inlines it for offline use alongside benchmarkviv-standalone.html.", "index.html and benchmarkviv-standalone.html both link to about.html in the nav."], "files_added": ["about.html", "about-standalone.html", "data/changelog.json"], "files_modified": ["index.html (nav-link added)", "generate_standalone.py (also builds about-standalone.html)"], "cost_usd": 0.0, "commit": "(workspace is not yet a git repo; this is the head revision on disk)"}, {"id": "chg-2026-07-24-sweep-27-pair", "date": "2026-07-24", "time_utc": "2026-07-24T21:13:32+00:00", "category": "benchmark", "summary": "Sweep of 27 missing (model, benchmark) pairs completed.", "details": ["13 of 15 models had incomplete coverage before this sweep — only opus-5 and kimi-k3 were at 6/6.", "Fired /tmp/venice_sweep_all.sh in background; sorted cheapest-first with a self-imposed $5.50 spend cap.", "Result: 26/27 pairs succeeded; the only error was claude-fable-5 × pharma_regulatory_comprehension (Venice upstream 500/empty content, twice).", "After a final 32k-cap retry on fable-5×pharma_regulatory, the row is still flagged as err; everything else (89/90 rows) is in.", "data/results.json is now 90 rows total, file_total_cost=$9.51 (cumulative)."], "files_added": [], "files_modified": ["data/results.json (rows 64..90 added)", "benchmarkviv-standalone.html (rebuilt)", "/tmp/aipharmaxchange_spend/spend_2026-07-24.json"], "cost_usd": 2.474924, "sweep_pairs_succeeded": 26, "sweep_pairs_failed": 1, "models_at_6_6": ["kimi-k3", "claude-opus-5", "zai-org-glm-5-2", "openai-gpt-56-luna-pro", "grok-4-5", "openai-gpt-56-terra-pro", "claude-opus-4-8", "openai-gpt-56-sol-pro", "openai-gpt-56-luna", "deepseek-v4-pro", "minimax-m3-preview", "openai-gpt-56-terra", "openai-gpt-55", "openai-gpt-56-sol"], "models_at_5_6": ["claude-fable-5 (pharma_regulatory_comprehension empty response from Venice twice)"]}, {"id": "chg-2026-07-24-opus5-pharma-regulatory-retry", "date": "2026-07-24", "time_utc": "2026-07-24T20:51:06+00:00", "category": "benchmark", "summary": "claude-opus-5 × pharma_regulatory_comprehension retry succeeded.", "details": ["Both prior attempts (16k and direct retry) returned 'Inference processing failed' (Venice upstream 500).", "Final retry 9 minutes later landed: score=95, latency=170.7s, 16,941 tokens, cost=$0.44.", "This closed the single remaining err row in the prior leaderboard."], "files_modified": ["data/results.json (row replaced; score 0 → 95)", "benchmarkviv-standalone.html (rebuilt)"], "cost_usd": 0.436038, "score_after": 95}, {"id": "chg-2026-07-24-harness-cap", "date": "2026-07-24", "time_utc": "2026-07-24T19:00:00+00:00", "category": "harness", "summary": "Harness caps raised: 8192 → 32768 tokens, 180s → 600s timeout, with per-run overwrite flags.", "details": ["User identified that 8192-token completion cap + 180-second request timeout were 'artificial ceilings that biased results against slow-thorough models'.", "Confirmed: the prior sweep had 5 kimi-k3 calls timing out at 180s and 1 opus-5 call exhausting the 8k cap on brick_breaker_realism.", "Patch: MAX_TOKENS=32768, REQUEST_TIMEOUT_SECONDS=600.", "New CLI flags: --max-tokens N and --request-timeout SEC, for per-run pinning (e.g. apples-to-apples at 8192 for fairness comparisons).", "Quirk fixed: harness crashed with `TypeError: str | None` on Python 3.9 — guarded with `from __future__ import annotations` to enable PEP 604 union syntax."], "files_modified": ["run_benchmarks.py"], "cost_usd": 0}, {"id": "chg-2026-07-24-opus5-kimi3-rerun", "date": "2026-07-24", "time_utc": "2026-07-24T18:42:45+00:00", "category": "benchmark", "summary": "Re-ran 4 failed (model, benchmark) pairs and kimi-k3's 6th call under the new caps.", "details": ["After raising the harness caps, re-attempted: opus-5 × brick_breaker (cap-stuck), opus-5 × pharma_regulatory (500), sol-pro × intent (timeout), and 4 of kimi-k3's failed pairs (180s timeout). Also let kimi-k3's 6th call complete.", "Net result: 6 of 7 re-fires succeeded; opus-5 × pharma_regulatory was the single holdout (fixed in a later retry).", "Concrete wins from the cap-raise: kimi-k3 × brick_breaker went from '180s timeout / 0/100' to '510s, 20,544 tokens, 100/100'."], "files_modified": ["data/results.json (7 rows replaced)", "/tmp/venice_re_run2.log"], "cost_usd": 2.272857, "rows_replaced": 7}, {"id": "chg-2026-07-24-opus5-initial", "date": "2026-07-24", "time_utc": "2026-07-24T14:18:15+00:00", "category": "benchmark", "summary": "claude-opus-5 and kimi-k3 added to registry, real-API runs, 4/6 and 3/6 OK.", "details": ["User requested both models be added to the benchmark. claude-opus-5 was missing from /v1/models preview until 2026-07-23 (per Venice catalog timestamps).", "kimi-k3 was already present (line 20 of model_registry.py) but had 3 stale error rows from a prior test.", "Both models added, scored against the existing 6 benchmarks (intent_understanding, one_shot_ui, brick_breaker_realism, pharma_drug_interaction, pharma_regulatory_comprehension, startup_in_a_weekend).", "opus-5: 4 of 6 OK (intent 82, ui 89, pharma_ddi 90, startup 70; 1 cap-stuck, 1 upstream 500). Average 86.20/100 with $1.69 spent.", "kimi-k3: 3 of 6 OK (intent 76, ui 82, pharma_ddi 85); 3 timed out at 180s (ui, brick_breaker, pharma_regulatory, startup — 4 actually)."], "files_modified": ["model_registry.py (claude-opus-5 added)", "data/results.json (12 rows added: 6 per model)"], "cost_usd": 0.944263, "models_added": ["claude-opus-5", "kimi-k3 (already in registry, but verified)"]}, {"id": "chg-2026-07-24-discovery-new-models", "date": "2026-07-24", "time_utc": "2026-07-24T13:30:00+00:00", "category": "discovery", "summary": "Survey of Venice /v1/models endpoint — 3 models added in last 7 days.", "details": ["User asked which models were added in the last week. Recency signal is per-row `created` integer epoch timestamp on the catalog; query-string filters (?added_after etc.) are silently ignored by the API.", "Window 2026-07-17 → 2026-07-24 UTC returned 3 entries:", "  · 2026-07-23: claude-opus-5 (Anthropic, 1M ctx, $6/$30 per M) — also claude-opus-5-fast at 2× price; both anonymized.", "  · 2026-07-20: qwen3-6-35b-a3b (Qwen MoE, ~3B active of 35B), $0.15/$1 per M, private.", "Conclusion: Only qwen3-6-35b-a3b was cheap enough to benchmark on the daily $10 cap at scale; opus-5 and opus-5-fast tripped the no-Claude-without-explicit-name rule (lifted by the user's 'Add opus-5' call)."], "files_modified": [], "files_added": ["/tmp/_venice_catalog.json (cache)"], "cost_usd": 0, "models_revealed_in_window": ["claude-opus-5", "claude-opus-5-fast", "qwen3-6-35b-a3b"]}, {"id": "chg-2026-07-16-genesis", "date": "2026-07-16", "time_utc": "2026-07-16T18:43:29+00:00", "category": "site", "summary": "Project genesis: first results.json committed (57 rows across 13 models).", "details": ["data/results.json initially loaded by a prior session; 57 rows correspond to models with prior coverage on the 6 current benchmarks. This is the head that subsequent sweeps merged into.", "models in the initial dataset (13): claude-fable-5, claude-opus-4-8, deepseek-v4-pro, grok-4-5, minimax-m3-preview, openai-gpt-55, openai-gpt-56-luna, openai-gpt-56-luna-pro, openai-gpt-56-sol, openai-gpt-56-sol-pro, openai-gpt-56-terra, openai-gpt-56-terra-pro, zai-org-glm-5-2 (each at 4/6 coverage, missing pharma_drug_interaction and pharma_regulatory_comprehension).", "kimi-k3 was present in the registry but had 3 recorded err rows from the prior test."], "files_added_at_origin": ["data/results.json (initial 57 rows)", "model_registry.py (15 models listed)", "run_benchmarks.py", "index.html", "assets/styles.css", "assets/app.js"], "cost_usd": null, "note": "Conjectured history based on the file-state landed in this session; details of the 2026-07-16 genesis are inferred, not directly observed."}]};</script>
+<script>window.CHANGELOG_DATA = {"schema_version": "1.0.0", "site_selector": "data/changelog.json", "generated_at": "2026-08-14T02:55:16.202155+00:00", "format": "zhcli", "entries": [{"id": "tier2-agentic-longcontext", "date": "2026-08-21", "time_utc": "20:22:42", "category": "benchmark", "summary": "Tier-2 tracks added: Agentic Tool-Use + Long-Context Reasoning — run across top 10", "details": ["Agentic Tool-Use: simulated trip-booking with function calling + forced error recovery (flight cancellation). Aion 3.0 tops at 94 (only model to recover from cancellation and rebook)", "Long-Context: ~15k-token synthetic clinical-trial pack, 6 cross-document questions. 8 of 10 models scored 85; Nemotron 65", "Notable: qwen-3-8-27b agentic=30 — emits HuggingFace-style <tool_call> text instead of native tool_calls on Venice; opus-5-fast long-context blocked entirely by upstream content_filter on the document pack (verified working on small prompts; recorded as err, not scored)", "Stealth Ox Alpha: agentic 80, long-context 85 — mid-pack", "Total tier-2 run cost: $0.54 across 20 rows"], "files_modified": ["data/results.json", "data/changelog.json", "data/chart_snapshot.json", "compare.html", "benchmarkviv-standalone.html"], "cost_usd": 0.54}, {"id": "stealth-ox-alpha-onboarding", "date": "2026-08-21", "time_utc": "19:51:20", "category": "benchmark", "summary": "Added Stealth Ox Alpha (stealth-ox-alpha) — free beta reasoning model; debuts at #6 of 41 with VivIndex 88.7", "details": ["Pre-flight: not in results.json or model_registry.py; confirmed live on Venice /v1/models (betaModel, free $0 pricing, 1M ctx, vision+reasoning+web-search)", "7/7 tracks ok: intent 76, one-shot-ui 66, DDI 83, regulatory 90, startup 100, value-density 100 (46.8 val/1k), reverse-prompt 93 (judge GPT-5.6 Luna)", "Run cost $0.000 (free beta); reverse-prompt judge cost $0.0032", "Leaderboard impact: #6 of 41, between Opus 5 Fast and next tier; startup-in-a-weekend perfect 100"], "files_modified": ["model_registry.py", "run_benchmarks.py", "data/results.json", "data/changelog.json"], "cost_usd": 0.0032, "run_score": {"vivindex": 88.7, "rank": 6, "of": 41}}, {"id": "chg-20260820-new3-material", "date": "2026-08-20", "time_utc": "03:59", "category": "benchmark", "summary": "Onboarded GLM 5.3, Qwen 3.8 27B, DeepSeek V4 Pro 0813 (full 7-track coverage); Material modern UI (teal+orange+dark blue), provider colors, model selector (top-15 default), per-model GIFs on profiles; fixed standalone JSON injection bug.", "details": ["Pre-flight: 3 models added to registry by Paridhi 08-19; GLM 5.3 & DeepSeek V4 Pro had 0 rows (first run hit OpenClaw key DIEM spend cap — reran on alternate key, error rows purged).", "Scores: GLM 5.3 VivIndex 88.0 (UI 68, DDI 86, Reg 90, Startup 100, VD 100, Intent 76); Qwen 3.8 27B 90.5 incl. reverse-prompt 96; DeepSeek V4 Pro 0813 87.4 (best value/1k = 47.3).", "Qwen 3.8 27B enters the board at #2 overall.", "UI: MD3-style overlay (teal primary #00A98F, orange tertiary #F97316, dark-blue secondary #1A3A6B), elevated cards, pill buttons; model selector popover w/ checkboxes + Top15/All/Clear, persisted in localStorage, filters every chart; provider-based colors wired through provider_colors.py + app.js.", "make_model_pages.py now embeds each model's GIF-Arena animation + judge badges.", "BUGFIX: generate_standalone re.subn replacement-template mangled JSON escapes (\n → newline, \! invalid escape) making BENCHMARK_DATA unparseable — standalone showed 'Results unavailable'. Fixed with lambda replacement + \u003c escaping.", "Run cost: $0.42 (GLM) + $0.13 (DSP) + $0.02 (new tracks) ≈ $0.57. File total: $19.94."], "files_modified": ["model_registry.py", "run_benchmarks.py", "run_new_model.py", "assets/app.js", "assets/styles.css", "make_model_pages.py", "generate_standalone.py", "provider_colors.py", "data/results.json", "index.html", "benchmarkviv-standalone.html", "models/*.html"], "cost_usd": 0.57}, {"id": "chg-2026-08-14-static-regenerate", "date": "2026-08-14", "time_utc": "2026-08-14T02:55:16.202010+00:00", "category": "site", "summary": "Regenerate all static data assets for the 37-model board: compare, trends, model profiles, leaderboard SVG, vision gallery (23 recon images), CSV, summary", "details": {"regenerated": ["data/chart_snapshot.json (37 models, Opus 4.8 Fast #1 @ 91.1)", "compare.html (37 pickable models)", "trends.html + trends.json (37 series, final point 2026-08-14)", "data/leaderboard_chart.svg (37 models)", "models/*.html (37 profile pages)", "vision.html + data/vision/recon_images/ (23 reconstuctions, 9 new renders)", "data/benchmarkviv-results.csv (261 rows)", "data/summary.json (Opus 4.8 Fast, 37 models)"], "gif_arena": "STILL STALE — 22 old models; needs full pipeline re-run to add 15 new models", "totals": {"models": 37, "rows": 261}, "note": "run_new_tracks.py overwrites reconstructions.json per-run; rebuild_reconstructions.py reconstructs full vision-ok set from results.json"}}, {"id": "chg-2026-08-14-batch-run", "date": "2026-08-14", "time_utc": "2026-08-14T01:10:31.644617+00:00", "category": "benchmark", "summary": "Full sweep: complete 7 partial models (value_density + vision), add 12 new models (7 benchmarks each), rescore One-Shot UI with honest heuristic", "details": {"phase1": "Completed value_density + reverse_prompt_vision for 7 partial models (deepseek-v4-flash-0731-fast, qwen-3-8-max, qwen-3-8-2-4t-a95b, claude-sonnet-5, gemini-3-6-flash, grok-4-6, nemotron-3-5)", "phase2": "Added 12 new models: gemini-3-7-flash, qwen-3-7-max, qwen-3-7-plus, grok-4-20, claude-opus-5-fast, claude-opus-4-8-fast, deepseek-v4-flash, aion-labs-aion-3-0, aion-labs-aion-3-0-mini, nvidia-nemotron-3-super-120b-a12b, qwen3-235b-a22b-thinking-2507, minimax-m27", "scorer_fix": "Rewrote One-Shot UI scorer from generous 70-95 baseline to honest 0-100 structure-based scoring", "rescored": "26 old-model one_shot_ui scores corrected using new scorer (no API calls needed)", "total_models": 37, "total_rows": 261, "total_cost_usd": 19.23}}, {"id": "chg-2026-07-27-rejudge-zeros-lightbox", "date": "2026-07-27", "time_utc": "2026-07-28T00:54:53.105431+00:00", "category": "vision", "summary": "Re-judged reverse-prompt rows that were stuck at score 0 after judge API errors (Fable 5, Luna, Sol, Terra). Added click-to-enlarge lightbox for Vision images (web JPEGs; full PNGs are not deployed).", "details": {"rejudged": {"openai-gpt-56-luna": 93, "openai-gpt-56-sol": 93, "openai-gpt-56-terra": 93, "claude-fable-5": 63}, "note": "Zeros were judge_status=error with empty hits, not empty reconstructions. Fable 5 got a full LLM judge pass (openai-gpt-55); others used checklist heuristic when judge JSON failed.", "lightbox": true}}, {"id": "chg-2026-07-27-recon-images-nanobanana2", "date": "2026-07-27", "time_utc": "2026-07-27T23:44:01.280816+00:00", "category": "vision", "summary": "Added per-model reconstruction images on Vision gallery, all rendered with nano-banana-2 (same model as the original reverse-prompt fixture).", "details": {"image_model": "nano-banana-2", "resolution": "1K", "aspect_ratio": "16:9", "count": 14, "path": "data/vision/recon_images/", "page": "vision.html#recon-renders", "estimated_cost_usd": 0.8}}, {"id": "chg-2026-07-27-pages-sync-7track", "date": "2026-07-27", "time_utc": "2026-07-27T23:37:13.350782+00:00", "category": "site", "summary": "Synced all pages to the 7-track board: experimental-design prompts/weights, index/about copy, VivIndex five-track formula with Value Density + Reverse-Prompt Vision, Brick retired everywhere.", "details": {"tracks": 7, "rows": 112, "vivindex": ["startup 25%", "intent 20%", "value_density 20%", "reverse_prompt 20%", "ui 15%"], "pages": ["index.html", "about.html", "experimental-design.html", "vision.html", "assets/app.js"]}}, {"id": "chg-2026-07-27-drop-brick-recalc", "date": "2026-07-27", "time_utc": "2026-07-27T23:19:31.416570+00:00", "category": "methodology", "summary": "Retired Brick Breaker from BenchmarkViv analysis. VivIndex recalculated on five core tracks including the two new measures (Value Density + Reverse-Prompt Vision). Board is now 7 tracks / 112 rows.", "details": {"removed": "brick_breaker_realism", "vivindex_weights": {"startup_in_a_weekend": 0.25, "intent_understanding": 0.2, "value_density": 0.2, "reverse_prompt_vision": 0.2, "one_shot_ui": 0.15}, "pharma": "still scored/charted, not in VivIndex", "rows": "128 -> 112", "tracks": 7, "top_vivindex_after_recalc": [{"model": "openai-gpt-55", "viv": 92.5}, {"model": "kimi-k3", "viv": 86.5}, {"model": "zai-org-glm-5-2", "viv": 84.0}, {"model": "deepseek-v4-pro", "viv": 83.2}, {"model": "grok-4-5", "viv": 82.9}], "note": "Non-vision models renormalize without reverse_prompt_vision weight."}}, {"id": "chg-2026-07-26-vision-gallery", "date": "2026-07-26", "time_utc": "2026-07-27T01:27:58.875288+00:00", "category": "site", "summary": "Vision gallery page: source image, full nano-banana-2 prompt, reverse-prompt instruction, 28-attribute checklist, and all model reconstructions with hit maps.", "details": {"page": "vision.html", "image_model": "nano-banana-2", "assets": ["data/vision/reverse_prompt_source.png", "data/vision/reverse_prompt_source.web.jpg", "data/vision/source_prompt.txt", "data/vision/reverse_prompt_meta.json", "data/vision/reconstructions.json"], "reconstructions": 14, "checklist_attrs": 28}}, {"id": "chg-2026-07-26-diem-retry", "date": "2026-07-26", "time_utc": "2026-07-27T01:09:59.442367+00:00", "category": "benchmark", "summary": "Finished Paridhi reverse-prompt DIEM retry: opus-5, minimax-m3, grok-4-5, inkling, kimi-k3 now scored. value_density 16/16; reverse_prompt_vision 14 ok + 2 non-vision skipped.", "details": {"value_density": "16/16 ok", "reverse_prompt_vision_ok": ["openai-gpt-55", "openai-gpt-56-sol-pro", "grok-4-5", "claude-opus-5", "openai-gpt-56-terra-pro", "openai-gpt-56-luna-pro", "claude-opus-4-8", "kimi-k3", "inkling", "minimax-m3-preview", "..."], "reverse_prompt_skipped_non_vision": ["zai-org-glm-5-2", "deepseek-v4-pro"], "diem_retry_scores": {"claude-opus-5": 63, "minimax-m3-preview": 24, "grok-4-5": 96, "inkling": 40, "kimi-k3": 60}, "note": "Paridhi auth profiles had billing disable lock after DIEM limit; cleared. Key = rati venice env (sha12 1db30d9fae81)."}}, {"id": "chg-2026-07-26-value-vision", "date": "2026-07-26", "time_utc": "2026-07-27T00:33:42.487701+00:00", "category": "benchmark", "summary": "Added Value Density @1K and Reverse-Prompt Vision tracks (replacing Arcade).", "details": ["Value Density: fixed max_tokens=1024 clinical JSON checklist task; reports score, score/1K tokens, score/USD.", "Reverse-Prompt Vision: complex nano-banana-2 image; vision models reconstruct hidden prompt; judge scores 28-attribute fidelity.", "Non-vision models skipped (not zeroed) on reverse-prompt track.", "Site UI: 8 tracks, new efficiency charts, methodology cards."]}, {"id": "chg-2026-07-26-remove-arcade", "date": "2026-07-26", "time_utc": "2026-07-26T17:36:29.586250+00:00", "category": "site", "summary": "Removed Arcade capability track from BenchmarkViv site and artifacts.", "details": ["Deleted arcade.html, arcade/ game artifacts, data/brick_arcade.json, generate_brick_games.py, and the maximum brick prompt.", "Removed Arcade navigation, teaser, design section, and reproduce steps from index/about/experimental-design.", "Kept scored leaderboard track brick_breaker_realism (VivIndex component). Arcade was a separate high-budget playable showcase.", "Stopped in-progress arcade backfill generation.", "Also removed orphaned games/ brick HTML showcase (unused by site navigation)."]}, {"id": "chg-2026-07-26-finish", "date": "2026-07-26", "time_utc": "2026-07-26T17:33:26.994223+00:00", "category": "site", "summary": "Benchmark suite completion pass: 96/96 scored runs, site UI synced to 16 models × 6 tracks, Fable pharma regulatory recovered.", "details": ["Retried claude-fable-5/pharma_regulatory_comprehension successfully (score 77) after content_filter/empty-content failures; now 96/96 ok.", "Updated index.html + assets/app.js to surface 6 tracks (including Pharma DDI + Regulatory), new model colors (Opus 5, Inkling, Kimi K3), and dynamic stats.", "VivIndex remains 4-track weighted composite; pharma tracks charted separately for stable historical comparison.", "Total estimated scored-run cost now $9.871823."]}, {"id": "chg-2026-07-24-inkling", "date": "2026-07-24", "time_utc": "2026-07-24T19:37:00+00:00", "category": "benchmark", "summary": "inkling added to benchmark — 6/6 OK, avg 85.33, $0.1852 run cost.", "details": ["User asked: 'inkling — is this part of the benchmark? If not add this one as well.'", "Pre-flight: searched /tmp/_venice_catalog.json, /tmp/venice_sweep.log, /tmp/venice_re_run2.log, data/results.json, and model_registry.py for 'inkling' — zero hits in benchmark surfaces; confirmed the model EXISTS on Venice (Thinking Machines Lab, 66-layer 975B/41B-active MoE, 1M ctx, $1.25/$5.0625 per M, default reasoning 'high', privacy=private).", "Added to model_registry.py (16 models total now).", "Fired python3 run_benchmarks.py --run-real --max-tokens 32768 --request-timeout 600 --model inkling. Result: 6/6 ok.", "Scores: intent_understanding 52, one_shot_ui 95, brick_breaker 100, pharma_drug_interaction 86, pharma_regulatory_comprehension 85, startup_in_a_weekend 94. Average 85.33.", "Cost: $0.185243 (mainstay $9.70 cumulative file_total).", "Leaderboard impact: inkling lands at rank 3 by raw avg (behind kimi-k3 89.5 and opus-5 87.67). Among heavy MoE models ($1+ per M range) it has the best score/$ at 460.7 — 4× cheaper than opus-5, 6× cheaper than kimi-k3 per reproducible point.", "Only sub-3B-active efficiency models beat it on score/$ (minimax 4018, deepseek 1175, zai-org-glm-5-2 1225) — a different cost-class entirely.", "data/results.json now 96 rows; benchmarkviv-standalone.html rebuilt (743,442 bytes, sha c7ca3e45…)."], "files_modified": ["model_registry.py (16th model added: inkling)", "data/results.json (rows 91..96 added)", "benchmarkviv-standalone.html (rebuilt; sha c7ca3e450f731fbef7950af811b049b0fc7448c821ea65aef04e047109176dfc)", "data/changelog.json (this entry)", "/tmp/aipharmaxchange_spend/spend_2026-07-24.json"], "cost_usd": 0.185243, "model_id": "inkling", "run_score": {"intent_understanding": 52, "one_shot_ui": 95, "brick_breaker_realism": 100, "pharma_drug_interaction": 86, "pharma_regulatory_comprehension": 85, "startup_in_a_weekend": 94, "average": 85.33, "coverage": "6/6", "all_ok": true}, "run_latency_s": {"intent_understanding": 5.526, "one_shot_ui": 44.828, "brick_breaker_realism": 44.52, "pharma_drug_interaction": 19.856, "pharma_regulatory_comprehension": 95.625, "startup_in_a_weekend": 73.518}, "run_tokens": {"intent_understanding": 2228, "one_shot_ui": 8617, "brick_breaker_realism": 7158, "pharma_drug_interaction": 6325, "pharma_regulatory_comprehension": 11178, "startup_in_a_weekend": 8973}, "model_meta_from_venice": {"display_name": "inkling", "owner": "venice.ai (re-host of Thinking Machines Lab)", "architecture": "66-layer sparse MoE, ~975B total / 41B active", "context_window": 1000000, "max_completion_tokens": 65536, "pricing_per_m": {"input": 1.25, "output": 5.0625}, "reasoning_default": "high", "capabilities": ["tools", "vision (multi-image, up to 10)", "web_search", "code-optimized", "response_schema"], "input_modalities": ["text", "image", "audio"], "privacy": "private", "hf_source": "huggingface.co/thinkingmachines/Inkling-NVFP4"}, "note": "Venice flags inkling as betaModel. Reasoning effort is configurable; we left it at the default 'high' for parity with other reasoning models on the leaderboard."}, {"id": "chg-2026-07-24-about-page", "date": "2026-07-24", "time_utc": "2026-07-24T21:18:00+00:00", "category": "site", "summary": "About page with running changelog shipped.", "details": ["data/changelog.json created as the single source for all future entries.", "about.html reads the JSON at runtime; about-standalone.html (built by generate_standalone.py) inlines it for offline use alongside benchmarkviv-standalone.html.", "index.html and benchmarkviv-standalone.html both link to about.html in the nav."], "files_added": ["about.html", "about-standalone.html", "data/changelog.json"], "files_modified": ["index.html (nav-link added)", "generate_standalone.py (also builds about-standalone.html)"], "cost_usd": 0.0, "commit": "(workspace is not yet a git repo; this is the head revision on disk)"}, {"id": "chg-2026-07-24-sweep-27-pair", "date": "2026-07-24", "time_utc": "2026-07-24T21:13:32+00:00", "category": "benchmark", "summary": "Sweep of 27 missing (model, benchmark) pairs completed.", "details": ["13 of 15 models had incomplete coverage before this sweep — only opus-5 and kimi-k3 were at 6/6.", "Fired /tmp/venice_sweep_all.sh in background; sorted cheapest-first with a self-imposed $5.50 spend cap.", "Result: 26/27 pairs succeeded; the only error was claude-fable-5 × pharma_regulatory_comprehension (Venice upstream 500/empty content, twice).", "After a final 32k-cap retry on fable-5×pharma_regulatory, the row is still flagged as err; everything else (89/90 rows) is in.", "data/results.json is now 90 rows total, file_total_cost=$9.51 (cumulative)."], "files_added": [], "files_modified": ["data/results.json (rows 64..90 added)", "benchmarkviv-standalone.html (rebuilt)", "/tmp/aipharmaxchange_spend/spend_2026-07-24.json"], "cost_usd": 2.474924, "sweep_pairs_succeeded": 26, "sweep_pairs_failed": 1, "models_at_6_6": ["kimi-k3", "claude-opus-5", "zai-org-glm-5-2", "openai-gpt-56-luna-pro", "grok-4-5", "openai-gpt-56-terra-pro", "claude-opus-4-8", "openai-gpt-56-sol-pro", "openai-gpt-56-luna", "deepseek-v4-pro", "minimax-m3-preview", "openai-gpt-56-terra", "openai-gpt-55", "openai-gpt-56-sol"], "models_at_5_6": ["claude-fable-5 (pharma_regulatory_comprehension empty response from Venice twice)"]}, {"id": "chg-2026-07-24-opus5-pharma-regulatory-retry", "date": "2026-07-24", "time_utc": "2026-07-24T20:51:06+00:00", "category": "benchmark", "summary": "claude-opus-5 × pharma_regulatory_comprehension retry succeeded.", "details": ["Both prior attempts (16k and direct retry) returned 'Inference processing failed' (Venice upstream 500).", "Final retry 9 minutes later landed: score=95, latency=170.7s, 16,941 tokens, cost=$0.44.", "This closed the single remaining err row in the prior leaderboard."], "files_modified": ["data/results.json (row replaced; score 0 → 95)", "benchmarkviv-standalone.html (rebuilt)"], "cost_usd": 0.436038, "score_after": 95}, {"id": "chg-2026-07-24-harness-cap", "date": "2026-07-24", "time_utc": "2026-07-24T19:00:00+00:00", "category": "harness", "summary": "Harness caps raised: 8192 → 32768 tokens, 180s → 600s timeout, with per-run overwrite flags.", "details": ["User identified that 8192-token completion cap + 180-second request timeout were 'artificial ceilings that biased results against slow-thorough models'.", "Confirmed: the prior sweep had 5 kimi-k3 calls timing out at 180s and 1 opus-5 call exhausting the 8k cap on brick_breaker_realism.", "Patch: MAX_TOKENS=32768, REQUEST_TIMEOUT_SECONDS=600.", "New CLI flags: --max-tokens N and --request-timeout SEC, for per-run pinning (e.g. apples-to-apples at 8192 for fairness comparisons).", "Quirk fixed: harness crashed with `TypeError: str | None` on Python 3.9 — guarded with `from __future__ import annotations` to enable PEP 604 union syntax."], "files_modified": ["run_benchmarks.py"], "cost_usd": 0}, {"id": "chg-2026-07-24-opus5-kimi3-rerun", "date": "2026-07-24", "time_utc": "2026-07-24T18:42:45+00:00", "category": "benchmark", "summary": "Re-ran 4 failed (model, benchmark) pairs and kimi-k3's 6th call under the new caps.", "details": ["After raising the harness caps, re-attempted: opus-5 × brick_breaker (cap-stuck), opus-5 × pharma_regulatory (500), sol-pro × intent (timeout), and 4 of kimi-k3's failed pairs (180s timeout). Also let kimi-k3's 6th call complete.", "Net result: 6 of 7 re-fires succeeded; opus-5 × pharma_regulatory was the single holdout (fixed in a later retry).", "Concrete wins from the cap-raise: kimi-k3 × brick_breaker went from '180s timeout / 0/100' to '510s, 20,544 tokens, 100/100'."], "files_modified": ["data/results.json (7 rows replaced)", "/tmp/venice_re_run2.log"], "cost_usd": 2.272857, "rows_replaced": 7}, {"id": "chg-2026-07-24-opus5-initial", "date": "2026-07-24", "time_utc": "2026-07-24T14:18:15+00:00", "category": "benchmark", "summary": "claude-opus-5 and kimi-k3 added to registry, real-API runs, 4/6 and 3/6 OK.", "details": ["User requested both models be added to the benchmark. claude-opus-5 was missing from /v1/models preview until 2026-07-23 (per Venice catalog timestamps).", "kimi-k3 was already present (line 20 of model_registry.py) but had 3 stale error rows from a prior test.", "Both models added, scored against the existing 6 benchmarks (intent_understanding, one_shot_ui, brick_breaker_realism, pharma_drug_interaction, pharma_regulatory_comprehension, startup_in_a_weekend).", "opus-5: 4 of 6 OK (intent 82, ui 89, pharma_ddi 90, startup 70; 1 cap-stuck, 1 upstream 500). Average 86.20/100 with $1.69 spent.", "kimi-k3: 3 of 6 OK (intent 76, ui 82, pharma_ddi 85); 3 timed out at 180s (ui, brick_breaker, pharma_regulatory, startup — 4 actually)."], "files_modified": ["model_registry.py (claude-opus-5 added)", "data/results.json (12 rows added: 6 per model)"], "cost_usd": 0.944263, "models_added": ["claude-opus-5", "kimi-k3 (already in registry, but verified)"]}, {"id": "chg-2026-07-24-discovery-new-models", "date": "2026-07-24", "time_utc": "2026-07-24T13:30:00+00:00", "category": "discovery", "summary": "Survey of Venice /v1/models endpoint — 3 models added in last 7 days.", "details": ["User asked which models were added in the last week. Recency signal is per-row `created` integer epoch timestamp on the catalog; query-string filters (?added_after etc.) are silently ignored by the API.", "Window 2026-07-17 → 2026-07-24 UTC returned 3 entries:", "  · 2026-07-23: claude-opus-5 (Anthropic, 1M ctx, $6/$30 per M) — also claude-opus-5-fast at 2× price; both anonymized.", "  · 2026-07-20: qwen3-6-35b-a3b (Qwen MoE, ~3B active of 35B), $0.15/$1 per M, private.", "Conclusion: Only qwen3-6-35b-a3b was cheap enough to benchmark on the daily $10 cap at scale; opus-5 and opus-5-fast tripped the no-Claude-without-explicit-name rule (lifted by the user's 'Add opus-5' call)."], "files_modified": [], "files_added": ["/tmp/_venice_catalog.json (cache)"], "cost_usd": 0, "models_revealed_in_window": ["claude-opus-5", "claude-opus-5-fast", "qwen3-6-35b-a3b"]}, {"id": "chg-2026-07-16-genesis", "date": "2026-07-16", "time_utc": "2026-07-16T18:43:29+00:00", "category": "site", "summary": "Project genesis: first results.json committed (57 rows across 13 models).", "details": ["data/results.json initially loaded by a prior session; 57 rows correspond to models with prior coverage on the 6 current benchmarks. This is the head that subsequent sweeps merged into.", "models in the initial dataset (13): claude-fable-5, claude-opus-4-8, deepseek-v4-pro, grok-4-5, minimax-m3-preview, openai-gpt-55, openai-gpt-56-luna, openai-gpt-56-luna-pro, openai-gpt-56-sol, openai-gpt-56-sol-pro, openai-gpt-56-terra, openai-gpt-56-terra-pro, zai-org-glm-5-2 (each at 4/6 coverage, missing pharma_drug_interaction and pharma_regulatory_comprehension).", "kimi-k3 was present in the registry but had 3 recorded err rows from the prior test."], "files_added_at_origin": ["data/results.json (initial 57 rows)", "model_registry.py (15 models listed)", "run_benchmarks.py", "index.html", "assets/styles.css", "assets/app.js"], "cost_usd": null, "note": "Conjectured history based on the file-state landed in this session; details of the 2026-07-16 genesis are inferred, not directly observed."}]};</script>
 <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="BenchmarkViv - About. Methodology, project history, and a running changelog of every benchmark run, harness change, and site update." />
@@ -20,7 +20,7 @@
   --surface: #FFFFFF;
   --surface-2: #E6FAF3;
   --text: #1A1A2E;
-  --text-dim: rgba(26, 26, 46, 0.64);
+  --text-dim: rgba(26, 26, 46, 0.75);
   --text-faint: rgba(26, 26, 46, 0.42);
   --rule: rgba(26, 26, 46, 0.10);
   --rule-strong: rgba(26, 26, 46, 0.16);
@@ -40,9 +40,9 @@
   --paper: var(--text);
   --paper-dim: var(--text-dim);
 
-  --font-display: "Geist", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-display: "Space Grotesk", "Geist", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-body: "Geist", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --font-mono: "Geist Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --font-mono: "JetBrains Mono", "Geist Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
 
   --radius: 10px;
   --radius-sm: 6px;
@@ -73,7 +73,7 @@ body {
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
   /* Keep content clear of mobile browser chrome */
-  padding-bottom: env(safe-area-inset-bottom, 0);
+  padding-bottom: env(safe-area-inset-bottom, 1.25rem);
 }
 
 section {
@@ -188,75 +188,111 @@ code, pre {
   transform: translateY(-1px);
 }
 
-/* Navbar */
-.navbar {
+/* ============================================
+   Sidenav — left rail on desktop, top bar on mobile
+   ============================================ */
+:root {
+  --sb-w: 248px;
+  --cobalt-ink: #006455;  /* AA accent text on light surfaces */
+}
+
+.sidenav {
   position: fixed;
-  inset: 0 0 auto;
+  inset: 0 auto 0 0;
   z-index: 400;
-  background: rgba(254, 252, 248, 0.94);
-  backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
+  width: var(--sb-w);
+  padding: 1.1rem 0.85rem 1rem;
+  background: rgba(254, 252, 248, 0.97);
   -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--rule);
-  /* iOS safe areas */
+  backdrop-filter: blur(12px);
+  border-right: 1px solid var(--rule);
+  overflow-y: auto;
+  overscroll-behavior: contain;
   padding-top: env(safe-area-inset-top, 0);
 }
 
-.navbar .container {
-  position: relative;
+.sb-home {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  height: var(--nav-h);
+  gap: 0.65rem;
+  padding: 0.45rem 0.55rem;
+  margin: 0 0 1.1rem;
+  border-radius: 12px;
+  flex-shrink: 0;
+  transition: background-color 160ms var(--ease);
 }
-
-.nav-logo {
+.sb-home:hover { background: var(--surface-2); }
+.sb-home:focus-visible { outline: 2px solid var(--cobalt-ink); outline-offset: 2px; }
+.sb-home-ico {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: var(--cobalt);
+  color: #04352c;
+}
+.sb-home-ico svg { width: 22px; height: 22px; }
+.sb-logo {
   font-family: var(--font-display);
   font-size: 1.12rem;
   font-weight: 700;
   letter-spacing: -0.02em;
-  flex-shrink: 0;
+  white-space: nowrap;
+  color: var(--text);
 }
+.sb-logo span { color: var(--magenta); }
 
-.nav-logo span {
-  color: var(--magenta);
+.sb-links {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  list-style: none;
+  margin: 0;
 }
-
-.nav-links {
+.sb-links a {
   display: flex;
   align-items: center;
-  gap: 1.35rem;
-  list-style: none;
-}
-
-.nav-links a {
+  gap: 0.65rem;
+  min-height: 40px;
+  padding: 0.5rem 0.7rem;
+  border-radius: 9px;
   font-size: 0.9rem;
   font-weight: 550;
   color: var(--text-dim);
-  transition: color 160ms;
+  transition: background-color 140ms var(--ease), color 140ms var(--ease);
 }
-
-.nav-links a:hover,
-.nav-links a[aria-current="page"] {
-  color: var(--text);
+.sb-links a:hover { background: var(--surface-2); color: var(--text); }
+.sb-links a[aria-current="page"] {
+  background: rgba(0, 212, 170, 0.12);
+  color: var(--cobalt-ink);
+  font-weight: 650;
 }
+.sb-links a:focus-visible { outline: 2px solid var(--cobalt-ink); outline-offset: 2px; }
+.sb-ico { width: 20px; height: 20px; flex-shrink: 0; }
 
-.nav-cta {
-  display: inline-flex;
+.sb-cta {
+  display: flex;
   align-items: center;
-  min-height: 40px;
-  padding: 0.45rem 0.9rem;
-  font-size: 0.84rem;
-  font-weight: 600;
-  background: var(--cobalt);
-  color: #fff;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: auto;
+  min-height: 44px;
+  padding: 0.65rem 0.9rem;
   border-radius: var(--radius-sm);
+  background: var(--cobalt);
+  color: #04352c;
+  font-size: 0.88rem;
+  font-weight: 700;
   white-space: nowrap;
 }
-
-.nav-cta:hover {
-  background: #00A68A;
-}
+.sb-cta:hover { background: var(--cobalt-dark); }
+.sb-cta:focus-visible { outline: 2px solid var(--cobalt-ink); outline-offset: 2px; }
+.sb-cta svg { width: 18px; height: 18px; }
 
 .nav-toggle {
   display: none;
@@ -269,91 +305,24 @@ code, pre {
   border-radius: var(--radius-sm);
   border: 1px solid var(--rule);
   background: var(--surface);
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  flex-shrink: 0;
 }
-
 .nav-toggle span {
   display: block;
   width: 18px;
   height: 1.5px;
   background: var(--text);
   margin-inline: auto;
+  transition: transform 160ms var(--ease), opacity 120ms linear;
+  transform-origin: center;
 }
-
-@media (max-width: 900px) {
-  .nav-links {
-    display: none;
-    position: absolute;
-    top: calc(100% + 0.45rem);
-    left: 0;
-    right: 0;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0.15rem;
-    padding: 0.55rem;
-    margin: 0;
-    background: var(--surface);
-    border: 1px solid var(--rule-strong);
-    border-radius: 12px;
-    box-shadow: 0 18px 40px -18px rgba(18, 18, 26, 0.45);
-    z-index: 500;
-    max-height: min(70vh, 28rem);
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .nav-links.is-open {
-    display: flex;
-  }
-
-  .nav-links a {
-    display: block;
-    padding: 0.95rem 1rem;
-    border-radius: 8px;
-    min-height: 44px;
-    line-height: 1.3;
-  }
-
-  .nav-links a:hover,
-  .nav-links a:active {
-    background: var(--surface-2);
-    color: var(--text);
-  }
-
-  .nav-cta {
-    display: none !important;
-  }
-
-  .nav-toggle {
-    display: inline-flex;
-    position: relative;
-    z-index: 510;
-    cursor: pointer;
-    touch-action: manipulation;
-    -webkit-tap-highlight-color: transparent;
-    flex-shrink: 0;
-  }
-
-  .nav-toggle[aria-expanded="true"] {
-    background: var(--surface-2);
-    border-color: var(--rule-strong);
-  }
-
-  /* Simple X state for open menu */
-  .nav-toggle[aria-expanded="true"] span:nth-child(1) {
-    transform: translateY(6.5px) rotate(45deg);
-  }
-  .nav-toggle[aria-expanded="true"] span:nth-child(2) {
-    opacity: 0;
-  }
-  .nav-toggle[aria-expanded="true"] span:nth-child(3) {
-    transform: translateY(-6.5px) rotate(-45deg);
-  }
-
-  .nav-toggle span {
-    transition: transform 160ms var(--ease), opacity 120ms linear;
-    transform-origin: center;
-  }
-}
+.nav-toggle[aria-expanded="true"] { background: var(--surface-2); border-color: var(--rule-strong); }
+.nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
 /* Scrim behind open mobile menu */
 .nav-scrim {
@@ -366,10 +335,60 @@ code, pre {
   padding: 0;
   cursor: pointer;
 }
-.nav-scrim.is-open {
-  display: block;
+.nav-scrim.is-open { display: block; }
+
+@media (min-width: 901px) {
+  body { padding-left: var(--sb-w); }
+  .hero { padding-top: 3.5rem; }
+  .recon-compare-source { top: 0.75rem; }
 }
 
+@media (max-width: 900px) {
+  .sidenav {
+    inset: 0 0 auto 0;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.6rem;
+    width: 100%;
+    height: var(--nav-h);
+    padding: 0 0.8rem;
+    border-right: 0;
+    border-bottom: 1px solid var(--rule);
+    overflow: visible;
+  }
+  .sb-home { margin: 0; padding: 0.3rem; min-width: 0; flex: 1; }
+  .sb-home-ico { width: 32px; height: 32px; border-radius: 8px; }
+  .sb-home-ico svg { width: 18px; height: 18px; }
+  .sb-logo { font-size: 1.02rem; }
+  .sb-links {
+    display: none;
+    position: absolute;
+    top: calc(100% + 0.45rem);
+    left: 0.6rem;
+    right: 0.6rem;
+    flex-direction: column;
+    gap: 0.15rem;
+    padding: 0.55rem;
+    margin: 0;
+    background: var(--surface);
+    border: 1px solid var(--rule-strong);
+    border-radius: 12px;
+    box-shadow: 0 18px 40px -18px rgba(18, 18, 26, 0.45);
+    max-height: min(70vh, 30rem);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .sb-links.is-open { display: flex; }
+  .sb-links a { min-height: 44px; padding: 0.8rem 0.9rem; border-radius: 8px; }
+  .sb-links a:hover,
+  .sb-links a:active { background: var(--surface-2); color: var(--text); }
+  .sb-cta { display: none; }
+  .nav-toggle { display: inline-flex; position: relative; z-index: 510; }
+}
+
+@media (max-width: 900px) {
+  html { scroll-padding-top: calc(var(--nav-h) + 1rem); }
+}
 
 /* Hero */
 .hero {
@@ -512,6 +531,19 @@ code, pre {
   }
 }
 
+/* Very small screens: stack stats in 1 column so the 5th isn't alone */
+@media (max-width: 400px) {
+  .bento {
+    grid-template-columns: 1fr;
+  }
+  .stat {
+    border-right: none;
+  }
+  .stat:nth-child(n + 2) {
+    border-top: 1px solid var(--rule);
+  }
+}
+
 /* Track cards */
 .bench-grid {
   display: grid;
@@ -585,6 +617,10 @@ code, pre {
   .bench-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+  .bench-card p {
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
 }
 
 @media (max-width: 560px) {
@@ -647,8 +683,8 @@ code, pre {
 }
 
 .filter-chip {
-  min-height: 40px;
-  padding: 0.45rem 0.8rem;
+  min-height: 44px;
+  padding: 0.55rem 0.85rem;
   border: 1px solid var(--rule-strong);
   background: var(--surface);
   font: 500 0.76rem var(--font-mono);
@@ -675,6 +711,25 @@ code, pre {
   background: var(--surface);
   box-shadow: var(--shadow);
   -webkit-overflow-scrolling: touch;
+  position: relative;
+  overflow-y: hidden;
+}
+
+.table-wrap::after {
+  content: '';
+  position: absolute;
+  inset-block: 0;
+  right: 0;
+  width: 32px;
+  background: linear-gradient(90deg, transparent, var(--surface));
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 200ms ease;
+  border-radius: 0 14px 14px 0;
+}
+
+.table-wrap.scrollable::after {
+  opacity: 1;
 }
 
 .leaderboard table {
@@ -781,11 +836,59 @@ code, pre {
 }
 
 .chart-card {
-  padding: 1.25rem;
+  padding: 1.5rem;
   border: 1px solid var(--rule);
   border-radius: 14px;
   background: var(--surface);
   box-shadow: var(--shadow);
+}
+
+/* ===== Terminal-window chrome on chart & bench cards ===== */
+.terminal-header {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.5rem 0.75rem 0.6rem;
+  margin: -1.5rem -1.5rem 1rem;
+  border-bottom: 1px solid var(--rule);
+  background: rgba(18, 18, 26, 0.03);
+  border-radius: 14px 14px 0 0;
+}
+
+.terminal-dots {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.32rem;
+  flex-shrink: 0;
+}
+
+.terminal-dots::before {
+  content: "";
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: #FF5F57;
+  box-shadow: 17px 0 0 #FEBC2E, 34px 0 0 #28C840;
+}
+
+.terminal-title {
+  flex: 1;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--text-faint);
+  letter-spacing: 0.03em;
+  text-align: right;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Bench card terminal header (smaller padding context) */
+.bench-card .terminal-header {
+  margin: -1.35rem -1.2rem 0.95rem;
+  padding: 0.45rem 0.7rem 0.5rem;
+  border-radius: 14px 14px 0 0;
 }
 
 .chart-card-wide {
@@ -820,7 +923,7 @@ code, pre {
 }
 
 .chart-wrap-xl {
-  height: 480px;
+  height: 540px;
 }
 
 @media (max-width: 700px) {
@@ -834,13 +937,13 @@ code, pre {
 
 .chart-wrap {
   position: relative;
-  height: 280px;
+  height: 360px;
   width: 100%;
   overflow: hidden;
 }
 
 .chart-wrap-tall {
-  height: 340px;
+  height: 420px;
 }
 
 .chart-wrap > canvas {
@@ -852,10 +955,23 @@ code, pre {
     grid-template-columns: 1fr;
   }
   .chart-wrap {
-    height: 250px;
+    height: 300px;
   }
   .chart-wrap-tall {
-    height: 300px;
+    height: 380px;
+  }
+}
+
+/* Mobile-specific chart heights for 18-model readability */
+@media (max-width: 768px) {
+  .chart-wrap {
+    height: 340px;
+  }
+  .chart-wrap-tall {
+    height: 460px;
+  }
+  .chart-wrap-xl {
+    height: 480px;
   }
 }
 
@@ -864,6 +980,24 @@ code, pre {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 0.85rem;
+}
+
+/* On mobile, make compare cards a horizontal scroll carousel */
+@media (max-width: 768px) {
+  .compare-grid {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 0.75rem;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 0.75rem;
+    margin-bottom: -0.75rem;
+  }
+  .compare-grid .compare-card {
+    flex: 0 0 260px;
+    scroll-snap-align: start;
+  }
 }
 
 .compare-card {
@@ -1303,13 +1437,13 @@ code, pre {
 
 /* Keep decorative GPU canvas behind content, but NEVER demote the fixed navbar
    (older rule set position:relative + z-index:1 on ALL body children and beat
-   .navbar's position:fixed / z-index:100 — mobile hamburger menu was unreachable). */
-body > *:not(.gpu-bg):not(.navbar) {
+   .sidenav's position:fixed / z-index:100 — mobile hamburger menu was unreachable). */
+body > *:not(.gpu-bg):not(.sidenav) {
   position: relative;
   z-index: 1;
 }
 
-body > .navbar {
+body > .sidenav {
   position: fixed;
   z-index: 400;
 }
@@ -1354,6 +1488,12 @@ body > .navbar {
 
 /* ===== Mobile hardenings ===== */
 @media (max-width: 640px) {
+  body {
+    font-size: 15px;
+  }
+  section {
+    padding: 2.5rem 0;
+  }
   .feature-list {
     overflow-wrap: break-word;
     word-break: break-word;
@@ -1377,9 +1517,70 @@ body > .navbar {
   }
   .feature-copy h2 {
     font-size: 1.55rem;
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+  .feature-copy h2 em {
+    white-space: nowrap;
+  }
+  .feature-copy p {
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+  .feature-grid {
+    gap: 1.5rem;
+    overflow: hidden;
+  }
+  .feature-media {
+    overflow: hidden;
+    min-width: 0;
+  }
+  .feature-copy {
+    overflow: hidden;
+    min-width: 0;
+  }
+  .feature-chart {
+    overflow: hidden;
   }
   .img-zoom-hint {
     opacity: 1;
+  }
+  /* Consistent card padding on mobile */
+  .chart-card {
+    padding: 1rem 0.85rem;
+    overflow: hidden;
+  }
+  .bench-card {
+    padding: 1.15rem 1rem;
+  }
+  .method-card {
+    padding: 1rem 0.9rem;
+  }
+  .protocol-card, .prompt-card, .callout {
+    padding: 1rem 0.9rem;
+  }
+  .vision-card {
+    padding: 1rem;
+  }
+  .compare-card .score small {
+    font-size: 0.45em;
+  }
+  .compare-card {
+    overflow: hidden;
+  }
+  /* Bottom padding so content isn't behind mobile browser chrome */
+  .vt-feature,
+  .game-demo,
+  .footer {
+    padding-bottom: calc(1.5rem + env(safe-area-inset-bottom, 16px));
+  }
+  /* Touch targets */
+  .filter-chip {
+    min-height: 44px;
+    padding: 0.55rem 0.85rem;
+  }
+  .table-search {
+    min-height: 48px;
   }
 }
 
@@ -1801,28 +2002,386 @@ body.lightbox-open {
   .feature-grid { grid-template-columns: 1fr; }
 }
 
+/* ══════════════════════════════════════════════════════════
+   MATERIAL MODERN overlay (2026-08-20) — teal + orange + dark blue
+   MD3 tokens layered on the light lab base.
+   ══════════════════════════════════════════════════════════ */
+:root {
+  /* brand palette */
+  --md-primary: #00A98F;        /* teal 600 */
+  --md-primary-hover: #00897B;
+  --md-primary-container: #CCFBF1;
+  --md-on-primary: #FFFFFF;
+  --md-secondary: #1A3A6B;      /* dark blue */
+  --md-secondary-container: #E3EAF5;
+  --md-tertiary: #F97316;       /* orange — more prominent */
+  --md-tertiary-hover: #EA580C;
+  --md-tertiary-container: #FFEDD5;
+  --md-bg: #F7F8FA;
+  --md-surface: #FFFFFF;
+  --md-surface-1: #FFFFFF;
+  --md-surface-2: #F1F4F8;
+  --md-surface-3: #E8EDF3;
+  --md-outline: #C9D2DD;
+  --md-outline-variant: #E2E8F0;
+  --md-on-surface: #16232F;
+  --md-on-surface-variant: #4A5A6A;
+
+  /* elevation */
+  --md-elev-1: 0 1px 2px rgba(16,32,48,.08), 0 1px 3px rgba(16,32,48,.06);
+  --md-elev-2: 0 2px 6px rgba(16,32,48,.10), 0 1px 4px rgba(16,32,48,.06);
+  --md-elev-3: 0 6px 16px rgba(16,32,48,.12), 0 2px 6px rgba(16,32,48,.08);
+
+  --md-shape-m: 14px;
+  --md-shape-l: 20px;
+  --md-state-hover: rgba(0,169,143,.08);
+  --md-state-press: rgba(0,169,143,.14);
+}
+
+body { background: var(--md-bg); }
+
+/* cards → elevated material surfaces */
+.card, .panel, section.card, .benchmark-card, .stat-card,
+.hero-card, table.card, .grid > .card {
+  background: var(--md-surface);
+  border: 1px solid var(--md-outline-variant);
+  border-radius: var(--md-shape-m);
+  box-shadow: var(--md-elev-1);
+  transition: box-shadow .2s var(--ease), transform .2s var(--ease);
+}
+.card:hover, .stat-card:hover { box-shadow: var(--md-elev-2); }
+
+/* primary buttons / chips → filled teal */
+button.primary, .btn-primary, .chip.active, .tab.active,
+.filter-chip[data-active="true"], nav .active {
+  background: var(--md-primary) !important;
+  color: var(--md-on-primary) !important;
+  border-radius: 999px !important;
+  border: none !important;
+  box-shadow: var(--md-elev-1);
+}
+button.primary:hover, .btn-primary:hover, .chip.active:hover { background: var(--md-primary-hover) !important; }
+
+/* secondary buttons → outlined dark blue */
+button:not(.primary):not(.icon-btn), .btn-secondary, .chip:not(.active) {
+  border: 1px solid var(--md-outline) !important;
+  border-radius: 999px !important;
+  color: var(--md-secondary) !important;
+  background: var(--md-surface) !important;
+  font-weight: 600;
+  transition: background .15s, border-color .15s;
+}
+button:not(.primary):hover { background: var(--md-state-hover); border-color: var(--md-primary) !important; }
+
+/* orange accents: hero, badges, featured */
+.hero, header.hero, .featured, .badge-hot, .top-1, .crown {
+  accent-color: var(--md-tertiary);
+}
+.hero h1 span, .accent-orange { color: var(--md-tertiary) !important; }
+.stat-value { color: var(--md-primary); }
+.kbd, .pill-new { background: var(--md-tertiary-container); color: #9A3412; }
+
+/* ripple (JS adds .ripple spans) */
+.ripple-host { position: relative; overflow: hidden; }
+.ripple { position: absolute; border-radius: 50%; transform: scale(0); animation: ripple .5s var(--ease) forwards; background: rgba(0,169,143,.25); pointer-events: none; }
+@keyframes ripple { to { transform: scale(3.2); opacity: 0; } }
+
+
+/* ── Comparison board toolbar: search / sort / provider chips ────────── */
+.board-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 1rem 0 1.25rem;
+}
+.board-search {
+  flex: 1 1 15rem;
+  min-width: 0;
+  padding: 0.55rem 0.9rem;
+  font: 500 0.92rem var(--font-body);
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--rule-strong);
+  border-radius: 999px !important; /* intentional pill, not an img-zoom */
+  outline: none;
+}
+.board-search:focus-visible {
+  border-color: var(--cobalt);
+  box-shadow: 0 0 0 3px var(--acid-soft);
+}
+.board-sort,
+.board-provider {
+  flex: 0 1 auto;
+  max-width: 100%;
+  padding: 0.5rem 0.8rem;
+  font: 600 0.88rem var(--font-body);
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--rule-strong);
+  border-radius: 10px !important;
+  cursor: pointer;
+}
+.board-limit {
+  flex: 0 0 auto;
+  padding: 0.5rem 0.9rem;
+  font: 600 0.84rem var(--font-body);
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--rule-strong);
+  border-radius: 999px;
+  cursor: pointer;
+}
+.board-limit[aria-pressed="true"] {
+  color: #fff;
+  background: var(--cobalt, #0057e6);
+  border-color: transparent;
+}
+.board-count {
+  font: 600 0.82rem var(--font-mono);
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+.board-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 0 0 1.1rem;
+}
+.board-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.32rem 0.8rem;
+  font: 600 0.8rem var(--font-body);
+  color: var(--text-dim);
+  background: var(--surface);
+  border: 1px solid var(--rule-strong);
+  border-radius: 999px !important; /* chip pill by design */
+  cursor: pointer;
+  transition: border-color 140ms ease, color 140ms ease, background 140ms ease;
+}
+.board-chip:hover { border-color: var(--cobalt); color: var(--text); }
+.board-chip[aria-pressed="true"] {
+  background: var(--acid-soft);
+  border-color: var(--cobalt);
+  color: var(--text);
+}
+.board-chip .chip-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.35em;
+  height: 1.35em;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--brand, var(--text-faint));
+  color: #fff;
+  font: 700 0.62em var(--font-mono);
+}
+.cmp-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--brand, var(--text-faint));
+  color: #fff;
+  font: 700 0.72rem var(--font-mono);
+}
+.cmp-byl {
+  margin: -0.5rem 0 0.35rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--text-dim);
+}
+@media (max-width: 480px) {
+  .board-search { flex-basis: 100%; }
+  .board-sort,
+  .board-provider { flex: 1 1 auto; }
+}
+
+/* ── Sticky mobile back-to-board shortcut ───────────────────────────── */
+.board-jump {
+  position: fixed;
+  left: 50%;
+  bottom: 1rem;
+  transform: translateX(-50%) translateY(200%);
+  z-index: 300;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.6rem 1.1rem;
+  font: 600 0.85rem var(--font-body);
+  color: #fff;
+  text-decoration: none;
+  background: var(--indigo, #1A1A2E);
+  border-radius: 999px;
+  box-shadow: 0 10px 24px rgba(26, 26, 46, 0.28);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 220ms var(--ease), opacity 220ms ease;
+}
+.board-jump.is-visible {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+.board-jump:hover { background: #26264a; }
+@media (min-width: 769px) {
+  .board-jump { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .board-jump { transition: none; }
+  .board-chip { transition: none; }
+}
+
+.model-select-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--md-surface); border: 1px solid var(--md-outline);
+  border-radius: 999px; padding: 8px 16px; font-weight: 600;
+  color: var(--md-secondary); cursor: pointer; box-shadow: var(--md-elev-1);
+}
+.model-select-btn:hover { background: var(--md-state-hover); }
+.model-select-pop {
+  position: absolute; z-index: 500; margin-top: 6px;
+  background: var(--md-surface); border: 1px solid var(--md-outline-variant);
+  border-radius: var(--md-shape-l); box-shadow: var(--md-elev-3);
+  padding: 12px; width: min(420px, 92vw); max-height: 60vh; overflow: auto;
+}
+.model-select-pop .quick { display: flex; gap: 6px; margin-bottom: 10px; flex-wrap: wrap; }
+.model-select-pop .quick button { font-size: 11px; padding: 5px 12px; }
+.model-row { display: flex; align-items: center; gap: 10px; padding: 7px 8px; border-radius: 10px; cursor: pointer; }
+.model-row:hover { background: var(--md-surface-2); }
+.model-row input { accent-color: var(--md-primary); width: 16px; height: 16px; }
+.model-row .dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.model-row .name { font-size: 13px; color: var(--md-on-surface); flex: 1; }
+.model-row .vi { font-family: var(--font-mono); font-size: 11px; color: var(--md-on-surface-variant); }
+
+@media (prefers-reduced-motion: reduce) { .ripple { display: none; } }
+
+/* ══════════════════════════════════════════════════════════
+   LEADERBOARD IMAGE CLIP FIX (2026-08-21) — keep LAST in file.
+   The Material overlay's `button:not(.primary)` rule resolves to
+   border-radius: 999px !important + inherited overflow clipping, which
+   turned the 41-row VivIndex leaderboard chart frame into a circle and
+   hid the top/bottom model rows. img-zoom buttons must never be pills.
+   ══════════════════════════════════════════════════════════ */
+button.img-zoom.img-zoom,
+button.img-zoom,
+.img-zoom,
+.img-zoom .feature-img,
+.feature-img {
+  border-radius: var(--radius, 10px) !important;
+  overflow: visible !important;
+}
+.img-zoom .img-zoom-hint {
+  overflow: hidden;
+}
+
+
+/* ============================================
+   Revamp polish — data legibility + a11y
+   ============================================ */
+table,
+.stat-value,
+td,
+th,
+.chart-label {
+  font-variant-numeric: tabular-nums;
+}
+.btn-primary { color: #04352c; }
+.btn-primary:hover { color: #04352c; }
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--cobalt-ink);
+  outline-offset: 2px;
+}
+
 </style>
 </head>
 <body>
   <div class="gpu-bg" aria-hidden="true"><canvas id="gpuCanvas"></canvas></div>
 
-  <nav class="navbar vt-nav">
-    <div class="container">
-      <a href="index.html" class="nav-logo">Benchmark<span>Viv</span></a>
-      <ul class="nav-links" id="siteNav">
-        <li><a href="index.html#leaderboard">Leaderboard</a></li>
-        <li><a href="index.html#tracks">Tracks</a></li>
-        <li><a href="vision.html">Vision</a></li>
-        <li><a href="trends.html">Trends</a></li>
-        <li><a href="compare.html">Compare</a></li>
-        <li><a href="gif-arena.html">GIF Arena</a></li>
-
-                <li><a href="about.html" class="is-current">About</a></li>
-      </ul>
-      <a href="index.html" class="nav-cta">Back to Leaderboard</a>
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button>
-    </div>
-  </nav>
+  <nav class="sidenav" aria-label="Main">
+  <a class="sb-home" href="index.html" aria-label="BenchmarkViv home">
+    <span class="sb-home-ico"><svg class="sb-home-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l-2 0l9 -9l9 9l-2 0" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" /></svg></span>
+    <span class="sb-logo">Benchmark<span>Viv</span></span>
+  </a>
+  <ul class="sb-links" id="siteNav">
+    <li><a href="index.html"><svg class="sb-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l-2 0l9 -9l9 9l-2 0" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" /></svg><span>Home</span></a></li>
+    <li><a href="index.html#leaderboard"><svg class="sb-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 21l8 0" />
+  <path d="M12 17l0 4" />
+  <path d="M7 4l10 0" />
+  <path d="M17 4v8a5 5 0 0 1 -10 0v-8" />
+  <path d="M5 9m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+  <path d="M19 9m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /></svg><span>Leaderboard</span></a></li>
+    <li><a href="index.html#tracks"><svg class="sb-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h6v6h-6z" />
+  <path d="M14 4h6v6h-6z" />
+  <path d="M4 14h6v6h-6z" />
+  <path d="M17 17m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" /></svg><span>Tracks</span></a></li>
+    <li><a href="vision.html"><svg class="sb-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+  <path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg><span>Vision</span></a></li>
+    <li><a href="trends.html"><svg class="sb-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19l16 0" />
+  <path d="M4 15l4 -6l4 2l4 -5l4 4" /></svg><span>Trends</span></a></li>
+    <li><a href="compare.html"><svg class="sb-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 17l-18 0" />
+  <path d="M6 10l-3 -3l3 -3" />
+  <path d="M3 7l18 0" />
+  <path d="M18 20l3 -3l-3 -3" /></svg><span>Compare</span></a></li>
+    <li><a href="evolution.html"><svg class="sb-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 8l0 4l2 2" />
+  <path d="M3.05 11a9 9 0 1 1 .5 4m-.5 5v-5h5" /></svg><span>Evolution</span></a></li>
+    <li><a href="gif-arena.html"><svg class="sb-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z" />
+  <path d="M8 4l0 16" />
+  <path d="M16 4l0 16" />
+  <path d="M4 8l4 0" />
+  <path d="M4 16l4 0" />
+  <path d="M4 12l16 0" />
+  <path d="M16 8l4 0" />
+  <path d="M16 16l4 0" /></svg><span>GIF Arena</span></a></li>
+    <li><a href="image-benchmark.html"><svg class="sb-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 8h.01" />
+  <path d="M3 6a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v12a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3v-12z" />
+  <path d="M3 16l5 -5c.928 -.893 2.072 -.893 3 0l5 5" />
+  <path d="M14 14l1 -1c.928 -.893 2.072 -.893 3 0l3 3" /></svg><span>Image Models</span></a></li>
+    <li><a href="video-benchmark.html"><svg class="sb-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 10l4.553 -2.276a1 1 0 0 1 1.447 .894v6.764a1 1 0 0 1 -1.447 .894l-4.553 -2.276v-4z" />
+  <path d="M3 6m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z" /></svg><span>Video Models</span></a></li>
+    <li><a href="video-daily.html"><svg class="sb-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="M10 9l5 3l-5 3z" /></svg><span>Daily Video</span></a></li>
+    <li><a href="system-prompt.html"><svg class="sb-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 4a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-5l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12z" />
+  <path d="M9.5 9h.01" />
+  <path d="M14.5 9h.01" />
+  <path d="M9.5 13a3.5 3.5 0 0 0 5 0" /></svg><span>System Prompts</span></a></li>
+    <li><a href="prompt-lab.html"><svg class="sb-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3l6 0" />
+  <path d="M10 9l4 0" />
+  <path d="M10 3v6l-4 11a.7 .7 0 0 0 .5 1h11a.7 .7 0 0 0 .5 -1l-4 -11v-6" /></svg><span>Prompt Lab</span></a></li>
+    <li><a href="prompt-guides.html"><svg class="sb-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+  <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+  <path d="M3 6l0 13" />
+  <path d="M12 6l0 13" />
+  <path d="M21 6l0 13" /></svg><span>Prompt Guides</span></a></li>
+    <li><a href="experimental-design.html"><svg class="sb-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 16l2 -6l6 -2l-2 6l-6 2" />
+  <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+  <path d="M12 3l0 2" />
+  <path d="M12 19l0 2" />
+  <path d="M3 12l2 0" />
+  <path d="M19 12l2 0" /></svg><span>Design</span></a></li>
+    <li><a href="about.html" aria-current="page"><svg class="sb-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" />
+  <path d="M12 9h.01" />
+  <path d="M11 12h1v4h1" /></svg><span>About</span></a></li>
+  </ul>
+  <a class="sb-cta" href="experimental-design.html"><svg class="sb-cta-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 16l2 -6l6 -2l-2 6l-6 2" />
+  <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+  <path d="M12 3l0 2" />
+  <path d="M12 19l0 2" />
+  <path d="M3 12l2 0" />
+  <path d="M19 12l2 0" /></svg><span>Experimental Design</span></a>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button>
+</nav>
 
   <header class="hero vt-hero">
     <div class="hero-backdrop"></div>
@@ -1883,10 +2442,12 @@ body.lightbox-open {
 (() => {
   "use strict";
 
-  const DATA_URL = "data/results.json";
+  const DATA_URL = "data/results-lite.json";
 
-  // Chart tracks: 5-track VivIndex core + pharma domain tracks (pharma not in VivIndex weights).
-  const BENCHMARKS = [
+  // Chart tracks: declared by the dataset (data/results-lite.json) so a new
+  // track cannot exist in rows but stay invisible on the site. This literal is
+  // only the offline fallback and the shape every renderer expects.
+  let BENCHMARKS = [
     { id: "intent-understanding", label: "Intent Understanding" },
     { id: "one-shot-ui", label: "One-Shot UI" },
     { id: "startup-in-a-weekend", label: "Startup in a Weekend" },
@@ -1895,27 +2456,115 @@ body.lightbox-open {
     { id: "value-density", label: "Value Density @1K" },
     { id: "reverse-prompt-vision", label: "Reverse-Prompt Vision" },
   ];
+  let TRACK_META = [];
+  let MODEL_PROVIDER = {};
 
-  // One saturated, accessible identity per model. These values are used in every chart.
-  const MODEL_COLORS = {
-    "GPT-5.6 Luna":      "#2563EB",
-    "GPT-5.6 Luna Pro":  "#7C3AED",
-    "GPT-5.6 Sol":       "#F97316",
-    "GPT-5.6 Sol Pro":   "#DC2626",
-    "GPT-5.6 Terra":     "#10B981",
-    "GPT-5.6 Terra Pro": "#00A6A6",
-    "GPT-5.5":           "#E11D74",
-    "Fable 5":           "#84A800",
-    "Opus 4.8":          "#9333EA",
-    "Opus 5":            "#6D28D9",
-    "GLM 5.2":           "#EC4899",
-    "DeepSeek V4":       "#0891B2",
-    "MiniMax M3":        "#D97706",
-    "Grok 4.5":          "#4F46E5",
-    "Inkling":           "#0EA5E9",
-    "Kimi K3":           "#F59E0B",
-    "Kimi K3 Fast API":  "#B45309",
+  // Provider-based colors (single source: provider_colors.py). Every model in a
+  // provider shares its base hue so the whole provider reads as one color.
+  const PROVIDER_COLORS = {
+    openai:  "#7C3AED",   // GPT
+    claude:  "#F97316",   // orange
+    deepseek:"#2563EB",   // blue
+    gemini:  "#06B6D4",
+    grok:    "#EF4444",
+    qwen:    "#8B5CF6",
+    kimi:    "#F59E0B",
+    minimax: "#EC4899",
+    glm:     "#00C2A8",
+    nvidia:  "#76B900",
+    mistral: "#D90429",
+    aion:    "#F43F5E",
+    inkling: "#64748B",
+    xiaomi:  "#FF6900",
+    stealth: "#94A3B8",
+    inception: "#22D3EE",
+    meta:    "#0EA5E9",
+    tencent: "#2563EB",
+    community: "#A3A3A3",
+    other:   "#64748B",
   };
+  const PROVIDER_OF = {
+    "GPT-5.6 Luna": "openai", "GPT-5.6 Luna Pro": "openai", "GPT-5.6 Sol": "openai",
+    "GPT-5.6 Sol Pro": "openai", "GPT-5.6 Terra": "openai", "GPT-5.6 Terra Pro": "openai",
+    "GPT-5.5": "openai", "OpenAI GPT": "openai",
+    "Fable 5": "claude", "Opus 4.8": "claude", "Opus 5": "claude", "Sonnet 5": "claude",
+    "Opus 5 Fast": "claude", "Opus 4.8 Fast": "claude",
+    "DeepSeek V4": "deepseek", "DeepSeek V4 Flash 0731": "deepseek",
+    "DeepSeek V4 Flash 0731 Fast": "deepseek", "DeepSeek V4 Flash": "deepseek",
+    "DeepSeek V4 Pro 0813": "deepseek",
+    "Gemini 3.6 Flash": "gemini", "Gemini 3.7 Flash": "gemini",
+    "Grok 4.5": "grok", "Grok 4.6": "grok", "Grok 4.20": "grok",
+    "Qwen 3.8 Max": "qwen", "Qwen 3.8 2.4T": "qwen", "Qwen 3.7 Max": "qwen",
+    "Qwen 3.7 Plus": "qwen", "Qwen 3.8 27B": "qwen", "Qwen3 235B Thinking": "qwen",
+    "Kimi K3": "kimi", "Kimi K3 Fast API": "kimi",
+    "MiniMax M3": "minimax", "MiniMax M27": "minimax",
+    "GLM 5.2": "glm", "GLM 5.3": "glm",
+    "Nemotron 3.5": "nvidia", "Nemotron 3 Super": "nvidia",
+    "Aion 3.0": "aion", "Aion 3.0 Mini": "aion",
+    "Inkling": "inkling",
+  };
+  function providerOf(name) {
+    if (MODEL_PROVIDER[name]) return MODEL_PROVIDER[name];
+    if (PROVIDER_OF[name]) return PROVIDER_OF[name];
+    // Last-resort inference for a model the dataset did not label. Keeping the
+    // fallback here (rather than a name allowlist) means a newly added model is
+    // coloured by its family even before the export catches up.
+    const n = String(name || "").toLowerCase();
+    if (/(gpt|openai)/.test(n)) return "openai";
+    if (/(claude|opus|sonnet|fable|haiku)/.test(n)) return "claude";
+    if (n.includes("deepseek")) return "deepseek";
+    if (n.includes("gemini")) return "gemini";
+    if (n.includes("grok")) return "grok";
+    if (n.includes("qwen")) return "qwen";
+    if (n.includes("kimi")) return "kimi";
+    if (n.includes("minimax")) return "minimax";
+    if (n.includes("glm")) return "glm";
+    if (n.includes("nemotron") || n.includes("nvidia")) return "nvidia";
+    if (n.includes("mistral")) return "mistral";
+    if (n.includes("aion")) return "aion";
+    if (n.includes("inkling")) return "inkling";
+    if (n.includes("mimo") || n.includes("xiaomi")) return "xiaomi";
+    if (n.includes("mercury")) return "inception";
+    if (n.includes("stealth")) return "stealth";
+    if (n.includes("muse")) return "meta";
+    return "other";
+  }
+  function modelColor(name, alpha = 1) {
+    const hex = PROVIDER_COLORS[providerOf(name)] || PROVIDER_COLORS.other;
+    if (alpha >= 1) return hex;
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+  }
+
+  // Company brand logo glyphs + display names for the comparison board.
+  const PROVIDER_BRAND = {
+    openai:   { glyph: "O",  name: "OpenAI" },
+    claude:   { glyph: "An", name: "Anthropic" },
+    deepseek: { glyph: "DS", name: "DeepSeek" },
+    gemini:   { glyph: "G",  name: "Google Gemini" },
+    grok:     { glyph: "X",  name: "xAI" },
+    qwen:     { glyph: "Q",  name: "Alibaba Qwen" },
+    kimi:     { glyph: "K",  name: "Moonshot Kimi" },
+    minimax:  { glyph: "MM", name: "MiniMax" },
+    glm:      { glyph: "Z",  name: "Z-AI / GLM" },
+    nvidia:   { glyph: "N",  name: "NVIDIA" },
+    mistral:  { glyph: "Mi", name: "Mistral" },
+    aion:     { glyph: "A",  name: "Aion Labs" },
+    inkling:  { glyph: "I",  name: "Inkling" },
+    xiaomi:   { glyph: "Xi", name: "Xiaomi" },
+    stealth:  { glyph: "S",  name: "Stealth" },
+    inception:{ glyph: "In", name: "Inception Labs" },
+    meta:     { glyph: "M",  name: "Meta" },
+    tencent:  { glyph: "T",  name: "Tencent" },
+    community:{ glyph: "C",  name: "Community" },
+    other:    { glyph: "?",  name: "Other" },
+  };
+  function providerBrand(name) {
+    return PROVIDER_BRAND[providerOf(name)] || PROVIDER_BRAND.other;
+  }
+
 
   const FALLBACK_DATA = { generated: "", source: "fallback", results: [] };
 
@@ -1938,11 +2587,18 @@ body.lightbox-open {
     isLive: false,
     sort: { key: "score", dir: -1 },
     filter: { text: "", benchmark: "all" },
+    selected: null,           // Set of model display-names shown on charts; null = all
+    selectedModels: null,     // Popover selection; charts only, never the board
+    trackMeta: [],            // declared tracks with coverage, from the export
+    totals: null,             // dataset totals
+    modelList: [],            // [{model, provider, vivIndex}] for the selector
     charts: { leaderboard: null, benchmark: null, costValue: null, vivIndex: null, speed: null, latency: null, valueDensity: null, reversePrompt: null, sparklines: [] },
   };
 
   const $ = (sel, root = document) => root.querySelector(sel);
   const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+
+  const isMobile = () => window.innerWidth < 768;
 
   const fmtScore = (n) => (n == null ? "—" : n.toFixed(1));
   const fmtLatency = (n) => (n == null ? "—" : `${n.toFixed(1)}s`);
@@ -1962,8 +2618,12 @@ body.lightbox-open {
     return nums.length ? nums.reduce((a, b) => a + b, 0) / nums.length : 0;
   }
 
-  function modelAggregates(rows) {
-    return uniqueModels(rows).map((model) => {
+  function modelAggregates(rows, opts = {}) {
+    const applySelection = opts.applySelection !== false;
+    if (applySelection && state.selectedModels && state.selectedModels.size) {
+      rows = rows.filter((r) => state.selectedModels.has(r.model));
+    }
+    let aggs = uniqueModels(rows).map((model) => {
       const mr = rows.filter((r) => r.model === model);
       // VivIndex: weighted composite over benchmarks present, renormalized.
       let wSum = 0, wTotal = 0;
@@ -1995,6 +2655,13 @@ body.lightbox-open {
         }),
       };
     });
+    // Respect the active model selection (default = top 15) for charts only.
+    // opts.applySelection === false is the model board: it always shows the
+    // full roster, even when the chart selector is narrowed.
+    if (applySelection && state.selected && state.selected.size) {
+      aggs = aggs.filter((a) => state.selected.has(a.model));
+    }
+    return aggs.sort((a, b) => b.vivIndex - a.vivIndex);
   }
 
   function median(nums) {
@@ -2002,15 +2669,6 @@ body.lightbox-open {
     if (!s.length) return 0;
     const m = Math.floor(s.length / 2);
     return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
-  }
-
-  function modelColor(model, alpha = 1) {
-    const hex = MODEL_COLORS[model] || "#94a3b8";
-    if (alpha >= 1) return hex;
-    const r = parseInt(hex.slice(1, 3), 16);
-    const g = parseInt(hex.slice(3, 5), 16);
-    const b = parseInt(hex.slice(5, 7), 16);
-    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
   }
 
   // JSON benchmark ids use underscores; the UI uses hyphens.
@@ -2031,6 +2689,34 @@ body.lightbox-open {
       const modelMap = Object.fromEntries((json.models || []).map((m) => [m.id, m.display]));
       const benchMap = Object.fromEntries((json.benchmarks || []).map((b) => [b.id, b.name]));
 
+      // The dataset is the source of truth for the roster, the provider of
+      // every model, and the declared track list. Renderers only read these.
+      MODEL_PROVIDER = Object.fromEntries(
+        (json.models || []).map((m) => [m.display, m.provider || "other"])
+      );
+      TRACK_META = (json.benchmarks || []).map((b) => ({
+        id: String(b.id).replace(/_/g, "-"),
+        rawId: b.id,
+        label: b.short || b.name,
+        name: b.name,
+        kind: b.kind || "core",
+        coverage: b.coverage || "full",
+        scoredRuns: b.scoredRuns || 0,
+        totalRuns: b.totalRuns || 0,
+        inVivIndex: !!b.in_vivindex,
+        retired: !!b.retired,
+      }));
+      if (TRACK_META.length) {
+        // Charts read active tracks only. Retired experiments stay declared
+        // (so their rows are never orphaned) but do not get a lane.
+        BENCHMARKS = TRACK_META.filter((t) => t.kind !== "retired").map((t) => ({
+          id: t.id,
+          label: t.label,
+        }));
+      }
+      state.totals = json.totals || null;
+      state.trackMeta = TRACK_META;
+
       const scored = json.results.filter((r) => {
         // An API timeout or other failed call is not a score of zero. Keep it
         // out of all score, latency, and cost aggregates while retaining its
@@ -2042,6 +2728,7 @@ body.lightbox-open {
         attempted: json.results.length,
         scored: scored.length,
         excluded: json.results.length - scored.length,
+        skipped: json.results.filter((r) => String(r.status || "").toLowerCase() === "skipped").length,
       };
       state.data = scored.map((r) => ({
         modelId: r.model_id,
@@ -2110,8 +2797,8 @@ body.lightbox-open {
           },
         },
         scales: {
-          x: { min: 0, max: 100, grid: { color: "rgba(18,18,26,0.08)" }, ticks: { color: "rgba(18,18,26,0.55)" } },
-          y: { grid: { display: false }, ticks: { color: "rgba(18,18,26,0.75)" } },
+          x: { min: 0, max: 100, grid: { color: "rgba(18,18,26,0.08)" }, ticks: { color: "rgba(18,18,26,0.55)", font: { size: isMobile() ? 10 : 12 } } },
+          y: { grid: { display: false }, ticks: { color: "rgba(18,18,26,0.75)", font: { size: isMobile() ? 10 : 12 }, autoSkip: false } },
         },
       },
     });
@@ -2151,6 +2838,7 @@ body.lightbox-open {
     const latencyCanvas = $("#latencyChart");
     if (typeof Chart === "undefined") return;
     const aggs = modelAggregates(state.data);
+    const mobile = isMobile();
 
     if (speedCanvas) {
       const rows = aggs.filter((a) => a.tokensPerSec != null).sort((a, b) => b.tokensPerSec - a.tokensPerSec);
@@ -2166,16 +2854,17 @@ body.lightbox-open {
             borderColor: rows.map((a) => modelColor(a.model)),
             borderWidth: 1.5,
             borderRadius: 6,
-            maxBarThickness: 56,
+            maxBarThickness: mobile ? 22 : 56,
           }],
         },
         options: {
+          indexAxis: mobile ? "y" : "x",
           responsive: true,
           maintainAspectRatio: false,
           plugins: { legend: { display: false }, tooltip: { callbacks: { label: (c) => ` ${c.raw} tok/s (higher is better)` } } },
           scales: {
-            y: { beginAtZero: true, title: { display: true, text: "Tokens per second" }, grid: { color: "rgba(18,18,26,0.08)" }, ticks: { color: "rgba(18,18,26,0.55)" } },
-            x: { grid: { display: false }, ticks: { color: "rgba(18,18,26,0.75)" } },
+            y: { beginAtZero: true, title: { display: !mobile, text: "Tokens per second" }, grid: { color: "rgba(18,18,26,0.08)" }, ticks: { color: "rgba(18,18,26,0.55)", font: { size: mobile ? 10 : 12 } } },
+            x: { grid: { display: false }, ticks: { color: "rgba(18,18,26,0.75)", font: { size: mobile ? 10 : 12 }, autoSkip: false, maxRotation: mobile ? 0 : 45 } },
           },
         },
       });
@@ -2195,16 +2884,17 @@ body.lightbox-open {
             borderColor: rows.map((a) => modelColor(a.model)),
             borderWidth: 1.5,
             borderRadius: 6,
-            maxBarThickness: 56,
+            maxBarThickness: mobile ? 22 : 56,
           }],
         },
         options: {
+          indexAxis: mobile ? "y" : "x",
           responsive: true,
           maintainAspectRatio: false,
           plugins: { legend: { display: false }, tooltip: { callbacks: { label: (c) => ` ${c.raw}s avg end-to-end (lower is better)` } } },
           scales: {
-            y: { beginAtZero: true, title: { display: true, text: "Seconds (lower is better)" }, grid: { color: "rgba(18,18,26,0.08)" }, ticks: { color: "rgba(18,18,26,0.55)" } },
-            x: { grid: { display: false }, ticks: { color: "rgba(18,18,26,0.75)" } },
+            y: { beginAtZero: true, title: { display: !mobile, text: "Seconds (lower is better)" }, grid: { color: "rgba(18,18,26,0.08)" }, ticks: { color: "rgba(18,18,26,0.55)", font: { size: mobile ? 10 : 12 } } },
+            x: { grid: { display: false }, ticks: { color: "rgba(18,18,26,0.75)", font: { size: mobile ? 10 : 12 }, autoSkip: false, maxRotation: mobile ? 0 : 45 } },
           },
         },
       });
@@ -2214,6 +2904,7 @@ body.lightbox-open {
   function renderLeaderboardChart() {
     const canvas = $("#leaderboardChart");
     if (!canvas || typeof Chart === "undefined") return;
+    const mobile = isMobile();
     const aggs = modelAggregates(state.data).sort((a, b) => b.avgScore - a.avgScore);
     if (state.charts.leaderboard) state.charts.leaderboard.destroy();
     state.charts.leaderboard = new Chart(canvas, {
@@ -2227,16 +2918,17 @@ body.lightbox-open {
           borderColor: aggs.map((a) => modelColor(a.model)),
           borderWidth: 1.5,
           borderRadius: 6,
-          maxBarThickness: 56,
+          maxBarThickness: mobile ? 22 : 56,
         }],
       },
       options: {
+        indexAxis: mobile ? "y" : "x",
         responsive: true,
         maintainAspectRatio: false,
         plugins: { legend: { display: false } },
         scales: {
-          y: { min: 0, max: 100, grid: { color: "rgba(18,18,26,0.08)" }, ticks: { color: "rgba(18,18,26,0.55)" } },
-          x: { grid: { display: false }, ticks: { color: "rgba(18,18,26,0.75)" } },
+          y: { min: 0, max: 100, grid: { color: "rgba(18,18,26,0.08)" }, ticks: { color: "rgba(18,18,26,0.55)", font: { size: mobile ? 10 : 12 } } },
+          x: { grid: { display: false }, ticks: { color: "rgba(18,18,26,0.75)", font: { size: mobile ? 10 : 12 }, autoSkip: false, maxRotation: mobile ? 0 : 45 } },
         },
       },
     });
@@ -2245,7 +2937,15 @@ body.lightbox-open {
   function renderBenchmarkChart() {
     const canvas = $("#benchmarkChart");
     if (!canvas || typeof Chart === "undefined") return;
-    const models = uniqueModels(state.data);
+    const mobile = isMobile();
+    const allModels = uniqueModels(state.data);
+    // On mobile, only show top 8 models by average score to keep the chart readable.
+    const models = mobile
+      ? modelAggregates(state.data)
+          .sort((a, b) => b.avgScore - a.avgScore)
+          .slice(0, 8)
+          .map((a) => a.model)
+      : allModels;
     if (state.charts.benchmark) state.charts.benchmark.destroy();
     state.charts.benchmark = new Chart(canvas, {
       type: "bar",
@@ -2264,16 +2964,17 @@ body.lightbox-open {
         })),
       },
       options: {
+        indexAxis: mobile ? "y" : "x",
         responsive: true,
         maintainAspectRatio: false,
         interaction: { mode: "index", intersect: false },
         plugins: {
-          legend: { position: "bottom", labels: { usePointStyle: true, boxWidth: 8, padding: 14 } },
+          legend: { position: "bottom", labels: { usePointStyle: true, boxWidth: mobile ? 6 : 8, padding: mobile ? 8 : 14, font: { size: mobile ? 9 : 12 } } },
           tooltip: { callbacks: { label: (ctx) => ` ${ctx.dataset.label}: ${ctx.raw ?? "not run"}` } },
         },
         scales: {
-          x: { stacked: false, grid: { display: false }, ticks: { color: "rgba(18,18,26,0.78)", maxRotation: 0 } },
-          y: { min: 0, max: 100, title: { display: true, text: "Score / 100" }, grid: { color: "rgba(18,18,26,0.09)" }, ticks: { color: "rgba(18,18,26,0.62)" } },
+          x: { stacked: false, grid: { display: false }, ticks: { color: "rgba(18,18,26,0.78)", maxRotation: mobile ? 0 : 0, font: { size: mobile ? 9 : 12 } } },
+          y: { min: 0, max: 100, title: { display: !mobile, text: "Score / 100" }, grid: { color: "rgba(18,18,26,0.09)" }, ticks: { color: "rgba(18,18,26,0.62)", font: { size: mobile ? 10 : 12 } } },
         },
       },
     });
@@ -2282,6 +2983,7 @@ body.lightbox-open {
   function renderCostValueChart() {
     const canvas = $("#costValueChart");
     if (!canvas || typeof Chart === "undefined") return;
+    const mobile = isMobile();
     const aggs = modelAggregates(state.data);
     const xMid = median(aggs.map((a) => a.avgCost));
     const yMid = median(aggs.map((a) => a.vivIndex));
@@ -2295,8 +2997,8 @@ body.lightbox-open {
           backgroundColor: modelColor(a.model, 0.65),
           borderColor: modelColor(a.model),
           borderWidth: 2,
-          pointRadius: 8,
-          pointHoverRadius: 10,
+          pointRadius: mobile ? 6 : 8,
+          pointHoverRadius: mobile ? 8 : 10,
         })),
       },
       plugins: [quadrantPlugin],
@@ -2305,7 +3007,7 @@ body.lightbox-open {
         maintainAspectRatio: false,
         plugins: {
           quadrant: { xMid, yMid },
-          legend: { position: "bottom", labels: { usePointStyle: true, boxWidth: 8 } },
+          legend: { display: !mobile, position: "bottom", labels: { usePointStyle: true, boxWidth: 8 } },
           tooltip: {
             callbacks: {
               label: (ctx) => [
@@ -2319,16 +3021,16 @@ body.lightbox-open {
         scales: {
           x: {
             type: "logarithmic",
-            title: { display: true, text: "Avg cost per run (USD, log) — left is cheaper", color: "rgba(18,18,26,0.55)" },
+            title: { display: !mobile, text: "Avg cost per run (USD, log) — left is cheaper", color: "rgba(18,18,26,0.55)" },
             grid: { color: "rgba(18,18,26,0.08)" },
-            ticks: { color: "rgba(18,18,26,0.55)" },
+            ticks: { color: "rgba(18,18,26,0.55)", font: { size: mobile ? 10 : 12 } },
           },
           y: {
             min: 40,
             max: 100,
-            title: { display: true, text: "VivIndex (weighted composite)", color: "rgba(18,18,26,0.55)" },
+            title: { display: !mobile, text: "VivIndex (weighted composite)", color: "rgba(18,18,26,0.55)" },
             grid: { color: "rgba(18,18,26,0.08)" },
-            ticks: { color: "rgba(18,18,26,0.55)" },
+            ticks: { color: "rgba(18,18,26,0.55)", font: { size: mobile ? 10 : 12 } },
           },
         },
       },
@@ -2340,24 +3042,62 @@ body.lightbox-open {
     if (!container) return;
     state.charts.sparklines.forEach((c) => c.destroy());
     state.charts.sparklines = [];
-    // Board rank = raw VivIndex (same rule as stats panel + infographics),
-    // so the #1 card is always the true leader.
-    const aggs = modelAggregates(state.data).sort((a, b) => b.vivIndex - a.vivIndex);
+
+    // Read live board controls (search + sort + provider filter).
+    const searchEl = $("#modelSearch");
+    const sortEl = $("#modelSort");
+    const provEl = $("#providerFilter");
+    const q = (searchEl ? searchEl.value || "" : "").trim().toLowerCase();
+    const sortKey = sortEl ? sortEl.value || "viv" : "viv";
+    const provKey = provEl ? provEl.value || "all" : "all";
+
+    let aggs = modelAggregates(state.data, { applySelection: false });
+    // Provider filter
+    if (provKey !== "all") aggs = aggs.filter((a) => providerOf(a.model) === provKey);
+    // Text search across model name + provider brand name
+    if (q) aggs = aggs.filter((a) =>
+      a.model.toLowerCase().includes(q) || providerBrand(a.model).name.toLowerCase().includes(q));
+    // Sort (null-safe: missing cost/speed sinks to the bottom, never NaN)
+    const byNum = (get) => (a, b) => {
+      const va = get(a), vb = get(b);
+      if (va == null && vb == null) return b.vivIndex - a.vivIndex;
+      if (va == null) return 1;
+      if (vb == null) return -1;
+      return va - vb;
+    };
+    if (sortKey === "cost") aggs = aggs.sort(byNum((a) => (Number.isFinite(a.avgCost) && a.avgCost > 0 ? a.avgCost : null)));
+    else if (sortKey === "speed") aggs = aggs.sort((a, b) => (b.tokensPerSec || 0) - (a.tokensPerSec || 0));
+    else if (sortKey === "alpha") aggs = aggs.sort((a, b) => a.model.localeCompare(b.model));
+    else aggs = aggs.sort((a, b) => b.vivIndex - a.vivIndex);
+
+    // The board is exhaustive by default; the toggle keeps a short list one tap
+    // away without making the top-15 slice the only thing anyone can see.
+    const limitToggle = $("#boardLimitToggle");
+    const limited = limitToggle && limitToggle.getAttribute("aria-pressed") === "true";
+    if (limited) aggs = aggs.slice(0, 15);
+
+    // Live count
+    const countEl = $("#modelCount");
+    if (countEl) countEl.textContent = `${aggs.length} model${aggs.length === 1 ? "" : "s"}`;
 
     container.innerHTML = aggs.map((a, i) => {
       const row = state.data.find((r) => r.model === a.model);
       const slug = (row && row.modelId ? row.modelId : a.model.toLowerCase()).replace(/_/g, "-");
-      const top = i === 0;
+      const top = i === 0 && sortKey === "viv";
+      const brand = providerBrand(a.model);
+      const provColor = modelColor(a.model);
       return `
       <article class="compare-card reveal${top ? " is-top" : ""}">
         <header>
           <span class="badge">#${i + 1}</span>
+          <span class="cmp-logo" style="--brand:${provColor}" title="${brand.name}" aria-label="${brand.name}">${brand.glyph}</span>
           <h3>${a.model}</h3>
         </header>
+        <div class="cmp-byl">${brand.name}</div>
         <div class="score">${a.vivIndex.toFixed(1)}<small style="font-size:.45em;color:var(--ink-2);font-weight:500"> VivIndex</small></div>
         <dl>
           <div><dt>Latency</dt><dd>${a.avgLatency.toFixed(1)}s</dd></div>
-          <div><dt>Cost/run</dt><dd>$${a.avgCost.toFixed(3)}</dd></div>
+          <div><dt>Cost/run</dt><dd>${Number.isFinite(a.avgCost) && a.avgCost > 0 ? "$" + a.avgCost.toFixed(3) : "—"}</dd></div>
           <div><dt>Speed</dt><dd>${a.tokensPerSec != null ? a.tokensPerSec.toFixed(0) + " tok/s" : "—"}</dd></div>
         </dl>
         <div class="spark-wrap"><canvas></canvas></div>
@@ -2367,7 +3107,7 @@ body.lightbox-open {
     }).join("");
 
     aggs.forEach((a, i) => {
-      const canvas = container.children[i].querySelector("canvas");
+      const canvas = container.children[i] ? container.children[i].querySelector("canvas") : null;
       if (!canvas || typeof Chart === "undefined") return;
       state.charts.sparklines.push(new Chart(canvas, {
         type: "line",
@@ -2397,6 +3137,7 @@ body.lightbox-open {
   function renderValueDensityChart() {
     const canvas = $("#valueDensityChart");
     if (!canvas || typeof Chart === "undefined") return;
+    const mobile = isMobile();
     const rows = state.data.filter((r) => r.benchmark === "value-density" && r.score != null && r.tokens > 0);
     if (!rows.length) return;
     const byModel = {};
@@ -2418,10 +3159,11 @@ body.lightbox-open {
           borderColor: aggs.map((a) => modelColor(a.model)),
           borderWidth: 1.5,
           borderRadius: 6,
-          maxBarThickness: 48,
+          maxBarThickness: mobile ? 22 : 48,
         }],
       },
       options: {
+        indexAxis: mobile ? "y" : "x",
         responsive: true,
         maintainAspectRatio: false,
         plugins: {
@@ -2441,8 +3183,8 @@ body.lightbox-open {
           },
         },
         scales: {
-          y: { beginAtZero: true, title: { display: true, text: "Score per 1K total tokens" }, grid: { color: "rgba(18,18,26,0.08)" } },
-          x: { grid: { display: false } },
+          y: { beginAtZero: true, title: { display: !mobile, text: "Score per 1K total tokens" }, grid: { color: "rgba(18,18,26,0.08)" }, ticks: { color: "rgba(18,18,26,0.55)", font: { size: mobile ? 10 : 12 } } },
+          x: { grid: { display: false }, ticks: { color: "rgba(18,18,26,0.75)", font: { size: mobile ? 10 : 12 }, autoSkip: false, maxRotation: mobile ? 0 : 45 } },
         },
       },
     });
@@ -2467,7 +3209,7 @@ body.lightbox-open {
           borderColor: aggs.map((a) => modelColor(a.model)),
           borderWidth: 1.5,
           borderRadius: 6,
-          maxBarThickness: 48,
+          maxBarThickness: isMobile() ? 22 : 48,
         }],
       },
       options: {
@@ -2476,19 +3218,21 @@ body.lightbox-open {
         maintainAspectRatio: false,
         plugins: { legend: { display: false } },
         scales: {
-          x: { min: 0, max: 100, grid: { color: "rgba(18,18,26,0.08)" } },
-          y: { grid: { display: false } },
+          x: { min: 0, max: 100, grid: { color: "rgba(18,18,26,0.08)" }, ticks: { color: "rgba(18,18,26,0.55)", font: { size: isMobile() ? 10 : 12 } } },
+          y: { grid: { display: false }, ticks: { color: "rgba(18,18,26,0.75)", font: { size: isMobile() ? 10 : 12 }, autoSkip: false } },
         },
       },
     });
   }
 
   function populateStats() {
-    const aggs = modelAggregates(state.data);
+    const aggs = modelAggregates(state.data, { applySelection: false });
     const top = aggs.length ? aggs.reduce((best, a) => (a.vivIndex > best.vivIndex ? a : best)) : null;
     const el = (id, v) => { const e = $(id); if (e) e.textContent = v; };
+    const activeTracks = (state.trackMeta || []).filter((t) => t.kind !== "retired");
+    const costTotal = state.totals && state.totals.estimatedCostUsd;
     el("#statModels", uniqueModels(state.data).length);
-    el("#statBenchmarks", BENCHMARKS.length);
+    el("#statBenchmarks", activeTracks.length || BENCHMARKS.length);
     el("#statRuns", `${state.runSummary.scored}/${state.runSummary.attempted}`);
     el("#statTopScore", top ? top.vivIndex.toFixed(1) : "—");
     // Average estimated full-suite cost across models with scored runs.
@@ -2500,11 +3244,32 @@ body.lightbox-open {
     el("#statCost", avgSuite != null ? avgSuite.toFixed(2) : "—");
     const leader = $("#statVivLeader");
     if (leader && top) leader.textContent = top.model;
+    // Fill the narrative from the same numbers, so prose cannot drift from data.
+    const setText = (id, text) => { const e = $(id); if (e) e.textContent = text; };
+    setText("#heroModelCount", String(uniqueModels(state.data).length));
+    setText("#heroTrackCount", String(activeTracks.length || BENCHMARKS.length));
+    setText("#heroRunCount", String(state.runSummary.scored));
+    setText("#heroCostTotal", costTotal ? `$${Number(costTotal).toFixed(2)}` : "—");
+    setText("#boardCountLabel", `${aggs.length} models · all of them, not a top-15 slice`);
+    // Feature spotlight: rank is computed, never typed.
+    const feature = aggs.find((a) => /glm 5\.3 flash/i.test(a.model));
+    if (feature) {
+      const rank = aggs.filter((a) => a.vivIndex > feature.vivIndex).length + 1;
+      setText("#featureRank", `#${rank}`);
+      setText("#featureOf", `of ${aggs.length}`);
+      setText("#featureScore", feature.vivIndex.toFixed(1));
+      setText("#featureModel", feature.model);
+      setText("#featureModelCopy", feature.model);
+      setText("#featureRankCopy", `#${rank}`);
+      setText("#featureOfCopy", String(aggs.length));
+    }
     const dataNote = $("#dataNote span");
     if (dataNote) {
+      const skipped = state.runSummary.skipped || 0;
+      const errored = Math.max(0, state.runSummary.excluded - skipped);
       dataNote.textContent = state.runSummary.excluded
-        ? `${state.runSummary.scored} scored runs; ${state.runSummary.excluded} failed/excluded from score aggregates. Pharma tracks are charted; VivIndex uses 4 core tracks.`
-        : `${state.runSummary.scored} scored runs across ${BENCHMARKS.length} tracks (${VIVINDEX_TRACK_COUNT}-track VivIndex).`;
+        ? `${state.runSummary.scored} scored runs; ${skipped} skipped (non-vision), ${errored} errored — neither is scored as zero. Pharma stays charted; VivIndex uses ${VIVINDEX_TRACK_COUNT} weighted tracks.`
+        : `${state.runSummary.scored} scored runs across ${activeTracks.length || BENCHMARKS.length} active tracks (${VIVINDEX_TRACK_COUNT}-track VivIndex).`;
     }
   }
 
@@ -2514,7 +3279,7 @@ body.lightbox-open {
     if (!toggle || !nav) return;
 
     // Ensure the navbar is the positioning context for the absolute drawer.
-    const navbar = toggle.closest(".navbar") || document.querySelector(".navbar");
+    const navbar = toggle.closest(".sidenav") || document.querySelector(".sidenav");
     if (navbar) navbar.style.zIndex = "400";
 
     // Scrim so taps outside clearly close the menu and block page scroll clicks.
@@ -2626,10 +3391,22 @@ body.lightbox-open {
       frame = requestAnimationFrame(draw);
     }
     resize();
-    draw();
     window.addEventListener("resize", resize);
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
-    reduced.addEventListener?.("change", () => { if (reduced.matches && frame) cancelAnimationFrame(frame); else if (!frame) draw(); });
+    // Run the particle loop ONLY while the canvas is on screen and the tab is
+    // visible. A rAF loop that never stops is what made this page eat a CPU.
+    let onScreen = true;
+    const io = new IntersectionObserver((entries) => {
+      onScreen = entries[0].isIntersecting;
+      if (onScreen && !frame && !document.hidden && !reduced.matches) draw();
+      if (!onScreen && frame) { cancelAnimationFrame(frame); frame = 0; }
+    }, { threshold: 0.01 });
+    io.observe(canvas);
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden && frame) { cancelAnimationFrame(frame); frame = 0; }
+      else if (!document.hidden && onScreen && !frame && !reduced.matches) draw();
+    });
+    reduced.addEventListener?.("change", () => { if (reduced.matches && frame) { cancelAnimationFrame(frame); frame = 0; } });
   }
 
   function initWaapiScores() {
@@ -2646,9 +3423,7 @@ body.lightbox-open {
     $$(".score-bar").forEach((b) => io.observe(b));
   }
 
-  async function init() {
-    initMobileNav();
-    await loadData();
+  function renderAllCharts() {
     renderVivIndexChart();
     renderLeaderboardChart();
     renderBenchmarkChart();
@@ -2656,11 +3431,196 @@ body.lightbox-open {
     renderSpeedCharts();
     renderValueDensityChart();
     renderReversePromptChart();
+  }
+
+  
+  // ── Model selector (Material popover, checkboxes, top-15 default) ──────────
+  function initModelSelector() {
+    const host = document.querySelector(".site-nav, header, .toolbar, main");
+    if (!host || document.getElementById("modelSelectBtn")) return;
+    const aggs = modelAggregates(state.data).sort((a, b) => b.vivIndex - a.vivIndex);
+    const allModels = aggs.map((a) => ({ name: a.model, vi: a.vivIndex }));
+    const saved = localStorage.getItem("bv_selected_models");
+    let selected = new Set();
+    if (saved) { try { selected = new Set(JSON.parse(saved)); } catch (e) {} }
+    if (!selected.size) allModels.slice(0, 15).forEach((m) => selected.add(m.name));
+    state.selectedModels = selected;
+
+    const btn = document.createElement("button");
+    btn.id = "modelSelectBtn";
+    btn.className = "model-select-btn";
+    btn.innerHTML = `<span style="width:12px;height:12px;border-radius:50%;background:var(--md-primary)"></span> Models <span id="msCount" style="font-family:var(--font-mono);font-size:11px;color:var(--md-primary)">${selected.size}</span> ▾`;
+    btn.onclick = (e) => { e.stopPropagation(); pop.style.display = pop.style.display === "block" ? "none" : "block"; };
+
+    const pop = document.createElement("div");
+    pop.className = "model-select-pop";
+    pop.style.display = "none";
+    pop.innerHTML = `
+      <div class="quick">
+        <button data-act="top15">Top 15</button>
+        <button data-act="all">All</button>
+        <button data-act="clear">Clear</button>
+        <button data-act="done" class="primary" style="background:var(--md-primary);color:#fff;border:none;border-radius:999px;padding:6px 14px;font-weight:600;cursor:pointer">Done</button>
+      </div>
+      ${allModels.map((m) => {
+        const prov = providerOf(m.name);
+        const color = PROVIDER_COLORS[prov] || PROVIDER_COLORS.other;
+        return `<label class="model-row"><input type="checkbox" value="${m.name.replace(/"/g, "&quot;")}" ${selected.has(m.name) ? "checked" : ""}>
+          <span class="dot" style="background:${color}"></span>
+          <span class="name">${m.name}</span>
+          <span class="vi">${m.vi ? m.vi.toFixed(1) : "—"}</span></label>`;
+      }).join("")}`;
+    pop.querySelectorAll(".quick button").forEach((b) => b.onclick = () => {
+      const act = b.dataset.act;
+      if (act === "top15") { selected = new Set(allModels.slice(0, 15).map((m) => m.name)); }
+      else if (act === "all") { selected = new Set(allModels.map((m) => m.name)); }
+      else if (act === "clear") { selected = new Set(); }
+      else if (act === "done") { pop.style.display = "none"; }
+      pop.querySelectorAll("input").forEach((i) => i.checked = selected.has(i.value));
+      apply();
+    });
+    pop.addEventListener("change", (e) => {
+      if (e.target.type === "checkbox") {
+        e.target.checked ? selected.add(e.target.value) : selected.delete(e.target.value);
+        apply();
+      }
+    });
+    document.addEventListener("click", (e) => { if (!pop.contains(e.target) && e.target !== btn) pop.style.display = "none"; });
+
+    function apply() {
+      state.selectedModels = selected;
+      localStorage.setItem("bv_selected_models", JSON.stringify([...selected]));
+      const c = document.getElementById("msCount"); if (c) c.textContent = selected.size;
+      renderAllCharts();
+      if (typeof renderComparison === "function") renderComparison();
+      if (typeof populateStats === "function") populateStats();
+    }
+
+    const wrap = document.createElement("div");
+    wrap.style.position = "relative";
+    wrap.style.display = "inline-block";
+    wrap.appendChild(btn); wrap.appendChild(pop);
+    host.insertBefore(wrap, host.firstChild);
+  }
+
+  // ── Board toolbar: provider chips, live search/sort re-render, sticky mobile shortcut ──
+  function initBoardControls() {
+    const searchEl = $("#modelSearch");
+    const sortEl = $("#modelSort");
+    const provSelect = $("#providerFilter");
+    const chipsHost = $("#providerChips");
+    if (!searchEl && !sortEl && !provSelect) return;
+
+    // Build provider chips from the full roster (discover, don't hardcode) —
+    // independent of the active chart-selection so no provider is hidden.
+    const provKeys = [...new Set(uniqueModels(state.data).map((m) => providerOf(m)))]
+      .filter((k) => PROVIDER_BRAND[k]);
+    let activeProv = "all";
+
+    if (chipsHost) {
+      const mkChip = (value, label, color) => {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.className = "board-chip";
+        b.setAttribute("aria-pressed", String(value === activeProv));
+        b.dataset.prov = value;
+        b.innerHTML = (color ? `<span class="chip-logo" style="--brand:${color}">${PROVIDER_BRAND[value].glyph}</span>` : "") + label;
+        b.addEventListener("click", () => {
+          activeProv = value;
+          if (provSelect) provSelect.value = value === "all" ? "all" : value;
+          chipsHost.querySelectorAll(".board-chip").forEach((c) =>
+            c.setAttribute("aria-pressed", String(c.dataset.prov === activeProv)));
+          renderComparison();
+        });
+        return b;
+      };
+      chipsHost.appendChild(mkChip("all", "All providers", null));
+      provKeys.forEach((k) => chipsHost.appendChild(mkChip(k, PROVIDER_BRAND[k].name, PROVIDER_COLORS[k] || PROVIDER_COLORS.other)));
+    }
+
+    // Keep the <select> fallback in sync with chips.
+    if (provSelect) {
+      provKeys.forEach((k) => {
+        if ([...provSelect.options].some((o) => o.value === k)) return;
+        const o = document.createElement("option");
+        o.value = k;
+        o.textContent = PROVIDER_BRAND[k].name;
+        provSelect.appendChild(o);
+      });
+      provSelect.addEventListener("change", () => {
+        activeProv = provSelect.value;
+        if (chipsHost) chipsHost.querySelectorAll(".board-chip").forEach((c) =>
+          c.setAttribute("aria-pressed", String(c.dataset.prov === activeProv)));
+        renderComparison();
+      });
+    }
+
+    // Live filter: debounce so fast typing doesn't thrash Chart.js sparklines.
+    if (searchEl) {
+      let t;
+      searchEl.addEventListener("input", () => {
+        clearTimeout(t);
+        t = setTimeout(renderComparison, 160);
+      });
+    }
+    if (sortEl) sortEl.addEventListener("change", renderComparison);
+
+    const limitToggle = $("#boardLimitToggle");
+    if (limitToggle) {
+      limitToggle.addEventListener("click", () => {
+        const nowLimited = limitToggle.getAttribute("aria-pressed") !== "true";
+        limitToggle.setAttribute("aria-pressed", String(nowLimited));
+        limitToggle.textContent = nowLimited ? "Show all models" : "Show top 15";
+        renderComparison();
+        populateStats();
+      });
+    }
+
+    // Sticky "back to board" pill on mobile: shows once the board has been
+    // scrolled past, hides when it is on screen. Disabled for reduced motion
+    // users only in the sense that transitions are disabled; visibility logic stays.
+    const board = $("#comparison");
+    const jump = $("#boardJump");
+    if (board && jump && "IntersectionObserver" in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          const past = !e.isIntersecting && e.boundingClientRect.top < 0;
+          jump.classList.toggle("is-visible", past);
+          jump.setAttribute("aria-hidden", String(!past));
+          jump.tabIndex = past ? 0 : -1;
+        });
+      }, { threshold: 0 });
+      io.observe(board);
+    }
+  }
+
+    async function init() {
+    initMobileNav();
+    await loadData();
+    initModelSelector();
+    initBoardControls();
+    renderAllCharts();
     renderComparison();
     populateStats();
     initReveal();
     initGpuBackground();
     initWaapiScores();
+
+    // Re-render charts when crossing the 768px breakpoint so mobile/desktop
+    // chart configs (horizontal vs vertical bars, legend visibility, top-8
+    // model filtering) update on orientation change or window resize.
+    let wasMobile = isMobile();
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        const nowMobile = isMobile();
+        if (nowMobile !== wasMobile) {
+          wasMobile = nowMobile;
+          renderAllCharts();
+        }
+      }, 200);
+    });
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
@@ -2724,8 +3684,15 @@ body.lightbox-open {
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") closeLightbox();
   });
-})();
 
+  // ── Scrollable table detection ──
+  document.querySelectorAll(".table-wrap").forEach((wrap) => {
+    const check = () => wrap.classList.toggle("scrollable", wrap.scrollWidth > wrap.clientWidth);
+    check();
+    window.addEventListener("resize", check);
+    new ResizeObserver(check).observe(wrap);
+  });
+})();
 
 </script>
   <script>

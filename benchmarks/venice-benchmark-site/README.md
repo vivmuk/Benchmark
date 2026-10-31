@@ -23,12 +23,24 @@ reverse-prompt vision) with a weighted **VivIndex** composite.
 
 ## Data
 
-- `data/results.json` — canonical results (full raw responses)
-- `data/chart_snapshot.json` — leaderboard snapshot for charts
+- `data/results-lite.json` — **what every page loads** (~120 KB: models with providers, declared tracks with coverage, scored rows; no raw text)
+- `data/results.json` — canonical archive including full raw responses (~4.7 MB)
+- `data/chart_snapshot.json` — historical chart snapshot
 - `data/benchmarkviv-results.csv` — flat export, 1 row per result
 - `data/summary.json` — top model / VivIndex / count (powers the badges)
 - `data/trends.json` + `data/trends_chart.svg` — history series + chart
 - `data/changelog.json` — site changelog
+
+### Export and guard
+
+```bash
+python3 build_export.py   # results.json -> results-lite.json
+python3 check_data.py     # fail on undeclared tracks, orphan models, missing providers
+```
+
+Model providers and track coverage live in the export, not in `app.js`. The
+build guard fails if a benchmark id in the rows is missing from the declared
+track list, so a track can no longer exist without being visible.
 
 ## Rebuild pipeline
 

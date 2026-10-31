@@ -1,0 +1,63 @@
+[
+  {
+    "model": "claude-opus-4-8-fast",
+    "completion_tokens": 9870,
+    "total_tokens": 12794,
+    "words": 3916,
+    "cost_usd": 0.627288,
+    "judge": {
+      "technical_accuracy": 6,
+      "actionability": 7,
+      "depth_of_tradeoffs": 8,
+      "precision": 6,
+      "concision": 7,
+      "overall": 69,
+      "key_strength": "Strong treatment of algorithm selection, atomic Redis Lua enforcement, multi-region consistency tradeoffs, and explicit failure-mode policies. The distinction between infrastructure protection and exact billing quota is particularly sound.",
+      "key_weakness": "The proposed L1 cache is not a defensible distributed token-bucket design: seeding and periodically syncing local buckets can double-spend allowance and has no rigorous overshoot bound. The response also overstates cross-dimension atomicity because Redis Cluster scripts cannot atomically cover keys on different hash slots, understates Redis memory overhead, treats Redis wall-clock TIME as effectively monotonic, and incorrectly calls Retry-After mandatory for 429 responses.",
+      "judge_cost_usd": 0.0195,
+      "judge_tokens": 6995,
+      "judge_status": "ok"
+    },
+    "quality_score": 69,
+    "quality_per_dollar": 110.0,
+    "quality_per_1k_tokens": 5.4
+  },
+  {
+    "model": "claude-fable-5",
+    "completion_tokens": 12149,
+    "total_tokens": 15050,
+    "words": 4381,
+    "cost_usd": 0.763752,
+    "judge": {
+      "technical_accuracy": 6,
+      "actionability": 7,
+      "depth_of_tradeoffs": 8,
+      "precision": 6,
+      "concision": 8,
+      "overall": 65,
+      "key_strength": "Strong GCRA choice, concrete Redis implementation details, explicit latency and correctness targets, and thoughtful comparison of regional, global, and fallback architectures.",
+      "key_weakness": "The global quota design has materially incorrect bounds: the floor formula can allocate more than L, the claimed 1.1× convergence bound does not follow, and dynamic rate changes lack safe state-transition semantics. The response also ends mid-failure-mode section and contains a hash-tag schema contradiction plus unresolved atomicity across tenant and IP limits.",
+      "judge_cost_usd": 0.031011,
+      "judge_tokens": 8579,
+      "judge_status": "ok"
+    },
+    "quality_score": 65,
+    "quality_per_dollar": 85.1,
+    "quality_per_1k_tokens": 4.3
+  },
+  {
+    "model": "claude-fable-5-1",
+    "completion_tokens": 21778,
+    "total_tokens": 24689,
+    "words": 6965,
+    "cost_usd": 1.11801,
+    "judge": {
+      "judge_status": "parse_error",
+      "judge_raw": "",
+      "score": null
+    },
+    "quality_score": null,
+    "quality_per_dollar": null,
+    "quality_per_1k_tokens": null
+  }
+]

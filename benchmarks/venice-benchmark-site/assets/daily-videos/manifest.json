@@ -1,0 +1,25 @@
+{
+  "description": "One AI-generated video per day, featured on the Daily Video tab (video-daily.html). Generated on Venice video models; newest entry is featured. Maintained by the daily-video automation routine.",
+  "videos": [
+    {
+      "date": "2026-10-29",
+      "title": "GPU Silicon Macro",
+      "file": "assets/daily-videos/2026-10-29-gemini-omni-flash-1-1.mp4",
+      "model": "gemini-omni-flash-1-1-text-to-video",
+      "duration": "4s",
+      "resolution": "360p",
+      "quote": 0.16,
+      "prompt": "Extreme macro shot gliding across a next-generation GPU die under a microscope: shimmering teal light traces pulse across dark indigo silicon substrate, cream-colored solder points glint like tiny stars as the camera sweeps over crystalline circuitry, particles of light drifting above the wafer surface, ultra shallow depth of field, cinematic product-photography lighting, photorealistic, no text, no watermarks."
+    },
+    {
+      "date": "2026-10-28",
+      "title": "Benchmark Control Room",
+      "file": "assets/daily-videos/2026-10-28-seedance-2-0-mini.mp4",
+      "model": "seedance-2-0-mini-text-to-video-basic",
+      "duration": "4s",
+      "resolution": "480p",
+      "quote": 0.18,
+      "prompt": "Cinematic shot inside a futuristic AI benchmark control room: glowing teal holographic bar charts and leaderboard panels rise and shuffle in mid-air above a dark indigo console, thin cream-colored light traces flow between them like neural circuitry. Camera slowly orbits, shallow depth of field, volumetric light, ultra clean sci-fi aesthetic, no text, no watermarks."
+    }
+  ]
+}

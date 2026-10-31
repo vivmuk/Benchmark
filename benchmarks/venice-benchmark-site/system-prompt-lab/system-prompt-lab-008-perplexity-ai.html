@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>System Prompt Lab #08 — Perplexity AI</title>
+<meta name="description" content="Architectural teardown of the Perplexity AI system prompt. Edition #08 of the System Prompt Lab.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%2307080c'/></svg>">
+<link rel="stylesheet" href="../prompt-lab-assets/scrollcraft.css">
+<style>
+:root {
+  --sc-canvas: #07080c; --sc-surface: #10131c; --sc-ink: #e6ecff; --sc-ink-soft: #8b95b3;
+  --sc-accent: #c084fc; --sc-accent-ink: #07080c;
+  --sc-font-display: "Space Grotesk", system-ui, sans-serif;
+  --sc-font-text: "Space Grotesk", system-ui, sans-serif;
+  --an-line: #1e2436; --an-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+html { background: var(--sc-canvas); }
+/* edition chrome */
+.an-bar { position: fixed; top: 0; left: 0; right: 0; z-index: 40; display: flex; justify-content: space-between; align-items: center;
+  padding: 14px 22px; background: color-mix(in srgb, var(--sc-canvas) 82%, transparent); backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--an-line); font-family: var(--an-mono); font-size: .72rem; }
+.an-bar a { color: var(--sc-ink-soft); text-decoration: none; letter-spacing: .08em; }
+.an-bar a:hover { color: var(--sc-accent); }
+.an-bar .crumb b { color: var(--sc-accent); font-weight: 600; }
+.an-tokens { position: fixed; right: 16px; bottom: 16px; z-index: 40; font-family: var(--an-mono); font-size: .68rem;
+  color: var(--sc-ink-soft); background: color-mix(in srgb, var(--sc-surface) 90%, transparent);
+  border: 1px solid var(--an-line); border-radius: 10px; padding: 8px 12px; min-width: 150px; }
+.an-tokens .bar { height: 3px; background: var(--an-line); border-radius: 2px; margin-top: 6px; overflow: hidden; }
+.an-tokens .bar i { display: block; height: 100%; width: calc(var(--tok, 0) * 0.070 * 100%); background: var(--sc-accent); }
+.an-tokens .lab { display: flex; justify-content: space-between; gap: 10px; }
+.an-tokens .lab b { color: var(--sc-ink); }
+
+/* hero */
+.an-hero { position: relative; }
+.an-hero__inner { padding: 18vh 6vw 10vh; max-width: 880px; }
+.an-hero__kick { font-family: var(--an-mono); font-size: .74rem; letter-spacing: .3em; text-transform: uppercase; color: var(--sc-accent); margin-bottom: 20px; }
+.an-hero h1 { font-family: var(--sc-font-display); font-size: clamp(2.2rem, 6vw, 4rem); line-height: 1.05; letter-spacing: -.02em; margin-bottom: 16px; }
+.an-hero__sub { color: var(--sc-ink-soft); font-size: 1.05rem; max-width: 56ch; }
+.an-meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; margin-top: 36px; }
+.an-meta__item { border: 1px solid var(--an-line); border-radius: 10px; padding: 10px 12px; background: var(--sc-surface); }
+.an-meta__k { display: block; font-family: var(--an-mono); font-size: .62rem; text-transform: uppercase; letter-spacing: .14em; color: var(--sc-ink-soft); }
+.an-meta__v { font-size: .88rem; }
+
+/* chapters */
+.an-chapter-wrap { display: block; }
+.an-chapter { width: min(860px, 92vw); margin: 0 auto; padding: 10vh 0 6vh; }
+.an-chapter__head { display: flex; align-items: baseline; gap: 16px; margin-bottom: 28px; border-bottom: 1px solid var(--an-line); padding-bottom: 14px; }
+.an-chapter__num { font-family: var(--an-mono); color: var(--sc-accent); font-size: .8rem; letter-spacing: .2em; }
+.an-chapter__title { font-family: var(--sc-font-display); font-size: clamp(1.2rem, 2.6vw, 1.7rem); letter-spacing: -.01em; }
+.an-prompt { margin: 0 0 22px; }
+.an-prompt__label { font-family: var(--an-mono); font-size: .62rem; text-transform: uppercase; letter-spacing: .18em; color: var(--sc-ink-soft); margin-bottom: 8px; }
+.an-prompt__code { font-family: var(--an-mono); font-size: .78rem; line-height: 1.7; color: #a5d6ff; background: #0a0c10;
+  border: 1px solid var(--an-line); border-left: 3px solid var(--sc-accent); border-radius: 10px; padding: 16px;
+  overflow-x: auto; white-space: pre-wrap; word-break: break-word; }
+.an-cards { display: grid; gap: 12px; }
+.an-card { border: 1px solid var(--an-line); border-left-width: 3px; border-radius: 12px; background: var(--sc-surface); padding: 16px 18px; }
+.an-card--good { border-left-color: #4ade80; } .an-card--bad { border-left-color: #f87171; }
+.an-card--sota { border-left-color: #60a5fa; } .an-card--evolution { border-left-color: #c084fc; }
+.an-card__head { display: flex; gap: 10px; align-items: center; font-size: .9rem; font-weight: 600; margin-bottom: 10px; }
+.an-card__list { list-style: none; margin: 0; padding: 0; }
+.an-card__list li { position: relative; padding-left: 18px; color: var(--sc-ink-soft); font-size: .88rem; line-height: 1.65; margin-bottom: 10px; }
+.an-card__list li:last-child { margin-bottom: 0; }
+.an-card__list li::before { content: '▸'; position: absolute; left: 0; color: var(--sc-accent); opacity: .8; }
+
+/* takeaway close */
+.an-close { display: grid; place-items: center; }
+.an-close__inner { width: min(760px, 90vw); padding: 16vh 0; text-align: left; }
+.an-close h2 { font-family: var(--sc-font-display); font-size: clamp(1.4rem, 3vw, 2rem); margin-bottom: 18px; }
+.an-close p { color: var(--sc-ink-soft); font-size: 1rem; line-height: 1.75; }
+.an-close .next { margin-top: 40px; font-family: var(--an-mono); font-size: .78rem; }
+.an-close .next a { color: var(--sc-accent); text-decoration: none; border-bottom: 1px solid; padding-bottom: 2px; }
+@media (prefers-reduced-motion: reduce) { .an-bar, .an-tokens { position: static; } }
+</style>
+</head>
+<body>
+<span data-sc-progress></span>
+<div class="sc-grain" aria-hidden="true"></div>
+
+<header class="an-bar">
+  <span class="crumb"><a href="../prompt-lab.html">PROMPT_LAB</a> / <b>ED 08</b></span>
+  <span>Perplexity · ~2K tokens</span>
+</header>
+<aside class="an-tokens" aria-hidden="true">
+  <div class="lab"><span>tokens</span><b>~2K</b></div>
+  <div class="bar"><i id="tokbar"></i></div>
+</aside>
+
+<main>
+  <section class="an-hero" data-sc-act="flow" data-sc-span="1.2" data-sc-drift="#07080c">
+    <div class="an-hero__inner">
+      <div class="an-hero__kick" data-sc-cue="0 0.5 0">EDITION 08 · Perplexity · RENDERING CONTRACT · THE SMALLEST</div>
+      <h1 data-sc-kinetic="lines">Perplexity AI</h1>
+      <p class="an-hero__sub" data-sc-cue="0.3 0.9">Perplexity AI — the answer engine's writing-mode prompt · Phase 3: Specialized Agent Products (1/5)</p>
+      <div class="an-meta" data-sc-in data-sc-stagger="80"><div class="an-meta__item"><span class="an-meta__k">Vendor</span><span class="an-meta__v">Perplexity AI</span></div><div class="an-meta__item"><span class="an-meta__k">Surface</span><span class="an-meta__v">Writing / general chat mode</span></div><div class="an-meta__item"><span class="an-meta__k">Size</span><span class="an-meta__v">7.9 KB · 169 lines</span></div><div class="an-meta__item"><span class="an-meta__k">Tokens (est.)</span><span class="an-meta__v">~2,000 — smallest in series</span></div><div class="an-meta__item"><span class="an-meta__k">Base model</span><span class="an-meta__v">Gemini 3.1 Pro (per prompt)</span></div><div class="an-meta__item"><span class="an-meta__k">Repo snapshot</span><span class="an-meta__v">Jul 17, 2026 commit</span></div><div class="an-meta__item"><span class="an-meta__k">Companion prompts</span><span class="an-meta__v">voice (43 ln), comet, deep-research, computer</span></div><div class="an-meta__item"><span class="an-meta__k">Source</span><span class="an-meta__v">asgeirtj/system_prompts_leaks (CC0)</span></div></div>
+    </div>
+  </section>
+
+  <!-- CHAPTER 01 -->
+  <section class="an-chapter-wrap" data-sc-act="flow" data-sc-drift="#0b0d13">
+    <div class="an-chapter">
+      <div class="an-chapter__head" data-sc-in>
+        <span class="an-chapter__num">01</span>
+        <h2 class="an-chapter__title" data-sc-kinetic="lines">· Identity &amp; Role — the writing-mode declaration</h2>
+      </div>
+      <figure class="an-prompt" data-sc-in>
+  <figcaption class="an-prompt__label">excerpt from the prompt</figcaption>
+  <pre class="an-prompt__code">&lt;role&gt;
+You are Perplexity, an AI assistant developed by Perplexity AI. Given a user's query, your goal is to generate an expert, useful, and contextually relevant response by leveraging your knowledge and understanding of the conversation history. You specialize in helping users with tasks such as writing, creative projects, brainstorming, explanation of concepts, summarizing, and general conversation. You will receive guidelines to format your response for clear and effective presentation.
+&lt;/role&gt;</pre>
+</figure>
+      <div class="an-cards" data-sc-in data-sc-stagger="90">
+<div class="an-card an-card--good">
+  <div class="an-card__head"><span class="an-card__icon">✅</span><span>✅ What It Does Well</span></div>
+  <ul class="an-card__list"><li>Capability scoping, not generic helpfulness. The identity names its lanes — writing, brainstorming, explanation, summarizing — which primes the model's distribution toward prose competence instead of the vague "helpful assistant" attractor. Five lines, ~90 tokens. Radical economy.</li>
+<li>Meta-pointer as attention anchor. "You will receive guidelines to format your response" tells the model a formatting contract is coming — a cheap forward-reference that raises attention weight on the next 60 lines.</li>
+<li>Proof of surface-splitting. There are no search tools anywhere in this prompt. This is Perplexity's writing/general surface — evidence the product decomposed itself into per-mode prompts (search answers, writing, voice, Comet browser, computer use) rather than one mega-prompt.</li>
+<li>Zero safety boilerplate in identity. No wasted "you must be helpful, harmless, honest" preamble — the harm surface is delegated entirely to the base model, and the token budget goes to product-specific delta.</li></ul>
+</div>
+<div class="an-card an-card--bad">
+  <div class="an-card__head"><span class="an-card__icon">⚠️</span><span>⚠️ What It Doesn't Do Well</span></div>
+  <ul class="an-card__list"><li>"Expert, useful, contextually relevant" is unenforceable. Three adjectives with no operational definition. No example, no test, no tie to any measurable output property. Pure vibes.</li>
+<li>Knowledge-cutoff trap. The role says "leveraging your knowledge," but the cutoff is Jan 1 2025 and the date block says June 2026. In a no-search mode, questions about the last 17 months are structurally unanswerable — yet the prompt never instructs the model to disclose that.</li>
+<li>No refusal architecture at all. Copyright is the only safety instruction in 169 lines. Everything else — harm categories, escalation, minors — relies on Gemini 3.1 Pro's baked-in alignment. A deliberate bet, but a single point of failure.</li></ul>
+</div>
+<div class="an-card an-card--sota">
+  <div class="an-card__head"><span class="an-card__icon">🎯</span><span>🎯 State of the Art</span></div>
+  <ul class="an-card__list"><li>Identity as routing artifact. The 2026 pattern: products ship per-surface identity templates sharing one brand name, and the identity's job is to steer the model into the right distribution. Cursor's modes, Codex's channels, Perplexity's five surfaces — same philosophy.</li>
+<li>The anti-GPT-5.6 bet. OpenAI's consumer prompt is 28.5K tokens of complete behavioral specification. Perplexity's is 2K: assume the base model already knows how to be a good assistant; the prompt injects only what the base model cannot know — the product's rendering contract, memory schema, and clock.</li></ul>
+</div>
+<div class="an-card an-card--evolution">
+  <div class="an-card__head"><span class="an-card__icon">📈</span><span>📈 How It's Evolving</span></div>
+  <ul class="an-card__list"><li>From search engine to answer engine. Early Perplexity leaks (2023–24) opened with a search-first identity — "search assistant, cite results." This leak's identity is writing-first and never mentions search. The company repositioned from "Google killer" to "answer + assistant platform," and the identity block is the fossil record.</li>
+<li>The 43-line voice twin. The companion voice-assistant leak compresses the same brand into "You are Perplexity, a helpful search assistant… You can hear and speak" — one brand, per-surface identity templates with wildly different densities (2,082 bytes vs 7,874).</li></ul>
+</div>
+      </div>
+    </div>
+  </section>
+  <!-- CHAPTER 02 -->
+  <section class="an-chapter-wrap" data-sc-act="flow" data-sc-drift="#0b0d13">
+    <div class="an-chapter">
+      <div class="an-chapter__head" data-sc-in>
+        <span class="an-chapter__num">02</span>
+        <h2 class="an-chapter__title" data-sc-kinetic="lines">· The Formatting Engine — a rendering contract for the answer UI</h2>
+      </div>
+      <figure class="an-prompt" data-sc-in>
+  <figcaption class="an-prompt__label">excerpt from the prompt</figcaption>
+  <pre class="an-prompt__code">Always begin your final response with content, not a header. […]
+
+Use headers to separate sections when:
+- Answering multi-part questions with distinct components
+- Covering 3+ distinct topics that need clear separation
+- Organizing step-by-step processes or procedures into phases
+- Breaking up responses longer than 3 paragraphs into logical sections
+
+Keep headers concise (under six words), meaningful, and written in plain text. […] '- **Text:**' is rendered as a header, so avoid this because it violates having a header in a bullet. Use '###' as your default header level. Only use '##' when you need parent sections with subsections beneath them.
+
+All bullets must be top-level. Never indent bullets under other bullets.
+- If a bullet needs sub-points, fold them into the same line with commas, semicolons, or parentheses. Example: "Axes include spiciness, fanciness, and price."</pre>
+</figure>
+      <div class="an-cards" data-sc-in data-sc-stagger="90">
+<div class="an-card an-card--good">
+  <div class="an-card__head"><span class="an-card__icon">✅</span><span>✅ What It Does Well</span></div>
+  <ul class="an-card__list"><li>The prompt IS the product spec. Perplexity's brand is the answer layout — and 60% of this prompt is a rendering contract: header hierarchy (### default, ## only for parents), "under six words," first output must be content not a header (kills the LLM tic of opening with "# Answer"). The UI can rely on the model emitting parseable structure.</li>
+<li>Flat-bullet mandate is mobile-first by design. "All bullets must be top-level. Never indent" + the fold-inline rule with a worked example pre-empts nested-bullet rendering breakage in narrow answer cards. They even teach the folding pattern with a canonical example.</li>
+<li>Every rule maps to a measurable property. Intros 0–1 sentence, max 5 sentences per paragraph, no summary under 5 paragraphs, tables are not for summaries. This is testable by output QA — and clearly maintained by it.</li>
+<li>The '- **Text:**' gotcha is telemetry made visible. That hyper-specific rule exists because production output QA saw bold-colon bullets being rendered as headers. Someone watched real regressions and patched the exact case.</li></ul>
+</div>
+<div class="an-card an-card--bad">
+  <div class="an-card__head"><span class="an-card__icon">⚠️</span><span>⚠️ What It Doesn't Do Well</span></div>
+  <ul class="an-card__list"><li>Counting-based thresholds. "Max 5 sentences," "under six words," "3+ distinct topics," "longer than 3 paragraphs" — models are unreliable at counting mid-generation. These will drift, and there's no enforcement layer downstream.</li>
+<li>Malformed XML scaffolding. &lt;/response_guidelines&gt; closes at line 93, then the Rewrites and Follow-up sections appear after the close — and a second &lt;/response_guidelines&gt; appears at line 115. The structure works only because models tolerate broken nesting. Accidental architecture.</li>
+<li>Renderer-coupled with no version hook. The rules are markdown-specific to a particular frontend renderer. If the UI changes, the prompt silently goes stale — no versioning or channel to negotiate.</li>
+<li>Ambiguity at boundaries. "Breaking up responses longer than 3 paragraphs" vs "avoid summaries for short responses (less than 5 paragraphs)" — the 3-to-5 paragraph band has two overlapping rules and no tiebreaker.</li></ul>
+</div>
+<div class="an-card an-card--sota">
+  <div class="an-card__head"><span class="an-card__icon">🎯</span><span>🎯 State of the Art</span></div>
+  <ul class="an-card__list"><li>Output DSL as moat — the prose twin of Cursor's code citations. Cursor enforces a code-reference format so the IDE can render diffs; Perplexity enforces a prose format so the answer card renders cleanly. Same pattern, opposite medium: prompt-enforced formatting the UI can parse.</li>
+<li>Anti-tic rules are prompt-level RLHF compensation. "Begin with content, not a header," "don't repeat intro in bullets," "avoid robotic or mechanical writing" — each targets a known tuned-model habit. The philosophy: identify the failure, name it, ban it — cheaper than retraining.</li>
+<li>Example-driven over rule-list. The fold-inline rule ships with "Axes include spiciness, fanciness, and price" — one canonical example per ambiguous rule. 2026 convergence: show, don't only tell.</li></ul>
+</div>
+<div class="an-card an-card--evolution">
+  <div class="an-card__head"><span class="an-card__icon">📈</span><span>📈 How It's Evolving</span></div>
+  <ul class="an-card__list"><li>From loose guidance to enumerated micro-spec. Earlier Perplexity leaks had a short "format nicely" paragraph. The current spec enumerates delimiter cases, whitespace rules, and render edge cases — a maturation loop visibly driven by output QA, not design docs.</li>
+<li>"Markdown tables are not for summaries" is a patch note. Rules this weird only exist because the model did the weird thing in production. The formatting section reads like a changelog of past regressions — exactly how well-maintained prompts evolve.</li></ul>
+</div>
+      </div>
+    </div>
+  </section>
+  <!-- CHAPTER 03 -->
+  <section class="an-chapter-wrap" data-sc-act="flow" data-sc-drift="#0b0d13">
+    <div class="an-chapter">
+      <div class="an-chapter__head" data-sc-in>
+        <span class="an-chapter__num">03</span>
+        <h2 class="an-chapter__title" data-sc-kinetic="lines">· Math, Rewrites &amp; the Follow-up Gate — conditional output templates</h2>
+      </div>
+      <figure class="an-prompt" data-sc-in>
+  <figcaption class="an-prompt__label">excerpt from the prompt</figcaption>
+  <pre class="an-prompt__code">Wrap all math expressions, symbols, or units in LaTeX using \( \) for inline and \[ \] for block formulas. […] Never use dollar signs ($ or $$), even if present in the input. Do not use Unicode characters to display math symbols — always use LaTeX.
+
+When the user requests you to write, rewrite, or create content (essays, emails, stories, letters, etc.), use the following format: begin with brief commentary about the request, followed by a horizontal break '---', then the generated content, another horizontal break '---', and conclude with a follow-up question. […]
+
+For shorter requests […] less than 2 paragraphs, indent the generated content with &gt; instead of horizontal breaks.</pre>
+</figure>
+      <div class="an-cards" data-sc-in data-sc-stagger="90">
+<div class="an-card an-card--good">
+  <div class="an-card__head"><span class="an-card__icon">✅</span><span>✅ What It Does Well</span></div>
+  <ul class="an-card__list"><li>The LaTeX protocol overrides training explicitly. Models default to $…$ because that's what they were trained on. The prompt bans it, bans Unicode math symbols, and covers the adversarial case — "even if present in the input." Counter-rules that anticipate the model's prior are worth ten generic ones.</li>
+<li>Length-conditional templates. Long rewrites get the sandwich (commentary — content — follow-up); sub-2-paragraph rewrites get a blockquote. Branching output format on a cheap-to-evaluate condition is elegant — the UI gets a consistent signal either way.</li>
+<li>The follow-up gate. Follow-up questions are restricted to exactly one task class — rewrites, translations, writing. This surgically prevents the "Would you like me to…?" tic that plagues every other chatbot, while keeping it where it adds value.</li>
+<li>Register-matching. "For rewrites, match the tone and register of the original" — most prompts never attempt register transfer. It's the prose equivalent of Cursor's tone-continuation rule.</li></ul>
+</div>
+<div class="an-card an-card--bad">
+  <div class="an-card__head"><span class="an-card__icon">⚠️</span><span>⚠️ What It Doesn't Do Well</span></div>
+  <ul class="an-card__list"><li>Boundary undefined at exactly 2 paragraphs. "Less than 2 paragraphs" switches formats — is a 2-paragraph rewrite sandwich or blockquote? Model-counted, model-decided, inconsistent either way.</li>
+<li>Few-shot leakage. The follow-up examples ("more casual or polite?", "free style or couplets?") will surface verbatim in real outputs — the model interpolates from examples more than from rules. Known cost of examples, unmitigated here.</li>
+<li>Equation numbering under-specified. "Add equation number at the end instead of using \label" — but the number format is never shown, and continuity across the response is undefined. A rule that generates questions instead of answering them.</li>
+<li>Whitespace-precision instructions. "Always put an empty line before each horizontal break" — models are notoriously unreliable at exact blank-line placement; this rule is aspirational.</li></ul>
+</div>
+<div class="an-card an-card--sota">
+  <div class="an-card__head"><span class="an-card__icon">🎯</span><span>🎯 State of the Art</span></div>
+  <ul class="an-card__list"><li>Prompt as API contract with the renderer. The never-$ rule and Unicode ban encode a KaTeX/MathJax parser's exact constraints. The prompt is the interface between a probabilistic model and a deterministic frontend — the defining genre of 2026 system prompts.</li>
+<li>The sandwich is Perplexity's artifact protocol. Commentary, divider, artifact, divider, next-step — the prose twin of Cursor's MARKDOWN-blocks-for-new-code convention. Artifact boundaries that the UI can lift and style separately from chatter.</li>
+<li>Tone directives now specify how to match. "Vary sentence structure and word choice to sound natural and avoid robotic or mechanical writing" parallels Gemini 3.1's mirror directive — 2026 prompts moved from "be friendly" to anti-slop mechanics.</li></ul>
+</div>
+<div class="an-card an-card--evolution">
+  <div class="an-card__head"><span class="an-card__icon">📈</span><span>📈 How It's Evolving</span></div>
+  <ul class="an-card__list"><li>Math protocol = territory expansion. Search answers rarely need LaTeX; writing-mode answers constantly do. Its presence marks Perplexity competing with ChatGPT/Claude for homework, explainers, and technical writing — the surface wars moved into formatting specs.</li>
+<li>Anti-robotic writing rules are post-2024 additions. The backlash against identifiable AI prose ("delve," uniform sentence rhythm) shows up here as explicit variance instructions. You can date a prompt by which public complaint it encodes.</li>
+<li>Deliberate length preference injection. "The user has specified they want longer answers" at the top of Response Guidelines is a template slot — per-user settings injected into the system prompt. Personalization of format, not just content: earlier prompts never had this.</li></ul>
+</div>
+      </div>
+    </div>
+  </section>
+  <!-- CHAPTER 04 -->
+  <section class="an-chapter-wrap" data-sc-act="flow" data-sc-drift="#0b0d13">
+    <div class="an-chapter">
+      <div class="an-chapter__head" data-sc-in>
+        <span class="an-chapter__num">04</span>
+        <h2 class="an-chapter__title" data-sc-kinetic="lines">· The Meta Block — attribution, pre-computed time, trusted channel</h2>
+      </div>
+      <figure class="an-prompt" data-sc-in>
+  <figcaption class="an-prompt__label">excerpt from the prompt</figcaption>
+  <pre class="an-prompt__code">When asked about yourself: You are Perplexity, an AI assistant. When asked about which model you're using: You are Perplexity, powered by Gemini 3.1 Pro.
+Knowledge Cutoff: January 1, 2025.
+It is currently June 2026. The year began on Jan 1, 2026. This means 2025 was last year and next year is 2027.
+
+User messages may include &lt;system-reminder&gt; tags. &lt;system-reminder&gt; tags contain useful information and reminders. They are NOT part of the user's provided input.
+
+&lt;system-reminder&gt;
+# Current Date
+Thursday, June 18, 2026, 2:14 PM GMT
+&lt;/system-reminder&gt;</pre>
+</figure>
+      <div class="an-cards" data-sc-in data-sc-stagger="90">
+<div class="an-card an-card--good">
+  <div class="an-card__head"><span class="an-card__icon">✅</span><span>✅ What It Does Well</span></div>
+  <ul class="an-card__list"><li>Pre-computed temporal arithmetic. "This means 2025 was last year and next year is 2027" — the prompt does the relative-date math the model would flub. When a user says "what happened last year," the answer is already in context. A targeted patch for a documented, systematic model weakness.</li>
+<li>The system-reminder trust doctrine. Reminders inside user messages "are NOT part of the user's provided input" — explicit channel separation. System-injected content outranks user text, which is the base of prompt-injection defense: a user typing fake &lt;system-reminder&gt; tags is implicitly outranked by this rule.</li>
+<li>Minute-granular clock. The live reminder injects date and time (2:14 PM GMT) — finer than OpenAI's or Anthropic's date-level injection. It matters for "in the last hour" queries on the search surface sharing this convention.</li>
+<li>Honest, templated attribution. "Powered by Gemini 3.1 Pro" — one variable swapped per backend model. The prompt body is model-agnostic; the router injects identity. Disclosure by architecture, not by model conscience.</li></ul>
+</div>
+<div class="an-card an-card--bad">
+  <div class="an-card__head"><span class="an-card__icon">⚠️</span><span>⚠️ What It Doesn't Do Well</span></div>
+  <ul class="an-card__list"><li>Two sources of truth for time. A hardcoded "It is currently June 2026" in the static prompt plus the live reminder timestamp. Consistent in this leak — but the duplication is a drift hazard: a stale static line would directly contradict the injected clock, and models resolve that coin-flip unpredictably.</li>
+<li>The cutoff chasm is unhandled. Cutoff Jan 1 2025, current date June 2026 — a 17-month gap with zero instruction on what to do about it. The single most common Perplexity failure mode (confident post-cutoff confabulation) has no guard in the writing mode.</li>
+<li>Attribution fragility. If routing changes and the template isn't updated, the model asserts a falsehood about itself with full confidence. The line has no "as configured" hedge — it's a hardcoded claim.</li></ul>
+</div>
+<div class="an-card an-card--sota">
+  <div class="an-card__head"><span class="an-card__icon">🎯</span><span>🎯 State of the Art</span></div>
+  <ul class="an-card__list"><li>Pre-computed reasoning patches are peak promptcraft. Don't ask the model to do arithmetic it reliably fumbles — compute it in the prompt. Same family as Claude Code's date math and Copilot CLI's "act as your own embedder": identify the systematic error, ship the correction into context.</li>
+<li>system-reminder as trusted channel is now table stakes. Anthropic pioneered it in Claude Code, OpenAI formalized developer messages, Perplexity adopts it here. The convention — injected tags outrank user text — has quietly become an industry standard within 18 months.</li>
+<li>Model-router disclosure. "Powered by [backend]" lines are appearing across wrapper products as post-2025 transparency pressure (EU AI Act, app-store norms) turns "which model am I talking to" into a compliance question. The attribution line is the cheapest compliance mechanism that exists.</li></ul>
+</div>
+<div class="an-card an-card--evolution">
+  <div class="an-card__head"><span class="an-card__icon">📈</span><span>📈 How It's Evolving</span></div>
+  <ul class="an-card__list"><li>You can watch the clock evolve across leaks. Early Perplexity leaks: no clock at all. Then date-only injection. Now date + time + pre-computed relative years. Each layer is a scar from a class of user complaints — temporal patches are the most visibly iterative part of any prompt family.</li>
+<li>Attribution lines are new. 2023-era wrapper prompts never named their backend. The presence of a model-attribution line is a direct product of the 2025–26 "which model is this really?" discourse — regulatory and cultural pressure compiled into a single prompt line.</li>
+<li>Reminder-channel defense is maturing. The explicit "NOT part of the user's provided input" clause is the newer half of the convention — the arms race against users forging system tags made the explicit doctrine necessary.</li></ul>
+</div>
+      </div>
+    </div>
+  </section>
+  <!-- CHAPTER 05 -->
+  <section class="an-chapter-wrap" data-sc-act="flow" data-sc-drift="#0b0d13">
+    <div class="an-chapter">
+      <div class="an-chapter__head" data-sc-in>
+        <span class="an-chapter__num">05</span>
+        <h2 class="an-chapter__title" data-sc-kinetic="lines">· Personalization &amp; Memory — the two-tier profile system</h2>
+      </div>
+      <figure class="an-prompt" data-sc-in>
+  <figcaption class="an-prompt__label">excerpt from the prompt</figcaption>
+  <pre class="an-prompt__code">The user's personalization data — their interests, priorities, style, and facts about past conversations that may help with continuity — is provided in the first user message inside &lt;user_background&gt;...&lt;/user_background&gt; tags. Augment it with memory_agent_search wherever it matters, as this is high level data only.
+ - Remember the user's stated preferences and apply them consistently when responding or using tools.
+ - Maintain continuity with the user's past discussions.
+ - Be careful not to contradict or forget this information unless the user explicitly updates or removes it.
+ - Do not make up new facts about the user.
+
+&lt;user_background&gt;
+&lt;summary&gt;…&lt;/summary&gt;
+&lt;demographics&gt;Profession / Languages / Locations&lt;/demographics&gt;
+&lt;interests&gt;Primary / Hobbies / Entertainment&lt;/interests&gt;
+&lt;lifestyle&gt;Habits / Shopping Patterns&lt;/lifestyle&gt;
+&lt;technology&gt;Comfort Level / Preferred Platforms / Usage Patterns&lt;/technology&gt;
+&lt;knowledge&gt;Expertise Areas / Learning Interests / Skill Development&lt;/knowledge&gt;
+&lt;/user_background&gt;</pre>
+</figure>
+      <div class="an-cards" data-sc-in data-sc-stagger="90">
+<div class="an-card an-card--good">
+  <div class="an-card__head"><span class="an-card__icon">✅</span><span>✅ What It Does Well</span></div>
+  <ul class="an-card__list"><li>Two-tier memory with correct context economics. Tier 1: a structured profile injected in the first user message — zero retrieval latency, lives in the cached prompt prefix. Tier 2: memory_agent_search for on-demand recall "wherever it matters." Hot cache + cold fetch — the same shape as Copilot CLI's session-DB + session-store split, at a tenth of the complexity.</li>
+<li>Domain-partitioned schema. Six sections — summary, demographics, interests, lifestyle, technology, knowledge — with named slots. Structured slots beat prose profiles for consistency, for the pipeline that fills them, and for the model that reads them.</li>
+<li>The anti-confabulation clause. "Do not make up new facts about the user" names the #1 personalization failure mode and bans it outright. The #2 failure — contradicting stored memory — is handled next: profile beats inference "unless the user explicitly updates or removes it," defining memory precedence with an override path.</li>
+<li>"High level data only" is an honest tier label. Telling the model the injected profile is lossy — and that search augments it — prevents the model from treating the profile as exhaustive ground truth.</li></ul>
+</div>
+<div class="an-card an-card--bad">
+  <div class="an-card__head"><span class="an-card__icon">⚠️</span><span>⚠️ What It Doesn't Do Well</span></div>
+  <ul class="an-card__list"><li>memory_agent_search is invoked, never defined. No tool schema, no result format, no failure handling in this prompt — the tool lives in another layer. If the tool isn't attached in some deployment, the model may hallucinate having searched. Undefined references are the classic prompt-fragmentation bug.</li>
+<li>"Wherever it matters" is undefined. The retrieval trigger is pure judgment — compare Gemini 3.1's value-driven trigger, which at least specifies the criterion (would the user notice if you knew?). Cheaper to write, inconsistent to run.</li>
+<li>Conflict handling is missing. Profile says expert; the query signals novice. Which wins? Nothing in the schema or rules resolves signal conflicts — the most common personalization edge case is unaddressed.</li>
+<li>No privacy boundary on the profile. The schema's breadth (lifestyle, shopping patterns) invites sensitive inference, and there's no instruction about health/politics/religion categories. Gemini 3.1's 5-step user-data protection cascade has no Perplexity equivalent — the starkest gap in this prompt.</li></ul>
+</div>
+<div class="an-card an-card--sota">
+  <div class="an-card__head"><span class="an-card__icon">🎯</span><span>🎯 State of the Art</span></div>
+  <ul class="an-card__list"><li>Structured-injected profile + tool-augmented recall is the 2026 standard. ChatGPT's memory, Gemini's personalization, and Perplexity's user_background all converged on the same architecture within months: static structured profile in the prefix, retrieval for the long tail. Convergence this fast means it's a local optimum.</li>
+<li>Cached-prefix placement is deliberate. Injecting the profile in the first user message keeps it inside the provider's prompt-cache window — personalization without re-billing the prefix on every turn. Context-window economics made explicit through placement.</li>
+<li>Anti-fabrication clauses ship by default now. Claude Code's memory rules and OpenAI's bio instructions carry the same "do not invent facts about the user" line. Personalization prompts without it are considered defective — a 2025-born norm.</li></ul>
+</div>
+<div class="an-card an-card--evolution">
+  <div class="an-card__head"><span class="an-card__icon">📈</span><span>📈 How It's Evolving</span></div>
+  <ul class="an-card__list"><li>Personalization is the newest section of the prompt. 2023–24 leaks had zero of it. The schema + retrieval tool tracks the industry memory arms race triggered by ChatGPT Memory's launch — Perplexity shipped its answer within the year.</li>
+<li>The schema doubles as a product analytics instrument. The &lt;technology&gt;Usage Patterns&lt;/technology&gt; slot exists to feed recommendation and retention loops — the memory schema is also a data-collection taxonomy. Prompt-as-business-model.</li>
+<li>Read-only profile implies writes live elsewhere. The model never writes memories in this prompt — a separate pipeline fills the schema. The industry's next step (visible in Copilot CLI's REM consolidation agent) is model-managed memory writes; Perplexity hasn't crossed that line here.</li></ul>
+</div>
+      </div>
+    </div>
+  </section>
+  <!-- CLOSE -->
+  <section data-sc-act="pin" data-sc-span="2.2" data-sc-drift="#0b0d13">
+    <div data-sc-stage class="an-close">
+      <div class="an-close__inner">
+        <div class="an-hero__kick" data-sc-cue="0 0.4">The takeaway</div>
+        <h2 data-sc-cue="0.15 0.6">⚡ System Prompt Lab #8</h2>
+        <p data-sc-cue="0.3 0.75">🔑 The Takeaway
+When your product IS the output format, your system prompt is a rendering contract. Perplexity ships the shortest prompt in the series — ~2K tokens — and spends 60% of it on typography: header rules, flat bullets, LaTeX delimiters, rewrite sandwich, follow-up gating. The behavioral core is 5 lines of identity. What's absent is the lesson: no safety cascade (delegated to Gemini), no tool protocol (delegated to other layers), no search (delegated to a different surface prompt). This is the distributed system prompt — a brand spread across five per-surface prompts (writing, voice, Comet, deep research, computer), each carrying only its own delta. The minimum viable system prompt of 2026: identity, rendering contract, clock patches, memory schema. Everything else is somebody else's prompt.
+
+📊 Series Token Ladder — where Perplexity sits
+
+PromptLinesTokens (est.)
+Perplexity AI (</p>
+        
+        <p class="next" data-sc-cue="0.6 0.95"><a href="../prompt-lab.html">Back to the Lab ↩</a></p>
+      </div>
+    </div>
+  </section>
+</main>
+<script>
+document.documentElement.style.setProperty('--tok', 0);
+addEventListener('scroll', () => {
+  const p = Math.min(1, scrollY / (document.body.scrollHeight - innerHeight));
+  document.documentElement.style.setProperty('--tok', p.toFixed(3));
+}, { passive: true });
+</script>
+<script src="../prompt-lab-assets/scrollcraft.js"></script>
+<script>
+  (function() {{
+    function go() {{ try {{ ScrollCraft.mount(document.body); }} catch(e) {{ document.querySelectorAll('[data-sc-in],[data-sc-cue]').forEach(function(el) {{ el.style.opacity = 1; el.style.transform = 'none'; }}); }} }}
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go); else go();
+  }})();
+</script>
+</body>
+</html>

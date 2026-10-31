@@ -1,0 +1,35 @@
+{
+  "model": "grok-4-6",
+  "status": "ok",
+  "prompt_tokens": 29327,
+  "completion_tokens": 2955,
+  "total_tokens": 32282,
+  "cost_usd": 0.086666,
+  "latency": 54.7,
+  "verdict": {
+    "rankings": [
+      {
+        "model": "claude-opus-4-8-fast",
+        "substance": 81,
+        "design": 86,
+        "note": "Elegant magazine essay with a clean LLM-vs-world-model distinction, six applications, a structural-shift table, and a strong 'hypothesis engine not truth engine' close. Prose is polished but thinner than the others: applications stay high-level, no ML lineage, few concrete rollouts. Design is restrained and typographically excellent (drop cap, gold quotes, definition box, 01–05 numbering) but less distinctive than the two Fable pieces."
+      },
+      {
+        "model": "claude-fable-5",
+        "substance": 87,
+        "design": 88,
+        "note": "Sharper strategic argument than Opus: evidence as portfolio optimization, counterfactual impact as the missing CFO metric, 'astrology with a GPU budget.' Six applications plus four cards, four identity shifts, three failure modes. Memorable lines throughout. Still less function-by-function and less technically grounded than 5.1. Design is cohesive teal/gold/cream with a strong dark hero, card grid, and well-crafted table—more visual personality than Opus, slightly less ambitious than 5.1."
+      },
+      {
+        "model": "claude-fable-5-1",
+        "substance": 95,
+        "design": 93,
+        "note": "Best answer to applications + transformation by a wide margin: encoder/dynamics/decoder definition, Ha–Schmidhuber/Dreamer/JEPA lineage, hybrid-systems honesty for 2026, ten function-level applications with specific rollouts (cardiometabolic evidence policy, belief-dynamics ethics, MSL transcript), then epistemology/roles/metrics/org politics. Failure modes and a 2026–2029 sequence are unusually serious. Design is the most crafted—night masthead, Observe→Act loop, CSS-counter apps, mono rehearsal, timeline, print CSS—serving the argument rather than decorating it."
+      }
+    ],
+    "overall_winner": "claude-fable-5-1",
+    "runner_up": "claude-fable-5",
+    "summary": "claude-fable-5-1 wins both axes: it is the only piece that treats world models as a real ML object, maps them onto medical affairs function by function with testable examples, and then follows through on transformation (plan-as-prediction, insights-as-state, custodianship of a shared disease model) plus governance and a staged build path. claude-fable-5 is the runner-up—punchier and more economically sharp than Opus, with a more distinctive UI, but still an essay of theses rather than a working map. Opus 4.8 Fast is the most classically written of the three and a very competent editorial layout, yet it stays one abstraction layer above the job."
+  },
+  "raw": "{\n  \"rankings\": [\n    {\"model\": \"claude-opus-4-8-fast\", \"substance\": 81, \"design\": 86, \"note\": \"Elegant magazine essay with a clean LLM-vs-world-model distinction, six applications, a structural-shift table, and a strong 'hypothesis engine not truth engine' close. Prose is polished but thinner than the others: applications stay high-level, no ML lineage, few concrete rollouts. Design is restrained and typographically excellent (drop cap, gold quotes, definition box, 01–05 numbering) but less distinctive than the two Fable pieces.\"},\n    {\"model\": \"claude-fable-5\", \"substance\": 87, \"design\": 88, \"note\": \"Sharper strategic argument than Opus: evidence as portfolio optimization, counterfactual impact as the missing CFO metric, 'astrology with a GPU budget.' Six applications plus four cards, four identity shifts, three failure modes. Memorable lines throughout. Still less function-by-function and less technically grounded than 5.1. Design is cohesive teal/gold/cream with a strong dark hero, card grid, and well-crafted table—more visual personality than Opus, slightly less ambitious than 5.1.\"},\n    {\"model\": \"claude-fable-5-1\", \"substance\": 95, \"design\": 93, \"note\": \"Best answer to applications + transformation by a wide margin: encoder/dynamics/decoder definition, Ha–Schmidhuber/Dreamer/JEPA lineage, hybrid-systems honesty for 2026, ten function-level applications with specific rollouts (cardiometabolic evidence policy, belief-dynamics ethics, MSL transcript), then epistemology/roles/metrics/org politics. Failure modes and a 2026–2029 sequence are unusually serious. Design is the most crafted—night masthead, Observe→Act loop, CSS-counter apps, mono rehearsal, timeline, print CSS—serving the argument rather than decorating it.\"}\n  ],\n  \"overall_winner\": \"claude-fable-5-1\",\n  \"runner_up\": \"claude-fable-5\",\n  \"summary\": \"claude-fable-5-1 wins both axes: it is the only piece that treats world models as a real ML object, maps them onto medical affairs function by function with testable examples, and then follows through on transformation (plan-as-prediction, insights-as-state, custodianship of a shared disease model) plus governance and a staged build path. claude-fable-5 is the runner-up—punchier and more economically sharp than Opus, with a more distinctive UI, but still an essay of theses rather than a working map. Opus 4.8 Fast is the most classically written of the three and a very competent editorial layout, yet it stays one abstraction layer above the job.\"\n}"
+}

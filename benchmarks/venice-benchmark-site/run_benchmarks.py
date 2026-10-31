@@ -40,6 +40,12 @@ RESULTS_PATH = Path("data") / "results.json"
 # spamming (or to enforce a fairness budget for an apples-to-apples run).
 MAX_TOKENS = 32768
 TEMPERATURE = 0.5
+# Models that reject any non-default `temperature` (the API only accepts the
+# default value 1). Omit the field entirely for these rather than sending 0.5.
+TEMPERATURE_LOCKED_MODELS = {"openai-gpt-56-luna", "openai-gpt-6-astra", "openai-gpt-6-astra-pro", "openai-gpt-6-luna"}
+# Models whose default reasoning_effort is verbose enough to hang the read
+# timeout; force a lower effort on core tracks so they complete.
+REASONING_EFFORT_LOW_MODELS = {"mercury-2-5", "mercury-3", "deepseek-v4-1-flash", "deepseek-v4-1-flash-1017", "grok-4-7", "openai-gpt-6-astra-pro", "openai-gpt-6-sol", "openai-gpt-6-luna", "xiaomi-mimo-v2-6-flash", "openai-gpt-61-sol", "openai-gpt-61-sol-ultrafast", "abliteration-abliterated-model-large-v2", "qwen3-235b-a22b-thinking-2507", "abliteration-abliterated-model-large-flash", "kimi-k3-1-pro", "kimi-k3-1-pro-highspeed", "openai-gpt-61-terra", "deepseek-v4-1-flash-1017-uncensored"}
 RATE_LIMIT_SLEEP_SECONDS = 1.0
 # Reasoning models on long-context prompts can take several minutes. The 180 s
 # reading timeout used to be the bottleneck for kimi-k3 / opus benchmarks.
@@ -55,6 +61,23 @@ MODEL_BENCHMARK_LIMITS = {}
 # Approximate fallback pricing (USD per 1M tokens: input, output).
 # Used if the /models endpoint does not return pricing.
 FALLBACK_PRICING = {
+    "stealth-ox-alpha": {"input": 0.0, "output": 0.0},
+    "claude-haiku-5-5":                    {"input": 0.125, "output": 0.625},
+    "deepseek-v4-1-flash-uncensored":      {"input": 0.30,  "output": 1.20},
+    "abliteration-abliterated-model-large-v2": {"input": 3.00, "output": 5.00},
+    "muse-wonder":                          {"input": 5.00,  "output": 25.00},
+    "muse-spark-open":                      {"input": 1.5625, "output": 5.3125},
+    "gemini-4-argon":                       {"input": 2.50,  "output": 12.50},
+    "openai-gpt-61-sol-ultrafast":          {"input": 12.00, "output": 60.00},
+    "openai-gpt-61-terra":                  {"input": 1.00, "output": 5.00},
+    "hy4-preview":                          {"input": 1.0425, "output": 3.12625},
+    "qwen3-6-35b-a3b":                      {"input": 0.10,  "output": 1.00},
+    "gemini-3-5-flash-lite":                {"input": 0.375, "output": 3.125},
+    "deepseek-v4-1-flash-1017":             {"input": 0.33,  "output": 1.32},
+    "deepseek-v4-1-flash-1017-uncensored":  {"input": 0.33,  "output": 1.32},
+    "kimi-k3-1-pro":                        {"input": 3.00,  "output": 15.00},
+    "kimi-k3-1-pro-highspeed":              {"input": 6.00,  "output": 30.00},
+    "abliteration-abliterated-model-large-flash": {"input": 1.25, "output": 2.50},
     "openai-gpt-56-luna":      {"input": 1.25,  "output": 7.5},
     "openai-gpt-56-luna-pro":  {"input": 1.25,  "output": 7.5},
     "openai-gpt-56-sol":       {"input": 6.25,  "output": 37.5},
@@ -63,6 +86,7 @@ FALLBACK_PRICING = {
     "openai-gpt-56-terra-pro": {"input": 3.125, "output": 18.75},
     "openai-gpt-55":           {"input": 10.00, "output": 30.00},
     "claude-fable-5":          {"input": 8.00,  "output": 24.00},
+    "claude-fable-5-1":        {"input": 10.00, "output": 50.00},
     "claude-opus-4-8":         {"input": 15.00, "output": 75.00},
     "zai-org-glm-5-2":         {"input": 1.00,  "output": 3.00},
     "deepseek-v4-pro":         {"input": 0.60,  "output": 2.20},
@@ -78,6 +102,97 @@ FALLBACK_PRICING = {
     "gemini-3-6-flash":        {"input": 1.875, "output": 9.375},
     "grok-4-6":                {"input": 2.27,  "output": 6.80},
     "nvidia-nemotron-3-5-lightning-30b-a3b": {"input": 0.10, "output": 0.25},
+    "nvidia-nemotron-3-5-super-vl-120b-a12b": {"input": 0.25, "output": 1.25},
+    # ---- Phase 2: new models ----
+    "gemini-3-7-flash":              {"input": 1.875, "output": 9.375},
+    "gemini-3-8-flash":              {"input": 0.9375, "output": 4.6875},
+    "qwen-3-7-max":                  {"input": 2.50,  "output": 7.50},
+    "qwen-3-7-plus":                 {"input": 2.50,  "output": 7.50},
+    "grok-4-20":                     {"input": 5.00,  "output": 15.00},
+    "claude-opus-5-fast":            {"input": 12.00, "output": 60.00},
+    "claude-opus-4-8-fast":          {"input": 12.00, "output": 60.00},
+    "deepseek-v4-flash":             {"input": 0.15,  "output": 0.30},
+    "aion-labs-aion-3-0":            {"input": 2.00,  "output": 6.00},
+    "aion-labs-aion-3-0-mini":       {"input": 0.50,  "output": 1.50},
+    "nvidia-nemotron-3-super-120b-a12b": {"input": 0.50, "output": 1.50},
+    "qwen3-235b-a22b-thinking-2507": {"input": 3.00,  "output": 9.00},
+    "minimax-m27":                   {"input": 0.50,  "output": 2.00},
+    # ---- 2026-08 additions (live /models pricing supersedes) ----
+    "z-ai-glm-5-3":                   {"input": 1.00,  "output": 3.00},
+    "qwen-3-8-27b":                   {"input": 0.50,  "output": 1.50},
+    "deepseek-v4-pro-0813":           {"input": 0.60,  "output": 2.20},
+    "z-ai-glm-5-3-flash":            {"input": 0.15,  "output": 0.50},
+    "openai-gpt-6-astra":            {"input": 12.5,  "output": 62.5},
+    # ---- 2026-09 additions ----
+    "mercury-2-5":                    {"input": 0.05,  "output": 0.1875},
+    "qwen-3-8-flash":                 {"input": 0.14,  "output": 0.49},
+    "deepseek-v4-1-flash":            {"input": 0.375, "output": 1.50},
+    "grok-4-7":                      {"input": 2.27,  "output": 6.80},
+    "openai-gpt-6-astra-pro":         {"input": 12.5,  "output": 62.5},
+    "claude-opus-5-5":                {"input": 4.8,   "output": 24.0},
+    "openai-gpt-6-sol":               {"input": 2.5,   "output": 12.5},
+    "openai-gpt-6-luna":              {"input": 0.125, "output": 0.625},
+    "xiaomi-mimo-v2-6-flash":         {"input": 0.175, "output": 0.35},
+    "claude-opus-5-5-fast":           {"input": 9.6,   "output": 48.0},
+    "claude-sonnet-5-5":              {"input": 3.75,  "output": 18.75},
+    "aion-labs-aion-3-5":             {"input": 3.75,  "output": 7.5},
+    "aion-labs-aion-3-5-mini":        {"input": 0.875, "output": 1.75},
+    "openai-gpt-61-sol":              {"input": 2.5,   "output": 12.5},
+    "mercury-3":                      {"input": 0.10,  "output": 0.35},
+    "minimax-m3-1-flash":             {"input": 0.1875, "output": 0.75},
+    # ---- 2026-10-31 auto-onboarding batch (live /models pricing snapshot) ----
+    "claude-opus-4-5": {"input": 5, "output": 25},
+    "claude-opus-4-6": {"input": 5, "output": 25},
+    "claude-opus-4-7": {"input": 5, "output": 25},
+    "claude-sonnet-4-6": {"input": 3, "output": 15},
+    "deepseek-v3.2": {"input": 0.33, "output": 0.48},
+    "gemini-3-1-pro-preview": {"input": 2.5, "output": 15},
+    "gemini-3-5-flash": {"input": 1.55, "output": 9.45},
+    "gemini-3-flash-preview": {"input": 0.7, "output": 3.75},
+    "gemma-4-uncensored": {"input": 0.1625, "output": 0.5},
+    "google-gemma-3-27b-it": {"input": 0.12, "output": 0.2},
+    "google-gemma-4-26b-a4b-it": {"input": 0.13, "output": 0.4},
+    "google-gemma-4-31b-it": {"input": 0.12, "output": 0.36},
+    "grok-4-20-multi-agent": {"input": 1.42, "output": 2.83},
+    "grok-4-3": {"input": 1.42, "output": 2.83},
+    "grok-build-0-1": {"input": 1, "output": 2},
+    "hermes-3-llama-3.1-405b": {"input": 1.1, "output": 3},
+    "kimi-k2-5": {"input": 0.56, "output": 3.5},
+    "kimi-k2-6": {"input": 0.75, "output": 3.5},
+    "kimi-k2-7-code": {"input": 0.75, "output": 3.5},
+    "llama-3.2-3b": {"input": 0.15, "output": 0.6},
+    "llama-3.3-70b": {"input": 0.7, "output": 2.8},
+    "mercury-2": {"input": 0.3125, "output": 0.9375},
+    "minimax-m25": {"input": 0.27, "output": 0.95},
+    "mistral-small-3-2-24b-instruct": {"input": 0.09375, "output": 0.25},
+    "nvidia-nemotron-3-nano-30b-a3b": {"input": 0.075, "output": 0.3},
+    "nvidia-nemotron-3-ultra-550b-a55b": {"input": 0.625, "output": 3.125},
+    "olafangensan-glm-4.7-flash-heretic": {"input": 0.07, "output": 0.4},
+    "openai-gpt-4o-2024-11-20": {"input": 2.5, "output": 10},
+    "openai-gpt-4o-mini-2024-07-18": {"input": 0.15, "output": 0.6},
+    "openai-gpt-52": {"input": 1.75, "output": 14},
+    "openai-gpt-53-codex": {"input": 1.75, "output": 14},
+    "openai-gpt-54": {"input": 2.5, "output": 15},
+    "openai-gpt-54-mini": {"input": 0.75, "output": 4.5},
+    "openai-gpt-oss-120b": {"input": 0.07, "output": 0.3},
+    "qwen-3-6-plus": {"input": 0.625, "output": 3.75},
+    "qwen3-235b-a22b-instruct-2507": {"input": 0.15, "output": 0.75},
+    "qwen3-5-35b-a3b": {"input": 0.15, "output": 1},
+    "qwen3-5-397b-a17b": {"input": 0.75, "output": 4.5},
+    "qwen3-6-27b": {"input": 0.325, "output": 3.25},
+    "qwen3-coder-480b-a35b-instruct-turbo": {"input": 0.35, "output": 1.5},
+    "qwen3-next-80b": {"input": 0.35, "output": 1.9},
+    "qwen3-vl-235b-a22b": {"input": 0.21, "output": 1.9},
+    "seed-2-1-turbo": {"input": 0.625, "output": 3.125},
+    "venice-uncensored-1-2": {"input": 0.2, "output": 0.9},
+    "venice-uncensored-role-play": {"input": 0.5, "output": 2},
+    "xiaomi-mimo-v2-5": {"input": 0.4, "output": 2},
+    "z-ai-glm-5-turbo": {"input": 1.2, "output": 4},
+    "z-ai-glm-5v-turbo": {"input": 1.5, "output": 5},
+    "zai-org-glm-4.6": {"input": 0.43, "output": 1.75},
+    "zai-org-glm-4.7": {"input": 0.55, "output": 2.65},
+    "zai-org-glm-5": {"input": 1, "output": 3.2},
+    "zai-org-glm-5-1": {"input": 1.54, "output": 4.84},
 }
 DEFAULT_PRICING = {"input": 5.00, "output": 15.00}
 
@@ -249,22 +364,100 @@ def score_intent_understanding(text: str) -> int:
 
 
 def score_one_shot_ui(text: str) -> int:
-    """Heuristic placeholder score in 70-95 range if it looks like a valid answer."""
-    if not text:
+    """Heuristic score for one-shot HTML generation (0-100).
+
+    Penalizes incomplete/near-empty responses. Rewards UI completeness,
+    not just tag presence. Empty or placeholder-only output scores 0.
+    """
+    if not text or not text.strip():
         return 0
     lower = text.lower()
-    checks = [
-        "<html" in lower or "<!doctype" in lower,
-        "<style" in lower or "css" in lower,
-        "<script" in lower or "javascript" in lower,
-        "button" in lower,
-        "focus" in lower and "score" in lower,
-    ]
-    hits = sum(checks)
-    if hits == 0:
+
+    # Structural completeness (35 points)
+    # A truly complete HTML page has these structural elements
+    has_doctype = "<!doctype" in lower
+    has_html_tag = "<html" in lower
+    has_head = "<head" in lower
+    has_body = "<body" in lower
+    has_closing_html = "</html>" in lower
+
+    structure_score = 0
+    if has_doctype and has_html_tag and has_head and has_body and has_closing_html:
+        structure_score = 35
+    elif has_doctype and has_html_tag and has_body and has_closing_html:
+        structure_score = 25
+    elif has_html_tag and has_body:
+        structure_score = 15
+    elif has_html_tag or has_doctype:
+        structure_score = 5
+
+    # If no HTML tag at all, this isn't generating a UI — score 0
+    if not has_html_tag:
         return 0
-    # Map 1..5 hits onto 70..95.
-    return 70 + round((hits - 1) * (25 / 4))
+
+    # Embedded CSS (15 points) — must have actual CSS rules, not just a <style> tag
+    css_rules_found = 0
+    if "<style" in lower:
+        # Rough heuristic: count CSS rule markers (curly braces)
+        style_start = lower.find("<style")
+        style_section = lower[style_start:lower.find("</style>", style_start)] if "</style>" in lower else lower[style_start:]
+        css_rules_found = style_section.count("{") + style_section.count("@")
+        if css_rules_found >= 3:
+            css_score = 15
+        elif css_rules_found >= 1:
+            css_score = 8
+        else:
+            css_score = 0
+    else:
+        css_score = 0
+
+    # Interactive JS (15 points)
+    js_found = "<script" in lower and "</script>" in lower
+    has_event = any(e in lower for e in ("onclick", "onchange", "oninput", "onsubmit", "addEventListener"))
+    if js_found and has_event:
+        js_score = 15
+    elif js_found:
+        js_score = 8
+    else:
+        js_score = 0
+
+    # Visual UI elements (20 points)
+    has_button = "button" in lower
+    has_form_input = "input" in lower or "<form" in lower
+    has_card = "card" in lower or "container" in lower
+    has_focus_display = ("focus" in lower or "score" in lower) or ("sparkline" in lower or "chart" in lower)
+    ui_score = sum([
+        5 if has_button else 0,
+        5 if has_form_input else 0,
+        5 if has_card else 0,
+        5 if has_focus_display else 0,
+    ])
+
+    # Responsiveness (5 points)
+    has_viewport = "viewport" in lower or "meta name" in lower
+    has_media_query = "@media" in lower
+    has_flex = "flex" in lower or "grid" in lower
+    responsive_score = 0
+    if has_viewport and has_media_query:
+        responsive_score = 5
+    elif has_viewport and has_flex:
+        responsive_score = 3
+    elif has_viewport:
+        responsive_score = 2
+
+    # Verbosity penalty (up to -10) — very long responses that still lack structure
+    length_penalty = 0
+    if len(text) > 3000 and (not has_head or not has_body):
+        length_penalty = -10
+
+    # Anti-windowing penalty (-10) — raw text with minor HTML interspersed
+    words = text.split()
+    html_ratio = sum(1 for w in words if w.startswith("<")) / max(len(words), 1)
+    if html_ratio < 0.15 and len(words) > 50:
+        length_penalty = min(length_penalty, -10)
+
+    total = structure_score + css_score + js_score + ui_score + responsive_score + length_penalty
+    return max(0, min(100, int(total)))
 
 
 
@@ -445,8 +638,11 @@ def call_venice(api_key: str, model_id: str, prompt: str) -> dict:
         "model": model_id,
         "messages": [{"role": "user", "content": prompt}],
         "max_tokens": MAX_TOKENS,
-        "temperature": TEMPERATURE,
     }
+    if model_id not in TEMPERATURE_LOCKED_MODELS:
+        payload["temperature"] = TEMPERATURE
+    if model_id in REASONING_EFFORT_LOW_MODELS:
+        payload["reasoning_effort"] = "low"
     headers = {
         "Authorization": f"Bearer {api_key}",
         "Content-Type": "application/json",
@@ -472,7 +668,12 @@ def call_venice(api_key: str, model_id: str, prompt: str) -> dict:
         content = ""
         choices = data.get("choices") or []
         if choices:
-            content = (choices[0].get("message") or {}).get("content") or ""
+            msg = (choices[0].get("message") or {})
+            content = msg.get("content") or ""
+            if not str(content).strip() and msg.get("reasoning_content"):
+                # Reasoning models (always-on thinking) burn the token budget on
+                # hidden reasoning and leave `content` empty; fall back like run_new_tracks.
+                content = msg.get("reasoning_content") or ""
         if not content.strip():
             return {
                 "status": "error",
@@ -636,7 +837,7 @@ def run(dry_run: bool, model_filter: str | None = None,
     if request_timeout_override is not None:
         REQUEST_TIMEOUT_SECONDS = request_timeout_override
 
-    api_key = os.environ.get(API_KEY_ENV, "")
+    api_key = os.environ.get("VENICE_API_KEY") or os.environ.get(API_KEY_ENV, "")
     pricing = dict(FALLBACK_PRICING)
 
     selected_models = MODELS
