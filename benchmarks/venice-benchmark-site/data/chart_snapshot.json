@@ -762,6 +762,20 @@
     }
   },
   {
+    "id": "claude-opus-4-5",
+    "disp": "Opus 4.5",
+    "viv": 78.5,
+    "scores": {
+      "intent-understanding": 70,
+      "one-shot-ui": 66,
+      "pharma-drug-interaction": 86,
+      "pharma-regulatory-comprehension": 80,
+      "startup-in-a-weekend": 100,
+      "value-density": 100,
+      "reverse-prompt-vision": 48
+    }
+  },
+  {
     "id": "deepseek-v4-1-flash-1017-uncensored",
     "disp": "DeepSeek V4.1 Flash 1017 Uncensored",
     "viv": 78.2,
