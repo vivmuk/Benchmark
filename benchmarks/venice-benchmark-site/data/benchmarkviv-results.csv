@@ -571,3 +571,15 @@ deepseek-v4-1-flash-1017-uncensored,DeepSeek V4.1 Flash 1017 Uncensored,pharma_r
 deepseek-v4-1-flash-1017-uncensored,DeepSeek V4.1 Flash 1017 Uncensored,startup_in_a_weekend,ok,100,72.82,1986,32768,34754,0.043909
 deepseek-v4-1-flash-1017-uncensored,DeepSeek V4.1 Flash 1017 Uncensored,value_density,ok,97,1.012,1912,129,2041,0.000801
 deepseek-v4-1-flash-1017-uncensored,DeepSeek V4.1 Flash 1017 Uncensored,reverse_prompt_vision,ok,60,2.447,2362,336,2698,0.003798
+claude-opus-4-5,Opus 4.5,intent_understanding,ok,70,15.32,1912,612,2524,0.02486
+claude-opus-4-5,Opus 4.5,one_shot_ui,ok,66,58.894,1922,5810,7732,0.15486
+claude-opus-4-5,Opus 4.5,pharma_drug_interaction,ok,86,29.713,2052,1872,3924,0.05706
+claude-opus-4-5,Opus 4.5,pharma_regulatory_comprehension,ok,80,44.36,2088,2225,4313,0.066065
+claude-opus-4-5,Opus 4.5,startup_in_a_weekend,ok,100,343.673,2151,26289,28440,0.66798
+claude-opus-4-5,Opus 4.5,value_density,ok,100,3.671,2072,120,2192,0.01336
+claude-opus-4-5,Opus 4.5,reverse_prompt_vision,ok,48,11.681,3155,332,3487,0.026396
+claude-fable-5-2,Fable 5.2,intent_understanding,ok,82,11.988,2759,766,3525,0.052712
+claude-fable-5-2,Fable 5.2,one_shot_ui,ok,95,72.885,2775,8834,11609,0.37556
+claude-fable-5-2,Fable 5.2,pharma_drug_interaction,ok,89,22.375,2968,2212,5180,0.112224
+claude-fable-5-2,Fable 5.2,pharma_regulatory_comprehension,ok,80,49.916,3018,5380,8398,0.239344
+claude-fable-5-2,Fable 5.2,startup_in_a_weekend,ok,94,121.014,3104,12111,15215,0.509272
