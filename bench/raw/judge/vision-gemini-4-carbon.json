@@ -1,0 +1,22 @@
+{
+ "claude-opus-5-5": {
+  "scores": {
+   "subjects": 8.0,
+   "layout": 6.0,
+   "colour": 7.0,
+   "style": 5.0,
+   "overall": 5.0
+  },
+  "note": "All key elements are present and roughly placed, but the recreation renders the traveller and alpaca much larger and closer, shrinks the saguaro and turns it fully neon pink, moves the monorail track toward the centre, uses a more illustrated digital-painting look instead of the photoreal original, "
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "subjects": 9.0,
+   "layout": 6.0,
+   "colour": 6.0,
+   "style": 7.0,
+   "overall": 5.0
+  },
+  "note": "Nearly all key elements are present, but the traveller and alpaca are much larger, the track follows a different route, and the recreation is brighter and more saturated."
+ }
+}

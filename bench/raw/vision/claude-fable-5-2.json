@@ -1,0 +1,17 @@
+{
+ "text": "Cinematic wide-angle sci-fi digital concept art, 16:9, photorealistic matte painting style. A futuristic desert city at dusk. Sky: deep indigo-navy at top with scattered tiny stars, fading through violet and magenta to glowing orange at the horizon on the right. Upper left: a huge thin crescent moon, lit on its lower-right edge, the dark disc faintly visible.\n\nCentre-right: three slender, tapering glass skyscrapers rising from a cluster of tiered, saucer-shaped retro-futuristic buildings with teal light bands and a small low skyline of lit buildings. The central tower is tallest, teal-glass, with a glowing cyan neon halo ring floating around its spire near the top. The left tower is shorter, teal, with a vertical cyan neon sign reading \"OASIS\" on its left side. The right tower is shorter, lit in purple-magenta neon. Four thin teal searchlight beams shoot diagonally into the sky from behind the city.\n\nLeft midground: on a dune crest, a lone figure seen from behind in a long dark red cloak stands beside a fluffy brown alpaca on his left, both looking toward the city, silhouetted in dim light.\n\nForeground: sweeping orange sand dunes with fine wind ripples, sand blowing off crests, a sharp dune ridge running diagonally from lower left.\n\nRight: an elevated monorail track with glowing amber edge-lights curving in an S-shape from the lower right toward the city, a sleek silver train on it. Beside it, a glowing turquoise oasis pool. Far right foreground: a tall saguaro cactus outlined with pink neon rim light, a small cactus behind it.\n\nWarm amber and teal palette, atmospheric haze, dramatic lighting.",
+ "reasoning_chars": 0,
+ "usage": {
+  "prompt_tokens": 1303,
+  "completion_tokens": 594,
+  "total_tokens": 1897,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 2.0647696247324347,
+ "t_first_content": 2.064770541153848,
+ "t_total": 8.051286332309246,
+ "cost": 0.034184
+}

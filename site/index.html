@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BenchmarkViv</title>
+<meta name="description" content="Five simple tests of the newest models on the Venice API: an alpaca walking, front-end design, image recreation, speed and value per token.">
+<link rel="icon" href="favicon.svg">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#alpaca">Benchmark<span>Viv</span></a>
+    <p class="tag">Five tests. Ten newest models on the Venice API. Every result shown.</p>
+  </div>
+  <nav class="tabs wrap" role="tablist" aria-label="Benchmarks">
+    <button role="tab" data-tab="alpaca">Alpaca walking</button>
+    <button role="tab" data-tab="design">Front-end design</button>
+    <button role="tab" data-tab="recreate">Image recreation</button>
+    <button role="tab" data-tab="speed">Tokens per second</button>
+    <button role="tab" data-tab="value">Value per token</button>
+  </nav>
+</header>
+<main class="wrap" id="main"></main>
+<footer class="wrap foot">
+  <p id="foot"></p>
+  <p>Model icons from <a href="https://github.com/lobehub/lobe-icons">Lobe Icons</a> (MIT). Previous site is kept on the <code>legacy-2026-11-16</code> branch.</p>
+</footer>
+<div class="modal" id="modal" hidden>
+  <div class="modal-bar"><strong id="modal-title"></strong><a id="modal-open" target="_blank" rel="noopener">Open in new tab</a><button id="modal-close" aria-label="Close">Close</button></div>
+  <iframe id="modal-frame" sandbox="allow-scripts" title="Model output"></iframe>
+</div>
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

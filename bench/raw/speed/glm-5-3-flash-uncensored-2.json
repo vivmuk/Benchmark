@@ -1,0 +1,20 @@
+{
+ "text": "A suspension bridge carries load along a carefully coordinated chain of elements, beginning at the deck and ending where the structure meets solid earth. Understanding that chain means following the forces step by step.\n\nThe deck itself is usually a relatively light structure of steel or concrete designed to carry traffic directly. When a truck rolls onto the deck, its weight presses downward on the roadway surface, which spans between floor beams spaced at regular intervals. Those beams transfer the concentrated wheel loads into longitudinal girders or a stiffening truss running the full length of the span. This stiffening system does more than distribute local loads; it also prevents the deck from undulating like a rope when traffic moves across it or wind pushes against it, keeping the roadway reasonably flat and stable under changing conditions.\n\nFrom the stiffened deck, the load passes upward through suspenders, sometimes called hangers, which are vertical cables or rods connecting the deck edges to the main cables above. Every suspender pulls on the main cable with a force equal to the weight of the deck section plus whatever live load sits on it at that point. Because the suspenders are evenly spaced, they convert what would be many separate point loads into a smooth, continuous loading on the main cables.\n\nThe main cables are the heart of the system. Draped between towers in a characteristic curve called a catenary, they cannot resist bending, only tension. The pull from hundreds of suspenders keeps them taut, and every pound of deck weight ultimately becomes tensile force flowing through these cables toward their two ends. That tension has both a vertical component, which supports the deck, and a horizontal component, which grows larger as the cable is pulled flatter.\n\nAt each end of a main cable, the story splits in two directions. Over the towers, the cables pass over saddles at the tower tops, pressing down with enormous force equal to the combined vertical pull of the cable on both sides of the tower. Each tower therefore acts like a giant column carrying perhaps half the total supported weight of the central span, delivering that compression straight down through its legs into massive pier foundations. These piers typically rest on bedrock or sit on deep piles driven into firm soil, so the ground beneath the towers receives the deck's weight directly.\n\nMeanwhile, the horizontal component of cable tension continues past the towers into the side spans, and eventually reaches the anchorages at each end of the bridge. An anchorage is a gigantic block of concrete, often weighing far more than everything else in the bridge combined, buried in the ground or tunneled into rock. The cable strands enter this mass and are splayed apart and gripped so that their pull is resisted by the sheer dead weight and bearing capacity of the anchorage against the earth. In effect, the anchorage converts the horizontal tension into a bearing pressure on the ground.\n\nSo the complete path is simple in principle: traffic and gravity press on the deck, the deck hangs from suspenders, suspenders tension the main cables, the cables bear down on towers that compress the ground below, and their tension is held fast by anchorages rooted in the earth. Every element plays one role in that unbroken journey of force from moving vehicles to immovable ground.",
+ "reasoning_chars": 236,
+ "usage": {
+  "prompt_tokens": 48,
+  "completion_tokens": 701,
+  "total_tokens": 749,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 52
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 1.1547113750129938,
+ "t_first_content": 1.340031792409718,
+ "t_total": 3.959212209098041,
+ "cost": 0.00039347000000000004
+}

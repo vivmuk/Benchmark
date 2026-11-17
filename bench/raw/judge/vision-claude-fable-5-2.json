@@ -1,0 +1,22 @@
+{
+ "claude-opus-5-5": {
+  "scores": {
+   "subjects": 9.0,
+   "layout": 6.0,
+   "colour": 7.0,
+   "style": 8.0,
+   "overall": 6.0
+  },
+  "note": "All key elements are present in a similar digital-painting style, but the recreation shifts the city right, enlarges the moon, moves the pool to centre-left of the track, pushes the cactus to the bottom-right edge, places the traveller and alpaca further right, and uses a more saturated purple-orang"
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "subjects": 10,
+   "layout": 6.0,
+   "colour": 7.0,
+   "style": 8.0,
+   "overall": 6.0
+  },
+  "note": "All key subjects are present, but the larger moon, shifted pool and dramatically rerouted monorail make the recreation noticeably different."
+ }
+}

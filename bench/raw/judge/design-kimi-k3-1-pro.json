@@ -1,0 +1,22 @@
+{
+ "claude-opus-5-5": {
+  "scores": {
+   "typography": 8.0,
+   "layout": 8.0,
+   "colour": 8.0,
+   "completeness": 9.0,
+   "originality": 7.0
+  },
+  "note": "A polished, cohesive page: tight grotesk headlines with a serif-italic accent, mono labels, a well-structured timetable and a coral-on-navy/cream palette, though the visible skip-link artifact, some tiny low-contrast microcopy and a familiar premium-template feel keep it short of exceptional."
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "typography": 8.0,
+   "layout": 9.0,
+   "colour": 8.0,
+   "completeness": 10,
+   "originality": 9.0
+  },
+  "note": "Distinctive train artwork and cohesive styling carry every required section, though tiny low-contrast text and a visible skip link reduce the polish."
+ }
+}

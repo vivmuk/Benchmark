@@ -1,0 +1,22 @@
+{
+ "claude-opus-5-5": {
+  "scores": {
+   "subjects": 7.0,
+   "layout": 6.0,
+   "colour": 6.0,
+   "style": 7.0,
+   "overall": 6.0
+  },
+  "note": "Every element is present, but the moon is nearly a full disc rather than a crescent, the cloak is purple rather than red, and the monorail track exits to the right instead of sweeping into the foreground; the figures and cactus are also larger, and the sky is darker with a weaker orange-purple gradi"
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "subjects": 9.0,
+   "layout": 6.0,
+   "colour": 6.0,
+   "style": 7.0,
+   "overall": 6.0
+  },
+  "note": "Nearly all key elements are present, but the traveller, train, pool and cactus shift in scale or position, and the recreation is darker and less warmly lit."
+ }
+}

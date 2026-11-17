@@ -1,0 +1,24 @@
+{
+ "text": "When a vehicle stands on a suspension bridge, its weight first presses on the roadway slab. The slab spreads that concentrated force into nearby beams and into the stiffening girder or truss that runs along the deck. These members also carry the deck\u2019s own weight. Because the deck has bending stiffness, a heavy wheel load is shared among several support points rather than being carried entirely by the hanger nearest the wheel. Depending on the bridge\u2019s construction, some load may also pass directly through the deck to towers, piers, or end supports.\n\nAt regular intervals, vertical or slightly inclined hangers connect the deck to the main cables. The deck pushes down on the hangers, stretching them, so each hanger carries its share of the load in tension. The hangers, in turn, pull down on the main cables. A cable cannot efficiently resist loads by bending as a beam does. Instead, it changes shape slightly and develops tension along its length. Its curved profile allows that tension to support the downward forces while keeping the deck at approximately its intended elevation. The stiffening girder remains important: it distributes concentrated loads, limits local sag between hangers, and helps control movement caused by traffic and wind.\n\nThe main cables deliver the accumulated forces to the towers and anchorages. Where a cable passes over a saddle at the top of a tower, its curved path produces a large downward force. The tower therefore works mainly as a compression member, much like a very tall column, and carries that force down to its foundation. Cable forces from the main span and side span largely balance one another horizontally, although uneven traffic, wind, temperature changes, or earthquakes can create imbalances. These effects can bend the tower and add horizontal forces that its foundation must resist.\n\nAt each end of a conventional suspension bridge, the main cable continues through the side span to an anchorage. The anchorage must resist the cable\u2019s enormous tension, including both its horizontal pull and any vertical component. A gravity anchorage uses the weight of a massive concrete block, together with friction and pressure against the surrounding ground, to prevent movement. Where suitable rock is available, cables may instead be secured to steel elements embedded in tunnels or sockets excavated into the rock. The anchorage does not merely stop the cable; it spreads the concentrated cable force over enough ground or rock to keep stresses within safe limits.\n\nThe load path reaches the ground through the tower foundations and anchorages. Spread footings, piles, or caissons transfer compression, horizontal shear, and overturning effects into soil or rock, while the anchorages mobilize the ground\u2019s weight and strength against cable tension. The ground then provides the reactions that balance the bridge\u2019s weight and applied loads. Thus, most of the deck\u2019s gravity load travels through the deck structure and hangers into cable tension, then becomes compression in the towers and anchoring forces at the cable ends before finally being dispersed into the earth. Wind and other sideways loads follow additional paths through the deck\u2019s lateral bracing, the cable system, towers, and foundations.",
+ "reasoning_chars": 5156,
+ "usage": {
+  "prompt_tokens": 121,
+  "completion_tokens": 1679,
+  "total_tokens": 1800,
+  "prompt_tokens_details": {
+   "cached_tokens": 64
+  },
+  "cache_read_input_tokens": 64,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 882,
+   "audio_tokens": 0,
+   "reasoning_tokens": 1060,
+   "rejected_prediction_tokens": 1506
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 0.6024622078984976,
+ "t_first_content": 6.6985473753884435,
+ "t_total": 9.705098249949515,
+ "cost": 0.017032
+}

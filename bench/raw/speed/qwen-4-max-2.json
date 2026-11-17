@@ -1,0 +1,20 @@
+{
+ "text": "Every kilogram on a suspension bridge \u2014 asphalt, railings, trucks, snow \u2014 ends up as pressure on soil or rock, but it takes a deliberately roundabout route to get there, and each stage of that route uses the material in the way it works best.\n\nThe load first enters the deck. Beneath the road surface lies a steel box girder or a stiffening truss, whose job is not to span the whole gap but to span the short distances between hanger attachments, typically ten to twenty metres apart. A wheel load bends the deck slightly over that short length and distributes itself among several hangers rather than one. The deck's stiffness also smooths the dips and ripples that a concentrated load would otherwise create in a very flexible cable, and it resists twisting in wind.\n\nEach hanger is a wire rope or rod working in pure tension. It pulls up on the deck and down on the main cable, handing the load upward. The main cable, built from thousands of high-strength galvanised wires bundled in parallel, has essentially no useful bending stiffness, so it cannot resist load by acting like a beam. Instead it changes the direction of its pull. Under a load spread evenly along the span it settles into a parabola, and at every point the tension in it can be split into a horizontal component that is the same everywhere and a vertical component that grows steadily from zero at midspan to a maximum at the towers. The vertical components from all the hangers accumulate into that steep pull at each end.\n\nThe geometry controls the magnitude. For a given load and span, the horizontal tension varies inversely with the sag, which is why cables usually dip about a tenth of the span: a flatter cable would look elegant but would pull far harder on everything holding it. The cable passes over a saddle at the top of each tower, where the steeply inclined main-span pull and the side-span pull largely cancel their horizontal parts and add their vertical parts. What is left is a nearly axial thrust pressing straight down the tower, so the tower works in compression, with some bending whenever traffic or temperature makes the two sides unequal. That thrust passes through the tower's legs into a caisson, piled footing, or excavated rock socket, and finally into bearing pressure on the ground.\n\nThe horizontal pull is not cancelled at the tower, only redirected; it continues along the side-span cable to the anchorage. There a massive concrete block resists the pull by sheer weight and friction, or the cable strands are splayed into a tunnel wedged into sound rock, so the force is delivered as shear and bearing along the rock mass. In a self-anchored bridge the cables instead terminate in the deck ends, and the deck itself carries that horizontal force as compression. The whole path \u2014 tension in hangers and cables, compression in towers and deck, bearing at the foundations \u2014 works because steel in tension cannot buckle, allowing spans no beam could reach.",
+ "reasoning_chars": 4519,
+ "usage": {
+  "prompt_tokens": 61,
+  "completion_tokens": 1604,
+  "total_tokens": 1665,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 1001
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 1.6128344163298607,
+ "t_first_content": 21.979308624751866,
+ "t_total": 31.842382499948144,
+ "cost": 0.009136875
+}

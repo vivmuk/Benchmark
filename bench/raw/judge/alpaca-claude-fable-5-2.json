@@ -1,0 +1,20 @@
+{
+ "claude-opus-5-5": {
+  "scores": {
+   "alpaca": 7.0,
+   "motion": 7.0,
+   "beauty": 7.0,
+   "scene": 7.0
+  },
+  "note": "A clean, fleecy camelid with a long neck, small head and upright ears, though the very tall neck, banana ears and spindly legs read slightly llama-like; legs swap lift and plant phases plausibly across frames while the foreground scrolls for parallax, all set in a polished but fairly generic mountai"
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "alpaca": 8.0,
+   "motion": 3.0,
+   "beauty": 7.0,
+   "scene": 7.0
+  },
+  "note": "The alpaca is recognizable and the scene is polished, but the leg movement is stiff and the last two poses are nearly identical."
+ }
+}

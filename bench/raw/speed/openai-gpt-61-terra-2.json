@@ -1,0 +1,17 @@
+{
+ "text": "A suspension bridge carries the weight of its deck and traffic through a chain of structural elements to the ground. The most visible parts of that chain are the vertical hangers, the sweeping main cables, the towers and the anchorages at the ends. Each plays a different role in moving and resisting the load.\n\nWhen a vehicle crosses the bridge, its weight presses down on the roadway. The deck spreads that load through its structural members rather than transmitting it at a single point. Floor beams carry loads across the width of the deck, while longitudinal members and stiffening girders distribute them along its length. These elements also limit bending and twisting between the points where the deck is supported.\n\nAt intervals along the deck, hangers connect it to the main cables above. The deck pulls downward on the hangers, and the hangers pull upward on the deck. The hangers are therefore in tension: they resist being stretched. They transfer the weight of the deck, vehicles and other loads to the main cables. Some deck load can also pass directly into supports near the ends of the bridge.\n\nThe main cables are made from many high-strength steel wires. Like the hangers, they carry load primarily in tension. The downward pulls from the hangers are distributed along each cable, which curves between its supports. The cable cannot simply carry those downward forces into a tower by bending like a beam. Instead, its tension acts along the cable, pulling on the towers and on the anchorages at its ends.\n\nAt each tower, the main cable passes over a saddle at the top. The cable pulls downward on the saddle, so the tower receives a large vertical load. The tower carries that load mainly in compression, as the force passes down through its legs to its foundations. Its foundations spread the force into the soil or rock below; where necessary, piles or other deep foundations reach stronger ground. The tower must also resist bending caused by uneven loads, wind and other forces.\n\nThe cable also pulls strongly toward the span at each end. Massive anchorages resist this pull, holding the cable ends in place. An anchorage may rely on its own weight, its connection to sound rock, or both. It transfers the cable force into the surrounding ground. Without secure anchorages, the tension needed to support the deck could not be maintained.\n\nThe load is not constant. Traffic moves, wind pushes on the bridge, and temperature changes cause its parts to expand and contract. The deck, cables, towers, bearings and foundations are designed to accommodate these changes while maintaining a safe path for the forces. Wind can also cause the deck to vibrate or twist, so its shape and stiffness matter as well as its strength.\n\nIn short, the deck distributes loads to the hangers, the hangers pull on the main cables, and the cables transfer forces to the towers and anchorages. The towers and anchorages then deliver those forces through their foundations into the ground.",
+ "reasoning_chars": 9052,
+ "usage": {
+  "prompt_tokens": 43,
+  "completion_tokens": 1109,
+  "total_tokens": 1152,
+  "completion_tokens_details": {
+   "reasoning_tokens": 516
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 15.222140207886696,
+ "t_first_content": 15.222141415812075,
+ "t_total": 26.51412204094231,
+ "cost": 0.005588
+}

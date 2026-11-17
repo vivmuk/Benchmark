@@ -1,0 +1,17 @@
+{
+ "text": "A suspension bridge carries the weight of its deck, traffic and other loads through a chain of structural elements to the ground. The deck is the first part to receive the load. Its surface spreads the weight of vehicles and people to the beams and stiffening girders beneath or alongside it. These members distribute the load along the bridge rather than allowing it to act only at the points where the wheels happen to be.\n\nAt intervals, vertical suspenders connect the deck to the main cables above. The deck pulls down on the suspenders, and the suspenders pull upward on the deck. Each suspender carries its share of the load mainly in tension: it is being stretched, rather than squeezed. The suspenders in turn pull down on the main cables.\n\nThe main cables are strong bundles of steel wires draped between towers. They carry load primarily in tension. Their curved shape is essential to how they work. At each suspender connection, the cable on either side slopes upward toward a tower, so the tension in those cable segments has upward components that balance the downward pull from the suspender. As the cable approaches a tower, it has accumulated the load from the suspenders along that part of the span.\n\nThe cables pass over the tops of the towers, usually through large supports called saddles, and continue down toward the ends of the bridge. The loaded cables press down on the towers. The towers carry much of this force downward in compression, like columns being squeezed. They can also experience bending, particularly when traffic or wind loads are uneven, so they must be stiff and strong enough to resist more than a simple vertical load.\n\nBelow each tower, a foundation spreads the force into the ground. Depending on the site, the foundation may bear on solid rock, rest on a broad footing, or use piles driven or drilled deep into stronger soil or rock. The design must keep the ground stresses within safe limits and control settlement, because excessive or uneven movement can affect the whole bridge.\n\nIn a conventional suspension bridge, the ends of the main cables are secured in massive anchorages beyond the towers. The cables pull on these anchorages toward the bridge and upward. The anchorages resist that pull through their weight and their connection to rock or soil, transferring the forces into the ground. In a self-anchored suspension bridge, by contrast, the cable ends are attached to the deck structure, which must resist the resulting compression.\n\nThe bridge must also carry forces that change with time. Traffic moves, wind pushes sideways and can make the deck oscillate, and temperature changes cause expansion and contraction. Bracing, stiffening girders, bearings and dampers help manage these effects and direct the forces toward the towers, anchorages and foundations. The structure is therefore not rigid: it is designed to move within controlled limits while maintaining a continuous load path to the ground.",
+ "reasoning_chars": 13224,
+ "usage": {
+  "prompt_tokens": 43,
+  "completion_tokens": 1223,
+  "total_tokens": 1266,
+  "completion_tokens_details": {
+   "reasoning_tokens": 646
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 12.006081624887884,
+ "t_first_content": 13.79108791705221,
+ "t_total": 23.808228999376297,
+ "cost": 0.006158
+}

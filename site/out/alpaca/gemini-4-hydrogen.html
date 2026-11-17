@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alpaca Walking — Andean Golden Hour</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #3d4d78;
+    }
+    svg#scene {
+      display: block;
+      width: 100vw;
+      height: 100vh;
+    }
+  </style>
+</head>
+<body>
+  <svg id="scene" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <!-- Sky & Atmosphere -->
+      <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#384973" />
+        <stop offset="28%" stop-color="#61658e" />
+        <stop offset="56%" stop-color="#b98284" />
+        <stop offset="78%" stop-color="#ebb085" />
+        <stop offset="100%" stop-color="#fce0b2" />
+      </linearGradient>
+
+      <radialGradient id="sunHalo" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#fff9e6" stop-opacity="0.95" />
+        <stop offset="18%" stop-color="#ffe7b3" stop-opacity="0.65" />
+        <stop offset="48%" stop-color="#f7b988" stop-opacity="0.25" />
+        <stop offset="100%" stop-color="#f7b988" stop-opacity="0" />
+      </radialGradient>
+
+      <radialGradient id="sunCore" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#ffffff" />
+        <stop offset="65%" stop-color="#fff3d1" />
+        <stop offset="100%" stop-color="#ffdfa0" stop-opacity="0.85" />
+      </radialGradient>
+
+      <linearGradient id="mistGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#fce2ba" stop-opacity="0" />
+        <stop offset="55%" stop-color="#f7cca0" stop-opacity="0.38" />
+        <stop offset="100%" stop-color="#f2ba91" stop-opacity="0" />
+      </linearGradient>
+
+      <!-- Mountains & Hills -->
+      <linearGradient id="mtnFarGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#7f7699" />
+        <stop offset="60%" stop-color="#9e879b" />
+        <stop offset="100%" stop-color="#d4a69c" />
+      </linearGradient>
+
+      <linearGradient id="mtnMidGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#6e736d" />
+        <stop offset="55%" stop-color="#878470" />
+        <stop offset="100%" stop-color="#bfa184" />
+      </linearGradient>
+
+      <linearGradient id="hillBackGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#7c8759" />
+        <stop offset="100%" stop-color="#5d6a45" />
+      </linearGradient>
+
+      <!-- Meadow & Trail -->
+      <linearGradient id="meadowGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#788751" />
+        <stop offset="32%" stop-color="#637342" />
+        <stop offset="72%" stop-color="#4e5d34" />
+        <stop offset="100%" stop-color="#3b4727" />
+      </linearGradient>
+
+      <linearGradient id="trailGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#9e8761" stop-opacity="0.35" />
+        <stop offset="45%" stop-color="#b59a72" stop-opacity="0.72" />
+        <stop offset="100%" stop-color="#8a7452" stop-opacity="0.32" />
+      </linearGradient>
+
+      <!-- Alpaca Gradients -->
+      <linearGradient id="fleeceMainGrad" x1="0.2" y1="0" x2="0.4" y2="1">
+        <stop offset="0%" stop-color="#fffdf8" />
+        <stop offset="48%" stop-color="#f7efe0" />
+        <stop offset="82%" stop-color="#e8d8c0" />
+        <stop offset="100%" stop-color="#d6c0a2" />
+      </linearGradient>
+
+      <linearGradient id="fleeceNeckGrad" x1="0.8" y1="0" x2="0.1" y2="1">
+        <stop offset="0%" stop-color="#fffcf5" />
+        <stop offset="55%" stop-color="#f5ebda" />
+        <stop offset="100%" stop-color="#e3d0b5" />
+      </linearGradient>
+
+      <linearGradient id="fleeceFarGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#e0cdb2" />
+        <stop offset="65%" stop-color="#ccb495" />
+        <stop offset="100%" stop-color="#b89d7c" />
+      </linearGradient>
+
+      <linearGradient id="legNearUpperGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#f3e9d8" />
+        <stop offset="65%" stop-color="#e8d7be" />
+        <stop offset="100%" stop-color="#dcc7a9" />
+      </linearGradient>
+
+      <linearGradient id="legNearLowerGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#e2cfb3" />
+        <stop offset="70%" stop-color="#d6be9c" />
+        <stop offset="100%" stop-color="#cab08c" />
+      </linearGradient>
+
+      <linearGradient id="legFarLowerGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#c4ab8c" />
+        <stop offset="100%" stop-color="#ad9171" />
+      </linearGradient>
+
+      <linearGradient id="faceGrad" x1="0.7" y1="0" x2="0.2" y2="1">
+        <stop offset="0%" stop-color="#fbf3e6" />
+        <stop offset="55%" stop-color="#eedec6" />
+        <stop offset="100%" stop-color="#dec7a8" />
+      </linearGradient>
+
+      <radialGradient id="cheekBlush" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#e59c87" stop-opacity="0.34" />
+        <stop offset="100%" stop-color="#e59c87" stop-opacity="0" />
+      </radialGradient>
+
+      <radialGradient id="shadowGrad" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#2e341d" stop-opacity="0.44" />
+        <stop offset="62%" stop-color="#353d22" stop-opacity="0.2" />
+        <stop offset="100%" stop-color="#353d22" stop-opacity="0" />
+      </radialGradient>
+
+      <radialGradient id="vignetteGrad" cx="50%" cy="50%" r="72%">
+        <stop offset="68%" stop-color="#2a2438" stop-opacity="0" />
+        <stop offset="100%" stop-color="#241f33" stop-opacity="0.26" />
+      </radialGradient>
+
+      <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur stdDeviation="5" />
+      </filter>
+
+      <filter id="cloudBlur" x="-10%" y="-10%" width="120%" height="120%">
+        <feGaussianBlur stdDeviation="1.6" />
+      </filter>
+    </defs>
+
+    <!-- 1. Sky -->
+    <rect width="1280" height="720" fill="url(#skyGrad)" />
+
+    <!-- 2. Golden Hour Sun -->
+    <g id="sunGroup" transform="translate(965, 255)">
+      <circle cx="0" cy="0" r="245" fill="url(#sunHalo)" />
+      <circle cx="0" cy="0" r="46" fill="url(#sunCore)" />
+    </g>
+
+    <!-- 3. Drifting Clouds -->
+    <g id="cloudsLayer" opacity="0.82"></g>
+
+    <!-- 4. Distant Andean Peaks (Seamless Parallax) -->
+    <g id="mtnFarLayer"></g>
+
+    <!-- Soft Valley Mist -->
+    <rect x="0" y="330" width="1280" height="120" fill="url(#mistGrad)" />
+
+    <!-- 5. Midground Foothills (Seamless Parallax) -->
+    <g id="mtnMidLayer"></g>
+
+    <!-- 6. Rolling Pasture Ridge -->
+    <g id="hillBackLayer"></g>
+
+    <!-- 7. Main Meadow Ground & Walking Trail -->
+    <g id="meadowBase">
+      <path d="M0,486 Q340,474 680,484 T1280,480 L1280,720 L0,720 Z" fill="url(#meadowGrad)" />
+      <!-- Sunlit highland trail -->
+      <path d="M0,548 Q320,542 640,547 T1280,544 L1280,592 Q960,596 640,592 T0,595 Z" fill="url(#trailGrad)" />
+      <!-- Soft sunlit rim along top of meadow -->
+      <path d="M0,486 Q340,474 680,484 T1280,480" fill="none" stroke="#b9bd7e" stroke-width="2" opacity="0.32" />
+    </g>
+
+    <!-- 8. Mid-Ground Grass Tufts (Behind Alpaca) -->
+    <g id="backGrassLayer"></g>
+
+    <!-- 9. Ground Trail Pebbles & Specks (Locked to Alpaca Foot Speed!) -->
+    <g id="trailDetailsLayer"></g>
+
+    <!-- 10. Alpaca Ground Shadow -->
+    <ellipse id="groundShadow" cx="600" cy="570" rx="116" ry="15" fill="url(#shadowGrad)" />
+
+    <!-- 11. THE ALPACA -->
+    <g id="alpaca" transform="translate(600, 405)">
+
+      <!-- Far Hind Leg -->
+      <g id="farHindLeg">
+        <g class="upperLeg">
+          <path d="M-19,-4 C-22,22 -14,54 -9,76 C-4,83 5,83 9,76 C12,52 17,22 17,-4 C16,-18 -18,-18 -19,-4 Z" fill="url(#fleeceFarGrad)" />
+        </g>
+        <g class="lowerLeg">
+          <path d="M-8,0 C-8,22 -6,48 -6,69 C-5,76 5,76 6,69 C6,48 8,22 8,0 C8,-8 -8,-8 -8,0 Z" fill="url(#legFarLowerGrad)" />
+        </g>
+        <g class="hoof">
+          <!-- Wooly ankle cuff + two-toed pad -->
+          <path d="M-8,-9 C-9,-2 -10,1 -5,2 L9,2 C13,2 13,-3 9,-6 C5,-8 4,-10 -8,-9 Z" fill="#b49a7a" />
+          <path d="M6,-2 C11,-2 13,0 12,2 L4,2 C3,0 4,-2 6,-2 Z" fill="#4f4036" />
+        </g>
+      </g>
+
+      <!-- Far Front Leg -->
+      <g id="farFrontLeg">
+        <g class="upperLeg">
+          <path d="M-16,-4 C-18,22 -12,52 -8,74 C-4,81 5,81 8,74 C11,52 15,22 15,-4 C14,-16 -15,-16 -16,-4 Z" fill="url(#fleeceFarGrad)" />
+        </g>
+        <g class="lowerLeg">
+          <path d="M-7,0 C-7,22 -5,46 -5,67 C-4,74 5,74 6,67 C6,46 7,22 7,0 C7,-7 -7,-7 -7,0 Z" fill="url(#legFarLowerGrad)" />
+        </g>
+        <g class="hoof">
+          <path d="M-7,-9 C-8,-2 -9,1 -4,2 L9,2 C13,2 13,-3 9,-6 C5,-8 4,-10 -7,-9 Z" fill="#b49a7a" />
+          <path d="M6,-2 C11,-2 13,0 12,2 L4,2 C3,0 4,-2 6,-2 Z" fill="#4f4036" />
+        </g>
+      </g>
+
+      <!-- Torso, Tail, Neck & Head -->
+      <g id="torsoGroup">
+        <!-- Fluffy Bobtail -->
+        <g id="tailGroup" transform="translate(-85, -12)">
+          <path d="M0,-6 C-12,-8 -25,-2 -29,11 C-32,19 -28,28 -21,30 C-15,32 -9,26 -6,19 C-1,11 4,2 0,-6 Z" fill="#efe2cd" />
+          <path d="M-4,-3 C-14,-4 -22,2 -24,13 C-25,19 -20,24 -15,22 C-10,19 -6,9 -4,-3 Z" fill="#fbf5ea" opacity="0.7" />
+        </g>
+
+        <!-- Long Graceful Wooly Neck & Head -->
+        <g id="neckGroup" transform="translate(54, -14)">
+          <!-- Fluffy Neck -->
+          <path d="M-24,16
+                   C-26,-16 -16,-50 -4,-78
+                   C6,-102 18,-122 30,-130
+                   C44,-136 62,-130 66,-114
+                   C70,-98 58,-76 48,-46
+                   C38,-18 36,6 32,26
+                   C18,36 -14,34 -24,16 Z"
+                fill="url(#fleeceNeckGrad)" />
+          <!-- Fluffy neck wool scallops (throat & mane) -->
+          <path d="M-12,-34 C-18,-48 -12,-66 -2,-76 C-10,-90 2,-108 14,-114" fill="none" stroke="#dcc6a8" stroke-width="2" stroke-linecap="round" opacity="0.55" />
+          <path d="M56,-84 C63,-72 60,-56 50,-44 C56,-30 50,-14 40,-4" fill="none" stroke="#fffdf9" stroke-width="2.5" stroke-linecap="round" opacity="0.85" />
+          <path d="M22,-64 C16,-48 16,-30 22,-14" fill="none" stroke="#dfd0b8" stroke-width="1.8" stroke-linecap="round" opacity="0.45" />
+
+          <!-- Head Group -->
+          <g id="headGroup" transform="translate(46, -116)">
+            <!-- Back Ear (Right ear) -->
+            <g id="earBack" transform="translate(8, -16) rotate(12)">
+              <path d="M-6,4 C-9,-14 -6,-34 1,-43 C6,-36 9,-16 6,4 Z" fill="#dfd0b8" />
+              <path d="M-3,-2 C-4,-15 -2,-28 1,-35 C4,-28 5,-14 3,-2 Z" fill="#d9ab98" opacity="0.75" />
+            </g>
+
+            <!-- Fluffy Head Back & Crown -->
+            <path d="M-16,10
+                     C-22,-2 -20,-18 -8,-25
+                     C2,-31 18,-28 24,-18
+                     C30,-6 24,12 10,17
+                     C-2,21 -12,18 -16,10 Z"
+                  fill="#f7efe0" />
+
+            <!-- Soft Toasted-Cream Face & Snout -->
+            <path d="M-4,-8
+                     C4,-19 20,-20 29,-11
+                     C35,-5 42,-2 48,1
+                     C52,3 52,9 48,13
+                     C43,17 34,17 24,16
+                     C12,15 0,14 -6,8
+                     C-9,3 -8,-3 -4,-8 Z"
+                  fill="url(#faceGrad)" />
+
+            <!-- Cheek Blush -->
+            <ellipse cx="14" cy="7" rx="8" ry="5" fill="url(#cheekBlush)" />
+
+            <!-- Fluffy Forehead Topknot / Bangs -->
+            <path d="M-15,-12
+                     C-18,-22 -8,-31 2,-28
+                     C8,-34 20,-31 23,-22
+                     C30,-21 31,-12 24,-9
+                     C18,-6 12,-12 6,-9
+                     C0,-6 -9,-6 -15,-12 Z"
+                  fill="#fffdf8" />
+            <path d="M-4,-20 C2,-25 12,-24 16,-18" fill="none" stroke="#e4d3ba" stroke-width="1.5" stroke-linecap="round" opacity="0.6" />
+
+            <!-- Fluffy Cheek Ruff -->
+            <path d="M-14,4 C-18,12 -10,21 0,20 C6,24 15,21 17,15" fill="#f7efe0" />
+
+            <!-- Gentle Eye -->
+            <g id="eyeGroup" transform="translate(20, -4)">
+              <ellipse cx="0" cy="0" rx="4.4" ry="4.9" fill="#2d211b" />
+              <ellipse cx="0.6" cy="0.8" rx="2.6" ry="2.8" fill="#463329" opacity="0.55" />
+              <circle cx="1.6" cy="-1.7" r="1.45" fill="#ffffff" />
+              <circle cx="-1.1" cy="1.8" r="0.6" fill="#ffffff" opacity="0.45" />
+              <!-- Upper Eyelash / Lid Line -->
+              <path d="M-5.2,-1.2 C-3,-5.8 3,-5.8 5,-1" fill="none" stroke="#3c2c23" stroke-width="1.5" stroke-linecap="round" />
+              <!-- Blinking Eyelid -->
+              <g id="blinkLid" opacity="0">
+                <ellipse cx="0" cy="0" rx="5.2" ry="5.5" fill="#eedec6" />
+                <path d="M-5,0.5 Q0,3.2 5,0.5" fill="none" stroke="#3c2c23" stroke-width="1.6" stroke-linecap="round" />
+              </g>
+            </g>
+
+            <!-- Cute Nostril & Gentle Smile -->
+            <path d="M44,2 C45.5,1 47,2 46.5,3.5 C46,4.5 44,4.2 44,2 Z" fill="#523e33" />
+            <path d="M49.5,6.5 C48,10.5 42,11.5 37.5,9.2" fill="none" stroke="#5a4337" stroke-width="1.4" stroke-linecap="round" />
+
+            <!-- Front Ear (Left ear) -->
+            <g id="earFront" transform="translate(-8, -14) rotate(-5)">
+              <path d="M-7,4 C-11,-15 -8,-37 0,-47 C7,-38 10,-16 7,4 Z" fill="#f5ebda" />
+              <path d="M-3,-2 C-5,-16 -3,-31 0,-38 C3,-31 5,-15 3,-2 Z" fill="#e5b9a6" opacity="0.82" />
+              <path d="M-6,1 C-2,5 3,5 7,1" fill="none" stroke="#e4d2b8" stroke-width="1.5" stroke-linecap="round" />
+            </g>
+          </g>
+        </g>
+
+        <!-- Main Cloud-Like Torso Fleece -->
+        <g id="torsoFleece">
+          <!-- Plump Fluffy Body Silhouette -->
+          <path d="M-84,-16
+                   C-89,-32 -74,-44 -56,-44
+                   C-44,-52 -20,-53 -4,-47
+                   C14,-52 38,-48 52,-37
+                   C68,-37 84,-28 89,-12
+                   C97,-2 96,15 84,26
+                   C76,37 60,42 44,40
+                   C30,48 6,50 -10,44
+                   C-26,50 -52,47 -64,36
+                   C-82,36 -94,22 -91,6
+                   C-95,-4 -91,-14 -84,-16 Z"
+                fill="url(#fleeceMainGrad)" />
+
+          <!-- Sunlit Rim Highlight along Back & Chest -->
+          <path d="M-72,-35 C-52,-48 -24,-50 -4,-44 C18,-49 42,-44 56,-34 C72,-32 85,-22 88,-6"
+                fill="none" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" opacity="0.72" />
+
+          <!-- Soft Inner Wooly Tuft Curves -->
+          <path d="M-62,-12 C-52,-20 -36,-18 -28,-10" fill="none" stroke="#decab0" stroke-width="2" stroke-linecap="round" opacity="0.5" />
+          <path d="M-12,-24 C0,-31 16,-28 24,-20" fill="none" stroke="#decab0" stroke-width="1.8" stroke-linecap="round" opacity="0.45" />
+          <path d="M46,-6 C58,-12 72,-6 76,6" fill="none" stroke="#decab0" stroke-width="2" stroke-linecap="round" opacity="0.5" />
+          <path d="M-26,22 C-12,30 12,30 26,22" fill="none" stroke="#d3bc9e" stroke-width="2" stroke-linecap="round" opacity="0.45" />
+        </g>
+      </g>
+
+      <!-- Near Hind Leg -->
+      <g id="nearHindLeg">
+        <g class="upperLeg">
+          <path d="M-22,-4 C-25,22 -16,54 -10,76 C-5,83 5,83 10,76 C14,52 19,22 19,-4 C18,-20 -20,-20 -22,-4 Z" fill="url(#legNearUpperGrad)" />
+          <path d="M-15,10 C-14,24 -10,36 -8,48" fill="none" stroke="#fffbf4" stroke-width="2" stroke-linecap="round" opacity="0.6" />
+        </g>
+        <g class="lowerLeg">
+          <path d="M-9,0 C-8,22 -6,48 -6,69 C-5,76 5,76 6,69 C6,48 8,22 9,0 C9,-8 -9,-8 -9,0 Z" fill="url(#legNearLowerGrad)" />
+        </g>
+        <g class="hoof">
+          <path d="M-8,-9 C-9,-2 -10,1 -5,2 L9,2 C14,2 14,-3 9,-6 C5,-8 4,-10 -8,-9 Z" fill="#d3bc9c" />
+          <path d="M6,-2 C11,-2 14,0 13,2 L4,2 C3,0 4,-2 6,-2 Z" fill="#4f4036" />
+        </g>
+      </g>
+
+      <!-- Near Front Leg -->
+      <g id="nearFrontLeg">
+        <g class="upperLeg">
+          <path d="M-18,-4 C-20,22 -13,52 -8,74 C-4,81 5,81 9,74 C13,52 17,22 17,-4 C16,-18 -17,-18 -18,-4 Z" fill="url(#legNearUpperGrad)" />
+          <path d="M11,10 C11,22 9,34 7,44" fill="none" stroke="#fffbf4" stroke-width="2" stroke-linecap="round" opacity="0.65" />
+        </g>
+        <g class="lowerLeg">
+          <path d="M-8,0 C-7,22 -6,46 -6,67 C-5,74 5,74 6,67 C6,46 7,22 8,0 C8,-8 -8,-8 -8,0 Z" fill="url(#legNearLowerGrad)" />
+        </g>
+        <g class="hoof">
+          <path d="M-7,-9 C-8,-2 -9,1 -4,2 L9,2 C14,2 14,-3 9,-6 C5,-8 4,-10 -7,-9 Z" fill="#d3bc9c" />
+          <path d="M6,-2 C11,-2 14,0 13,2 L4,2 C3,0 4,-2 6,-2 Z" fill="#4f4036" />
+        </g>
+      </g>
+    </g>
+
+    <!-- 12. Foreground Swaying Grass & Wildflowers -->
+    <g id="frontGrassLayer"></g>
+
+    <!-- 13. Sunlit Pollen / Dust Motes -->
+    <g id="motesLayer"></g>
+
+    <!-- 14. Subtle Cinematic Vignette -->
+    <rect width="1280" height="720" fill="url(#vignetteGrad)" pointer-events="none" />
+  </svg>
+
+  <script>
+    (() => {
+      const SVG_NS = "http://www.w3.org/2000/svg";
+      const el = (tag, attrs = {}, parent = null) => {
+        const node = document.createElementNS(SVG_NS, tag);
+        for (const [k, v] of Object.entries(attrs)) {
+          node.setAttribute(k, v);
+        }
+        if (parent) parent.appendChild(node);
+        return node;
+      };
+
+      // Deterministic pseudo-random generator for clean, reproducible art
+      let seed = 4219;
+      const rand = () => {
+        seed = (seed * 16807) % 2147483647;
+        return (seed - 1) / 2147483646;
+      };
+
+      // ==========================================================
+      // 1. PROCEDURAL SEAMLESS LANDSCAPE GENERATION
+      // ==========================================================
+
+      // Clouds
+      const cloudsLayer = document.getElementById("cloudsLayer");
+      const clouds = [];
+      const cloudSpecs = [
+        { x: 180, y: 125, scale: 1.05, speed: 6.5, opacity: 0.55 },
+        { x: 560, y: 88, scale: 0.78, speed: 4.2, opacity: 0.45 },
+        { x: 920, y: 142, scale: 0.92, speed: 5.5, opacity: 0.5 },
+        { x: 1260, y: 105, scale: 0.68, speed: 3.8, opacity: 0.38 }
+      ];
+      cloudSpecs.forEach((c) => {
+        const g = el("g", { filter: "url(#cloudBlur)", opacity: c.opacity }, cloudsLayer);
+        el("path", {
+          d: "M-110,16 C-110,4 -94,-4 -76,-2 C-66,-18 -40,-24 -20,-14 C-4,-28 28,-28 44,-12 C66,-16 88,-6 92,10 C106,10 116,18 112,24 L-108,24 C-114,24 -116,18 -110,16 Z",
+          fill: "#fde2c6"
+        }, g);
+        el("path", {
+          d: "M-92,18 C-70,12 60,12 94,18 L96,24 L-96,24 Z",
+          fill: "#ebb09d",
+          opacity: "0.55"
+        }, g);
+        clouds.push({ ...c, node: g });
+      });
+
+      // Helper for 2560px seamless periodic mountain ridge
+      function buildSeamlessMountain(parent, baseLine, amp1, amp2, cragAmp, fill, highlightFill) {
+        const tileGroup = el("g", {}, parent);
+        const pts = [];
+        const step = 32;
+        for (let x = 0; x <= 1280; x += step) {
+          const t = (x / 1280) * Math.PI * 2;
+          const crag = Math.abs(Math.sin(3 * t + 0.4)) * cragAmp;
+          const y = baseLine
+            - Math.sin(t + 0.5) * amp1
+            - Math.sin(2 * t - 0.8) * amp2
+            - crag;
+          pts.push([x, y]);
+        }
+
+        let d = `M 0 720 L 0 ${pts[0][1].toFixed(1)} `;
+        for (let rep = 0; rep < 2; rep++) {
+          const offsetX = rep * 1280;
+          for (let i = 1; i < pts.length; i++) {
+            d += `L ${(pts[i][0] + offsetX).toFixed(1)} ${pts[i][1].toFixed(1)} `;
+          }
+        }
+        d += "L 2560 720 Z";
+        el("path", { d, fill }, tileGroup);
+
+        // Subtle sunlit snow/ridge accents on peak crests
+        if (highlightFill) {
+          for (let rep = 0; rep < 2; rep++) {
+            const offsetX = rep * 1280;
+            for (let i = 1; i < pts.length - 1; i++) {
+              if (pts[i][1] < pts[i - 1][1] && pts[i][1] < pts[i + 1][1]) {
+                const px = pts[i][0] + offsetX;
+                const py = pts[i][1];
+                const nx = pts[i + 1][0] + offsetX;
+                const ny = pts[i + 1][1];
+                el("path", {
+                  d: `M ${px.toFixed(1)} ${py.toFixed(1)} L ${nx.toFixed(1)} ${ny.toFixed(1)} L ${(px + 10).toFixed(1)} ${(py + 22).toFixed(1)} Z`,
+                  fill: highlightFill,
+                  opacity: "0.42"
+                }, tileGroup);
+              }
+            }
+          }
+        }
+        return tileGroup;
+      }
+
+      const mtnFarGroup = buildSeamlessMountain(
+        document.getElementById("mtnFarLayer"),
+        365, 38, 22, 48, "url(#mtnFarGrad)", "#fde4cf"
+      );
+
+      const mtnMidGroup = buildSeamlessMountain(
+        document.getElementById("mtnMidLayer"),
+        425, 22, 16, 22, "url(#mtnMidGrad)", "#e7be9a"
+      );
+
+      // Smooth rolling back pasture hill (2560px seamless)
+      const hillBackLayer = document.getElementById("hillBackLayer");
+      {
+        let d = "M 0 720 ";
+        for (let x = 0; x <= 2560; x += 40) {
+          const t = (x / 1280) * Math.PI * 2;
+          const y = 456 + Math.sin(t) * 14 + Math.cos(2 * t + 0.6) * 8;
+          d += `L ${x} ${y.toFixed(1)} `;
+        }
+        d += "L 2560 720 Z";
+        el("path", { d, fill: "url(#hillBackGrad)" }, hillBackLayer);
+      }
+
+      // Mid-ground golden ichu grass clumps (behind alpaca)
+      const backGrassLayer = document.getElementById("backGrassLayer");
+      const backTufts = [];
+      for (let i = 0; i < 34; i++) {
+        const x = rand() * 1400 - 60;
+        const y = 500 + rand() * 44;
+        const scale = 0.6 + rand() * 0.65;
+        const g = el("g", {}, backGrassLayer);
+        const color = rand() > 0.45 ? "#9ca05f" : "#7e8a4e";
+        for (let b = -2; b <= 2; b++) {
+          const tipX = b * 4.5 + (rand() - 0.5) * 4;
+          const tipY = -14 - rand() * 12;
+          el("path", {
+            d: `M ${(b * 1.6).toFixed(1)},0 Q ${(b * 2.4).toFixed(1)},${(tipY * 0.55).toFixed(1)} ${tipX.toFixed(1)},${tipY.toFixed(1)}`,
+            fill: "none",
+            stroke: color,
+            "stroke-width": (1.6 * scale).toFixed(2),
+            "stroke-linecap": "round"
+          }, g);
+        }
+        backTufts.push({ node: g, x, y, scale, phase: rand() * Math.PI * 2 });
+      }
+
+      // Ground trail pebbles & micro grass specks (LOCKED to exact foot speed!)
+      const trailDetailsLayer = document.getElementById("trailDetailsLayer");
+      const trailDetails = [];
+      for (let i = 0; i < 42; i++) {
+        const x = rand() * 1400 - 60;
+        const y = 556 + rand() * 28;
+        const g = el("g", {}, trailDetailsLayer);
+        if (rand() > 0.35) {
+          // Small sunlit pebble
+          const rx = 2.2 + rand() * 3.8;
+          const ry = 1.1 + rand() * 1.6;
+          el("ellipse", {
+            cx: 0, cy: 0,
+            rx: rx.toFixed(1), ry: ry.toFixed(1),
+            fill: rand() > 0.5 ? "#8b7454" : "#cbb38f",
+            opacity: (0.45 + rand() * 0.35).toFixed(2)
+          }, g);
+        } else {
+          // Tiny ground grass sprig
+          el("path", {
+            d: "M-2,0 Q-4,-6 -6,-9 M0,0 Q1,-7 4,-10",
+            fill: "none",
+            stroke: "#727f48",
+            "stroke-width": "1.3",
+            "stroke-linecap": "round",
+            opacity: "0.7"
+          }, g);
+        }
+        trailDetails.push({ node: g, x, y });
+      }
+
+      // Foreground swaying grass & wildflowers (in front of alpaca)
+      const frontGrassLayer = document.getElementById("frontGrassLayer");
+      const frontItems = [];
+      for (let i = 0; i < 30; i++) {
+        const x = rand() * 1460 - 90;
+        const y = 622 + rand() * 96;
+        const scale = 0.8 + (y - 620) / 140;
+        const g = el("g", {}, frontGrassLayer);
+        const bladeColor = rand() > 0.4 ? "#364423" : "#49582f";
+        const blades = 3 + Math.floor(rand() * 3);
+        for (let b = 0; b < blades; b++) {
+          const offset = (b - (blades - 1) / 2) * 4.5;
+          const h = (26 + rand() * 28) * scale;
+          const bend = (rand() - 0.35) * 18;
+          el("path", {
+            d: `M ${offset.toFixed(1)},0 Q ${(offset + bend * 0.4).toFixed(1)},${(-h * 0.55).toFixed(1)} ${(offset + bend).toFixed(1)},${(-h).toFixed(1)}`,
+            fill: "none",
+            stroke: bladeColor,
+            "stroke-width": (2.2 * scale).toFixed(2),
+            "stroke-linecap": "round"
+          }, g);
+        }
+
+        // Occasional delicate wildflower
+        if (rand() > 0.52) {
+          const fx = (rand() - 0.5) * 14;
+          const fy = -(28 + rand() * 22) * scale;
+          el("path", {
+            d: `M 0,0 Q ${(fx * 0.4).toFixed(1)},${(fy * 0.55).toFixed(1)} ${fx.toFixed(1)},${fy.toFixed(1)}`,
+            fill: "none",
+            stroke: "#576838",
+            "stroke-width": (1.6 * scale).toFixed(2),
+            "stroke-linecap": "round"
+          }, g);
+          const flowerPick = rand();
+          const petalColor = flowerPick > 0.65 ? "#fff7e8" : flowerPick > 0.3 ? "#ffd97d" : "#f4a38c";
+          const fg = el("g", { transform: `translate(${fx.toFixed(1)}, ${fy.toFixed(1)})` }, g);
+          for (let p = 0; p < 5; p++) {
+            const ang = (p / 5) * Math.PI * 2;
+            el("circle", {
+              cx: (Math.cos(ang) * 3.4 * scale).toFixed(2),
+              cy: (Math.sin(ang) * 3.4 * scale).toFixed(2),
+              r: (2.2 * scale).toFixed(2),
+              fill: petalColor
+            }, fg);
+          }
+          el("circle", { cx: 0, cy: 0, r: (1.9 * scale).toFixed(2), fill: "#e6a43e" }, fg);
+        }
+        frontItems.push({ node: g, x, y, phase: rand() * Math.PI * 2, swayAmp: 3 + rand() * 3.5 });
+      }
+
+      // Floating sunlit dust motes
+      const motesLayer = document.getElementById("motesLayer");
+      const motes = [];
+      for (let i = 0; i < 28; i++) {
+        const x = rand() * 1280;
+        const y = 140 + rand() * 440;
+        const r = 1.1 + rand() * 2.2;
+        const circle = el("circle", {
+          cx: 0, cy: 0, r: r.toFixed(2),
+          fill: "#fff6d6"
+        }, motesLayer);
+        motes.push({
+          node: circle,
+          x, y,
+          vx: -(8 + rand() * 14),
+          vy: -(3 + rand() * 6),
+          phase: rand() * Math.PI * 2,
+          baseOp: 0.2 + rand() * 0.45
+        });
+      }
+
+      // ==========================================================
+      // 2. ALPACA GAIT, 2-BONE IK & ANIMATION LOOP
+      // ==========================================================
+      const groundShadow = document.getElementById("groundShadow");
+      const torsoGroup = document.getElementById("torsoGroup");
+      const tailGroup = document.getElementById("tailGroup");
+      const neckGroup = document.getElementById("neckGroup");
+      const headGroup = document.getElementById("headGroup");
+      const earBack = document.getElementById("earBack");
+      const earFront = document.getElementById("earFront");
+      const blinkLid = document.getElementById("blinkLid");
+
+      const bindLeg = (id) => {
+        const root = document.getElementById(id);
+        return {
+          upper: root.querySelector(".upperLeg"),
+          lower: root.querySelector(".lowerLeg"),
+          hoof: root.querySelector(".hoof")
+        };
+      };
+
+      const legs = [
+        {
+          dom: bindLeg("farHindLeg"),
+          anchorX: -54, anchorY: 22,
+          restX: -54, groundY: 160,
+          L1: 76, L2: 78,
+          dir: 1, // hock bends backward (-x)
+          phaseOffset: 0.0
+        },
+        {
+          dom: bindLeg("farFrontLeg"),
+          anchorX: 54, anchorY: 24,
+          restX: 54, groundY: 160,
+          L1: 74, L2: 76,
+          dir: -1, // carpus bends forward (+x)
+          phaseOffset: 0.25
+        },
+        {
+          dom: bindLeg("nearHindLeg"),
+          anchorX: -50, anchorY: 26,
+          restX: -50, groundY: 164,
+          L1: 76, L2: 78,
+          dir: 1,
+          phaseOffset: 0.50
+        },
+        {
+          dom: bindLeg("nearFrontLeg"),
+          anchorX: 48, anchorY: 28,
+          restX: 48, groundY: 164,
+          L1: 74, L2: 76,
+          dir: -1,
+          phaseOffset: 0.75
+        }
+      ];
+
+      // Walking parameters
+      const freq = 0.84;          // full 4-beat stride cycles per second
+      const strideHalf = 32;      // half of stride length in px
+      const stanceRatio = 0.66;   // foot planted for 66% of cycle
+      const swingRatio = 1 - stanceRatio;
+      const liftHeight = 25;      // hoof lift arc height
+      const groundSpeed = (2 * strideHalf / stanceRatio) * freq; // exact px/sec match!
+
+      function solveLegIK(ax, ay, bx, by, L1, L2, dir) {
+        const dx = bx - ax;
+        const dy = by - ay;
+        let d = Math.hypot(dx, dy);
+        const maxD = L1 + L2 - 1.2;
+        const minD = Math.abs(L1 - L2) + 1.2;
+        if (d > maxD) d = maxD;
+        if (d < minD) d = minD;
+
+        const baseAngle = Math.atan2(dy, dx);
+        const cosA = (L1 * L1 + d * d - L2 * L2) / (2 * L1 * d);
+        const clampedCos = Math.max(-1, Math.min(1, cosA));
+        const angleA = Math.acos(clampedCos);
+
+        const jointAngle = baseAngle + dir * angleA;
+        const jx = ax + Math.cos(jointAngle) * L1;
+        const jy = ay + Math.sin(jointAngle) * L1;
+
+        const lowerAngle = Math.atan2(by - jy, bx - jx);
+        const upperDeg = (jointAngle - Math.PI / 2) * (180 / Math.PI);
+        const lowerDeg = (lowerAngle - Math.PI / 2) * (180 / Math.PI);
+
+        return { jx, jy, upperDeg, lowerDeg };
+      }
+
+      let elapsed = 0;
+      let lastTime = performance.now();
+      let blinkTimer = 2.6;
+      let blinkProgress = -1;
+
+      function tick(now) {
+        const dt = Math.min(0.05, (now - lastTime) / 1000);
+        lastTime = now;
+        elapsed += dt;
+
+        const phase = (elapsed * freq) % 1;
+        const tau = Math.PI * 2;
+
+        // 1. Torso bob, gentle lateral sway & pitch
+        const bodyBobY = Math.sin(2 * tau * phase - 0.35) * 3.8;
+        const bodyBobX = Math.cos(2 * tau * phase) * 1.4;
+        const bodyPitch = Math.sin(tau * phase + 0.3) * 1.15;
+
+        torsoGroup.setAttribute(
+          "transform",
+          `translate(${bodyBobX.toFixed(2)}, ${bodyBobY.toFixed(2)}) rotate(${bodyPitch.toFixed(2)})`
+        );
+
+        // Shadow subtly responds to body bob
+        const shadowScale = 1 - bodyBobY * 0.008;
+        groundShadow.setAttribute(
+          "transform",
+          `translate(${(bodyBobX * 0.6).toFixed(2)}, 0) scale(${shadowScale.toFixed(3)}, 1)`
+        );
+
+        // 2. Secondary motion: Neck, Head, Ears, Tail
+        const neckRot = Math.sin(tau * phase - 0.45) * 2.6 + Math.sin(2 * tau * phase - 0.9) * 1.1;
+        const headRot = -neckRot * 0.68 + Math.sin(2 * tau * phase - 1.4) * 1.3;
+        const earBackRot = 12 + Math.sin(2 * tau * phase - 1.8) * 2.8;
+        const earFrontRot = -5 + Math.sin(2 * tau * phase - 2.0) * 3.1;
+        const tailRot = Math.sin(tau * phase - 0.8) * 5.2 + Math.sin(2 * tau * phase - 1.2) * 2.2;
+
+        neckGroup.setAttribute("transform", `translate(54, -14) rotate(${neckRot.toFixed(2)})`);
+        headGroup.setAttribute("transform", `translate(46, -116) rotate(${headRot.toFixed(2)})`);
+        earBack.setAttribute("transform", `translate(8, -16) rotate(${earBackRot.toFixed(2)})`);
+        earFront.setAttribute("transform", `translate(-8, -14) rotate(${earFrontRot.toFixed(2)})`);
+        tailGroup.setAttribute("transform", `translate(-85, -12) rotate(${tailRot.toFixed(2)})`);
+
+        // 3. Natural occasional blink
+        blinkTimer -= dt;
+        if (blinkTimer <= 0 && blinkProgress < 0) {
+          blinkProgress = 0;
+          blinkTimer = 3.2 + ((Math.sin(elapsed * 7.3) + 1) * 1.4);
+        }
+        if (blinkProgress >= 0) {
+          blinkProgress += dt / 0.16;
+          if (blinkProgress >= 1) {
+            blinkProgress = -1;
+            blinkLid.setAttribute("opacity", "0");
+          } else {
+            const bVal = Math.sin(blinkProgress * Math.PI);
+            blinkLid.setAttribute("opacity", bVal > 0.35 ? "1" : "0");
+          }
+        }
+
+        // 4. Four-leg IK update
+        const pitchRad = (bodyPitch * Math.PI) / 180;
+        const cosP = Math.cos(pitchRad);
+        const sinP = Math.sin(pitchRad);
+
+        for (let i = 0; i < legs.length; i++) {
+          const leg = legs[i];
+          const p = (phase + leg.phaseOffset) % 1;
+
+          let footX, footY, hoofDeg;
+          if (p < stanceRatio) {
+            // Stance: locked on ground, moving backward at exact groundSpeed
+            const s = p / stanceRatio;
+            footX = leg.restX + strideHalf - s * (2 * strideHalf);
+            footY = leg.groundY;
+            hoofDeg = 0;
+          } else {
+            // Swing: lifts in smooth parabolic arc and swings forward
+            const u = (p - stanceRatio) / swingRatio;
+            const easeX = 0.5 - 0.5 * Math.cos(Math.PI * u);
+            footX = leg.restX - strideHalf + easeX * (2 * strideHalf);
+            const lift = Math.sin(Math.PI * Math.pow(u, 0.86));
+            footY = leg.groundY - liftHeight * lift;
+            // Toe dips gently at push-off, levels before landing
+            hoofDeg = Math.sin(u * Math.PI * 1.35) * 14 * (1 - u * 0.45);
+          }
+
+          // Transform hip/shoulder anchor with torso bob & pitch
+          const ax = bodyBobX + leg.anchorX * cosP - leg.anchorY * sinP;
+          const ay = bodyBobY + leg.anchorX * sinP + leg.anchorY * cosP;
+
+          const { jx, jy, upperDeg, lowerDeg } = solveLegIK(
+            ax, ay, footX, footY, leg.L1, leg.L2, leg.dir
+          );
+
+          leg.dom.upper.setAttribute(
+            "transform",
+            `translate(${ax.toFixed(2)}, ${ay.toFixed(2)}) rotate(${upperDeg.toFixed(2)})`
+          );
+          leg.dom.lower.setAttribute(
+            "transform",
+            `translate(${jx.toFixed(2)}, ${jy.toFixed(2)}) rotate(${lowerDeg.toFixed(2)})`
+          );
+          leg.dom.hoof.setAttribute(
+            "transform",
+            `translate(${footX.toFixed(2)}, ${footY.toFixed(2)}) rotate(${hoofDeg.toFixed(2)})`
+          );
+        }
+
+        // 5. Parallax Environment Scrolling
+        const mtnFarX = -((elapsed * 4.5) % 1280);
+        const mtnMidX = -((elapsed * 14) % 1280);
+        const hillBackX = -((elapsed * 32) % 1280);
+        mtnFarGroup.setAttribute("transform", `translate(${mtnFarX.toFixed(2)}, 0)`);
+        mtnMidGroup.setAttribute("transform", `translate(${mtnMidX.toFixed(2)}, 0)`);
+        hillBackLayer.setAttribute("transform", `translate(${hillBackX.toFixed(2)}, 0)`);
+
+        // Clouds
+        for (let i = 0; i < clouds.length; i++) {
+          const c = clouds[i];
+          c.x -= c.speed * dt;
+          if (c.x < -160) c.x = 1440;
+          c.node.setAttribute("transform", `translate(${c.x.toFixed(2)}, ${c.y}) scale(${c.scale})`);
+        }
+
+        // Mid-ground grass tufts
+        for (let i = 0; i < backTufts.length; i++) {
+          const t = backTufts[i];
+          t.x -= groundSpeed * 0.72 * dt;
+          if (t.x < -70) t.x += 1420;
+          const sway = Math.sin(elapsed * 1.9 + t.phase) * 2.4;
+          t.node.setAttribute(
+            "transform",
+            `translate(${t.x.toFixed(2)}, ${t.y.toFixed(1)}) scale(${t.scale.toFixed(2)}) skewX(${sway.toFixed(2)})`
+          );
+        }
+
+        // Ground trail pebbles/specks (EXACT foot-lock speed!)
+        for (let i = 0; i < trailDetails.length; i++) {
+          const d = trailDetails[i];
+          d.x -= groundSpeed * dt;
+          if (d.x < -60) d.x += 1400;
+          d.node.setAttribute("transform", `translate(${d.x.toFixed(2)}, ${d.y.toFixed(1)})`);
+        }
+
+        // Foreground grass & wildflowers
+        for (let i = 0; i < frontItems.length; i++) {
+          const f = frontItems[i];
+          f.x -= groundSpeed * 1.32 * dt;
+          if (f.x < -100) f.x += 1480;
+          const sway = Math.sin(elapsed * 2.2 + f.phase) * f.swayAmp;
+          f.node.setAttribute(
+            "transform",
+            `translate(${f.x.toFixed(2)}, ${f.y.toFixed(1)}) skewX(${sway.toFixed(2)})`
+          );
+        }
+
+        // Sunlit pollen motes
+        for (let i = 0; i < motes.length; i++) {
+          const m = motes[i];
+          m.x += m.vx * dt;
+          m.y += (m.vy + Math.sin(elapsed * 1.4 + m.phase) * 4) * dt;
+          if (m.x < -20) m.x = 1300;
+          if (m.y < 100) m.y = 620;
+          const twinkle = m.baseOp * (0.65 + 0.35 * Math.sin(elapsed * 2.6 + m.phase));
+          m.node.setAttribute("transform", `translate(${m.x.toFixed(2)}, ${m.y.toFixed(2)})`);
+          m.node.setAttribute("opacity", twinkle.toFixed(2));
+        }
+
+        requestAnimationFrame(tick);
+      }
+
+      requestAnimationFrame(tick);
+    })();
+  </script>
+</body>
+</html>

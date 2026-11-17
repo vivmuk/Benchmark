@@ -1,0 +1,22 @@
+{
+ "text": "When a vehicle travels across a suspension bridge, its weight first presses on the roadway deck. The deck slab bends slightly and transfers that force to nearby longitudinal beams and crossbeams. These members, often working together with a stiffening girder or truss, spread the concentrated wheel load over a wider area. Most of the resulting load is then delivered to the vertical or inclined hangers, called suspenders, that connect the deck to the main cables. Some deck load may also pass directly into supports at the towers or bridge ends.\n\nEach suspender carries its share of the load in tension: it pulls upward on the deck and downward on the main cable. The main cable cannot resist these forces by acting as a rigid beam. Instead, it carries them almost entirely as tension along its curved length. Its sag is essential. Because the cable changes direction from point to point, the tensions on either side of a hanger attachment can combine to support that hanger\u2019s downward pull. The cable therefore gathers forces from many suspenders and conducts them toward the towers and anchorages. Its tension increases when traffic or other loading increases, and its shape may change slightly.\n\nThe stiffening girder or truss remains important even though the cables provide the principal span. It distributes a heavy vehicle\u2019s weight among several hangers, limits sharp local bends in the deck and cable, and reduces excessive movement under uneven traffic, wind, and other changing loads. Without this stiffness, a concentrated load could produce a large local depression rather than being shared smoothly by the suspension system.\n\nAt each tower, the main cable usually passes over a saddle near the top. The cable pulls along its length on both sides of the saddle. The vertical components of those pulls press downward, placing the tower mainly in compression. The tower behaves much like a very tall column, carrying this compression down through its legs to the pier and foundation. Horizontal components largely oppose one another when the cable forces on the two sides are balanced, although differences in loading, temperature effects, wind, and earthquakes can also make the tower bend. The foundation spreads the resulting forces into the ground through a broad footing, caissons, or piles, which transfer them by bearing on soil or rock and, where relevant, by friction along their sides.\n\nThe towers alone cannot keep the cables taut. In a typical suspension bridge, the cables continue beyond the towers to anchorages. There, their strands are secured within massive concrete blocks or fastened into sound rock. A gravity anchorage uses its weight and its interaction with the ground to resist the cable\u2019s enormous inward pull and any vertical component; a rock anchorage relies heavily on the strength of the surrounding rock and the embedded fastening system. The anchorages thus prevent the cables from simply pulling the supports inward.\n\nThe complete load path is therefore deck to deck framing, framing to suspenders, suspenders to main cables, and cables to towers and anchorages. The towers deliver their forces chiefly as compression through their foundations, while the anchorages deliver large cable tensions into the surrounding ground. Together, the ground reactions at these supports balance the bridge\u2019s own weight and the loads imposed upon it.",
+ "reasoning_chars": 7394,
+ "usage": {
+  "prompt_tokens": 121,
+  "completion_tokens": 2106,
+  "total_tokens": 2227,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 1468,
+   "image_tokens": 0,
+   "audio_tokens": 0
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 0.37809320725500584,
+ "t_first_content": 13.726118041202426,
+ "t_total": 20.5240605417639,
+ "cost": 0.053255
+}

@@ -1,0 +1,17 @@
+{
+ "text": "A suspension bridge carries load to the ground through a continuous chain of members that work mainly in tension and compression. The deck itself is not strong enough to span the gap directly. Instead, the deck and its stiffening girder or truss act together to spread the weight of pavement, railings, vehicles, pedestrians, snow, and wind among many hangers. When a heavy vehicle stands at one point, the stiffened deck bends slightly and shares that concentrated load with neighboring hangers rather than leaving one hanger to carry everything.\n\nEach hanger is a vertical or nearly vertical cable in tension. It hangs from a cable band clamped to a main cable, and it pulls downward on that main cable. The main cables are the principal load-carrying elements. They sag in a curve between the towers and are held in tension by the weight they support. As load passes onto the main cables, their tension increases and their curve tends to change slightly; the deck stiffness and the cable geometry keep this movement controlled. The main cables carry the load toward the towers as an inclined tension. That tension has two parts: a vertical component that pushes down on the towers and a horizontal component that pulls the cables toward the anchorages.\n\nAt each tower, the main cables pass over a saddle. The downward vertical force from the cables is transferred through the saddle into the tower, which acts as a tall compression member. The tower carries that compression down to a foundation, and the foundation spreads it into the ground as pressure and shear. The horizontal pull of the cables is not left for the tower to resist alone. In a conventional suspension bridge, the cables continue to massive anchorages at the ends, where they are tied into rock or into large concrete blocks. The anchorages pull back against the cables and transfer the horizontal tension into the ground. Across a central span, the horizontal pulls from the two halves largely balance each other through the cable system, but the anchorages still provide the final restraint at the ends.\n\nThe ground therefore receives the load in two ways: as compression under the tower foundations and as pulling or shear at the anchorages. Soil and rock must be strong enough to resist both. The whole system is interdependent. The deck distributes local loads, the hangers deliver them to the main cables, the main cables collect and carry them in tension to the towers and anchorages, and the towers and anchorages pass them into the foundations and surrounding ground. In this way, even a heavy load on the deck is ultimately converted into forces that the ground can safely receive.",
+ "reasoning_chars": 3487,
+ "usage": {
+  "prompt_tokens": 66,
+  "completion_tokens": 1260,
+  "total_tokens": 1326,
+  "completion_tokens_details": {
+   "reasoning_tokens": 744
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 0.7947936253622174,
+ "t_first_content": 17.332283792085946,
+ "t_total": 20.37599604204297,
+ "cost": 0.00168498
+}

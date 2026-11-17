@@ -1,0 +1,1219 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dune Line — Overnight across the desert</title>
+<meta name="description" content="Dune Line runs an overnight train between the last town before the sand and the neon city of Vega Gate. Nightly departures, private berths, sky-deck lounge.">
+<meta name="theme-color" content="#0a0711">
+<script>document.documentElement.classList.add('js');</script>
+<style>
+  /* ---------- Tokens ---------- */
+  :root{
+    --ink:#f7f1ea;
+    --ink-dim:#cfc6d8;
+    --muted:#9a90a8;
+    --bg:#08060d;
+    --line:rgba(247,241,234,.10);
+    --line-strong:rgba(247,241,234,.18);
+    --sand:#f0c48a;
+    --sand-2:#e0a45f;
+    --rose:#ff5f8f;
+    --violet:#9a6bff;
+    --cyan:#4fe0cf;
+    --serif: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+
+  /* ---------- Reset ---------- */
+  *,*::before,*::after{box-sizing:border-box}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--sans);
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    overflow-x:hidden;
+  }
+  body::before{
+    content:"";
+    position:fixed; inset:0; z-index:-2;
+    background:
+      radial-gradient(900px 620px at 82% -10%, rgba(154,107,255,.20), transparent 62%),
+      radial-gradient(760px 520px at 4% 106%, rgba(255,95,143,.13), transparent 60%),
+      radial-gradient(1000px 820px at 50% 42%, #0d0917, #06040b 72%);
+  }
+  ::selection{background:rgba(255,95,143,.30);color:#fff}
+  :focus-visible{outline:2px solid var(--sand);outline-offset:3px;border-radius:6px}
+  img,svg{max-width:100%}
+  a{color:inherit}
+
+  /* ---------- Grain overlay ---------- */
+  .grain{
+    position:fixed; inset:0; z-index:1;
+    width:100%; height:100%;
+    pointer-events:none;
+    opacity:.035;
+    mix-blend-mode:overlay;
+  }
+
+  /* ---------- Layout ---------- */
+  .wrap{width:min(1180px, 100% - 48px); margin-inline:auto}
+  section[id]{scroll-margin-top:96px}
+  .section{padding:clamp(60px, 7.5vw, 104px) 0; border-top:1px solid var(--line)}
+
+  /* ---------- Type ---------- */
+  h1,h2,h3{font-family:var(--serif); font-weight:400; margin:0}
+  h1{
+    font-size:clamp(2.55rem, 5.2vw, 4.3rem);
+    line-height:1.0;
+    letter-spacing:-.025em;
+    margin-bottom:22px;
+    text-wrap:balance;
+  }
+  h1 em{
+    font-style:italic;
+    background:linear-gradient(96deg, var(--sand) 0%, #ff9a76 38%, var(--rose) 68%, var(--violet) 100%);
+    -webkit-background-clip:text; background-clip:text;
+    -webkit-text-fill-color:transparent; color:transparent;
+  }
+  h2{
+    font-size:clamp(1.85rem, 3.1vw, 2.65rem);
+    line-height:1.1;
+    letter-spacing:-.02em;
+    text-wrap:balance;
+  }
+  .eyebrow{
+    display:flex; align-items:center; gap:10px;
+    margin:0 0 16px;
+    font-size:11px; font-weight:600;
+    letter-spacing:.2em; text-transform:uppercase;
+    color:var(--sand);
+  }
+  .eyebrow::before{
+    content:""; width:24px; height:1px;
+    background:currentColor; opacity:.55; flex:none;
+  }
+  .sub{
+    color:var(--muted);
+    font-size:15px; line-height:1.7;
+    margin:16px 0 0; max-width:54ch;
+  }
+  .lede{
+    max-width:44ch;
+    color:var(--muted);
+    font-size:clamp(15px, 1.15vw, 17px);
+    line-height:1.7;
+    margin:0 0 32px;
+  }
+
+  /* ---------- Buttons ---------- */
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    padding:11px 18px;
+    border-radius:999px;
+    border:1px solid transparent;
+    font-family:inherit; font-size:13.5px; font-weight:600;
+    letter-spacing:.005em;
+    text-decoration:none;
+    white-space:nowrap;
+    cursor:pointer;
+    transition:transform .18s ease, background .22s ease, border-color .22s ease, box-shadow .22s ease, color .22s ease;
+  }
+  .btn-primary{
+    background:linear-gradient(180deg, #ffdcb0, var(--sand-2));
+    color:#2a1408;
+    box-shadow:0 10px 26px -14px rgba(240,176,106,.9), inset 0 1px 0 rgba(255,255,255,.6);
+  }
+  .btn-primary:hover{
+    transform:translateY(-1px);
+    box-shadow:0 18px 38px -16px rgba(255,95,143,.75), 0 0 0 1px rgba(255,220,176,.45);
+  }
+  .btn-outline{
+    background:rgba(247,241,234,.035);
+    border-color:var(--line-strong);
+    color:var(--ink);
+  }
+  .btn-outline:hover{
+    border-color:rgba(240,196,138,.5);
+    background:rgba(240,196,138,.09);
+    transform:translateY(-1px);
+  }
+  .btn-quiet{
+    color:var(--ink-dim);
+    border-color:transparent;
+    padding-inline:8px;
+  }
+  .btn-quiet:hover{color:var(--sand)}
+  .btn-lg{padding:14px 24px; font-size:14.5px}
+
+  /* ---------- Nav ---------- */
+  .site-nav{
+    position:sticky; top:0; z-index:60;
+    border-bottom:1px solid transparent;
+    background:rgba(8,6,13,.35);
+    backdrop-filter:blur(14px) saturate(140%);
+    -webkit-backdrop-filter:blur(14px) saturate(140%);
+    transition:background .3s ease, border-color .3s ease;
+  }
+  .site-nav.scrolled{
+    background:rgba(8,6,13,.84);
+    border-bottom-color:var(--line);
+  }
+  .nav-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    gap:20px; height:74px;
+  }
+  .brand{
+    display:inline-flex; align-items:center; gap:11px;
+    text-decoration:none;
+    font-size:12.5px; font-weight:700;
+    letter-spacing:.22em; text-transform:uppercase;
+    color:var(--ink);
+  }
+  .brand svg{width:27px; height:27px; color:var(--sand); flex:none}
+  .nav-links{
+    display:flex; align-items:center; gap:30px;
+    margin-inline:auto;
+  }
+  .nav-links a{
+    position:relative;
+    padding:6px 0;
+    color:var(--ink-dim);
+    text-decoration:none;
+    font-size:13.5px;
+    transition:color .2s ease;
+  }
+  .nav-links a::after{
+    content:"";
+    position:absolute; left:0; right:0; bottom:0; height:1px;
+    background:linear-gradient(90deg, var(--sand), var(--rose));
+    transform:scaleX(0); transform-origin:left;
+    transition:transform .32s cubic-bezier(.2,.7,.2,1);
+  }
+  .nav-links a:hover{color:var(--ink)}
+  .nav-links a:hover::after{transform:scaleX(1)}
+  .nav-actions{display:flex; align-items:center; gap:10px}
+  .menu-btn{
+    display:none;
+    width:42px; height:42px;
+    align-items:center; justify-content:center;
+    flex-direction:column; gap:5px;
+    border-radius:11px;
+    border:1px solid var(--line-strong);
+    background:rgba(247,241,234,.04);
+    cursor:pointer;
+    padding:0;
+  }
+  .menu-btn span{
+    display:block; width:16px; height:1.5px; border-radius:2px;
+    background:var(--ink);
+    transition:transform .25s ease, opacity .25s ease;
+  }
+  .menu-btn[aria-expanded="true"] span:first-child{transform:translateY(3.25px) rotate(45deg)}
+  .menu-btn[aria-expanded="true"] span:last-child{transform:translateY(-3.25px) rotate(-45deg)}
+  .mobile-panel{
+    display:none;
+    flex-direction:column;
+    padding:6px 24px 22px;
+    background:rgba(8,6,13,.97);
+    border-bottom:1px solid var(--line);
+    backdrop-filter:blur(14px);
+  }
+  .mobile-panel.open{display:flex; animation:fadeDown .25s ease both}
+  @keyframes fadeDown{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+  .mobile-panel a{
+    padding:13px 0;
+    text-decoration:none;
+    color:var(--ink-dim);
+    font-size:15px;
+    border-bottom:1px solid rgba(247,241,234,.06);
+  }
+  .mobile-panel a:last-child{
+    margin-top:16px;
+    border-bottom:0;
+    color:#2a1408;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{padding:clamp(36px, 5.5vw, 72px) 0 clamp(56px, 7vw, 96px)}
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.05fr .95fr;
+    gap:clamp(32px, 4.5vw, 60px);
+    align-items:center;
+  }
+  .hero-cta{display:flex; flex-wrap:wrap; align-items:center; gap:12px}
+  .hero-stats{
+    display:flex; flex-wrap:wrap;
+    gap:clamp(20px, 3vw, 46px);
+    margin:44px 0 0;
+    padding:24px 0 0;
+    border-top:1px solid var(--line);
+  }
+  .hero-stats div{display:flex; flex-direction:column-reverse; gap:6px}
+  .hero-stats dt{
+    font-size:10.5px; letter-spacing:.18em; text-transform:uppercase;
+    color:var(--muted);
+  }
+  .hero-stats dd{
+    margin:0;
+    font-family:var(--serif);
+    font-size:1.35rem;
+    letter-spacing:-.01em;
+    font-variant-numeric:tabular-nums;
+  }
+
+  .hero-art{
+    position:relative;
+    margin:0;
+    border-radius:26px;
+    overflow:hidden;
+    border:1px solid rgba(247,241,234,.12);
+    background:#0d0817;
+    box-shadow:0 50px 100px -55px #000, inset 0 0 0 1px rgba(255,255,255,.04);
+  }
+  .hero-art svg{display:block; width:100%; height:auto}
+  .art-chip{
+    position:absolute; left:16px; bottom:16px;
+    display:flex; align-items:center; gap:9px;
+    padding:9px 15px;
+    border-radius:999px;
+    border:1px solid rgba(247,241,234,.15);
+    background:rgba(10,7,17,.66);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    font-size:12px; letter-spacing:.02em;
+    color:var(--ink-dim);
+    font-variant-numeric:tabular-nums;
+  }
+  .live-dot{
+    width:7px; height:7px; border-radius:50%;
+    background:var(--cyan);
+    box-shadow:0 0 0 0 rgba(79,224,207,.6);
+    animation:pulse 2.6s infinite;
+    flex:none;
+  }
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(79,224,207,.55)}
+    70%{box-shadow:0 0 0 9px rgba(79,224,207,0)}
+    100%{box-shadow:0 0 0 0 rgba(79,224,207,0)}
+  }
+
+  /* ---------- Features ---------- */
+  .section-head{max-width:660px; margin-bottom:clamp(32px, 4vw, 52px)}
+  .cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(268px, 1fr));
+    gap:16px;
+  }
+  .card{
+    position:relative;
+    padding:26px 24px 28px;
+    border-radius:18px;
+    border:1px solid var(--line);
+    background:linear-gradient(180deg, rgba(247,241,234,.055), rgba(247,241,234,.014));
+    transition:transform .35s cubic-bezier(.2,.7,.2,1), border-color .35s ease, background .35s ease;
+  }
+  .card:hover{
+    transform:translateY(-4px);
+    border-color:rgba(240,196,138,.32);
+    background:linear-gradient(180deg, rgba(247,241,234,.08), rgba(247,241,234,.02));
+  }
+  .icon{
+    width:44px; height:44px;
+    border-radius:13px;
+    display:grid; place-items:center;
+    color:var(--sand);
+    background:radial-gradient(120% 120% at 30% 0%, rgba(240,196,138,.24), rgba(240,196,138,.06));
+    border:1px solid rgba(240,196,138,.22);
+    margin-bottom:20px;
+  }
+  .icon svg{width:22px; height:22px}
+  .card .num{
+    position:absolute; top:24px; right:24px;
+    font-size:11px; letter-spacing:.16em;
+    color:rgba(247,241,234,.26);
+    font-variant-numeric:tabular-nums;
+  }
+  .card h3{font-size:1.2rem; letter-spacing:-.01em; margin-bottom:9px}
+  .card p{margin:0; color:var(--muted); font-size:14.5px; line-height:1.65}
+
+  /* ---------- Timetable ---------- */
+  .board{
+    border:1px solid var(--line);
+    border-radius:20px;
+    overflow:hidden;
+    background:linear-gradient(180deg, rgba(247,241,234,.04), rgba(255,255,255,.008));
+  }
+  .board-head,
+  .board-row{
+    display:grid;
+    grid-template-columns:132px 1.7fr 152px 104px 44px;
+    align-items:center;
+    gap:16px;
+    padding:16px 24px;
+  }
+  .board-head{
+    font-size:10.5px; letter-spacing:.18em; text-transform:uppercase;
+    color:var(--muted);
+    border-bottom:1px solid var(--line);
+    background:rgba(255,255,255,.02);
+  }
+  .board-row{
+    position:relative;
+    text-decoration:none;
+    border-bottom:1px solid rgba(247,241,234,.06);
+    transition:background .25s ease;
+  }
+  .board-row:last-child{border-bottom:0}
+  .board-row::before{
+    content:"";
+    position:absolute; left:0; top:0; bottom:0; width:2px;
+    background:linear-gradient(180deg, var(--sand), var(--rose));
+    transform:scaleY(0);
+    transition:transform .3s cubic-bezier(.2,.7,.2,1);
+  }
+  .board-row:hover{background:rgba(247,241,234,.045)}
+  .board-row:hover::before{transform:scaleY(1)}
+  .cell{display:flex; flex-direction:column; gap:3px; min-width:0}
+  .cell strong{font-weight:600; font-size:15px; letter-spacing:.005em}
+  .cell span{font-size:12.5px; color:var(--muted); line-height:1.4}
+  .cell.time strong{
+    font-family:var(--serif);
+    font-size:1.3rem;
+    font-variant-numeric:tabular-nums;
+    letter-spacing:0;
+  }
+  .go{
+    width:36px; height:36px; border-radius:50%;
+    display:grid; place-items:center;
+    justify-self:end;
+    border:1px solid var(--line-strong);
+    color:var(--ink);
+    font-size:14px; line-height:1;
+    transition:background .25s ease, color .25s ease, border-color .25s ease, transform .25s ease;
+  }
+  .board-row:hover .go{
+    background:var(--sand);
+    color:#231204;
+    border-color:transparent;
+    transform:translateX(3px);
+  }
+
+  /* ---------- Pricing ---------- */
+  .tiers{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:16px;
+    align-items:start;
+  }
+  .tier{
+    position:relative;
+    display:flex; flex-direction:column;
+    padding:30px 26px 30px;
+    border-radius:20px;
+    border:1px solid var(--line);
+    background:linear-gradient(180deg, rgba(247,241,234,.045), rgba(255,255,255,.01));
+    transition:border-color .3s ease, transform .3s ease;
+  }
+  .tier:hover{border-color:rgba(247,241,234,.24); transform:translateY(-3px)}
+  .tier--featured{
+    border-color:rgba(240,196,138,.42);
+    background:linear-gradient(180deg, rgba(240,196,138,.11), rgba(255,95,143,.055) 58%, rgba(255,255,255,.012));
+    box-shadow:0 34px 80px -54px rgba(255,95,143,.95);
+  }
+  .badge{
+    position:absolute; top:-11px; left:26px;
+    padding:5px 12px;
+    border-radius:999px;
+    font-size:10px; font-weight:700;
+    letter-spacing:.18em; text-transform:uppercase;
+    color:#2a1408;
+    background:linear-gradient(90deg, var(--sand), #ffb27a);
+  }
+  .tier h3{font-size:1.22rem; letter-spacing:-.01em}
+  .tier-note{
+    margin:6px 0 0;
+    font-size:12px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--muted);
+  }
+  .price{
+    display:flex; align-items:baseline;
+    margin:18px 0 0;
+    font-family:var(--serif);
+    font-size:2.7rem; line-height:1;
+    letter-spacing:-.035em;
+    font-variant-numeric:tabular-nums;
+  }
+  .price .cur{font-size:1.25rem; opacity:.7; margin-right:3px}
+  .price .per{
+    font-family:var(--sans);
+    font-size:12px; font-weight:500;
+    letter-spacing:.02em;
+    color:var(--muted);
+    margin-left:8px;
+  }
+  .tier-desc{
+    margin:14px 0 0;
+    font-size:14px; line-height:1.6;
+    color:var(--ink-dim);
+  }
+  .tier-list{
+    list-style:none;
+    margin:22px 0 26px;
+    padding:22px 0 0;
+    border-top:1px solid var(--line);
+    display:grid; gap:11px;
+  }
+  .tier-list li{
+    position:relative;
+    padding-left:24px;
+    font-size:13.5px; line-height:1.5;
+    color:var(--ink-dim);
+  }
+  .tier-list li::before{
+    content:"";
+    position:absolute; left:2px; top:4px;
+    width:6px; height:10px;
+    border-right:1.6px solid var(--sand);
+    border-bottom:1.6px solid var(--sand);
+    transform:rotate(40deg);
+    opacity:.85;
+  }
+  .tier .btn{margin-top:auto; width:100%}
+
+  /* ---------- Testimonial ---------- */
+  .quote-section{padding:clamp(64px, 8.5vw, 116px) 0; border-top:1px solid var(--line)}
+  .quote-wrap{max-width:880px; margin-inline:auto; text-align:center}
+  blockquote{
+    margin:0;
+    font-family:var(--serif);
+    font-size:clamp(1.35rem, 2.55vw, 2.05rem);
+    line-height:1.36;
+    letter-spacing:-.015em;
+    text-wrap:balance;
+  }
+  blockquote::before{
+    content:"\201C";
+    display:block;
+    font-size:3.6rem;
+    line-height:.55;
+    color:var(--sand);
+    opacity:.45;
+    margin-bottom:22px;
+  }
+  .attrib{
+    display:flex; align-items:center; justify-content:center;
+    flex-wrap:wrap; gap:12px;
+    margin-top:30px;
+    font-size:13px; color:var(--muted);
+  }
+  .avatar{
+    width:38px; height:38px; border-radius:50%;
+    display:grid; place-items:center;
+    font-size:11px; font-weight:700; letter-spacing:.06em;
+    color:#2a1408;
+    background:linear-gradient(135deg, var(--sand), #ff8a7a 58%, var(--rose));
+    flex:none;
+  }
+  .attrib strong{color:var(--ink); font-weight:600}
+  .attrib .sep{opacity:.4}
+
+  /* ---------- Footer ---------- */
+  .site-footer{
+    border-top:1px solid var(--line);
+    padding:clamp(48px, 6vw, 76px) 0 30px;
+  }
+  .foot-grid{
+    display:grid;
+    grid-template-columns:1.7fr 1fr 1fr 1fr;
+    gap:36px 24px;
+  }
+  .foot-brand p{
+    margin:16px 0 0;
+    max-width:32ch;
+    font-size:13.5px; line-height:1.7;
+    color:var(--muted);
+  }
+  .foot-col h4{
+    margin:0 0 14px;
+    font-size:11px; font-weight:600;
+    letter-spacing:.18em; text-transform:uppercase;
+    color:var(--muted);
+  }
+  .foot-col a{
+    display:block;
+    padding:5px 0;
+    font-size:13.5px;
+    color:var(--ink-dim);
+    text-decoration:none;
+    transition:color .2s ease;
+  }
+  .foot-col a:hover{color:var(--sand)}
+  .foot-bottom{
+    display:flex; flex-wrap:wrap; gap:12px 24px;
+    justify-content:space-between;
+    margin-top:52px;
+    padding-top:22px;
+    border-top:1px solid rgba(247,241,234,.06);
+    font-size:12px;
+    color:rgba(154,144,168,.9);
+  }
+  .foot-mark{
+    margin-top:clamp(28px, 5vw, 52px);
+    font-family:var(--serif);
+    font-size:clamp(2.8rem, 12.5vw, 9rem);
+    line-height:.82;
+    letter-spacing:.015em;
+    text-align:center;
+    white-space:nowrap;
+    overflow:hidden;
+    color:transparent;
+    -webkit-text-stroke:1px rgba(247,241,234,.085);
+    user-select:none;
+  }
+
+  /* ---------- Reveal ---------- */
+  .js .reveal{
+    opacity:0;
+    transform:translateY(16px);
+    transition:opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1);
+    transition-delay:var(--d, 0s);
+  }
+  .js .reveal.is-in{opacity:1; transform:none}
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:1024px){
+    .hero-grid{grid-template-columns:1fr; gap:44px}
+    .hero-art{max-width:660px; width:100%}
+    .nav-links{gap:22px}
+  }
+  @media (max-width:900px){
+    .tiers{grid-template-columns:1fr; max-width:540px}
+    .foot-grid{grid-template-columns:1fr 1fr}
+    .foot-brand{grid-column:1 / -1}
+  }
+  @media (max-width:880px){
+    .nav-links{display:none}
+    .menu-btn{display:inline-flex}
+    .nav-actions .btn-outline{display:none}
+  }
+  @media (max-width:820px){
+    .board-head{display:none}
+    .board-row{
+      grid-template-columns:1fr 1fr;
+      gap:16px 20px;
+      padding:20px 56px 20px 22px;
+    }
+    .board-row .go{
+      position:absolute;
+      right:16px; top:50%;
+      transform:translateY(-50%);
+      justify-self:auto;
+    }
+    .board-row:hover .go{transform:translateY(-50%) translateX(2px)}
+  }
+  @media (max-width:640px){
+    .wrap{width:min(1180px, 100% - 36px)}
+    .hero-stats{gap:24px 32px}
+    .foot-grid{grid-template-columns:1fr 1fr; gap:30px 20px}
+    .board-row{padding:18px 52px 18px 18px}
+    .art-chip{left:12px; bottom:12px; font-size:11px; padding:8px 12px}
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    .js .reveal{opacity:1; transform:none; transition:none}
+    .live-dot{animation:none}
+    *{transition-duration:.01ms !important}
+  }
+</style>
+</head>
+<body>
+
+<!-- Grain overlay, drawn in code -->
+<svg class="grain" aria-hidden="true" focusable="false">
+  <filter id="grainFilter">
+    <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/>
+    <feColorMatrix type="saturate" values="0"/>
+  </filter>
+  <rect width="100%" height="100%" filter="url(#grainFilter)"/>
+</svg>
+
+<!-- ================= NAV ================= -->
+<header class="site-nav" id="siteNav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top" aria-label="Dune Line — home">
+      <svg viewBox="0 0 28 28" fill="none" aria-hidden="true">
+        <circle cx="14" cy="14" r="12.4" stroke="currentColor" stroke-opacity=".35" stroke-width="1.1"/>
+        <path d="M4.6 17.9c2.9-2 4.9-2.9 7.9-2.9s5 1.1 7.9 2.9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+        <path d="M5.9 21.4c2.5-1.6 4.3-2.3 6.9-2.3 2.6 0 4.3 1 6.8 2.4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" opacity=".45"/>
+        <circle cx="18.6" cy="9.1" r="2.6" fill="currentColor"/>
+      </svg>
+      <span>Dune Line</span>
+    </a>
+
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#journey">The Journey</a>
+      <a href="#timetable">Timetable</a>
+      <a href="#fares">Fares</a>
+      <a href="#voices">Voices</a>
+    </nav>
+
+    <div class="nav-actions">
+      <a class="btn btn-outline" href="#timetable">Tonight's trains</a>
+      <a class="btn btn-primary" href="#fares">Book a berth</a>
+      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mobilePanel" aria-label="Open menu">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="mobile-panel" id="mobilePanel">
+    <a href="#journey">The Journey</a>
+    <a href="#timetable">Timetable</a>
+    <a href="#fares">Fares</a>
+    <a href="#voices">Voices</a>
+    <a class="btn btn-primary" href="#fares">Book a berth</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ================= HERO ================= -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+
+      <div class="hero-copy">
+        <p class="eyebrow">Nightly from Ashfall Halt</p>
+        <h1>Cross the dunes.<br>Wake in <em>neon</em>.</h1>
+        <p class="lede">
+          One set of rails runs between the last town before the sand and the first light
+          of Vega Gate. Board at dusk, sleep behind a real door, and step off into a city
+          that never turns its lights down.
+        </p>
+        <div class="hero-cta">
+          <a class="btn btn-primary btn-lg" href="#fares">Reserve a berth</a>
+          <a class="btn btn-quiet btn-lg" href="#timetable">See the timetable →</a>
+        </div>
+        <dl class="hero-stats">
+          <div><dt>Journey</dt><dd>11h 40m</dd></div>
+          <div><dt>Distance</dt><dd>684 km</dd></div>
+          <div><dt>Departures</dt><dd>4 nightly</dd></div>
+        </dl>
+      </div>
+
+      <figure class="hero-art">
+        <svg viewBox="0 0 640 520" role="img" aria-label="A lit train crossing layered desert dunes toward a glowing neon city on the horizon, under a crescent moon.">
+          <defs>
+            <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#0b0818"/>
+              <stop offset="28%" stop-color="#1c1037"/>
+              <stop offset="52%" stop-color="#4a1f4e"/>
+              <stop offset="72%" stop-color="#973b48"/>
+              <stop offset="87%" stop-color="#d97548"/>
+              <stop offset="100%" stop-color="#f2a962"/>
+            </linearGradient>
+
+            <radialGradient id="cityGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#ff5f8f" stop-opacity=".55"/>
+              <stop offset="55%" stop-color="#a24cff" stop-opacity=".18"/>
+              <stop offset="100%" stop-color="#a24cff" stop-opacity="0"/>
+            </radialGradient>
+
+            <radialGradient id="moonGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#ffe9c4" stop-opacity=".38"/>
+              <stop offset="100%" stop-color="#ffe9c4" stop-opacity="0"/>
+            </radialGradient>
+
+            <linearGradient id="duneFar" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#3d1a46"/>
+              <stop offset="100%" stop-color="#200f2c"/>
+            </linearGradient>
+
+            <linearGradient id="duneMid" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#2a1334"/>
+              <stop offset="100%" stop-color="#150a20"/>
+            </linearGradient>
+
+            <linearGradient id="duneNear" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#190c22"/>
+              <stop offset="100%" stop-color="#090410"/>
+            </linearGradient>
+
+            <linearGradient id="beam" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#ffd79a" stop-opacity=".55"/>
+              <stop offset="100%" stop-color="#ffd79a" stop-opacity="0"/>
+            </linearGradient>
+
+            <radialGradient id="vignette" cx="50%" cy="44%" r="74%">
+              <stop offset="52%" stop-color="#000" stop-opacity="0"/>
+              <stop offset="100%" stop-color="#05030a" stop-opacity=".78"/>
+            </radialGradient>
+
+            <mask id="moonMask">
+              <rect width="640" height="520" fill="#000"/>
+              <circle cx="545" cy="84" r="22" fill="#fff"/>
+              <circle cx="557" cy="76" r="19" fill="#000"/>
+            </mask>
+          </defs>
+
+          <!-- sky -->
+          <rect width="640" height="520" fill="url(#sky)"/>
+
+          <!-- stars -->
+          <g fill="#fff6e6">
+            <circle cx="40" cy="44" r="1.3" opacity=".9"/>
+            <circle cx="92" cy="86" r="1" opacity=".5"/>
+            <circle cx="128" cy="32" r="1.2" opacity=".7"/>
+            <circle cx="176" cy="110" r="0.9" opacity=".45"/>
+            <circle cx="210" cy="58" r="1.3" opacity=".8"/>
+            <circle cx="246" cy="140" r="1" opacity=".5"/>
+            <circle cx="288" cy="26" r="1.1" opacity=".6"/>
+            <circle cx="322" cy="96" r="1.5" opacity=".9"/>
+            <circle cx="356" cy="52" r="0.9" opacity=".45"/>
+            <circle cx="392" cy="132" r="1.2" opacity=".7"/>
+            <circle cx="430" cy="74" r="1" opacity=".55"/>
+            <circle cx="452" cy="30" r="1.3" opacity=".85"/>
+            <circle cx="486" cy="150" r="0.8" opacity=".4"/>
+            <circle cx="560" cy="44" r="1.1" opacity=".6"/>
+            <circle cx="596" cy="104" r="0.95" opacity=".5"/>
+            <circle cx="608" cy="168" r="0.9" opacity=".45"/>
+            <circle cx="70" cy="150" r="1" opacity=".5"/>
+            <circle cx="150" cy="172" r="0.8" opacity=".35"/>
+            <circle cx="258" cy="190" r="1" opacity=".5"/>
+            <circle cx="340" cy="166" r="0.85" opacity=".4"/>
+            <circle cx="410" cy="186" r="0.9" opacity=".45"/>
+            <circle cx="520" cy="132" r="1" opacity=".55"/>
+            <circle cx="574" cy="22" r="1.1" opacity=".7"/>
+            <circle cx="24" cy="112" r="0.8" opacity=".4"/>
+          </g>
+          <g stroke="#fff6e6" stroke-width=".8" opacity=".5">
+            <path d="M322 90v12M316 96h12"/>
+            <path d="M452 25v10M447 30h10"/>
+          </g>
+
+          <!-- moon -->
+          <circle cx="545" cy="84" r="62" fill="url(#moonGlow)"/>
+          <circle cx="545" cy="84" r="22" fill="#ffeccf" mask="url(#moonMask)" opacity=".95"/>
+
+          <!-- city glow on the horizon -->
+          <ellipse cx="470" cy="338" rx="240" ry="106" fill="url(#cityGlow)"/>
+
+          <!-- skyline -->
+          <g fill="#150a22">
+            <rect x="6" y="316" width="18" height="26" rx="1.5"/>
+            <rect x="26" y="300" width="12" height="42" rx="1.5"/>
+            <rect x="392" y="302" width="16" height="40" rx="1.5"/>
+            <rect x="410" y="284" width="13" height="58" rx="1.5"/>
+            <rect x="426" y="312" width="24" height="30" rx="1.5"/>
+            <rect x="452" y="262" width="18" height="80" rx="1.5"/>
+            <rect x="473" y="298" width="15" height="44" rx="1.5"/>
+            <rect x="490" y="240" width="24" height="102" rx="2"/>
+            <rect x="516" y="292" width="16" height="50" rx="1.5"/>
+            <rect x="534" y="272" width="15" height="70" rx="1.5"/>
+            <rect x="551" y="310" width="26" height="32" rx="1.5"/>
+            <rect x="578" y="288" width="16" height="54" rx="1.5"/>
+            <rect x="596" y="314" width="22" height="28" rx="1.5"/>
+            <rect x="620" y="296" width="14" height="46" rx="1.5"/>
+          </g>
+
+          <!-- antennae -->
+          <g stroke="#3a2350" stroke-width="1.4">
+            <path d="M502 240v-17"/>
+            <path d="M541 272v-14"/>
+            <path d="M460 262v-11"/>
+          </g>
+          <g>
+            <circle cx="502" cy="221" r="2" fill="#ff5f8f" opacity=".95"/>
+            <circle cx="541" cy="256" r="1.7" fill="#4fe0cf" opacity=".9"/>
+            <circle cx="460" cy="249" r="1.5" fill="#ffd79a" opacity=".9"/>
+          </g>
+
+          <!-- windows -->
+          <g>
+            <rect x="496" y="252" width="3" height="4" rx="1" fill="#4fe0cf" opacity=".9"/>
+            <rect x="504" y="252" width="3" height="4" rx="1" fill="#ff5f8f" opacity=".75"/>
+            <rect x="496" y="266" width="3" height="4" rx="1" fill="#ffd79a" opacity=".8"/>
+            <rect x="504" y="284" width="3" height="4" rx="1" fill="#4fe0cf" opacity=".7"/>
+            <rect x="496" y="300" width="3" height="4" rx="1" fill="#ff5f8f" opacity=".85"/>
+            <rect x="504" y="318" width="3" height="4" rx="1" fill="#ffd79a" opacity=".6"/>
+            <rect x="457" y="274" width="3" height="4" rx="1" fill="#ffd79a" opacity=".8"/>
+            <rect x="463" y="290" width="3" height="4" rx="1" fill="#4fe0cf" opacity=".8"/>
+            <rect x="457" y="310" width="3" height="4" rx="1" fill="#ff5f8f" opacity=".7"/>
+            <rect x="538" y="284" width="3" height="4" rx="1" fill="#4fe0cf" opacity=".85"/>
+            <rect x="538" y="302" width="3" height="4" rx="1" fill="#ffd79a" opacity=".7"/>
+            <rect x="582" y="300" width="3" height="4" rx="1" fill="#ff5f8f" opacity=".8"/>
+            <rect x="582" y="316" width="3" height="4" rx="1" fill="#4fe0cf" opacity=".7"/>
+            <rect x="415" y="296" width="3" height="4" rx="1" fill="#ffd79a" opacity=".75"/>
+            <rect x="415" y="316" width="3" height="4" rx="1" fill="#4fe0cf" opacity=".65"/>
+            <rect x="629" y="308" width="3" height="4" rx="1" fill="#ff5f8f" opacity=".7"/>
+            <rect x="601" y="322" width="3" height="4" rx="1" fill="#ffd79a" opacity=".65"/>
+            <rect x="556" y="320" width="3" height="4" rx="1" fill="#4fe0cf" opacity=".7"/>
+          </g>
+
+          <!-- horizon light -->
+          <rect x="360" y="336" width="280" height="1.2" fill="#ff9a76" opacity=".35"/>
+
+          <!-- dunes -->
+          <path d="M0 352 C 70 338 130 348 200 344 C 280 339 340 356 420 350 C 500 344 570 356 640 348 L640 520 L0 520 Z" fill="url(#duneFar)"/>
+
+          <path d="M0 424 C 70 402 140 400 210 410 C 290 421 340 404 420 410 C 500 416 570 428 640 418 L640 520 L0 520 Z" fill="url(#duneMid)"/>
+          <path d="M0 424 C 70 402 140 400 210 410 C 290 421 340 404 420 410 C 500 416 570 428 640 418" fill="none" stroke="#7d4166" stroke-width="1.5" opacity=".55"/>
+
+          <path d="M0 500 C 90 476 180 492 270 486 C 370 479 450 500 540 492 C 590 488 620 494 640 490 L640 520 L0 520 Z" fill="url(#duneNear)"/>
+          <path d="M0 500 C 90 476 180 492 270 486 C 370 479 450 500 540 492 C 590 488 620 494 640 490" fill="none" stroke="#8a4a5f" stroke-width="1.2" opacity=".32"/>
+
+          <!-- train -->
+          <g transform="translate(132 384)">
+            <ellipse cx="96" cy="26" rx="104" ry="6" fill="#ff9a76" opacity=".16"/>
+            <path d="M196 0 L268 -12 L268 34 Z" fill="url(#beam)" opacity=".5"/>
+            <rect x="0" y="0" width="198" height="24" rx="9" fill="#120a1c"/>
+            <path d="M8 0.7 H188" stroke="#ffc08a" stroke-width="1.2" opacity=".38" fill="none"/>
+            <g fill="#ffd79a">
+              <rect x="14" y="7" width="7" height="9" rx="2" opacity=".95"/>
+              <rect x="30" y="7" width="7" height="9" rx="2" opacity=".8"/>
+              <rect x="46" y="7" width="7" height="9" rx="2" opacity=".95"/>
+              <rect x="62" y="7" width="7" height="9" rx="2" opacity=".65"/>
+              <rect x="78" y="7" width="7" height="9" rx="2" opacity=".9"/>
+              <rect x="94" y="7" width="7" height="9" rx="2" opacity=".75"/>
+              <rect x="110" y="7" width="7" height="9" rx="2" opacity=".95"/>
+              <rect x="126" y="7" width="7" height="9" rx="2" opacity=".6"/>
+              <rect x="142" y="7" width="7" height="9" rx="2" opacity=".9"/>
+              <rect x="158" y="7" width="7" height="9" rx="2" opacity=".8"/>
+            </g>
+            <rect x="46" y="7" width="7" height="9" rx="2" fill="#4fe0cf" opacity=".55"/>
+            <rect x="126" y="7" width="7" height="9" rx="2" fill="#ff5f8f" opacity=".5"/>
+            <rect x="172" y="5" width="16" height="13" rx="3" fill="#fff0cf" opacity=".85"/>
+            <circle cx="198" cy="12" r="3.2" fill="#fff6dd"/>
+          </g>
+
+          <!-- vignette -->
+          <rect width="640" height="520" fill="url(#vignette)"/>
+        </svg>
+        <figcaption class="art-chip">
+          <span class="live-dot" aria-hidden="true"></span>
+          Next departure 19:40 · Platform 3
+        </figcaption>
+      </figure>
+
+    </div>
+  </section>
+
+  <!-- ================= FEATURES ================= -->
+  <section class="section" id="journey">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">On board</p>
+        <h2>Three reasons to leave the road behind.</h2>
+        <p class="sub">
+          Dune Line is one train, eleven carriages, and a route that has not changed since
+          1974. Here is what the night buys you.
+        </p>
+      </div>
+
+      <div class="cards">
+        <article class="card reveal" style="--d:.02s">
+          <span class="num" aria-hidden="true">01</span>
+          <div class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2.5 18.5v-6h15.5a3.5 3.5 0 0 1 3.5 3.5v2.5"/>
+              <path d="M2.5 18.5h19"/>
+              <path d="M6 12.5V9.2A1.7 1.7 0 0 1 7.7 7.5h3.1"/>
+              <path d="M9.6 7.5v5"/>
+            </svg>
+          </div>
+          <h3>A door, a bed, a window</h3>
+          <p>
+            Every fare includes a real mattress behind a real door. Linen changed at
+            Ashfall, a brass reading lamp, and glass cut wide enough for the dunes to
+            go blue at two in the morning.
+          </p>
+        </article>
+
+        <article class="card reveal" style="--d:.10s">
+          <span class="num" aria-hidden="true">02</span>
+          <div class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20.4 14.6A8.2 8.2 0 1 1 9.5 3.7a6.6 6.6 0 0 0 10.9 10.9Z"/>
+              <path d="M17.4 3.2v3.2M15.8 4.8h3.2"/>
+              <path d="M21.2 8.6v2.2M20.1 9.7h2.2" opacity=".6"/>
+            </svg>
+          </div>
+          <h3>Sky-deck lounge</h3>
+          <p>
+            The last carriage has almost no roof to speak of. Sit under the stars with a
+            cardamom coffee and the wind off the sand until the city glow rises on the
+            horizon.
+          </p>
+        </article>
+
+        <article class="card reveal" style="--d:.18s">
+          <span class="num" aria-hidden="true">03</span>
+          <div class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="8" cy="8.5" r="4.2"/>
+              <path d="M11.1 11.6 20 20.5"/>
+              <path d="M16.8 17.3l1.8-1.8"/>
+              <path d="M19.2 19.7l1.8-1.8"/>
+            </svg>
+          </div>
+          <h3>Arrive rested, not wrecked</h3>
+          <p>
+            Breakfast is served ninety minutes out. Showers, pressed shirts and a porter
+            who learns your name before Mirage Junction — so you walk into Vega Gate
+            looking like you flew.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TIMETABLE ================= -->
+  <section class="section" id="timetable">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">Timetable</p>
+        <h2>Four trains a night.</h2>
+        <p class="sub">
+          All services board on the desert side. Times are local; the clocks move an hour
+          at Mirage Junction.
+        </p>
+      </div>
+
+      <div class="board reveal">
+        <div class="board-head" aria-hidden="true">
+          <span>Departure</span>
+          <span>Service</span>
+          <span>Arrives</span>
+          <span>From</span>
+          <span></span>
+        </div>
+
+        <a class="board-row" href="#fares">
+          <div class="cell time"><strong>19:40</strong><span>Ashfall Halt</span></div>
+          <div class="cell service"><strong>The Meridian</strong><span>to Vega Gate · nightly</span></div>
+          <div class="cell arrive"><strong>07:20 <span style="font-size:11px;letter-spacing:.06em">+1</span></strong><span>11h 40m</span></div>
+          <div class="cell fare"><strong>$180</strong><span>per berth</span></div>
+          <div class="go" aria-hidden="true">→</div>
+        </a>
+
+        <a class="board-row" href="#fares">
+          <div class="cell time"><strong>21:15</strong><span>Ashfall Halt</span></div>
+          <div class="cell service"><strong>The Caravan</strong><span>to Mirage Junction · Wed–Sun</span></div>
+          <div class="cell arrive"><strong>06:20 <span style="font-size:11px;letter-spacing:.06em">+1</span></strong><span>9h 05m</span></div>
+          <div class="cell fare"><strong>$140</strong><span>per berth</span></div>
+          <div class="go" aria-hidden="true">→</div>
+        </a>
+
+        <a class="board-row" href="#fares">
+          <div class="cell time"><strong>23:50</strong><span>Salt Flats</span></div>
+          <div class="cell service"><strong>The Lantern</strong><span>to Vega Gate · nightly</span></div>
+          <div class="cell arrive"><strong>08:10 <span style="font-size:11px;letter-spacing:.06em">+1</span></strong><span>8h 20m</span></div>
+          <div class="cell fare"><strong>$220</strong><span>per berth</span></div>
+          <div class="go" aria-hidden="true">→</div>
+        </a>
+
+        <a class="board-row" href="#fares">
+          <div class="cell time"><strong>01:10</strong><span>Ashfall Halt</span></div>
+          <div class="cell service"><strong>The Long Night</strong><span>to Vega Gate · Fri–Sun</span></div>
+          <div class="cell arrive"><strong>14:05 <span style="font-size:11px;letter-spacing:.06em">+1</span></strong><span>12h 55m</span></div>
+          <div class="cell fare"><strong>$160</strong><span>per berth</span></div>
+          <div class="go" aria-hidden="true">→</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PRICING ================= -->
+  <section class="section" id="fares">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">Fares</p>
+        <h2>Pay for the berth. Keep the view.</h2>
+        <p class="sub">
+          One-way, per person, taxes included. Breakfast comes with every tier — the rest
+          is a matter of how much room you like between yourself and morning.
+        </p>
+      </div>
+
+      <div class="tiers">
+
+        <article class="tier reveal" style="--d:.02s">
+          <h3>Bunk</h3>
+          <p class="tier-note">Night coach</p>
+          <p class="price"><span class="cur">$</span>180<span class="per">/ berth</span></p>
+          <p class="tier-desc">A curtained berth in the night coach, with the window you paid for.</p>
+          <ul class="tier-list">
+            <li>Single bunk with linen</li>
+            <li>Curtain, reading lamp, shelf</li>
+            <li>Shared washroom at each end</li>
+            <li>Tea, dates and breakfast</li>
+            <li>One bag up to 23 kg</li>
+          </ul>
+          <a class="btn btn-outline" href="#timetable">Choose Bunk</a>
+        </article>
+
+        <article class="tier tier--featured reveal" style="--d:.10s">
+          <span class="badge">Most chosen</span>
+          <h3>Cabin</h3>
+          <p class="tier-note">Private twin</p>
+          <p class="price"><span class="cur">$</span>340<span class="per">/ berth</span></p>
+          <p class="tier-desc">A private twin cabin with a proper window on the deep sand.</p>
+          <ul class="tier-list">
+            <li>Private twin cabin, lockable</li>
+            <li>En-suite basin and shower slot</li>
+            <li>Dinner and breakfast served in</li>
+            <li>Sky-deck lounge access</li>
+            <li>Two bags up to 23 kg</li>
+            <li>Priority boarding at Ashfall</li>
+          </ul>
+          <a class="btn btn-primary" href="#timetable">Choose Cabin</a>
+        </article>
+
+        <article class="tier reveal" style="--d:.18s">
+          <h3>Observation Suite</h3>
+          <p class="tier-note">Last carriage</p>
+          <p class="price"><span class="cur">$</span>620<span class="per">/ berth</span></p>
+          <p class="tier-desc">The last carriage, all glass, and a host who knows the route by heart.</p>
+          <ul class="tier-list">
+            <li>Queen berth under the glass roof</li>
+            <li>Private lounge and bar</li>
+            <li>Dinner served in your suite</li>
+            <li>Dedicated host for the night</li>
+            <li>Three bags, plus a bike or skis</li>
+            <li>Chauffeur from Vega Gate</li>
+          </ul>
+          <a class="btn btn-outline" href="#timetable">Choose Suite</a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TESTIMONIAL ================= -->
+  <section class="quote-section" id="voices">
+    <div class="wrap quote-wrap reveal">
+      <blockquote>
+        I have taken the Meridian eleven times and I still stay up past Mirage Junction
+        just to watch the dunes turn blue. You fall asleep in one country and wake up in
+        another — and somehow you are rested for both.
+      </blockquote>
+      <div class="attrib">
+        <span class="avatar" aria-hidden="true">NO</span>
+        <strong>Nadia Okonjo</strong>
+        <span class="sep" aria-hidden="true">·</span>
+        <span>Architect, Vega Gate</span>
+        <span class="sep" aria-hidden="true">·</span>
+        <span>11 crossings</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="brand" href="#top" aria-label="Dune Line — home">
+          <svg viewBox="0 0 28 28" fill="none" aria-hidden="true">
+            <circle cx="14" cy="14" r="12.4" stroke="currentColor" stroke-opacity=".35" stroke-width="1.1"/>
+            <path d="M4.6 17.9c2.9-2 4.9-2.9 7.9-2.9s5 1.1 7.9 2.9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+            <path d="M5.9 21.4c2.5-1.6 4.3-2.3 6.9-2.3 2.6 0 4.3 1 6.8 2.4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" opacity=".45"/>
+            <circle cx="18.6" cy="9.1" r="2.6" fill="currentColor"/>
+          </svg>
+          <span>Dune Line</span>
+        </a>
+        <p>
+          Overnight across the deep sand since 1974. One route, four departures, and a
+          sky-deck that stays open until the last passenger gives up on the stars.
+        </p>
+      </div>
+
+      <div class="foot-col">
+        <h4>Travel</h4>
+        <a href="#timetable">Timetable</a>
+        <a href="#fares">Fares &amp; tiers</a>
+        <a href="#journey">On board</a>
+        <a href="#top">Accessibility</a>
+      </div>
+
+      <div class="foot-col">
+        <h4>The line</h4>
+        <a href="#top">About Dune Line</a>
+        <a href="#voices">Passenger voices</a>
+        <a href="#top">Route history</a>
+        <a href="#top">Careers</a>
+      </div>
+
+      <div class="foot-col">
+        <h4>Reach us</h4>
+        <a href="#top">Ashfall Halt, Platform 3</a>
+        <a href="#top">hello@duneline.example</a>
+        <a href="#top">Night desk: +00 1140</a>
+        <a href="#top">Newsletter</a>
+      </div>
+    </div>
+
+    <div class="foot-bottom">
+      <span>© 2024 Dune Line Rail Co. A fictional service, lovingly invented.</span>
+      <span>Every pixel on this page is drawn in code.</span>
+    </div>
+
+    <div class="foot-mark" aria-hidden="true">Dune Line</div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var nav = document.getElementById('siteNav');
+    function onScroll() {
+      nav.classList.toggle('scrolled', window.scrollY > 8);
+    }
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    var btn = document.getElementById('menuBtn');
+    var panel = document.getElementById('mobilePanel');
+
+    btn.addEventListener('click', function () {
+      var open = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!open));
+      btn.setAttribute('aria-label', open ? 'Open menu' : 'Close menu');
+      panel.classList.toggle('open', !open);
+    });
+
+    Array.prototype.forEach.call(panel.querySelectorAll('a'), function (a) {
+      a.addEventListener('click', function () {
+        btn.setAttribute('aria-expanded', 'false');
+        btn.setAttribute('aria-label', 'Open menu');
+        panel.classList.remove('open');
+      });
+    });
+
+    var items = document.querySelectorAll('.reveal');
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if ('IntersectionObserver' in window && !reduced) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-in');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+      Array.prototype.forEach.call(items, function (el) { io.observe(el); });
+    } else {
+      Array.prototype.forEach.call(items, function (el) { el.classList.add('is-in'); });
+    }
+  })();
+</script>
+</body>
+</html>

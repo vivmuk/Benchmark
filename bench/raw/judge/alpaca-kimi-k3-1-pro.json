@@ -1,0 +1,20 @@
+{
+ "claude-opus-5-5": {
+  "scores": {
+   "alpaca": 6.0,
+   "motion": 6.0,
+   "beauty": 6.0,
+   "scene": 7.0
+  },
+  "note": "A charming, softly coloured camelid with a long neck, fleece and upright ears sits in a tasteful mountain-path scene, but the cloud-blob body, banana-like llama ears and stiff, stick-like wooden legs with awkwardly bending joints weaken both the anatomy and the walk cycle, even though the legs do cl"
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "alpaca": 8.0,
+   "motion": 6.0,
+   "beauty": 8.0,
+   "scene": 7.0
+  },
+  "note": "The woolly alpaca is clear and charming in a tasteful pastel landscape, but its visibly changing legs move somewhat stiffly."
+ }
+}

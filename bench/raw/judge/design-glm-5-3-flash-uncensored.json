@@ -1,0 +1,22 @@
+{
+ "claude-opus-5-5": {
+  "scores": {
+   "typography": 8.0,
+   "layout": 6.0,
+   "colour": 8.0,
+   "completeness": 6.0,
+   "originality": 8.0
+  },
+  "note": "A distinctive dusk-to-neon serif-and-mono design with a lovely boarding-pass hero, but the 'Four trains leave tonight' section shows no departure rows, so the timetable is missing and the testimonial sits in its place; a stray '\u5730\u56fe' glyph and a struck-through 'No' in the body copy add polish issues."
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "typography": 8.0,
+   "layout": 7.0,
+   "colour": 9.0,
+   "completeness": 6.0,
+   "originality": 9.0
+  },
+  "note": "The train illustration, boarding pass and desert palette feel distinctive, but the promised four-departure timetable has no departures."
+ }
+}

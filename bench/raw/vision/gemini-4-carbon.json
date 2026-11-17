@@ -1,0 +1,14 @@
+{
+ "text": "A cinematic sci-fi digital illustration in a wide-angle composition. In the left foreground, atop a misty, wind-rippled orange sand dune, a dark-haired figure wearing a dark red cape stands beside a fluffy beige llama, both seen from behind looking toward a futuristic desert metropolis in the center-right background. The city features tiered circular bases, smaller skyscrapers, and three towering spires: a tallest central spire crowned with a glowing horizontal cyan halo ring, a left spire with a vertical cyan neon sign reading \"OASIS\", and a right spire lit with purple neon accents. Two bright cyan searchlights beam diagonally outward into the sky from either side of the city. Winding through the dunes from the city to the bottom-right corner is an elevated, orange-lit monorail track carrying a single sleek train toward the foreground. On the right, a turquoise oasis pond sits near a large saguaro cactus outlined in glowing pink neon, with a smaller unlit saguaro behind it. A massive crescent moon, illuminated on its lower-right curve, hangs in the upper-left sky. The starry twilight sky gradients from warm sunset orange on the right horizon through purple to deep navy blue above, blending vibrant neon highlights with warm atmospheric dusk lighting.",
+ "reasoning_chars": 811,
+ "usage": {
+  "prompt_tokens": 1248,
+  "completion_tokens": 1059,
+  "total_tokens": 2307
+ },
+ "finish": "stop",
+ "t_first_delta": 9.951231500133872,
+ "t_first_content": 22.424575083889067,
+ "t_total": 25.949809833429754,
+ "cost": 0.0163575
+}

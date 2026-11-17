@@ -1,0 +1,24 @@
+{
+ "text": "Ultra-wide 16:9 cinematic science-fiction matte painting, highly detailed semi-realistic retro-futurist concept art, low eye-level establishing shot. Rippled orange sand dunes fill the foreground, with windblown dust glowing along a ridge. On the left ridge, seen from behind and facing the city, stand one dark-haired traveler in a long flowing burgundy cloak and one shaggy gray-brown llama in right-facing profile; both cast long shadows toward the lower left. The center-right background holds a dense futuristic oasis city: three slender glass supertowers, the tallest dark-teal central spire crowned by a glowing horizontal cyan elliptical halo, a turquoise left spire with a vertical neon sign reading \u201cOASIS\u201d one letter per line, and a violet-magenta right spire. Two round, tiered, saucer-roofed buildings and many tiny illuminated low-rise structures cluster around their stepped neon-edged bases. Several faint diagonal cyan searchlight beams rise into the sky. Above, a deep navy star-speckled sky gradients through dusty purple and mauve to peach and vivid orange at the horizon; a large slender silver crescent moon hangs in the upper left. In the lower right, an irregular turquoise pool reflects the city. A tall dark-green multi-armed saguaro with a thin pink neon rim stands on its near bank, with one much smaller distant cactus at the far right. An elevated black monorail guideway with glowing golden edges curves from the bottom-right corner toward the city on thin supports; one short sleek dark-teal train sits on its near bend. Warm sunset sand contrasts with cool cyan and magenta neon, atmospheric haze, soft volumetric light, crisp detail.",
+ "reasoning_chars": 6565,
+ "usage": {
+  "prompt_tokens": 1357,
+  "completion_tokens": 1968,
+  "total_tokens": 3325,
+  "prompt_tokens_details": {
+   "cached_tokens": 64
+  },
+  "cache_read_input_tokens": 64,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 1033,
+   "audio_tokens": 0,
+   "reasoning_tokens": 1603,
+   "rejected_prediction_tokens": 1772
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 1.4861952075734735,
+ "t_first_content": 13.4669777918607,
+ "t_total": 15.449662417173386,
+ "cost": 0.022394
+}

@@ -1,0 +1,17 @@
+{
+ "text": "A suspension bridge carries load by a continuous chain of tension and compression members that begins at the deck and ends in the ground. The deck does not sit directly on the ground; it is supported at intervals by hangers, which are vertical or nearly vertical cables or rods. When traffic, wind, or the bridge\u2019s own weight pushes down on the deck, the deck tries to sag between supports. A stiffening girder or truss built into the deck spreads concentrated loads over many hangers and limits bending and twisting, so the load is shared rather than dumped onto one point. The hangers hang from the main cables and pull downward on them.\n\nThe main cables are the primary load-carrying members of a suspension bridge. They are draped in a curve between towers and are held in tension by the downward pull of the deck, hangers, and their own weight. Each hanger\u2019s downward pull is transferred into the main cable as tension along the cable\u2019s curved path. Because the cable is curved, the tension has both vertical and horizontal components. The vertical components at the towers are carried into the towers, while the horizontal components pull toward the anchorages at each end. The main cable thus gathers the deck loads and carries them toward the towers and anchorages, changing the direction of the force as it follows its curve.\n\nAt the towers, the main cable passes over saddles or bearings. The downward force from the cable is transferred into the tower as compression. The tower acts as a tall column: it receives the vertical thrust from the cable and carries it down to its foundation. The tower foundation spreads that compression into the ground through footings, caissons, or piles, depending on the site. The horizontal pull of the main cable is resisted at the ends of the bridge by anchorages, which may be massive concrete blocks, rock anchors, or tied-back foundations. These anchorages hold the cable ends and transfer the cable\u2019s tension into the ground. In a self-anchored suspension bridge, the main cable is anchored to the stiffening girder instead, and the girder carries the horizontal pull in compression to the piers and foundations, but the overall principle is similar: the load is collected, redirected, and delivered to the ground.\n\nThe ground therefore receives the bridge load in two main ways. The towers deliver vertical compression from the cable and deck into their foundations, and the anchorages deliver the outward horizontal pull of the main cable into the soil or rock. The foundations must spread or resist these forces without settling or sliding. In this way, the deck\u2019s downward load becomes tension in hangers and main cables, compression in towers, and finally compression and anchorage forces in the ground.",
+ "reasoning_chars": 1260,
+ "usage": {
+  "prompt_tokens": 66,
+  "completion_tokens": 819,
+  "total_tokens": 885,
+  "completion_tokens_details": {
+   "reasoning_tokens": 270
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 0.39943312481045723,
+ "t_first_content": 6.387742582708597,
+ "t_total": 12.762988582253456,
+ "cost": 0.0011028600000000002
+}

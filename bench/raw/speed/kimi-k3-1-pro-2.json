@@ -1,0 +1,24 @@
+{
+ "text": "The deck\u2019s own weight, together with vehicles, people, and other loads, first presses on the roadway slab and its supporting steel or concrete members. These members act like beams, carrying each patch of load to nearby floor beams, stringers, and the stiffening girder or truss that runs along the bridge. The stiffening structure spreads a concentrated wheel load over a longer length, so it is not delivered to a single point. Vertical hangers, usually steel ropes or rods, connect the deck system to the main cables at regular intervals. Most of the load on the suspended spans therefore enters the hangers, although some deck load and restraint forces pass directly through bearings at the towers or end supports.\n\nEach hanger is tightened by the weight below it and pulls downward on the main cable. The cable is flexible and has little ability to resist bending, so it carries this force primarily as tension along its curved length. Under additional load, the cable and deck move slightly until their new shape and the cable tensions balance the applied forces. Near midspan, where the cable is relatively flat, a large tension is needed to provide even a modest upward supporting effect. Along the cable, the vertical components of tension support the attached loads, while a substantial horizontal component remains. That horizontal pull is an essential part of the system and must ultimately be resisted by the towers, anchorages, and ground.\n\nThe main cables pass over saddles at the tops of the towers and continue into the side spans. Their tensions bear down on the saddles. When the main-span and side-span pulls are balanced, much of their horizontal effect at a tower opposes and cancels, while their vertical components add to a large downward force. The tower consequently works mainly as a compression member, much like a tall column, and delivers that force to its foundation. Unequal traffic, wind, temperature movement, or different span loading can leave unbalanced horizontal forces, so the tower and foundation must also resist some bending and shear.\n\nAt the ends of an earth-anchored bridge, the cables lead down to anchorages rather than relying on the towers alone. Inside an anchorage, the cable may separate into many strands that are fixed to a massive concrete block or secured in rock. The cable pulls the anchorage toward the span and generally upward along the incoming cable. The anchorage resists through its weight, friction and bearing against the ground, or direct attachment to sound rock. In this way, the large horizontal cable force, and any associated vertical force, is transferred into the earth.\n\nTower foundations spread their concentrated loads into soil or rock through piles, caissons, or large footings, while anchorage foundations resist sliding, uplift, and overturning as required. The ground provides the final reactions. The complete path is therefore from deck to hangers, from hangers into tension in the main cables, and from the cables into tower compression and anchorage pull, before reaching foundations and the earth. In a self-anchored suspension bridge, the cables instead attach to the stiffening girder, which carries their horizontal pull as compression; the vertical load still reaches the ground through the bridge\u2019s supports.",
+ "reasoning_chars": 9945,
+ "usage": {
+  "prompt_tokens": 121,
+  "completion_tokens": 2620,
+  "total_tokens": 2741,
+  "prompt_tokens_details": {
+   "cached_tokens": 64
+  },
+  "cache_read_input_tokens": 64,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 1495,
+   "audio_tokens": 0,
+   "reasoning_tokens": 1974,
+   "rejected_prediction_tokens": 1877
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 0.6776967914775014,
+ "t_first_content": 11.44683950021863,
+ "t_total": 13.74608491640538,
+ "cost": 0.026442
+}

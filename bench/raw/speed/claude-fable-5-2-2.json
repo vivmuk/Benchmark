@@ -1,0 +1,17 @@
+{
+ "text": "A suspension bridge works by turning the weight of traffic and the roadway itself into tension in cables and compression in towers, then delivering both forces to the ground.\n\nThe path begins at the deck. When a truck drives across, its weight presses down on the road surface, which rests on a framework of beams and a stiffening girder or truss running the length of the bridge. This stiffening structure does not carry the load to the supports by itself, as an ordinary beam bridge would. Its job is to spread a concentrated load across a longer stretch of deck so that no single point takes the full burden, and to keep the roadway from twisting or rippling under wind and moving traffic.\n\nFrom the deck, the load passes upward into the hangers, also called suspenders. These are vertical cables or rods spaced at regular intervals along the span, each clamped to the main cable above and attached to the deck below. Each hanger picks up the weight of the section of deck near it and is pulled taut, carrying that weight in pure tension.\n\nThe hangers deliver their forces to the main cables, the great curved bundles of steel wire that drape from one end of the bridge to the other. Because a cable is flexible, it cannot resist bending and can only pull along its own length. The cable therefore settles into the shape that lets it carry the many downward pulls of the hangers in tension alone, which is the familiar sagging curve, close to a parabola. Steel wire is extraordinarily strong in tension, so this arrangement uses the material efficiently and allows spans far longer than any other bridge type.\n\nThe tension in the main cable has to go somewhere, and it goes to two places. At the top of each tower, the cable passes over a saddle and changes direction. The cable pulls downward and inward on the tower from both sides. The horizontal parts of those pulls largely cancel, since the main span pulls one way and the side span pulls the other. The vertical parts add together and push straight down. The towers therefore act as enormous columns in compression, carrying most of the bridge's weight down through their legs into foundations sunk into bedrock or firm soil, often beneath the water.\n\nThe remaining force is the horizontal pull of the cables, which the towers cannot resist without bending. For this reason the cables continue past the towers and down to anchorages at each end of the bridge. An anchorage is either a massive block of concrete, heavy enough to resist being dragged or lifted, or a chamber cut into solid rock. Inside, the cable splays apart into its individual strands, each fastened to steel anchors embedded deep in the mass. The anchorage resists the cable's pull through its sheer weight and its grip on the surrounding ground.\n\nSo the complete journey runs from deck to hangers, from hangers to main cables, and from the cables into the towers, which push down on the earth, and the anchorages, which hold back against the pull.",
+ "reasoning_chars": 622,
+ "usage": {
+  "prompt_tokens": 61,
+  "completion_tokens": 1107,
+  "total_tokens": 1168,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 2.303099916316569,
+ "t_first_content": 3.5569525826722383,
+ "t_total": 12.969673499464989,
+ "cost": 0.044768
+}

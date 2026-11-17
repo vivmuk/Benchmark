@@ -1,0 +1,22 @@
+{
+ "text": "Ultra-wide 16:9 cinematic science-fiction matte painting, photorealistic detail, teal-and-orange palette. At twilight, rippled orange desert dunes fill the foreground, with windblown sand and long shadows. On a dune at lower left, seen from behind, stand exactly one shaggy beige-gray llama and one dark-haired person in a flowing ankle-length burgundy cape; both face a distant city. The futuristic oasis city sits center-right: dense low buildings and tiered circular complexes outlined in cyan and magenta, supporting three sleek glass needle skyscrapers. The tallest central teal tower has a brilliant horizontal turquoise neon halo near its tip; the left tower displays the vertical cyan text \u201cOASIS\u201d; the right tower glows violet-pink. Above, a deep navy starry sky gradients through purple and dusty blue to a peach-orange horizon, with a large slender silver crescent moon in the upper left and three diagonal cyan searchlight beams crossing the sky. At lower right, a small sleek cyan train travels on a single elevated golden light-rail track that S-curves from the bottom-right corner toward the city, supported by dark pylons. Behind it lies an irregular luminous turquoise pond. A tall dark-green saguaro cactus with two raised arms and pink neon rim lighting stands in front of the pond at the far right; one tiny distant cactus appears farther right. Atmospheric haze, glowing reflections, dramatic scale, soft cinematic lighting, crisp intricate details, no border.",
+ "reasoning_chars": 4335,
+ "usage": {
+  "prompt_tokens": 1357,
+  "completion_tokens": 1343,
+  "total_tokens": 2700,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 1027,
+   "image_tokens": 0,
+   "audio_tokens": 0
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 1.36704733222723,
+ "t_first_content": 21.063722416758537,
+ "t_total": 24.725633499212563,
+ "cost": 0.04036
+}

@@ -1,0 +1,20 @@
+{
+ "text": "A suspension bridge carries the weight of its deck and traffic by hanging that deck from a continuous main cable, which in turn passes over towers and is tied into the ground. The process starts at the deck surface. Traffic, snow, wind, and the deck\u2019s own weight push down on the roadway. The roadway is supported by longitudinal girders or a stiffening truss, and these gather the load and pass it to floor beams or directly to hangers spaced along the span. The hangers are vertical or nearly vertical steel ropes or rods. They act in tension: the deck pulls down on them, and they pull up on the deck. Each hanger delivers its share of the load to the main cable above.\n\nThe main cable is the principal load-carrying member. It sags in a curve, usually close to a parabola when the load is uniform. Because it is curved, the downward pull from the hangers puts the cable in tension and changes its direction gradually along the span. At every point the cable\u2019s tension has a vertical component that helps balance the hanger loads and a horizontal component that remains nearly constant along the cable. Near the towers the cable rises steeply, so its tension has a large vertical component. The cable passes over a saddle at the top of each tower. The saddle redirects the cable from the main span to the side spans, and the tower receives a mostly vertical downward force, which puts the tower in compression. The horizontal pull from one side of the tower is largely balanced by the pull from the other side, though unequal spans or loads can leave some unbalanced force that the tower and its foundation must resist.\n\nBeyond the towers, the cable continues through the side spans, where hangers may also support part of the deck, and then terminates at anchorages. The anchorages are massive concrete or rock structures, or in some designs the cable is tied into the deck itself. In a conventionally anchored bridge, the main cable pulls against the anchorage in tension. The anchorage resists that pull either by its own weight, by embedding into rock, or by bearing against soil and rock through friction and passive resistance. The tower foundations and anchorage foundations spread the concentrated forces into the ground. The tower foundation carries the tower\u2019s compression plus any unbalanced cable pull into the soil or rock, while the anchorage foundation transfers the cable\u2019s horizontal and vertical pull into the earth. In this way the load travels from the roadway to the stiffening girder, to the hangers, to the main cables, over the towers, into the anchorages and tower foundations, and finally into the ground.",
+ "reasoning_chars": 5138,
+ "usage": {
+  "prompt_tokens": 66,
+  "completion_tokens": 1612,
+  "total_tokens": 1678,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 1078
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 2.019835624843836,
+ "t_first_content": 27.224061666987836,
+ "t_total": 34.522769208066165,
+ "cost": 0.00244275
+}

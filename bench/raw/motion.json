@@ -1,0 +1,12 @@
+{
+ "qwen-4-max": 3.124,
+ "gemini-4-hydrogen": 2.209,
+ "glm-5-3-flash-uncensored": 0.862,
+ "gemini-4-carbon": 5.898,
+ "claude-fable-5-2": 6.806,
+ "e2ee-deepseek-v4-1-flash-1017-abliterated": null,
+ "deepseek-v4-1-flash-1017-uncensored": 2.605,
+ "openai-gpt-61-terra": 0.981,
+ "kimi-k3-1-pro": 0.831,
+ "kimi-k3-1-pro-highspeed": 0.654
+}

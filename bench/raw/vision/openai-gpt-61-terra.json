@@ -1,0 +1,22 @@
+{
+ "text": "Wide 16:9 cinematic retro-futurist desert landscape at twilight, viewed from a low dune. In the left foreground, a solitary traveler seen from behind stands on a sandy ridge, wearing a long dark burgundy cloak, looking toward a distant city. One shaggy brown llama stands immediately to the traveler\u2019s left, also facing the city. Their long shadows stretch toward the lower left.\n\nRolling copper-orange dunes fill the foreground, with fine rippled sand, drifting dust and dark blue-purple shadows. In the center-right distance rises a luminous futuristic metropolis: three slender tapering glass skyscrapers above layered, circular, tiered buildings. The tallest central tower reaches almost to the top of the frame and is encircled near its summit by a bright horizontal cyan neon halo. The shorter left tower has a vertical turquoise sign reading \u201cOASIS\u201d in white capital letters. The right tower glows violet and magenta. Tiny illuminated buildings cluster around their bases, and pale turquoise searchlight beams rise diagonally into the sky.\n\nA single sleek blue monorail travels along a slender elevated golden-lit track that curves from the city toward the lower-right corner. On the far right foreground, a tall dark green saguaro cactus with several upright arms is outlined by pink neon light; a smaller cactus stands behind it. A small glowing turquoise oasis pool lies behind the large cactus.\n\nDeep navy star-speckled sky fades to dusty mauve and warm orange along the horizon. A huge faint dark moon with a thin bright crescent along its lower-right edge hangs in the upper left. Atmospheric, highly detailed digital matte painting, soft cinematic lighting, serene and otherworldly.",
+ "reasoning_chars": 4212,
+ "usage": {
+  "prompt_tokens": 1178,
+  "completion_tokens": 523,
+  "total_tokens": 1701,
+  "prompt_tokens_details": {
+   "cached_tokens": 0,
+   "cache_creation_input_tokens": 1175
+  },
+  "cache_creation_input_tokens": 1175,
+  "completion_tokens_details": {
+   "reasoning_tokens": 181
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 5.747151707299054,
+ "t_first_content": 5.74715262465179,
+ "t_total": 11.524739999324083,
+ "cost": 0.003793
+}

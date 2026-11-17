@@ -1,0 +1,24 @@
+{
+ "text": "{\"q1\":4227,\"q2\":62,\"q3\":\"Sunday\",\"q4\":1,\"q5\":55440,\"q6\":232792560,\"q7\":22062,\"q8\":457,\"q9\":832040,\"q10\":\"BEEF\",\"q11\":9,\"q12\":204}",
+ "reasoning_chars": 6009,
+ "usage": {
+  "prompt_tokens": 380,
+  "completion_tokens": 2443,
+  "total_tokens": 2823,
+  "prompt_tokens_details": {
+   "cached_tokens": 64
+  },
+  "cache_read_input_tokens": 64,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 1469,
+   "audio_tokens": 0,
+   "reasoning_tokens": 2363,
+   "rejected_prediction_tokens": 1453
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 0.671833791770041,
+ "t_first_content": 11.799762249924242,
+ "t_total": 12.396266916766763,
+ "cost": 0.02519
+}

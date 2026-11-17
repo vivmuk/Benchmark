@@ -1,0 +1,20 @@
+{
+ "text": "A suspension bridge takes the weight of vehicles and of its own roadway and converts it, step by step, into a pull on steel wire, which is then handed to the earth in two quite different ways. The journey begins at the deck, which is rarely a simple plate. It is usually a stiffening girder or truss, deep enough that a wheel load landing at one point is spread along several metres of structure rather than punching at a single spot. That stiffness matters: without it, a concentrated load would dent the cable profile locally and the roadway would ripple under traffic. The girder gathers the load and delivers it at regular intervals to the hangers, the vertical ropes or rods that hang from the main cables.\n\nEvery hanger works in pure tension, which is the most efficient way to use steel, since a wire in tension cannot buckle and can be stressed close to its material limit. Each hanger lifts its share of deck and passes it up into the main cable at a discrete point. Because those points are closely spaced relative to the span, the cable behaves as though it were carrying a smooth, continuous load, and it takes up the shape that such a load dictates: very nearly a parabola. The cable has no ability to resist bending, so it can only respond by changing its slope, and its sag is what gives it the leverage to carry anything at all. A shallower cable must pull harder. With the customary sag of about one tenth of the span, the horizontal component of cable tension is roughly one and a quarter times the entire load hanging from that cable, and the tension is greatest at the tower tops, where the slope is steepest.\n\nAt each tower the cable passes over a saddle, a curved casting that turns it gently downward toward the anchorage. Because the cable pulls with nearly equal tension on both sides, the horizontal components largely cancel and what remains is a steeply inclined downward force. The tower therefore works almost entirely in compression, collecting the vertical share of two spans and driving it into its foundation. Towers are built as braced steel or concrete shafts precisely because compression members must be guarded against buckling, and their bearings and expansion joints let the deck move longitudinally without pushing them sideways.\n\nThe horizontal pull that the towers do not absorb continues down the backstays to the anchorages. In an earth-anchored bridge these are enormous concrete blocks whose weight and base friction resist the drag, or tunnels driven into sound rock where the cable strands are splayed and grouted so that the pull is transferred into the mountain itself. In a self-anchored bridge the cables terminate in the deck instead, and the roadway absorbs the horizontal force as compression, which removes the need for massive anchorages but makes the deck a much heavier structural member.\n\nFinally the forces reach the ground through caissons, piles, or spread footings, which spread tower compression and anchorage pull over enough soil or rock that pressures stay modest and settlement stays uniform. Most of what the ground feels is the bridge's own dead weight, which is why long spans are won by making cables and deck lighter rather than stronger.",
+ "reasoning_chars": 3365,
+ "usage": {
+  "prompt_tokens": 61,
+  "completion_tokens": 1463,
+  "total_tokens": 1524,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 826
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 1.6460571652278304,
+ "t_first_content": 19.07193424925208,
+ "t_total": 31.35528929065913,
+ "cost": 0.00834375
+}

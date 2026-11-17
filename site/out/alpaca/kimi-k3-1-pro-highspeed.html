@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alpaca Morning Walk</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #a8c9c5;
+  }
+  body { position: fixed; inset: 0; }
+  .scene {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .cloud-one { animation: cloudOne 19s ease-in-out infinite alternate; }
+  .cloud-two { animation: cloudTwo 24s ease-in-out infinite alternate; }
+  .cloud-three { animation: cloudOne 29s ease-in-out infinite alternate-reverse; }
+  .sun-halo { animation: sunlight 6s ease-in-out infinite alternate; }
+  .birds { animation: birds 13s ease-in-out infinite alternate; }
+  .sway-slow, .sway-medium, .sway-fast {
+    transform-box: fill-box;
+    transform-origin: 50% 100%;
+  }
+  .sway-slow { animation: sway 4.8s ease-in-out infinite alternate; }
+  .sway-medium { animation: sway 3.7s ease-in-out infinite alternate-reverse; }
+  .sway-fast { animation: sway 3.1s ease-in-out infinite alternate; }
+
+  .leg .limb, .leg .upper, .leg .shin-light {
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .leg .limb { stroke-width: 11; }
+  .leg .upper { stroke-width: 20; }
+  .leg .shin-light { stroke-width: 2.4; opacity: .42; }
+  .leg.near .limb { stroke: #c99662; }
+  .leg.near .upper { stroke: #e9c994; }
+  .leg.near .shin-light { stroke: #f4dbb1; }
+  .leg.far { opacity: .88; }
+  .leg.far .limb { stroke: #aa805c; }
+  .leg.far .upper { stroke: #c9aa7d; }
+  .leg.far .shin-light { stroke: #ddc39b; }
+  .leg .hoof { fill: #654c3e; }
+  .leg.far .hoof { fill: #5e5148; }
+  .leg .hoof-line {
+    fill: none;
+    stroke: #aa8b6c;
+    stroke-width: 1;
+    stroke-linecap: round;
+    opacity: .55;
+  }
+
+  @keyframes cloudOne {
+    from { transform: translate(-12px, 0); }
+    to   { transform: translate(20px, 4px); }
+  }
+  @keyframes cloudTwo {
+    from { transform: translate(15px, 2px); }
+    to   { transform: translate(-20px, -3px); }
+  }
+  @keyframes sunlight {
+    from { opacity: .48; transform: scale(.97); transform-origin: 1015px 132px; }
+    to   { opacity: .75; transform: scale(1.04); transform-origin: 1015px 132px; }
+  }
+  @keyframes birds {
+    from { transform: translate(0, 0); }
+    to   { transform: translate(24px, -7px); }
+  }
+  @keyframes sway {
+    from { transform: rotate(-2.2deg); }
+    to   { transform: rotate(2.6deg); }
+  }
+</style>
+</head>
+<body>
+<svg class="scene" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid slice"
+     xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="sceneTitle sceneDesc">
+  <title id="sceneTitle">A fluffy alpaca walking through the Andes at sunrise</title>
+  <desc id="sceneDesc">A cream-colored alpaca with a long neck, upright ears and four articulated legs walks in a continuous gait through a softly layered mountain meadow.</desc>
+
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="100%">
+      <stop offset="0" stop-color="#a8ced1"/>
+      <stop offset=".48" stop-color="#d8ded0"/>
+      <stop offset="1" stop-color="#f5d9b1"/>
+    </linearGradient>
+    <radialGradient id="sunGlow">
+      <stop offset="0" stop-color="#fff7d7" stop-opacity=".95"/>
+      <stop offset=".28" stop-color="#ffedbd" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#ffe5b0" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="farMountain" x1="0" y1="0" x2="0" y2="100%">
+      <stop offset="0" stop-color="#a9bbb3"/>
+      <stop offset="1" stop-color="#91aaa1"/>
+    </linearGradient>
+    <linearGradient id="midMountain" x1="0" y1="0" x2="0" y2="100%">
+      <stop offset="0" stop-color="#829f94"/>
+      <stop offset="1" stop-color="#6f9082"/>
+    </linearGradient>
+    <linearGradient id="meadow" x1="0" y1="0" x2="0" y2="100%">
+      <stop offset="0" stop-color="#a8b58b"/>
+      <stop offset="1" stop-color="#7f9873"/>
+    </linearGradient>
+    <linearGradient id="trail" x1="0" y1="0" x2="0" y2="100%">
+      <stop offset="0" stop-color="#e3d2aa"/>
+      <stop offset=".55" stop-color="#d6c093"/>
+      <stop offset="1" stop-color="#c6ad7e"/>
+    </linearGradient>
+    <linearGradient id="wool" x1="15%" y1="0" x2="80%" y2="100%">
+      <stop offset="0" stop-color="#fff1d2"/>
+      <stop offset=".42" stop-color="#efd6aa"/>
+      <stop offset="1" stop-color="#cfa371"/>
+    </linearGradient>
+    <linearGradient id="neckWool" x1="0" y1="0" x2="100%" y2="70%">
+      <stop offset="0" stop-color="#fff0cf"/>
+      <stop offset=".52" stop-color="#e8c796"/>
+      <stop offset="1" stop-color="#bd8c5e"/>
+    </linearGradient>
+    <linearGradient id="faceWool" x1="0" y1="0" x2="100%" y2="100%">
+      <stop offset="0" stop-color="#e8c18b"/>
+      <stop offset=".6" stop-color="#d4a16c"/>
+      <stop offset="1" stop-color="#b9835b"/>
+    </linearGradient>
+    <radialGradient id="vignette">
+      <stop offset="55%" stop-color="#244a44" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#244a44" stop-opacity=".17"/>
+    </radialGradient>
+
+    <filter id="softGlow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="15"/>
+    </filter>
+    <filter id="groundBlur" x="-30%" y="-200%" width="160%" height="500%">
+      <feGaussianBlur stdDeviation="7"/>
+    </filter>
+    <filter id="paperGrain" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency=".72" numOctaves="3"
+                    seed="12" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+
+    <pattern id="woolPattern" width="46" height="42" patternUnits="userSpaceOnUse">
+      <path d="M3 16C-1 8 11 4 15 11C18 3 31 7 28 15C38 14 39 27 30 28C28 37 15 34 15 27C6 31 0 23 6 18"
+            fill="none" stroke="#fff8e5" stroke-width="2" opacity=".48"/>
+      <path d="M31 38C26 33 33 26 39 30C45 28 49 36 44 40"
+            fill="none" stroke="#a97950" stroke-width="1.4" opacity=".18"/>
+      <path d="M9 39C5 34 11 29 17 32" fill="none"
+            stroke="#b98c5e" stroke-width="1.2" opacity=".16"/>
+    </pattern>
+
+    <path id="torsoShape" d="
+      M-119 -197
+      C-139 -210 -132 -234 -111 -238
+      C-103 -258 -74 -260 -59 -245
+      C-41 -264 -10 -260 1 -242
+      C25 -254 51 -243 58 -224
+      C84 -236 111 -221 110 -198
+      C135 -191 143 -164 125 -148
+      C137 -124 115 -100 91 -106
+      C77 -85 46 -86 32 -103
+      C11 -88 -18 -91 -30 -108
+      C-53 -93 -81 -99 -88 -119
+      C-116 -112 -137 -132 -128 -154
+      C-151 -165 -143 -191 -119 -197 Z"/>
+    <path id="neckShape" d="
+      M57 -180
+      C57 -210 70 -239 69 -273
+      C68 -303 61 -330 74 -351
+      C85 -369 113 -371 127 -354
+      C140 -338 129 -310 127 -282
+      C125 -250 130 -219 119 -187
+      C112 -163 91 -148 71 -155 Z"/>
+  </defs>
+
+  <!-- Dawn sky -->
+  <rect width="1280" height="720" fill="url(#sky)"/>
+  <circle class="sun-halo" cx="1015" cy="132" r="133" fill="url(#sunGlow)"/>
+  <circle cx="1015" cy="132" r="47" fill="#fff1c8" opacity=".96"/>
+  <circle cx="1002" cy="117" r="29" fill="#fff8df" opacity=".45" filter="url(#softGlow)"/>
+
+  <g class="cloud-one" fill="#fff8e9" opacity=".56">
+    <path d="M87 141C91 124 111 118 125 127C133 104 169 103 179 127C200 116 223 130 220 148H91C82 148 80 143 87 141Z"/>
+    <path d="M244 89C249 77 264 74 274 81C283 61 310 65 315 84C333 78 347 88 346 100H245C238 99 238 92 244 89Z" opacity=".62"/>
+  </g>
+  <g class="cloud-two" fill="#fff9ec" opacity=".42">
+    <path d="M760 102C767 84 789 82 802 93C813 66 851 70 857 96C878 86 902 99 902 116H759C750 113 752 105 760 102Z"/>
+  </g>
+  <g class="cloud-three" fill="#fff8e8" opacity=".34">
+    <path d="M1071 230C1077 216 1095 213 1106 222C1114 201 1144 204 1150 224C1167 217 1185 228 1185 241H1069C1063 238 1065 232 1071 230Z"/>
+  </g>
+
+  <g class="birds" fill="none" stroke="#587d78" stroke-width="2.1" stroke-linecap="round" opacity=".55">
+    <path d="M673 150q7-7 14 0q7-7 14 0"/>
+    <path d="M717 177q5-5 10 0q5-5 10 0"/>
+    <path d="M646 185q4-4 8 0q4-4 8 0"/>
+  </g>
+
+  <!-- Layered Andes -->
+  <path d="M0 374V310L114 235L180 287L330 142L472 300L556 228L658 324L849 151L1016 312L1099 248L1280 356V421H0Z"
+        fill="url(#farMountain)"/>
+  <path d="M249 225L330 142L399 219L361 200L333 222L313 187L282 236L264 224Z"
+        fill="#f5ead7" opacity=".88"/>
+  <path d="M768 223L849 151L929 228L889 209L860 229L837 195L804 239Z"
+        fill="#f7ead6" opacity=".8"/>
+  <path d="M114 235L180 287L330 142L278 272L195 332L0 374V310Z"
+        fill="#c2ccc0" opacity=".25"/>
+  <path d="M472 300L556 228L658 324L603 304L557 266L527 317Z"
+        fill="#dce0d1" opacity=".25"/>
+  <path d="M849 151L1016 312L938 283L884 223Z" fill="#6f9088" opacity=".19"/>
+
+  <path d="M0 421V368L141 292L241 364L393 246L522 364L624 294L747 390L917 275L1031 359L1147 295L1280 376V452H0Z"
+        fill="url(#midMountain)"/>
+  <path d="M393 246L522 364L448 333L406 287L365 340L310 354Z"
+        fill="#65877d" opacity=".38"/>
+  <path d="M917 275L1031 359L964 340L923 307L886 348L836 363Z"
+        fill="#5f8177" opacity=".3"/>
+  <path d="M0 408C149 370 256 394 368 373C510 346 650 402 777 373C935 337 1080 382 1280 342V479H0Z"
+        fill="#b5bf9c" opacity=".75"/>
+
+  <!-- Meadow and trail -->
+  <path d="M0 441C154 400 279 437 410 416C561 392 703 435 827 414C1000 385 1119 413 1280 385V720H0Z"
+        fill="url(#meadow)"/>
+  <path d="M0 485C149 448 266 477 387 461C542 440 654 473 811 448C977 422 1118 456 1280 421V508C1090 532 956 495 795 519C624 544 476 508 324 531C200 549 96 528 0 550Z"
+        fill="#91a47d" opacity=".68"/>
+  <path d="M0 561C183 535 293 566 420 552C593 532 706 547 840 541C1022 530 1120 551 1280 526V720H0Z"
+        fill="url(#trail)"/>
+  <path d="M0 569C183 543 298 574 425 560C592 542 715 555 843 550C1013 541 1142 558 1280 538"
+        fill="none" stroke="#f0e1bd" stroke-width="3" opacity=".38"/>
+  <path d="M0 685C198 662 329 693 496 676C671 658 798 684 968 665C1082 652 1178 663 1280 650"
+        fill="none" stroke="#aa946c" stroke-width="2" opacity=".18"/>
+
+  <g opacity=".45" fill="none" stroke="#647e61" stroke-linecap="round">
+    <path d="M73 511q4-19 7 0m-3-8q-10-10-12-4m14 2q9-12 13-7" stroke-width="2"/>
+    <path d="M1176 478q3-17 6 0m-3-8q-8-9-11-4m13 1q8-10 11-5" stroke-width="2"/>
+    <path d="M1035 509q3-13 5 0m-2-6q-7-7-9-3" stroke-width="1.7"/>
+    <path d="M246 476q3-14 5 0m-2-6q-7-8-10-3" stroke-width="1.7"/>
+  </g>
+
+  <g id="groundFlow" opacity=".5"></g>
+
+  <!-- Soft contact shadow -->
+  <ellipse id="alpacaShadow" cx="585" cy="594" rx="137" ry="14"
+           fill="#405448" opacity=".23" filter="url(#groundBlur)"/>
+  <ellipse cx="585" cy="592" rx="108" ry="6" fill="#59654f" opacity=".1"/>
+
+  <!-- Alpaca rig -->
+  <g id="alpaca" transform="translate(585 590)">
+    <g id="legsFar">
+      <g class="leg far" id="leg-fh">
+        <path class="limb"/>
+        <path class="upper"/>
+        <path class="shin-light"/>
+        <g class="hoof">
+          <path d="M-7-8Q-8-2-4 1H7Q10-2 7-8Z"/>
+          <path class="hoof-line" d="M1-7V0"/>
+        </g>
+      </g>
+      <g class="leg far" id="leg-ff">
+        <path class="limb"/>
+        <path class="upper"/>
+        <path class="shin-light"/>
+        <g class="hoof">
+          <path d="M-7-8Q-8-2-4 1H7Q10-2 7-8Z"/>
+          <path class="hoof-line" d="M1-7V0"/>
+        </g>
+      </g>
+    </g>
+
+    <g id="legsNear">
+      <g class="leg near" id="leg-nh">
+        <path class="limb"/>
+        <path class="upper"/>
+        <path class="shin-light"/>
+        <g class="hoof">
+          <path d="M-7-8Q-8-2-4 1H7Q10-2 7-8Z"/>
+          <path class="hoof-line" d="M1-7V0"/>
+        </g>
+      </g>
+      <g class="leg near" id="leg-nf">
+        <path class="limb"/>
+        <path class="upper"/>
+        <path class="shin-light"/>
+        <g class="hoof">
+          <path d="M-7-8Q-8-2-4 1H7Q10-2 7-8Z"/>
+          <path class="hoof-line" d="M1-7V0"/>
+        </g>
+      </g>
+    </g>
+
+    <g id="bodyVisual">
+      <!-- Small woolly tail -->
+      <g id="tail">
+        <path d="M-116-199C-139-198-158-216-154-234C-151-248-135-249-128-236C-110-243-97-226-105-211Z"
+              fill="url(#wool)"/>
+        <path d="M-143-230C-145-239-134-242-129-233C-119-238-111-228-116-220"
+              fill="none" stroke="#fff0d0" stroke-width="4" stroke-linecap="round" opacity=".55"/>
+      </g>
+
+      <!-- Long neck and small head -->
+      <g id="neckGroup">
+        <use href="#neckShape" fill="url(#neckWool)"/>
+        <use href="#neckShape" fill="url(#woolPattern)" opacity=".47"/>
+        <path d="M112-348C126-323 113-296 115-267C118-229 117-198 101-171C116-178 122-193 124-215C127-246 122-267 128-297C133-322 136-340 124-354Z"
+              fill="#9e704f" opacity=".14"/>
+        <path d="M73-327C78-342 88-350 96-351M72-289C78-300 88-302 94-298M72-246C79-257 91-256 96-249"
+              fill="none" stroke="#fff2d3" stroke-width="3" stroke-linecap="round" opacity=".38"/>
+
+        <!-- Upright ears -->
+        <g id="earFar">
+          <path d="M88-377C75-397 72-432 82-445C88-453 96-446 99-435C104-416 101-394 102-379Z"
+                fill="#c39167"/>
+          <path d="M88-389C82-407 81-430 86-437C91-433 94-408 94-390Z"
+                fill="#a96f62" opacity=".58"/>
+        </g>
+        <g id="earNear">
+          <path d="M113-383C111-409 119-440 132-448C140-452 143-441 140-430C136-410 129-394 128-378Z"
+                fill="#d6a777"/>
+          <path d="M120-391C119-412 126-435 133-439C137-431 130-405 126-390Z"
+                fill="#b77868" opacity=".62"/>
+          <path d="M132-443Q138-446 138-436" fill="none" stroke="#f0c99b" stroke-width="2" opacity=".65"/>
+        </g>
+
+        <!-- Face -->
+        <path d="M79-365C76-385 92-402 112-398C128-407 148-394 149-378C165-380 181-370 184-357C197-351 195-337 182-332C169-326 150-330 140-337C124-326 100-330 91-343C84-348 81-356 79-365Z"
+              fill="url(#faceWool)"/>
+        <path d="M146-361C161-370 181-362 184-352C195-348 191-337 180-334C166-330 151-334 143-341C150-346 151-354 146-361Z"
+              fill="#e6bd89" opacity=".78"/>
+        <path d="M79-365C70-377 80-391 92-389C89-405 107-413 118-402C129-414 148-404 147-389C161-390 168-377 158-367C139-374 119-367 105-365C94-362 86-362 79-365Z"
+              fill="url(#wool)"/>
+        <path d="M83-377C85-387 96-391 103-384M108-394C114-402 126-399 128-390M134-385C141-392 151-385 149-378"
+              fill="none" stroke="#fff4d8" stroke-width="3" stroke-linecap="round" opacity=".63"/>
+
+        <g id="eye" transform="translate(139 -369)">
+          <ellipse rx="5.2" ry="6" fill="#3c332d"/>
+          <circle cx="1.5" cy="-2" r="1.55" fill="#fff9e9"/>
+          <path d="M-7-7Q0-11 7-7" fill="none" stroke="#71503d" stroke-width="1.6" stroke-linecap="round"/>
+        </g>
+        <path d="M128-380Q138-385 147-379" fill="none" stroke="#9b6c4c" stroke-width="2" stroke-linecap="round" opacity=".55"/>
+        <path d="M181-350Q188-353 190-348Q188-342 182-344Z" fill="#654b40"/>
+        <circle cx="185" cy="-349" r="1.2" fill="#f2cfaa" opacity=".55"/>
+        <path d="M184-338Q176-332 166-337" fill="none" stroke="#815b48" stroke-width="1.7" stroke-linecap="round"/>
+        <path d="M101-346Q106-338 116-337" fill="none" stroke="#f2d0a1" stroke-width="3" stroke-linecap="round" opacity=".45"/>
+
+        <!-- Woven collar -->
+        <path d="M68-295Q96-285 128-296L128-281Q98-270 68-282Z" fill="#ad624e"/>
+        <path d="M69-290Q98-280 127-291" fill="none" stroke="#e3b86f" stroke-width="2" opacity=".9"/>
+        <path d="M77-285L83-278L89-284L95-276L101-283L107-277L114-285"
+              fill="none" stroke="#f2d18d" stroke-width="1.8" stroke-linejoin="round"/>
+        <g id="tassel">
+          <path d="M126-282Q132-269 126-258" fill="none" stroke="#9b5d48" stroke-width="2.4"/>
+          <path d="M126-260C118-255 120-245 126-242C133-247 134-256 126-260Z" fill="#c67a55"/>
+          <path d="M124-256L123-246M127-256L128-245" stroke="#edbd78" stroke-width="1.2" opacity=".75"/>
+        </g>
+      </g>
+
+      <!-- Fluffy torso, covering the leg attachments -->
+      <use href="#torsoShape" fill="url(#wool)"/>
+      <use href="#torsoShape" fill="url(#woolPattern)" opacity=".63"/>
+      <use href="#torsoShape" fill="none" stroke="#fff2d5" stroke-width="2" opacity=".36"/>
+
+      <path d="M-112-216C-101-241-76-243-61-229C-39-249-12-244-2-226C20-239 43-228 48-211C15-218-16-203-45-209C-71-215-89-202-112-216Z"
+            fill="#fff5db" opacity=".32"/>
+      <path d="M110-183C127-163 112-142 105-135C116-116 94-103 79-112C61-94 42-100 34-112C67-119 87-143 110-183Z"
+            fill="#a97650" opacity=".12"/>
+      <path d="M-104-164C-112-176-99-188-88-181C-83-195-64-193-60-181M-40-229C-34-241-16-239-12-226M17-151C24-164 42-160 43-146M-61-132C-53-145-36-141-35-128M65-208C74-219 91-212 90-199"
+            fill="none" stroke="#fff7e1" stroke-width="3.2" stroke-linecap="round" opacity=".45"/>
+      <path d="M-107-143Q-96-132-84-139M-10-116Q1-106 13-115M56-119Q68-108 78-117"
+            fill="none" stroke="#ac7c53" stroke-width="2" stroke-linecap="round" opacity=".2"/>
+    </g>
+  </g>
+
+  <!-- Small meadow flowers -->
+  <g class="sway-slow" transform="translate(208 625)">
+    <path d="M0 28Q-2 5 3-19M1 11Q-11 2-15-8M1 4Q12-5 15-15"
+          fill="none" stroke="#58775c" stroke-width="2.6" stroke-linecap="round"/>
+    <path d="M-2 15Q-15 10-13 5Q-4 5-2 15M2 8Q13 4 13-2Q5-1 2 8" fill="#74906a"/>
+    <g transform="translate(3 -21)" fill="#f6e8c5">
+      <ellipse cy="-5" rx="3.3" ry="5"/>
+      <ellipse cx="4.7" cy="-1.5" rx="3.3" ry="5" transform="rotate(72 4.7 -1.5)"/>
+      <ellipse cx="3" cy="4" rx="3.3" ry="5" transform="rotate(144 3 4)"/>
+      <ellipse cx="-3" cy="4" rx="3.3" ry="5" transform="rotate(216 -3 4)"/>
+      <ellipse cx="-4.7" cy="-1.5" rx="3.3" ry="5" transform="rotate(288 -4.7 -1.5)"/>
+      <circle r="3.2" fill="#c78852"/>
+    </g>
+  </g>
+
+  <g class="sway-medium" transform="translate(1065 611)">
+    <path d="M0 28Q2 4-2-17M0 12Q11 3 14-7"
+          fill="none" stroke="#5d795b" stroke-width="2.4" stroke-linecap="round"/>
+    <path d="M1 16Q12 11 12 5Q4 6 1 16" fill="#789069"/>
+    <g transform="translate(-2 -19)" fill="#e8c6ae">
+      <circle cy="-4" r="4"/>
+      <circle cx="4" r="4"/>
+      <circle cy="4" r="4"/>
+      <circle cx="-4" r="4"/>
+      <circle r="2.7" fill="#b7794f"/>
+    </g>
+  </g>
+
+  <!-- Foreground framing plants -->
+  <g class="sway-slow" transform="translate(46 720)">
+    <path d="M0 0Q4-70 25-125M3-10Q-7-71-30-102M8-25Q34-65 58-79M1-39Q-24-63-50-67"
+          fill="none" stroke="#416c5d" stroke-width="5" stroke-linecap="round"/>
+    <path d="M11-65Q26-103 25-125Q4-102 11-65M-9-58Q-35-78-30-102Q-7-86-9-58M26-49Q50-75 58-79Q55-53 26-49M-15-51Q-43-48-50-67Q-27-70-15-51"
+          fill="#557c65"/>
+    <path d="M6-30Q20-60 17-82Q0-60 6-30M-1-25Q-20-44-20-60Q0-49-1-25"
+          fill="#729073"/>
+  </g>
+
+  <g class="sway-medium" transform="translate(1228 724)">
+    <path d="M0 0Q-4-73-26-131M-3-17Q12-72 36-102M-8-31Q-37-67-62-79M-2-48Q22-66 48-67"
+          fill="none" stroke="#3f6859" stroke-width="5" stroke-linecap="round"/>
+    <path d="M-12-69Q-28-108-26-131Q-5-104-12-69M10-61Q35-81 36-102Q12-89 10-61M-28-53Q-54-76-62-79Q-57-52-28-53M15-54Q42-49 48-67Q26-70 15-54"
+          fill="#537861"/>
+    <path d="M-6-36Q-22-65-18-85Q0-63-6-36M1-29Q20-47 20-63Q1-52 1-29"
+          fill="#718c6c"/>
+  </g>
+
+  <g fill="#6f8264" opacity=".7">
+    <path d="M1110 690Q1120 675 1143 680Q1154 687 1145 693H1113Z"/>
+    <path d="M1138 696Q1150 687 1167 692Q1173 698 1163 701H1140Z" opacity=".65"/>
+  </g>
+  <g fill="none" stroke="#f0ddb4" stroke-width="2" opacity=".45">
+    <path d="M1117 685Q1128 681 1138 685"/>
+    <path d="M1145 695Q1153 692 1160 695"/>
+  </g>
+
+  <!-- Gentle atmospheric finish -->
+  <rect width="1280" height="720" fill="url(#vignette)" pointer-events="none"/>
+  <rect width="1280" height="720" filter="url(#paperGrain)" opacity=".035"
+        style="mix-blend-mode:multiply" pointer-events="none"/>
+</svg>
+
+<script>
+(() => {
+  "use strict";
+
+  const NS = "http://www.w3.org/2000/svg";
+  const $ = id => document.getElementById(id);
+
+  const bodyVisual = $("bodyVisual");
+  const neckGroup = $("neckGroup");
+  const tail = $("tail");
+  const tassel = $("tassel");
+  const earNear = $("earNear");
+  const eye = $("eye");
+  const shadow = $("alpacaShadow");
+
+  const cycle = 1.55;
+  const stride = 56;
+  const stance = 0.65;
+  const lift = 24;
+  const groundSpeed = stride / (cycle * stance);
+
+  const legs = [
+    { id: "leg-fh", x: -70, offset: 0.50, bend: -1, far: true  },
+    { id: "leg-ff", x:  91, offset: 0.25, bend:  1, far: true  },
+    { id: "leg-nh", x: -94, offset: 0.00, bend: -1, far: false },
+    { id: "leg-nf", x:  68, offset: 0.75, bend:  1, far: false }
+  ].map(config => {
+    const root = $(config.id);
+    return Object.assign(config, {
+      limb: root.querySelector(".limb"),
+      upper: root.querySelector(".upper"),
+      shine: root.querySelector(".shin-light"),
+      hoof: root.querySelector(".hoof")
+    });
+  });
+
+  // Deterministic trail marks, continuously moving at the feet's stance speed.
+  let seed = 41;
+  const random = () => {
+    seed = (seed * 16807) % 2147483647;
+    return (seed - 1) / 2147483646;
+  };
+  const mod = (n, m) => ((n % m) + m) % m;
+  const flow = $("groundFlow");
+  const trailMarks = [];
+
+  for (let i = 0; i < 34; i++) {
+    const el = document.createElementNS(NS, "path");
+    const length = 4 + random() * 11;
+    if (i % 3 === 0) {
+      el.setAttribute("d", `M${-length / 2} 0Q0 ${-1.5 - random() * 2} ${length / 2} 0`);
+      el.setAttribute("fill", "none");
+      el.setAttribute("stroke", i % 2 ? "#9d8964" : "#f2e2bb");
+      el.setAttribute("stroke-width", (1 + random() * 1.3).toFixed(2));
+      el.setAttribute("stroke-linecap", "round");
+    } else {
+      el.setAttribute("d", `M${-length / 2} 0q${length / 2} -3 ${length} 0q${-length / 2} 3 ${-length} 0Z`);
+      el.setAttribute("fill", i % 2 ? "#aa946d" : "#ead8af");
+      el.setAttribute("opacity", (.35 + random() * .35).toFixed(2));
+    }
+    flow.appendChild(el);
+    trailMarks.push({
+      el,
+      x: random() * 1400,
+      y: 566 + random() * 126,
+      rotation: -8 + random() * 16
+    });
+  }
+
+  function updateLeg(config, gait, sway, bob, roll) {
+    const p = mod(gait + config.offset, 1);
+    let stepX, footY, hoofPitch;
+
+    if (p < stance) {
+      const q = p / stance;
+      stepX = stride * (0.5 - q);
+      footY = config.far ? -2 : 0;
+      hoofPitch = 0;
+    } else {
+      const q = (p - stance) / (1 - stance);
+      const ease = q * q * (3 - 2 * q);
+      const arc = Math.pow(Math.sin(Math.PI * q), 1.3);
+      stepX = stride * (-0.5 + ease);
+      footY = (config.far ? -2 : 0) - lift * arc;
+      hoofPitch = -10 * Math.sin(Math.PI * q) + 3 * Math.sin(2 * Math.PI * q);
+    }
+
+    // Match each hip to the gently rolling body while feet remain on the trail.
+    const angle = roll * Math.PI / 180;
+    const c = Math.cos(angle);
+    const s = Math.sin(angle);
+    const baseY = -119;
+    const relativeY = baseY + 170;
+    const hipX = config.x * c - relativeY * s + sway;
+    const hipY = -170 + config.x * s + relativeY * c + bob;
+
+    const footX = config.x + stepX;
+    const dx = footX - hipX;
+    const dy = footY - hipY;
+    const rawDistance = Math.hypot(dx, dy);
+    const upperLength = 65;
+    const lowerLength = 65;
+    const distance = Math.max(8, Math.min(rawDistance, upperLength + lowerLength - 0.1));
+    const ux = dx / rawDistance;
+    const uy = dy / rawDistance;
+
+    const along = (
+      upperLength * upperLength -
+      lowerLength * lowerLength +
+      distance * distance
+    ) / (2 * distance);
+    const out = Math.sqrt(Math.max(0, upperLength * upperLength - along * along));
+
+    const kneeX = hipX + along * ux + config.bend * out * (-uy);
+    const kneeY = hipY + along * uy + config.bend * out * ux;
+    const upperEndX = hipX + (kneeX - hipX) * 0.9;
+    const upperEndY = hipY + (kneeY - hipY) * 0.9;
+
+    config.limb.setAttribute("d",
+      `M${hipX.toFixed(2)} ${hipY.toFixed(2)}L${kneeX.toFixed(2)} ${kneeY.toFixed(2)}L${footX.toFixed(2)} ${footY.toFixed(2)}`);
+    config.upper.setAttribute("d",
+      `M${hipX.toFixed(2)} ${hipY.toFixed(2)}L${upperEndX.toFixed(2)} ${upperEndY.toFixed(2)}`);
+    config.shine.setAttribute("d",
+      `M${(kneeX - 1.5).toFixed(2)} ${(kneeY + 4).toFixed(2)}L${(footX - 1.5).toFixed(2)} ${(footY - 7).toFixed(2)}`);
+    config.hoof.setAttribute("transform",
+      `translate(${footX.toFixed(2)} ${footY.toFixed(2)}) rotate(${hoofPitch.toFixed(2)})`);
+  }
+
+  function draw(time) {
+    const gait = time / cycle;
+    const phase = gait * Math.PI * 2;
+
+    const bob = -1 + 1.8 * Math.cos(phase * 2);
+    const sway = 2.1 * Math.sin(phase);
+    const roll = 0.58 * Math.sin(phase + 0.5);
+    const neckNod = 0.85 * Math.sin(phase * 2 + 1.15);
+    const tailSwish = 4 * Math.sin(phase - 0.8) + 1.2 * Math.sin(phase * 2);
+
+    bodyVisual.setAttribute("transform",
+      `translate(${sway.toFixed(2)} ${bob.toFixed(2)}) rotate(${roll.toFixed(3)} 0 -170)`);
+    neckGroup.setAttribute("transform", `rotate(${neckNod.toFixed(3)} 75 -178)`);
+    tail.setAttribute("transform", `rotate(${tailSwish.toFixed(2)} -116 -197)`);
+    tassel.setAttribute("transform",
+      `rotate(${(7 * Math.sin(phase + 0.7)).toFixed(2)} 126 -282)`);
+
+    const earTime = time % 7.2;
+    const twitch = earTime < 0.55
+      ? Math.sin(earTime / 0.55 * Math.PI * 2) * (1 - earTime / 0.55) * 5
+      : 0;
+    earNear.setAttribute("transform", `rotate(${twitch.toFixed(2)} 121 -383)`);
+
+    const blinkTime = time % 5.4;
+    let eyeOpen = 1;
+    if (blinkTime > 5.05) {
+      const q = (blinkTime - 5.05) / 0.24;
+      eyeOpen = q < 0.5 ? 1 - q * 2 : (q - 0.5) * 2;
+      eyeOpen = Math.max(0.08, Math.min(1, eyeOpen));
+    }
+    eye.setAttribute("transform", `translate(139 -369) scale(1 ${eyeOpen.toFixed(3)})`);
+
+    legs.forEach(leg => updateLeg(leg, gait, sway, bob, roll));
+
+    shadow.setAttribute("rx", (136 - bob * 2.2).toFixed(2));
+    shadow.setAttribute("opacity", (0.225 + bob * 0.008).toFixed(3));
+
+    const distance = time * groundSpeed;
+    trailMarks.forEach(mark => {
+      const x = mod(mark.x - distance + 70, 1400) - 70;
+      mark.el.setAttribute("transform",
+        `translate(${x.toFixed(2)} ${mark.y.toFixed(2)}) rotate(${mark.rotation.toFixed(2)})`);
+    });
+  }
+
+  draw(0);
+  const start = performance.now();
+  function frame(now) {
+    draw((now - start) / 1000);
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

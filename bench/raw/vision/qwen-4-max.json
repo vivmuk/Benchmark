@@ -1,0 +1,20 @@
+{
+ "text": "Cinematic 16:9 digital sci-fi concept art, retro-futuristic neon desert at twilight. Sky gradients from starry deep navy at top through lavender to glowing orange at the right horizon; a large pale crescent moon, lit on its right edge with faint earthshine, hangs upper-left. Center distance: a futuristic oasis city of three tapering glass skyscrapers \u2014 the tallest central teal spire encircled near its tip by a glowing cyan neon halo ring; a slimmer teal tower to its left bearing a vertical cyan neon sign reading \"OASIS\"; a magenta-purple tower right edged in pink neon. Tiered circular ziggurat buildings with glowing teal bands and clusters of tiny lit windows form the city base. Four thin cyan searchlight beams shoot diagonally skyward, two on each side of the towers. Left foreground, on a dune crest at the left third: a person seen from behind, dark hair, wearing a long dark-crimson cloak, standing beside one shaggy grey-brown llama, both gazing toward the city. Right foreground: a tall green saguaro cactus outlined in glowing pink neon, a smaller neon-edged saguaro behind it. Below them a vivid turquoise oasis pool with tiny palms on its far bank. An elevated monorail on slender pylons, rails glowing amber-orange, curves from the bottom-right corner toward the city; one small sleek white-and-teal train rides it mid-frame. Foreground: wind-rippled orange sand dunes with drifting dust wisps, warm sunset rim-light from the right, cool purple shadows. Painterly, polished, synthwave palette, serene epic mood.",
+ "reasoning_chars": 7410,
+ "usage": {
+  "prompt_tokens": 975,
+  "completion_tokens": 2185,
+  "total_tokens": 3160,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 1839
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 3.364474667236209,
+ "t_first_content": 38.79753470886499,
+ "t_total": 44.070049666799605,
+ "cost": 0.01411875
+}

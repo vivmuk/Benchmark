@@ -1,16 +1,6 @@
 __pycache__/
-*.pyc
-
-# Per-brick test output lives in arcade/ alongside index.html; allow real bricks,
-# but ignore small synthetic placeholders so a partial run doesn't pollute the repo.
-# Threshold: real bricks are > 1000 bytes; dry-run placeholders are ~330 bytes.
-arcade/*.raw.txt
-
-# Don't commit the in-progress brick_arcade.json from a partial run
-benchmarks/venice-benchmark-site/data/brick_arcade.json.tmp
-
-backup-tokenclean-*/
-.openclaw/
-fable5/
-crowd-rush/
-DREAMS.md
+.DS_Store
+bench/raw/judge_in/
+bench/raw/shots/
+bench/raw/source.png
+*.log
