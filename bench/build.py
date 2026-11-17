@@ -62,7 +62,7 @@ def gen_task(task, mid):
 models, spend = [], 0.0
 for mid in MODELS:
     s = sp[mid]
-    m = {"id": mid, "name": s["name"], "lab": s["lab"], "icon": "icons/%s.svg" % dict(ICONS).get(s["family"], "venice-color"),
+    m = {"id": mid, "name": s["name"], "lab": s["lab"], "icon": "logos/%s.svg" % dict(ICONS).get(s["family"], "venice-color"),
          "released": datetime.date.fromtimestamp(s["created"]).isoformat(), "price_in": s["in"], "price_out": s["out"],
          "vision": s["vision"]}
     m["alpaca"] = gen_task("alpaca", mid)
