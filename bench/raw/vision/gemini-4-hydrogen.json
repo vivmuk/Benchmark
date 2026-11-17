@@ -1,0 +1,14 @@
+{
+ "text": "Digital sci-fi illustration of a futuristic desert at dusk, wide cinematic shot. On a rippled sand dune in the left foreground, a man in a dark red cape stands next to a brown llama, both viewed from behind facing a distant city. In the right foreground, a saguaro cactus outlined in glowing pink neon stands beside a glowing turquoise pond, with a smaller dark cactus to its right. An elevated, orange-lit monorail track with a sleek silver train curves from the bottom right across the dunes toward the city. In the center-right background, a cyberpunk metropolis rises with three towering spires: a central spire encircled by a glowing cyan halo ring, a left spire displaying a vertical cyan neon sign reading \"OASIS\", and a right spire lit in purple, above tiered circular buildings and four diagonal cyan spotlights. The sky transitions from starry deep blue at top-left to a warm orange horizon, featuring a large crescent moon in the upper left.",
+ "reasoning_chars": 1010,
+ "usage": {
+  "prompt_tokens": 1248,
+  "completion_tokens": 1220,
+  "total_tokens": 2468
+ },
+ "finish": "stop",
+ "t_first_delta": 5.28536737523973,
+ "t_first_content": 11.420660291798413,
+ "t_total": 12.271726959384978,
+ "cost": 0.0137775
+}

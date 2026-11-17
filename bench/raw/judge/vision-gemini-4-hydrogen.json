@@ -1,0 +1,22 @@
+{
+ "claude-opus-5-5": {
+  "scores": {
+   "subjects": 7.0,
+   "layout": 5.0,
+   "colour": 7.0,
+   "style": 6.0,
+   "overall": 5.0
+  },
+  "note": "Most elements are present, but the crescent moon became a full moon. The traveller, alpaca and cactus are much larger and closer, the monorail curves toward the lower left instead of the lower right, and the pool sits below the cactus rather than beside it, all rendered in a more saturated, busier s"
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "subjects": 8.0,
+   "layout": 5.0,
+   "colour": 7.0,
+   "style": 7.0,
+   "overall": 5.0
+  },
+  "note": "The main elements and neon desert palette are present, but the crescent is nearly full, the figures are much larger, and the track and pool occupy different parts of the frame."
+ }
+}

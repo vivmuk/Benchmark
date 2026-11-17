@@ -1,0 +1,17 @@
+{
+ "text": "Wide 16:9 cinematic sci-fi concept art, desert at twilight. Foreground left: a lone figure in a long flowing red cloak stands on a rippled sand dune, back to viewer, beside one woolly llama/alpaca to their left, both silhouetted and facing a distant futuristic city. Sky: deep navy starry upper left, gradient to peach/orange sunset lower right; huge thin white crescent moon upper left with faint glow. Center background: glowing neon metropolis, central ultra-tall spire with translucent cyan halo ring floating above; left cyan skyscraper with vertical neon text \"OASIS\"; right magenta-lit tower; curved terraced bases and low city lights. Multiple cyan/magenta searchlight beams sweep upward. Right foreground: curved elevated road with glowing yellow edges and a blue train car, turquoise oasis pool, large saguaro cactus with magenta rim light and a smaller cactus. Warm orange dunes with fine wind ripples. Digital illustration, futuristic synthwave lighting, high detail, dramatic scale, sharp focus, centered composition.",
+ "reasoning_chars": 3250,
+ "usage": {
+  "prompt_tokens": 643,
+  "completion_tokens": 929,
+  "total_tokens": 1572,
+  "completion_tokens_details": {
+   "reasoning_tokens": 708
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 1.3477297499775887,
+ "t_first_content": 4.164919290691614,
+ "t_total": 4.808872582390904,
+ "cost": 0.00143847
+}

@@ -1,0 +1,2126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DUNE LINE — Overnight Desert-to-Neon Sleeper</title>
+<style>
+  :root {
+    --bg-deep: #07060e;
+    --bg-surface: #110e1c;
+    --bg-card: rgba(22, 18, 36, 0.72);
+    --bg-card-hover: rgba(30, 25, 49, 0.9);
+    --sand-gold: #f3a867;
+    --sand-amber: #e26d42;
+    --neon-cyan: #00f0d6;
+    --neon-pink: #ff2a85;
+    --neon-violet: #8c42ff;
+    --text-main: #f6f3ec;
+    --text-muted: #9e97b0;
+    --text-dim: #68617a;
+    --border-subtle: rgba(243, 168, 103, 0.16);
+    --border-neon: rgba(0, 240, 214, 0.35);
+    --font-display: 'Iowan Old Style', 'Palatino Linotype', 'URW Palladio L', P052, Georgia, serif;
+    --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, monospace;
+    --max-w: 1200px;
+    --radius-lg: 20px;
+    --radius-md: 12px;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--bg-deep);
+    color: var(--text-main);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    overflow-x: hidden;
+    background:
+      radial-gradient(circle at 15% 8%, rgba(226, 109, 66, 0.12), transparent 38%),
+      radial-gradient(circle at 85% 18%, rgba(0, 240, 214, 0.1), transparent 42%),
+      radial-gradient(circle at 50% 65%, rgba(140, 66, 255, 0.07), transparent 50%),
+      var(--bg-deep);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  button {
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+    background: none;
+  }
+
+  .container {
+    width: 100%;
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* Section Eyebrows & Headings */
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sand-gold);
+    margin-bottom: 14px;
+  }
+
+  .eyebrow::before {
+    content: "";
+    display: inline-block;
+    width: 24px;
+    height: 1px;
+    background: linear-gradient(90deg, var(--sand-gold), var(--neon-cyan));
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(2rem, 3.6vw, 3rem);
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    color: var(--text-main);
+  }
+
+  .section-sub {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    max-width: 560px;
+    margin-top: 14px;
+  }
+
+  /* ================= NAVBAR ================= */
+  .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    background: rgba(7, 6, 14, 0.78);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    transition: border-color 0.3s ease;
+  }
+
+  .nav-inner {
+    height: 76px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    font-size: 0.95rem;
+    color: var(--text-main);
+  }
+
+  .brand-mark {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    letter-spacing: 0.03em;
+    transition: color 0.2s ease;
+    position: relative;
+  }
+
+  .nav-links a:hover {
+    color: var(--text-main);
+  }
+
+  .nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 0%;
+    height: 1px;
+    background: linear-gradient(90deg, var(--sand-gold), var(--neon-cyan));
+    transition: width 0.25s ease;
+  }
+
+  .nav-links a:hover::after {
+    width: 100%;
+  }
+
+  .nav-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--bg-deep);
+    background: linear-gradient(135deg, var(--sand-gold) 0%, #ffd29d 48%, var(--neon-cyan) 100%);
+    box-shadow: 0 0 24px rgba(243, 168, 103, 0.25);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .nav-cta:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 28px rgba(0, 240, 214, 0.38);
+  }
+
+  .mobile-toggle {
+    display: none;
+    color: var(--text-main);
+    padding: 8px;
+  }
+
+  /* ================= HERO ================= */
+  .hero {
+    position: relative;
+    padding: 64px 0 88px;
+    overflow: hidden;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 48px;
+    align-items: center;
+  }
+
+  .route-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 14px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-subtle);
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+  }
+
+  .route-badge .dot-sand {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--sand-gold);
+    box-shadow: 0 0 8px var(--sand-gold);
+  }
+
+  .route-badge .dot-neon {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--neon-cyan);
+    box-shadow: 0 0 8px var(--neon-cyan);
+  }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(2.75rem, 5vw, 4.45rem);
+    line-height: 1.04;
+    letter-spacing: -0.025em;
+    margin-bottom: 22px;
+  }
+
+  .hero-title .grad-sand {
+    background: linear-gradient(95deg, #ffe3c2, var(--sand-gold), var(--sand-amber));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .hero-title .grad-neon {
+    background: linear-gradient(95deg, var(--neon-cyan), #72efdd, var(--neon-pink));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .hero-lead {
+    font-size: 1.12rem;
+    color: var(--text-muted);
+    max-width: 510px;
+    margin-bottom: 34px;
+    line-height: 1.65;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 42px;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 28px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--sand-amber), var(--sand-gold));
+    color: #0b0812;
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+    box-shadow: 0 10px 30px rgba(226, 109, 66, 0.3);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 36px rgba(243, 168, 103, 0.45);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 26px;
+    border-radius: 999px;
+    border: 1px solid rgba(0, 240, 214, 0.35);
+    background: rgba(0, 240, 214, 0.05);
+    color: var(--neon-cyan);
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: background 0.2s ease, border-color 0.2s ease;
+  }
+
+  .btn-secondary:hover {
+    background: rgba(0, 240, 214, 0.12);
+    border-color: var(--neon-cyan);
+  }
+
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding-top: 26px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    max-width: 490px;
+  }
+
+  .stat-val {
+    font-family: var(--font-mono);
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text-main);
+  }
+
+  .stat-label {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+    margin-top: 2px;
+  }
+
+  /* Hero Art Frame */
+  .hero-art-wrap {
+    position: relative;
+  }
+
+  .hero-art-card {
+    position: relative;
+    border-radius: 26px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: #0b0818;
+    box-shadow:
+      0 30px 80px rgba(0, 0, 0, 0.7),
+      0 0 60px rgba(0, 240, 214, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  }
+
+  .hero-svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  /* Train light pulse animation inside SVG */
+  @keyframes pulseGlow {
+    0%, 100% { opacity: 0.75; }
+    50% { opacity: 1; }
+  }
+
+  @keyframes streakMove {
+    0% { transform: translateX(0); opacity: 0.5; }
+    50% { opacity: 0.95; }
+    100% { transform: translateX(-14px); opacity: 0.5; }
+  }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+  }
+
+  .svg-twinkle {
+    animation: twinkle 3.6s infinite ease-in-out;
+  }
+
+  .svg-twinkle-delayed {
+    animation: twinkle 4.4s infinite 1.8s ease-in-out;
+  }
+
+  .svg-neon-pulse {
+    animation: pulseGlow 2.8s infinite ease-in-out;
+  }
+
+  .svg-train-streak {
+    animation: streakMove 3s infinite alternate ease-in-out;
+  }
+
+  .telemetry-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+    background: rgba(11, 9, 22, 0.92);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+  }
+
+  .telemetry-live {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--neon-cyan);
+  }
+
+  .telemetry-live::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--neon-cyan);
+    box-shadow: 0 0 8px var(--neon-cyan);
+    animation: pulseGlow 1.5s infinite;
+  }
+
+  /* ================= FEATURES ================= */
+  .features {
+    padding: 96px 0;
+    position: relative;
+  }
+
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 32px;
+    margin-bottom: 56px;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+
+  .feature-card {
+    background: var(--bg-card);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-lg);
+    padding: 34px 30px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+  }
+
+  .feature-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--sand-gold), var(--neon-cyan), transparent);
+    opacity: 0.45;
+    transition: opacity 0.3s ease;
+  }
+
+  .feature-card:hover {
+    transform: translateY(-6px);
+    background: var(--bg-card-hover);
+    border-color: rgba(243, 168, 103, 0.3);
+  }
+
+  .feature-card:hover::before {
+    opacity: 1;
+  }
+
+  .feature-illus {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 26px;
+  }
+
+  .feature-num {
+    position: absolute;
+    top: 32px;
+    right: 28px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    letter-spacing: 0.14em;
+  }
+
+  .feature-card h3 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 1.45rem;
+    margin-bottom: 12px;
+    color: var(--text-main);
+  }
+
+  .feature-card p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.65;
+    margin-bottom: 22px;
+  }
+
+  .feature-spec {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.73rem;
+    letter-spacing: 0.08em;
+    color: var(--sand-gold);
+    padding: 5px 10px;
+    border-radius: 6px;
+    background: rgba(243, 168, 103, 0.08);
+    border: 1px solid rgba(243, 168, 103, 0.18);
+  }
+
+  /* ================= TIMETABLE ================= */
+  .timetable-section {
+    padding: 96px 0;
+  }
+
+  .board-shell {
+    background: linear-gradient(180deg, rgba(20, 17, 34, 0.92), rgba(11, 9, 21, 0.96));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 28px 70px rgba(0, 0, 0, 0.55);
+  }
+
+  .board-topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 22px 30px;
+    background: rgba(255, 255, 255, 0.025);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .board-station {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .board-arrow {
+    color: var(--sand-gold);
+  }
+
+  .board-clock {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--neon-cyan);
+    background: rgba(0, 240, 214, 0.08);
+    border: 1px solid rgba(0, 240, 214, 0.25);
+    padding: 6px 14px;
+    border-radius: 999px;
+  }
+
+  .table-scroll {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .schedule-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    min-width: 780px;
+  }
+
+  .schedule-table th {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--text-dim);
+    padding: 18px 30px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    font-weight: 500;
+  }
+
+  .schedule-table td {
+    padding: 24px 30px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    vertical-align: middle;
+  }
+
+  .schedule-table tbody tr {
+    transition: background 0.2s ease;
+  }
+
+  .schedule-table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  .schedule-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  .train-id {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--sand-gold);
+    display: block;
+    margin-bottom: 3px;
+  }
+
+  .train-name {
+    font-family: var(--font-display);
+    font-size: 1.18rem;
+    color: var(--text-main);
+  }
+
+  .time-big {
+    font-family: var(--font-mono);
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--text-main);
+  }
+
+  .time-sub {
+    display: block;
+    font-size: 0.76rem;
+    color: var(--text-dim);
+    margin-top: 2px;
+  }
+
+  .crossing-note {
+    font-size: 0.86rem;
+    color: var(--text-muted);
+  }
+
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 5px 12px;
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .status-pill.boarding {
+    background: rgba(0, 240, 214, 0.1);
+    color: var(--neon-cyan);
+    border: 1px solid rgba(0, 240, 214, 0.3);
+  }
+
+  .status-pill.limited {
+    background: rgba(243, 168, 103, 0.12);
+    color: var(--sand-gold);
+    border: 1px solid rgba(243, 168, 103, 0.32);
+  }
+
+  .status-pill.open {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-muted);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  .row-book-btn {
+    padding: 9px 18px;
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-main);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.03);
+    transition: all 0.2s ease;
+  }
+
+  .row-book-btn:hover {
+    border-color: var(--neon-cyan);
+    color: var(--bg-deep);
+    background: var(--neon-cyan);
+  }
+
+  /* ================= PRICING ================= */
+  .pricing-section {
+    padding: 96px 0;
+  }
+
+  .pricing-header {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto 60px;
+  }
+
+  .pricing-header .section-sub {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    align-items: stretch;
+  }
+
+  .tier-card {
+    background: var(--bg-card);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 24px;
+    padding: 36px 32px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+
+  .tier-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .tier-card.featured {
+    background: linear-gradient(165deg, rgba(35, 25, 56, 0.95), rgba(15, 13, 29, 0.96));
+    border: 1px solid rgba(0, 240, 214, 0.45);
+    box-shadow: 0 24px 64px rgba(0, 240, 214, 0.11);
+    transform: translateY(-8px);
+  }
+
+  .tier-card.featured:hover {
+    transform: translateY(-12px);
+  }
+
+  .featured-ribbon {
+    position: absolute;
+    top: -13px;
+    left: 32px;
+    padding: 4px 14px;
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    background: linear-gradient(90deg, var(--neon-cyan), #6ef7e5);
+    color: #07060e;
+  }
+
+  .tier-code {
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    letter-spacing: 0.16em;
+    color: var(--sand-gold);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .tier-name {
+    font-family: var(--font-display);
+    font-size: 1.7rem;
+    font-weight: 400;
+    margin-bottom: 10px;
+  }
+
+  .tier-desc {
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    min-height: 46px;
+  }
+
+  .ticket-perf {
+    margin: 24px 0;
+    border-top: 1px dashed rgba(255, 255, 255, 0.16);
+    position: relative;
+  }
+
+  .tier-price {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+
+  .price-amount {
+    font-family: var(--font-display);
+    font-size: 2.85rem;
+    line-height: 1;
+    color: var(--text-main);
+  }
+
+  .price-unit {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .tier-perks {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+    margin-bottom: 34px;
+    flex-grow: 1;
+  }
+
+  .tier-perks li {
+    display: flex;
+    align-items: flex-start;
+    gap: 11px;
+    font-size: 0.92rem;
+    color: var(--text-muted);
+  }
+
+  .perk-check {
+    color: var(--neon-cyan);
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+
+  .tier-btn {
+    width: 100%;
+    padding: 14px 20px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.92rem;
+    letter-spacing: 0.03em;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: var(--text-main);
+    background: rgba(255, 255, 255, 0.04);
+    transition: all 0.2s ease;
+  }
+
+  .tier-btn:hover {
+    background: rgba(255, 255, 255, 0.11);
+    border-color: var(--sand-gold);
+  }
+
+  .tier-card.featured .tier-btn {
+    background: linear-gradient(135deg, var(--neon-cyan), #4be8d5);
+    color: #07060e;
+    border-color: transparent;
+    box-shadow: 0 8px 24px rgba(0, 240, 214, 0.25);
+  }
+
+  .tier-card.featured .tier-btn:hover {
+    box-shadow: 0 10px 30px rgba(0, 240, 214, 0.45);
+    transform: translateY(-1px);
+  }
+
+  /* ================= TESTIMONIAL ================= */
+  .testimonial-section {
+    padding: 80px 0 110px;
+  }
+
+  .quote-panel {
+    position: relative;
+    border-radius: 28px;
+    padding: 64px 72px;
+    background:
+      radial-gradient(circle at 90% 20%, rgba(255, 42, 133, 0.13), transparent 45%),
+      radial-gradient(circle at 10% 85%, rgba(243, 168, 103, 0.14), transparent 45%),
+      linear-gradient(145deg, rgba(23, 19, 39, 0.9), rgba(12, 10, 22, 0.95));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 48px;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .quote-mark {
+    font-family: var(--font-display);
+    font-size: 4.5rem;
+    line-height: 0.7;
+    color: var(--sand-gold);
+    opacity: 0.55;
+    margin-bottom: 18px;
+    display: block;
+  }
+
+  .quote-text {
+    font-family: var(--font-display);
+    font-size: clamp(1.35rem, 2.3vw, 1.95rem);
+    line-height: 1.42;
+    color: var(--text-main);
+    margin-bottom: 28px;
+    font-style: italic;
+  }
+
+  .quote-author {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .author-avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    border: 1px solid rgba(0, 240, 214, 0.4);
+    overflow: hidden;
+  }
+
+  .author-name {
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--text-main);
+  }
+
+  .author-role {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  .quote-stamp {
+    width: 148px;
+    height: 148px;
+    flex-shrink: 0;
+    opacity: 0.9;
+  }
+
+  /* ================= FOOTER ================= */
+  .footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    background: #05040a;
+    padding: 72px 0 40px;
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 1.4fr 0.8fr 0.8fr 1.2fr;
+    gap: 40px;
+    padding-bottom: 56px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  }
+
+  .footer-tagline {
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    margin-top: 16px;
+    max-width: 300px;
+  }
+
+  .footer-coords {
+    margin-top: 20px;
+    font-family: var(--font-mono);
+    font-size: 0.73rem;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+  }
+
+  .footer-col h4 {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--sand-gold);
+    margin-bottom: 18px;
+  }
+
+  .footer-col ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+  }
+
+  .footer-col a {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    transition: color 0.2s ease;
+  }
+
+  .footer-col a:hover {
+    color: var(--neon-cyan);
+  }
+
+  .dispatch-form {
+    display: flex;
+    gap: 8px;
+    margin-top: 14px;
+  }
+
+  .dispatch-input {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 10px;
+    padding: 11px 14px;
+    color: var(--text-main);
+    font-size: 0.88rem;
+    outline: none;
+    transition: border-color 0.2s ease;
+  }
+
+  .dispatch-input:focus {
+    border-color: var(--neon-cyan);
+  }
+
+  .dispatch-btn {
+    padding: 11px 18px;
+    border-radius: 10px;
+    background: rgba(243, 168, 103, 0.16);
+    border: 1px solid rgba(243, 168, 103, 0.4);
+    color: var(--sand-gold);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: all 0.2s ease;
+  }
+
+  .dispatch-btn:hover {
+    background: var(--sand-gold);
+    color: #07060e;
+  }
+
+  .dispatch-msg {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--neon-cyan);
+    margin-top: 10px;
+    min-height: 18px;
+  }
+
+  .footer-bottom {
+    padding-top: 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 0.82rem;
+    color: var(--text-dim);
+  }
+
+  .route-line-mini {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+  }
+
+  .route-line-mini span.bar {
+    width: 48px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--sand-gold), var(--neon-pink), var(--neon-cyan));
+  }
+
+  /* ================= BOOKING MODAL ================= */
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: rgba(4, 3, 9, 0.82);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+  }
+
+  .modal-backdrop.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .modal-card {
+    width: 100%;
+    max-width: 480px;
+    background: #131022;
+    border: 1px solid rgba(0, 240, 214, 0.35);
+    border-radius: 22px;
+    padding: 32px;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8);
+    transform: translateY(14px);
+    transition: transform 0.25s ease;
+  }
+
+  .modal-backdrop.active .modal-card {
+    transform: translateY(0);
+  }
+
+  .modal-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 22px;
+  }
+
+  .modal-head h3 {
+    font-family: var(--font-display);
+    font-size: 1.55rem;
+    font-weight: 400;
+  }
+
+  .modal-close {
+    color: var(--text-muted);
+    font-size: 1.4rem;
+    line-height: 1;
+    padding: 4px 8px;
+  }
+
+  .modal-close:hover {
+    color: var(--text-main);
+  }
+
+  .form-group {
+    margin-bottom: 16px;
+  }
+
+  .form-group label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+
+  .form-control {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--text-main);
+    font-family: var(--font-sans);
+    font-size: 0.92rem;
+    outline: none;
+  }
+
+  .form-control option {
+    background: #131022;
+    color: var(--text-main);
+  }
+
+  .form-control:focus {
+    border-color: var(--neon-cyan);
+  }
+
+  .modal-submit {
+    width: 100%;
+    margin-top: 10px;
+    padding: 14px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--sand-gold), var(--neon-cyan));
+    color: #07060e;
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+
+  .booking-success {
+    display: none;
+    text-align: center;
+    padding: 18px 0 6px;
+  }
+
+  .booking-success h4 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+    color: var(--neon-cyan);
+  }
+
+  .booking-success p {
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    margin-bottom: 16px;
+  }
+
+  .ticket-ref {
+    display: inline-block;
+    font-family: var(--font-mono);
+    padding: 8px 16px;
+    border-radius: 8px;
+    background: rgba(0, 240, 214, 0.1);
+    border: 1px dashed var(--neon-cyan);
+    color: var(--neon-cyan);
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+  }
+
+  /* ================= RESPONSIVE ================= */
+  @media (max-width: 1024px) {
+    .hero-grid {
+      grid-template-columns: 1fr;
+      gap: 44px;
+    }
+    .features-grid,
+    .pricing-grid {
+      grid-template-columns: 1fr;
+      max-width: 580px;
+      margin: 0 auto;
+    }
+    .tier-card.featured {
+      transform: none;
+    }
+    .quote-panel {
+      grid-template-columns: 1fr;
+      padding: 44px 36px;
+      text-align: left;
+    }
+    .quote-stamp {
+      display: none;
+    }
+    .footer-top {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .container {
+      padding: 0 20px;
+    }
+    .nav-links,
+    .nav-cta-desktop {
+      display: none;
+    }
+    .mobile-toggle {
+      display: block;
+    }
+    .navbar.menu-open .nav-links {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 76px;
+      left: 0;
+      right: 0;
+      background: rgba(11, 9, 22, 0.98);
+      padding: 24px;
+      gap: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .section-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .footer-top {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <!-- ================= NAVIGATION ================= -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a href="#" class="brand" aria-label="Dune Line Home">
+        <svg class="brand-mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+          <rect x="1.5" y="1.5" width="37" height="37" rx="10" stroke="url(#brandGrad)" stroke-width="1.8"/>
+          <path d="M7 26C13 26 15 19 21 19C27 19 29 24 33 24" stroke="#F3A867" stroke-width="2" stroke-linecap="round"/>
+          <path d="M7 30H33" stroke="#00F0D6" stroke-width="1.8" stroke-linecap="round"/>
+          <circle cx="27" cy="12" r="3" fill="#FF2A85"/>
+          <defs>
+            <linearGradient id="brandGrad" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#F3A867"/>
+              <stop offset="1" stop-color="#00F0D6"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <span>DUNE LINE</span>
+      </a>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#timetable">Timetable</a></li>
+        <li><a href="#berths">Sleeper Berths</a></li>
+        <li><a href="#guestbook">Logbook</a></li>
+      </ul>
+
+      <button class="nav-cta nav-cta-desktop" onclick="openBooking('Dune Suite', '21:45 — Starlight Limited')">
+        Reserve Passage
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M3 8H13M13 8L8.5 3.5M13 8L8.5 12.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Menu">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <path d="M4 7h16M4 12h16M4 17h16"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- ================= HERO SECTION ================= -->
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="route-badge">
+            <span class="dot-sand"></span>
+            <span>SANDSTONE GATE</span>
+            <span>⟶</span>
+            <span>NEW VERIDIAN SECTOR 9</span>
+            <span class="dot-neon"></span>
+          </div>
+
+          <h1 class="hero-title">
+            Board in <span class="grad-sand">Amber Dusk.</span><br>
+            Wake in <span class="grad-neon">Electric Neon.</span>
+          </h1>
+
+          <p class="hero-lead">
+            Nine hundred kilometers of starlit red Erg, crossed in whisper-quiet magnetic suspension. Fall asleep to shifting desert silhouettes; draw your curtain at dawn to rain-slicked holographic towers.
+          </p>
+
+          <div class="hero-actions">
+            <button class="btn-primary" onclick="openBooking('Dune Suite', '21:45 — Starlight Limited')">
+              Book Overnight Berth
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M3 8H13M13 8L8.5 3.5M13 8L8.5 12.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <a href="#timetable" class="btn-secondary">View Night Departures</a>
+          </div>
+
+          <div class="hero-stats">
+            <div>
+              <div class="stat-val">940 KM</div>
+              <div class="stat-label">Al-Kamar Crossing</div>
+            </div>
+            <div>
+              <div class="stat-val">07h 45m</div>
+              <div class="stat-label">Dusk to Dawn</div>
+            </div>
+            <div>
+              <div class="stat-val">310 KM/H</div>
+              <div class="stat-label">Mag-Glide Cruise</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Custom Code-Drawn SVG Illustration -->
+        <div class="hero-art-wrap">
+          <div class="hero-art-card">
+            <svg class="hero-svg" viewBox="0 0 640 480" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration of the Dune Line night train gliding across desert dunes toward a glowing neon skyline">
+              <defs>
+                <linearGradient id="skyGrad" x1="0" y1="0" x2="640" y2="340" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#080614"/>
+                  <stop offset="45%" stop-color="#191030"/>
+                  <stop offset="78%" stop-color="#411b3c"/>
+                  <stop offset="100%" stop-color="#9e4338"/>
+                </linearGradient>
+                <radialGradient id="cityGlow" cx="0.78" cy="0.52" r="0.38">
+                  <stop offset="0%" stop-color="#00F0D6" stop-opacity="0.5"/>
+                  <stop offset="45%" stop-color="#FF2A85" stop-opacity="0.28"/>
+                  <stop offset="100%" stop-color="#191030" stop-opacity="0"/>
+                </radialGradient>
+                <radialGradient id="sunSet" cx="0.22" cy="0.62" r="0.26">
+                  <stop offset="0%" stop-color="#FFD099" stop-opacity="0.85"/>
+                  <stop offset="45%" stop-color="#F3A867" stop-opacity="0.35"/>
+                  <stop offset="100%" stop-color="#F3A867" stop-opacity="0"/>
+                </radialGradient>
+                <linearGradient id="duneBack" x1="0" y1="270" x2="640" y2="390" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#6b2e35"/>
+                  <stop offset="55%" stop-color="#30172f"/>
+                  <stop offset="100%" stop-color="#16142c"/>
+                </linearGradient>
+                <linearGradient id="duneMid" x1="0" y1="310" x2="640" y2="440" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#b8563a"/>
+                  <stop offset="48%" stop-color="#481d38"/>
+                  <stop offset="100%" stop-color="#121226"/>
+                </linearGradient>
+                <linearGradient id="duneFront" x1="0" y1="370" x2="640" y2="480" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#2c1423"/>
+                  <stop offset="60%" stop-color="#120d1f"/>
+                  <stop offset="100%" stop-color="#07060e"/>
+                </linearGradient>
+                <linearGradient id="trainBody" x1="60" y1="320" x2="520" y2="345" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#231c38"/>
+                  <stop offset="60%" stop-color="#3a3158"/>
+                  <stop offset="100%" stop-color="#e5f9f6"/>
+                </linearGradient>
+                <linearGradient id="headlightBeam" x1="470" y1="335" x2="640" y2="315" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#00F0D6" stop-opacity="0.75"/>
+                  <stop offset="100%" stop-color="#00F0D6" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+
+              <!-- Sky & Dual Atmospheric Glows -->
+              <rect width="640" height="480" fill="url(#skyGrad)"/>
+              <rect width="640" height="480" fill="url(#sunSet)"/>
+              <rect width="640" height="480" fill="url(#cityGlow)"/>
+
+              <!-- Stars -->
+              <g class="svg-twinkle" fill="#FFF7EB">
+                <circle cx="74" cy="56" r="1.4"/>
+                <circle cx="152" cy="38" r="1.1"/>
+                <circle cx="228" cy="78" r="1.5"/>
+                <circle cx="310" cy="44" r="1.2"/>
+                <circle cx="415" cy="64" r="1.1"/>
+                <circle cx="540" cy="42" r="1.4"/>
+              </g>
+              <g class="svg-twinkle-delayed" fill="#00F0D6">
+                <circle cx="112" cy="96" r="1.2"/>
+                <circle cx="276" cy="62" r="1.4"/>
+                <circle cx="368" cy="35" r="1.3"/>
+                <circle cx="485" cy="58" r="1.2"/>
+                <circle cx="592" cy="76" r="1.5"/>
+              </g>
+
+              <!-- Crescent Desert Moon & Orbit Ring -->
+              <circle cx="136" cy="128" r="30" fill="#FFD9A8" fill-opacity="0.9"/>
+              <circle cx="148" cy="120" r="27" fill="#1b112f"/>
+              <circle cx="195" cy="92" r="7" stroke="#F3A867" stroke-opacity="0.45" stroke-width="1"/>
+
+              <!-- Distant Neon Megacity Skyline (Right Horizon) -->
+              <g class="svg-neon-pulse">
+                <!-- Vertical Light Beams -->
+                <path d="M472 260L456 80H476L472 260Z" fill="#00F0D6" fill-opacity="0.08"/>
+                <path d="M548 260L568 65H550L548 260Z" fill="#FF2A85" fill-opacity="0.09"/>
+              </g>
+
+              <!-- City Towers -->
+              <g>
+                <rect x="420" y="195" width="22" height="95" fill="#131029" stroke="#00F0D6" stroke-opacity="0.4" stroke-width="1"/>
+                <rect x="446" y="152" width="28" height="138" fill="#15122e" stroke="#FF2A85" stroke-opacity="0.5" stroke-width="1"/>
+                <path d="M460 152V118" stroke="#FF2A85" stroke-width="1.6"/>
+                <circle cx="460" cy="116" r="2.2" fill="#FF2A85"/>
+
+                <!-- Pyramid Mega-Arcology -->
+                <polygon points="478,290 508,132 538,290" fill="#10122b" stroke="#00F0D6" stroke-opacity="0.6" stroke-width="1.2"/>
+                <line x1="508" y1="132" x2="508" y2="290" stroke="#00F0D6" stroke-opacity="0.35"/>
+
+                <rect x="542" y="166" width="26" height="124" fill="#16112d" stroke="#8C42FF" stroke-opacity="0.55" stroke-width="1"/>
+                <rect x="572" y="184" width="22" height="106" fill="#111025" stroke="#00F0D6" stroke-opacity="0.4" stroke-width="1"/>
+                <rect x="598" y="212" width="20" height="78" fill="#120f24" stroke="#FF2A85" stroke-opacity="0.35" stroke-width="1"/>
+
+                <!-- Neon Signs / Lit Windows -->
+                <g stroke="#00F0D6" stroke-width="1.5" stroke-linecap="round">
+                  <line x1="452" y1="170" x2="468" y2="170"/>
+                  <line x1="452" y1="182" x2="464" y2="182"/>
+                  <line x1="548" y1="184" x2="562" y2="184"/>
+                  <line x1="548" y1="206" x2="562" y2="206"/>
+                  <line x1="577" y1="198" x2="589" y2="198"/>
+                </g>
+                <g stroke="#FF2A85" stroke-width="1.5" stroke-linecap="round">
+                  <line x1="426" y1="210" x2="436" y2="210"/>
+                  <line x1="498" y1="195" x2="518" y2="195"/>
+                  <line x1="494" y1="214" x2="522" y2="214"/>
+                  <line x1="548" y1="195" x2="558" y2="195"/>
+                </g>
+              </g>
+
+              <!-- Sweeping Desert Dunes (Back & Mid) -->
+              <path d="M0 295C95 262 175 270 265 296C355 322 465 258 640 272V400H0V295Z" fill="url(#duneBack)"/>
+              <path d="M0 338C130 294 245 352 370 326C475 304 555 314 640 332V450H0V338Z" fill="url(#duneMid)"/>
+
+              <!-- Elevated Mag-Glide Viaduct -->
+              <path d="M-10 368Q310 332 650 322" stroke="#F3A867" stroke-opacity="0.35" stroke-width="2"/>
+              <path d="M-10 372Q310 336 650 326" stroke="#00F0D6" stroke-opacity="0.65" stroke-width="2.5"/>
+
+              <!-- Viaduct Pylons -->
+              <g stroke="#1b1530" stroke-width="5">
+                <line x1="70" y1="362" x2="70" y2="420"/>
+                <line x1="175" y1="353" x2="175" y2="415"/>
+                <line x1="285" y1="344" x2="285" y2="410"/>
+                <line x1="395" y1="336" x2="395" y2="405"/>
+                <line x1="505" y1="329" x2="505" y2="400"/>
+              </g>
+
+              <!-- Headlight Cone -->
+              <polygon points="482,326 640,295 640,344" fill="url(#headlightBeam)"/>
+
+              <!-- THE DUNE LINE SLEEPER TRAIN -->
+              <g transform="rotate(-2.7 280 340)">
+                <!-- Mag-lev Underglow -->
+                <rect x="45" y="343" width="440" height="4" rx="2" fill="#00F0D6" fill-opacity="0.85"/>
+
+                <!-- Carriages & Aerodynamic Nose -->
+                <path d="M30 342L48 323H452C474 323 492 332 500 342H30Z" fill="url(#trainBody)" stroke="#F3A867" stroke-opacity="0.5" stroke-width="1"/>
+
+                <!-- Warm Illuminated Sleeper Cabin Windows -->
+                <g fill="#FFD39B">
+                  <rect x="68" y="328" width="18" height="6" rx="2"/>
+                  <rect x="92" y="328" width="18" height="6" rx="2"/>
+                  <rect x="116" y="328" width="18" height="6" rx="2"/>
+                  <rect x="152" y="328" width="24" height="6" rx="2" fill="#FF9E7D"/>
+                  <rect x="182" y="328" width="24" height="6" rx="2" fill="#FF9E7D"/>
+                  <rect x="220" y="328" width="18" height="6" rx="2"/>
+                  <rect x="244" y="328" width="18" height="6" rx="2"/>
+                  <rect x="268" y="328" width="18" height="6" rx="2"/>
+                  <rect x="304" y="328" width="28" height="6" rx="2" fill="#00F0D6"/>
+                  <rect x="338" y="328" width="28" height="6" rx="2" fill="#00F0D6"/>
+                  <rect x="380" y="328" width="18" height="6" rx="2"/>
+                  <rect x="404" y="328" width="18" height="6" rx="2"/>
+                </g>
+
+                <!-- Cockpit Visor -->
+                <path d="M454 327H474L488 335H454V327Z" fill="#00F0D6"/>
+
+                <!-- Motion Light Streaks -->
+                <g class="svg-train-streak">
+                  <line x1="5" y1="331" x2="62" y2="331" stroke="#FF2A85" stroke-width="1.6" stroke-linecap="round"/>
+                  <line x1="-15" y1="338" x2="45" y2="338" stroke="#F3A867" stroke-width="1.4" stroke-linecap="round"/>
+                </g>
+              </g>
+
+              <!-- Foreground Dune Silhouette -->
+              <path d="M0 398C155 362 290 426 455 394C540 377 595 382 640 395V480H0V398Z" fill="url(#duneFront)"/>
+              <path d="M0 398C155 362 290 426 455 394" stroke="#F3A867" stroke-opacity="0.22" stroke-width="1.2"/>
+            </svg>
+
+            <div class="telemetry-bar">
+              <span class="telemetry-live">CONSIST DL-09 EN ROUTE</span>
+              <span>EXT: 14°C CLEAR · WIND 6 KT</span>
+              <span>CABIN: 21.5°C SILENT</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= THREE FEATURE HIGHLIGHTS ================= -->
+    <section class="features" id="experience">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <span class="eyebrow">Aboard the Consist</span>
+            <h2 class="section-title">Engineered for the Liminal Hour</h2>
+          </div>
+          <p class="section-sub">
+            Half grand desert hotel, half streamlined spacecraft. Every carriage transitions its lighting and acoustics as sandstone gives way to city glow.
+          </p>
+        </div>
+
+        <div class="features-grid">
+          <!-- Feature 1 -->
+          <article class="feature-card">
+            <span class="feature-num">CAR 01–04</span>
+            <div class="feature-illus">
+              <svg width="36" height="36" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+                <path d="M6 27C6 16.5 11.4 9 18 9C24.6 9 30 16.5 30 27H6Z" stroke="#F3A867" stroke-width="1.7"/>
+                <path d="M10 27C10 19.5 13.6 14 18 14C22.4 14 26 19.5 26 27" stroke="#00F0D6" stroke-width="1.3" stroke-dasharray="2 2"/>
+                <circle cx="18" cy="6" r="1.8" fill="#00F0D6"/>
+                <circle cx="9" cy="11" r="1.3" fill="#FF2A85"/>
+                <circle cx="27" cy="11" r="1.3" fill="#F3A867"/>
+              </svg>
+            </div>
+            <h3>Stargazer Silica Domes</h3>
+            <p>
+              Curved zero-glare acoustic quartz ceilings arch above every berth. In the deep Al-Kamar basin—ninety miles from the nearest streetlamp—the Milky Way fills your entire canopy.
+            </p>
+            <span class="feature-spec">BORTLE CLASS 1 SKY VIEW</span>
+          </article>
+
+          <!-- Feature 2 -->
+          <article class="feature-card">
+            <span class="feature-num">CAR 05</span>
+            <div class="feature-illus">
+              <svg width="36" height="36" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+                <path d="M10 9H26L19.5 18.5V27H16.5V18.5L10 9Z" stroke="#00F0D6" stroke-width="1.7" stroke-linejoin="round"/>
+                <line x1="13" y1="27" x2="23" y2="27" stroke="#F3A867" stroke-width="1.7" stroke-linecap="round"/>
+                <circle cx="21" cy="12" r="2" fill="#FF2A85"/>
+                <path d="M13 13.5H23" stroke="#F3A867" stroke-width="1.2"/>
+              </svg>
+            </div>
+            <h3>The Mirage Salon Car</h3>
+            <p>
+              Saffron-smoked desert botanicals, bioluminescent tonic pours, and low-key vinyl synth sets. Linger in velvet booths as distant horizon lightning illuminates red rock spires.
+            </p>
+            <span class="feature-spec">OPEN 20:00 UNTIL NEON DAWN</span>
+          </article>
+
+          <!-- Feature 3 -->
+          <article class="feature-card">
+            <span class="feature-num">CHASSIS MK-IV</span>
+            <div class="feature-illus">
+              <svg width="36" height="36" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+                <path d="M4 21C9 16 14 16 18 21C22 26 27 26 32 21" stroke="#00F0D6" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M4 26H32" stroke="#F3A867" stroke-width="1.6" stroke-linecap="round"/>
+                <path d="M9 13H27" stroke="#FF2A85" stroke-width="1.4" stroke-linecap="round" stroke-dasharray="3 3"/>
+              </svg>
+            </div>
+            <h3>Whisper Mag-Glide Track</h3>
+            <p>
+              Suspended eighteen millimeters above elevated desert pylons, eliminating wheel clatter entirely. Your espresso stays mirror-still even as the consist crests 310 km/h.
+            </p>
+            <span class="feature-spec">24 dBA CABIN QUIETUDE</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= TIMETABLE (4 DEPARTURES) ================= -->
+    <section class="timetable-section" id="timetable">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <span class="eyebrow">Nightly Dispatch</span>
+            <h2 class="section-title">Four Crossings Every Dusk</h2>
+          </div>
+          <p class="section-sub">
+            All services depart Sandstone Gate Platform 04 and terminate directly beneath the holographic canopy of New Veridian Central.
+          </p>
+        </div>
+
+        <div class="board-shell">
+          <div class="board-topbar">
+            <div class="board-station">
+              <span>SDG · SANDSTONE GATE</span>
+              <span class="board-arrow">━━━▶</span>
+              <span>NVC · NEW VERIDIAN CENTRAL</span>
+            </div>
+            <div class="board-clock" id="liveClock">STATION TIME · 19:42:10</div>
+          </div>
+
+          <div class="table-scroll">
+            <table class="schedule-table">
+              <thead>
+                <tr>
+                  <th>Consist</th>
+                  <th>Depart Desert</th>
+                  <th>Mid-Erg Zenith</th>
+                  <th>Arrive Neon City</th>
+                  <th>Status</th>
+                  <th>Passage</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <span class="train-id">DL-104</span>
+                    <span class="train-name">Dusk Express</span>
+                  </td>
+                  <td>
+                    <span class="time-big">20:15</span>
+                    <span class="time-sub">Golden Hour Lounge</span>
+                  </td>
+                  <td>
+                    <span class="crossing-note">23:50 · Red Salt Flats</span>
+                  </td>
+                  <td>
+                    <span class="time-big">04:00</span>
+                    <span class="time-sub">+1 · Early Market Glow</span>
+                  </td>
+                  <td>
+                    <span class="status-pill boarding"><span class="status-dot"></span>Boarding Gate 4</span>
+                  </td>
+                  <td>
+                    <button class="row-book-btn" onclick="openBooking('Dune Suite', '20:15 — Dusk Express')">Select</button>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <span class="train-id">DL-208</span>
+                    <span class="train-name">Starlight Limited</span>
+                  </td>
+                  <td>
+                    <span class="time-big">21:45</span>
+                    <span class="time-sub">Supper Seating Incl.</span>
+                  </td>
+                  <td>
+                    <span class="crossing-note">01:30 · Crater Observatory</span>
+                  </td>
+                  <td>
+                    <span class="time-big">05:30</span>
+                    <span class="time-sub">+1 · Violet Pre-Dawn</span>
+                  </td>
+                  <td>
+                    <span class="status-pill limited"><span class="status-dot"></span>4 Berths Left</span>
+                  </td>
+                  <td>
+                    <button class="row-book-btn" onclick="openBooking('Dune Suite', '21:45 — Starlight Limited')">Select</button>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <span class="train-id">DL-312</span>
+                    <span class="train-name">Midnight Mirage</span>
+                  </td>
+                  <td>
+                    <span class="time-big">23:00</span>
+                    <span class="time-sub">Late Salon Set</span>
+                  </td>
+                  <td>
+                    <span class="crossing-note">02:45 · Deep Dune Silence</span>
+                  </td>
+                  <td>
+                    <span class="time-big">06:45</span>
+                    <span class="time-sub">+1 · Skyline Sunrise</span>
+                  </td>
+                  <td>
+                    <span class="status-pill open"><span class="status-dot"></span>On Schedule</span>
+                  </td>
+                  <td>
+                    <button class="row-book-btn" onclick="openBooking('Nomad Pod', '23:00 — Midnight Mirage')">Select</button>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <span class="train-id">DL-416</span>
+                    <span class="train-name">Red Moon Sleeper</span>
+                  </td>
+                  <td>
+                    <span class="time-big">00:30</span>
+                    <span class="time-sub">Direct Lights-Out</span>
+                  </td>
+                  <td>
+                    <span class="crossing-note">04:10 · Obsidian Canyon</span>
+                  </td>
+                  <td>
+                    <span class="time-big">08:15</span>
+                    <span class="time-sub">Morning Rush Arrival</span>
+                  </td>
+                  <td>
+                    <span class="status-pill open"><span class="status-dot"></span>On Schedule</span>
+                  </td>
+                  <td>
+                    <button class="row-book-btn" onclick="openBooking('Obsidian Suite', '00:30 — Red Moon Sleeper')">Select</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PRICING (3 TIERS) ================= -->
+    <section class="pricing-section" id="berths">
+      <div class="container">
+        <div class="pricing-header">
+          <span class="eyebrow">Accommodations</span>
+          <h2 class="section-title">Choose Your Private Sanctuary</h2>
+          <p class="section-sub">
+            Every ticket includes station lounge access at Sandstone Gate, cold-pressed desert fig welcome elixir, and priority customs clearance into New Veridian.
+          </p>
+        </div>
+
+        <div class="pricing-grid">
+          <!-- Tier 1 -->
+          <div class="tier-card">
+            <span class="tier-code">CLASS 03 · SOLO</span>
+            <h3 class="tier-name">Nomad Pod</h3>
+            <p class="tier-desc">Architectural cedar-and-slate cocoon crafted for solo night dreamers.</p>
+            <div class="ticket-perf"></div>
+            <div class="tier-price">
+              <span class="price-amount">$240</span>
+              <span class="price-unit">/ one-way berth</span>
+            </div>
+            <ul class="tier-perks">
+              <li>
+                <span class="perk-check">✦</span>
+                <span>1.2m wide zero-gravity memory mattress &amp; raw linen bedding</span>
+              </li>
+              <li>
+                <span class="perk-check">✦</span>
+                <span>Personal curved horizon window with electro-tint dimmer</span>
+              </li>
+              <li>
+                <span class="perk-check">✦</span>
+                <span>Bespoke ambient desert-to-synth sleep soundscape</span>
+              </li>
+              <li>
+                <span class="perk-check">✦</span>
+                <span>Morning cardamom espresso delivered to your pod</span>
+              </li>
+            </ul>
+            <button class="tier-btn" onclick="openBooking('Nomad Pod ($240)', '21:45 — Starlight Limited')">Reserve Nomad Pod</button>
+          </div>
+
+          <!-- Tier 2 (Featured) -->
+          <div class="tier-card featured">
+            <span class="featured-ribbon">Most Coveted</span>
+            <span class="tier-code">CLASS 02 · CABIN FOR 1–2</span>
+            <h3 class="tier-name">Dune Suite</h3>
+            <p class="tier-desc">Private stateroom with overhead stargazer dome and en-suite rain shower.</p>
+            <div class="ticket-perf"></div>
+            <div class="tier-price">
+              <span class="price-amount">$580</span>
+              <span class="price-unit">/ private cabin</span>
+            </div>
+            <ul class="tier-perks">
+              <li>
+                <span class="perk-check">✦</span>
+                <span>Queen sleeper berth beneath a full-width Stargazer Silica Dome</span>
+              </li>
+              <li>
+                <span class="perk-check">✦</span>
+                <span>Private copper-and-basalt wet room with heated desert stone floor</span>
+              </li>
+              <li>
+                <span class="perk-check">✦</span>
+                <span>Three-course twilight tasting supper in The Mirage Salon Car</span>
+              </li>
+              <li>
+                <span class="perk-check">✦</span>
+                <span>Guaranteed east-facing skyline view upon New Veridian approach</span>
+              </li>
+            </ul>
+            <button class="tier-btn" onclick="openBooking('Dune Suite ($580)', '21:45 — Starlight Limited')">Reserve Dune Suite</button>
+          </div>
+
+          <!-- Tier 3 -->
+          <div class="tier-card">
+            <span class="tier-code">CLASS 01 · TAIL CARRIAGE</span>
+            <h3 class="tier-name">Obsidian Salon</h3>
+            <p class="tier-desc">Double-width observation suite occupying the glass tail-end of the train.</p>
+            <div class="ticket-perf"></div>
+            <div class="tier-price">
+              <span class="price-amount">$1,190</span>
+              <span class="price-unit">/ grand suite</span>
+            </div>
+            <ul class="tier-perks">
+              <li>
+                <span class="perk-check">✦</span>
+                <span>270° wraparound observation lounge watching the rails vanish into sand</span>
+              </li>
+              <li>
+                <span class="perk-check">✦</span>
+                <span>Dedicated night steward &amp; bespoke in-suite midnight bar</span>
+              </li>
+              <li>
+                <span class="perk-check">✦</span>
+                <span>Deep soaking tub aligned with the twin-moon horizon</span>
+              </li>
+              <li>
+                <span class="perk-check">✦</span>
+                <span>Private autonomous spinner transfer from platform to any city spire</span>
+              </li>
+            </ul>
+            <button class="tier-btn" onclick="openBooking('Obsidian Salon ($1,190)', '23:00 — Midnight Mirage')">Reserve Obsidian Salon</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= ONE TESTIMONIAL ================= -->
+    <section class="testimonial-section" id="guestbook">
+      <div class="container">
+        <div class="quote-panel">
+          <div>
+            <span class="eyebrow">Passenger Logbook · Entry 409</span>
+            <span class="quote-mark" aria-hidden="true">“</span>
+            <blockquote class="quote-text">
+              At midnight I was sipping smoked pomegranate tea while silver dunes drifted past like slow ocean swells under a billion cold stars. When I woke, magenta rain was beading on the glass and forty-story holographic koi were swimming across the towers of Sector 9. Flights erase distance; Dune Line turns distance into cinema.
+            </blockquote>
+            <div class="quote-author">
+              <svg class="author-avatar" viewBox="0 0 56 56" fill="none" aria-hidden="true">
+                <rect width="56" height="56" fill="#1b1530"/>
+                <circle cx="28" cy="22" r="10" fill="#F3A867"/>
+                <path d="M10 52C12 40 20 35 28 35C36 35 44 40 46 52" fill="#00F0D6" fill-opacity="0.75"/>
+              </svg>
+              <div>
+                <div class="author-name">Soraia Vance-Kouri</div>
+                <div class="author-role">LIGHTING ARCHITECT · CROSSED ON DL-208 STARLIGHT LIMITED</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Decorative SVG Transit Stamp -->
+          <svg class="quote-stamp" viewBox="0 0 160 160" fill="none" aria-hidden="true">
+            <circle cx="80" cy="80" r="72" stroke="#F3A867" stroke-opacity="0.35" stroke-width="1.2" stroke-dasharray="4 4"/>
+            <circle cx="80" cy="80" r="56" stroke="#00F0D6" stroke-opacity="0.5" stroke-width="1.2"/>
+            <polygon points="80,36 92,68 126,68 98,88 108,120 80,100 52,120 62,88 34,68 68,68" stroke="#F3A867" stroke-opacity="0.7" stroke-width="1.2" fill="none"/>
+            <circle cx="80" cy="80" r="14" fill="#131022" stroke="#FF2A85" stroke-width="1.4"/>
+            <circle cx="80" cy="80" r="4" fill="#00F0D6"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div>
+          <a href="#" class="brand">
+            <svg class="brand-mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+              <rect x="1.5" y="1.5" width="37" height="37" rx="10" stroke="#F3A867" stroke-width="1.6"/>
+              <path d="M7 26C13 26 15 19 21 19C27 19 29 24 33 24" stroke="#F3A867" stroke-width="2" stroke-linecap="round"/>
+              <path d="M7 30H33" stroke="#00F0D6" stroke-width="1.8" stroke-linecap="round"/>
+              <circle cx="27" cy="12" r="3" fill="#FF2A85"/>
+            </svg>
+            <span>DUNE LINE</span>
+          </a>
+          <p class="footer-tagline">
+            Trans-Erg Magnetic Sleeper Authority. Linking the quiet amber rim to the sleepless neon coast every night of the year.
+          </p>
+          <div class="footer-coords">24°18'N 51°07'E ━━ 28°54'N 56°42'E</div>
+        </div>
+
+        <div class="footer-col">
+          <h4>The Journey</h4>
+          <ul>
+            <li><a href="#experience">Carriage Spec</a></li>
+            <li><a href="#experience">Mirage Salon Menu</a></li>
+            <li><a href="#timetable">Nightly Schedule</a></li>
+            <li><a href="#berths">Private Charters</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Terminals</h4>
+          <ul>
+            <li><a href="#timetable">Sandstone Gate P-04</a></li>
+            <li><a href="#timetable">New Veridian Central</a></li>
+            <li><a href="#berths">Luggage &amp; Customs</a></li>
+            <li><a href="#guestbook">Astronomy Advisories</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Clear-Sky Dispatch</h4>
+          <p style="font-size:0.88rem; color: var(--text-muted);">
+            Receive meteor-shower crossing alerts and rare Obsidian Salon releases.
+          </p>
+          <form class="dispatch-form" id="dispatchForm">
+            <input type="email" class="dispatch-input" id="dispatchEmail" placeholder="traveler@veridian.net" required aria-label="Email address">
+            <button type="submit" class="dispatch-btn">Join</button>
+          </form>
+          <div class="dispatch-msg" id="dispatchMsg" aria-live="polite"></div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© 2089 Dune Line Rail Corp. All rights reserved across both sectors.</div>
+        <div class="route-line-mini">
+          <span>DUSK</span>
+          <span class="bar"></span>
+          <span>NEON</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= INTERACTIVE BOOKING MODAL ================= -->
+  <div class="modal-backdrop" id="bookingModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-card">
+      <div class="modal-head">
+        <div>
+          <span class="eyebrow" style="margin-bottom:6px;">Boarding Pass Request</span>
+          <h3 id="modalTitle">Reserve Overnight Berth</h3>
+        </div>
+        <button class="modal-close" onclick="closeBooking()" aria-label="Close modal">×</button>
+      </div>
+
+      <form id="bookingForm">
+        <div class="form-group">
+          <label for="selectDeparture">Nightly Departure</label>
+          <select id="selectDeparture" class="form-control">
+            <option value="20:15 — Dusk Express">20:15 — DL-104 Dusk Express</option>
+            <option value="21:45 — Starlight Limited">21:45 — DL-208 Starlight Limited</option>
+            <option value="23:00 — Midnight Mirage">23:00 — DL-312 Midnight Mirage</option>
+            <option value="00:30 — Red Moon Sleeper">00:30 — DL-416 Red Moon Sleeper</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="selectTier">Sleeper Accommodation</label>
+          <select id="selectTier" class="form-control">
+            <option value="Nomad Pod ($240)">Nomad Pod — $240</option>
+            <option value="Dune Suite ($580)">Dune Suite — $580</option>
+            <option value="Obsidian Salon ($1,190)">Obsidian Salon — $1,190</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="passengerName">Lead Passenger Name</label>
+          <input type="text" id="passengerName" class="form-control" placeholder="e.g. Kaelen Thorne" required>
+        </div>
+
+        <button type="submit" class="modal-submit">Issue Provisional Boarding Key</button>
+      </form>
+
+      <div class="booking-success" id="bookingSuccess">
+        <h4>Berth Held in Your Name</h4>
+        <p id="bookingSummaryText"></p>
+        <div class="ticket-ref" id="ticketRefCode">DL-8841-NV</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Mobile Menu Toggle
+    const navbar = document.getElementById('navbar');
+    const mobileToggle = document.getElementById('mobileToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    mobileToggle.addEventListener('click', () => {
+      navbar.classList.toggle('menu-open');
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => navbar.classList.remove('menu-open'));
+    });
+
+    // Live Station Clock (Sandstone Gate Time)
+    const liveClock = document.getElementById('liveClock');
+    function updateClock() {
+      const now = new Date();
+      const hh = String(now.getHours()).padStart(2, '0');
+      const mm = String(now.getMinutes()).padStart(2, '0');
+      const ss = String(now.getSeconds()).padStart(2, '0');
+      liveClock.textContent = `STATION TIME · ${hh}:${mm}:${ss}`;
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
+
+    // Booking Modal Logic
+    const modal = document.getElementById('bookingModal');
+    const bookingForm = document.getElementById('bookingForm');
+    const bookingSuccess = document.getElementById('bookingSuccess');
+    const selectTier = document.getElementById('selectTier');
+    const selectDeparture = document.getElementById('selectDeparture');
+
+    function openBooking(tierHint, departureHint) {
+      bookingForm.style.display = 'block';
+      bookingSuccess.style.display = 'none';
+
+      if (tierHint) {
+        for (const opt of selectTier.options) {
+          if (opt.value.toLowerCase().includes(tierHint.toLowerCase().split(' ')[0])) {
+            selectTier.value = opt.value;
+            break;
+          }
+        }
+      }
+
+      if (departureHint) {
+        for (const opt of selectDeparture.options) {
+          if (opt.value.includes(departureHint.slice(0, 5))) {
+            selectDeparture.value = opt.value;
+            break;
+          }
+        }
+      }
+
+      modal.classList.add('active');
+    }
+
+    function closeBooking() {
+      modal.classList.remove('active');
+    }
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeBooking();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeBooking();
+    });
+
+    bookingForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('passengerName').value.trim() || 'Traveler';
+      const dep = selectDeparture.value;
+      const tier = selectTier.value;
+      const code = 'DL-' + Math.floor(1000 + Math.random() * 9000) + '-NV9';
+
+      document.getElementById('bookingSummaryText').textContent =
+        `${name}, your ${tier} on the ${dep} crossing is reserved at Sandstone Gate Platform 04.`;
+      document.getElementById('ticketRefCode').textContent = `KEY · ${code}`;
+
+      bookingForm.style.display = 'none';
+      bookingSuccess.style.display = 'block';
+    });
+
+    // Newsletter Dispatch Form
+    const dispatchForm = document.getElementById('dispatchForm');
+    const dispatchMsg = document.getElementById('dispatchMsg');
+    dispatchForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = document.getElementById('dispatchEmail').value;
+      dispatchMsg.textContent = `✓ Clear-sky alerts routed to ${email}`;
+      dispatchForm.reset();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+{
+ "claude-opus-5-5": {
+  "scores": {
+   "typography": 8.0,
+   "layout": 5.0,
+   "colour": 8.0,
+   "completeness": 8.0,
+   "originality": 7.0
+  },
+  "note": "A polished serif-and-mono system, a warm amber/teal night palette and a charming train illustration with route timeline lift this well above template; it is undermined by a broken hero, where the headline and intro paragraph are clipped under the nav, leaving a strip of dead space above it."
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "typography": 8.0,
+   "layout": 7.0,
+   "colour": 8.0,
+   "completeness": 9.0,
+   "originality": 9.0
+  },
+  "note": "A distinctive, cohesive page with all seven sections, though the hero copy appears clipped beneath the navigation and some small text lacks contrast."
+ }
+}

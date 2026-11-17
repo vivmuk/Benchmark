@@ -1,0 +1,22 @@
+{
+ "claude-opus-5-5": {
+  "scores": {
+   "typography": 9.0,
+   "layout": 8.0,
+   "colour": 9.0,
+   "completeness": 10,
+   "originality": 9.0
+  },
+  "note": "A polished, atmospheric page: the serif-and-italic headline pairing, monospace timetable details and the dusk-to-neon palette give it a distinctive, cohesive identity, with only minor issues like the large empty gap before the fares section and some small low-contrast captions."
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "typography": 9.0,
+   "layout": 9.0,
+   "colour": 9.0,
+   "completeness": 10,
+   "originality": 9.0
+  },
+  "note": "A distinctive, cohesive page with every required section; some small secondary text has weak contrast."
+ }
+}

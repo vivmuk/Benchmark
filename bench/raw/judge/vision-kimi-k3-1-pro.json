@@ -1,0 +1,22 @@
+{
+ "claude-opus-5-5": {
+  "scores": {
+   "subjects": 8.0,
+   "layout": 6.0,
+   "colour": 7.0,
+   "style": 5.0,
+   "overall": 5.0
+  },
+  "note": "All key elements are present in the same general arrangement, but the traveller's cloak is purple rather than red, the alpaca stands to the traveller's right instead of left, the pool is larger and more central, the monorail track curves differently, and the cleaner illustrated look departs from the"
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "subjects": 9.0,
+   "layout": 6.0,
+   "colour": 7.0,
+   "style": 6.0,
+   "overall": 5.0
+  },
+  "note": "Nearly all key elements are present, but the alpaca switches sides, the city and track shift, and the recreation is brighter and sharper than the original."
+ }
+}

@@ -1,0 +1,20 @@
+{
+ "claude-opus-5-5": {
+  "scores": {
+   "alpaca": 6.0,
+   "motion": 6.0,
+   "beauty": 6.0,
+   "scene": 7.0
+  },
+  "note": "The alpaca is readable, with upright ears, a long neck, a small snouted head and a cloud-like fleece body, but the flat slab neck and stiff, dowel-like tube legs weaken its anatomy and charm; the legs do swing in plausible alternating phases between frames, and the soft pastel layered-hill scene wit"
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "alpaca": 7.0,
+   "motion": 4.0,
+   "beauty": 8.0,
+   "scene": 8.0
+  },
+  "note": "The fluffy alpaca and pastel landscape are polished, but its rigid, nearly straight legs make the changing poses feel more like a shuffle than a believable walk."
+ }
+}

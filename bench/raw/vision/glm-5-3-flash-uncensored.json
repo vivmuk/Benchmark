@@ -1,0 +1,20 @@
+{
+ "text": "A cinematic sci-fi digital painting of a futuristic neon city rising from golden desert sand dunes at twilight. Wide panoramic composition. Upper left: deep indigo-blue starry sky with a large glowing crescent moon, fading to warm orange sunset on the right horizon. Center-right: a cluster of sleek glass skyscrapers \u2014 a tall cyan-lit tower crowned by a bright teal glowing ring halo, flanked by a slim spire with a vertical cyan neon sign reading \"OASIS\" and a magenta-pink lit angular tower with purple light beams shooting upward into the sky. Tiered rounded saucer-like building bases surrounded by small low-rise skyline with tiny window lights. Foreground lower left: rolling rippled sand dunes in amber tones; a person in a long dark red cloak stands beside a light brown llama/alpaca, both seen from behind on a dune ridge looking toward the city. Right side: a giant saguaro cactus outlined in glowing pink neon, with a smaller neon cactus behind it near a small turquoise oasis pond reflecting city lights. A curved elevated monorail track with golden-yellow lighting sweeps across the lower right foreground, carrying a small white train car. Soft atmospheric haze, volumetric glow, retro-futurism meets vaporwave aesthetic, highly detailed matte painting, symmetrical central skyline, dreamy serene mood.",
+ "reasoning_chars": 0,
+ "usage": {
+  "prompt_tokens": 1277,
+  "completion_tokens": 278,
+  "total_tokens": 1555,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 0
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 1.4862425001338124,
+ "t_first_content": 1.4862450007349253,
+ "t_total": 2.4373921658843756,
+ "cost": 0.000363605
+}

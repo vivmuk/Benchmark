@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Walking Alpaca</title>
+<style>
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  html, body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: #1d1826;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  canvas {
+    display: block;
+    width: 100vw;
+    height: 100vh;
+  }
+</style>
+</head>
+<body>
+<canvas id="scene"></canvas>
+<script>
+(() => {
+  const canvas = document.getElementById('scene');
+  const ctx = canvas.getContext('2d');
+
+  // Virtual coordinate space anchored to 1280x720
+  const VW = 1280;
+  const VH = 720;
+  let dpr = 1;
+
+  function resize() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2.5);
+    canvas.width = Math.round(window.innerWidth * dpr);
+    canvas.height = Math.round(window.innerHeight * dpr);
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  // Deterministic PRNG for procedural scenery elements
+  function mulberry32(a) {
+    return function() {
+      let t = a += 0x6D2B79F5;
+      t = Math.imul(t ^ (t >>> 15), t | 1);
+      t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+  const rand = mulberry32(4219);
+
+  // Gait & physics constants (mathematically locked so hooves never slip)
+  const CYCLE_DURATION = 1.38;     // seconds per full 4-beat gait cycle
+  const STANCE_RATIO = 0.58;       // fraction of cycle each foot is on the ground
+  const STRIDE_LENGTH = 114;       // pixels covered during stance
+  const GROUND_SPEED = STRIDE_LENGTH / (STANCE_RATIO * CYCLE_DURATION); // exact ground velocity
+  const GROUND_Y = 588;
+
+  // Pre-generate clouds
+  const clouds = Array.from({ length: 7 }, (_, i) => ({
+    x: i * 240 + rand() * 120,
+    y: 75 + rand() * 150,
+    scale: 0.65 + rand() * 0.65,
+    speed: 8 + rand() * 7,
+    puffs: Array.from({ length: 5 }, (__, j) => ({
+      ox: (j - 2) * 34 + (rand() - 0.5) * 14,
+      oy: Math.abs(j - 2) * 7 + (rand() - 0.5) * 8,
+      r: 26 + (2 - Math.abs(j - 2)) * 12 + rand() * 8
+    }))
+  }));
+
+  // Pre-generate floating golden sun motes
+  const motes = Array.from({ length: 28 }, () => ({
+    x: rand() * VW,
+    y: 80 + rand() * 440,
+    r: 1.2 + rand() * 2.2,
+    speedX: 10 + rand() * 18,
+    phase: rand() * Math.PI * 2,
+    alpha: 0.2 + rand() * 0.45
+  }));
+
+  // Pre-generate meadow tufts & Andean wildflowers (scrolling loop width = 1600)
+  const LOOP_W = 1600;
+  const meadowItems = Array.from({ length: 46 }, () => {
+    const type = rand() < 0.35 ? 'flower' : (rand() < 0.5 ? 'ichu' : 'shrub');
+    const flowerColors = ['#e86f88', '#f4b942', '#9b7ede', '#ff8c61'];
+    return {
+      x: rand() * LOOP_W,
+      yOffset: (rand() - 0.5) * 26,
+      scale: 0.7 + rand() * 0.55,
+      type,
+      color: flowerColors[Math.floor(rand() * flowerColors.length)],
+      seed: rand() * Math.PI * 2
+    };
+  }).sort((a, b) => a.yOffset - b.yOffset);
+
+  // Pre-generate trail pebbles & texture marks
+  const pebbles = Array.from({ length: 55 }, () => ({
+    x: rand() * LOOP_W,
+    y: GROUND_Y - 12 + rand() * 68,
+    rx: 3 + rand() * 7,
+    ry: 1.6 + rand() * 3,
+    shade: rand() < 0.5 ? '#c69c78' : '#dfba98',
+    rot: (rand() - 0.5) * 0.5
+  }));
+
+  // Foreground grass silhouettes
+  const fgBlades = Array.from({ length: 18 }, () => ({
+    x: rand() * LOOP_W,
+    h: 42 + rand() * 48,
+    lean: (rand() - 0.5) * 22,
+    phase: rand() * Math.PI * 2
+  }));
+
+  // Dynamic footstep dust particles
+  const dustParticles = [];
+  const legOrder = [
+    { id: 'BL', phaseOffset: 0.00, isFront: false, isNear: false },
+    { id: 'FL', phaseOffset: 0.25, isFront: true,  isNear: false },
+    { id: 'BR', phaseOffset: 0.50, isFront: false, isNear: true  },
+    { id: 'FR', phaseOffset: 0.75, isFront: true,  isNear: true  }
+  ];
+  const prevInStance = { BL: true, FL: true, BR: true, FR: true };
+
+  function spawnDust(x, y, isNear) {
+    const count = isNear ? 5 : 3;
+    for (let i = 0; i < count; i++) {
+      dustParticles.push({
+        x: x + (Math.random() - 0.5) * 10,
+        y: y - 2 + (Math.random() - 0.5) * 4,
+        vx: -GROUND_SPEED * (0.55 + Math.random() * 0.35) - Math.random() * 18,
+        vy: -12 - Math.random() * 22,
+        r: (isNear ? 4.5 : 3.2) + Math.random() * 4,
+        life: 0,
+        maxLife: 0.45 + Math.random() * 0.3,
+        alpha: isNear ? 0.38 : 0.22
+      });
+    }
+  }
+
+  // 2-Bone Inverse Kinematics solver
+  function solveIK(hx, hy, fx, fy, L1, L2, bendDir) {
+    let dx = fx - hx;
+    let dy = fy - hy;
+    let d = Math.hypot(dx, dy);
+    const minD = Math.abs(L1 - L2) + 0.5;
+    const maxD = (L1 + L2) * 0.998;
+    if (d < minD) d = minD;
+    if (d > maxD) {
+      dx = (dx / d) * maxD;
+      dy = (dy / d) * maxD;
+      d = maxD;
+    }
+    const a = (L1 * L1 - L2 * L2 + d * d) / (2 * d);
+    const h = Math.sqrt(Math.max(0, L1 * L1 - a * a));
+    const ux = dx / d;
+    const uy = dy / d;
+    const mx = hx + a * ux;
+    const my = hy + a * uy;
+    // Perpendicular (-uy, ux) points Left (-X) when dy > 0
+    const px = -uy * bendDir;
+    const py = ux * bendDir;
+    return {
+      kx: mx + h * px,
+      ky: my + h * py,
+      fx: hx + dx,
+      fy: hy + dy
+    };
+  }
+
+  // Compute foot target & toe angle for a given phase [0..1)
+  function getFootTarget(originX, groundY, phase, liftHeight) {
+    const p = ((phase % 1) + 1) % 1;
+    let x, y, footAngle, inStance;
+
+    if (p < STANCE_RATIO) {
+      // Stance phase: linear backward motion locked to ground scroll speed
+      const u = p / STANCE_RATIO;
+      x = originX + STRIDE_LENGTH * (0.5 - u);
+      y = groundY;
+      footAngle = 0;
+      inStance = true;
+    } else {
+      // Swing phase: smooth forward arc with gentle heel peel and soft landing
+      const u = (p - STANCE_RATIO) / (1 - STANCE_RATIO);
+      const easeX = 0.5 - 0.5 * Math.cos(Math.PI * u);
+      x = originX - STRIDE_LENGTH * 0.5 + STRIDE_LENGTH * easeX;
+
+      // Skewed sine lift so foot clears ground briskly and descends smoothly
+      const liftProfile = Math.sin(Math.PI * Math.pow(u, 0.82));
+      y = groundY - liftHeight * liftProfile;
+
+      // Camelid foot pad tilts down/back slightly on lift, levels out before touch-down
+      footAngle = Math.sin(Math.PI * u) * 0.48 * (1 - u * 0.35);
+      inStance = false;
+    }
+    return { x, y, footAngle, inStance };
+  }
+
+  // Helper: Draw a fluffy cloud-scalloped closed shape from circle puffs
+  function fillPuffCluster(puffs, fillStyle) {
+    ctx.fillStyle = fillStyle;
+    ctx.beginPath();
+    for (let i = 0; i < puffs.length; i++) {
+      const p = puffs[i];
+      ctx.moveTo(p.x + p.r, p.y);
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    }
+    ctx.fill();
+  }
+
+  // Draw Sky, Sun & Atmospheric Glow
+  function drawSky(t) {
+    const skyGrad = ctx.createLinearGradient(0, 0, 0, GROUND_Y);
+    skyGrad.addColorStop(0.00, '#3e497a');
+    skyGrad.addColorStop(0.28, '#7b6d9d');
+    skyGrad.addColorStop(0.58, '#d98c8c');
+    skyGrad.addColorStop(0.84, '#f7be8f');
+    skyGrad.addColorStop(1.00, '#fce0b6');
+    ctx.fillStyle = skyGrad;
+    ctx.fillRect(0, 0, VW, VH);
+
+    // Warm golden-hour sun on upper right-left horizon
+    const sunX = 960;
+    const sunY = 215;
+    const pulse = 1 + Math.sin(t * 0.9) * 0.025;
+
+    const halo = ctx.createRadialGradient(sunX, sunY, 15, sunX, sunY, 340 * pulse);
+    halo.addColorStop(0.0, 'rgba(255, 248, 220, 0.85)');
+    halo.addColorStop(0.18, 'rgba(255, 224, 168, 0.45)');
+    halo.addColorStop(0.5, 'rgba(249, 178, 130, 0.14)');
+    halo.addColorStop(1.0, 'rgba(249, 178, 130, 0)');
+    ctx.fillStyle = halo;
+    ctx.fillRect(0, 0, VW, GROUND_Y);
+
+    ctx.fillStyle = '#fff9e6';
+    ctx.beginPath();
+    ctx.arc(sunX, sunY, 44, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Soft clouds
+    for (const c of clouds) {
+      const cx = ((c.x - t * c.speed) % (VW + 360) + (VW + 360)) % (VW + 360) - 180;
+      ctx.save();
+      ctx.translate(cx, c.y);
+      ctx.scale(c.scale, c.scale);
+
+      // Cloud shadow base
+      ctx.fillStyle = 'rgba(219, 152, 158, 0.45)';
+      ctx.beginPath();
+      for (const p of c.puffs) {
+        ctx.moveTo(p.ox + p.r, p.oy + 5);
+        ctx.arc(p.ox, p.oy + 5, p.r, 0, Math.PI * 2);
+      }
+      ctx.fill();
+
+      // Cloud warm lit body
+      const cg = ctx.createLinearGradient(0, -35, 0, 28);
+      cg.addColorStop(0, '#fff7eb');
+      cg.addColorStop(1, '#f7d5c6');
+      ctx.fillStyle = cg;
+      ctx.beginPath();
+      for (const p of c.puffs) {
+        ctx.moveTo(p.ox + p.r, p.oy);
+        ctx.arc(p.ox, p.oy, p.r, 0, Math.PI * 2);
+      }
+      ctx.fill();
+      ctx.restore();
+    }
+  }
+
+  // Draw Layered Andean Mountains & Hills
+  function drawMountains(scrollDist) {
+    // Layer 1: Distant snow-capped Cordillera peaks
+    const p1 = (scrollDist * 0.035) % 1280;
+    for (let rep = -1; rep <= 1; rep++) {
+      const ox = rep * 1280 - p1;
+      ctx.save();
+      ctx.translate(ox, 0);
+
+      const mGrad = ctx.createLinearGradient(0, 170, 0, 470);
+      mGrad.addColorStop(0, '#8d789f');
+      mGrad.addColorStop(0.55, '#b68fa6');
+      mGrad.addColorStop(1, '#e4b4a6');
+      ctx.fillStyle = mGrad;
+
+      ctx.beginPath();
+      ctx.moveTo(0, 460);
+      ctx.lineTo(140, 285);
+      ctx.lineTo(255, 345);
+      ctx.lineTo(430, 185);
+      ctx.lineTo(590, 325);
+      ctx.lineTo(745, 225);
+      ctx.lineTo(910, 340);
+      ctx.lineTo(1090, 205);
+      ctx.lineTo(1280, 460);
+      ctx.closePath();
+      ctx.fill();
+
+      // sunlit snow caps on right-facing slopes
+      ctx.fillStyle = 'rgba(255, 246, 236, 0.72)';
+      const peaks = [
+        [430, 185, 376, 235, 488, 242],
+        [745, 225, 700, 266, 795, 272],
+        [1090, 205, 1040, 250, 1142, 262],
+        [140, 285, 106, 318, 178, 322]
+      ];
+      for (const pk of peaks) {
+        ctx.beginPath();
+        ctx.moveTo(pk[0], pk[1]);
+        ctx.lineTo(pk[2], pk[3]);
+        ctx.lineTo(pk[0] - 8, pk[3] + 10);
+        ctx.lineTo(pk[0] + 12, pk[3] - 2);
+        ctx.lineTo(pk[4], pk[5]);
+        ctx.closePath();
+        ctx.fill();
+      }
+      ctx.restore();
+    }
+
+    // Soft valley mist band
+    const mist = ctx.createLinearGradient(0, 340, 0, 470);
+    mist.addColorStop(0, 'rgba(252, 219, 194, 0)');
+    mist.addColorStop(0.6, 'rgba(252, 219, 194, 0.45)');
+    mist.addColorStop(1, 'rgba(252, 219, 194, 0.7)');
+    ctx.fillStyle = mist;
+    ctx.fillRect(0, 340, VW, 130);
+
+    // Layer 2: Midground warm terracotta / Rainbow-mountain-inspired ridges
+    const p2 = (scrollDist * 0.11) % 1280;
+    for (let rep = -1; rep <= 1; rep++) {
+      const ox = rep * 1280 - p2;
+      ctx.save();
+      ctx.translate(ox, 0);
+
+      const rGrad = ctx.createLinearGradient(0, 320, 0, 510);
+      rGrad.addColorStop(0, '#9e6f7d');
+      rGrad.addColorStop(0.45, '#b87f7c');
+      rGrad.addColorStop(1, '#d39e85');
+      ctx.fillStyle = rGrad;
+
+      ctx.beginPath();
+      ctx.moveTo(0, 500);
+      ctx.bezierCurveTo(180, 360, 310, 355, 490, 425);
+      ctx.bezierCurveTo(660, 485, 790, 330, 980, 365);
+      ctx.bezierCurveTo(1110, 390, 1190, 445, 1280, 500);
+      ctx.closePath();
+      ctx.fill();
+
+      // Subtle mineral strata ribbons
+      ctx.strokeStyle = 'rgba(238, 189, 152, 0.28)';
+      ctx.lineWidth = 7;
+      ctx.beginPath();
+      ctx.moveTo(40, 465);
+      ctx.bezierCurveTo(200, 385, 310, 382, 470, 438);
+      ctx.moveTo(690, 452);
+      ctx.bezierCurveTo(810, 368, 930, 365, 1120, 428);
+      ctx.stroke();
+
+      ctx.restore();
+    }
+
+    // Layer 3: Rolling altiplano golden-olive hills
+    const p3 = (scrollDist * 0.28) % 1280;
+    for (let rep = -1; rep <= 1; rep++) {
+      const ox = rep * 1280 - p3;
+      ctx.save();
+      ctx.translate(ox, 0);
+
+      const hGrad = ctx.createLinearGradient(0, 425, 0, 555);
+      hGrad.addColorStop(0, '#8ca06c');
+      hGrad.addColorStop(0.6, '#768c5d');
+      hGrad.addColorStop(1, '#61774e');
+      ctx.fillStyle = hGrad;
+
+      ctx.beginPath();
+      ctx.moveTo(0, 555);
+      ctx.bezierCurveTo(220, 430, 430, 455, 650, 490);
+      ctx.bezierCurveTo(860, 522, 1040, 425, 1280, 485);
+      ctx.lineTo(1280, 555);
+      ctx.closePath();
+      ctx.fill();
+
+      // Distant Andean terraces & tiny bushes
+      ctx.strokeStyle = 'rgba(218, 212, 148, 0.22)';
+      ctx.lineWidth = 2.5;
+      for (let k = 0; k < 3; k++) {
+        ctx.beginPath();
+        ctx.moveTo(140 + k * 25, 478 + k * 14);
+        ctx.quadraticCurveTo(280, 458 + k * 14, 410 - k * 20, 482 + k * 14);
+        ctx.stroke();
+      }
+      ctx.restore();
+    }
+  }
+
+  // Draw Near Meadow, Ichu Grass, Wildflowers & Sandy Trail
+  function drawGroundAndMeadow(scrollDist, t) {
+    // Meadow bank behind path
+    const mGrad = ctx.createLinearGradient(0, 505, 0, 580);
+    mGrad.addColorStop(0, '#9ab065');
+    mGrad.addColorStop(1, '#6f874b');
+    ctx.fillStyle = mGrad;
+
+    const pm = (scrollDist * 0.65) % 1280;
+    ctx.beginPath();
+    ctx.moveTo(0, 590);
+    for (let x = 0; x <= VW + 80; x += 80) {
+      const wx = x + pm;
+      const y = 524 + Math.sin(wx * 0.006) * 12 + Math.cos(wx * 0.013) * 6;
+      ctx.lineTo(x, y);
+    }
+    ctx.lineTo(VW, 590);
+    ctx.closePath();
+    ctx.fill();
+
+    // Meadow flora (scrolling at 0.78x)
+    const pf = (scrollDist * 0.78) % LOOP_W;
+    for (const item of meadowItems) {
+      let ix = ((item.x - pf) % LOOP_W + LOOP_W) % LOOP_W - 160;
+      if (ix < -80 || ix > VW + 80) continue;
+      const iy = 546 + item.yOffset;
+      const sway = Math.sin(t * 2.2 + item.seed) * 4 * item.scale;
+
+      ctx.save();
+      ctx.translate(ix, iy);
+      ctx.scale(item.scale, item.scale);
+
+      if (item.type === 'ichu') {
+        // Golden Andean feather grass
+        for (let b = -3; b <= 3; b++) {
+          ctx.strokeStyle = b % 2 === 0 ? '#dfc77a' : '#b7a960';
+          ctx.lineWidth = 2;
+          ctx.lineCap = 'round';
+          ctx.beginPath();
+          ctx.moveTo(0, 0);
+          ctx.quadraticCurveTo(b * 4 + sway * 0.5, -18, b * 9 + sway, -30 + Math.abs(b) * 3);
+          ctx.stroke();
+        }
+      } else if (item.type === 'shrub') {
+        ctx.fillStyle = '#5c7542';
+        ctx.beginPath();
+        ctx.arc(-8, -5, 9, 0, Math.PI * 2);
+        ctx.arc(7, -4, 8, 0, Math.PI * 2);
+        ctx.arc(0, -10, 10, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = '#7e9956';
+        ctx.beginPath();
+        ctx.arc(1, -12, 8, 0, Math.PI * 2);
+        ctx.arc(8, -6, 6, 0, Math.PI * 2);
+        ctx.fill();
+      } else {
+        // Lupine / Andean wildflower stalk
+        ctx.strokeStyle = '#57733e';
+        ctx.lineWidth = 2.2;
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.quadraticCurveTo(sway * 0.5, -14, sway, -26);
+        ctx.stroke();
+
+        ctx.fillStyle = item.color;
+        for (let f = 0; f < 4; f++) {
+          const fy = -14 - f * 4.5;
+          const fx = sway * ( -fy / 26 );
+          ctx.beginPath();
+          ctx.arc(fx, fy, 3.6 - f * 0.4, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+      ctx.restore();
+    }
+
+    // Warm sunlit trail (1.0x ground speed)
+    const pathGrad = ctx.createLinearGradient(0, 558, 0, VH);
+    pathGrad.addColorStop(0.00, '#e8c79e');
+    pathGrad.addColorStop(0.16, '#dfb78c');
+    pathGrad.addColorStop(0.68, '#c89b72');
+    pathGrad.addColorStop(1.00, '#9f7553');
+    ctx.fillStyle = pathGrad;
+
+    const pt = scrollDist % 1280;
+    ctx.beginPath();
+    ctx.moveTo(0, VH);
+    for (let x = 0; x <= VW + 80; x += 80) {
+      const wx = x + pt;
+      const y = 558 + Math.sin(wx * 0.008) * 3.5;
+      ctx.lineTo(x, y);
+    }
+    ctx.lineTo(VW, VH);
+    ctx.closePath();
+    ctx.fill();
+
+    // Grassy verge border along trail edge
+    ctx.strokeStyle = '#859d55';
+    ctx.lineWidth = 5;
+    ctx.beginPath();
+    for (let x = 0; x <= VW + 80; x += 80) {
+      const wx = x + pt;
+      const y = 558 + Math.sin(wx * 0.008) * 3.5;
+      if (x === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+
+    // Scrolling trail pebbles (exact 1.0x ground lock!)
+    const pp = scrollDist % LOOP_W;
+    for (const peb of pebbles) {
+      const px = ((peb.x - pp) % LOOP_W + LOOP_W) % LOOP_W - 160;
+      if (px < -20 || px > VW + 20) continue;
+      ctx.save();
+      ctx.translate(px, peb.y);
+      ctx.rotate(peb.rot);
+      ctx.fillStyle = 'rgba(130, 88, 56, 0.28)';
+      ctx.beginPath();
+      ctx.ellipse(1, 1.8, peb.rx, peb.ry, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = peb.shade;
+      ctx.beginPath();
+      ctx.ellipse(0, 0, peb.rx, peb.ry, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    }
+  }
+
+  // Draw a single articulated alpaca leg
+  function drawAlpacaLeg(hx, hy, ik, footAngle, isNear, isFront) {
+    const fleeceMain  = isNear ? '#f6ecdd' : '#dfd1be';
+    const fleeceShade = isNear ? '#eadbc6' : '#cfc0ab';
+    const lowerCoat   = isNear ? '#efe2cf' : '#d5c5b0';
+    const hoofColor   = isNear ? '#4a3d38' : '#3a2f2b';
+    const hoofHi      = isNear ? '#6c5a53' : '#50423d';
+
+    const { kx, ky, fx, fy } = ik;
+
+    // Fluffy upper thigh / forearm cuff
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+
+    ctx.strokeStyle = fleeceShade;
+    ctx.lineWidth = isFront ? 28 : 32;
+    ctx.beginPath();
+    ctx.moveTo(hx, hy);
+    ctx.lineTo(kx, ky);
+    ctx.stroke();
+
+    ctx.strokeStyle = fleeceMain;
+    ctx.lineWidth = isFront ? 24 : 28;
+    ctx.beginPath();
+    ctx.moveTo(hx + 2, hy - 2);
+    ctx.lineTo(kx + 1.5, ky - 1);
+    ctx.stroke();
+
+    // Fluffy puffs along upper leg
+    const midX = (hx + kx) * 0.5;
+    const midY = (hy + ky) * 0.5;
+    ctx.fillStyle = fleeceMain;
+    ctx.beginPath();
+    ctx.arc(hx - 4, hy + 10, isFront ? 15 : 18, 0, Math.PI * 2);
+    ctx.arc(midX + (isFront ? 5 : -6), midY, isFront ? 13 : 15, 0, Math.PI * 2);
+    ctx.arc(kx, ky - 2, 12.5, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Slender lower cannon bone (tapered wooly stocking)
+    const ankleX = fx - Math.cos(footAngle) * 4;
+    const ankleY = fy - 8;
+
+    ctx.strokeStyle = lowerCoat;
+    ctx.lineWidth = 15.5;
+    ctx.beginPath();
+    ctx.moveTo(kx, ky);
+    ctx.lineTo(ankleX, ankleY);
+    ctx.stroke();
+
+    // Subtle warm sunlit front edge on near legs
+    if (isNear) {
+      ctx.strokeStyle = '#fbf4e9';
+      ctx.lineWidth = 5;
+      ctx.beginPath();
+      ctx.moveTo(kx + 4, ky + 2);
+      ctx.lineTo(ankleX + 4, ankleY - 2);
+      ctx.stroke();
+    }
+
+    // Fetlock fluff & Camelid two-toed soft padded foot
+    ctx.save();
+    ctx.translate(fx, fy);
+    ctx.rotate(footAngle);
+
+    // Padded camelid toes
+    ctx.fillStyle = hoofColor;
+    ctx.beginPath();
+    ctx.moveTo(-10, 0);
+    ctx.lineTo(14, 0);
+    ctx.quadraticCurveTo(17, -6, 9, -9);
+    ctx.lineTo(-7, -9);
+    ctx.quadraticCurveTo(-11, -5, -10, 0);
+    ctx.closePath();
+    ctx.fill();
+
+    // Front toe highlight / split camelid toe hint
+    ctx.fillStyle = hoofHi;
+    ctx.beginPath();
+    ctx.ellipse(9, -3.8, 5, 3.2, -0.2, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Soft wool cuff overlapping top of foot
+    ctx.fillStyle = lowerCoat;
+    ctx.beginPath();
+    ctx.ellipse(0, -9, 9.5, 5.5, -0.08, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.restore();
+  }
+
+  // Draw the Hero Alpaca!
+  function drawAlpaca(t, dt) {
+    const cyclePhase = (t / CYCLE_DURATION) % 1;
+    const twoBeat = cyclePhase * Math.PI * 4; // 2 oscillations per full 4-beat cycle
+
+    // Subtle organic body motion: vertical bob + gentle pitch + slight surge
+    const bodyBob = Math.sin(twoBeat - 0.5) * 4.6;
+    const bodyPitch = Math.sin(twoBeat + 0.4) * 0.018;
+    const bodyX = 608 + Math.cos(twoBeat) * 1.8;
+    const bodyY = 408 + bodyBob;
+
+    // Hip/shoulder world anchor projections & IK calculation
+    const legsData = {};
+    for (const leg of legOrder) {
+      const p = (cyclePhase + leg.phaseOffset) % 1;
+      const localHipX = leg.isFront ? 64 : -58;
+      const localHipY = leg.isFront ? 22 : 18;
+      // Offset far legs slightly forward/up for subtle 3/4 depth readability
+      const depthShiftX = leg.isNear ? 0 : 8;
+      const depthShiftY = leg.isNear ? 0 : -4;
+
+      const cosP = Math.cos(bodyPitch);
+      const sinP = Math.sin(bodyPitch);
+      const hx = bodyX + localHipX * cosP - localHipY * sinP + depthShiftX;
+      const hy = bodyY + localHipX * sinP + localHipY * cosP + depthShiftY;
+
+      const groundLine = GROUND_Y + (leg.isNear ? 2 : -5);
+      const restFootX = bodyX + localHipX + (leg.isFront ? 6 : -6) + depthShiftX;
+      const liftH = leg.isFront ? 36 : 33;
+
+      const target = getFootTarget(restFootX, groundLine, p, liftH);
+
+      // Spawn dust puff when foot transitions into stance
+      if (target.inStance && !prevInStance[leg.id] && dt > 0) {
+        spawnDust(target.x, target.y, leg.isNear);
+      }
+      prevInStance[leg.id] = target.inStance;
+
+      // Front knee bends forward (-1 on left-pointing normal), back hock bends backward (+1)
+      const L1 = leg.isFront ? 79 : 83;
+      const L2 = leg.isFront ? 79 : 86;
+      const bendDir = leg.isFront ? -1 : 1;
+      const ik = solveIK(hx, hy, target.x, target.y, L1, L2, bendDir);
+
+      legsData[leg.id] = { hx, hy, ik, footAngle: target.footAngle, target, leg };
+    }
+
+    // Ground contact shadow beneath alpaca
+    const shadowScale = 1 - bodyBob * 0.012;
+    const shGrad = ctx.createRadialGradient(bodyX + 18, GROUND_Y + 1, 12, bodyX + 18, GROUND_Y + 1, 138 * shadowScale);
+    shGrad.addColorStop(0, 'rgba(98, 64, 38, 0.42)');
+    shGrad.addColorStop(0.65, 'rgba(98, 64, 38, 0.18)');
+    shGrad.addColorStop(1, 'rgba(98, 64, 38, 0)');
+    ctx.fillStyle = shGrad;
+    ctx.save();
+    ctx.translate(bodyX + 18, GROUND_Y + 1);
+    ctx.scale(1, 0.17);
+    ctx.beginPath();
+    ctx.arc(0, 0, 138 * shadowScale, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+
+    // Individual soft shadows directly under lifting/planted hooves
+    for (const leg of legOrder) {
+      const ld = legsData[leg.id];
+      const groundLine = GROUND_Y + (leg.isNear ? 2 : -5);
+      const liftRatio = Math.max(0, 1 - (groundLine - ld.target.y) / 45);
+      ctx.fillStyle = `rgba(88, 56, 34, ${0.28 * liftRatio})`;
+      ctx.beginPath();
+      ctx.ellipse(ld.target.x + 2, groundLine + 1, 15 * liftRatio, 3.8 * liftRatio, 0, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    // 1. Draw FAR legs (Back-Left, Front-Left) behind torso
+    drawAlpacaLeg(legsData.BL.hx, legsData.BL.hy, legsData.BL.ik, legsData.BL.footAngle, false, false);
+    drawAlpacaLeg(legsData.FL.hx, legsData.FL.hy, legsData.FL.ik, legsData.FL.footAngle, false, true);
+
+    // 2. Torso, Tail, Long Fluffy Neck, Decorative Tassels & Head
+    ctx.save();
+    ctx.translate(bodyX, bodyY);
+    ctx.rotate(bodyPitch);
+
+    // --- Fluffy Bouncing Tail ---
+    const tailWag = Math.sin(twoBeat - 1.1) * 0.16;
+    ctx.save();
+    ctx.translate(-86, -18);
+    ctx.rotate(tailWag);
+    fillPuffCluster([
+      { x: -10, y: 6, r: 16 },
+      { x: -22, y: 12, r: 15 },
+      { x: -29, y: 22, r: 12 }
+    ], '#eadbc6');
+    fillPuffCluster([
+      { x: -8, y: 2, r: 15 },
+      { x: -20, y: 8, r: 14 },
+      { x: -27, y: 18, r: 11 }
+    ], '#fbf4e9');
+    ctx.restore();
+
+    // --- Fluffy Torso Fleece ---
+    // Layer A: Warm Golden Rim Highlight along top back
+    fillPuffCluster([
+      { x: -72, y: -30, r: 28 },
+      { x: -42, y: -38, r: 31 },
+      { x: -8,  y: -41, r: 33 },
+      { x: 28,  y: -40, r: 32 },
+      { x: 60,  y: -36, r: 30 }
+    ], '#fffdf7');
+
+    // Layer B: Underside Soft Belly & Chest Shadow
+    fillPuffCluster([
+      { x: -74, y: 6,  r: 29 },
+      { x: -46, y: 18, r: 31 },
+      { x: -12, y: 22, r: 33 },
+      { x: 24,  y: 22, r: 32 },
+      { x: 58,  y: 16, r: 33 },
+      { x: 80,  y: 0,  r: 30 }
+    ], '#eadbc6');
+
+    // Layer C: Creamy Main Wool Body
+    const torsoGrad = ctx.createLinearGradient(0, -56, 0, 42);
+    torsoGrad.addColorStop(0.0, '#fffaf0');
+    torsoGrad.addColorStop(0.62, '#f8efe1');
+    torsoGrad.addColorStop(1.0, '#ede0cc');
+
+    fillPuffCluster([
+      { x: -74, y: -14, r: 30 },
+      { x: -50, y: -28, r: 32 },
+      { x: -16, y: -32, r: 35 },
+      { x: 20,  y: -31, r: 34 },
+      { x: 54,  y: -27, r: 33 },
+      { x: 78,  y: -14, r: 31 },
+      { x: -58, y: 6,   r: 28 },
+      { x: -24, y: 11,  r: 31 },
+      { x: 14,  y: 11,  r: 31 },
+      { x: 50,  y: 9,   r: 31 },
+      { x: 76,  y: 2,   r: 27 }
+    ], torsoGrad);
+
+    // Subtle interior wool curl accents on torso
+    ctx.strokeStyle = 'rgba(214, 195, 171, 0.55)';
+    ctx.lineWidth = 2.4;
+    ctx.lineCap = 'round';
+    const curls = [
+      [-52, -8, 12], [-18, -14, 14], [18, -10, 13],
+      [-34, 12, 11], [6, 14, 12], [44, 10, 12], [68, -6, 11]
+    ];
+    for (const [cx, cy, cr] of curls) {
+      ctx.beginPath();
+      ctx.arc(cx, cy, cr, 0.25 * Math.PI, 0.88 * Math.PI);
+      ctx.stroke();
+    }
+
+    // --- Long Fluffy Neck & Head Assembly ---
+    const neckSway = Math.sin(twoBeat - 1.05) * 0.036;
+    ctx.save();
+    ctx.translate(72, -22); // Base of neck at front of torso
+    ctx.rotate(neckSway);
+
+    // Neck shadow back edge & warm sunlit front edge
+    fillPuffCluster([
+      { x: 6,  y: -22, r: 29 },
+      { x: 12, y: -52, r: 26 },
+      { x: 16, y: -82, r: 24 },
+      { x: 19, y: -112, r: 22 },
+      { x: 21, y: -138, r: 21 }
+    ], '#eadbc6');
+
+    // Sunlit rim along front/top of neck
+    fillPuffCluster([
+      { x: 20, y: -24, r: 25 },
+      { x: 24, y: -56, r: 23 },
+      { x: 26, y: -86, r: 21 },
+      { x: 27, y: -115, r: 20 },
+      { x: 27, y: -140, r: 19 }
+    ], '#fffdf7');
+
+    // Main creamy neck puffs
+    const neckGrad = ctx.createLinearGradient(-15, -80, 42, -80);
+    neckGrad.addColorStop(0.0, '#efe2ce');
+    neckGrad.addColorStop(0.55, '#f9f1e4');
+    neckGrad.addColorStop(1.0, '#fffbf3');
+
+    fillPuffCluster([
+      { x: 10, y: -20, r: 28 },
+      { x: 15, y: -48, r: 25 },
+      { x: 18, y: -76, r: 23.5 },
+      { x: 20, y: -104, r: 22 },
+      { x: 22, y: -130, r: 20.5 },
+      { x: 23, y: -152, r: 19.5 }
+    ], neckGrad);
+
+    // Subtle fleece scallops on neck
+    ctx.strokeStyle = 'rgba(214, 195, 171, 0.5)';
+    ctx.lineWidth = 2.2;
+    for (const [nx, ny, nr] of [[12, -46, 10], [16, -82, 9.5], [19, -116, 9]]) {
+      ctx.beginPath();
+      ctx.arc(nx, ny, nr, 0.2 * Math.PI, 0.85 * Math.PI);
+      ctx.stroke();
+    }
+
+    // --- Traditional Andean Woven Collar & Bouncing Yarn Pom-Poms ---
+    const collarSwing = Math.sin(twoBeat - 1.55) * 0.14;
+    ctx.strokeStyle = '#b83b5e';
+    ctx.lineWidth = 5.5;
+    ctx.beginPath();
+    ctx.moveTo(-10, -48);
+    ctx.quadraticCurveTo(16, -34, 38, -42);
+    ctx.stroke();
+
+    // Gold woven zig-zag stitches on collar
+    ctx.strokeStyle = '#f9c74f';
+    ctx.lineWidth = 2;
+    ctx.setLineDash([4, 4]);
+    ctx.beginPath();
+    ctx.moveTo(-8, -48);
+    ctx.quadraticCurveTo(16, -34, 37, -42);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    const tassels = [
+      { ox: 4,  oy: -40, color: '#e63966', hi: '#ff7597', len: 13, phase: 0 },
+      { ox: 20, oy: -38, color: '#f4a226', hi: '#ffd166', len: 16, phase: 0.4 },
+      { ox: 34, oy: -41, color: '#2a9d8f', hi: '#64dfdf', len: 13, phase: 0.8 }
+    ];
+    for (const ts of tassels) {
+      ctx.save();
+      ctx.translate(ts.ox, ts.oy);
+      ctx.rotate(collarSwing + Math.sin(twoBeat - 1.6 + ts.phase) * 0.1);
+      ctx.strokeStyle = '#8d2d48';
+      ctx.lineWidth = 1.8;
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.lineTo(0, ts.len);
+      ctx.stroke();
+
+      // Fluffy yarn pom-pom
+      ctx.fillStyle = ts.color;
+      ctx.beginPath();
+      ctx.arc(0, ts.len + 4, 6.8, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = ts.hi;
+      ctx.beginPath();
+      ctx.arc(2, ts.len + 2, 3.2, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    }
+
+    // --- Small Expressive Alpaca Head & Upright Spear-Shaped Ears ---
+    const headNod = -neckSway * 0.65 + Math.sin(twoBeat - 1.7) * 0.026;
+    ctx.save();
+    ctx.translate(24, -162);
+    ctx.rotate(headNod);
+
+    // Occasional gentle ear flick + continuous rhythm
+    const flickWave = Math.pow(Math.max(0, Math.sin(t * 1.15)), 18) * 0.18;
+    const earBob = Math.sin(twoBeat - 1.9) * 0.05;
+
+    // Far Upright Ear (behind topknot)
+    ctx.save();
+    ctx.translate(6, -24);
+    ctx.rotate(0.14 + earBob);
+    ctx.fillStyle = '#dfd0bc';
+    ctx.beginPath();
+    ctx.moveTo(-6, 4);
+    ctx.bezierCurveTo(-9, -18, -2, -38, 6, -44);
+    ctx.bezierCurveTo(12, -34, 10, -14, 5, 4);
+    ctx.closePath();
+    ctx.fill();
+    ctx.restore();
+
+    // Tapered Short Camelid Snout / Muzzle (smooth warm cream skin/short fur)
+    const snoutGrad = ctx.createLinearGradient(12, -12, 54, 14);
+    snoutGrad.addColorStop(0, '#f5ead9');
+    snoutGrad.addColorStop(1, '#e7d5be');
+    ctx.fillStyle = snoutGrad;
+    ctx.beginPath();
+    ctx.moveTo(14, -15);
+    ctx.bezierCurveTo(34, -14, 52, -7, 55, 2);
+    ctx.bezierCurveTo(56, 11, 47, 17, 34, 17);
+    ctx.bezierCurveTo(22, 17, 14, 13, 10, 9);
+    ctx.closePath();
+    ctx.fill();
+
+    // Cute Nose & Gentle Camelid Smile
+    ctx.fillStyle = '#4a3b36';
+    ctx.beginPath();
+    ctx.ellipse(51.5, 1.2, 3.6, 2.4, 0.35, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.strokeStyle = '#5c4942';
+    ctx.lineWidth = 2;
+    ctx.lineCap = 'round';
+    ctx.beginPath();
+    ctx.moveTo(53, 4);
+    ctx.quadraticCurveTo(49, 10.5, 40.5, 9.5);
+    ctx.stroke();
+
+    // Fluffy Skull, Cheek & Signature Huacaya Forehead Topknot!
+    fillPuffCluster([
+      { x: -12, y: -2,  r: 20 },
+      { x: -10, y: -16, r: 19 },
+      { x: 4,   y: 8,   r: 17 }
+    ], '#eadbc6');
+
+    fillPuffCluster([
+      { x: -6,  y: -6,  r: 21 },
+      { x: 6,   y: 4,   r: 18 },
+      { x: 8,   y: -18, r: 19 },
+      { x: -6,  y: -20, r: 18 },
+      { x: 20,  y: -19, r: 14.5 }, // fluffy topknot poof over brow
+      { x: 11,  y: -25, r: 15 }
+    ], '#fbf4e8');
+
+    // Sunlit crown highlight on topknot
+    fillPuffCluster([
+      { x: 12, y: -25, r: 12 },
+      { x: 21, y: -19, r: 11 }
+    ], '#fffdf8');
+
+    // Warm Rosy Cheek Blush
+    const blush = ctx.createRadialGradient(24, 8, 1, 24, 8, 10);
+    blush.addColorStop(0, 'rgba(240, 142, 142, 0.42)');
+    blush.addColorStop(1, 'rgba(240, 142, 142, 0)');
+    ctx.fillStyle = blush;
+    ctx.beginPath();
+    ctx.arc(24, 8, 10, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Soulful Dark Alpaca Eye (with natural periodic blink)
+    const blinkCycle = t % 4.1;
+    const isBlinking = blinkCycle > 3.94;
+    const eyeX = 24.5;
+    const eyeY = -4.5;
+
+    if (isBlinking) {
+      ctx.strokeStyle = '#362925';
+      ctx.lineWidth = 2.4;
+      ctx.beginPath();
+      ctx.arc(eyeX, eyeY + 1, 5.5, 0.1 * Math.PI, 0.9 * Math.PI);
+      ctx.stroke();
+    } else {
+      // Soft upper eyelashes
+      ctx.strokeStyle = '#362925';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(eyeX - 5, eyeY - 3);
+      ctx.lineTo(eyeX - 8.5, eyeY - 5.5);
+      ctx.moveTo(eyeX - 2, eyeY - 5);
+      ctx.lineTo(eyeX - 4.5, eyeY - 8);
+      ctx.stroke();
+
+      ctx.fillStyle = '#2b201d';
+      ctx.beginPath();
+      ctx.ellipse(eyeX, eyeY, 5.4, 5.8, -0.08, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Warm amber lower iris sheen
+      ctx.fillStyle = '#5c4138';
+      ctx.beginPath();
+      ctx.arc(eyeX + 0.5, eyeY + 2, 2.8, 0, Math.PI);
+      ctx.fill();
+
+      // Crisp dual catchlights
+      ctx.fillStyle = '#ffffff';
+      ctx.beginPath();
+      ctx.arc(eyeX + 1.8, eyeY - 2, 2.0, 0, Math.PI * 2);
+      ctx.arc(eyeX - 1.8, eyeY + 1.6, 0.9, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    // Near Upright Spear-Shaped Alpaca Ear (with soft peach inner ear)
+    ctx.save();
+    ctx.translate(-5, -22);
+    ctx.rotate(-0.12 + earBob - flickWave);
+
+    ctx.fillStyle = '#f8efe1';
+    ctx.beginPath();
+    ctx.moveTo(-8, 4);
+    ctx.bezierCurveTo(-12, -18, -5, -40, 3, -47);
+    ctx.bezierCurveTo(11, -36, 10, -14, 6, 4);
+    ctx.closePath();
+    ctx.fill();
+
+    // Inner ear warm pink/peach hollow
+    ctx.fillStyle = '#e5a99e';
+    ctx.beginPath();
+    ctx.moveTo(-2, 1);
+    ctx.bezierCurveTo(-5, -15, -1, -32, 3, -38);
+    ctx.bezierCurveTo(7, -29, 6, -13, 3, 1);
+    ctx.closePath();
+    ctx.fill();
+
+    // Fluffy ear base tuft
+    ctx.fillStyle = '#fbf4e8';
+    ctx.beginPath();
+    ctx.arc(-1, 3, 8.5, 0, Math.PI * 2);
+    ctx.arc(4, -2, 5.5, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.restore(); // end near ear
+    ctx.restore(); // end head
+    ctx.restore(); // end neck
+    ctx.restore(); // end torso transform
+
+    // 3. Draw NEAR legs (Back-Right, Front-Right) overlapping lower torso fleece
+    drawAlpacaLeg(legsData.BR.hx, legsData.BR.hy, legsData.BR.ik, legsData.BR.footAngle, true, false);
+    drawAlpacaLeg(legsData.FR.hx, legsData.FR.hy, legsData.FR.ik, legsData.FR.footAngle, true, true);
+
+    // Blend top of near legs softly into torso fleece
+    ctx.save();
+    ctx.translate(bodyX, bodyY);
+    ctx.rotate(bodyPitch);
+    fillPuffCluster([
+      { x: -58, y: 14, r: 21 },
+      { x: -42, y: 15, r: 17 },
+      { x: 62,  y: 15, r: 21 },
+      { x: 76,  y: 8,  r: 17 }
+    ], '#f3e7d5');
+    ctx.restore();
+  }
+
+  // Update & Draw Footstep Dust Puffs, Sun Motes & Foreground Grass
+  function drawParticlesAndForeground(scrollDist, t, dt) {
+    // Footstep dust puffs
+    for (let i = dustParticles.length - 1; i >= 0; i--) {
+      const p = dustParticles[i];
+      p.life += dt;
+      if (p.life >= p.maxLife) {
+        dustParticles.splice(i, 1);
+        continue;
+      }
+      p.x += p.vx * dt;
+      p.y += p.vy * dt;
+      p.vy += 28 * dt;
+      const u = p.life / p.maxLife;
+      const alpha = p.alpha * (1 - u);
+      const radius = p.r * (0.7 + u * 1.1);
+
+      ctx.fillStyle = `rgba(246, 224, 196, ${alpha})`;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, radius, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    // Drifting golden atmospheric motes
+    for (const m of motes) {
+      const mx = ((m.x - t * m.speedX) % VW + VW) % VW;
+      const my = m.y + Math.sin(t * 1.4 + m.phase) * 14;
+      const twinkle = m.alpha * (0.65 + 0.35 * Math.sin(t * 2.5 + m.phase));
+      ctx.fillStyle = `rgba(255, 248, 218, ${twinkle})`;
+      ctx.beginPath();
+      ctx.arc(mx, my, m.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    // Subtle foreground grass blades passing near bottom edge (1.32x parallax)
+    const pfg = (scrollDist * 1.32) % LOOP_W;
+    ctx.lineCap = 'round';
+    for (const b of fgBlades) {
+      const bx = ((b.x - pfg) % LOOP_W + LOOP_W) % LOOP_W - 160;
+      if (bx < -40 || bx > VW + 40) continue;
+      const sway = Math.sin(t * 2.6 + b.phase) * 7;
+      ctx.strokeStyle = 'rgba(72, 86, 46, 0.55)';
+      ctx.lineWidth = 4.5;
+      ctx.beginPath();
+      ctx.moveTo(bx, VH + 6);
+      ctx.quadraticCurveTo(bx + b.lean * 0.4 + sway * 0.4, VH - b.h * 0.5, bx + b.lean + sway, VH - b.h);
+      ctx.stroke();
+    }
+
+    // Delicate warm cinematic vignette
+    const vig = ctx.createRadialGradient(VW * 0.5, VH * 0.48, VW * 0.36, VW * 0.5, VH * 0.5, VW * 0.66);
+    vig.addColorStop(0, 'rgba(42, 24, 34, 0)');
+    vig.addColorStop(1, 'rgba(42, 24, 34, 0.24)');
+    ctx.fillStyle = vig;
+    ctx.fillRect(0, 0, VW, VH);
+  }
+
+  // Main Animation Loop
+  let lastTime = null;
+  let elapsed = 0;
+
+  function frame(now) {
+    if (lastTime === null) lastTime = now;
+    const dt = Math.min((now - lastTime) / 1000, 0.05);
+    lastTime = now;
+    elapsed += dt;
+
+    const w = canvas.width;
+    const h = canvas.height;
+
+    // Cover viewport seamlessly while preserving 1280x720 composition
+    const scale = Math.max(w / VW, h / VH);
+    const offsetX = (w - VW * scale) * 0.5;
+    const offsetY = (h - VH * scale) * 0.5;
+
+    ctx.save();
+    ctx.setTransform(scale, 0, 0, scale, offsetX, offsetY);
+
+    const scrollDist = elapsed * GROUND_SPEED;
+
+    drawSky(elapsed);
+    drawMountains(scrollDist);
+    drawGroundAndMeadow(scrollDist, elapsed);
+    drawAlpaca(elapsed, dt);
+    drawParticlesAndForeground(scrollDist, elapsed, dt);
+
+    ctx.restore();
+    requestAnimationFrame(frame);
+  }
+
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

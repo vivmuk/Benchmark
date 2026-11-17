@@ -1,0 +1,22 @@
+{
+ "claude-opus-5-5": {
+  "scores": {
+   "subjects": 7.0,
+   "layout": 6.0,
+   "colour": 6.0,
+   "style": 5.0,
+   "overall": 5.0
+  },
+  "note": "All the key elements are present and roughly placed, but the recreation turns the three sparse towers into a dense skyline, makes the searchlights purple instead of cyan, adds extra cacti, and uses a more saturated, illustrative style than the original's smoother, more photoreal look."
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "subjects": 9.0,
+   "layout": 7.0,
+   "colour": 7.0,
+   "style": 6.0,
+   "overall": 5.0
+  },
+  "note": "Nearly all key elements are present, but the recreation shifts their positions and makes the city, neon lighting, and foreground much brighter and more stylized."
+ }
+}

@@ -1,0 +1,22 @@
+{
+ "text": "When a vehicle stands on a suspension bridge, its weight first enters the deck, which also carries its own weight and that of the pavement, barriers, and other equipment. The deck slab spreads each concentrated wheel load into beams or a stiffening truss beneath it. This structure bends slightly between support points and distributes the load more broadly, so one heavily loaded location is not carried by a single connection. The stiffening girder or truss also helps the bridge keep its shape under uneven traffic, wind, and temperature changes.\n\nAt regular intervals, vertical or nearly vertical hangers connect the deck structure to the main cables. The hangers are tension members: the deck pulls down on them, and they pull down on the cables. A suspension bridge\u2019s main cables are flexible and cannot usefully resist compression or bending. Instead, they carry load by developing tension along their curved length. Their sag is essential to this action. Near a hanger, the cable tensions on either side combine to provide an upward force that balances the downward pull. As more load is added, the cable geometry and internal forces adjust until the bridge reaches equilibrium.\n\nThe loaded main cables pass over saddles at the tops of the towers. The cables bear down on these saddles, and the towers carry the resulting forces mainly as compression, much as tall columns carry the weight of a building. The towers then deliver those forces to their foundations, which spread them into soil or rock strong enough to resist settlement. The horizontal pulls from the cable segments on opposite sides of a tower largely oppose one another, although uneven loading and wind can leave an imbalance that the tower must also resist.\n\nThe towers alone cannot complete the load path because the main cables still exert large horizontal pulls. In a conventional suspension bridge, the cables continue beyond the towers through the side spans to anchorages. An anchorage may be a massive concrete block founded in the ground or a structure embedded in sound rock. The cable is secured within it, often after being separated into many strands. The anchorage resists the cable\u2019s inward pull and, depending on the cable geometry, an upward pull as well. Its weight, its bearing against the surrounding ground, and friction or other resistance at its foundation provide the opposing forces. These reactions ultimately pass into the earth.\n\nSome deck load also travels directly into abutments or piers near the ends of the bridge, rather than through the hangers. Bearings at these supports transfer force while permitting necessary movement, especially thermal expansion and contraction. Nevertheless, the characteristic path for most of the suspended span is clear: the deck and stiffening structure gather the load, the hangers deliver it to the main cables, the cables carry it in tension, and the towers and anchorages transfer the resulting compression, pull, and associated forces into foundations and finally the ground. The bridge remains stable because every part of that chain supplies a reaction equal to the force imposed on it.",
+ "reasoning_chars": 6159,
+ "usage": {
+  "prompt_tokens": 121,
+  "completion_tokens": 1835,
+  "total_tokens": 1956,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 1244,
+   "image_tokens": 0,
+   "audio_tokens": 0
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 0.5468078339472413,
+ "t_first_content": 13.877240875735879,
+ "t_total": 19.46176925022155,
+ "cost": 0.04648
+}

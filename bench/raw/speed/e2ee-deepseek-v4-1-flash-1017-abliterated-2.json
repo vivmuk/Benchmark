@@ -1,0 +1,20 @@
+{
+ "text": "The deck of a suspension bridge carries its own weight and the weight of traffic, pedestrians, snow, and wind-induced forces, but it does not usually span the whole distance by itself. Its load is collected by a grid of deck members. Longitudinal stringers or girders run along the roadway, and floor beams or cross-girders run across it; together they stiffen the deck and spread concentrated loads over a wider area. Those members deliver the load to the main stiffening truss or box girder, which runs the length of the bridge and gives the deck enough rigidity to distribute uneven loads and resist bending and twisting.\n\nFrom the stiffening structure, the load moves upward through the suspenders, also called hangers. These are vertical or nearly vertical cables or rods spaced along the bridge, each connecting a point on the deck structure to the main cable above. A truck or a patch of heavy traffic pulls down on the deck, the deck pulls down on the nearby hangers, and the hangers pull down on the main cables. Because the hangers are spaced closely, they transfer the deck load in many small increments rather than at one point.\n\nThe main cables are the principal load-carrying elements. They hang in a curve between the towers and are held in tension. When a hanger pulls downward on a main cable, the cable\u2019s curved shape converts that vertical pull into tension along its length. The tension has both vertical and horizontal components. The vertical components are carried to the towers, while the horizontal components pull inward toward the bridge spans and must be resisted by the rest of the cable system, the towers, and the anchorages. In a simple suspension bridge, the main cables run over saddles at the tops of the towers and then down to large anchorages at each end.\n\nThe towers receive the downward vertical components from the main cables and carry them in compression to their foundations. Those foundations spread the concentrated tower loads into the ground through piles, caissons, or large concrete footings, depending on the site. The anchorages at the ends of the main cables resist the large horizontal pull of the cables and also transfer it into the ground; they may be massive concrete blocks or rock-anchored structures. Thus the load path is continuous: deck to stringers and floor beams, to the stiffening girder or truss, to the suspenders, to the main cables, to the towers and anchorages, and finally into the foundations and the earth. The deck\u2019s stiffness helps smooth the transfer and resist local effects, but the main cables, towers, and anchorages do the primary work of carrying the bridge\u2019s load to the ground.",
+ "reasoning_chars": 1200,
+ "usage": {
+  "prompt_tokens": 66,
+  "completion_tokens": 789,
+  "total_tokens": 855,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 248
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 1.2814670838415623,
+ "t_first_content": 8.073432125151157,
+ "t_total": 19.265990249812603,
+ "cost": 0.00120825
+}

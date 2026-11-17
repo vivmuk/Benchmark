@@ -1,0 +1,17 @@
+{
+ "text": "A suspension bridge carries load by a continuous chain of tension and compression that begins at the deck and ends in the ground. The deck, together with its stiffening girder or truss, first gathers the weight of the roadway, railings, pavement, and vehicles. Because the deck is stiff, a heavy vehicle does not load only the hangers directly beneath it; the girder bends and spreads that concentrated load over a longer stretch of the span, bringing many hangers into action. The hangers are vertical or nearly vertical ropes that hang from the main cables, and they pull upward on the deck. In doing so, the hangers are stretched in tension, and they transfer the deck load to the main cables above.\n\nThe main cables are the principal load-carrying members. They are draped in a curve between the towers and are held in tension by the weight and pull of the deck below. When load is added, the cable tends to sag a little more and its tension increases; the curved shape lets the cable receive many small downward pulls from the hangers and convert them into a large tensile force along its length. The cable\u2019s slope means that its tension has both vertical and horizontal components. The vertical components are carried toward the towers, while the horizontal components pull inward toward the span and outward toward the anchorages.\n\nAt each tower, the cable passes over a saddle or tower top. The downward vertical component of the cable tension presses on the tower, so the tower is loaded mainly in compression. The tower carries that compression down its height to a foundation, which spreads the force into rock or soil. The horizontal pull from one side of the tower is largely balanced by the horizontal pull from the other side: the main span pulls one way and the side span or anchor cable pulls the other. Any imbalance is resisted by the tower and its foundation.\n\nAt the ends of the bridge, the main cables terminate in anchorages. These are massive concrete blocks, rock tunnels, or other ground anchors that grip the cable ends and resist being pulled toward the span. The anchorages transfer the cable\u2019s remaining horizontal tension, and some vertical force, into the ground. In this way the deck\u2019s weight and traffic load move through the stiffening deck, into the hangers, up into the main cables, along the cables to the towers and anchorages, and finally through foundations and anchorages into the earth. The ground receives the load as compression beneath the towers and as tension or shear at the anchors, while the bridge itself remains largely in a balanced system of cable tension and tower compression.",
+ "reasoning_chars": 1833,
+ "usage": {
+  "prompt_tokens": 66,
+  "completion_tokens": 898,
+  "total_tokens": 964,
+  "completion_tokens_details": {
+   "reasoning_tokens": 374
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 0.3927343748509884,
+ "t_first_content": 2.4954690001904964,
+ "t_total": 5.787482790648937,
+ "cost": 0.00120714
+}

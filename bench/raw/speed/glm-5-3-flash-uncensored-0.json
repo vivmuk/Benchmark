@@ -1,0 +1,20 @@
+{
+ "text": "A suspension bridge carries its load through an elegant chain of elements that begins at the roadway and ends in massive foundations buried in earth or rock. Understanding this chain means following each load step by step as it makes its way from the deck down to the ground.\n\nThe journey starts with the deck itself, the surface on which vehicles and pedestrians travel. The deck must support two distinct kinds of weight. The first is dead load, which is the permanent weight of the bridge's own structure, including the roadway, railings, and any surfacing. The second is live load, meaning everything that moves across the bridge, such as cars, trucks, wind forces, and snow. When traffic rolls onto the deck, the force passes almost immediately into longitudinal stringers and cross beams beneath the roadway surface. These members spread the concentrated weight of a single truck wheel out over a wider area so that no single point of the structure bears too much.\n\nFrom these secondary beams, the deck load travels into the stiffening girder or truss, the strong structural spine running the length of the bridge just below the roadway. This element serves a crucial purpose beyond simply holding weight. It distributes localized heavy loads, like a queue of trucks stopped in one lane, along the length of the span rather than letting them pull sharply downward at one spot, which would create a noticeable dip or kink in the deck.\n\nSuspended above the stiffening structure are the main cables, the signature feature of a suspension bridge, draping between tall towers in gentle curves called catenaries. Connecting the cables to the deck at regular intervals are vertical suspenders, sometimes called hangers, which may be rods or bundles of wire. Every meter of deck hangs from the cables through these suspenders. As the deck presses down under gravity, the suspenders are placed in pure tension; they are being stretched, not bent or compressed. That tension transfers into the main cables.\n\nHere the load path splits in two directions. A portion of the cable tension pulls vertically upward against the weight of the deck, but because the cables curve, they also carry this tension horizontally toward their ends. At the midspan of the bridge, the cables pass over the tops of the towers. The towers act like posts being squeezed. They receive the vertical component of the cable force as compression pushing straight down their legs, and they channel that force through their massive bases into piers and deep foundations. These foundations must rest on bedrock or soil strong enough to resist enormous continuous pressure.\n\nMeanwhile, at each end of the bridge, the cables run past the last suspender down to anchorages, typically colossal blocks of concrete, often held in place partly by their own staggering weight or tied into solid rock. The remaining horizontal pull of the cables ends here, tugging continuously at these anchors for the life of the structure.\n\nIn short, the deck leans on the suspenders, the suspenders hang from the cables, the cables drape over the towers pressing them downward, and both towers and anchorages hand every last kilonewton of force safely into the ground.",
+ "reasoning_chars": 294,
+ "usage": {
+  "prompt_tokens": 48,
+  "completion_tokens": 687,
+  "total_tokens": 735,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 66
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 0.36592395789921284,
+ "t_first_content": 0.618562082760036,
+ "t_total": 3.1970748752355576,
+ "cost": 0.00038577
+}

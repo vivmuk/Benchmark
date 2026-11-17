@@ -1,0 +1,22 @@
+{
+ "claude-opus-5-5": {
+  "scores": {
+   "typography": 8.0,
+   "layout": 8.0,
+   "colour": 8.0,
+   "completeness": 10,
+   "originality": 7.0
+  },
+  "note": "A polished, cohesive page: an elegant serif-and-sans pairing, a warm dusk palette, a strong illustrated hero and a well-crafted departure board, though the feature cards and pricing tiers lean on familiar SaaS-template patterns and some small body text is low-contrast."
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "typography": 8.0,
+   "layout": 9.0,
+   "colour": 9.0,
+   "completeness": 10,
+   "originality": 8.0
+  },
+  "note": "A polished, cohesive page with all seven sections and a distinctive illustrated hero, though some small, faint text hurts readability."
+ }
+}

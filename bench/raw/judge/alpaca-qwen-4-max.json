@@ -1,0 +1,20 @@
+{
+ "claude-opus-5-5": {
+  "scores": {
+   "alpaca": 3.0,
+   "motion": 5.0,
+   "beauty": 4.0,
+   "scene": 7.0
+  },
+  "note": "The pastel altiplano scene is soft and tasteful with gentle parallax, but the alpaca is anatomically broken: its scalloped neck floats detached above a cloud-blob body, and its stick legs shift between frames in an awkward, unconvincing gait."
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "alpaca": 5.0,
+   "motion": 5.0,
+   "beauty": 7.0,
+   "scene": 7.0
+  },
+  "note": "The pastel landscape is polished and the legs change position, but the detached-looking neck and stiff, sliding gait weaken the alpaca and its walk."
+ }
+}

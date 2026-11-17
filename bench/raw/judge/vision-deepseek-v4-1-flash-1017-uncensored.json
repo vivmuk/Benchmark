@@ -1,0 +1,22 @@
+{
+ "claude-opus-5-5": {
+  "scores": {
+   "subjects": 7.0,
+   "layout": 5.0,
+   "colour": 6.0,
+   "style": 5.0,
+   "overall": 4.0
+  },
+  "note": "All key elements are present, but the recreation is a denser, more saturated neon cityscape: the OASIS sign is built into a tower, the moon faces the other way, the alpaca reads as a pack llama, the cactus lacks a neon outline, and the pool, monorail, and figures are larger and repositioned, so it d"
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "subjects": 9.0,
+   "layout": 6.0,
+   "colour": 7.0,
+   "style": 6.0,
+   "overall": 5.0
+  },
+  "note": "Nearly all key subjects are present, but the towers, moon, pool, and train have shifted, and the recreation is sharper and more saturated than the original."
+ }
+}

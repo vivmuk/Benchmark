@@ -1,0 +1,20 @@
+{
+ "claude-opus-5-5": {
+  "scores": {
+   "alpaca": 6.0,
+   "motion": 5.0,
+   "beauty": 6.0,
+   "scene": 6.0
+  },
+  "note": "A recognisable, cute alpaca with upright ears, long neck and fluffy fleece, but the legs are stiff unjointed sticks swinging like pendulums under a cloud-blob body with an odd belly smudge, set in a soft, pleasant but generic meadow whose scrolling grass sells the walk better than the gait itself."
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "alpaca": 7.0,
+   "motion": 5.0,
+   "beauty": 6.0,
+   "scene": 6.0
+  },
+  "note": "The fluffy, long-necked animal reads as an alpaca, but its stiff legs and nearly stationary body make the walk feel mechanical; the soft meadow is pleasant but simple."
+ }
+}

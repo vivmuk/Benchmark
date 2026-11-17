@@ -1,0 +1,22 @@
+{
+ "claude-opus-5-5": {
+  "scores": {
+   "typography": 7.0,
+   "layout": 2.0,
+   "colour": 7.0,
+   "completeness": 3.0,
+   "originality": 6.0
+  },
+  "note": "The hero and features are polished, with elegant serif type, a gradient italic and a distinctive desert-train illustration, but the timetable, pricing and testimonial never render, leaving a huge empty void with only an orphaned fare footnote and a stray 'Continue' widget overlapping the section bre"
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "typography": 8.0,
+   "layout": 2.0,
+   "colour": 8.0,
+   "completeness": 3.0,
+   "originality": 8.0
+  },
+  "note": "Distinctive type, palette and illustration are undermined by a huge empty stretch and missing timetable, pricing tiers and testimonial."
+ }
+}

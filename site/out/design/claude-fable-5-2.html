@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dune Line — The overnight train to Vesper City</title>
+<meta name="description" content="Dune Line is the overnight sleeper across the Sable Desert. Fall asleep in the dunes, wake up in neon.">
+<meta name="theme-color" content="#0c0920">
+<style>
+:root{
+  --night-900:#0b0819; --night-800:#100b24; --night-700:#171031; --dune:#140a25;
+  --sand-100:#f4e8d2; --sand-200:#ecdcbd; --ink:#1d1230;
+  --cream:#f6ecd9; --amber:#ffb65c; --ember:#f2683c; --terra:#b94a27;
+  --pink:#ff4fa3; --violet:#8f6bff; --cyan:#4ff0e0;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua","URW Palladio L",P052,Georgia,serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono","Cascadia Mono","Segoe UI Mono",Menlo,Consolas,"Liberation Mono",monospace;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:92px;-webkit-text-size-adjust:100%}
+body{margin:0;font-family:var(--sans);font-size:17px;line-height:1.6;color:var(--cream);background:var(--night-900);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+h1,h2,h3,p,figure,blockquote{margin:0}
+a{color:inherit}
+svg{display:block}
+:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:6px}
+.wrap{width:100%;max-width:1280px;margin:0 auto;padding:0 clamp(20px,4vw,40px)}
+.skip{position:absolute;left:16px;top:-60px;background:var(--amber);color:var(--ink);padding:10px 16px;border-radius:10px;z-index:100;font-weight:600;text-decoration:none}
+.skip:focus{top:12px}
+
+/* ---------- shared type ---------- */
+.eyebrow{display:inline-flex;align-items:center;gap:12px;font:500 12.5px/1.4 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--e,var(--amber))}
+.eyebrow::before{content:"";width:28px;height:1px;background:currentColor}
+h2{font-family:var(--serif);font-weight:400;font-size:clamp(32px,4vw,52px);line-height:1.08;letter-spacing:-.015em;text-wrap:balance}
+h2 em{font-style:italic}
+.sec-head{display:grid;grid-template-columns:1.25fr .75fr;gap:48px;align-items:end;margin-bottom:clamp(40px,5vw,68px)}
+.sec-head h2{margin-top:18px}
+.sec-head p{font-size:17.5px;max-width:42ch}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:52px;padding:0 26px;border-radius:999px;font:600 15.5px/1 var(--sans);letter-spacing:.01em;text-decoration:none;border:1px solid transparent;cursor:pointer;white-space:nowrap;transition:transform .2s ease,box-shadow .2s ease,background-color .2s ease,border-color .2s ease}
+.btn--primary{background:var(--amber);color:var(--ink);box-shadow:0 12px 30px -12px rgba(255,182,92,.75)}
+.btn--primary:hover{background:#ffc67e;transform:translateY(-2px)}
+.btn--ghost{border-color:rgba(246,236,217,.28);color:var(--cream)}
+.btn--ghost:hover{border-color:rgba(246,236,217,.65);background:rgba(246,236,217,.06)}
+.btn--neon{background:linear-gradient(100deg,#ff4fa3,#a35cff);color:#fff;box-shadow:0 14px 36px -12px rgba(255,79,163,.8)}
+.btn--neon:hover{transform:translateY(-2px);box-shadow:0 18px 44px -12px rgba(255,79,163,.95)}
+.btn--sm{height:42px;padding:0 20px;font-size:14.5px}
+.btn svg{transition:transform .2s ease}
+.btn:hover svg{transform:translateX(3px)}
+
+/* ---------- nav ---------- */
+.nav{position:fixed;inset:0 0 auto 0;z-index:50;border-bottom:1px solid transparent;transition:background-color .3s ease,border-color .3s ease}
+.nav.is-stuck,.nav.is-open{background:rgba(11,8,25,.82);-webkit-backdrop-filter:blur(14px) saturate(140%);backdrop-filter:blur(14px) saturate(140%);border-color:rgba(255,255,255,.08)}
+.nav__in{display:flex;align-items:center;justify-content:space-between;height:76px;gap:24px}
+.brand{display:inline-flex;align-items:center;gap:12px;text-decoration:none;color:var(--cream);font-family:var(--serif);font-size:23px;letter-spacing:.005em}
+.nav__links{display:flex;gap:38px;list-style:none;margin:0;padding:0}
+.nav__links a{position:relative;text-decoration:none;font-size:15px;color:rgba(246,236,217,.76);padding:8px 0;transition:color .2s}
+.nav__links a::after{content:"";position:absolute;left:0;right:0;bottom:2px;height:1px;background:var(--amber);transform:scaleX(0);transform-origin:left;transition:transform .25s ease}
+.nav__links a:hover{color:var(--cream)}
+.nav__links a:hover::after{transform:scaleX(1)}
+.nav__right{display:flex;align-items:center;gap:12px}
+.nav__toggle{display:none;width:42px;height:42px;border-radius:50%;border:1px solid rgba(246,236,217,.28);background:none;color:var(--cream);cursor:pointer;padding:0;align-items:center;justify-content:center}
+.nav__toggle span,.nav__toggle span::before{display:block;width:16px;height:1.5px;background:currentColor;position:relative;transition:transform .2s}
+.nav__toggle span::before{content:"";position:absolute;top:6px}
+.nav__toggle span{transform:translateY(-3px)}
+.nav.is-open .nav__toggle span{transform:rotate(45deg)}
+.nav.is-open .nav__toggle span::before{transform:translateY(-6px) rotate(-90deg)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;overflow:hidden;min-height:780px;min-height:clamp(780px,100vh,960px);min-height:clamp(780px,100svh,960px);
+  background:radial-gradient(90% 70% at 88% 0%,#080920 0%,rgba(8,9,32,0) 65%),linear-gradient(180deg,#0c0920 0%,#1a0f3c 42%,#3a1757 74%,#55205f 100%)}
+.stars{position:absolute;inset:0;z-index:0;pointer-events:none}
+.stars i{position:absolute;border-radius:50%;background:#fff;opacity:var(--o,.6);animation:twinkle 4s ease-in-out infinite}
+@keyframes twinkle{50%{opacity:calc(var(--o,.6)*.3)}}
+.moon{position:absolute;z-index:0;top:128px;right:12%;width:54px;height:54px;filter:drop-shadow(0 0 18px rgba(246,236,217,.45))}
+.scene{position:absolute;left:0;bottom:0;z-index:1;width:100%;height:clamp(300px,43.75vw,640px);overflow:visible;pointer-events:none}
+.hero__in{position:relative;z-index:3;padding-top:148px}
+.hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(42px,6.4vw,88px);line-height:1.03;letter-spacing:-.022em;margin-top:26px}
+.hero h1 em{font-style:italic;color:#ffe0ef;text-shadow:0 0 14px rgba(255,79,163,.9),0 0 44px rgba(255,79,163,.55),0 0 90px rgba(143,107,255,.5)}
+.hero__lede{margin-top:26px;max-width:560px;font-size:clamp(17px,1.5vw,19px);line-height:1.6;color:rgba(246,236,217,.8)}
+.hero__cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
+.train{animation:arrive 2.6s cubic-bezier(.16,.7,.2,1) both}
+@keyframes arrive{from{transform:translateX(-240px)}to{transform:none}}
+.beacon{animation:blink 2.4s steps(1,end) infinite}
+@keyframes blink{0%,60%{opacity:1}61%,100%{opacity:.15}}
+.halo{animation:hum 5s ease-in-out infinite}
+@keyframes hum{50%{opacity:.72}}
+
+/* ---------- route band ---------- */
+.route{position:relative;z-index:2;background:var(--dune);margin-top:-1px;padding:40px 0 150px}
+.route__head{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px 24px;font:500 12px/1.5 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:rgba(246,236,217,.5);margin-bottom:36px}
+.route__head b{font-weight:500;color:var(--cream)}
+.stops{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);position:relative}
+.stops::before{content:"";position:absolute;left:7px;right:calc(25% - 7px);top:6px;height:2px;border-radius:2px;background:linear-gradient(90deg,var(--amber),var(--ember) 34%,var(--pink) 68%,var(--cyan))}
+.stops li{position:relative;padding:36px 28px 0 0}
+.stops li::before{content:"";position:absolute;left:0;top:0;width:14px;height:14px;border-radius:50%;background:var(--dune);border:2px solid var(--c);box-shadow:0 0 0 5px var(--dune),0 0 22px 4px var(--c)}
+.stops time{display:block;font:500 13px/1 var(--mono);letter-spacing:.08em;color:var(--c)}
+.stops strong{display:block;font:400 25px/1.2 var(--serif);margin-top:10px}
+.stops span{display:block;font-size:14.5px;color:rgba(246,236,217,.6);margin-top:4px}
+.route__dune{position:absolute;left:0;right:0;bottom:-1px;width:100%;height:clamp(40px,6vw,84px)}
+
+/* ---------- features ---------- */
+.features{background:linear-gradient(180deg,var(--sand-100),var(--sand-200));color:var(--ink);padding:clamp(56px,7vw,96px) 0 clamp(80px,10vw,136px)}
+.features .eyebrow,.quote .eyebrow{--e:var(--terra)}
+.features h2 em,.quote em{color:var(--terra)}
+.features .sec-head p{color:rgba(29,18,48,.72)}
+.features__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(24px,3.2vw,44px)}
+.pane{background:var(--ink);padding:10px;border-radius:36px;box-shadow:0 34px 50px -32px rgba(29,18,48,.7)}
+.pane__glass{border-radius:27px;overflow:hidden}
+.pane svg{width:100%;height:auto}
+.feature__k{display:flex;align-items:center;gap:10px;margin-top:30px;font:500 12px/1 var(--mono);letter-spacing:.15em;text-transform:uppercase;color:var(--terra)}
+.feature__k i{flex:0 0 18px;height:1px;background:currentColor}
+.feature h3{font:400 29px/1.15 var(--serif);letter-spacing:-.01em;margin:14px 0 12px}
+.feature p{font-size:16.5px;color:rgba(29,18,48,.74)}
+.feature__meta{margin-top:20px;padding-top:16px;border-top:1px solid rgba(29,18,48,.16);font:500 12px/1.5 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:rgba(29,18,48,.62)}
+
+/* ---------- timetable ---------- */
+.times{background:linear-gradient(180deg,#0d0a1f,var(--night-900));padding:clamp(80px,10vw,136px) 0}
+.times .sec-head p{color:rgba(246,236,217,.68)}
+.clockbox{justify-self:end;text-align:right}
+.clock{display:inline-flex;align-items:center;gap:14px;padding:10px 16px 10px 14px;border:1px solid rgba(255,255,255,.12);border-radius:999px;font:500 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:rgba(246,236,217,.6)}
+.clock i{width:8px;height:8px;border-radius:50%;background:var(--amber);box-shadow:0 0 12px var(--amber)}
+.clock time{font-size:15px;letter-spacing:.06em;color:var(--amber);font-variant-numeric:tabular-nums}
+.next{margin-top:14px;font-size:15px;color:rgba(246,236,217,.68)}
+.next strong{color:var(--cream);font-weight:600}
+.board-wrap{border:1px solid rgba(255,255,255,.09);border-radius:24px;background:linear-gradient(180deg,#181133,#110b27);overflow:hidden;box-shadow:0 50px 100px -60px #000}
+.board{width:100%;border-collapse:collapse;text-align:left}
+.board thead th{font:500 11.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:rgba(246,236,217,.55);padding:22px 18px;border-bottom:1px solid rgba(255,255,255,.09);vertical-align:top}
+.board thead small{display:block;margin-top:7px;font-size:10.5px;letter-spacing:.1em;color:rgba(246,236,217,.5)}
+.board tbody th,.board tbody td{padding:25px 18px;border-bottom:1px solid rgba(255,255,255,.06);vertical-align:middle;font-weight:400;transition:background-color .2s}
+.board tbody tr:last-child>*{border-bottom:0}
+.board tr>:first-child{padding-left:32px}
+.board tr>:last-child{padding-right:32px}
+.board tbody tr:hover>*{background:rgba(255,255,255,.025)}
+.board tbody tr.is-next>*{background:rgba(255,182,92,.065)}
+.board tbody tr.is-next>th{box-shadow:inset 3px 0 0 var(--amber)}
+.svc{display:flex;align-items:center;gap:16px}
+.svc__no{flex:none;font:500 12px/1 var(--mono);letter-spacing:.08em;padding:8px 9px;border:1px solid rgba(246,236,217,.24);border-radius:8px;color:rgba(246,236,217,.82)}
+.svc__name{font:400 23px/1.2 var(--serif)}
+.svc__tag{display:none;margin-left:10px;vertical-align:3px;font:600 10.5px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink);background:var(--amber);padding:5px 8px;border-radius:999px}
+.is-next .svc__tag{display:inline-block}
+.t{font:500 30px/1 var(--mono);letter-spacing:-.02em;font-variant-numeric:tabular-nums;white-space:nowrap}
+.t--dep{color:var(--amber)}
+.t--arr{color:#8ff7ec;text-shadow:0 0 22px rgba(79,240,224,.45)}
+.t sup{font-size:11px;letter-spacing:.04em;color:rgba(246,236,217,.6);margin-left:5px;vertical-align:top;position:relative;top:2px;text-shadow:none}
+.dur{font:500 14px/1.4 var(--mono);color:rgba(246,236,217,.85);white-space:nowrap}
+.dur small{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(246,236,217,.55);margin-top:3px}
+.calls{font-size:14.5px;color:rgba(246,236,217,.7)}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:7px 12px 7px 10px;border-radius:999px;font-size:13px;font-weight:500;white-space:nowrap;border:1px solid var(--p);color:var(--p)}
+.pill::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.pill--ok{--p:#7fe9c9}.pill--warn{--p:#ffb65c}.pill--muted{--p:rgba(246,236,217,.6)}
+.board-note{display:flex;flex-wrap:wrap;gap:8px 32px;margin-top:22px;font-size:14px;color:rgba(246,236,217,.6)}
+.board-note span::before{content:"";display:inline-block;width:4px;height:4px;border-radius:50%;background:var(--amber);margin-right:10px;vertical-align:middle}
+
+/* ---------- testimonial ---------- */
+.quote{background:linear-gradient(180deg,var(--sand-100),#f3dcbd);color:var(--ink);padding:clamp(80px,10vw,136px) 0}
+.quote__in{display:grid;grid-template-columns:220px 1fr;gap:64px}
+.quote__mark{font:400 190px/1 var(--serif);color:var(--terra);height:112px;margin-top:22px;user-select:none}
+.quote blockquote p{font:400 clamp(25px,3.1vw,40px)/1.26 var(--serif);letter-spacing:-.012em;text-wrap:pretty}
+.quote figcaption{display:flex;align-items:center;gap:16px;margin-top:44px;padding-top:28px;border-top:1px solid rgba(29,18,48,.16)}
+.avatar{flex:none;width:52px;height:52px;border-radius:50%;display:grid;place-items:center;font:400 19px/1 var(--serif);color:var(--ink);background:linear-gradient(135deg,var(--amber),#ff8f7a 60%,#ff6fae)}
+.quote__who strong{display:block;font-weight:600;font-size:16.5px}
+.quote__who span{font-size:15px;color:rgba(29,18,48,.7)}
+.quote__trip{margin-left:auto;font:500 12px/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:rgba(29,18,48,.65);text-align:right}
+
+/* ---------- fares ---------- */
+.fares{position:relative;overflow:hidden;background:var(--night-900);padding:clamp(80px,10vw,136px) 0}
+.fares::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(620px 420px at 10% 8%,rgba(255,79,163,.17),transparent 70%),radial-gradient(720px 480px at 92% 88%,rgba(79,240,224,.11),transparent 70%),radial-gradient(520px 380px at 50% 60%,rgba(143,107,255,.12),transparent 70%)}
+.fares .wrap{position:relative}
+.fares .eyebrow{--e:#ff86c0}
+.fares__head{text-align:center;max-width:720px;margin:0 auto clamp(44px,5vw,64px)}
+.fares__head h2{margin-top:18px}
+.fares__head p{margin-top:18px;color:rgba(246,236,217,.7)}
+.seg{display:inline-flex;margin-top:30px;padding:5px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1)}
+.seg button{appearance:none;border:0;background:none;color:rgba(246,236,217,.75);font:600 14.5px/1 var(--sans);height:40px;padding:0 20px;border-radius:999px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:background-color .2s,color .2s}
+.seg button[aria-pressed="true"]{background:var(--cream);color:var(--ink)}
+.seg button span{font:600 11px/1 var(--mono);padding:4px 6px;border-radius:999px;background:rgba(255,79,163,.2);color:#ff9acb}
+.seg button[aria-pressed="true"] span{background:var(--ink);color:#ff9acb}
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:stretch}
+.tier{position:relative;display:flex;flex-direction:column;padding:36px 32px 34px;border-radius:26px;border:1px solid rgba(255,255,255,.1);background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.018))}
+.tier--featured{border:1.5px solid transparent;background:linear-gradient(180deg,#23153f,#160d2d) padding-box,linear-gradient(140deg,#ff4fa3,#8f6bff 52%,#4ff0e0) border-box;box-shadow:0 40px 90px -40px rgba(255,79,163,.6);transform:translateY(-14px)}
+.tier__badge{position:absolute;top:22px;right:22px;font:600 10.5px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:#ffd3ea;padding:7px 10px;border-radius:999px;background:rgba(255,79,163,.16);border:1px solid rgba(255,79,163,.5)}
+.tier__kind{display:flex;align-items:center;gap:10px;font:500 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--a)}
+.tier__kind::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--a);box-shadow:0 0 14px var(--a)}
+.tier h3{font:400 38px/1.1 var(--serif);letter-spacing:-.01em;margin-top:18px}
+.tier__desc{margin-top:10px;font-size:15.5px;color:rgba(246,236,217,.68);min-height:3.2em}
+.tier__price{display:flex;align-items:flex-start;gap:4px;margin-top:26px;font-family:var(--serif)}
+.tier__cur{font-size:24px;line-height:1;margin-top:9px;color:rgba(246,236,217,.75)}
+.tier__amt{font-size:68px;line-height:1;letter-spacing:-.03em;font-variant-numeric:lining-nums}
+.tier__per{align-self:flex-end;margin:0 0 9px 8px;font:400 14px/1.35 var(--sans);color:rgba(246,236,217,.62)}
+.tier .btn{margin-top:28px;width:100%}
+.tier ul{list-style:none;margin:28px 0 0;padding:24px 0 0;border-top:1px solid rgba(255,255,255,.1)}
+.tier li{position:relative;padding-left:30px;margin:0 0 13px;font-size:15.5px;line-height:1.45;color:rgba(246,236,217,.84)}
+.tier li:last-child{margin-bottom:0}
+.tier li::before{content:"";position:absolute;left:5px;top:.22em;width:6px;height:11px;border:solid var(--a);border-width:0 2px 2px 0;transform:rotate(42deg)}
+.fares__note{margin-top:40px;text-align:center;font-size:14px;color:rgba(246,236,217,.6)}
+
+/* ---------- footer ---------- */
+.foot{background:#08060f;padding:clamp(72px,9vw,120px) 0 36px}
+.foot__cta{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:32px}
+.foot__cta h2{max-width:14em}
+.foot__cta h2 em{color:#ffe0ef;text-shadow:0 0 14px rgba(255,79,163,.85),0 0 44px rgba(255,79,163,.5)}
+.foot__btns{display:flex;flex-wrap:wrap;gap:12px}
+.foot__line{height:2px;margin:clamp(48px,6vw,80px) 0;border-radius:2px;background:linear-gradient(90deg,var(--amber),var(--ember) 30%,var(--pink) 64%,var(--cyan));box-shadow:0 0 24px rgba(255,79,163,.55)}
+.foot__grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:40px}
+.foot__about p{margin-top:18px;max-width:30ch;font-size:15px;color:rgba(246,236,217,.62)}
+.foot h3{font:500 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:rgba(246,236,217,.6);margin:8px 0 18px}
+.foot ul{list-style:none;margin:0;padding:0}
+.foot li{margin-bottom:10px}
+.foot li a{text-decoration:none;font-size:15.5px;color:rgba(246,236,217,.82);transition:color .2s}
+.foot li a:hover{color:var(--amber)}
+.foot__base{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px 24px;margin-top:64px;padding-top:24px;border-top:1px solid rgba(255,255,255,.08);font-size:13.5px;color:rgba(246,236,217,.6)}
+
+/* ---------- responsive ---------- */
+@media (max-width:1040px){
+  .tiers{grid-template-columns:1fr;max-width:540px;margin:0 auto}
+  .tier--featured{transform:none}
+  .tier__desc{min-height:0}
+}
+@media (max-width:960px){
+  .sec-head{grid-template-columns:1fr;gap:20px;align-items:start}
+  .clockbox{justify-self:start;text-align:left}
+  .features__grid{grid-template-columns:1fr;gap:48px}
+  .feature{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1fr);gap:32px;align-items:center}
+  .feature__k{margin-top:0}
+  .quote__in{grid-template-columns:1fr;gap:8px}
+  .quote__mark{margin-top:10px}
+  .foot__grid{grid-template-columns:1fr 1fr 1fr}
+  .foot__about{grid-column:1/-1}
+}
+@media (max-width:880px){
+  .nav__toggle{display:inline-flex}
+  .nav__links{display:none;position:absolute;left:0;right:0;top:76px;flex-direction:column;gap:0;padding:8px clamp(20px,4vw,40px) 20px;background:rgba(11,8,25,.96);border-bottom:1px solid rgba(255,255,255,.08)}
+  .nav.is-open .nav__links{display:flex}
+  .nav__links a{display:block;padding:14px 0;font-size:17px;border-bottom:1px solid rgba(255,255,255,.07)}
+  .nav__links a::after{display:none}
+  .board thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .board,.board tbody{display:block}
+  .board tbody tr{display:grid;grid-template-columns:1fr 1fr;gap:18px 16px;padding:24px 22px;border-bottom:1px solid rgba(255,255,255,.07)}
+  .board tbody tr:last-child{border-bottom:0}
+  .board tbody th,.board tbody td{display:block;padding:0!important;border:0;background:none!important;box-shadow:none!important}
+  .board tbody th{grid-column:1/-1}
+  .board tbody tr.is-next{background:rgba(255,182,92,.065);box-shadow:inset 3px 0 0 var(--amber)}
+  .board td::before{content:attr(data-label);display:block;font:500 10.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:rgba(246,236,217,.55);margin-bottom:8px}
+}
+@media (max-width:720px){
+  .hero{min-height:0;padding-bottom:300px}
+  .hero__in{padding-top:124px}
+  .hero h1 br{display:none}
+  .moon{top:92px;right:8%;width:40px;height:40px}
+  .route{padding-bottom:110px}
+  .stops{grid-template-columns:1fr;gap:28px}
+  .stops::before{left:6px;right:auto;top:8px;bottom:40px;width:2px;height:auto;background:linear-gradient(180deg,var(--amber),var(--ember) 34%,var(--pink) 68%,var(--cyan))}
+  .stops li{padding:0 0 0 38px}
+  .stops li::before{top:0}
+  .feature{display:block}
+  .feature__k{margin-top:26px}
+  .quote figcaption{flex-wrap:wrap}
+  .quote__trip{margin-left:68px;text-align:left;width:100%}
+  .foot__grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:560px){
+  .scene{transform:translateX(-70px)}
+  .nav .btn{display:none}
+  .btn{height:50px}
+  .hero__cta .btn{flex:1 1 100%}
+  .t{font-size:26px}
+  .tier{padding:30px 24px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ================= NAV ================= -->
+<header class="nav">
+  <div class="wrap nav__in">
+    <a class="brand" href="#top" aria-label="Dune Line home">
+      <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true" focusable="false">
+        <circle cx="17" cy="17" r="16" fill="none" stroke="currentColor" stroke-opacity=".35"/>
+        <path d="M9.5 18a7.5 7.5 0 0 1 15 0z" fill="#ffb65c"/>
+        <path d="M4.5 22c4.6-3.6 8.6-3.6 12.500-1s8 3 12.500-1" fill="none" stroke="#ff4fa3" stroke-width="1.8" stroke-linecap="round"/>
+        <path d="M9 26.500h16" stroke="#4ff0e0" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+      Dune Line
+    </a>
+    <nav aria-label="Primary">
+      <ul class="nav__links" id="menu">
+        <li><a href="#route">Route</a></li>
+        <li><a href="#onboard">On board</a></li>
+        <li><a href="#timetable">Timetable</a></li>
+        <li><a href="#fares">Fares</a></li>
+      </ul>
+    </nav>
+    <div class="nav__right">
+      <a class="btn btn--primary btn--sm" href="#fares">Book a berth</a>
+      <button class="nav__toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="menu"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="top">
+  <div class="stars" aria-hidden="true"></div>
+  <svg class="moon" viewBox="0 0 60 60" aria-hidden="true" focusable="false">
+    <defs><mask id="moonMask"><rect width="60" height="60" fill="#000"/><circle cx="30" cy="30" r="22" fill="#fff"/><circle cx="40" cy="24" r="20" fill="#000"/></mask></defs>
+    <rect width="60" height="60" fill="#f6ecd9" mask="url(#moonMask)"/>
+  </svg>
+
+  <svg class="scene" viewBox="0 0 1440 560" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false">
+    <defs>
+      <radialGradient id="sunGlow" gradientUnits="userSpaceOnUse" cx="700" cy="396" r="500">
+        <stop offset="0" stop-color="#ffb45e" stop-opacity=".9"/>
+        <stop offset=".26" stop-color="#f4683f" stop-opacity=".5"/>
+        <stop offset=".6" stop-color="#b3336d" stop-opacity=".2"/>
+        <stop offset="1" stop-color="#7a2a7a" stop-opacity="0"/>
+      </radialGradient>
+      <linearGradient id="sunFill" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#fff2c4"/><stop offset=".6" stop-color="#ffb060"/><stop offset="1" stop-color="#ff7d48"/>
+      </linearGradient>
+      <radialGradient id="cityGlow" gradientUnits="userSpaceOnUse" cx="1215" cy="392" r="360">
+        <stop offset="0" stop-color="#ff4fa3" stop-opacity=".62"/>
+        <stop offset=".45" stop-color="#8f4dff" stop-opacity=".26"/>
+        <stop offset="1" stop-color="#4ff0e0" stop-opacity="0"/>
+      </radialGradient>
+      <linearGradient id="duneFar" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#5b2767"/><stop offset=".3" stop-color="#96395f"/><stop offset=".5" stop-color="#c2505f"/><stop offset=".72" stop-color="#7a2f6b"/><stop offset="1" stop-color="#43226e"/>
+      </linearGradient>
+      <linearGradient id="duneShade" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#1a0b2c" stop-opacity="0"/><stop offset="1" stop-color="#1a0b2c" stop-opacity=".75"/>
+      </linearGradient>
+      <linearGradient id="duneMid" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#2c1447"/><stop offset=".5" stop-color="#57204c"/><stop offset="1" stop-color="#2a1552"/>
+      </linearGradient>
+      <linearGradient id="rim" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#ffb065" stop-opacity="0"/><stop offset=".3" stop-color="#ffb065" stop-opacity=".3"/><stop offset=".5" stop-color="#ffbe7a" stop-opacity=".95"/><stop offset=".72" stop-color="#ff7d7d" stop-opacity=".3"/><stop offset="1" stop-color="#ff4fa3" stop-opacity=".6"/>
+      </linearGradient>
+      <linearGradient id="beam" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#fff6d8" stop-opacity=".7"/><stop offset="1" stop-color="#fff6d8" stop-opacity="0"/>
+      </linearGradient>
+      <filter id="soft" x="-20%" y="-200%" width="140%" height="500%"><feGaussianBlur stdDeviation="2.4"/></filter>
+      <filter id="neonBlur" x="-20%" y="-30%" width="140%" height="160%"><feGaussianBlur stdDeviation="4"/></filter>
+      <pattern id="winA" width="12" height="16" patternUnits="userSpaceOnUse">
+        <rect x="2" y="3" width="2.4" height="3.4" fill="#ffcf8a"/><rect x="8" y="3" width="2.4" height="3.4" fill="#ffcf8a" opacity=".45"/><rect x="2" y="11" width="2.4" height="3.4" fill="#ff8cc4" opacity=".85"/>
+      </pattern>
+      <pattern id="winB" width="12" height="16" patternUnits="userSpaceOnUse">
+        <rect x="8" y="2" width="2.4" height="3.4" fill="#8ff7ec"/><rect x="2" y="10" width="2.4" height="3.4" fill="#8ff7ec" opacity=".5"/><rect x="8" y="10" width="2.4" height="3.4" fill="#ffcf8a" opacity=".85"/>
+      </pattern>
+      <pattern id="piers" width="56" height="80" patternUnits="userSpaceOnUse"><rect x="26" y="0" width="4" height="80" fill="#170c2a"/></pattern>
+      <path id="farPath" d="M-120 398C40 372 180 366 320 384S560 410 720 394S980 366 1140 386S1400 408 1560 384V560H-120Z"/>
+      <g id="win">
+        <rect x="8" y="432" width="9" height="6.500" rx="1.500"/><rect x="21" y="432" width="9" height="6.500" rx="1.500"/><rect x="34" y="432" width="9" height="6.500" rx="1.500"/><rect x="47" y="432" width="9" height="6.500" rx="1.500"/><rect x="60" y="432" width="9" height="6.500" rx="1.500"/><rect x="73" y="432" width="9" height="6.500" rx="1.500"/><rect x="86" y="432" width="9" height="6.500" rx="1.500"/>
+      </g>
+      <g id="car">
+        <rect x="0" y="427" width="104" height="23" rx="5" fill="#1a0e2e"/>
+        <rect x="5" y="427" width="94" height="1.400" rx=".7" fill="#ffb878" opacity=".6"/>
+        <use href="#win" fill="#ffc15e" filter="url(#soft)"/>
+        <use href="#win" fill="#ffe4ab"/>
+        <rect x="0" y="442.500" width="104" height="1.300" fill="#ff4fa3" opacity=".9"/>
+        <rect x="10" y="449" width="22" height="3" rx="1" fill="#0f081d"/><rect x="72" y="449" width="22" height="3" rx="1" fill="#0f081d"/>
+      </g>
+      <g id="signs">
+        <rect x="1094" y="296" width="38" height="2" fill="#4ff0e0"/>
+        <rect x="1168" y="262" width="3" height="58" fill="#ff4fa3"/>
+        <rect x="1170" y="232" width="22" height="1.800" fill="#4ff0e0"/>
+        <rect x="1280" y="270" width="26" height="2" fill="#ff4fa3"/>
+        <rect x="1299" y="284" width="3" height="44" fill="#4ff0e0"/>
+        <rect x="1202" y="286" width="28" height="2" fill="#ffb65c"/>
+        <rect x="1240" y="304" width="30" height="13" fill="none" stroke="#4ff0e0" stroke-width="1.600"/>
+        <rect x="1245" y="309" width="14" height="2" fill="#ff4fa3"/>
+        <rect x="1382" y="320" width="30" height="2" fill="#4ff0e0"/>
+        <rect x="1038" y="340" width="3" height="30" fill="#ff4fa3"/>
+        <rect x="1140" y="330" width="16" height="2" fill="#ffb65c"/>
+      </g>
+    </defs>
+
+    <!-- sky light -->
+    <rect x="-200" y="-120" width="1840" height="680" fill="url(#sunGlow)"/>
+    <rect x="-200" y="-120" width="1840" height="680" fill="url(#cityGlow)"/>
+    <circle cx="700" cy="394" r="88" fill="url(#sunFill)"/>
+
+    <!-- the city -->
+    <g class="halo">
+      <circle cx="1330" cy="300" r="46" fill="none" stroke="#ff4fa3" stroke-width="6" filter="url(#neonBlur)"/>
+      <circle cx="1330" cy="300" r="46" fill="none" stroke="#ffd3ea" stroke-width="2.200"/>
+    </g>
+    <g fill="#190e31">
+      <rect x="1004" y="352" width="26" height="70"/><rect x="1034" y="330" width="32" height="92"/><rect x="1070" y="344" width="20" height="78"/>
+      <rect x="1094" y="296" width="38" height="126"/><rect x="1136" y="318" width="24" height="104"/>
+      <rect x="1164" y="246" width="34" height="176"/><rect x="1170" y="232" width="22" height="16"/><rect x="1180.200" y="204" width="1.600" height="30"/>
+      <rect x="1202" y="286" width="28" height="136"/><rect x="1234" y="322" width="42" height="100"/><rect x="1244" y="317" width="2" height="6"/><rect x="1264" y="317" width="2" height="6"/>
+      <rect x="1280" y="270" width="26" height="152"/><rect x="1310" y="306" width="36" height="116"/><rect x="1350" y="338" width="28" height="84"/>
+      <rect x="1382" y="320" width="30" height="102"/><rect x="1416" y="350" width="60" height="72"/>
+    </g>
+    <g opacity=".75">
+      <rect x="1097" y="304" width="32" height="110" fill="url(#winA)"/><rect x="1174" y="254" width="22" height="160" fill="url(#winB)"/>
+      <rect x="1237" y="330" width="36" height="80" fill="url(#winA)"/><rect x="1313" y="314" width="30" height="100" fill="url(#winB)"/>
+      <rect x="1044" y="338" width="20" height="70" fill="url(#winB)"/><rect x="1385" y="328" width="24" height="80" fill="url(#winA)"/>
+      <rect x="1205" y="294" width="22" height="110" fill="url(#winA)"/>
+    </g>
+    <use href="#signs" filter="url(#neonBlur)"/>
+    <use href="#signs"/>
+    <circle class="beacon" cx="1181" cy="202" r="2.400" fill="#ff7dbb"/>
+
+    <!-- far dunes -->
+    <use href="#farPath" fill="url(#duneFar)"/>
+    <use href="#farPath" fill="url(#duneShade)"/>
+
+    <!-- viaduct -->
+    <rect x="-120" y="454" width="1680" height="70" fill="url(#piers)"/>
+    <rect x="-120" y="451.500" width="1680" height="3.200" fill="#170c2a"/>
+
+    <!-- the train -->
+    <g class="train">
+      <g transform="translate(735 451.500) scale(1.250) translate(-735 -451.500)">
+        <polygon points="1001,444.500 1150,430 1150,464 1001,447.500" fill="url(#beam)"/>
+        <rect x="572" y="434" width="4" height="12" fill="#120922"/><rect x="680" y="434" width="4" height="12" fill="#120922"/><rect x="788" y="434" width="4" height="12" fill="#120922"/><rect x="896" y="434" width="4" height="12" fill="#120922"/>
+        <use href="#car" x="468"/><use href="#car" x="576"/>
+        <path d="M704 427.500c6-9 58-9 64 0z" fill="#4ff0e0" fill-opacity=".3" stroke="#a8faf1" stroke-width="1"/>
+        <use href="#car" x="684"/><use href="#car" x="792"/>
+        <path d="M900 450v-18a5 5 0 0 1 5-5h54c22 0 36 9 43 20v3z" fill="#1a0e2e"/>
+        <path d="M905 427.700h54c14 0 25 4 33 10" fill="none" stroke="#ffb878" stroke-opacity=".6" stroke-width="1.400"/>
+        <path d="M963 431.500c11 .6 20 4 26 9.500h-26z" fill="#c4f6ff" opacity=".9"/>
+        <g fill="#ffe4ab"><rect x="908" y="432" width="9" height="6.500" rx="1.500"/><rect x="921" y="432" width="9" height="6.500" rx="1.500"/><rect x="934" y="432" width="9" height="6.500" rx="1.500"/></g>
+        <rect x="900" y="442.500" width="98" height="1.300" fill="#ff4fa3" opacity=".9"/>
+        <rect x="910" y="449" width="22" height="3" rx="1" fill="#0f081d"/><rect x="966" y="449" width="22" height="3" rx="1" fill="#0f081d"/>
+        <circle cx="1000.500" cy="446" r="1.800" fill="#fff"/>
+      </g>
+    </g>
+
+    <!-- near dunes -->
+    <path d="M-120 488C60 468 240 462 420 478S700 508 900 486S1220 458 1560 484V560H-120Z" fill="url(#duneMid)"/>
+    <path d="M-120 488C60 468 240 462 420 478S700 508 900 486S1220 458 1560 484" fill="none" stroke="url(#rim)" stroke-width="1.200" opacity=".5"/>
+    <path d="M-120 540C80 510 260 502 430 522S720 552 900 530S1180 500 1560 530V562H-120Z" fill="#140a25"/>
+    <path d="M-120 540C80 510 260 502 430 522S720 552 900 530S1180 500 1560 530" fill="none" stroke="url(#rim)" stroke-width="1.500"/>
+  </svg>
+
+  <div class="wrap hero__in">
+    <p class="eyebrow">Nightly · Port Sable to Vesper City</p>
+    <h1>Fall asleep in the dunes.<br> Wake up in <em>neon</em>.</h1>
+    <p class="hero__lede">The overnight sleeper across the Sable Desert: 1,142&nbsp;km of open sand, a sky without a single streetlight, and a city that never switched off waiting at the other end.</p>
+    <div class="hero__cta">
+      <a class="btn btn--primary" href="#fares">Book a berth</a>
+      <a class="btn btn--ghost" href="#timetable">See tonight’s departures
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.600" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ROUTE ================= -->
+<section class="route" id="route" aria-label="The route">
+  <div class="wrap">
+    <div class="route__head"><span><b>DL 3</b> · The Dusk Runner</span><span>1,142 km · 10 h 35 m · every night</span></div>
+    <ol class="stops">
+      <li style="--c:var(--amber)"><time>19:40</time><strong>Port Sable</strong><span>Board as the sun goes down</span></li>
+      <li style="--c:var(--ember)"><time>22:05</time><strong>Amber Wells</strong><span>Last light on the high dunes</span></li>
+      <li style="--c:var(--pink)"><time>02:30</time><strong>Mirage Halt</strong><span>The darkest sky on the line</span></li>
+      <li style="--c:var(--cyan)"><time>06:15</time><strong>Vesper City</strong><span>Arrive while the signs are still lit</span></li>
+    </ol>
+  </div>
+  <svg class="route__dune" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 80V52C230 14 470 2 720 30s490 46 720 8v42z" fill="#f4e8d2"/></svg>
+</section>
+
+<!-- ================= FEATURES ================= -->
+<section class="features" id="onboard">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow">On board</p>
+        <h2>Three windows on one long, <em>unhurried</em> night.</h2>
+      </div>
+      <p>The crossing takes ten and a half hours. We’ve spent years making sure you never once wish it took less.</p>
+    </div>
+
+    <div class="features__grid">
+      <article class="feature">
+        <div class="pane"><div class="pane__glass">
+          <svg viewBox="0 0 360 230" role="img" aria-label="A cabin window looking out on dunes at sunset">
+            <defs><linearGradient id="w1sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a1857"/><stop offset=".42" stop-color="#b23a62"/><stop offset=".74" stop-color="#f58a45"/><stop offset="1" stop-color="#ffd27a"/></linearGradient></defs>
+            <rect width="360" height="230" fill="url(#w1sky)"/>
+            <circle cx="236" cy="146" r="40" fill="#ffe7ab"/>
+            <path d="M0 158C60 138 120 148 180 162S300 148 360 156V230H0Z" fill="#c04d5c"/>
+            <path d="M0 184C80 164 150 194 230 180S320 168 360 178V230H0Z" fill="#7a2a55"/>
+            <path d="M0 212C70 196 170 222 250 206S330 204 360 208V230H0Z" fill="#35133b"/>
+            <path d="M0 184C80 164 150 194 230 180" fill="none" stroke="#ffb878" stroke-opacity=".6" stroke-width="1.200"/>
+            <path d="M40 0h70L30 230h-70Z" fill="#fff" opacity=".07"/>
+          </svg>
+        </div></div>
+        <div class="feature__body">
+          <p class="feature__k"><i></i>01 · Dusk</p>
+          <h3>A cabin that faces the dunes</h3>
+          <p>Every berth sits beside a full-width picture window, with linen bedding, real pillows and a blackout blind you’ll forget to close.</p>
+          <p class="feature__meta">Cars 2–6 · 24 private cabins</p>
+        </div>
+      </article>
+
+      <article class="feature">
+        <div class="pane"><div class="pane__glass">
+          <svg viewBox="0 0 360 230" role="img" aria-label="A glass roof full of stars above dark dunes">
+            <defs>
+              <linearGradient id="w2sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#070616"/><stop offset=".6" stop-color="#151040"/><stop offset="1" stop-color="#2c1b62"/></linearGradient>
+              <filter id="w2blur" x="-30%" y="-80%" width="160%" height="260%"><feGaussianBlur stdDeviation="14"/></filter>
+              <linearGradient id="w2shoot" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#fff"/></linearGradient>
+            </defs>
+            <rect width="360" height="230" fill="url(#w2sky)"/>
+            <ellipse cx="190" cy="92" rx="230" ry="30" transform="rotate(-24 190 92)" fill="#9a7bff" opacity=".4" filter="url(#w2blur)"/>
+            <g fill="#fff">
+              <circle cx="24" cy="30" r="1"/><circle cx="52" cy="92" r="1.300" opacity=".8"/><circle cx="70" cy="44" r=".9" opacity=".7"/><circle cx="38" cy="140" r="1" opacity=".6"/>
+              <circle cx="112" cy="24" r="1.200"/><circle cx="146" cy="130" r="1" opacity=".7"/><circle cx="158" cy="42" r=".9" opacity=".8"/><circle cx="188" cy="150" r="1.200" opacity=".6"/>
+              <circle cx="222" cy="52" r="1" opacity=".9"/><circle cx="262" cy="132" r="1.300" opacity=".7"/><circle cx="286" cy="64" r="1"/><circle cx="318" cy="108" r="1.100" opacity=".8"/>
+              <circle cx="336" cy="40" r="1.400"/><circle cx="304" cy="162" r=".9" opacity=".6"/><circle cx="90" cy="162" r="1" opacity=".5"/><circle cx="232" cy="168" r=".9" opacity=".5"/>
+              <circle cx="200" cy="22" r=".8" opacity=".7"/><circle cx="130" cy="64" r=".8" opacity=".6"/><circle cx="20" cy="76" r=".8" opacity=".6"/><circle cx="346" cy="150" r=".9" opacity=".6"/>
+            </g>
+            <polyline points="96,60 128,86 170,78 204,106 246,94" fill="none" stroke="#fff" stroke-opacity=".4" stroke-width=".8"/>
+            <g fill="#fff"><circle cx="96" cy="60" r="2.200"/><circle cx="128" cy="86" r="1.800"/><circle cx="170" cy="78" r="2.400"/><circle cx="204" cy="106" r="1.800"/><circle cx="246" cy="94" r="2.200"/></g>
+            <line x1="262" y1="34" x2="306" y2="20" stroke="url(#w2shoot)" stroke-width="1.400" stroke-linecap="round"/>
+            <path d="M-10 62Q180-30 370 62" fill="none" stroke="#fff" stroke-opacity=".14" stroke-width="2"/>
+            <path d="M120 0V230M240 0V230" stroke="#fff" stroke-opacity=".09" stroke-width="2"/>
+            <path d="M0 198C60 182 130 192 190 202S300 188 360 196V230H0Z" fill="#0b0819"/>
+            <path d="M40 0h70L30 230h-70Z" fill="#fff" opacity=".05"/>
+          </svg>
+        </div></div>
+        <div class="feature__body">
+          <p class="feature__k"><i></i>02 · Midnight</p>
+          <h3>The Observatory Car</h3>
+          <p>A glass-roofed lounge with reclining seats and no reading lights. Past Mirage Halt we dim the whole train for 200&nbsp;km of unbroken sky.</p>
+          <p class="feature__meta">Car 4 · open until 03:00</p>
+        </div>
+      </article>
+
+      <article class="feature">
+        <div class="pane"><div class="pane__glass">
+          <svg viewBox="0 0 360 230" role="img" aria-label="A coffee cup on a window sill with a neon skyline at dawn">
+            <defs>
+              <linearGradient id="w3sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1b1147"/><stop offset=".48" stop-color="#7a2c8f"/><stop offset=".76" stop-color="#ff6aa2"/><stop offset="1" stop-color="#ffc890"/></linearGradient>
+              <filter id="w3blur" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="4"/></filter>
+              <pattern id="w3win" width="10" height="13" patternUnits="userSpaceOnUse"><rect x="2" y="3" width="2.200" height="3" fill="#ffcf8a"/><rect x="6.500" y="8" width="2.200" height="3" fill="#8ff7ec" opacity=".8"/></pattern>
+            </defs>
+            <rect width="360" height="230" fill="url(#w3sky)"/>
+            <circle cx="252" cy="118" r="44" fill="none" stroke="#ff4fa3" stroke-width="6" filter="url(#w3blur)"/>
+            <circle cx="252" cy="118" r="44" fill="none" stroke="#ffd3ea" stroke-width="2.400"/>
+            <g fill="#160c2e">
+              <rect x="14" y="124" width="36" height="90"/><rect x="54" y="98" width="28" height="116"/><rect x="86" y="140" width="42" height="74"/>
+              <rect x="132" y="70" width="32" height="144"/><rect x="141" y="56" width="14" height="16"/><rect x="147.200" y="36" width="1.600" height="22"/>
+              <rect x="168" y="112" width="36" height="102"/><rect x="208" y="136" width="30" height="78"/><rect x="242" y="102" width="26" height="112"/>
+              <rect x="272" y="130" width="40" height="84"/><rect x="316" y="92" width="34" height="122"/>
+            </g>
+            <g opacity=".8"><rect x="57" y="106" width="22" height="92" fill="url(#w3win)"/><rect x="136" y="80" width="24" height="118" fill="url(#w3win)"/><rect x="171" y="120" width="30" height="78" fill="url(#w3win)"/><rect x="319" y="100" width="28" height="98" fill="url(#w3win)"/><rect x="275" y="138" width="34" height="60" fill="url(#w3win)"/></g>
+            <g>
+              <rect x="132" y="70" width="32" height="2.200" fill="#4ff0e0"/><rect x="137" y="86" width="3" height="42" fill="#ff4fa3"/>
+              <rect x="316" y="92" width="34" height="2.200" fill="#ffb65c"/><rect x="242" y="102" width="26" height="2.200" fill="#ff4fa3"/>
+              <rect x="20" y="134" width="3" height="34" fill="#4ff0e0"/><rect x="168" y="112" width="36" height="2.200" fill="#ffb65c"/>
+              <circle cx="148" cy="35" r="2" fill="#ff7dbb"/>
+            </g>
+            <rect x="0" y="202" width="360" height="28" fill="#1d1230"/>
+            <rect x="0" y="202" width="360" height="1.500" fill="#ffb878" opacity=".5"/>
+            <path d="M52 178h32v10a14 14 0 0 1-14 14h-4a14 14 0 0 1-14-14z" fill="#f4e8d2"/>
+            <path d="M84 181h3a5.500 5.500 0 0 1 0 11h-4" fill="none" stroke="#f4e8d2" stroke-width="3"/>
+            <path d="M61 170c-4-6 4-8 0-14M74 170c-4-6 4-8 0-14" fill="none" stroke="#fff" stroke-opacity=".75" stroke-width="2" stroke-linecap="round"/>
+            <path d="M40 0h70L30 230h-70Z" fill="#fff" opacity=".06"/>
+          </svg>
+        </div></div>
+        <div class="feature__body">
+          <p class="feature__k"><i></i>03 · First light</p>
+          <h3>Supper at dusk, coffee in neon</h3>
+          <p>Three slow courses in the dining car while the sand turns red. Then coffee and warm pastries at your door, forty minutes before the skyline.</p>
+          <p class="feature__meta">Car 7 · supper 20:15 · breakfast 05:30</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TIMETABLE ================= -->
+<section class="times" id="timetable">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow">Timetable</p>
+        <h2>Four departures. Every night of the year.</h2>
+      </div>
+      <div class="clockbox">
+        <div class="clock"><i></i>Station time <time id="clock">19:12:00</time></div>
+        <p class="next" id="next-note">Check-in closes 20 minutes before departure.</p>
+      </div>
+    </div>
+
+    <div class="board-wrap">
+      <table class="board">
+        <thead>
+          <tr>
+            <th scope="col">Service</th>
+            <th scope="col">Departs<small>Port Sable</small></th>
+            <th scope="col">Arrives<small>Vesper City</small></th>
+            <th scope="col">Journey</th>
+            <th scope="col">Calls at</th>
+            <th scope="col">Tonight</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr data-dep="17:10" data-name="DL 1 Gold Hour">
+            <th scope="row"><div class="svc"><span class="svc__no">DL 1</span><span class="svc__name">Gold Hour<span class="svc__tag">Next out</span></span></div></th>
+            <td data-label="Departs"><span class="t t--dep">17:10</span></td>
+            <td data-label="Arrives"><span class="t t--arr">05:20<sup>+1</sup></span></td>
+            <td data-label="Journey"><span class="dur">12 h 10 m<small>Scenic</small></span></td>
+            <td data-label="Calls at"><span class="calls">Amber Wells · Saltgate · Mirage Halt</span></td>
+            <td data-label="Tonight"><span class="pill pill--ok">Cabins available</span></td>
+          </tr>
+          <tr data-dep="19:40" data-name="DL 3 Dusk Runner">
+            <th scope="row"><div class="svc"><span class="svc__no">DL 3</span><span class="svc__name">Dusk Runner<span class="svc__tag">Next out</span></span></div></th>
+            <td data-label="Departs"><span class="t t--dep">19:40</span></td>
+            <td data-label="Arrives"><span class="t t--arr">06:15<sup>+1</sup></span></td>
+            <td data-label="Journey"><span class="dur">10 h 35 m<small>Flagship</small></span></td>
+            <td data-label="Calls at"><span class="calls">Amber Wells · Mirage Halt</span></td>
+            <td data-label="Tonight"><span class="pill pill--warn">Last 6 cabins</span></td>
+          </tr>
+          <tr data-dep="21:55" data-name="DL 5 Night Glass">
+            <th scope="row"><div class="svc"><span class="svc__no">DL 5</span><span class="svc__name">Night Glass<span class="svc__tag">Next out</span></span></div></th>
+            <td data-label="Departs"><span class="t t--dep">21:55</span></td>
+            <td data-label="Arrives"><span class="t t--arr">08:05<sup>+1</sup></span></td>
+            <td data-label="Journey"><span class="dur">10 h 10 m<small>Stargazer</small></span></td>
+            <td data-label="Calls at"><span class="calls">Mirage Halt</span></td>
+            <td data-label="Tonight"><span class="pill pill--ok">Cabins available</span></td>
+          </tr>
+          <tr data-dep="23:30" data-name="DL 7 Last Light">
+            <th scope="row"><div class="svc"><span class="svc__no">DL 7</span><span class="svc__name">Last Light<span class="svc__tag">Next out</span></span></div></th>
+            <td data-label="Departs"><span class="t t--dep">23:30</span></td>
+            <td data-label="Arrives"><span class="t t--arr">09:10<sup>+1</sup></span></td>
+            <td data-label="Journey"><span class="dur">9 h 40 m<small>Express</small></span></td>
+            <td data-label="Calls at"><span class="calls">Non-stop to Vesper City</span></td>
+            <td data-label="Tonight"><span class="pill pill--muted">Seats only</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="board-note">
+      <span>All arrivals are the following morning</span>
+      <span>Port Sable lounge opens at 16:00</span>
+      <span>Stay aboard until 07:00 on early arrivals</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TESTIMONIAL ================= -->
+<section class="quote" aria-label="Passenger story">
+  <div class="wrap quote__in">
+    <div>
+      <p class="eyebrow">Passenger notes</p>
+      <div class="quote__mark" aria-hidden="true">“</div>
+    </div>
+    <figure>
+      <blockquote>
+        <p>I pulled the blind down on red sand and let it up on a skyline that was still switched on. In between there was supper, a glass roof full of stars, and <em>the best sleep I’ve had on anything that moves.</em></p>
+      </blockquote>
+      <figcaption>
+        <span class="avatar" aria-hidden="true">IA</span>
+        <span class="quote__who"><strong>Imogen Achterberg</strong><span>Travel editor, The Slow Atlas</span></span>
+        <span class="quote__trip">DL 3 · Dune cabin<br>Car 5, berth 11</span>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ================= FARES ================= -->
+<section class="fares" id="fares">
+  <div class="wrap">
+    <div class="fares__head">
+      <p class="eyebrow">Fares</p>
+      <h2>Choose how you’d like to sleep.</h2>
+      <p>Every fare includes the Observatory Car, two checked bags and a window. Always a window.</p>
+      <div class="seg" role="group" aria-label="Fare type">
+        <button type="button" data-mode="one" aria-pressed="true">One way</button>
+        <button type="button" data-mode="return" aria-pressed="false">Return <span>−15%</span></button>
+      </div>
+    </div>
+
+    <div class="tiers">
+      <article class="tier" style="--a:var(--amber)">
+        <p class="tier__kind">Reclining seat</p>
+        <h3>Drift</h3>
+        <p class="tier__desc">A deep recliner, a blanket and the whole desert sliding past.</p>
+        <p class="tier__price"><span class="tier__cur">$</span><span class="tier__amt" data-one="64" data-return="109">64</span><span class="tier__per">per person<br><span data-per>one way</span></span></p>
+        <a class="btn btn--ghost" href="#fares">Choose Drift</a>
+        <ul>
+          <li>Wide recliner with 140° tilt and footrest</li>
+          <li>Blanket, eye mask and earplugs</li>
+          <li>Reading light and USB-C at every seat</li>
+          <li>Café counter open until 01:00</li>
+        </ul>
+      </article>
+
+      <article class="tier tier--featured" style="--a:#ff7dbb">
+        <span class="tier__badge">Most booked</span>
+        <p class="tier__kind">Private cabin</p>
+        <h3>Dune</h3>
+        <p class="tier__desc">A lockable cabin for one or two, with supper and breakfast included.</p>
+        <p class="tier__price"><span class="tier__cur">$</span><span class="tier__amt" data-one="148" data-return="252">148</span><span class="tier__per">per person<br><span data-per>one way</span></span></p>
+        <a class="btn btn--neon" href="#fares">Choose Dune</a>
+        <ul>
+          <li>Twin-berth cabin with picture window</li>
+          <li>Linen bedding and real pillows</li>
+          <li>Three-course supper in the dining car</li>
+          <li>Breakfast brought to your door</li>
+          <li>Hot showers at the end of every car</li>
+        </ul>
+      </article>
+
+      <article class="tier" style="--a:var(--cyan)">
+        <p class="tier__kind">Suite</p>
+        <h3>Mirage</h3>
+        <p class="tier__desc">A double bed, your own shower and the best seats under the glass.</p>
+        <p class="tier__price"><span class="tier__cur">$</span><span class="tier__amt" data-one="285" data-return="485">285</span><span class="tier__per">per person<br><span data-per>one way</span></span></p>
+        <a class="btn btn--ghost" href="#fares">Choose Mirage</a>
+        <ul>
+          <li>Double-bed suite with en-suite shower</li>
+          <li>Supper at a reserved table or in your suite</li>
+          <li>Reserved Observatory seats after midnight</li>
+          <li>Station lounges at both ends of the line</li>
+          <li>Fully flexible: change or refund any time</li>
+        </ul>
+      </article>
+    </div>
+    <p class="fares__note">Under-12s travel half price · Under-3s ride free in your berth · Cabin fares assume two sharing</p>
+  </div>
+</section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__cta">
+      <h2>Tonight’s train is already <em>warming up</em>.</h2>
+      <div class="foot__btns">
+        <a class="btn btn--primary" href="#fares">Book a berth</a>
+        <a class="btn btn--ghost" href="#timetable">Check departures</a>
+      </div>
+    </div>
+    <div class="foot__line" aria-hidden="true"></div>
+    <div class="foot__grid">
+      <div class="foot__about">
+        <a class="brand" href="#top" aria-label="Dune Line home">
+          <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true" focusable="false">
+            <circle cx="17" cy="17" r="16" fill="none" stroke="currentColor" stroke-opacity=".35"/>
+            <path d="M9.5 18a7.5 7.5 0 0 1 15 0z" fill="#ffb65c"/>
+            <path d="M4.5 22c4.6-3.6 8.6-3.6 12.500-1s8 3 12.500-1" fill="none" stroke="#ff4fa3" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M9 26.500h16" stroke="#4ff0e0" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+          Dune Line
+        </a>
+        <p>The overnight sleeper between Port Sable and Vesper City. Slow on purpose since the first crossing.</p>
+      </div>
+      <nav aria-label="Journey">
+        <h3>Journey</h3>
+        <ul><li><a href="#route">The route</a></li><li><a href="#timetable">Timetable</a></li><li><a href="#fares">Fares</a></li><li><a href="#fares">Gift a crossing</a></li></ul>
+      </nav>
+      <nav aria-label="On board">
+        <h3>On board</h3>
+        <ul><li><a href="#onboard">Cabins &amp; suites</a></li><li><a href="#onboard">Observatory Car</a></li><li><a href="#onboard">Dining car</a></li><li><a href="#onboard">Accessibility</a></li></ul>
+      </nav>
+      <nav aria-label="Company">
+        <h3>Company</h3>
+        <ul><li><a href="#top">Our story</a></li><li><a href="#top">Careers</a></li><li><a href="#top">Press</a></li><li><a href="#top">Contact</a></li></ul>
+      </nav>
+    </div>
+    <div class="foot__base">
+      <span>© Dune Line Railway Co. · Platform 1, Port Sable Terminus</span>
+      <span>A fictional railway. The stars are real, though.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var d=document;
+
+  /* nav: solid on scroll + mobile menu */
+  var nav=d.querySelector('.nav'), tg=d.querySelector('.nav__toggle'), menu=d.getElementById('menu');
+  function onScroll(){nav.classList.toggle('is-stuck',window.scrollY>24)}
+  onScroll(); window.addEventListener('scroll',onScroll,{passive:true});
+  tg.addEventListener('click',function(){
+    var open=nav.classList.toggle('is-open'); tg.setAttribute('aria-expanded',String(open));
+  });
+  menu.addEventListener('click',function(e){
+    if(e.target.closest('a')){nav.classList.remove('is-open');tg.setAttribute('aria-expanded','false')}
+  });
+
+  /* stars: seeded so the sky is the same every visit */
+  var sky=d.querySelector('.stars');
+  if(sky){
+    var seed=11;
+    var rnd=function(){seed|=0;seed=seed+0x6D2B79F5|0;var t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296};
+    var frag=d.createDocumentFragment();
+    for(var i=0;i<120;i++){
+      var x=rnd()*100, y=Math.pow(rnd(),1.3)*66, k=rnd();
+      var size=k<.1?2.4:(k<.5?1.6:1);
+      var o=Math.max(.12,(.35+rnd()*.65)*(1-y/80));
+      var s=d.createElement('i');
+      s.style.cssText='left:'+x.toFixed(2)+'%;top:'+y.toFixed(2)+'%;width:'+size+'px;height:'+size+'px;--o:'+o.toFixed(2)+';animation-delay:-'+(rnd()*6).toFixed(2)+'s;animation-duration:'+(3+rnd()*4).toFixed(2)+'s';
+      frag.appendChild(s);
+    }
+    sky.appendChild(frag);
+  }
+
+  /* timetable: live clock + next departure */
+  var rows=[].slice.call(d.querySelectorAll('.board tbody tr')), clock=d.getElementById('clock'), note=d.getElementById('next-note');
+  function mins(t){var p=t.split(':');return (+p[0])*60+(+p[1])}
+  function pad(n){return (n<10?'0':'')+n}
+  function tick(){
+    var n=new Date(), m=n.getHours()*60+n.getMinutes(), next=null, wait=0;
+    if(clock) clock.textContent=pad(n.getHours())+':'+pad(n.getMinutes())+':'+pad(n.getSeconds());
+    rows.forEach(function(r){var dm=mins(r.getAttribute('data-dep')); if(!next&&dm>m){next=r;wait=dm-m}});
+    if(!next&&rows.length){next=rows[0];wait=mins(rows[0].getAttribute('data-dep'))+1440-m}
+    rows.forEach(function(r){r.classList.toggle('is-next',r===next)});
+    if(note&&next){
+      var h=Math.floor(wait/60), mm=wait%60;
+      note.innerHTML='Next out: <strong>'+next.getAttribute('data-name')+'</strong> in '+(h?h+' h ':'')+mm+' min';
+    }
+  }
+  if(rows.length){tick();setInterval(tick,1000)}
+
+  /* fares: one way / return */
+  var seg=[].slice.call(d.querySelectorAll('.seg button'));
+  seg.forEach(function(b){
+    b.addEventListener('click',function(){
+      var mode=b.getAttribute('data-mode');
+      seg.forEach(function(x){x.setAttribute('aria-pressed',String(x===b))});
+      [].forEach.call(d.querySelectorAll('.tier__amt'),function(el){el.textContent=el.getAttribute('data-'+mode)});
+      [].forEach.call(d.querySelectorAll('[data-per]'),function(el){el.textContent=mode==='return'?'return':'one way'});
+    });
+  });
+})();
+</script>
+</body>
+</html>

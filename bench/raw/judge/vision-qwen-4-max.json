@@ -1,0 +1,22 @@
+{
+ "claude-opus-5-5": {
+  "scores": {
+   "subjects": 8.0,
+   "layout": 6.0,
+   "colour": 7.0,
+   "style": 4.0,
+   "overall": 5.0
+  },
+  "note": "Every element is present in roughly the right region, but the recreation uses a stylized digital-illustration look instead of photoreal rendering, enlarges the figures and towers, adds a second elevated monorail track and palm trees, and places the OASIS sign on the tower face rather than beside it."
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "subjects": 9.0,
+   "layout": 5.0,
+   "colour": 6.0,
+   "style": 6.0,
+   "overall": 5.0
+  },
+  "note": "Nearly all subjects are present, but the towers, track, and pool shift substantially, and the recreation is brighter and more stylized."
+ }
+}

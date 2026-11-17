@@ -1,0 +1,22 @@
+{
+ "claude-opus-5-5": {
+  "scores": {
+   "typography": 8.0,
+   "layout": 5.0,
+   "colour": 8.0,
+   "completeness": 8.0,
+   "originality": 8.0
+  },
+  "note": "A polished, atmospheric dark design with refined serif and mono pairing and rich, specific content, but the sticky nav renders mid-hero, overlapping the headline and hero illustration, a clear broken-layout flaw."
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "typography": 8.0,
+   "layout": 7.0,
+   "colour": 8.0,
+   "completeness": 10,
+   "originality": 9.0
+  },
+  "note": "A distinctive, cohesive design with all required sections, though the navigation interrupts the hero and some small text lacks contrast."
+ }
+}

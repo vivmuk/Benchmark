@@ -1,0 +1,22 @@
+{
+ "text": "A suspension bridge carries load by changing much of it into tension in its main cables, then delivering the resulting forces to the towers and anchorages. The process starts with the deck, which supports its own weight as well as vehicles, people, wind, and other loads. A wheel load is first carried locally by the roadway surface and the beams beneath it. Crossbeams spread that load to the deck\u2019s longitudinal girders or trusses, which distribute it along the bridge so that no single support has to carry the entire concentrated force.\n\nAt intervals along the span, vertical or slightly inclined hangers connect the deck to the main cables overhead. The deck pulls downward on these hangers, stretching them, and the hangers respond by pulling upward on the deck. Each hanger therefore carries a share of the deck load in tension. At their upper ends, the hangers pull downward on the main cables. The closely spaced attachments make the cables support the deck at many points rather than only at its ends.\n\nThe main cables are very strong in tension but cannot usefully resist compression or bending. Under the downward pull of the hangers, they take a curved shape, approximately parabolic for a fairly uniform load across the main span. Tension develops along each cable, with its horizontal component remaining nearly constant across that span. Because the cable becomes steeper toward the towers, the total tension is generally greatest near its upper ends. The cable\u2019s curvature is essential: a perfectly straight, horizontal cable could not support a vertical load with finite tension. When loading changes, the bridge deflects slightly until cable tension, hanger forces, and deck forces return to equilibrium.\n\nEach main cable passes over a saddle near the top of a tower. The cable presses down on the saddle, and the forces from the main span and the side span largely oppose one another horizontally. Under balanced conditions, the tower consequently carries mostly a large downward compressive force, although uneven traffic, wind, temperature effects, and differences between spans can also produce bending and horizontal forces. The tower transmits these forces to its foundation, which spreads them into soil or rock strong enough to resist settlement, sliding, and overturning.\n\nBeyond the towers, the cables continue through the side spans to anchorages at the ends of the bridge. An anchorage may be a massive concrete block or a structure fixed directly into suitable rock. It must resist the cable\u2019s pull toward the span and its upward component. Its weight, friction, and connection to the surrounding ground provide that resistance, so the anchorage ultimately transfers cable tension into the earth as well.\n\nThe deck\u2019s stiffening girders or trusses remain important even though the cables provide the main support. They spread concentrated loads between hangers, limit local sagging, and help control movement under traffic and wind. Thus the complete load path runs from the roadway into the deck structure, through the hangers into tension in the main cables, and then through compression in the towers and tension at the anchorages into foundations and finally the ground.",
+ "reasoning_chars": 4034,
+ "usage": {
+  "prompt_tokens": 121,
+  "completion_tokens": 1419,
+  "total_tokens": 1540,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 808,
+   "image_tokens": 0,
+   "audio_tokens": 0
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 0.8809900004416704,
+ "t_first_content": 11.086233125068247,
+ "t_total": 15.591617790982127,
+ "cost": 0.03608
+}

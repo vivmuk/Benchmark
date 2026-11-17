@@ -1,0 +1,17 @@
+{
+ "text": "A suspension bridge works by turning the weight of the deck and its traffic into tension in cables, then routing that tension to two kinds of support: towers that push down into the ground, and anchorages that hold the cable ends in place.\n\nThe path begins at the deck. When a truck crosses, its weight presses on the roadway, which rests on a stiffening structure, usually a deep truss or an aerodynamic steel box girder. This structure is not strong enough to span the gap on its own, and it does not need to be. Its job is to spread a concentrated load along the length of the bridge so that no single point bears it alone, and to keep the deck from twisting or rippling under wind and moving traffic.\n\nThe deck hangs from vertical cables or rods called hangers or suspenders, spaced at regular intervals along its length. Each one collects the weight of a short section of deck and carries it straight upward in pure tension, like a rope holding a bucket. At the top, each hanger is clamped to one of the main cables.\n\nThe main cables are the heart of the system. Each is a thick bundle of thousands of high-strength steel wires, draped over the tops of the towers and sweeping down in a curve between them. Because a cable cannot resist bending or compression, it can only pull along its own length. The many downward tugs from the hangers shape it into a curve close to a parabola, and at every point the tension in the cable is angled so that its vertical component supports the load hanging below. That tension is enormous, and it has a large horizontal component as well, because the cable is relatively shallow compared with its span. A flatter cable means a higher tension for the same load.\n\nAt the towers, the cable passes over curved saddles and changes direction. The cable pulls downward on the tower from both sides, the main span on one side and the side span or backstay on the other. The horizontal pulls from the two sides largely cancel each other, which is why the towers can be surprisingly slender. What remains is a huge vertical force, so the towers act as columns in compression, carrying most of the bridge's weight straight down into foundations set on bedrock or deep piles. From there the load spreads into the ground.\n\nThe horizontal pull remains. The cable's tension does not vanish at the towers; it continues along the backstays to the anchorages at each end of the bridge. These are massive concrete blocks or chambers cut into solid rock, where the cable's wires splay out and attach to steel anchor assemblies embedded deep inside. The anchorages resist the pull through sheer weight, friction against the ground, and the strength of the surrounding rock. Without them, the cables would simply slide inward and the deck would drop.\n\nSo every load ends up in the earth by one of two routes: as compression down through the towers, or as tension dragged outward and resisted by the anchorages.",
+ "reasoning_chars": 441,
+ "usage": {
+  "prompt_tokens": 61,
+  "completion_tokens": 1061,
+  "total_tokens": 1122,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 4.199164125137031,
+ "t_first_content": 4.223601249977946,
+ "t_total": 12.35589824989438,
+ "cost": 0.042928
+}

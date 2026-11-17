@@ -1,0 +1,22 @@
+{
+ "claude-opus-5-5": {
+  "scores": {
+   "typography": 8.0,
+   "layout": 8.0,
+   "colour": 8.0,
+   "completeness": 9.0,
+   "originality": 6.0
+  },
+  "note": "A polished, cohesive editorial build: the serif display type with its italic terracotta accent, the restrained cream, navy and copper palette, and the custom train illustration all work well, and every required section is present and well formed, though the tiny grey body text strains legibility and"
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "typography": 8.0,
+   "layout": 9.0,
+   "colour": 9.0,
+   "completeness": 10,
+   "originality": 9.0
+  },
+  "note": "A distinctive, polished page with every requested section; some small labels and secondary text are harder to read."
+ }
+}

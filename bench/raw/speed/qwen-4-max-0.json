@@ -1,0 +1,20 @@
+{
+ "text": "When a truck rolls onto a suspension bridge, its weight presses first into the roadway slab, and the slab passes that pressure into the stiffening girder or truss beneath it. That girder is not intended to span the whole opening by itself; a beam of such length would collapse under its own weight. Instead it is held up every ten or twenty metres by a vertical hanger, so it only bends across the short distance between neighbouring hangers. Its real work is to spread a concentrated wheel load among several hangers at once, preventing a local dip in the deck and smoothing the effect of unevenly placed traffic.\n\nEach hanger carries its share in pure tension. This matters, because a member pulled straight is far more efficient than one bent or squeezed: it cannot buckle, and every fibre of its cross-section works at full stress. The hangers deliver their loads into the main cable, which is itself a bundle of tens of thousands of high-strength steel wires, and which behaves as a single flexible tension member. A cable has no bending stiffness worth mentioning, so it can carry load only by changing direction. Where a hanger pulls down, the cable kinks slightly, and the tension in the segments on either side of that kink has a net upward component that balances the pull. Accumulated over hundreds of hangers, these small changes of direction give the cable its smooth curve, close to a parabola when the deck load is roughly uniform along the span.\n\nThe depth of that curve governs the forces. A cable that hangs low, with a sag of about a tenth of the span, pulls with far less tension than a shallow one stretched nearly flat, because a steeper cable can generate the necessary vertical support with a smaller total force. This is why suspension bridges have such pronounced droop, and why the tension is greatest near the towers, where the cable is steepest.\n\nAt the tower top the cable passes over a saddle, a smooth curved casting that lets it turn without a sharp bend. The steeply inclined cable on the main-span side and the backstay on the shore side pull in nearly opposite horizontal directions, so those horizontal components largely cancel and the tower receives mostly a downward force. The tower is therefore a compression member, carrying the accumulated weight of half the main span and its side span down through its legs to a pier, a caisson, or bedrock, where the ground bears the load in ordinary compressive bearing.\n\nThe horizontal pull that the tower does not absorb continues along the backstay to the anchorage at each end. There the cable is splayed out and anchored into a massive concrete block, or into a tunnel cut in sound rock, and the ground resists the enormous steady pull by weight, friction, and shear. So the load path closes: the deck hangs in tension from the cables, the cables press down on the towers and pull back on the anchorages, and the earth finally takes it all, pushing up beneath the towers and holding fast against the anchorages.",
+ "reasoning_chars": 3769,
+ "usage": {
+  "prompt_tokens": 61,
+  "completion_tokens": 1460,
+  "total_tokens": 1521,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 844
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 2.6050202073529363,
+ "t_first_content": 20.330227916128933,
+ "t_total": 30.998486957512796,
+ "cost": 0.008326875
+}

@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Alpaca Walk</title>
+<style>
+  html,body{margin:0;padding:0;height:100%;overflow:hidden;background:#0d1522;}
+  svg{display:block;width:100vw;height:100vh;}
+  #alpaca *{transform-box:view-box;}
+
+  /* ---------- leg gait ---------- */
+  .leg{
+    animation:step 1.15s linear infinite;
+    will-change:transform;
+  }
+  @keyframes step{
+    0%   {transform:rotate(13deg) translateY(0px);   animation-timing-function:cubic-bezier(.36,0,.64,1);}
+    58%  {transform:rotate(-13deg) translateY(0px);  animation-timing-function:cubic-bezier(.4,0,.6,1);}
+    63%  {transform:rotate(-13deg) translateY(-17px);animation-timing-function:cubic-bezier(.35,0,.65,1);}
+    90%  {transform:rotate(13deg) translateY(-17px); animation-timing-function:cubic-bezier(.4,0,.6,1);}
+    100% {transform:rotate(13deg) translateY(0px);}
+  }
+
+  /* ---------- body & secondary motion ---------- */
+  #bodyBob{
+    animation:bob 1.15s ease-in-out infinite;
+    transform-origin:620px 420px;
+  }
+  @keyframes bob{
+    0%,100%{transform:translateY(0px) rotate(0deg);}
+    22%    {transform:translateY(2.6px) rotate(-0.4deg);}
+    48%    {transform:translateY(0px) rotate(0deg);}
+    74%    {transform:translateY(2.6px) rotate(0.4deg);}
+  }
+
+  #neck{animation:neckSway 1.15s ease-in-out infinite;transform-origin:702px 404px;}
+  @keyframes neckSway{
+    0%,100%{transform:rotate(-1.7deg);}
+    50%    {transform:rotate(1.7deg);}
+  }
+
+  #head{animation:headMov 1.15s ease-in-out infinite;transform-origin:752px 286px;}
+  @keyframes headMov{
+    0%,100%{transform:translateX(-3.4px) rotate(2.4deg);}
+    50%    {transform:translateX(3.4px) rotate(-2.4deg);}
+  }
+
+  #tail{animation:tailWag 0.92s ease-in-out infinite;transform-origin:498px 372px;}
+  @keyframes tailWag{
+    0%,100%{transform:rotate(-7deg);}
+    50%    {transform:rotate(7deg);}
+  }
+
+  #earL{animation:earL 2.4s ease-in-out infinite;transform-origin:750px 246px;}
+  #earR{animation:earR 2.9s ease-in-out infinite;transform-origin:778px 244px;}
+  @keyframes earL{
+    0%,70%,100%{transform:rotate(0deg);}
+    80%{transform:rotate(-7deg);}
+    90%{transform:rotate(3deg);}
+  }
+  @keyframes earR{
+    0%,60%,100%{transform:rotate(0deg);}
+    72%{transform:rotate(6deg);}
+    86%{transform:rotate(-3deg);}
+  }
+
+  #eye{animation:blink 4.6s ease-in-out infinite;transform-origin:780px 255px;}
+  @keyframes blink{
+    0%,90%,100%{transform:scaleY(1);}
+    94%,96%    {transform:scaleY(0.08);}
+  }
+
+  /* ---------- scenery ---------- */
+  #grassScroll{animation:scroll 9s linear infinite;}
+  #fgScroll{animation:scrollFast 4.6s linear infinite;}
+  @keyframes scroll{from{transform:translateX(0px);}to{transform:translateX(-640px);}}
+  @keyframes scrollFast{from{transform:translateX(0px);}to{transform:translateX(-640px);}}
+
+  .cloud{animation:drift 100s linear infinite;}
+  @keyframes drift{from{transform:translateX(-320px);}to{transform:translateX(1620px);}}
+
+  #sunGlow{animation:pulse 9s ease-in-out infinite;transform-origin:1035px 165px;}
+  @keyframes pulse{0%,100%{transform:scale(1);opacity:.9;}50%{transform:scale(1.09);opacity:1;}}
+
+  #shadow{animation:shadowPulse 1.15s ease-in-out infinite;transform-origin:630px 562px;}
+  @keyframes shadowPulse{0%,100%{transform:scaleX(1);opacity:.26;}50%{transform:scaleX(0.94);opacity:.2;}}
+</style>
+</head>
+<body>
+<svg id="scene" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#6e9bcb"/>
+      <stop offset="30%"  stop-color="#a9c8e2"/>
+      <stop offset="55%"  stop-color="#dbe7ea"/>
+      <stop offset="76%"  stop-color="#f6e2c6"/>
+      <stop offset="100%" stop-color="#f9d7b0"/>
+    </linearGradient>
+    <radialGradient id="sunGlowG">
+      <stop offset="0%"   stop-color="#fff7de" stop-opacity=".95"/>
+      <stop offset="42%"  stop-color="#ffe9b6" stop-opacity=".42"/>
+      <stop offset="100%" stop-color="#ffdfa4" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="hillFar" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#c3d3e2"/>
+      <stop offset="100%" stop-color="#a9bed3"/>
+    </linearGradient>
+    <linearGradient id="hillMid" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#a5c2a6"/>
+      <stop offset="100%" stop-color="#86a98b"/>
+    </linearGradient>
+    <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#8fb98a"/>
+      <stop offset="35%"  stop-color="#74a375"/>
+      <stop offset="100%" stop-color="#3f6c50"/>
+    </linearGradient>
+    <linearGradient id="haze" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#ffe3bd" stop-opacity=".85"/>
+      <stop offset="100%" stop-color="#ffe3bd" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="underShade" cx="50%" cy="50%" r="50%">
+      <stop offset="45%"  stop-color="#d2a67c" stop-opacity=".7"/>
+      <stop offset="100%" stop-color="#d2a67c" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="topLight" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="#fffcf4" stop-opacity=".75"/>
+      <stop offset="100%" stop-color="#fffcf4" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="50%" cy="48%" r="72%">
+      <stop offset="58%"  stop-color="#101d2c" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#101d2c" stop-opacity=".38"/>
+    </radialGradient>
+    <filter id="soft9"><feGaussianBlur stdDeviation="9"/></filter>
+    <filter id="soft14"><feGaussianBlur stdDeviation="14"/></filter>
+    <filter id="soft4"><feGaussianBlur stdDeviation="4"/></filter>
+  </defs>
+
+  <!-- sky -->
+  <rect x="-20" y="-20" width="1320" height="760" fill="url(#sky)"/>
+
+  <!-- sun -->
+  <circle id="sunGlow" cx="1035" cy="165" r="165" fill="url(#sunGlowG)"/>
+  <circle cx="1035" cy="165" r="46" fill="#fff6d9" opacity=".92" filter="url(#soft4)"/>
+
+  <!-- clouds -->
+  <g id="clouds" fill="#ffffff" opacity=".7">
+    <g class="cloud" style="animation-duration:118s;animation-delay:-18s;">
+      <ellipse cx="60" cy="150" rx="72" ry="26"/>
+      <ellipse cx="10" cy="158" rx="52" ry="20"/>
+      <ellipse cx="112" cy="160" rx="58" ry="19"/>
+      <ellipse cx="64" cy="132" rx="46" ry="24"/>
+    </g>
+    <g class="cloud" style="animation-duration:96s;animation-delay:-64s;opacity:.75">
+      <ellipse cx="240" cy="96" rx="58" ry="20"/>
+      <ellipse cx="200" cy="104" rx="40" ry="16"/>
+      <ellipse cx="282" cy="104" rx="44" ry="15"/>
+      <ellipse cx="243" cy="82" rx="34" ry="18"/>
+    </g>
+    <g class="cloud" style="animation-duration:142s;animation-delay:-96s;opacity:.6">
+      <ellipse cx="420" cy="215" rx="86" ry="22"/>
+      <ellipse cx="356" cy="222" rx="58" ry="17"/>
+      <ellipse cx="486" cy="222" rx="62" ry="16"/>
+    </g>
+    <g class="cloud" style="animation-duration:170s;animation-delay:-140s;opacity:.5">
+      <ellipse cx="700" cy="128" rx="64" ry="18"/>
+      <ellipse cx="656" cy="136" rx="44" ry="14"/>
+      <ellipse cx="748" cy="136" rx="46" ry="13"/>
+    </g>
+  </g>
+
+  <!-- distant hills -->
+  <path d="M -30 512 Q 140 400 300 470 Q 440 532 580 450 Q 720 372 860 452 Q 1000 530 1140 448 Q 1240 396 1310 462 L 1310 600 L -30 600 Z" fill="url(#hillFar)"/>
+  <path d="M -30 542 Q 180 478 380 522 Q 560 562 740 518 Q 920 474 1100 528 Q 1215 560 1310 528 L 1310 640 L -30 640 Z" fill="url(#hillMid)"/>
+
+  <!-- ground -->
+  <rect x="-30" y="545" width="1340" height="220" fill="url(#ground)"/>
+  <rect x="-30" y="500" width="1340" height="80" fill="url(#haze)"/>
+
+  <!-- scrolling grass -->
+  <g id="grassScroll"></g>
+
+  <!-- alpaca -->
+  <g id="alpaca" style="filter:drop-shadow(0 7px 9px rgba(46,74,54,.22))">
+    <ellipse id="shadow" cx="632" cy="562" rx="152" ry="17" fill="#26452f" opacity=".26" filter="url(#soft9)"/>
+
+    <!-- FAR legs -->
+    <g class="leg" style="transform-origin:570px 426px;animation-delay:-0.2875s;">
+      <path d="M555 426 C550 480 558 510 561.5 538 L578.5 538 C582 510 590 480 585 426 Z" fill="#dbb391"/>
+      <rect x="559" y="536" width="21" height="24" rx="5" fill="#8a7060"/>
+    </g>
+    <g class="leg" style="transform-origin:722px 426px;animation-delay:-0.575s;">
+      <path d="M710.5 426 C706.5 480 713 510 715 538 L729 538 C731 510 737.5 480 733.5 426 Z" fill="#dbb391"/>
+      <rect x="713" y="536" width="18" height="24" rx="5" fill="#8a7060"/>
+    </g>
+
+    <!-- NEAR legs -->
+    <g class="leg" style="transform-origin:546px 426px;animation-delay:-0.8625s;">
+      <path d="M531 426 C526 480 534 510 537.5 538 L554.5 538 C558 510 566 480 561 426 Z" fill="#f6ddbb"/>
+      <rect x="535" y="536" width="21" height="24" rx="5" fill="#6f5a4c"/>
+    </g>
+    <g class="leg" style="transform-origin:700px 426px;animation-delay:0s;">
+      <path d="M688.5 426 C684.5 480 691 510 693 538 L707 538 C709 510 715.5 480 711.5 426 Z" fill="#f6ddbb"/>
+      <rect x="691" y="536" width="18" height="24" rx="5" fill="#6f5a4c"/>
+    </g>
+
+    <!-- bobbing body -->
+    <g id="bodyBob">
+
+      <!-- tail -->
+      <g id="tail">
+        <circle cx="472" cy="380" r="21" fill="#f6ddbb"/>
+        <circle cx="459" cy="398" r="17" fill="#f6ddbb"/>
+        <circle cx="480" cy="359" r="15" fill="#f6ddbb"/>
+        <circle cx="458" cy="380" r="14" fill="#e7c49f" opacity=".45"/>
+      </g>
+
+      <!-- body fleece -->
+      <g id="body">
+        <ellipse cx="622" cy="400" rx="116" ry="60" fill="#f6ddbb"/>
+        <g fill="#f6ddbb">
+          <circle cx="528" cy="372" r="30"/>
+          <circle cx="556" cy="352" r="32"/>
+          <circle cx="588" cy="342" r="30"/>
+          <circle cx="620" cy="338" r="32"/>
+          <circle cx="652" cy="342" r="30"/>
+          <circle cx="682" cy="354" r="28"/>
+          <circle cx="708" cy="372" r="26"/>
+          <circle cx="508" cy="398" r="30"/>
+          <circle cx="730" cy="392" r="30"/>
+          <circle cx="737" cy="414" r="26"/>
+          <circle cx="540" cy="436" r="26"/>
+          <circle cx="575" cy="448" r="24"/>
+          <circle cx="612" cy="452" r="24"/>
+          <circle cx="650" cy="450" r="24"/>
+          <circle cx="686" cy="442" r="22"/>
+          <circle cx="716" cy="428" r="22"/>
+        </g>
+        <ellipse cx="620" cy="434" rx="110" ry="46" fill="url(#underShade)"/>
+        <ellipse cx="604" cy="352" rx="92" ry="34" fill="url(#topLight)" filter="url(#soft9)"/>
+      </g>
+
+      <!-- neck -->
+      <g id="neck">
+        <path d="M688 402 C684 354 704 306 740 268 L766 292 C742 336 728 378 728 414 Z" fill="#f6ddbb"/>
+        <g fill="#f6ddbb">
+          <circle cx="694" cy="382" r="17"/>
+          <circle cx="701" cy="352" r="16"/>
+          <circle cx="713" cy="322" r="15"/>
+          <circle cx="729" cy="294" r="13"/>
+          <circle cx="752" cy="272" r="12"/>
+        </g>
+        <path d="M762 289 C741 332 730 376 731 409" fill="none" stroke="#e5bd98" stroke-width="10" stroke-linecap="round" opacity=".55"/>
+      </g>
+
+      <!-- head -->
+      <g id="head">
+        <path d="M738 262 C738 240 758 226 780 230 C800 234 814 250 814 266 C814 282 798 294 776 293 C752 292 738 280 738 262 Z" fill="#f6ddbb"/>
+        <g fill="#f6ddbb">
+          <circle cx="744" cy="242" r="13"/>
+          <circle cx="757" cy="230" r="14"/>
+          <circle cx="772" cy="224" r="13"/>
+          <circle cx="788" cy="230" r="12"/>
+          <circle cx="799" cy="241" r="11"/>
+        </g>
+        <ellipse cx="803" cy="275" rx="16" ry="13" fill="#eec6ad"/>
+        <ellipse cx="809" cy="271" rx="2.2" ry="2.8" fill="#c08e70"/>
+        <path d="M797 285 q6 5 12 1" fill="none" stroke="#c08e70" stroke-width="2" stroke-linecap="round"/>
+        <g id="eye">
+          <circle cx="780" cy="255" r="5.6" fill="#33281f"/>
+          <circle cx="782" cy="253" r="1.9" fill="#ffffff"/>
+        </g>
+        <g id="earL">
+          <path d="M748 246 C737 216 737 194 748 187 C761 195 763 220 758 248 Z" fill="#f6ddbb"/>
+          <path d="M750 244 C743 218 744 202 749 197 C755 204 756 222 754 245 Z" fill="#e7b39c"/>
+        </g>
+        <g id="earR">
+          <path d="M776 244 C770 210 774 188 786 183 C796 193 794 218 787 246 Z" fill="#f6ddbb"/>
+          <path d="M779 242 C775 214 778 199 784 196 C789 204 788 222 783 243 Z" fill="#e7b39c"/>
+        </g>
+      </g>
+
+    </g>
+  </g>
+
+  <!-- foreground grass -->
+  <g id="fgScroll" filter="url(#soft4)" opacity=".95"></g>
+
+  <!-- vignette -->
+  <rect x="-20" y="-20" width="1320" height="760" fill="url(#vig)" pointer-events="none"/>
+</svg>
+
+<script>
+(function () {
+  var NS = 'http://www.w3.org/2000/svg';
+
+  function mulberry32(a) {
+    return function () {
+      a |= 0; a = a + 0x6D2B79F5 | 0;
+      var t = Math.imul(a ^ a >>> 15, 1 | a);
+      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+  }
+  var rand = mulberry32(20240607);
+
+  function el(name, attrs) {
+    var n = document.createElementNS(NS, name);
+    for (var k in attrs) n.setAttribute(k, attrs[k]);
+    return n;
+  }
+
+  function buildGrass(target, count, yMin, yMax, sMin, sMax, cols, flowerRate, flowers) {
+    for (var tile = 0; tile < 3; tile++) {
+      for (var i = 0; i < count; i++) {
+        var x = rand() * 640 + tile * 640;
+        var t = rand();
+        var y = yMin + t * (yMax - yMin);
+        var s = sMin + t * (sMax - sMin);
+        var g = el('g', { transform: 'translate(' + x.toFixed(1) + ' ' + y.toFixed(1) + ') scale(' + s.toFixed(2) + ')' });
+
+        var blades = 3 + ((rand() * 2) | 0);
+        for (var b = 0; b < blades; b++) {
+          var ang = (rand() - 0.5) * 1.05;
+          var len = 11 + rand() * 13;
+          var tipX = Math.sin(ang) * len;
+          var tipY = -Math.cos(ang) * len;
+          var c1x = Math.sin(ang) * len * 0.35 - len * 0.14;
+          var c1y = -Math.cos(ang) * len * 0.55;
+          g.appendChild(el('path', {
+            d: 'M0 0 Q ' + c1x.toFixed(1) + ' ' + c1y.toFixed(1) + ' ' + tipX.toFixed(1) + ' ' + tipY.toFixed(1),
+            fill: 'none',
+            stroke: cols[(rand() * cols.length) | 0],
+            'stroke-width': (2.4 + rand() * 0.9).toFixed(1),
+            'stroke-linecap': 'round',
+            opacity: (0.72 + rand() * 0.28).toFixed(2)
+          }));
+        }
+        target.appendChild(g);
+
+        if (flowers && rand() < flowerRate) {
+          var fc = ['#fff4e2', '#ffd9e0', '#ffe9a8', '#e8def9'][(rand() * 4) | 0];
+          var f = el('g', { transform: 'translate(' + x.toFixed(1) + ' ' + (y - 8).toFixed(1) + ') scale(' + s.toFixed(2) + ')' });
+          for (var p = 0; p < 5; p++) {
+            var a2 = p / 5 * Math.PI * 2;
+            f.appendChild(el('circle', {
+              cx: (Math.cos(a2) * 3.1).toFixed(2),
+              cy: (Math.sin(a2) * 3.1).toFixed(2),
+              r: 2.3, fill: fc
+            }));
+          }
+          f.appendChild(el('circle', { cx: 0, cy: 0, r: 1.7, fill: '#f5b94a' }));
+          target.appendChild(f);
+        }
+      }
+    }
+  }
+
+  buildGrass(document.getElementById('grassScroll'), 52, 552, 706, 0.62, 1.5,
+    ['#52855c', '#45755a', '#63976a', '#38614b'], 0.11, true);
+
+  buildGrass(document.getElementById('fgScroll'), 17, 660, 760, 1.5, 2.5,
+    ['#35604a', '#2c5340', '#3f6d52'], 0.05, false);
+})();
+</script>
+</body>
+</html>
