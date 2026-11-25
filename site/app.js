@@ -146,7 +146,7 @@
   function sortKey(td) {
     var dots = td.querySelectorAll('.dots .ok').length;
     if (dots) return dots;
-    var t = (td.innerText || '').trim().replace(/[$,]/g, '');
+    var t = (td.innerText || '').trim().split('\n')[0].replace(/[$,]/g, '');
     var m = t.match(/-?\d+(?:\.\d+)?/);
     var rest = t.replace(/-?\d+(?:\.\d+)?/g, '').replace(/[s%x]/g, '').trim();
     if (m && !/[A-Za-z]/.test(rest)) return parseFloat(m[0]);
