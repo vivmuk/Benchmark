@@ -28,7 +28,7 @@
     value: {
       title: 'Value per token',
       lede: 'How much correct work does each output token buy? Twelve questions with exact answers, checked by code, no judge.',
-      how: 'Twelve short questions (arithmetic, counting, dates, number theory) whose answers were computed in Python. Value per token = correct answers per 1,000 billed output tokens, reasoning tokens included. A model that thinks for 8,000 tokens to get the same answers as one that uses 800 scores a tenth as much. Correct answers per dollar uses the live Venice price. Ranked by correct answers per 1,000 tokens.'
+      how: 'Twelve short questions (arithmetic, counting, dates, number theory) whose answers were computed in Python. Value per token = correct answers per 1,000 billed output tokens, reasoning tokens included. A model that thinks for 8,000 tokens to get the same answers as one that uses 800 scores a tenth as much. Correct per $1 is correct answers divided by what that one call cost at the live Venice price (input plus output tokens), so it folds in the price of a token as well as the number of them. The value index combines the two: each axis is scaled so the best model on it scores 100, and the index is their geometric mean, so a model has to be both parsimonious and cheap to rank well. The table is still ranked by correct answers per 1,000 tokens.'
     }
   };
 
@@ -109,10 +109,11 @@
     }, '', 'Tokens / second');
   }
   function value() {
-    return table('value', 'per_1k', ['Correct', 'Each question', 'Tokens used', 'Cost', 'Correct per $1'], function (m, d) {
+    return table('value', 'per_1k', ['Correct', 'Each question', 'Tokens used', 'Tokens / correct', '$ / correct', 'Correct per $1', 'Value index'], function (m, d) {
       return '<td class="num">' + d.correct + ' / ' + d.total + '</td><td><div class="dots">' + d.per_q.map(function (q) { return '<i class="' + (q ? 'ok' : '') + '"></i>'; }).join('') +
-        '</div></td><td class="num">' + num(d.out_tokens) + '</td><td class="num">' + money(d.cost) + '</td><td class="num">' + num(d.per_dollar) + '</td>';
-    }, 'v', 'Correct per 1,000 tokens');
+        '</div></td><td class="num">' + num(d.out_tokens) + '</td><td class="num">' + num(Math.round(d.out_tokens / d.correct)) + '</td><td class="num">$' + d.per_correct_cost.toFixed(5) + '</td><td class="num">' + num(d.per_dollar) + '</td><td class="num"><strong>' + d.index.toFixed(1) + '</strong><small class="idx">#' + d.index_rank + ' of ' + B.models.length + '</small></td>';
+    }, 'v', 'Correct per 1,000 tokens') +
+      '<p class="valuenote"><strong>Token thrift and money thrift are different things.</strong> GPT-6.2 Astra spends 35 output tokens per correct answer where Gemini 4 Neon spends 716, so Astra is 20 times more parsimonious. But Astra\'s output costs $40 per million tokens against Neon\'s $18.75, so its lead in dollars is only 8.5 times. GLM 5.3 Flash goes the other way: 142 tokens per correct answer, four times Astra\'s, yet 19 times more correct answers per dollar, because its output price is $0.55 per million. The index rewards the models that are good on both axes — it is the geometric mean, so a model that is wasteful or expensive cannot buy its way out on the other side.</p>';
   }
 
   function fit() {

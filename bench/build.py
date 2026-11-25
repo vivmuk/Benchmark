@@ -120,6 +120,19 @@ for mid in MODELS:
 data = {"generated": datetime.date.today().isoformat(), "models": models, "judges": JUDGES, "image_model": IMAGE_MODEL,
         "contestant_spend": round(spend, 2), "questions": len(answers),
         "run_note": "The first ten models ran on 2026-11-16; the nine newer entries ran on 2026-11-25."}
+# Two axes of "value": answers per 1,000 output tokens (parsimony) and answers per dollar (price).
+# The index is their geometric mean, each axis scaled to the best model, so a model has to be good at both.
+scored = [m for m in models if m["value"].get("status") == "ok" and m["value"].get("correct")]
+if scored:
+    best_t = max(m["value"]["per_1k"] for m in scored)
+    best_m = max(m["value"]["per_dollar"] for m in scored)
+    for m in scored:
+        v = m["value"]
+        v["per_correct_cost"] = round(v["cost"] / v["correct"], 6)
+        v["index"] = round(100 * ((v["per_1k"] / best_t) * (v["per_dollar"] / best_m)) ** 0.5, 1)
+    order = sorted(scored, key=lambda m: -m["value"]["index"])
+    for i, m in enumerate(order, 1):
+        m["value"]["index_rank"] = i
 (SITE / "data.js").write_text("window.BENCH = " + json.dumps(data, indent=1).replace("</", "<\\/") + ";\n")
 for m in models:
     print("%-44s alp %-8s des %-8s rec %-9s tps %-6s val %s" % (

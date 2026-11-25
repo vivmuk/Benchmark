@@ -96,7 +96,10 @@ window.BENCH = {
      true
     ],
     "per_1k": 2.98,
-    "per_dollar": 515
+    "per_dollar": 515,
+    "per_correct_cost": 0.001941,
+    "index": 6.6,
+    "index_rank": 13
    }
   },
   {
@@ -214,7 +217,10 @@ window.BENCH = {
      true
     ],
     "per_1k": 1.51,
-    "per_dollar": 160
+    "per_dollar": 160,
+    "per_correct_cost": 0.006262,
+    "index": 2.6,
+    "index_rank": 18
    }
   },
   {
@@ -332,7 +338,10 @@ window.BENCH = {
      true
     ],
     "per_1k": 7.06,
-    "per_dollar": 12179
+    "per_dollar": 12179,
+    "per_correct_cost": 8.2e-05,
+    "index": 49.6,
+    "index_rank": 1
    }
   },
   {
@@ -450,7 +459,10 @@ window.BENCH = {
      true
     ],
     "per_1k": 2.71,
-    "per_dollar": 213
+    "per_dollar": 213,
+    "per_correct_cost": 0.004696,
+    "index": 4.1,
+    "index_rank": 17
    }
   },
   {
@@ -568,7 +580,10 @@ window.BENCH = {
      true
     ],
     "per_1k": 13.54,
-    "per_dollar": 309
+    "per_dollar": 309,
+    "per_correct_cost": 0.003237,
+    "index": 11.0,
+    "index_rank": 10
    }
   },
   {
@@ -645,7 +660,10 @@ window.BENCH = {
      true
     ],
     "per_1k": 4.23,
-    "per_dollar": 2739
+    "per_dollar": 2739,
+    "per_correct_cost": 0.000365,
+    "index": 18.2,
+    "index_rank": 7
    }
   },
   {
@@ -763,7 +781,10 @@ window.BENCH = {
      true
     ],
     "per_1k": 4.6,
-    "per_dollar": 3381
+    "per_dollar": 3381,
+    "per_correct_cost": 0.000296,
+    "index": 21.1,
+    "index_rank": 6
    }
   },
   {
@@ -881,7 +902,10 @@ window.BENCH = {
      true
     ],
     "per_1k": 10.96,
-    "per_dollar": 2078
+    "per_dollar": 2078,
+    "per_correct_cost": 0.000481,
+    "index": 25.6,
+    "index_rank": 3
    }
   },
   {
@@ -999,7 +1023,10 @@ window.BENCH = {
      true
     ],
     "per_1k": 4.91,
-    "per_dollar": 476
+    "per_dollar": 476,
+    "per_correct_cost": 0.002099,
+    "index": 8.2,
+    "index_rank": 11
    }
   },
   {
@@ -1117,7 +1144,10 @@ window.BENCH = {
      true
     ],
     "per_1k": 5.85,
-    "per_dollar": 226
+    "per_dollar": 226,
+    "per_correct_cost": 0.004433,
+    "index": 6.2,
+    "index_rank": 14
    }
   },
   {
@@ -1235,7 +1265,10 @@ window.BENCH = {
      true
     ],
     "per_1k": 1.51,
-    "per_dollar": 2979
+    "per_dollar": 2979,
+    "per_correct_cost": 0.000336,
+    "index": 11.4,
+    "index_rank": 9
    }
   },
   {
@@ -1332,7 +1365,10 @@ window.BENCH = {
      true
     ],
     "per_1k": 1.52,
-    "per_dollar": 481
+    "per_dollar": 481,
+    "per_correct_cost": 0.00208,
+    "index": 4.6,
+    "index_rank": 16
    }
   },
   {
@@ -1450,7 +1486,10 @@ window.BENCH = {
      true
     ],
     "per_1k": 1.4,
-    "per_dollar": 74
+    "per_dollar": 74,
+    "per_correct_cost": 0.013532,
+    "index": 1.7,
+    "index_rank": 19
    }
   },
   {
@@ -1568,7 +1607,10 @@ window.BENCH = {
      true
     ],
     "per_1k": 28.64,
-    "per_dollar": 627
+    "per_dollar": 627,
+    "per_correct_cost": 0.001596,
+    "index": 22.7,
+    "index_rank": 5
    }
   },
   {
@@ -1686,7 +1728,10 @@ window.BENCH = {
      true
     ],
     "per_1k": 11.08,
-    "per_dollar": 167
+    "per_dollar": 167,
+    "per_correct_cost": 0.005971,
+    "index": 7.3,
+    "index_rank": 12
    }
   },
   {
@@ -1804,7 +1849,10 @@ window.BENCH = {
      true
     ],
     "per_1k": 27.27,
-    "per_dollar": 2401
+    "per_dollar": 2401,
+    "per_correct_cost": 0.000416,
+    "index": 43.3,
+    "index_rank": 2
    }
   },
   {
@@ -1922,7 +1970,10 @@ window.BENCH = {
      true
     ],
     "per_1k": 10.09,
-    "per_dollar": 626
+    "per_dollar": 626,
+    "per_correct_cost": 0.001598,
+    "index": 13.5,
+    "index_rank": 8
    }
   },
   {
@@ -2040,7 +2091,10 @@ window.BENCH = {
      true
     ],
     "per_1k": 3.95,
-    "per_dollar": 308
+    "per_dollar": 308,
+    "per_correct_cost": 0.003244,
+    "index": 5.9,
+    "index_rank": 15
    }
   },
   {
@@ -2158,7 +2212,10 @@ window.BENCH = {
      true
     ],
     "per_1k": 4.76,
-    "per_dollar": 3841
+    "per_dollar": 3841,
+    "per_correct_cost": 0.00026,
+    "index": 22.9,
+    "index_rank": 4
    }
   }
  ],
