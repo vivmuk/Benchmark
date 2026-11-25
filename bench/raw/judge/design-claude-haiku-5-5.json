@@ -1,0 +1,22 @@
+{
+ "gemini-3-1-pro-preview": {
+  "scores": {
+   "typography": 7.0,
+   "layout": 4.0,
+   "colour": 8.0,
+   "completeness": 5.0,
+   "originality": 7.0
+  },
+  "note": "A visually striking hero section with great typography and color, but the page is severely incomplete, missing the timetable, pricing, and testimonial sections."
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "typography": 6.0,
+   "layout": 2.0,
+   "colour": 7.0,
+   "completeness": 4.0,
+   "originality": 7.0
+  },
+  "note": "The illustrated hero and palette are distinctive, but text overlaps the artwork, vast blank areas disrupt the page, and the timetable, pricing tiers, and testimonial are missing."
+ }
+}

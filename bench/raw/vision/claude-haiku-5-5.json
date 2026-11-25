@@ -1,0 +1,17 @@
+{
+ "text": "Digital matte painting, wide 16:9 landscape composition, cinematic sci-fi desert at dusk. Foreground: rippled golden sand dunes sweeping from bottom edge toward the center, with fine wind-blown sand streaks drifting left. On the left-foreground dune ridge stand two figures facing right toward the city: a fluffy tan-and-cream alpaca on the far left, and beside it a lone human in a long flowing crimson-maroon cloak with hood down, back partly turned, seen from behind. Upper left: a large pale crescent moon, slightly glowing, with faint stars scattered across a deep indigo-to-navy sky. Horizon glows warm orange and peach fading into dusky violet at the edges.\n\nCenter-right: a futuristic city skyline with glowing teal and cyan accents. The tallest central tower is a slender glass spire crowned by a luminous cyan halo ring. Two flanking towers: a slim blade-like tower on the left with a vertical neon sign reading \"OASIS\" in cyan letters, and a sharp violet-lit tower on the right with magenta-purple neon edges. Low tiered saucer-like plazas with teal lighting sit at the base. Cyan laser beams rise diagonally from the city into the sky. Small illuminated buildings dot the skyline.\n\nRight foreground: a tall saguaro cactus outlined in glowing magenta-pink neon, with a smaller cactus behind it. Beside it a turquoise reflective oasis pool. A curving elevated monorail track with warm amber-gold light winds from the right middle toward the lower right, carrying a sleek silver train.\n\nStyle: photorealistic synthwave concept art, soft volumetric haze, rich contrast between warm sand tones and cool cyan-violet neon, cinematic depth of field, high detail.",
+ "reasoning_chars": 0,
+ "usage": {
+  "prompt_tokens": 1303,
+  "completion_tokens": 608,
+  "total_tokens": 1911,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 1.2535907560377382,
+ "t_first_content": 1.2535909620346501,
+ "t_total": 6.212053032009862,
+ "cost": 0.0004343
+}

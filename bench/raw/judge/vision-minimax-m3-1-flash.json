@@ -1,0 +1,22 @@
+{
+ "gemini-3-1-pro-preview": {
+  "scores": {
+   "subjects": 4.0,
+   "layout": 6.0,
+   "colour": 7.0,
+   "style": 5.0,
+   "overall": 4.0
+  },
+  "note": "The recreation alters many core elements, such as replacing the alpaca with a horse, the monorail with a highway, omitting the neon outline on the cactus, changing the moon size/phase, and modifying the city architecture."
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "subjects": 7.0,
+   "layout": 5.0,
+   "colour": 6.0,
+   "style": 4.0,
+   "overall": 4.0
+  },
+  "note": "The main scene elements are recognizable, but the alpaca is a horse, the moon and pool have changed scale and position, and the recreation is much more saturated and illustrative."
+ }
+}

@@ -1,0 +1,22 @@
+{
+ "gemini-3-1-pro-preview": {
+  "scores": {
+   "typography": 9.0,
+   "layout": 9.0,
+   "colour": 9.0,
+   "completeness": 10,
+   "originality": 8.0
+  },
+  "note": "A beautifully executed landing page with strong thematic consistency, excellent typography, and a compelling color palette that perfectly matches the brief."
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "typography": 8.0,
+   "layout": 8.0,
+   "colour": 9.0,
+   "completeness": 10,
+   "originality": 9.0
+  },
+  "note": "Distinctive illustration and a cohesive palette make this feel bespoke, though some small text and generous gaps weaken the rhythm."
+ }
+}

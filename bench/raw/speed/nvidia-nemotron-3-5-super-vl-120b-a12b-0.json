@@ -1,0 +1,23 @@
+{
+ "text": "A suspension bridge moves the weight of the roadway and everything on it through a sequence of parts that finally deliver the force into the earth. The process begins at the deck, the flat surface that carries cars, trains, and pedestrians. As vehicles move across, their weight pushes down on the deck, which behaves like a shallow beam or girder. That deck is not strong enough on its own to span the entire distance between supports, so it leans on a network of thin vertical cables called suspenders. These suspenders hang down from the big main cables and are spaced at regular intervals along the length of the bridge. When the deck is loaded, it transfers its weight upward through the suspenders into the main cables.\n\nThe main cables are the defining feature of a suspension bridge. They are made of thousands of high-strength steel wires bundled together and stretched in a graceful curve between the towers and beyond them to the far banks. Because they are flexible, they carry their load almost entirely in tension, meaning they resist being pulled apart rather than being crushed. The weight collected by the suspenders puts a downward pull on the main cables, and because the cables are anchored at each end, that pull is resolved into two components. One component runs vertically downward into the towers, and the other runs horizontally outward into the anchorages embedded in the ground.\n\nThe towers stand tall in the water or on the land and receive the vertical portion of the cable force. They act like columns, carrying the load straight down through compression into their foundations, which spread the force into the soil or bedrock beneath. The towers themselves do not have to resist the sideways pull of the cables because that force is handled elsewhere.\n\nThat sideways pull goes to the anchorages, massive concrete blocks or tunnels dug into solid ground at each end of the span. The main cables pass over the tops of the towers and continue past them to be fixed firmly in these anchorages. The anchorages must be heavy and immovable enough to resist the constant horizontal tension trying to pull the cables inward. They transfer that pulling force into the earth, balancing the bridge so the cables stay taut and the deck remains level.\n\nWhen all these pieces work together, the load travels from the traffic on the deck, up through the suspenders, along the main cables in tension, down through the towers in compression, and outward through the anchorages into the ground. No single part carries the whole burden; instead, the weight is shared and redirected until it is safely absorbed by the foundations and the earth on either side of the crossing. This division of labor allows a suspension bridge to span very wide distances, such as broad rivers or deep straits, where building intermediate piers would be impractical or impossible.",
+ "reasoning_chars": 4097,
+ "usage": {
+  "prompt_tokens": 56,
+  "completion_tokens": 1389,
+  "total_tokens": 1445,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 1025,
+   "audio_tokens": 0,
+   "reasoning_tokens": 836,
+   "rejected_prediction_tokens": 795
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 0.2986286709783599,
+ "t_first_content": 2.250794555991888,
+ "t_total": 3.0267867249785922,
+ "cost": 0.0007057000000000001
+}

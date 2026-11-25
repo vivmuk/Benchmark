@@ -1,0 +1,17 @@
+{
+ "text": "A suspension bridge carries load through a chain of tension and compression that begins at the deck and ends deep in the earth. The deck is the roadway or walkway, and it bears the weight of traffic, wind, and its own structure. Rather than resting on piers beneath it, the deck hangs from vertical cables called suspenders or hangers, which are attached at regular intervals along its length.\n\nEach suspender runs upward to a pair of massive main cables draped over the tops of tall towers. When a vehicle crosses, its weight passes into the deck, which spreads it along the stiffening girders or trusses that give the deck rigidity. The girders transfer the force into the nearby suspenders, and those suspenders pull downward on the main cables. Because the cables are flexible, they respond by settling into a smooth curve, close to a parabola when the load is spread evenly along the deck. Every part of the cable is in tension, meaning it is being stretched, which is a task steel wire performs exceptionally well. A cable made of thousands of parallel high-strength wires can carry enormous forces for its weight.\n\nThe main cables do not simply hang straight down; they slope upward toward the towers, so the force in them has two components. One is vertical, representing the deck's weight, and the other is horizontal, a pulling force along the span. At the towers, the cables rest on saddles, which are curved supports that let the cable pass over smoothly. Here the cable's vertical pull pushes down on the tower, so the towers act chiefly as compression members. They carry the combined load of the cables, and often much of the deck, straight down through their legs into foundations. Those foundations may be caissons sunk into the riverbed or footings set into bedrock, spreading the load over enough area that the ground can bear it.\n\nThe horizontal pull is just as important and is handled differently. Beyond the towers, the main cables continue outward and down to anchorages at each end of the bridge. An anchorage is usually a gigantic block of concrete, often set into rock, that resists being dragged inward toward the span. The cable splays into strands that are fixed to heavy steel anchor frames embedded in this mass. The anchorage works by its sheer weight and by the friction and bearing of the surrounding ground, balancing the cable's tug so the towers are not pulled over. In a balanced design, the towers see mostly downward force while the anchorages deal with the sideways tension.\n\nShorter side spans can complicate this picture, but the principle holds: load moves from deck to suspenders, from suspenders to main cables, from cables to towers and anchorages, and finally from those structures into the ground. Engineers also add stiffness to the deck so that moving loads and wind do not cause excessive flexing or oscillation. The result is an efficient arrangement in which slender, light elements in tension carry the load across long distances, while compact masses of concrete and stone handle the compression and anchoring at the ends.",
+ "reasoning_chars": 0,
+ "usage": {
+  "prompt_tokens": 61,
+  "completion_tokens": 937,
+  "total_tokens": 998,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 0.7467781120212749,
+ "t_first_content": 0.7467783410102129,
+ "t_total": 9.410086877003778,
+ "cost": 0.009492
+}

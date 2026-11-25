@@ -44,7 +44,7 @@
   function head(t, r) {
     var missing = r.rest.length ? '<p class="notice">' + r.rest.length + ' of ' + B.models.length + ' models ' + (r.rest.length === 1 ? 'has' : 'have') + ' no score here: ' +
       r.rest.map(function (m) { return esc(m.name); }).join(', ') + '. They are listed at the end with the reason.</p>' : '';
-    return '<h1>' + t.title + '</h1><p class="lede">' + t.lede + '</p><details class="how"><summary>How this is scored</summary><p>' + t.how + '</p></details>' + missing;
+    return '<h1>' + t.title + '</h1><p class="lede">' + t.lede + '</p><details class="how"><summary>How this is scored</summary><p>' + t.how + '</p></details>' + (B.judge_note ? '<p class="lede" style="font-size:13px">' + B.judge_note + '</p>' : '') + missing;
   }
   function crit(d) {
     if (!d.criteria) return '';
@@ -92,8 +92,8 @@
 
   function table(key, field, cols, rowFn, barCls, unit) {
     var r = ranked(key, field), max = r.ok.length ? r.ok[0][key][field] : 1;
-    var h = head(TABS[key], r) + '<div class="scroll"><table class="tbl"><thead><tr><th>#</th><th>Model</th><th>' + unit + '</th>' +
-      cols.map(function (c) { return '<th>' + c + '</th>'; }).join('') + '</tr></thead><tbody>';
+    var h = head(TABS[key], r) + '<p class="lede" style="font-size:13px">Click any column heading to sort; click again to reverse.</p><div class="scroll"><table class="tbl"><thead><tr><th class="sortable" data-col="0" title="Sort by rank">#</th><th class="sortable" data-col="1" title="Sort by model">Model</th><th class="sortable" data-col="2" title="Sort by ' + unit + '">' + unit + '</th>' +
+      cols.map(function (c, i) { return '<th class="sortable" data-col="' + (i + 3) + '" title="Sort by ' + c + '">' + c + '</th>'; }).join('') + '</tr></thead><tbody>';
     r.ok.forEach(function (m, i) {
       var d = m[key];
       h += '<tr><td class="num">' + (i + 1) + '</td><td>' + who(m) + '</td><td><div class="bar ' + barCls + '"><i style="width:' + Math.max(3, d[field] / max * 100) + '%"></i><b>' + d[field] + '</b></div></td>' + rowFn(m, d) + '</tr>';
@@ -109,9 +109,9 @@
     }, '', 'Tokens / second');
   }
   function value() {
-    return table('value', 'per_1k', ['Correct', 'Each question', 'Tokens used', 'Tokens / correct', '$ / correct', 'Correct per $1', 'Value index'], function (m, d) {
+    return table('value', 'per_1k', ['Correct', 'Each Q', 'Tokens / answer', '$ / answer', 'Per $1', 'Index'], function (m, d) {
       return '<td class="num">' + d.correct + ' / ' + d.total + '</td><td><div class="dots">' + d.per_q.map(function (q) { return '<i class="' + (q ? 'ok' : '') + '"></i>'; }).join('') +
-        '</div></td><td class="num">' + num(d.out_tokens) + '</td><td class="num">' + num(Math.round(d.out_tokens / d.correct)) + '</td><td class="num">$' + d.per_correct_cost.toFixed(5) + '</td><td class="num">' + num(d.per_dollar) + '</td><td class="num"><strong>' + d.index.toFixed(1) + '</strong><small class="idx">#' + d.index_rank + ' of ' + B.models.length + '</small></td>';
+        '</div></td><td class="num">' + num(Math.round(d.out_tokens / d.correct)) + '</td><td class="num">$' + d.per_correct_cost.toFixed(5) + '</td><td class="num">' + num(d.per_dollar) + '</td><td class="num"><strong>' + d.index.toFixed(1) + '</strong><small class="idx">#' + d.index_rank + ' of ' + B.models.length + '</small></td>';
     }, 'v', 'Correct per 1,000 tokens') +
       '<p class="valuenote"><strong>Token thrift and money thrift are different things.</strong> GPT-6.2 Astra spends 35 output tokens per correct answer where Gemini 4 Neon spends 716, so Astra is 20 times more parsimonious. But Astra\'s output costs $40 per million tokens against Neon\'s $18.75, so its lead in dollars is only 8.5 times. GLM 5.3 Flash goes the other way: 142 tokens per correct answer, four times Astra\'s, yet 19 times more correct answers per dollar, because its output price is $0.55 per million. The index rewards the models that are good on both axes — it is the geometric mean, so a model that is wasteful or expensive cannot buy its way out on the other side.</p>';
   }
@@ -142,6 +142,36 @@
       document.getElementById('modal-open').href = o.dataset.open;
     }
     if (e.target.id === 'modal-close' || e.target === modal) close();
+  });
+  function sortKey(td) {
+    var dots = td.querySelectorAll('.dots .ok').length;
+    if (dots) return dots;
+    var t = (td.innerText || '').trim().replace(/[$,]/g, '');
+    var m = t.match(/-?\d+(?:\.\d+)?/);
+    var rest = t.replace(/-?\d+(?:\.\d+)?/g, '').replace(/[s%x]/g, '').trim();
+    if (m && !/[A-Za-z]/.test(rest)) return parseFloat(m[0]);
+    return t.toLowerCase();
+  }
+  document.addEventListener('click', function (e) {
+    var th = e.target.closest('th.sortable');
+    if (!th) return;
+    var table = th.closest('table'), tb = table.tBodies[0];
+    if (!tb) return;
+    var col = Number(th.dataset.col);
+    var rows = Array.prototype.slice.call(tb.rows);
+    var good = rows.filter(function (r) { return r.cells.length > 2; });
+    var bad = rows.filter(function (r) { return r.cells.length <= 2; });
+    var numeric = good.length && good.every(function (r) { return typeof sortKey(r.cells[col]) === 'number'; });
+    var dir = th.dataset.dir === 'desc' ? 1 : th.dataset.dir === 'asc' ? -1 : (numeric ? -1 : 1);
+    table.querySelectorAll('th.sortable').forEach(function (h) { if (h !== th) { h.removeAttribute('data-dir'); h.removeAttribute('aria-sort'); } });
+    th.dataset.dir = dir === 1 ? 'asc' : 'desc';
+    th.setAttribute('aria-sort', dir === 1 ? 'ascending' : 'descending');
+    good.sort(function (a, b) {
+      var x = sortKey(a.cells[col]), y = sortKey(b.cells[col]);
+      if (typeof x === 'string' || typeof y === 'string') return dir * String(x).localeCompare(String(y));
+      return dir * (x - y);
+    });
+    good.concat(bad).forEach(function (r) { tb.appendChild(r); });
   });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
   window.addEventListener('hashchange', function () { show(location.hash.slice(1)); window.scrollTo(0, 0); });

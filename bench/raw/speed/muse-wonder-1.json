@@ -1,0 +1,22 @@
+{
+ "text": "A suspension bridge carries the weight of its deck and the traffic crossing it not by pushing that weight straight down through piers beneath the roadway, but by lifting it upward into cables that hang in a curve and then carrying it outward and downward to solid ground at the ends and to the foundations of its towers. When a car drives onto the deck, its weight presses down on the road surface and on the steel or concrete structure that supports that surface. That structure, often a stiffening girder or truss running the length of the bridge, spreads a concentrated wheel load over a longer stretch of deck so that it is not carried by a single connection point. From the deck, the load passes upward through vertical suspenders, sometimes called hangers, which are the many relatively short cables or rods that connect the edge of the deck to the main cables above. Each suspender works in tension, simply pulling up on the deck with the same force with which the deck pulls down on it, and together the suspenders pick up the distributed weight of the roadway span by span and deliver it to the two main cables, one on each side of the bridge.\n\nOnce the load reaches a main cable, it no longer travels straight down but instead follows the cable itself toward support. A main cable is a massive bundle of thousands of parallel steel wires, strong almost entirely in pulling, and it hangs between towers in the familiar sagging curve, its shape determined by its own weight and by the nearly uniform weight of the deck suspended below it. Any downward pull from a suspender increases tension in the cable on both sides of that point, and that tension acts along the direction of the cable at each place. Because the cable slopes more steeply near the towers and is almost level at the middle of the main span, the tension is greatest where it passes over a tower and smallest at midspan, even though the vertical effect needed to hold up the deck remains the same along the span. In effect, the cable converts a scattered series of downward pulls into a smooth flow of tension that runs uphill toward the towers and, beyond them, downhill through the side spans toward the anchorages at either end of the bridge.\n\nAt each tower the cable rests in a steel saddle, pressing down as its tension passes over the top. The tower, a pair of legs joined by beams, carries that pressure as compression, like a column, to its base. There a massive concrete foundation spreads the force over soil or sends it through piles to bedrock, which pushes back and provides the final support. Beyond the tower the cable continues through the side span to an anchorage, a huge concrete block buried in ground or rock where its strands are splayed and fastened. The anchorage's weight and grip resist the cable's forward pull, delivering the horizontal component into the earth, so every pound on the roadway ends in the ground.",
+ "reasoning_chars": 0,
+ "usage": {
+  "prompt_tokens": 44,
+  "completion_tokens": 3630,
+  "total_tokens": 3674,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 3044,
+   "image_tokens": 0,
+   "audio_tokens": 0
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 21.755261073005386,
+ "t_first_content": 21.75526169303339,
+ "t_total": 22.763896362041123,
+ "cost": 0.09097
+}

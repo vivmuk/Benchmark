@@ -1,0 +1,17 @@
+{
+ "text": "Everything a suspension bridge carries begins on the deck, the roadway that cars, trucks, and pedestrians actually travel across. The deck has its own considerable weight, called the dead load, and it also bears the shifting weight of traffic, wind, and sometimes snow, known collectively as live loads. The deck itself is not strong enough to span the enormous distance between towers on its own, and it is not meant to be. Instead, it acts more like a long, stiff beam that gathers these forces and hands them off at frequent intervals to a series of vertical cables or rods called hangers, or suspenders.\n\nThe hangers are attached to the deck structure at regular spacing along its length, often every ten to twenty meters. Each hanger works purely in tension, pulling upward on the deck much as a string holds up a weight. Because the deck is stiffened by deep girders or a truss, a heavy truck at one point does not simply tug on the single hanger above it. The stiffness spreads the load across several neighboring hangers, which keeps the deck from sagging sharply under concentrated weight and helps the bridge resist twisting and fluttering in the wind.\n\nAt their upper ends, the hangers clamp onto the main cables, the great swooping ropes that give a suspension bridge its familiar silhouette. These main cables are made of thousands of high-strength steel wires bundled and compacted together. When the hangers pull down on them, the cables settle into a curve close to a parabola, the shape a flexible line naturally takes when it carries a load spread evenly along the horizontal. In this shape, the cable carries everything through pure tension, with no bending, which is the most efficient way steel can be used. That efficiency is why suspension bridges can span distances no other bridge type can match.\n\nThe main cables pass over the tops of the towers, resting in curved steel fittings called saddles. Here the tension in the cable splits into two effects. Because the cable bends downward on both sides of the tower, it presses straight down on the saddle, and this downward push travels through the tower as compression. Towers are designed to be very good at resisting this squeezing force, and they carry it down into massive foundations, typically concrete footings or caissons sunk to bedrock or deep, firm soil beneath the water or ground.\n\nThe cable's tension also has a horizontal component, a pull trying to drag the tower tops toward the center of the span. On a well-designed bridge, the cable continues past each tower and down to the shore, so the inward pull of the main span is balanced by an outward pull on the side spans. The cable ends are then fastened into anchorages, enormous blocks of concrete or tunnels bored into solid rock. There, the cable fans out into individual strands looped around steel eyebars embedded deep in the mass. The anchorage resists the cable's pull through its sheer weight and its grip on the earth, finally delivering the horizontal portion of the load into the ground, just as the towers deliver the vertical portion.",
+ "reasoning_chars": 815,
+ "usage": {
+  "prompt_tokens": 61,
+  "completion_tokens": 1173,
+  "total_tokens": 1234,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 2.009448869037442,
+ "t_first_content": 3.6825393110048026,
+ "t_total": 13.905648311018012,
+ "cost": 0.023704
+}

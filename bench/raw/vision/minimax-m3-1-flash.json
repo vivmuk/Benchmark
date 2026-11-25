@@ -1,0 +1,21 @@
+{
+ "text": "Cinematic sci-fi concept art, wide landscape composition. A vast orange sand desert at dusk, rippled dune ridges sweeping toward the horizon. In the left foreground, a lone hooded figure in a long dark maroon cloak stands on a dune crest beside a brown horse, both seen from behind, gazing at a distant futuristic city. The city of glass spires rises center-right: a tall tapered cyan-teal tower in the middle, flanked by two shorter needle skyscrapers edged in electric blue and magenta neon, a vertical cyan neon sign with stylized glyphs on the left tower, and a glowing turquoise halo ring floating directly above the tallest spire. Multiple thin teal laser beams shoot straight up into the night sky, which is deep navy and starry at the top, fading through violet into a burning orange sunset band at the horizon; a pale crescent moon hangs in the upper left, and thin sagging power lines with small perched birds cross the sky. A curved elevated highway with glowing amber edge lights arcs from the lower right toward the city, carrying a small truck. Beneath it, a luminous turquoise lagoon with a tiny dock. In the right foreground, a tall saguaro cactus rim-lit in hot pink, with a smaller cactus behind it. Low distant buildings silhouette the horizon. Warm orange sand versus cool teal city glow, atmospheric haze, volumetric light, dramatic rim lighting, highly detailed digital painting.",
+ "reasoning_chars": 3699,
+ "usage": {
+  "prompt_tokens": 600,
+  "completion_tokens": 1077,
+  "total_tokens": 1677,
+  "prompt_tokens_details": {
+   "cached_tokens": 191
+  },
+  "cache_read_input_tokens": 191,
+  "completion_tokens_details": {
+   "reasoning_tokens": 793
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 1.0954634369700216,
+ "t_first_content": 7.93319979601074,
+ "t_total": 9.59807390498463,
+ "cost": 0.00092025
+}

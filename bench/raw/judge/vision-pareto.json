@@ -1,0 +1,22 @@
+{
+ "gemini-3-1-pro-preview": {
+  "scores": {
+   "subjects": 9.0,
+   "layout": 8.0,
+   "colour": 7.0,
+   "style": 6.0,
+   "overall": 6.0
+  },
+  "note": "The recreation includes all key elements in similar positions, but the style is noticeably more cartoonish and the colors are much more saturated."
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "subjects": 10,
+   "layout": 6.0,
+   "colour": 7.0,
+   "style": 6.0,
+   "overall": 5.0
+  },
+  "note": "All key elements are present, but the towers and pool shift noticeably, and the recreation is brighter and more stylized than the original."
+ }
+}

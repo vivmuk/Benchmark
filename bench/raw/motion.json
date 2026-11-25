@@ -17,5 +17,13 @@
  "openai-gpt-62-sol": 0.732,
  "openai-gpt-62-sol-pro": 0.37,
  "e2ee-kimi-k3-1-pro-p": 0.762,
- "deepseek-v4-1-flash-1017": 2.309
+ "deepseek-v4-1-flash-1017": 2.309,
+ "claude-opus-5-5": 3.57,
+ "claude-sonnet-5-5": 5.181,
+ "claude-haiku-5-5": 3.615,
+ "minimax-m3-1-flash": 4.407,
+ "nvidia-nemotron-3-5-super-vl-120b-a12b": 0.13,
+ "muse-wonder": 2.228,
+ "pareto": 0.724,
+ "qwen3-6-27b": 0.731
 }

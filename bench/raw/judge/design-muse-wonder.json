@@ -1,0 +1,22 @@
+{
+ "gemini-3-1-pro-preview": {
+  "scores": {
+   "typography": 8.0,
+   "layout": 6.0,
+   "colour": 8.0,
+   "completeness": 5.0,
+   "originality": 7.0
+  },
+  "note": "The design sets a great mood with typography and colour, but fails completely on the completeness front by missing the timetable entries, pricing tiers, and testimonial sections."
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "typography": 8.0,
+   "layout": 2.0,
+   "colour": 8.0,
+   "completeness": 3.0,
+   "originality": 7.0
+  },
+  "note": "The type, palette, and illustrated hero are strong, but vast empty sections leave the four departures, pricing tiers, and testimonial missing."
+ }
+}

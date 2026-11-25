@@ -1,0 +1,17 @@
+{
+ "text": "\n\n{\"q1\": 4227, \"q2\": 62, \"q3\": \"Sunday\", \"q4\": 1, \"q5\": 277200, \"q6\": 232792560, \"q7\": 22062, \"q8\": 457, \"q9\": 832040, \"q10\": \"BEEF\", \"q11\": 9, \"q12\": 204}",
+ "reasoning_chars": 14934,
+ "usage": {
+  "prompt_tokens": 345,
+  "completion_tokens": 8081,
+  "total_tokens": 8426,
+  "completion_tokens_details": {
+   "reasoning_tokens": 7959
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 0.8230271840002388,
+ "t_first_content": 99.47927838901524,
+ "t_total": 100.97231054696022,
+ "cost": 0.025969600000000002
+}

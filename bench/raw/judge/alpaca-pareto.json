@@ -1,0 +1,20 @@
+{
+ "gemini-3-1-pro-preview": {
+  "scores": {
+   "alpaca": 9.0,
+   "motion": 8.0,
+   "beauty": 8.0,
+   "scene": 9.0
+  },
+  "note": "The alpaca is charmingly illustrated and the walk cycle is fluid, set against a tasteful, calming landscape."
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "alpaca": 7.0,
+   "motion": 5.0,
+   "beauty": 8.0,
+   "scene": 8.0
+  },
+  "note": "The fluffy, long-necked figure reads as an alpaca in a polished pastel scene, though its oversized ears and mostly stationary body make the walk less convincing."
+ }
+}

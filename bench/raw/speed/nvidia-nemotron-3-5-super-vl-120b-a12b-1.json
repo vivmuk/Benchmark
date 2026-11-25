@@ -1,0 +1,23 @@
+{
+ "text": "A suspension bridge carries the weight of its deck and everything on it by turning downward pressure into a path of tension and compression that ends in the earth. When a car or a train moves across the roadway, its weight presses down on the deck. The deck itself is usually a stiffening truss or box girder, so the load does not rest on just one spot; it spreads out along the length of the span and resists twisting or bending under uneven traffic. Hanging vertically from the deck are the suspender cables, short steel strands spaced at regular intervals. These suspenders pick up the load from the deck and pull it upward into the two main cables that arch overhead.\n\nThe main cables are the heart of the system. Made of thousands of high-strength steel wires bound together, they are designed to work in tension, meaning they carry load by being stretched rather than crushed. As the suspenders pull down on them, the main cables sag into a shallow curve between the towers. The weight from the deck travels along these cables toward the towers on either side of the span. At each tower, the cable passes over a saddle that lets it shift angle without slipping, and the force changes from a diagonal pull into a direct downward thrust. The tower itself is built to work in compression, so it takes that force and pushes it straight down into its foundation and the ground beneath.\n\nBeyond the towers, the main cables do not stop. They continue downward to massive anchorages embedded in solid rock or heavy concrete at each end of the bridge. The anchorages grip the cable ends and resist the enormous horizontal pull that the cables exert. Because the cable is continuous, the tension in the main span is balanced by the tension in the shorter side spans and by the resistance of the anchorages, so the whole system remains stable. The anchorages transfer that horizontal force into the ground, just as the towers transfer the vertical force.\n\nIn this way, the load journeys from the vehicles on the deck, through the suspenders, into the main cables, down through the towers, and out into the anchorages and foundations. No single part carries the entire weight alone; instead, the deck distributes it, the cables pull it sideways and upward, the towers squeeze it downward, and the anchorages hold it in place. The ground at both ends and beneath the towers ultimately receives every pound, allowing a thin deck to span a wide river or strait without collapsing under its own use.",
+ "reasoning_chars": 6590,
+ "usage": {
+  "prompt_tokens": 56,
+  "completion_tokens": 1890,
+  "total_tokens": 1946,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 1423,
+   "audio_tokens": 0,
+   "reasoning_tokens": 1389,
+   "rejected_prediction_tokens": 917
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 0.2794635570026003,
+ "t_first_content": 3.4738219819846563,
+ "t_total": 3.6476290329592302,
+ "cost": 0.0009562
+}

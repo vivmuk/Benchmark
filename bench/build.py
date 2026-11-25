@@ -119,7 +119,8 @@ for mid in MODELS:
 
 data = {"generated": datetime.date.today().isoformat(), "models": models, "judges": JUDGES, "image_model": IMAGE_MODEL,
         "contestant_spend": round(spend, 2), "questions": len(answers),
-        "run_note": "The first ten models ran on 2026-11-16; the nine newer entries ran on 2026-11-25."}
+        "judge_note": "Models added before 2026-11-25 were scored by Claude Opus 5.5 and GPT-6 Sol. Claude Opus 5.5 is now a contestant, so from that date the Claude-side judge is Gemini 3.1 Pro; every row records which judges produced it.",
+        "run_note": "The first ten models ran on 2026-11-16; the seventeen added since ran on 2026-11-25."}
 # Two axes of "value": answers per 1,000 output tokens (parsimony) and answers per dollar (price).
 # The index is their geometric mean, each axis scaled to the best model, so a model has to be good at both.
 scored = [m for m in models if m["value"].get("status") == "ok" and m["value"].get("correct")]

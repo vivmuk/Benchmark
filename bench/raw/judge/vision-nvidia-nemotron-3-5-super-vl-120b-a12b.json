@@ -1,0 +1,22 @@
+{
+ "gemini-3-1-pro-preview": {
+  "scores": {
+   "subjects": 9.0,
+   "layout": 6.0,
+   "colour": 7.0,
+   "style": 8.0,
+   "overall": 7.0
+  },
+  "note": "All key subjects are present, but their layout is somewhat different (e.g. alpaca is on the right of the person instead of the left, track curves differently, moon is smaller), and the lighting has more contrast with a darker foreground."
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "subjects": 9.0,
+   "layout": 6.0,
+   "colour": 5.0,
+   "style": 5.0,
+   "overall": 4.0
+  },
+  "note": "Nearly all key elements are present, but the enlarged foreground figures, relocated track and pool, and much brighter neon palette make it clearly a different image."
+ }
+}

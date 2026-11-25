@@ -1,0 +1,17 @@
+{
+ "text": "Cinematic widescreen digital matte painting of a futuristic desert city at dusk, in a retro-futuristic sci-fi style with photoreal detail. Foreground: rippled orange-gold sand dunes with a sharp wind-blown crest running diagonally from lower center to the left. Fine sand is blowing off the ridge. On the left dune crest stand a fluffy brown alpaca, seen from behind in three-quarter view, and beside it a lone figure in a long crimson-magenta hooded cloak, also seen from behind. Both look toward the city. The pair sit at about one-fifth from the left edge, slightly below mid-height.\n\nMidground and background: a glowing skyline sits on the horizon at center, with three tall tapering glass spires. The central spire is the tallest and is topped by a floating cyan neon ring. The left spire is teal-glass with a vertical cyan neon sign reading \"OASIS\". The right spire is glowing violet-purple. Tiered, disc-shaped teal-lit terraced buildings sit at their base, with a dense small city of lit windows spreading to both sides. Four thin teal-green laser beams slant up into the sky from the city, two on each side.\n\nRight side: a curved elevated monorail track with glowing amber edge lights sweeps from the lower right toward the city. A small silver train is on the track at center-right. Beside the track is a turquoise oasis pool. A tall saguaro cactus in the right foreground has a pink-magenta neon rim light, and a smaller cactus stands behind it.\n\nSky: a deep navy-indigo sky at top, with scattered tiny stars, fades through purple and magenta into a glowing orange and amber horizon. A large pale crescent moon with a faint dark disc is in the upper left. Lighting is warm sunset glow on the sand and cool cyan and violet neon from the city. Soft haze hangs at the horizon, with long shadows and a rich teal-and-orange palette.",
+ "reasoning_chars": 0,
+ "usage": {
+  "prompt_tokens": 1303,
+  "completion_tokens": 648,
+  "total_tokens": 1951,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 2.1613378130132332,
+ "t_first_content": 2.161337988974992,
+ "t_total": 7.932352640957106,
+ "cost": 0.009086
+}

@@ -1,0 +1,17 @@
+{
+ "text": "q1: The sum of primes below 200 is 4227. (The sum below 100 is 1060, and the primes from 100 to 199 are 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199.) Their sum is 101+103+107+109+113 = 533, then +127 = 660, +131 = 791, +137 = 928, +139 = 1067, +149 = 1216, +151 = 1367, +157 = 1524, +163 = 1687, +167 = 1854, +173 = 2027, +179 = 2206, +181 = 2387, +191 = 2578, +193 = 2771, +197 = 2968, +199 = 3167. So the total is 1060 + 3167 = 4227.\n\nq2: 250/5 = 50, 250/25 = 10, 250/125 = 2, so 62 trailing zeros.\n\nq3: 29 Feb 2032. 1 Jan 2000 was a Saturday. Counting to 1 Jan 2032 gives 32 years \u00d7 365 plus 8 leap days (2000, 2004, ..., 2028) = 11680 + 8 = 11688 days. 11688 mod 7: 7 \u00d7 1669 = 11683, remainder 5. Saturday + 5 = Thursday, so 1 Jan 2032 is a Thursday. Feb 29 is day 31 + 28 = 59 days later (day 60 of the year). 59 mod 7 = 3, and Thursday + 3 = Sunday.\n\nq4: Mod 8, 3^200 = 1. Mod 125, \u03c6 = 100, so 3^200 = 1. Hence 3^200 \u2261 1 mod 1000.\n\nq5: ALPACALLAMA has 11 letters: A\u00d75 (A, A, A, A, A: positions A-L-P-A-C-A-L-L-A-M-A gives 5), L\u00d73, P, C, M. Arrangements = 11!/(5!\u00b73!) = 39916800/720 = 55440.\n\nq6: LCM(1..20) = 232792560.\n\nq7: 1.07^9 = 1.838459, and \u00d712000 = 22061.5. More precisely, 1.07^2 = 1.1449, ^4 = 1.31079601, ^8 = 1.718186, ^9 = 1.838459. 12000 \u00d7 1.838459 = 22061.51, so 22062.\n\nq8: Inclusion\u2013exclusion: 1000 \u2212 (333 + 200 + 142) + (66 + 47 + 28) \u2212 9 = 1000 \u2212 675 + 141 \u2212 9 = 457.\n\nq9: F30 = 832040.\n\nq10: 48879 = 0xBEEF.\n\nq11: strawberry has 3 r's, raspberry has 3, cranberry has 3, total 9.\n\nq12: Sum of squares 1..8 = 204.\n\n{\"q1\": 4227, \"q2\": 62, \"q3\": \"Sunday\", \"q4\": 1, \"q5\": 55440, \"q6\": 232792560, \"q7\": 22062, \"q8\": 457, \"q9\": 832040, \"q10\": \"BEEF\", \"q11\": 9, \"q12\": 204}",
+ "reasoning_chars": 0,
+ "usage": {
+  "prompt_tokens": 425,
+  "completion_tokens": 1066,
+  "total_tokens": 1491,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 0.7367115749511868,
+ "t_first_content": 0.7367118529509753,
+ "t_total": 7.461214290000498,
+ "cost": 0.01151
+}

@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f1e8">
+  <meta name="description" content="Dune Line. An overnight desert crossing from Solis to Lumen. Fall asleep under the stars. Wake up somewhere electric.">
+  <title>Dune Line — Take the long way into tomorrow.</title>
+  <style>
+    :root {
+      --paper: #f5f1e8;
+      --ink: #292b25;
+      --muted: #6e7064;
+      --orange: #c44c2f;
+      --line: #d6d4c7;
+      --night: #272e2a;
+      --lime: #dde5a8;
+      --serif: Georgia, 'Times New Roman', serif;
+      --sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 28px; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+    button, input, select { font: inherit; }
+    a { color: inherit; text-decoration: none; }
+    button, a, input, select { -webkit-tap-highlight-color: transparent; }
+    button { cursor: pointer; }
+    button:disabled { cursor: default; }
+    ::selection { background: var(--lime); color: var(--ink); }
+    :focus-visible { outline: 3px solid var(--orange); outline-offset: 5px; }
+    .wrap { width: min(1152px, calc(100% - 96px)); margin-inline: auto; }
+    .eyebrow { font-size: 10px; font-weight: 700; letter-spacing: .17em; text-transform: uppercase; }
+    .arrow { display: inline-block; margin-left: 22px; font-size: 19px; line-height: 1; }
+    .button {
+      display: inline-flex; align-items: center; justify-content: space-between; gap: 20px;
+      min-height: 49px; padding: 14px 21px; border: 1px solid var(--ink);
+      background: var(--ink); color: var(--paper); font-size: 12px; font-weight: 600;
+      transition: background .2s, transform .2s;
+    }
+    .button:hover { background: #454a3d; transform: translateY(-2px); }
+    .button.light { color: var(--ink); background: transparent; border-color: var(--line); }
+    .button.light:hover { background: #e9e6db; }
+    header { height: 100px; }
+    .nav { height: 100%; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--line); }
+    .brand { display: inline-flex; align-items: center; gap: 11px; }
+    .brand-mark { width: 36px; height: 36px; }
+    .brand-name { font-size: 20px; font-weight: 850; letter-spacing: -.9px; line-height: .9; }
+    .brand-name span { display: block; }
+    .nav-links { display: flex; gap: 34px; align-items: center; font-size: 12px; }
+    .nav-links > a:not(.nav-book) { position: relative; }
+    .nav-links > a:not(.nav-book)::after { content: ''; position: absolute; left: 0; right: 100%; bottom: -6px; height: 1px; background: var(--orange); transition: right .2s; }
+    .nav-links > a:hover::after { right: 0; }
+    .nav-book { display: flex; align-items: center; padding: 12px 16px; border: 1px solid var(--ink); font-weight: 600; }
+    .nav-book:hover { background: #e9e6db; }
+    .menu-toggle { display: none; background: none; border: 1px solid var(--line); padding: 10px 12px; font-size: 12px; }
+    .hero { display: grid; grid-template-columns: 1fr 1fr; gap: 42px; padding-top: 44px; padding-bottom: 44px; align-items: center; }
+    .hero-copy { padding: 10px 0 16px; }
+    .route-label { display: flex; align-items: center; gap: 11px; margin-bottom: 26px; }
+    .route-label::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--orange); box-shadow: 0 0 0 4px #c44c2f12; }
+    h1 { font-family: var(--serif); font-size: clamp(56px, 5.75vw, 78px); font-weight: 400; line-height: 1.015; letter-spacing: -3.8px; margin: 0 0 24px; }
+    h1 em { color: var(--orange); font-weight: 400; }
+    .hero-description { font-size: 14px; line-height: 1.85; color: var(--muted); max-width: 340px; margin: 0 0 26px; }
+    .hero-actions { display: flex; align-items: center; gap: 21px; }
+    .hero-note { font-size: 10px; line-height: 1.6; color: var(--muted); }
+    .hero-note strong { display: block; color: var(--ink); font-size: 13px; font-weight: 500; }
+    .hero-bottom { margin-top: 43px; display: flex; align-items: center; gap: 12px; color: var(--muted); font-size: 10px; }
+    .tiny-stars { color: var(--orange); font-size: 16px; letter-spacing: -3px; padding-right: 4px; }
+    .poster { margin: 0; position: relative; background: #303047; overflow: hidden; aspect-ratio: 1 / 1.04; }
+    .poster > svg { width: 100%; height: 100%; display: block; }
+    .poster-top { position: absolute; top: 25px; left: 25px; right: 25px; display: flex; align-items: flex-start; justify-content: space-between; color: #fff3d6; }
+    .poster-kicker { font-size: 9px; letter-spacing: .15em; }
+    .poster-heading { margin-top: 8px; font-family: var(--serif); font-size: 27px; line-height: 1.08; font-weight: 400; }
+    .poster-badge { width: 58px; height: 58px; border: 1px solid #f5e5b975; border-radius: 50%; display: flex; flex-direction: column; justify-content: center; align-items: center; font-size: 8px; letter-spacing: .12em; transform: rotate(12deg); }
+    .poster-badge b { font-family: var(--serif); font-size: 22px; font-weight: 400; letter-spacing: -1px; }
+    .poster-bottom { position: absolute; bottom: 22px; left: 25px; right: 25px; display: flex; justify-content: space-between; align-items: end; color: #f8eace; font-size: 9px; letter-spacing: .13em; }
+    .poster-bottom span:last-child { text-align: right; line-height: 1.6; }
+    .route-strip { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 1fr 1.35fr 1fr; gap: 35px; padding: 22px 0; align-items: center; }
+    .station { display: flex; gap: 12px; align-items: center; }
+    .station:last-child { justify-content: end; }
+    .station-code { font-family: var(--serif); font-size: 32px; letter-spacing: -1px; }
+    .station small { display: block; font-size: 10px; color: var(--muted); margin-top: 4px; }
+    .station-label { font-size: 11px; font-weight: 600; }
+    .journey-line { display: flex; align-items: center; gap: 12px; }
+    .journey-line::before, .journey-line::after { content: ''; height: 1px; background: var(--line); flex: 1; }
+    .journey-line span { text-align: center; font-size: 9px; white-space: nowrap; color: var(--muted); letter-spacing: .06em; line-height: 1.8; }
+    .journey-line b { font-size: 11px; color: var(--ink); font-weight: 500; }
+    .features { padding: 58px 0 62px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; }
+    .feature-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+    .feature-icon { width: 29px; height: 29px; color: var(--orange); }
+    .feature-number { color: #96998a; font-family: var(--serif); font-style: italic; font-size: 15px; }
+    .feature h3 { font-family: var(--serif); font-weight: 400; font-size: 25px; letter-spacing: -.6px; margin: 0 0 11px; }
+    .feature p { font-size: 12px; line-height: 1.9; color: var(--muted); margin: 0; max-width: 290px; }
+    .night-section { background: var(--night); color: var(--paper); padding: 62px 0 56px; position: relative; overflow: hidden; }
+    .section-heading { display: flex; justify-content: space-between; align-items: end; gap: 28px; margin-bottom: 30px; }
+    h2 { font-family: var(--serif); font-size: 43px; font-weight: 400; line-height: 1.12; letter-spacing: -1.7px; margin: 13px 0 0; }
+    .night-section .eyebrow { color: var(--lime); }
+    .section-aside { font-size: 11px; line-height: 1.8; color: #c2c7b9; max-width: 240px; margin: 0 0 3px; }
+    .schedule-overflow { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; text-align: left; }
+    th { font-size: 9px; text-transform: uppercase; letter-spacing: .14em; font-weight: 500; color: #aeb6a9; padding: 12px 0 16px; border-bottom: 1px solid #555b4d; }
+    td { padding: 19px 0; border-bottom: 1px solid #454d42; font-size: 12px; }
+    th:first-child { width: 27%; }
+    th:nth-child(2), th:nth-child(3) { width: 19%; }
+    td:last-child, th:last-child { text-align: right; }
+    .train-name { display: block; font-weight: 500; font-size: 13px; }
+    .train-id { display: block; font-size: 9px; color: #aeb6a9; margin-top: 6px; letter-spacing: .07em; }
+    .time { font-size: 22px; font-weight: 400; font-variant-numeric: tabular-nums; letter-spacing: -.5px; }
+    .time sup { vertical-align: super; font-size: 9px; color: var(--lime); margin-left: 4px; }
+    .status { color: #cbd3c1; font-size: 10px; display: inline-flex; gap: 7px; align-items: center; }
+    .status::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--lime); }
+    .status.limited { color: #ecb493; }
+    .status.limited::before { background: #ecb493; }
+    .select-train { border: 1px solid #69715e; color: var(--paper); background: none; padding: 10px 15px; font-size: 10px; transition: .2s; }
+    .select-train:hover { background: var(--lime); color: var(--night); border-color: var(--lime); }
+    .select-train .arrow { font-size: 15px; margin-left: 20px; }
+    .schedule-note { display: flex; justify-content: space-between; gap: 20px; color: #aeb6a9; font-size: 9px; line-height: 1.7; margin-top: 20px; }
+    .pricing { padding: 65px 0 60px; }
+    .pricing .section-aside { color: var(--muted); }
+    .price-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 17px; }
+    .price-card { border: 1px solid var(--line); padding: 27px 26px 25px; position: relative; display: flex; flex-direction: column; }
+    .price-card.featured { background: #e8ebd9; border-color: #92987b; }
+    .price-card .eyebrow { color: var(--muted); font-size: 9px; }
+    .popular { position: absolute; top: -10px; right: 17px; background: var(--night); color: var(--lime); font-size: 8px; padding: 6px 9px; letter-spacing: .11em; text-transform: uppercase; }
+    .price-card h3 { font-family: var(--serif); font-size: 29px; font-weight: 400; margin: 11px 0 9px; letter-spacing: -.9px; }
+    .price-description { font-size: 11px; color: var(--muted); line-height: 1.7; margin: 0; }
+    .price { font-family: var(--serif); font-size: 47px; letter-spacing: -2px; margin: 25px 0 20px; display: flex; align-items: baseline; gap: 8px; }
+    .price small { font-family: var(--sans); font-size: 10px; letter-spacing: 0; color: var(--muted); }
+    .price-card ul { padding: 20px 0 0; margin: 0 0 26px; list-style: none; border-top: 1px solid #cccfbe; }
+    .price-card li { font-size: 11px; line-height: 2.3; display: flex; gap: 10px; }
+    .price-card li::before { content: '✓'; font-size: 11px; color: #737e57; }
+    .price-card .button { margin-top: auto; width: 100%; font-size: 11px; min-height: 44px; padding: 11px 15px; }
+    .price-footnote { text-align: center; color: var(--muted); font-size: 10px; margin: 19px 0 0; }
+    .testimonial { border-top: 1px solid var(--line); padding: 44px 0 48px; display: grid; grid-template-columns: 1fr 2.15fr; gap: 48px; align-items: center; }
+    .testimonial-label .stars { color: var(--orange); letter-spacing: 3px; font-size: 13px; margin-bottom: 12px; }
+    .testimonial-label p { color: var(--muted); font-size: 11px; line-height: 1.8; margin: 9px 0 0; }
+    blockquote { margin: 0; }
+    blockquote p { font-family: var(--serif); font-size: 29px; line-height: 1.35; letter-spacing: -.6px; margin: 0 0 19px; }
+    blockquote cite { font-size: 10px; font-style: normal; }
+    blockquote cite span { color: var(--muted); margin-left: 10px; }
+    footer { background: #e8e6db; padding: 31px 0 22px; }
+    .footer-top { display: flex; justify-content: space-between; align-items: center; gap: 25px; padding-bottom: 27px; }
+    .footer-tagline { font-family: var(--serif); font-style: italic; font-size: 23px; margin: 0; color: #646858; }
+    .footer-links { display: flex; gap: 22px; font-size: 11px; }
+    .footer-links a:hover { text-decoration: underline; text-underline-offset: 4px; }
+    .footer-bottom { border-top: 1px solid #cccec0; padding-top: 18px; display: flex; justify-content: space-between; gap: 20px; font-size: 9px; color: var(--muted); line-height: 1.7; }
+    .footer-bottom span:last-child { letter-spacing: .1em; text-transform: uppercase; }
+    dialog { border: 1px solid var(--line); padding: 36px; width: min(480px, calc(100% - 32px)); max-height: calc(100dvh - 40px); background: var(--paper); color: var(--ink); }
+    dialog::backdrop { background: #1b251bd9; backdrop-filter: blur(5px); }
+    .dialog-close { position: absolute; top: 12px; right: 13px; border: 0; background: none; font-size: 24px; color: var(--muted); width: 32px; height: 32px; }
+    dialog h2 { font-size: 36px; margin-bottom: 13px; }
+    .dialog-intro { color: var(--muted); font-size: 12px; line-height: 1.7; }
+    .booking-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 17px; margin-top: 24px; }
+    .field-wide { grid-column: 1 / -1; }
+    label { display: block; font-size: 10px; font-weight: 600; }
+    input, select { display: block; width: 100%; margin-top: 8px; min-height: 43px; padding: 10px; border: 1px solid #bebfae; border-radius: 0; background: transparent; color: var(--ink); font-size: 12px; }
+    .booking-total { border-top: 1px solid var(--line); margin-top: 24px; padding: 20px 0; display: flex; align-items: center; justify-content: space-between; font-size: 12px; }
+    .booking-total strong { font-family: var(--serif); font-size: 30px; font-weight: 400; }
+    form > .button { width: 100%; }
+    .demo-note { margin: 14px 0 0; font-size: 9px; line-height: 1.6; color: var(--muted); text-align: center; }
+    #confirmation { padding-top: 12px; }
+    #confirmation p { font-size: 13px; line-height: 1.9; color: var(--muted); }
+    #confirmation .button { width: 100%; margin-top: 16px; }
+    [hidden] { display: none !important; }
+    @media (min-width: 1400px) { h1 { font-size: 78px; } }
+    @media (max-width: 1000px) {
+      .wrap { width: calc(100% - 56px); }
+      .hero { gap: 24px; }
+      h1 { font-size: 59px; letter-spacing: -3px; }
+      .hero-bottom { margin-top: 28px; }
+      .hero-actions { gap: 13px; }
+      .hero .button { padding-inline: 15px; }
+      .poster { aspect-ratio: .9; }
+      .features { gap: 28px; }
+      .price-card { padding-inline: 20px; }
+      .footer-tagline { font-size: 20px; }
+    }
+    @media (max-width: 740px) {
+      .wrap { width: calc(100% - 40px); }
+      header { height: 80px; }
+      .nav { position: relative; }
+      .menu-toggle { display: block; }
+      .nav-links { display: none; position: absolute; top: 70px; left: 0; right: 0; z-index: 5; background: var(--paper); border: 1px solid var(--line); padding: 24px; box-shadow: 0 15px 25px #292b2510; }
+      .nav-links.open { display: flex; flex-direction: column; align-items: stretch; gap: 24px; }
+      .nav-book { justify-content: space-between; }
+      .hero { grid-template-columns: 1fr; padding-top: 35px; gap: 28px; padding-bottom: 28px; }
+      .hero-copy { padding: 0; }
+      .route-label { margin-bottom: 23px; }
+      h1 { font-size: clamp(55px, 10.5vw, 77px); max-width: 540px; }
+      .hero-description { max-width: 430px; }
+      .hero-bottom { margin-top: 23px; }
+      .poster { aspect-ratio: 1.08; max-height: 600px; }
+      .route-strip { gap: 12px; grid-template-columns: 1fr .8fr 1fr; padding: 20px 0; }
+      .station { display: block; }
+      .station:last-child { text-align: right; }
+      .station-code { font-size: 28px; }
+      .station-label { font-size: 10px; margin-top: 5px; }
+      .station small { font-size: 9px; }
+      .journey-line { gap: 5px; }
+      .journey-line span { font-size: 8px; }
+      .features { gap: 26px; padding: 38px 0 42px; }
+      .feature h3 { font-size: 21px; }
+      .feature p { font-size: 11px; }
+      .night-section { padding: 42px 0; }
+      .section-heading { align-items: start; flex-direction: column; gap: 16px; margin-bottom: 25px; }
+      h2 { font-size: 37px; }
+      .section-aside { max-width: 100%; }
+      table { min-width: 545px; }
+      th:first-child { width: 25%; }
+      th:nth-child(2), th:nth-child(3) { width: 18%; }
+      .time { font-size: 20px; }
+      .schedule-note { flex-direction: column; gap: 5px; }
+      .pricing { padding: 43px 0; }
+      .price-grid { gap: 12px; }
+      .price-card { padding: 23px 15px 18px; }
+      .price-card h3 { font-size: 25px; }
+      .price-card .eyebrow { font-size: 8px; }
+      .price-card li { font-size: 10px; line-height: 1.7; margin-bottom: 8px; gap: 7px; }
+      .price-card .button { font-size: 10px; padding-inline: 10px; gap: 5px; }
+      .price-card .arrow { margin-left: 0; }
+      .price { font-size: 41px; gap: 5px; flex-wrap: wrap; }
+      .price small { font-size: 9px; }
+      .popular { right: 10px; font-size: 7px; }
+      .testimonial { grid-template-columns: 1fr; gap: 23px; padding: 34px 0 40px; }
+      .testimonial-label p { display: none; }
+      blockquote p { font-size: 26px; }
+      .footer-top { flex-wrap: wrap; gap: 25px; }
+      .footer-tagline { margin-left: auto; font-size: 18px; }
+      .footer-links { width: 100%; }
+      .footer-bottom { flex-direction: column; gap: 7px; }
+    }
+    @media (max-width: 500px) {
+      .features { grid-template-columns: 1fr; gap: 27px; }
+      .feature { display: grid; grid-template-columns: 42px 1fr; column-gap: 16px; }
+      .feature-top { grid-row: 1 / 3; display: block; margin: 0; padding-top: 2px; }
+      .feature-number { display: block; margin-top: 9px; font-size: 12px; }
+      .feature h3 { margin-bottom: 7px; font-size: 24px; }
+      .feature p { max-width: none; font-size: 12px; }
+      .price-grid { grid-template-columns: 1fr; gap: 22px; }
+      .price-card { padding: 25px; }
+      .price-card h3 { font-size: 30px; }
+      .price-card .eyebrow { font-size: 9px; }
+      .price-card li { font-size: 12px; line-height: 1.9; margin-bottom: 4px; }
+      .price-card .button { font-size: 12px; padding: 12px 16px; }
+      .price { margin: 20px 0; font-size: 48px; }
+      .price small { font-size: 11px; }
+      .price-card ul { margin-bottom: 20px; }
+      .popular { font-size: 8px; right: 20px; }
+      .poster-heading { font-size: 25px; }
+      .poster-top { top: 20px; left: 20px; right: 20px; }
+      .poster-bottom { left: 20px; right: 20px; bottom: 18px; font-size: 8px; }
+      .footer-tagline { display: none; }
+      dialog { padding: 29px 23px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; }
+      .button:hover { transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="nav wrap" aria-label="Main navigation">
+      <a class="brand" href="#" aria-label="Dune Line home">
+        <svg class="brand-mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+          <path d="M3 30 17 6h8L11 30H3Zm12 0L29 6h8L23 30h-8Z" fill="currentColor"/>
+          <path d="M3 35h30" stroke="currentColor" stroke-width="3"/>
+        </svg>
+        <span class="brand-name"><span>DUNE</span><span>LINE</span></span>
+      </a>
+      <button class="menu-toggle" aria-expanded="false" aria-controls="nav-links">Menu <span aria-hidden="true">＋</span></button>
+      <div class="nav-links" id="nav-links">
+        <a href="#experience">The experience</a>
+        <a href="#departures">Departures</a>
+        <a href="#cabins">Cabins & fares</a>
+        <a class="nav-book" href="#cabins">Find your seat <span class="arrow" aria-hidden="true">↗</span></a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero wrap" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <div class="route-label eyebrow">Solis desert <span aria-hidden="true">→</span> Lumen city</div>
+        <h1 id="hero-title">Somewhere<br>between<br><em>sand & neon.</em></h1>
+        <p class="hero-description">Leave the ordinary at the platform. Cross the desert under a sky full of stars, and wake up in a city that never runs out of light.</p>
+        <div class="hero-actions">
+          <a class="button" href="#departures">Find your night <span class="arrow" aria-hidden="true">↗</span></a>
+          <div class="hero-note"><strong>From $89 one way</strong>A little further from everyday.</div>
+        </div>
+        <div class="hero-bottom"><span class="tiny-stars" aria-hidden="true">✦ ✦ ✦</span>Less rushing. More looking out the window.</div>
+      </div>
+
+      <figure class="poster">
+        <svg viewBox="0 0 550 572" preserveAspectRatio="xMidYMid slice" role="img" aria-labelledby="landscape-title landscape-desc">
+          <title id="landscape-title">The night train to Lumen</title>
+          <desc id="landscape-desc">A silver train winds through rust-colored desert dunes toward a distant neon skyline beneath a giant setting sun and the first evening stars.</desc>
+          <defs>
+            <linearGradient id="sky" x1="0" y1="0" x2=".15" y2="1">
+              <stop offset="0" stop-color="#292d43"/>
+              <stop offset=".39" stop-color="#835965"/>
+              <stop offset=".72" stop-color="#db8d73"/>
+              <stop offset="1" stop-color="#edb17b"/>
+            </linearGradient>
+            <linearGradient id="sun" x2="0" y2="1">
+              <stop stop-color="#f7dba2"/>
+              <stop offset="1" stop-color="#ed9971"/>
+            </linearGradient>
+            <linearGradient id="frontDune" x1="0" y1="0" x2=".5" y2="1">
+              <stop stop-color="#bc5c3f"/><stop offset="1" stop-color="#713e33"/>
+            </linearGradient>
+            <linearGradient id="trainSide" x1="0" y1="0" x2=".3" y2="1">
+              <stop stop-color="#e7ddbd"/><stop offset=".6" stop-color="#bdbba7"/><stop offset="1" stop-color="#838d82"/>
+            </linearGradient>
+            <linearGradient id="glass" x2="1" y2="1">
+              <stop stop-color="#313b3b"/><stop offset="1" stop-color="#536568"/>
+            </linearGradient>
+            <pattern id="windows" width="13" height="17" patternUnits="userSpaceOnUse">
+              <rect x="3" y="3" width="2" height="5" fill="#e9ba91" opacity=".55"/>
+              <rect x="8" y="3" width="2" height="5" fill="#edb3bb" opacity=".7"/>
+            </pattern>
+            <filter id="glow"><feGaussianBlur stdDeviation="3"/></filter>
+          </defs>
+          <path fill="url(#sky)" d="M0 0h550v572H0z"/>
+          <g fill="#f6e8cb">
+            <circle cx="179" cy="36" r="1"/><circle cx="313" cy="69" r="1.1"/><circle cx="259" cy="118" r=".8"/>
+            <circle cx="402" cy="138" r=".9"/><circle cx="491" cy="114" r=".8"/><circle cx="73" cy="166" r=".9"/>
+            <circle cx="351" cy="27" r=".7"/><circle cx="31" cy="121" r=".7"/><circle cx="202" cy="83" r=".7"/>
+            <path d="M347 106v8m-4-4h8" stroke="#f6e8cb" stroke-width=".8"/>
+          </g>
+          <circle cx="328" cy="235" r="87" fill="url(#sun)"/>
+          <path d="M0 300 65 270 118 285 171 254 237 292 297 275 346 295 400 272 472 294 550 253v150H0Z" fill="#ab7767"/>
+          <path d="m0 323 80-16 88 19 85-16 81 15 83-28 75 18 58-17v120H0Z" fill="#8a6660"/>
+
+          <!-- The city: small, distant, electric. -->
+          <g fill="#41404a">
+            <path d="M325 290v-39h15v39m3 0v-61h20v61m7 0v-86h19v86m5 0v-45h16v45m7 0v-111h22v111m8 0v-70h18v70m8 0v-47h22v47m9 0v-80h22v80m8 0v-37h26v37"/>
+            <path d="m371 204 8-14 9 14m31-25 9-21 9 21m62 31 5-15 6 15"/>
+          </g>
+          <path d="M325 251h15v39h-15zm18-22h20v61h-20zm27-25h19v86h-19zm47-25h22v111h-22zm30 41h18v70h-18zm47-10h22v80h-22z" fill="url(#windows)"/>
+          <g stroke="#eaa4bb" fill="none">
+            <path d="M371 266v-61h16v51m33 32V180h16v108m63-52v-25h13v25" opacity=".5" stroke-width="5" filter="url(#glow)"/>
+            <path d="M371 266v-61h16v51m33 32V180h16v108m63-52v-25h13v25" stroke-width="1.4"/>
+            <path d="M351 231v50m99-59h12m17 38h12" stroke="#bdd8c6" stroke-width="1.4"/>
+            <path d="M427 179v-30" stroke-width=".8"/>
+          </g>
+          <path d="M0 328c106-29 141-1 244 18s190-70 306-38v264H0Z" fill="#cf8960"/>
+          <path d="M550 334c-81-25-147-6-224 20S128 412 0 356v216h550Z" fill="#e0a171"/>
+          <path d="M0 365c107 21 212 50 317 72s165-5 233-22v157H0Z" fill="url(#frontDune)"/>
+          <path d="M0 516c148-34 226-16 550 39v17H0Z" fill="#8d4634"/>
+          <path d="M550 352c-98-11-149 5-180 34S246 462-45 536" fill="none" stroke="#644c3d" stroke-width="35"/>
+          <path d="M550 350c-98-11-149 5-180 34S246 460-45 532" fill="none" stroke="#bc9a75" stroke-width="25"/>
+          <path d="M550 350c-98-11-149 5-180 34S246 460-45 532" fill="none" stroke="#564d41" stroke-width="26" stroke-dasharray="3 9"/>
+          <path d="M550 345c-98-11-149 5-184 34S240 453-45 523M550 356c-98-11-149 5-176 34S252 470-45 545" fill="none" stroke="#d3bc91" stroke-width="2.5"/>
+          <path d="M-25 433 367 334q42-12 71 11l47 38q16 16-12 26L-25 552Z" fill="#2d332d" opacity=".35"/>
+          <!-- Streamlined sleeper train. -->
+          <path d="m-28 370 401-65q38-7 66 18l48 42q18 19-13 30L-28 530Z" fill="url(#trainSide)"/>
+          <path d="m-28 370 401-65q38-7 66 18l15 13q-31-14-64-6L-28 409Z" fill="#ede1bd"/>
+          <path d="m-28 410 418-80q32-5 53 9l27 26q-29-10-59-1L-28 464Z" fill="url(#glass)"/>
+          <path d="m-28 476 463-112q23-6 35 1l9 9L-28 496Z" fill="#be4d32"/>
+          <path d="m-28 500 498-120" fill="none" stroke="#f1dfb9" stroke-width="3"/>
+          <g stroke="#b9bca7" stroke-width="5">
+            <path d="m54 394-2 51m62-63-1 48m62-60-1 46m59-57 1 44m56-55 2 42m50-52 3 39"/>
+          </g>
+          <g stroke="#a8aa93" stroke-width="1.1" opacity=".8">
+            <path d="m95 350-3 147m159-172 6 128m101-142 14 108"/>
+          </g>
+          <path d="m391 334 17 27 47-11-17-14q-19-12-47-2Z" fill="#303d3d"/>
+          <path d="m396 337 13 19 33-8" fill="none" stroke="#829893" stroke-width="1.3"/>
+          <path d="m448 383 17-5m-55 14 15-4" stroke="#fff4b9" stroke-width="4" stroke-linecap="round"/>
+          <path d="m448 383 17-5m-55 14 15-4" stroke="#fff4b9" stroke-width="8" opacity=".7" filter="url(#glow)"/>
+          <path d="m-28 517 446-116" stroke="#666f61" stroke-width="5"/>
+          <text x="282" y="408" fill="#545d50" font-family="Arial, sans-serif" font-size="7" letter-spacing="2" transform="rotate(-14 282 408)">DUNE LINE</text>
+          <g fill="none" stroke="#d18b60" stroke-width="1" opacity=".5">
+            <path d="M308 486c90-1 156 28 242 26M275 496c108 0 174 30 275 29M373 477c61 3 109 19 177 22"/>
+          </g>
+          <path d="M0 552c108-24 158-24 272-9s192 36 278 18v11H0Z" fill="#543c32"/>
+        </svg>
+        <div class="poster-top" aria-hidden="true">
+          <div><div class="poster-kicker">THE OVERNIGHT ESCAPE</div><div class="poster-heading">A different<br>kind of night out.</div></div>
+          <div class="poster-badge">EST.<b>2026</b>GO SLOW</div>
+        </div>
+        <figcaption class="poster-bottom"><span>33° N &nbsp; / &nbsp; A WORLD AWAY</span><span>DESERT TO DOWNTOWN.<br>DUSK TO DAWN.</span></figcaption>
+      </figure>
+    </section>
+
+    <div class="route-strip wrap" aria-label="Route: Solis Central to Lumen Union, 8 hours 40 minutes overnight">
+      <div class="station"><span class="station-code">SOL</span><div class="station-label">Solis Central<small>Where the desert begins</small></div></div>
+      <div class="journey-line"><span><b>8h 40m</b><br>ONE UNFORGETTABLE NIGHT</span></div>
+      <div class="station"><span class="station-code">LUM</span><div class="station-label">Lumen Union<small>Right in the heart of it</small></div></div>
+    </div>
+
+    <section class="features wrap" id="experience" aria-label="The Dune Line experience">
+      <article class="feature">
+        <div class="feature-top">
+          <svg class="feature-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M23 4a12 12 0 1 0 5 18A12 12 0 0 1 23 4Z"/><path d="M9 5v6M6 8h6m15-2v8m-4-4h8"/></svg>
+          <span class="feature-number">01 /</span>
+        </div>
+        <h3>Less scroll. More sky.</h3>
+        <p>Panoramic windows. A billion stars. Our observation carriage makes doing absolutely nothing feel like everything.</p>
+      </article>
+      <article class="feature">
+        <div class="feature-top">
+          <svg class="feature-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M4 25V11m0 10h24v7M4 16h20a4 4 0 0 1 4 4v1M4 25h24M8 12h6v5H8zM22 3v6m-3-3h6"/></svg>
+          <span class="feature-number">02 /</span>
+        </div>
+        <h3>A proper good night.</h3>
+        <p>Fresh linen, soft light, and the gentle rhythm of the rails. Settle into your own little somewhere and let the miles melt away.</p>
+      </article>
+      <article class="feature">
+        <div class="feature-top">
+          <svg class="feature-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M6 13h17v8a6 6 0 0 1-6 6h-5a6 6 0 0 1-6-6v-8Zm17 1h2a4 4 0 0 1 0 8h-2M3 29h24M11 3c-3 3 3 4 0 7m7-7c-3 3 3 4 0 7"/></svg>
+          <span class="feature-number">03 /</span>
+        </div>
+        <h3>Slow food. Fast friends.</h3>
+        <p>Desert-inspired plates, a late-night drink, and stories from the next table. There’s always a seat for you in the dining car.</p>
+      </article>
+    </section>
+
+    <section class="night-section" id="departures" aria-labelledby="departures-title">
+      <div class="wrap">
+        <div class="section-heading">
+          <div><div class="eyebrow">The night is yours</div><h2 id="departures-title">Four ways to leave the day behind.</h2></div>
+          <p class="section-aside">Every evening, from Solis to Lumen.<br>Choose your sunset. We’ll take it from here.</p>
+        </div>
+        <div class="schedule-overflow" role="region" aria-label="Daily departure timetable; scroll horizontally on small screens" tabindex="0">
+          <table>
+            <thead><tr><th scope="col">Your train</th><th scope="col">Departs · SOL</th><th scope="col">Arrives · LUM</th><th scope="col">Availability</th><th scope="col"><span class="eyebrow">All aboard</span></th></tr></thead>
+            <tbody>
+              <tr><td><span class="train-name">The Golden Hour</span><span class="train-id">DL 101 · DAILY</span></td><td class="time">19:40</td><td class="time">04:20<sup>+1</sup></td><td><span class="status">Seats available</span></td><td><button class="select-train" data-train="0" aria-label="Choose The Golden Hour, departing 19:40">Choose <span class="arrow" aria-hidden="true">↗</span></button></td></tr>
+              <tr><td><span class="train-name">The Sundowner</span><span class="train-id">DL 103 · DAILY</span></td><td class="time">20:30</td><td class="time">05:10<sup>+1</sup></td><td><span class="status limited">Filling up</span></td><td><button class="select-train" data-train="1" aria-label="Choose The Sundowner, departing 20:30">Choose <span class="arrow" aria-hidden="true">↗</span></button></td></tr>
+              <tr><td><span class="train-name">The Stargazer</span><span class="train-id">DL 105 · DAILY</span></td><td class="time">21:20</td><td class="time">06:00<sup>+1</sup></td><td><span class="status">Seats available</span></td><td><button class="select-train" data-train="2" aria-label="Choose The Stargazer, departing 21:20">Choose <span class="arrow" aria-hidden="true">↗</span></button></td></tr>
+              <tr><td><span class="train-name">The Night Owl</span><span class="train-id">DL 107 · DAILY</span></td><td class="time">22:10</td><td class="time">06:50<sup>+1</sup></td><td><span class="status">Seats available</span></td><td><button class="select-train" data-train="3" aria-label="Choose The Night Owl, departing 22:10">Choose <span class="arrow" aria-hidden="true">↗</span></button></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="schedule-note"><span>All times local. +1 means next-day arrival. Platform opens 30 minutes before departure.</span><span>One direction. A whole new perspective. ↗</span></div>
+      </div>
+    </section>
+
+    <section class="pricing wrap" id="cabins" aria-labelledby="pricing-title">
+      <div class="section-heading">
+        <div><div class="eyebrow">Room to make it your own</div><h2 id="pricing-title">Your night. Your kind of comfort.</h2></div>
+        <p class="section-aside">One-way fares, with no hidden surprises.<br>A great view comes with every ticket.</p>
+      </div>
+      <div class="price-grid">
+        <article class="price-card">
+          <div class="eyebrow">For the light traveler</div>
+          <h3>The Wanderer</h3>
+          <p class="price-description">A little space to lean back and drift off.</p>
+          <div class="price">$89 <small>/ person</small></div>
+          <ul><li>Generous reclining seat</li><li>Blanket & travel pillow</li><li>Observation carriage access</li><li>One bag + one carry-on</li></ul>
+          <button class="button light" data-tier="wanderer">Choose Wanderer <span class="arrow" aria-hidden="true">↗</span></button>
+        </article>
+        <article class="price-card featured">
+          <span class="popular">The passenger favorite</span>
+          <div class="eyebrow">For the dreamers</div>
+          <h3>The Sleeper</h3>
+          <p class="price-description">Your own bed. A world outside the window.</p>
+          <div class="price">$149 <small>/ person</small></div>
+          <ul><li>Berth in a shared two-person cabin</li><li>Fresh linen & a proper mattress</li><li>Breakfast & morning coffee</li><li>Observation carriage access</li></ul>
+          <button class="button" data-tier="sleeper">Choose Sleeper <span class="arrow" aria-hidden="true">↗</span></button>
+        </article>
+        <article class="price-card">
+          <div class="eyebrow">For a little more magic</div>
+          <h3>The Night Suite</h3>
+          <p class="price-description">Close the door. Open up to the journey.</p>
+          <div class="price">$249 <small>/ person</small></div>
+          <ul><li>Private single-occupancy cabin</li><li>En-suite shower & soft robes</li><li>Seasonal dinner & breakfast</li><li>Welcome drink & priority boarding</li></ul>
+          <button class="button light" data-tier="suite">Choose Night Suite <span class="arrow" aria-hidden="true">↗</span></button>
+        </article>
+      </div>
+      <p class="price-footnote">All fares in USD, taxes included. Every tier includes a place in the observation carriage.</p>
+    </section>
+
+    <section class="testimonial wrap" aria-label="A passenger's story">
+      <div class="testimonial-label">
+        <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+        <div class="eyebrow">Good nights. Great stories.</div>
+        <p>The journey tends to stay with you.<br>Our passengers say it best.</p>
+      </div>
+      <blockquote>
+        <p>“I booked it to get to the city. Somewhere around midnight, I wished the journey was twice as long.”</p>
+        <cite>Alex M. <span>— The Sleeper, Solis → Lumen</span></cite>
+      </blockquote>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="footer-top">
+        <a class="brand" href="#" aria-label="Dune Line, back to top">
+          <svg class="brand-mark" viewBox="0 0 40 40" fill="none" aria-hidden="true"><path d="M3 30 17 6h8L11 30H3Zm12 0L29 6h8L23 30h-8Z" fill="currentColor"/><path d="M3 35h30" stroke="currentColor" stroke-width="3"/></svg>
+          <span class="brand-name"><span>DUNE</span><span>LINE</span></span>
+        </a>
+        <p class="footer-tagline">Take the long way into tomorrow.</p>
+        <div class="footer-links"><a href="#experience">The experience</a><a href="#departures">Timetable</a><a href="#cabins">Fares</a></div>
+      </div>
+      <div class="footer-bottom"><span>© 2026 Dune Line. A fictional railway for real daydreamers. All journeys, availability & stories are illustrative.</span><span>Made for the in-between.</span></div>
+    </div>
+  </footer>
+
+  <dialog id="booking-dialog" aria-labelledby="booking-title">
+    <button class="dialog-close" type="button" aria-label="Close itinerary planner">×</button>
+    <div class="eyebrow">Your desert escape</div>
+    <h2 id="booking-title">A night worth taking.</h2>
+    <form id="booking-form">
+      <p class="dialog-intro">Build a little daydream. Choose a departure and we’ll put your overnight itinerary together.</p>
+      <div class="booking-fields">
+        <label class="field-wide">Departure
+          <select id="train-choice" name="train">
+            <option value="0">19:40 · The Golden Hour</option>
+            <option value="1">20:30 · The Sundowner</option>
+            <option value="2" selected>21:20 · The Stargazer</option>
+            <option value="3">22:10 · The Night Owl</option>
+          </select>
+        </label>
+        <label class="field-wide">Your comfort
+          <select id="tier-choice" name="tier">
+            <option value="wanderer">The Wanderer · $89 / person</option>
+            <option value="sleeper" selected>The Sleeper · $149 / person</option>
+            <option value="suite">The Night Suite · $249 / person</option>
+          </select>
+        </label>
+        <label>Departure date<input type="date" id="travel-date" name="date" required></label>
+        <label>Travelers<select id="travelers" name="travelers"><option value="1">1 traveler</option><option value="2">2 travelers</option><option value="3">3 travelers</option><option value="4">4 travelers</option></select></label>
+      </div>
+      <div class="booking-total"><span>One way · taxes included</span><strong id="total" aria-live="polite">$149</strong></div>
+      <button class="button" type="submit">Create my itinerary <span class="arrow" aria-hidden="true">↗</span></button>
+      <p class="demo-note">This is a fictional journey. No payment, reservation, or personal details required. Nothing leaves this page.</p>
+    </form>
+    <div id="confirmation" hidden aria-live="polite">
+      <p id="itinerary-summary"></p>
+      <p>Your sample itinerary is ready. No seats have been reserved — just a little inspiration for your next escape.</p>
+      <button type="button" class="button" id="edit-itinerary">Make it a different night <span class="arrow" aria-hidden="true">↗</span></button>
+    </div>
+  </dialog>
+
+  <script>
+    (() => {
+      const toggle = document.querySelector('.menu-toggle');
+      const links = document.querySelector('.nav-links');
+      function closeMenu() {
+        toggle.setAttribute('aria-expanded', 'false');
+        links.classList.remove('open');
+      }
+      toggle.addEventListener('click', () => {
+        const open = toggle.getAttribute('aria-expanded') !== 'true';
+        toggle.setAttribute('aria-expanded', String(open));
+        links.classList.toggle('open', open);
+      });
+      links.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+      document.addEventListener('keydown', event => {
+        if (event.key === 'Escape' && links.classList.contains('open')) {
+          closeMenu();
+          toggle.focus();
+        }
+      });
+
+      const dialog = document.getElementById('booking-dialog');
+      const form = document.getElementById('booking-form');
+      const confirmation = document.getElementById('confirmation');
+      const train = document.getElementById('train-choice');
+      const tier = document.getElementById('tier-choice');
+      const travelers = document.getElementById('travelers');
+      const date = document.getElementById('travel-date');
+      const prices = { wanderer: 89, sleeper: 149, suite: 249 };
+      const names = { wanderer: 'The Wanderer', sleeper: 'The Sleeper', suite: 'The Night Suite' };
+      const trains = [
+        { name: 'The Golden Hour', departure: '19:40', arrival: '04:20' },
+        { name: 'The Sundowner', departure: '20:30', arrival: '05:10' },
+        { name: 'The Stargazer', departure: '21:20', arrival: '06:00' },
+        { name: 'The Night Owl', departure: '22:10', arrival: '06:50' }
+      ];
+      const money = amount => new Intl.NumberFormat('en-US', {
+        style: 'currency', currency: 'USD', maximumFractionDigits: 0
+      }).format(amount);
+      const localDate = value => `${value.getFullYear()}-${String(value.getMonth() + 1).padStart(2, '0')}-${String(value.getDate()).padStart(2, '0')}`;
+      const tomorrow = new Date();
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      date.min = localDate(tomorrow);
+      date.value = localDate(tomorrow);
+
+      function updateTotal() {
+        document.getElementById('total').textContent = money(prices[tier.value] * Number(travelers.value));
+      }
+      function showForm() {
+        form.hidden = false;
+        confirmation.hidden = true;
+        document.getElementById('booking-title').textContent = 'A night worth taking.';
+      }
+      document.querySelectorAll('[data-train], [data-tier]').forEach(button => {
+        button.addEventListener('click', () => {
+          if (button.dataset.train !== undefined) train.value = button.dataset.train;
+          if (button.dataset.tier) tier.value = button.dataset.tier;
+          showForm();
+          updateTotal();
+          dialog.showModal();
+        });
+      });
+      tier.addEventListener('change', updateTotal);
+      travelers.addEventListener('change', updateTotal);
+      document.querySelector('.dialog-close').addEventListener('click', () => dialog.close());
+      dialog.addEventListener('click', event => {
+        if (event.target !== dialog) return;
+        const rect = dialog.getBoundingClientRect();
+        if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) dialog.close();
+      });
+      form.addEventListener('submit', event => {
+        event.preventDefault();
+        if (!form.reportValidity()) return;
+        const selected = trains[Number(train.value)];
+        const departureDate = new Date(date.value + 'T12:00:00');
+        const arrivalDate = new Date(departureDate);
+        arrivalDate.setDate(arrivalDate.getDate() + 1);
+        const formatDate = value => value.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        const count = Number(travelers.value);
+        const accommodation = tier.value === 'suite' && count > 1 ? ` (${count} private cabins)` : '';
+        document.getElementById('itinerary-summary').textContent =
+          `${selected.name} · ${names[tier.value]}${accommodation}. ` +
+          `Depart Solis Central on ${formatDate(departureDate)} at ${selected.departure}. ` +
+          `Arrive at Lumen Union on ${formatDate(arrivalDate)} at ${selected.arrival}. ` +
+          `${count} ${count === 1 ? 'traveler' : 'travelers'} · ${money(prices[tier.value] * count)} total, taxes included.`;
+        form.hidden = true;
+        confirmation.hidden = false;
+        document.getElementById('booking-title').textContent = 'Next stop: possibility.';
+        document.getElementById('edit-itinerary').focus();
+      });
+      document.getElementById('edit-itinerary').addEventListener('click', () => {
+        showForm();
+        train.focus();
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+ "text": "A suspension bridge carries load through a chain of tension and compression, moving weight from the roadway up into cables, over towers, and finally into the earth at both ends.\n\nIt begins at the deck, the roadway surface and the stiffening structure beneath it. When vehicles, pedestrians, wind, and the deck's own weight press downward, that force is transferred to vertical suspenders, which are ropes or rods hanging from the main cables. Because the suspenders are slender and flexible, they can only pull, never push, so each one simply hangs in tension, holding up its small share of the deck.\n\nThe suspenders attach to the two main cables, which drape in a smooth curve between the towers. This is where the bridge's character emerges. A cable carrying a load spread evenly along the horizontal takes the shape of a parabola, and in that shape every part of it is in pure tension. The cable doesn't bend or resist by stiffness; it simply pulls along its own length. Steel in tension is extraordinarily efficient, which is why such bridges can span thousands of meters. The downward pull of the suspenders makes the cable tug on its supports with a force that has both a vertical component and a horizontal one. The more the cable sags, the smaller that horizontal pull becomes for a given load, which is why designers choose a sag of roughly a tenth of the span.\n\nThe cables rise to the tops of the towers and pass over saddles, smooth curved fittings that let the cable slide slightly without being kinked or worn. At this point the towers receive the load. Because the cable pulls down on each side of the tower, the tower experiences a large downward force, and it is compressed like a column. The towers are therefore stocky enough and made of strong material, usually reinforced concrete or steel, to resist crushing and buckling. If the cable angles on both sides of a tower are balanced, the horizontal pulls largely cancel at the top, leaving mostly vertical load for the tower to pass down into its foundation. Those foundations, sunk into bedrock or deep sediment, spread the compression into the ground.\n\nThe cables don't stop at the towers. They continue outward and downward to the anchorages at each end of the bridge. This is the part many people overlook, yet it is essential. The horizontal component of cable tension is enormous, and something must resist it, or the towers would be dragged inward and the span would collapse. Anchorages are massive blocks of concrete or tunnels bored into rock. The cable strands splay out and are fixed to them, and the anchorage resists being pulled toward the span through its sheer weight, the friction of its base, or the grip of the rock around it. In this way the horizontal force is neutralized in the ground rather than in the structure.\n\nMeanwhile, the stiffening girder or truss of the deck distributes concentrated loads, such as a heavy truck, among many suspenders and resists twisting from wind. So the load path runs from deck to suspenders to cables, then splits: part passes through the towers as compression into their foundations, and part passes along the back-stays as tension into the anchorages.",
+ "reasoning_chars": 0,
+ "usage": {
+  "prompt_tokens": 61,
+  "completion_tokens": 981,
+  "total_tokens": 1042,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 0.7689618639997207,
+ "t_first_content": 0.7689622290199623,
+ "t_total": 10.342974229017273,
+ "cost": 0.009932
+}

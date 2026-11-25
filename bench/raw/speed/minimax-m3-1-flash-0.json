@@ -1,0 +1,21 @@
+{
+ "text": "A suspension bridge moves load to the ground along a chain of members, each doing one job well. The deck hangs from above, the hangers pull up on the main cables, the main cables pull inward and downward on the towers, and the towers press everything into the earth.\n\nThe deck is not a beam strong enough to span the gap by itself. It is a stiffened girder, a deep open truss or a shallow steel box, whose first job is to spread concentrated loads such as a truck axle along the deck so no single suspender carries the whole vehicle, and whose second is to resist bending and the twisting that wind and uneven traffic impose.\n\nThe hanging is done by vertical suspender cables spaced every fifteen or thirty metres along the span. Each is a wire rope or a bundle of rods tied to a crossbeam beneath the deck and reaching up to the main cable. They work in pure tension and are deliberately slender, stretching slightly under load, which is one reason the whole structure behaves nonlinearly.\n\nThe main cables, usually one on each side of the roadway, are the heart of the system. Each is a bundle of thousands of parallel high-strength steel wires, spun together on site and compacted into a cylinder about a foot across. The cable sags in a curve close to a catenary, and that sag is the key to everything. A cable can only carry load by also pushing outward, and the curve is what converts its tension into a useful hold on the deck. The deeper the sag, the flatter the cable lies and the less tension it develops for a given load, which is why engineers specify a generous sag, often a span-to-rise ratio of ten to one, accepting taller towers and longer hangers in exchange for a lighter, cheaper cable. Tension is least at midspan and greatest at the anchorages.\n\nAt each tower the cable runs over a cast-steel saddle and continues down the far side as a backstay. The saddle turns the cable and delivers the vertical component of its pull straight down the tower legs, while the horizontal components from the two sides nearly cancel each other. The tower carries the combined force in compression to its foundations, which may be caissons sunk to bedrock or long friction piles driven into firm soil, and which must also resist the overturning moments produced by wind and by live load sitting on only part of the span.\n\nAt the ends, the cables are secured in massive blocks of concrete, often set directly into rock. The anchorages hold the cable's pull by their own weight and friction, and they take the horizontal thrust that would otherwise drag them inward toward midspan. They are among the heaviest and stiffest structures in the bridge, and the ground beneath them gets the closest scrutiny from geologists. What makes the scheme elegant is that nothing is asked to do what it does badly: the deck bends and twists, the hangers and cables pull, the towers squeeze, and the earth absorbs the lot. But the chain works only as a whole, because lose a hanger and its share of the load shifts to its neighbours, and change the cable's geometry and forces redistribute along the entire span.",
+ "reasoning_chars": 19561,
+ "usage": {
+  "prompt_tokens": 233,
+  "completion_tokens": 4904,
+  "total_tokens": 5137,
+  "prompt_tokens_details": {
+   "cached_tokens": 191
+  },
+  "cache_read_input_tokens": 191,
+  "completion_tokens_details": {
+   "reasoning_tokens": 4270
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 0.5057390459696762,
+ "t_first_content": 31.304901129973587,
+ "t_total": 34.21307734097354,
+ "cost": 0.0037216875
+}

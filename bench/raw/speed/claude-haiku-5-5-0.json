@@ -1,0 +1,17 @@
+{
+ "text": "A suspension bridge carries its load by turning the weight of the roadway into tension, a pulling force, and then sending that pull into the ground at the two ends. The deck is the surface vehicles drive on, and it is usually supported by a stiffening truss or girder beneath it. Because the deck is heavy and spans a long distance, it would sag and bend badly if it had to hold itself up alone, so the design hands most of that burden to cables.\n\nVertical hangers, sometimes called suspenders, are steel rods or cables that hang down from the main cables and attach to the stiffening girder at regular intervals. Every vehicle, pedestrian, and piece of the deck's own weight pulls downward on the girder. The girder transfers that force to the nearest hangers, and each hanger pulls up on the main cable. The girder is stiff enough to spread a concentrated load, such as a single truck, across several hangers, so no single point on the cable takes the whole weight.\n\nThe main cables are the heart of the structure. They are made of many thousands of thin steel wires bundled together, which gives them great strength while keeping them flexible. Each cable hangs in a curve between two towers and then continues to anchorages on land. The cable's shape matters. Because it can only pull along its length, not push, it settles into a curve that balances the downward loads, and the sag of that curve determines how much tension develops. A deeper sag reduces the force in the cable but increases the height of the towers required, so engineers choose the curve carefully.\n\nAt the towers, the cable passes over a saddle, a fixture that lets it slide slightly as the bridge expands, contracts, or flexes under traffic without damaging the wire. The towers themselves are tall columns, usually of steel or concrete, that carry the cable's downward push. The cable pulls down and inward on the top of each tower, and since the tower is standing upright, that force travels straight down its length as compression. The towers are then anchored into their foundations, which sit on bedrock or on deep piles driven into firm soil, and the foundations spread the compression into the earth.\n\nThe ends of the main cables do not rest on the towers; they continue past them and are secured at the anchorages. These are massive blocks of concrete, often weighing many thousands of tons, sometimes with the cable ends embedded in them or fastened to anchor bars. The cable's enormous horizontal pull is resisted by the anchorage's own weight and by friction and bearing against the surrounding rock or soil. If the anchorage were not heavy or firmly seated, the cable would drag it forward.\n\nThe complete path, then, runs from the vehicle to the deck, from the deck through the hangers into the main cables, across the towers, and into the anchorages, which resist the pull and hold the whole system in place. The towers carry compression downward, the cables carry tension along their curves, and the anchorages hold that tension against the ground. The result is a structure that spans distances far beyond what a simple beam could manage, using relatively little material in the deck itself.",
+ "reasoning_chars": 353,
+ "usage": {
+  "prompt_tokens": 61,
+  "completion_tokens": 1097,
+  "total_tokens": 1158,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 1.7077004900202155,
+ "t_first_content": 1.7083444879972376,
+ "t_total": 6.808315589034464,
+ "cost": 0.0005546
+}

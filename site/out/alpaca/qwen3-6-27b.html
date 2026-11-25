@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Walking Alpaca</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 100%; height: 100%; overflow: hidden; background: #1a1a2e; }
+svg { width: 100vw; height: 100vh; display: block; }
+
+/* Walking cycle - diagonal pair gait with stagger */
+@keyframes legFrontLeft {
+  0%, 100% { transform: rotate(-25deg); }
+  25% { transform: rotate(0deg); }
+  50% { transform: rotate(25deg); }
+  75% { transform: rotate(0deg); }
+}
+@keyframes legFrontRight {
+  0%, 100% { transform: rotate(25deg); }
+  25% { transform: rotate(0deg); }
+  50% { transform: rotate(-25deg); }
+  75% { transform: rotate(0deg); }
+}
+@keyframes legBackLeft {
+  0%, 100% { transform: rotate(25deg); }
+  25% { transform: rotate(0deg); }
+  50% { transform: rotate(-25deg); }
+  75% { transform: rotate(0deg); }
+}
+@keyframes legBackRight {
+  0%, 100% { transform: rotate(-25deg); }
+  25% { transform: rotate(0deg); }
+  50% { transform: rotate(25deg); }
+  75% { transform: rotate(0deg); }
+}
+
+@keyframes bodyBounce {
+  0%, 100% { transform: translateY(0px); }
+  25% { transform: translateY(-4px); }
+  50% { transform: translateY(0px); }
+  75% { transform: translateY(-4px); }
+}
+
+@keyframes neckSway {
+  0%, 100% { transform: rotate(-2deg); }
+  50% { transform: rotate(2deg); }
+}
+
+@keyframes headBob {
+  0%, 100% { transform: rotate(-1deg) translateY(0); }
+  50% { transform: rotate(1deg) translateY(-2px); }
+}
+
+@keyframes tailWag {
+  0%, 100% { transform: rotate(-5deg); }
+  50% { transform: rotate(10deg); }
+}
+
+@keyframes earTwitchL {
+  0%, 40%, 100% { transform: rotate(0deg); }
+  45% { transform: rotate(-8deg); }
+  50% { transform: rotate(0deg); }
+}
+
+@keyframes earTwitchR {
+  0%, 60%, 100% { transform: rotate(0deg); }
+  65% { transform: rotate(8deg); }
+  70% { transform: rotate(0deg); }
+}
+
+@keyframes cloudDrift1 {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(1400px); }
+}
+@keyframes cloudDrift2 {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(1400px); }
+}
+
+@keyframes sunPulse {
+  0%, 100% { r: 60; opacity: 0.9; }
+  50% { r: 63; opacity: 1; }
+}
+
+@keyframes grassSway {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+}
+
+@keyframes butterfly1 {
+  0% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(60px, -40px) scale(0.8); }
+  50% { transform: translate(120px, -10px) scale(1); }
+  75% { transform: translate(60px, -50px) scale(0.9); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
+@keyframes butterfly2 {
+  0% { transform: translate(0, 0) scale(0.9); }
+  25% { transform: translate(-50px, -30px) scale(1); }
+  50% { transform: translate(-100px, -5px) scale(0.8); }
+  75% { transform: translate(-50px, -40px) scale(0.95); }
+  100% { transform: translate(0, 0) scale(0.9); }
+}
+
+@keyframes wingFlap1 {
+  0%, 100% { transform: scaleX(1); }
+  50% { transform: scaleX(0.3); }
+}
+
+@keyframes shadowPulse {
+  0%, 100% { transform: scaleX(1); opacity: 0.3; }
+  25% { transform: scaleX(0.9); opacity: 0.25; }
+  50% { transform: scaleX(1.05); opacity: 0.35; }
+  75% { transform: scaleX(0.9); opacity: 0.25; }
+}
+
+@keyframes pollenFloat {
+  0% { transform: translateY(0) translateX(0); opacity: 0; }
+  10% { opacity: 0.8; }
+  90% { opacity: 0.8; }
+  100% { transform: translateY(-200px) translateX(30px); opacity: 0; }
+}
+
+@keyframes birdFly1 {
+  0% { transform: translate(-50px, 0); }
+  100% { transform: translate(1400px, -30px); }
+}
+@keyframes birdFly2 {
+  0% { transform: translate(-50px, 0); }
+  100% { transform: translate(1400px, -20px); }
+}
+
+@keyframes birdWing {
+  0%, 100% { d: path("M0,0 Q3,-5 6,0"); }
+  50% { d: path("M0,0 Q3,5 6,0"); }
+}
+
+.fl-leg-front-left {
+  animation: legFrontLeft 0.8s ease-in-out infinite;
+  transform-origin: 185px 280px;
+}
+.fl-leg-front-right {
+  animation: legFrontRight 0.8s ease-in-out infinite;
+  transform-origin: 185px 280px;
+}
+.fl-leg-back-left {
+  animation: legBackLeft 0.8s ease-in-out infinite;
+  transform-origin: 85px 280px;
+}
+.fl-leg-back-right {
+  animation: legBackRight 0.8s ease-in-out infinite;
+  transform-origin: 85px 280px;
+}
+
+.fl-body { animation: bodyBounce 0.8s ease-in-out infinite; }
+.fl-neck { animation: neckSway 1.6s ease-in-out infinite; transform-origin: 170px 220px; }
+.fl-head { animation: headBob 1.6s ease-in-out infinite; transform-origin: 200px 120px; }
+.fl-tail { animation: tailWag 1.2s ease-in-out infinite; transform-origin: 20px 250px; }
+.fl-ear-l { animation: earTwitchL 4s ease-in-out infinite; transform-origin: 195px 85px; }
+.fl-ear-r { animation: earTwitchR 4s ease-in-out infinite; transform-origin: 210px 85px; }
+
+.cloud1 { animation: cloudDrift1 60s linear infinite; }
+.cloud2 { animation: cloudDrift2 45s linear infinite; animation-delay: -20s; }
+
+.sun { animation: sunPulse 4s ease-in-out infinite; }
+
+.grass1 { animation: grassSway 2s ease-in-out infinite; transform-origin: 0px 0px; }
+.grass2 { animation: grassSway 2.3s ease-in-out infinite; transform-origin: 0px 0px; animation-delay: 0.5s; }
+.grass3 { animation: grassSway 1.8s ease-in-out infinite; transform-origin: 0px 0px; animation-delay: 1s; }
+
+.butterfly1 { animation: butterfly1 8s ease-in-out infinite; }
+.butterfly2 { animation: butterfly2 10s ease-in-out infinite; animation-delay: -3s; }
+.wing-flap { animation: wingFlap1 0.3s ease-in-out infinite; }
+
+.alpaca-shadow { animation: shadowPulse 0.8s ease-in-out infinite; }
+
+.pollen { animation: pollenFloat 6s linear infinite; }
+</style>
+</head>
+<body>
+<svg viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Sky gradient -->
+    <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4a90d9"/>
+      <stop offset="30%" stop-color="#87CEEB"/>
+      <stop offset="60%" stop-color="#b8e4f0"/>
+      <stop offset="85%" stop-color="#f0c27f"/>
+      <stop offset="100%" stop-color="#e8a87c"/>
+    </linearGradient>
+
+    <!-- Sun glow -->
+    <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fff7a1" stop-opacity="1"/>
+      <stop offset="40%" stop-color="#ffe066" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#ffcc33" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Ground gradient -->
+    <linearGradient id="groundGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#5a8f3c"/>
+      <stop offset="30%" stop-color="#4a7a32"/>
+      <stop offset="100%" stop-color="#3d6628"/>
+    </linearGradient>
+
+    <!-- Hill gradients -->
+    <linearGradient id="hillFar" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6b9e5a"/>
+      <stop offset="100%" stop-color="#5a8f3c"/>
+    </linearGradient>
+    <linearGradient id="hillMid" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#5a8f3c"/>
+      <stop offset="100%" stop-color="#4a7a32"/>
+    </linearGradient>
+
+    <!-- Alpaca fleece gradient -->
+    <radialGradient id="fleeceGrad" cx="40%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#f5f0e8"/>
+      <stop offset="60%" stop-color="#e8ddd0"/>
+      <stop offset="100%" stop-color="#d4c4b0"/>
+    </radialGradient>
+
+    <!-- Darker fleece for far side -->
+    <radialGradient id="fleeceDark" cx="40%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#ddd5c8"/>
+      <stop offset="100%" stop-color="#c8b8a0"/>
+    </radialGradient>
+
+    <!-- Neck gradient -->
+    <linearGradient id="neckGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#e8ddd0"/>
+      <stop offset="100%" stop-color="#f0ebe3"/>
+    </linearGradient>
+
+    <!-- Fluff filter for fleece -->
+    <filter id="fluff">
+      <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="4" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+
+    <!-- Soft shadow -->
+    <filter id="softShadow">
+      <feGaussianBlur stdDeviation="3"/>
+    </filter>
+
+    <!-- Cloud blur -->
+    <filter id="cloudBlur">
+      <feGaussianBlur stdDeviation="2"/>
+    </filter>
+
+    <!-- Flower template -->
+    <g id="flower">
+      <circle cx="0" cy="-5" r="3" fill="#fff"/>
+      <circle cx="4" cy="-2" r="3" fill="#fff"/>
+      <circle cx="3" cy="3" r="3" fill="#fff"/>
+      <circle cx="-2" cy="4" r="3" fill="#fff"/>
+      <circle cx="-4" cy="0" r="3" fill="#fff"/>
+      <circle cx="0" cy="0" r="2" fill="#ffdd44"/>
+    </g>
+
+    <g id="flowerPink">
+      <circle cx="0" cy="-5" r="3" fill="#ffb6d9"/>
+      <circle cx="4" cy="-2" r="3" fill="#ffb6d9"/>
+      <circle cx="3" cy="3" r="3" fill="#ffb6d9"/>
+      <circle cx="-2" cy="4" r="3" fill="#ffb6d9"/>
+      <circle cx="-4" cy="0" r="3" fill="#ffb6d9"/>
+      <circle cx="0" cy="0" r="2" fill="#ffdd44"/>
+    </g>
+
+    <g id="flowerPurple">
+      <circle cx="0" cy="-5" r="3" fill="#d4a5e8"/>
+      <circle cx="4" cy="-2" r="3" fill="#d4a5e8"/>
+      <circle cx="3" cy="3" r="3" fill="#d4a5e8"/>
+      <circle cx="-2" cy="4" r="3" fill="#d4a5e8"/>
+      <circle cx="-4" cy="0" r="3" fill="#d4a5e8"/>
+      <circle cx="0" cy="0" r="2" fill="#ffdd44"/>
+    </g>
+
+    <!-- Grass blade template -->
+    <path id="grassBlade" d="M0,0 Q-2,-15 -1,-30 Q0,-35 1,-30 Q2,-15 0,0" fill="#4a7a32"/>
+  </defs>
+
+  <!-- Sky -->
+  <rect width="1280" height="720" fill="url(#skyGrad)"/>
+
+  <!-- Sun -->
+  <circle class="sun" cx="1050" cy="120" r="60" fill="url(#sunGlow)"/>
+  <circle cx="1050" cy="120" r="28" fill="#fff7a1" opacity="0.9"/>
+
+  <!-- Clouds -->
+  <g class="cloud1" opacity="0.8">
+    <g transform="translate(50, 80)" filter="url(#cloudBlur)">
+      <ellipse cx="0" cy="0" rx="50" ry="20" fill="white"/>
+      <ellipse cx="-25" cy="5" rx="35" ry="18" fill="white"/>
+      <ellipse cx="30" cy="3" rx="40" ry="17" fill="white"/>
+      <ellipse cx="10" cy="-8" rx="30" ry="15" fill="white"/>
+    </g>
+  </g>
+  <g class="cloud2" opacity="0.6" transform="scale(0.7)">
+    <g transform="translate(-100, 50)" filter="url(#cloudBlur)">
+      <ellipse cx="0" cy="0" rx="60" ry="22" fill="white"/>
+      <ellipse cx="-30" cy="5" rx="40" ry="20" fill="white"/>
+      <ellipse cx="35" cy="4" rx="45" ry="19" fill="white"/>
+      <ellipse cx="5" cy="-10" rx="35" ry="16" fill="white"/>
+    </g>
+  </g>
+  <g class="cloud1" opacity="0.5" style="animation-delay: -30s; animation-duration: 70s;">
+    <g transform="translate(200, 160)" filter="url(#cloudBlur)">
+      <ellipse cx="0" cy="0" rx="40" ry="15" fill="white"/>
+      <ellipse cx="-20" cy="3" rx="28" ry="14" fill="white"/>
+      <ellipse cx="25" cy="2" rx="32" ry="13" fill="white"/>
+    </g>
+  </g>
+
+  <!-- Distant mountains -->
+  <path d="M0,420 Q80,340 160,380 Q240,320 320,360 Q400,300 480,350 Q560,310 640,340 Q720,290 800,330 Q880,300 960,340 Q1040,280 1120,320 Q1200,300 1280,340 L1280,420 Z" fill="#7ab87a" opacity="0.4"/>
+  <path d="M0,440 Q120,380 240,410 Q360,360 480,400 Q600,350 720,390 Q840,340 960,380 Q1080,350 1280,390 L1280,440 Z" fill="#6aad5a" opacity="0.35"/>
+
+  <!-- Far hills -->
+  <path d="M0,480 Q200,430 400,460 Q600,420 800,450 Q1000,420 1280,460 L1280,500 L0,500 Z" fill="url(#hillFar)" opacity="0.8"/>
+
+  <!-- Mid hills -->
+  <path d="M0,510 Q150,480 350,500 Q550,475 750,495 Q950,470 1280,500 L1280,540 L0,540 Z" fill="url(#hillMid)" opacity="0.7"/>
+
+  <!-- Ground -->
+  <rect x="0" y="530" width="1280" height="190" fill="url(#groundGrad)"/>
+
+  <!-- Ground texture lines -->
+  <path d="M0,550 Q320,545 640,550 Q960,555 1280,548" stroke="#4a7a32" stroke-width="1" fill="none" opacity="0.3"/>
+  <path d="M0,570 Q200,565 400,572 Q600,568 800,573 Q1000,569 1280,571" stroke="#4a7a32" stroke-width="1" fill="none" opacity="0.2"/>
+
+  <!-- Grass patches -->
+  <g transform="translate(100, 530)">
+    <g class="grass1"><use href="#grassBlade"/></g>
+    <g class="grass2" transform="translate(8, 3)"><use href="#grassBlade" transform="scale(0.8)"/></g>
+    <g class="grass3" transform="translate(-6, 5)"><use href="#grassBlade" transform="scale(0.7)"/></g>
+  </g>
+  <g transform="translate(350, 535)">
+    <g class="grass2"><use href="#grassBlade" transform="scale(0.9)"/></g>
+    <g class="grass1" transform="translate(10, 2)"><use href="#grassBlade" transform="scale(0.7)"/></g>
+    <g class="grass3" transform="translate(-8, 4)"><use href="#grassBlade" transform="scale(0.8)"/></g>
+  </g>
+  <g transform="translate(600, 532)">
+    <g class="grass1"><use href="#grassBlade" transform="scale(1.1)"/></g>
+    <g class="grass3" transform="translate(6, 3)"><use href="#grassBlade" transform="scale(0.8)"/></g>
+    <g class="grass2" transform="translate(-10, 2)"><use href="#grassBlade" transform="scale(0.9)"/></g>
+  </g>
+  <g transform="translate(850, 534)">
+    <g class="grass2"><use href="#grassBlade"/></g>
+    <g class="grass1" transform="translate(7, 2)"><use href="#grassBlade" transform="scale(0.75)"/></g>
+    <g class="grass3" transform="translate(-5, 4)"><use href="#grassBlade" transform="scale(0.85)"/></g>
+  </g>
+  <g transform="translate(1100, 531)">
+    <g class="grass1"><use href="#grassBlade" transform="scale(0.9)"/></g>
+    <g class="grass3" transform="translate(9, 3)"><use href="#grassBlade" transform="scale(0.8)"/></g>
+    <g class="grass2" transform="translate(-7, 5)"><use href="#grassBlade" transform="scale(0.7)"/></g>
+  </g>
+
+  <!-- Flowers -->
+  <g transform="translate(150, 545)"><use href="#flower" transform="scale(0.8)"/></g>
+  <g transform="translate(280, 550)"><use href="#flowerPink" transform="scale(0.7)"/></g>
+  <g transform="translate(420, 542)"><use href="#flowerPurple" transform="scale(0.75)"/></g>
+  <g transform="translate(550, 548)"><use href="#flower" transform="scale(0.65)"/></g>
+  <g transform="translate(700, 544)"><use href="#flowerPink" transform="scale(0.8)"/></g>
+  <g transform="translate(830, 547)"><use href="#flowerPurple" transform="scale(0.7)"/></g>
+  <g transform="translate(960, 543)"><use href="#flower" transform="scale(0.75)"/></g>
+  <g transform="translate(1080, 549)"><use href="#flowerPink" transform="scale(0.7)"/></g>
+  <g transform="translate(1200, 545)"><use href="#flowerPurple" transform="scale(0.8)"/></g>
+
+  <!-- Flower stems -->
+  <line x1="150" y1="550" x2="150" y2="565" stroke="#3d6628" stroke-width="1.5"/>
+  <line x1="280" y1="555" x2="280" y2="570" stroke="#3d6628" stroke-width="1.5"/>
+  <line x1="420" y1="547" x2="420" y2="562" stroke="#3d6628" stroke-width="1.5"/>
+  <line x1="550" y1="553" x2="550" y2="568" stroke="#3d6628" stroke-width="1.5"/>
+  <line x1="700" y1="549" x2="700" y2="564" stroke="#3d6628" stroke-width="1.5"/>
+  <line x1="830" y1="552" x2="830" y2="567" stroke="#3d6628" stroke-width="1.5"/>
+  <line x1="960" y1="548" x2="960" y2="563" stroke="#3d6628" stroke-width="1.5"/>
+  <line x1="1080" y1="554" x2="1080" y2="569" stroke="#3d6628" stroke-width="1.5"/>
+  <line x1="1200" y1="550" x2="1200" y2="565" stroke="#3d6628" stroke-width="1.5"/>
+
+  <!-- Pollen particles -->
+  <circle class="pollen" cx="200" cy="500" r="2" fill="#fffde0" style="animation-delay: 0s;" opacity="0"/>
+  <circle class="pollen" cx="400" cy="480" r="1.5" fill="#fffde0" style="animation-delay: 1.5s;" opacity="0"/>
+  <circle class="pollen" cx="600" cy="510" r="2" fill="#fffde0" style="animation-delay: 3s;" opacity="0"/>
+  <circle class="pollen" cx="800" cy="490" r="1.5" fill="#fffde0" style="animation-delay: 4.5s;" opacity="0"/>
+  <circle class="pollen" cx="1000" cy="505" r="2" fill="#fffde0" style="animation-delay: 2s;" opacity="0"/>
+  <circle class="pollen" cx="1200" cy="475" r="1.5" fill="#fffde0" style="animation-delay: 5s;" opacity="0"/>
+
+  <!-- Birds -->
+  <g style="animation: birdFly1 30s linear infinite;">
+    <g transform="translate(0, 150)">
+      <path d="M0,0 Q3,-5 6,0" stroke="#2c3e50" stroke-width="1.5" fill="none" style="animation: birdWing 0.4s ease-in-out infinite;"/>
+    </g>
+    <g transform="translate(15, 145)">
+      <path d="M0,0 Q3,-5 6,0" stroke="#2c3e50" stroke-width="1.5" fill="none" style="animation: birdWing 0.4s ease-in-out infinite; animation-delay: 0.2s;"/>
+    </g>
+  </g>
+  <g style="animation: birdFly2 35s linear infinite; animation-delay: -10s;">
+    <g transform="translate(0, 180)">
+      <path d="M0,0 Q3,-5 6,0" stroke="#2c3e50" stroke-width="1.5" fill="none" style="animation: birdWing 0.5s ease-in-out infinite;"/>
+    </g>
+    <g transform="translate(12, 176)">
+      <path d="M0,0 Q3,-5 6,0" stroke="#2c3e50" stroke-width="1.5" fill="none" style="animation: birdWing 0.5s ease-in-out infinite; animation-delay: 0.15s;"/>
+    </g>
+  </g>
+
+  <!-- ============ ALPACA ============ -->
+  <g id="alpaca" transform="translate(100, 300)">
+
+    <!-- Shadow on ground -->
+    <ellipse class="alpaca-shadow" cx="120" cy="265" rx="80" ry="12" fill="#2d5a1e"/>
+
+    <!-- Far back leg (right back) -->
+    <g class="fl-leg-back-right">
+      <rect x="72" y="260" width="16" height="65" rx="8" fill="url(#fleeceDark)"/>
+      <!-- Hoof -->
+      <rect x="73" y="318" width="14" height="10" rx="3" fill="#5a4a3a"/>
+      <!-- Fluff at top -->
+      <ellipse cx="80" cy="265" rx="12" ry="8" fill="#d4c4b0"/>
+    </g>
+
+    <!-- Far front leg (right front) -->
+    <g class="fl-leg-front-right">
+      <rect x="172" y="265" width="15" height="60" rx="7.5" fill="url(#fleeceDark)"/>
+      <rect x="173" y="320" width="13" height="9" rx="3" fill="#5a4a3a"/>
+      <ellipse cx="179" cy="270" rx="11" ry="7" fill="#d4c4b0"/>
+    </g>
+
+    <!-- Tail -->
+    <g class="fl-tail">
+      <ellipse cx="12" cy="255" rx="10" ry="7" fill="#e8ddd0"/>
+      <ellipse cx="8" cy="252" rx="7" ry="5" fill="#f0ebe3"/>
+      <ellipse cx="15" cy="258" rx="6" ry="4" fill="#ddd5c8"/>
+    </g>
+
+    <!-- Main body (fluffy) -->
+    <g class="fl-body">
+      <!-- Back body mass -->
+      <ellipse cx="110" cy="270" rx="75" ry="45" fill="url(#fleeceGrad)"/>
+
+      <!-- Fluffy bumps - back -->
+      <circle cx="45" cy="268" r="22" fill="#e8ddd0"/>
+      <circle cx="35" cy="275" r="18" fill="#ddd5c8"/>
+      <circle cx="55" cy="278" r="20" fill="#e0d5c5"/>
+      <circle cx="70" cy="282" r="22" fill="#e8ddd0"/>
+      <circle cx="90" cy="284" r="24" fill="#f0ebe3"/>
+      <circle cx="110" cy="285" r="25" fill="#f5f0e8"/>
+      <circle cx="130" cy="284" r="24" fill="#f0ebe3"/>
+      <circle cx="150" cy="282" r="22" fill="#e8ddd0"/>
+      <circle cx="165" cy="278" r="20" fill="#e0d5c5"/>
+
+      <!-- Fluffy bumps - top -->
+      <circle cx="50" cy="245" r="20" fill="#f0ebe3"/>
+      <circle cx="75" cy="240" r="22" fill="#f5f0e8"/>
+      <circle cx="100" cy="238" r="24" fill="#faf5ed"/>
+      <circle cx="125" cy="238" r="23" fill="#f5f0e8"/>
+      <circle cx="150" cy="242" r="21" fill="#f0ebe3"/>
+      <circle cx="170" cy="248" r="19" fill="#e8ddd0"/>
+
+      <!-- Fluffy bumps - belly -->
+      <circle cx="60" cy="295" r="16" fill="#e0d5c5"/>
+      <circle cx="85" cy="298" r="18" fill="#e8ddd0"/>
+      <circle cx="110" cy="299" r="19" fill="#f0ebe3"/>
+      <circle cx="135" cy="298" r="18" fill="#e8ddd0"/>
+      <circle cx="160" cy="295" r="16" fill="#e0d5c5"/>
+
+      <!-- Additional texture bumps -->
+      <circle cx="65" cy="255" r="12" fill="#faf5ed"/>
+      <circle cx="95" cy="252" r="13" fill="#faf5ed"/>
+      <circle cx="125" cy="253" r="12" fill="#faf5ed"/>
+      <circle cx="155" cy="258" r="11" fill="#f5f0e8"/>
+      <circle cx="55" cy="288" r="10" fill="#f0ebe3"/>
+      <circle cx="140" cy="290" r="10" fill="#f0ebe3"/>
+    </g>
+
+    <!-- Neck -->
+    <g class="fl-neck">
+      <!-- Neck base -->
+      <path d="M165,240 Q175,200 185,165 Q195,130 200,105 L215,105 Q218,135 210,170 Q200,205 190,240 Z" fill="url(#neckGrad)"/>
+
+      <!-- Neck fluff layers -->
+      <path d="M162,238 Q172,200 183,168 Q192,135 197,110 L200,110 Q208,138 198,172 Q188,208 178,242 Z" fill="#f5f0e8" opacity="0.5"/>
+
+      <!-- Mane/crest -->
+      <ellipse cx="180" cy="200" rx="14" ry="6" fill="#f5f0e8" transform="rotate(-15, 180, 200)"/>
+      <ellipse cx="188" cy="175" rx="13" ry="5.5" fill="#faf5ed" transform="rotate(-10, 188, 175)"/>
+      <ellipse cx="195" cy="152" rx="12" ry="5" fill="#f5f0e8" transform="rotate(-5, 195, 152)"/>
+      <ellipse cx="200" cy="130" rx="11" ry="4.5" fill="#faf5ed" transform="rotate(-2, 200, 130)"/>
+      <ellipse cx="203" cy="112" rx="10" ry="4" fill="#f5f0e8"/>
+    </g>
+
+    <!-- Head -->
+    <g class="fl-head">
+      <!-- Head shape -->
+      <ellipse cx="205" cy="100" rx="22" ry="20" fill="#f5f0e8"/>
+
+      <!-- Snout -->
+      <ellipse cx="222" cy="105" rx="14" ry="11" fill="#e8ddd0"/>
+      <ellipse cx="225" cy="107" rx="10" ry="8" fill="#ddd5c8"/>
+
+      <!-- Nostrils -->
+      <ellipse cx="228" cy="104" rx="2.5" ry="2" fill="#b8a890"/>
+      <ellipse cx="233" cy="106" rx="2" ry="1.5" fill="#b8a890"/>
+
+      <!-- Mouth -->
+      <path d="M220,112 Q225,116 230,112" stroke="#b8a890" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+
+      <!-- Eyes -->
+      <ellipse cx="210" cy="94" rx="4" ry="4.5" fill="#2c1810"/>
+      <ellipse cx="210" cy="93.5" rx="1.5" ry="2" fill="white" opacity="0.8"/>
+
+      <ellipse cx="218" cy="96" rx="3.5" ry="4" fill="#2c1810"/>
+      <ellipse cx="218" cy="95.5" rx="1.3" ry="1.8" fill="white" opacity="0.7"/>
+
+      <!-- Eyelashes -->
+      <path d="M206,90 L204,87" stroke="#2c1810" stroke-width="0.8" stroke-linecap="round"/>
+      <path d="M208,89.5 L207,86" stroke="#2c1810" stroke-width="0.8" stroke-linecap="round"/>
+
+      <!-- Cheek blush -->
+      <ellipse cx="202" cy="105" rx="5" ry="3" fill="#f0c0b0" opacity="0.4"/>
+
+      <!-- Inner ear (visible from front) -->
+      <!-- Left ear -->
+      <g class="fl-ear-l">
+        <path d="M193,88 L188,55 L198,86 Z" fill="#f0ebe3"/>
+        <path d="M192,86 L189,60 L196,84 Z" fill="#e8b8a8" opacity="0.5"/>
+      </g>
+
+      <!-- Right ear -->
+      <g class="fl-ear-r">
+        <path d="M207,86 L212,52 L216,84 Z" fill="#f0ebe3"/>
+        <path d="M208,85 L212,58 L215,83 Z" fill="#e8b8a8" opacity="0.5"/>
+      </g>
+
+      <!-- Head fluff on top -->
+      <circle cx="200" cy="82" r="8" fill="#faf5ed"/>
+      <circle cx="208" cy="80" r="7" fill="#f5f0e8"/>
+      <circle cx="215" cy="83" r="6" fill="#f0ebe3"/>
+      <circle cx="205" cy="78" r="6" fill="#faf5ed"/>
+    </g>
+
+    <!-- Near back leg (left back) -->
+    <g class="fl-leg-back-left">
+      <rect x="73" y="260" width="16" height="65" rx="8" fill="url(#fleeceGrad)"/>
+      <rect x="74" y="318" width="14" height="10" rx="3" fill="#6a5a4a"/>
+      <ellipse cx="81" cy="265" rx="12" ry="8" fill="#f0ebe3"/>
+    </g>
+
+    <!-- Near front leg (left front) -->
+    <g class="fl-leg-front-left">
+      <rect x="173" y="265" width="15" height="60" rx="7.5" fill="url(#fleeceGrad)"/>
+      <rect x="174" y="320" width="13" height="9" rx="3" fill="#6a5a4a"/>
+      <ellipse cx="180" cy="270" rx="11" ry="7" fill="#f0ebe3"/>
+    </g>
+
+  </g>
+
+  <!-- Butterflies -->
+  <g class="butterfly1" transform="translate(700, 400)">
+    <g class="wing-flap" transform="translate(-5, 0)">
+      <path d="M0,0 Q-8,-12 -4,-18 Q0,-14 0,-8 Z" fill="#f0a0c0" opacity="0.8"/>
+    </g>
+    <g class="wing-flap" transform="translate(5, 0)" style="animation-delay: 0.15s;">
+      <path d="M0,0 Q8,-12 4,-18 Q0,-14 0,-8 Z" fill="#f0a0c0" opacity="0.8"/>
+    </g>
+    <ellipse cx="0" cy="-2" rx="1.5" ry="5" fill="#8b4585"/>
+  </g>
+
+  <g class="butterfly2" transform="translate(500, 370)">
+    <g class="wing-flap" transform="translate(-4, 0)">
+      <path d="M0,0 Q-7,-10 -3,-15 Q0,-12 0,-6 Z" fill="#a0c0f0" opacity="0.7"/>
+    </g>
+    <g class="wing-flap" transform="translate(4, 0)" style="animation-delay: 0.15s;">
+      <path d="M0,0 Q7,-10 3,-15 Q0,-12 0,-6 Z" fill="#a0c0f0" opacity="0.7"/>
+    </g>
+    <ellipse cx="0" cy="-2" rx="1.2" ry="4" fill="#3a4a8b"/>
+  </g>
+
+</svg>
+</body>
+</html>

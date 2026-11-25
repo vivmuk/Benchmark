@@ -1,0 +1,21 @@
+{
+ "text": "A suspension bridge moves load to the ground through a chain of forces, and every member in that chain does one distinct job. The chain begins at the roadway surface. Vehicles and pedestrians press down on the deck, which is typically a slab of asphalt over steel girders or an orthotropic steel box. The deck is not a single beam but a shallow truss or girder running the length of the span, stiffened at intervals by floor beams that span across the width of the bridge. These members spread a concentrated wheel load out into a distributed load, so that no single point of the structure has to resist the whole weight of a truck. A stiffening truss beneath the deck ties the two edges together, preventing the deck from twisting or folding sideways, and gives the bridge aerodynamic depth, which mattered far more than engineers expected after the famous wind failures of the twentieth century.\n\nFrom the edges of this stiffened deck, vertical suspender cables, also called hangers, rise to the main cables. Each suspender is a simple tension member: it can pull but not push, so it is loaded only when the deck tries to move down. The suspenders transfer their share of the deck's weight upward to the main cables, which sweep in a graceful curve from anchorage to anchorage, dipping to their lowest point near midspan and rising over the towers. Under a uniformly distributed load this curve approximates a parabola, and the geometry is what makes the whole system work. Because the curve is steepest near the towers and flattest near midspan, the vertical component of the tension in the main cable is greatest where it must support the most weight and the towers, while the horizontal component stays nearly constant along the cable's length.\n\nThat horizontal component is the price of the system. A cable cannot carry compression, so the main cables are pure tension, and their inward pull has to be resisted somewhere. The towers provide one answer and the anchorages provide the other. At the top of each tower, a steel saddle allows the main cable to pass over and change direction without breaking the cable's tension. As the cable bends over the saddle, its pull presses down on the tower, and because the two cable segments pull in opposite horizontal directions on either side of the tower, those horizontal forces very nearly cancel. The tower therefore carries mainly the vertical component of the cable tension, making it a compression member, and it carries that compression straight down its shafts into a foundation.\n\nThe anchorages deal with the unbalanced pull. At each end of the bridge the main cable is split into strands that are splayed out and anchored inside a massive concrete block, often several stories tall, buried in the ground. The block's enormous weight and its friction against the surrounding soil or rock resist the cable's pull, so the horizontal thrust goes directly into the ground instead of into the towers.\n\nThe complete path runs from the deck through the floor beams and stiffening truss, up the suspenders in tension, into the main cables in tension, over the saddles, down the towers in compression, and through the foundations into soil or bedrock, with the cable ends anchored separately at each shore. Because every member works in a single mode, either tension or compression, a suspension bridge can be remarkably light for the distance it covers, though its flexibility means it cannot easily be made rigid against sideways sway, which is why modern designs add deep trusses, streamlined deck sections, and sometimes dampers to control movement in wind.",
+ "reasoning_chars": 6737,
+ "usage": {
+  "prompt_tokens": 233,
+  "completion_tokens": 2080,
+  "total_tokens": 2313,
+  "prompt_tokens_details": {
+   "cached_tokens": 232
+  },
+  "cache_read_input_tokens": 232,
+  "completion_tokens_details": {
+   "reasoning_tokens": 1380
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 0.49395515699870884,
+ "t_first_content": 12.193001854000613,
+ "t_total": 15.885093262011651,
+ "cost": 0.0016036875
+}

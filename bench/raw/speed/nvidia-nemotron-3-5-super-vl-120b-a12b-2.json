@@ -1,0 +1,23 @@
+{
+ "text": "A suspension bridge carries the weight of the roadway and everything on it by turning that downward pull into tension that travels through a continuous system of cables and towers before ending in the ground. The load begins on the deck, the flat surface that carries vehicles and pedestrians. From there, vertical ropes called suspenders hang down at regular intervals and grip the deck, transferring its weight upward into the main cables. These main cables are enormous, curved strands made of thousands of steel wires bound together, and they drape between tall towers in a gentle arc. The deck itself is usually stiffened with a truss or box girder so that it does not sag excessively between suspenders and so that wind or moving traffic does not cause dangerous oscillations. This stiffening frame spreads the load from any single point, such as a heavy truck, across several suspenders rather than letting one rope carry too much. Engineers also distinguish between dead load, the permanent weight of the bridge, and live load, the temporary weight of traffic, and the cable system must handle both without exceeding the elastic limit of the steel.\n\nBecause the suspenders pull down on the main cables at many points, the cables are placed in tension. The curve of the cable is not accidental; it naturally forms a shape that balances those many small pulls into a smooth, flowing line. The tension runs along the length of the cable toward the towers. At each tower, the cable passes over a saddle, a curved piece of steel that redirects the force. The tower itself then carries the load downward in compression, squeezing its massive steel or concrete legs toward the foundations.\n\nHowever, the main cables do not stop at the towers. They continue past them and are anchored firmly into the ground at each end of the bridge, usually in enormous concrete blocks embedded in solid rock or soil. These anchorages resist the outward pull of the cables, holding them in place so the tension cannot simply unzip the structure. The result is a balanced system: the deck pushes down on the suspenders, the suspenders pull on the cables, the cables pull on the towers and anchorages, and the towers and anchorages push against the earth.\n\nThe towers take most of the vertical weight, while the anchorages handle the horizontal component that would otherwise pull the bridge apart. The foundations are often sunk deep below the waterline using caissons or piles so that the bridge remains stable even when the soil shifts or the riverbed erodes. The foundations beneath both must be deep and massive enough to transfer these forces into the ground without shifting. If one part of this chain fails\u2014the suspenders snap, the cables corrode, the towers buckle, or the anchorages pull loose\u2014the entire load path collapses. But when every piece works together, a suspension bridge can span distances far greater than any beam or arch bridge, because it uses the efficient strength of steel in tension to carry weight across water or valleys and deliver it safely to the ground.",
+ "reasoning_chars": 12275,
+ "usage": {
+  "prompt_tokens": 56,
+  "completion_tokens": 4540,
+  "total_tokens": 4596,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 3601,
+   "audio_tokens": 0,
+   "reasoning_tokens": 3944,
+   "rejected_prediction_tokens": 1099
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 0.3180169150000438,
+ "t_first_content": 5.9085745550110005,
+ "t_total": 6.566503495036159,
+ "cost": 0.0022811999999999997
+}

@@ -1,0 +1,22 @@
+{
+ "gemini-3-1-pro-preview": {
+  "scores": {
+   "typography": 9.0,
+   "layout": 9.0,
+   "colour": 9.0,
+   "completeness": 10,
+   "originality": 9.0
+  },
+  "note": "A highly polished, distinct design with excellent typographic hierarchy and a cohesive, evocative color palette perfectly matching the prompt."
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "typography": 8.0,
+   "layout": 9.0,
+   "colour": 8.0,
+   "completeness": 10,
+   "originality": 9.0
+  },
+  "note": "A distinctive, polished page with all required sections, though some small, low-contrast text is difficult to read."
+ }
+}

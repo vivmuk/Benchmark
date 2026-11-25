@@ -1,0 +1,22 @@
+{
+ "gemini-3-1-pro-preview": {
+  "scores": {
+   "typography": 8.0,
+   "layout": 8.0,
+   "colour": 8.0,
+   "completeness": 10,
+   "originality": 7.0
+  },
+  "note": "A solid, well-executed design with a coherent dark theme and neon accents, though the hero illustration feels a bit simple compared to the polished UI components."
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "typography": 7.0,
+   "layout": 8.0,
+   "colour": 8.0,
+   "completeness": 10,
+   "originality": 6.0
+  },
+  "note": "All required sections are present and neatly arranged, but the typography and card layouts feel conventional, and some secondary text lacks contrast."
+ }
+}

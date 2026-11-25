@@ -1,0 +1,22 @@
+{
+ "gemini-3-1-pro-preview": {
+  "scores": {
+   "typography": 8.0,
+   "layout": 4.0,
+   "colour": 8.0,
+   "completeness": 3.0,
+   "originality": 7.0
+  },
+  "note": "The design has a strong visual identity and excellent typography in the visible sections, but fails entirely on completeness as the vast majority of the required content (features, timetable, pricing, testimonial) is missing from the massive empty space in the middle of the page."
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "typography": 7.0,
+   "layout": 2.0,
+   "colour": 8.0,
+   "completeness": 2.0,
+   "originality": 7.0
+  },
+  "note": "The illustrated hero has a distinctive palette, but a vast empty gap replaces the required features, timetable, pricing and testimonial."
+ }
+}

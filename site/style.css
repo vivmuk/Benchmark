@@ -56,6 +56,10 @@ h1{font-size:clamp(26px,4vw,38px);line-height:1.1;letter-spacing:-.025em;margin:
 .valuenote{max-width:82ch;font-size:14px;line-height:1.65;color:var(--mute);margin:16px 0 0;padding-left:12px;border-left:3px solid var(--line)}
 .valuenote strong{color:var(--ink)}
 .idx{display:block;font-weight:400;font-size:11px;color:var(--mute);margin-top:2px;letter-spacing:.02em}
+th.sortable{cursor:pointer;user-select:none;white-space:nowrap}
+th.sortable:hover{color:var(--ink)}
+th.sortable[data-dir=desc]::after{content:" ↓";color:var(--accent)}
+th.sortable[data-dir=asc]::after{content:" ↑";color:var(--accent)}
 .stats{font-family:var(--mono);font-size:12px}
 details.p summary{cursor:pointer;color:var(--ink)}
 details.p p{margin:6px 0 0;color:var(--ink)}
@@ -70,8 +74,8 @@ details.p p{margin:6px 0 0;color:var(--ink)}
 .pair figcaption{position:absolute;left:6px;top:6px;background:rgba(29,26,38,.78);color:#fff;font-size:11px;padding:2px 7px;border-radius:99px}
 
 .tbl{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
-.tbl th,.tbl td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:middle}
-.tbl th{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--mute);font-weight:700}
+.tbl th,.tbl td{padding:12px 10px;text-align:left;border-bottom:1px solid var(--line);vertical-align:middle}
+.tbl th{font-size:11.5px;text-transform:uppercase;letter-spacing:.04em;color:var(--mute);font-weight:700}
 .tbl tr:last-child td{border-bottom:0}
 .tbl td.num{font:600 14px var(--mono);white-space:nowrap}
 .tbl .who{padding:0}

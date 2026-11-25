@@ -1,0 +1,22 @@
+{
+ "gemini-3-1-pro-preview": {
+  "scores": {
+   "subjects": 7.0,
+   "layout": 8.0,
+   "colour": 8.0,
+   "style": 7.0,
+   "overall": 7.0
+  },
+  "note": "The recreation captures most elements and the general layout well, but misses the monorail (replacing it with a highway), alters the city design, and changes the moon's phase."
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "subjects": 8.0,
+   "layout": 4.0,
+   "colour": 7.0,
+   "style": 7.0,
+   "overall": 5.0
+  },
+  "note": "Most landmarks are present, but the traveller and alpaca are much larger and reversed, the towers and track are repositioned, and the monorail is missing."
+ }
+}

@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dune Line — Overnight Desert Express to Neon City</title>
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  :root {
+    --bg: #080a0f;
+    --surface: #10141d;
+    --surface-2: #181e2b;
+    --text: #f5f5f7;
+    --text-muted: #94a3b8;
+    --sand: #e7d5b8;
+    --dune: #8b6b4f;
+    --sunset: #ff7043;
+    --neon-pink: #d946ef;
+    --neon-cyan: #22d3ee;
+    --neon-purple: #a855f7;
+    --border: #253040;
+    --radius: 16px;
+    --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    --max-width: 1200px;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ---------- Navigation ---------- */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(8, 10, 15, 0.7);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 800;
+    font-size: 1.2rem;
+    letter-spacing: -0.02em;
+  }
+
+  .logo mark {
+    background: var(--sunset);
+    color: #000;
+    padding: 0 5px;
+    border-radius: 5px;
+    font-style: normal;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+    align-items: center;
+  }
+
+  .nav-links a {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    transition: color var(--transition);
+  }
+
+  .nav-links a:hover {
+    color: var(--text);
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--sunset), var(--neon-pink));
+    color: #fff;
+    padding: 10px 22px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    transition: transform var(--transition), box-shadow var(--transition);
+    box-shadow: 0 4px 16px rgba(255, 112, 67, 0.35);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(255, 112, 67, 0.5);
+  }
+
+  .btn-outline {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 10px 22px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    transition: all var(--transition);
+  }
+
+  .btn-outline:hover {
+    border-color: var(--neon-cyan);
+    color: var(--neon-cyan);
+  }
+
+  .mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text);
+    font-size: 1.4rem;
+    cursor: pointer;
+    line-height: 1;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative;
+    padding: 130px 0 170px;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      radial-gradient(circle at 25% 35%, #1c1a2e 0%, transparent 45%),
+      linear-gradient(to bottom, #0a0c13 0%, #14111b 55%, #1b140c 100%);
+  }
+
+  .hero-svg {
+    position: absolute;
+    bottom: -80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 1300px;
+    height: 340px;
+    pointer-events: none;
+    z-index: 0;
+    filter: drop-shadow(0 24px 40px rgba(0, 0, 0, 0.5));
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 640px;
+  }
+
+  .hero-kicker {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--neon-cyan);
+    margin-bottom: 20px;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.5rem, 5vw, 4.6rem);
+    font-weight: 800;
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    margin-bottom: 24px;
+    background: linear-gradient(to right, #ffffff, var(--sand));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero p {
+    font-size: 1.15rem;
+    color: var(--text-muted);
+    margin-bottom: 34px;
+    max-width: 460px;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  /* ---------- Section Headers ---------- */
+  section {
+    padding: 110px 0;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 70px;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .section-header h2 {
+    font-size: clamp(1.75rem, 3vw, 2.8rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin-bottom: 16px;
+  }
+
+  .section-header p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+  }
+
+  /* ---------- Features ---------- */
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 26px;
+  }
+
+  .feature-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 36px 30px;
+    transition: all var(--transition);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .feature-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--sunset), transparent);
+    opacity: 0.5;
+  }
+
+  .feature-card:hover {
+    border-color: var(--surface-2);
+    transform: translateY(-5px);
+    box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.45);
+  }
+
+  .feature-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 22px;
+    box-shadow: 0 10px 24px rgba(168, 85, 247, 0.35);
+  }
+
+  .feature-icon svg {
+    width: 26px;
+    height: 26px;
+    fill: none;
+    stroke: #fff;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .feature-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
+  }
+
+  .feature-card p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  /* ---------- Timetable ---------- */
+  .timetable {
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .trip-row {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr 1.3fr 1.3fr 1.6fr auto;
+    gap: 18px;
+    align-items: center;
+    padding: 22px 28px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 14px;
+    transition: all var(--transition);
+  }
+
+  .trip-row:hover {
+    border-color: var(--neon-cyan);
+    background: var(--surface-2);
+  }
+
+  .trip-row .train {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--text);
+  }
+
+  .trip-row .time {
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: var(--neon-cyan);
+    letter-spacing: -0.01em;
+  }
+
+  .trip-row .place {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
+
+  .trip-row .price {
+    font-weight: 800;
+    color: var(--sand);
+  }
+
+  .trip-row .status {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: rgba(34, 211, 238, 0.1);
+    color: var(--neon-cyan);
+    border: 1px solid rgba(34, 211, 238, 0.2);
+    white-space: nowrap;
+  }
+
+  /* ---------- Pricing ---------- */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 26px;
+    align-items: start;
+  }
+
+  .price-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 44px 30px;
+    display: flex;
+    flex-direction: column;
+    transition: all var(--transition);
+    position: relative;
+  }
+
+  .price-card.featured {
+    border-color: var(--neon-pink);
+    background: linear-gradient(180deg, rgba(217, 70, 239, 0.06) 0%, var(--surface) 100%);
+    box-shadow: 0 0 50px rgba(217, 70, 239, 0.12);
+    transform: scale(1.04);
+    z-index: 2;
+  }
+
+  .price-card.featured .badge {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--neon-pink);
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    padding: 4px 14px;
+    border-radius: 999px;
+  }
+
+  .price-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 8px;
+  }
+
+  .price-card .price {
+    font-size: 2.6rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+
+  .price-card .price span {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-muted);
+  }
+
+  .price-card p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 30px;
+  }
+
+  .price-card ul {
+    list-style: none;
+    margin-bottom: 32px;
+    flex-grow: 1;
+  }
+
+  .price-card li {
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .price-card li::before {
+    content: "✦";
+    color: var(--neon-cyan);
+    font-size: 0.75rem;
+  }
+
+  .price-card .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* ---------- Testimonial ---------- */
+  .testimonial {
+    max-width: 760px;
+    margin: 0 auto;
+    text-align: center;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 64px 40px;
+  }
+
+  .quote {
+    font-size: 1.75rem;
+    font-weight: 600;
+    line-height: 1.7;
+    color: var(--text);
+    margin-bottom: 36px;
+    position: relative;
+    display: inline-block;
+    text-align: left;
+  }
+
+  .quote::before {
+    content: "“";
+    font-size: 5rem;
+    color: var(--neon-pink);
+    position: absolute;
+    top: -32px;
+    left: -14px;
+    opacity: 0.25;
+    line-height: 1;
+  }
+
+  .stars {
+    color: var(--sunset);
+    font-size: 1.3rem;
+    margin-bottom: 22px;
+    letter-spacing: 2px;
+  }
+
+  .author {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--sunset), var(--neon-purple));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 1.2rem;
+    color: #000;
+  }
+
+  .author-info h4 {
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  .author-info span {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    display: block;
+  }
+
+  /* ---------- Footer ---------- */
+  footer {
+    border-top: 1px solid var(--border);
+    background: #05070a;
+    padding: 70px 0 40px;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2.2fr 1fr 1fr 1fr;
+    gap: 44px;
+  }
+
+  .footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 800;
+    font-size: 1.25rem;
+    margin-bottom: 20px;
+  }
+
+  .footer-brand mark {
+    background: var(--sunset);
+    color: #000;
+    padding: 0 5px;
+    border-radius: 5px;
+    font-style: normal;
+  }
+
+  .footer p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    max-width: 280px;
+    line-height: 1.8;
+  }
+
+  .footer h5 {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--text);
+    margin-bottom: 18px;
+    font-weight: 800;
+  }
+
+  .footer ul {
+    list-style: none;
+  }
+
+  .footer li {
+    margin-bottom: 12px;
+  }
+
+  .footer li a {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    transition: color var(--transition);
+  }
+
+  .footer li a:hover {
+    color: var(--neon-cyan);
+  }
+
+  .footer-bottom {
+    border-top: 1px solid var(--border);
+    margin-top: 50px;
+    padding-top: 26px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 900px) {
+    .pricing-grid {
+      grid-template-columns: 1fr;
+    }
+    .price-card.featured {
+      transform: scale(1);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .mobile-menu-btn {
+      display: block;
+    }
+
+    .nav-links {
+      position: absolute;
+      top: 72px;
+      left: 0;
+      right: 0;
+      background: rgba(8, 10, 15, 0.95);
+      backdrop-filter: blur(14px);
+      flex-direction: column;
+      align-items: center;
+      padding: 26px;
+      gap: 18px;
+      display: none;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-links.open {
+      display: flex;
+    }
+
+    .hero {
+      padding: 100px 0 140px;
+    }
+
+    .hero-svg {
+      height: 260px;
+      bottom: -40px;
+    }
+
+    section {
+      padding: 80px 0;
+    }
+
+    .trip-row {
+      grid-template-columns: 1fr;
+      gap: 10px;
+      padding: 18px 22px;
+    }
+
+    .trip-row .place:nth-child(3),
+    .trip-row .place:nth-child(4) {
+      display: none;
+    }
+
+    .footer-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .footer-bottom {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+    }
+    .hero-actions {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .btn-primary,
+    .btn-outline {
+      width: 100%;
+      text-align: center;
+    }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container nav-inner">
+    <div class="logo">Dune<span style="color:var(--sunset)">Line</span></div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#features">Journey</a></li>
+      <li><a href="#timetable">Timetable</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#testimonial">Experience</a></li>
+    </ul>
+    <a href="#pricing" class="btn-primary">Book Now</a>
+    <button class="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false" id="menuBtn">☰</button>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-bg"></div>
+  <svg class="hero-svg" viewBox="0 0 1200 400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <defs>
+      <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#0a0c13"/>
+        <stop offset="100%" stop-color="#14111b"/>
+      </linearGradient>
+      <linearGradient id="smokeGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.35"/>
+        <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+      </linearGradient>
+    </defs>
+    <rect width="1200" height="300" fill="url(#skyGrad)"/>
+    <!-- stars -->
+    <circle cx="110" cy="55" r="1.4" fill="#fff" opacity="0.7"/>
+    <circle cx="250" cy="100" r="1" fill="#fff" opacity="0.5"/>
+    <circle cx="420" cy="45" r="1.8" fill="#fff" opacity="0.9"/>
+    <circle cx="580" cy="130" r="1.3" fill="#fff" opacity="0.6"/>
+    <circle cx="740" cy="65" r="1" fill="#fff" opacity="0.4"/>
+    <circle cx="900" cy="150" r="1.6" fill="#fff" opacity="0.8"/>
+    <circle cx="1060" cy="35" r="1.2" fill="#fff" opacity="0.5"/>
+    <!-- moon -->
+    <circle cx="150" cy="95" r="44" fill="#f8fafc" opacity="0.92"/>
+    <circle cx="162" cy="83" r="16" fill="#0a0c13"/>
+    <!-- dunes -->
+    <path d="M0,250 C150,230 400,270 700,240 C1000,210 1200,250 1200,300 L0,300 Z" fill="#0f131c"/>
+    <path d="M0,265 C250,245 600,290 950,255 C1200,225 1200,280 1200,300 L0,300 Z" fill="#181e2b" opacity="0.55"/>
+    <!-- train -->
+    <g transform="translate(30, 10)">
+      <rect x="60" y="185" width="340" height="10" rx="4" fill="#475569"/>
+      <rect x="60" y="195" width="340" height="50" rx="8" fill="#334155"/>
+      <rect x="80" y="208" width="40" height="26" rx="4" fill="#22d3ee" opacity="0.9"/>
+      <rect x="134" y="208" width="40" height="26" rx="4" fill="#22d3ee" opacity="0.9"/>
+      <rect x="188" y="208" width="40" height="26" rx="4" fill="#22d3ee" opacity="0.9"/>
+      <rect x="242" y="208" width="40" height="26" rx="4" fill="#22d3ee" opacity="0.9"/>
+      <rect x="360" y="186" width="22" height="30" fill="#64748b"/>
+      <circle cx="90" cy="257" r="13" fill="#0f172a" stroke="#475569" stroke-width="2"/>
+      <circle cx="190" cy="257" r="13" fill="#0f172a" stroke="#475569" stroke-width="2"/>
+      <circle cx="290" cy="257" r="13" fill="#0f172a" stroke="#475569" stroke-width="2"/>
+      <circle cx="364" cy="257" r="13" fill="#0f172a" stroke="#475569" stroke-width="2"/>
+      <path d="M372,190 Q382,166 362,146 Q342,136 332,156" fill="none" stroke="url(#smokeGrad)" stroke-width="6" stroke-linecap="round"/>
+      <path d="M378,185 Q388,161 368,141 Q348,131 338,151" fill="none" stroke="url(#smokeGrad)" stroke-width="4" stroke-linecap="round" opacity="0.55"/>
+    </g>
+    <!-- neon city -->
+    <g transform="translate(840, 150)">
+      <rect x="0" y="110" width="28" height="70" fill="#d946ef" opacity="0.92"/>
+      <rect x="38" y="70" width="28" height="110" fill="#22d3ee" opacity="0.92"/>
+      <rect x="76" y="130" width="28" height="50" fill="#a855f7" opacity="0.92"/>
+      <rect x="114" y="50" width="28" height="130" fill="#d946ef" opacity="0.92"/>
+      <rect x="152" y="150" width="28" height="30" fill="#22d3ee" opacity="0.92"/>
+      <rect x="190" y="90" width="28" height="90" fill="#a855f7" opacity="0.92"/>
+      <rect x="228" y="170" width="28" height="10" fill="#22d3ee" opacity="0.92"/>
+      <rect x="266" y="30" width="28" height="150" fill="#d946ef" opacity="0.92"/>
+    </g>
+  </svg>
+  <div class="container hero-content">
+    <div class="hero-kicker">Overnight Desert Express</div>
+    <h1>From the Dunes<br>to the Neon</h1>
+    <p>Board the Dune Line for a sleeper journey across moonlit dunes, arriving at the glowing skyline of Neon City by dawn.</p>
+    <div class="hero-actions">
+      <a href="#timetable" class="btn-outline">View Timetable</a>
+      <a href="#pricing" class="btn-primary">Book a Cabin</a>
+    </div>
+  </div>
+</header>
+
+<section id="features">
+  <div class="container">
+    <div class="section-header">
+      <h2>The Journey</h2>
+      <p>Every mile between the desert and the city is designed for rest, wonder, and arrival.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 3L4 9l8 7 8-7-8-7z"/><path d="M9 12h6v6H9z"/></svg>
+        </div>
+        <h3>Sleeper Cabins</h3>
+        <p>Private soundproof cabins with plush beds, blackout blinds, and personal climate control.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        <h3>Dune Observation Lounge</h3>
+        <p>Panoramic glass and an open-air deck for watching the desert pass beneath a million stars.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 5V14h9V5"/><path d="M14 5v12h5V5z"/><path d="M3 22h18"/></svg>
+        </div>
+        <h3>Neon Arrival</h3>
+        <p>Step off the train directly into the electric heart of Neon City, where the night never sleeps.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="timetable" style="background: var(--surface-2);">
+  <div class="container">
+    <div class="section-header">
+      <h2>Departures from Dune Outpost</h2>
+      <p>Overnight services to Neon City. All times local.</p>
+    </div>
+    <div class="timetable">
+      <div class="trip-row">
+        <div class="train">Dune Express 1</div>
+        <div class="time">22:00</div>
+        <div class="place">Dune Outpost</div>
+        <div class="place">06:00 · Neon Spire</div>
+        <div class="price">8h · From $49</div>
+        <div class="status">On time</div>
+      </div>
+      <div class="trip-row">
+        <div class="train">Dune Express 2</div>
+        <div class="time">23:30</div>
+        <div class="place">Dune Outpost</div>
+        <div class="place">07:45 · Neon Spire</div>
+        <div class="price">8h 15m · From $79</div>
+        <div class="status">On time</div>
+      </div>
+      <div class="trip-row">
+        <div class="train">Dune Express 3</div>
+        <div class="time">01:15</div>
+        <div class="place">Dune Outpost</div>
+        <div class="place">09:30 · Neon Spire</div>
+        <div class="price">8h 15m · From $119</div>
+        <div class="status">Boarding</div>
+      </div>
+      <div class="trip-row">
+        <div class="train">Dune Express 4</div>
+        <div class="time">02:45</div>
+        <div class="place">Dune Outpost</div>
+        <div class="place">11:00 · Neon Spire</div>
+        <div class="price">8h 15m · From $149</div>
+        <div class="status">On time</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="container">
+    <div class="section-header">
+      <h2>Choose Your Class</h2>
+      <p>Three ways to cross the desert.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <h3>Economy</h3>
+        <div class="price">$49<span> / seat</span></div>
+        <p>Reclining seat, shared lounge access, snack bar.</p>
+        <ul>
+          <li>Reclining seat</li>
+          <li>Shared lounge access</li>
+          <li>Snack bar</li>
+          <li>Wi-Fi (basic)</li>
+        </ul>
+        <a href="#" class="btn btn-outline">Select Economy</a>
+      </div>
+      <div class="price-card featured">
+        <div class="badge">Most Popular</div>
+        <h3>Sleeper</h3>
+        <div class="price">$119<span> / cabin</span></div>
+        <p>Private cabin, made bed, lounge access, welcome drink.</p>
+        <ul>
+          <li>Private sleeper cabin</li>
+          <li>Made bed &amp; linens</li>
+          <li>Lounge access</li>
+          <li>Welcome drink</li>
+          <li>Priority boarding</li>
+        </ul>
+        <a href="#" class="btn btn-primary">Select Sleeper</a>
+      </div>
+      <div class="price-card">
+        <h3>Nebula Suite</h3>
+        <div class="price">$249<span> / suite</span></div>
+        <p>Premium suite, panoramic window, butler service, champagne.</p>
+        <ul>
+          <li>Premium suite</li>
+          <li>Panoramic window</li>
+          <li>Butler service</li>
+          <li>Champagne on arrival</li>
+          <li>Late checkout</li>
+        </ul>
+        <a href="#" class="btn btn-outline">Select Suite</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="testimonial" style="background: var(--surface-2);">
+  <div class="container">
+    <div class="testimonial">
+      <div class="stars">★★★★★</div>
+      <div class="quote">The desert passed like a dream, and when the neon skyline appeared on the horizon, I knew I'd arrived somewhere magical.</div>
+      <div class="author">
+        <div class="avatar">EV</div>
+        <div class="author-info">
+          <h4>Elena V.</h4>
+          <span>Digital Nomad</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">Dune<span style="color:var(--sunset)">Line</span></div>
+        <p>The overnight train that carries you from silent dunes to electric streets.</p>
+      </div>
+      <div>
+        <h5>Journey</h5>
+        <ul>
+          <li><a href="#features">Sleeper Cabins</a></li>
+          <li><a href="#features">Observation Lounge</a></li>
+          <li><a href="#features">Neon Arrival</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Plan</h5>
+        <ul>
+          <li><a href="#timetable">Timetable</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#pricing">Book Now</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Privacy</a></li>
+          <li><a href="#">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2024 Dune Line. Fictional railway.</span>
+      <span>No external assets used.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var menuBtn = document.getElementById('menuBtn');
+    var navLinks = document.getElementById('navLinks');
+
+    menuBtn.addEventListener('click', function () {
+      var open = navLinks.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', open);
+    });
+
+    document.querySelectorAll('.nav-links a').forEach(function (anchor) {
+      anchor.addEventListener('click', function () {
+        if (window.innerWidth <= 768) {
+          navLinks.classList.remove('open');
+          menuBtn.setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
+
+    var newsletter = document.querySelector('.newsletter form');
+    if (newsletter) {
+      newsletter.addEventListener('submit', function (e) {
+        e.preventDefault();
+        alert('Thanks for signing up!');
+      });
+    }
+  });
+</script>
+
+</body>
+</html>

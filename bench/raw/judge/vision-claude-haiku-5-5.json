@@ -1,0 +1,22 @@
+{
+ "gemini-3-1-pro-preview": {
+  "scores": {
+   "subjects": 9.0,
+   "layout": 8.0,
+   "colour": 8.0,
+   "style": 8.0,
+   "overall": 8.0
+  },
+  "note": "The recreation is very good, though the moon is slightly different, the alpaca has packs, and the track is closer to the foreground."
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "subjects": 9.0,
+   "layout": 8.0,
+   "colour": 5.0,
+   "style": 7.0,
+   "overall": 6.0
+  },
+  "note": "Nearly all key elements occupy similar positions, but the reversed sky lighting, larger foreground figures and altered track make the recreation noticeably different."
+ }
+}

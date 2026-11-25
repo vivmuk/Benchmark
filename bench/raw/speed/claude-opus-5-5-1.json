@@ -1,0 +1,17 @@
+{
+ "text": "Imagine a car rolling onto the deck of a suspension bridge. Its weight, along with the much larger weight of the deck itself, has to find its way down into the earth, and the remarkable thing about this type of bridge is how little of that journey involves bending. Almost every major component works either by being pulled or by being pushed, which is why suspension bridges can span distances that would be impossible for a simple beam.\n\nThe deck is the first element to feel the load. It is usually built as a stiffened girder or truss, and its job is not to span the full distance between towers but only the short gap between neighboring hangers. Its stiffness spreads a concentrated load, like a heavy truck, across several hangers so that no single point is overwhelmed and the deck does not deform sharply under moving traffic. This stiffness also helps the bridge resist twisting and oscillation in the wind, a lesson learned painfully from bridges that were too slender.\n\nFrom the deck, the load passes upward into the hangers, the vertical steel cables or rods spaced along its length. Hangers work purely in tension. They are pulled downward by the deck and pass that pull up to the main cables draped above.\n\nThe main cables are the heart of the structure. Each is made of thousands of high-strength steel wires bundled and compacted together, and each hangs in a smooth curve between the towers. A cable carrying a load spread evenly along the horizontal takes the shape of a parabola, and in that shape the entire cable is in tension with no bending at all. Steel is extraordinarily efficient in tension, so the cables can carry enormous forces relative to their own weight. The sag of the cable matters a great deal: a deeper sag means lower tension for the same load, while a shallower sag requires the cable to pull harder.\n\nAt the tops of the towers, the main cables pass over curved saddles. Here the tension in the cable, which runs at an angle on either side, produces a large downward force on the tower. The towers therefore work in compression, carrying that force straight down through their legs into foundations sunk into bedrock or supported by deep caissons and piles. Because the cable usually leaves the saddle at roughly matching angles on both sides, the horizontal pulls largely cancel, leaving the towers to carry mostly vertical load rather than being bent sideways.\n\nBeyond the towers, the cables descend to the anchorages at each end of the bridge. This is where the horizontal component of the cable tension finally has to be resolved. Anchorages are massive blocks of concrete, or chambers carved into solid rock, that hold the cable ends and resist their tremendous pull through sheer weight and friction against the ground or through the strength of the rock itself.\n\nSo the path is complete: the deck hangs from the hangers, the hangers hang from the cables, the cables press down on the towers and pull on the anchorages, and both towers and anchorages hand those forces to the earth.",
+ "reasoning_chars": 569,
+ "usage": {
+  "prompt_tokens": 61,
+  "completion_tokens": 1130,
+  "total_tokens": 1191,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 2.1462442179908976,
+ "t_first_content": 3.2175760800018907,
+ "t_total": 12.637414356984664,
+ "cost": 0.022844
+}

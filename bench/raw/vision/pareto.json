@@ -1,0 +1,17 @@
+{
+ "text": "A wide cinematic digital artwork of a retro-futuristic desert metropolis at twilight, 16:9 landscape. Sky gradients from deep indigo-purple at top to warm orange-pink at the horizon, scattered with small stars and a large glowing white-blue crescent moon in the upper left, with faint teal light rays streaking diagonally from the upper corners. Foreground left: a lone man in a flowing red cloak stands on a rippled orange sand-dune ridge beside a brown alpaca, both seen from behind, silhouetted, gazing toward the distant city. Center: a futuristic city of three tapering spire skyscrapers rises from the dunes \u2014 the left spire teal-glass with a vertical cyan neon sign reading \"OASIS\" in capital letters; the tallest central spire glows blue-white, crowned by a floating luminous cyan ring halo; the right spire glows magenta-pink with purple neon strips. The city base features tiered saucer-shaped buildings lit teal and amber, with tiny glowing windows and low skyline blocks. Right foreground: a tall saguaro cactus rimmed in neon pink light, with smaller cacti silhouettes nearby. A glowing amber-orange elevated monorail track curves from the lower right toward the city, carrying a small sleek train pod as it crosses a radiant turquoise oasis pool nestled in the dunes. Wind-blown sand haze, warm rim lighting, synthwave-retrofuturism style, ultra-detailed, atmospheric, cinematic composition.",
+ "reasoning_chars": 0,
+ "usage": {
+  "prompt_tokens": 1267,
+  "completion_tokens": 752,
+  "total_tokens": 2019,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 4.4017484139767475,
+ "t_first_content": 4.4017487689852715,
+ "t_total": 5.946314205008093,
+ "cost": 0.004275
+}

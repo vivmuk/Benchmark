@@ -1,0 +1,22 @@
+{
+ "gemini-3-1-pro-preview": {
+  "scores": {
+   "typography": 8.0,
+   "layout": 7.0,
+   "colour": 8.0,
+   "completeness": 7.0,
+   "originality": 8.0
+  },
+  "note": "A visually striking design with good use of typography and color to match the theme, though it is missing the pricing and testimonial sections."
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "typography": 7.0,
+   "layout": 3.0,
+   "colour": 7.0,
+   "completeness": 5.0,
+   "originality": 6.0
+  },
+  "note": "The atmospheric hero and clear hierarchy work well, but huge empty sections replace the required pricing tiers and testimonial."
+ }
+}

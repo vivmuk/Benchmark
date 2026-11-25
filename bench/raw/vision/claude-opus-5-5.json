@@ -1,0 +1,17 @@
+{
+ "text": "Wide cinematic digital painting of a futuristic desert city at twilight. Center: a cluster of three tall tapering glass skyscrapers. The tallest, in the middle, is crowned by a glowing cyan neon halo ring. To its left is a teal-lit spire with a vertical cyan neon sign reading \"OASIS\". To its right is a violet/magenta-glowing spire. At their bases sit tiered, saucer-like domed buildings and a dense low skyline of small lit towers. Four thin teal searchlight beams fan up into the sky from the city.\n\nThe sky is a gradient from deep navy with scattered stars at the top to purple, then warm orange glow at the horizon on the right. In the upper left hangs a huge pale crescent moon.\n\nForeground left: a person in a long flowing red-maroon cloak stands on a sand ridge, seen from behind, gazing toward the city. Beside them on the left stands a shaggy fluffy alpaca. Wind blows wisps of sand off the rippled orange dunes.\n\nRight side: a sleek white monorail train glides along an elevated curving track lined with warm golden lights, winding from the city toward the foreground lower right. Behind it is a turquoise oasis pool. On the far right stands a tall saguaro cactus outlined in pink neon, with a smaller cactus in the distance.\n\nWarm golden sand contrasts with cool teal and violet neon. Retro-futurist sci-fi concept art with soft atmospheric haze and a 16:9 composition.",
+ "reasoning_chars": 0,
+ "usage": {
+  "prompt_tokens": 1303,
+  "completion_tokens": 502,
+  "total_tokens": 1805,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 2.107802838960197,
+ "t_first_content": 2.1078030539792962,
+ "t_total": 7.5578172209789045,
+ "cost": 0.015252
+}

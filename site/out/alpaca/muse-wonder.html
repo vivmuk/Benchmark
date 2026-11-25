@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Morning Alpaca</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body { width:100%; height:100%; overflow:hidden; background:#9ed7f2; font-family:Georgia, "Times New Roman", serif; }
+  .stage { position:fixed; inset:0; width:100vw; height:100vh; overflow:hidden; }
+  svg { display:block; width:100%; height:100%; }
+
+  .caption {
+    position:absolute; left:52px; top:42px; color:#31536b; pointer-events:none;
+    text-shadow:0 1px 0 rgba(255,255,255,.55);
+  }
+  .caption .small {
+    font-family:Arial, Helvetica, sans-serif; font-size:11px; letter-spacing:.34em;
+    text-transform:uppercase; color:#6d8a78; margin-bottom:9px; font-weight:700;
+  }
+  .caption h1 { font-size:42px; line-height:.95; font-weight:400; font-style:italic; letter-spacing:-.02em; }
+  .caption p { margin-top:10px; font-size:16px; font-style:italic; color:#67808a; }
+  .vignette {
+    position:absolute; inset:0; pointer-events:none;
+    background:radial-gradient(ellipse at 50% 42%, transparent 52%, rgba(64,84,74,.16) 100%);
+  }
+
+  /* ---------- sky motion ---------- */
+  .cloud-drift { animation:cloudDrift 9s ease-in-out infinite alternate; }
+  .cloud-drift.slow { animation-duration:13s; animation-delay:-4s; }
+  @keyframes cloudDrift { from { transform:translateX(-18px); } to { transform:translateX(28px); } }
+
+  .rays { transform-box:fill-box; transform-origin:center; animation:spinRays 46s linear infinite; opacity:.5; }
+  @keyframes spinRays { to { transform:rotate(360deg); } }
+
+  .bird-bob { animation:birdBob 2.8s ease-in-out infinite alternate; }
+  .bird-bob.two { animation-delay:-1.3s; }
+  @keyframes birdBob { from { transform:translateY(0); } to { transform:translateY(-9px); } }
+
+  /* ---------- scrolling ground ---------- */
+  .scroll-fast { animation:scrollGround 5.2s linear infinite; }
+  .scroll-mid  { animation:scrollGround 9s linear infinite; }
+  @keyframes scrollGround { from { transform:translateX(0); } to { transform:translateX(-1280px); } }
+
+  /* ---------- alpaca body ---------- */
+  .bob { animation:bob 1.6s ease-in-out infinite; }
+  @keyframes bob {
+    0%,50%,100% { transform:translateY(0); }
+    25%,75%     { transform:translateY(-5px); }
+  }
+  .shadow-pulse { transform-box:fill-box; transform-origin:center; animation:shadowPulse 1.6s ease-in-out infinite; }
+  @keyframes shadowPulse {
+    0%,50%,100% { transform:scaleX(1); opacity:.22; }
+    25%,75%     { transform:scaleX(.94); opacity:.17; }
+  }
+  .breath { transform-box:fill-box; transform-origin:50% 60%; animation:breath 1.6s ease-in-out infinite; }
+  @keyframes breath {
+    0%,50%,100% { transform:scale(1,1); }
+    25%,75%     { transform:scale(1.012,1.02); }
+  }
+
+  .neck-swing { transform-box:fill-box; transform-origin:28% 92%; animation:neckSwing 1.6s ease-in-out infinite; }
+  @keyframes neckSwing {
+    0%,100% { transform:rotate(1.6deg); }
+    25%     { transform:rotate(-1.8deg); }
+    50%     { transform:rotate(1.6deg); }
+    75%     { transform:rotate(-1.8deg); }
+  }
+  .head-swing { transform-box:fill-box; transform-origin:8% 78%; animation:headSwing 1.6s ease-in-out infinite; }
+  @keyframes headSwing {
+    0%,100% { transform:rotate(-2deg) translateY(0); }
+    25%     { transform:rotate(2.4deg) translateY(2px); }
+    50%     { transform:rotate(-2deg) translateY(0); }
+    75%     { transform:rotate(2.4deg) translateY(2px); }
+  }
+  .ear-wiggle { transform-box:fill-box; transform-origin:50% 100%; animation:earWiggle 3.2s ease-in-out infinite; }
+  .ear-wiggle.back { animation-delay:-1.6s; }
+  @keyframes earWiggle {
+    0%,88%,100% { transform:rotate(0deg); }
+    92% { transform:rotate(-8deg); }
+    96% { transform:rotate(6deg); }
+  }
+  .eye { transform-box:fill-box; transform-origin:center; animation:blink 4.8s ease-in-out infinite; }
+  @keyframes blink {
+    0%,91%,98%,100% { transform:scaleY(1); }
+    94% { transform:scaleY(.08); }
+  }
+  .tail-wag { transform-box:fill-box; transform-origin:90% 45%; animation:tailWag 1.6s ease-in-out infinite; }
+  @keyframes tailWag {
+    0%,100% { transform:rotate(4deg); }
+    50%     { transform:rotate(-7deg); }
+  }
+  .fringe { transform-box:fill-box; transform-origin:50% 0%; animation:fringeSway 1.6s ease-in-out infinite; }
+  @keyframes fringeSway {
+    0%,100% { transform:rotate(2deg); }
+    50%     { transform:rotate(-3deg); }
+  }
+
+  /* ---------- walking legs : four-beat gait ---------- */
+  .swing { transform-box:fill-box; transform-origin:50% 0%; animation:swing 1.6s ease-in-out infinite; }
+  @keyframes swing {
+    0%,100% { transform:rotate(23deg); }
+    50%     { transform:rotate(-23deg); }
+  }
+  .bend { transform-box:fill-box; transform-origin:50% 0%; animation:bend 1.6s ease-in-out infinite; }
+  @keyframes bend {
+    0%,100% { transform:rotate(3deg); }
+    42%     { transform:rotate(5deg); }
+    55%     { transform:rotate(0deg); }
+    70%     { transform:rotate(38deg); }
+    86%     { transform:rotate(16deg); }
+  }
+  /* footfall order: near-front, far-hind, far-front, near-hind */
+  .p1 .swing, .p1 .bend { animation-delay:0s; }
+  .p2 .swing, .p2 .bend { animation-delay:-.4s; }
+  .p3 .swing, .p3 .bend { animation-delay:-.8s; }
+  .p4 .swing, .p4 .bend { animation-delay:-1.2s; }
+
+  .puff { transform-box:fill-box; transform-origin:center; animation:puff 1.6s ease-out infinite; opacity:0; }
+  .puff.two { animation-delay:-.8s; }
+  @keyframes puff {
+    0%,52% { transform:translate(0,0) scale(.4); opacity:0; }
+    60%    { opacity:.45; }
+    82%,100% { transform:translate(-26px,-10px) scale(1.35); opacity:0; }
+  }
+
+  .pollen-dot { animation-name:pollenFloat; animation-timing-function:ease-in-out; animation-iteration-count:infinite; }
+  @keyframes pollenFloat {
+    0%   { transform:translate(0,0); opacity:0; }
+    18%  { opacity:.85; }
+    82%  { opacity:.6; }
+    100% { transform:translate(-72px,-48px); opacity:0; }
+  }
+</style>
+</head>
+<body>
+<div class="stage">
+  <svg viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid slice" aria-label="A fluffy alpaca walking through a sunny meadow">
+    <defs>
+      <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#79c7ec"/>
+        <stop offset=".48" stop-color="#c9eefb"/>
+        <stop offset=".78" stop-color="#fff0c8"/>
+        <stop offset="1" stop-color="#ffe9d2"/>
+      </linearGradient>
+      <radialGradient id="sunGlow">
+        <stop offset="0" stop-color="#fff6bd"/>
+        <stop offset=".55" stop-color="#ffe98d"/>
+        <stop offset="1" stop-color="#ffe98d" stop-opacity="0"/>
+      </radialGradient>
+      <linearGradient id="hillFar" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#a9c98b"/><stop offset="1" stop-color="#7db06f"/>
+      </linearGradient>
+      <linearGradient id="meadow" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#8fce6e"/><stop offset="1" stop-color="#4f9d43"/>
+      </linearGradient>
+
+      <g id="cloudShape" fill="#ffffff">
+        <ellipse cx="0" cy="0" rx="58" ry="25"/>
+        <ellipse cx="-38" cy="8" rx="38" ry="19"/>
+        <ellipse cx="38" cy="8" rx="42" ry="20"/>
+        <ellipse cx="4" cy="-17" rx="36" ry="24"/>
+      </g>
+
+      <g id="tuft" fill="none" stroke="#35873a" stroke-width="4" stroke-linecap="round">
+        <path d="M0,0 C-3,-15 -8,-23 -14,-29"/>
+        <path d="M0,0 C0,-18 2,-27 6,-35"/>
+        <path d="M0,0 C4,-13 10,-21 16,-26"/>
+      </g>
+
+      <g id="flower">
+        <path d="M0,0 C1,-9 0,-16 0,-22" fill="none" stroke="#3c8b3e" stroke-width="3" stroke-linecap="round"/>
+        <g fill="#ff8fb3">
+          <circle cx="0" cy="-30" r="5"/><circle cx="-6" cy="-24" r="5"/><circle cx="6" cy="-24" r="5"/>
+          <circle cx="-4" cy="-18" r="5"/><circle cx="4" cy="-18" r="5"/>
+        </g>
+        <circle cx="0" cy="-24" r="3.4" fill="#ffd94d"/>
+      </g>
+      <g id="flowerBlue">
+        <path d="M0,0 C1,-9 0,-16 0,-22" fill="none" stroke="#3c8b3e" stroke-width="3" stroke-linecap="round"/>
+        <g fill="#8fb7ff">
+          <circle cx="0" cy="-30" r="5"/><circle cx="-6" cy="-24" r="5"/><circle cx="6" cy="-24" r="5"/>
+          <circle cx="-4" cy="-18" r="5"/><circle cx="4" cy="-18" r="5"/>
+        </g>
+        <circle cx="0" cy="-24" r="3.4" fill="#fff3a6"/>
+      </g>
+
+      <g id="tree">
+        <rect x="-4" y="-8" width="8" height="34" rx="3" fill="#7a5238"/>
+        <circle cx="0" cy="-28" r="27" fill="#4f9b52"/>
+        <circle cx="-20" cy="-14" r="19" fill="#61ad60"/>
+        <circle cx="20" cy="-15" r="20" fill="#5da75b"/>
+        <circle cx="-6" cy="-38" r="5" fill="#ff9d9d"/><circle cx="13" cy="-23" r="5" fill="#ff9d9d"/>
+      </g>
+
+      <!-- mid-distance meadow details, one full 1280px tile -->
+      <g id="layerMid">
+        <use href="#tuft" transform="translate(70,566) scale(.8)"/>
+        <use href="#tuft" transform="translate(300,552) scale(.65)"/>
+        <use href="#flower" transform="translate(430,575) scale(.8)"/>
+        <use href="#tuft" transform="translate(610,560) scale(.7)"/>
+        <use href="#flowerBlue" transform="translate(790,572) scale(.75)"/>
+        <use href="#tuft" transform="translate(980,556) scale(.8)"/>
+        <use href="#flower" transform="translate(1130,578) scale(.7)"/>
+        <use href="#tuft" transform="translate(1225,562) scale(.6)"/>
+        <ellipse cx="180" cy="574" rx="10" ry="4" fill="#d9c39a"/>
+        <ellipse cx="900" cy="580" rx="13" ry="5" fill="#d9c39a"/>
+      </g>
+
+      <!-- near meadow details, one full 1280px tile -->
+      <g id="layerNear">
+        <use href="#tuft" transform="translate(55,660)"/>
+        <use href="#flower" transform="translate(150,690)"/>
+        <use href="#tuft" transform="translate(255,635) scale(1.15)"/>
+        <use href="#flowerBlue" transform="translate(360,672) scale(1.1)"/>
+        <use href="#tuft" transform="translate(505,690) scale(.9)"/>
+        <use href="#flower" transform="translate(635,642) scale(1.05)"/>
+        <use href="#tuft" transform="translate(735,682) scale(1.2)"/>
+        <use href="#flowerBlue" transform="translate(865,655)"/>
+        <use href="#tuft" transform="translate(965,695)"/>
+        <use href="#flower" transform="translate(1080,640) scale(1.15)"/>
+        <use href="#tuft" transform="translate(1185,678) scale(1.05)"/>
+        <ellipse cx="470" cy="660" rx="14" ry="5" fill="#e2cda2"/>
+        <ellipse cx="1015" cy="688" rx="16" ry="6" fill="#e2cda2"/>
+      </g>
+
+      <clipPath id="blanketClip">
+        <path d="M155,116 C184,99 268,99 296,116 L291,187 C252,200 199,200 161,187 Z"/>
+      </clipPath>
+    </defs>
+
+    <!-- ======== SKY ======== -->
+    <rect width="1280" height="720" fill="url(#sky)"/>
+
+    <g transform="translate(1058,128)">
+      <circle r="105" fill="url(#sunGlow)"/>
+      <g class="rays" stroke="#ffdf74" stroke-width="5" stroke-linecap="round">
+        <path d="M0,-88 V-108"/><path d="M62,-62 L77,-77"/><path d="M88,0 H108"/>
+        <path d="M62,62 L77,77"/><path d="M0,88 V108"/><path d="M-62,62 L-77,77"/>
+        <path d="M-88,0 H-108"/><path d="M-62,-62 L-77,-77"/>
+      </g>
+      <circle r="52" fill="#fff0a3"/>
+      <circle r="44" fill="#fff7c4"/>
+    </g>
+
+    <g transform="translate(190,112) scale(1.05)" opacity=".94"><g class="cloud-drift"><use href="#cloudShape"/></g></g>
+    <g transform="translate(560,72) scale(.72)" opacity=".85"><g class="cloud-drift slow"><use href="#cloudShape"/></g></g>
+    <g transform="translate(880,168) scale(.58)" opacity=".75"><g class="cloud-drift"><use href="#cloudShape"/></g></g>
+
+    <g transform="translate(350,150)" stroke="#466a7d" stroke-width="3" fill="none" stroke-linecap="round">
+      <g class="bird-bob"><path d="M0,0 Q9,-9 18,0 Q27,-9 36,0"/></g>
+    </g>
+    <g transform="translate(420,118) scale(.75)" stroke="#466a7d" stroke-width="3" fill="none" stroke-linecap="round">
+      <g class="bird-bob two"><path d="M0,0 Q9,-9 18,0 Q27,-9 36,0"/></g>
+    </g>
+
+    <!-- ======== LANDSCAPE ======== -->
+    <path d="M0,428 L170,258 L305,382 L470,224 L640,392 L815,264 L985,400 L1135,282 L1280,382 L1280,540 L0,540 Z" fill="#9db6d8" opacity=".62"/>
+    <path d="M170,258 L202,292 L168,300 L142,282 Z M470,224 L505,260 L470,268 L442,248 Z M815,264 L842,292 L815,298 L792,282 Z" fill="#ffffff" opacity=".85"/>
+    <path d="M0,478 C260,432 430,505 690,472 C930,442 1090,494 1280,458 L1280,720 L0,720 Z" fill="url(#hillFar)"/>
+    <use href="#tree" transform="translate(118,482) scale(1.05)"/>
+    <use href="#tree" transform="translate(1118,478) scale(.9)"/>
+    <use href="#tree" transform="translate(1010,492) scale(.62)"/>
+    <rect x="0" y="520" width="1280" height="200" fill="url(#meadow)"/>
+    <path d="M0,592 C340,572 620,588 900,576 C1060,570 1180,574 1280,568 L1280,642 C1000,656 650,646 360,656 C220,660 90,656 0,650 Z" fill="#ecd3a0"/>
+    <path d="M0,592 C340,572 620,588 900,576 C1060,570 1180,574 1280,568" fill="none" stroke="#d9b978" stroke-width="3" opacity=".6"/>
+
+    <g class="scroll-mid"><use href="#layerMid"/><use href="#layerMid" transform="translate(1280,0)"/></g>
+
+    <!-- ======== ALPACA ======== -->
+    <ellipse class="puff" cx="515" cy="594" rx="15" ry="8" fill="#efe0bd"/>
+    <ellipse class="puff two" cx="800" cy="594" rx="15" ry="8" fill="#efe0bd"/>
+
+    <g transform="translate(365,205) scale(1.08)">
+      <ellipse class="shadow-pulse" cx="248" cy="362" rx="168" ry="18" fill="#2f6b35"/>
+
+      <g class="bob">
+        <!-- far legs -->
+        <g transform="translate(150,200)" class="p2">
+          <g class="swing">
+            <path d="M-12,-6 C-14,25 -11,54 -8,78 L8,78 C11,52 13,20 11,-6 Z" fill="#d9b992"/>
+            <g transform="translate(0,76)"><g class="bend">
+              <path d="M-8,-2 C-10,22 -8,48 -7,72 L8,72 C9,46 10,20 8,-2 Z" fill="#d9b992"/>
+              <rect x="-8" y="62" width="20" height="15" rx="6" fill="#77543f"/>
+            </g></g>
+          </g>
+        </g>
+        <g transform="translate(314,200)" class="p3">
+          <g class="swing">
+            <path d="M-12,-6 C-14,25 -11,54 -8,78 L8,78 C11,52 13,20 11,-6 Z" fill="#d9b992"/>
+            <g transform="translate(0,76)"><g class="bend">
+              <path d="M-8,-2 C-10,22 -8,48 -7,72 L8,72 C9,46 10,20 8,-2 Z" fill="#d9b992"/>
+              <rect x="-8" y="62" width="20" height="15" rx="6" fill="#77543f"/>
+            </g></g>
+          </g>
+        </g>
+
+        <!-- tail -->
+        <g transform="translate(118,148)">
+          <g class="tail-wag" fill="#fff6e3">
+            <circle cx="-4" cy="0" r="21"/><circle cx="-16" cy="11" r="16"/><circle cx="4" cy="14" r="15"/>
+          </g>
+        </g>
+
+        <!-- long neck + head -->
+        <g transform="translate(316,170)">
+          <g class="neck-swing">
+            <path d="M-23,22 C-13,-32 4,-82 28,-126 C35,-139 57,-140 64,-127 C72,-94 59,-38 43,24 C30,36 -15,35 -23,22 Z" fill="#fff6e3"/>
+            <g fill="#fff6e3">
+              <circle cx="-12" cy="-12" r="16"/><circle cx="-4" cy="-48" r="17"/><circle cx="5" cy="-84" r="16"/><circle cx="18" cy="-115" r="15"/>
+            </g>
+            <g fill="#ffedd0">
+              <circle cx="48" cy="-78" r="13"/><circle cx="42" cy="-38" r="13"/>
+            </g>
+
+            <g transform="translate(46,-128)">
+              <g class="head-swing">
+                <!-- ears -->
+                <g transform="translate(-1,-20)"><g class="ear-wiggle back">
+                  <path d="M-5,2 C-9,-20 -7,-34 -1,-44 C5,-34 8,-18 7,2 Z" fill="#dcb287"/>
+                  <path d="M-1,-6 C-3,-19 -2,-29 -1,-35 C2,-27 3,-17 2,-6 Z" fill="#f4a9a0"/>
+                </g></g>
+                <g transform="translate(19,-22)"><g class="ear-wiggle">
+                  <path d="M-5,2 C-9,-22 -7,-37 -1,-47 C5,-37 8,-20 7,2 Z" fill="#eec39b"/>
+                  <path d="M-1,-6 C-3,-20 -2,-31 -1,-38 C2,-29 3,-18 2,-6 Z" fill="#f7b3aa"/>
+                </g></g>
+                <!-- head -->
+                <ellipse cx="20" cy="-4" rx="39" ry="27" fill="#eec39b" transform="rotate(-7 20 -4)"/>
+                <ellipse cx="53" cy="4" rx="23" ry="16" fill="#f4d2aa" transform="rotate(-5 53 4)"/>
+                <g fill="#fff7e8">
+                  <circle cx="-8" cy="-27" r="13"/><circle cx="6" cy="-34" r="16"/><circle cx="21" cy="-29" r="12"/><circle cx="-15" cy="-12" r="11"/>
+                </g>
+                <g class="eye"><circle cx="22" cy="-8" r="5.6" fill="#2b211c"/><circle cx="24" cy="-10" r="1.8" fill="#fff"/></g>
+                <circle cx="67" cy="0" r="2.6" fill="#8a5a42"/>
+                <path d="M64,10 Q55,17 46,12" fill="none" stroke="#8a5a42" stroke-width="2.4" stroke-linecap="round"/>
+                <ellipse cx="33" cy="9" rx="7.5" ry="4.2" fill="#f49bb4" opacity=".65"/>
+                <!-- little flower by the ear -->
+                <g transform="translate(12,-30)">
+                  <g fill="#ff8fb3"><circle cx="0" cy="-5" r="4"/><circle cx="-5" cy="0" r="4"/><circle cx="5" cy="0" r="4"/><circle cx="-3" cy="4" r="4"/><circle cx="3" cy="4" r="4"/></g>
+                  <circle r="2.6" fill="#ffd94d"/>
+                </g>
+              </g>
+            </g>
+          </g>
+        </g>
+
+        <!-- fluffy body -->
+        <g class="breath">
+          <ellipse cx="226" cy="172" rx="122" ry="70" fill="#f9e2bd"/>
+          <g fill="#fff6e3">
+            <ellipse cx="226" cy="164" rx="120" ry="69"/>
+            <circle cx="124" cy="136" r="27"/><circle cx="148" cy="114" r="29"/><circle cx="184" cy="103" r="31"/>
+            <circle cx="226" cy="99" r="33"/><circle cx="267" cy="106" r="30"/><circle cx="301" cy="120" r="28"/>
+            <circle cx="329" cy="144" r="25"/><circle cx="332" cy="178" r="24"/><circle cx="318" cy="203" r="22"/>
+            <circle cx="284" cy="221" r="25"/><circle cx="240" cy="228" r="27"/><circle cx="194" cy="225" r="27"/>
+            <circle cx="154" cy="215" r="25"/><circle cx="126" cy="188" r="24"/>
+          </g>
+          <ellipse cx="218" cy="205" rx="88" ry="28" fill="#ffe9c6" opacity=".75"/>
+        </g>
+
+        <!-- woven blanket -->
+        <g>
+          <path d="M155,116 C184,99 268,99 296,116 L291,187 C252,200 199,200 161,187 Z" fill="#249b8d"/>
+          <g clip-path="url(#blanketClip)">
+            <rect x="184" y="96" width="17" height="108" fill="#e76f51"/>
+            <rect x="218" y="96" width="13" height="108" fill="#e9c46a"/>
+            <rect x="248" y="96" width="17" height="108" fill="#f4a261"/>
+            <rect x="155" y="138" width="142" height="9" fill="#ffffff" opacity=".35"/>
+            <g fill="#ffffff" opacity=".9">
+              <path d="M226,120 l7,9 -7,9 -7,-9 Z"/><path d="M196,158 l6,8 -6,8 -6,-8 Z"/><path d="M258,158 l6,8 -6,8 -6,-8 Z"/>
+            </g>
+          </g>
+          <path d="M161,124 C190,110 262,110 289,124 L285,181 C250,192 202,192 166,181 Z" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="5 5" opacity=".65"/>
+          <g class="fringe" stroke="#e76f51" stroke-width="4" stroke-linecap="round">
+            <path d="M172,193 v13"/><path d="M194,198 v13"/><path d="M218,200 v13"/><path d="M242,198 v13"/><path d="M266,194 v13"/>
+          </g>
+        </g>
+
+        <!-- near legs -->
+        <g transform="translate(166,204)" class="p4">
+          <g class="swing">
+            <path d="M-13,-6 C-15,26 -12,55 -9,79 L9,79 C12,53 14,20 12,-6 Z" fill="#f3ddba"/>
+            <g transform="translate(0,77)"><g class="bend">
+              <path d="M-9,-2 C-11,22 -9,49 -8,73 L9,73 C10,47 11,20 9,-2 Z" fill="#f3ddba"/>
+              <rect x="-9" y="63" width="21" height="15" rx="6" fill="#8a6752"/>
+            </g></g>
+          </g>
+        </g>
+        <g transform="translate(330,204)" class="p1">
+          <g class="swing">
+            <path d="M-13,-6 C-15,26 -12,55 -9,79 L9,79 C12,53 14,20 12,-6 Z" fill="#f7e5c4"/>
+            <g transform="translate(0,77)"><g class="bend">
+              <path d="M-9,-2 C-11,22 -9,49 -8,73 L9,73 C10,47 11,20 9,-2 Z" fill="#f7e5c4"/>
+              <rect x="-9" y="63" width="21" height="15" rx="6" fill="#8a6752"/>
+            </g></g>
+          </g>
+        </g>
+      </g>
+    </g>
+
+    <g class="scroll-fast"><use href="#layerNear"/><use href="#layerNear" transform="translate(1280,0)"/></g>
+
+    <!-- foreground soft blades -->
+    <g fill="#2f7f35" opacity=".55">
+      <path d="M0,720 C8,682 4,660 -6,632 L14,630 C16,664 18,690 24,720 Z"/>
+      <path d="M1240,720 C1238,684 1246,658 1262,636 L1278,642 C1268,668 1266,692 1272,720 Z"/>
+      <path d="M1188,720 C1192,692 1188,672 1176,654 L1192,650 C1202,674 1204,696 1202,720 Z"/>
+    </g>
+
+    <g id="pollenLayer"></g>
+  </svg>
+
+  <div class="caption">
+    <div class="small">Pasture &nbsp;·&nbsp; Early Morning</div>
+    <h1>The Morning<br>Alpaca</h1>
+    <p>a quiet walk, four soft steps at a time</p>
+  </div>
+  <div class="vignette"></div>
+</div>
+
+<script>
+  // Drifting golden pollen, generated in-code (no external assets).
+  (function () {
+    var layer = document.getElementById('pollenLayer');
+    var NS = 'http://www.w3.org/2000/svg';
+    for (var i = 0; i < 18; i++) {
+      var c = document.createElementNS(NS, 'circle');
+      c.setAttribute('cx', 90 + Math.random() * 1100);
+      c.setAttribute('cy', 180 + Math.random() * 430);
+      c.setAttribute('r', (1.6 + Math.random() * 2.4).toFixed(1));
+      c.setAttribute('fill', '#fff3ae');
+      c.setAttribute('class', 'pollen-dot');
+      c.style.animationDuration = (5 + Math.random() * 6).toFixed(1) + 's';
+      c.style.animationDelay = (-Math.random() * 9).toFixed(1) + 's';
+      layer.appendChild(c);
+    }
+  })();
+</script>
+</body>
+</html>

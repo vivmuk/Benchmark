@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A softer pace</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; }
+  body { background: #ede5d5; }
+  svg { display: block; width: 100%; height: 100%; }
+  .eyebrow { font: 10px Arial, sans-serif; letter-spacing: 3px; fill: #697166; }
+  .title { font: 54px Georgia, 'Times New Roman', serif; letter-spacing: -2px; fill: #394c43; }
+  .subtitle { font: 12px Arial, sans-serif; letter-spacing: .65px; fill: #798076; }
+  .small { font: 10px Arial, sans-serif; letter-spacing: 1.8px; fill: #7f8375; }
+  .cloud { animation: cloud-drift 24s ease-in-out infinite alternate; }
+  .cloud.second { animation-delay: -12s; animation-duration: 32s; }
+  .plant { transform-box: fill-box; transform-origin: bottom center; animation: sway 5s ease-in-out infinite alternate; }
+  .plant.second { animation-delay: -2s; animation-duration: 6s; }
+  .mote { animation: float 9s ease-in-out infinite; }
+  .mote.two { animation-delay: -4s; animation-duration: 12s; }
+  .mote.three { animation-delay: -7s; animation-duration: 11s; }
+  @keyframes cloud-drift { to { transform: translateX(24px); } }
+  @keyframes sway { from { transform: rotate(-2deg); } to { transform: rotate(3deg); } }
+  @keyframes float {
+    0%, 100% { transform: translate(0, 0); opacity: .2; }
+    50% { transform: translate(-15px, -23px); opacity: .65; }
+  }
+</style>
+</head>
+<body>
+<svg viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="scene-title scene-description">
+  <title id="scene-title">A softer pace</title>
+  <desc id="scene-description">A fluffy ivory alpaca walks peacefully along a sandy trail, surrounded by sage-green hills, wildflowers, and the warm evening sun.</desc>
+  <defs>
+    <linearGradient id="sky" x2=".35" y2="1">
+      <stop stop-color="#e9e8dc"/>
+      <stop offset=".65" stop-color="#f5e9d6"/>
+      <stop offset="1" stop-color="#f3ddc0"/>
+    </linearGradient>
+    <radialGradient id="sun-halo">
+      <stop stop-color="#f9d89b" stop-opacity=".45"/>
+      <stop offset="1" stop-color="#f9d89b" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="far-hill" x2="0" y2="1">
+      <stop stop-color="#b9c4b1"/>
+      <stop offset="1" stop-color="#d0d3b9"/>
+    </linearGradient>
+    <linearGradient id="hill" x2=".2" y2="1">
+      <stop stop-color="#8fa895"/>
+      <stop offset="1" stop-color="#b2ba96"/>
+    </linearGradient>
+    <linearGradient id="meadow" x2="0" y2="1">
+      <stop stop-color="#bec39d"/>
+      <stop offset="1" stop-color="#d4ccaa"/>
+    </linearGradient>
+    <linearGradient id="trail" x2="0" y2="1">
+      <stop stop-color="#e8d9ba"/>
+      <stop offset="1" stop-color="#eee2c9"/>
+    </linearGradient>
+    <linearGradient id="fleece" x1=".2" y1="0" x2=".65" y2="1">
+      <stop stop-color="#fffaf0"/>
+      <stop offset=".48" stop-color="#f6edda"/>
+      <stop offset="1" stop-color="#dfccad"/>
+    </linearGradient>
+    <linearGradient id="face" x1="0" y1="0" x2=".8" y2="1">
+      <stop stop-color="#fcf5e7"/>
+      <stop offset="1" stop-color="#e6d3b6"/>
+    </linearGradient>
+    <linearGradient id="near-leg" x2="1" y2=".2">
+      <stop stop-color="#dfcaab"/>
+      <stop offset=".45" stop-color="#f3e7d0"/>
+      <stop offset="1" stop-color="#e6d4b6"/>
+    </linearGradient>
+    <linearGradient id="far-leg" x2="1" y2=".3">
+      <stop stop-color="#c4ad8e"/>
+      <stop offset="1" stop-color="#ddc8a8"/>
+    </linearGradient>
+    <radialGradient id="shadow">
+      <stop stop-color="#766a4e" stop-opacity=".24"/>
+      <stop offset=".55" stop-color="#766a4e" stop-opacity=".12"/>
+      <stop offset="1" stop-color="#766a4e" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="soft" x="-30%" y="-50%" width="160%" height="200%">
+      <feGaussianBlur stdDeviation="3"/>
+    </filter>
+    <path id="wool-outline" d="
+      M 486 357
+      C 480 344 492 334 504 336
+      C 510 324 525 327 531 330
+      C 539 319 552 325 557 327
+      C 567 317 581 323 586 327
+      C 597 319 609 323 615 329
+      C 627 322 640 327 645 333
+      C 658 329 668 323 674 312
+      C 678 296 679 280 685 267
+      C 681 258 688 250 692 246
+      C 691 235 700 227 710 228
+      C 720 220 735 229 738 238
+      C 749 243 748 256 742 265
+      C 741 282 735 296 734 310
+      C 730 328 733 343 737 357
+      C 746 365 746 377 742 383
+      C 750 397 744 410 740 414
+      C 744 427 733 436 725 437
+      C 722 451 711 454 700 452
+      C 691 464 677 463 669 458
+      C 658 469 645 465 639 461
+      C 627 470 614 467 607 463
+      C 597 473 583 467 579 463
+      C 566 470 554 465 549 460
+      C 537 465 524 457 522 451
+      C 508 452 499 445 498 437
+      C 484 436 479 425 482 417
+      C 470 410 469 398 475 391
+      C 466 381 474 366 486 357 Z"/>
+    <clipPath id="wool-clip"><use href="#wool-outline"/></clipPath>
+  </defs>
+
+  <!-- A little landscape, with plenty of room to breathe. -->
+  <rect width="1280" height="720" fill="url(#sky)"/>
+  <circle cx="1012" cy="179" r="205" fill="url(#sun-halo)"/>
+  <circle cx="1012" cy="179" r="57" fill="#efc68f"/>
+  <circle cx="1012" cy="179" r="47" fill="#f3d09b" opacity=".48"/>
+
+  <g fill="none" stroke="#fff9eb" stroke-width="2" stroke-linecap="round" opacity=".6">
+    <path class="cloud" d="M 729 117 H 817 M 748 125 H 789"/>
+    <path class="cloud second" d="M 1090 278 H 1190 M 1116 287 H 1161"/>
+  </g>
+  <g stroke="#8d9989" fill="none" stroke-width="1.5" stroke-linecap="round" opacity=".65">
+    <path d="M 892 144 q 6 -5 12 1 q 5 -6 11 -3"/>
+    <path d="M 867 163 q 4 -4 9 0 q 4 -4 8 -2"/>
+  </g>
+
+  <path d="M 0 393 C 95 377 151 320 231 328 C 325 337 353 411 448 394 C 565 373 601 280 700 287 C 795 294 853 365 926 341 C 1050 297 1110 332 1280 282 V 720 H 0 Z" fill="url(#far-hill)"/>
+  <path d="M 0 443 C 150 420 246 484 368 447 C 484 411 544 358 650 374 C 752 390 777 452 879 426 C 1027 388 1131 349 1280 379 V 720 H 0 Z" fill="url(#hill)"/>
+  <path d="M 0 443 C 150 420 246 484 368 447 C 484 411 544 358 650 374" fill="none" stroke="#d4d7b9" stroke-width="2" opacity=".4"/>
+  <path d="M 0 495 C 151 477 227 486 333 493 C 466 503 519 473 665 480 C 883 490 1012 459 1280 478 V 720 H 0 Z" fill="url(#meadow)"/>
+
+  <g opacity=".3" stroke="#708b73" fill="none" stroke-linecap="round">
+    <path d="M 32 484 l -3 -10 m 3 10 l 5 -7 M 151 474 l 0 -8 m 0 8 l 5 -5 M 316 483 l -2 -10 M 866 477 l 2 -9 M 1043 466 l -2 -8 m 2 8 l 5 -6 M 1194 471 l 1 -8"/>
+    <path d="M 372 494 h 17 M 409 488 h 9 M 947 489 h 21 M 1082 480 h 12"/>
+  </g>
+
+  <path d="M 0 581 C 216 548 379 557 525 551 C 724 544 1000 551 1280 518 V 720 H 0 Z" fill="url(#trail)"/>
+  <path d="M 0 590 C 260 557 363 568 548 559 C 798 548 1038 556 1280 529" fill="none" stroke="#f7ecd5" stroke-width="2" opacity=".55"/>
+  <path d="M 0 672 C 236 628 371 652 576 641 C 831 627 1042 650 1280 607 V 720 H 0 Z" fill="#e5dbc0" opacity=".5"/>
+
+  <g transform="translate(83 80)">
+    <path d="M 0 0 H 27" stroke="#748473" stroke-width="1.5"/>
+    <text x="39" y="4" class="eyebrow">LITTLE WANDERINGS</text>
+    <text x="-3" y="77" class="title">A softer pace.</text>
+    <text x="0" y="108" class="subtitle">No hurry. Just a little further.</text>
+  </g>
+
+  <!-- Ground details drift at the same speed as planted feet. -->
+  <g id="ground-details"></g>
+  <ellipse id="contact-shadow" cx="612" cy="556" rx="163" ry="20" fill="url(#shadow)"/>
+
+  <!-- The rear pair sits behind the fleece; every leg is articulated. -->
+  <g id="far-legs"></g>
+
+  <g id="alpaca-body">
+    <g id="tail">
+      <path d="M 492 371 C 475 373 453 354 454 338 C 444 340 443 330 449 325 C 451 316 460 320 464 326 C 478 328 480 344 500 346 Z" fill="url(#fleece)" stroke="#e2d1b6" stroke-width="1"/>
+      <path d="M 453 329 Q 460 344 479 351" fill="none" stroke="#fff8e9" stroke-width="4" stroke-linecap="round"/>
+    </g>
+
+    <use href="#wool-outline" fill="url(#fleece)" stroke="#dcc9ab" stroke-width="1.2"/>
+    <g clip-path="url(#wool-clip)">
+      <path d="M 487 401 C 546 450 650 449 697 413 C 731 387 715 336 724 291 C 722 360 760 409 723 452 L 627 489 L 510 463 Z" fill="#c4a983" opacity=".13"/>
+      <path d="M 499 350 C 548 329 611 335 650 349" fill="none" stroke="#fffdf4" stroke-width="15" stroke-linecap="round" opacity=".4"/>
+      <path d="M 697 273 C 687 307 691 331 681 350" fill="none" stroke="#fffdf4" stroke-width="11" stroke-linecap="round" opacity=".45"/>
+      <g id="fleece-texture"></g>
+    </g>
+    <path d="M 720 320 Q 713 338 716 354 M 710 369 q 8 7 5 15" fill="none" stroke="#d7bf9e" stroke-width="1.6" stroke-linecap="round" opacity=".45"/>
+
+    <g id="head">
+      <!-- Upright, softly pointed ears. -->
+      <path d="M 710 232 C 696 222 687 193 691 169 C 692 162 695 160 699 166 C 713 181 721 207 722 226 Z" fill="#e7d6ba" stroke="#d3bc99" stroke-width="1.2"/>
+      <path d="M 710 219 Q 697 195 697 175 Q 710 191 713 218" fill="#cfa992"/>
+      <path d="M 738 226 C 733 205 740 178 751 161 C 756 154 759 157 759 164 C 763 186 756 217 748 230 Z" fill="url(#fleece)" stroke="#ddc9aa" stroke-width="1.2"/>
+      <path d="M 745 217 Q 745 190 754 169 Q 756 195 748 216" fill="#d8b29a"/>
+      <path d="M 743 212 Q 744 190 751 176" fill="none" stroke="#f9e6d2" stroke-width="2" stroke-linecap="round"/>
+
+      <path d="M 709 229 C 718 211 746 214 762 224 C 773 232 775 241 786 245 C 799 249 803 258 797 266 C 792 275 776 274 765 270 C 750 282 725 273 717 261 C 706 253 704 241 709 229 Z" fill="url(#face)" stroke="#dac4a5" stroke-width="1"/>
+      <path d="M 769 248 C 780 243 794 248 798 256 C 804 267 788 274 774 266 C 767 263 764 256 769 248 Z" fill="#d9c1a3" opacity=".68"/>
+      <path d="M 725 262 Q 740 275 757 264" fill="none" stroke="#cdb28e" stroke-width="1.5" opacity=".45" stroke-linecap="round"/>
+
+      <!-- A glossy eye, tiny nostril, and an unhurried expression. -->
+      <path d="M 752 242 Q 759 235 765 243 Q 759 249 753 245 Z" fill="#433b32"/>
+      <ellipse cx="759" cy="242" rx="3.4" ry="4" fill="#302f29"/>
+      <circle cx="760.1" cy="240.5" r="1.2" fill="#fff7e4"/>
+      <path d="M 751 238 Q 757 233 762 236" fill="none" stroke="#b39a7a" stroke-width="1.5" stroke-linecap="round"/>
+      <ellipse cx="790" cy="254" rx="2.5" ry="1.8" transform="rotate(15 790 254)" fill="#76604d"/>
+      <path d="M 782 265 Q 789 268 796 263" fill="none" stroke="#806a52" stroke-width="1.5" stroke-linecap="round"/>
+      <path d="M 792 259 l 1 4" stroke="#9b8062" stroke-width="1" stroke-linecap="round"/>
+      <ellipse cx="758" cy="258" rx="6" ry="3.5" fill="#d9ad90" opacity=".28"/>
+
+      <!-- A little cloud of fringe. -->
+      <path d="M 705 238 C 698 232 702 223 710 222 C 707 213 719 209 725 214 C 729 205 741 210 743 215 C 752 211 761 217 758 224 C 765 230 759 236 752 234 C 747 241 739 237 736 232 C 730 239 722 236 719 231 C 714 237 710 239 705 238 Z" fill="#fff6e6"/>
+      <path d="M 712 224 q 5 -5 10 0 m 9 -4 q 5 -5 10 0 m -18 10 q 5 4 9 -1" fill="none" stroke="#e6d5ba" stroke-width="1.1" stroke-linecap="round"/>
+    </g>
+  </g>
+
+  <g id="near-legs"></g>
+
+  <!-- Foreground botanical framing. -->
+  <g class="plant" fill="none" stroke="#718875" stroke-width="2" stroke-linecap="round">
+    <path d="M 1065 637 Q 1060 590 1083 544 M 1068 600 Q 1046 590 1037 573 M 1073 577 Q 1094 569 1104 551"/>
+    <g fill="#8da184" stroke="none">
+      <path d="M 1066 605 Q 1041 605 1038 584 Q 1063 585 1066 605"/>
+      <path d="M 1070 590 Q 1094 591 1099 570 Q 1078 570 1070 590"/>
+      <path d="M 1079 559 Q 1063 550 1069 533 Q 1084 540 1079 559"/>
+      <path d="M 1080 552 Q 1100 549 1099 532 Q 1083 534 1080 552"/>
+    </g>
+    <g fill="#f6e9c7" stroke="none">
+      <circle cx="1084" cy="541" r="4"/><circle cx="1088" cy="544" r="4"/><circle cx="1082" cy="547" r="4"/>
+      <circle cx="1104" cy="548" r="3.5"/><circle cx="1108" cy="552" r="3.5"/><circle cx="1102" cy="554" r="3.5"/>
+    </g>
+    <g fill="#c8a36c" stroke="none"><circle cx="1084" cy="545" r="2"/><circle cx="1105" cy="552" r="1.7"/></g>
+  </g>
+  <g class="plant second" fill="none" stroke="#8c9a7a" stroke-width="2" stroke-linecap="round">
+    <path d="M 185 623 Q 188 596 174 574 M 183 609 Q 198 597 202 584 M 184 606 Q 168 603 160 591"/>
+    <g fill="#9aa584" stroke="none">
+      <path d="M 182 600 Q 164 589 172 578 Q 185 582 182 600"/>
+      <path d="M 189 603 Q 185 583 201 579 Q 204 593 189 603"/>
+      <path d="M 179 615 Q 159 616 157 599 Q 172 599 179 615"/>
+    </g>
+    <circle cx="173" cy="572" r="4" fill="#e4bd79" stroke="none"/>
+    <circle cx="203" cy="581" r="3" fill="#e4bd79" stroke="none"/>
+  </g>
+  <g fill="#fffae6">
+    <circle class="mote" cx="884" cy="391" r="2"/>
+    <circle class="mote two" cx="410" cy="349" r="1.8"/>
+    <circle class="mote three" cx="944" cy="467" r="1.6"/>
+  </g>
+
+  <g transform="translate(84 663)">
+    <circle cx="4" cy="-3" r="3" fill="#8b9a7d"/>
+    <text x="19" y="0" class="small">ONE STEP AT A TIME</text>
+  </g>
+  <g transform="translate(1111 659)" stroke="#939781" fill="none" stroke-width="1" opacity=".7">
+    <path d="M 0 0 h 84 M 74 -4 l 10 4 -10 4"/>
+  </g>
+</svg>
+
+<script>
+(() => {
+  'use strict';
+  const NS = 'http://www.w3.org/2000/svg';
+  const make = (tag, attrs, parent) => {
+    const node = document.createElementNS(NS, tag);
+    for (const [key, value] of Object.entries(attrs)) node.setAttribute(key, value);
+    if (parent) parent.appendChild(node);
+    return node;
+  };
+
+  // Deterministic hand-drawn fleece details.
+  let seed = 47;
+  const random = () => {
+    seed = (seed * 16807) % 2147483647;
+    return (seed - 1) / 2147483646;
+  };
+  const texture = document.getElementById('fleece-texture');
+  for (let i = 0; i < 155; i++) {
+    const x = 478 + random() * 263;
+    const y = 239 + random() * 222;
+    const torso = ((x - 603) / 125) ** 2 + ((y - 396) / 66) ** 2 < .91;
+    const neck = x > 694 && x < 729 && y > 252 && y < 390;
+    if (!torso && !neck) continue;
+    const r = 3 + random() * 4;
+    make('path', {
+      d: `M ${x-r} ${y} q ${r*.2} ${-r} ${r} ${-r*.65} q ${r*.9} ${-r*.4} ${r*1.3} ${r*.55}`,
+      fill: 'none',
+      stroke: i % 3 ? '#fffaf0' : '#c9b18d',
+      'stroke-opacity': i % 3 ? .63 : .24,
+      'stroke-width': i % 3 ? 2.1 : 1.15,
+      'stroke-linecap': 'round'
+    }, texture);
+  }
+
+  const ground = document.getElementById('ground-details');
+  const marks = [];
+  for (let i = 0; i < 44; i++) {
+    const x = random() * 1440;
+    const y = 569 + random() * 63;
+    const width = 2 + random() * 8;
+    const node = make('path', {
+      d: `M 0 0 q ${width*.5} -1 ${width} 0`,
+      fill: 'none', stroke: i % 4 ? '#bfae88' : '#fff5df',
+      'stroke-width': i % 4 ? 1.3 : 2,
+      'stroke-linecap': 'round', opacity: .35
+    }, ground);
+    marks.push({node, x, y});
+  }
+
+  const legs = [
+    {x: 525, y: 423, phase: .50, front: false, far: true},
+    {x: 696, y: 414, phase: .75, front: true,  far: true},
+    {x: 516, y: 425, phase: .00, front: false, far: false},
+    {x: 685, y: 417, phase: .25, front: true,  far: false}
+  ].map(spec => {
+    const group = make('g', {}, document.getElementById(spec.far ? 'far-legs' : 'near-legs'));
+    const shape = make('path', {
+      fill: spec.far ? 'url(#far-leg)' : 'url(#near-leg)',
+      stroke: spec.far ? '#c0a888' : '#d5be9b',
+      'stroke-width': 1, 'stroke-linejoin': 'round'
+    }, group);
+    const highlight = make('path', {
+      fill: 'none', stroke: '#fff5df',
+      'stroke-width': 2.5, opacity: spec.far ? .15 : .55,
+      'stroke-linecap': 'round'
+    }, group);
+    const hoof = make('path', {fill: spec.far ? '#85745c' : '#746451'}, group);
+    const seam = make('path', {
+      fill: 'none', stroke: '#514c40', 'stroke-width': 1, opacity: .5
+    }, group);
+    return {...spec, shape, highlight, hoof, seam};
+  });
+
+  const body = document.getElementById('alpaca-body');
+  const head = document.getElementById('head');
+  const tail = document.getElementById('tail');
+  const shadow = document.getElementById('contact-shadow');
+  const TAU = Math.PI * 2;
+  const duration = 2.65;
+  const stance = .66;
+  const stride = 65;
+  const groundSpeed = stride / (duration * stance);
+  let start;
+
+  function draw(now) {
+    if (start === undefined) start = now;
+    const t = (now - start) / 1000;
+    const cycle = t / duration;
+    const bob = Math.cos(cycle * TAU * 2) * 1.7;
+    const sway = Math.sin(cycle * TAU) * 1.15;
+    const pitch = Math.sin(cycle * TAU) * .32;
+    body.setAttribute('transform', `translate(${sway} ${bob}) rotate(${pitch} 609 392)`);
+    head.setAttribute('transform', `rotate(${Math.sin(cycle * TAU - .5) * .85} 714 272)`);
+    tail.setAttribute('transform', `rotate(${Math.sin(cycle * TAU + 1) * 3} 491 357)`);
+    shadow.setAttribute('rx', 157 + bob * 1.2);
+
+    for (const leg of legs) {
+      const phase = (cycle + leg.phase) % 1;
+      const hx = leg.x + sway;
+      const hy = leg.y + bob + (leg.x - 609) * Math.sin(pitch * Math.PI / 180);
+      let fx, lift, toeAngle;
+      if (phase < stance) {
+        const u = phase / stance;
+        fx = leg.x + stride * (.5 - u);
+        lift = 0;
+        toeAngle = 0;
+      } else {
+        const u = (phase - stance) / (1 - stance);
+        // Matching touchdown and liftoff velocity avoids a sliding, pendulum gait.
+        const ratio = (1 - stance) / stance;
+        const travel = -2*u*u*u + 3*u*u - ratio*(2*u*u*u - 3*u*u + u);
+        fx = leg.x + stride * (travel - .5);
+        lift = 25 * Math.pow(Math.sin(Math.PI * u), 1.35);
+        toeAngle = Math.sin(TAU * u) * 13;
+      }
+      const fy = 550 - lift + (leg.far ? -3 : 0);
+      const dx = fx - hx, dy = fy - hy;
+      const distance = Math.hypot(dx, dy);
+      const upper = 76, lower = 76;
+      const along = (upper*upper - lower*lower + distance*distance) / (2*distance);
+      const bend = Math.sqrt(Math.max(0, upper*upper - along*along));
+      const direction = leg.front ? -1 : 1;
+      const kx = hx + dx * along / distance + direction * (-dy / distance) * bend;
+      const ky = hy + dy * along / distance + direction * ( dx / distance) * bend;
+
+      const w = leg.far ? 12 : 14;
+      leg.shape.setAttribute('d', `
+        M ${hx-w} ${hy-10}
+        Q ${hx-15} ${hy+17} ${kx-8} ${ky}
+        Q ${kx-6} ${ky+12} ${fx-5.5} ${fy+1}
+        Q ${fx} ${fy+5} ${fx+6} ${fy+1}
+        Q ${fx+7} ${fy-16} ${kx+8} ${ky+1}
+        Q ${hx+15} ${hy+15} ${hx+w} ${hy-8}
+        Q ${hx+6} ${hy-15} ${hx+1} ${hy-9}
+        Q ${hx-5} ${hy-16} ${hx-w} ${hy-10} Z`);
+      leg.highlight.setAttribute('d', `M ${hx-5} ${hy+5} Q ${hx-6} ${hy+23} ${kx-2} ${ky-1} Q ${kx+1} ${ky+13} ${fx-1} ${fy-10}`);
+
+      const hoofPath = `M ${fx-6} ${fy-3}
+        Q ${fx} ${fy-1} ${fx+6} ${fy-3}
+        L ${fx+10} ${fy+3}
+        Q ${fx+11} ${fy+7} ${fx+7} ${fy+7}
+        L ${fx-5} ${fy+7}
+        Q ${fx-8} ${fy+6} ${fx-6} ${fy-3} Z`;
+      leg.hoof.setAttribute('d', hoofPath);
+      leg.hoof.setAttribute('transform', `rotate(${toeAngle} ${fx} ${fy})`);
+      leg.seam.setAttribute('d', `M ${fx+3} ${fy+3} l 1 4`);
+      leg.seam.setAttribute('transform', `rotate(${toeAngle} ${fx} ${fy})`);
+    }
+
+    for (const mark of marks) {
+      const x = ((mark.x - t * groundSpeed) % 1440 + 1440) % 1440 - 80;
+      mark.node.setAttribute('transform', `translate(${x} ${mark.y})`);
+    }
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+</script>
+</body>
+</html>

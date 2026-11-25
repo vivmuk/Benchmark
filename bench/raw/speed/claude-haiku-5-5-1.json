@@ -1,0 +1,17 @@
+{
+ "text": "A suspension bridge carries its load mainly through tension, and the path begins with the roadway itself. The deck, which is the surface cars and people drive or walk on, is usually supported by a stiffening girder or truss beneath it. Vertical cables called hangers, or suspenders, connect this girder to the main cables above. Each hanger takes a share of the deck's weight and whatever traffic happens to be on it, and passes that force upward into the main cable.\n\nThe main cables are the heart of the structure. They are made of thousands of steel wires bundled together and draped over the tops of two tall towers, forming a long, shallow curve between them. A cable that carries weight in this way is pulled taut, and its tension is what does the work. Because the cable is flexible, it can only pull, never push, and the pull runs along its length in the direction of the cable itself. The sag of the cable matters here. A deeper sag means the cable is more nearly horizontal where it meets the towers, which reduces the cable's own tension for a given load, but the cable still exerts an enormous horizontal pull.\n\nAt the tops of the towers, the cables rest on saddles that allow them to slide slightly as the load shifts. The towers receive the cables' downward force and pass it straight down their height. Because the towers are rigid columns, they carry this load in compression, much as a stone pillar would. The towers are set on foundations, often large concrete caissons or piers sunk into bedrock or dense soil, which spread the weight over a wide area so the ground can bear it.\n\nThe cables also pull the towers inward toward the middle of the span, and this horizontal pull has to go somewhere. At each end, the main cables pass over the towers and continue to anchorages. These anchorages are massive blocks of concrete, sometimes anchored into solid rock or built as gravity structures whose sheer mass resists being dragged forward. Steel rods or strands embedded deep in the anchorage transfer the cable's tension into the surrounding mass. Between the two anchorages, the cables are in equilibrium: the tension pulling toward each end is balanced by the anchorage's resistance, so the bridge as a whole does not move.\n\nTaken together, the path of load is clear. Traffic weight passes from the deck into the girder, then into the hangers, then into the main cables as tension. The cables deliver downward force to the towers, which push it into their foundations, and deliver horizontal pull to the anchorages, which hold it against the earth. The stiffening girder also distributes concentrated loads along the span and resists twisting and wind-induced motion, keeping the deck level and stable.",
+ "reasoning_chars": 648,
+ "usage": {
+  "prompt_tokens": 61,
+  "completion_tokens": 1199,
+  "total_tokens": 1260,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 1.5669039179920219,
+ "t_first_content": 3.32274095894536,
+ "t_total": 7.503018538991455,
+ "cost": 0.0006056
+}

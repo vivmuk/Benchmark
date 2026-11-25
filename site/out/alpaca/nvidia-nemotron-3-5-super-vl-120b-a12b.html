@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Walking Alpaca</title>
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: #b3e5fc;
+  }
+  svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  /* Whole alpaca body bounce */
+  #alpaca-inner {
+    transform-origin: 0 0;
+    animation: body-bob 1.4s infinite ease-in-out;
+  }
+
+  @keyframes body-bob {
+    0%, 100% { transform: translate(0, 0); }
+    25% { transform: translate(-1px, -6px); }
+    50% { transform: translate(0, 0); }
+    75% { transform: translate(1px, -6px); }
+    100% { transform: translate(0, 0); }
+  }
+
+  /* Leg gait: diagonal pairs move in opposition */
+  .leg {
+    transform-origin: 0 0;
+    animation-duration: 1.4s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: ease-in-out;
+  }
+  .leg.pair-1 { animation-name: walk-pair-1; }
+  .leg.pair-2 { animation-name: walk-pair-2; }
+
+  @keyframes walk-pair-1 {
+    0% { transform: rotate(-12deg); }
+    100% { transform: rotate(28deg); }
+  }
+  @keyframes walk-pair-2 {
+    0% { transform: rotate(28deg); }
+    100% { transform: rotate(-12deg); }
+  }
+
+  /* Head nod */
+  #nod {
+    transform-origin: 0 0;
+    animation: head-nod 1.4s infinite ease-in-out;
+  }
+  @keyframes head-nod {
+    0%, 100% { transform: rotate(0deg) translateY(0); }
+    50% { transform: rotate(-4deg) translateY(-3px); }
+  }
+
+  /* Tail sway */
+  #tail {
+    transform-origin: -45px -5px;
+    animation: tail-sway 1.4s infinite ease-in-out alternate;
+  }
+  @keyframes tail-sway {
+    0% { transform: rotate(-6deg); }
+    100% { transform: rotate(6deg); }
+  }
+</style>
+</head>
+<body>
+<svg viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#a1c4fd"/>
+      <stop offset="100%" stop-color="#c2e9fb"/>
+    </linearGradient>
+    <filter id="blur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+    </filter>
+  </defs>
+
+  <!-- Sky -->
+  <rect width="1280" height="720" fill="url(#skyGrad)"/>
+
+  <!-- Sun -->
+  <circle cx="1080" cy="110" r="48" fill="#fff9c4" opacity="0.85"/>
+
+  <!-- Ground -->
+  <path d="M 0 500 Q 320 540 640 520 Q 960 500 1280 520 V 720 H 0 Z" fill="#81c784"/>
+  <path d="M 0 520 Q 320 560 640 540 Q 960 520 1280 540 V 720 H 0 Z" fill="#66bb6a" opacity="0.6"/>
+
+  <!-- Ground shadow under alpaca -->
+  <ellipse cx="520" cy="520" rx="90" ry="18" fill="#000000" opacity="0.16" filter="url(#blur)"/>
+
+  <!-- Alpaca -->
+  <g id="alpaca-outer" transform="translate(520, 400)">
+    <g id="alpaca-inner">
+
+      <!-- Far (back) legs -->
+      <g transform="translate(-50, 45)">
+        <g class="leg pair-2">
+          <path d="M -2.5,0 L 2.5,0 L 3,80 L -3,80 Z" fill="#d7ccc8"/>
+          <ellipse cx="0" cy="86" rx="4" ry="3.5" fill="#bcaaa4"/>
+        </g>
+      </g>
+      <g transform="translate(0, 45)">
+        <g class="leg pair-1">
+          <path d="M -2.5,0 L 2.5,0 L 3,80 L -3,80 Z" fill="#d7ccc8"/>
+          <ellipse cx="0" cy="86" rx="4" ry="3.5" fill="#bcaaa4"/>
+        </g>
+      </g>
+
+      <!-- Body -->
+      <g id="body">
+        <path d="M -50,-15 Q -35,-55 0,-35 Q 35,-55 50,-15 Q 60,25 50,55 Q 0,65 -50,55 Q -60,25 -50,-15 Z" fill="#f4f1ea"/>
+      </g>
+
+      <!-- Tail -->
+      <g id="tail" transform="translate(-50, -5)">
+        <path d="M 0,0 Q -15,5 -10,20 L 5,10 Z" fill="#f4f1ea"/>
+      </g>
+
+      <!-- Neck & Head -->
+      <g transform="translate(35, -30)">
+        <g id="nod">
+          <path d="M 30,-25 Q 60,-65 100,-85 L 115,-80 Q 85,-55 45,-25 Z" fill="#f4f1ea"/>
+          
+          <!-- Ears -->
+          <path d="M 95,-95 Q 90,-120 100,-112 L 105,-102 Z" fill="#f4f1ea"/>
+          <path d="M 97,-104 Q 94,-116 98,-112 L 100,-106 Z" fill="#ffcdd2"/>
+          <path d="M 115,-95 Q 120,-120 110,-112 L 105,-102 Z" fill="#f4f1ea"/>
+          <path d="M 113,-104 Q 116,-116 112,-112 L 110,-106 Z" fill="#ffcdd2"/>
+
+          <!-- Head -->
+          <ellipse cx="105" cy="-85" rx="22" ry="17" fill="#f4f1ea"/>
+          <circle cx="112" cy="-88" r="2.5" fill="#5d4037"/>
+          <circle cx="120" cy="-82" r="1.5" fill="#8d6e63"/>
+        </g>
+      </g>
+
+      <!-- Near (front) legs -->
+      <g transform="translate(55, 45)">
+        <g class="leg pair-1">
+          <path d="M -2.5,0 L 2.5,0 L 3,80 L -3,80 Z" fill="#d7ccc8"/>
+          <ellipse cx="0" cy="86" rx="4" ry="3.5" fill="#bcaaa4"/>
+        </g>
+      </g>
+      <g transform="translate(95, 45)">
+        <g class="leg pair-2">
+          <path d="M -2.5,0 L 2.5,0 L 3,80 L -3,80 Z" fill="#d7ccc8"/>
+          <ellipse cx="0" cy="86" rx="4" ry="3.5" fill="#bcaaa4"/>
+        </g>
+      </g>
+
+    </g>
+  </g>
+</svg>
+</body>
+</html>

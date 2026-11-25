@@ -1,0 +1,17 @@
+{
+ "text": "A suspension bridge carries its load through a chain of tension and compression, and the path begins with the deck, the roadway that vehicles and pedestrians actually travel on. The deck is not held up from below the way a beam bridge is supported by piers. Instead, it hangs. Vertical steel cables called hangers or suspenders connect the deck to the main cables, which arc high above it. Each hanger takes a share of the deck's weight and the traffic on it, and pulls upward on the main cable at the point where it attaches.\n\nThe main cables are the heart of the structure. Each is made of thousands of thin steel wires bundled together, and they are draped over the tops of two towers and anchored firmly at each end. Because the cables are flexible, they cannot resist being pushed or bent. They can only pull. Every load that reaches them travels along their length as tension, the same way a rope tightens when you hang a weight from it. The cable's curve matters here: the sag between towers means the cable is pulled sideways as well as upward, and that sideways pull is what the anchorages must eventually resist.\n\nThe towers, usually built of steel or reinforced concrete, receive the cables' downward force at their tops, where the cables rest in saddles. The towers are essentially tall columns, and their job is to carry this enormous load straight down into the ground. Columns handle compression well, so the towers are loaded mainly along their height, squeezed from above. Their weight, together with the weight of the cables they support, is transferred into foundations that spread the load over a large area of rock or dense soil so that the ground can bear it without shifting or settling.\n\nThe cables' ends, meanwhile, must be held in place. At each end, the main cable runs into a massive anchorage, often a block of concrete weighing many thousands of tonnes, sometimes built into bedrock. The anchorage resists the cable's pull through its own weight and through friction and bond with the surrounding ground. If the cable's tension were not held at the ends, the whole structure would drift toward the towers, so the anchorages are as important as any other part of the system.\n\nPut together, the load path is continuous. Traffic presses on the deck, the deck pushes on the hangers, the hangers pull on the main cables, the cables pull on the towers and the anchorages, and the towers push down onto their foundations while the anchorages pull back against the earth. Each element is used for what it does best: cables for tension, towers for compression, and the ground for resisting both. This arrangement allows a suspension bridge to span distances that would be impossible for a rigid beam, because the cables convert vertical loads into forces that the towers and anchorages can manage efficiently.",
+ "reasoning_chars": 251,
+ "usage": {
+  "prompt_tokens": 61,
+  "completion_tokens": 997,
+  "total_tokens": 1058,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 3.0133137209923007,
+ "t_first_content": 3.0626043300144374,
+ "t_total": 6.353505828010384,
+ "cost": 0.0005046
+}

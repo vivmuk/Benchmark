@@ -1,0 +1,17 @@
+{
+ "text": "\n\nCinematic sci-fi concept art of a futuristic desert metropolis at dusk. In the foreground left, a cloaked figure in maroon stands with a brown alpaca on a golden sand dune, facing the city. A curved highway with glowing yellow lane markers winds toward a bright turquoise oasis pool on the right. Beside the pool, a tall saguaro cactus is outlined in neon pink light. The background features a sprawling neon city with three main spires. The central, tallest tower has a glowing cyan ring hovering above it. The left tower displays a vertical neon sign reading 'OASIS'. The right tower glows purple. Cyan laser beams shoot upward from the buildings into the sky. The sky is a gradient of sunset orange to deep starry blue, featuring a large crescent moon in the upper left. High contrast, detailed textures, 8k resolution.",
+ "reasoning_chars": 3520,
+ "usage": {
+  "prompt_tokens": 962,
+  "completion_tokens": 1012,
+  "total_tokens": 1974,
+  "completion_tokens_details": {
+   "reasoning_tokens": 830
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 1.9208828280097805,
+ "t_first_content": 15.375374361989088,
+ "t_total": 18.063072760996874,
+ "cost": 0.0035462400000000004
+}

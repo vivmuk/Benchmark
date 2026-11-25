@@ -1,0 +1,22 @@
+{
+ "gemini-3-1-pro-preview": {
+  "scores": {
+   "subjects": 9.0,
+   "layout": 8.0,
+   "colour": 7.0,
+   "style": 6.0,
+   "overall": 7.0
+  },
+  "note": "The recreation includes all key elements but differs in styling, lighting, and exact placement of details."
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "subjects": 10,
+   "layout": 7.0,
+   "colour": 6.0,
+   "style": 7.0,
+   "overall": 6.0
+  },
+  "note": "All key elements are present, but the traveller and alpaca swap positions, the track curves differently, and the recreation is sharper and more saturated."
+ }
+}

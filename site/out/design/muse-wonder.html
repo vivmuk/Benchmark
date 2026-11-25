@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dune Line — Sleep in the Desert. Wake in Neon.</title>
+<meta name="description" content="Dune Line is a fictional overnight train crossing the desert from Aurelia Sands to Vesper City.">
+<style>
+  :root{
+    --night:#0c0e26;
+    --night-2:#151839;
+    --night-3:#211647;
+    --plum:#2d1b4e;
+    --cream:#fff7e9;
+    --paper:#fffdf7;
+    --warm:#fdf0dc;
+    --sand:#e9c48f;
+    --sand-2:#d99a5c;
+    --sand-3:#b96f3f;
+    --ink:#1b172f;
+    --muted:#716a83;
+    --muted-light:#b9b4d6;
+    --cyan:#5eead4;
+    --pink:#ff6ab5;
+    --violet:#8b7cf6;
+    --line:rgba(27,23,47,.11);
+    --line-light:rgba(255,255,255,.13);
+    --shadow:0 24px 60px rgba(21,15,52,.16);
+    --shadow-sm:0 10px 30px rgba(21,15,52,.10);
+    --radius:24px;
+    --font-sans: ui-sans-system, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --font-serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--font-sans);
+    background:var(--cream);
+    color:var(--ink);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--pink);color:white}
+  a{color:inherit;text-decoration:none}
+  button{font:inherit;cursor:pointer}
+  :focus-visible{outline:3px solid var(--cyan);outline-offset:3px;border-radius:6px}
+  .wrap{width:min(1180px,calc(100% - 48px));margin:0 auto}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:10px;
+    font-size:.72rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;
+  }
+  .eyebrow::before{content:"";width:28px;height:1px;background:currentColor;opacity:.7}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:9px;
+    padding:14px 24px;border-radius:999px;border:1px solid transparent;
+    font-weight:750;font-size:.95rem;line-height:1;transition:.25s ease;white-space:nowrap;
+  }
+  .btn-sand{background:var(--sand);color:#241331;box-shadow:0 12px 28px rgba(233,196,143,.28)}
+  .btn-sand:hover{background:#f4d6a7;transform:translateY(-2px)}
+  .btn-ghost{background:rgba(255,255,255,.06);color:#fff;border-color:rgba(255,255,255,.22);backdrop-filter:blur(8px)}
+  .btn-ghost:hover{background:rgba(255,255,255,.13);transform:translateY(-2px)}
+  .btn-dark{background:var(--night);color:#fff}
+  .btn-dark:hover{background:var(--night-3);transform:translateY(-2px)}
+  .btn-outline{background:transparent;color:var(--ink);border-color:var(--line)}
+  .btn-outline:hover{border-color:var(--ink)}
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed;inset:0 0 auto 0;z-index:50;
+    background:rgba(12,14,38,.78);
+    backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+    border-bottom:1px solid rgba(255,255,255,.09);
+  }
+  .nav{height:72px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+  .logo{display:flex;align-items:center;gap:11px;color:#fff;font-weight:850;letter-spacing:.02em;font-size:1.08rem}
+  .logo-mark{
+    width:38px;height:38px;border-radius:11px;display:grid;place-items:center;flex:none;
+    background:linear-gradient(145deg,var(--sand),#c97e46);
+    box-shadow:0 8px 20px rgba(217,154,92,.35);
+  }
+  .logo small{display:block;font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--sand);font-weight:800;line-height:1;margin-top:2px}
+  .nav-links{display:flex;align-items:center;gap:34px;color:#d8d4ef;font-size:.92rem;font-weight:600}
+  .nav-links a{position:relative;padding:6px 0}
+  .nav-links a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:2px;background:linear-gradient(90deg,var(--cyan),var(--pink));transition:.25s}
+  .nav-links a:hover{color:#fff}
+  .nav-links a:hover::after{width:100%}
+  .nav-cta{display:flex;align-items:center;gap:12px}
+  .nav-book{padding:11px 20px;font-size:.88rem}
+  .burger{display:none;background:none;border:0;width:42px;height:42px;border-radius:10px;place-items:center}
+  .burger span{display:block;width:22px;height:2px;background:#fff;margin:5px auto;border-radius:2px;transition:.25s}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;color:#fff;overflow:hidden;
+    background:
+      radial-gradient(900px 480px at 85% -10%, rgba(139,124,246,.38), transparent 60%),
+      radial-gradient(700px 420px at 8% 18%, rgba(255,106,181,.16), transparent 60%),
+      linear-gradient(180deg,#090b22 0%,#14163a 46%,#33204f 76%,#593052 100%);
+    padding:158px 0 0;
+  }
+  .stars,.stars::before,.stars::after{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background-image:
+      radial-gradient(1.5px 1.5px at 12% 22%, #fff 50%, transparent 51%),
+      radial-gradient(1px 1px at 28% 12%, #ffe9c4 50%, transparent 51%),
+      radial-gradient(1.5px 1.5px at 46% 30%, #fff 50%, transparent 51%),
+      radial-gradient(1px 1px at 63% 14%, #bffcf3 50%, transparent 51%),
+      radial-gradient(1.5px 1.5px at 78% 26%, #fff 50%, transparent 51%),
+      radial-gradient(1px 1px at 90% 10%, #ffd6ec 50%, transparent 51%),
+      radial-gradient(1px 1px at 36% 42%, #fff 50%, transparent 51%),
+      radial-gradient(1px 1px at 70% 44%, #ffe9c4 50%, transparent 51%);
+    animation:twinkle 4.5s ease-in-out infinite alternate;
+  }
+  .stars::before{transform:translate(38px,26px) scale(1.15);opacity:.55;animation-delay:1.2s}
+  .stars::after{transform:translate(-52px,12px) scale(.9);opacity:.4;animation-delay:2.1s}
+  @keyframes twinkle{from{opacity:.55}to{opacity:1}}
+  .hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.02fr .98fr;gap:58px;align-items:center;padding-bottom:64px}
+  .hero .eyebrow{color:var(--sand)}
+  h1{
+    font-family:var(--font-serif);font-weight:500;
+    font-size:clamp(3rem,5.6vw,4.85rem);line-height:.98;letter-spacing:-.02em;
+    margin:22px 0 22px;max-width:10.5ch;
+  }
+  h1 em{font-style:italic;background:linear-gradient(92deg,var(--cyan) 5%,#a5b4fc 48%,var(--pink) 95%);-webkit-background-clip:text;background-clip:text;color:transparent}
+  h1 .sand-word{color:var(--sand)}
+  .hero-sub{font-size:1.13rem;line-height:1.7;color:#dcd8f2;max-width:54ch}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin:32px 0 34px}
+  .hero-meta{display:flex;flex-wrap:wrap;gap:0;border-top:1px solid var(--line-light);padding-top:22px;max-width:560px}
+  .hero-meta div{padding-right:26px;margin-right:26px;border-right:1px solid var(--line-light)}
+  .hero-meta div:last-child{border:0;margin:0;padding:0}
+  .hero-meta b{display:block;font-family:var(--font-serif);font-size:1.45rem;font-weight:600;line-height:1.1;color:#fff}
+  .hero-meta span{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted-light);font-weight:700}
+
+  /* Scene card */
+  .scene-card{
+    background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,.045));
+    border:1px solid rgba(255,255,255,.16);border-radius:28px;padding:14px;
+    box-shadow:0 34px 80px rgba(0,0,0,.38);backdrop-filter:blur(10px);
+  }
+  .scene{border-radius:19px;overflow:hidden;line-height:0;background:#101336}
+  .scene svg{width:100%;height:auto;display:block}
+  .train-bob{animation:bob 4.6s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-2.5px)}}
+  .flicker{animation:flick 3.4s ease-in-out infinite}
+  @keyframes flick{0%,100%{opacity:1}48%{opacity:.72}52%{opacity:1}78%{opacity:.84}}
+  .scene-caption{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 6px 6px}
+  .scene-caption b{font-size:.95rem;display:block;line-height:1.3}
+  .scene-caption span{font-size:.8rem;color:var(--muted-light)}
+  .live-badge{display:inline-flex;align-items:center;gap:8px;font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#bbf7ec;background:rgba(94,234,212,.12);border:1px solid rgba(94,234,212,.3);padding:8px 12px;border-radius:999px;white-space:nowrap}
+  .live-badge i{width:7px;height:7px;border-radius:50%;background:var(--cyan);box-shadow:0 0 0 0 rgba(94,234,212,.6);animation:pulse 1.8s infinite}
+  @keyframes pulse{to{box-shadow:0 0 0 8px rgba(94,234,212,0)}}
+
+  /* Route strip */
+  .route-strip{position:relative;z-index:2;border-top:1px solid var(--line-light);background:rgba(7,8,25,.32)}
+  .route{display:flex;align-items:flex-start;justify-content:space-between;padding:26px 4px 30px;position:relative}
+  .route::before{content:"";position:absolute;left:4%;right:4%;top:35px;height:1px;background:linear-gradient(90deg,var(--sand),rgba(255,255,255,.25),var(--cyan),var(--pink))}
+  .route div{text-align:center;flex:1;position:relative}
+  .route i{display:block;width:11px;height:11px;margin:4px auto 10px;border-radius:50%;background:var(--night);border:2px solid var(--sand);position:relative;z-index:1}
+  .route div:last-child i{border-color:var(--pink);background:var(--pink);box-shadow:0 0 16px rgba(255,106,181,.8)}
+  .route b{display:block;font-size:.82rem;letter-spacing:.06em}
+  .route span{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-light);font-weight:700}
+
+  /* ---------- SECTIONS ---------- */
+  section{padding:104px 0}
+  .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:36px;margin-bottom:48px}
+  .section-head .eyebrow{color:var(--sand-3)}
+  h2{font-family:var(--font-serif);font-weight:500;font-size:clamp(2.1rem,3.6vw,3.1rem);line-height:1.06;letter-spacing:-.015em;margin-top:16px;max-width:18ch}
+  h2 em{font-style:italic;color:var(--sand-3)}
+  .section-head p{max-width:38ch;color:var(--muted);font-size:1.02rem}
+
+  /* Features */
+  .features{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .feature{
+    background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
+    padding:34px 30px 30px;box-shadow:var(--shadow-sm);position:relative;overflow:hidden;transition:.3s ease;
+  }
+  .feature:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+  .feature::after{content:"";position:absolute;inset:auto 0 0 0;height:3px;background:linear-gradient(90deg,var(--sand),var(--pink));opacity:0;transition:.3s}
+  .feature:hover::after{opacity:1}
+  .feature-num{position:absolute;top:22px;right:26px;font-family:var(--font-serif);font-style:italic;font-size:1rem;color:#cbb astonishing}
+  .feature-num{color:#d6b48a}
+  .icon{
+    width:56px;height:56px;border-radius:17px;display:grid;place-items:center;margin-bottom:22px;color:#3a214f;
+    background:linear-gradient(145deg,#f7dfba,#efc48d);box-shadow:inset 0 1px 0 #fff8,0 10px 20px rgba(185,111,63,.18);
+  }
+  .feature:nth-child(2) .icon{background:linear-gradient(145deg,#1d1f4d,#33215e);color:var(--cyan)}
+  .feature:nth-child(3) .icon{background:linear-gradient(145deg,#ffe1ef,#ffc2dd);color:#8f245e}
+  .feature h3{font-family:var(--font-serif);font-size:1.42rem;font-weight:600;line-height:1.2;margin-bottom:10px}
+  .feature p{color:var(--muted);font-size:.97rem}
+  .feature ul{list-style:none;margin-top:18px;padding-top:16px;border-top:1px dashed var(--line);display:grid;gap:8px;font-size:.88rem;font-weight:650;color:#453e5f}
+  .feature li::before{content:"—";color:var(--sand-2);margin-right:9px}
+
+  /* Timetable */
+  .dark-section{background:radial-gradient(800px 400px at 90% 0%,rgba(139,124,246,.24),transparent 60%),linear-gradient(180deg,var(--night) 0%,#121331 100%);color:#fff}
+  .dark-section .section-head p{color:var(--muted-light)}
+  .dark-section .eyebrow{color:var(--cyan)}
+  .dark-section h2 em{color:var(--cyan)}
+  .table-card{background:rgba(255,255,255,.045);border:1px solid var(--line-light);border-radius:26px;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.3)}
+  .table-scroll{overflow-x:auto}
+  table{width:100%;border-collapse:collapse;min-width:820px;text-align:left}
+  th{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted-light);font-weight:800;padding:20px 24px;border-bottom:1px solid var(--line-light);background:rgba(255,255,255,.03)}
+  td{padding:22px 24px;border-bottom:1px solid rgba(255,255,255,.07);vertical-align:middle}
+  tbody tr{transition:.22s;cursor:pointer}
+  tbody tr:hover{background:rgba(255,255,255,.055)}
+  tbody tr:last-child td{border-bottom:0}
+  tbody tr.selected{background:linear-gradient(90deg,rgba(233,196,143,.13),rgba(255,106,181,.07));box-shadow:inset 3px 0 0 var(--sand)}
+  .train-no{font-weight:850;letter-spacing:.04em}
+  .train-no small{display:block;color:var(--muted-light);font-weight:600;font-size:.78rem;letter-spacing:0;margin-top:2px}
+  .time{font-family:var(--font-serif);font-size:1.55rem;line-height:1;color:#fff}
+  .station{font-size:.86rem;color:#cfcbea;margin-top:5px}
+  .arrow-cell{color:var(--sand);font-size:1.1rem}
+  .duration{font-weight:700;font-size:.92rem}
+  .duration small{display:block;color:var(--muted-light);font-weight:600;font-size:.78rem}
+  .tag{display:inline-flex;padding:6px 10px;border-radius:999px;font-size:.7rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;border:1px solid}
+  .tag-pop{color:#ffd9a8;background:rgba(233,196,143,.1);border-color:rgba(233,196,143,.35)}
+  .tag-fast{color:#a7f3ea;background:rgba(94,234,212,.09);border-color:rgba(94,234,212,.32)}
+  .tag-sun{color:#ffc2dd;background:rgba(255,106,181,.09);border-color:rgba(255,106,181,.32)}
+  .tag-quiet{color:#c4b5fd;background:rgba(139,124,246,.1);border-color:rgba(139,124,246,.35)}
+  .select-btn{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.28);border-radius:999px;padding:9px 15px;font-size:.82rem;font-weight:750;transition:.22s;white-space:nowrap}
+  tr.selected .select-btn,.select-btn:hover{background:var(--sand);border-color:var(--sand);color:#241331}
+  .table-note{display:flex;flex-wrap:wrap;gap:10px 26px;justify-content:space-between;padding:18px 24px;color:var(--muted-light);font-size:.85rem;border-top:1px solid var(--line-light);background:rgba(0,0,0,.14)}
+  .table-note b{color:#fff}
+
+  /* Pricing */
+  .toggle{display:inline-flex;background:#eee2cf;border:1px solid var(--line);padding:5px;border-radius:999px;gap:4px}
+  .toggle button{border:0;background:transparent;padding:10px 18px;border-radius:999px;font-weight:750;font-size:.88rem;color:var(--muted);transition:.22s}
+  .toggle button.active{background:var(--night);color:#fff;box-shadow:0 6px 16px rgba(12,14,38,.25)}
+  .toggle-note{font-size:.82rem;color:var(--muted);margin-top:10px;text-align:right}
+  .pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:stretch}
+  .plan{background:var(--paper);border:1px solid var(--line);border-radius:26px;padding:34px 30px;display:flex;flex-direction:column;box-shadow:var(--shadow-sm);transition:.3s;position:relative}
+  .plan:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+  .plan.popular{background:linear-gradient(165deg,#191b45,#2b174d 72%,#3c1d4e);color:#fff;border-color:rgba(255,255,255,.12);box-shadow:0 30px 65px rgba(23,16,60,.32)}
+  .pop-label{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:linear-gradient(90deg,var(--cyan),var(--pink));color:#14102e;font-size:.68rem;font-weight:900;letter-spacing:.14em;text-transform:uppercase;padding:7px 13px;border-radius:999px;white-space:nowrap}
+  .plan-name{font-size:.75rem;font-weight:850;letter-spacing:.2em;text-transform:uppercase;color:var(--sand-3)}
+  .popular .plan-name{color:var(--cyan)}
+  .plan h3{font-family:var(--font-serif);font-size:1.65rem;font-weight:600;margin:8px 0 6px}
+  .plan-desc{font-size:.93rem;color:var(--muted);min-height:48px}
+  .popular .plan-desc{color:#c9c4e9}
+  .price{display:flex;align-items:baseline;gap:7px;margin:22px 0 4px}
+  .price b{font-family:var(--font-serif);font-size:3rem;font-weight:500;line-height:1;letter-spacing:-.03em}
+  .price span{color:var(--muted);font-size:.88rem;font-weight:650}
+  .popular .price span{color:var(--muted-light)}
+  .per-note{font-size:.8rem;color:var(--muted);margin-bottom:24px}
+  .popular .per-note{color:var(--muted-light)}
+  .plan ul{list-style:none;display:grid;gap:12px;padding:22px 0 26px;border-top:1px dashed var(--line);margin-bottom:auto;font-size:.93rem}
+  .popular ul{border-color:rgba(255,255,255,.16)}
+  .plan li{display:flex;gap:10px;align-items:flex-start}
+  .plan li::before{content:"✓";flex:none;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-size:.68rem;font-weight:900;background:#f3dfc2;color:#7c471c;margin-top:2px}
+  .popular li::before{background:rgba(94,234,212,.16);color:var(--cyan)}
+  .plan .btn{width:100%}
+  .popular .btn{background:var(--sand);color:#241331}
+  .popular .btn:hover{background:#f6d8a9}
+  .plan.chosen{outline:3px solid rgba(255,106,181,.55);outline-offset:3px}
+
+  /* Booking summary */
+  .summary{
+    margin-top:26px;background:var(--night);color:#fff;border-radius:22px;padding:20px 22px;
+    display:flex;align-items:center;gap:22px;flex-wrap:wrap;box-shadow:0 22px 50px rgba(12,14,38,.22);
+  }
+  .summary-item{min-width:130px}
+  .summary-item span{display:block;font-size:.66rem;letter-spacing:.17em;text-transform:uppercase;color:var(--muted-light);font-weight:800;margin-bottom:3px}
+  .summary-item b{font-size:.96rem}
+  .stepper{display:flex;align-items:center;gap:12px}
+  .stepper button{width:34px;height:34px;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.06);color:#fff;font-size:1.1rem;line-height:1;display:grid;place-items:center}
+  .stepper button:hover{background:var(--sand);color:var(--night);border-color:var(--sand)}
+  .summary-total{margin-left:auto;text-align:right}
+  .summary-total span{display:block;font-size:.66rem;letter-spacing:.17em;text-transform:uppercase;color:var(--muted-light);font-weight:800}
+  .summary-total b{font-family:var(--font-serif);font-size:2rem;font-weight:500;line-height:1}
+  .summary .btn{flex:none}
+
+  /* Testimonial */
+  .testimonial-sec{padding-top:20px}
+  .testimonial{
+    position:relative;overflow:hidden;border-radius:30px;padding:64px clamp(28px,6vw,76px);text-align:center;
+    background:
+      radial-gradient(600px 280px at 12% 0%,rgba(255,255,255,.65),transparent 60%),
+      linear-gradient(135deg,#f3d5a7,#eebd8d 48%,#dda0a8);
+    box-shadow:var(--shadow);
+  }
+  .testimonial::before{content:"“";position:absolute;top:-38px;left:34px;font-family:var(--font-serif);font-size:11rem;color:rgba(255,255,255,.34);line-height:1}
+  .stars-row{color:#7c3f16;letter-spacing:.35em;font-size:.95rem;margin-bottom:22px}
+  blockquote{font-family:var(--font-serif);font-size:clamp(1.65rem,3.2vw,2.55rem);line-height:1.28;font-weight:500;letter-spacing:-.01em;max-width:900px;margin:0 auto;color:#2a1836}
+  blockquote em{font-style:italic;color:#7c2458}
+  .person{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:30px;text-align:left}
+  .avatar{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;background:var(--night);color:var(--sand);font-family:var(--font-serif);font-weight:700;border:2px solid rgba(255,255,255,.7);box-shadow:var(--shadow-sm)}
+  .person b{display:block;line-height:1.25;color:#2a1836}
+  .person span{font-size:.86rem;color:#6d4356}
+
+  /* Final CTA */
+  .cta{margin:0 0 104px;border-radius:30px;padding:58px clamp(28px,5vw,64px);color:#fff;position:relative;overflow:hidden;background:linear-gradient(120deg,#12143a,#2c1850 58%,#57284f);display:flex;align-items:center;justify-content:space-between;gap:34px;flex-wrap:wrap;box-shadow:var(--shadow)}
+  .cta::after{content:"";position:absolute;width:420px;height:420px;border-radius:50%;right:-140px;top:-190px;background:radial-gradient(circle,rgba(255,106,181,.38),transparent 65%)}
+  .cta h2{color:#fff;margin:0;max-width:15ch;position:relative;z-index:1}
+  .cta p{color:#cfcbea;margin-top:12px;max-width:48ch;position:relative;z-index:1}
+  .cta .btn{position:relative;z-index:1}
+
+  /* Footer */
+  footer{background:#080a20;color:#bdb9d9;padding:72px 0 30px}
+  .footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:38px;padding-bottom:46px;border-bottom:1px solid rgba(255,255,255,.09)}
+  .footer-brand p{font-size:.92rem;max-width:34ch;margin-top:16px;color:#9793b8}
+  footer h4{color:#fff;font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;margin-bottom:18px}
+  .footer-links{list-style:none;display:grid;gap:11px;font-size:.92rem}
+  .footer-links a:hover{color:var(--sand)}
+  .footer-bottom{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;padding-top:24px;font-size:.82rem;color:#77739a}
+
+  /* Toast */
+  .toast{
+    position:fixed;left:50%;bottom:26px;transform:translate(-50%,120px);z-index:80;max-width:min(560px,calc(100% - 32px));
+    background:#fff;color:var(--ink);border-radius:18px;padding:18px 20px;box-shadow:0 24px 60px rgba(0,0,0,.28);
+    border-left:5px solid var(--pink);transition:.45s cubic-bezier(.2,.9,.25,1.2);font-size:.94rem;
+  }
+  .toast.show{transform:translate(-50%,0)}
+  .toast b{display:block;margin-bottom:2px}
+
+  @media (max-width:980px){
+    .hero-grid{grid-template-columns:1fr;gap:42px}
+    h1{max-width:13ch}
+    .features,.pricing{grid-template-columns:1fr;max-width:560px;margin-inline:auto}
+    .plan-desc{min-height:0}
+    .section-head{flex-direction:column;align-items:flex-start}
+    .toggle-note{text-align:left}
+    .footer-grid{grid-template-columns:1fr 1fr}
+    .summary-total{margin-left:0;text-align:left}
+  }
+  @media (max-width:760px){
+    .wrap{width:calc(100% - 32px)}
+    section{padding:76px 0}
+    .nav-links{
+      position:absolute;top:72px;left:16px;right:16px;display:none;flex-direction:column;align-items:stretch;gap:0;
+      background:#151839;border:1px solid var(--line-light);border-radius:18px;padding:10px;box-shadow:var(--shadow);
+    }
+    .nav-links.open{display:flex}
+    .nav-links a{padding:13px 14px;border-radius:10px}
+    .nav-links a:hover{background:rgba(255,255,255,.06)}
+    .nav-book{display:none}
+    .burger{display:grid}
+    .hero{padding-top:126px}
+    .hero-meta div{padding-right:16px;margin-right:16px}
+    .route span{display:none}
+    .route b{font-size:.68rem;line-height:1.25}
+    .scene-caption{align-items:flex-start;flex-direction:column}
+    .cta{margin-bottom:76px}
+    .footer-grid{grid-template-columns:1fr}
+    .summary{align-items:flex-start;flex-direction:column}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+    .reveal{opacity:1;transform:none}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#top" aria-label="Dune Line home">
+      <span class="logo-mark" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 17c3-4.5 6-6.5 9-6.5S18 12.7 21 17" stroke="#241331" stroke-width="2" stroke-linecap="round"/><path d="M5 20h14M7.5 7.2 9 4h6l1.5 3.2" stroke="#241331" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12.2" r="1.4" fill="#241331"/></svg>
+      </span>
+      <span>DUNE LINE<small>Overnight Railway</small></span>
+    </a>
+
+    <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+      <a href="#experience">Experience</a>
+      <a href="#timetable">Timetable</a>
+      <a href="#fares">Fares</a>
+      <a href="#story">Story</a>
+    </nav>
+
+    <div class="nav-cta">
+      <a class="btn btn-sand nav-book" href="#fares">Book a berth</a>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="stars" aria-hidden="true"></div>
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">Aurelia Sands → Vesper City · Nightly</span>
+        <h1>Sleep in the <span class="sand-word">desert.</span><br>Wake in <em>neon.</em></h1>
+        <p class="hero-sub">Board at golden hour, dine beneath a ceiling of stars, and drift across 842 kilometres of moonlit dunes — arriving in Vesper City just as its neon signs flicker awake.</p>
+        <div class="hero-actions">
+          <a class="btn btn-sand" href="#timetable">View tonight’s departures <span aria-hidden="true">→</span></a>
+          <a class="btn btn-ghost" href="#experience">Explore the train</a>
+        </div>
+        <div class="hero-meta" aria-label="Journey facts">
+          <div><b>842 km</b><span>One crossing</span></div>
+          <div><b>11h 36m</b><span>Fastest service</span></div>
+          <div><b>4.9 / 5</b><span>12,400 sleepers</span></div>
+        </div>
+      </div>
+
+      <div class="scene-card" aria-label="Illustration of the Dune Line train crossing desert dunes toward a neon city">
+        <div class="scene">
+          <svg viewBox="0 0 640 430" role="img" aria-labelledby="sceneTitle">
+            <title id="sceneTitle">The Dune Line crossing desert dunes at night toward a neon city</title>
+            <defs>
+              <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#0b0e2e"/><stop offset=".58" stop-color="#2b1c4e"/><stop offset="1" stop-color="#7a3d55"/>
+              </linearGradient>
+              <linearGradient id="duneBack" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8a5a52"/><stop offset="1" stop-color="#5d3548"/></linearGradient>
+              <linearGradient id="duneFront" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e0a061"/><stop offset="1" stop-color="#a9603c"/></linearGradient>
+              <linearGradient id="trainBody" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#25295e"/><stop offset="1" stop-color="#12142f"/></linearGradient>
+              <linearGradient id="beam" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffe9ad" stop-opacity=".85"/><stop offset="1" stop-color="#ffe9ad" stop-opacity="0"/></linearGradient>
+            </defs>
+
+            <rect width="640" height="430" fill="url(#sky)"/>
+            <g fill="#fff">
+              <circle cx="48" cy="46" r="1.6"/><circle cx="118" cy="84" r="1.1"/><circle cx="190" cy="38" r="1.4"/>
+              <circle cx="268" cy="70" r="1"/><circle cx="342" cy="34" r="1.5"/><circle cx="420" cy="82" r="1"/>
+              <circle cx="500" cy="40" r="1.3"/><circle cx="574" cy="76" r="1"/><circle cx="84" cy="138" r="1"/>
+              <circle cx="232" cy="118" r="1.1"/><circle cx="386" cy="126" r="1.2"/><circle cx="540" cy="132" r="1"/>
+            </g>
+            <!-- Moon -->
+            <circle cx="92" cy="78" r="27" fill="#f7dfae"/>
+            <circle cx="104" cy="68" r="24" fill="#171741"/>
+            <circle cx="78" cy="72" r="3" fill="#e8c98f" opacity=".7"/>
+
+            <!-- Neon city -->
+            <g>
+              <rect x="512" y="148" width="26" height="112" fill="#171338"/>
+              <rect x="544" y="116" width="34" height="144" fill="#13102e"/>
+              <rect x="584" y="166" width="24" height="94" fill="#1b173e"/>
+              <rect x="606" y="136" width="28" height="124" fill="#151233"/>
+              <rect x="498" y="190" width="18" height="70" fill="#100e29"/>
+              <g class="flicker">
+                <rect x="550" y="128" width="6" height="8" fill="#5eead4"/><rect x="564" y="128" width="6" height="8" fill="#ff6ab5"/>
+                <rect x="550" y="146" width="6" height="8" fill="#ff6ab5"/><rect x="564" y="146" width="6" height="8" fill="#5eead4"/>
+                <rect x="550" y="164" width="6" height="8" fill="#ffe9ad"/><rect x="564" y="182" width="6" height="8" fill="#ff6ab5"/>
+                <rect x="518" y="162" width="5" height="7" fill="#5eead4"/><rect x="518" y="178" width="5" height="7" fill="#ff6ab5"/>
+                <rect x="612" y="150" width="6" height="8" fill="#5eead4"/><rect x="612" y="168" width="6" height="8" fill="#ffe9ad"/>
+                <rect x="590" y="180" width="5" height="7" fill="#ff6ab5"/><rect x="590" y="196" width="5" height="7" fill="#5eead4"/>
+              </g>
+              <rect x="544" y="108" width="34" height="4" rx="2" fill="#ff6ab5" opacity=".9"/>
+              <rect x="512" y="142" width="26" height="3" rx="1.5" fill="#5eead4" opacity=".9"/>
+            </g>
+
+            <!-- Dunes -->
+            <path d="M0 258 C120 214 220 282 340 248 C450 217 540 250 640 224 L640 430 L0 430Z" fill="url(#duneBack)"/>
+            <path d="M0 322 C110 282 210 330 330 306 C450 282 540 318 640 292 L640 430 L0 430Z" fill="url(#duneFront)"/>
+            <path d="M0 322 C110 282 210 330 330 306" fill="none" stroke="#ffd9a0" stroke-width="2" opacity=".55"/>
+
+            <!-- Cactus silhouettes -->
+            <g stroke="#3a1f2e" stroke-width="6" stroke-linecap="round" fill="none">
+              <path d="M52 342 v-34 M52 322 h-11 v-10 M52 316 h11 v-12"/>
+              <path d="M586 344 v-26 M586 330 h-9 v-8 M586 326 h9 v-10"/>
+            </g>
+
+            <!-- Track -->
+            <path d="M-10 356 C160 340 380 348 650 330" stroke="#2c1830" stroke-width="5" fill="none"/>
+            <path d="M-10 363 C160 347 380 355 650 337" stroke="#43243a" stroke-width="2" fill="none" stroke-dasharray="14 18"/>
+
+            <!-- Train -->
+            <g class="train-bob">
+              <polygon points="438,318 560,306 438,336" fill="url(#beam)" opacity=".55"/>
+              <!-- carriages -->
+              <g>
+                <rect x="58" y="282" width="104" height="48" rx="10" fill="url(#trainBody)" stroke="#4a4f8f" stroke-width="1.2"/>
+                <rect x="168" y="282" width="104" height="48" rx="10" fill="url(#trainBody)" stroke="#4a4f8f" stroke-width="1.2"/>
+                <rect x="278" y="282" width="104" height="48" rx="10" fill="url(#trainBody)" stroke="#4a4f8f" stroke-width="1.2"/>
+                <g fill="#ffd98f">
+                  <rect x="72" y="294" width="16" height="13" rx="3"/><rect x="96" y="294" width="16" height="13" rx="3"/><rect x="120" y="294" width="16" height="13" rx="3"/>
+                  <rect x="182" y="294" width="16" height="13" rx="3"/><rect x="206" y="294" width="16" height="13" rx="3"/><rect x="230" y="294" width="16" height="13" rx="3" fill="#5eead4"/>
+                  <rect x="292" y="294" width="16" height="13" rx="3"/><rect x="316" y="294" width="16" height="13" rx="3" fill="#ff9ecb"/><rect x="340" y="294" width="16" height="13" rx="3"/>
+                </g>
+                <rect x="58" y="318" width="324" height="4" fill="#e9c48f" opacity=".85"/>
+              </g>
+              <!-- locomotive -->
+              <path d="M388 330 v-34 q0-14 14-14 h34 q16 0 24 13 l10 18 q3 6-1 11 q-3 6-11 6Z" fill="url(#trainBody)" stroke="#555aa0" stroke-width="1.2"/>
+              <rect x="402" y="291" width="22" height="15" rx="4" fill="#ffe1a1"/>
+              <rect x="431" y="291" width="16" height="15" rx="4" fill="#9be9dd"/>
+              <rect x="388" y="318" width="82" height="4" fill="#ff6ab5" opacity=".9"/>
+              <circle cx="468" cy="320" r="5" fill="#fff3c4"/>
+              <!-- wheels -->
+              <g fill="#0a0a20" stroke="#6b6fa8" stroke-width="2">
+                <circle cx="82" cy="336" r="8"/><circle cx="140" cy="336" r="8"/><circle cx="192" cy="336" r="8"/>
+                <circle cx="250" cy="336" r="8"/><circle cx="302" cy="336" r="8"/><circle cx="360" cy="336" r="8"/>
+                <circle cx="404" cy="336" r="8"/><circle cx="448" cy="336" r="8"/>
+              </g>
+              <!-- dome -->
+              <path d="M196 282 q24-22 48 0Z" fill="rgba(94,234,212,.28)" stroke="#5eead4" stroke-width="1.4"/>
+            </g>
+          </svg>
+        </div>
+        <div class="scene-caption">
+          <div>
+            <b>DL 07 · The Dune Line Express</b>
+            <span>Now crossing Khar Dunes — clear skies, 18°C</span>
+          </div>
+          <span class="live-badge"><i></i> On time</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="route-strip">
+      <div class="wrap route" aria-label="Route stops">
+        <div><i></i><b>Aurelia Sands</b><span>Depart</span></div>
+        <div><i></i><b>Mirage Flats</b><span>22:05</span></div>
+        <div><i></i><b>Khar Dunes</b><span>00:40</span></div>
+        <div><i></i><b>Obsidian Pass</b><span>03:55</span></div>
+        <div><i></i><b>Vesper City</b><span>Arrive</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURES -->
+  <section id="experience">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <span class="eyebrow">On board</span>
+          <h2>Built for the hours <em>between places.</em></h2>
+        </div>
+        <p>Not simply a way across the desert — a small, warm, quietly luxurious world that moves through it while you rest.</p>
+      </div>
+
+      <div class="features">
+        <article class="feature reveal">
+          <span class="feature-num">/ 01</span>
+          <div class="icon"><svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 19a8 8 0 1 1 16 0"/><path d="M2 19h20M12 5V3M5.6 7.6 4.2 6.2M18.4 7.6l1.4-1.4"/><circle cx="12" cy="13" r="2.4"/></svg></div>
+          <h3>The Panorama Dome</h3>
+          <p>A glass-domed carriage with reclined stargazing seats, low amber light and a resident astronomer on every crossing.</p>
+          <ul><li>Milky Way talks at midnight</li><li>Blankets &amp; night tea included</li></ul>
+        </article>
+
+        <article class="feature reveal">
+          <span class="feature-num">/ 02</span>
+          <div class="icon"><svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v5"/><path d="M3 18h18M5 11V7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v4"/><path d="M7 8h4"/></svg></div>
+          <h3>Real Beds, Real Quiet</h3>
+          <p>Sound-dampened cabins with proper mattresses, blackout blinds and a gentle wake-up call as the city lights appear.</p>
+          <ul><li>Turn-down service at 22:30</li><li>Quiet carriage guarantee</li></ul>
+        </article>
+
+        <article class="feature reveal">
+          <span class="feature-num">/ 03</span>
+          <div class="icon"><svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3h11l3 5H8a3 3 0 0 0-3 3v10"/><path d="M5 21h14M8 8v13M16 3v5"/><circle cx="17.5" cy="17.5" r=".5" fill="currentColor"/></svg></div>
+          <h3>Dining Under Stars</h3>
+          <p>Three courses of desert-spiced cooking in the dining car, then saffron hot chocolate served on the open rear deck.</p>
+          <ul><li>Locally sourced night menu</li><li>Sunrise breakfast in bed</li></ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMETABLE -->
+  <section class="dark-section" id="timetable" style="padding-top:96px">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <span class="eyebrow">Timetable</span>
+          <h2>Four departures, <em>every night.</em></h2>
+        </div>
+        <p>All services run Aurelia Sands → Vesper City, seven nights a week. Select a departure to add it to your booking below.</p>
+      </div>
+
+      <div class="table-card reveal">
+        <div class="table-scroll">
+          <table aria-label="Dune Line nightly departures">
+            <thead>
+              <tr><th>Train</th><th>Departs</th><th></th><th>Arrives</th><th>Journey</th><th>Good for</th><th></th></tr>
+            </thead>
+            <tbody id="departureRows">
+              <tr class="selected" data-departure="DL 07 · 19:42" tabindex="0">
+                <td><span class="train-no">DL 07<small>Express</small></span></td>
+                <td><div class="time">19:42</div><div class="station">Aurelia Sands</div></td>
+                <td class="arrow-cell">⟶</td>
+                <td><div class="time">07:18</div><div class="station">Vesper City</div></td>
+                <td><span class="duration">11h 36m<small>Direct</small></span></td>
+                <td><span class="tag tag-pop">Most popular</span></td>
+                <td><button class="select-btn" type="button">Selected</button></td>
+              </tr>
+              <tr data-departure="DL 09 · 20:24" tabindex="0">
+                <td><span class="train-no">DL 09<small>Express</small></span></td>
+                <td><div class="time">20:24</div><div class="station">Aurelia Sands</div></td>
+                <td class="arrow-cell">⟶</td>
+                <td><div class="time">07:57</div><div class="station">Vesper City</div></td>
+                <td><span class="duration">11h 33m<small>Direct · Fastest</small></span></td>
+                <td><span class="tag tag-fast">Fastest</span></td>
+                <td><button class="select-btn" type="button">Select</button></td>
+              </tr>
+              <tr data-departure="DL 11 · 21:10" tabindex="0">
+                <td><span class="train-no">DL 11<small>Quiet service</small></span></td>
+                <td><div class="time">21:10</div><div class="station">Aurelia Sands</div></td>
+                <td class="arrow-cell">⟶</td>
+                <td><div class="time">08:44</div><div class="station">Vesper City</div></td>
+                <td><span class="duration">11h 34m<small>Direct</small></span></td>
+                <td><span class="tag tag-quiet">Quiet car</span></td>
+                <td><button class="select-btn" type="button">Select</button></td>
+              </tr>
+              <tr data-departure="DL 13 · 22:48" tabindex="0">
+                <td><span class="train-no">DL 13<small>Sunrise service</small></span></td>
+                <td><div class="time">22:48</div><div class="station">Aurelia Sands</div></td>
+                <td class="arrow-cell">⟶</td>
+                <td><div class="time">10:21</div><div class="station">Vesper City</div></td>
+                <td><span class="duration">11h 33m<small>Direct</small></span></td>
+                <td><span class="tag tag-sun">Dawn arrival</span></td>
+                <td><button class="select-btn" type="button">Select</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="table-note">
+          <span><b>Boarding</b> opens 45 minutes before departure · Platforms 2–4</span>
+          <span>All times local · Luggage included on every fare</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="fares">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <span class="eyebrow">Fares</span>
+          <h2>Choose how you’d like <em>to dream.</em></h2>
+        </div>
+        <div>
+          <div class="toggle" role="group" aria-label="Trip type">
+            <button type="button" class="active" id="btnOneWay">One way</button>
+            <button type="button" id="btnReturn">Return · save 15%</button>
+          </div>
+          <p class="toggle-note">Per person, including meals marked below.</p>
+        </div>
+      </div>
+
+      <div class="pricing">
+        <article class="plan reveal" data-plan="Nomad Seat" data-oneway="89" data-return="151">
+          <span class="plan-name">Nomad</span>
+          <h3>Nomad Seat</h3>
+          <p class="plan-desc">A wide reclining seat in the starlit observation carriage.</p>
+          <div class="price"><b>$<span class="price-val">89</span></b><span class="price-per">/ one way</span></div>
+          <p class="per-note">For the restless stargazer.</p>
+          <ul>
+            <li>Extra-legroom recliner seat</li>
+            <li>Panorama Dome access</li>
+            <li>Blanket, pillow &amp; eye mask</li>
+            <li>Sunrise coffee &amp; pastry</li>
+          </ul>
+          <button class="btn btn-outline choose-plan" type="button">Choose Nomad</button>
+        </article>
+
+        <article class="plan popular chosen reveal" data-plan="Dune Cabin" data-oneway="189" data-return="321">
+          <span class="pop-label">Most loved</span>
+          <span class="plan-name">Dune</span>
+          <h3>Dune Cabin</h3>
+          <p class="plan-desc">Your own private cabin that turns from lounge to bedroom.</p>
+          <div class="price"><b>$<span class="price-val">189</span></b><span class="price-per">/ one way</span></div>
+          <p class="per-note">For a proper night’s sleep.</p>
+          <ul>
+            <li>Private lockable cabin for 1–2</li>
+            <li>Real bed with linen &amp; turn-down</li>
+            <li>Three-course dining car dinner</li>
+            <li>Breakfast in bed at sunrise</li>
+            <li>Washbasin &amp; night attendant</li>
+          </ul>
+          <button class="btn choose-plan" type="button">Chosen ✓</button>
+        </article>
+
+        <article class="plan reveal" data-plan="Neon Suite" data-oneway="329" data-return="559">
+          <span class="plan-name">Neon</span>
+          <h3>Neon Suite</h3>
+          <p class="plan-desc">A spacious suite at the rear, with the desert unfolding behind you.</p>
+          <div class="price"><b>$<span class="price-val">329</span></b><span class="price-per">/ one way</span></div>
+          <p class="per-note">For the full, luminous occasion.</p>
+          <ul>
+            <li>Double bed &amp; private en-suite</li>
+            <li>Rear panoramic window lounge</li>
+            <li>All meals &amp; drinks included</li>
+            <li>Priority boarding &amp; lounge</li>
+            <li>Late checkout on arrival</li>
+          </ul>
+          <button class="btn btn-outline choose-plan" type="button">Choose Neon Suite</button>
+        </article>
+      </div>
+
+      <!-- Booking summary -->
+      <div class="summary reveal" aria-live="polite">
+        <div class="summary-item"><span>Departure</span><b id="sumDeparture">DL 07 · 19:42</b></div>
+        <div class="summary-item"><span>Cabin</span><b id="sumPlan">Dune Cabin</b></div>
+        <div class="summary-item">
+          <span>Passengers</span>
+          <div class="stepper">
+            <button type="button" id="minusBtn" aria-label="Remove one passenger">−</button>
+            <b id="passengerCount">2</b>
+            <button type="button" id="plusBtn" aria-label="Add one passenger">+</button>
+          </div>
+        </div>
+        <div class="summary-total"><span>Total</span><b id="sumTotal">$378</b></div>
+        <button class="btn btn-sand" type="button" id="reserveBtn">Reserve berth →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIAL -->
+  <section class="testimonial-sec" id="story" style="padding-bottom:104px">
+    <div class="wrap">
+      <div class="testimonial reveal">
+        <div class="stars-row" aria-label="Five star rating">★★★★★</div>
+        <blockquote>“I fell asleep to the sound of the train crossing empty dunes, and woke to <em>breakfast in bed</em> as a neon city rose out of the morning haze. It didn’t feel like travel. It felt like a dream with a timetable.”</blockquote>
+        <div class="person">
+          <div class="avatar" aria-hidden="true">ME</div>
+          <div><b>Mara Ellison</b><span>Photographer · Dune Cabin, DL 07 — March crossing</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="cta reveal">
+      <div>
+        <h2>Tonight, the desert is calling.</h2>
+        <p>Berths for this evening’s departures are limited to 148 sleepers per train. Reserve now, pay at the platform.</p>
+      </div>
+      <a class="btn btn-sand" href="#timetable" style="padding:17px 28px">Check tonight’s trains →</a>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="logo" href="#top">
+          <span class="logo-mark" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 17c3-4.5 6-6.5 9-6.5S18 12.7 21 17" stroke="#241331" stroke-width="2" stroke-linecap="round"/><path d="M5 20h14M7.5 7.2 9 4h6l1.5 3.2" stroke="#241331" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12.2" r="1.4" fill="#241331"/></svg>
+          </span>
+          <span>DUNE LINE<small>Overnight Railway</small></span>
+        </a>
+        <p>A fictional overnight railway crossing the great desert from Aurelia Sands to the neon streets of Vesper City.</p>
+      </div>
+      <div>
+        <h4>Journey</h4>
+        <ul class="footer-links"><li><a href="#experience">Experience</a></li><li><a href="#timetable">Timetable</a></li><li><a href="#fares">Fares &amp; cabins</a></li><li><a href="#story">Traveller story</a></li></ul>
+      </div>
+      <div>
+        <h4>Stations</h4>
+        <ul class="footer-links"><li><a href="#timetable">Aurelia Sands</a></li><li><a href="#timetable">Mirage Flats</a></li><li><a href="#timetable">Obsidian Pass</a></li><li><a href="#timetable">Vesper City</a></li></ul>
+      </div>
+      <div>
+        <h4>Help</h4>
+        <ul class="footer-links"><li><a href="#fares">Luggage &amp; meals</a></li><li><a href="#fares">Group bookings</a></li><li><a href="#timetable">Accessibility</a></li><li><a href="#top">Contact the guard</a></li></ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year">2026</span> Dune Line Railway Co. A fictional service, dreamed up for the love of night trains.</span>
+      <span>Aurelia Sands · Khar Dunes · Vesper City</span>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite">
+  <b>Berth held for 20 minutes ✦</b>
+  <span id="toastText">DL 07 · Dune Cabin for 2 — $378. See you at Platform 3.</span>
+</div>
+
+<script>
+(function(){
+  var burger=document.getElementById('burger'),
+      navLinks=document.getElementById('navLinks');
+  burger.addEventListener('click',function(){
+    var open=navLinks.classList.toggle('open');
+    burger.setAttribute('aria-expanded',open);
+    burger.setAttribute('aria-label',open?'Close menu':'Open menu');
+  });
+  navLinks.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click',function(){navLinks.classList.remove('open');burger.setAttribute('aria-expanded','false');});
+  });
+
+  // State
+  var state={departure:'DL 07 · 19:42',plan:'Dune Cabin',price:189,passengers:2,returnTrip:false};
+
+  var sumDeparture=document.getElementById('sumDeparture'),
+      sumPlan=document.getElementById('sumPlan'),
+      sumTotal=document.getElementById('sumTotal'),
+      passengerEl=document.getElementById('passengerCount');
+
+  function money(n){return '$'+n.toLocaleString('en-US');}
+  function updateSummary(){
+    sumDeparture.textContent=state.departure;
+    sumPlan.textContent=state.plan;
+    passengerEl.textContent=state.passengers;
+    sumTotal.textContent=money(state.price*state.passengers);
+  }
+
+  // Timetable selection
+  var rows=document.querySelectorAll('#departureRows tr');
+  function selectRow(row){
+    rows.forEach(function(r){
+      r.classList.remove('selected');
+      r.querySelector('.select-btn').textContent='Select';
+    });
+    row.classList.add('selected');
+    row.querySelector('.select-btn').textContent='Selected';
+    state.departure=row.getAttribute('data-departure');
+    updateSummary();
+  }
+  rows.forEach(function(row){
+    row.addEventListener('click',function(){selectRow(row);});
+    row.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();selectRow(row);}});
+  });
+
+  // Pricing
+  var plans=document.querySelectorAll('.plan'),
+      btnOne=document.getElementById('btnOneWay'),
+      btnRet=document.getElementById('btnReturn');
+
+  function refreshPrices(){
+    plans.forEach(function(card){
+      var val=state.returnTrip?card.getAttribute('data-return'):card.getAttribute('data-oneway');
+      card.querySelector('.price-val').textContent=val;
+      card.querySelector('.price-per').textContent=state.returnTrip?'/ return':'/ one way';
+      if(card.getAttribute('data-plan')===state.plan){state.price=parseInt(val,10);}
+    });
+    updateSummary();
+  }
+  btnOne.addEventListener('click',function(){state.returnTrip=false;btnOne.classList.add('active');btnRet.classList.remove('active');refreshPrices();});
+  btnRet.addEventListener('click',function(){state.returnTrip=true;btnRet.classList.add('active');btnOne.classList.remove('active');refreshPrices();});
+
+  plans.forEach(function(card){
+    card.querySelector('.choose-plan').addEventListener('click',function(){
+      plans.forEach(function(c){
+        c.classList.remove('chosen');
+        var b=c.querySelector('.choose-plan');
+        b.textContent='Choose '+c.getAttribute('data-plan');
+      });
+      card.classList.add('chosen');
+      state.plan=card.getAttribute('data-plan');
+      state.price=parseInt(state.returnTrip?card.getAttribute('data-return'):card.getAttribute('data-oneway'),10);
+      card.querySelector('.choose-plan').textContent='Chosen ✓';
+      updateSummary();
+      document.querySelector('.summary').scrollIntoView({behavior:'smooth',block:'center'});
+    });
+  });
+
+  // Passengers
+  document.getElementById('minusBtn').addEventListener('click',function(){
+    if(state.passengers>1){state.passengers--;updateSummary();}
+  });
+  document.getElementById('plusBtn').addEventListener('click',function(){
+    if(state.passengers<6){state.passengers++;updateSummary();}
+  });
+
+  // Reserve / toast
+  var toast=document.getElementById('toast'),toastText=document.getElementById('toastText'),timer;
+  document.getElementById('reserveBtn').addEventListener('click',function(){
+    toastText.textContent=state.departure+' · '+state.plan+' for '+state.passengers+
+      (state.passengers===1?' passenger':' passengers')+' — '+money(state.price*state.passengers)+
+      (state.returnTrip?' (return)':'')+'. See you at Platform 3.';
+    toast.classList.add('show');
+    clearTimeout(timer);
+    timer=setTimeout(function(){toast.classList.remove('show');},5200);
+  });
+
+  // Reveal on scroll
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+    },{threshold:.12});
+    document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+  }else{
+    document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('in');});
+  }
+
+  document.getElementById('year').textContent=new Date().getFullYear();
+  updateSummary();
+})();
+</script>
+</body>
+</html>

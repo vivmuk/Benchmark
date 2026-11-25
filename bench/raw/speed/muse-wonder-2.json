@@ -1,0 +1,22 @@
+{
+ "text": "A suspension bridge carries the weight of its deck and the traffic crossing it by turning downward forces into pulling forces that travel through steel cables to massive foundations in the ground. The deck itself is a relatively flat platform made of steel or concrete, and it is not strong enough on its own to span a long distance without sagging or breaking. Whenever a vehicle drives across, its weight pushes down on the small area directly beneath its wheels, and the deck and the stiffening girders beneath it spread that push sideways and lengthwise so that the load does not remain isolated.\n\nFrom the deck the load passes upward through short vertical cables called hangers. Each hanger is attached to the deck or to a stiffening girder beneath it, and its top end is clamped to a main cable stretching from one end of the bridge to the other. When the deck is pushed down it tugs on the hangers, and because slender steel cable is strongest when pulled tight rather than bent, the hangers carry the force efficiently in tension to the main cables above, while the girder shares a local load among several hangers instead of one.\n\nThe main cables receive loads from many hangers and carry them toward the towers and the ends of the bridge. Each cable hangs in a smooth curve between towers because that shape lets every part remain in pure tension, much like a rope held at both ends and loaded along its length. The pull does not act only downward where a hanger attaches, but travels along the curve, increasing tension where the cable passes over a tower and where it reaches the anchorage beyond the span. Thus a load near the middle is shared to distant points where support is available.\n\nThe towers provide the high support that lifts the main cables above the deck and allows them to cross a wide opening. Where a cable passes over a tower it rests on a saddle that transfers tension smoothly from one side to the other, and the combined pull from both sides presses down on the tower with great force. Towers are therefore stiff vertical structures of steel or concrete that carry this force mainly in compression through their legs. Beneath each tower a deep foundation spreads the concentrated load over a broad area of soil or rock, or onto piles reaching firmer ground, so the earth can bear it without excessive settlement.\n\nAt each end of the bridge the main cable is also pulled toward the shore, and its tension must be held by an anchorage rather than by a tower. The cable ends are split and fixed into a massive block of concrete buried in the ground, or into solid rock, so the forward pull is resisted by the weight and grip of that mass. From there the remaining force passes into the earth, completing the path from a wheel on the deck to the ground that ultimately supports the whole bridge.",
+ "reasoning_chars": 0,
+ "usage": {
+  "prompt_tokens": 44,
+  "completion_tokens": 5119,
+  "total_tokens": 5163,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 4552,
+   "image_tokens": 0,
+   "audio_tokens": 0
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 20.448278444004245,
+ "t_first_content": 20.448278983996715,
+ "t_total": 21.516695186961442,
+ "cost": 0.128195
+}

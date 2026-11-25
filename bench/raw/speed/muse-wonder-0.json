@@ -1,0 +1,22 @@
+{
+ "text": "A suspension bridge carries the weight of its deck and the traffic crossing it not by pushing that weight straight down through supports directly beneath the roadway, but by lifting it upward, carrying it sideways through steel cables in tension, and delivering it to massive foundations at the towers and anchorages. The journey begins where vehicles and pedestrians travel. Their weight, together with the weight of the roadway itself, presses down on the deck, usually a stiffened steel or concrete slab supported by longitudinal girders and transverse beams. This stiffening system spreads concentrated loads, such as the wheels of a heavy truck, over a broad area and limits how much the deck bends between its supports.\n\nFrom the deck the load moves upward through vertical hangers, also called suspenders. These closely spaced steel cables or rods connect the edges of the stiffening girder to the two main cables overhead. Each hanger works purely in tension, like a rope lifting a weight. When a vehicle crosses, the hangers nearest it take the greatest force and pass that pull into the main cable, while neighboring hangers share changes as the load moves. The deck therefore hangs from above rather than resting on piers in the water or valley below, which allows the bridge to cross a long distance without intermediate support.\n\nThe main cables receive downward pulls from many hangers along the main span and the side spans. Draped between the towers in a curve approaching a parabola, a cable cannot resist bending or compression, so it aligns itself with the combined pulls and converts them into tension traveling along its length. That tension grows wherever the hangers add load and carries each increment toward the towers and toward the ends of the bridge. Steel performs this task well because it is exceptionally strong when pulled, allowing relatively slender cables to support a heavy roadway over a span far longer than a beam could reach.\n\nAt each tower the main cable passes over a saddle that lets it change direction smoothly. The cable pulls downward and inward from both sides, and the combined force travels down the tower mainly as compression. Towers of steel or reinforced concrete must also resist bending caused by unequal loading, as when traffic crowds the main span but not a side span, and by wind pressing on the bridge. At their bases, broad footings or deep piles transfer the compression into rock or firm soil, spreading it over enough ground that the earth can bear it without shifting or settling excessively.\n\nBeyond the towers the cables continue through the side spans to anchorages at the ends of the bridge. There the tension can go no farther, so the cable is fanned into individual strands and locked deep within a massive concrete block, or fixed directly into solid rock. The anchorage resists the inclined pull through its weight, friction, and pressure against surrounding ground. Thus weight that began as tires pressing midstream is finally divided between downward force at the tower foundations and pull absorbed onshore, completing a continuous path from moving traffic, through hangers and cables, into the earth itself.",
+ "reasoning_chars": 576,
+ "usage": {
+  "prompt_tokens": 44,
+  "completion_tokens": 5178,
+  "total_tokens": 5222,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 4458,
+   "image_tokens": 0,
+   "audio_tokens": 0
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 4.06714835803723,
+ "t_first_content": 38.01655895600561,
+ "t_total": 41.10136922902893,
+ "cost": 0.12967
+}

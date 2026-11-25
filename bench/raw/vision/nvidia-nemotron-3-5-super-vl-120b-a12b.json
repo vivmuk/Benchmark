@@ -1,0 +1,23 @@
+{
+ "text": "Cinematic wide shot of a surreal futuristic desert landscape at night. In the lower left foreground, a person in a long red cloak stands beside a fluffy alpaca on a sand dune, both facing away towards a distant city. The background features a glowing metropolis with a central skyscraper topped by a bright cyan neon ring halo. To the left, a skyscraper has vertical neon text reading 'OASIS'. To the right, a purple neon skyscraper glows. Beams of cyan light shoot into a starry sky where a large crescent moon hangs in the upper left. The horizon transitions from deep blue to a warm orange sunset. In the right foreground, a tall saguaro cactus outlined in neon pink stands beside a small turquoise pool of water. A futuristic monorail track curves through the sand with a train on it. Hyper-detailed digital art, sci-fi style, vibrant neon colors, cinematic composition.",
+ "reasoning_chars": 3294,
+ "usage": {
+  "prompt_tokens": 1008,
+  "completion_tokens": 1004,
+  "total_tokens": 2012,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 751,
+   "audio_tokens": 0,
+   "reasoning_tokens": 801,
+   "rejected_prediction_tokens": 514
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 1.1501379230176099,
+ "t_first_content": 2.5744752339669503,
+ "t_total": 2.8297005770145915,
+ "cost": 0.0007036
+}

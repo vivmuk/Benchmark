@@ -1,0 +1,21 @@
+{
+ "text": "A suspension bridge carries its load by turning weight into tension and driving that tension into the ground. Almost nothing in the load path works by bending; the roadway hangs, the cables pull, and the earth holds on.\n\nThe load path starts at the deck, which is usually a stiffened steel plate girder or truss, deep enough to resist bending and to spread concentrated loads such as trucks across several hanger points. The deck is not expected to span between the towers on its own strength. It hangs. Vertical steel ropes or rods called hangers rise from points along its edges at regular intervals, each one working in pure tension, and they lift the weight of the deck and everything on it up to the great main cables that run the length of the span.\n\nThose main cables are the heart of the structure. Each is made of thousands of high-strength steel wires, bundled, compacted and wrapped, and each runs from anchorage to anchorage, passing over a saddle at the top of every tower. Between the towers the cable sags into a curve close to a catenary, and the weight it carries hangs from it the way clothes hang from a clothesline. Because the cable curves, the tension within it is not vertical. At any point the pull has a vertical component, equal to the share of deck weight suspended there, and a horizontal component running along the cable toward the towers. The vertical component holds the bridge up; the horizontal component tries to drag the towers inward, and it is the unavoidable price of the system.\n\nAt the tower top the saddle redirects the cable without interrupting it, and the cable presses down on the tower with a force equal to the full vertical component, essentially the entire weight of the bridge, dead and live. The towers are therefore enormous compression members, and they carry that force down through their shafts into footings and piles founded on bedrock or firm soil. They are also designed to flex slightly along the length of the bridge, since the horizontal thrust from the two cables is balanced only approximately and shifts as the cable stretches and sags under traffic.\n\nBeyond the towers the cables continue downward as backstays to the anchorages, massive blocks of concrete, sometimes tunnelled into rock, sometimes braced with retaining walls. Here the cable pulls with a large axial tension along the line of the backstay. The anchorage resists that pull by sheer weight, by friction against the ground, or by bearing directly on sound rock, and in doing so it delivers the entire horizontal thrust of the main cable into the earth. It is the anchorages, not the towers, that keep the bridge from being slowly dragged inward by its own cables.\n\nUnder live load the system behaves unlike any ordinary beam. When a truck crosses, the nearby hangers stretch slightly, the cable's curve changes, and the tension throughout the cable increases. That added tension both lifts the deck beneath the load and, by increasing the horizontal component everywhere, creates a restoring effect known as geometric stiffness. The whole bridge participates in carrying each load and responds gently rather than snapping. This is why the stiffening girder exists: not so much to stop the deck from sagging locally, but to distribute loads along the cable so no single hanger or cable section is overtaxed, and to give the deck torsional rigidity against wind.\n\nBecause everything above ground works in tension or compression, the design of cables, saddles, anchorages and deck aerodynamics is largely a matter of keeping these forces understood and safely within the capacity of the steel and the ground.",
+ "reasoning_chars": 7854,
+ "usage": {
+  "prompt_tokens": 233,
+  "completion_tokens": 2327,
+  "total_tokens": 2560,
+  "prompt_tokens_details": {
+   "cached_tokens": 232
+  },
+  "cache_read_input_tokens": 232,
+  "completion_tokens_details": {
+   "reasoning_tokens": 1617
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 0.5676486599841155,
+ "t_first_content": 14.979967765975744,
+ "t_total": 19.417585403018165,
+ "cost": 0.0017889375
+}

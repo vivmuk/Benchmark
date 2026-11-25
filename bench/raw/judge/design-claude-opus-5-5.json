@@ -1,0 +1,22 @@
+{
+ "gemini-3-1-pro-preview": {
+  "scores": {
+   "typography": 9.0,
+   "layout": 9.0,
+   "colour": 9.0,
+   "completeness": 10,
+   "originality": 9.0
+  },
+  "note": "A beautifully executed design with a strong, cohesive theme, excellent typography, and a well-structured layout that perfectly captures the brief's atmosphere."
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "typography": 8.0,
+   "layout": 9.0,
+   "colour": 9.0,
+   "completeness": 10,
+   "originality": 9.0
+  },
+  "note": "A distinctive, polished page with all seven sections present; tiny, low-contrast secondary text slightly limits readability."
+ }
+}

@@ -1,0 +1,17 @@
+{
+ "text": "Every suspension bridge begins its work at the deck, the flat roadway that carries cars, trucks, trains, or people. The deck itself is heavy, and whatever travels across it adds more weight, so the first job of the structure is to collect all of that downward force and send it somewhere useful. The deck is usually built as a stiffened girder or truss, a long beam that spreads concentrated loads, such as a heavy truck, over a wider stretch so that no single point is overwhelmed. This stiffness also keeps the roadway from bending sharply or twisting in the wind.\n\nFrom the deck, the load moves upward through the hangers, also called suspenders. These are vertical cables or rods attached to the deck at regular intervals. They work purely in tension, meaning they are being pulled rather than pushed. Steel performs extremely well in tension, which is why these slender elements can hold up enormous weights without looking substantial. Each hanger picks up its share of the deck and lifts it toward the main cables overhead.\n\nThe main cables are the heart of the system. Draped between the towers, they hang in a graceful curve that is close to a parabola when the deck load is spread evenly along the span. This shape is not decorative; it is the natural form a flexible cable takes when it carries distributed weight, and it allows the cable to resist the load entirely through tension. Each main cable is made of thousands of individual high-strength steel wires bundled and compacted together, giving it immense capacity while remaining flexible enough to adjust its shape slightly as loads shift.\n\nThe tension in the main cables pulls in two directions at once. Part of it acts downward and part acts sideways. At the tops of the towers, the cables pass over saddles, curved seats that let the cable change direction smoothly. Here the downward component of the cable force presses onto the towers, which carry it to the ground in compression. Towers are tall, stiff columns of steel or concrete designed to be squeezed rather than bent, and they deliver this vertical load into massive foundations. These foundations often extend through water and soft soil down to bedrock, sometimes using caissons, which are huge hollow structures sunk into the riverbed and filled with concrete.\n\nThe sideways pull of the cables is handled differently. Across the top of each tower, the horizontal pull from the main span is largely balanced by the pull from the side span on the opposite side, so the tower is not dragged over. That horizontal force must still end up somewhere, and it travels along the cables beyond the towers to the anchorages at each end of the bridge. Anchorages are enormous blocks of concrete, or sockets cut into solid rock, that grip the cable ends and resist their pull through sheer mass, friction against the ground, and the strength of the rock itself.\n\nSo the path is complete: weight gathers in the deck, rises through the hangers, flows along the main cables, divides at the towers into vertical compression and horizontal tension, and finally passes into the earth through foundations and anchorages.",
+ "reasoning_chars": 497,
+ "usage": {
+  "prompt_tokens": 61,
+  "completion_tokens": 1160,
+  "total_tokens": 1221,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 2.563524599012453,
+ "t_first_content": 3.638107170991134,
+ "t_total": 13.399246833985671,
+ "cost": 0.023444
+}

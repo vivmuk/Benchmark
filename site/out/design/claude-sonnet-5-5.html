@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dune Line — The Overnight Train to Neon City</title>
+<meta name="description" content="Dune Line: an overnight sleeper train crossing the desert to a neon city.">
+<style>
+:root{
+  --ink:#140c1f;
+  --ink2:#1d1230;
+  --sand:#f4e6cf;
+  --sand2:#e8d2ae;
+  --dune:#e08a4b;
+  --ember:#ff5e4d;
+  --pink:#ff3fa4;
+  --cyan:#35e6e0;
+  --violet:#7b4dff;
+  --muted:#b7a9c9;
+  --line:rgba(244,230,207,.14);
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+  --sans:"Avenir Next","Segoe UI",system-ui,-apple-system,Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--sand);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1200px;margin:0 auto;padding:0 32px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--cyan);display:flex;align-items:center;gap:12px}
+.eyebrow::before{content:"";width:28px;height:1px;background:var(--cyan)}
+h1,h2,h3{font-family:var(--serif);font-weight:500;line-height:1.05;letter-spacing:-.01em}
+h2{font-size:clamp(34px,4.4vw,56px);margin:18px 0 18px}
+.lede{color:var(--muted);font-size:18px;max-width:560px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:15px 28px;border-radius:999px;font-weight:600;font-size:15px;letter-spacing:.02em;transition:.25s;border:1px solid transparent;cursor:pointer;font-family:inherit}
+.btn.primary{background:linear-gradient(100deg,var(--ember),var(--pink));color:#fff;box-shadow:0 10px 30px -8px rgba(255,63,164,.6)}
+.btn.primary:hover{transform:translateY(-2px);box-shadow:0 16px 38px -8px rgba(255,63,164,.8)}
+.btn.ghost{border-color:var(--line);color:var(--sand);background:rgba(255,255,255,.03)}
+.btn.ghost:hover{border-color:var(--cyan);color:var(--cyan)}
+:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:.3s}
+nav.stuck{background:rgba(20,12,31,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;height:78px}
+.logo{display:flex;align-items:center;gap:12px;font-family:var(--serif);font-size:24px;letter-spacing:.02em}
+.logo svg{width:34px;height:34px}
+.logo b{font-weight:500;color:var(--dune)}
+.links{display:flex;gap:38px;font-size:14px;letter-spacing:.06em;text-transform:uppercase}
+.links a{color:var(--muted);transition:.2s;position:relative}
+.links a:hover{color:var(--sand)}
+.links a::after{content:"";position:absolute;left:0;bottom:-6px;height:1px;width:0;background:var(--pink);transition:.25s}
+.links a:hover::after{width:100%}
+.nav-cta{padding:11px 22px;font-size:14px}
+.burger{display:none;background:none;border:1px solid var(--line);color:var(--sand);width:44px;height:44px;border-radius:12px;cursor:pointer}
+
+/* HERO */
+.hero{position:relative;min-height:100vh;min-height:max(100vh,760px);display:flex;align-items:center;padding:130px 0 260px;overflow:hidden;
+  background:linear-gradient(180deg,#0e0818 0%,#2a1244 38%,#7a2a62 62%,#e0644f 82%,#f2a35e 100%)}
+.stars{position:absolute;inset:0 0 40% 0}
+.stars i{position:absolute;width:2px;height:2px;background:#fff;border-radius:50%;opacity:.7;animation:tw 4s infinite}
+@keyframes tw{50%{opacity:.1}}
+.sun{position:absolute;left:68%;bottom:210px;width:340px;height:340px;border-radius:50%;transform:translateX(-50%);
+  background:radial-gradient(circle,#ffd9a0 0,#ffb067 35%,#ff6f5e 62%,rgba(255,63,164,0) 71%);filter:blur(1px);opacity:.95}
+.hero-art{position:absolute;left:0;right:0;bottom:0;width:100%;height:420px;display:block}
+.hero-copy{position:relative;z-index:3;max-width:660px}
+.hero h1{font-size:clamp(52px,7.4vw,98px);margin:22px 0 24px;color:#fff6e6;text-shadow:0 4px 40px rgba(20,12,31,.4)}
+.hero h1 em{font-style:italic;background:linear-gradient(90deg,var(--cyan),var(--pink));-webkit-background-clip:text;background-clip:text;color:transparent;padding-right:.06em}
+.hero p{font-size:19px;color:#f0dcc6;max-width:520px;margin-bottom:38px}
+.hero .btns{display:flex;gap:16px;flex-wrap:wrap}
+.hero-stats{position:absolute;z-index:3;left:0;right:0;bottom:36px}
+.stats{display:flex;gap:56px;flex-wrap:wrap;padding-top:22px;border-top:1px solid rgba(255,246,230,.25)}
+.stats div{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#f3dcc0}
+.stats strong{display:block;font-family:var(--serif);font-size:32px;letter-spacing:0;text-transform:none;color:#fff;font-weight:500}
+.train{animation:glide 9s ease-in-out infinite alternate}
+@keyframes glide{to{transform:translateX(-26px)}}
+.dash{stroke-dasharray:14 18;animation:dash 1.2s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-32}}
+
+/* FEATURES */
+section{position:relative}
+.pad{padding:130px 0}
+.features{background:var(--ink)}
+.head{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;margin-bottom:64px;flex-wrap:wrap}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.card{padding:38px 34px 40px;border:1px solid var(--line);border-radius:24px;background:linear-gradient(160deg,rgba(255,255,255,.05),rgba(255,255,255,.01));position:relative;overflow:hidden;transition:.35s}
+.card::before{content:"";position:absolute;inset:0;background:radial-gradient(400px 200px at 0 0,var(--glow,rgba(53,230,224,.16)),transparent 70%);opacity:.8;pointer-events:none}
+.card:hover{transform:translateY(-6px);border-color:rgba(244,230,207,.3)}
+.card .ico{width:60px;height:60px;border-radius:18px;display:grid;place-items:center;margin-bottom:60px;border:1px solid var(--line);background:rgba(20,12,31,.6);position:relative}
+.card .ico svg{width:30px;height:30px}
+.card .num{position:absolute;right:30px;top:34px;font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.15em}
+.card h3{font-size:29px;margin-bottom:12px;position:relative}
+.card p{color:var(--muted);font-size:16px;position:relative}
+.card:nth-child(2){--glow:rgba(255,63,164,.18)}
+.card:nth-child(3){--glow:rgba(224,138,75,.2)}
+
+/* TIMETABLE */
+.timetable{background:linear-gradient(180deg,var(--ink),var(--ink2))}
+.tt-grid{display:grid;grid-template-columns:.8fr 1.5fr;gap:80px;align-items:start}
+.route{margin-top:44px;padding-left:2px}
+.stop{display:flex;gap:18px;position:relative;padding-bottom:24px;font-size:15px;color:var(--muted)}
+.stop::before{content:"";position:absolute;left:5px;top:16px;bottom:-2px;width:1px;background:linear-gradient(var(--dune),var(--pink))}
+.stop:last-child::before{display:none}
+.stop span{width:11px;height:11px;border-radius:50%;background:var(--ink);border:2px solid var(--dune);margin-top:6px;flex:none;position:relative;z-index:1}
+.stop:last-child span{border-color:var(--pink);box-shadow:0 0 12px var(--pink)}
+.stop b{color:var(--sand);font-weight:600;display:block}
+.board{border:1px solid var(--line);border-radius:24px;overflow:hidden;background:#0d0716;box-shadow:0 40px 80px -30px rgba(0,0,0,.7)}
+.board-h,.row{display:grid;grid-template-columns:1.05fr 1.5fr 1fr 1fr;align-items:center;padding:0 30px;gap:12px}
+.board-h{height:52px;font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);background:rgba(255,255,255,.04);border-bottom:1px solid var(--line)}
+.row{min-height:92px;border-bottom:1px solid var(--line);transition:.25s}
+.row:last-child{border-bottom:0}
+.row:hover{background:rgba(255,63,164,.06)}
+.time{font-family:var(--mono);font-size:28px;color:var(--cyan);text-shadow:0 0 16px rgba(53,230,224,.5);letter-spacing:.02em}
+.name{font-family:var(--serif);font-size:21px}
+.name small{display:block;font-family:var(--sans);font-size:13px;color:var(--muted)}
+.arr{font-family:var(--mono);font-size:15px;color:var(--sand2)}
+.arr small{display:block;font-size:11px;color:var(--muted)}
+.tag{justify-self:end;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:7px 12px;border-radius:999px;border:1px solid;white-space:nowrap}
+.ok{color:#7dffa8;border-color:rgba(125,255,168,.4)}
+.low{color:#ffc15e;border-color:rgba(255,193,94,.45)}
+.few{color:var(--pink);border-color:rgba(255,63,164,.5)}
+.note{margin-top:20px;font-size:13px;color:var(--muted);font-family:var(--mono)}
+
+/* PRICING */
+.pricing{background:var(--ink2)}
+.center{text-align:center}
+.center .eyebrow{justify-content:center}
+.center .eyebrow::before{display:none}
+.center .lede{margin:0 auto}
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:64px;align-items:stretch}
+.tier{padding:42px 36px;border-radius:26px;border:1px solid var(--line);background:rgba(255,255,255,.03);display:flex;flex-direction:column;position:relative;transition:.3s}
+.tier:hover{transform:translateY(-6px)}
+.tier h3{font-size:30px}
+.tier .for{color:var(--muted);font-size:15px;margin:6px 0 28px}
+.price{font-family:var(--serif);font-size:62px;line-height:1;margin-bottom:6px}
+.price sup{font-size:26px;vertical-align:top;position:relative;top:8px;margin-right:4px;color:var(--sand2)}
+.price small{font-family:var(--sans);font-size:14px;color:var(--muted)}
+.tier ul{list-style:none;margin:30px 0 36px;padding-top:28px;border-top:1px solid var(--line);display:grid;gap:14px;font-size:15px;flex:1}
+.tier li{display:flex;gap:12px;align-items:flex-start;color:var(--sand2)}
+.tier li::before{content:"";flex:none;width:16px;height:16px;margin-top:4px;border-radius:50%;background:var(--cyan) center/10px no-repeat;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2 5.2l2 2L8 3' fill='none' stroke='%23140c1f' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}
+.tier .btn{justify-content:center}
+.tier.feat{background:linear-gradient(170deg,#3a1760,#24103d 60%);border-color:transparent;transform:translateY(-14px);box-shadow:0 40px 80px -30px rgba(255,63,164,.5)}
+.tier.feat::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.5px;background:linear-gradient(160deg,var(--cyan),var(--pink),var(--dune));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.tier.feat:hover{transform:translateY(-20px)}
+.badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:linear-gradient(100deg,var(--cyan),#8af5ff);color:var(--ink);font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:7px 16px;border-radius:999px;white-space:nowrap}
+
+/* TESTIMONIAL */
+.quote{background:var(--sand);color:var(--ink);overflow:hidden}
+.quote .wrap{display:grid;grid-template-columns:1.4fr .8fr;gap:70px;align-items:center}
+.qmark{font-family:var(--serif);font-size:140px;line-height:.6;color:var(--ember);height:64px}
+blockquote{font-family:var(--serif);font-size:clamp(28px,3.4vw,44px);line-height:1.22;letter-spacing:-.01em}
+.who{display:flex;align-items:center;gap:16px;margin-top:38px}
+.avatar{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--violet),var(--pink));display:grid;place-items:center;color:#fff;font-family:var(--serif);font-size:22px}
+.who b{display:block}
+.who span{font-size:14px;color:#6b5a78}
+.qart{aspect-ratio:1;border-radius:50% 50% 24px 24px;background:linear-gradient(180deg,#1a0d2e,#6a2468 55%,#ff6f5e);position:relative;overflow:hidden;box-shadow:0 30px 60px -25px rgba(20,12,31,.6)}
+.qart svg{position:absolute;inset:0;width:100%;height:100%}
+
+/* CTA + FOOTER */
+.cta{background:linear-gradient(120deg,#2a1244,#5a1b64 55%,#a1305f);text-align:center;padding:110px 0;position:relative;overflow:hidden}
+.cta::after{content:"";position:absolute;inset:auto -10% -60% -10%;height:100%;background:radial-gradient(closest-side,rgba(255,63,164,.35),transparent)}
+.cta .wrap{position:relative;z-index:1}
+.cta h2{font-size:clamp(36px,5vw,68px);margin:0 auto 20px;max-width:780px}
+.cta p{color:#e7cfe0;margin-bottom:36px;font-size:18px}
+footer{background:#0b0612;padding:80px 0 36px;border-top:1px solid var(--line)}
+.f-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:48px;padding-bottom:56px}
+.f-grid p{color:var(--muted);font-size:15px;max-width:300px;margin-top:18px}
+footer h4{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--dune);margin-bottom:20px;font-weight:500}
+footer ul{list-style:none;display:grid;gap:12px;font-size:15px}
+footer ul a{color:var(--muted);transition:.2s}
+footer ul a:hover{color:var(--cyan)}
+.legal{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-top:28px;border-top:1px solid var(--line);font-size:13px;color:#8a7c9c}
+
+/* RESPONSIVE */
+@media(max-width:1020px){
+  .cards,.tiers{grid-template-columns:1fr}
+  .tier.feat{transform:none}.tier.feat:hover{transform:translateY(-6px)}
+  .tt-grid{grid-template-columns:1fr;gap:50px}
+  .quote .wrap{grid-template-columns:1fr}
+  .qart{max-width:320px}
+  .f-grid{grid-template-columns:1fr 1fr}
+  .sun{left:72%;width:260px;height:260px}
+}
+@media(max-width:820px){
+  .links,.nav-cta{display:none}
+  .burger{display:block}
+  nav.open .links{display:flex;flex-direction:column;position:absolute;top:78px;left:0;right:0;background:rgba(20,12,31,.97);padding:28px 32px;gap:22px;border-bottom:1px solid var(--line)}
+  .pad{padding:88px 0}
+}
+@media(max-width:640px){
+  .wrap{padding:0 20px}
+  .hero{padding:120px 0 280px}
+  .stats{gap:28px}.stats strong{font-size:24px}
+  .board-h{display:none}
+  .row{grid-template-columns:1fr auto;padding:20px;row-gap:6px}
+  .row .arr{grid-column:1}.row .tag{grid-row:1;grid-column:2}
+  .f-grid{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="wrap nav-in">
+    <a href="#top" class="logo" aria-label="Dune Line home">
+      <svg viewBox="0 0 40 40" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff5e4d"/><stop offset="1" stop-color="#ff3fa4"/></linearGradient></defs><circle cx="20" cy="20" r="19" fill="none" stroke="url(#lg)" stroke-width="1.5"/><path d="M4 28c6-9 11-9 16-3s11 3 16-5v10c-2 5-30 5-32 0z" fill="url(#lg)"/><circle cx="26" cy="13" r="4" fill="#f4e6cf"/></svg>
+      Dune<b>Line</b>
+    </a>
+    <div class="links" id="links">
+      <a href="#journey">Journey</a>
+      <a href="#timetable">Timetable</a>
+      <a href="#fares">Fares</a>
+      <a href="#stories">Stories</a>
+    </div>
+    <a href="#fares" class="btn primary nav-cta">Book a berth</a>
+    <button class="burger" id="burger" aria-label="Toggle menu">☰</button>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="stars" id="stars" aria-hidden="true"></div>
+  <div class="sun" aria-hidden="true"></div>
+
+  <svg class="hero-art" viewBox="0 0 1440 420" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <defs>
+      <linearGradient id="d1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8a3059"/><stop offset="1" stop-color="#4a1a50"/></linearGradient>
+      <linearGradient id="d2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4a1a50"/><stop offset="1" stop-color="#2a1244"/></linearGradient>
+      <linearGradient id="d3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1d0d33"/><stop offset="1" stop-color="#140c1f"/></linearGradient>
+      <linearGradient id="car" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4e6cf"/><stop offset="1" stop-color="#c99a78"/></linearGradient>
+    </defs>
+    <!-- distant city skyline -->
+    <g fill="#5a2158" opacity=".9">
+      <rect x="1010" y="196" width="26" height="90"/><rect x="1040" y="170" width="20" height="116"/><rect x="1064" y="205" width="32" height="80"/>
+      <rect x="1100" y="150" width="18" height="136"/><rect x="1122" y="188" width="30" height="98"/><rect x="1156" y="214" width="22" height="72"/>
+      <rect x="1182" y="164" width="24" height="122"/><rect x="1210" y="198" width="34" height="88"/><rect x="1248" y="178" width="18" height="108"/>
+    </g>
+    <g fill="#ff3fa4" opacity=".9"><rect x="1104" y="160" width="3" height="3"/><rect x="1044" y="182" width="3" height="3"/><rect x="1186" y="176" width="3" height="3"/><rect x="1253" y="190" width="3" height="3"/></g>
+    <g fill="#35e6e0" opacity=".9"><rect x="1110" y="176" width="3" height="3"/><rect x="1048" y="204" width="3" height="3"/><rect x="1190" y="196" width="3" height="3"/><rect x="1126" y="210" width="3" height="3"/><rect x="1214" y="214" width="3" height="3"/></g>
+    <path d="M0 250C140 200 260 205 400 245s280 40 420-10 270-50 420 0 140 22 200 5v180H0z" fill="url(#d1)"/>
+    <path d="M0 300C180 255 300 270 470 300s300 20 470-20 330-30 500 10v130H0z" fill="url(#d2)"/>
+    <!-- train -->
+    <g class="train">
+      <g transform="translate(120 286)">
+        <g id="cr">
+          <rect x="0" y="0" width="150" height="38" rx="9" fill="url(#car)"/>
+          <rect x="0" y="24" width="150" height="5" fill="#e0644f"/>
+          <g fill="#2a1244"><rect x="12" y="8" width="20" height="11" rx="3"/><rect x="40" y="8" width="20" height="11" rx="3"/><rect x="68" y="8" width="20" height="11" rx="3"/><rect x="96" y="8" width="20" height="11" rx="3"/><rect x="124" y="8" width="16" height="11" rx="3"/></g>
+          <g fill="#35e6e0" opacity=".8"><rect x="12" y="8" width="20" height="11" rx="3"/><rect x="68" y="8" width="20" height="11" rx="3"/></g>
+          <g fill="#ffb067" opacity=".9"><rect x="40" y="8" width="20" height="11" rx="3"/><rect x="124" y="8" width="16" height="11" rx="3"/></g>
+        </g>
+        <use href="#cr" x="156"/><use href="#cr" x="312"/><use href="#cr" x="468"/>
+        <path d="M624 0h70c24 0 40 20 46 38H624z" fill="#ff5e4d"/>
+        <path d="M706 8h20c6 6 10 14 12 22h-32z" fill="#2a1244"/>
+        <rect x="624" y="24" width="116" height="5" fill="#ffd9a0"/>
+        <circle cx="738" cy="30" r="4" fill="#fff"/>
+        <path d="M740 30L900 70V0z" fill="#ffd9a0" opacity=".14"/>
+      </g>
+    </g>
+    <rect x="0" y="324" width="1440" height="4" fill="#140c1f"/>
+    <path d="M0 336h1440" stroke="#ff3fa4" stroke-width="2" class="dash" opacity=".7"/>
+    <path d="M0 350C200 320 380 330 560 352s330 24 520-6 260-20 360 4v70H0z" fill="url(#d3)"/>
+    <!-- cacti -->
+    <g fill="#0b0612"><rect x="140" y="330" width="10" height="70" rx="5"/><rect x="124" y="352" width="26" height="8" rx="4"/><rect x="124" y="340" width="8" height="20" rx="4"/><rect x="150" y="346" width="18" height="8" rx="4"/><rect x="160" y="334" width="8" height="20" rx="4"/>
+    <rect x="1320" y="340" width="9" height="60" rx="4"/><rect x="1306" y="358" width="23" height="7" rx="3"/><rect x="1306" y="348" width="7" height="17" rx="3"/></g>
+  </svg>
+
+  <div class="wrap">
+    <div class="hero-copy">
+      <div class="eyebrow">Overnight Sleeper · Est. 1924</div>
+      <h1>Sleep across the <em>desert.</em> Wake in neon.</h1>
+      <p>Dune Line carries you 1,140 km from the silent sands of Amberwell to the electric skyline of Neon City — in eleven hours, under every star.</p>
+      <div class="btns">
+        <a href="#fares" class="btn primary">Reserve your berth →</a>
+        <a href="#timetable" class="btn ghost">View departures</a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="wrap">
+      <div class="stats">
+        <div><strong>1,140 km</strong>Of open dune</div>
+        <div><strong>11 h 20</strong>Dusk to dawn</div>
+        <div><strong>4.9 / 5</strong>Traveller rating</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="features pad" id="journey">
+  <div class="wrap">
+    <div class="head">
+      <div>
+        <div class="eyebrow">The Journey</div>
+        <h2>Built for the long,<br>luminous night.</h2>
+      </div>
+      <p class="lede">Every carriage is designed around one idea: the crossing should be the destination.</p>
+    </div>
+    <div class="cards">
+      <article class="card">
+        <span class="num">01</span>
+        <div class="ico"><svg viewBox="0 0 32 32" fill="none" stroke="#35e6e0" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M27 18A11 11 0 1 1 14 5a9 9 0 0 0 13 13z"/><circle cx="22" cy="8" r=".8" fill="#35e6e0"/><circle cx="26" cy="12" r=".8" fill="#35e6e0"/></svg></div>
+        <h3>Skylight Cabins</h3>
+        <p>Private sleepers with a panoramic glass roof, linen bedding and a berth that faces the Milky Way instead of a ceiling.</p>
+      </article>
+      <article class="card">
+        <span class="num">02</span>
+        <div class="ico"><svg viewBox="0 0 32 32" fill="none" stroke="#ff3fa4" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h20v6c0 6-4 9-10 9S6 16 6 10z"/><path d="M16 19v8M11 27h10"/></svg></div>
+        <h3>The Ember Dining Car</h3>
+        <p>A six-course tasting menu cooked over open coals, paired with date wines and smoked-citrus cocktails as the dunes turn violet.</p>
+      </article>
+      <article class="card">
+        <span class="num">03</span>
+        <div class="ico"><svg viewBox="0 0 32 32" fill="none" stroke="#e08a4b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 26h26M6 26V12h5v14M13 26V6h6v20M21 26V14h5v12"/><path d="M15.5 11v.01M15.5 16v.01"/></svg></div>
+        <h3>Neon Dawn Arrival</h3>
+        <p>We time the final hour so the sun rises as Neon City lights up beside the track. Coffee is served on the observation deck.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="timetable pad" id="timetable">
+  <div class="wrap tt-grid">
+    <div>
+      <div class="eyebrow">Timetable</div>
+      <h2>Four ways to meet the night.</h2>
+      <p class="lede">Departing daily from Amberwell Central. Boarding opens 45 minutes before departure with a welcome drink on platform 9.</p>
+      <div class="route" aria-label="Route stops">
+        <div class="stop"><span></span><div><b>Amberwell Central</b>Departure</div></div>
+        <div class="stop"><span></span><div><b>Mirage Junction</b>Midnight stargazing halt</div></div>
+        <div class="stop"><span></span><div><b>Saltglass Basin</b>Moonlit salt flats</div></div>
+        <div class="stop"><span></span><div><b>Neon City Terminal</b>Arrival</div></div>
+      </div>
+    </div>
+    <div>
+      <div class="board" role="table" aria-label="Departures">
+        <div class="board-h" role="row"><span>Departs</span><span>Service</span><span>Arrives</span><span style="text-align:right">Status</span></div>
+        <div class="row" role="row">
+          <div class="time">18:40</div>
+          <div class="name">Golden Hour<small>Dinner service · 4 cars</small></div>
+          <div class="arr">06:00<small>+1 day</small></div>
+          <span class="tag ok">Available</span>
+        </div>
+        <div class="row" role="row">
+          <div class="time">20:15</div>
+          <div class="name">The Nightjar<small>Signature sleeper · 6 cars</small></div>
+          <div class="arr">07:35<small>+1 day</small></div>
+          <span class="tag low">Few berths</span>
+        </div>
+        <div class="row" role="row">
+          <div class="time">22:00</div>
+          <div class="name">Starlight Express<small>Stargazing halt · 5 cars</small></div>
+          <div class="arr">09:20<small>+1 day</small></div>
+          <span class="tag few">Almost full</span>
+        </div>
+        <div class="row" role="row">
+          <div class="time">23:30</div>
+          <div class="name">Moonrunner<small>Late departure · 3 cars</small></div>
+          <div class="arr">10:50<small>+1 day</small></div>
+          <span class="tag ok">Available</span>
+        </div>
+      </div>
+      <p class="note">All times local · Arrival at Neon City Terminal, Gate 12.</p>
+    </div>
+  </div>
+</section>
+
+<section class="pricing pad" id="fares">
+  <div class="wrap center">
+    <div class="eyebrow">Fares</div>
+    <h2>Choose your corner of the night.</h2>
+    <p class="lede">One-way fares per traveller. Free cancellation up to 14 days before departure.</p>
+    <div class="tiers" style="text-align:left">
+      <article class="tier">
+        <h3>Dune Seat</h3>
+        <p class="for">Recliner, wide windows, good company.</p>
+        <div class="price"><sup>$</sup>89 <small>/ one way</small></div>
+        <ul>
+          <li>Lie-flat recliner seat</li>
+          <li>Blanket &amp; sleep kit</li>
+          <li>Breakfast at arrival</li>
+          <li>Access to the lounge car</li>
+        </ul>
+        <a href="#top" class="btn ghost">Choose Seat</a>
+      </article>
+      <article class="tier feat">
+        <span class="badge">Most loved</span>
+        <h3>Skylight Cabin</h3>
+        <p class="for">Private sleeper with a glass roof.</p>
+        <div class="price"><sup>$</sup>249 <small>/ one way</small></div>
+        <ul>
+          <li>Private cabin for one or two</li>
+          <li>Panoramic skylight &amp; linen bed</li>
+          <li>Three-course Ember dinner</li>
+          <li>Stargazing halt at Mirage Junction</li>
+          <li>Priority arrival-deck access</li>
+        </ul>
+        <a href="#top" class="btn primary">Choose Cabin</a>
+      </article>
+      <article class="tier">
+        <h3>Oasis Suite</h3>
+        <p class="for">The whole carriage-end, your way.</p>
+        <div class="price"><sup>$</sup>520 <small>/ one way</small></div>
+        <ul>
+          <li>Two-room suite with private bath</li>
+          <li>Six-course tasting menu</li>
+          <li>Personal steward all night</li>
+          <li>Chauffeur from Neon City Terminal</li>
+        </ul>
+        <a href="#top" class="btn ghost">Choose Suite</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="quote pad" id="stories">
+  <div class="wrap">
+    <div>
+      <div class="qmark">“</div>
+      <blockquote>I fell asleep under a sky so full of stars it felt unreal, and woke to a city glowing pink and cyan outside my window. Nothing else in my life has felt like that.</blockquote>
+      <div class="who">
+        <div class="avatar">M</div>
+        <div><b>Mara Okonkwo-Vance</b><span>Travel editor, <i>The Meridian Review</i></span></div>
+      </div>
+    </div>
+    <div class="qart" aria-hidden="true">
+      <svg viewBox="0 0 300 300" preserveAspectRatio="xMidYMid slice">
+        <g fill="#fff"><circle cx="60" cy="50" r="1.5"/><circle cx="120" cy="30" r="1"/><circle cx="210" cy="60" r="1.5"/><circle cx="250" cy="25" r="1"/><circle cx="170" cy="90" r="1"/><circle cx="40" cy="110" r="1"/></g>
+        <circle cx="200" cy="170" r="52" fill="#ffd9a0" opacity=".9"/>
+        <path d="M0 210C60 180 120 190 180 210s90 0 120-15v105H0z" fill="#3a1450"/>
+        <path d="M0 250C80 225 150 235 220 252s60 0 80-6v54H0z" fill="#140c1f"/>
+        <rect x="40" y="226" width="220" height="3" fill="#ff3fa4"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap">
+    <h2>The desert is waiting. So is your berth.</h2>
+    <p>Tonight's departures are filling fast.</p>
+    <a href="#fares" class="btn primary">Book your crossing →</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="f-grid">
+      <div>
+        <a href="#top" class="logo">
+          <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="19" fill="none" stroke="#ff5e4d" stroke-width="1.5"/><path d="M4 28c6-9 11-9 16-3s11 3 16-5v10c-2 5-30 5-32 0z" fill="#ff5e4d"/><circle cx="26" cy="13" r="4" fill="#f4e6cf"/></svg>
+          Dune<b>Line</b>
+        </a>
+        <p>An overnight sleeper train from Amberwell to Neon City. Fictional, but we wish it weren't.</p>
+      </div>
+      <div><h4>Travel</h4><ul><li><a href="#timetable">Timetable</a></li><li><a href="#fares">Fares</a></li><li><a href="#journey">The Journey</a></li><li><a href="#top">Gift a crossing</a></li></ul></div>
+      <div><h4>Company</h4><ul><li><a href="#top">Our story</a></li><li><a href="#top">Careers</a></li><li><a href="#stories">Press</a></li><li><a href="#top">Sustainability</a></li></ul></div>
+      <div><h4>Help</h4><ul><li><a href="#top">Contact</a></li><li><a href="#top">Accessibility</a></li><li><a href="#top">Baggage</a></li><li><a href="#top">Terms</a></li></ul></div>
+    </div>
+    <div class="legal"><span>© 2025 Dune Line Railway Co. All rights reserved.</span><span>Amberwell Central · Platform 9</span></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var s=document.getElementById('stars'),h='';
+  for(var i=0;i<90;i++){
+    h+='<i style="left:'+(Math.random()*100).toFixed(1)+'%;top:'+(Math.random()*100).toFixed(1)+'%;animation-delay:'+(Math.random()*4).toFixed(1)+'s;transform:scale('+(0.6+Math.random()*1.2).toFixed(2)+')"></i>';
+  }
+  s.innerHTML=h;
+  var nav=document.getElementById('nav');
+  function f(){nav.classList.toggle('stuck',window.scrollY>30)}
+  f();window.addEventListener('scroll',f,{passive:true});
+  document.getElementById('burger').addEventListener('click',function(){nav.classList.toggle('open')});
+  document.getElementById('links').addEventListener('click',function(){nav.classList.remove('open')});
+})();
+</script>
+</body>
+</html>

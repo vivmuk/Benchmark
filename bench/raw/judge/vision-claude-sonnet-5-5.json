@@ -1,0 +1,22 @@
+{
+ "gemini-3-1-pro-preview": {
+  "scores": {
+   "subjects": 9.0,
+   "layout": 8.0,
+   "colour": 8.0,
+   "style": 8.0,
+   "overall": 8.0
+  },
+  "note": "The recreation includes all key elements with very similar placement, colors, and style, though some details like the moon's phase, character poses, and specific architectural forms differ slightly."
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "subjects": 9.0,
+   "layout": 6.0,
+   "colour": 6.0,
+   "style": 7.0,
+   "overall": 6.0
+  },
+  "note": "All key elements appear, but the traveller and alpaca swap sides, the moon and towers shift, and the recreation is brighter and more saturated."
+ }
+}

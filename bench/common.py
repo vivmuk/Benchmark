@@ -28,15 +28,23 @@ MODELS = [
     "openai-gpt-62-sol-pro",
     "e2ee-kimi-k3-1-pro-p",
     "deepseek-v4-1-flash-1017",
+    "claude-opus-5-5",
+    "claude-sonnet-5-5",
+    "claude-haiku-5-5",
+    "minimax-m3-1-flash",
+    "nvidia-nemotron-3-5-super-vl-120b-a12b",
+    "muse-wonder",
+    "pareto",
+    "qwen3-6-27b",
 ]
 ICONS = [("qwen", "qwen-color"), ("gemini", "gemini-color"), ("glm", "zai"), ("claude", "claude-color"),
          ("deepseek", "deepseek-color"), ("openai", "openai"), ("kimi", "kimi-color"),
-         ("inkling", "thinkingmachines"), ("hy4", "hy4")]
+         ("inkling", "thinkingmachines"), ("hy4", "hy4"), ("minimax", "minimax"), ("nvidia", "nvidia")]
 LABS = {"qwen": "Alibaba", "gemini": "Google", "glm": "Z.ai", "claude": "Anthropic",
         "deepseek": "DeepSeek", "openai": "OpenAI", "kimi": "Moonshot AI",
-        "inkling": "Thinking Machines", "hy4": "Tencent"}
+        "inkling": "Thinking Machines", "hy4": "Tencent", "minimax": "MiniMax", "nvidia": "NVIDIA"}
 IMAGE_MODEL = "nano-banana-2-1"
-JUDGES = ["claude-opus-5-5", "openai-gpt-6-sol"]  # neither is a contestant
+JUDGES = ["gemini-3-1-pro-preview", "openai-gpt-6-sol"]  # neither is a contestant
 
 
 def key():

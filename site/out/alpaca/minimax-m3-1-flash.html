@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alpaca Walk</title>
+<style>
+  html, body { margin:0; padding:0; width:100%; height:100%; overflow:hidden; background:#0e1b24; }
+  #stage { position:fixed; left:0; top:0; width:100%; height:100%; display:block; }
+  .fleece      { fill:url(#gFleece); }
+  .fleeceFar   { fill:url(#gFleeceFar); }
+  .thigh       { fill:#f8efdc; }
+  .thighFar    { fill:#dccbae; }
+  .shin        { fill:#dcc29c; }
+  .shinFar     { fill:#b3a186; }
+  .hoof        { fill:#4a3a2d; }
+  .hoofFar     { fill:#3a2d23; }
+</style>
+</head>
+<body>
+<svg id="stage" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-label="An alpaca walking along a country trail">
+
+  <defs>
+    <linearGradient id="gSky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0"   stop-color="#3d8fcd"/>
+      <stop offset=".28" stop-color="#78b8e4"/>
+      <stop offset=".58" stop-color="#b7dcee"/>
+      <stop offset=".84" stop-color="#e9edd9"/>
+      <stop offset="1"   stop-color="#fbe4bb"/>
+    </linearGradient>
+
+    <radialGradient id="gSun" cx=".5" cy=".5" r=".5">
+      <stop offset="0"   stop-color="#fff9e2" stop-opacity=".95"/>
+      <stop offset=".26" stop-color="#fff0ba" stop-opacity=".55"/>
+      <stop offset=".62" stop-color="#ffe7a8" stop-opacity=".18"/>
+      <stop offset="1"   stop-color="#ffe7a8" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="gHaze" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0"   stop-color="#eaf3f5" stop-opacity="0"/>
+      <stop offset="1"   stop-color="#eaf3f5" stop-opacity=".8"/>
+    </linearGradient>
+
+    <linearGradient id="gField" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0"   stop-color="#a3cf79"/>
+      <stop offset=".45" stop-color="#8dbf65"/>
+      <stop offset="1"   stop-color="#74a954"/>
+    </linearGradient>
+
+    <linearGradient id="gTrail" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0"   stop-color="#f0ddb6"/>
+      <stop offset=".55" stop-color="#e5cfa3"/>
+      <stop offset="1"   stop-color="#d7bd8e"/>
+    </linearGradient>
+
+    <linearGradient id="gFore" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0"   stop-color="#7cae59" stop-opacity="0"/>
+      <stop offset=".55" stop-color="#6ea153" stop-opacity=".85"/>
+      <stop offset="1"   stop-color="#5f9549"/>
+    </linearGradient>
+
+    <linearGradient id="gFleece" gradientUnits="userSpaceOnUse" x1="168" y1="128" x2="330" y2="262">
+      <stop offset="0"   stop-color="#fffdf6"/>
+      <stop offset=".42" stop-color="#f8eeda"/>
+      <stop offset="1"   stop-color="#e3d0ac"/>
+    </linearGradient>
+
+    <linearGradient id="gFleeceFar" gradientUnits="userSpaceOnUse" x1="168" y1="128" x2="330" y2="262">
+      <stop offset="0"   stop-color="#e9dec6"/>
+      <stop offset="1"   stop-color="#cbb695"/>
+    </linearGradient>
+
+    <linearGradient id="gNeck" gradientUnits="userSpaceOnUse" x1="-28" y1="-130" x2="28" y2="8">
+      <stop offset="0"   stop-color="#fef9ee"/>
+      <stop offset=".5"  stop-color="#f6ead4"/>
+      <stop offset="1"   stop-color="#e3d0ab"/>
+    </linearGradient>
+
+    <radialGradient id="gVig" gradientUnits="userSpaceOnUse" cx="640" cy="330" r="790">
+      <stop offset=".55" stop-color="#0c1a24" stop-opacity="0"/>
+      <stop offset="1"   stop-color="#0c1a24" stop-opacity=".30"/>
+    </radialGradient>
+
+    <filter id="fSoft" x="-40%" y="-60%" width="180%" height="220%"><feGaussianBlur stdDeviation="7"/></filter>
+    <filter id="fSoft2" x="-60%" y="-80%" width="220%" height="260%"><feGaussianBlur stdDeviation="2.6"/></filter>
+
+    <path id="blanketPath" d="M196,196 C200,158 222,130 252,124 C282,118 307,129 313,150 C318,169 300,185 272,192 C244,199 214,203 196,196 Z"/>
+    <clipPath id="blanketClip"><use href="#blanketPath"/></clipPath>
+  </defs>
+
+  <!-- ======== SKY ======== -->
+  <rect x="0" y="0" width="1280" height="720" fill="url(#gSky)"/>
+  <circle cx="1015" cy="148" r="215" fill="url(#gSun)"/>
+  <circle cx="1015" cy="148" r="39"  fill="#fff8de" opacity=".92"/>
+  <g id="clouds"></g>
+  <g id="birds"></g>
+
+  <!-- ======== DISTANT SCENERY ======== -->
+  <g id="layerMountains"></g>
+  <rect x="0" y="330" width="1280" height="146" fill="url(#gHaze)"/>
+  <g id="layerHills"></g>
+
+  <!-- ======== GROUND ======== -->
+  <rect x="0" y="452" width="1280" height="268" fill="url(#gField)"/>
+  <path d="M0,552 C180,544 340,563 540,557 C760,550 980,567 1280,552 L1280,669 C1000,677 800,660 560,669 C340,677 160,660 0,671 Z" fill="url(#gTrail)"/>
+  <g id="layerMid"></g>
+  <g id="layerGround"></g>
+
+  <!-- ======== THE ALPACA ======== -->
+  <g id="footShadows"></g>
+
+  <g id="alpacaRoot" transform="translate(600,600) scale(0.92) translate(-250,-400)">
+    <ellipse id="bodyShadow" cx="255" cy="403" rx="98" ry="12" fill="#2e2211" opacity=".22" filter="url(#fSoft)"/>
+
+    <g id="bob">
+      <!-- far hind leg -->
+      <g id="legFH" transform="translate(158,225)">
+        <g id="thighFH">
+          <path class="thighFar" d="M-12,-4 C-15,16 -9,42 -7,64 L7,64 C10,42 15,16 12,-4 C5,-10 -5,-10 -12,-4 Z"/>
+          <g id="shinFH" transform="translate(0,64)">
+            <path class="shinFar" d="M-6,-3 C-8,26 -6,64 -5,104 L5,104 C6,64 8,26 6,-3 C2,-7 -2,-7 -6,-3 Z"/>
+            <g id="hoofFH" transform="translate(0,104)"><path class="hoofFar" d="M-7,-3 C-9,4 -8,12 0,15 C8,12 9,4 7,-3 C2,-6 -2,-6 -7,-3 Z"/></g>
+          </g>
+        </g>
+      </g>
+      <!-- far front leg -->
+      <g id="legFF" transform="translate(330,218)">
+        <g id="thighFF">
+          <path class="thighFar" d="M-9,-4 C-11,8 -7,20 -6,30 L6,30 C8,20 11,8 9,-4 C3,-8 -3,-8 -9,-4 Z"/>
+          <g id="shinFF" transform="translate(0,30)">
+            <path class="shinFar" d="M-6,-3 C-8,30 -6,90 -5,138 L5,138 C6,90 8,30 6,-3 C2,-7 -2,-7 -6,-3 Z"/>
+            <g id="hoofFF" transform="translate(0,138)"><path class="hoofFar" d="M-7,-3 C-9,4 -8,12 0,15 C8,12 9,4 7,-3 C2,-6 -2,-6 -7,-3 Z"/></g>
+          </g>
+        </g>
+      </g>
+
+      <!-- tail -->
+      <g id="tailG" transform="translate(152,182) rotate(30)">
+        <circle cx="0"  cy="0"  r="13" class="fleece"/>
+        <circle cx="-6" cy="12" r="11" class="fleece"/>
+        <circle cx="-11" cy="22" r="9"  class="fleece"/>
+        <circle cx="-9" cy="21" r="5"  fill="#f3e6cd" opacity=".7"/>
+      </g>
+
+      <!-- neck + head (behind the body so the base blends in) -->
+      <g id="neckG" transform="translate(336,178) rotate(26)">
+        <path d="M-30,6 C-27,-30 -24,-80 -21,-116 C-20,-129 20,-129 21,-116 C24,-80 27,-30 30,6 C12,12 -12,12 -30,6 Z" fill="url(#gNeck)"/>
+        <g id="neckPuffs"></g>
+        <g id="headG" transform="translate(0,-124) rotate(-26)">
+          <g id="earFarG" transform="translate(-2,-18)">
+            <path d="M-6,2 C-9,-10 -8,-24 -1,-31 C6,-24 9,-10 6,2 C2,6 -2,6 -6,2 Z" fill="#e0cdac"/>
+            <path d="M-3,-1 C-5,-10 -4,-20 -1,-25 C3,-20 5,-10 3,-1 Z" fill="#e5a49e"/>
+          </g>
+          <ellipse cx="4" cy="-4" rx="22" ry="19" fill="#f7ead4"/>
+          <circle cx="-7" cy="5" r="12" fill="#f3e4cb"/>
+          <circle cx="-7" cy="-18" r="10" fill="#fbf3e3"/>
+          <circle cx="5"  cy="-21" r="11" fill="#fbf3e3"/>
+          <circle cx="16" cy="-16" r="9"  fill="#f9f0de"/>
+          <path d="M16,-12 C30,-11 44,-4 49,3 C51,9 46,14 38,14 C28,13 18,8 13,2 Z" fill="#e2c8a3"/>
+          <path d="M40,0 C46,-2 52,1 51,7 C50,12 43,14 38,10 C36,6 37,2 40,0 Z" fill="#3b2f27"/>
+          <ellipse cx="46" cy="4" rx="2.3" ry="1.5" fill="#221b16" transform="rotate(18 46 4)"/>
+          <path d="M38,12 C33,15 26,13 22,10" fill="none" stroke="#9c7f60" stroke-width="1.6" stroke-linecap="round"/>
+          <ellipse cx="14" cy="-7" rx="5" ry="5.4" fill="#2b221c"/>
+          <circle cx="15.6" cy="-9" r="1.8" fill="#ffffff"/>
+          <path d="M8,-13.5 q5.5,-2.8 10,-0.4" fill="none" stroke="#c9ab86" stroke-width="1.5" stroke-linecap="round"/>
+          <g id="earNearG" transform="translate(10,-15)">
+            <path d="M-6,2 C-9,-10 -8,-24 -1,-31 C6,-24 9,-10 6,2 C2,6 -2,6 -6,2 Z" fill="#f6ecd9"/>
+            <path d="M-3,-1 C-5,-10 -4,-20 -1,-25 C3,-20 5,-10 3,-1 Z" fill="#eeb0a9"/>
+          </g>
+        </g>
+      </g>
+
+      <!-- body -->
+      <g id="bodyCore">
+        <ellipse cx="255" cy="196" rx="110" ry="47" class="fleece"/>
+        <g id="bodyPuffs"></g>
+        <g id="bodyCurls"></g>
+      </g>
+
+      <!-- saddle blanket -->
+      <g id="blanketG">
+        <use href="#blanketPath" fill="#c96a48"/>
+        <g clip-path="url(#blanketClip)">
+          <path d="M180,140 L330,108 M180,158 L330,126 M180,176 L330,144 M180,194 L330,162"
+                stroke="#f6e6c8" stroke-width="5" opacity=".5" fill="none"/>
+        </g>
+        <path d="M196,196 C214,203 244,199 272,192 C300,185 318,169 313,150 C316,168 302,187 274,195 C246,203 214,206 196,199 Z" fill="#a85236" opacity=".45"/>
+        <g id="fringeG">
+          <path d="M200,197 L201,205 M214,201 L215,209 M231,200 L232,208 M249,197 L250,205 M267,193 L268,201 M284,186 L285,194 M298,175 L299,183"
+                stroke="#b25a3a" stroke-width="2.6" stroke-linecap="round" fill="none"/>
+        </g>
+      </g>
+
+      <!-- near hind leg -->
+      <g id="legNH" transform="translate(170,225)">
+        <g id="thighNH">
+          <path class="thigh" d="M-12,-4 C-15,16 -9,42 -7,64 L7,64 C10,42 15,16 12,-4 C5,-10 -5,-10 -12,-4 Z"/>
+          <circle cx="-11" cy="-6" r="11" class="fleece"/>
+          <circle cx="1"   cy="-9" r="12" class="fleece"/>
+          <circle cx="11"  cy="-4" r="10" class="fleece"/>
+          <g id="shinNH" transform="translate(0,64)">
+            <path class="shin" d="M-6,-3 C-8,26 -6,64 -5,104 L5,104 C6,64 8,26 6,-3 C2,-7 -2,-7 -6,-3 Z"/>
+            <g id="hoofNH" transform="translate(0,104)"><path class="hoof" d="M-7,-3 C-9,4 -8,12 0,15 C8,12 9,4 7,-3 C2,-6 -2,-6 -7,-3 Z"/></g>
+          </g>
+        </g>
+      </g>
+
+      <!-- near front leg -->
+      <g id="legNF" transform="translate(342,218)">
+        <g id="thighNF">
+          <path class="thigh" d="M-9,-4 C-11,8 -7,20 -6,30 L6,30 C8,20 11,8 9,-4 C3,-8 -3,-8 -9,-4 Z"/>
+          <circle cx="-8" cy="-5" r="10" class="fleece"/>
+          <circle cx="2"  cy="-8" r="11" class="fleece"/>
+          <circle cx="9"  cy="-3" r="9"  class="fleece"/>
+          <g id="shinNF" transform="translate(0,30)">
+            <path class="shin" d="M-6,-3 C-8,30 -6,90 -5,138 L5,138 C6,90 8,30 6,-3 C2,-7 -2,-7 -6,-3 Z"/>
+            <g id="hoofNF" transform="translate(0,138)"><path class="hoof" d="M-7,-3 C-9,4 -8,12 0,15 C8,12 9,4 7,-3 C2,-6 -2,-6 -7,-3 Z"/></g>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+
+  <!-- ======== FOREGROUND + AIR ======== -->
+  <g id="layerFore"></g>
+  <g id="motes"></g>
+  <rect x="0" y="0" width="1280" height="720" fill="url(#gVig)" pointer-events="none"/>
+</svg>
+
+<script>
+(function(){
+  "use strict";
+  const NS = "http://www.w3.org/2000/svg";
+  const stage = document.getElementById('stage');
+  const mk = (t,a,p)=>{ const e=document.createElementNS(NS,t); if(a) for(const k in a) e.setAttribute(k,a[k]); if(p) p.appendChild(e); return e; };
+  const gid = id => document.getElementById(id);
+
+  let _s = 20240607;
+  function rnd(){ _s^=_s<<13; _s^=_s>>>17; _s^=_s<<5; _s>>>=0; return _s/4294967296; }
+  const TAU = Math.PI*2;
+  const lerp = (a,b,t)=>a+(b-a)*t;
+  const smooth = t=>t*t*(3-2*t);
+  const clamp = (v,a,b)=>v<a?a:(v>b?b:v);
+
+  /* ------------------------------------------------------------------ *
+   *  SKY ELEMENTS
+   * ------------------------------------------------------------------ */
+  const cloudLayer = gid('clouds'), clouds = [];
+  [[170,112,1.00,5],[530,74,.74,7],[880,168,.60,9],[1185,98,.86,6]].forEach(c=>{
+    const [x,y,s,sp]=c, g = mk('g',{},cloudLayer);
+    [[0,0,36],[31,9,26],[-30,10,25],[15,-15,27],[-9,14,31]].forEach(p=>{
+      mk('ellipse',{cx:p[0],cy:p[1],rx:p[2]*s,ry:p[2]*s*.70,fill:'#ffffff',opacity:(.60+rnd()*.28).toFixed(2)},g);
+    });
+    mk('ellipse',{cx:2,cy:17*s,rx:62*s,ry:15*s,fill:'#ffffff',opacity:.42},g);
+    clouds.push({g:g,x:x,y:y,s:s,sp:sp});
+  });
+
+  const birdLayer = gid('birds'), birds = [];
+  [[300,118,1.0],[372,92,.8],[246,160,.68]].forEach(b=>{
+    const [x,y,s]=b, g=mk('g',{},birdLayer);
+    const p=mk('path',{fill:'none',stroke:'#4a5c6b','stroke-width':2.1,'stroke-linecap':'round'},g);
+    birds.push({g:g,p:p,x:x,y:y,s:s,sp:7+rnd()*5,ph:rnd()*TAU});
+  });
+
+  /* ------------------------------------------------------------------ *
+   *  TERRAIN (periodic functions -> seamless parallax scroll)
+   * ------------------------------------------------------------------ */
+  function ridgePath(fn, yBase, step){
+    let d = 'M -1400 '+yBase;
+    for(let x=-1400;x<=2700;x+=step) d += ' L '+x.toFixed(1)+' '+fn(x).toFixed(1);
+    d += ' L 2700 '+(yBase+46)+' L -1400 '+(yBase+46)+' Z';
+    return d;
+  }
+  const mtnFar  = x => 402 - (30*Math.abs(Math.sin(3*Math.PI*x/1280+0.35)) + 15*Math.abs(Math.sin(5*Math.PI*x/1280+1.20)) + 7*Math.abs(Math.sin(11*Math.PI*x/1280+2.10)));
+  const mtnNear = x => 434 - (21*Math.abs(Math.sin(2*Math.PI*x/1280+0.90)) + 11*Math.abs(Math.sin(4*Math.PI*x/1280+2.40)) + 5*Math.abs(Math.sin(9*Math.PI*x/1280+0.60)));
+  const hillY   = x => 463 - (10*Math.sin(TAU*x/1280) + 6*Math.sin(2*TAU*x/1280+1.1) + 3*Math.sin(3*TAU*x/1280+2.2));
+
+  mk('path',{d:ridgePath(mtnFar,470,9),  fill:'#9db9d3', opacity:'.92'}, gid('layerMountains'));
+  mk('path',{d:ridgePath(mtnNear,472,9), fill:'#7f9fbd', opacity:'.95'}, gid('layerMountains'));
+
+  const hills = gid('layerHills');
+  mk('path',{d:ridgePath(mtnNear,472,9), fill:'#7f9fbd'}, hills);
+  let hd='M -1400 480';
+  for(let x=-1400;x<=2700;x+=10) hd += ' L '+x.toFixed(1)+' '+hillY(x).toFixed(1);
+  hd += ' L 2700 500 L -1400 500 Z';
+  mk('path',{d:hd, fill:'#7fae66'}, hills);
+  mk('path',{d:'M -1400 480', fill:'none'}, hills);
+
+  /* trees & bushes in the middle distance */
+  const midLayer = gid('layerMid');
+  function tree(parent,x,y,h,spread){
+    const g = mk('g',{},parent);
+    mk('path',{d:'M '+(x-h*0.05)+' '+y+' L '+(x-h*0.032)+' '+(y-h*0.46)+' L '+(x+h*0.032)+' '+(y-h*0.46)+' L '+(x+h*0.05)+' '+y+' Z', fill:'#7a5a3d'},g);
+    mk('ellipse',{cx:x,cy:y-h*0.60,rx:spread*0.66,ry:h*0.29,fill:'#4f8a4c'},g);
+    mk('ellipse',{cx:x-spread*0.30,cy:y-h*0.46,rx:spread*0.42,ry:h*0.23,fill:'#5e9a52'},g);
+    mk('ellipse',{cx:x+spread*0.32,cy:y-h*0.48,rx:spread*0.40,ry:h*0.22,fill:'#5e9a52'},g);
+    mk('ellipse',{cx:x,cy:y-h*0.80,rx:spread*0.40,ry:h*0.23,fill:'#6faa5b'},g);
+  }
+  function bush(parent,x,y,r){
+    const g=mk('g',{},parent);
+    mk('ellipse',{cx:x,cy:y-r*0.5,rx:r*1.15,ry:r*0.78,fill:'#5c9350'},g);
+    mk('ellipse',{cx:x-r*0.55,cy:y-r*0.35,rx:r*0.62,ry:r*0.50,fill:'#6aa057'},g);
+    mk('ellipse',{cx:x+r*0.55,cy:y-r*0.40,rx:r*0.58,ry:r*0.46,fill:'#6aa057'},g);
+  }
+  for(let i=0;i<9;i++){
+    const x = rnd()*1280, y = 470 + rnd()*12, h = 52+rnd()*46, sp = h*0.42;
+    [x-1280,x,x+1280].forEach(px=>tree(midLayer,px,y,h,sp));
+  }
+  for(let i=0;i<16;i++){
+    const x = rnd()*1280, y = 478 + rnd()*14, r = 11+rnd()*10;
+    [x-1280,x,x+1280].forEach(px=>bush(midLayer,px,y,r));
+  }
+
+  /* grass tufts, pebbles and flowers along the trail */
+  const groundLayer = gid('layerGround');
+  function tuft(parent,x,y,size,color,wmin){
+    const g=mk('g',{},parent), n=3+Math.floor(rnd()*3);
+    for(let i=0;i<n;i++){
+      const dx=(rnd()-.5)*size*0.95, h=size*(0.55+rnd()*0.75), bend=(rnd()-.5)*size*0.6;
+      mk('path',{d:'M '+dx.toFixed(1)+' 0 C '+(dx+bend*0.3).toFixed(1)+' '+(-h*0.5).toFixed(1)+' '+(dx+bend*0.7).toFixed(1)+' '+(-h*0.82).toFixed(1)+' '+(dx+bend).toFixed(1)+' '+(-h).toFixed(1),
+        fill:'none',stroke:color,'stroke-width':(wmin+rnd()*0.9).toFixed(1),'stroke-linecap':'round'},g);
+    }
+    g.setAttribute('transform','translate('+x.toFixed(1)+','+y.toFixed(1)+')');
+  }
+  function pebble(parent,x,y,r){
+    const g=mk('g',{},parent);
+    mk('ellipse',{cx:0,cy:0,rx:r,ry:r*0.62,fill:'#bfa98b'},g);
+    mk('ellipse',{cx:-r*0.25,cy:-r*0.18,rx:r*0.5,ry:r*0.26,fill:'#d8c5a6',opacity:'.75'},g);
+    g.setAttribute('transform','translate('+x.toFixed(1)+','+y.toFixed(1)+')');
+  }
+  function flower(parent,x,y,s,col){
+    const g=mk('g',{},parent);
+    for(let i=0;i<5;i++){ const a=i/5*TAU; mk('circle',{cx:(Math.cos(a)*s).toFixed(1),cy:(Math.sin(a)*s).toFixed(1),r:s*0.72,fill:col},g); }
+    mk('circle',{cx:0,cy:0,r:s*0.62,fill:'#f2c14b'},g);
+    g.setAttribute('transform','translate('+x.toFixed(1)+','+y.toFixed(1)+')');
+  }
+  for(let i=0;i<40;i++){
+    const x=rnd()*1280, y=546+rnd()*14, s=7+rnd()*9;
+    [x-1280,x,x+1280].forEach(px=>tuft(groundLayer,px,y,s,'#5f9548',1.4));
+  }
+  for(let i=0;i<26;i++){
+    const x=rnd()*1280, y=566+rnd()*92, r=2.2+rnd()*3.4;
+    [x-1280,x,x+1280].forEach(px=>pebble(groundLayer,px,y,r));
+  }
+  for(let i=0;i<14;i++){
+    const x=rnd()*1280, y=556+rnd()*8, s=2.4+rnd()*1.4, col=rnd()>.5?'#fdf7ec':'#f6d9e0';
+    [x-1280,x,x+1280].forEach(px=>flower(groundLayer,px,y,s,col));
+  }
+  for(let i=0;i<22;i++){
+    const x=rnd()*1280, y=660+rnd()*12, s=8+rnd()*9;
+    [x-1280,x,x+1280].forEach(px=>tuft(groundLayer,px,y,s,'#568a42',1.5));
+  }
+
+  /* foreground grass */
+  const foreLayer = gid('layerFore');
+  for(let i=0;i<26;i++){
+    const x=rnd()*1280, y=694+rnd()*26, s=16+rnd()*16;
+    [x-1280,x,x+1280].forEach(px=>tuft(foreLayer,px,y,s,'#4f7f3c',2.0));
+  }
+  for(let i=0;i<10;i++){
+    const x=rnd()*1280, y=700+rnd()*18, s=18+rnd()*14;
+    [x-1280,x,x+1280].forEach(px=>tuft(foreLayer,px,y,s,'#3f6b31',2.4));
+  }
+
+  /* ------------------------------------------------------------------ *
+   *  ALPACA FLEECE DETAIL
+   * ------------------------------------------------------------------ */
+  const bodyPuffs = gid('bodyPuffs');
+  for(let i=0;i<30;i++){
+    const a=i/30*TAU, jx=(rnd()-.5)*10, jy=(rnd()-.5)*8;
+    const x=255+Math.cos(a)*(110+jx), y=196+Math.sin(a)*(47+jy);
+    let r=12+rnd()*6;
+    if(Math.sin(a)>0.45) r*=0.78;
+    mk('circle',{cx:x.toFixed(1),cy:y.toFixed(1),r:r.toFixed(1),class:'fleece'},bodyPuffs);
+  }
+  const curls = gid('bodyCurls');
+  for(let i=0;i<30;i++){
+    const x=255-88+rnd()*176, y=196-30+rnd()*58;
+    const q=Math.pow((x-255)/104,2)+Math.pow((y-196)/40,2);
+    if(q>0.92) continue;
+    const r=3+rnd()*3.2;
+    mk('path',{d:'M '+(x-r).toFixed(1)+' '+y.toFixed(1)+' q '+r.toFixed(1)+' '+(-r*0.95).toFixed(1)+' '+(2*r).toFixed(1)+' 0',
+      fill:'none',stroke:'#e0cda9','stroke-width':1.35,opacity:'.5','stroke-linecap':'round'},curls);
+  }
+  const neckPuffs = gid('neckPuffs');
+  for(let t=0;t<=1.0001;t+=0.07){
+    const y=-124*t, hw=30-9*t, r=8.6+2.6*Math.sin(t*3.1);
+    mk('circle',{cx:(-hw).toFixed(1),cy:y.toFixed(1),r:r.toFixed(1),fill:'url(#gNeck)'},neckPuffs);
+    mk('circle',{cx:( hw).toFixed(1),cy:y.toFixed(1),r:(r*0.88).toFixed(1),fill:'url(#gNeck)'},neckPuffs);
+  }
+
+  /* ------------------------------------------------------------------ *
+   *  WALKING RIG
+   * ------------------------------------------------------------------ */
+  const ALPACA_X = 600, ALPACA_Y = 600, SCALE = 0.92;
+  const GROUND = 400, HOOF = 14, STRIDE = 20, LIFT = 19;
+  const GAIT = 0.82;                       // gait cycles per second
+  const DUTY = 0.62;                       // fraction of cycle spent on the ground
+  const T = 1/GAIT;
+  const SPEED = SCALE*STRIDE/(DUTY*T);     // ground scroll speed (no foot sliding)
+
+  const bobG = gid('bob'), neckG = gid('neckG'), headG = gid('headG');
+  const earNearG = gid('earNearG'), earFarG = gid('earFarG'), tailG = gid('tailG');
+  const fringeG = gid('fringeG'), bodyShadow = gid('bodyShadow');
+
+  const legs = [
+    {pivot:[342,218], L1:30, L2:138, sign: 1, phase:0.25, far:false, ids:['legNF','thighNF','shinNF','hoofNF']},
+    {pivot:[330,218], L1:30, L2:138, sign: 1, phase:0.75, far:true,  ids:['legFF','thighFF','shinFF','hoofFF']},
+    {pivot:[170,225], L1:64, L2:104, sign:-1, phase:0.00, far:false, ids:['legNH','thighNH','shinNH','hoofNH']},
+    {pivot:[158,225], L1:64, L2:104, sign:-1, phase:0.50, far:true,  ids:['legFH','thighFH','shinFH','hoofFH']}
+  ];
+  const shadowLayer = gid('footShadows');
+  legs.forEach(l=>{
+    l.thigh = gid(l.ids[1]); l.shin = gid(l.ids[2]); l.hoof = gid(l.ids[3]);
+    l.shadow = mk('ellipse',{cx:0,cy:602,rx:14,ry:4.6,fill:'#3a2b16',opacity:'.2',filter:'url(#fSoft2)'},shadowLayer);
+  });
+
+  const scroll = [
+    {el:gid('layerMountains'), sp:5},
+    {el:gid('layerHills'),      sp:12},
+    {el:gid('layerMid'),        sp:20},
+    {el:gid('layerGround'),     sp:SPEED},
+    {el:gid('layerFore'),       sp:SPEED*1.55}
+  ];
+
+  /* pollen motes */
+  const moteLayer = gid('motes'), motes = [];
+  for(let i=0;i<28;i++){
+    const x=rnd()*1280, y=rnd()*720, r=1+rnd()*2.1, sp=5+rnd()*9;
+    motes.push({c:mk('circle',{cx:x.toFixed(1),cy:y.toFixed(1),r:r.toFixed(1),fill:'#fff8dd',opacity:'.3'},moteLayer),
+                x:x,y:y,sp:sp,ph:rnd()*TAU});
+  }
+
+  /* ------------------------------------------------------------------ *
+   *  ANIMATION LOOP
+   * ------------------------------------------------------------------ */
+  const t0 = performance.now();
+  let last = t0;
+
+  function frame(now){
+    const dt = Math.min(0.05,(now-last)/1000); last = now;
+    const t = (now-t0)/1000;
+    const ph = (t*GAIT)%1;
+
+    /* --- body bob & sway --- */
+    const bob  = 2.6*Math.cos(TAU*2*ph + 0.9);
+    const sway = 1.4*Math.sin(TAU*ph + 2.0);
+    bobG.setAttribute('transform','translate('+(-sway).toFixed(2)+','+(-bob).toFixed(2)+')');
+    bodyShadow.setAttribute('rx',(98-bob*3).toFixed(1));
+    bodyShadow.setAttribute('opacity',(0.22-bob*0.012).toFixed(3));
+
+    /* --- legs: four beat walking gait with two link IK --- */
+    for(let i=0;i<legs.length;i++){
+      const leg = legs[i];
+      const u = (ph + leg.phase) % 1;
+      let sx, lift, swing = 0;
+      if(u < DUTY){
+        const s = u/DUTY;
+        sx = lerp(STRIDE,-STRIDE,s); lift = 0;
+      }else{
+        const v = (u-DUTY)/(1-DUTY); swing = v;
+        sx = lerp(-STRIDE,STRIDE,smooth(v));
+        lift = LIFT*Math.sin(Math.PI*v);
+      }
+      const px = leg.pivot[0], py = leg.pivot[1];
+      const tx = px + sx, ty = GROUND-HOOF + bob - lift;
+      let dx = tx-px, dy = ty-py, d = Math.hypot(dx,dy);
+      const maxD = leg.L1+leg.L2-0.01;
+      if(d>maxD){ const k=maxD/d; dx*=k; dy*=k; d=maxD; }
+      const base     = Math.atan2(dx,dy);
+      const gamma    = Math.acos(clamp((leg.L1*leg.L1+d*d-leg.L2*leg.L2)/(2*leg.L1*d),-1,1));
+      const interior = Math.acos(clamp((leg.L1*leg.L1+leg.L2*leg.L2-d*d)/(2*leg.L1*leg.L2),-1,1));
+      const alpha = base + leg.sign*gamma;
+      const delta = -leg.sign*(Math.PI-interior);
+      const beta  = alpha + delta;
+      let hoofA = -beta*0.8;
+      if(swing>0) hoofA -= 14*Math.sin(Math.PI*swing);
+
+      leg.thigh.setAttribute('transform','rotate('+(alpha*180/Math.PI).toFixed(2)+')');
+      leg.shin .setAttribute('transform','translate(0,'+leg.L1+') rotate('+(delta*180/Math.PI).toFixed(2)+')');
+      leg.hoof .setAttribute('transform','translate(0,'+leg.L2+') rotate('+(hoofA*180/Math.PI).toFixed(2)+')');
+
+      /* contact shadow under each hoof */
+      const wx = ALPACA_X + SCALE*(tx-250);
+      const k2 = Math.max(0,1-lift/26);
+      leg.shadow.setAttribute('cx',wx.toFixed(1));
+      leg.shadow.setAttribute('rx',(7+9*k2).toFixed(1));
+      leg.shadow.setAttribute('opacity',(0.09+0.13*k2).toFixed(3));
+    }
+
+    /* --- neck, head, ears, tail --- */
+    const neckSwing = 1.7*Math.sin(TAU*ph + 0.5);
+    neckG.setAttribute('transform','translate(336,178) rotate('+(26+neckSwing).toFixed(2)+')');
+    const headTilt = -1.4*Math.sin(TAU*ph + 1.4);
+    const headBob  = 1.5*Math.sin(TAU*ph + 0.3);
+    headG.setAttribute('transform','translate(0,-124) rotate('+(-26-neckSwing+headTilt).toFixed(2)+') translate(0,'+headBob.toFixed(2)+')');
+    earNearG.setAttribute('transform','translate(10,-15) rotate('+(-8+3.2*Math.sin(TAU*2*ph+0.4)).toFixed(2)+')');
+    earFarG .setAttribute('transform','translate(-2,-18) rotate('+(-20+4.2*Math.sin(TAU*2*ph+1.3)).toFixed(2)+')');
+    tailG.setAttribute('transform','translate(152,182) rotate('+(30+9*Math.sin(TAU*ph)).toFixed(2)+')');
+    fringeG.setAttribute('transform','rotate('+(1.6*Math.sin(TAU*ph+0.8)).toFixed(2)+',250,175)');
+
+    /* --- parallax scroll --- */
+    for(let i=0;i<scroll.length;i++){
+      const L = scroll[i], off = (t*L.sp)%1280;
+      L.el.setAttribute('transform','translate('+(-off).toFixed(2)+',0)');
+    }
+
+    /* --- clouds --- */
+    for(let i=0;i<clouds.length;i++){
+      const c = clouds[i];
+      let x = c.x - t*c.sp;
+      x = ((x+320)%1700+1700)%1700-320;
+      c.g.setAttribute('transform','translate('+x.toFixed(1)+','+c.y+') scale('+c.s+')');
+    }
+
+    /* --- birds --- */
+    for(let i=0;i<birds.length;i++){
+      const b = birds[i];
+      let x = b.x - t*b.sp;
+      x = ((x+200)%1400+1400)%1400-200;
+      const flap = (3.2 + 3.0*Math.sin(t*5.4+b.ph))*b.s;
+      b.p.setAttribute('d','M -10 0 Q -5 '+(-flap).toFixed(1)+' 0 0 Q 5 '+(-flap).toFixed(1)+' 10 0');
+      b.g.setAttribute('transform','translate('+x.toFixed(1)+','+(b.y+Math.sin(t*0.6+b.ph)*5).toFixed(1)+') scale('+b.s+')');
+    }
+
+    /* --- pollen --- */
+    for(let i=0;i<motes.length;i++){
+      const m = motes[i];
+      m.y -= m.sp*dt;
+      if(m.y < -12){ m.y = 732; }
+      const mx = m.x + Math.sin(t*0.6+m.ph)*16;
+      m.c.setAttribute('cx',mx.toFixed(1));
+      m.c.setAttribute('cy',m.y.toFixed(1));
+      m.c.setAttribute('opacity',(0.10+0.26*(0.5+0.5*Math.sin(t*1.4+m.ph))).toFixed(3));
+    }
+
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

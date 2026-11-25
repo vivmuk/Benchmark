@@ -1,0 +1,20 @@
+{
+ "gemini-3-1-pro-preview": {
+  "scores": {
+   "alpaca": 10,
+   "motion": 10,
+   "beauty": 10,
+   "scene": 10
+  },
+  "note": "A beautifully crafted, cohesive scene with an adorable alpaca that exhibits clear and believable walking motion across the frames."
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "alpaca": 8.0,
+   "motion": 6.0,
+   "beauty": 7.0,
+   "scene": 7.0
+  },
+  "note": "The alpaca is clearly recognizable and the cheerful scene is cohesive, but the stiff body and occasionally floating feet make the walk less convincing."
+ }
+}

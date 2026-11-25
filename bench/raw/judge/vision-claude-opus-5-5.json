@@ -1,0 +1,22 @@
+{
+ "gemini-3-1-pro-preview": {
+  "scores": {
+   "subjects": 9.0,
+   "layout": 8.0,
+   "colour": 8.0,
+   "style": 7.0,
+   "overall": 7.0
+  },
+  "note": "The recreation includes all the key elements but alters their proportions, details, and exact placement, resulting in a similar but distinct image."
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "subjects": 9.0,
+   "layout": 6.0,
+   "colour": 8.0,
+   "style": 7.0,
+   "overall": 6.0
+  },
+  "note": "Nearly all key elements are present, but the towers and moon shift noticeably, while the city, dunes, and monorail differ in scale and detail."
+ }
+}

@@ -1,0 +1,20 @@
+{
+ "gemini-3-1-pro-preview": {
+  "scores": {
+   "alpaca": 8.0,
+   "motion": 5.0,
+   "beauty": 6.0,
+   "scene": 6.0
+  },
+  "note": "The alpaca is cute and fits the description well, but its legs only pivot stiffly without bending at the joints, making the walk cycle look rudimentary, while the scene is simple but tastefully composed."
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "alpaca": 7.0,
+   "motion": 4.0,
+   "beauty": 5.0,
+   "scene": 4.0
+  },
+  "note": "The alpaca is recognizable and charming, but its stiff leg changes make for an unconvincing walk, and the pleasant landscape leaves it small in the frame."
+ }
+}

@@ -99,7 +99,7 @@ window.BENCH = {
     "per_dollar": 515,
     "per_correct_cost": 0.001941,
     "index": 6.6,
-    "index_rank": 13
+    "index_rank": 19
    }
   },
   {
@@ -220,7 +220,7 @@ window.BENCH = {
     "per_dollar": 160,
     "per_correct_cost": 0.006262,
     "index": 2.6,
-    "index_rank": 18
+    "index_rank": 26
    }
   },
   {
@@ -462,7 +462,7 @@ window.BENCH = {
     "per_dollar": 213,
     "per_correct_cost": 0.004696,
     "index": 4.1,
-    "index_rank": 17
+    "index_rank": 24
    }
   },
   {
@@ -583,7 +583,7 @@ window.BENCH = {
     "per_dollar": 309,
     "per_correct_cost": 0.003237,
     "index": 11.0,
-    "index_rank": 10
+    "index_rank": 16
    }
   },
   {
@@ -663,7 +663,7 @@ window.BENCH = {
     "per_dollar": 2739,
     "per_correct_cost": 0.000365,
     "index": 18.2,
-    "index_rank": 7
+    "index_rank": 11
    }
   },
   {
@@ -784,7 +784,7 @@ window.BENCH = {
     "per_dollar": 3381,
     "per_correct_cost": 0.000296,
     "index": 21.1,
-    "index_rank": 6
+    "index_rank": 9
    }
   },
   {
@@ -905,7 +905,7 @@ window.BENCH = {
     "per_dollar": 2078,
     "per_correct_cost": 0.000481,
     "index": 25.6,
-    "index_rank": 3
+    "index_rank": 6
    }
   },
   {
@@ -1026,7 +1026,7 @@ window.BENCH = {
     "per_dollar": 476,
     "per_correct_cost": 0.002099,
     "index": 8.2,
-    "index_rank": 11
+    "index_rank": 17
    }
   },
   {
@@ -1147,7 +1147,7 @@ window.BENCH = {
     "per_dollar": 226,
     "per_correct_cost": 0.004433,
     "index": 6.2,
-    "index_rank": 14
+    "index_rank": 20
    }
   },
   {
@@ -1268,7 +1268,7 @@ window.BENCH = {
     "per_dollar": 2979,
     "per_correct_cost": 0.000336,
     "index": 11.4,
-    "index_rank": 9
+    "index_rank": 15
    }
   },
   {
@@ -1368,7 +1368,7 @@ window.BENCH = {
     "per_dollar": 481,
     "per_correct_cost": 0.00208,
     "index": 4.6,
-    "index_rank": 16
+    "index_rank": 22
    }
   },
   {
@@ -1489,7 +1489,7 @@ window.BENCH = {
     "per_dollar": 74,
     "per_correct_cost": 0.013532,
     "index": 1.7,
-    "index_rank": 19
+    "index_rank": 27
    }
   },
   {
@@ -1610,7 +1610,7 @@ window.BENCH = {
     "per_dollar": 627,
     "per_correct_cost": 0.001596,
     "index": 22.7,
-    "index_rank": 5
+    "index_rank": 8
    }
   },
   {
@@ -1731,7 +1731,7 @@ window.BENCH = {
     "per_dollar": 167,
     "per_correct_cost": 0.005971,
     "index": 7.3,
-    "index_rank": 12
+    "index_rank": 18
    }
   },
   {
@@ -1852,7 +1852,7 @@ window.BENCH = {
     "per_dollar": 2401,
     "per_correct_cost": 0.000416,
     "index": 43.3,
-    "index_rank": 2
+    "index_rank": 3
    }
   },
   {
@@ -1973,7 +1973,7 @@ window.BENCH = {
     "per_dollar": 626,
     "per_correct_cost": 0.001598,
     "index": 13.5,
-    "index_rank": 8
+    "index_rank": 14
    }
   },
   {
@@ -2094,7 +2094,7 @@ window.BENCH = {
     "per_dollar": 308,
     "per_correct_cost": 0.003244,
     "index": 5.9,
-    "index_rank": 15
+    "index_rank": 21
    }
   },
   {
@@ -2215,16 +2215,985 @@ window.BENCH = {
     "per_dollar": 3841,
     "per_correct_cost": 0.00026,
     "index": 22.9,
+    "index_rank": 7
+   }
+  },
+  {
+   "id": "claude-opus-5-5",
+   "name": "Claude Opus 5.5",
+   "lab": "Anthropic",
+   "icon": "logos/claude-color.svg",
+   "released": "2026-09-18",
+   "price_in": 4,
+   "price_out": 20,
+   "vision": true,
+   "alpaca": {
+    "out_tokens": 27683,
+    "cost": 0.554708,
+    "seconds": 285.7,
+    "finish": "stop",
+    "status": "ok",
+    "score": 75.0,
+    "criteria": {
+     "alpaca": 8.5,
+     "motion": 6.5,
+     "beauty": 7.5,
+     "scene": 7.5
+    },
+    "by_judge": {
+     "gemini-3-1-pro-preview": 82.5,
+     "openai-gpt-6-sol": 67.5
+    },
+    "notes": {
+     "gemini-3-1-pro-preview": "The alpaca is well-drawn and the walking motion is clearly depicted through the changing leg positions across the frames, set in a beautifully styled vector landscape.",
+     "openai-gpt-6-sol": "The alpaca is clearly recognizable and the pastel landscape is polished, but the leg changes are subtle and the gait looks somewhat stiff."
+    },
+    "judges": 2,
+    "motion": 3.57
+   },
+   "design": {
+    "out_tokens": 44651,
+    "cost": 0.893916,
+    "seconds": 381.3,
+    "finish": "stop",
+    "status": "ok",
+    "score": 91.0,
+    "criteria": {
+     "typography": 8.5,
+     "layout": 9.0,
+     "colour": 9.0,
+     "completeness": 10,
+     "originality": 9.0
+    },
+    "by_judge": {
+     "gemini-3-1-pro-preview": 92.0,
+     "openai-gpt-6-sol": 90.0
+    },
+    "notes": {
+     "gemini-3-1-pro-preview": "A beautifully executed design with a strong, cohesive theme, excellent typography, and a well-structured layout that perfectly captures the brief's atmosphere.",
+     "openai-gpt-6-sol": "A distinctive, polished page with all seven sections present; tiny, low-contrast secondary text slightly limits readability."
+    },
+    "judges": 2
+   },
+   "recreate": {
+    "out_tokens": 502,
+    "cost": 0.015252,
+    "seconds": 7.6,
+    "finish": "stop",
+    "status": "ok",
+    "score": 75.0,
+    "criteria": {
+     "subjects": 9.0,
+     "layout": 7.0,
+     "colour": 8.0,
+     "style": 7.0,
+     "overall": 6.5
+    },
+    "by_judge": {
+     "gemini-3-1-pro-preview": 78.0,
+     "openai-gpt-6-sol": 72.0
+    },
+    "notes": {
+     "gemini-3-1-pro-preview": "The recreation includes all the key elements but alters their proportions, details, and exact placement, resulting in a similar but distinct image.",
+     "openai-gpt-6-sol": "Nearly all key elements are present, but the towers and moon shift noticeably, while the city, dunes, and monorail differ in scale and detail."
+    },
+    "judges": 2,
+    "prompt": "Wide cinematic digital painting of a futuristic desert city at twilight. Center: a cluster of three tall tapering glass skyscrapers. The tallest, in the middle, is crowned by a glowing cyan neon halo ring. To its left is a teal-lit spire with a vertical cyan neon sign reading \"OASIS\". To its right is a violet/magenta-glowing spire. At their bases sit tiered, saucer-like domed buildings and a dense low skyline of small lit towers. Four thin teal searchlight beams fan up into the sky from the city.\n\nThe sky is a gradient from deep navy with scattered stars at the top to purple, then warm orange glow at the horizon on the right. In the upper left hangs a huge pale crescent moon.\n\nForeground left: a person in a long flowing red-maroon cloak stands on a sand ridge, seen from behind, gazing toward the city. Beside them on the left stands a shaggy fluffy alpaca. Wind blows wisps of sand off the rippled orange dunes.\n\nRight side: a sleek white monorail train glides along an elevated curving track lined with warm golden lights, winding from the city toward the foreground lower right. Behind it is a turquoise oasis pool. On the far right stands a tall saguaro cactus outlined in pink neon, with a smaller cactus in the distance.\n\nWarm golden sand contrasts with cool teal and violet neon. Retro-futurist sci-fi concept art with soft atmospheric haze and a 16:9 composition."
+   },
+   "speed": {
+    "status": "ok",
+    "runs": 3,
+    "tps": 86.6,
+    "tps_min": 84.4,
+    "tps_max": 89.4,
+    "ttft": 3.64,
+    "seconds": 13.4,
+    "out_tokens": 1160
+   },
+   "value": {
+    "out_tokens": 831,
+    "cost": 0.01832,
+    "seconds": 8.0,
+    "finish": "stop",
+    "status": "ok",
+    "correct": 12,
+    "total": 12,
+    "per_q": [
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true
+    ],
+    "per_1k": 14.44,
+    "per_dollar": 655,
+    "per_correct_cost": 0.001527,
+    "index": 16.5,
+    "index_rank": 12
+   }
+  },
+  {
+   "id": "claude-sonnet-5-5",
+   "name": "Claude Sonnet 5.5",
+   "lab": "Anthropic",
+   "icon": "logos/claude-color.svg",
+   "released": "2026-09-26",
+   "price_in": 2,
+   "price_out": 10,
+   "vision": true,
+   "alpaca": {
+    "out_tokens": 13945,
+    "cost": 0.139974,
+    "seconds": 101.0,
+    "finish": "stop",
+    "status": "ok",
+    "score": 66.2,
+    "criteria": {
+     "alpaca": 7.5,
+     "motion": 4.0,
+     "beauty": 7.5,
+     "scene": 7.5
+    },
+    "by_judge": {
+     "gemini-3-1-pro-preview": 70.0,
+     "openai-gpt-6-sol": 62.5
+    },
+    "notes": {
+     "gemini-3-1-pro-preview": "The alpaca is stylized well with overlapping circles and the scene is aesthetically pleasing, but the walking animation appears stiff and mechanically flawed.",
+     "openai-gpt-6-sol": "The woolly alpaca and pastel landscape are appealing, but the body stays nearly fixed while the legs change only slightly, making the walk look stiff."
+    },
+    "judges": 2,
+    "motion": 5.181
+   },
+   "design": {
+    "out_tokens": 13914,
+    "cost": 0.139588,
+    "seconds": 84.3,
+    "finish": "stop",
+    "status": "ok",
+    "score": 89.0,
+    "criteria": {
+     "typography": 8.5,
+     "layout": 8.5,
+     "colour": 9.0,
+     "completeness": 10,
+     "originality": 8.5
+    },
+    "by_judge": {
+     "gemini-3-1-pro-preview": 90.0,
+     "openai-gpt-6-sol": 88.0
+    },
+    "notes": {
+     "gemini-3-1-pro-preview": "A beautifully executed landing page with strong thematic consistency, excellent typography, and a compelling color palette that perfectly matches the brief.",
+     "openai-gpt-6-sol": "Distinctive illustration and a cohesive palette make this feel bespoke, though some small text and generous gaps weaken the rhythm."
+    },
+    "judges": 2
+   },
+   "recreate": {
+    "out_tokens": 648,
+    "cost": 0.009086,
+    "seconds": 7.9,
+    "finish": "stop",
+    "status": "ok",
+    "score": 75.0,
+    "criteria": {
+     "subjects": 9.0,
+     "layout": 7.0,
+     "colour": 7.0,
+     "style": 7.5,
+     "overall": 7.0
+    },
+    "by_judge": {
+     "gemini-3-1-pro-preview": 82.0,
+     "openai-gpt-6-sol": 68.0
+    },
+    "notes": {
+     "gemini-3-1-pro-preview": "The recreation includes all key elements with very similar placement, colors, and style, though some details like the moon's phase, character poses, and specific architectural forms differ slightly.",
+     "openai-gpt-6-sol": "All key elements appear, but the traveller and alpaca swap sides, the moon and towers shift, and the recreation is brighter and more saturated."
+    },
+    "judges": 2,
+    "prompt": "Cinematic widescreen digital matte painting of a futuristic desert city at dusk, in a retro-futuristic sci-fi style with photoreal detail. Foreground: rippled orange-gold sand dunes with a sharp wind-blown crest running diagonally from lower center to the left. Fine sand is blowing off the ridge. On the left dune crest stand a fluffy brown alpaca, seen from behind in three-quarter view, and beside it a lone figure in a long crimson-magenta hooded cloak, also seen from behind. Both look toward the city. The pair sit at about one-fifth from the left edge, slightly below mid-height.\n\nMidground and background: a glowing skyline sits on the horizon at center, with three tall tapering glass spires. The central spire is the tallest and is topped by a floating cyan neon ring. The left spire is teal-glass with a vertical cyan neon sign reading \"OASIS\". The right spire is glowing violet-purple. Tiered, disc-shaped teal-lit terraced buildings sit at their base, with a dense small city of lit windows spreading to both sides. Four thin teal-green laser beams slant up into the sky from the city, two on each side.\n\nRight side: a curved elevated monorail track with glowing amber edge lights sweeps from the lower right toward the city. A small silver train is on the track at center-right. Beside the track is a turquoise oasis pool. A tall saguaro cactus in the right foreground has a pink-magenta neon rim light, and a smaller cactus stands behind it.\n\nSky: a deep navy-indigo sky at top, with scattered tiny stars, fades through purple and magenta into a glowing orange and amber horizon. A large pale crescent moon with a faint dark disc is in the upper left. Lighting is warm sunset glow on the sand and cool cyan and violet neon from the city. Soft haze hangs at the horizon, with long shadows and a rich teal-and-orange palette."
+   },
+   "speed": {
+    "status": "ok",
+    "runs": 3,
+    "tps": 99.6,
+    "tps_min": 94.8,
+    "tps_max": 102.3,
+    "ttft": 0.75,
+    "seconds": 9.8,
+    "out_tokens": 981
+   },
+   "value": {
+    "out_tokens": 1066,
+    "cost": 0.01151,
+    "seconds": 7.5,
+    "finish": "stop",
+    "status": "ok",
+    "correct": 12,
+    "total": 12,
+    "per_q": [
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true
+    ],
+    "per_1k": 11.26,
+    "per_dollar": 1043,
+    "per_correct_cost": 0.000959,
+    "index": 18.3,
+    "index_rank": 10
+   }
+  },
+  {
+   "id": "claude-haiku-5-5",
+   "name": "Claude Haiku 5.5",
+   "lab": "Anthropic",
+   "icon": "logos/claude-color.svg",
+   "released": "2026-10-07",
+   "price_in": 0.1,
+   "price_out": 0.5,
+   "vision": true,
+   "alpaca": {
+    "out_tokens": 25328,
+    "cost": 0.0126902,
+    "seconds": 119.5,
+    "finish": "stop",
+    "status": "ok",
+    "score": 60.0,
+    "criteria": {
+     "alpaca": 6.5,
+     "motion": 4.0,
+     "beauty": 7.0,
+     "scene": 6.5
+    },
+    "by_judge": {
+     "gemini-3-1-pro-preview": 60.0,
+     "openai-gpt-6-sol": 60.0
+    },
+    "notes": {
+     "gemini-3-1-pro-preview": "The alpaca is cute but its anatomy is a bit disjointed, and while the legs move, the motion lacks a natural walking rhythm.",
+     "openai-gpt-6-sol": "The pastel illustration is charming and recognizably alpaca-like, but its oversized ears and stiff, slightly floating leg movements weaken the anatomy and walk."
+    },
+    "judges": 2,
+    "motion": 3.615
+   },
+   "design": {
+    "out_tokens": 34159,
+    "cost": 0.0171019,
+    "seconds": 135.0,
+    "finish": "stop",
+    "status": "ok",
+    "score": 57.0,
+    "criteria": {
+     "typography": 6.5,
+     "layout": 3.0,
+     "colour": 7.5,
+     "completeness": 4.5,
+     "originality": 7.0
+    },
+    "by_judge": {
+     "gemini-3-1-pro-preview": 62.0,
+     "openai-gpt-6-sol": 52.0
+    },
+    "notes": {
+     "gemini-3-1-pro-preview": "A visually striking hero section with great typography and color, but the page is severely incomplete, missing the timetable, pricing, and testimonial sections.",
+     "openai-gpt-6-sol": "The illustrated hero and palette are distinctive, but text overlaps the artwork, vast blank areas disrupt the page, and the timetable, pricing tiers, and testimonial are missing."
+    },
+    "judges": 2
+   },
+   "recreate": {
+    "out_tokens": 608,
+    "cost": 0.0004343,
+    "seconds": 6.2,
+    "finish": "stop",
+    "status": "ok",
+    "score": 76.0,
+    "criteria": {
+     "subjects": 9.0,
+     "layout": 8.0,
+     "colour": 6.5,
+     "style": 7.5,
+     "overall": 7.0
+    },
+    "by_judge": {
+     "gemini-3-1-pro-preview": 82.0,
+     "openai-gpt-6-sol": 70.0
+    },
+    "notes": {
+     "gemini-3-1-pro-preview": "The recreation is very good, though the moon is slightly different, the alpaca has packs, and the track is closer to the foreground.",
+     "openai-gpt-6-sol": "Nearly all key elements occupy similar positions, but the reversed sky lighting, larger foreground figures and altered track make the recreation noticeably different."
+    },
+    "judges": 2,
+    "prompt": "Digital matte painting, wide 16:9 landscape composition, cinematic sci-fi desert at dusk. Foreground: rippled golden sand dunes sweeping from bottom edge toward the center, with fine wind-blown sand streaks drifting left. On the left-foreground dune ridge stand two figures facing right toward the city: a fluffy tan-and-cream alpaca on the far left, and beside it a lone human in a long flowing crimson-maroon cloak with hood down, back partly turned, seen from behind. Upper left: a large pale crescent moon, slightly glowing, with faint stars scattered across a deep indigo-to-navy sky. Horizon glows warm orange and peach fading into dusky violet at the edges.\n\nCenter-right: a futuristic city skyline with glowing teal and cyan accents. The tallest central tower is a slender glass spire crowned by a luminous cyan halo ring. Two flanking towers: a slim blade-like tower on the left with a vertical neon sign reading \"OASIS\" in cyan letters, and a sharp violet-lit tower on the right with magenta-purple neon edges. Low tiered saucer-like plazas with teal lighting sit at the base. Cyan laser beams rise diagonally from the city into the sky. Small illuminated buildings dot the skyline.\n\nRight foreground: a tall saguaro cactus outlined in glowing magenta-pink neon, with a smaller cactus behind it. Beside it a turquoise reflective oasis pool. A curving elevated monorail track with warm amber-gold light winds from the right middle toward the lower right, carrying a sleek silver train.\n\nStyle: photorealistic synthwave concept art, soft volumetric haze, rich contrast between warm sand tones and cool cyan-violet neon, cinematic depth of field, high detail."
+   },
+   "speed": {
+    "status": "ok",
+    "runs": 3,
+    "tps": 159.8,
+    "tps_min": 156.9,
+    "tps_max": 161.1,
+    "ttft": 3.06,
+    "seconds": 6.8,
+    "out_tokens": 1097
+   },
+   "value": {
+    "out_tokens": 2720,
+    "cost": 0.0014025,
+    "seconds": 13.7,
+    "finish": "stop",
+    "status": "ok",
+    "correct": 12,
+    "total": 12,
+    "per_q": [
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true
+    ],
+    "per_1k": 4.41,
+    "per_dollar": 8556,
+    "per_correct_cost": 0.000117,
+    "index": 32.9,
     "index_rank": 4
+   }
+  },
+  {
+   "id": "minimax-m3-1-flash",
+   "name": "MiniMax M3.1 Flash",
+   "lab": "MiniMax",
+   "icon": "logos/minimax.svg",
+   "released": "2026-10-18",
+   "price_in": 0.1875,
+   "price_out": 0.75,
+   "vision": true,
+   "alpaca": {
+    "out_tokens": 62980,
+    "cost": 0.0473025,
+    "seconds": 436.7,
+    "finish": "stop",
+    "status": "ok",
+    "score": 70.0,
+    "criteria": {
+     "alpaca": 8.0,
+     "motion": 5.5,
+     "beauty": 7.0,
+     "scene": 7.5
+    },
+    "by_judge": {
+     "gemini-3-1-pro-preview": 82.5,
+     "openai-gpt-6-sol": 57.5
+    },
+    "notes": {
+     "gemini-3-1-pro-preview": "The alpaca is beautifully drawn and the walking animation is convincing, set in a pleasant and stylized landscape.",
+     "openai-gpt-6-sol": "The fleece, long neck and upright ears read as an alpaca, but its thin legs barely change between frames, making the walk feel stiff."
+    },
+    "judges": 2,
+    "motion": 4.407
+   },
+   "design": {
+    "out_tokens": 38105,
+    "cost": 0.0286415625,
+    "seconds": 232.9,
+    "finish": "stop",
+    "status": "ok",
+    "score": 56.0,
+    "criteria": {
+     "typography": 7.5,
+     "layout": 3.0,
+     "colour": 8.0,
+     "completeness": 2.5,
+     "originality": 7.0
+    },
+    "by_judge": {
+     "gemini-3-1-pro-preview": 60.0,
+     "openai-gpt-6-sol": 52.0
+    },
+    "notes": {
+     "gemini-3-1-pro-preview": "The design has a strong visual identity and excellent typography in the visible sections, but fails entirely on completeness as the vast majority of the required content (features, timetable, pricing, testimonial) is missing from the massive empty space in the middle of the page.",
+     "openai-gpt-6-sol": "The illustrated hero has a distinctive palette, but a vast empty gap replaces the required features, timetable, pricing and testimonial."
+    },
+    "judges": 2
+   },
+   "recreate": {
+    "out_tokens": 1077,
+    "cost": 0.00092025,
+    "seconds": 9.6,
+    "finish": "stop",
+    "status": "ok",
+    "score": 52.0,
+    "criteria": {
+     "subjects": 5.5,
+     "layout": 5.5,
+     "colour": 6.5,
+     "style": 4.5,
+     "overall": 4.0
+    },
+    "by_judge": {
+     "gemini-3-1-pro-preview": 52.0,
+     "openai-gpt-6-sol": 52.0
+    },
+    "notes": {
+     "gemini-3-1-pro-preview": "The recreation alters many core elements, such as replacing the alpaca with a horse, the monorail with a highway, omitting the neon outline on the cactus, changing the moon size/phase, and modifying the city architecture.",
+     "openai-gpt-6-sol": "The main scene elements are recognizable, but the alpaca is a horse, the moon and pool have changed scale and position, and the recreation is much more saturated and illustrative."
+    },
+    "judges": 2,
+    "prompt": "Cinematic sci-fi concept art, wide landscape composition. A vast orange sand desert at dusk, rippled dune ridges sweeping toward the horizon. In the left foreground, a lone hooded figure in a long dark maroon cloak stands on a dune crest beside a brown horse, both seen from behind, gazing at a distant futuristic city. The city of glass spires rises center-right: a tall tapered cyan-teal tower in the middle, flanked by two shorter needle skyscrapers edged in electric blue and magenta neon, a vertical cyan neon sign with stylized glyphs on the left tower, and a glowing turquoise halo ring floating directly above the tallest spire. Multiple thin teal laser beams shoot straight up into the night sky, which is deep navy and starry at the top, fading through violet into a burning orange sunset band at the horizon; a pale crescent moon hangs in the upper left, and thin sagging power lines with small perched birds cross the sky. A curved elevated highway with glowing amber edge lights arcs from the lower right toward the city, carrying a small truck. Beneath it, a luminous turquoise lagoon with a tiny dock. In the right foreground, a tall saguaro cactus rim-lit in hot pink, with a smaller cactus behind it. Low distant buildings silhouette the horizon. Warm orange sand versus cool teal city glow, atmospheric haze, volumetric light, dramatic rim lighting, highly detailed digital painting."
+   },
+   "speed": {
+    "status": "ok",
+    "runs": 3,
+    "tps": 130.9,
+    "tps_min": 119.8,
+    "tps_max": 143.3,
+    "ttft": 14.98,
+    "seconds": 19.4,
+    "out_tokens": 2327
+   },
+   "value": {
+    "out_tokens": 2502,
+    "cost": 0.001968375,
+    "seconds": 15.6,
+    "finish": "stop",
+    "status": "ok",
+    "correct": 12,
+    "total": 12,
+    "per_q": [
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true
+    ],
+    "per_1k": 4.8,
+    "per_dollar": 6096,
+    "per_correct_cost": 0.000164,
+    "index": 29.0,
+    "index_rank": 5
+   }
+  },
+  {
+   "id": "nvidia-nemotron-3-5-super-vl-120b-a12b",
+   "name": "NVIDIA Nemotron 3.5 Super VL 120B",
+   "lab": "NVIDIA",
+   "icon": "logos/nvidia.svg",
+   "released": "2026-10-16",
+   "price_in": 0.2,
+   "price_out": 0.5,
+   "vision": true,
+   "alpaca": {
+    "out_tokens": 13090,
+    "cost": 0.006583,
+    "seconds": 24.2,
+    "finish": "stop",
+    "status": "ok",
+    "score": 21.2,
+    "criteria": {
+     "alpaca": 1.5,
+     "motion": 2.0,
+     "beauty": 2.0,
+     "scene": 3.0
+    },
+    "by_judge": {
+     "gemini-3-1-pro-preview": 17.5,
+     "openai-gpt-6-sol": 25.0
+    },
+    "notes": {
+     "gemini-3-1-pro-preview": "The 'alpaca' is represented by disconnected floating shapes (a head/neck detached from a blob-like body with stick legs), and the motion is just a slight shifting of the stick legs that doesn't resemble a walking cycle.",
+     "openai-gpt-6-sol": "The small head and ears suggest an alpaca, but its neck is detached from the body, the stick legs move only slightly, and the pleasant landscape is very sparse."
+    },
+    "judges": 2,
+    "motion": 0.13
+   },
+   "design": {
+    "out_tokens": 18483,
+    "cost": 0.0092743,
+    "seconds": 26.7,
+    "finish": "stop",
+    "status": "ok",
+    "score": 80.0,
+    "criteria": {
+     "typography": 7.5,
+     "layout": 8.0,
+     "colour": 8.0,
+     "completeness": 10,
+     "originality": 6.5
+    },
+    "by_judge": {
+     "gemini-3-1-pro-preview": 82.0,
+     "openai-gpt-6-sol": 78.0
+    },
+    "notes": {
+     "gemini-3-1-pro-preview": "A solid, well-executed design with a coherent dark theme and neon accents, though the hero illustration feels a bit simple compared to the polished UI components.",
+     "openai-gpt-6-sol": "All required sections are present and neatly arranged, but the typography and card layouts feel conventional, and some secondary text lacks contrast."
+    },
+    "judges": 2
+   },
+   "recreate": {
+    "out_tokens": 1004,
+    "cost": 0.0007036,
+    "seconds": 2.8,
+    "finish": "stop",
+    "status": "ok",
+    "score": 66.0,
+    "criteria": {
+     "subjects": 9.0,
+     "layout": 6.0,
+     "colour": 6.0,
+     "style": 6.5,
+     "overall": 5.5
+    },
+    "by_judge": {
+     "gemini-3-1-pro-preview": 74.0,
+     "openai-gpt-6-sol": 58.0
+    },
+    "notes": {
+     "gemini-3-1-pro-preview": "All key subjects are present, but their layout is somewhat different (e.g. alpaca is on the right of the person instead of the left, track curves differently, moon is smaller), and the lighting has more contrast with a darker foreground.",
+     "openai-gpt-6-sol": "Nearly all key elements are present, but the enlarged foreground figures, relocated track and pool, and much brighter neon palette make it clearly a different image."
+    },
+    "judges": 2,
+    "prompt": "Cinematic wide shot of a surreal futuristic desert landscape at night. In the lower left foreground, a person in a long red cloak stands beside a fluffy alpaca on a sand dune, both facing away towards a distant city. The background features a glowing metropolis with a central skyscraper topped by a bright cyan neon ring halo. To the left, a skyscraper has vertical neon text reading 'OASIS'. To the right, a purple neon skyscraper glows. Beams of cyan light shoot into a starry sky where a large crescent moon hangs in the upper left. The horizon transitions from deep blue to a warm orange sunset. In the right foreground, a tall saguaro cactus outlined in neon pink stands beside a small turquoise pool of water. A futuristic monorail track curves through the sand with a train on it. Hyper-detailed digital art, sci-fi style, vibrant neon colors, cinematic composition."
+   },
+   "speed": {
+    "status": "ok",
+    "runs": 3,
+    "tps": 518.1,
+    "tps_min": 458.9,
+    "tps_max": 691.4,
+    "ttft": 3.47,
+    "seconds": 3.6,
+    "out_tokens": 1890
+   },
+   "value": {
+    "out_tokens": 6153,
+    "cost": 0.0031459,
+    "seconds": 9.4,
+    "finish": "stop",
+    "status": "ok",
+    "correct": 12,
+    "total": 12,
+    "per_q": [
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true
+    ],
+    "per_1k": 1.95,
+    "per_dollar": 3814,
+    "per_correct_cost": 0.000262,
+    "index": 14.6,
+    "index_rank": 13
+   }
+  },
+  {
+   "id": "muse-wonder",
+   "name": "Muse Wonder",
+   "lab": "Venice",
+   "icon": "logos/venice-color.svg",
+   "released": "2026-10-12",
+   "price_in": 5,
+   "price_out": 25,
+   "vision": true,
+   "alpaca": {
+    "out_tokens": 15440,
+    "cost": 0.386865,
+    "seconds": 115.7,
+    "finish": "stop",
+    "status": "ok",
+    "score": 85.0,
+    "criteria": {
+     "alpaca": 9.0,
+     "motion": 8.0,
+     "beauty": 8.5,
+     "scene": 8.5
+    },
+    "by_judge": {
+     "gemini-3-1-pro-preview": 100,
+     "openai-gpt-6-sol": 70.0
+    },
+    "notes": {
+     "gemini-3-1-pro-preview": "A beautifully crafted, cohesive scene with an adorable alpaca that exhibits clear and believable walking motion across the frames.",
+     "openai-gpt-6-sol": "The alpaca is clearly recognizable and the cheerful scene is cohesive, but the stiff body and occasionally floating feet make the walk less convincing."
+    },
+    "judges": 2,
+    "motion": 2.228
+   },
+   "design": {
+    "out_tokens": 17815,
+    "cost": 0.446115,
+    "seconds": 89.5,
+    "finish": "stop",
+    "status": "ok",
+    "score": 62.0,
+    "criteria": {
+     "typography": 8.0,
+     "layout": 4.0,
+     "colour": 8.0,
+     "completeness": 4.0,
+     "originality": 7.0
+    },
+    "by_judge": {
+     "gemini-3-1-pro-preview": 68.0,
+     "openai-gpt-6-sol": 56.0
+    },
+    "notes": {
+     "gemini-3-1-pro-preview": "The design sets a great mood with typography and colour, but fails completely on the completeness front by missing the timetable entries, pricing tiers, and testimonial sections.",
+     "openai-gpt-6-sol": "The type, palette, and illustrated hero are strong, but vast empty sections leave the four departures, pricing tiers, and testimonial missing."
+    },
+    "judges": 2
+   },
+   "recreate": {
+    "out_tokens": 1526,
+    "cost": 0.04056,
+    "seconds": 9.2,
+    "finish": "stop",
+    "status": "ok",
+    "score": 73.0,
+    "criteria": {
+     "subjects": 9.5,
+     "layout": 7.5,
+     "colour": 6.5,
+     "style": 6.5,
+     "overall": 6.5
+    },
+    "by_judge": {
+     "gemini-3-1-pro-preview": 74.0,
+     "openai-gpt-6-sol": 72.0
+    },
+    "notes": {
+     "gemini-3-1-pro-preview": "The recreation includes all key elements but differs in styling, lighting, and exact placement of details.",
+     "openai-gpt-6-sol": "All key elements are present, but the traveller and alpaca swap positions, the track curves differently, and the recreation is sharper and more saturated."
+    },
+    "judges": 2,
+    "prompt": "Wide panoramic cinematic sci-fi fantasy digital painting, a futuristic desert city in the center distance at twilight, viewed across golden-orange rippled sand dunes in the foreground with wind-blown sand. On the left dune ridge, seen from behind in silhouette, one man in a long dark burgundy cloak standing beside one fluffy brown llama. In the center background, three towering glass spires on tiered futuristic bases among smaller city buildings; the tallest central tower has a glowing cyan halo ring around its peak, the left tower has a vertical cyan neon sign reading \u201cOASIS\u201d, the right tower glows purple-magenta, with bright cyan searchlight beams shooting diagonally into the sky. On the right, a curved elevated monorail track with a glowing golden edge and a sleek train winds from the city toward the bottom-right corner, passing a small turquoise oasis pool. At the far right foreground, one tall green saguaro cactus outlined in pink neon, with one tiny cactus behind it. Upper left sky has a large dark planet with a bright crescent moon edge, starry deep navy sky grading to purple and orange sunset on the horizon."
+   },
+   "speed": {
+    "status": "ok",
+    "runs": 3,
+    "tps": 159.5,
+    "tps_min": 126.0,
+    "tps_max": 237.9,
+    "ttft": 21.76,
+    "seconds": 22.8,
+    "out_tokens": 5119
+   },
+   "value": {
+    "out_tokens": 2988,
+    "cost": 0.07621,
+    "seconds": 15.4,
+    "finish": "stop",
+    "status": "ok",
+    "correct": 12,
+    "total": 12,
+    "per_q": [
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true
+    ],
+    "per_1k": 4.02,
+    "per_dollar": 157,
+    "per_correct_cost": 0.006351,
+    "index": 4.3,
+    "index_rank": 23
+   }
+  },
+  {
+   "id": "pareto",
+   "name": "Pareto",
+   "lab": "Venice",
+   "icon": "logos/venice-color.svg",
+   "released": "2026-10-14",
+   "price_in": 1,
+   "price_out": 4,
+   "vision": true,
+   "alpaca": {
+    "out_tokens": 8376,
+    "cost": 0.033685,
+    "seconds": 143.5,
+    "finish": "stop",
+    "status": "ok",
+    "score": 77.5,
+    "criteria": {
+     "alpaca": 8.0,
+     "motion": 6.5,
+     "beauty": 8.0,
+     "scene": 8.5
+    },
+    "by_judge": {
+     "gemini-3-1-pro-preview": 85.0,
+     "openai-gpt-6-sol": 70.0
+    },
+    "notes": {
+     "gemini-3-1-pro-preview": "The alpaca is charmingly illustrated and the walk cycle is fluid, set against a tasteful, calming landscape.",
+     "openai-gpt-6-sol": "The fluffy, long-necked figure reads as an alpaca in a polished pastel scene, though its oversized ears and mostly stationary body make the walk less convincing."
+    },
+    "judges": 2,
+    "motion": 0.724
+   },
+   "design": {
+    "out_tokens": 14239,
+    "cost": 0.05709,
+    "seconds": 184.6,
+    "finish": "stop",
+    "status": "ok",
+    "score": 90.0,
+    "criteria": {
+     "typography": 8.5,
+     "layout": 9.0,
+     "colour": 8.5,
+     "completeness": 10,
+     "originality": 9.0
+    },
+    "by_judge": {
+     "gemini-3-1-pro-preview": 92.0,
+     "openai-gpt-6-sol": 88.0
+    },
+    "notes": {
+     "gemini-3-1-pro-preview": "A highly polished, distinct design with excellent typographic hierarchy and a cohesive, evocative color palette perfectly matching the prompt.",
+     "openai-gpt-6-sol": "A distinctive, polished page with all required sections, though some small, low-contrast text is difficult to read."
+    },
+    "judges": 2
+   },
+   "recreate": {
+    "out_tokens": 752,
+    "cost": 0.004275,
+    "seconds": 5.9,
+    "finish": "stop",
+    "status": "ok",
+    "score": 70.0,
+    "criteria": {
+     "subjects": 9.5,
+     "layout": 7.0,
+     "colour": 7.0,
+     "style": 6.0,
+     "overall": 5.5
+    },
+    "by_judge": {
+     "gemini-3-1-pro-preview": 72.0,
+     "openai-gpt-6-sol": 68.0
+    },
+    "notes": {
+     "gemini-3-1-pro-preview": "The recreation includes all key elements in similar positions, but the style is noticeably more cartoonish and the colors are much more saturated.",
+     "openai-gpt-6-sol": "All key elements are present, but the towers and pool shift noticeably, and the recreation is brighter and more stylized than the original."
+    },
+    "judges": 2,
+    "prompt": "A wide cinematic digital artwork of a retro-futuristic desert metropolis at twilight, 16:9 landscape. Sky gradients from deep indigo-purple at top to warm orange-pink at the horizon, scattered with small stars and a large glowing white-blue crescent moon in the upper left, with faint teal light rays streaking diagonally from the upper corners. Foreground left: a lone man in a flowing red cloak stands on a rippled orange sand-dune ridge beside a brown alpaca, both seen from behind, silhouetted, gazing toward the distant city. Center: a futuristic city of three tapering spire skyscrapers rises from the dunes \u2014 the left spire teal-glass with a vertical cyan neon sign reading \"OASIS\" in capital letters; the tallest central spire glows blue-white, crowned by a floating luminous cyan ring halo; the right spire glows magenta-pink with purple neon strips. The city base features tiered saucer-shaped buildings lit teal and amber, with tiny glowing windows and low skyline blocks. Right foreground: a tall saguaro cactus rimmed in neon pink light, with smaller cacti silhouettes nearby. A glowing amber-orange elevated monorail track curves from the lower right toward the city, carrying a small sleek train pod as it crosses a radiant turquoise oasis pool nestled in the dunes. Wind-blown sand haze, warm rim lighting, synthwave-retrofuturism style, ultra-detailed, atmospheric, cinematic composition."
+   },
+   "speed": {
+    "status": "ok",
+    "runs": 3,
+    "tps": 42.9,
+    "tps_min": 24.8,
+    "tps_max": 167.2,
+    "ttft": 18.41,
+    "seconds": 18.9,
+    "out_tokens": 761
+   },
+   "value": {
+    "out_tokens": 622,
+    "cost": 0.002829,
+    "seconds": 28.2,
+    "finish": "stop",
+    "status": "ok",
+    "correct": 12,
+    "total": 12,
+    "per_q": [
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true
+    ],
+    "per_1k": 19.29,
+    "per_dollar": 4242,
+    "per_correct_cost": 0.000236,
+    "index": 48.4,
+    "index_rank": 2
+   }
+  },
+  {
+   "id": "qwen3-6-27b",
+   "name": "Qwen 3.6 27B",
+   "lab": "Alibaba",
+   "icon": "logos/qwen-color.svg",
+   "released": "2026-04-24",
+   "price_in": 0.32,
+   "price_out": 3.2,
+   "vision": true,
+   "alpaca": {
+    "out_tokens": 11081,
+    "cost": 0.0355184,
+    "seconds": 122.7,
+    "finish": "stop",
+    "status": "ok",
+    "score": 56.2,
+    "criteria": {
+     "alpaca": 7.5,
+     "motion": 4.5,
+     "beauty": 5.5,
+     "scene": 5.0
+    },
+    "by_judge": {
+     "gemini-3-1-pro-preview": 62.5,
+     "openai-gpt-6-sol": 50.0
+    },
+    "notes": {
+     "gemini-3-1-pro-preview": "The alpaca is cute and fits the description well, but its legs only pivot stiffly without bending at the joints, making the walk cycle look rudimentary, while the scene is simple but tastefully composed.",
+     "openai-gpt-6-sol": "The alpaca is recognizable and charming, but its stiff leg changes make for an unconvincing walk, and the pleasant landscape leaves it small in the frame."
+    },
+    "judges": 2,
+    "motion": 0.731
+   },
+   "design": {
+    "out_tokens": 14352,
+    "cost": 0.04597632,
+    "seconds": 169.2,
+    "finish": "stop",
+    "status": "ok",
+    "score": 66.0,
+    "criteria": {
+     "typography": 7.5,
+     "layout": 5.0,
+     "colour": 7.5,
+     "completeness": 6.0,
+     "originality": 7.0
+    },
+    "by_judge": {
+     "gemini-3-1-pro-preview": 76.0,
+     "openai-gpt-6-sol": 56.0
+    },
+    "notes": {
+     "gemini-3-1-pro-preview": "A visually striking design with good use of typography and color to match the theme, though it is missing the pricing and testimonial sections.",
+     "openai-gpt-6-sol": "The atmospheric hero and clear hierarchy work well, but huge empty sections replace the required pricing tiers and testimonial."
+    },
+    "judges": 2
+   },
+   "recreate": {
+    "out_tokens": 1012,
+    "cost": 0.0035462400000000004,
+    "seconds": 18.1,
+    "finish": "stop",
+    "status": "ok",
+    "score": 68.0,
+    "criteria": {
+     "subjects": 7.5,
+     "layout": 6.0,
+     "colour": 7.5,
+     "style": 7.0,
+     "overall": 6.0
+    },
+    "by_judge": {
+     "gemini-3-1-pro-preview": 74.0,
+     "openai-gpt-6-sol": 62.0
+    },
+    "notes": {
+     "gemini-3-1-pro-preview": "The recreation captures most elements and the general layout well, but misses the monorail (replacing it with a highway), alters the city design, and changes the moon's phase.",
+     "openai-gpt-6-sol": "Most landmarks are present, but the traveller and alpaca are much larger and reversed, the towers and track are repositioned, and the monorail is missing."
+    },
+    "judges": 2,
+    "prompt": "Cinematic sci-fi concept art of a futuristic desert metropolis at dusk. In the foreground left, a cloaked figure in maroon stands with a brown alpaca on a golden sand dune, facing the city. A curved highway with glowing yellow lane markers winds toward a bright turquoise oasis pool on the right. Beside the pool, a tall saguaro cactus is outlined in neon pink light. The background features a sprawling neon city with three main spires. The central, tallest tower has a glowing cyan ring hovering above it. The left tower displays a vertical neon sign reading 'OASIS'. The right tower glows purple. Cyan laser beams shoot upward from the buildings into the sky. The sky is a gradient of sunset orange to deep starry blue, featuring a large crescent moon in the upper left. High contrast, detailed textures, 8k resolution."
+   },
+   "speed": {
+    "status": "ok",
+    "runs": 3,
+    "tps": 71.5,
+    "tps_min": 64.7,
+    "tps_max": 75.6,
+    "ttft": 52.95,
+    "seconds": 63.7,
+    "out_tokens": 4546
+   },
+   "value": {
+    "out_tokens": 8081,
+    "cost": 0.025969600000000002,
+    "seconds": 101.0,
+    "finish": "stop",
+    "status": "ok",
+    "correct": 11,
+    "total": 12,
+    "per_q": [
+     true,
+     true,
+     true,
+     true,
+     false,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true
+    ],
+    "per_1k": 1.36,
+    "per_dollar": 424,
+    "per_correct_cost": 0.002361,
+    "index": 4.1,
+    "index_rank": 25
    }
   }
  ],
  "judges": [
-  "claude-opus-5-5",
+  "gemini-3-1-pro-preview",
   "openai-gpt-6-sol"
  ],
  "image_model": "nano-banana-2-1",
- "contestant_spend": 18.62,
+ "contestant_spend": 22.22,
  "questions": 12,
- "run_note": "The first ten models ran on 2026-11-16; the nine newer entries ran on 2026-11-25."
+ "judge_note": "Models added before 2026-11-25 were scored by Claude Opus 5.5 and GPT-6 Sol. Claude Opus 5.5 is now a contestant, so from that date the Claude-side judge is Gemini 3.1 Pro; every row records which judges produced it.",
+ "run_note": "The first ten models ran on 2026-11-16; the seventeen added since ran on 2026-11-25."
 };

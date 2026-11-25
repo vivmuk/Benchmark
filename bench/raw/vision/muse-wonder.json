@@ -1,0 +1,22 @@
+{
+ "text": "Wide panoramic cinematic sci-fi fantasy digital painting, a futuristic desert city in the center distance at twilight, viewed across golden-orange rippled sand dunes in the foreground with wind-blown sand. On the left dune ridge, seen from behind in silhouette, one man in a long dark burgundy cloak standing beside one fluffy brown llama. In the center background, three towering glass spires on tiered futuristic bases among smaller city buildings; the tallest central tower has a glowing cyan halo ring around its peak, the left tower has a vertical cyan neon sign reading \u201cOASIS\u201d, the right tower glows purple-magenta, with bright cyan searchlight beams shooting diagonally into the sky. On the right, a curved elevated monorail track with a glowing golden edge and a sleek train winds from the city toward the bottom-right corner, passing a small turquoise oasis pool. At the far right foreground, one tall green saguaro cactus outlined in pink neon, with one tiny cactus behind it. Upper left sky has a large dark planet with a bright crescent moon edge, starry deep navy sky grading to purple and orange sunset on the horizon.",
+ "reasoning_chars": 0,
+ "usage": {
+  "prompt_tokens": 482,
+  "completion_tokens": 1526,
+  "total_tokens": 2008,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 1281,
+   "image_tokens": 0,
+   "audio_tokens": 0
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 8.436493826971855,
+ "t_first_content": 8.436494210967794,
+ "t_total": 9.226410069968551,
+ "cost": 0.04056
+}
