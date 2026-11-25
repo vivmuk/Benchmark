@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Quiet Wanderer</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; }
+  body { background: linear-gradient(#c7b9d1, #f9ddc5 59%, #c69a8d); }
+  svg { display: block; width: 100%; height: 100%; }
+  .serif { font-family: Georgia, "Times New Roman", serif; }
+  .label { font: 600 10px system-ui, sans-serif; letter-spacing: 2.8px; }
+  .fleece-line { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .leg .coat { fill: url(#legNear); stroke: #aa7d70; stroke-width: 1.25; stroke-linejoin: round; }
+  .leg.far .coat { fill: url(#legFar); stroke: #9d716e; }
+  .leg .light { fill: none; stroke: #fff0d6; stroke-width: 1.6; stroke-linecap: round; opacity: .55; }
+  .leg.far .light { opacity: .25; }
+  .leg .hoof { fill: #715158; stroke: #654550; stroke-width: .85; }
+  .leg.far .hoof { fill: #654854; }
+  .paper { mix-blend-mode: soft-light; pointer-events: none; }
+  @media (max-aspect-ratio: 4/5) {
+    .editorial { display: none; }
+  }
+</style>
+</head>
+<body>
+<svg id="scene" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid slice"
+     xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title description">
+  <title id="title">The Quiet Wanderer</title>
+  <desc id="description">A cream-colored alpaca takes four soft, steady steps across a rose-colored Andean plain at sunrise.</desc>
+
+  <defs>
+    <linearGradient id="sky" x2="0" y2="1">
+      <stop stop-color="#c6b7d2"/>
+      <stop offset=".43" stop-color="#e8c6cb"/>
+      <stop offset=".79" stop-color="#f9dac0"/>
+      <stop offset="1" stop-color="#f7d2af"/>
+    </linearGradient>
+    <radialGradient id="halo">
+      <stop stop-color="#ffedc9" stop-opacity=".78"/>
+      <stop offset=".47" stop-color="#ffe3bc" stop-opacity=".31"/>
+      <stop offset="1" stop-color="#ffe3bc" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="sun" x2=".14" y2="1">
+      <stop stop-color="#fff3d7"/>
+      <stop offset="1" stop-color="#ffd2a2"/>
+    </linearGradient>
+    <linearGradient id="mountain" x2=".12" y2="1">
+      <stop stop-color="#918398"/>
+      <stop offset="1" stop-color="#c09ba2"/>
+    </linearGradient>
+    <linearGradient id="hill" x2="0" y2="1">
+      <stop stop-color="#b08991"/>
+      <stop offset="1" stop-color="#d9a69e"/>
+    </linearGradient>
+    <linearGradient id="earth" x2=".12" y2="1">
+      <stop stop-color="#e1b3a4"/>
+      <stop offset=".48" stop-color="#d4a497"/>
+      <stop offset="1" stop-color="#bd8e83"/>
+    </linearGradient>
+    <linearGradient id="fleece" gradientUnits="userSpaceOnUse" x1="22" y1="-271" x2="-35" y2="-96">
+      <stop stop-color="#fff5de"/>
+      <stop offset=".57" stop-color="#fae7ca"/>
+      <stop offset=".82" stop-color="#eecfb0"/>
+      <stop offset="1" stop-color="#d9ad96"/>
+    </linearGradient>
+    <linearGradient id="head" x2=".28" y2="1">
+      <stop stop-color="#fff4db"/>
+      <stop offset=".58" stop-color="#f6dec0"/>
+      <stop offset="1" stop-color="#e1b59b"/>
+    </linearGradient>
+    <linearGradient id="muzzle" x2=".25" y2="1">
+      <stop stop-color="#f1c7ae"/>
+      <stop offset="1" stop-color="#d9a397"/>
+    </linearGradient>
+    <linearGradient id="ear" x2=".2" y2="1">
+      <stop stop-color="#f6d9be"/>
+      <stop offset="1" stop-color="#d4a18e"/>
+    </linearGradient>
+    <linearGradient id="legNear" gradientUnits="userSpaceOnUse" x1="0" y1="-140" x2="0" y2="4">
+      <stop stop-color="#f4dbbd"/>
+      <stop offset=".48" stop-color="#e8c7aa"/>
+      <stop offset="1" stop-color="#c79482"/>
+    </linearGradient>
+    <linearGradient id="legFar" gradientUnits="userSpaceOnUse" x1="0" y1="-140" x2="0" y2="-4">
+      <stop stop-color="#d9ae99"/>
+      <stop offset="1" stop-color="#ad7c77"/>
+    </linearGradient>
+    <radialGradient id="shade">
+      <stop stop-color="#684655" stop-opacity=".33"/>
+      <stop offset=".55" stop-color="#79515b" stop-opacity=".18"/>
+      <stop offset="1" stop-color="#79515b" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="grain" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency=".72" numOctaves="3" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+
+    <g id="tuft" fill="none" stroke-linecap="round">
+      <path d="M0 0Q-3-10-10-16M0 0Q0-13 4-23M1 0Q6-9 12-12M-1 0Q-7-4-12-4"
+            stroke="#825f64" stroke-width="1.2"/>
+      <path d="M1-1Q7-6 10-6M-1-1Q-2-10-5-13" stroke="#f3c9a9" stroke-width="1"/>
+    </g>
+    <g id="bloom" fill="none" stroke-linecap="round">
+      <path d="M0 0Q-1-16-9-27M0 0Q3-19 11-33M1 0Q8-11 16-13M-1 0Q-8-7-13-8"
+            stroke="#86666b" stroke-width="1.25"/>
+      <path d="M-9-27l-2-3m2 3 1-4m19-2v-4m0 4 3-3m2 23 4-2"
+            stroke="#f8d6b4" stroke-width="2.1"/>
+    </g>
+    <g id="stone">
+      <path d="M-11 1Q-7-6 0-5Q8-6 12 1Q4 4-11 1Z" fill="#9f7880"/>
+      <path d="M-9 0Q-3-5 3-4Q7-4 10 0Q1-2-9 0Z" fill="#efc4ad"/>
+    </g>
+    <g id="meadowMarks">
+      <use href="#bloom" transform="translate(87 591) scale(.9)" opacity=".75"/>
+      <use href="#tuft" transform="translate(108 595) scale(.58)" opacity=".62"/>
+      <use href="#stone" transform="translate(205 547) scale(.7)" opacity=".69"/>
+      <use href="#tuft" transform="translate(271 572) scale(.8)" opacity=".68"/>
+      <use href="#tuft" transform="translate(288 575) scale(.36)" opacity=".48"/>
+      <use href="#tuft" transform="translate(388 519) scale(.47)" opacity=".55"/>
+      <use href="#stone" transform="translate(451 596) scale(.48)" opacity=".6"/>
+      <use href="#tuft" transform="translate(520 533) scale(.49)" opacity=".52"/>
+      <use href="#stone" transform="translate(746 582) scale(.62)" opacity=".63"/>
+      <use href="#tuft" transform="translate(906 552) scale(.66)" opacity=".69"/>
+      <use href="#bloom" transform="translate(1014 596) scale(.72)" opacity=".72"/>
+      <use href="#tuft" transform="translate(1031 600) scale(.5)" opacity=".58"/>
+      <use href="#stone" transform="translate(1152 539) scale(.75)" opacity=".66"/>
+      <use href="#tuft" transform="translate(1250 579) scale(.76)" opacity=".65"/>
+      <use href="#tuft" transform="translate(1364 527) scale(.45)" opacity=".5"/>
+      <path d="M39 548h15m99-18h8m44 31h19m93-24h11m57 47h23m85-64h11m78 44h18
+               m105-39h11m29 68h19m92-62h14m92 46h12m77-53h23m71 44h18m98-33h10"
+            stroke="#f7d3b3" stroke-linecap="round" opacity=".62"/>
+    </g>
+    <g id="foregroundMarks">
+      <use href="#bloom" transform="translate(40 692) scale(1.65)" opacity=".85"/>
+      <use href="#tuft" transform="translate(65 698) scale(1.2)" opacity=".75"/>
+      <use href="#stone" transform="translate(239 653) scale(1.03)" opacity=".6"/>
+      <use href="#tuft" transform="translate(348 683) scale(1.17)" opacity=".67"/>
+      <use href="#tuft" transform="translate(369 688) scale(.64)" opacity=".55"/>
+      <use href="#stone" transform="translate(525 644) scale(.7)" opacity=".6"/>
+      <use href="#bloom" transform="translate(735 694) scale(1.34)" opacity=".82"/>
+      <use href="#tuft" transform="translate(753 698) scale(.81)" opacity=".6"/>
+      <use href="#stone" transform="translate(974 667) scale(1.06)" opacity=".64"/>
+      <use href="#bloom" transform="translate(1191 682) scale(1.61)" opacity=".85"/>
+      <use href="#tuft" transform="translate(1213 686) scale(1.12)" opacity=".7"/>
+      <use href="#tuft" transform="translate(1379 642) scale(.72)" opacity=".62"/>
+      <path d="M105 652h32m39 45h20m228-52h19m160 31h36m174-39h21m41 61h26m173-54h34m167 46h23"
+            stroke="#f4c6a9" stroke-linecap="round" opacity=".49"/>
+    </g>
+  </defs>
+
+  <!-- Dawn over the Altiplano -->
+  <rect width="1280" height="720" fill="url(#sky)"/>
+  <ellipse cx="962" cy="219" rx="257" ry="218" fill="url(#halo)"/>
+  <circle cx="962" cy="217" r="74" fill="none" stroke="#fff1d7" opacity=".44"/>
+  <circle cx="962" cy="217" r="64" fill="url(#sun)"/>
+
+  <g fill="none" stroke="#fff1db" stroke-linecap="round">
+    <path d="M184 269q62-7 153-3m-104 8 73-1M488 119q47-4 94-1m-66 7h103
+             M706 234q35-2 93-1m238-102q49-4 112-2m-92 7h37m-9 80 96-2"
+          opacity=".47"/>
+    <path d="M884 239q72 5 150-1m-138 7q54 4 117-1" opacity=".37"/>
+  </g>
+
+  <path d="M0 369 66 341 105 349 168 315 201 327 273 298 331 324 366 314
+           420 339 485 327 545 353 613 329 664 355 748 313 793 325 867 301
+           923 322 984 302 1051 316 1101 286 1141 307 1197 290 1280 323V499H0Z"
+        fill="#c4a4b3"/>
+  <path d="m168 315 33 12 72-29 58 26 35-10 26 12-48-3-34 8-40-19-45 21-30-1-46 14z
+           m580-2 45 12 74-24 56 21 61-20 53 11-49-3-65 23-54-20-66 20z"
+        fill="#ecd0cb" opacity=".53"/>
+  <path d="M0 404 55 385 95 389 166 357 217 369 284 343 324 353 378 321
+           460 365 503 355 575 392 636 380 697 360 732 372 786 348 825 357
+           922 317 965 324 1049 260 1085 280 1123 317 1160 308 1224 346 1280 328V502H0Z"
+        fill="url(#mountain)"/>
+  <path d="m922 317 43 7 84-64 36 20 38 37-29-14-18-4-27-26-16 28-19 6-27 24-25 3z
+           M324 353l54-32 82 44-45-15-33-16-9 13-29 6-34 16z"
+        fill="#efdbd2" opacity=".77"/>
+  <path d="m1049 273 18 40 56 31 43 8 58 37-78-23-35-5-53-31-32 17-65 14 49-28z
+           m-671 61 22 26 63 28-58-10-33-23-42 20-62 10 54-24z"
+        fill="#775f7f" opacity=".21"/>
+  <path d="M0 442q111-31 218-14 84 12 186-6 87-18 189 3 143 26 261-15
+           122-35 244 1 91 24 182-1v132H0Z" fill="#c59da4"/>
+  <path d="M0 462q122-51 254-19 109 31 224 15 137-32 262 2 93 24 210-5
+           155-46 330-19v115H0Z" fill="url(#hill)"/>
+  <path d="M0 487q135-31 280-13 173 20 325 2 131-13 264 7 202 10 411-30v267H0Z" fill="url(#earth)"/>
+
+  <g fill="none" stroke-linecap="round">
+    <path d="M0 503q121-16 245-4m24 0 77 2m485-2q105 8 216-2m33-3 90-10m-490 17 84-3"
+          stroke="#f6ccae" opacity=".58"/>
+    <path d="M0 613q114-32 256-19m69 8q143 15 237 8m284 10q188 5 434-27"
+          stroke="#edbd9f" opacity=".49"/>
+    <path d="M0 627q119-25 264-21m651 22q151-3 365-27" stroke="#ad7e79" opacity=".25"/>
+  </g>
+
+  <g id="meadow">
+    <use href="#meadowMarks"/>
+    <use href="#meadowMarks" x="1440"/>
+  </g>
+
+  <!-- The alpaca is articulated at the hips, knees, ankles, ears, and tail. -->
+  <g transform="translate(641 553) scale(1.16)">
+    <ellipse cx="-9" cy="4" rx="180" ry="24" fill="url(#shade)"/>
+    <g id="contacts"></g>
+    <g id="farLegs"></g>
+    <g id="nearLegs"></g>
+
+    <g id="body">
+      <g id="tail">
+        <path d="M-134-173C-148-184-161-191-175-184C-190-180-195-163-181-158
+                 C-183-149-171-144-163-148C-157-139-145-144-138-150L-126-160Z"
+              fill="url(#head)" stroke="#ba8d7e" stroke-width="1.35"/>
+        <path d="M-184-169q6-10 16-10m-9 20q7 2 12-3m1 7q6 1 10-3"
+              class="fleece-line" stroke="#fff0d6" stroke-width="2.5"/>
+      </g>
+
+      <path d="M-144-173
+        C-139-184-128-187-121-182C-114-195-97-195-87-187
+        C-78-198-61-198-51-190C-40-198-25-196-17-187
+        C-7-194 8-192 17-184C29-187 35-201 39-214
+        C44-227 49-238 50-252C48-266 57-280 72-286
+        C88-292 103-282 108-270C114-252 102-236 101-218
+        C98-206 100-192 94-181C96-170 89-159 84-154
+        C86-145 81-138 76-136C79-126 72-118 63-116
+        C61-106 51-101 40-105C32-97 20-96 11-103
+        C2-94-12-95-20-102C-31-94-43-96-51-103
+        C-61-95-75-97-82-105C-93-98-106-101-112-109
+        C-121-104-135-109-137-118C-150-119-156-129-152-138
+        C-161-145-158-156-152-160C-153-167-148-172-144-173Z"
+        fill="url(#fleece)" stroke="#b98b79" stroke-width="1.45"/>
+
+      <path d="M-146-156C-116-178-93-161-72-170C-39-185-19-170 5-170
+        C34-169 50-207 55-235C60-258 70-268 79-264
+        C65-242 71-211 60-194C54-180 49-160 23-149
+        C-6-135-33-151-56-140C-88-124-100-150-123-140C-137-135-145-143-146-156Z"
+        fill="#fff4db" opacity=".47"/>
+      <path d="M-145-130C-128-121-121-128-111-121C-97-110-88-120-80-117
+        C-68-109-59-120-51-119C-35-113-30-122-19-118C-7-110 3-121 12-118
+        C30-111 45-122 55-132C65-143 76-150 84-154
+        C86-144 80-139 76-136C79-126 72-118 63-116C61-106 51-101 40-105
+        C32-97 20-96 11-103C2-94-12-95-20-102C-31-94-43-96-51-103
+        C-61-95-75-97-82-105C-93-98-106-101-112-109C-121-104-135-109-137-118
+        C-144-119-148-123-145-130Z" fill="#bb8a80" opacity=".16"/>
+
+      <g class="fleece-line">
+        <path d="M-142-171q11-12 21-7m5-3q12-10 24-4m11 1q11-9 24-4m13 1q12-7 23 1
+                 m12 1q12-6 23 1m18-9q11-11 14-26m6-12q6-16 5-26"
+              stroke="#fff6e3" stroke-width="2.55" opacity=".87"/>
+        <path d="M-133-158q6-7 14-3q5 3 10-1m11-4q8-7 15-2
+                 m14 7q9-9 19-4m11 12q8-6 15-2q5 2 9-1m13-9q9-6 16-1
+                 m-144 28q7-5 14-1m13-7q9-6 16 0m9 10q8 4 15-2m12-5q9-8 17-4
+                 m18 12q8 4 16-2m10-10q10-6 16-2m-136 29q7 4 14 1
+                 m16 3q9 4 15-1m19-6q8 4 14-1m14 3q9 4 16-2
+                 m30-6q10-2 14-10m2-14q9-3 12-11
+                 m-8-15q8-5 9-13m-4-8q7-5 9-12m-8-7q7-3 9-10
+                 m2 32q9-6 9-15m-15 53q9-4 12-12m-20 34q9-3 12-10"
+              stroke="#c8947e" stroke-width="1.4" opacity=".54"/>
+        <path d="M-132-154q7-5 13-2m22-6q7-5 12-2m17 7q7-6 13-4m21 11q7-4 13-1
+                 m-83 9q8-4 14 0m15 9q7 3 12-1m9-3q7-6 13-4m20 11q6 3 12-1
+                 m24-11q7-4 14-3m23-24q7-3 10-9m-3-16q6-5 8-10m-2-11q5-3 7-8"
+              stroke="#fff4db" stroke-width="2.35" opacity=".85"/>
+      </g>
+
+      <g id="earBack">
+        <path d="M86-289C75-297 66-315 68-333C69-343 74-345 80-338
+                 C91-327 97-307 95-294Z" fill="url(#ear)" stroke="#b38277" stroke-width="1.4"/>
+        <path d="M87-298C78-307 72-324 73-334C81-328 89-308 89-298Z" fill="#cb938c"/>
+        <path d="M70-333q-1-5 2-7q11 7 17 27" fill="none" stroke="#ffedcf" stroke-width="1.65" stroke-linecap="round"/>
+      </g>
+      <g id="earFront">
+        <path d="M109-295C107-311 114-334 124-345C129-351 134-347 135-340
+                 C138-322 130-303 121-293Z" fill="url(#ear)" stroke="#b38277" stroke-width="1.4"/>
+        <path d="M117-301C115-313 123-336 130-341C133-331 126-309 120-302Z" fill="#cb9289"/>
+        <path d="M113-316q4-17 14-29q3-3 5 1" fill="none" stroke="#fff1d5" stroke-width="1.8" stroke-linecap="round"/>
+      </g>
+
+      <path d="M72-277C68-290 83-300 95-298C102-304 114-304 120-297
+        C129-301 139-294 142-285C144-278 152-275 160-272
+        C168-268 167-258 159-253C151-247 139-248 132-248
+        C125-240 111-237 102-242C94-238 83-242 81-250C71-254 67-266 72-277Z"
+        fill="url(#head)" stroke="#b88776" stroke-width="1.4"/>
+      <path d="M137-272C143-275 153-274 160-271C167-268 166-258 159-254
+        C153-249 140-248 133-250C130-254 130-261 134-266Z" fill="url(#muzzle)"/>
+      <path d="M73-277C69-281 70-287 76-290C75-297 84-302 92-300
+        C96-307 108-307 114-302C122-307 133-302 135-296
+        C142-294 145-288 142-282C138-284 133-284 129-282
+        C126-289 118-288 114-284C110-288 103-285 101-281
+        C95-283 91-279 89-274C83-278 78-273 73-277Z"
+        fill="#fff0d3" stroke="#c99c84" stroke-width="1.15"/>
+      <path d="M76-288q5-4 11-2m4-7q6-4 12-2m5 8q5-4 11-3m6-4q6 1 9 5
+               M83-260q4 5 10 3m-3 10q5 3 10 0"
+            class="fleece-line" stroke="#d8a88d" stroke-width="1.45" opacity=".8"/>
+      <path d="M78-289q0-6 9-8m9-3q6-4 12-1m10 0q9-4 14 3"
+            class="fleece-line" stroke="#fff9e9" stroke-width="2"/>
+
+      <ellipse cx="122" cy="-260" rx="9" ry="4.7" fill="#e6a39c" opacity=".54"/>
+      <g id="eye">
+        <path d="M112-274q4-4 9-2" class="fleece-line" stroke="#b58575" stroke-width="1.4"/>
+        <path d="M113-268q3-5 9-2" class="fleece-line" stroke="#543842" stroke-width="1.45"/>
+        <ellipse cx="118" cy="-268" rx="3.55" ry="4.45" fill="#4b3340"/>
+        <circle cx="119.15" cy="-269.65" r="1.2" fill="#fff8e8"/>
+        <circle cx="116.9" cy="-266.6" r=".54" fill="#dda78f"/>
+      </g>
+      <path d="M157-266c1.5-1 4-.5 4.5 1s-1.2 2.9-2.7 2.2-3-2.2-1.8-3.2Z" fill="#80565d"/>
+      <path d="M160-258q-5 4-11 2" class="fleece-line" stroke="#8b5d61" stroke-width="1.2"/>
+      <path d="M140-270q6-2 11-1" class="fleece-line" stroke="#ffe0c3" stroke-width="1.5"/>
+    </g>
+  </g>
+
+  <g id="foreground">
+    <use href="#foregroundMarks"/>
+    <use href="#foregroundMarks" x="1440"/>
+  </g>
+  <rect class="paper" width="1280" height="720" filter="url(#grain)" opacity=".24"/>
+
+  <g class="editorial" fill="#5d414f">
+    <rect x="30.5" y="30.5" width="1219" height="659" rx="2" fill="none" stroke="#fff3df" opacity=".56"/>
+    <path d="M77 79h23m-11.5-4v8" fill="none" stroke="#795462" stroke-width="1" opacity=".8"/>
+    <text x="111" y="83" class="label">THE ALTIPLANO</text>
+    <text x="72" y="151" class="serif" font-size="69" letter-spacing="-3.5">The quiet</text>
+    <text x="73" y="215" class="serif" font-size="69" font-style="italic" letter-spacing="-3.9">wanderer.</text>
+    <path d="M78 245h43" stroke="#795462" opacity=".57"/>
+    <text x="78" y="267" class="serif" font-size="16" font-style="italic" fill="#705261">First light on the high plateau</text>
+    <text x="78" y="660" class="label" opacity=".83">VICUGNA PACOS</text>
+    <text x="1201" y="660" text-anchor="end" class="label" opacity=".83">FIELD STUDY / 01</text>
+  </g>
+</svg>
+
+<script>
+(() => {
+  "use strict";
+  const ns = "http://www.w3.org/2000/svg";
+  const $ = id => document.getElementById(id);
+  const el = (name, attrs, parent) => {
+    const node = document.createElementNS(ns, name);
+    for (const [key, value] of Object.entries(attrs)) node.setAttribute(key, value);
+    parent.appendChild(node);
+    return node;
+  };
+
+  const body = $("body");
+  const tail = $("tail");
+  const earBack = $("earBack");
+  const earFront = $("earFront");
+  const eye = $("eye");
+  const meadow = $("meadow");
+  const foreground = $("foreground");
+  const tau = 2 * Math.PI;
+  const cycle = 1.48;
+  const stance = .64;
+  const halfStep = 27;
+  const beltSpeed = 1.16 * (2 * halfStep) / (cycle * stance);
+  const mod = (value, period) => ((value % period) + period) % period;
+
+  // A lateral-sequence, four-beat walk: left hind, left fore, right hind, right fore.
+  const legs = [
+    { x: -86, y: -130, floor: -7, phase: .50, upper: 66, lower: 66, bend: 1,  width: 13, far: true },
+    { x:  78, y: -135, floor: -7, phase: .75, upper: 69, lower: 65, bend: -1, width: 12, far: true },
+    { x:-110, y: -135, floor:  5, phase: .00, upper: 72, lower: 71, bend: 1,  width: 17, far: false },
+    { x:  49, y: -140, floor:  5, phase: .25, upper: 76, lower: 73, bend: -1, width: 15, far: false }
+  ];
+
+  for (const leg of legs) {
+    leg.shadow = el("ellipse", { fill: "url(#shade)", ry: 4 }, $("contacts"));
+    const group = el("g", { class: leg.far ? "leg far" : "leg" }, $(leg.far ? "farLegs" : "nearLegs"));
+    leg.coat = el("path", { class: "coat" }, group);
+    leg.light = el("path", { class: "light" }, group);
+    leg.foot = el("g", {}, group);
+    el("path", {
+      class: "hoof",
+      d: "M-6-9Q-1-7 5-8Q9-7 11-4L12-1Q12 1 9 1H-4Q-8 1-8-2Z"
+    }, leg.foot);
+    el("path", {
+      d: "M-4-5Q1-5 5-4M6-3Q7-1 6 1",
+      fill: "none", stroke: "#c99b8a", "stroke-width": ".85", "stroke-linecap": "round", opacity: ".67"
+    }, leg.foot);
+  }
+
+  const point = (x, y) => ({x, y});
+  const offset = (p, n, w) => point(p.x + n.x * w, p.y + n.y * w);
+  const mix = (a, b, w) => point(a.x + (b.x-a.x)*w, a.y + (b.y-a.y)*w);
+  const unit = (x, y) => {
+    const length = Math.hypot(x, y) || 1;
+    return point(x/length, y/length);
+  };
+  const normal = (a, b) => unit(b.y-a.y, a.x-b.x);
+  const xy = p => `${p.x.toFixed(2)} ${p.y.toFixed(2)}`;
+
+  function drawLeg(leg, stride, bob, angle) {
+    const phase = mod(stride - leg.phase, 1);
+    let travel, lift = 0, pitch = 0;
+    if (phase < stance) {
+      // The planted foot travels backward at exactly the speed of the meadow.
+      travel = halfStep * (1 - 2 * phase / stance);
+    } else {
+      const u = (phase - stance) / (1 - stance);
+      // Match the speed at both ends of the swing so toes leave and land without a hitch.
+      const tangent = -2 * halfStep * (1 - stance) / stance;
+      travel = -halfStep + 2 * halfStep * u*u*(3-2*u) + tangent * u*(1-u)*(1-2*u);
+      lift = (leg.bend > 0 ? 25 : 30) * Math.pow(Math.sin(Math.PI * u), 1.8) * (1.12 - .24*u);
+      pitch = -24 * Math.sin(tau * u) * Math.sin(Math.PI * u);
+    }
+
+    const fx = leg.x + travel, fy = leg.floor - lift;
+    const pivotY = -149, c = Math.cos(angle), s = Math.sin(angle);
+    const hip = point(leg.x*c - (leg.y-pivotY)*s, pivotY + bob + leg.x*s + (leg.y-pivotY)*c);
+    const ankle = point(fx + 5*Math.sin(pitch*Math.PI/180), fy - 6);
+    const axis = unit(ankle.x - hip.x, ankle.y - hip.y);
+    const dist = Math.min(Math.hypot(ankle.x-hip.x, ankle.y-hip.y), leg.upper+leg.lower-.01);
+    const along = (leg.upper**2 - leg.lower**2 + dist**2) / (2*dist);
+    const bend = leg.bend * Math.sqrt(Math.max(0, leg.upper**2 - along**2));
+    const knee = point(hip.x + axis.x*along + axis.y*bend, hip.y + axis.y*along - axis.x*bend);
+
+    const n1 = normal(hip, knee), n2 = normal(knee, ankle);
+    const nk = unit(n1.x+n2.x, n1.y+n2.y);
+    const w = leg.width, joint = leg.far ? 8 : 9.5, cuff = leg.far ? 5.15 : 5.9;
+    const a = offset(hip,n1,w), b = offset(knee,nk,joint), c1 = offset(ankle,n2,cuff);
+    const d = offset(ankle,n2,-cuff), e = offset(knee,nk,-joint), f = offset(hip,n1,-w);
+    const mid1 = mix(hip,knee,.54), mid2 = mix(knee,ankle,.58);
+    leg.coat.setAttribute("d",
+      `M${xy(a)} Q${xy(offset(mid1,n1,w*.85))} ${xy(b)}
+       Q${xy(offset(mid2,n2,cuff+1))} ${xy(c1)} Q${fx} ${fy-2} ${xy(d)}
+       Q${xy(offset(mid2,n2,-cuff-1))} ${xy(e)}
+       Q${xy(offset(mid1,n1,-w*.72))} ${xy(f)} Z`);
+    leg.light.setAttribute("d",
+      `M${xy(offset(mix(hip,knee,.49),n1,joint-2))}
+       Q${xy(offset(knee,nk,joint-3))} ${xy(offset(mix(knee,ankle,.76),n2,2.7))}`);
+    leg.foot.setAttribute("transform", `translate(${fx} ${fy}) rotate(${pitch})`);
+    leg.shadow.setAttribute("cx", fx+1);
+    leg.shadow.setAttribute("cy", leg.floor+.5);
+    leg.shadow.setAttribute("rx", 17 + lift*.32);
+    leg.shadow.setAttribute("opacity", Math.max(.16, .85-lift*.025));
+  }
+
+  const start = performance.now();
+  function animate(now) {
+    const t = (now - start) / 1000;
+    const stride = t / cycle + .58;
+    const wave = tau * stride;
+    const bob = 1.8*Math.cos(2*wave+.1) + .55*Math.cos(4*wave-.55);
+    const tilt = .95*Math.sin(2*wave-.7) + .34*Math.sin(wave+.6);
+
+    body.setAttribute("transform", `translate(0 ${bob}) rotate(${tilt} 0 -149)`);
+    tail.setAttribute("transform", `rotate(${4.8*Math.sin(wave-.8)+1.2*Math.sin(2*wave)} -137 -164)`);
+    const flick = Math.pow(Math.max(0,Math.cos(tau*t/7.4+1.2)), 34);
+    earBack.setAttribute("transform", `rotate(${1.8*Math.sin(wave+.8)-8*flick} 90 -296)`);
+    earFront.setAttribute("transform", `rotate(${1.25*Math.sin(wave-.35)+3.7*flick} 118 -297)`);
+    const blinkTime = mod(t+2.8, 5.7);
+    const blink = blinkTime < .16 ? Math.sin(Math.PI*blinkTime/.16)**2 : 0;
+    eye.setAttribute("transform", `translate(0 -268) scale(1 ${1-.95*blink}) translate(0 268)`);
+
+    for (const leg of legs) drawLeg(leg, stride, bob, tilt*Math.PI/180);
+    meadow.setAttribute("transform", `translate(${-mod(t*beltSpeed,1440)} 0)`);
+    foreground.setAttribute("transform", `translate(${-mod(t*beltSpeed*1.26,1440)} 0)`);
+    requestAnimationFrame(animate);
+  }
+  animate(start);
+})();
+</script>
+</body>
+</html>

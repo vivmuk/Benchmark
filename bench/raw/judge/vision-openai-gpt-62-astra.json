@@ -1,0 +1,22 @@
+{
+ "claude-opus-5-5": {
+  "scores": {
+   "subjects": 7.0,
+   "layout": 7.0,
+   "colour": 6.0,
+   "style": 6.0,
+   "overall": 6.0
+  },
+  "note": "All the key elements are present in roughly the right places, but the recreation differs in several ways: a larger near-full moon instead of a thin crescent, a dull brown cloak rather than red, an oversized cactus with only a faint neon outline, a muted sky without the vivid orange horizon glow, and"
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "subjects": 9.0,
+   "layout": 6.0,
+   "colour": 7.0,
+   "style": 7.0,
+   "overall": 6.0
+  },
+  "note": "Nearly all key subjects are present, but the cactus is much larger, the tower ring and monorail have shifted, and the recreation has brighter, broader beams."
+ }
+}

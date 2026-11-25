@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dune Line | Overnight Express to Neo-Cairo</title>
+  <style>
+    :root {
+      --bg-dark: #05020A;
+      --bg-card: rgba(16, 8, 28, 0.65);
+      --sand: #E6B971;
+      --sand-dim: #8A6D3B;
+      --neon-cyan: #00E5FF;
+      --neon-pink: #FF007F;
+      --neon-purple: #B026FF;
+      --text-main: #F8F8FC;
+      --text-muted: #8B8B9E;
+      --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --container: 1200px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--bg-dark);
+      background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* SVG Noise Overlay */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      mix-blend-mode: overlay;
+    }
+
+    ::selection { background: var(--neon-pink); color: #fff; }
+    :focus-visible { outline: 2px solid var(--neon-cyan); outline-offset: 4px; }
+
+    .container {
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 2rem;
+      position: relative;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4 { font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; }
+    .text-gradient {
+      background: linear-gradient(90deg, var(--sand) 0%, var(--neon-pink) 50%, var(--neon-cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .text-sand { color: var(--sand); }
+    .eyebrow {
+      font-family: var(--font-mono);
+      color: var(--neon-cyan);
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem 2rem;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-primary {
+      background: var(--neon-cyan);
+      color: #000;
+      box-shadow: 0 0 20px rgba(0, 229, 255, 0.3);
+    }
+    .btn-primary:hover {
+      background: #fff;
+      box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+      transform: translateY(-2px);
+    }
+    .btn-secondary {
+      background: rgba(255,255,255,0.02);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.2);
+      backdrop-filter: blur(8px);
+    }
+    .btn-secondary:hover {
+      border-color: var(--sand);
+      color: var(--sand);
+      background: rgba(230, 185, 113, 0.05);
+      transform: translateY(-2px);
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.5rem 0;
+      transition: all 0.4s ease;
+      border-bottom: 1px solid transparent;
+    }
+    nav.scrolled {
+      padding: 1rem 0;
+      background: rgba(5, 2, 10, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+    .logo {
+      display: flex; align-items: center; gap: 0.75rem;
+      color: #fff; text-decoration: none;
+      font-weight: 800; font-size: 1.25rem; letter-spacing: 0.05em;
+    }
+    .logo span { font-weight: 300; color: var(--text-muted); }
+    .nav-links { display: flex; gap: 2.5rem; }
+    .nav-links a {
+      color: var(--text-muted); text-decoration: none;
+      font-size: 0.9rem; font-weight: 500; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--neon-cyan); }
+    .btn-nav {
+      background: transparent; color: #fff;
+      border: 1px solid rgba(255,255,255,0.3);
+      padding: 0.6rem 1.25rem; border-radius: 4px;
+      text-decoration: none; font-size: 0.9rem; font-weight: 600;
+      transition: all 0.2s;
+    }
+    .btn-nav:hover { border-color: var(--neon-cyan); color: var(--neon-cyan); }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8rem 0 4rem;
+      overflow: hidden;
+    }
+    .hero-bg-wrapper {
+      position: absolute; inset: 0;
+      z-index: 0; pointer-events: none;
+      background: var(--bg-dark);
+    }
+    .hero-scene {
+      position: absolute; bottom: 0; left: 0;
+      width: 100%; height: 100%;
+      will-change: transform;
+    }
+    .stars-overlay {
+      position: absolute; inset: 0;
+      background-image: 
+        radial-gradient(1px 1px at 15% 25%, #fff, transparent),
+        radial-gradient(1.5px 1.5px at 75% 15%, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1px 1px at 45% 45%, #fff, transparent),
+        radial-gradient(2px 2px at 85% 35%, rgba(0, 229, 255, 0.6), transparent),
+        radial-gradient(1px 1px at 25% 65%, #fff, transparent);
+      background-size: 300px 300px, 250px 250px, 400px 400px, 350px 350px, 200px 200px;
+      animation: twinkle 6s infinite alternate ease-in-out;
+      opacity: 0.6;
+    }
+    @keyframes twinkle { 0% { opacity: 0.3; } 100% { opacity: 0.8; } }
+
+    .hero-content {
+      z-index: 10; text-align: center;
+      max-width: 900px;
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .hero-content::before {
+      content: ''; position: absolute;
+      top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 140%; height: 140%;
+      background: radial-gradient(ellipse at center, rgba(5,2,10,0.7) 0%, transparent 60%);
+      z-index: -1; pointer-events: none;
+    }
+    .badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-family: var(--font-mono); font-size: 0.75rem;
+      letter-spacing: 0.1em; color: var(--sand);
+      border: 1px solid rgba(230, 185, 113, 0.3);
+      background: rgba(230, 185, 113, 0.05);
+      padding: 0.4rem 1rem; border-radius: 20px;
+      margin-bottom: 2rem;
+    }
+    .badge::before {
+      content: ''; width: 6px; height: 6px;
+      background: var(--sand); border-radius: 50%;
+      box-shadow: 0 0 8px var(--sand);
+      animation: pulse 2s infinite;
+    }
+    .hero h1 {
+      font-size: clamp(3.5rem, 7vw, 6rem);
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+    }
+    .hero p {
+      font-size: clamp(1.1rem, 2vw, 1.25rem);
+      color: #D0D0E0; max-width: 650px;
+      margin: 0 auto 2.5rem; font-weight: 300;
+    }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+
+    /* Sections Common */
+    .section { padding: 8rem 0; position: relative; }
+    .section-header { margin-bottom: 4rem; }
+    .section-header h2 { font-size: clamp(2.5rem, 4vw, 3.5rem); }
+    .section-header.center { text-align: center; }
+
+    /* Features */
+    .features-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
+    }
+    .feature-card {
+      background: linear-gradient(145deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px; padding: 2.5rem;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s, box-shadow 0.3s;
+    }
+    .feature-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(0, 229, 255, 0.4);
+      box-shadow: 0 15px 40px -15px rgba(0, 229, 255, 0.15);
+    }
+    .icon-box {
+      width: 48px; height: 48px;
+      border-radius: 12px;
+      background: rgba(0, 229, 255, 0.1);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.5rem; color: var(--neon-cyan);
+    }
+    .feature-card h3 { font-size: 1.25rem; margin-bottom: 1rem; }
+    .feature-card p { color: var(--text-muted); font-size: 0.95rem; }
+
+    /* Timetable */
+    .timetable-board {
+      background: rgba(10, 5, 20, 0.7);
+      border: 1px solid rgba(0, 229, 255, 0.15);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5), inset 0 0 30px rgba(0, 229, 255, 0.03);
+      font-family: var(--font-mono);
+      backdrop-filter: blur(10px);
+    }
+    .tt-title-bar {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1rem 1.5rem;
+      background: rgba(255,255,255,0.02);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      font-size: 0.8rem; letter-spacing: 0.1em; color: var(--text-muted);
+    }
+    .live-clock span { color: var(--neon-cyan); }
+    .tt-header {
+      display: grid; grid-template-columns: 1fr 1fr 1.5fr 1fr;
+      padding: 1rem 1.5rem;
+      background: rgba(0, 229, 255, 0.03);
+      color: var(--neon-cyan); font-size: 0.75rem; letter-spacing: 0.15em;
+      border-bottom: 1px solid rgba(0, 229, 255, 0.15);
+    }
+    .tt-row {
+      display: grid; grid-template-columns: 1fr 1fr 1.5fr 1fr;
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      align-items: center; transition: background 0.2s;
+    }
+    .tt-row:last-child { border-bottom: none; }
+    .tt-row:hover { background: rgba(0, 229, 255, 0.04); }
+    .tt-time { font-size: 1.25rem; color: #fff; font-weight: 600; }
+    .tt-time.dim { color: var(--text-muted); font-weight: 400; }
+    .tt-vessel { color: #D0D0E0; font-size: 0.9rem; }
+    .tt-vessel span {
+      color: var(--sand); font-family: var(--font-sans);
+      font-style: italic; font-size: 0.85rem; margin-left: 0.75rem; opacity: 0.9;
+    }
+    .tt-status {
+      display: flex; align-items: center; gap: 0.6rem;
+      font-size: 0.8rem; color: #4ade80; letter-spacing: 0.05em;
+    }
+    .tt-row:nth-child(5) .tt-status { color: var(--sand); }
+    .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: currentColor; box-shadow: 0 0 10px currentColor;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+    /* Pricing */
+    .pricing-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 2rem; align-items: center;
+    }
+    .price-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px; padding: 2.5rem;
+      position: relative; backdrop-filter: blur(10px);
+    }
+    .price-card.popular {
+      border: 1px solid var(--neon-pink);
+      box-shadow: 0 0 40px rgba(255, 0, 127, 0.12);
+      transform: scale(1.05);
+      background: linear-gradient(180deg, rgba(255,0,127,0.06), var(--bg-card));
+      z-index: 2;
+    }
+    .popular-badge {
+      position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+      background: var(--neon-pink); color: #fff;
+      font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.1em; padding: 5px 14px; border-radius: 20px;
+      box-shadow: 0 0 15px rgba(255, 0, 127, 0.5);
+      white-space: nowrap;
+    }
+    .price-card h3 { font-size: 1.5rem; }
+    .price-card .desc { color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem; }
+    .price { font-size: 3rem; font-weight: 800; color: #fff; margin: 1.5rem 0; }
+    .price span { font-size: 1rem; color: var(--text-muted); font-weight: 400; font-family: var(--font-sans); }
+    .feature-list { list-style: none; margin: 2rem 0; }
+    .feature-list li {
+      padding: 0.8rem 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+      color: #D0D0E0; font-size: 0.9rem; display: flex; align-items: center; gap: 0.75rem;
+    }
+    .feature-list li:last-child { border-bottom: none; }
+    .feature-list li::before { content: '✦'; color: var(--neon-cyan); font-size: 0.8rem; }
+    .price-card.popular .feature-list li::before { color: var(--neon-pink); }
+
+    /* Testimonial */
+    .testimonial-section { padding: 8rem 0; text-align: center; position: relative; }
+    .testimonial-section::before {
+      content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 1px; height: 80px;
+      background: linear-gradient(180deg, transparent, var(--neon-pink));
+    }
+    .quote-mark {
+      font-family: Georgia, serif; font-size: 8rem; line-height: 1;
+      color: var(--neon-pink); opacity: 0.15; margin-bottom: -2.5rem;
+    }
+    blockquote {
+      font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 300;
+      line-height: 1.5; max-width: 850px; margin: 0 auto 3rem; color: #fff;
+    }
+    .author { display: flex; align-items: center; justify-content: center; gap: 1rem; }
+    .avatar {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--sand), var(--neon-pink));
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; color: #000; font-size: 1.1rem;
+      box-shadow: 0 0 15px rgba(255, 0, 127, 0.3);
+    }
+    .author-info { text-align: left; }
+    .author-info strong { display: block; font-size: 1rem; }
+    .author-info span { font-size: 0.8rem; color: var(--text-muted); font-family: var(--font-mono); letter-spacing: 0.05em; }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid transparent;
+      border-image: linear-gradient(90deg, transparent, var(--sand), var(--neon-pink), var(--neon-cyan), transparent) 1;
+      padding: 5rem 0 2rem;
+      background: #020105;
+      position: relative;
+    }
+    .footer-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 4rem; margin-bottom: 4rem; }
+    .footer-brand p { color: var(--text-muted); font-size: 0.9rem; margin-top: 1rem; max-width: 300px; }
+    .footer-links { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+    .link-col h4 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; color: #fff; margin-bottom: 1.5rem; }
+    .link-col a { display: block; color: var(--text-muted); text-decoration: none; font-size: 0.9rem; margin-bottom: 0.75rem; transition: color 0.2s; }
+    .link-col a:hover { color: var(--neon-cyan); }
+    .footer-bottom {
+      display: flex; justify-content: space-between; align-items: center;
+      padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.05);
+      font-family: var(--font-mono); font-size: 0.75rem; color: #55556A;
+    }
+
+    /* Reveal Animations */
+    .reveal {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .delay-1 { transition-delay: 0.1s; }
+    .delay-2 { transition-delay: 0.2s; }
+    .delay-3 { transition-delay: 0.3s; }
+    /* Fix for popular card transform conflict with reveal */
+    .price-card.popular.reveal { transform: scale(1.05) translateY(30px); }
+    .price-card.popular.reveal.visible { transform: scale(1.05) translateY(0); }
+
+    /* Responsive */
+    @media (max-width: 960px) {
+      .features-grid, .pricing-grid { grid-template-columns: 1fr; max-width: 450px; margin: 0 auto; }
+      .price-card.popular { transform: scale(1); }
+      .price-card.popular.reveal { transform: translateY(30px); }
+      .price-card.popular.reveal.visible { transform: translateY(0); }
+      .nav-links { display: none; }
+      .footer-grid { grid-template-columns: 1fr; gap: 3rem; }
+    }
+    @media (max-width: 640px) {
+      .tt-header { display: none; }
+      .tt-row { grid-template-columns: 1fr 1fr; gap: 1rem; padding: 1.5rem; }
+      .tt-vessel { grid-column: 1 / -1; }
+      .tt-status { grid-column: 1 / -1; margin-top: 0.5rem; }
+      .footer-links { grid-template-columns: 1fr 1fr; }
+      .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+      .hero-actions { flex-direction: column; width: 100%; }
+      .hero-actions .btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav id="navbar">
+    <div class="container nav-inner">
+      <a href="#" class="logo">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round">
+          <path d="M2 18 Q 12 4, 22 18" stroke="var(--sand)"/>
+          <line x1="2" y1="22" x2="22" y2="22" stroke="var(--neon-cyan)"/>
+          <circle cx="12" cy="10" r="3" fill="var(--neon-pink)" stroke="none"/>
+        </svg>
+        DUNE<span>LINE</span>
+      </a>
+      <div class="nav-links">
+        <a href="#experience">Experience</a>
+        <a href="#schedule">Timetable</a>
+        <a href="#pricing">Cabins</a>
+      </div>
+      <a href="#pricing" class="btn-nav">Book Passage</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero" id="home">
+    <div class="hero-bg-wrapper">
+      <div class="stars-overlay"></div>
+      <!-- Unified Code-Drawn Illustration -->
+      <svg class="hero-scene" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#05020A"/>
+            <stop offset="50%" stop-color="#160A2B"/>
+            <stop offset="100%" stop-color="#3D0D4F"/>
+          </linearGradient>
+          <linearGradient id="sunGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#FF007F"/>
+            <stop offset="50%" stop-color="#B026FF"/>
+            <stop offset="100%" stop-color="#00E5FF"/>
+          </linearGradient>
+          <linearGradient id="gridGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#00E5FF" stop-opacity="0.7"/>
+            <stop offset="100%" stop-color="#00E5FF" stop-opacity="0"/>
+          </linearGradient>
+          <linearGradient id="duneGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#160A2B"/>
+            <stop offset="100%" stop-color="#05020A"/>
+          </linearGradient>
+
+          <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="8" result="blur"/>
+            <feMerge>
+              <feMergeNode in="blur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+
+          <mask id="sunMask">
+            <rect x="0" y="0" width="1440" height="900" fill="white"/>
+            <!-- Synthwave horizontal cuts -->
+            <rect x="0" y="550" width="1440" height="3" fill="black"/>
+            <rect x="0" y="570" width="1440" height="5" fill="black"/>
+            <rect x="0" y="595" width="1440" height="7" fill="black"/>
+            <rect x="0" y="625" width="1440" height="10" fill="black"/>
+            <rect x="0" y="660" width="1440" height="14" fill="black"/>
+            <rect x="0" y="700" width="1440" height="20" fill="black"/>
+            <rect x="0" y="750" width="1440" height="28" fill="black"/>
+            <rect x="0" y="810" width="1440" height="40" fill="black"/>
+          </mask>
+        </defs>
+
+        <!-- Sky Base -->
+        <rect width="1440" height="900" fill="url(#skyGrad)"/>
+
+        <!-- Static Bright Stars -->
+        <g fill="#FFF" opacity="0.7">
+          <circle cx="180" cy="120" r="1.5"/><circle cx="420" cy="60" r="1"/>
+          <circle cx="850" cy="180" r="2"/><circle cx="1150" cy="90" r="1.5"/>
+          <circle cx="1350" cy="220" r="1"/><circle cx="80" cy="320" r="2"/>
+          <circle cx="620" cy="250" r="1"/><circle cx="980" cy="40" r="1.5"/>
+          <circle cx="300" cy="200" r="1"/><circle cx="1050" cy="300" r="1.5"/>
+        </g>
+
+        <!-- Neon Sun / Portal (Horizon at y=500) -->
+        <circle cx="720" cy="500" r="260" fill="url(#sunGrad)" mask="url(#sunMask)" filter="url(#glow)"/>
+
+        <!-- Horizon Glow Line -->
+        <rect x="0" y="498" width="1440" height="4" fill="#00E5FF" filter="url(#glow)"/>
+
+        <!-- Perspective Neon Grid -->
+        <g stroke="url(#gridGrad)" stroke-width="1.5">
+          <!-- Converging Lines -->
+          <line x1="720" y1="500" x2="-300" y2="900"/>
+          <line x1="720" y1="500" x2="0" y2="900"/>
+          <line x1="720" y1="500" x2="250" y2="900"/>
+          <line x1="720" y1="500" x2="450" y2="900"/>
+          <line x1="720" y1="500" x2="600" y2="900"/>
+          <line x1="720" y1="500" x2="720" y2="900"/>
+          <line x1="720" y1="500" x2="840" y2="900"/>
+          <line x1="720" y1="500" x2="990" y2="900"/>
+          <line x1="720" y1="500" x2="1190" y2="900"/>
+          <line x1="720" y1="500" x2="1440" y2="900"/>
+          <line x1="720" y1="500" x2="1740" y2="900"/>
+          <!-- Accelerating Horizontal Lines -->
+          <line x1="0" y1="515" x2="1440" y2="515"/>
+          <line x1="0" y1="535" x2="1440" y2="535"/>
+          <line x1="0" y1="565" x2="1440" y2="565"/>
+          <line x1="0" y1="610" x2="1440" y2="610"/>
+          <line x1="0" y1="675" x2="1440" y2="675"/>
+          <line x1="0" y1="770" x2="1440" y2="770"/>
+          <line x1="0" y1="890" x2="1440" y2="890"/>
+        </g>
+
+        <!-- Foreground Desert Dunes -->
+        <!-- Back Dune -->
+        <path d="M0 600 Q 350 500, 700 620 T 1440 560 L 1440 900 L 0 900 Z" fill="url(#duneGrad)"/>
+        <path d="M0 600 Q 350 500, 700 620 T 1440 560" fill="none" stroke="#E6B971" stroke-width="2" opacity="0.5" filter="url(#glow)"/>
+        
+        <!-- Micro-detail: Train silhouette crossing the rim -->
+        <g transform="translate(310, 526) rotate(-5)">
+          <rect x="0" y="0" width="70" height="7" rx="3.5" fill="#020105"/>
+          <rect x="8" y="2" width="8" height="3" rx="1" fill="var(--neon-cyan)" opacity="0.9"/>
+          <rect x="22" y="2" width="8" height="3" rx="1" fill="var(--neon-cyan)" opacity="0.9"/>
+          <rect x="36" y="2" width="8" height="3" rx="1" fill="var(--neon-cyan)" opacity="0.9"/>
+          <rect x="50" y="2" width="8" height="3" rx="1" fill="var(--neon-cyan)" opacity="0.9"/>
+        </g>
+
+        <!-- Front Dune Silhouette -->
+        <path d="M0 720 Q 400 820, 850 680 T 1440 740 L 1440 900 L 0 900 Z" fill="#020105"/>
+      </svg>
+    </div>
+
+    <div class="container hero-content">
+      <div class="badge">NOW BOARDING • NIGHTLY SERVICE</div>
+      <h1>THE DESERT<br><span class="text-gradient">MEETS THE NEON</span></h1>
+      <p>Board the Dune Line. A silent, overnight mag-lev journey from the ancient sands to the electric pulse of Neo-Cairo. Sleep in absolute darkness. Wake in pure light.</p>
+      <div class="hero-actions">
+        <a href="#pricing" class="btn btn-primary">Reserve Cabin</a>
+        <a href="#schedule" class="btn btn-secondary">View Timetable</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Features Section -->
+  <section id="experience" class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="eyebrow">01 / The Journey</span>
+        <h2>Engineered for the <br><span class="text-sand">In-Between</span></h2>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card reveal delay-1">
+          <div class="icon-box">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 16a10 10 0 0120 0"/>
+              <line x1="2" y1="16" x2="22" y2="16"/>
+              <path d="M12 6v2M8 8l1 1M16 8l-1 1M5 12l1.5.5M19 12l-1.5.5"/>
+            </svg>
+          </div>
+          <h3>Panoramic Stargazing</h3>
+          <p>Light-pollution free routing. Floor-to-ceiling electro-chromic glass dissolves at dusk for absolute immersion in the silent desert sky.</p>
+        </div>
+        <div class="feature-card reveal delay-2">
+          <div class="icon-box">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="4" y="6" width="16" height="8" rx="2"/>
+              <path d="M8 14v2M16 14v2"/>
+              <path d="M2 19c2 0 2-2 4-2s2 2 4 2 2-2 4-2 2 2 4 2 2-2 4-2" opacity="0.6"/>
+              <path d="M2 22c2 0 2-2 4-2s2 2 4 2 2-2 4-2 2 2 4 2 2-2 4-2" opacity="0.3"/>
+            </svg>
+          </div>
+          <h3>Silent Mag-Lev</h3>
+          <p>Zero friction. Zero sound. Our quantum-suspension glides 40cm above the dunes at 400km/h. You will only hear your own breath.</p>
+        </div>
+        <div class="feature-card reveal delay-3">
+          <div class="icon-box">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 22V8a8 8 0 0116 0v14"/>
+              <line x1="2" y1="22" x2="22" y2="22"/>
+              <path d="M9 22v-6h6v6"/>
+              <circle cx="12" cy="10" r="1.5" fill="currentColor" stroke="none"/>
+            </svg>
+          </div>
+          <h3>Neon Arrival</h3>
+          <p>Transition seamlessly. Onboard biometric clearing means you step off the train directly into the glowing archways of the Neo-Cairo lounge.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Timetable Section -->
+  <section id="schedule" class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="eyebrow">02 / Nightly Departures</span>
+        <h2>The <span class="text-sand">Midnight</span> Manifest</h2>
+      </div>
+      
+      <div class="timetable-board reveal delay-1">
+        <div class="tt-title-bar">
+          <div class="tt-title">DUNE STATION // TERMINAL 4</div>
+          <div class="live-clock">STATION TIME: <span id="clock">00:00:00</span></div>
+        </div>
+        <div class="tt-header">
+          <span>DEP</span>
+          <span>ARR</span>
+          <span>VESSEL</span>
+          <span>STATUS</span>
+        </div>
+        <div class="tt-row">
+          <span class="tt-time">20:00</span>
+          <span class="tt-time dim">06:00</span>
+          <span class="tt-vessel">DL-101 <span>The Mirage</span></span>
+          <span class="tt-status"><span class="dot"></span> BOARDING</span>
+        </div>
+        <div class="tt-row">
+          <span class="tt-time">21:30</span>
+          <span class="tt-time dim">07:30</span>
+          <span class="tt-vessel">DL-204 <span>The Oasis</span></span>
+          <span class="tt-status"><span class="dot"></span> ON TIME</span>
+        </div>
+        <div class="tt-row">
+          <span class="tt-time">23:15</span>
+          <span class="tt-time dim">09:15</span>
+          <span class="tt-vessel">DL-308 <span>The Sirius</span></span>
+          <span class="tt-status"><span class="dot"></span> ON TIME</span>
+        </div>
+        <div class="tt-row">
+          <span class="tt-time">01:00</span>
+          <span class="tt-time dim">11:00</span>
+          <span class="tt-vessel">DL-412 <span>The Phantom</span></span>
+          <span class="tt-status"><span class="dot"></span> SCHEDULED</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section id="pricing" class="section">
+    <div class="container">
+      <div class="section-header center reveal">
+        <span class="eyebrow">03 / Accommodations</span>
+        <h2>Choose Your <span class="text-sand">Sanctuary</span></h2>
+      </div>
+      <div class="pricing-grid">
+        
+        <div class="price-card reveal delay-1">
+          <h3>Standard Pod</h3>
+          <p class="desc">Efficient, dark, silent.</p>
+          <div class="price">$199<span> / passage</span></div>
+          <ul class="feature-list">
+            <li>Windowless deep-sleep pod</li>
+            <li>Zero-gravity memory foam</li>
+            <li>Standard arrival clearing</li>
+            <li>Ambient temperature control</li>
+          </ul>
+          <a href="#" class="btn btn-secondary" style="width: 100%;">Select Pod</a>
+        </div>
+
+        <div class="price-card popular reveal delay-2">
+          <div class="popular-badge">MOST POPULAR</div>
+          <h3>Dome Car</h3>
+          <p class="desc">Sleep beneath the cosmos.</p>
+          <div class="price">$349<span> / passage</span></div>
+          <ul class="feature-list">
+            <li>Panoramic electro-chromic glass</li>
+            <li>Desert stargazing mode</li>
+            <li>Complimentary night cap</li>
+            <li>Priority arrival clearing</li>
+            <li>In-cabin climate simulation</li>
+          </ul>
+          <a href="#" class="btn btn-primary" style="width: 100%;">Select Dome</a>
+        </div>
+
+        <div class="price-card reveal delay-3">
+          <h3>Oasis Suite</h3>
+          <p class="desc">The ultimate crossing.</p>
+          <div class="price">$599<span> / passage</span></div>
+          <ul class="feature-list">
+            <li>Private 2-room lounge</li>
+            <li>Personal voyage concierge</li>
+            <li>Neon Lounge direct access</li>
+            <li>Heli-transfer on arrival</li>
+            <li>Custom circadian lighting</li>
+          </ul>
+          <a href="#" class="btn btn-secondary" style="width: 100%;">Select Suite</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonial Section -->
+  <section class="testimonial-section">
+    <div class="container reveal">
+      <div class="quote-mark">"</div>
+      <blockquote>
+        I fell asleep watching the silent dunes under a billion stars, and woke up to a skyline burning pink and cyan. It’s not a train. It’s a time machine.
+      </blockquote>
+      <div class="author">
+        <div class="avatar">EV</div>
+        <div class="author-info">
+          <strong>Elara V.</strong>
+          <span>Frequent Voyager • 14 Crossings</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="logo" style="margin-bottom: 1rem;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round">
+            <path d="M2 18 Q 12 4, 22 18" stroke="var(--sand)"/>
+            <line x1="2" y1="22" x2="22" y2="22" stroke="var(--neon-cyan)"/>
+            <circle cx="12" cy="10" r="3" fill="var(--neon-pink)" stroke="none"/>
+          </svg>
+          DUNE<span>LINE</span>
+        </a>
+        <p>The overnight express from the ancient sands to the electric pulse of tomorrow.</p>
+      </div>
+      <div class="footer-links">
+        <div class="link-col">
+          <h4>Voyage</h4>
+          <a href="#">Route Map</a>
+          <a href="#">Fleet Specs</a>
+          <a href="#schedule">Timetable</a>
+        </div>
+        <div class="link-col">
+          <h4>Company</h4>
+          <a href="#">About Us</a>
+          <a href="#">Careers</a>
+          <a href="#">Press Kit</a>
+        </div>
+        <div class="link-col">
+          <h4>Legal</h4>
+          <a href="#">Terms of Passage</a>
+          <a href="#">Privacy Protocol</a>
+        </div>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <span>© 2045 Dune Line Mag-Lev Corp. All rights reserved.</span>
+      <span>Designed in the dark.</span>
+    </div>
+  </footer>
+
+  <script>
+    // Live Station Clock
+    function updateClock() {
+      const now = new Date();
+      const timeString = now.toLocaleTimeString('en-GB', { hour12: false });
+      const clockEl = document.getElementById('clock');
+      if (clockEl) clockEl.textContent = timeString;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // Navigation Scroll State
+    const nav = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    }, { passive: true });
+
+    // Buttery Smooth Hero Parallax
+    const scene = document.querySelector('.hero-scene');
+    let mouseX = 0, mouseY = 0;
+    let currX = 0, currY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+      mouseX = (e.clientX / window.innerWidth - 0.5) * 30;
+      mouseY = (e.clientY / window.innerHeight - 0.5) * 30;
+    }, { passive: true });
+
+    function animateParallax() {
+      currX += (mouseX - currX) * 0.06;
+      currY += (mouseY - currY) * 0.06;
+      if (scene) {
+        scene.style.transform = `scale(1.04) translate(${currX}px, ${currY}px)`;
+      }
+      requestAnimationFrame(animateParallax);
+    }
+    // Only run parallax on non-touch devices for performance
+    if (window.matchMedia("(pointer: fine)").matches) {
+      animateParallax();
+    }
+
+    // Intersection Observer for Scroll Reveals
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: "0px 0px -50px 0px"
+    };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal').forEach(el => {
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>

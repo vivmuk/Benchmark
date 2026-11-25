@@ -1,0 +1,20 @@
+{
+ "claude-opus-5-5": {
+  "scores": {
+   "alpaca": 8.0,
+   "motion": 3.0,
+   "beauty": 8.0,
+   "scene": 8.0
+  },
+  "note": "A charming, well-proportioned fleecy alpaca with a woven saddle blanket sits in a polished, tastefully muted Andean scene, but the walk barely registers: frames 1 and 2 show an essentially identical leg pose (only the foreground grass shifts), frame 3 changes the legs only modestly, and the swaying "
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "alpaca": 8.0,
+   "motion": 2.0,
+   "beauty": 9.0,
+   "scene": 9.0
+  },
+  "note": "The alpaca and Andean landscape are beautifully crafted, but the first two poses are nearly identical and the third shows only slight leg movement."
+ }
+}

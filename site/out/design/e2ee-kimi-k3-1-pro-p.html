@@ -1,0 +1,2211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Dune Line — the overnight train from the open desert to the neon city of Nocturne.">
+  <meta name="theme-color" content="#141018">
+  <title>Dune Line — Leave at dusk. Wake in neon.</title>
+  <style>
+    :root {
+      --night: #141018;
+      --night-raised: #201a26;
+      --night-line: #39313f;
+      --paper: #f3efe7;
+      --paper-deep: #e8e0d5;
+      --ink: #211a24;
+      --muted: #736b74;
+      --sand: #d8b286;
+      --ember: #ed9a73;
+      --copper: #a65338;
+      --lilac: #c6afff;
+      --white: #fffaf2;
+      --serif: "Iowan Old Style", "Baskerville", "Times New Roman", Georgia, serif;
+      --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--night);
+      color: var(--white);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    ::selection {
+      color: var(--night);
+      background: var(--ember);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button, a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    img, svg {
+      display: block;
+    }
+
+    h1, h2, h3, p, figure, blockquote {
+      margin: 0;
+    }
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .shell {
+      width: min(1184px, calc(100% - 96px));
+      margin-inline: auto;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .skip-link {
+      position: fixed;
+      top: 12px;
+      left: 12px;
+      z-index: 1000;
+      padding: 12px 18px;
+      color: var(--night);
+      background: var(--white);
+      transform: translateY(-160%);
+      transition: transform 180ms ease;
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--ember);
+      outline-offset: 5px;
+    }
+
+    #experience, #timetable, #fares {
+      scroll-margin-top: 20px;
+    }
+
+    /* Header */
+    .site-header {
+      position: relative;
+      z-index: 20;
+      background: var(--night);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.11);
+    }
+
+    .header-inner {
+      position: relative;
+      min-height: 84px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      flex: 0 0 auto;
+    }
+
+    .brand-mark {
+      width: 35px;
+      height: 35px;
+      color: var(--ember);
+    }
+
+    .brand-name {
+      font-size: 14px;
+      line-height: 1;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+    }
+
+    .brand-name span {
+      font-weight: 400;
+    }
+
+    .brand-edition {
+      margin-left: 4px;
+      padding-left: 16px;
+      border-left: 1px solid var(--night-line);
+      color: #948b99;
+      font-size: 9px;
+      line-height: 1.35;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .main-nav {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .main-nav > a:not(.nav-cta) {
+      position: relative;
+      color: #c2bbc6;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      transition: color 180ms ease;
+    }
+
+    .main-nav > a:not(.nav-cta)::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: -8px;
+      left: 0;
+      height: 1px;
+      background: var(--ember);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 180ms ease;
+    }
+
+    .main-nav > a:not(.nav-cta):hover {
+      color: var(--white);
+    }
+
+    .main-nav > a:not(.nav-cta):hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 22px;
+      min-height: 42px;
+      padding: 0 17px;
+      border: 1px solid #625768;
+      color: var(--white);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: background 180ms ease, border-color 180ms ease;
+    }
+
+    .nav-cta:hover {
+      background: rgba(255, 255, 255, 0.07);
+      border-color: var(--ember);
+    }
+
+    .menu-toggle {
+      display: none;
+      width: 44px;
+      height: 44px;
+      padding: 0;
+      border: 1px solid var(--night-line);
+      color: var(--white);
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 18px;
+      height: 1px;
+      margin: 5px auto;
+      background: currentColor;
+      transition: transform 180ms ease;
+    }
+
+    .menu-toggle[aria-expanded="true"] span:first-child {
+      transform: translateY(3px) rotate(45deg);
+    }
+
+    .menu-toggle[aria-expanded="true"] span:last-child {
+      transform: translateY(-3px) rotate(-45deg);
+    }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 60px 0 62px;
+      background:
+        radial-gradient(circle at 86% 12%, rgba(114, 78, 139, 0.13), transparent 29%),
+        var(--night);
+    }
+
+    .hero-top {
+      display: grid;
+      grid-template-columns: minmax(0, 1.55fr) minmax(300px, 0.65fr);
+      gap: 80px;
+      align-items: end;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--copper);
+      font-size: 10px;
+      line-height: 1.4;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 28px;
+      height: 1px;
+      flex: 0 0 auto;
+      background: currentColor;
+    }
+
+    .hero .eyebrow {
+      margin-bottom: 24px;
+      color: var(--ember);
+    }
+
+    .hero h1 {
+      max-width: 790px;
+      font-family: var(--serif);
+      font-size: clamp(66px, 7.15vw, 92px);
+      line-height: 0.96;
+      font-weight: 400;
+      letter-spacing: -0.055em;
+    }
+
+    .hero h1 em {
+      color: var(--lilac);
+      font-weight: 400;
+    }
+
+    .hero-intro {
+      padding-bottom: 4px;
+    }
+
+    .journey-code {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      color: #e5dce8;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .journey-code .arrow {
+      color: var(--ember);
+      font-size: 17px;
+      font-weight: 400;
+    }
+
+    .hero-description {
+      max-width: 400px;
+      color: #b8afbd;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 24px;
+      margin-top: 26px;
+    }
+
+    .button-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+      min-height: 50px;
+      padding: 0 20px;
+      color: #211720;
+      background: var(--ember);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.025em;
+      transition: background 180ms ease, transform 180ms ease;
+    }
+
+    .button-primary:hover {
+      background: #ffb18c;
+      transform: translateY(-2px);
+    }
+
+    .text-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 8px 0;
+      color: #d3cbd7;
+      border-bottom: 1px solid #514654;
+      font-size: 12px;
+      transition: border-color 180ms ease, color 180ms ease;
+    }
+
+    .text-link:hover {
+      color: var(--white);
+      border-color: var(--ember);
+    }
+
+    .hero-price-note {
+      margin-top: 17px;
+      color: #857c8a;
+      font-size: 10px;
+      letter-spacing: 0.055em;
+    }
+
+    .hero-visual {
+      position: relative;
+      aspect-ratio: 1200 / 440;
+      margin-top: 52px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      border-radius: 3px;
+      background: #191421;
+    }
+
+    .hero-art {
+      width: 100%;
+      height: 100%;
+    }
+
+    .art-label {
+      position: absolute;
+      z-index: 2;
+      top: 22px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255, 250, 242, 0.75);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      pointer-events: none;
+    }
+
+    .art-label.left {
+      left: 24px;
+    }
+
+    .art-label.right {
+      right: 24px;
+      color: rgba(222, 211, 234, 0.66);
+    }
+
+    .live-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--ember);
+      box-shadow: 0 0 0 4px rgba(237, 154, 115, 0.12);
+    }
+
+    .crossing-label {
+      position: absolute;
+      bottom: 20px;
+      left: 22px;
+      z-index: 2;
+      padding: 10px 13px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(20, 16, 24, 0.57);
+      backdrop-filter: blur(8px);
+      pointer-events: none;
+    }
+
+    .crossing-label small {
+      display: block;
+      margin-bottom: 3px;
+      color: #a69aa9;
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: 0.17em;
+      text-transform: uppercase;
+    }
+
+    .crossing-label span {
+      color: #f4e9df;
+      font-family: var(--serif);
+      font-size: 17px;
+      letter-spacing: 0.02em;
+    }
+
+    .art-coordinate {
+      position: absolute;
+      right: 24px;
+      bottom: 23px;
+      z-index: 2;
+      color: rgba(241, 224, 213, 0.48);
+      font-size: 8px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      pointer-events: none;
+    }
+
+    /* Shared section headings */
+    .section-heading {
+      display: grid;
+      grid-template-columns: minmax(0, 1.45fr) minmax(280px, 0.55fr);
+      gap: 80px;
+      align-items: end;
+    }
+
+    .section-heading .eyebrow {
+      margin-bottom: 20px;
+    }
+
+    .section-heading h2 {
+      max-width: 720px;
+      font-family: var(--serif);
+      font-size: clamp(43px, 4.6vw, 60px);
+      line-height: 1.03;
+      font-weight: 400;
+      letter-spacing: -0.04em;
+    }
+
+    .section-heading > p {
+      max-width: 390px;
+      padding-bottom: 4px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    /* Experience */
+    .experience {
+      padding: 110px 0 112px;
+      color: var(--ink);
+      background: var(--paper);
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 48px;
+      margin-top: 76px;
+    }
+
+    .feature {
+      padding-top: 22px;
+      border-top: 1px solid #cec5b9;
+    }
+
+    .feature-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      min-height: 100px;
+    }
+
+    .feature-number {
+      padding-top: 5px;
+      color: #8d8189;
+      font-family: var(--serif);
+      font-size: 13px;
+      font-style: italic;
+    }
+
+    .feature-icon {
+      width: 93px;
+      height: 93px;
+      color: #7f493d;
+    }
+
+    .feature h3 {
+      margin-top: 29px;
+      font-family: var(--serif);
+      font-size: 27px;
+      line-height: 1.15;
+      font-weight: 400;
+      letter-spacing: -0.025em;
+    }
+
+    .feature p {
+      max-width: 330px;
+      margin-top: 15px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.75;
+    }
+
+    /* Timetable */
+    .timetable-wrap {
+      margin-top: 106px;
+      padding-top: 78px;
+      border-top: 1px solid #d2c8bc;
+    }
+
+    .timetable-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 40px;
+    }
+
+    .timetable-heading .eyebrow {
+      margin-bottom: 17px;
+    }
+
+    .timetable-heading h2 {
+      font-family: var(--serif);
+      font-size: clamp(42px, 4.2vw, 56px);
+      line-height: 1;
+      font-weight: 400;
+      letter-spacing: -0.04em;
+    }
+
+    .route-note {
+      padding-bottom: 4px;
+      text-align: right;
+    }
+
+    .route-note strong {
+      display: block;
+      color: #473b45;
+      font-size: 10px;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .route-note span {
+      display: block;
+      margin-top: 6px;
+      color: #867b83;
+      font-size: 11px;
+    }
+
+    .schedule {
+      width: 100%;
+      margin-top: 45px;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+
+    .schedule th {
+      padding: 0 12px 15px;
+      color: #8b7f86;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-align: left;
+      text-transform: uppercase;
+    }
+
+    .schedule th:first-child,
+    .schedule td:first-child {
+      padding-left: 0;
+    }
+
+    .schedule th:nth-child(1) { width: 17%; }
+    .schedule th:nth-child(2) { width: 20%; }
+    .schedule th:nth-child(3) { width: 20%; }
+    .schedule th:nth-child(4) { width: 12%; }
+    .schedule th:nth-child(5) { width: 23%; }
+    .schedule th:nth-child(6) { width: 8%; }
+
+    .schedule tbody tr {
+      border-top: 1px solid #d6cdc1;
+      transition: background 180ms ease;
+    }
+
+    .schedule tbody tr:last-child {
+      border-bottom: 1px solid #d6cdc1;
+    }
+
+    .schedule td {
+      padding: 23px 12px;
+      vertical-align: middle;
+    }
+
+    .service-name strong {
+      display: block;
+      color: #2b212b;
+      font-size: 12px;
+      letter-spacing: 0.11em;
+    }
+
+    .service-name span {
+      display: block;
+      margin-top: 4px;
+      color: #8a7d84;
+      font-family: var(--serif);
+      font-size: 14px;
+      font-style: italic;
+    }
+
+    .time-cell time {
+      display: block;
+      color: #2b212b;
+      font-family: var(--serif);
+      font-size: 28px;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -0.02em;
+    }
+
+    .time-cell span {
+      display: block;
+      margin-top: 7px;
+      color: #877b82;
+      font-size: 10px;
+    }
+
+    .duration {
+      color: #5f535b;
+      font-size: 12px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .availability {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #5a5057;
+      font-size: 11px;
+      white-space: nowrap;
+    }
+
+    .availability::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      background: #56836b;
+    }
+
+    .availability.limited::before {
+      background: #c57445;
+    }
+
+    .row-action {
+      text-align: right;
+    }
+
+    .row-action a {
+      display: inline-grid;
+      width: 42px;
+      height: 42px;
+      place-items: center;
+      border: 1px solid #bfb3a9;
+      border-radius: 50%;
+      color: #493a43;
+      transition: color 180ms ease, background 180ms ease, border-color 180ms ease;
+    }
+
+    .row-action a:hover {
+      color: var(--paper);
+      background: var(--ink);
+      border-color: var(--ink);
+    }
+
+    .schedule-note {
+      margin-top: 18px;
+      color: #8a7e85;
+      font-size: 10px;
+      line-height: 1.6;
+    }
+
+    /* Fares */
+    .fares {
+      padding: 112px 0 120px;
+      background:
+        radial-gradient(circle at 80% 2%, rgba(133, 95, 158, 0.12), transparent 30%),
+        var(--night);
+    }
+
+    .fares .eyebrow {
+      color: var(--ember);
+    }
+
+    .fares .section-heading > p {
+      color: #a99fac;
+    }
+
+    .fare-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      align-items: stretch;
+      margin-top: 76px;
+    }
+
+    .fare-card {
+      position: relative;
+      display: flex;
+      min-height: 514px;
+      flex-direction: column;
+      padding: 32px;
+      border: 1px solid var(--night-line);
+      background: rgba(255, 255, 255, 0.018);
+    }
+
+    .fare-card.featured {
+      top: -14px;
+      min-height: 542px;
+      color: var(--ink);
+      background: var(--paper);
+      border-color: var(--paper);
+    }
+
+    .popular-badge {
+      position: absolute;
+      top: 28px;
+      right: 28px;
+      padding: 6px 9px;
+      color: #653728;
+      background: #ecc2a4;
+      font-size: 8px;
+      font-weight: 800;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .fare-kicker {
+      color: #a99eab;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .featured .fare-kicker {
+      color: #8c7470;
+    }
+
+    .fare-card h3 {
+      margin-top: 15px;
+      font-family: var(--serif);
+      font-size: 28px;
+      line-height: 1.1;
+      font-weight: 400;
+      letter-spacing: -0.025em;
+    }
+
+    .fare-description {
+      min-height: 47px;
+      margin-top: 12px;
+      color: #aaa0ad;
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+    .featured .fare-description {
+      color: #756a72;
+    }
+
+    .price {
+      display: flex;
+      align-items: baseline;
+      gap: 9px;
+      margin-top: 27px;
+      padding-bottom: 26px;
+      border-bottom: 1px solid var(--night-line);
+    }
+
+    .featured .price {
+      border-color: #d1c6b9;
+    }
+
+    .price strong {
+      font-family: var(--serif);
+      font-size: 54px;
+      line-height: 1;
+      font-weight: 400;
+      letter-spacing: -0.045em;
+    }
+
+    .price span {
+      color: #948994;
+      font-size: 10px;
+      line-height: 1.4;
+    }
+
+    .featured .price span {
+      color: #786c72;
+    }
+
+    .fare-list {
+      display: grid;
+      gap: 13px;
+      margin: 26px 0 30px;
+      color: #c1b8c4;
+      font-size: 12px;
+    }
+
+    .featured .fare-list {
+      color: #564a53;
+    }
+
+    .fare-list li {
+      position: relative;
+      padding-left: 20px;
+    }
+
+    .fare-list li::before {
+      content: "";
+      position: absolute;
+      top: 0.55em;
+      left: 1px;
+      width: 8px;
+      height: 4px;
+      border-bottom: 1px solid var(--ember);
+      border-left: 1px solid var(--ember);
+      transform: rotate(-45deg);
+    }
+
+    .featured .fare-list li::before {
+      border-color: var(--copper);
+    }
+
+    .fare-button {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 49px;
+      margin-top: auto;
+      padding: 0 17px;
+      border: 1px solid #5b4e60;
+      color: #efe7ee;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      transition: color 180ms ease, background 180ms ease, border-color 180ms ease;
+    }
+
+    .fare-button:hover {
+      color: var(--night);
+      background: var(--ember);
+      border-color: var(--ember);
+    }
+
+    .featured .fare-button {
+      color: var(--paper);
+      background: var(--ink);
+      border-color: var(--ink);
+    }
+
+    .featured .fare-button:hover {
+      color: var(--ink);
+      background: var(--ember);
+      border-color: var(--ember);
+    }
+
+    .fares-footnote {
+      margin-top: 22px;
+      color: #7f7483;
+      font-size: 10px;
+      text-align: center;
+      letter-spacing: 0.025em;
+    }
+
+    /* Testimonial */
+    .testimonial {
+      padding: 91px 0 94px;
+      color: #2d1d24;
+      background: #d88967;
+    }
+
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 176px;
+      gap: 82px;
+      align-items: center;
+    }
+
+    .testimonial .eyebrow {
+      margin-bottom: 27px;
+      color: #62352f;
+    }
+
+    blockquote {
+      position: relative;
+    }
+
+    blockquote p {
+      max-width: 900px;
+      font-family: var(--serif);
+      font-size: clamp(34px, 3.75vw, 48px);
+      line-height: 1.16;
+      letter-spacing: -0.035em;
+    }
+
+    blockquote footer {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 31px;
+      font-size: 11px;
+    }
+
+    blockquote footer strong {
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    blockquote footer span {
+      padding-left: 14px;
+      border-left: 1px solid rgba(45, 29, 36, 0.3);
+      color: #6f4844;
+    }
+
+    .postmark {
+      display: flex;
+      width: 168px;
+      aspect-ratio: 1;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(45, 29, 36, 0.52);
+      border-radius: 50%;
+      transform: rotate(7deg);
+    }
+
+    .postmark::before {
+      content: "";
+      position: absolute;
+      width: 148px;
+      aspect-ratio: 1;
+      border: 1px dashed rgba(45, 29, 36, 0.34);
+      border-radius: 50%;
+    }
+
+    .postmark svg {
+      width: 60px;
+      height: 42px;
+      margin-bottom: 8px;
+    }
+
+    .postmark strong {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+    }
+
+    .postmark small {
+      margin-top: 5px;
+      font-size: 7px;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    /* Footer */
+    .site-footer {
+      padding: 72px 0 34px;
+      background: #100d14;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1fr 1fr auto;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .footer-tagline {
+      max-width: 330px;
+      color: #958b99;
+      font-family: var(--serif);
+      font-size: 20px;
+      line-height: 1.4;
+    }
+
+    .footer-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 28px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #66586b;
+      color: var(--ember);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      transition: border-color 180ms ease;
+    }
+
+    .footer-cta:hover {
+      border-color: var(--ember);
+    }
+
+    .footer-route {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      margin: 64px 0 52px;
+    }
+
+    .station {
+      flex: 0 0 auto;
+    }
+
+    .station strong {
+      display: block;
+      color: #ddd4df;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .station small {
+      display: block;
+      margin-top: 5px;
+      color: #6f6574;
+      font-size: 9px;
+    }
+
+    .station.arrival {
+      text-align: right;
+    }
+
+    .route-line {
+      position: relative;
+      height: 1px;
+      flex: 1;
+      background: #3e3444;
+    }
+
+    .route-line::before,
+    .route-line::after {
+      content: "";
+      position: absolute;
+      top: -3px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--ember);
+    }
+
+    .route-line::before { left: 0; }
+    .route-line::after { right: 0; background: var(--lilac); }
+
+    .route-line svg {
+      position: absolute;
+      top: -13px;
+      left: 50%;
+      width: 45px;
+      height: 27px;
+      padding: 3px;
+      color: #8d7f91;
+      background: #100d14;
+      transform: translateX(-50%);
+    }
+
+    .footer-bottom {
+      display: grid;
+      grid-template-columns: 1fr 1fr auto;
+      gap: 30px;
+      align-items: center;
+      padding-top: 25px;
+      border-top: 1px solid #2e2733;
+      color: #6f6574;
+      font-size: 9px;
+      letter-spacing: 0.035em;
+    }
+
+    .footer-bottom span:nth-child(2) {
+      text-align: center;
+    }
+
+    .back-to-top {
+      color: #a69aa9;
+      transition: color 180ms ease;
+    }
+
+    .back-to-top:hover {
+      color: var(--white);
+    }
+
+    /* Responsive */
+    @media (min-width: 901px) {
+      .schedule tbody tr:hover {
+        background: rgba(255, 255, 255, 0.45);
+      }
+    }
+
+    @media (max-width: 1050px) {
+      .hero-top,
+      .section-heading {
+        gap: 50px;
+      }
+
+      .brand-edition {
+        display: none;
+      }
+
+      .main-nav {
+        gap: 24px;
+      }
+
+      .feature-grid {
+        gap: 30px;
+      }
+
+      .fare-card {
+        padding: 27px;
+      }
+
+      .popular-badge {
+        top: 24px;
+        right: 22px;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .shell {
+        width: calc(100% - 56px);
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .main-nav {
+        position: absolute;
+        top: calc(100% - 1px);
+        right: 0;
+        left: 0;
+        display: none;
+        align-items: stretch;
+        flex-direction: column;
+        gap: 0;
+        padding: 18px 24px 26px;
+        border: 1px solid var(--night-line);
+        background: #1a151f;
+        box-shadow: 0 24px 45px rgba(0, 0, 0, 0.3);
+      }
+
+      .main-nav.is-open {
+        display: flex;
+      }
+
+      .main-nav > a:not(.nav-cta) {
+        padding: 16px 0;
+        border-bottom: 1px solid #332a39;
+        font-family: var(--serif);
+        font-size: 23px;
+        font-weight: 400;
+        letter-spacing: 0;
+      }
+
+      .main-nav > a:not(.nav-cta)::after {
+        display: none;
+      }
+
+      .nav-cta {
+        justify-content: space-between;
+        margin-top: 20px;
+      }
+
+      .hero-top {
+        grid-template-columns: 1fr;
+        gap: 35px;
+      }
+
+      .hero-intro {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 36px;
+      }
+
+      .journey-code,
+      .hero-description {
+        grid-column: 1;
+      }
+
+      .hero-actions,
+      .hero-price-note {
+        grid-column: 2;
+      }
+
+      .hero-actions {
+        grid-row: 1 / span 2;
+        align-self: center;
+        align-items: flex-start;
+        flex-direction: column;
+        margin-top: 0;
+      }
+
+      .hero-price-note {
+        margin-top: -13px;
+      }
+
+      .section-heading {
+        grid-template-columns: 1fr;
+        gap: 26px;
+      }
+
+      .section-heading > p {
+        max-width: 560px;
+      }
+
+      .feature h3 {
+        font-size: 24px;
+      }
+
+      .schedule th:nth-child(4),
+      .schedule td.duration {
+        display: none;
+      }
+
+      .schedule th:nth-child(5) { width: 26%; }
+      .schedule th:nth-child(6) { width: 5%; }
+
+      .fare-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        margin-top: 50px;
+      }
+
+      .fare-card,
+      .fare-card.featured {
+        top: 0;
+        min-height: 0;
+      }
+
+      .fare-description {
+        min-height: 0;
+      }
+
+      .fare-button {
+        margin-top: 6px;
+      }
+
+      .fares-footnote {
+        margin-top: 28px;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .hero {
+        padding-top: 46px;
+      }
+
+      .hero h1 {
+        font-size: clamp(54px, 13.7vw, 78px);
+      }
+
+      .hero-visual {
+        height: 390px;
+        aspect-ratio: auto;
+      }
+
+      .hero-art {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 1064px;
+        max-width: none;
+      }
+
+      .art-label.right,
+      .art-coordinate {
+        display: none;
+      }
+
+      .feature-grid {
+        grid-template-columns: 1fr;
+        gap: 48px;
+        margin-top: 54px;
+      }
+
+      .feature {
+        display: grid;
+        grid-template-columns: 94px 1fr;
+        column-gap: 26px;
+      }
+
+      .feature-top {
+        grid-row: 1 / span 2;
+        min-height: 0;
+      }
+
+      .feature-number {
+        display: none;
+      }
+
+      .feature h3,
+      .feature p {
+        margin-top: 0;
+      }
+
+      .feature p {
+        margin-top: 12px;
+      }
+
+      .timetable-wrap {
+        margin-top: 80px;
+        padding-top: 60px;
+      }
+
+      .timetable-heading {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 22px;
+      }
+
+      .route-note {
+        text-align: left;
+      }
+
+      .schedule,
+      .schedule tbody {
+        display: block;
+      }
+
+      .schedule thead {
+        display: none;
+      }
+
+      .schedule tbody tr {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px 20px;
+        padding: 26px 0;
+      }
+
+      .schedule td,
+      .schedule td:first-child {
+        display: block;
+        padding: 0;
+      }
+
+      .schedule td::before {
+        content: attr(data-label);
+        display: block;
+        margin-bottom: 8px;
+        color: #8b7f86;
+        font-size: 8px;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .schedule td.duration {
+        display: block;
+      }
+
+      .schedule td.row-action {
+        grid-column: 1 / -1;
+        text-align: left;
+      }
+
+      .schedule td.row-action::before {
+        display: none;
+      }
+
+      .row-action a {
+        display: flex;
+        width: 100%;
+        height: 44px;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 15px;
+        border-radius: 0;
+      }
+
+      .row-action a::after {
+        content: "View fares";
+        order: -1;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .testimonial-grid {
+        grid-template-columns: 1fr;
+        gap: 46px;
+      }
+
+      .postmark {
+        width: 140px;
+        justify-self: end;
+      }
+
+      .postmark::before {
+        width: 122px;
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      .footer-cta {
+        justify-self: start;
+      }
+
+      .footer-bottom {
+        grid-template-columns: 1fr auto;
+        row-gap: 13px;
+      }
+
+      .footer-bottom span:nth-child(2) {
+        grid-column: 1 / -1;
+        grid-row: 2;
+        text-align: left;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .shell {
+        width: calc(100% - 40px);
+      }
+
+      .header-inner {
+        min-height: 74px;
+      }
+
+      .hero {
+        padding-bottom: 42px;
+      }
+
+      .hero h1 {
+        letter-spacing: -0.06em;
+      }
+
+      .hero-intro {
+        display: block;
+      }
+
+      .hero-description {
+        font-size: 15px;
+      }
+
+      .hero-actions {
+        align-items: center;
+        flex-direction: row;
+        gap: 20px;
+        margin-top: 24px;
+      }
+
+      .hero-price-note {
+        margin-top: 15px;
+      }
+
+      .hero-visual {
+        height: 350px;
+        margin-top: 40px;
+      }
+
+      .crossing-label {
+        bottom: 16px;
+        left: 16px;
+      }
+
+      .art-label.left {
+        top: 17px;
+        left: 17px;
+      }
+
+      .experience,
+      .fares {
+        padding: 80px 0;
+      }
+
+      .section-heading h2,
+      .timetable-heading h2 {
+        font-size: 43px;
+      }
+
+      .feature {
+        grid-template-columns: 72px 1fr;
+        column-gap: 20px;
+      }
+
+      .feature-icon {
+        width: 72px;
+        height: 72px;
+      }
+
+      .feature h3 {
+        font-size: 23px;
+      }
+
+      .schedule {
+        margin-top: 35px;
+      }
+
+      .time-cell time {
+        font-size: 26px;
+      }
+
+      .fare-card {
+        padding: 27px 24px;
+      }
+
+      .popular-badge {
+        position: static;
+        align-self: flex-start;
+        margin-bottom: 17px;
+      }
+
+      .testimonial {
+        padding: 75px 0;
+      }
+
+      blockquote p {
+        font-size: 34px;
+      }
+
+      blockquote footer {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 7px;
+      }
+
+      blockquote footer span {
+        padding-left: 0;
+        border-left: 0;
+      }
+
+      .site-footer {
+        padding-top: 55px;
+      }
+
+      .footer-route {
+        gap: 12px;
+        margin: 48px 0 40px;
+      }
+
+      .station strong {
+        font-size: 8px;
+      }
+
+      .station small {
+        font-size: 8px;
+      }
+
+      .route-line svg {
+        display: none;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *, *::before, *::after {
+        transition: none !important;
+        animation: none !important;
+      }
+    }
+  </style>
+</head>
+<body id="top">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="brand" href="#top" aria-label="Dune Line home">
+        <svg class="brand-mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+          <circle cx="20" cy="20" r="18.25" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M7 24.5C12 18.7 16.8 18.4 22 22.1C26.6 25.4 30.1 25 34 21.5" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M10 28.5H30M13 31.5H27" stroke="currentColor" stroke-width="1.2"/>
+          <circle cx="25.5" cy="12.5" r="3.5" fill="currentColor"/>
+        </svg>
+        <span class="brand-name">DUNE <span>LINE</span></span>
+        <span class="brand-edition" aria-hidden="true">Overnight<br>Rail Service</span>
+      </a>
+
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" aria-label="Open navigation">
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="main-nav" id="primary-navigation" aria-label="Primary navigation">
+        <a href="#experience">The experience</a>
+        <a href="#timetable">Timetable</a>
+        <a href="#fares">Fares</a>
+        <a class="nav-cta" href="#fares">Book a berth <span aria-hidden="true">↗</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="shell">
+        <div class="hero-top">
+          <div>
+            <p class="eyebrow">Sirocco to Nocturne · Every night</p>
+            <h1 id="hero-title">Leave at dusk.<br>Wake in <em>neon.</em></h1>
+          </div>
+
+          <div class="hero-intro">
+            <p class="journey-code">
+              <span>20:45 Sirocco</span>
+              <span class="arrow" aria-hidden="true">→</span>
+              <span>07:10 Nocturne</span>
+            </p>
+            <p class="hero-description">
+              An overnight train across the open desert. Dine under the stars, sleep in your own cabin, and step into Nocturne just as the city switches on.
+            </p>
+            <div class="hero-actions">
+              <a class="button-primary" href="#fares">Book your crossing <span aria-hidden="true">↗</span></a>
+              <a class="text-link" href="#experience">Explore the train <span aria-hidden="true">↓</span></a>
+            </div>
+            <p class="hero-price-note">From $149 per person · Dinner and breakfast included</p>
+          </div>
+        </div>
+
+        <figure class="hero-visual">
+          <svg class="hero-art" viewBox="0 0 1200 440" preserveAspectRatio="xMidYMid slice" role="img" aria-labelledby="hero-art-title hero-art-desc">
+            <title id="hero-art-title">The Dune Line crossing the desert at night</title>
+            <desc id="hero-art-desc">A warmly lit sleeper train travels between rolling dunes toward Nocturne’s glowing purple skyline under a crescent moon.</desc>
+            <defs>
+              <linearGradient id="night-sky" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#171320"/>
+                <stop offset="0.62" stop-color="#292032"/>
+                <stop offset="1" stop-color="#694149"/>
+              </linearGradient>
+              <radialGradient id="city-halo" cx="50%" cy="50%" r="50%">
+                <stop offset="0" stop-color="#9a68d0" stop-opacity="0.34"/>
+                <stop offset="0.5" stop-color="#714791" stop-opacity="0.12"/>
+                <stop offset="1" stop-color="#714791" stop-opacity="0"/>
+              </radialGradient>
+              <linearGradient id="far-dune" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#6c4148"/>
+                <stop offset="1" stop-color="#412e40"/>
+              </linearGradient>
+              <linearGradient id="mid-dune" x1="0" y1="0" x2="0.9" y2="1">
+                <stop offset="0" stop-color="#a05c4d"/>
+                <stop offset="0.55" stop-color="#754345"/>
+                <stop offset="1" stop-color="#443041"/>
+              </linearGradient>
+              <linearGradient id="near-dune" x1="0" y1="0" x2="1" y2="0.7">
+                <stop offset="0" stop-color="#452b35"/>
+                <stop offset="0.5" stop-color="#8e5044"/>
+                <stop offset="1" stop-color="#422c3c"/>
+              </linearGradient>
+              <linearGradient id="train-metal" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#49424c"/>
+                <stop offset="0.5" stop-color="#2b2730"/>
+                <stop offset="1" stop-color="#17161d"/>
+              </linearGradient>
+              <linearGradient id="train-window" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stop-color="#e8a36d"/>
+                <stop offset="0.5" stop-color="#ffdfa4"/>
+                <stop offset="1" stop-color="#e8a16e"/>
+              </linearGradient>
+              <filter id="neon-glow" x="-100%" y="-100%" width="300%" height="300%">
+                <feGaussianBlur stdDeviation="3" result="blur"/>
+                <feMerge>
+                  <feMergeNode in="blur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+              <filter id="soft-glow" x="-100%" y="-100%" width="300%" height="300%">
+                <feGaussianBlur stdDeviation="8"/>
+              </filter>
+              <mask id="crescent-mask" maskUnits="userSpaceOnUse" x="130" y="45" width="85" height="85">
+                <rect x="130" y="45" width="85" height="85" fill="black"/>
+                <circle cx="172" cy="86" r="32" fill="white"/>
+                <circle cx="187" cy="75" r="30" fill="black"/>
+              </mask>
+            </defs>
+
+            <rect width="1200" height="440" fill="url(#night-sky)"/>
+            <ellipse cx="1040" cy="188" rx="295" ry="260" fill="url(#city-halo)"/>
+
+            <g fill="#e8d8db">
+              <circle cx="78" cy="120" r="1.1" opacity="0.64"/>
+              <circle cx="121" cy="54" r="1.4" opacity="0.76"/>
+              <circle cx="239" cy="93" r="1" opacity="0.56"/>
+              <circle cx="289" cy="42" r="1.2" opacity="0.68"/>
+              <circle cx="344" cy="140" r="1" opacity="0.5"/>
+              <circle cx="405" cy="72" r="1.4" opacity="0.78"/>
+              <circle cx="457" cy="34" r="0.9" opacity="0.56"/>
+              <circle cx="502" cy="118" r="1.2" opacity="0.7"/>
+              <circle cx="571" cy="61" r="1" opacity="0.5"/>
+              <circle cx="628" cy="143" r="1.3" opacity="0.72"/>
+              <circle cx="674" cy="42" r="1" opacity="0.65"/>
+              <circle cx="724" cy="97" r="1.4" opacity="0.7"/>
+              <circle cx="785" cy="55" r="0.9" opacity="0.57"/>
+              <circle cx="838" cy="130" r="1.1" opacity="0.66"/>
+              <circle cx="903" cy="64" r="1.3" opacity="0.65"/>
+              <circle cx="1088" cy="42" r="1.2" opacity="0.7"/>
+              <circle cx="1145" cy="112" r="0.9" opacity="0.46"/>
+            </g>
+
+            <circle cx="172" cy="86" r="32" fill="#f4dfb9" mask="url(#crescent-mask)"/>
+            <path d="M531 83L558 71" stroke="#cfb5d8" stroke-width="1" opacity="0.36"/>
+            <circle cx="560" cy="70" r="1.3" fill="#e2cddd" opacity="0.65"/>
+
+            <!-- Distant neon city -->
+            <g opacity="0.94">
+              <g fill="#292437">
+                <path d="M891 281V204H919V171H937V281Z"/>
+                <path d="M929 281V146H965V281Z"/>
+                <path d="M967 281V190H990V113H1015V281Z"/>
+                <path d="M1008 281V155H1041V281Z"/>
+                <path d="M1038 281V92H1068V281Z"/>
+                <path d="M1065 281V178H1095V133H1114V281Z"/>
+                <path d="M1107 281V205H1145V153H1162V281Z"/>
+                <path d="M1154 281V190H1186V281Z"/>
+              </g>
+              <g stroke="#837098" stroke-width="1" opacity="0.65">
+                <path d="M942 146V121M952 146V132"/>
+                <path d="M1002 113V83"/>
+                <path d="M1053 92V49M1053 49L1057 68"/>
+                <path d="M1105 133V101"/>
+                <path d="M1155 153V128"/>
+              </g>
+              <g filter="url(#neon-glow)" fill="none">
+                <path d="M940 160V244M958 166V263" stroke="#c186ff" stroke-width="2"/>
+                <path d="M995 126V225" stroke="#8fc6e6" stroke-width="1.7"/>
+                <path d="M1047 106V240M1061 114V190" stroke="#db86ff" stroke-width="2"/>
+                <path d="M1090 153V238" stroke="#85c4de" stroke-width="1.5"/>
+                <path d="M1149 172V235" stroke="#d586f3" stroke-width="1.5"/>
+              </g>
+              <g fill="#c49add" opacity="0.65">
+                <rect x="936" y="184" width="4" height="3"/>
+                <rect x="948" y="195" width="4" height="3"/>
+                <rect x="979" y="207" width="5" height="3"/>
+                <rect x="1018" y="173" width="5" height="3"/>
+                <rect x="1028" y="188" width="5" height="3"/>
+                <rect x="1074" y="207" width="5" height="3"/>
+                <rect x="1117" y="218" width="5" height="3"/>
+                <rect x="1170" y="216" width="5" height="3"/>
+              </g>
+              <g fill="#7dbed5" opacity="0.55">
+                <rect x="1018" y="213" width="5" height="3"/>
+                <rect x="1050" y="130" width="5" height="3"/>
+                <rect x="1050" y="143" width="5" height="3"/>
+                <rect x="1050" y="156" width="5" height="3"/>
+                <rect x="1100" y="184" width="5" height="3"/>
+              </g>
+              <text x="973" y="264" fill="#d6b1e5" opacity="0.74" font-family="Arial, sans-serif" font-size="8" letter-spacing="4">NOCTURNE</text>
+            </g>
+
+            <!-- Layered dunes -->
+            <path d="M0 252C108 220 159 224 247 252C331 279 385 274 477 240C574 205 649 229 723 258C805 290 857 275 935 255C1030 231 1110 244 1200 276V440H0Z" fill="url(#far-dune)"/>
+            <path d="M0 302C94 278 163 235 254 247C344 259 379 311 472 312C579 313 635 247 728 250C814 252 852 297 938 309C1032 322 1100 276 1200 271V440H0Z" fill="url(#mid-dune)"/>
+            <path d="M0 304C110 282 164 254 250 253" fill="none" stroke="#d48562" stroke-opacity="0.27" stroke-width="1.4"/>
+            <path d="M480 311C575 303 638 254 725 254" fill="none" stroke="#d88b6b" stroke-opacity="0.23" stroke-width="1.2"/>
+            <path d="M728 350C832 316 902 298 1002 312C1082 323 1127 317 1200 297V440H0V361C207 340 429 363 587 364C641 364 683 361 728 350Z" fill="url(#near-dune)"/>
+
+            <!-- Rail bed -->
+            <path d="M40 349C331 345 620 348 967 344" fill="none" stroke="#251e28" stroke-width="9" opacity="0.55"/>
+            <path d="M36 345C350 342 683 346 1027 338M36 352C350 349 683 352 1027 345" fill="none" stroke="#b68369" stroke-width="1" opacity="0.55"/>
+            <g stroke="#251e28" stroke-width="2" opacity="0.65">
+              <path d="M86 342L91 355M135 342L140 355M187 342L192 355M241 342L246 355M300 342L305 355M360 342L365 355M424 342L429 355M491 342L496 355M562 341L567 354M636 341L641 354M713 340L718 353M792 338L797 352M873 337L878 350M956 334L961 348"/>
+            </g>
+
+            <!-- Sleeper train -->
+            <g>
+              <ellipse cx="555" cy="341" rx="427" ry="8" fill="#120f16" opacity="0.42"/>
+              <path d="M108 293H805C852 293 893 307 924 331L924 339H108Z" fill="url(#train-metal)" stroke="#77616a" stroke-width="0.8"/>
+              <path d="M112 293H805C852 293 889 305 914 324" fill="none" stroke="#b19a9c" stroke-width="1.3" opacity="0.58"/>
+              <path d="M108 329H880C897 329 909 332 924 336V339H108Z" fill="#17151b"/>
+              <path d="M110 329H879" stroke="#d77b59" stroke-width="2"/>
+              <path d="M106 338H920" stroke="#71616b" stroke-width="1"/>
+
+              <g fill="url(#train-window)">
+                <rect x="131" y="302" width="34" height="12" rx="2"/>
+                <rect x="176" y="302" width="34" height="12" rx="2"/>
+                <rect x="221" y="302" width="34" height="12" rx="2"/>
+                <rect x="266" y="302" width="28" height="12" rx="2"/>
+                <rect x="320" y="302" width="34" height="12" rx="2"/>
+                <rect x="365" y="302" width="34" height="12" rx="2"/>
+                <rect x="410" y="302" width="34" height="12" rx="2"/>
+                <rect x="455" y="302" width="28" height="12" rx="2"/>
+                <rect x="509" y="302" width="34" height="12" rx="2"/>
+                <rect x="554" y="302" width="34" height="12" rx="2"/>
+                <rect x="599" y="302" width="34" height="12" rx="2"/>
+                <rect x="644" y="302" width="28" height="12" rx="2"/>
+                <rect x="699" y="302" width="34" height="12" rx="2"/>
+                <rect x="744" y="302" width="34" height="12" rx="2"/>
+              </g>
+
+              <g fill="#332638" opacity="0.7">
+                <rect x="143" y="302" width="1.2" height="12"/>
+                <rect x="188" y="302" width="1.2" height="12"/>
+                <rect x="377" y="302" width="1.2" height="12"/>
+                <rect x="566" y="302" width="1.2" height="12"/>
+                <rect x="756" y="302" width="1.2" height="12"/>
+              </g>
+
+              <path d="M800 302H838C857 304 876 311 889 320H801Z" fill="#8b9cb0" opacity="0.86"/>
+              <path d="M843 305L838 319" stroke="#25242e" stroke-width="1.5"/>
+              <g stroke="#7b6670" stroke-width="1" opacity="0.55">
+                <path d="M306 294V337M495 294V337M684 294V337M791 294V337"/>
+              </g>
+              <g fill="#0f1015">
+                <circle cx="178" cy="339" r="7"/>
+                <circle cx="271" cy="339" r="7"/>
+                <circle cx="367" cy="339" r="7"/>
+                <circle cx="460" cy="339" r="7"/>
+                <circle cx="556" cy="339" r="7"/>
+                <circle cx="649" cy="339" r="7"/>
+                <circle cx="745" cy="339" r="7"/>
+                <circle cx="846" cy="339" r="7"/>
+              </g>
+              <text x="111" y="324" fill="#c2adb0" font-family="Arial, sans-serif" font-size="6.5" letter-spacing="2.3">DUNE LINE</text>
+              <ellipse cx="926" cy="333" rx="22" ry="11" fill="#f6c792" opacity="0.2" filter="url(#soft-glow)"/>
+              <circle cx="919" cy="330" r="3.5" fill="#ffe7b4" filter="url(#neon-glow)"/>
+            </g>
+
+            <!-- Foreground -->
+            <path d="M0 385C136 354 284 373 402 398C514 422 644 416 746 386C867 350 989 371 1087 391C1128 399 1164 398 1200 389V440H0Z" fill="#2b202b"/>
+            <path d="M0 385C136 354 284 373 402 398" fill="none" stroke="#a3624e" stroke-opacity="0.35"/>
+            <path d="M947 377C1010 376 1050 383 1087 391C1128 399 1164 398 1200 389" fill="none" stroke="#9f6252" stroke-opacity="0.3"/>
+            <g stroke="#776057" stroke-width="1" opacity="0.42">
+              <path d="M1090 397L1087 382M1087 388L1080 384M1087 391L1095 385"/>
+              <path d="M1137 404L1134 391M1134 397L1128 393M1134 399L1140 394"/>
+              <path d="M83 390L80 378M80 383L75 380"/>
+            </g>
+          </svg>
+
+          <div class="art-label left"><span class="live-dot"></span>DL 001 · Westbound</div>
+          <div class="art-label right">Clear night · 24°C</div>
+          <div class="crossing-label">
+            <small>Now crossing · 03:17</small>
+            <span>The Great Erg</span>
+          </div>
+          <span class="art-coordinate">31°14′ N &nbsp; 06°48′ E</span>
+          <figcaption class="sr-only">The overnight Dune Line crosses moonlit sand dunes toward Nocturne.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="experience" id="experience" aria-labelledby="experience-title">
+      <div class="shell">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">On board · 01</p>
+            <h2 id="experience-title">The long way has<br>its privileges.</h2>
+          </div>
+          <p>No airport queues. No wasted daylight. Just a beautifully considered night, moving quietly across 1,124 kilometres of desert toward morning.</p>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature">
+            <div class="feature-top">
+              <span class="feature-number">01 / Rest</span>
+              <svg class="feature-icon" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+                <path d="M14 82V30C14 19 23 10 34 10H66C77 10 86 19 86 30V82" stroke="currentColor" stroke-width="1.4"/>
+                <path d="M22 51V30C22 23 27 18 34 18H66C73 18 78 23 78 30V51" stroke="currentColor" stroke-width="1.2"/>
+                <path d="M22 42C34 33 43 35 51 41C61 48 69 45 78 38" stroke="currentColor" stroke-width="1.2"/>
+                <circle cx="61" cy="28" r="4" stroke="currentColor" stroke-width="1.2"/>
+                <path d="M14 61H86V81H14zM22 61V52H45C50 52 53 56 53 61M14 70H86M22 81V87M78 81V87" stroke="currentColor" stroke-width="1.4"/>
+                <path d="M62 61V55H78" stroke="currentColor" stroke-width="1.2"/>
+              </svg>
+            </div>
+            <h3>Your room,<br>your rhythm.</h3>
+            <p>A proper bed, crisp linen and a window wide enough for the entire desert. We’ll turn down your cabin while you dine.</p>
+          </article>
+
+          <article class="feature">
+            <div class="feature-top">
+              <span class="feature-number">02 / Dine</span>
+              <svg class="feature-icon" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+                <path d="M15 80H85M23 80V87M77 80V87" stroke="currentColor" stroke-width="1.4"/>
+                <path d="M23 64H77M29 64C29 48 38 38 50 38C62 38 71 48 71 64Z" stroke="currentColor" stroke-width="1.4"/>
+                <path d="M47 33H53M50 33V38" stroke="currentColor" stroke-width="1.4"/>
+                <path d="M14 59H21M79 59H86M50 17V24M28 25L33 30M72 25L67 30" stroke="currentColor" stroke-width="1.2"/>
+                <path d="M19 69V79M81 69V79" stroke="currentColor" stroke-width="1.2"/>
+                <circle cx="50" cy="64" r="23" stroke="currentColor" stroke-width="0.8" stroke-dasharray="2 5" opacity="0.6"/>
+              </svg>
+            </div>
+            <h3>Dinner after<br>sundown.</h3>
+            <p>A two-course desert menu served at your table, followed by mint tea beneath the observation car’s glass dome.</p>
+          </article>
+
+          <article class="feature">
+            <div class="feature-top">
+              <span class="feature-number">03 / Arrive</span>
+              <svg class="feature-icon" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+                <path d="M15 84V43C15 24 30 9 50 9C70 9 85 24 85 43V84" stroke="currentColor" stroke-width="1.4"/>
+                <path d="M23 64V43C23 28 35 17 50 17C65 17 77 28 77 43V64" stroke="currentColor" stroke-width="1.2"/>
+                <circle cx="57" cy="32" r="6" stroke="currentColor" stroke-width="1.2"/>
+                <path d="M23 52C34 46 40 49 47 54C55 60 64 57 77 48" stroke="currentColor" stroke-width="1.2"/>
+                <path d="M29 65V51H35V65M40 65V44H47V65M54 65V48H60V65M65 65V38H72V65" stroke="currentColor" stroke-width="1.2"/>
+                <path d="M14 65H86M28 71H72M35 77H65M42 83H58" stroke="currentColor" stroke-width="1.4"/>
+              </svg>
+            </div>
+            <h3>Sunrise in<br>Nocturne.</h3>
+            <p>Wake to coffee and a first glimpse of the violet skyline. Step off downtown, rested and exactly where you need to be.</p>
+          </article>
+        </div>
+
+        <div class="timetable-wrap" id="timetable">
+          <div class="timetable-heading">
+            <div>
+              <p class="eyebrow">The night service · 02</p>
+              <h2>Pick your night.</h2>
+            </div>
+            <p class="route-note">
+              <strong>Sirocco Central → Nocturne Terminal</strong>
+              <span>Daily departures · All times local</span>
+            </p>
+          </div>
+
+          <table class="schedule">
+            <caption class="sr-only">Four daily overnight departures from Sirocco Central to Nocturne Terminal</caption>
+            <thead>
+              <tr>
+                <th scope="col">Service</th>
+                <th scope="col">Departure</th>
+                <th scope="col">Arrival +1 day</th>
+                <th scope="col">Journey</th>
+                <th scope="col">Availability</th>
+                <th scope="col"><span class="sr-only">View fares</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="service-name" data-label="Service"><strong>DL 01</strong><span>The Sunset</span></td>
+                <td class="time-cell" data-label="Sirocco Central"><time datetime="20:45">20:45</time><span>Sirocco Central</span></td>
+                <td class="time-cell" data-label="Nocturne Terminal"><time datetime="07:10">07:10</time><span>Nocturne Terminal</span></td>
+                <td class="duration" data-label="Journey">10h 25m</td>
+                <td data-label="Availability"><span class="availability">Good availability</span></td>
+                <td class="row-action">
+                  <a href="#fares" aria-label="View fares for DL 01, The Sunset">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" stroke-width="1.3"/></svg>
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td class="service-name" data-label="Service"><strong>DL 03</strong><span>The Starlight</span></td>
+                <td class="time-cell" data-label="Sirocco Central"><time datetime="22:15">22:15</time><span>Sirocco Central</span></td>
+                <td class="time-cell" data-label="Nocturne Terminal"><time datetime="08:40">08:40</time><span>Nocturne Terminal</span></td>
+                <td class="duration" data-label="Journey">10h 25m</td>
+                <td data-label="Availability"><span class="availability limited">6 cabins left</span></td>
+                <td class="row-action">
+                  <a href="#fares" aria-label="View fares for DL 03, The Starlight">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" stroke-width="1.3"/></svg>
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td class="service-name" data-label="Service"><strong>DL 05</strong><span>The Midnight</span></td>
+                <td class="time-cell" data-label="Sirocco Central"><time datetime="23:55">23:55</time><span>Sirocco Central</span></td>
+                <td class="time-cell" data-label="Nocturne Terminal"><time datetime="10:20">10:20</time><span>Nocturne Terminal</span></td>
+                <td class="duration" data-label="Journey">10h 25m</td>
+                <td data-label="Availability"><span class="availability">Good availability</span></td>
+                <td class="row-action">
+                  <a href="#fares" aria-label="View fares for DL 05, The Midnight">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" stroke-width="1.3"/></svg>
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td class="service-name" data-label="Service"><strong>DL 07</strong><span>The Afterglow</span></td>
+                <td class="time-cell" data-label="Sirocco Central"><time datetime="01:30">01:30</time><span>Sirocco Central</span></td>
+                <td class="time-cell" data-label="Nocturne Terminal"><time datetime="11:55">11:55</time><span>Nocturne Terminal</span></td>
+                <td class="duration" data-label="Journey">10h 25m</td>
+                <td data-label="Availability"><span class="availability limited">Last 3 cabins</span></td>
+                <td class="row-action">
+                  <a href="#fares" aria-label="View fares for DL 07, The Afterglow">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" stroke-width="1.3"/></svg>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="schedule-note">Arrivals are the following morning. Every fare includes dinner, breakfast, bottled water and access to the observation car.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="fares" id="fares" aria-labelledby="fares-title">
+      <div class="shell">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Fares · 03</p>
+            <h2 id="fares-title">Your own patch<br>of night.</h2>
+          </div>
+          <p>From a deeply reclining seat to a suite with its own shower, there is a comfortable way to cross. One fare, one remarkable night, no hidden extras.</p>
+        </div>
+
+        <div class="fare-grid">
+          <article class="fare-card">
+            <p class="fare-kicker">The essential crossing</p>
+            <h3>Sleeper Seat</h3>
+            <p class="fare-description">A calm, spacious seat designed for a genuine night’s rest.</p>
+            <p class="price"><strong>$149</strong><span>per person<br>one way</span></p>
+            <ul class="fare-list">
+              <li>Deep-recline sleeper seat</li>
+              <li>Privacy screen and linen night kit</li>
+              <li>Dinner and breakfast included</li>
+              <li>Observation car access</li>
+            </ul>
+            <a class="fare-button" href="#timetable">See seat departures <span aria-hidden="true">↗</span></a>
+          </article>
+
+          <article class="fare-card featured">
+            <span class="popular-badge">Most booked</span>
+            <p class="fare-kicker">The classic Dune Line</p>
+            <h3>Dune Cabin</h3>
+            <p class="fare-description">Your own quiet room on rails, with a proper bed made for dreaming.</p>
+            <p class="price"><strong>$289</strong><span>per person<br>one way</span></p>
+            <ul class="fare-list">
+              <li>Private one- or two-berth cabin</li>
+              <li>Proper bed and en-suite washbasin</li>
+              <li>Dinner, breakfast and a nightcap</li>
+              <li>Priority boarding and cabin service</li>
+            </ul>
+            <a class="fare-button" href="#timetable">Find a cabin <span aria-hidden="true">↗</span></a>
+          </article>
+
+          <article class="fare-card">
+            <p class="fare-kicker">The grand crossing</p>
+            <h3>Nocturne Suite</h3>
+            <p class="fare-description">Our widest windows and most generous room, made for slow mornings.</p>
+            <p class="price"><strong>$540</strong><span>per person<br>one way</span></p>
+            <ul class="fare-list">
+              <li>Full-width suite and private lounge</li>
+              <li>Private en-suite shower</li>
+              <li>À la carte dining in your suite</li>
+              <li>Nocturne arrival transfer</li>
+            </ul>
+            <a class="fare-button" href="#timetable">See suite departures <span aria-hidden="true">↗</span></a>
+          </article>
+        </div>
+        <p class="fares-footnote">All prices include taxes and onboard dining. Children under five travel free with a fare-paying adult.</p>
+      </div>
+    </section>
+
+    <section class="testimonial" aria-labelledby="testimonial-title">
+      <div class="shell testimonial-grid">
+        <div>
+          <p class="eyebrow" id="testimonial-title">Passenger notes · No. 014</p>
+          <blockquote>
+            <p>“I closed the blind on empty desert and opened it above a river of neon. It felt less like a train ride and more like changing worlds.”</p>
+            <footer>
+              <strong>Mara Venn</strong>
+              <span>Architect, Nocturne · Travelled in a Dune Cabin</span>
+            </footer>
+          </blockquote>
+        </div>
+
+        <div class="postmark" aria-hidden="true">
+          <svg viewBox="0 0 64 44" fill="none">
+            <circle cx="42" cy="11" r="6" stroke="currentColor" stroke-width="1.2"/>
+            <path d="M5 29C15 19 25 22 32 27C41 33 49 28 59 21M4 34H60M12 39H52" stroke="currentColor" stroke-width="1.2"/>
+          </svg>
+          <strong>DUNE LINE</strong>
+          <small>Sirocco — Nocturne · Night 001</small>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell">
+      <div class="footer-top">
+        <a class="brand" href="#top" aria-label="Dune Line home">
+          <svg class="brand-mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+            <circle cx="20" cy="20" r="18.25" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M7 24.5C12 18.7 16.8 18.4 22 22.1C26.6 25.4 30.1 25 34 21.5" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M10 28.5H30M13 31.5H27" stroke="currentColor" stroke-width="1.2"/>
+            <circle cx="25.5" cy="12.5" r="3.5" fill="currentColor"/>
+          </svg>
+          <span class="brand-name">DUNE <span>LINE</span></span>
+        </a>
+        <p class="footer-tagline">The desert is only the beginning.</p>
+        <a class="footer-cta" href="#timetable">Plan your crossing <span aria-hidden="true">↗</span></a>
+      </div>
+
+      <div class="footer-route" aria-label="Route from Sirocco Central to Nocturne Terminal">
+        <div class="station">
+          <strong>Sirocco Central</strong>
+          <small>Platform 9 · From 20:45</small>
+        </div>
+        <div class="route-line" aria-hidden="true">
+          <svg viewBox="0 0 48 28" fill="none">
+            <path d="M5 8H32C37 8 41 11 44 16V20H5Z" stroke="currentColor" stroke-width="1"/>
+            <path d="M10 11H16V15H10zM19 11H25V15H19zM28 11H33L37 15H28z" fill="currentColor"/>
+            <circle cx="13" cy="21" r="2" fill="currentColor"/>
+            <circle cx="36" cy="21" r="2" fill="currentColor"/>
+          </svg>
+        </div>
+        <div class="station arrival">
+          <strong>Nocturne Terminal</strong>
+          <small>City Centre · From 07:10</small>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© <span id="year">2025</span> Dune Line Railway Co.</span>
+        <span>A fictional railway. A very real escape.</span>
+        <a class="back-to-top" href="#top">Back to the beginning ↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const toggle = document.querySelector(".menu-toggle");
+      const navigation = document.querySelector(".main-nav");
+
+      function closeMenu() {
+        toggle.setAttribute("aria-expanded", "false");
+        toggle.setAttribute("aria-label", "Open navigation");
+        navigation.classList.remove("is-open");
+      }
+
+      toggle.addEventListener("click", function () {
+        const isOpen = toggle.getAttribute("aria-expanded") === "true";
+        toggle.setAttribute("aria-expanded", String(!isOpen));
+        toggle.setAttribute("aria-label", isOpen ? "Open navigation" : "Close navigation");
+        navigation.classList.toggle("is-open", !isOpen);
+      });
+
+      navigation.addEventListener("click", function (event) {
+        if (event.target.closest("a")) closeMenu();
+      });
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") {
+          closeMenu();
+          toggle.focus();
+        }
+      });
+
+      window.addEventListener("resize", function () {
+        if (window.innerWidth > 900) closeMenu();
+      });
+
+      document.getElementById("year").textContent = new Date().getFullYear();
+    })();
+  </script>
+</body>
+</html>

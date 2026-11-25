@@ -1,0 +1,21 @@
+{
+ "text": "Wide 16:9 cinematic sci-fi concept art, viewed from a desert dune at twilight. Wind-rippled copper sand fills the foreground, with deep violet shadows, drifting sand and a bright ridge sloping toward the lower right. On the left ridge, one short-haired traveler in a long dark burgundy cloak and boots stands with their back to us, a shaggy brown llama immediately to their left. Both face the distant city and cast long shadows toward the lower left.\n\nCenter-right on the horizon, a futuristic metropolis rises from layered dunes: warm speckled windows, low rectangular buildings and broad stacked circular terraces edged in turquoise. Exactly three dominant tapered glass spires: the tallest in the middle, almost reaching the top, with a brilliant horizontal cyan halo around its upper tip; a shorter teal spire on the left with a boxed cyan neon sign reading \u201cOASIS,\u201d one letter per line; a shorter violet spire on the right edged in magenta. Slender teal searchlight beams fan upward behind them.\n\nAn elevated monorail on thin dark supports curves from the city around a luminous turquoise pool in the lower right, then sweeps out through the bottom-right edge. Twin amber rail lights and one sleek teal train on the near bend. A huge ribbed saguaro outlined in pink neon stands before the pool at right, with one tiny cactus beyond it. A large pale crescent moon in the upper left, lit along its lower-right rim; sparse stars in a navy sky fading through lavender to apricot-gold at the horizon.",
+ "reasoning_chars": 5556,
+ "usage": {
+  "prompt_tokens": 5012,
+  "completion_tokens": 2484,
+  "total_tokens": 7496,
+  "prompt_tokens_details": {
+   "cached_tokens": 2350
+  },
+  "cache_read_input_tokens": 2350,
+  "completion_tokens_details": {
+   "reasoning_tokens": 1804
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 37.36530581797706,
+ "t_first_content": 37.365306216990575,
+ "t_total": 37.42731821001507,
+ "cost": 0.034864
+}

@@ -1,0 +1,22 @@
+{
+ "claude-opus-5-5": {
+  "scores": {
+   "typography": 8.0,
+   "layout": 3.0,
+   "colour": 8.0,
+   "completeness": 3.0,
+   "originality": 7.0
+  },
+  "note": "The nav, hero illustration, features and timetable are polished and atmospheric, but the three pricing tiers and the testimonial failed to render, leaving huge empty voids that break the page's rhythm."
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "typography": 7.0,
+   "layout": 3.0,
+   "colour": 7.0,
+   "completeness": 4.0,
+   "originality": 8.0
+  },
+  "note": "The illustrated hero is distinctive, but the pricing tiers and testimonial are missing, leaving enormous blank sections in an otherwise polished page."
+ }
+}

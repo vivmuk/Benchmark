@@ -1,0 +1,20 @@
+{
+ "claude-opus-5-5": {
+  "scores": {
+   "alpaca": 7.0,
+   "motion": 7.0,
+   "beauty": 8.0,
+   "scene": 8.0
+  },
+  "note": "A charming, polished camelid with a fleecy body, long neck and woven saddle blanket, plus plausible gait changes across frames and a tasteful layered Andean plate; the long banana ears and bare, deer-thin legs read more llama than alpaca, and the walk is believable but somewhat stiff."
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "alpaca": 8.0,
+   "motion": 6.0,
+   "beauty": 9.0,
+   "scene": 9.0
+  },
+  "note": "The alpaca is recognizable and the Altiplano scene is beautifully composed, though its slender legs move more convincingly than its nearly static body."
+ }
+}

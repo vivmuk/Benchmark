@@ -20,13 +20,21 @@ MODELS = [
     "kimi-k3-1-pro",
     "kimi-k3-1-pro-highspeed",
     "inkling-2-mini",
+    "hy4",
+    "gemini-4-neon",
+    "openai-gpt-62-astra",
+    "openai-gpt-62-astra-pro",
+    "openai-gpt-62-sol",
+    "openai-gpt-62-sol-pro",
+    "e2ee-kimi-k3-1-pro-p",
+    "deepseek-v4-1-flash-1017",
 ]
 ICONS = [("qwen", "qwen-color"), ("gemini", "gemini-color"), ("glm", "zai"), ("claude", "claude-color"),
          ("deepseek", "deepseek-color"), ("openai", "openai"), ("kimi", "kimi-color"),
-         ("inkling", "thinkingmachines")]
+         ("inkling", "thinkingmachines"), ("hy4", "hy4")]
 LABS = {"qwen": "Alibaba", "gemini": "Google", "glm": "Z.ai", "claude": "Anthropic",
         "deepseek": "DeepSeek", "openai": "OpenAI", "kimi": "Moonshot AI",
-        "inkling": "Thinking Machines"}
+        "inkling": "Thinking Machines", "hy4": "Tencent"}
 IMAGE_MODEL = "nano-banana-2-1"
 JUDGES = ["claude-opus-5-5", "openai-gpt-6-sol"]  # neither is a contestant
 

@@ -1,0 +1,22 @@
+{
+ "claude-opus-5-5": {
+  "scores": {
+   "typography": 8.0,
+   "layout": 8.0,
+   "colour": 8.0,
+   "completeness": 9.0,
+   "originality": 7.0
+  },
+  "note": "A polished, cohesive editorial take: serif display type with mono labels, a warm dusk palette, a strong illustrated hero and a well-crafted timetable and fare cards. It still leans on a familiar premium-template structure, and the 'neon city' theme is muted rather than truly electric."
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "typography": 9.0,
+   "layout": 9.0,
+   "colour": 8.0,
+   "completeness": 10,
+   "originality": 9.0
+  },
+  "note": "A polished, distinctive rail-travel page with every required section; the muted city illustration does not quite deliver the promised neon atmosphere."
+ }
+}

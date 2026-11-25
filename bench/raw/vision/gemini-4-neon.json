@@ -1,0 +1,14 @@
+{
+ "text": "Cinematic sci-fi digital art of a desert at twilight. In the lower left on a wind-swept sand dune ridge, a man in a dark red cloak stands from behind next to a fluffy brown llama, facing a futuristic city. On the lower right, a large green saguaro cactus outlined in glowing pink neon stands near a smaller cactus and a turquoise oasis pond. A curved, orange-lit elevated monorail carrying a sleek train winds from the bottom right toward the city. Center-right rises a futuristic metropolis with three giant tapered skyscrapers: the tallest middle spire features a glowing cyan neon halo ring, the left tower has a vertical cyan sign reading \"OASIS\", and the right tower glows purple. Diagonal cyan searchlights shoot skyward from the illuminated city base. The starry sky fades from deep dark blue to purple and warm orange at the horizon, with a giant crescent moon in the upper left.",
+ "reasoning_chars": 1076,
+ "usage": {
+  "prompt_tokens": 1251,
+  "completion_tokens": 1227,
+  "total_tokens": 2478
+ },
+ "finish": "stop",
+ "t_first_delta": 6.628300124022644,
+ "t_first_content": 14.035273960034829,
+ "t_total": 15.379654265998397,
+ "cost": 0.0276975
+}

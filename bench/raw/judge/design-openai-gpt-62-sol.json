@@ -1,0 +1,22 @@
+{
+ "claude-opus-5-5": {
+  "scores": {
+   "typography": 8.0,
+   "layout": 8.0,
+   "colour": 8.0,
+   "completeness": 10,
+   "originality": 7.0
+  },
+  "note": "A polished, cohesive dusk-palette page with elegant serif display type, a strong illustrated hero and every required section well formed, though the section structure and pricing cards follow a fairly familiar premium-template pattern."
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "typography": 9.0,
+   "layout": 9.0,
+   "colour": 9.0,
+   "completeness": 10,
+   "originality": 9.0
+  },
+  "note": "A polished, distinctive page with every requested section; some small secondary text is faint against the dark background."
+ }
+}

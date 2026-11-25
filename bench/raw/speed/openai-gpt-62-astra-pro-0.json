@@ -1,0 +1,17 @@
+{
+ "text": "When a truck rolls onto a suspension bridge, its weight first presses down on a small patch of deck beneath each tire. The deck does not carry that weight all the way to shore by acting as one enormous beam. Instead, the deck and the beams beneath it spread the load to nearby vertical hangers. The hangers pull on the main cables, which carry the load toward the towers and the anchorages. Both the tower foundations and the anchorages pass forces into the ground, but they do so in different ways.\n\nBeneath the roadway, beams running along the bridge work with others running across it. Together they let the truck ride near one edge of the roadway or between hangers without requiring a hanger directly beneath every wheel. Stiffening girders or trusses along the deck help several neighboring hangers share the load. They also limit how much one part of the roadway can dip relative to the next as the truck moves across.\n\nEach hanger is in tension: the deck pulls down on its lower end, and the main cable pulls up on its upper end. At the connection to the main cable, the hanger exerts a downward pull. The cable can resist that pull because it sags between the towers. Imagine a hanger attached at the lowest point of the cable. The cable segments on either side pull away from the connection, one toward each tower. Their horizontal pulls balance, while their upward pulls add together to support the hanger. The same principle applies away from the lowest point, although there it is the difference in slope between neighboring segments that gives the cable its net upward pull.\n\nAt the top of each tower, the main cable passes over a curved support called a saddle and descends on the other side. The cable pulls on the saddle along both descending lengths. The horizontal components of those pulls largely oppose each other, but the downward components add. The resulting force presses down on the tower, which carries it mainly in compression to its foundation. The foundation spreads that force into soil or rock capable of supporting it.\n\nIn a conventional ground-anchored suspension bridge, the cable ends are secured beyond the towers. There the cable pulls each anchorage upward and toward the bridge. A massive concrete anchorage can resist that pull through its weight and its grip on the ground, or the anchorage can be tied into sound rock. Without that restraint, the cable ends would move inward and the cables could not maintain the tension needed to support the deck. The towers thus do more than hold the cables high, and the anchorages do more than keep their ends in place: together they provide the reactions that allow a flexible cable to support a loaded roadway.",
+ "reasoning_chars": 4508,
+ "usage": {
+  "prompt_tokens": 3107,
+  "completion_tokens": 1744,
+  "total_tokens": 4851,
+  "completion_tokens_details": {
+   "reasoning_tokens": 669
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 30.760561882983893,
+ "t_first_content": 30.760562449984718,
+ "t_total": 30.821767174988054,
+ "cost": 0.094616
+}

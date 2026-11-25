@@ -1,0 +1,22 @@
+{
+ "claude-opus-5-5": {
+  "scores": {
+   "subjects": 8.0,
+   "layout": 7.0,
+   "colour": 6.0,
+   "style": 6.0,
+   "overall": 6.0
+  },
+  "note": "All key elements are present in broadly matching positions, but the traveller's cloak is muted purple rather than red, the animal reads as a llama, the sky lacks the strong orange horizon glow, and the rendering is more illustrative and less photographic than the original."
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "subjects": 9.0,
+   "layout": 7.0,
+   "colour": 8.0,
+   "style": 8.0,
+   "overall": 7.0
+  },
+  "note": "Nearly all key elements are present, but the traveller, alpaca, cactus and monorail are larger or shifted, and the recreation has a cooler, sharper look."
+ }
+}

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Altiplano — an alpaca in motion</title>
+<style>
+  * { box-sizing: border-box }
+  html, body { width:100%; height:100%; margin:0; overflow:hidden; background:#799b9b }
+  svg { display:block; width:100%; height:100%; overflow:hidden }
+  .label { font-family:Arial,Helvetica,sans-serif; font-weight:600; letter-spacing:3px }
+  .fiber { fill:none; stroke-linecap:round; stroke-linejoin:round }
+</style>
+</head>
+<body>
+<svg id="scene" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid slice" role="img" aria-labelledby="title desc">
+<title id="title">Altiplano</title>
+<desc id="desc">A cream-fleeced alpaca with a small woven blanket walks through golden puna grasses, beneath sunlit Andean peaks.</desc>
+<defs>
+  <linearGradient id="sky" x2=".23" y2="1" gradientUnits="objectBoundingBox">
+    <stop stop-color="#739b9e"/><stop offset=".44" stop-color="#b9c8b8"/>
+    <stop offset=".77" stop-color="#f1d6ab"/><stop offset="1" stop-color="#f9c69b"/>
+  </linearGradient>
+  <linearGradient id="sun" x2="0" y2="1"><stop stop-color="#fff5c9"/><stop offset="1" stop-color="#ffe2a3"/></linearGradient>
+  <linearGradient id="mount" x2=".3" y2="1"><stop stop-color="#a98d92"/><stop offset=".64" stop-color="#b79e95"/><stop offset="1" stop-color="#d2b499"/></linearGradient>
+  <linearGradient id="bluehill" x2="0" y2="1"><stop stop-color="#63858a"/><stop offset="1" stop-color="#96a69b"/></linearGradient>
+  <linearGradient id="valley" x2=".1" y2="1"><stop stop-color="#7c9990"/><stop offset=".5" stop-color="#8caa94"/><stop offset="1" stop-color="#b3b38c"/></linearGradient>
+  <linearGradient id="meadow" x2=".16" y2="1"><stop stop-color="#b8b388"/><stop offset=".29" stop-color="#d9bf8e"/><stop offset=".54" stop-color="#d9b286"/><stop offset="1" stop-color="#9d9472"/></linearGradient>
+  <linearGradient id="bank" x2=".12" y2="1"><stop stop-color="#718671"/><stop offset="1" stop-color="#405f5c"/></linearGradient>
+  <linearGradient id="wool" x1=".85" y1=".1" x2=".28" y2="1">
+    <stop stop-color="#fff3d8"/><stop offset=".38" stop-color="#f7e6c4"/><stop offset=".74" stop-color="#e9d4b2"/><stop offset="1" stop-color="#c7ae94"/>
+  </linearGradient>
+  <linearGradient id="face" x1=".8" y1=".1" x2=".2" y2="1"><stop stop-color="#fff0cf"/><stop offset=".65" stop-color="#ead6b6"/><stop offset="1" stop-color="#c8ad94"/></linearGradient>
+  <linearGradient id="nearleg" x1="0" y1=".5" x2="1" y2=".45"><stop stop-color="#ba9f86"/><stop offset=".55" stop-color="#e5cbaa"/><stop offset="1" stop-color="#f3dfbd"/></linearGradient>
+  <linearGradient id="farleg" x1="0" y1=".4" x2="1" y2=".5"><stop stop-color="#8c796d"/><stop offset="1" stop-color="#b9a28b"/></linearGradient>
+  <linearGradient id="cloth" x1="0" y1="0" x2=".7" y2="1"><stop stop-color="#386d6e"/><stop offset=".55" stop-color="#29595b"/><stop offset="1" stop-color="#244e52"/></linearGradient>
+  <path id="fleeceShape" d="M-100-30
+    Q-103-40-93-43 Q-91-49-84-47 Q-78-54-69-51 Q-58-56-48-52
+    Q-36-55-27-51 Q-17-54-6-50 Q5-52 13-48 Q24-50 30-55
+    Q38-66 43-85 Q46-99 48-110 Q49-117 52-123 Q51-133 57-140
+    Q68-150 80-141 Q88-135 84-123 Q82-113 80-108 Q81-100 76-92
+    Q78-82 73-75 Q75-67 70-59 Q72-48 66-42 Q69-33 62-26
+    Q64-16 58-12 Q60-4 53 0 Q54 9 46 12 Q46 20 36 19
+    Q29 26 22 21 Q15 28 8 23 Q0 29-7 25 Q-16 30-23 24
+    Q-31 29-40 24 Q-49 28-57 22 Q-68 27-73 19 Q-82 23-88 14
+    Q-98 14-98 5 Q-107 1-103-8 Q-110-16-104-23 Q-107-29-100-30Z"/>
+  <clipPath id="fleeceClip"><use href="#fleeceShape"/></clipPath>
+  <path id="rugShape" d="M-75-49 Q-53-55-26-50 L-12-48 Q-16-33-14-19 L-13-9 Q-43 0-73-9 Q-68-28-75-49Z"/>
+  <clipPath id="rugClip"><use href="#rugShape"/></clipPath>
+  <g id="landmarks"></g>
+  <g id="groundmarks"></g>
+  <g id="closemarks"></g>
+  <pattern id="grain" width="176" height="176" patternUnits="userSpaceOnUse"><image id="paper" width="176" height="176"/></pattern>
+</defs>
+
+<!-- A high, dry sky and the first light over the cordillera. -->
+<path fill="url(#sky)" d="M0 0h1280v441H0z"/>
+<g fill="#ffe8b1">
+  <circle cx="960" cy="154" r="102" opacity=".055"/>
+  <circle cx="960" cy="154" r="85" opacity=".085"/>
+  <circle cx="960" cy="154" r="69" opacity=".13"/>
+  <circle cx="960" cy="154" r="56" fill="url(#sun)"/>
+</g>
+<g id="clouds" fill="#fff2ce">
+  <path opacity=".29" d="M284 137q42-4 64-4 32-9 63-6 14-5 38-3 21 1 35 7 37-1 65 4-81 0-119 3-79 3-146-1Z"/>
+  <path opacity=".33" d="M745 103q20-4 49-4 25-6 42-3 20-1 34 4l29 1q-70 5-154 2Z"/>
+  <path opacity=".48" d="M907 162q26-4 58-3 26-3 45-1 23-5 40-3 28-2 49 3l39 3q-140 5-231 1Z"/>
+  <path opacity=".32" d="M-20 214q62-1 101-7 25-7 52-4 37-4 59 3l56 3q-143 8-268 5Z"/>
+</g>
+<path fill="#cfb6a2" d="M0 260l45-21 27 7 56-33 25 8 24-16 39 18 43-9 30 20 39-12 62 26 36-11 29 8 44-25 25 3 33-27 18 4 31-28 21 3 38 33 19-4 33 22 47-8 21 12 54-15 62 29 44-18 48 8 48-31 39 7 49-34 65 15v161H0Z"/>
+<path fill="#efceaf" d="M501 222l33-27 19 5 31-28 21 3 38 33-32-13-15 1-12-10-15 13-11 2-14 13-11-5Z"/>
+
+<!-- Angular light and shadow are cut from the same mountain silhouette. -->
+<path fill="url(#mount)" d="M0 231l40 6 46-28 17 4 39-34 15-4 28-27 14 8 23 30 17 4 26 30 34 8 22 24 26 10 21 15 29-5 31 13 40 3 44 22 38-15 30 8 51-21 40 10 54-23 26 2 49-41 24-4 38-31 23 1 27-25 21-6 25-36 15 1 26 29 12 3 33 40 17 4 21 23 39 12 23 21 30-8 22 6 28-16 30-1 35-19 24 9v161H0Z"/>
+<g fill="#ddb29a">
+  <path d="M185 148l14 8 23 30 17 4 26 30 34 8 22 24 26 10 21 15-50-12-31-21-30-5-21-23-17-4-15-23-10-4Z"/>
+  <path d="M938 163l15 1 26 29 12 3 33 40 17 4 21 23 39 12 23 21-70-23-48-27-18-25-20-10-12-24Z"/>
+  <path d="M892 205l21-6-12 23-15 9-9 18-34 16 19-26Z"/>
+</g>
+<g fill="#f4d8bc">
+  <path d="M135 186l22-11 28-27 14 8 23 30 17 4 16 20-24-13-11 1-16-18-3 8-14-19-8 7-3-8-18 17 1-7Z"/>
+  <path d="M898 205l15-6 25-36 15 1 26 29 12 3 21 26-24-14-12-2-15-18 3 14-19-23-10 7 2-12-15 18-2-2Z"/>
+</g>
+<g fill="#846f7e" opacity=".35">
+  <path d="M185 168l-19 33-11 5-19 25-48 26 41-34 18-26 13-5Z"/>
+  <path d="M936 189l-12 31-18 12-18 27-55 31 45-37 20-28 15-10Z"/>
+  <path d="M850 234l-19 25-28 16-10 13-43 15 43-30Z"/>
+</g>
+<g stroke="#f1ceb1" stroke-width="1.5" fill="none" opacity=".56">
+  <path d="M203 202l27 29 20 8 16 15m690-46 32 37 26 12 24 20m-116-49-15 21-26 16"/>
+</g>
+<path fill="#97a7a1" d="M0 270q59 3 101 25l49 10 59 24 50-8 47 10 51-19 38 3 52-23 26 4 34-14 41 7 46-12 25 2 39-14 31 4 56-18 48 8 37-5 51 13 48 2 47 18 60 5 45 15 48 4 43 14 52 2 54 12 61-6 49 10v94H0Z"/>
+<path fill="url(#bluehill)" d="M0 283q45 3 90 21l51 11 41 19 58 12 41 14 49 1 55 15 57 6 57 14 70-6 33 8 51-10 49 2 56-13 46-2 56-21 32-2 49-24 44-6 37-21 32-7 44-24 28 1 51-22 43 3 43-11 55 3v197H0Z"/>
+<g fill="#abc0af" opacity=".34">
+  <path d="M0 295l92 21 34 14 67 13-34-15-45-11-39-15Z"/>
+  <path d="M1010 329l69-24 38-22 37-5 32-13-40 22-29 6-40 21Z"/>
+</g>
+<path fill="url(#valley)" d="M0 357q107 5 193 30t209 19q123-10 256-2t255-5q181-22 367-8v146H0Z"/>
+<g fill="#e8d3aa">
+  <path opacity=".65" d="M0 382q118 12 198 23 104 13 215 9-135 12-248-4L0 398Z"/>
+  <path opacity=".75" d="M608 410q100 5 223-4 44-4 90-3-63 5-82 10-40 8-134 9 154 5 195 15 25 7-7 13-45 9-190 15-131 6-186 18l-104-2q51-16 224-23 143-6 183-13 17-4-6-6-80-11-192-12-61-2-4-7l115-6Z"/>
+</g>
+<path fill="#a6ac8a" d="M0 419q89-7 172 8t153 12q99-3 194 7-141-3-225 8-163 2-294-12Z"/>
+<g id="distantGrass"><use href="#landmarks"/><use href="#landmarks" x="1280"/></g>
+<path fill="url(#meadow)" d="M0 467q176-22 365-6t357 8q142-6 267-24t291-12v287H0Z"/>
+<path fill="#e8c99b" opacity=".8" d="M0 546q148-8 314 0t318 3q155-8 283-21t365-18v15q-186 0-336 14-196 19-359 20-286-6-585 8Z"/>
+<path fill="#e7c29a" d="M0 572q148-17 334-11t333-2q132-12 295-17t318-3v28q-140-9-331 0-249 14-376 14-359-8-573 13Z"/>
+<g id="field"><use href="#groundmarks"/><use href="#groundmarks" x="1280"/></g>
+
+<!-- The walking figure, drawn in local anatomical coordinates. -->
+<g transform="translate(626 430) scale(1.35)">
+  <g fill="#6e685a">
+    <ellipse cx="-16" cy="101.7" rx="102" ry="5.4" opacity=".11"/>
+    <ellipse cx="-20" cy="101.3" rx="77" ry="3.2" opacity=".14"/>
+  </g>
+  <g id="contacts"></g>
+  <g id="farLegs"></g>
+  <g id="nearLegs"></g>
+  <g id="body">
+    <g id="tail">
+      <path fill="#c8af94" d="M-95-38q-15-5-20 6-3 9-14 12 3 5 10 5l-5 5q9 2 16-4-1 3-3 5 19-6 24-20Z"/>
+      <path fill="#f0dfbf" d="M-94-38q-13-7-20 4-5 8-12 11 10 1 16-8-1 5-6 10 11-2 19-13Z"/>
+    </g>
+    <use href="#fleeceShape" fill="url(#wool)"/>
+    <g clip-path="url(#fleeceClip)">
+      <path fill="#bca28c" opacity=".48" d="M-110-28q10 26 20 27 0 9 8 7 0 8 12 7 7 8 15 3 8 9 17 4 8 7 16 2 11 6 21-2 12 3 18-4 13 4 22-7 9 1 16-11l18-16-11 52-152 1Z"/>
+      <path fill="#d1b99d" opacity=".8" d="M-7-45q19 1 35-15 12-21 20-57l8-9q-5 21-8 37l-5 6 1-6q-1 16-9 26l1-7q-6 20-17 24l4-6q-14 11-30 7Z"/>
+      <path fill="#fff4db" d="M84-134q4 19-4 33l-2-2q1 10-4 18l-1-4q1 11-6 17l2-11q-5 9-10 11 8-15 9-25l3 2q3-12 1-21Z"/>
+      <path fill="#fff1d4" opacity=".83" d="M-107-31q12-24 31-22l14 6q-17-2-24 8l-1-3q-9 3-14 14l-1-6Z"/>
+      <path fill="#dfc6a7" opacity=".7" d="M52-53q-1 17-9 22l1-6q-5 13-16 15l4-5q-9 7-17 5 12-4 17-13l-1 6q11-9 12-19l1 8Z"/>
+      <g id="locks" class="fiber"></g>
+    </g>
+
+    <!-- A little handwoven manta with a stepped-diamond border. -->
+    <g id="fringe" stroke-linecap="round"></g>
+    <use href="#rugShape" fill="url(#cloth)"/>
+    <g clip-path="url(#rugClip)">
+      <path d="M-77-43q33 7 68-1M-78-14q31 12 69 1" fill="none" stroke="#e1bb85" stroke-width="1.65"/>
+      <path d="M-76-34q35 10 66 0" fill="none" stroke="#c96f50" stroke-width="13"/>
+      <path d="M-76-41q32 10 66 1m-66 12q34 12 67 1" fill="none" stroke="#f1d29b" stroke-width="1.4"/>
+      <g fill="#f4d59c">
+        <path d="m-72-34 5-3 5 5-5 3Zm11 3 6-4 6 5-6 4Zm13 1 6-5 6 5-6 5Zm13 0 6-6 6 4-6 6Zm13-3 6-6 6 3-6 6Z"/>
+      </g>
+      <path d="m-58-31 3-2 3 3-3 2Zm13 1 3-2 3 2-3 2Zm13-1 3-3 3 2-3 3Z" fill="#6b6555"/>
+      <path d="M-70-48q5 18 2 39m46-41q-4 16-2 34" fill="none" stroke="#91a29a" opacity=".25" stroke-width="1.2"/>
+    </g>
+
+    <g id="head">
+      <!-- Far ear, near ear, forelock, cheek and the fine split upper lip. -->
+      <g id="farEar">
+        <path fill="#c6ad94" d="M70-142q0-15 7-30 3-8 6-9 4 2 2 15-1 15-8 27Z"/>
+        <path fill="#aa897b" d="M76-148q0-14 7-27 1 15-6 28Z"/>
+      </g>
+      <g id="ear">
+        <path fill="#f7e6c8" d="M58-140q-8-13-8-33-1-13 2-16 5 0 12 17 7 15 5 29Z"/>
+        <path fill="#bb9888" d="M60-149q-7-13-7-32 7 10 11 25l1 10Z"/>
+        <path fill="#dbb5a1" d="M60-152q-5-12-5-23 6 12 8 25Z"/>
+      </g>
+      <path fill="url(#face)" d="M51-132q-1-15 11-20 11-8 22-2 8 1 12 10l6 8 12 5q7 3 5 8-1 5-7 6-5 5-11 3-6 5-16 1l-7-4q-11 0-18-7l-2 4q-6-4-7-12Z"/>
+      <path fill="#dac1a5" d="M69-125q7 6 14 6 4 4 10 3l-4-3q9 3 14 1l8-5 6 1q-7 11-17 8-7 5-17 0-11-3-14-11Z"/>
+      <path fill="#fdf0d4" d="M50-133q-6-6-1-13-2-5 4-9 2-7 9-5 6-7 13-3 8-3 12 3 7 0 9 7 4 4 2 8-3 0-6-4 0 4-3 5-3-1-4-5-2 4-6 4l-1-4q-4 6-10 5 0 6-6 7l-1-4q-3 7-9 8Z"/>
+      <path class="fiber" stroke="#ddc8ab" stroke-width="1.6" d="M54-147q-1-5 3-7m6 3q4-1 5-5m6 5q3 0 4-4m7 4 3 2"/>
+      <path d="M80-137q4-5 10-2" class="fiber" stroke="#b99a83" stroke-width="1.8"/>
+      <g id="eye">
+        <path d="M79.6-134.3q4.6-6 11.1-1.4-3.1 6.2-8.6 3.1Z" fill="#4b403a"/>
+        <circle cx="85.6" cy="-135.2" r="2.15" fill="#302e2c"/>
+        <circle cx="86.4" cy="-136.1" r=".95" fill="#fff5d8"/>
+        <path d="m81.5-134.7-3.5-1.9" class="fiber" stroke="#59483e" stroke-width="1.15"/>
+      </g>
+      <path fill="#f9e7c9" d="M96-134q6 1 12 3 9 0 11 6-2 5-10 5l-6-2q-6 1-10-2Z"/>
+      <path fill="#806659" d="M111-130q6-2 9 2 1 3-2 5-3 0-5-3Z"/>
+      <path fill="#463e38" d="M114-128q3-1 3.6 1.5-2.7.1-3.6-1.5Z"/>
+      <path d="M117-123q0 3-4 4-5 1-9-1" class="fiber" stroke="#8a7160" stroke-width="1.15"/>
+      <g fill="#b9a088"><circle cx="101" cy="-125" r=".7"/><circle cx="105" cy="-124" r=".65"/><circle cx="103" cy="-127" r=".6"/></g>
+      <path class="fiber" fill="none" stroke="#cbb297" stroke-width="1.3" d="m65-129 4 4m1-5 4 3m-16-6 2 4"/>
+    </g>
+  </g>
+</g>
+
+<path fill="url(#bank)" d="M0 598q102 10 174 38t199 42q103 20 210 12t214-23q149-12 254-54 114-39 229-38v145H0Z"/>
+<path fill="#98a087" opacity=".52" d="M0 604q106 15 187 45 64 23 144 28-105-2-181-31-74-26-150-30Zm910 52q97-16 192-49 82-27 178-26v7q-111 0-196 29-87 29-174 39Z"/>
+<g id="foreground"><use href="#closemarks"/><use href="#closemarks" x="1280"/></g>
+
+<!-- Small letterpress-style plate furniture. -->
+<g transform="translate(57 48)" fill="#294d50">
+  <g stroke="#34595a" fill="none" stroke-width="1.4">
+    <path d="M0 9h29M3 6l6-7 5 5 5-10 10 12"/>
+    <circle cx="5" cy="-4" r="2" fill="#34595a" stroke="none"/>
+  </g>
+  <text class="label" x="42" y="7" font-size="10">FAUNA OF THE ANDES</text>
+  <text x="-3" y="74" font-family="Georgia,'Times New Roman',serif" font-size="68" letter-spacing="-3.4">Altiplano</text>
+  <path d="M1 96h27" stroke="#456567" stroke-width="1.3"/>
+  <text x="38" y="100" font-family="Georgia,'Times New Roman',serif" font-style="italic" font-size="16">Vicugna pacos</text>
+</g>
+<g transform="translate(1118 675)" fill="#f0dfba">
+  <path d="M0-11h103" stroke="#ecdbb6" stroke-width="1" opacity=".6"/>
+  <text class="label" x="0" y="6" font-size="9" letter-spacing="2">FIELD PLATE</text>
+  <text x="90" y="7" font-family="Georgia,serif" font-size="15">01</text>
+</g>
+<path pointer-events="none" fill="url(#grain)" opacity=".165" style="mix-blend-mode:soft-light" d="M0 0h1280v720H0z"/>
+</svg>
+<script>
+(() => {
+  'use strict';
+  const NS='http://www.w3.org/2000/svg', $=id=>document.getElementById(id);
+  function make(tag,attrs,parent) {
+    const e=document.createElementNS(NS,tag);
+    for(const k in attrs)e.setAttribute(k,attrs[k]);
+    if(parent)parent.appendChild(e);
+    return e;
+  }
+  let seed=15483;
+  const rnd=()=>((seed=(Math.imul(seed,1664525)+1013904223)>>>0)/4294967296);
+  const range=(a,b)=>a+(b-a)*rnd(), pick=a=>a[Math.floor(rnd()*a.length)];
+  const n=x=>Number(x.toFixed(2)), tau=Math.PI*2;
+  const path=(parent,d,attrs)=>make('path',{d,...attrs},parent);
+
+  // A static tile of fine paper tooth; no animated image filters.
+  const tile=document.createElement('canvas'); tile.width=tile.height=176;
+  const ctx=tile.getContext('2d'), img=ctx.createImageData(176,176);
+  for(let i=0;i<img.data.length;i+=4) {
+    const v=Math.floor(range(0,256));
+    img.data[i]=img.data[i+1]=img.data[i+2]=v;img.data[i+3]=255;
+  }
+  ctx.putImageData(img,0,0); $('paper').setAttribute('href',tile.toDataURL());
+
+  function tussock(parent,x,y,s,palette,flower=false) {
+    let leaves='',glints='';
+    const count=6+Math.floor(rnd()*6);
+    for(let i=0;i<count;i++){
+      const root=range(-4,4)*s, h=range(5,15)*s, bow=range(-9,10)*s;
+      leaves+=`M${n(x+root-1.4*s)} ${n(y)}q${n(bow*.32)} ${n(-h*.63)} ${n(bow)} ${n(-h)}q${n(-bow*.65)} ${n(h*.69)} ${n(2.4*s-bow)} ${n(h)}Z`;
+      if(i%3===0)glints+=`M${n(x+root)} ${n(y-s)}q${n(bow*.2)} ${n(-h*.52)} ${n(bow*.86)} ${n(-h*.88)}`;
+    }
+    path(parent,leaves,{fill:palette[0]});
+    path(parent,glints,{fill:'none',stroke:palette[1],'stroke-width':n(.9*s),'stroke-linecap':'round'});
+    if(flower)for(let j=0;j<3;j++){
+      const dx=range(2,12)*s,dy=range(14,21)*s;
+      path(parent,`M${n(x)} ${n(y)}q${n(dx*.27)} ${n(-dy*.63)} ${n(dx)} ${n(-dy)}`,{fill:'none',stroke:palette[1],'stroke-width':n(s*.8)});
+      make('ellipse',{cx:n(x+dx),cy:n(y-dy),rx:n(1.3*s),ry:n(3.4*s),fill:palette[2],transform:`rotate(29 ${n(x+dx)} ${n(y-dy)})`},parent);
+    }
+  }
+
+  const lm=$('landmarks'), gm=$('groundmarks'), cm=$('closemarks');
+  for(let i=0;i<270;i++){
+    const x=range(0,1280),y=range(426,469),w=range(1,11);
+    path(lm,`M${n(x)} ${n(y)}q${n(w*.35)} -2 ${n(w)} -.6`,{fill:'none',stroke:pick(['#839a83','#9aa78a','#cad0a4']),'stroke-width':range(.6,1.3)});
+  }
+  for(let i=0;i<270;i++){
+    const x=range(0,1280),y=range(480,697), w=range(2,12)*(y-420)/180;
+    path(gm,`M${n(x)} ${n(y)}q${n(w*.49)} ${n(-w*.2)} ${n(w)} -.2q${n(-w*.45)} 1.6 ${n(-w)} .2Z`,{fill:pick(['#b09876','#eed3a3','#bab08b','#c2a27d']),opacity:range(.5,.95)});
+  }
+  for(let i=0;i<108;i++){
+    const x=range(10,1269), y=i<49?range(469,526):range(596,706),s=range(.35,.78)*(y-340)/250;
+    tussock(gm,x,y,s,pick([['#9c9e75','#d3c58d','#edce92'],['#b2a172','#e5ca91','#f4daa0'],['#939a74','#bfbb89','#e7cd93']]),i%6===0);
+  }
+  // Foreground vegetation runs on its own very low strip, framing rather than hiding the feet.
+  for(let i=0;i<62;i++){
+    const x=range(15,1264),y=range(704,750),s=range(.85,2.4);
+    tussock(cm,x,y,s,pick([['#526e60','#9ca483','#d0ba88'],['#49675b','#899a7c','#d4bf92'],['#75856a','#b4ae82','#ddc597']]),i%4===0);
+  }
+
+  // Short groups of tapered fleece marks, rather than a uniform scallop pattern.
+  const wool=$('locks');
+  for(let i=0;i<196;i++){
+    const x=range(-107,83),y=range(-144,26),s=range(.6,1.65);
+    if(x>28&&y<-20 || y>-48) {
+      const a=range(.14,.38), tall=x>36&&y<-31;
+      path(wool,`M${n(x)} ${n(y)}q${n((tall?.8:1.7)*s)} ${n(2.8*s)} ${n((tall?-1.4:3.8)*s)} ${n((tall?6:2.2)*s)}`,{
+        stroke:pick(['#bba28a','#fff5dc','#fff8df']),'stroke-width':n(range(.7,1.65)),opacity:n(a+.12)
+      });
+    }
+  }
+  const fringe=$('fringe');
+  for(let j=0;j<17;j++){
+    const x=-71+j*3.55,y=-9+5.1*Math.sin(j*Math.PI/16),length=3.6+(j%3===0?1.9:0);
+    path(fringe,`M${x} ${y-1}l-.9 ${length}`,{stroke:j%3===0?'#be724f':'#dac193','stroke-width':1.8});
+  }
+
+  // Four independent planted-foot cycles. Each leg solves a two-link chain
+  // from its moving upper joint to the fetlock; hind hocks fold the other way.
+  const legs=[];
+  function addLeg(hind,far,offset) {
+    const g=make('g',{},$(far?'farLegs':'nearLegs'));
+    legs.push({hind,far,offset,
+      shadow:make('ellipse',{cy:101.1,rx:8,ry:1.4,fill:'#766656'},$('contacts')),
+      limb:path(g,'',{fill:far?'url(#farleg)':'url(#nearleg)'}),
+      gleam:path(g,'',{fill:'none',stroke:far?'#c8b39a':'#fff0d0','stroke-linecap':'round','stroke-width':far?1.15:1.65,opacity:.67}),
+      toe:path(g,'',{fill:far?'#6e6258':'#927b68'}),
+      split:path(g,'',{fill:'none',stroke:far?'#574f49':'#67594e','stroke-width':.85,'stroke-linecap':'round'})
+    });
+  }
+  addLeg(true,true,.50); addLeg(false,true,.35);
+  addLeg(true,false,0); addLeg(false,false,.85);
+
+  const stance=.64,span=42,duration=1.36,speed=span/stance/duration*1.35;
+  function pose(l,cycle,bob,sway,lean) {
+    const p=(cycle+l.offset)%1, {hind,far}=l;
+    const hipx=(hind?-76:37)+(far?5:-2),hipy=(hind?3:0);
+    const hx=hipx+sway,hy=hipy+bob+hipx*lean;
+    let dx,up=0,roll=0;
+    if(p<stance){
+      dx=span*(.5-p/stance);
+      roll=Math.pow(Math.max(0,(p/stance-.80)/.20),2)*.36;
+    }else{
+      const u=(p-stance)/(1-stance), smooth=u*u*(3-2*u);
+      const adjust=-span*(1-stance)/stance*u*(1-u)*(1-2*u);
+      dx=-span/2+span*smooth+adjust;
+      up=(hind?15:19)*Math.pow(Math.sin(Math.PI*u),1.55);
+      roll=.36*(1-smooth)+.42*Math.sin(u*tau)*(1-u);
+    }
+    const footx=hipx+(hind?0:1)+dx,footy=100.8-(far?1.4:0)-up;
+    const ax=footx-2.6, ay=footy-5.5-Math.sin(roll)*3.5;
+    const ux=hx+(hind?11:-7)+dx*.14,uy=hy+(hind?31:27)-up*.12;
+    const vx=ax-ux,vy=ay-uy,d=Math.max(.01,Math.hypot(vx,vy));
+    let a=hind?32:35,b=hind?39:39;
+    if(a+b<d+1){let k=(d+1)/(a+b);a*=k;b*=k}
+    const line=(a*a-b*b+d*d)/(2*d),side=Math.sqrt(Math.max(0,a*a-line*line))*(hind?1:-1);
+    const kx=ux+vx/d*line-vy/d*side,ky=uy+vy/d*line+vx/d*side;
+    const W=hind?13:11,kw=hind?4.3:4.5;
+    const pt=(x,y)=>`${n(x)} ${n(y)}`;
+    l.limb.setAttribute('d',`M${pt(hx-W,hy-8)}
+      Q${pt(hx-W-3,hy+8)} ${pt(ux-7,uy)}
+      Q${pt(ux-5.2,uy+4)} ${pt(kx-kw,ky-2)}
+      Q${pt(kx-kw-1,ky+2)} ${pt(kx-kw+.7,ky+5)}
+      L${pt(ax-3,ay-4)} Q${pt(ax-4.8,ay)} ${pt(ax-2.7,ay+3.4)}
+      Q${pt(ax+.8,ay+7.2)} ${pt(footx+6,footy-.4)}
+      Q${pt(footx+8,footy-2.3)} ${pt(ax+3.4,ay-.3)}
+      L${pt(kx+kw-.4,ky+5)} Q${pt(kx+kw+1,ky+1.7)} ${pt(kx+kw,ky-3)}
+      Q${pt(ux+5.2,uy+5)} ${pt(ux+7.1,uy-.8)}
+      Q${pt(hx+W+2,hy+10)} ${pt(hx+W,hy-7)}Z`);
+    l.gleam.setAttribute('d',`M${pt(kx+1.7,ky+6)}Q${pt((kx+ax)/2+2,(ky+ay)/2)} ${pt(ax+1.5,ay-7)}`);
+    const tx=footx,ty=footy,angle=roll*180/Math.PI;
+    l.toe.setAttribute('d',`M${pt(tx-5.2,ty-4.6)}q3.8 1.8 5.1-.2 3.1-1.7 6.3.7 2.8 1.6 2.4 3.6-5.2 1.9-11 .6-2.4-1.1-2.8-4.7Z`);
+    l.split.setAttribute('d',`M${pt(tx+3.2,ty-3.3)}q2 .8 2.4 2.8`);
+    for(const e of [l.toe,l.split])e.setAttribute('transform',`rotate(${n(angle)} ${n(tx+6)} ${n(ty)})`);
+    l.shadow.setAttribute('cx',n(footx));l.shadow.setAttribute('opacity',n(.04+.20*(1-up/19)));
+    l.shadow.setAttribute('rx',n(7+up*.16));
+  }
+
+  const start=performance.now();
+  function frame(now) {
+    const t=(now-start)*.001,cycle=t/duration,v=cycle*tau;
+    const bob=-1.75*Math.cos(2*v-.33),sway=1.35*Math.sin(v+.65),lean=.009*Math.sin(v-.27);
+    $('body').setAttribute('transform',`translate(${n(sway)} ${n(bob)}) rotate(${n(lean*180/Math.PI)})`);
+    $('head').setAttribute('transform',`rotate(${n(1.4*Math.sin(v*2-.60)-.9*Math.sin(v))} 67 -123)`);
+    $('tail').setAttribute('transform',`rotate(${n(4.3*Math.sin(v-.55)+1.8*Math.cos(2*v))} -95 -35)`);
+    $('ear').setAttribute('transform',`rotate(${n(1.6*Math.sin(v-.7)+4*Math.pow(Math.max(0,Math.sin(t*.93)),24)*Math.sin(t*13))} 62 -145)`);
+    $('farEar').setAttribute('transform',`rotate(${n(2.1*Math.sin(v+.6))} 74 -145)`);
+    const blink=Math.pow(Math.max(0,Math.cos(t*1.26+2)),450);
+    $('eye').setAttribute('transform',`translate(0 -134.7) scale(1 ${n(1-.92*blink)}) translate(0 134.7)`);
+    legs.forEach(l=>pose(l,cycle,bob,sway,lean));
+    for(const [id,factor] of [['distantGrass',.19],['field',1],['foreground',1.44]]){
+      $(id).setAttribute('transform',`translate(${n(-((t*speed*factor)%1280))} 0)`);
+    }
+    $('clouds').setAttribute('transform',`translate(${n(12*Math.sin(t*.033))} 0)`);
+    requestAnimationFrame(frame);
+  }
+  frame(start);
+})();
+</script>
+</body>
+</html>

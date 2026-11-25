@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Altiplano — a walking alpaca</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: #afccc4; }
+  svg { display: block; width: 100%; height: 100%; }
+  .caption { font-family: Arial, Helvetica, sans-serif; font-weight: 600; }
+  .book { font-family: Georgia, "Times New Roman", serif; }
+  .ink { stroke-linecap: round; stroke-linejoin: round; }
+</style>
+</head>
+<body>
+<svg id="plate" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid slice" role="img" aria-labelledby="title desc">
+<title id="title">Altiplano</title>
+<desc id="desc">A cream-colored alpaca in a little woven blanket walks along a sunlit trail. Golden bunchgrass rolls past beneath the blue peaks of the Andes.</desc>
+<defs>
+  <linearGradient id="sky" x2=".16" y2="1" gradientUnits="objectBoundingBox">
+    <stop stop-color="#90bcb9"/><stop offset=".54" stop-color="#d9dbbc"/><stop offset="1" stop-color="#ffd5a5"/>
+  </linearGradient>
+  <radialGradient id="sunwash">
+    <stop stop-color="#fff1c6" stop-opacity=".75"/><stop offset=".45" stop-color="#ffe3ac" stop-opacity=".29"/><stop offset="1" stop-color="#ffe1a7" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="stoneBlue" x2="0" y2="1">
+    <stop stop-color="#648187"/><stop offset="1" stop-color="#9eafa1"/>
+  </linearGradient>
+  <linearGradient id="meadow" x2=".1" y2="1">
+    <stop stop-color="#a5aa82"/><stop offset="1" stop-color="#d5ba85"/>
+  </linearGradient>
+  <linearGradient id="trail" x2="0" y2="1">
+    <stop stop-color="#d2ad7b"/><stop offset=".45" stop-color="#edc899"/><stop offset="1" stop-color="#c99569"/>
+  </linearGradient>
+  <linearGradient id="frontHill" x2="0" y2="1">
+    <stop stop-color="#647c69"/><stop offset="1" stop-color="#254c4b"/>
+  </linearGradient>
+  <linearGradient id="wool" x1=".7" y1=".07" x2=".36" y2="1">
+    <stop stop-color="#fff2d4"/><stop offset=".53" stop-color="#f4e2bb"/><stop offset="1" stop-color="#d6b68b"/>
+  </linearGradient>
+  <linearGradient id="face" x1=".7" y1="0" x2=".3" y2="1">
+    <stop stop-color="#fff1d1"/><stop offset="1" stop-color="#e4c59e"/>
+  </linearGradient>
+  <linearGradient id="legWarm" x1="0" y1="0" x2=".35" y2="1">
+    <stop stop-color="#e6cba3"/><stop offset=".6" stop-color="#d7b993"/><stop offset="1" stop-color="#a58065"/>
+  </linearGradient>
+  <linearGradient id="legCool" x2=".2" y2="1">
+    <stop stop-color="#ad957b"/><stop offset="1" stop-color="#8c7869"/>
+  </linearGradient>
+  <pattern id="weave" width="4" height="4" patternUnits="userSpaceOnUse">
+    <path d="M0 .5H4 M.5 0V4" stroke="#ffe6b7" stroke-width=".55" opacity=".31"/>
+  </pattern>
+  <filter id="grain" x="0" y="0" width="100%" height="100%">
+    <feTurbulence type="fractalNoise" baseFrequency=".79" numOctaves="3" stitchTiles="stitch"/>
+    <feColorMatrix type="saturate" values="0"/>
+  </filter>
+  <pattern id="paper" width="160" height="160" patternUnits="userSpaceOnUse">
+    <rect width="160" height="160" filter="url(#grain)"/>
+  </pattern>
+  <path id="coat" d="M-117-199
+    Q-119-211-108-215 Q-107-225-94-223 Q-87-231-76-226
+    Q-62-231-48-226 Q-31-230-18-225 Q-2-229 12-224
+    Q27-228 36-224 Q48-228 53-244 Q61-266 63-296
+    Q66-310 78-314 L103-310 Q111-303 108-292
+    Q112-287 108-279 Q113-272 109-264 Q114-256 110-248
+    Q116-241 111-232 Q117-223 112-215 Q117-205 111-199
+    Q115-187 106-181 Q108-171 99-167 Q100-156 89-153
+    Q88-141 77-141 Q72-131 62-136 Q53-128 45-134
+    Q36-124 26-131 Q14-124 4-131 Q-7-124-17-131
+    Q-29-124-40-132 Q-52-124-62-133 Q-74-127-83-136
+    Q-96-131-101-143 Q-114-142-116-155 Q-127-159-122-170
+    Q-130-179-122-188 Q-126-196-117-199Z"/>
+  <clipPath id="coatClip"><use href="#coat"/></clipPath>
+  <path id="cloth" d="M-84-226 Q-44-230 9-225 Q8-200 14-176 Q-24-157-79-168 Q-87-195-84-226Z"/>
+  <clipPath id="clothClip"><use href="#cloth"/></clipPath>
+  <path id="grass" d="M0 0Q-9-17-17-21Q-7-17-3-3Q-13-29-12-37Q-5-24-1-6Q-5-31-1-45Q2-24 1-7Q8-34 15-38Q6-20 4-5Q17-25 26-27Q14-17 5-2Q16-11 22-10Q14-6 7 0Z"/>
+  <g id="plume" class="ink">
+    <path d="M0 0Q-1-21-13-43M1 0Q6-25 19-46M0 0Q1-39 7-57" fill="none" stroke="#9b875b" stroke-width="1.3"/>
+    <path d="M-13-43Q-20-45-22-58Q-15-55-13-43ZM19-46Q19-56 29-63Q26-52 19-46ZM7-57Q4-64 11-77Q13-65 7-57Z" fill="#e8cb8a"/>
+  </g>
+</defs>
+
+<!-- The airy, ink-washed distance -->
+<rect width="1280" height="474" fill="url(#sky)"/>
+<ellipse cx="971" cy="146" rx="292" ry="272" fill="url(#sunwash)"/>
+<g fill="none" stroke="#fff2c7">
+  <circle cx="971" cy="146" r="68" opacity=".40"/><circle cx="971" cy="146" r="74" opacity=".16"/>
+</g>
+<circle cx="971" cy="146" r="58" fill="#fff1c6"/>
+<g id="wisps" fill="#fff3d4">
+  <path opacity=".5" d="M267 118q49-2 77-11 29-6 57-4 32-9 67-5-27 3-50 11-44-1-68 6-39 6-83 3Z"/>
+  <path opacity=".32" d="M345 123q68-11 114-10l58-2q-36 7-81 7Z"/>
+  <path opacity=".65" d="M876 171q60 1 101-4 24-7 55-4 44-8 82-4-34 3-61 9-59 0-81 6Z"/>
+  <path opacity=".47" d="M1061 82q47 0 68-8 40 0 65-4-24 10-57 11Z"/>
+  <path opacity=".47" d="M-42 218q74-5 123-16 37 3 71-5 29-4 67-2-45 7-78 13-44-1-79 8Z"/>
+</g>
+<g id="birds" fill="none" stroke="#476c6d" stroke-linecap="round" opacity=".75">
+  <path d="M815 158q7-3 12 3 3-7 10-7" stroke-width="1.7"/>
+  <path d="M846 144q5-1 8 3 3-4 8-4" stroke-width="1.2"/>
+  <path d="M796 149q4-1 7 3 1-4 6-5" stroke-width="1.1"/>
+</g>
+
+<path fill="#a7b6ab" d="M0 321l53-20 36 3 41-27 22 5 65-27 40 24 57-16 54 18 60-33 21 4 42-29 44 30 32-6 45 25 57-21 23 5 76-44 32 16 32-7 66 31 45-13 34 13 55-29 39 19 48-12 20 8 64-43 41 25 35-9 61 25v174H0Z"/>
+<g>
+  <path fill="url(#stoneBlue)" d="M0 303l60-23 35 9 58-30 22 4 47-38 20 1 43-41 16 11 18 0 35 38 15-3 52 48 40 11 47 39 53-17 28-22 32 5 43-23 32 8 47-33 29 2 27-26 22 4 46-53 14 7 16-19 26 29 11-4 43 45 20-9 47 41 25-4 62 38 43-13 45 5 42-24 55 29v124H0Z"/>
+  <g fill="#aab7a7">
+    <path d="M285 185l-15 49-23 13-21 28 15-46Z"/>
+    <path d="M285 185l34 11 35 38 15-3 52 48-48-24-17 3-42-45-13 2Z"/>
+    <path d="M847 200l-19 48-23 23-33 14 35-49Z"/>
+    <path d="M877 188l26 29 11-4 43 45 20-9 47 41-44-23-16 7-39-32-12 2Z"/>
+  </g>
+  <g fill="#f0e6c9">
+    <path d="M222 225l20 1 43-41 16 11h18l35 38-26-15-13 1-16-16-3 12-13-13-18 22-10 1-21 19 9-16Z"/>
+    <path d="M800 247l47-47 14 7 16-19 26 29 11-4 30 32-29-18-9 4-26-22-1 11-14-6-13 17-1-15-19 19-9-1Z"/>
+  </g>
+  <g fill="none" stroke="#e0ddbd" stroke-width="1.6" opacity=".45" class="ink">
+    <path d="M255 240l-21 23-14 4-30 26m78-60-12 18-18 12m74-38 23 23 13 4 25 20"/>
+    <path d="M827 246l-19 29-24 14m117-56 22 22 13 4 22 24m-94-60-10 15-10 22"/>
+  </g>
+</g>
+<path fill="#72928b" d="M0 311q61-7 112 23 46 20 91 16 42-3 103 20 64 18 121 5 55-3 130-38 76-37 133-34 49-8 95-25 50-16 98 6 63 29 120 35 77 13 128 45 86 31 149 24v87H0Z"/>
+<path fill="#90a394" d="M0 339q98 7 172 36 109 32 219 15 127-14 212-50 81-40 165-45-53 13-112 45-74 41-128 53-114 42-528 32Z"/>
+<path fill="#547e78" d="M0 354q95 1 169 29 86 33 168 23 86-1 171-29 95-33 179-29 97 5 167-14 96-24 180-16 102 6 157-9 51-14 89-12v171H0Z"/>
+<path fill="#81a08e" d="M0 383q74-4 165 16 121 28 252 13 134-16 239-43 69-17 135-11 74 6 165-10 126-26 213-23-105 18-166 41-93 32-211 23-62-1-148 23-97 31-174 35H0Z"/>
+<path fill="#b9bd9d" d="M0 422q112-20 230-2 149 24 265 7 80-12 159-30 79-15 156-4 132 16 235-12 146-32 235-19v96H0Z"/>
+<path fill="#d3cfad" d="M264 439q215 10 330-25 93-28 188-14 91 13 174 0-80 23-186 10-87-12-176 15-124 34-330 14Z"/>
+
+<!-- Seamlessly travelling bands of pasture and trail -->
+<g id="pastureTiles"><g id="pastureTile">
+  <path d="M0 435Q123 413 243 433T487 442Q601 437 729 418T967 417Q1140 445 1280 435V545H0Z" fill="url(#meadow)"/>
+  <path d="M0 477q132-13 257-4t276-7q142-20 272-8t264 7q106-6 211 12v45H0Z" fill="#c6b68b"/>
+  <g id="pastureDetails"></g>
+</g><use href="#pastureTile" x="1280"/></g>
+<g id="trailTiles"><g id="trailTile">
+  <path d="M0 503q112-10 239-2t266-1q157-11 307 0t247 5q110-9 221-2v217H0Z" fill="url(#trail)"/>
+  <path d="M0 514q155-12 287-2t306-1q132-7 266 4-143-4-268 4-173 9-310-1T0 519Z" fill="#e7c99d"/>
+  <g id="trailDetails"></g>
+</g><use href="#trailTile" x="1280"/></g>
+
+<!-- The walking figure. Feet are solved against the moving ground. -->
+<g transform="translate(628 552) scale(1.095)">
+  <g id="shade" fill="#785e49">
+    <ellipse cx="-8" cy="0" rx="119" ry="8" opacity=".10"/>
+    <ellipse cx="-10" cy="0" rx="91" ry="4.7" opacity=".12"/>
+  </g>
+  <g id="limbs"></g>
+  <g id="body">
+    <g id="tail">
+      <path d="M-107-209q-12-10-19-4-5 3-5 11-8 13-17 16 5 4 12 3-4 4-12 6 11 5 22-1 3 3 9-2 13-8 17-21Z" fill="#ddc19b"/>
+      <path d="M-111-209q-11-7-17 3-4 15-13 18 13-1 19-14-3 13-10 18 13-5 21-25Z" fill="#f6e6c7"/>
+    </g>
+    <use href="#coat" fill="url(#wool)"/>
+    <g clip-path="url(#coatClip)">
+      <path fill="#bc9875" opacity=".24" d="M-135-176q16 20 30 13 4 15 19 10 11 11 22 4 8 9 19 4 14 9 26 2 11 8 24 0 13 7 23-2 15 5 22-6 18 5 21-9 15 1 17-12 15-2 15-17 12-4 17-26l14 98-270 9Z"/>
+      <path fill="#fff4d8" opacity=".79" d="M54-237q8-31 9-63l23-8q3 18-4 31 4 10-3 19 2 11-7 17 1 12-8 15 0 11-13 16-5 12-19 11-6 10-18 7l-4-38Z"/>
+      <g id="curls" fill="none" class="ink"></g>
+      <g fill="none" stroke="#fff3da" stroke-width="3" opacity=".8" class="ink">
+        <path d="M-116-201q0-8 8-10m-3 18q1-6 7-7m136-13q8 0 10-8m6 2q8-2 9-10m25-43q6-3 5-9"/>
+      </g>
+    </g>
+    <!-- Small hand-woven manta, with stepped diamond bands and fringe -->
+    <g id="fringe" stroke-linecap="round"></g>
+    <use href="#cloth" fill="#b7563e"/>
+    <g clip-path="url(#clothClip)">
+      <g transform="rotate(-3 -38 -200)">
+        <path d="M-91-222Q-44-218 17-222v5q-56 5-108 0Z" fill="#ecb77e"/>
+        <path d="M-90-208Q-39-203 17-208v22q-55 6-107 0Z" fill="#365e5c"/>
+        <path d="M-91-205Q-38-200 17-205m-108 16q52 5 108 0" stroke="#e5bc86" stroke-width="1.6" fill="none"/>
+        <g id="diamonds"></g>
+        <path d="M-91-181q53 7 111-1v3q-59 9-111 1Z" fill="#f1cf98"/>
+        <path d="M-90-174q54 9 110-2v5q-55 10-110 3Z" fill="#6d433d"/>
+      </g>
+      <use href="#cloth" fill="url(#weave)"/>
+      <path d="M-82-227q-2 31 6 57" stroke="#f1c794" stroke-width="1.7" fill="none"/>
+    </g>
+    <g id="head" class="ink">
+      <!-- The far ear sits behind the nearer, softly furred ear. -->
+      <g id="farEar">
+        <path d="M87-310q-1-19 6-42 3-12 8-14 4 8 2 21-1 22-7 36Z" fill="#d1b794"/>
+        <path d="M93-316q0-23 7-42 1 24-5 42Z" fill="#ac8476"/>
+      </g>
+      <g id="nearEar">
+        <path d="M69-306q-9-14-10-32-2-15 1-29 1-7 5-9 9 10 13 30 5 22 2 36Z" fill="#f6e5c5"/>
+        <path d="M72-316q-8-20-8-48 6 10 10 29l2 18Z" fill="#cf9b87"/>
+        <path d="M71-322q-4-16-5-31" stroke="#ad8177" stroke-width="1.4" fill="none"/>
+      </g>
+      <path d="M65-306q4-17 23-18 21-4 32 8 6 5 8 14 3 6 14 10 7 3 6 9-1 8-9 11-6 5-15 3-13-1-22-8-11 2-18-5-8 1-12-5-10-2-10-10-5-3 3-9Z" fill="url(#face)"/>
+      <path d="M103-283q9 1 17-2 6-3 8-9 6 1 14 5 6 4 3 10-5 10-19 8-16-1-23-12Z" fill="#dfba99"/>
+      <path d="M121-273q11 5 19-1-4 8-14 5Z" fill="#b38e76"/>
+      <path d="M139-289q7-1 10 4-1 5-6 6-6-2-6-6Z" fill="#68554c"/>
+      <path d="M143-280q-1 8-10 6-3-1-5-3" stroke="#795c4e" stroke-width="1.7" fill="none"/>
+      <path d="M94-306q8-7 16 1" fill="none" stroke="#b69474" stroke-width="2"/>
+      <path d="M95-300q5-8 12-4 4 3 0 7-6 4-12-3Z" fill="#54453d"/>
+      <ellipse cx="102.2" cy="-300.4" rx="3.8" ry="4.2" fill="#302f2b"/>
+      <circle cx="103.6" cy="-302.2" r="1.45" fill="#fff9e6"/>
+      <path d="M95-300l-3-2" stroke="#655146" stroke-width="1.5"/>
+      <path d="M84-288q3 5 8 4m-11 1q2 4 6 4" stroke="#c9ab89" stroke-width="1.65" fill="none"/>
+      <path d="M60-302q-6-6 1-11-3-8 5-11 2-9 12-7 5-8 13-4 9-7 16 1 11-3 15 7 7 2 5 10-4 5-11 2-4 5-10 1-6 5-13 1-3 7-10 5-1 8-9 7-7 7-14-1Z" fill="#fff0d1"/>
+      <path d="M67-319q1-5 6-5m9-1q2-4 7-3m10 9q5 3 8-1m-37 12q4 2 7-2" fill="none" stroke="#e8d4b4" stroke-width="1.8"/>
+    </g>
+  </g>
+</g>
+
+<!-- Bunchgrass in the bottom margin frames the trail. -->
+<g id="bankTiles"><g id="bankTile">
+  <path d="M0 595q135-22 281 0t289 0q168-17 315-1t263 5q68-8 132-4v125H0Z" fill="#b4a473"/>
+  <g id="bankGrass"></g>
+</g><use href="#bankTile" x="1280"/></g>
+<g id="frontTiles"><g id="frontTile">
+  <g id="frontGrass"></g>
+  <path d="M0 631q90-17 182-2t168 8q145-22 281-5t275 5q69-10 143-12t163 6q42 6 68 0v89H0Z" fill="url(#frontHill)"/>
+  <g id="frontMarks"></g>
+</g><use href="#frontTile" x="1280"/></g>
+
+<!-- Letterpress furniture -->
+<g fill="#284f50">
+  <g transform="translate(55 53)" stroke="#365e5d" fill="none" stroke-width="1.4">
+    <circle r="4"/><path d="M0-11v4m0 14v4m-11-11h4m14 0h4M-8-8l3 3m10 10 3 3M8-8 5-5M-5 5l-3 3"/>
+  </g>
+  <text class="caption" x="80" y="57" font-size="10" letter-spacing="2.6">FIELD STUDIES<tspan opacity=".58">  /  </tspan>PLATE 04</text>
+  <text class="book" x="42" y="126" font-size="72" letter-spacing="-3.8">Altiplano</text>
+  <path d="M47 147h33" fill="none" stroke="#426766" stroke-width="1.5"/>
+  <text class="book" x="92" y="152" font-size="17" font-style="italic" fill="#456664">A walk in the high Andes</text>
+</g>
+<g fill="#f3e2bf">
+  <path d="M47 662h1186" stroke="#e5d6b7" opacity=".35" stroke-width=".8"/>
+  <text x="47" y="692" class="caption" font-size="10" letter-spacing="2.3">ALPACA</text>
+  <path d="M118 680v13" stroke="#dacbad" opacity=".6"/>
+  <text x="134" y="692" class="book" font-size="18" font-style="italic">Vicugna pacos</text>
+  <g transform="translate(1017 688)" fill="none" stroke="#eddfbb" stroke-width="1.3" class="ink">
+    <path d="m0 4 9-14 7 10 5-7 8 11Zm5-4 4-2 3 2"/>
+  </g>
+  <text class="caption" x="1233" y="692" text-anchor="end" font-size="10" letter-spacing="2">PUNA GRASSLAND · 3,840 M</text>
+</g>
+<rect width="1280" height="720" fill="url(#paper)" opacity=".102" pointer-events="none" style="mix-blend-mode:multiply"/>
+</svg>
+<script>
+(() => {
+  'use strict';
+  const ns = 'http://www.w3.org/2000/svg', by = id => document.getElementById(id);
+  const el = (name, attrs, parent) => {
+    const n = document.createElementNS(ns, name);
+    for (const k in attrs) n.setAttribute(k, attrs[k]);
+    parent.appendChild(n); return n;
+  };
+  let seed = 8381;
+  const rnd = () => ((seed = (Math.imul(seed,1664525)+1013904223)>>>0) / 4294967296);
+  const pick = a => a[Math.floor(rnd()*a.length)];
+  const f = n => +n.toFixed(2), tau = Math.PI*2;
+  const use = (parent,id,x,y,s,c,lean=0) => el('use',{href:'#'+id, transform:`translate(${f(x)} ${f(y)}) skewX(${f(lean)}) scale(${f(s)})`,fill:c},parent);
+
+  // Tiny irregular ink marks are generated once, never randomized between frames.
+  for (let i=0;i<154;i++){
+    const x=rnd()*1280,y=443+rnd()*56,s=.055+.16*(y-438)/62*rnd();
+    use(by('pastureDetails'),'grass',x,y,s,pick(['#929a77','#aa9c73','#dcca97']),-12);
+    if(i%4===0) el('path',{d:`M${f(x)} ${f(y+1)}q9-2 23 0-13-1-23 0`,fill:'#a79f7c'},by('pastureDetails'));
+  }
+  for(let i=0;i<162;i++){
+    const x=rnd()*1280,y=507+rnd()*92,w=1+rnd()*10;
+    el('path',{d:`M${f(x)} ${f(y)}q${f(w*.3)} ${f(-1-rnd()*2)} ${f(w)} -.5l${f(w*.5)} 1Z`, fill:pick(['#b38964','#f7dcad','#c29b72','#d2ab80']),opacity:f(.4+rnd()*.4)},by('trailDetails'));
+  }
+  for(let i=0;i<122;i++){
+    const x=rnd()*1280,y=597+9*Math.sin(tau*x/1280*2)+rnd()*36;
+    use(by('bankGrass'),'grass',x,y,.19+rnd()*.39,pick(['#b6a675','#9d9970','#caba85','#a59e73']),-14+rnd()*12);
+  }
+  for(let i=0;i<48;i++){
+    const x=7+rnd()*1265,y=635-6*Math.sin(x*tau/1280*3)+rnd()*4;
+    use(by('frontGrass'),'grass',x,y,.49+rnd()*.54,pick(['#75846b','#859071','#a19b71','#647d68']),-8+rnd()*18);
+    if(i%4===0) use(by('frontGrass'),'plume',x+3,y,.59+rnd()*.38,'none',-14);
+  }
+  for(let i=0;i<76;i++){
+    const x=rnd()*1280,y=640+rnd()*72,w=3+rnd()*18;
+    el('path',{d:`M${f(x)} ${f(y)}q${f(w*.4)} -2 ${f(w)} -1`,fill:'none',stroke:'#aac09c','stroke-width':1,opacity:f(.08+rnd()*.15)},by('frontMarks'));
+  }
+  // Broken crescent marks follow the fleece rather than outlining every curl.
+  for(let i=0;i<146;i++){
+    const neck=i>91;
+    const x=neck?52+rnd()*65:-125+rnd()*231, y=neck?-303+rnd()*115:-223+rnd()*99;
+    const s=.55+rnd()*.65;
+    el('path',{d:pick(['M-4-1q3 5 7 0','M-4 0q1 4 5 3 3 1 4-2','M-3 1q2 2 5-1']),transform:`translate(${f(x)} ${f(y)}) rotate(${f((neck?-26:0)+rnd()*34-17)}) scale(${f(s)})`,stroke:rnd()<.48?'#fff8df':'#b89876','stroke-width':f(1.1+rnd()*.95),opacity:f(.25+rnd()*.33)},by('curls'));
+  }
+  for(let i=0;i<15;i++){
+    const a=i/14,x=-78+91*a,y=(1-a)*(1-a)*-168+2*a*(1-a)*-157+a*a*-176;
+    el('path',{d:`M${f(x)} ${f(y-2)}q1 4 ${f(1.4+rnd()*2)} ${f(6+rnd()*2)}`,stroke:i%3===0?'#b7593f':'#e6c28a','stroke-width':3},by('fringe'));
+  }
+  for(let i=0;i<7;i++){
+    const x=-90+i*19,y=-196+1.6*Math.sin(i/6*Math.PI);
+    el('path',{d:`M${x-9} ${y}l4-2v-2h3v-3h4v3h3v2l4 2-4 2v2h-3v3h-4v-3h-3v-2Z`,fill:'#efc68c'},by('diamonds'));
+    el('path',{d:`M${x-3} ${y}l3-3 3 3-3 3Z`,fill:'#b95841'},by('diamonds'));
+  }
+
+  // Four independent feet: constant ground speed in stance; eased recovery.
+  // The front carpus folds forward, while the rear hock folds backward.
+  const legs = [];
+  for(const [fore,far,offset] of [[false,true,.5],[true,true,.36],[false,false,0],[true,false,.86]]){
+    const g=el('g',{},by('limbs'));
+    legs.push({fore,far,offset,
+      cast:el('ellipse',{cy:1,rx:10,ry:1.8,fill:'#806349'},by('shade')),
+      shape:el('path',{fill:far?'url(#legCool)':'url(#legWarm)'},g),
+      light:el('path',{fill:'none',stroke:far?'#bdab8d':'#f2dbb5','stroke-width':2.3,'stroke-linecap':'round',opacity:.68},g),
+      foot:el('g',{},g)
+    });
+    const foot=legs[legs.length-1].foot;
+    el('path',{d:'M-4-10Q1-13 4-9L6-5Q12-4 12-1Q8 1 2 0L-5 0Q-7-2-5-6Z',fill:far?'#837263':'#a0836c'},foot);
+    el('path',{d:'M4-4Q10-5 12-1Q10 .5 5 0Z',fill:far?'#665e54':'#776355'},foot);
+    el('path',{d:'M3-4q4 1 4.5 3.4',stroke:'#6c5a4e','stroke-width':.8,fill:'none'},foot);
+  }
+  function smoothClosed(points){
+    const n=points.length, mid=(a,b)=>`${f((a[0]+b[0])*.5)} ${f((a[1]+b[1])*.5)}`;
+    let d='M'+mid(points[n-1],points[0]);
+    for(let i=0;i<n;i++)d+=`Q${f(points[i][0])} ${f(points[i][1])} ${mid(points[i],points[(i+1)%n])}`;
+    return d+'Z';
+  }
+  const period=1.48, stance=.645, stride=65, scale=1.095;
+  const speed=stride*scale/(period*stance);
+  function pose(L,cycle,bob){
+    const p=(cycle+L.offset)%1, u=Math.max(0,(p-stance)/(1-stance));
+    let dx=stride*(.5-p/stance),lift=0;
+    if(p>=stance){
+      const blend=u*u*(3-2*u), v=stride*(1-stance)/stance;
+      dx=stride*(blend-.5)-v*u*(1-u)*(1-2*u);
+      lift=(L.fore?26:22)*Math.sin(Math.PI*u)**2;
+    }
+    const x0=(L.fore?66:-87)+(L.far?9:0),y0=-157+bob;
+    const fx=x0+dx+(L.fore?1:-3),fy=-lift;
+    const ex=x0+(L.fore?-6:13)+dx*.18+(L.fore?3:8)*lift/25;
+    const ey=-111+bob+lift*.09;
+    const ax=fx-1,ay=fy-8,X=ax-ex,Y=ay-ey,dist=Math.hypot(X,Y);
+    const a=L.fore?50:54,b=L.fore?55:57;
+    const h=Math.min(dist-.1,(a*a-b*b+dist*dist)/(2*dist));
+    const bend=(L.fore?1:-1)*Math.sqrt(Math.max(1.4,a*a-h*h));
+    const kx=ex+(h*X+bend*Y)/dist,ky=ey+(h*Y-bend*X)/dist;
+    const wx=ax+(kx-ax)*.17,wy=ay+(ky-ay)*.17;
+    const center=[[x0,y0,L.fore?17:23],[ex,ey,L.fore?9:12],[kx,ky,L.fore?6:7],[wx,wy,3.6],[ax,ay,4.7],[fx,fy-3,4.5]];
+    const left=[],right=[];
+    for(let j=0;j<center.length;j++){
+      const [x,y,r]=center[j],prev=center[Math.max(0,j-1)],next=center[Math.min(center.length-1,j+1)];
+      const vx=next[0]-prev[0],vy=next[1]-prev[1],d=Math.hypot(vx,vy)||1;
+      const nx=vy/d*r,ny=-vx/d*r;
+      left.push([x-nx,y-ny]); right.push([x+nx,y+ny]);
+      if(j===2){left.push([x-nx*.92+(wx-x)*.065,y-ny*.92+(wy-y)*.065]);right.push([x+nx*.92+(wx-x)*.065,y+ny*.92+(wy-y)*.065]);}
+    }
+    L.shape.setAttribute('d',smoothClosed(left.concat(right.reverse())));
+    L.light.setAttribute('d',`M${f(kx+2)} ${f(ky+4)}Q${f(kx+(wx-kx)*.3+2)} ${f(ky+(wy-ky)*.3)} ${f(wx+2)} ${f(wy-1)}`);
+    L.foot.setAttribute('transform',`translate(${f(fx)} ${f(fy)}) rotate(${f(20*Math.sin(tau*u)*Math.sin(Math.PI*u))} 0 -6)`);
+    L.cast.setAttribute('cx',f(fx+3)); L.cast.setAttribute('opacity',f(.18*(1-lift/30)));
+  }
+  let t=0,last;
+  const layers=[['pastureTiles',.25],['trailTiles',1],['bankTiles',1.21],['frontTiles',1.52]].map(([id,v])=>[by(id),v]);
+  function frame(now){
+    if(last!==undefined)t+=Math.min(.06,(now-last)/1000);
+    last=now;
+    const cycle=t/period+.08, ang=cycle*tau;
+    const bob=1.75*Math.cos(2*ang-.25)+.48*Math.sin(ang);
+    by('body').setAttribute('transform',`translate(${f(1.35*Math.sin(2*ang))} ${f(bob)}) rotate(${f(.7*Math.sin(ang-.4))} -10 -172)`);
+    by('head').setAttribute('transform',`rotate(${f(1.6*Math.sin(ang+.2)+.8*Math.sin(2*ang-.7))} 79 -299)`);
+    by('nearEar').setAttribute('transform',`rotate(${f(2.1*Math.sin(ang-.45))} 75 -313)`);
+    by('farEar').setAttribute('transform',`rotate(${f(-2+2.8*Math.sin(ang-.9))} 95 -313)`);
+    by('tail').setAttribute('transform',`rotate(${f(5*Math.sin(ang-.4))} -109 -204)`);
+    for(const l of legs)pose(l,cycle,bob);
+    for(const [layer,v] of layers)layer.setAttribute('transform',`translate(${f(-((t*speed*v)%1280))} 0)`);
+    by('birds').setAttribute('transform',`translate(${f(13*Math.sin(t*.077))} ${f(3*Math.sin(t*.21))})`);
+    by('wisps').setAttribute('transform',`translate(${f(16*Math.sin(t*.026))} 0)`);
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

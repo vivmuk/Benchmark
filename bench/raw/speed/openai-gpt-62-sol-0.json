@@ -1,0 +1,17 @@
+{
+ "text": "When a truck crosses a suspension bridge, its weight first pushes down on the deck. The deck also carries its own weight and the weight of everything permanently attached to it. Beams or a stiffening truss beneath the roadway spread the truck\u2019s load along the deck, so several nearby suspenders share it rather than one taking it all. Those suspenders are the nearly vertical cables or rods that connect the deck to the main cables overhead. The deck pulls down on the suspenders, and the suspenders pull up on the deck. They carry the load in tension, meaning that they are being stretched rather than squeezed.\n\nEach suspender pulls down on a main cable at the point where it is attached. The main cable can carry that downward load because it sags between the towers. A cable can only pull along its own length, but where it slopes upward, part of that pull acts upward. At each suspender connection, the pulls from the cable on either side have a combined upward effect that balances the downward pull of the suspender. The same principle explains why a rope strung between two posts is harder to hold nearly straight when a weight hangs from it: with very little sag, the rope has to pull much harder to produce the same upward force.\n\nAt the top of each tower, the main cable passes over a curved support called a saddle. The cable slopes down away from the saddle on both sides, so both stretches pull downward on the tower. They also pull horizontally in opposite directions. In normal conditions, much of that horizontal pull balances, leaving the tower to carry mainly a downward load. As traffic moves, the pulls can change, and the tower must also resist the bending that results when they do not balance. Most of the downward force travels through the tower in compression, squeezing its legs, and then passes through the foundations into the soil or rock below.\n\nThe main cables do not stop at the towers. In a conventional suspension bridge, they continue down to anchorages beyond the ends of the suspended span. Each cable pulls its anchorage toward the bridge and upward, along the slope of the cable. An anchorage may rely on the weight of a massive concrete block and its contact with the ground, or it may be secured directly into strong rock. Either way, its job is to keep the end of the cable from moving and to transfer the cable\u2019s pull into the ground.\n\nThe towers and anchorages therefore do different jobs. The towers hold the cables high above the deck and pass most of the vertical load down through their foundations. The anchorages hold the ends of the cables against the strong inward pull that keeps them in tension. A truck adds load only to a small patch of roadway at any instant, but the deck and cables spread that load through the structure. By the time it reaches the ground, it is shared among supports that may be hundreds of meters apart.",
+ "reasoning_chars": 4956,
+ "usage": {
+  "prompt_tokens": 43,
+  "completion_tokens": 749,
+  "total_tokens": 792,
+  "completion_tokens_details": {
+   "reasoning_tokens": 163
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 5.447974126029294,
+ "t_first_content": 5.447974375041667,
+ "t_total": 18.91180375200929,
+ "cost": 0.007576
+}

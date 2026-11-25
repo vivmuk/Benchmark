@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Walking Alpaca</title>
+<style>
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #1f2433;
+  }
+  #stage {
+    width: 100vw;
+    height: 100vh;
+    display: block;
+  }
+</style>
+</head>
+<body>
+<svg id="stage" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="An animated fluffy alpaca walking through a sunlit Andean meadow">
+  <defs>
+    <!-- Sky & Atmosphere Gradients -->
+    <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6B8CB8"/>
+      <stop offset="34%" stop-color="#9CB4CA"/>
+      <stop offset="62%" stop-color="#E7C8B5"/>
+      <stop offset="86%" stop-color="#F7DAB4"/>
+      <stop offset="100%" stop-color="#FCE7C4"/>
+    </linearGradient>
+
+    <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFFDF0" stop-opacity="1"/>
+      <stop offset="22%" stop-color="#FFEAB8" stop-opacity="0.88"/>
+      <stop offset="52%" stop-color="#F8C88A" stop-opacity="0.32"/>
+      <stop offset="100%" stop-color="#F8C88A" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="farMtnGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8B96B2"/>
+      <stop offset="55%" stop-color="#A59FB0"/>
+      <stop offset="100%" stop-color="#CEB6A8"/>
+    </linearGradient>
+
+    <linearGradient id="snowGrad" x1="0.2" y1="0" x2="0.8" y2="1">
+      <stop offset="0%" stop-color="#FFFDF8"/>
+      <stop offset="65%" stop-color="#F6E9DC"/>
+      <stop offset="100%" stop-color="#DFC9BD"/>
+    </linearGradient>
+
+    <linearGradient id="midHillGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#9AA379"/>
+      <stop offset="60%" stop-color="#7E8A63"/>
+      <stop offset="100%" stop-color="#687351"/>
+    </linearGradient>
+
+    <linearGradient id="nearHillGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#B7B26B"/>
+      <stop offset="48%" stop-color="#8D9559"/>
+      <stop offset="100%" stop-color="#697546"/>
+    </linearGradient>
+
+    <linearGradient id="meadowGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#A4A45E"/>
+      <stop offset="26%" stop-color="#889050"/>
+      <stop offset="68%" stop-color="#677341"/>
+      <stop offset="100%" stop-color="#4A5631"/>
+    </linearGradient>
+
+    <linearGradient id="pathGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#D7BE94"/>
+      <stop offset="50%" stop-color="#C9AA7D"/>
+      <stop offset="100%" stop-color="#B09066"/>
+    </linearGradient>
+
+    <linearGradient id="cloudGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFBF2" stop-opacity="0.92"/>
+      <stop offset="70%" stop-color="#F7E4CE" stop-opacity="0.72"/>
+      <stop offset="100%" stop-color="#E6C6B2" stop-opacity="0.4"/>
+    </linearGradient>
+
+    <!-- Alpaca Fleece Gradients -->
+    <linearGradient id="fleeceMain" x1="0.3" y1="0" x2="0.6" y2="1">
+      <stop offset="0%" stop-color="#FFFDF8"/>
+      <stop offset="35%" stop-color="#FAF1E3"/>
+      <stop offset="76%" stop-color="#ECDBC4"/>
+      <stop offset="100%" stop-color="#DAC1A4"/>
+    </linearGradient>
+
+    <linearGradient id="fleeceNeck" x1="0.15" y1="0" x2="0.85" y2="1">
+      <stop offset="0%" stop-color="#FFFDF7"/>
+      <stop offset="50%" stop-color="#F7ECDC"/>
+      <stop offset="100%" stop-color="#E3CEB4"/>
+    </linearGradient>
+
+    <linearGradient id="fleeceHead" x1="0.2" y1="0" x2="0.8" y2="1">
+      <stop offset="0%" stop-color="#FFFDF9"/>
+      <stop offset="60%" stop-color="#F8EEDF"/>
+      <stop offset="100%" stop-color="#E5D0B6"/>
+    </linearGradient>
+
+    <linearGradient id="fleeceShadow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#DFC8AD"/>
+      <stop offset="100%" stop-color="#C7AB8C"/>
+    </linearGradient>
+
+    <linearGradient id="muzzleGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F7E7D5"/>
+      <stop offset="70%" stop-color="#E5CCB2"/>
+      <stop offset="100%" stop-color="#D4B598"/>
+    </linearGradient>
+
+    <linearGradient id="legNearUpper" x1="0.2" y1="0" x2="0.8" y2="1">
+      <stop offset="0%" stop-color="#FBF2E4"/>
+      <stop offset="75%" stop-color="#E9D6BD"/>
+      <stop offset="100%" stop-color="#D8BF9F"/>
+    </linearGradient>
+
+    <linearGradient id="legNearLower" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#DEC6A9"/>
+      <stop offset="60%" stop-color="#C8AA89"/>
+      <stop offset="100%" stop-color="#B0906E"/>
+    </linearGradient>
+
+    <linearGradient id="legFarUpper" x1="0.2" y1="0" x2="0.8" y2="1">
+      <stop offset="0%" stop-color="#DFC9AE"/>
+      <stop offset="100%" stop-color="#C3A788"/>
+    </linearGradient>
+
+    <linearGradient id="legFarLower" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#BFA181"/>
+      <stop offset="100%" stop-color="#9A7C5E"/>
+    </linearGradient>
+
+    <linearGradient id="earInner" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E8B9A6"/>
+      <stop offset="100%" stop-color="#CFA08E"/>
+    </linearGradient>
+
+    <radialGradient id="groundShadowGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#4A3F2B" stop-opacity="0.34"/>
+      <stop offset="68%" stop-color="#4A3F2B" stop-opacity="0.16"/>
+      <stop offset="100%" stop-color="#4A3F2B" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="vignetteGrad" cx="50%" cy="46%" r="65%">
+      <stop offset="62%" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#2D221A" stop-opacity="0.24"/>
+    </radialGradient>
+
+    <filter id="softBlur" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2.5"/>
+    </filter>
+  </defs>
+
+  <!-- 1. SKY & SUN -->
+  <rect width="1280" height="720" fill="url(#skyGrad)"/>
+  <circle cx="965" cy="182" r="195" fill="url(#sunGlow)"/>
+  <circle cx="965" cy="182" r="44" fill="#FFFDF4" opacity="0.92"/>
+
+  <!-- Soft sunlight haze band -->
+  <rect x="0" y="340" width="1280" height="170" fill="#FFE6BF" opacity="0.18"/>
+
+  <!-- 2. DRIFTING CLOUDS -->
+  <g id="cloudsLayer"></g>
+
+  <!-- 3. FAR ANDEAN PEAKS (Parallax) -->
+  <g id="farMountainsLayer"></g>
+
+  <!-- 4. MID ROLLING HILLS (Parallax) -->
+  <g id="midHillsLayer"></g>
+
+  <!-- 5. NEAR ROLLING FOOTHILLS (Parallax) -->
+  <g id="nearHillsLayer"></g>
+
+  <!-- 6. MEADOW & WALKING PATH -->
+  <path d="M 0 510 Q 320 500 640 508 T 1280 504 L 1280 720 L 0 720 Z" fill="url(#meadowGrad)"/>
+  <!-- Sunlit dirt path -->
+  <path d="M 0 546 Q 340 538 680 544 T 1280 540 L 1280 606 Q 940 614 600 608 T 0 612 Z" fill="url(#pathGrad)"/>
+  <!-- Soft path rim highlight -->
+  <path d="M 0 547 Q 340 539 680 545 T 1280 541" fill="none" stroke="#ECD6AE" stroke-width="2.5" opacity="0.65"/>
+
+  <!-- Mid-ground grass & pebbles behind alpaca -->
+  <g id="pathDetailsLayer"></g>
+
+  <!-- Soft shadow beneath alpaca -->
+  <ellipse id="alpacaShadow" cx="612" cy="566" rx="145" ry="20" fill="url(#groundShadowGrad)"/>
+
+  <!-- Footstep dust puffs -->
+  <g id="dustPuffsLayer"></g>
+
+  <!-- 7. THE ALPACA -->
+  <g id="alpacaRoot">
+    <!-- Far Legs (Right side, shaded for depth) -->
+    <g id="legBackFar"></g>
+    <g id="legFrontFar"></g>
+
+    <!-- Main Body Group (bobs and pitches gently) -->
+    <g id="alpacaBodyGroup">
+      <!-- Fluffy Tail -->
+      <g id="alpacaTail" transform="translate(468, 344)">
+        <path d="M 6 -6
+                 C -12 -14, -34 -4, -38 14
+                 C -48 20, -48 40, -34 48
+                 C -26 57, -10 56, -4 44
+                 C 6 38, 12 22, 10 8 Z"
+              fill="url(#fleeceMain)" stroke="#D7C0A4" stroke-width="1.4"/>
+        <!-- Tail shadow -->
+        <path d="M -34 48 C -26 57, -10 56, -4 44 C 4 38, 9 25, 8 14 C -2 24, -18 36, -34 48 Z"
+              fill="#DFC8AC" opacity="0.65"/>
+        <!-- Tail wool curl -->
+        <path d="M -26 18 C -20 12, -10 14, -8 22 M -30 34 C -22 30, -14 34, -12 40"
+              fill="none" stroke="#D5BC9E" stroke-width="1.6" stroke-linecap="round"/>
+      </g>
+
+      <!-- Main Fluffy Fleece Torso -->
+      <g id="alpacaTorso">
+        <!-- Base silhouette: rich scalloped fluffy wool cloud -->
+        <path d="M 488 334
+                 C 496 314, 524 309, 544 319
+                 C 558 304, 592 302, 610 315
+                 C 626 303, 660 305, 675 320
+                 C 695 316, 718 328, 722 348
+                 C 736 362, 735 388, 720 404
+                 C 722 422, 704 436, 684 434
+                 C 668 446, 640 446, 624 436
+                 C 606 447, 574 447, 558 436
+                 C 540 446, 512 442, 498 428
+                 C 476 426, 462 406, 468 386
+                 C 458 368, 466 344, 488 334 Z"
+              fill="url(#fleeceMain)" stroke="#D4BC9F" stroke-width="1.6" stroke-linejoin="round"/>
+
+        <!-- Warm underside fleece shadow for plump 3D volume -->
+        <path d="M 476 402
+                 C 482 420, 496 428, 512 434
+                 C 528 443, 548 442, 560 434
+                 C 578 444, 606 444, 624 434
+                 C 644 444, 670 443, 685 432
+                 C 705 433, 719 420, 719 404
+                 C 696 418, 656 424, 602 422
+                 C 548 421, 502 414, 476 402 Z"
+              fill="url(#fleeceShadow)" opacity="0.58"/>
+
+        <!-- Golden sunlit rim highlight along top back -->
+        <path d="M 495 332
+                 C 505 317, 526 314, 543 322
+                 C 558 309, 588 307, 607 318
+                 C 625 308, 655 310, 672 323"
+              fill="none" stroke="#FFFFFF" stroke-width="3.2" stroke-linecap="round" opacity="0.78"/>
+
+        <!-- Tactile wool curl details on torso -->
+        <g fill="none" stroke="#D8C0A2" stroke-width="1.8" stroke-linecap="round" opacity="0.8">
+          <path d="M 516 348 C 524 338, 540 339, 546 349"/>
+          <path d="M 556 336 C 566 327, 584 328, 592 339"/>
+          <path d="M 608 342 C 618 333, 636 334, 644 344"/>
+          <path d="M 656 348 C 666 340, 682 342, 688 352"/>
+          <path d="M 494 374 C 504 366, 518 368, 524 378"/>
+          <path d="M 544 376 C 556 367, 574 369, 582 380"/>
+          <path d="M 602 378 C 614 368, 634 370, 642 382"/>
+          <path d="M 664 382 C 676 374, 690 376, 696 386"/>
+          <path d="M 522 406 C 534 398, 548 400, 554 409"/>
+          <path d="M 580 408 C 594 400, 610 402, 618 411"/>
+          <path d="M 640 406 C 652 398, 668 400, 674 409"/>
+        </g>
+      </g>
+
+      <!-- Near Legs (Left side, in front of torso edge) -->
+      <g id="legBackNear"></g>
+      <g id="legFrontNear"></g>
+
+      <!-- Front Chest Wool Puff (seamlessly blends shoulder into neck) -->
+      <path d="M 678 348
+               C 694 340, 720 348, 728 366
+               C 738 380, 734 404, 716 414
+               C 704 422, 684 418, 674 404
+               C 666 388, 668 360, 678 348 Z"
+            fill="url(#fleeceMain)" stroke="#D8C0A2" stroke-width="1.3"/>
+      <path d="M 692 372 C 702 365, 714 368, 718 377 M 688 394 C 698 388, 710 391, 714 399"
+            fill="none" stroke="#D8C0A2" stroke-width="1.6" stroke-linecap="round" opacity="0.8"/>
+
+      <!-- LONG GRACEFUL NECK & HEAD GROUP (pivots at neck base) -->
+      <g id="alpacaNeckGroup" transform="translate(698, 354)">
+        <!-- Neck Fluffy Column (local origin = neck base at chest) -->
+        <path d="M -26 6
+                 C -34 -14, -22 -36, -8 -48
+                 C -14 -68, -2 -90, 12 -102
+                 C 8 -120, 20 -138, 38 -144
+                 C 54 -146, 68 -134, 68 -116
+                 C 76 -102, 72 -80, 60 -68
+                 C 68 -52, 64 -28, 50 -14
+                 C 54 4, 42 24, 22 28
+                 C 2 32, -20 22, -26 6 Z"
+              fill="url(#fleeceNeck)" stroke="#D5BC9F" stroke-width="1.6" stroke-linejoin="round"/>
+
+        <!-- Soft shadow on right/under side of neck -->
+        <path d="M 38 -138
+                 C 56 -138, 66 -124, 66 -112
+                 C 74 -98, 70 -78, 58 -66
+                 C 66 -50, 62 -28, 48 -14
+                 C 52 2, 42 20, 24 25
+                 C 36 12, 44 -14, 46 -46
+                 C 48 -84, 48 -116, 38 -138 Z"
+              fill="#DFC8AC" opacity="0.45"/>
+
+        <!-- Sunlit left edge highlight on neck -->
+        <path d="M -18 -20 C -22 -36, -12 -46, -4 -54 C -8 -70, 2 -88, 15 -98 C 12 -114, 22 -130, 36 -138"
+              fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" opacity="0.72"/>
+
+        <!-- Neck wool curls -->
+        <g fill="none" stroke="#D7BF9F" stroke-width="1.6" stroke-linecap="round" opacity="0.82">
+          <path d="M 10 -116 C 18 -122, 30 -121, 35 -113"/>
+          <path d="M 22 -90 C 32 -96, 44 -94, 48 -86"/>
+          <path d="M 6 -74 C 16 -80, 28 -78, 32 -70"/>
+          <path d="M 20 -52 C 30 -58, 42 -56, 46 -47"/>
+          <path d="M -2 -34 C 8 -41, 22 -39, 27 -30"/>
+          <path d="M 16 -14 C 28 -21, 40 -18, 44 -9"/>
+        </g>
+
+        <!-- Tasteful Woven Andean Neck Collar & Swaying Pom-Poms -->
+        <g id="andeanCollar">
+          <!-- Woven band wrapping gracefully around lower neck -->
+          <path d="M -17 -20 Q 18 -2 54 -19 L 51 -7 Q 18 11 -14 -8 Z" fill="#C94F3D"/>
+          <!-- Turquoise stripe -->
+          <path d="M -15 -15 Q 18 2 53 -14" fill="none" stroke="#369395" stroke-width="3.2"/>
+          <!-- Golden geometric dots along band -->
+          <path d="M -10 -13 Q 18 4 49 -12" fill="none" stroke="#F4C752" stroke-width="2.2" stroke-dasharray="3 6" stroke-linecap="round"/>
+
+          <!-- Swaying Pom-Pom Tassels (driven by pendulum physics in JS) -->
+          <g id="tasselGroup" transform="translate(36, -3)">
+            <!-- Front tassel cord & pom-pom -->
+            <path d="M 0 0 Q 2 14 5 26" fill="none" stroke="#C94F3D" stroke-width="2.2" stroke-linecap="round"/>
+            <circle cx="5" cy="28" r="6.8" fill="#D95341"/>
+            <circle cx="3.5" cy="26.5" r="2.2" fill="#F0806E" opacity="0.7"/>
+            <!-- Second smaller turquoise pom-pom slightly offset -->
+            <path d="M -8 2 Q -8 13 -7 21" fill="none" stroke="#369395" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="-7" cy="23" r="5.5" fill="#3B9B9C"/>
+            <circle cx="-8.5" cy="21.5" r="1.8" fill="#77CECF" opacity="0.7"/>
+            <!-- Tiny mustard accent pom-pom -->
+            <circle cx="0" cy="14" r="4" fill="#EBB942"/>
+          </g>
+        </g>
+
+        <!-- HEAD GROUP (pivots cleanly at top of neck) -->
+        <g id="alpacaHeadGroup" transform="translate(46, -134)">
+          <!-- Back Ear (upright pointed alpaca ear) -->
+          <g id="earBack" transform="translate(8, -22)">
+            <path d="M -5 4 C -6 -16, 2 -36, 12 -44 C 18 -34, 20 -14, 13 5 Z"
+                  fill="#E4CEB4" stroke="#CAAE8F" stroke-width="1.4" stroke-linejoin="round"/>
+            <path d="M 2 -2 C 2 -14, 6 -28, 11 -35 C 14 -26, 14 -12, 9 0 Z"
+                  fill="url(#earInner)" opacity="0.7"/>
+          </g>
+
+          <!-- Delicate Muzzle (shorter, velvety alpaca snout) -->
+          <path d="M 18 -10
+                   C 34 -12, 54 -4, 62 6
+                   C 67 13, 64 24, 55 28
+                   C 44 33, 28 32, 16 26
+                   C 8 20, 8 0, 18 -10 Z"
+                fill="url(#muzzleGrad)" stroke="#CBB195" stroke-width="1.3"/>
+
+          <!-- Soft muzzle highlight -->
+          <path d="M 30 -6 C 42 -6, 52 -1, 56 5" fill="none" stroke="#FFF8EE" stroke-width="2" stroke-linecap="round" opacity="0.65"/>
+
+          <!-- Cute alpaca split upper lip / nose & gentle smile -->
+          <path d="M 55 10 C 59 10, 62 12, 61 15 C 59 17, 55 16, 54 13 Z" fill="#59453B"/>
+          <path d="M 59 15 C 59 20, 56 23, 51 24 C 46 25, 42 23, 39 21"
+                fill="none" stroke="#6B5346" stroke-width="1.7" stroke-linecap="round"/>
+
+          <!-- Warm rosy cheek blush -->
+          <ellipse cx="32" cy="14" rx="7.5" ry="4.5" fill="#E69B8A" opacity="0.3"/>
+
+          <!-- Fluffy Head Wool Crown, Cheeks & Signature Forelock -->
+          <path d="M -22 10
+                   C -28 -6, -20 -24, -4 -28
+                   C 4 -38, 22 -38, 30 -26
+                   C 40 -26, 46 -18, 42 -10
+                   C 32 -12, 22 -6, 18 4
+                   C 22 14, 16 26, 4 28
+                   C -8 32, -22 24, -22 10 Z"
+                fill="url(#fleeceHead)" stroke="#D5BC9F" stroke-width="1.5" stroke-linejoin="round"/>
+
+          <!-- Sunlit topknot highlight -->
+          <path d="M -2 -26 C 6 -34, 20 -34, 27 -24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" opacity="0.85"/>
+
+          <!-- Cute fluffy forelock tuft curling slightly over forehead -->
+          <path d="M 16 -24 C 24 -27, 36 -23, 40 -14 C 33 -15, 25 -13, 20 -10 C 16 -14, 14 -19, 16 -24 Z"
+                fill="#FFFBF3" stroke="#DAC2A5" stroke-width="1.2"/>
+
+          <!-- Expressive Gentle Eye -->
+          <g id="alpacaEye" transform="translate(26, 2)">
+            <!-- Subtle warm eyelid ring -->
+            <ellipse cx="0" cy="0" rx="6.6" ry="7.2" fill="#CFAF92" opacity="0.45"/>
+            <!-- Dark glossy alpaca eye -->
+            <ellipse cx="0" cy="0" rx="5.6" ry="6.2" fill="#2A1F1B"/>
+            <!-- Warm chestnut iris rim -->
+            <ellipse cx="0.6" cy="0.8" rx="4.2" ry="4.6" fill="#4A3226" opacity="0.55"/>
+            <!-- Main pupil -->
+            <circle cx="0" cy="0" r="3.4" fill="#1C1411"/>
+            <!-- Dual catchlights for life and warmth -->
+            <circle cx="-1.7" cy="-2.1" r="1.9" fill="#FFFFFF"/>
+            <circle cx="2.1" cy="1.8" r="0.9" fill="#FFFFFF" opacity="0.75"/>
+            <!-- Delicate upper eyelashes -->
+            <path d="M -5 -3 C -2 -7.5, 4 -7.5, 6.5 -2.5" fill="none" stroke="#3B2B24" stroke-width="1.6" stroke-linecap="round"/>
+            <!-- Blinking eyelid overlay (scaled in JS during blinks) -->
+            <path id="eyelidCover" d="M -7 -8 L 8 -8 L 8 8 L -7 8 Z" fill="#EFE0CE" opacity="0"/>
+            <path id="eyelidLine" d="M -5.5 0.5 Q 0 3.8 5.8 0.5" fill="none" stroke="#5A4338" stroke-width="1.7" stroke-linecap="round" opacity="0"/>
+          </g>
+
+          <!-- Front Ear (upright, fluffy, attentive) -->
+          <g id="earFront" transform="translate(-4, -22)">
+            <path d="M -8 5 C -14 -14, -10 -38, 0 -48 C 10 -38, 14 -16, 8 4 Z"
+                  fill="url(#fleeceHead)" stroke="#CEB395" stroke-width="1.5" stroke-linejoin="round"/>
+            <path d="M -3 -1 C -6 -14, -4 -29, 1 -37 C 6 -28, 7 -13, 4 0 Z"
+                  fill="url(#earInner)"/>
+            <!-- Tiny tuft of wool at base of ear -->
+            <path d="M -6 3 C -2 -2, 4 -1, 7 3" fill="none" stroke="#FFFBF3" stroke-width="2.2" stroke-linecap="round"/>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+
+  <!-- 8. FOREGROUND SWAYING ICHU GRASS & WILDFLOWERS (passes in front of hooves) -->
+  <g id="foregroundGrassLayer"></g>
+
+  <!-- 9. FLOATING SUNLIT POLLEN / DUST MOTES -->
+  <g id="motesLayer"></g>
+
+  <!-- 10. WARM ATMOSPHERIC VIGNETTE -->
+  <rect width="1280" height="720" fill="url(#vignetteGrad)" pointer-events="none"/>
+</svg>
+
+<script>
+(() => {
+  const SVG_NS = "http://www.w3.org/2000/svg";
+
+  function el(tag, attrs = {}, parent = null) {
+    const node = document.createElementNS(SVG_NS, tag);
+    for (const [k, v] of Object.entries(attrs)) {
+      node.setAttribute(k, v);
+    }
+    if (parent) parent.appendChild(node);
+    return node;
+  }
+
+  // Deterministic pseudo-random generator for clean, repeatable scenery
+  function mulberry32(seed) {
+    return function() {
+      let t = seed += 0x6D2B79F5;
+      t = Math.imul(t ^ (t >>> 15), t | 1);
+      t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+
+  // =========================================================================
+  // 1. PROCEDURAL SEAMLESS ANDEAN LANDSCAPE LAYERS
+  // =========================================================================
+
+  // Helper to create a seamless two-tile parallax layer of tile width W
+  function createParallaxLayer(containerId, tileWidth, buildTileFn) {
+    const container = document.getElementById(containerId);
+    const tileA = el("g", {}, container);
+    const tileB = el("g", { transform: `translate(${tileWidth}, 0)` }, container);
+    buildTileFn(tileA, tileWidth);
+    buildTileFn(tileB, tileWidth);
+    return { container, tileA, tileB, tileWidth };
+  }
+
+  // --- Clouds ---
+  const clouds = [];
+  const cloudsContainer = document.getElementById("cloudsLayer");
+  const cloudConfigs = [
+    { x: 140, y: 112, s: 1.05, speed: 7.5, op: 0.85 },
+    { x: 520, y: 84,  s: 0.82, speed: 5.5, op: 0.72 },
+    { x: 860, y: 132, s: 1.15, speed: 9.0, op: 0.78 },
+    { x: 1180, y: 92, s: 0.74, speed: 6.2, op: 0.68 },
+    { x: 340, y: 185, s: 0.62, speed: 4.5, op: 0.55 }
+  ];
+  for (const c of cloudConfigs) {
+    const g = el("g", { opacity: c.op }, cloudsContainer);
+    el("path", {
+      d: "M -95 16 C -112 16, -118 -2, -96 -8 C -92 -28, -64 -38, -42 -26 C -26 -46, 14 -48, 32 -26 C 54 -34, 82 -20, 84 -2 C 106 0, 108 16, 86 16 Z",
+      fill: "url(#cloudGrad)"
+    }, g);
+    clouds.push({ ...c, el: g });
+  }
+
+  // --- Far Snow-Capped Andean Peaks ---
+  const farMountains = createParallaxLayer("farMountainsLayer", 1600, (g) => {
+    // Mountain ridge profile (starts & ends at y=435 for seamless loop)
+    const ridge = "M 0 435 L 95 368 L 195 278 L 285 330 L 395 232 L 505 316 L 610 264 L 725 352 L 845 215 L 955 292 L 1065 245 L 1185 338 L 1300 268 L 1435 344 L 1525 385 L 1600 435 L 1600 540 L 0 540 Z";
+    el("path", { d: ridge, fill: "url(#farMtnGrad)" }, g);
+
+    // Sunlit eastern slopes (warm golden light from the right)
+    const sunlitFacets = [
+      "M 195 278 L 285 330 L 230 375 L 178 345 Z",
+      "M 395 232 L 505 316 L 442 368 L 384 314 Z",
+      "M 610 264 L 725 352 L 660 390 L 600 330 Z",
+      "M 845 215 L 955 292 L 892 365 L 835 295 Z",
+      "M 1065 245 L 1185 338 L 1120 385 L 1055 310 Z",
+      "M 1300 268 L 1435 344 L 1365 395 L 1288 335 Z"
+    ];
+    for (const d of sunlitFacets) {
+      el("path", { d, fill: "#EED3BC", opacity: "0.34" }, g);
+    }
+
+    // Snow caps on tall Andean peaks
+    const snowCaps = [
+      "M 195 278 L 236 303 L 214 316 L 198 302 L 180 318 L 154 314 Z",
+      "M 395 232 L 446 271 L 420 282 L 402 266 L 382 284 L 352 271 Z",
+      "M 610 264 L 652 296 L 628 304 L 610 292 L 590 304 L 568 290 Z",
+      "M 845 215 L 898 252 L 872 268 L 848 250 L 826 272 L 792 262 Z",
+      "M 1065 245 L 1114 283 L 1086 294 L 1064 278 L 1042 292 L 1018 276 Z",
+      "M 1300 268 L 1352 298 L 1324 310 L 1300 295 L 1278 308 L 1255 296 Z"
+    ];
+    for (const d of snowCaps) {
+      el("path", { d, fill: "url(#snowGrad)", opacity: "0.9" }, g);
+    }
+  });
+
+  // --- Mid Rolling Foothills ---
+  const midHills = createParallaxLayer("midHillsLayer", 1600, (g) => {
+    const d = "M 0 468 C 160 412, 310 404, 480 442 C 660 482, 820 398, 1020 420 C 1220 442, 1410 492, 1600 468 L 1600 560 L 0 560 Z";
+    el("path", { d, fill: "url(#midHillGrad)" }, g);
+    // Warm sunlit ridge rim
+    el("path", {
+      d: "M 0 468 C 160 412, 310 404, 480 442 C 660 482, 820 398, 1020 420 C 1220 442, 1410 492, 1600 468",
+      fill: "none",
+      stroke: "#D4CB90",
+      "stroke-width": "2.5",
+      opacity: "0.45"
+    }, g);
+  });
+
+  // --- Near Golden-Green Slopes & Distant Shrubs ---
+  const nearHills = createParallaxLayer("nearHillsLayer", 1600, (g) => {
+    const d = "M 0 498 C 220 465, 390 482, 620 472 C 860 462, 1080 494, 1310 474 C 1440 464, 1525 486, 1600 498 L 1600 560 L 0 560 Z";
+    el("path", { d, fill: "url(#nearHillGrad)" }, g);
+
+    // Subtle distant sunlit ichu shrubs along the ridge
+    const rand = mulberry32(42);
+    for (let i = 0; i < 24; i++) {
+      const bx = 35 + i * 66 + (rand() - 0.5) * 28;
+      const by = 486 + Math.sin(bx / 1600 * Math.PI * 4) * 10 + rand() * 14;
+      const sc = 0.65 + rand() * 0.65;
+      el("path", {
+        d: `M ${bx - 8*sc} ${by} Q ${bx - 5*sc} ${by - 12*sc} ${bx - 1*sc} ${by - 15*sc} Q ${bx + 2*sc} ${by - 8*sc} ${bx + 2*sc} ${by} M ${bx} ${by} Q ${bx + 5*sc} ${by - 11*sc} ${bx + 10*sc} ${by - 13*sc} Q ${bx + 7*sc} ${by - 4*sc} ${bx + 6*sc} ${by}`,
+        fill: "#B9B263",
+        opacity: "0.7"
+      }, g);
+    }
+  });
+
+  // --- Path Details (Pebbles & Grass behind Alpaca, exact ground speed!) ---
+  const pathDetails = createParallaxLayer("pathDetailsLayer", 1280, (g) => {
+    const rand = mulberry32(108);
+    // Soft background grass clumps along the upper edge of the path
+    for (let i = 0; i < 36; i++) {
+      const x = i * 36 + rand() * 24;
+      const y = 540 + rand() * 10;
+      const h = 14 + rand() * 18;
+      const col = rand() > 0.45 ? "#9AA054" : "#B8B262";
+      el("path", {
+        d: `M ${x} ${y} Q ${x - 7} ${y - h*0.65} ${x - 11} ${y - h}
+            M ${x + 2} ${y} Q ${x} ${y - h*0.75} ${x - 1} ${y - h*1.12}
+            M ${x + 4} ${y} Q ${x + 8} ${y - h*0.65} ${x + 12} ${y - h*0.92}`,
+        fill: "none",
+        stroke: col,
+        "stroke-width": 2.2,
+        "stroke-linecap": "round"
+      }, g);
+    }
+    // Small warm pebbles and path texture lines
+    for (let i = 0; i < 48; i++) {
+      const x = rand() * 1270;
+      const y = 552 + rand() * 48;
+      const rx = 2.5 + rand() * 5.5;
+      const ry = 1.2 + rand() * 2.2;
+      const fill = rand() > 0.5 ? "#B5946B" : "#DFC69E";
+      el("ellipse", { cx: x, cy: y, rx, ry, fill, opacity: 0.58 }, g);
+    }
+    // Tiny wildflowers behind path
+    const flowerColors = ["#F4D35E", "#F09D8B", "#FFF6E6", "#E5B4C9"];
+    for (let i = 0; i < 18; i++) {
+      const x = 20 + rand() * 1240;
+      const y = 524 + rand() * 20;
+      const c = flowerColors[Math.floor(rand() * flowerColors.length)];
+      el("circle", { cx: x, cy: y, r: 2.3 + rand() * 1.4, fill: c, opacity: 0.9 }, g);
+    }
+  });
+
+  // --- Foreground Swaying Ichu Grass & Wildflowers (passes in front of alpaca!) ---
+  const swayTufts = [];
+  const fgGrass = createParallaxLayer("foregroundGrassLayer", 1280, (g) => {
+    const rand = mulberry32(256);
+    const flowerPalette = ["#F7D76B", "#F39A82", "#FFF8EC", "#E8B7CC"];
+
+    for (let i = 0; i < 34; i++) {
+      const x = i * 38 + rand() * 22;
+      const y = 604 + rand() * 98;
+      const scale = 0.78 + ((y - 604) / 98) * 0.72; // bigger closer to viewer
+      const tuft = el("g", { transform: `translate(${x}, ${y})` }, g);
+      const blades = el("g", {}, tuft);
+
+      const h = (26 + rand() * 22) * scale;
+      const col1 = rand() > 0.45 ? "#7C8846" : "#979B50";
+      const col2 = "#C2B967";
+
+      el("path", {
+        d: `M -4 2 Q -12 ${-h*0.55} -18 ${-h*0.86}
+            M -1 2 Q -5 ${-h*0.65} -7 ${-h*1.04}
+            M 2 2 Q 4 ${-h*0.7} 6 ${-h*1.0}
+            M 5 2 Q 12 ${-h*0.58} 19 ${-h*0.82}`,
+        fill: "none",
+        stroke: col1,
+        "stroke-width": 2.6 * scale,
+        "stroke-linecap": "round"
+      }, blades);
+
+      // Sunlit golden tip blades
+      el("path", {
+        d: `M 0 2 Q 1 ${-h*0.72} 1 ${-h*1.12}
+            M 3 2 Q 10 ${-h*0.65} 14 ${-h*0.92}`,
+        fill: "none",
+        stroke: col2,
+        "stroke-width": 1.8 * scale,
+        "stroke-linecap": "round",
+        opacity: 0.85
+      }, blades);
+
+      // Occasional wildflower atop a slender stem
+      if (rand() > 0.52) {
+        const fx = (rand() - 0.5) * 16 * scale;
+        const fy = -h * (0.75 + rand() * 0.25);
+        const fCol = flowerPalette[Math.floor(rand() * flowerPalette.length)];
+        el("path", {
+          d: `M 0 2 Q ${fx * 0.5} ${fy * 0.5} ${fx} ${fy}`,
+          fill: "none",
+          stroke: "#6F7D40",
+          "stroke-width": 1.5 * scale
+        }, blades);
+        el("circle", { cx: fx, cy: fy, r: 3.1 * scale, fill: fCol }, blades);
+        el("circle", { cx: fx, cy: fy, r: 1.2 * scale, fill: "#D98A3A" }, blades);
+      }
+
+      swayTufts.push({
+        el: blades,
+        phase: rand() * Math.PI * 2,
+        amp: 2.8 + rand() * 3.2
+      });
+    }
+  });
+
+  // --- Floating Sunlit Golden Dust Motes ---
+  const motesContainer = document.getElementById("motesLayer");
+  const motes = [];
+  const moteRand = mulberry32(999);
+  for (let i = 0; i < 26; i++) {
+    const m = {
+      x: moteRand() * 1280,
+      y: 120 + moteRand() * 520,
+      r: 1.4 + moteRand() * 2.4,
+      vx: -18 - moteRand() * 28,
+      vy: -4 + moteRand() * 8,
+      phase: moteRand() * Math.PI * 2,
+      baseOp: 0.25 + moteRand() * 0.45
+    };
+    m.el = el("circle", {
+      cx: m.x, cy: m.y, r: m.r,
+      fill: "#FFF5D6",
+      opacity: m.baseOp
+    }, motesContainer);
+    motes.push(m);
+  }
+
+  // --- Subtle Hoof Dust Puff Pool ---
+  const dustContainer = document.getElementById("dustPuffsLayer");
+  const dustPuffs = [];
+  function spawnDustPuff(x, y) {
+    for (let i = 0; i < 3; i++) {
+      const circle = el("circle", {
+        cx: x, cy: y, r: 4 + Math.random() * 4,
+        fill: "#E5CFA9",
+        opacity: 0.42
+      }, dustContainer);
+      dustPuffs.push({
+        el: circle,
+        x: x + (Math.random() - 0.5) * 10,
+        y: y - Math.random() * 4,
+        vx: -80 - Math.random() * 45,
+        vy: -14 - Math.random() * 22,
+        r: 4 + Math.random() * 4,
+        age: 0,
+        life: 0.55 + Math.random() * 0.3
+      });
+    }
+  }
+
+  // =========================================================================
+  // 2. ALPACA 4-LEG KINEMATICS & ARTICULATED SVG PARTS
+  // =========================================================================
+
+  // Build each articulated leg: upper fluffy trouser -> sleek lower shin -> cloven hoof
+  function createLegParts(containerId, isFar, isBack) {
+    const g = document.getElementById(containerId);
+    const upperGrad = isFar ? "url(#legFarUpper)" : "url(#legNearUpper)";
+    const lowerGrad = isFar ? "url(#legFarLower)" : "url(#legNearLower)";
+    const strokeCol = isFar ? "#A6896A" : "#C9AE8F";
+    const hoofCol   = isFar ? "#4A3A30" : "#3A2C24";
+
+    // Lower leg (drawn behind fluffy upper wool cuff)
+    const lowerGroup = el("g", {}, g);
+    const lowerPath = el("path", {
+      fill: lowerGrad,
+      stroke: strokeCol,
+      "stroke-width": 1.3,
+      "stroke-linejoin": "round"
+    }, lowerGroup);
+
+    // Neat two-toed alpaca hoof / padded foot
+    const hoofGroup = el("g", {}, lowerGroup);
+    el("path", {
+      d: "M -8 -2 C -8 -7, 4 -7, 10 -2 C 14 2, 13 7, 7 8 L -6 8 C -10 8, -11 2, -8 -2 Z",
+      fill: hoofCol
+    }, hoofGroup);
+    // Subtle hoof highlight
+    el("path", {
+      d: "M 1 -3 C 5 -3, 8 0, 9 3",
+      fill: "none",
+      stroke: "#6B5648",
+      "stroke-width": 1.3,
+      "stroke-linecap": "round"
+    }, hoofGroup);
+
+    // Upper fluffy thigh / shoulder "wool trouser"
+    const upperGroup = el("g", {}, g);
+    const upperPath = el("path", {
+      fill: upperGrad,
+      stroke: strokeCol,
+      "stroke-width": 1.4,
+      "stroke-linejoin": "round"
+    }, upperGroup);
+
+    // Fluffy knee/hock cuff & wool curl accent
+    const woolCuff = el("path", {
+      fill: "none",
+      stroke: isFar ? "#B6997A" : "#D4BC9F",
+      "stroke-width": 1.5,
+      "stroke-linecap": "round"
+    }, upperGroup);
+
+    return { g, upperPath, lowerPath, hoofGroup, woolCuff, isBack, isFar };
+  }
+
+  const legs = [
+    {
+      name: "backNear",
+      parts: createLegParts("legBackNear", false, true),
+      rootBase: { x: 522, y: 404 },
+      L1: 86,
+      L2: 80,
+      bendDir: 1, // +1 => angle + acos => bends backward (-x) in SVG coords for hock!
+      phaseOffset: 0.00,
+      strideXShift: -4,
+      prevPlanted: true
+    },
+    {
+      name: "frontNear",
+      parts: createLegParts("legFrontNear", false, false),
+      rootBase: { x: 676, y: 402 },
+      L1: 86,
+      L2: 82,
+      bendDir: -1, // -1 => angle - acos => bends forward (+x) in SVG coords for front knee!
+      phaseOffset: 0.23,
+      strideXShift: 6,
+      prevPlanted: true
+    },
+    {
+      name: "backFar",
+      parts: createLegParts("legBackFar", true, true),
+      rootBase: { x: 544, y: 402 },
+      L1: 85,
+      L2: 79,
+      bendDir: 1,
+      phaseOffset: 0.50,
+      strideXShift: -2,
+      prevPlanted: false
+    },
+    {
+      name: "frontFar",
+      parts: createLegParts("legFrontFar", true, false),
+      rootBase: { x: 696, y: 400 },
+      L1: 85,
+      L2: 81,
+      bendDir: -1,
+      phaseOffset: 0.73,
+      strideXShift: 8,
+      prevPlanted: false
+    }
+  ];
+
+  // Gait parameters: synchronized mathematically to ground speed for ZERO foot slide!
+  const GROUND_Y = 562;
+  const STRIDE_LENGTH = 130;   // px traveled backward on ground during stance
+  const STANCE_DUTY = 0.60;    // 60% of cycle on ground, 40% swinging forward
+  const CYCLE_DURATION = 1.48; // calm, graceful stroll (~1.48s per full cycle)
+  const GROUND_SPEED = STRIDE_LENGTH / (STANCE_DUTY * CYCLE_DURATION); // exact px/s!
+  const LIFT_HEIGHT = 36;
+
+  // Solve 2-bone IK from root R to foot target T
+  function solveIK(rx, ry, tx, ty, L1, L2, bendDir) {
+    const dx = tx - rx;
+    const dy = ty - ry;
+    const maxD = L1 + L2 - 1.2;
+    const minD = Math.abs(L1 - L2) + 4;
+    const d = Math.max(minD, Math.min(maxD, Math.hypot(dx, dy)));
+
+    const baseAngle = Math.atan2(dy, dx);
+    const cosA = Math.max(-1, Math.min(1, (L1*L1 + d*d - L2*L2) / (2 * L1 * d)));
+    const angleA = Math.acos(cosA);
+
+    const upperAngle = baseAngle + bendDir * angleA;
+    const jx = rx + Math.cos(upperAngle) * L1;
+    const jy = ry + Math.sin(upperAngle) * L1;
+    const lowerAngle = Math.atan2(ty - jy, tx - jx);
+
+    return { jx, jy, upperAngle, lowerAngle };
+  }
+
+  // Update a single leg's SVG geometry from its joint coordinates
+  function renderLeg(leg, rx, ry, fx, fy, swingLiftRatio, hoofTiltDeg) {
+    const { jx, jy, upperAngle, lowerAngle } = solveIK(
+      rx, ry, fx, fy, leg.L1, leg.L2, leg.bendDir
+    );
+
+    // Build fluffy upper leg shape aligned along R -> J
+    const ux = Math.cos(upperAngle), uy = Math.sin(upperAngle);
+    const nx = -uy, ny = ux; // perpendicular vector
+    const topW = leg.parts.isBack ? 28 : 23;
+    const midW = leg.parts.isBack ? 23 : 18;
+    const botW = 12.5;
+
+    // Fluffy scalloped thigh/shoulder contour
+    const p1x = rx + nx * topW - ux * 10, p1y = ry + ny * topW - uy * 10;
+    const p2x = rx - nx * topW - ux * 10, p2y = ry - ny * topW - uy * 10;
+    const m1x = rx + ux * (leg.L1 * 0.52) + nx * midW;
+    const m1y = ry + uy * (leg.L1 * 0.52) + ny * midW;
+    const m2x = rx + ux * (leg.L1 * 0.52) - nx * midW;
+    const m2y = ry + uy * (leg.L1 * 0.52) - ny * midW;
+    const j1x = jx + nx * botW + ux * 6, j1y = jy + ny * botW + uy * 6;
+    const j2x = jx - nx * botW + ux * 6, j2y = jy - ny * botW + uy * 6;
+
+    // Slight fluffy scallop puff near knee/hock cuff
+    const cuffX = jx + ux * 10, cuffY = jy + uy * 10;
+    leg.parts.upperPath.setAttribute(
+      "d",
+      `M ${p1x.toFixed(1)} ${p1y.toFixed(1)}
+       Q ${m1x.toFixed(1)} ${m1y.toFixed(1)} ${j1x.toFixed(1)} ${j1y.toFixed(1)}
+       Q ${cuffX.toFixed(1)} ${cuffY.toFixed(1)} ${j2x.toFixed(1)} ${j2y.toFixed(1)}
+       Q ${m2x.toFixed(1)} ${m2y.toFixed(1)} ${p2x.toFixed(1)} ${p2y.toFixed(1)} Z`
+    );
+
+    // Subtle fleece curl detail on upper trouser
+    const cStartX = rx + ux * (leg.L1 * 0.62) + nx * (botW * 0.65);
+    const cStartY = ry + uy * (leg.L1 * 0.62) + ny * (botW * 0.65);
+    const cCtrlX  = rx + ux * (leg.L1 * 0.78);
+    const cCtrlY  = ry + uy * (leg.L1 * 0.78);
+    const cEndX   = rx + ux * (leg.L1 * 0.62) - nx * (botW * 0.65);
+    const cEndY   = ry + uy * (leg.L1 * 0.62) - ny * (botW * 0.65);
+    leg.parts.woolCuff.setAttribute(
+      "d",
+      `M ${cStartX.toFixed(1)} ${cStartY.toFixed(1)} Q ${cCtrlX.toFixed(1)} ${cCtrlY.toFixed(1)} ${cEndX.toFixed(1)} ${cEndY.toFixed(1)}`
+    );
+
+    // Sleek tapered lower leg from J -> F
+    const lx = Math.cos(lowerAngle), ly = Math.sin(lowerAngle);
+    const lnx = -ly, lny = lx;
+    const lTopW = 10.5;
+    const lBotW = 6.6;
+
+    const a1x = jx + lnx * lTopW - lx * 4, a1y = jy + lny * lTopW - ly * 4;
+    const a2x = jx - lnx * lTopW - lx * 4, a2y = jy - lny * lTopW - ly * 4;
+    const b1x = fx + lnx * lBotW - lx * 3, b1y = fy + lny * lBotW - ly * 3;
+    const b2x = fx - lnx * lBotW - lx * 3, b2y = fy - lny * lBotW - ly * 3;
+
+    leg.parts.lowerPath.setAttribute(
+      "d",
+      `M ${a1x.toFixed(1)} ${a1y.toFixed(1)}
+       L ${b1x.toFixed(1)} ${b1y.toFixed(1)}
+       L ${b2x.toFixed(1)} ${b2y.toFixed(1)}
+       L ${a2x.toFixed(1)} ${a2y.toFixed(1)} Z`
+    );
+
+    // Hoof placement & graceful tilt during swing
+    leg.parts.hoofGroup.setAttribute(
+      "transform",
+      `translate(${fx.toFixed(1)}, ${(fy - 3).toFixed(1)}) rotate(${hoofTiltDeg.toFixed(1)})`
+    );
+  }
+
+  // =========================================================================
+  // 3. SECONDARY MOTION CONTROLLERS (Body, Neck, Head, Ears, Tail, Tassel, Blink)
+  // =========================================================================
+
+  const bodyGroup   = document.getElementById("alpacaBodyGroup");
+  const neckGroup   = document.getElementById("alpacaNeckGroup");
+  const headGroup   = document.getElementById("alpacaHeadGroup");
+  const tailGroup   = document.getElementById("alpacaTail");
+  const earFront    = document.getElementById("earFront");
+  const earBack     = document.getElementById("earBack");
+  const tasselGroup = document.getElementById("tasselGroup");
+  const shadowEl    = document.getElementById("alpacaShadow");
+  const eyelidCover = document.getElementById("eyelidCover");
+  const eyelidLine  = document.getElementById("eyelidLine");
+
+  // Pendulum physics state for the swaying woven neck tassel
+  let tasselAngle = 0;
+  let tasselVel = 0;
+
+  // Natural blinking & ear twitch timers
+  let nextBlinkTime = 2.6;
+  let blinkProgress = -1;
+  let nextEarTwitchTime = 3.8;
+  let earTwitchProgress = -1;
+
+  // Parallax scroll accumulators
+  let scrollGround = 0;
+  let scrollNearHills = 0;
+  let scrollMidHills = 0;
+  let scrollFarMtns = 0;
+
+  // Main animation state
+  let elapsed = 0;
+  let lastTimestamp = null;
+
+  function updateParallax(layer, offset) {
+    const x = -(offset % layer.tileWidth);
+    layer.tileA.setAttribute("transform", `translate(${x.toFixed(2)}, 0)`);
+    layer.tileB.setAttribute("transform", `translate(${(x + layer.tileWidth).toFixed(2)}, 0)`);
+  }
+
+  function animate(timestamp) {
+    if (lastTimestamp === null) lastTimestamp = timestamp;
+    const dt = Math.min(0.05, (timestamp - lastTimestamp) / 1000);
+    lastTimestamp = timestamp;
+    elapsed += dt;
+
+    // 1. Gait cycle phase [0, 1)
+    const phase = (elapsed / CYCLE_DURATION) % 1;
+    const tau = Math.PI * 2;
+
+    // 2. Scroll parallax scenery smoothly (ground matches hoof stance speed exactly!)
+    scrollGround    += GROUND_SPEED * dt;
+    scrollNearHills += GROUND_SPEED * 0.24 * dt;
+    scrollMidHills  += GROUND_SPEED * 0.11 * dt;
+    scrollFarMtns   += GROUND_SPEED * 0.035 * dt;
+
+    updateParallax(farMountains, scrollFarMtns);
+    updateParallax(midHills, scrollMidHills);
+    updateParallax(nearHills, scrollNearHills);
+    updateParallax(pathDetails, scrollGround);
+    updateParallax(fgGrass, scrollGround * 1.16); // slight foreground parallax depth
+
+    // Drift clouds gently
+    for (const c of clouds) {
+      c.x -= c.speed * dt;
+      if (c.x < -160) c.x = 1440;
+      c.el.setAttribute("transform", `translate(${c.x.toFixed(1)}, ${c.y.toFixed(1)}) scale(${c.s})`);
+    }
+
+    // Gentle Andean breeze swaying foreground grass
+    for (const tuft of swayTufts) {
+      const ang = Math.sin(elapsed * 2.1 + tuft.phase) * tuft.amp + 1.5;
+      tuft.el.setAttribute("transform", `rotate(${ang.toFixed(2)})`);
+    }
+
+    // Floating golden dust motes
+    for (const m of motes) {
+      m.x += m.vx * dt;
+      m.y += (m.vy + Math.sin(elapsed * 1.6 + m.phase) * 5) * dt;
+      if (m.x < -20) { m.x = 1300; m.y = 120 + Math.random() * 500; }
+      if (m.y < 60) m.y = 640;
+      if (m.y > 680) m.y = 80;
+      const op = m.baseOp * (0.65 + 0.35 * Math.sin(elapsed * 2.4 + m.phase));
+      m.el.setAttribute("cx", m.x.toFixed(1));
+      m.el.setAttribute("cy", m.y.toFixed(1));
+      m.el.setAttribute("opacity", op.toFixed(2));
+    }
+
+    // Update footstep dust puffs
+    for (let i = dustPuffs.length - 1; i >= 0; i--) {
+      const p = dustPuffs[i];
+      p.age += dt;
+      if (p.age >= p.life) {
+        p.el.remove();
+        dustPuffs.splice(i, 1);
+      } else {
+        const t = p.age / p.life;
+        p.x += p.vx * dt;
+        p.y += p.vy * dt;
+        p.r += 14 * dt;
+        p.el.setAttribute("cx", p.x.toFixed(1));
+        p.el.setAttribute("cy", p.y.toFixed(1));
+        p.el.setAttribute("r", p.r.toFixed(1));
+        p.el.setAttribute("opacity", ((1 - t) * 0.36).toFixed(2));
+      }
+    }
+
+    // 3. Body vertical bob & gentle pitch (two soft bounces per full stride)
+    const bodyBobY = Math.sin(phase * tau * 2 - 0.5) * 4.8;
+    const bodyPitch = Math.sin(phase * tau * 2 + 0.45) * 1.55;
+    bodyGroup.setAttribute(
+      "transform",
+      `translate(0, ${bodyBobY.toFixed(2)}) rotate(${bodyPitch.toFixed(2)}, 605, 385)`
+    );
+
+    // Shadow subtly breathes with body bob
+    const shadowScale = 1 - bodyBobY * 0.008;
+    shadowEl.setAttribute("rx", (145 * shadowScale).toFixed(1));
+    shadowEl.setAttribute("opacity", (0.94 - bodyBobY * 0.012).toFixed(2));
+
+    // 4. Long Neck graceful forward/back counterbalance + gentle Head stabilization
+    const neckSway = Math.sin(phase * tau * 2 - 1.15) * 3.8 + Math.sin(phase * tau) * 1.1;
+    neckGroup.setAttribute(
+      "transform",
+      `translate(698, 354) rotate(${neckSway.toFixed(2)})`
+    );
+
+    const headCounter = -neckSway * 0.62 + Math.sin(phase * tau * 2 - 2.1) * 1.6;
+    headGroup.setAttribute(
+      "transform",
+      `translate(46, -134) rotate(${headCounter.toFixed(2)})`
+    );
+
+    // 5. Fluffy Tail happy rhythmic bounce
+    const tailWag = Math.sin(phase * tau * 2 - 1.3) * 8.5 + Math.sin(phase * tau) * 3.0;
+    tailGroup.setAttribute(
+      "transform",
+      `translate(468, 344) rotate(${tailWag.toFixed(2)})`
+    );
+
+    // 6. Swaying Andean Neck Tassels (damped spring pendulum driven by stride accel)
+    const targetDrive = -neckSway * 1.4 - bodyBobY * 0.9 - 6; // slight breeze trailing back
+    const springK = 42;
+    const damping = 5.2;
+    const accel = (targetDrive - tasselAngle) * springK - tasselVel * damping;
+    tasselVel += accel * dt;
+    tasselAngle += tasselVel * dt;
+    tasselGroup.setAttribute(
+      "transform",
+      `translate(36, -3) rotate(${tasselAngle.toFixed(2)})`
+    );
+
+    // 7. Gentle Ear Bobbing & Occasional Curious Twitch
+    let earTwitchOffset = 0;
+    if (elapsed >= nextEarTwitchTime && earTwitchProgress < 0) {
+      earTwitchProgress = 0;
+    }
+    if (earTwitchProgress >= 0) {
+      earTwitchProgress += dt / 0.42;
+      if (earTwitchProgress >= 1) {
+        earTwitchProgress = -1;
+        nextEarTwitchTime = elapsed + 3.4 + Math.random() * 4.2;
+      } else {
+        earTwitchOffset = Math.sin(earTwitchProgress * Math.PI * 2) * -10 * (1 - earTwitchProgress * 0.4);
+      }
+    }
+    const earBob = Math.sin(phase * tau * 2 - 1.8) * 3.4;
+    earFront.setAttribute("transform", `translate(-4, -22) rotate(${(earBob + earTwitchOffset).toFixed(2)})`);
+    earBack.setAttribute("transform", `translate(8, -22) rotate(${(earBob * 0.75 - earTwitchOffset * 0.35).toFixed(2)})`);
+
+    // 8. Soft Eye Blinking
+    if (elapsed >= nextBlinkTime && blinkProgress < 0) {
+      blinkProgress = 0;
+    }
+    if (blinkProgress >= 0) {
+      blinkProgress += dt / 0.19;
+      if (blinkProgress >= 1) {
+        blinkProgress = -1;
+        nextBlinkTime = elapsed + 2.8 + Math.random() * 3.4;
+        eyelidCover.setAttribute("opacity", "0");
+        eyelidLine.setAttribute("opacity", "0");
+      } else {
+        const closed = Math.sin(blinkProgress * Math.PI);
+        const isClosed = closed > 0.55 ? 1 : 0;
+        eyelidCover.setAttribute("opacity", isClosed ? "1" : (closed * 1.4).toFixed(2));
+        eyelidLine.setAttribute("opacity", closed > 0.35 ? Math.min(1, closed * 1.3).toFixed(2) : "0");
+      }
+    }
+
+    // 9. Update all 4 Legs with True 2-Bone IK & Zero-Slip Stance
+    const pitchRad = bodyPitch * Math.PI / 180;
+    const cosP = Math.cos(pitchRad);
+    const sinP = Math.sin(pitchRad);
+
+    for (const leg of legs) {
+      const p = (phase + leg.phaseOffset) % 1;
+
+      // Compute exact world-space hip/shoulder attachment accounting for body bob & pitch
+      const dx0 = leg.rootBase.x - 605;
+      const dy0 = leg.rootBase.y - 385;
+      let rx = 605 + dx0 * cosP - dy0 * sinP;
+      let ry = 385 + dx0 * sinP + dy0 * cosP + bodyBobY;
+
+      // For near legs (inside alpacaBodyGroup), keep local coordinates relative to bodyGroup!
+      // For far legs (outside alpacaBodyGroup), use world coordinates so they stay seamlessly attached!
+      const isNear = !leg.parts.isFar;
+
+      let footWorldX, footWorldY, liftRatio = 0, hoofTilt = 0;
+      const centerFootX = leg.rootBase.x + leg.strideXShift;
+      const halfStride = STRIDE_LENGTH * 0.5;
+
+      if (p < STANCE_DUTY) {
+        // STANCE PHASE: foot stays planted on ground and moves backward at exact GROUND_SPEED
+        const s = p / STANCE_DUTY; // 0 -> 1
+        footWorldX = centerFootX + halfStride - STRIDE_LENGTH * s;
+        footWorldY = GROUND_Y + (leg.parts.isFar ? -5 : 0);
+        // Gentle toe-off roll right at end of stance
+        if (s > 0.84) {
+          const toe = (s - 0.84) / 0.16;
+          hoofTilt = toe * 22;
+          footWorldY -= toe * 4;
+        }
+        // Spawn delicate sunlit dust puff when hoof plants
+        if (!leg.prevPlanted) {
+          spawnDustPuff(footWorldX, footWorldY + 3);
+        }
+        leg.prevPlanted = true;
+      } else {
+        // SWING PHASE: smooth lift and forward arc to next footfall
+        const u = (p - STANCE_DUTY) / (1 - STANCE_DUTY); // 0 -> 1
+        const easeX = 0.5 - 0.5 * Math.cos(Math.PI * u);
+        footWorldX = centerFootX - halfStride + STRIDE_LENGTH * easeX;
+
+        liftRatio = Math.pow(Math.sin(Math.PI * u), 1.25);
+        footWorldY = (GROUND_Y + (leg.parts.isFar ? -5 : 0)) - liftRatio * LIFT_HEIGHT;
+
+        // Graceful hoof angle: points slightly down on lift, levels out before landing
+        hoofTilt = Math.sin(Math.PI * (1 - u)) * 26 - Math.sin(Math.PI * u) * 8;
+        leg.prevPlanted = false;
+      }
+
+      if (isNear) {
+        // Transform world foot target back into alpacaBodyGroup's local coordinate space
+        const fxRel = footWorldX - 605;
+        const fyRel = footWorldY - bodyBobY - 385;
+        const localFootX = 605 + fxRel * cosP + fyRel * sinP;
+        const localFootY = 385 - fxRel * sinP + fyRel * cosP;
+        renderLeg(leg, leg.rootBase.x, leg.rootBase.y, localFootX, localFootY, liftRatio, hoofTilt - bodyPitch);
+      } else {
+        renderLeg(leg, rx, ry, footWorldX, footWorldY, liftRatio, hoofTilt);
+      }
+    }
+
+    requestAnimationFrame(animate);
+  }
+
+  requestAnimationFrame(animate);
+})();
+</script>
+</body>
+</html>

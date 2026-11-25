@@ -1,0 +1,20 @@
+{
+ "claude-opus-5-5": {
+  "scores": {
+   "alpaca": 6.0,
+   "motion": 6.0,
+   "beauty": 6.0,
+   "scene": 7.0
+  },
+  "note": "The fluffy body, long neck and upright ears read as an alpaca, but the overly long, bare, deer-like legs and fox-like head weaken the anatomy; the legs swing plausibly across frames against a scrolling parallax background, and the pastel dusk scene is pleasant though generic, with an empty ground pl"
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "alpaca": 7.0,
+   "motion": 5.0,
+   "beauty": 6.0,
+   "scene": 6.0
+  },
+  "note": "The fleece, long neck and small head read as an alpaca, but the stick-thin legs and modest changes between frames make the walk feel stiff."
+ }
+}

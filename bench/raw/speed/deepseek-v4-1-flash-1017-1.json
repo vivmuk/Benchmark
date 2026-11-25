@@ -1,0 +1,20 @@
+{
+ "text": "The deck of a suspension bridge carries traffic, pedestrians, and its own weight, but it is not strong enough to span the gap by itself. Its load is collected by the deck structure\u2014stringers, floor beams, and a stiffening truss or box girder\u2014and distributed to a series of hangers. These hangers are vertical or nearly vertical cables spaced along the bridge. Each hanger pulls upward on the deck and transfers that load to a main cable above. The stiffening girder also spreads a heavy concentrated load, such as a truck, over several hangers so that no single hanger or cable segment has to take the whole load alone.\n\nThe main cables are the principal load-carrying elements. They hang in a curve between the towers and are always in tension. When the hangers pull down on the main cable, the cable\u2019s curved shape converts that downward load into tension along its length. The cable pulls partly downward on the hangers and partly inward toward the towers. At each tower, the main cable passes over a saddle or support. The vertical component of the cable tension pushes down on the tower, so the tower is mainly in compression, like a column. The horizontal component of the cable tension is largely balanced by the cable coming from the other side of the tower, although the tower and bridge geometry must also resist any imbalance.\n\nThe towers then carry their compressive load down to their foundations. These foundations may be spread footings, caissons, or piles, depending on the ground. They spread the concentrated tower load over a large area of soil or rock so that the ground can support it without excessive settlement.\n\nAt the ends of the bridge, the main cables continue down to anchorages. These anchorages may be massive concrete blocks, rock anchors, or other ground connections. They resist the large horizontal pull of the main cables and transfer it into the ground. In a typical suspension bridge, then, the load path is clear: the deck gathers the load, the hangers lift it to the main cables, the main cables carry it in tension to the towers and anchorages, and the towers and anchorages pass it into the foundations and finally into the ground.",
+ "reasoning_chars": 2598,
+ "usage": {
+  "prompt_tokens": 66,
+  "completion_tokens": 992,
+  "total_tokens": 1058,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 547
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 0.885018413013313,
+ "t_first_content": 6.69695136602968,
+ "t_total": 10.958676723006647,
+ "cost": 0.0012101999999999998
+}

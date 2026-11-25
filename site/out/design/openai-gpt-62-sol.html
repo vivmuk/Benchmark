@@ -1,0 +1,523 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#120f1c">
+<title>Dune Line — The overnight desert express</title>
+<style>
+  :root {
+    color-scheme: dark;
+    --ink: #120f1c;
+    --paper: #f8eee3;
+    --muted: #bbb0c3;
+    --peach: #ffab99;
+    --rule: #393142;
+    --serif: Georgia, "Times New Roman", serif;
+    --sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --mono: ui-monospace, "Cascadia Mono", Consolas, monospace;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--ink); color: var(--paper); font: 16px/1.6 var(--sans); }
+  a { color: inherit; text-decoration: none; }
+  button, select { font: inherit; }
+  button { cursor: pointer; }
+  :focus-visible { outline: 2px solid var(--peach); outline-offset: 5px; }
+  h1, h2, h3, p, figure { margin: 0; }
+  .wrap { width: min(1120px, calc(100% - 96px)); margin-inline: auto; }
+  .mono { font: 600 11px/1.5 var(--mono); letter-spacing: .15em; text-transform: uppercase; }
+  .eyebrow { display: flex; align-items: center; gap: 11px; color: var(--peach); }
+  .eyebrow::before { content: ""; width: 19px; height: 1px; background: currentColor; flex: none; }
+  .icon { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+  .sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+  .skip { position: fixed; z-index: 10; top: 12px; left: 12px; transform: translateY(-160%); padding: 10px 16px; background: var(--paper); color: var(--ink); }
+  .skip:focus { transform: none; }
+
+  .site-header { border-bottom: 1px solid #ffffff14; background: #130f1d; }
+  .nav { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 24px; min-height: 76px; }
+  .brand { display: inline-flex; align-items: center; gap: 11px; width: max-content; }
+  .brand-mark { width: 35px; height: 35px; color: var(--peach); }
+  .brand span { font-size: 15px; font-weight: 750; letter-spacing: .19em; }
+  .nav-links { display: flex; gap: clamp(20px, 4vw, 45px); color: #d3c8d9; font-size: 13px; }
+  .nav-links a:hover, .text-link:hover, .footer-links a:hover { color: var(--peach); }
+  .button {
+    display: inline-flex; align-items: center; justify-content: center; gap: 13px;
+    min-height: 47px; padding: 0 17px; border: 1px solid #655265; border-radius: 5px;
+    background: transparent; color: var(--paper); font-size: 13px; font-weight: 700; white-space: nowrap;
+    transition: background .18s, color .18s, border-color .18s;
+  }
+  .button:hover { background: #ffffff0d; border-color: var(--peach); }
+  .button.solid { background: var(--peach); border-color: var(--peach); color: #261321; }
+  .button.solid:hover { background: #ffc2b0; border-color: #ffc2b0; }
+  .nav > .button { justify-self: end; min-height: 38px; padding-inline: 13px; }
+
+  .hero { position: relative; isolation: isolate; background: #1b1328; overflow: hidden; border-bottom: 1px solid #4b3449; }
+  .scene, .hero-shade { position: absolute; inset: 0; pointer-events: none; }
+  .scene svg { display: block; width: 100%; height: 100%; }
+  .hero-shade {
+    background: linear-gradient(90deg, #171220 0%, #171220f5 17%, #171220ba 33%, #17122024 56%, transparent 72%),
+                linear-gradient(0deg, #120f1cf5, transparent 25%);
+  }
+  .hero-inner { min-height: 622px; position: relative; display: flex; flex-direction: column; justify-content: space-between; }
+  .hero-copy { padding-top: 98px; }
+  .hero h1 {
+    font: 400 clamp(76px, 8.4vw, 126px)/.91 var(--serif);
+    letter-spacing: -.075em; margin: 23px 0 26px;
+  }
+  .hero h1 em { display: block; color: var(--peach); font-weight: inherit; letter-spacing: -.087em; }
+  .hero-copy > p:not(.eyebrow) { max-width: 330px; color: #decfdf; font-size: 16px; }
+  .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 23px; margin-top: 28px; }
+  .text-link { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 650; }
+  .hero-meta { display: flex; justify-content: space-between; align-items: center; gap: 20px; border-top: 1px solid #ead3e140; min-height: 62px; color: #e5d6e5; }
+  .route { display: flex; align-items: center; gap: 12px; }
+  .route .icon { color: var(--peach); }
+  .scene-label { color: #c9b4ce; }
+  .scene-label b { color: var(--peach); margin-right: 5px; }
+
+  .section { padding-block: 78px; scroll-margin-top: 16px; }
+  .section h2 { font: 400 clamp(39px, 5vw, 64px)/1.02 var(--serif); letter-spacing: -.055em; margin-top: 12px; }
+  .section-intro { color: var(--muted); max-width: 390px; }
+  .section-head { display: flex; justify-content: space-between; align-items: end; gap: 20px 36px; margin-bottom: 32px; }
+  .features { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 26px; }
+  .feature { border-top: 1px solid var(--rule); padding: 22px 8px 0 0; }
+  .feature-top { display: flex; justify-content: space-between; align-items: start; margin-bottom: 16px; color: #9f90a9; }
+  .feature-icon { display: grid; place-items: center; width: 44px; height: 44px; color: var(--peach); border: 1px solid #6c485b; border-radius: 50%; background: #221827; }
+  .feature-icon .icon { width: 23px; height: 23px; stroke-width: 1.2; }
+  .feature h3, .tier h3 { font: 400 27px/1.15 var(--serif); letter-spacing: -.025em; margin-bottom: 8px; }
+  .feature p, .tier p { color: var(--muted); font-size: 14px; max-width: 300px; }
+
+  .schedule { background: #191423; border-block: 1px solid #32283b; }
+  .schedule .section-intro { max-width: 320px; }
+  .board { border: 1px solid #41354b; border-radius: 9px; overflow: hidden; background: #17121f; }
+  .board-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 16px 23px; background: #241a2d; border-bottom: 1px solid #41354b; color: #e1d2e3; }
+  .status { color: #f6baa8; display: flex; align-items: center; gap: 9px; }
+  .status::before { content: ""; width: 6px; height: 6px; background: var(--peach); border-radius: 50%; box-shadow: 0 0 8px #ffab9970; flex: none; }
+  table { border-collapse: collapse; width: 100%; text-align: left; }
+  th, td { padding: 13px 23px; border-bottom: 1px solid #342a3e; }
+  th { color: #c7b6cd; }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:hover { background: #ffffff04; }
+  td.time { font: 500 20px/1.2 var(--mono); white-space: nowrap; }
+  td small { vertical-align: top; color: var(--peach); font: 600 10px/1.3 var(--mono); }
+  td.duration { color: var(--muted); font-size: 13px; }
+  th:last-child, td:last-child { text-align: right; }
+  .select-seat { color: var(--peach); border: 0; background: transparent; padding: 6px 0 6px 8px; }
+  .select-seat:hover { text-decoration: underline; text-underline-offset: 4px; }
+  .board-note { color: var(--muted); margin-top: 12px; font-size: 12px; }
+
+  .tiers { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+  .tier { display: flex; flex-direction: column; position: relative; padding: 25px; border-radius: 9px; border: 1px solid #423548; background: #191423; }
+  .tier.featured { border-color: #c27f83; background: linear-gradient(150deg, #382334, #1f1729 72%); }
+  .tier-code { display: flex; justify-content: space-between; align-items: center; gap: 8px; color: var(--peach); margin-bottom: 21px; min-height: 22px; }
+  .badge { padding: 3px 7px; border-radius: 3px; background: #ffad9a; color: #301b29; font-size: 9px; letter-spacing: .1em; }
+  .price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 7px; margin: 20px 0 16px; }
+  .price strong { font: 400 46px/1 var(--serif); letter-spacing: -.06em; }
+  .price span { color: var(--muted); font-size: 12px; }
+  .tier ul { list-style: none; padding: 15px 0 19px; margin: 0; border-top: 1px solid #ffffff24; font-size: 13px; color: #e4d7e7; }
+  .tier li { margin-bottom: 7px; }
+  .tier li::before { content: "✧"; color: var(--peach); margin-right: 8px; }
+  .tier .button { width: 100%; margin-top: auto; justify-content: space-between; }
+
+  .quote { position: relative; overflow: hidden; text-align: center; padding: 66px 24px 70px; border-block: 1px solid #4a3549; background: radial-gradient(ellipse at 50% 120%, #4a2a41, #201727 69%); }
+  .quote::before, .quote::after { content: ""; position: absolute; width: 760px; height: 190px; left: 50%; bottom: -131px; border: 1px solid #ffab9935; border-radius: 50%; transform: translateX(-50%); pointer-events: none; }
+  .quote::after { width: 990px; height: 240px; bottom: -159px; }
+  .quote .eyebrow { justify-content: center; }
+  .quote .eyebrow::after { content: ""; width: 19px; height: 1px; background: currentColor; }
+  blockquote { max-width: 735px; margin: 20px auto; font: italic 400 clamp(29px, 4.3vw, 49px)/1.13 var(--serif); letter-spacing: -.035em; }
+  figcaption { color: #dbc7da; }
+  .footer { padding-top: 37px; }
+  .footer-top { display: flex; align-items: center; justify-content: space-between; gap: 22px; padding-bottom: 31px; }
+  .footer-links { display: flex; flex-wrap: wrap; gap: 10px 23px; font-size: 13px; color: #dacee0; }
+  .footer-bottom { display: flex; justify-content: space-between; gap: 8px 20px; flex-wrap: wrap; border-top: 1px solid var(--rule); padding-block: 17px; color: #b2a3ba; font-size: 12px; }
+
+  dialog { width: min(460px, calc(100% - 32px)); max-height: calc(100% - 32px); padding: 27px; color: var(--paper); background: #21182c; border: 1px solid #795768; border-radius: 12px; box-shadow: 0 20px 90px #0009; }
+  dialog::backdrop { background: #100b19c9; backdrop-filter: blur(5px); }
+  .dialog-top { display: flex; justify-content: space-between; align-items: start; gap: 12px; margin-bottom: 8px; }
+  .dialog-top h2 { font: 400 36px/1.1 var(--serif); letter-spacing: -.045em; margin-top: 6px; }
+  .close { min-height: 36px; padding-inline: 9px; }
+  .dialog-copy, .preview { color: var(--muted); font-size: 14px; }
+  #booking-form { display: grid; gap: 13px; margin-top: 18px; }
+  #booking-form label { display: grid; gap: 4px; font-size: 13px; }
+  select { min-height: 43px; width: 100%; padding: 7px 10px; border: 1px solid #66536f; border-radius: 5px; background: #161020; color: var(--paper); }
+  .preview:not(:empty) { margin-top: 16px; border-top: 1px solid #624a64; padding-top: 12px; color: var(--paper); }
+
+  @media (max-width: 920px) {
+    .wrap { width: calc(100% - 64px); }
+    .hero h1 { font-size: clamp(70px, 11vw, 98px); }
+    .hero-shade { background: linear-gradient(90deg, #171220 3%, #171220eb 21%, #17122086 44%, transparent 72%), linear-gradient(0deg, #120f1cf5, transparent 25%); }
+    .section { padding-block: 61px; }
+    .tier { padding: 18px; }
+  }
+  @media (max-width: 690px) {
+    .wrap { width: calc(100% - 40px); }
+    .nav { grid-template-columns: 1fr auto; gap: 0 12px; padding-top: 12px; }
+    .nav-links { grid-row: 2; grid-column: 1 / -1; justify-content: space-between; gap: 10px; margin-top: 9px; border-top: 1px solid #ffffff14; }
+    .nav-links a { padding-block: 8px; }
+    .hero-inner { min-height: 638px; }
+    .hero-copy { padding-top: 42px; }
+    .hero h1 { font-size: clamp(60px, 13vw, 88px); margin-block: 19px; }
+    .hero-copy > p:not(.eyebrow) { font-size: 15px; }
+    .actions { margin-top: 20px; }
+    .scene { top: 283px; bottom: 21px; }
+    .hero-shade { background: linear-gradient(180deg, #171220 0%, #171220 44%, #17122080 54%, transparent 67%, #120f1ce8 100%); }
+    .hero-meta { min-height: 47px; }
+    .scene-label { display: none; }
+    .section-head { align-items: start; flex-direction: column; gap: 11px; margin-bottom: 24px; }
+    .section { padding-block: 49px; }
+    .features, .tiers { grid-template-columns: 1fr; gap: 19px; }
+    .feature { padding-top: 16px; }
+    .feature-top { margin-bottom: 10px; }
+    .feature p, .tier p { max-width: none; }
+    .tier { padding: 21px; }
+    .board-top, th, td { padding-inline: 12px; }
+    .duration { display: none; }
+    td.time { font-size: 17px; }
+    .footer-top { align-items: start; flex-direction: column; gap: 16px; }
+  }
+  @media (max-width: 380px) {
+    .wrap { width: calc(100% - 32px); }
+    .actions { gap: 10px 14px; }
+    .actions .button { padding-inline: 11px; }
+    .board-top { letter-spacing: .07em; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+  }
+</style>
+</head>
+<body id="top">
+<svg class="sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <symbol id="logo" viewBox="0 0 40 40">
+    <circle cx="20" cy="20" r="18" fill="none" stroke="currentColor" stroke-width="1.25"/>
+    <path d="M7 23c4-5 7-7 11-7 5 0 7 5 15 6M7 26h26M16 27l-4 6m12-6 4 6m-12-3h8M27 9v7m-3.5-3.5h7" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="arrow" viewBox="0 0 24 24"><path d="M4 12h15m-6-6 6 6-6 6"/></symbol>
+  <symbol id="diagonal" viewBox="0 0 24 24"><path d="M6 18 18 6M8 6h10v10"/></symbol>
+  <symbol id="down" viewBox="0 0 24 24"><path d="M12 4v15m-5-5 5 5 5-5"/></symbol>
+  <symbol id="window" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="4"/><path d="M3 15c3-1 5-3 8-3s5 4 10 2m-5-7v4m-2-2h4"/></symbol>
+  <symbol id="dinner" viewBox="0 0 24 24"><path d="M3 17h18M5 15a7 7 0 0 1 14 0M12 8V6m-8 5L2 9m18 2 2-2M6 20h12"/></symbol>
+  <symbol id="sunrise" viewBox="0 0 24 24"><path d="M3 15h18M6 19h12m-10-4a4 4 0 0 1 8 0m-4-8V4m-6 6L4 8m14 2 2-2"/></symbol>
+</svg>
+
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <nav class="nav wrap" aria-label="Main navigation">
+    <a class="brand" href="#top" aria-label="Dune Line home"><svg class="brand-mark" aria-hidden="true"><use href="#logo"/></svg><span>DUNE LINE</span></a>
+    <div class="nav-links">
+      <a href="#experience">On board</a>
+      <a href="#departures">Departures</a>
+      <a href="#tickets">Tickets</a>
+    </div>
+    <a class="button" href="#departures" data-book>Find a seat <svg class="icon" aria-hidden="true"><use href="#diagonal"/></svg></a>
+  </nav>
+</header>
+
+<main id="main">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="scene" aria-hidden="true">
+      <svg viewBox="0 0 1280 622" preserveAspectRatio="xMaxYMid slice" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="sky" x2="0" y2="1" gradientUnits="objectBoundingBox">
+            <stop stop-color="#171129"/><stop offset=".52" stop-color="#3a2148"/><stop offset=".72" stop-color="#713c58"/><stop offset="1" stop-color="#2b1a36"/>
+          </linearGradient>
+          <radialGradient id="halo">
+            <stop stop-color="#f47f93" stop-opacity=".58"/><stop offset=".6" stop-color="#d15b88" stop-opacity=".18"/><stop offset="1" stop-color="#d15b88" stop-opacity="0"/>
+          </radialGradient>
+          <linearGradient id="sun" x2="0" y2="1">
+            <stop stop-color="#ffd5a4"/><stop offset=".53" stop-color="#ff9f9b"/><stop offset="1" stop-color="#ec638f"/>
+          </linearGradient>
+          <linearGradient id="far-sand" x2="0" y2="1">
+            <stop stop-color="#86506c"/><stop offset="1" stop-color="#42243f"/>
+          </linearGradient>
+          <linearGradient id="sand" x2=".25" y2="1">
+            <stop stop-color="#66405c"/><stop offset=".53" stop-color="#3c253f"/><stop offset="1" stop-color="#22182e"/>
+          </linearGradient>
+          <linearGradient id="steel" x2="0" y2="1">
+            <stop stop-color="#e8a09b"/><stop offset=".13" stop-color="#815269"/><stop offset=".39" stop-color="#3c2947"/><stop offset=".62" stop-color="#60415d"/><stop offset=".68" stop-color="#30223c"/><stop offset="1" stop-color="#191427"/>
+          </linearGradient>
+          <linearGradient id="nose" x2=".9" y2="1">
+            <stop stop-color="#c08a92"/><stop offset=".35" stop-color="#61405a"/><stop offset="1" stop-color="#24192e"/>
+          </linearGradient>
+          <linearGradient id="glass" x2="1" y2="1">
+            <stop stop-color="#ffc8a1"/><stop offset=".58" stop-color="#eb8d94"/><stop offset="1" stop-color="#a45579"/>
+          </linearGradient>
+          <linearGradient id="rail" x2="1" y2="0">
+            <stop stop-color="#76536d" stop-opacity=".15"/><stop offset="1" stop-color="#b38395" stop-opacity=".8"/>
+          </linearGradient>
+          <pattern id="city-windows" width="8" height="9" patternUnits="userSpaceOnUse">
+            <path d="M2 2h2v3H2z" fill="#fca29d" opacity=".67"/><path d="M6 6h1v2H6z" fill="#e681c3" opacity=".48"/>
+          </pattern>
+          <pattern id="dust" width="37" height="29" patternUnits="userSpaceOnUse">
+            <path d="M3 3h1m15 8h1m13 10h1m-24 4h1" stroke="#fac6b6" stroke-width="1" opacity=".16"/>
+          </pattern>
+          <mask id="sun-cut" maskUnits="userSpaceOnUse" x="810" y="90" width="290" height="290">
+            <path fill="#fff" d="M810 90h290v290H810z"/>
+            <path stroke="#000" stroke-width="1" d="M810 238h290m-290 11h290"/>
+            <path stroke="#000" stroke-width="2" d="M810 261h290m-290 13h290"/>
+            <path stroke="#000" stroke-width="3" d="M810 288h290m-290 14h290"/>
+            <path stroke="#000" stroke-width="5" d="M810 318h290m-290 16h290m-290 17h290"/>
+          </mask>
+          <path id="skyline" d="M747 366v-18h13v-13h16v12h11v-25h14v-10h10v10h12v28h12v-48h10v-12h16v12h10v26h12v-45h6v-14h12v14h7v37h11v-24h11v-10h10v-15h9v15h10v10h9v34h9v-70h7v-12h6v-15h2v15h9v12h7v58h12v-29h9v-18h15v18h8v25h10v-44h9v-9h14v9h8v22h10v-33h9v-14h7v14h12v46h10v-20h9v-5h17v5h8v19h9v-31h8v-7h15v7h9v31h15v-12h14v-14h15v14h16v35z"/>
+        </defs>
+
+        <path fill="url(#sky)" d="M0 0h1280v622H0z"/>
+        <ellipse cx="955" cy="246" rx="369" ry="261" fill="url(#halo)"/>
+        <g fill="#f9ded8">
+          <path opacity=".55" d="M535 68h1v1h-1zM601 153h2v2h-2zM647 83h1v1h-1zM671 220h1v1h-1zM710 58h1v1h-1zM730 127h2v2h-2zM809 43h1v1h-1zM864 77h2v2h-2zM915 33h1v1h-1zM963 60h1v1h-1zM1009 91h1v1h-1zM1077 44h2v2h-2zM1106 110h1v1h-1zM1193 71h1v1h-1zM1232 112h2v2h-2zM1265 47h1v1h-1zM1254 236h1v1h-1zM1185 224h1v1h-1zM1124 191h1v1h-1zM779 208h1v1h-1zM829 111h1v1h-1z"/>
+          <circle cx="578" cy="116" r="1.3"/><circle cx="822" cy="154" r="1"/><circle cx="1160" cy="119" r="1.2"/><circle cx="1210" cy="167" r=".9"/><circle cx="1014" cy="49" r="1"/>
+          <path d="M767 81l1.1 4.9 4.9 1.1-4.9 1.1L767 93l-1.1-4.9-4.9-1.1 4.9-1.1zM1147 71l.8 3.2 3.2.8-3.2.8-.8 3.2-.8-3.2-3.2-.8 3.2-.8z"/>
+        </g>
+        <circle cx="955" cy="226" r="134" fill="url(#sun)" mask="url(#sun-cut)"/>
+        <g fill="none" stroke="#ffd0c4">
+          <path opacity=".17" d="M622 232h125m357 10h176M542 265h188m398 16h152M638 311h180m256 4h206"/>
+          <path opacity=".1" d="M694 227h77m357 31h152M722 277h68m346 22h144"/>
+        </g>
+
+        <path fill="#70435f" d="M0 379 295 338q68-16 129 8t111 5q43-19 87-23t96 18q36 17 91 6t120 8l351-2v87H0z"/>
+        <path fill="#472a4b" d="M699 372v-19h17v-12h9v12h15v-22h18v41m265 0v-30h13v-14h8v14h15v30m129 0v-48h15v-9h9v9h13v14h9v-22h12v-11h11v11h11v23h12v33z"/>
+        <use href="#skyline" fill="#2b1a34"/>
+        <use href="#skyline" fill="url(#city-windows)" opacity=".8"/>
+        <g fill="none" stroke-linecap="round">
+          <path d="M846 296h14m33-21h6m46 3v30m45-49h16m-22 20h23m36 20h10m31-7h12m32-6v30m2-37h7m75 38h10" stroke="#ff9baf" stroke-width="1.7"/>
+          <path d="M858 310v20m47-43v23m82-44v39m15-40v27m49 14v25m48-31v26m83 11h13" stroke="#d694f0" stroke-width="1.1"/>
+          <path d="M796 353h68m34 4h53m14-6h64m29 4h76m36-5h41m16 3h37" stroke="#fd9da2" opacity=".58"/>
+        </g>
+
+        <path fill="url(#far-sand)" d="M0 419q163-48 318-55t291 24q86 23 166 4 120-31 214-17 151 22 291-17v264H0z"/>
+        <path fill="#50304e" d="M0 455q178-70 341-52 137 20 250 8 107-10 208-27 98-17 188 6 152 38 293 22v210H0z"/>
+        <path fill="url(#sand)" d="M0 451q213 26 397-13 135-28 255-11 147 20 268-2 174-29 360-10v207H0z"/>
+        <path fill="url(#dust)" d="M0 451q213 26 397-13 135-28 255-11 147 20 268-2 174-29 360-10v207H0z"/>
+        <g fill="none" stroke="#e3a3a7" opacity=".24">
+          <path d="M355 445q187-44 326-11m-271 8q144-28 229-16m76-25q160-42 264-15 145 37 301 28M1178 399q70-8 102-20m-8 69c-63-6-135-7-193 0"/>
+          <path d="M18 514q205-54 389-18 139 27 276 22m-391-9q118 33 255 32m-468 20q161-33 291-5 183 40 367 10m-421 27q115 20 236 10 125-9 279-25"/>
+          <path d="M533 467q124-6 219 13m-176-9q116 4 163 12m-51 63q116-10 226 20t366 40m-445-40q100 35 219 41"/>
+        </g>
+        <path fill="#211628" opacity=".8" d="M500 443q318 12 780 89v61Q827 486 500 449z"/>
+        <g fill="none" stroke="#916a7e" opacity=".48" stroke-width="2.5">
+          <path d="m731 468-6 6m29-4-5 8m28-5-5 10m32-7-4 13m31-9-2 14m32-10-1 17m33-12 1 19m34-14 2 22m34-16 4 25m35-19 7 27m35-21 9 31m37-24 10 34m40-27 12 38m40-30 13 42m43-33 15 46"/>
+        </g>
+        <g fill="none" stroke="url(#rail)" stroke-width="2">
+          <path d="M505 444q358 22 775 95M505 446q352 35 775 133"/>
+        </g>
+
+        <g>
+          <path fill="#160f21" opacity=".68" d="M548 446q257 1 678 44l-28 27q-168 10-650-61z"/>
+          <path fill="#1d1529" stroke="#9c667e" stroke-opacity=".55" d="M555 435l567-47q31-4 50 13l35 48q14 17 8 31-4 13-28 20l-65 5-567-51z"/>
+          <path fill="url(#steel)" d="M556 436l568-45q23-3 44 13l-32 31-9 62-571-45z"/>
+          <path fill="#ffb6ab" opacity=".47" d="M558 436l565-45q25-3 41 10l-44-2-562 40z"/>
+          <path fill="#24172d" d="M565 440l552-34v42l-552-3z"/>
+          <g fill="url(#glass)">
+            <path d="M572 440h8v5h-8zm12-1h9v6h-9zm13-1h10v7h-10zm15-1h11v8h-11zm15-1h12v9h-12zm17-1h13v10h-13zm19-1h14v11h-14zm20-1h16v12h-16zm25-2h17v14h-17zm23-1h19v15h-19zm25-2h20v17h-20zm27-1h22v18h-22zm29-2h25v20h-25zm35-2h28v22h-28zm36-2h31v24h-31zm40-2h35v26h-35zm45-3h38v29h-38zm48-3h42v32h-42zm53-3h41v35h-41z"/>
+          </g>
+          <g fill="none" stroke="#462b44" opacity=".83">
+            <path d="M698 433v12m47-15v15m25-16v16m28-18v18m31-20v20m38-22v22m37-24v24m43-26v26m47-29v29m48-32v32m53-34v34"/>
+            <path d="M705 426v39m138-49v60m120-69v77m99-85v94" stroke-width="2.5"/>
+          </g>
+          <path d="M559 449l567 20" stroke="#ffad98" stroke-width="1.5" opacity=".9"/>
+          <path d="M651 455l474 26" stroke="#b87791" opacity=".73"/>
+          <path fill="url(#nose)" stroke="#bd8896" stroke-width="1.1" d="M1118 402q22-10 43-2 10 3 17 15l29 37q13 17 6 29-5 10-25 15l-60 3q-14-14-12-44z"/>
+          <path fill="#211a30" stroke="#f4a5aa" stroke-opacity=".65" d="M1126 408q24-7 44 4l27 35q-26-5-72-1z"/>
+          <path fill="#6e536f" d="M1131 411q19-5 35 3l19 23q-22-11-54-14z"/>
+          <path d="m1154 408 14 36m-41 14q38-6 75 1m-72 27q35 3 73-7" fill="none" stroke="#d89a9f" opacity=".55"/>
+          <path d="M1134 470q23 0 65-5" fill="none" stroke="#ffa58f" stroke-width="7" opacity=".22"/>
+          <path d="m1134 471 13-1m42-3 10-2" stroke="#ffe0b4" stroke-width="3.5" stroke-linecap="round"/>
+          <path d="m1156 476 24-2-4 6-16 1z" fill="#21172a"/>
+          <path d="M1157 460l3-4 4 4m-6 1h7" fill="none" stroke="#ffd3bc" stroke-linecap="round" stroke-width=".8"/>
+          <path d="m1132 495 54-3q13-3 19-8-6 13-24 17l-43 3z" fill="#171322"/>
+          <path d="M938 472l67 5" stroke="#e1a3a7" opacity=".6" stroke-width=".8"/>
+          <text x="972" y="472" fill="#f6c0ba" font-family="monospace" font-size="6" letter-spacing="1.6" transform="rotate(3 972 472)">DUNE LINE</text>
+        </g>
+      </svg>
+    </div>
+    <div class="hero-shade"></div>
+    <div class="hero-inner wrap">
+      <div class="hero-copy">
+        <p class="eyebrow mono">The overnight desert express</p>
+        <h1 id="hero-title">All aboard <em>the night.</em></h1>
+        <p>Watch the last light slip behind the dunes. Wake to the glow of Neon City.</p>
+        <div class="actions">
+          <a class="button solid" href="#departures">Explore departures <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></a>
+          <a class="text-link" href="#experience">Life on board <svg class="icon" aria-hidden="true"><use href="#down"/></svg></a>
+        </div>
+      </div>
+      <div class="hero-meta mono">
+        <span class="route">Sundown Terminal <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg> Neon City</span>
+        <span class="scene-label"><b>01 /</b> The desert crossing</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap" id="experience" aria-labelledby="experience-title">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow mono">01 / On board</p>
+        <h2 id="experience-title">The desert, after dark.</h2>
+      </div>
+      <p class="section-intro">Make an evening of the crossing: watch the dunes from your window, have dinner, then let the rails rock you to sleep.</p>
+    </div>
+    <div class="features">
+      <article class="feature">
+        <div class="feature-top"><span class="feature-icon"><svg class="icon" aria-hidden="true"><use href="#window"/></svg></span><span class="mono">01</span></div>
+        <h3>Big windows, dark skies</h3>
+        <p>Once the station lights fall away, even the faintest stars come into view.</p>
+      </article>
+      <article class="feature">
+        <div class="feature-top"><span class="feature-icon"><svg class="icon" aria-hidden="true"><use href="#dinner"/></svg></span><span class="mono">02</span></div>
+        <h3>Dinner in the dunes</h3>
+        <p>Head to the dining car for a hot supper or a cardamom nightcap under the amber lamps.</p>
+      </article>
+      <article class="feature">
+        <div class="feature-top"><span class="feature-icon"><svg class="icon" aria-hidden="true"><use href="#sunrise"/></svg></span><span class="mono">03</span></div>
+        <h3>Coffee before the city</h3>
+        <p>Pick up a fresh coffee as Neon City’s signs come into view. The train takes you right downtown.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section schedule" id="departures" aria-labelledby="departures-title">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow mono">02 / Timetable</p>
+          <h2 id="departures-title">Nightly departures.</h2>
+        </div>
+        <p class="section-intro">Four trains leave Sundown Terminal each evening for Neon City Central.</p>
+      </div>
+      <div class="board">
+        <div class="board-top mono"><span>Eastbound · DL 01</span><span class="status">Runs nightly</span></div>
+        <table aria-label="Nightly departures from Sundown Terminal to Neon City Central" aria-describedby="schedule-note">
+          <thead class="mono">
+            <tr><th scope="col">Departs</th><th scope="col">Arrives</th><th scope="col" class="duration">Journey</th><th scope="col">Seats</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="time">19:40</td><td class="time">04:20 <small>+1</small></td><td class="duration">8 hr 40 min</td><td><a class="text-link select-seat" href="#tickets" data-book data-time="19:40" aria-label="Select the 19:40 departure">Select <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></a></td></tr>
+            <tr><td class="time">21:00</td><td class="time">05:40 <small>+1</small></td><td class="duration">8 hr 40 min</td><td><a class="text-link select-seat" href="#tickets" data-book data-time="21:00" aria-label="Select the 21:00 departure">Select <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></a></td></tr>
+            <tr><td class="time">22:20</td><td class="time">07:00 <small>+1</small></td><td class="duration">8 hr 40 min</td><td><a class="text-link select-seat" href="#tickets" data-book data-time="22:20" aria-label="Select the 22:20 departure">Select <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></a></td></tr>
+            <tr><td class="time">23:40</td><td class="time">08:20 <small>+1</small></td><td class="duration">8 hr 40 min</td><td><a class="text-link select-seat" href="#tickets" data-book data-time="23:40" aria-label="Select the 23:40 departure">Select <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></a></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="board-note" id="schedule-note">All times local. +1 indicates arrival the following morning.</p>
+    </div>
+  </section>
+
+  <section class="section wrap" id="tickets" aria-labelledby="tickets-title">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow mono">03 / Tickets</p>
+        <h2 id="tickets-title">Find your place for the night.</h2>
+      </div>
+      <p class="section-intro">Take a seat by the window or close the door on a room of your own. Fares are one way, per guest.</p>
+    </div>
+    <div class="tiers">
+      <article class="tier">
+        <div class="tier-code mono">01 / Seat</div>
+        <h3>Night Seat</h3>
+        <p>Lean back and watch the stars from the quiet coach.</p>
+        <div class="price"><strong>$79</strong><span>/ guest</span></div>
+        <ul><li>Wide reclining seat</li><li>Blanket and reading light</li><li>Morning coffee or tea</li></ul>
+        <a class="button" href="#departures" data-book data-tier="seat">Choose Night Seat <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></a>
+      </article>
+      <article class="tier featured">
+        <div class="tier-code mono">02 / Sleeper <span class="badge">Dune Line pick</span></div>
+        <h3>Moon Cabin</h3>
+        <p>A private sleeper with a window right beside your berth.</p>
+        <div class="price"><strong>$169</strong><span>/ guest</span></div>
+        <ul><li>Private cabin with a flat bed</li><li>Supper in the dining car</li><li>Breakfast and coffee</li></ul>
+        <a class="button solid" href="#departures" data-book data-tier="cabin">Choose Moon Cabin <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></a>
+      </article>
+      <article class="tier">
+        <div class="tier-code mono">03 / Suite</div>
+        <h3>Mirage Suite</h3>
+        <p>Stretch out with a panoramic view and room to linger.</p>
+        <div class="price"><strong>$289</strong><span>/ guest</span></div>
+        <ul><li>Double bed and private shower</li><li>Dinner served in your suite</li><li>Breakfast whenever you wake</li></ul>
+        <a class="button" href="#departures" data-book data-tier="suite">Choose Mirage Suite <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></a>
+      </article>
+    </div>
+  </section>
+
+  <figure class="quote">
+    <p class="eyebrow mono">From the guestbook</p>
+    <blockquote>“I meant to sleep right away, but I stayed up for miles watching the moon move across the dunes.”</blockquote>
+    <figcaption class="mono">Mara V. · Moon Cabin guest</figcaption>
+  </figure>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <a class="brand" href="#top" aria-label="Dune Line home"><svg class="brand-mark" aria-hidden="true"><use href="#logo"/></svg><span>DUNE LINE</span></a>
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="#experience">On board</a><a href="#departures">Departures</a><a href="#tickets">Tickets</a>
+      </nav>
+      <a class="text-link" href="#top">Back to top <svg class="icon" aria-hidden="true"><use href="#diagonal"/></svg></a>
+    </div>
+    <div class="footer-bottom"><span>© Dune Line</span><span>A fictional railway between Sundown Terminal and Neon City.</span></div>
+  </div>
+</footer>
+
+<dialog id="booking" aria-labelledby="booking-title" aria-describedby="booking-description">
+  <div class="dialog-top">
+    <div><p class="eyebrow mono">Dune Line · Eastbound</p><h2 id="booking-title">Plan your crossing.</h2></div>
+    <form method="dialog"><button class="button close" aria-label="Close booking preview">✕</button></form>
+  </div>
+  <p class="dialog-copy" id="booking-description">Preview an itinerary for this fictional railway. No tickets will be booked.</p>
+  <form id="booking-form">
+    <label>Departure from Sundown Terminal
+      <select id="departure">
+        <option value="19:40">19:40 → 04:20 (+1)</option>
+        <option value="21:00">21:00 → 05:40 (+1)</option>
+        <option value="22:20">22:20 → 07:00 (+1)</option>
+        <option value="23:40">23:40 → 08:20 (+1)</option>
+      </select>
+    </label>
+    <label>Fare per guest
+      <select id="fare">
+        <option value="seat">Night Seat — $79</option>
+        <option value="cabin">Moon Cabin — $169</option>
+        <option value="suite">Mirage Suite — $289</option>
+      </select>
+    </label>
+    <button class="button solid" type="submit">Preview itinerary <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></button>
+  </form>
+  <p class="preview" id="preview" role="status"></p>
+</dialog>
+
+<script>
+  (() => {
+    const dialog = document.querySelector('#booking');
+    if (typeof dialog.showModal !== 'function') return;
+
+    const departure = document.querySelector('#departure');
+    const fare = document.querySelector('#fare');
+    const form = document.querySelector('#booking-form');
+    const preview = document.querySelector('#preview');
+    let trigger;
+
+    for (const link of document.querySelectorAll('[data-book]')) {
+      link.setAttribute('aria-haspopup', 'dialog');
+      link.addEventListener('click', event => {
+        if (event.metaKey || event.ctrlKey || event.altKey || event.shiftKey) return;
+        event.preventDefault();
+        trigger = link;
+        departure.value = link.dataset.time || '21:00';
+        fare.value = link.dataset.tier || 'cabin';
+        preview.textContent = '';
+        dialog.showModal();
+        departure.focus();
+      });
+    }
+
+    form.addEventListener('change', () => { preview.textContent = ''; });
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      const arrival = departure.selectedOptions[0].textContent.split(' → ')[1].slice(0, 5);
+      preview.textContent = `Sundown Terminal ${departure.value} → Neon City Central ${arrival} the next morning. ${fare.selectedOptions[0].textContent} per guest.`;
+    });
+    dialog.addEventListener('close', () => trigger?.focus());
+  })();
+</script>
+</body>
+</html>

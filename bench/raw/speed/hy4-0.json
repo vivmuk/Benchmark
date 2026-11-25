@@ -1,0 +1,20 @@
+{
+ "text": "A suspension bridge carries load by turning downward weight into tension in cables, compression in towers, and forces that the ground can finally absorb. It begins at the deck. Traffic, snow, and the bridge\u2019s own weight press downward, while wind adds changing sideways, lifting, and twisting forces. The roadway is usually built with a stiffening girder or truss. That stiffening matters because it spreads a truck or other concentrated load along the deck, prevents sharp local sagging, and helps the whole roadway resist twisting and wind-driven motion. Without it, the flexible cable system would support weight, but the deck would change shape too easily.\n\nThe load then moves into the suspenders, the vertical or nearly vertical rods and cables attached to the deck and to the main cables above. Each suspender works in tension. The deck pulls down on it, and it pulls up on the deck. A heavy vehicle increases tension mainly in the nearby suspenders, which pass that pull upward to the enormous cables running over the towers and down toward the ends of the bridge.\n\nThose main cables are the primary load-carrying members. They hang in a deep curve, low near the middle of the main span and high at the towers, because a flexible cable can carry gravity loads only by taking a shape in which its own tension balances the load. For a deck load spread fairly evenly, the curve is close to a parabola; for a cable carrying only its own weight, it is a catenary. In either case the cable does not act like a beam. It has almost no bending strength. It carries load by being stretched, so every part of it is in tension. At any point this tension has a vertical component that supports the hangers and a horizontal component that tries to pull the cable ends inward.\n\nAt the towers the cables pass over smooth, curved saddles. The towers give the cables high support points, but their main job is to take the downward push caused where the cable changes direction. This push travels through the tower legs as compression into piers and foundations. The foundations spread that force into soil or rock and also resist overturning from unequal loads, wind, temperature changes, and earthquakes.\n\nThe horizontal pull of the main cables must also be resisted. In the usual suspension bridge, the cables continue past the side spans into massive anchorages at both ends. These are huge concrete blocks, or chambers and tunnels locked into rock, which transfer the cable tension into the earth through their enormous weight and through bearing and friction against the surrounding ground. In a self-anchored bridge the cable ends are fastened to the deck instead, so the deck carries the required horizontal compression. In the end, the deck gathers weight, the suspenders lift it, the main cables carry it in tension, the towers turn part of that tension into compression, and the anchorages and foundations deliver all the remaining forces safely into the ground.",
+ "reasoning_chars": 33663,
+ "usage": {
+  "prompt_tokens": 57,
+  "completion_tokens": 8292,
+  "total_tokens": 8349,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 7702
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 0.7577026279759593,
+ "t_first_content": 91.75420733698411,
+ "t_total": 95.25898037198931,
+ "cost": 0.025982287500000003
+}

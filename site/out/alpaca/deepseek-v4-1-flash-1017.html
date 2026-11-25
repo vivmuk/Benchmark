@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alpaca Walk</title>
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    background: #1a1f2e;
+  }
+  canvas {
+    display: block;
+    width: 100vw;
+    height: 100vh;
+  }
+</style>
+</head>
+<body>
+<canvas id="scene"></canvas>
+<script>
+(function () {
+  "use strict";
+
+  /* ------------------------------------------------------------------ */
+  /*  Canvas / viewport                                                  */
+  /* ------------------------------------------------------------------ */
+  const canvas = document.getElementById("scene");
+  const ctx = canvas.getContext("2d");
+  const DW = 1280, DH = 720;
+  let dpr = 1, viewScale = 1, viewX = 0, viewY = 0, vw = DW, vh = DH;
+
+  function resize() {
+    vw = window.innerWidth;
+    vh = window.innerHeight;
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = Math.round(vw * dpr);
+    canvas.height = Math.round(vh * dpr);
+    canvas.style.width = vw + "px";
+    canvas.style.height = vh + "px";
+    viewScale = Math.max(vw / DW, vh / DH);
+    viewX = (vw - DW * viewScale) / 2;
+    viewY = (vh - DH * viewScale) / 2;
+  }
+  window.addEventListener("resize", resize);
+  resize();
+
+  /* ------------------------------------------------------------------ */
+  /*  Small helpers                                                      */
+  /* ------------------------------------------------------------------ */
+  function mulberry32(a) {
+    return function () {
+      a |= 0; a = (a + 0x6D2B79F5) | 0;
+      let t = Math.imul(a ^ (a >>> 15), 1 | a);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+  const lerp = (a, b, t) => a + (b - a) * t;
+
+  /* Filled tapered tube following a quadratic bezier */
+  function tube(g, p0, p1, p2, w0, w1, fill, samples) {
+    samples = samples || 14;
+    const L = [], R = [];
+    for (let i = 0; i <= samples; i++) {
+      const t = i / samples, mt = 1 - t;
+      const x = mt * mt * p0.x + 2 * mt * t * p1.x + t * t * p2.x;
+      const y = mt * mt * p0.y + 2 * mt * t * p1.y + t * t * p2.y;
+      const dx = 2 * mt * (p1.x - p0.x) + 2 * t * (p2.x - p1.x);
+      const dy = 2 * mt * (p1.y - p0.y) + 2 * t * (p2.y - p1.y);
+      const dl = Math.hypot(dx, dy) || 1;
+      const nx = -dy / dl, ny = dx / dl;
+      const w = (w0 + (w1 - w0) * t) * 0.5;
+      L.push([x + nx * w, y + ny * w]);
+      R.push([x - nx * w, y - ny * w]);
+    }
+    g.beginPath();
+    g.moveTo(L[0][0], L[0][1]);
+    for (let i = 1; i < L.length; i++) g.lineTo(L[i][0], L[i][1]);
+    for (let i = R.length - 1; i >= 0; i--) g.lineTo(R[i][0], R[i][1]);
+    g.closePath();
+    g.fillStyle = fill;
+    g.fill();
+  }
+
+  /* ------------------------------------------------------------------ */
+  /*  Fleece puff sprite                                                 */
+  /* ------------------------------------------------------------------ */
+  const puffSprite = (function () {
+    const S = 96;
+    const c = document.createElement("canvas");
+    c.width = c.height = S;
+    const g = c.getContext("2d");
+    const grd = g.createRadialGradient(
+      S * 0.62, S * 0.36, S * 0.03,
+      S * 0.5, S * 0.5, S * 0.5
+    );
+    grd.addColorStop(0.00, "rgba(255,253,247,1)");
+    grd.addColorStop(0.40, "rgba(251,240,224,1)");
+    grd.addColorStop(0.76, "rgba(238,220,196,1)");
+    grd.addColorStop(0.91, "rgba(228,206,178,0.88)");
+    grd.addColorStop(1.00, "rgba(228,206,178,0)");
+    g.fillStyle = grd;
+    g.beginPath();
+    g.arc(S / 2, S / 2, S / 2, 0, Math.PI * 2);
+    g.fill();
+    return c;
+  })();
+
+  function drawPuffs(g, list) {
+    for (let i = 0; i < list.length; i++) {
+      const p = list[i];
+      g.drawImage(puffSprite, p.x - p.s / 2, p.y - p.s / 2, p.s, p.s);
+    }
+  }
+
+  /* ------------------------------------------------------------------ */
+  /*  Alpaca proportions (local units, ground = y 0, up = negative)      */
+  /* ------------------------------------------------------------------ */
+  const HIP_Y = -146;
+  const CYCLE = 1.45;     // seconds for a full 4-beat walk
+  const STRIDE = 76;      // total foot travel during stance
+  const DUTY = 0.65;      // fraction of cycle each foot is planted
+  const ALPACA_S = 0.88;
+  const GROUND_SPEED = (STRIDE * ALPACA_S) / (DUTY * CYCLE); // px/sec
+
+  const BODY = { x0: -140, y0: -395, w: 330, h: 315 };
+
+  /* --------------------------------------------------------------- */
+  /*  Pre-generate fleece puff positions                              */
+  /* --------------------------------------------------------------- */
+  const rngP = mulberry32(918273);
+
+  const torsoPuffs = [];
+  for (let i = 0; i < 100; i++) {
+    const a = rngP() * Math.PI * 2;
+    const rr = Math.sqrt(rngP());
+    torsoPuffs.push({
+      x: -8 + Math.cos(a) * rr * 86,
+      y: -208 + Math.sin(a) * rr * 54,
+      s: 25 + rngP() * 27
+    });
+  }
+
+  const neckPuffs = [];
+  for (let i = 0; i < 36; i++) {
+    const t = rngP(), mt = 1 - t;
+    const x = mt * mt * 50 + 2 * mt * t * 80 + t * t * 114;
+    const y = mt * mt * -224 + 2 * mt * t * -292 + t * t * -330;
+    const w = lerp(66, 40, t);
+    neckPuffs.push({
+      x: x + (rngP() - 0.5) * w * 0.95,
+      y: y + (rngP() - 0.5) * 20,
+      s: 21 + rngP() * 18
+    });
+  }
+
+  const tailPuffs = [];
+  for (let i = 0; i < 15; i++) {
+    const a = rngP() * Math.PI * 2;
+    const rr = Math.sqrt(rngP());
+    tailPuffs.push({
+      x: -98 + Math.cos(a) * rr * 20,
+      y: -226 + Math.sin(a) * rr * 18,
+      s: 19 + rngP() * 17
+    });
+  }
+
+  const fringePuffs = [];
+  for (let i = 0; i < 15; i++) {
+    const a = rngP() * Math.PI * 2;
+    const rr = Math.sqrt(rngP());
+    fringePuffs.push({
+      x: 117 + Math.cos(a) * rr * 17,
+      y: -347 + Math.sin(a) * rr * 11,
+      s: 19 + rngP() * 16
+    });
+  }
+
+  /* --------------------------------------------------------------- */
+  /*  Build the static upper body once into an offscreen canvas       */
+  /* --------------------------------------------------------------- */
+  function buildBody() {
+    const BS = 2;
+    const c = document.createElement("canvas");
+    c.width = Math.ceil(BODY.w * BS);
+    c.height = Math.ceil(BODY.h * BS);
+    const g = c.getContext("2d");
+    g.scale(BS, BS);
+    g.translate(-BODY.x0, -BODY.y0);
+
+    /* ---- tail (behind) ---- */
+    g.fillStyle = "#E9D5B9";
+    g.beginPath();
+    g.ellipse(-98, -226, 23, 21, -0.25, 0, Math.PI * 2);
+    g.fill();
+    drawPuffs(g, tailPuffs);
+
+    /* ---- neck ---- */
+    tube(g, { x: 50, y: -224 }, { x: 80, y: -292 }, { x: 114, y: -330 },
+      66, 40, "#EFDEC6");
+    drawPuffs(g, neckPuffs);
+
+    /* ---- torso ---- */
+    g.fillStyle = "#F3E4CE";
+    g.beginPath();
+    g.ellipse(-8, -208, 88, 56, 0, 0, Math.PI * 2);
+    g.fill();
+    drawPuffs(g, torsoPuffs);
+
+    /* ---- head ---- */
+    g.save();
+    g.translate(126, -324);
+    g.rotate(0.15);
+    g.fillStyle = "#F9ECDC";
+    g.beginPath();
+    g.ellipse(0, 0, 26, 24, 0, 0, Math.PI * 2);
+    g.fill();
+    g.restore();
+
+    /* ---- muzzle ---- */
+    g.save();
+    g.translate(150, -312);
+    g.rotate(0.32);
+    const mg = g.createLinearGradient(0, -13, 0, 13);
+    mg.addColorStop(0, "#FAE9D6");
+    mg.addColorStop(1, "#DCBB99");
+    g.fillStyle = mg;
+    g.beginPath();
+    g.ellipse(0, 0, 19, 13, 0, 0, Math.PI * 2);
+    g.fill();
+    g.restore();
+
+    /* ---- fringe (forelock) ---- */
+    drawPuffs(g, fringePuffs);
+
+    /* ---- face details ---- */
+    g.fillStyle = "#3B2A20";
+    g.beginPath();
+    g.ellipse(134, -331, 4.7, 5.3, 0, 0, Math.PI * 2);
+    g.fill();
+    g.fillStyle = "rgba(255,255,255,0.92)";
+    g.beginPath();
+    g.arc(135.7, -333.2, 1.7, 0, Math.PI * 2);
+    g.fill();
+
+    g.fillStyle = "#6B4F3E";
+    g.beginPath();
+    g.ellipse(161, -310, 5.6, 4.6, 0.3, 0, Math.PI * 2);
+    g.fill();
+
+    g.strokeStyle = "#6B4F3E";
+    g.lineWidth = 1.8;
+    g.lineCap = "round";
+    g.beginPath();
+    g.moveTo(163, -303);
+    g.quadraticCurveTo(157, -299, 150, -302);
+    g.stroke();
+
+    /* ---- global shading of the whole silhouette ---- */
+    g.globalCompositeOperation = "source-atop";
+
+    const lg = g.createRadialGradient(120, -310, 20, -10, -220, 350);
+    lg.addColorStop(0.00, "rgba(255,250,238,0.50)");
+    lg.addColorStop(0.42, "rgba(255,245,228,0.06)");
+    lg.addColorStop(1.00, "rgba(88,58,38,0.46)");
+    g.fillStyle = lg;
+    g.fillRect(BODY.x0, BODY.y0, BODY.w, BODY.h);
+
+    const vg = g.createLinearGradient(0, -292, 0, -140);
+    vg.addColorStop(0.00, "rgba(255,252,240,0.26)");
+    vg.addColorStop(0.55, "rgba(255,255,255,0)");
+    vg.addColorStop(1.00, "rgba(108,74,50,0.34)");
+    g.fillStyle = vg;
+    g.fillRect(BODY.x0, BODY.y0, BODY.w, BODY.h);
+
+    g.globalCompositeOperation = "source-over";
+    return c;
+  }
+
+  const bodyCanvas = buildBody();
+
+  /* ------------------------------------------------------------------ */
+  /*  Walk cycle                                                         */
+  /* ------------------------------------------------------------------ */
+  function footPos(hipX, phase, cycleP) {
+    const p = (cycleP + phase) % 1;
+    const half = STRIDE * 0.5;
+    let fx, fy;
+    if (p < DUTY) {
+      const u = p / DUTY;               // planted: slides backwards
+      fx = half - STRIDE * u;
+      fy = 0;
+    } else {
+      const u = (p - DUTY) / (1 - DUTY); // swing: returns forward, lifted
+      const e = u * u * (3 - 2 * u);
+      fx = -half + STRIDE * e;
+      fy = -Math.sin(Math.PI * u) * 24;
+    }
+    return { x: hipX + fx, y: fy };
+  }
+
+  const LEGS = [
+    { hx: -70, phase: 0.50, near: false, hind: true },  // right hind
+    { hx: 50,  phase: 0.75, near: false, hind: false }, // right front
+    { hx: -56, phase: 0.00, near: true,  hind: true },  // left hind
+    { hx: 64,  phase: 0.25, near: true,  hind: false }  // left front
+  ];
+
+  function drawLeg(leg, bob, cycleP) {
+    const hipX = leg.hx;
+    const hipY = HIP_Y + bob;
+    const f = footPos(leg.hx, leg.phase, cycleP);
+    const footX = f.x;
+    const footY = f.y;
+
+    const midX = (hipX + footX) * 0.5;
+    const midY = (hipY + footY) * 0.5;
+    const bend = leg.hind ? 17 : 9;
+    const ctrlX = midX - bend;
+    const ctrlY = midY - (leg.hind ? 3 : 0);
+
+    const grad = ctx.createLinearGradient(hipX - 30, 0, hipX + 30, 0);
+    if (leg.near) {
+      grad.addColorStop(0.00, "#B99A7C");
+      grad.addColorStop(0.45, "#E4CFB4");
+      grad.addColorStop(1.00, "#FCF3E5");
+    } else {
+      grad.addColorStop(0.00, "#93765C");
+      grad.addColorStop(0.45, "#BEA88E");
+      grad.addColorStop(1.00, "#DBC8AF");
+    }
+
+    tube(
+      ctx,
+      { x: hipX, y: hipY },
+      { x: ctrlX, y: ctrlY },
+      { x: footX, y: footY - 8 },
+      42, 16, grad
+    );
+
+    /* hoof */
+    const hg = ctx.createLinearGradient(footX - 12, 0, footX + 12, 0);
+    if (leg.near) {
+      hg.addColorStop(0, "#453526");
+      hg.addColorStop(1, "#7C6350");
+    } else {
+      hg.addColorStop(0, "#382B1F");
+      hg.addColorStop(1, "#614C3C");
+    }
+    ctx.fillStyle = hg;
+    ctx.beginPath();
+    ctx.ellipse(footX, footY - 4, 11, 9, 0, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  function drawEars(cycleP) {
+    const w1 = Math.sin(cycleP * Math.PI * 2 + 1.1) * 0.055;
+    const w2 = Math.sin(cycleP * Math.PI * 2 + 2.6) * 0.055;
+
+    const earGrad = ctx.createLinearGradient(100, -370, 145, -330);
+    earGrad.addColorStop(0, "#FCF2E2");
+    earGrad.addColorStop(1, "#D7BC9D");
+
+    const innerGrad = ctx.createLinearGradient(100, -370, 145, -330);
+    innerGrad.addColorStop(0, "#E7C4AC");
+    innerGrad.addColorStop(1, "#C9A487");
+
+    function ear(bx, by, ang, len, wide) {
+      const tipX = bx + Math.cos(ang) * len;
+      const tipY = by + Math.sin(ang) * len;
+      const mx = bx + Math.cos(ang) * len * 0.55 - Math.sin(ang) * len * 0.10;
+      const my = by + Math.sin(ang) * len * 0.55 + Math.cos(ang) * len * 0.10;
+      tube(ctx, { x: bx, y: by }, { x: mx, y: my }, { x: tipX, y: tipY },
+        wide, 3.5, earGrad, 10);
+      // inner ear
+      const ix = bx + Math.cos(ang) * len * 0.76;
+      const iy = by + Math.sin(ang) * len * 0.76;
+      tube(ctx,
+        { x: bx + Math.cos(ang) * len * 0.18, y: by + Math.sin(ang) * len * 0.18 },
+        { x: (bx + ix) * 0.5, y: (by + iy) * 0.5 },
+        { x: ix, y: iy },
+        wide * 0.42, 1, innerGrad, 8);
+    }
+
+    ear(112, -338, -Math.PI / 2 - 0.26 + w1, 36, 15);
+    ear(133, -340, -Math.PI / 2 + 0.20 + w2, 38, 15);
+  }
+
+  const ALPACA = { x: 616, groundY: 592 };
+
+  function drawAlpaca(t) {
+    const cycleP = (t / CYCLE) % 1;
+    const bob = Math.sin(cycleP * Math.PI * 4 + 0.7) * 3.4;
+    const pitch = Math.sin(cycleP * Math.PI * 2) * 0.013;
+
+    ctx.save();
+    ctx.translate(ALPACA.x, ALPACA.groundY);
+    ctx.scale(ALPACA_S, ALPACA_S);
+
+    /* ground shadow */
+    const shGrad = ctx.createRadialGradient(0, 0, 4, 0, 0, 130);
+    shGrad.addColorStop(0, "rgba(28,52,26,0.42)");
+    shGrad.addColorStop(0.55, "rgba(28,52,26,0.20)");
+    shGrad.addColorStop(1, "rgba(28,52,26,0)");
+    ctx.fillStyle = shGrad;
+    ctx.save();
+    ctx.translate(8, 2);
+    ctx.scale(1, 0.155);
+    ctx.beginPath();
+    ctx.arc(0, 0, 130, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+
+    /* legs: far side first */
+    for (let i = 0; i < LEGS.length; i++) if (!LEGS[i].near) drawLeg(LEGS[i], bob, cycleP);
+    for (let i = 0; i < LEGS.length; i++) if (LEGS[i].near) drawLeg(LEGS[i], bob, cycleP);
+
+    /* body with gentle bob + pitch */
+    ctx.save();
+    ctx.translate(-8, -208 + bob);
+    ctx.rotate(pitch);
+    ctx.translate(8, 208);
+    ctx.drawImage(bodyCanvas, BODY.x0, BODY.y0, BODY.w, BODY.h);
+    drawEars(cycleP);
+    ctx.restore();
+
+    ctx.restore();
+  }
+
+  /* ------------------------------------------------------------------ */
+  /*  Scenery data                                                       */
+  /* ------------------------------------------------------------------ */
+  const HORIZON = 505;
+
+  function speedAt(y) {
+    const k = (yy) => 0.25 + 0.85 * ((yy - HORIZON) / (720 - HORIZON));
+    return GROUND_SPEED * (k(y) / k(592));
+  }
+
+  const rngG = mulberry32(447711);
+  const grassItems = [];
+  for (let i = 0; i < 230; i++) {
+    const y = 512 + Math.pow(rngG(), 0.75) * 210;
+    const depth = (y - HORIZON) / (720 - HORIZON);
+    grassItems.push({
+      x0: rngG() * 1600,
+      y: y,
+      spd: speedAt(y),
+      scale: 0.32 + Math.pow(depth, 1.15) * 1.25,
+      type: rngG() < 0.12 ? "flower" : "grass",
+      seed: Math.floor(rngG() * 99999),
+      depth: depth,
+      tone: rngG()
+    });
+  }
+
+  const pollen = [];
+  const rngQ = mulberry32(2024);
+  for (let i = 0; i < 44; i++) {
+    pollen.push({
+      x: rngQ() * DW,
+      y: 60 + rngQ() * 520,
+      r: 1 + rngQ() * 2.2,
+      spd: 8 + rngQ() * 22,
+      ph: rngQ() * Math.PI * 2,
+      amp: 8 + rngQ() * 22
+    });
+  }
+
+  /* ------------------------------------------------------------------ */
+  /*  Scenery drawing                                                    */
+  /* ------------------------------------------------------------------ */
+  function drawSky() {
+    const g = ctx.createLinearGradient(0, 0, 0, DH);
+    g.addColorStop(0.00, "#3F5FA8");
+    g.addColorStop(0.24, "#6E8FCC");
+    g.addColorStop(0.48, "#A9BBDF");
+    g.addColorStop(0.66, "#E8C3B4");
+    g.addColorStop(0.80, "#FFD2A0");
+    g.addColorStop(1.00, "#FFE7C4");
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, DW, DH);
+  }
+
+  function drawSun(t) {
+    const sx = 968, sy = 356;
+    // big soft halo
+    const halo = ctx.createRadialGradient(sx, sy, 10, sx, sy, 380);
+    halo.addColorStop(0.00, "rgba(255,236,190,0.85)");
+    halo.addColorStop(0.18, "rgba(255,216,160,0.45)");
+    halo.addColorStop(0.48, "rgba(255,190,140,0.16)");
+    halo.addColorStop(1.00, "rgba(255,180,130,0)");
+    ctx.fillStyle = halo;
+    ctx.fillRect(sx - 400, sy - 400, 800, 800);
+
+    // disc
+    const d = ctx.createRadialGradient(sx, sy, 2, sx, sy, 54);
+    d.addColorStop(0, "rgba(255,255,248,1)");
+    d.addColorStop(0.55, "rgba(255,247,214,1)");
+    d.addColorStop(1, "rgba(255,226,168,0.55)");
+    ctx.fillStyle = d;
+    ctx.beginPath();
+    ctx.arc(sx, sy, 54, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  function drawClouds(t) {
+    const clouds = [
+      { x: 180, y: 128, s: 1.15, a: 0.55, v: 5 },
+      { x: 620, y: 92,  s: 0.85, a: 0.40, v: 3.2 },
+      { x: 1040, y: 168, s: 1.0, a: 0.45, v: 4.2 },
+      { x: 420, y: 226, s: 0.7, a: 0.30, v: 2.4 },
+      { x: 860, y: 60,  s: 0.75, a: 0.32, v: 3.8 }
+    ];
+    for (const c of clouds) {
+      let x = (c.x - t * c.v) % (DW + 500);
+      if (x < -250) x += DW + 500;
+      const puffs = [
+        [0, 0, 90], [-72, 15, 62], [76, 14, 66], [-30, -26, 60], [38, -22, 54]
+      ];
+      for (const p of puffs) {
+        const px = x + p[0] * c.s;
+        const py = c.y + p[1] * c.s;
+        const r = p[2] * c.s;
+        const g = ctx.createRadialGradient(px, py - r * 0.25, r * 0.1, px, py, r);
+        g.addColorStop(0, "rgba(255,245,232," + (c.a * 1.15) + ")");
+        g.addColorStop(0.6, "rgba(255,229,210," + (c.a * 0.7) + ")");
+        g.addColorStop(1, "rgba(255,215,196,0)");
+        ctx.fillStyle = g;
+        ctx.beginPath();
+        ctx.arc(px, py, r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+  }
+
+  function ridgeY(wx, baseY, amp, p) {
+    return baseY
+      - amp * (0.5 + 0.5 * Math.sin(wx * 0.0016 + p))
+      - amp * 0.28 * Math.sin(wx * 0.0041 + p * 2.3)
+      - amp * 0.12 * Math.sin(wx * 0.0097 + p * 4.1);
+  }
+
+  function drawRidge(t, speed, baseY, amp, p, color) {
+    const off = t * speed;
+    ctx.beginPath();
+    ctx.moveTo(-20, DH + 10);
+    for (let x = -20; x <= DW + 20; x += 5) {
+      ctx.lineTo(x, ridgeY(x + off, baseY, amp, p));
+    }
+    ctx.lineTo(DW + 20, DH + 10);
+    ctx.closePath();
+    ctx.fillStyle = color;
+    ctx.fill();
+  }
+
+  function drawMountains(t) {
+    // far range
+    drawRidge(t, 4.5, 472, 96, 0.4, "#8E9DC6");
+    // near range
+    drawRidge(t, 9.0, 492, 62, 2.1, "#7C8CB8");
+    // atmospheric haze band over the ranges
+    const hz = ctx.createLinearGradient(0, 430, 0, 520);
+    hz.addColorStop(0, "rgba(255,220,180,0)");
+    hz.addColorStop(1, "rgba(255,220,180,0.55)");
+    ctx.fillStyle = hz;
+    ctx.fillRect(0, 430, DW, 92);
+  }
+
+  function drawHills(t) {
+    drawRidge(t, 16, HORIZON + 12, 58, 1.2, "#93B183");
+    drawRidge(t, 27, HORIZON + 34, 44, 3.4, "#7EA26D");
+    drawRidge(t, 44, HORIZON + 58, 32, 5.1, "#66915C");
+  }
+
+  function drawField(t) {
+    const g = ctx.createLinearGradient(0, 492, 0, DH);
+    g.addColorStop(0.00, "rgba(206,224,166,0)");
+    g.addColorStop(0.07, "rgba(198,218,158,0.85)");
+    g.addColorStop(0.20, "rgba(160,192,126,1)");
+    g.addColorStop(0.52, "rgba(116,156,94,1)");
+    g.addColorStop(0.78, "rgba(84,124,72,1)");
+    g.addColorStop(1.00, "rgba(56,90,54,1)");
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 492, DW, DH - 492);
+
+    /* warm light wash on the far field */
+    const warm = ctx.createLinearGradient(0, 490, 0, 600);
+    warm.addColorStop(0, "rgba(255,212,150,0.55)");
+    warm.addColorStop(1, "rgba(255,212,150,0)");
+    ctx.fillStyle = warm;
+    ctx.fillRect(0, 490, DW, 112);
+
+    /* -- grass & flowers -- */
+    const span = DW + 240;
+    ctx.lineCap = "round";
+
+    for (let i = 0; i < grassItems.length; i++) {
+      const it = grassItems[i];
+      let x = it.x0 - t * it.spd;
+      x = ((x % span) + span) % span - 120;
+
+      const d = it.depth;
+      const hue = lerp(80, 112, d);
+      const sat = lerp(26, 42, d);
+      const lit = lerp(62, 24, d) + (it.tone - 0.5) * 6;
+
+      if (it.type === "flower") {
+        const r = 2.6 * it.scale;
+        ctx.strokeStyle = "hsl(" + hue + "," + sat + "%," + (lit - 8) + "%)";
+        ctx.lineWidth = 1.4 * it.scale;
+        ctx.beginPath();
+        ctx.moveTo(x, it.y);
+        ctx.lineTo(x, it.y - 9 * it.scale);
+        ctx.stroke();
+        ctx.fillStyle = it.tone > 0.5
+          ? "rgba(255,246,214,0.92)"
+          : "rgba(255,214,120,0.92)";
+        ctx.beginPath();
+        ctx.arc(x, it.y - 9 * it.scale, r, 0, Math.PI * 2);
+        ctx.fill();
+      } else {
+        const rnd = mulberry32(it.seed);
+        const n = 3 + Math.floor(rnd() * 3);
+        const h = (7 + rnd() * 9) * it.scale;
+        ctx.strokeStyle = "hsl(" + hue + "," + sat + "%," + lit + "%)";
+        ctx.lineWidth = 1.7 * it.scale;
+        for (let k = 0; k < n; k++) {
+          const lean = (rnd() - 0.5) * h * 1.1;
+          const bx = x + (rnd() - 0.5) * 9 * it.scale;
+          ctx.beginPath();
+          ctx.moveTo(bx, it.y);
+          ctx.quadraticCurveTo(bx + lean * 0.4, it.y - h * 0.6, bx + lean, it.y - h);
+          ctx.stroke();
+        }
+      }
+    }
+  }
+
+  function drawPollen(t) {
+    for (let i = 0; i < pollen.length; i++) {
+      const p = pollen[i];
+      const x = ((p.x - t * p.spd) % (DW + 80) + DW + 80) % (DW + 80) - 40;
+      const y = p.y + Math.sin(t * 0.7 + p.ph) * p.amp;
+      const a = 0.20 + 0.35 * (0.5 + 0.5 * Math.sin(t * 1.4 + p.ph * 2));
+      const g = ctx.createRadialGradient(x, y, 0, x, y, p.r * 4.5);
+      g.addColorStop(0, "rgba(255,248,214," + a + ")");
+      g.addColorStop(1, "rgba(255,240,190,0)");
+      ctx.fillStyle = g;
+      ctx.beginPath();
+      ctx.arc(x, y, p.r * 4.5, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  function drawVignette() {
+    const g = ctx.createRadialGradient(DW / 2, DH * 0.44, DH * 0.34,
+      DW / 2, DH * 0.5, DH * 0.98);
+    g.addColorStop(0, "rgba(0,0,0,0)");
+    g.addColorStop(1, "rgba(24,26,48,0.34)");
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, DW, DH);
+  }
+
+  /* ------------------------------------------------------------------ */
+  /*  Main loop                                                          */
+  /* ------------------------------------------------------------------ */
+  function draw(t) {
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, vw, vh);
+    ctx.save();
+    ctx.translate(viewX, viewY);
+    ctx.scale(viewScale, viewScale);
+
+    drawSky();
+    drawSun(t);
+    drawClouds(t);
+    drawMountains(t);
+    drawHills(t);
+    drawField(t);
+    drawPollen(t);
+    drawAlpaca(t);
+    drawVignette();
+
+    ctx.restore();
+  }
+
+  let lastT = 0, time = 0;
+
+  function frame(now) {
+    if (!lastT) lastT = now;
+    let dt = (now - lastT) / 1000;
+    lastT = now;
+    if (dt > 0.05) dt = 0.05;
+    time += dt;
+    draw(time);
+    requestAnimationFrame(frame);
+  }
+
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

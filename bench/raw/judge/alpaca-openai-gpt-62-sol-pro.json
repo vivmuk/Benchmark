@@ -1,0 +1,20 @@
+{
+ "claude-opus-5-5": {
+  "scores": {
+   "alpaca": 7.0,
+   "motion": 2.0,
+   "beauty": 7.0,
+   "scene": 8.0
+  },
+  "note": "A charming, clearly readable fleecy alpaca in a tasteful pastel altiplano with elegant typography, but its legs and body look essentially frozen across all three frames, so only the scrolling ground plants imply walking, and those plants drift over the 'FIELD STUDY / 01' caption."
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "alpaca": 8.0,
+   "motion": 1.0,
+   "beauty": 9.0,
+   "scene": 9.0
+  },
+  "note": "The alpaca and landscape are beautifully drawn, but the legs and body barely change while the ground scrolls."
+ }
+}

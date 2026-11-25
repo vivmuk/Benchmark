@@ -1,0 +1,2646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dune Line — Overnight Trans-Desert Rail to Vespera</title>
+  <style>
+    :root {
+      --bg-void: #07080d;
+      --bg-deep: #0c0e17;
+      --bg-surface: #131624;
+      --bg-elevated: #191d2f;
+      --bg-glass: rgba(15, 18, 30, 0.78);
+
+      --text-primary: #f5ecdf;
+      --text-secondary: #b7b0a8;
+      --text-muted: #7c7985;
+
+      --sand-gold: #e6b877;
+      --sand-bright: #f7d59c;
+      --sand-deep: #b87e3b;
+      --neon-cyan: #38f2d1;
+      --neon-rose: #ff3f82;
+      --neon-violet: #8c52ff;
+
+      --border-subtle: rgba(245, 236, 223, 0.09);
+      --border-strong: rgba(230, 184, 119, 0.28);
+      --border-cyan: rgba(56, 242, 209, 0.28);
+
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+      --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --radius-pill: 999px;
+
+      --container: 1200px;
+      --shadow-card: 0 24px 60px rgba(0, 0, 0, 0.45);
+      --shadow-glow-gold: 0 0 36px rgba(230, 184, 119, 0.16);
+      --shadow-glow-cyan: 0 0 32px rgba(56, 242, 209, 0.15);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-void);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      background-color: var(--bg-void);
+      background-image:
+        radial-gradient(ellipse 70% 45% at 15% 0%, rgba(230, 184, 119, 0.08), transparent 65%),
+        radial-gradient(ellipse 65% 50% at 88% 8%, rgba(56, 242, 209, 0.07), transparent 60%),
+        radial-gradient(ellipse 55% 40% at 75% 45%, rgba(255, 63, 130, 0.045), transparent 60%);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+      color: inherit;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    /* Typography Helpers */
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--sand-gold);
+    }
+
+    .eyebrow-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--neon-cyan);
+      box-shadow: 0 0 10px var(--neon-cyan);
+      flex-shrink: 0;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 32px;
+      margin-bottom: 52px;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 3.2vw, 2.85rem);
+      font-weight: 600;
+      letter-spacing: -0.025em;
+      line-height: 1.12;
+      margin-top: 14px;
+      color: var(--text-primary);
+    }
+
+    .section-title em {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 400;
+      color: var(--sand-gold);
+    }
+
+    .section-desc {
+      max-width: 440px;
+      color: var(--text-secondary);
+      font-size: 0.98rem;
+      line-height: 1.65;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 13px 24px;
+      border-radius: var(--radius-pill);
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease, border-color 0.22s ease;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--sand-bright) 0%, var(--sand-gold) 55%, #cf9549 100%);
+      color: #120d06;
+      font-weight: 600;
+      box-shadow: 0 8px 26px rgba(230, 184, 119, 0.24);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 34px rgba(230, 184, 119, 0.36);
+    }
+
+    .btn-secondary {
+      background: rgba(245, 236, 223, 0.04);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+    }
+
+    .btn-secondary:hover {
+      border-color: rgba(230, 184, 119, 0.45);
+      background: rgba(230, 184, 119, 0.08);
+      transform: translateY(-1px);
+    }
+
+    .btn-neon {
+      background: rgba(56, 242, 209, 0.1);
+      border: 1px solid rgba(56, 242, 209, 0.42);
+      color: var(--neon-cyan);
+    }
+
+    .btn-neon:hover {
+      background: rgba(56, 242, 209, 0.18);
+      box-shadow: 0 0 24px rgba(56, 242, 209, 0.22);
+      transform: translateY(-1px);
+    }
+
+    /* Navigation Bar */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background: rgba(7, 8, 13, 0.78);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .nav-inner {
+      height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      flex-shrink: 0;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+    }
+
+    .brand-name {
+      font-size: 0.96rem;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--text-primary);
+    }
+
+    .brand-sub {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+      margin-top: 4px;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 34px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      transition: color 0.2s ease;
+      position: relative;
+      padding: 4px 0;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      width: 0;
+      height: 1px;
+      background: var(--sand-gold);
+      transition: width 0.24s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-primary);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .nav-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px;
+      border-radius: var(--radius-pill);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-subtle);
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      color: var(--text-secondary);
+    }
+
+    .nav-status strong {
+      color: var(--neon-cyan);
+      font-weight: 600;
+    }
+
+    .pulse-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--neon-cyan);
+      box-shadow: 0 0 10px var(--neon-cyan);
+      animation: pulseGlow 2.4s ease-in-out infinite;
+    }
+
+    .nav-toggle {
+      display: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      border: 1px solid var(--border-subtle);
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 56px 0 88px;
+      position: relative;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+      gap: 44px;
+      align-items: center;
+    }
+
+    .hero-copy {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 7px 14px;
+      border-radius: var(--radius-pill);
+      background: rgba(230, 184, 119, 0.08);
+      border: 1px solid rgba(230, 184, 119, 0.25);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--sand-gold);
+      margin-bottom: 24px;
+    }
+
+    .hero-title {
+      font-size: clamp(2.65rem, 4.3vw, 3.85rem);
+      font-weight: 600;
+      line-height: 1.04;
+      letter-spacing: -0.03em;
+      color: var(--text-primary);
+      margin-bottom: 22px;
+    }
+
+    .hero-title .serif-accent {
+      display: block;
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 400;
+      background: linear-gradient(95deg, var(--sand-bright) 0%, var(--neon-rose) 58%, var(--neon-cyan) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      padding-bottom: 4px;
+    }
+
+    .hero-lead {
+      font-size: 1.05rem;
+      line-height: 1.68;
+      color: var(--text-secondary);
+      max-width: 460px;
+      margin-bottom: 32px;
+    }
+
+    .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 40px;
+    }
+
+    .hero-metrics {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      padding-top: 26px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .metric-val {
+      font-family: var(--font-mono);
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+    }
+
+    .metric-val span {
+      font-size: 0.78rem;
+      color: var(--sand-gold);
+      margin-left: 2px;
+    }
+
+    .metric-label {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+      letter-spacing: 0.02em;
+    }
+
+    /* Hero Artwork Frame */
+    .hero-visual {
+      position: relative;
+    }
+
+    .artwork-frame {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid rgba(245, 236, 223, 0.14);
+      background: #0a0b15;
+      box-shadow:
+        0 32px 80px rgba(0, 0, 0, 0.65),
+        0 0 0 1px rgba(230, 184, 119, 0.08) inset;
+    }
+
+    .artwork-svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .telemetry-bar {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 12px 16px;
+      border-radius: 12px;
+      background: rgba(9, 11, 20, 0.78);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(245, 236, 223, 0.12);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+    }
+
+    .telemetry-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text-primary);
+    }
+
+    .telemetry-tag {
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: rgba(56, 242, 209, 0.14);
+      color: var(--neon-cyan);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+    }
+
+    .telemetry-route {
+      color: var(--text-secondary);
+      letter-spacing: 0.06em;
+    }
+
+    .telemetry-route strong {
+      color: var(--sand-bright);
+      font-weight: 600;
+    }
+
+    .telemetry-right {
+      color: var(--sand-gold);
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+    }
+
+    /* SVG Animations */
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.45; transform: scale(0.85); }
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.25; }
+      50% { opacity: 0.95; }
+    }
+
+    @keyframes railSweep {
+      0% { stroke-dashoffset: 180; opacity: 0.2; }
+      40% { opacity: 0.95; }
+      100% { stroke-dashoffset: -180; opacity: 0.2; }
+    }
+
+    @keyframes beamBreath {
+      0%, 100% { opacity: 0.52; }
+      50% { opacity: 0.78; }
+    }
+
+    .star-a { animation: twinkle 3.6s ease-in-out infinite; }
+    .star-b { animation: twinkle 4.8s ease-in-out 1.2s infinite; }
+    .star-c { animation: twinkle 2.9s ease-in-out 0.6s infinite; }
+    .rail-streak {
+      stroke-dasharray: 42 138;
+      animation: railSweep 3.4s linear infinite;
+    }
+    .headlight-beam { animation: beamBreath 4.2s ease-in-out infinite; }
+
+    /* Sections General */
+    section.band {
+      padding: 96px 0;
+      position: relative;
+    }
+
+    .band-divider {
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    /* Feature Highlights */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .feature-card {
+      position: relative;
+      padding: 32px 30px 34px;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(180deg, rgba(22, 26, 42, 0.85) 0%, rgba(13, 15, 25, 0.92) 100%);
+      border: 1px solid var(--border-subtle);
+      transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
+      overflow: hidden;
+    }
+
+    .feature-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(230, 184, 119, 0.45), transparent);
+      opacity: 0;
+      transition: opacity 0.28s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(230, 184, 119, 0.3);
+      box-shadow: var(--shadow-card);
+    }
+
+    .feature-card:hover::before {
+      opacity: 1;
+    }
+
+    .feature-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 28px;
+    }
+
+    .feature-icon-wrap {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      background: rgba(230, 184, 119, 0.08);
+      border: 1px solid rgba(230, 184, 119, 0.22);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .feature-card.accent-cyan .feature-icon-wrap {
+      background: rgba(56, 242, 209, 0.08);
+      border-color: rgba(56, 242, 209, 0.24);
+    }
+
+    .feature-card.accent-rose .feature-icon-wrap {
+      background: rgba(255, 63, 130, 0.08);
+      border-color: rgba(255, 63, 130, 0.24);
+    }
+
+    .feature-num {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+    }
+
+    .feature-title {
+      font-size: 1.24rem;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      margin-bottom: 12px;
+      color: var(--text-primary);
+    }
+
+    .feature-copy {
+      font-size: 0.94rem;
+      line-height: 1.68;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+    }
+
+    .feature-meta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--sand-gold);
+    }
+
+    .feature-card.accent-cyan .feature-meta {
+      color: var(--neon-cyan);
+    }
+
+    .feature-card.accent-rose .feature-meta {
+      color: #ff7ba9;
+    }
+
+    /* Route Schematic + Timetable */
+    .route-schematic {
+      margin-bottom: 30px;
+      padding: 24px 28px;
+      border-radius: var(--radius-lg);
+      background: rgba(15, 18, 30, 0.75);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .schematic-label-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .schematic-label-row strong {
+      color: var(--text-primary);
+    }
+
+    .timetable-board {
+      border-radius: var(--radius-lg);
+      background: linear-gradient(180deg, #111422 0%, #0c0e18 100%);
+      border: 1px solid rgba(245, 236, 223, 0.12);
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+    }
+
+    .timetable-head,
+    .timetable-row {
+      display: grid;
+      grid-template-columns: 115px 1.35fr 110px 1.2fr 110px 95px 135px 118px;
+      align-items: center;
+      gap: 16px;
+      padding: 0 28px;
+    }
+
+    .timetable-head {
+      height: 50px;
+      background: rgba(255, 255, 255, 0.025);
+      border-bottom: 1px solid var(--border-subtle);
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .timetable-row {
+      min-height: 82px;
+      padding-top: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border-subtle);
+      transition: background 0.2s ease;
+    }
+
+    .timetable-row:last-child {
+      border-bottom: none;
+    }
+
+    .timetable-row:hover {
+      background: rgba(230, 184, 119, 0.045);
+    }
+
+    .train-code {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 5px 10px;
+      border-radius: 6px;
+      background: rgba(230, 184, 119, 0.1);
+      border: 1px solid rgba(230, 184, 119, 0.28);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--sand-bright);
+      letter-spacing: 0.08em;
+      width: fit-content;
+    }
+
+    .service-name {
+      font-weight: 600;
+      font-size: 0.96rem;
+      color: var(--text-primary);
+    }
+
+    .service-sub {
+      display: block;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .time-cell {
+      font-family: var(--font-mono);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      letter-spacing: 0.02em;
+    }
+
+    .time-cell small {
+      display: block;
+      font-size: 0.66rem;
+      font-weight: 400;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      margin-top: 2px;
+    }
+
+    .time-cell.arrival {
+      color: var(--neon-cyan);
+    }
+
+    .waypoint-cell {
+      font-size: 0.86rem;
+      color: var(--text-secondary);
+    }
+
+    .waypoint-cell small {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .duration-cell {
+      font-family: var(--font-mono);
+      font-size: 0.84rem;
+      color: var(--text-secondary);
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 5px 10px;
+      border-radius: var(--radius-pill);
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      width: fit-content;
+    }
+
+    .status-pill .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+    }
+
+    .status-boarding {
+      background: rgba(56, 242, 209, 0.12);
+      color: var(--neon-cyan);
+      border: 1px solid rgba(56, 242, 209, 0.3);
+    }
+    .status-boarding .dot { background: var(--neon-cyan); box-shadow: 0 0 8px var(--neon-cyan); }
+
+    .status-ontime {
+      background: rgba(230, 184, 119, 0.11);
+      color: var(--sand-bright);
+      border: 1px solid rgba(230, 184, 119, 0.28);
+    }
+    .status-ontime .dot { background: var(--sand-bright); }
+
+    .status-limited {
+      background: rgba(255, 63, 130, 0.12);
+      color: #ff7ba9;
+      border: 1px solid rgba(255, 63, 130, 0.3);
+    }
+    .status-limited .dot { background: var(--neon-rose); }
+
+    .row-book-btn {
+      padding: 8px 14px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border-subtle);
+      background: rgba(255, 255, 255, 0.03);
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      transition: all 0.2s ease;
+      justify-self: end;
+    }
+
+    .row-book-btn:hover {
+      background: var(--sand-gold);
+      border-color: var(--sand-gold);
+      color: #120d06;
+    }
+
+    .timetable-note {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding: 16px 28px;
+      background: rgba(255, 255, 255, 0.015);
+      border-top: 1px solid var(--border-subtle);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    /* Pricing Section */
+    .billing-toggle {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px;
+      border-radius: var(--radius-pill);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      gap: 4px;
+    }
+
+    .toggle-btn {
+      padding: 8px 16px;
+      border-radius: var(--radius-pill);
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: all 0.22s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .toggle-btn.active {
+      background: rgba(230, 184, 119, 0.16);
+      color: var(--sand-bright);
+      box-shadow: inset 0 0 0 1px rgba(230, 184, 119, 0.35);
+    }
+
+    .save-tag {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: rgba(56, 242, 209, 0.14);
+      color: var(--neon-cyan);
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 26px;
+      align-items: stretch;
+    }
+
+    .price-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      padding: 36px 32px 34px;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(180deg, rgba(19, 22, 36, 0.9) 0%, rgba(11, 13, 22, 0.96) 100%);
+      border: 1px solid var(--border-subtle);
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+
+    .price-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .price-card.featured {
+      background: linear-gradient(180deg, rgba(28, 26, 42, 0.96) 0%, rgba(14, 16, 28, 0.98) 100%);
+      border: 1px solid rgba(230, 184, 119, 0.45);
+      box-shadow:
+        0 28px 70px rgba(0, 0, 0, 0.55),
+        0 0 50px rgba(230, 184, 119, 0.1);
+    }
+
+    .featured-ribbon {
+      position: absolute;
+      top: -12px;
+      right: 28px;
+      padding: 5px 12px;
+      border-radius: var(--radius-pill);
+      background: linear-gradient(90deg, var(--sand-gold), var(--sand-bright));
+      color: #140e06;
+      font-family: var(--font-mono);
+      font-size: 0.66rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .tier-class {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--sand-gold);
+      margin-bottom: 10px;
+    }
+
+    .tier-name {
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      margin-bottom: 10px;
+    }
+
+    .tier-desc {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      min-height: 46px;
+      margin-bottom: 26px;
+    }
+
+    .tier-price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      padding-bottom: 24px;
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .tier-price {
+      font-family: var(--font-mono);
+      font-size: 2.55rem;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      color: var(--text-primary);
+      line-height: 1;
+    }
+
+    .tier-period {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .tier-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+      margin-bottom: 32px;
+      flex: 1;
+    }
+
+    .tier-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 11px;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.48;
+    }
+
+    .check-icon {
+      width: 17px;
+      height: 17px;
+      flex-shrink: 0;
+      margin-top: 2px;
+      color: var(--sand-gold);
+    }
+
+    .price-card.featured .check-icon {
+      color: var(--neon-cyan);
+    }
+
+    .price-card .btn {
+      width: 100%;
+    }
+
+    /* Testimonial Section */
+    .testimonial-wrap {
+      position: relative;
+      border-radius: 24px;
+      padding: 58px 64px;
+      background:
+        radial-gradient(circle at 92% 18%, rgba(56, 242, 209, 0.1), transparent 40%),
+        radial-gradient(circle at 8% 85%, rgba(230, 184, 119, 0.1), transparent 45%),
+        linear-gradient(135deg, rgba(20, 23, 38, 0.92) 0%, rgba(11, 13, 23, 0.96) 100%);
+      border: 1px solid rgba(230, 184, 119, 0.22);
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+    }
+
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 260px;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .quote-mark {
+      font-family: var(--font-serif);
+      font-size: 4.5rem;
+      line-height: 0.6;
+      color: var(--sand-gold);
+      opacity: 0.45;
+      margin-bottom: 18px;
+      display: block;
+    }
+
+    .testimonial-quote {
+      font-family: var(--font-serif);
+      font-size: clamp(1.35rem, 2.2vw, 1.82rem);
+      font-style: italic;
+      line-height: 1.5;
+      color: var(--text-primary);
+      margin-bottom: 28px;
+      letter-spacing: -0.005em;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .author-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      border: 1px solid rgba(230, 184, 119, 0.4);
+      overflow: hidden;
+    }
+
+    .author-name {
+      font-weight: 600;
+      font-size: 0.98rem;
+      color: var(--text-primary);
+    }
+
+    .author-role {
+      font-size: 0.84rem;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
+
+    .ticket-stub {
+      padding: 22px 20px;
+      border-radius: 14px;
+      background: rgba(7, 9, 16, 0.72);
+      border: 1px dashed rgba(230, 184, 119, 0.32);
+      font-family: var(--font-mono);
+    }
+
+    .stub-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.66rem;
+      letter-spacing: 0.14em;
+      color: var(--neon-cyan);
+      text-transform: uppercase;
+      padding-bottom: 12px;
+      margin-bottom: 14px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .stub-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.74rem;
+      margin-bottom: 9px;
+    }
+
+    .stub-row span:first-child {
+      color: var(--text-muted);
+    }
+
+    .stub-row span:last-child {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .stub-stars {
+      display: flex;
+      gap: 4px;
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border-subtle);
+      color: var(--sand-bright);
+      font-size: 0.85rem;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .stub-stars small {
+      color: var(--text-muted);
+      font-size: 0.66rem;
+    }
+
+    /* Footer */
+    .footer {
+      border-top: 1px solid var(--border-subtle);
+      background: #06070c;
+      padding: 72px 0 38px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1.35fr;
+      gap: 44px;
+      padding-bottom: 52px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .footer-tagline {
+      margin-top: 16px;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      max-width: 300px;
+      line-height: 1.65;
+    }
+
+    .footer-coords {
+      margin-top: 18px;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+    }
+
+    .footer-col h4 {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--sand-gold);
+      margin-bottom: 18px;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+    }
+
+    .footer-links a {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--text-primary);
+    }
+
+    .dispatch-form {
+      display: flex;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .dispatch-input {
+      flex: 1;
+      min-width: 0;
+      padding: 11px 14px;
+      border-radius: var(--radius-pill);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+      font-size: 0.86rem;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+
+    .dispatch-input:focus {
+      border-color: var(--sand-gold);
+    }
+
+    .dispatch-msg {
+      margin-top: 10px;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--neon-cyan);
+      min-height: 18px;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding-top: 28px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .footer-bottom-right {
+      display: flex;
+      gap: 24px;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+    }
+
+    /* Reservation Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(4, 5, 10, 0.78);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-card {
+      width: 100%;
+      max-width: 540px;
+      border-radius: 20px;
+      background: linear-gradient(180deg, #15192a 0%, #0d101c 100%);
+      border: 1px solid rgba(230, 184, 119, 0.3);
+      box-shadow: 0 32px 90px rgba(0, 0, 0, 0.75);
+      padding: 32px;
+      position: relative;
+      max-height: 92vh;
+      overflow-y: auto;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .modal-title {
+      font-size: 1.45rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-top: 6px;
+    }
+
+    .modal-close {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-secondary);
+      transition: all 0.2s ease;
+    }
+
+    .modal-close:hover {
+      border-color: var(--sand-gold);
+      color: var(--text-primary);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .form-field.full {
+      grid-column: 1 / -1;
+    }
+
+    .form-field label {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 11px 14px;
+      border-radius: 10px;
+      background: rgba(7, 9, 16, 0.75);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+      font-size: 0.92rem;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+
+    .form-control:focus {
+      border-color: var(--sand-gold);
+    }
+
+    .summary-box {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 18px;
+      border-radius: 12px;
+      background: rgba(230, 184, 119, 0.07);
+      border: 1px solid rgba(230, 184, 119, 0.22);
+      margin-bottom: 22px;
+    }
+
+    .summary-label {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+    }
+
+    .summary-total {
+      font-family: var(--font-mono);
+      font-size: 1.55rem;
+      font-weight: 600;
+      color: var(--sand-bright);
+    }
+
+    .boarding-pass {
+      display: none;
+      padding: 24px;
+      border-radius: 16px;
+      background: rgba(7, 9, 16, 0.85);
+      border: 1px solid rgba(56, 242, 209, 0.35);
+    }
+
+    .boarding-pass.visible {
+      display: block;
+    }
+
+    .pass-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 16px;
+      margin-bottom: 16px;
+      border-bottom: 1px dashed rgba(245, 236, 223, 0.18);
+    }
+
+    .pass-codes {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-family: var(--font-mono);
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .pass-arrow {
+      color: var(--sand-gold);
+      font-size: 1rem;
+    }
+
+    .pass-meta-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      margin-bottom: 18px;
+    }
+
+    .pass-meta-grid span {
+      display: block;
+      color: var(--text-muted);
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+
+    /* Mobile Drawer */
+    .mobile-menu {
+      display: none;
+      border-top: 1px solid var(--border-subtle);
+      padding: 18px 32px 24px;
+      background: rgba(7, 8, 13, 0.96);
+    }
+
+    .mobile-menu.open {
+      display: block;
+    }
+
+    .mobile-menu ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .mobile-menu a {
+      font-size: 1rem;
+      color: var(--text-primary);
+    }
+
+    /* Responsive Breakpoints */
+    @media (max-width: 1120px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 44px;
+      }
+
+      .hero-copy {
+        max-width: 640px;
+      }
+
+      .timetable-head {
+        display: none;
+      }
+
+      .timetable-row {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px 18px;
+        padding: 20px 24px;
+      }
+
+      .row-book-btn {
+        justify-self: start;
+        grid-column: 1 / -1;
+        margin-top: 4px;
+      }
+    }
+
+    @media (max-width: 960px) {
+      .nav-links,
+      .nav-status {
+        display: none;
+      }
+
+      .nav-toggle {
+        display: inline-flex;
+      }
+
+      .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        margin-bottom: 38px;
+      }
+
+      .features-grid,
+      .pricing-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .testimonial-wrap {
+        padding: 38px 28px;
+      }
+
+      .testimonial-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        padding: 0 20px;
+      }
+
+      .hero {
+        padding: 36px 0 64px;
+      }
+
+      section.band {
+        padding: 68px 0;
+      }
+
+      .telemetry-bar {
+        position: static;
+        border-radius: 0;
+        border: none;
+        border-top: 1px solid var(--border-subtle);
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+      }
+
+      .hero-metrics {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+      }
+
+      .metric-val {
+        font-size: 1.05rem;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-actions .btn-primary {
+        padding: 10px 16px;
+        font-size: 0.82rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="#top" class="brand" aria-label="Dune Line Home">
+        <svg class="brand-mark" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+          <rect x="1" y="1" width="34" height="34" rx="9" fill="#121524" stroke="rgba(230,184,119,0.45)" stroke-width="1.2"/>
+          <path d="M5 24.5C10.5 18.5 16 17.5 22 20.5C26 22.5 29 21.8 31.5 19.5" stroke="#E6B877" stroke-width="1.7" stroke-linecap="round"/>
+          <path d="M6.5 27.5H29.5" stroke="#38F2D1" stroke-width="1.4" stroke-linecap="round"/>
+          <path d="M23 14.5V9.5M26.5 15.5V7.5M29.5 15.5V11" stroke="#FF3F82" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="11.5" cy="11.5" r="2.6" fill="#F7D59C"/>
+        </svg>
+        <div class="brand-text">
+          <span class="brand-name">Dune Line</span>
+          <span class="brand-sub">OCH → VSP Rail</span>
+        </div>
+      </a>
+
+      <nav aria-label="Primary Navigation">
+        <ul class="nav-links">
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#timetable">Timetable</a></li>
+          <li><a href="#fares">Fares</a></li>
+          <li><a href="#journal">Passenger Note</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <div class="nav-status" title="Next scheduled overnight departure">
+          <span class="pulse-dot" aria-hidden="true"></span>
+          <span>NEXT DL-04 <strong>21:40</strong></span>
+        </div>
+        <button class="btn btn-primary" type="button" data-open-booking>Reserve Cabin</button>
+        <button class="nav-toggle" type="button" id="mobileMenuBtn" aria-label="Toggle Menu" aria-expanded="false">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+            <path d="M3 6h14M3 10h14M3 14h14"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobile-menu" id="mobileMenu">
+      <ul>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#timetable">Timetable</a></li>
+        <li><a href="#fares">Fares</a></li>
+        <li><a href="#journal">Passenger Note</a></li>
+      </ul>
+      <div class="nav-status" style="display:inline-flex;">
+        <span class="pulse-dot" aria-hidden="true"></span>
+        <span>NEXT DL-04 <strong>21:40</strong> • OCHRE BASIN</span>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="hero-badge">
+            <span class="eyebrow-dot" aria-hidden="true"></span>
+            Overnight Trans-Desert Sleeper
+          </div>
+
+          <h1 class="hero-title">
+            Sleep through the dunes.
+            <span class="serif-accent">Wake in the neon.</span>
+          </h1>
+
+          <p class="hero-lead">
+            Board at Ochre Basin under a cooling desert dusk and glide 840 kilometers across the starlit Glass Erg. Arrive directly inside Vespera’s electric sky-concourse at dawn—rested, unhurried, and worlds apart.
+          </p>
+
+          <div class="hero-ctas">
+            <button class="btn btn-primary" type="button" data-open-booking>
+              Book Tonight’s Crossing
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M3.5 8h9M8.5 4l4 4-4 4"/>
+              </svg>
+            </button>
+            <a class="btn btn-secondary" href="#timetable">View Timetable</a>
+          </div>
+
+          <div class="hero-metrics">
+            <div>
+              <div class="metric-val">840<span>KM</span></div>
+              <div class="metric-label">Glass Erg Crossing</div>
+            </div>
+            <div>
+              <div class="metric-val">8H 35<span>M</span></div>
+              <div class="metric-label">Dusk to Neon Dawn</div>
+            </div>
+            <div>
+              <div class="metric-val">28<span>dB</span></div>
+              <div class="metric-label">Cabin Acoustic Floor</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bespoke Code-Drawn Hero Illustration -->
+        <div class="hero-visual">
+          <div class="artwork-frame">
+            <svg class="artwork-svg" viewBox="0 0 760 540" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration of the Dune Line overnight sleeper train gliding across starlit desert dunes toward the distant glowing neon skyline of Vespera City">
+              <defs>
+                <!-- Night Desert Sky -->
+                <linearGradient id="skyGrad" x1="380" y1="0" x2="380" y2="380" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#070812"/>
+                  <stop offset="46%" stop-color="#121226"/>
+                  <stop offset="78%" stop-color="#281632"/>
+                  <stop offset="100%" stop-color="#401c3a"/>
+                </linearGradient>
+
+                <!-- Neon City Horizon Glow -->
+                <radialGradient id="cityGlowCyan" cx="76%" cy="58%" r="36%">
+                  <stop offset="0%" stop-color="#38F2D1" stop-opacity="0.34"/>
+                  <stop offset="50%" stop-color="#8C52FF" stop-opacity="0.16"/>
+                  <stop offset="100%" stop-color="#070812" stop-opacity="0"/>
+                </radialGradient>
+
+                <radialGradient id="cityGlowRose" cx="62%" cy="61%" r="28%">
+                  <stop offset="0%" stop-color="#FF3F82" stop-opacity="0.32"/>
+                  <stop offset="60%" stop-color="#FF3F82" stop-opacity="0.08"/>
+                  <stop offset="100%" stop-color="#070812" stop-opacity="0"/>
+                </radialGradient>
+
+                <!-- Moon Glow -->
+                <radialGradient id="moonGlow" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#F7D59C" stop-opacity="0.45"/>
+                  <stop offset="100%" stop-color="#F7D59C" stop-opacity="0"/>
+                </radialGradient>
+
+                <!-- Vertical Neon Sky Beams -->
+                <linearGradient id="beamCyan" x1="0" y1="1" x2="0" y2="0">
+                  <stop offset="0%" stop-color="#38F2D1" stop-opacity="0.42"/>
+                  <stop offset="100%" stop-color="#38F2D1" stop-opacity="0"/>
+                </linearGradient>
+                <linearGradient id="beamRose" x1="0" y1="1" x2="0" y2="0">
+                  <stop offset="0%" stop-color="#FF3F82" stop-opacity="0.38"/>
+                  <stop offset="100%" stop-color="#FF3F82" stop-opacity="0"/>
+                </linearGradient>
+
+                <!-- Desert Dune Gradients -->
+                <linearGradient id="duneFar" x1="0" y1="0" x2="1" y2="0.4">
+                  <stop offset="0%" stop-color="#2a1d2f"/>
+                  <stop offset="55%" stop-color="#382337"/>
+                  <stop offset="100%" stop-color="#231c36"/>
+                </linearGradient>
+
+                <linearGradient id="duneMid" x1="0" y1="0" x2="0.8" y2="1">
+                  <stop offset="0%" stop-color="#3d262b"/>
+                  <stop offset="45%" stop-color="#241928"/>
+                  <stop offset="100%" stop-color="#131120"/>
+                </linearGradient>
+
+                <linearGradient id="duneFront" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#261922"/>
+                  <stop offset="50%" stop-color="#14111d"/>
+                  <stop offset="100%" stop-color="#090a12"/>
+                </linearGradient>
+
+                <!-- Train Metallic Body -->
+                <linearGradient id="trainBody" x1="0" y1="0" x2="1" y2="0.3">
+                  <stop offset="0%" stop-color="#191c2b"/>
+                  <stop offset="48%" stop-color="#2c2f44"/>
+                  <stop offset="100%" stop-color="#1b2236"/>
+                </linearGradient>
+
+                <!-- Headlight Cone -->
+                <linearGradient id="headlightGrad" x1="0" y1="0.5" x2="1" y2="0.5">
+                  <stop offset="0%" stop-color="#38F2D1" stop-opacity="0.72"/>
+                  <stop offset="45%" stop-color="#F7D59C" stop-opacity="0.22"/>
+                  <stop offset="100%" stop-color="#38F2D1" stop-opacity="0"/>
+                </linearGradient>
+
+                <!-- Window Warm Glow -->
+                <linearGradient id="windowGlow" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#FFF2D6"/>
+                  <stop offset="65%" stop-color="#F2B863"/>
+                  <stop offset="100%" stop-color="#C97D33"/>
+                </linearGradient>
+
+                <filter id="softBlur" x="-30%" y="-30%" width="160%" height="160%">
+                  <feGaussianBlur stdDeviation="5"/>
+                </filter>
+              </defs>
+
+              <!-- Sky Base -->
+              <rect width="760" height="540" fill="url(#skyGrad)"/>
+              <rect width="760" height="540" fill="url(#cityGlowCyan)"/>
+              <rect width="760" height="540" fill="url(#cityGlowRose)"/>
+
+              <!-- Starfield -->
+              <g fill="#F5ECDF">
+                <circle cx="62" cy="54" r="1.4" class="star-a"/>
+                <circle cx="118" cy="36" r="1" opacity="0.6"/>
+                <circle cx="176" cy="82" r="1.3" class="star-b"/>
+                <circle cx="224" cy="48" r="1" opacity="0.5"/>
+                <circle cx="294" cy="64" r="1.5" class="star-c"/>
+                <circle cx="348" cy="34" r="1.1" opacity="0.65"/>
+                <circle cx="410" cy="78" r="1.2" class="star-a"/>
+                <circle cx="468" cy="44" r="1.5" class="star-b"/>
+                <circle cx="534" cy="66" r="1" opacity="0.55"/>
+                <circle cx="612" cy="42" r="1.4" class="star-c"/>
+                <circle cx="688" cy="72" r="1.2" class="star-a"/>
+                <circle cx="718" cy="46" r="1" opacity="0.5"/>
+                <circle cx="90" cy="128" r="1.1" class="star-b"/>
+                <circle cx="255" cy="118" r="1.2" opacity="0.5"/>
+                <circle cx="384" cy="122" r="1.1" class="star-c"/>
+                <circle cx="574" cy="112" r="1.3" class="star-a"/>
+                <circle cx="44" cy="176" r="1" opacity="0.45"/>
+                <circle cx="195" cy="166" r="1.2" class="star-b"/>
+              </g>
+
+              <!-- Crescent Moon -->
+              <circle cx="122" cy="108" r="46" fill="url(#moonGlow)"/>
+              <path d="M128 84C114.2 85.4 103.5 97 103.5 111.2C103.5 126.3 115.7 138.5 130.8 138.5C135.4 138.5 139.8 137.3 143.6 135.2C132.4 135.7 123 126.8 123 115.4C123 104.5 131.5 95.6 142.2 94.9C138.4 89.2 133.7 85.4 128 84Z" fill="#F7D59C"/>
+
+              <!-- Distant Neon City Sky Beams -->
+              <g opacity="0.65">
+                <rect x="498" y="102" width="3" height="190" fill="url(#beamRose)"/>
+                <rect x="564" y="70" width="4" height="225" fill="url(#beamCyan)"/>
+                <rect x="632" y="92" width="3" height="205" fill="url(#beamRose)"/>
+                <rect x="688" y="114" width="3.5" height="180" fill="url(#beamCyan)"/>
+              </g>
+
+              <!-- Vespera Neon City Skyline Silhouette -->
+              <g>
+                <!-- Back Towers -->
+                <path d="M418 308V264H436V250H454V308H418Z" fill="#171429"/>
+                <path d="M458 308V234H478V218H494V308H458Z" fill="#18152d"/>
+                <path d="M498 308V192L512 178H524V308H498Z" fill="#16162e"/>
+                <path d="M528 308V216H552V156L564 138L576 156V308H528Z" fill="#12142b"/>
+                <path d="M582 308V184H608V204H624V308H582Z" fill="#181632"/>
+                <path d="M628 308V168H648V154H654V168H666V308H628Z" fill="#13142a"/>
+                <path d="M672 308V198L690 182H706V308H672Z" fill="#171630"/>
+                <path d="M712 308V224H744V308H712Z" fill="#151428"/>
+
+                <!-- Neon Facade Strips & Spires -->
+                <rect x="506" y="196" width="2" height="72" fill="#FF3F82" opacity="0.9"/>
+                <rect x="515" y="210" width="2" height="58" fill="#FF3F82" opacity="0.5"/>
+                <rect x="563" y="144" width="2.5" height="122" fill="#38F2D1" opacity="0.95"/>
+                <rect x="556" y="176" width="16" height="2" fill="#38F2D1" opacity="0.75"/>
+                <rect x="556" y="196" width="16" height="2" fill="#38F2D1" opacity="0.6"/>
+                <rect x="556" y="216" width="16" height="2" fill="#38F2D1" opacity="0.45"/>
+
+                <rect x="590" y="198" width="12" height="2.2" fill="#FF3F82" opacity="0.85"/>
+                <rect x="590" y="208" width="12" height="2.2" fill="#FF3F82" opacity="0.65"/>
+                <rect x="590" y="218" width="12" height="2.2" fill="#FF3F82" opacity="0.45"/>
+
+                <rect x="636" y="176" width="2.2" height="90" fill="#38F2D1" opacity="0.85"/>
+                <rect x="656" y="182" width="2.2" height="84" fill="#FF3F82" opacity="0.8"/>
+
+                <rect x="684" y="198" width="14" height="2.2" fill="#38F2D1" opacity="0.85"/>
+                <rect x="684" y="210" width="14" height="2.2" fill="#38F2D1" opacity="0.55"/>
+                <rect x="466" y="242" width="18" height="2" fill="#F7D59C" opacity="0.65"/>
+                <rect x="466" y="252" width="14" height="2" fill="#FF3F82" opacity="0.75"/>
+
+                <!-- Horizon Neon Mist Line -->
+                <rect x="405" y="294" width="355" height="18" fill="url(#cityGlowCyan)" filter="url(#softBlur)"/>
+              </g>
+
+              <!-- Far Desert Dunes -->
+              <path d="M0 318C92 276 178 272 284 304C380 332 456 300 546 286C626 274 696 286 760 306V420H0V318Z" fill="url(#duneFar)"/>
+              <!-- Warm Rim Highlight on Far Dune -->
+              <path d="M0 318C92 276 178 272 284 304C380 332 456 300 546 286C626 274 696 286 760 306" stroke="#E6B877" stroke-opacity="0.28" stroke-width="1.3"/>
+
+              <!-- Midground Sweeping Dunes -->
+              <path d="M0 354C108 328 192 366 312 346C432 326 534 308 656 324C702 330 734 338 760 344V480H0V354Z" fill="url(#duneMid)"/>
+              <path d="M0 354C108 328 192 366 312 346C432 326 534 308 656 324C702 330 734 338 760 344" stroke="#E6B877" stroke-opacity="0.34" stroke-width="1.5"/>
+
+              <!-- Elevated Viaduct Railway Pillars -->
+              <g stroke="#1c1c30" stroke-width="6" opacity="0.85">
+                <line x1="68" y1="434" x2="68" y2="510"/>
+                <line x1="154" y1="406" x2="154" y2="496"/>
+                <line x1="242" y1="382" x2="242" y2="474"/>
+                <line x1="332" y1="362" x2="332" y2="444"/>
+                <line x1="422" y1="346" x2="422" y2="414"/>
+                <line x1="506" y1="334" x2="506" y2="386"/>
+                <line x1="584" y1="324" x2="584" y2="366"/>
+                <line x1="654" y1="316" x2="654" y2="348"/>
+              </g>
+
+              <!-- Sweeping Railway Viaduct Deck -->
+              <path d="M-12 464C160 400 370 348 768 308" stroke="#181b2c" stroke-width="18" stroke-linecap="round"/>
+              <path d="M-12 459C160 395 370 343 768 303" stroke="#E6B877" stroke-opacity="0.45" stroke-width="1.5"/>
+              <path d="M-12 462C160 398 370 346 768 306" stroke="#38F2D1" stroke-opacity="0.7" stroke-width="1.6" class="rail-streak"/>
+
+              <!-- Locomotive Headlight Beam -->
+              <polygon points="502,324 720,270 726,316 500,336" fill="url(#headlightGrad)" class="headlight-beam"/>
+
+              <!-- The Dune Line Overnight Sleeper Train (Curved Perspective) -->
+              <g>
+                <!-- Rear Carriage 3 -->
+                <path d="M22 430L148 389L154 409L28 450Z" fill="url(#trainBody)" stroke="rgba(245,236,223,0.16)" stroke-width="1"/>
+                <path d="M26 444L151 403" stroke="#E6B877" stroke-width="1.4" opacity="0.85"/>
+                <!-- Warm Panoramic Windows Car 3 -->
+                <g fill="url(#windowGlow)">
+                  <polygon points="36,431 54,425 56,433 38,439"/>
+                  <polygon points="62,422 82,416 84,424 64,430"/>
+                  <polygon points="90,413 110,407 112,415 92,421"/>
+                  <polygon points="118,404 138,398 140,406 120,412"/>
+                </g>
+
+                <!-- Mid Carriage 2 (Mirage Dining Car) -->
+                <path d="M156 386L294 352L299 373L162 407Z" fill="url(#trainBody)" stroke="rgba(245,236,223,0.18)" stroke-width="1"/>
+                <path d="M160 401L297 367" stroke="#E6B877" stroke-width="1.5" opacity="0.9"/>
+                <g fill="url(#windowGlow)">
+                  <polygon points="170,388 194,382 196,391 172,397"/>
+                  <polygon points="202,380 226,374 228,383 204,389"/>
+                  <polygon points="234,372 258,366 260,375 236,381"/>
+                  <polygon points="266,364 286,359 288,368 268,373"/>
+                </g>
+
+                <!-- Front Carriage 1 + Aerodynamic Locomotive -->
+                <path d="M302 350L452 321C474 317 498 318 514 328C516 330 512 335 502 337L307 372Z" fill="url(#trainBody)" stroke="rgba(245,236,223,0.24)" stroke-width="1.1"/>
+                <!-- Gold Signature Accent Stripe -->
+                <path d="M305 366L498 331" stroke="#F7D59C" stroke-width="1.7"/>
+                <!-- Cyan Nose Trim -->
+                <path d="M474 324C490 323 503 325 511 330" stroke="#38F2D1" stroke-width="2" stroke-linecap="round"/>
+
+                <!-- Warm Windows Car 1 -->
+                <g fill="url(#windowGlow)">
+                  <polygon points="316,352 342,347 343,356 317,361"/>
+                  <polygon points="350,346 376,341 377,350 351,355"/>
+                  <polygon points="384,339 410,334 411,343 385,348"/>
+                  <polygon points="418,333 442,329 443,337 419,341"/>
+                </g>
+
+                <!-- Sleek Cockpit Glass -->
+                <path d="M454 325C468 323 482 323 492 327L460 334Z" fill="#38F2D1" opacity="0.88"/>
+                <!-- Glowing Headlight Point -->
+                <circle cx="508" cy="331" r="3.4" fill="#FFFFFF"/>
+                <circle cx="508" cy="331" r="8" fill="#38F2D1" opacity="0.45" filter="url(#softBlur)"/>
+              </g>
+
+              <!-- Foreground Dramatic Dune Shadow -->
+              <path d="M0 478C144 438 264 460 404 422C528 388 648 394 760 420V540H0V478Z" fill="url(#duneFront)"/>
+              <path d="M0 478C144 438 264 460 404 422C528 388 648 394 760 420" stroke="#E6B877" stroke-opacity="0.24" stroke-width="1.4"/>
+
+              <!-- Subtle Sand Grain Reflection Lines -->
+              <path d="M460 448C536 436 616 440 698 456" stroke="#38F2D1" stroke-opacity="0.16" stroke-width="1.2" stroke-linecap="round"/>
+              <path d="M84 494C178 476 266 484 352 468" stroke="#E6B877" stroke-opacity="0.16" stroke-width="1.2" stroke-linecap="round"/>
+            </svg>
+
+            <div class="telemetry-bar">
+              <div class="telemetry-left">
+                <span class="telemetry-tag">DL-04 LIVE</span>
+                <span class="telemetry-route">SECTOR 07 GLASS ERG → <strong>VESPERA CENTRAL</strong></span>
+              </div>
+              <div class="telemetry-right">ETA 06:15 • 142 KM/H</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Three Feature Highlights -->
+    <section id="experience" class="band band-divider">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <span class="eyebrow"><span class="eyebrow-dot"></span>Crafted for the Crossing</span>
+            <h2 class="section-title">Silence in the sand,<br><em>electric</em> at dawn.</h2>
+          </div>
+          <p class="section-desc">
+            Every carriage is suspended on magnetic desert dampers and lined in brushed obsidian and warm brass—turning an overnight crossing into the centerpiece of your trip.
+          </p>
+        </div>
+
+        <div class="features-grid">
+          <!-- Feature 1 -->
+          <article class="feature-card">
+            <div class="feature-top">
+              <div class="feature-icon-wrap" aria-hidden="true">
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                  <rect x="3" y="5" width="22" height="16" rx="3.5" stroke="#E6B877" stroke-width="1.6"/>
+                  <path d="M3 16.5C8.5 13 13.5 13 19 15.5C21.5 16.6 23.5 16.3 25 15.4" stroke="#F7D59C" stroke-width="1.4" stroke-linecap="round"/>
+                  <circle cx="9.5" cy="10" r="1.6" fill="#F7D59C"/>
+                  <path d="M8 24h12" stroke="#E6B877" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <span class="feature-num">01 / CABINS</span>
+            </div>
+            <h3 class="feature-title">Panoramic Sand-Glass Suites</h3>
+            <p class="feature-copy">
+              Triple-glazed electrochromic windows frame the nocturnal dunes in whisper-quiet isolation, gently tinting before the desert glare rises so you wake naturally.
+            </p>
+            <span class="feature-meta">2.4m Curved Viewport • 28 dB</span>
+          </article>
+
+          <!-- Feature 2 -->
+          <article class="feature-card accent-rose">
+            <div class="feature-top">
+              <div class="feature-icon-wrap" aria-hidden="true">
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                  <path d="M8 5h12l-1.5 7.2A4.5 4.5 0 0 1 14 16a4.5 4.5 0 0 1-4.5-3.8L8 5Z" stroke="#FF7BA9" stroke-width="1.6" stroke-linejoin="round"/>
+                  <path d="M14 16v7M10 23h8" stroke="#FF7BA9" stroke-width="1.6" stroke-linecap="round"/>
+                  <path d="M9.5 10h9" stroke="#F7D59C" stroke-width="1.3" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <span class="feature-num">02 / DINING</span>
+            </div>
+            <h3 class="feature-title">The Mirage Dining Car</h3>
+            <p class="feature-copy">
+              Saffron-smoked desert plates, chilled botanical pours, and late-night cardamom espresso served beneath warm brass lamps as the salt flats shimmer outside.
+            </p>
+            <span class="feature-meta">Midnight Tasting Menu • Car 03</span>
+          </article>
+
+          <!-- Feature 3 -->
+          <article class="feature-card accent-cyan">
+            <div class="feature-top">
+              <div class="feature-icon-wrap" aria-hidden="true">
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                  <path d="M5 23V12l5-4v15M12 23V6l5-2v19M19 23V10l4 2v11" stroke="#38F2D1" stroke-width="1.6" stroke-linejoin="round"/>
+                  <path d="M3 23h22" stroke="#F5ECDF" stroke-opacity="0.6" stroke-width="1.4" stroke-linecap="round"/>
+                  <path d="M14.5 9v5M14.5 16v3" stroke="#FF3F82" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <span class="feature-num">03 / ARRIVAL</span>
+            </div>
+            <h3 class="feature-title">Direct Neon-Core Arrival</h3>
+            <p class="feature-copy">
+              Glide past the outer desert checkpoints on our dedicated elevated viaduct and step straight onto Platform Zero inside Vespera’s glowing sky-concourse.
+            </p>
+            <span class="feature-meta">Platform Zero • Express Customs</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Timetable with Four Departures -->
+    <section id="timetable" class="band band-divider">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <span class="eyebrow"><span class="eyebrow-dot"></span>Nightly Schedule</span>
+            <h2 class="section-title">Four crossings, <em>every night.</em></h2>
+          </div>
+          <p class="section-desc">
+            All services depart Ochre Basin Terminus (OCH) and terminate at Vespera Neon Central (VSP). Select any departure below to reserve your cabin.
+          </p>
+        </div>
+
+        <!-- SVG Route Schematic -->
+        <div class="route-schematic">
+          <div class="schematic-label-row">
+            <span><strong>OCH</strong> OCHRE BASIN TERMINUS</span>
+            <span>TRANS-ERG CORRIDOR • 840 KM</span>
+            <span><strong>VSP</strong> VESPERA NEON CENTRAL</span>
+          </div>
+          <svg viewBox="0 0 1120 74" width="100%" height="74" fill="none" role="img" aria-label="Route map from Ochre Basin Terminus through Saffron Flats, Obsidian Ridge, and Mirage Causeway to Vespera Neon Central">
+            <defs>
+              <linearGradient id="routeLineGrad" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#E6B877"/>
+                <stop offset="55%" stop-color="#FF3F82"/>
+                <stop offset="100%" stop-color="#38F2D1"/>
+              </linearGradient>
+            </defs>
+            <line x1="30" y1="26" x2="1090" y2="26" stroke="rgba(245,236,223,0.12)" stroke-width="3" stroke-linecap="round"/>
+            <line x1="30" y1="26" x2="1090" y2="26" stroke="url(#routeLineGrad)" stroke-width="2.2" stroke-dasharray="7 7"/>
+
+            <!-- Stations -->
+            <g>
+              <circle cx="30" cy="26" r="7" fill="#0C0E17" stroke="#E6B877" stroke-width="2.5"/>
+              <text x="30" y="56" fill="#F5ECDF" font-family="ui-monospace, monospace" font-size="11" text-anchor="start">000 KM • OCHRE BASIN</text>
+
+              <circle cx="320" cy="26" r="5" fill="#131624" stroke="#E6B877" stroke-width="2"/>
+              <text x="320" y="56" fill="#8C8794" font-family="ui-monospace, monospace" font-size="11" text-anchor="middle">240 KM • SAFFRON FLATS</text>
+
+              <circle cx="620" cy="26" r="5" fill="#131624" stroke="#FF3F82" stroke-width="2"/>
+              <text x="620" y="56" fill="#8C8794" font-family="ui-monospace, monospace" font-size="11" text-anchor="middle">510 KM • OBSIDIAN RIDGE</text>
+
+              <circle cx="870" cy="26" r="5" fill="#131624" stroke="#38F2D1" stroke-width="2"/>
+              <text x="870" y="56" fill="#8C8794" font-family="ui-monospace, monospace" font-size="11" text-anchor="middle">735 KM • MIRAGE CAUSEWAY</text>
+
+              <circle cx="1090" cy="26" r="7" fill="#0C0E17" stroke="#38F2D1" stroke-width="2.5"/>
+              <text x="1090" y="56" fill="#38F2D1" font-family="ui-monospace, monospace" font-size="11" text-anchor="end">840 KM • VESPERA CENTRAL</text>
+            </g>
+          </svg>
+        </div>
+
+        <!-- Timetable Board -->
+        <div class="timetable-board" role="region" aria-label="Overnight Train Departures">
+          <div class="timetable-head">
+            <span>Train</span>
+            <span>Service</span>
+            <span>Departs</span>
+            <span>Primary Waypoint</span>
+            <span>Arrives</span>
+            <span>Duration</span>
+            <span>Status</span>
+            <span style="text-align:right;">Action</span>
+          </div>
+
+          <!-- Departure 1 -->
+          <div class="timetable-row">
+            <div><span class="train-code">DL-01</span></div>
+            <div>
+              <span class="service-name">Dusk Meridian</span>
+              <span class="service-sub">Sunset dining &amp; stargazing deck</span>
+            </div>
+            <div class="time-cell">20:15<small>OCH PLAT. 2</small></div>
+            <div class="waypoint-cell">Saffron Flats<small>23:05 • 12m Vista Pause</small></div>
+            <div class="time-cell arrival">04:50<small>VSP PLAT. 0</small></div>
+            <div class="duration-cell">8h 35m</div>
+            <div><span class="status-pill status-boarding"><span class="dot"></span>Boarding</span></div>
+            <button class="row-book-btn" type="button" data-open-booking data-train="DL-01 • Dusk Meridian (20:15)">Select</button>
+          </div>
+
+          <!-- Departure 2 -->
+          <div class="timetable-row">
+            <div><span class="train-code">DL-04</span></div>
+            <div>
+              <span class="service-name">Starlight Limited</span>
+              <span class="service-sub">Flagship sleeper • Mirage Dining Car</span>
+            </div>
+            <div class="time-cell">21:40<small>OCH PLAT. 1</small></div>
+            <div class="waypoint-cell">Obsidian Ridge<small>01:25 • Quiet Pass</small></div>
+            <div class="time-cell arrival">06:15<small>VSP PLAT. 0</small></div>
+            <div class="duration-cell">8h 35m</div>
+            <div><span class="status-pill status-ontime"><span class="dot"></span>On Time</span></div>
+            <button class="row-book-btn" type="button" data-open-booking data-train="DL-04 • Starlight Limited (21:40)">Select</button>
+          </div>
+
+          <!-- Departure 3 -->
+          <div class="timetable-row">
+            <div><span class="train-code">DL-07</span></div>
+            <div>
+              <span class="service-name">Midnight Express</span>
+              <span class="service-sub">High-speed nonstop corridor</span>
+            </div>
+            <div class="time-cell">23:10<small>OCH PLAT. 3</small></div>
+            <div class="waypoint-cell">Glass Erg Nonstop<small>Direct Mag-Viaduct</small></div>
+            <div class="time-cell arrival">07:10<small>VSP PLAT. 0</small></div>
+            <div class="duration-cell">8h 00m</div>
+            <div><span class="status-pill status-limited"><span class="dot"></span>4 Cabins</span></div>
+            <button class="row-book-btn" type="button" data-open-booking data-train="DL-07 • Midnight Express (23:10)">Select</button>
+          </div>
+
+          <!-- Departure 4 -->
+          <div class="timetable-row">
+            <div><span class="train-code">DL-09</span></div>
+            <div>
+              <span class="service-name">Aurora Sleeper</span>
+              <span class="service-sub">Late departure • Golden-hour entry</span>
+            </div>
+            <div class="time-cell">00:25<small>OCH PLAT. 1</small></div>
+            <div class="waypoint-cell">Mirage Causeway<small>06:40 • Neon Horizon</small></div>
+            <div class="time-cell arrival">09:00<small>VSP PLAT. 0</small></div>
+            <div class="duration-cell">8h 35m</div>
+            <div><span class="status-pill status-ontime"><span class="dot"></span>Open</span></div>
+            <button class="row-book-btn" type="button" data-open-booking data-train="DL-09 • Aurora Sleeper (00:25)">Select</button>
+          </div>
+
+          <div class="timetable-note">
+            <span>ALL TIMES LOCAL DESERT STANDARD (DST) • BOARDING CLOSES 15 MIN PRIOR</span>
+            <span>COMPLIMENTARY LUGGAGE TRANSFER TO VESPERA HOTELS</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing with Three Tiers -->
+    <section id="fares" class="band band-divider">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <span class="eyebrow"><span class="eyebrow-dot"></span>Cabins &amp; Fares</span>
+            <h2 class="section-title">Choose your <em>sanctuary.</em></h2>
+          </div>
+
+          <div class="billing-toggle" role="group" aria-label="Trip Type">
+            <button type="button" class="toggle-btn active" data-trip="oneway">One-Way</button>
+            <button type="button" class="toggle-btn" data-trip="roundtrip">Round-Trip <span class="save-tag">-15%</span></button>
+          </div>
+        </div>
+
+        <div class="pricing-grid">
+          <!-- Tier 1 -->
+          <article class="price-card">
+            <span class="tier-class">Tier 01 • Quiet Alcove</span>
+            <h3 class="tier-name">Nomad Berth</h3>
+            <p class="tier-desc">A minimalist private lie-flat pod with sound-softening velvet drapes and an overhead starlight strip.</p>
+            <div class="tier-price-row">
+              <span class="tier-price" data-price-oneway="210" data-price-roundtrip="355">$210</span>
+              <span class="tier-period" data-period-label>per crossing</span>
+            </div>
+            <ul class="tier-list">
+              <li>
+                <svg class="check-icon" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 9.5l3.5 3.5 7.5-8"/></svg>
+                Full-flat 205 cm acoustic sleeper berth
+              </li>
+              <li>
+                <svg class="check-icon" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 9.5l3.5 3.5 7.5-8"/></svg>
+                Woven desert-linen bedding &amp; silk sleep mask
+              </li>
+              <li>
+                <svg class="check-icon" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 9.5l3.5 3.5 7.5-8"/></svg>
+                Dawn cardamom espresso &amp; warm flatbread
+              </li>
+              <li>
+                <svg class="check-icon" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 9.5l3.5 3.5 7.5-8"/></svg>
+                Access to Observation Lounge &amp; Library
+              </li>
+            </ul>
+            <button class="btn btn-secondary" type="button" data-open-booking data-tier="Nomad Berth">Reserve Nomad Berth</button>
+          </article>
+
+          <!-- Tier 2 (Featured) -->
+          <article class="price-card featured">
+            <span class="featured-ribbon">Most Chosen</span>
+            <span class="tier-class">Tier 02 • En-Suite Cabin</span>
+            <h3 class="tier-name">Mirage Suite</h3>
+            <p class="tier-desc">Our signature private sleeper with floor-to-ceiling sand glass, rain shower, and reserved Mirage dining.</p>
+            <div class="tier-price-row">
+              <span class="tier-price" data-price-oneway="460" data-price-roundtrip="780">$460</span>
+              <span class="tier-period" data-period-label>per crossing</span>
+            </div>
+            <ul class="tier-list">
+              <li>
+                <svg class="check-icon" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 9.5l3.5 3.5 7.5-8"/></svg>
+                Private suite with 2.4m electrochromic glass
+              </li>
+              <li>
+                <svg class="check-icon" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 9.5l3.5 3.5 7.5-8"/></svg>
+                4-course dinner in the Mirage Dining Car
+              </li>
+              <li>
+                <svg class="check-icon" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 9.5l3.5 3.5 7.5-8"/></svg>
+                En-suite heated stone bath &amp; botanical amenities
+              </li>
+              <li>
+                <svg class="check-icon" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 9.5l3.5 3.5 7.5-8"/></svg>
+                Priority Platform Zero customs &amp; lounge entry
+              </li>
+            </ul>
+            <button class="btn btn-primary" type="button" data-open-booking data-tier="Mirage Suite">Reserve Mirage Suite</button>
+          </article>
+
+          <!-- Tier 3 -->
+          <article class="price-card">
+            <span class="tier-class">Tier 03 • Rear Stateroom</span>
+            <h3 class="tier-name">Sovereign Observatory</h3>
+            <p class="tier-desc">A full-width rear carriage sanctuary with wrap-around night glass, dedicated steward, and Vespera sky-cab.</p>
+            <div class="tier-price-row">
+              <span class="tier-price" data-price-oneway="940" data-price-roundtrip="1590">$940</span>
+              <span class="tier-period" data-period-label>per crossing</span>
+            </div>
+            <ul class="tier-list">
+              <li>
+                <svg class="check-icon" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 9.5l3.5 3.5 7.5-8"/></svg>
+                180° rear observatory glass &amp; private brass balcony
+              </li>
+              <li>
+                <svg class="check-icon" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 9.5l3.5 3.5 7.5-8"/></svg>
+                In-suite supper &amp; curated vintage cellar pairings
+              </li>
+              <li>
+                <svg class="check-icon" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 9.5l3.5 3.5 7.5-8"/></svg>
+                Dedicated cabin steward throughout the night
+              </li>
+              <li>
+                <svg class="check-icon" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 9.5l3.5 3.5 7.5-8"/></svg>
+                Chauffeured electric sky-cab transfer in Vespera
+              </li>
+            </ul>
+            <button class="btn btn-neon" type="button" data-open-booking data-tier="Sovereign Observatory">Reserve Stateroom</button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Single Editorial Testimonial -->
+    <section id="journal" class="band band-divider">
+      <div class="container">
+        <div class="testimonial-wrap">
+          <div class="testimonial-grid">
+            <div>
+              <span class="quote-mark" aria-hidden="true">“</span>
+              <blockquote class="testimonial-quote">
+                Falling asleep to endless violet dunes and waking as the carriage glided between Vespera’s cyan glass towers felt less like transit and more like crossing between two worlds. Not a single rattle—just brass lamplight, warm cardamom, and the quiet hum of the rails.
+              </blockquote>
+              <div class="testimonial-author">
+                <div class="author-avatar" aria-hidden="true">
+                  <svg viewBox="0 0 50 50" width="50" height="50" fill="none">
+                    <rect width="50" height="50" fill="#181b2e"/>
+                    <circle cx="25" cy="19" r="8" fill="#E6B877" fill-opacity="0.88"/>
+                    <path d="M10 46C11.8 36.2 17.6 31.5 25 31.5C32.4 31.5 38.2 36.2 40 46" fill="#38F2D1" fill-opacity="0.45"/>
+                    <circle cx="25" cy="25" r="24" stroke="#E6B877" stroke-opacity="0.35"/>
+                  </svg>
+                </div>
+                <div>
+                  <div class="author-name">Elena Vance</div>
+                  <div class="author-role">Architectural Photographer • Vespera Design Biennial</div>
+                </div>
+              </div>
+            </div>
+
+            <aside class="ticket-stub" aria-label="Verified passenger crossing details">
+              <div class="stub-header">
+                <span>VERIFIED CROSSING</span>
+                <span>OCH → VSP</span>
+              </div>
+              <div class="stub-row"><span>SERVICE</span><span>DL-04 LIMITED</span></div>
+              <div class="stub-row"><span>CABIN</span><span>MIRAGE SUITE</span></div>
+              <div class="stub-row"><span>CARRIAGE</span><span>CAR 04 • BERTH 2A</span></div>
+              <div class="stub-row"><span>ARRIVAL</span><span>06:15 ON TIME</span></div>
+              <div class="stub-stars">
+                <span>★★★★★</span>
+                <small>LOG #4109</small>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="#top" class="brand" aria-label="Dune Line">
+            <svg class="brand-mark" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+              <rect x="1" y="1" width="34" height="34" rx="9" fill="#121524" stroke="rgba(230,184,119,0.45)" stroke-width="1.2"/>
+              <path d="M5 24.5C10.5 18.5 16 17.5 22 20.5C26 22.5 29 21.8 31.5 19.5" stroke="#E6B877" stroke-width="1.7" stroke-linecap="round"/>
+              <path d="M6.5 27.5H29.5" stroke="#38F2D1" stroke-width="1.4" stroke-linecap="round"/>
+              <path d="M23 14.5V9.5M26.5 15.5V7.5M29.5 15.5V11" stroke="#FF3F82" stroke-width="1.5" stroke-linecap="round"/>
+              <circle cx="11.5" cy="11.5" r="2.6" fill="#F7D59C"/>
+            </svg>
+            <div class="brand-text">
+              <span class="brand-name">Dune Line</span>
+              <span class="brand-sub">Trans-Erg Railway Co.</span>
+            </div>
+          </a>
+          <p class="footer-tagline">
+            Overnight acoustic sleeper rail connecting the Ochre Basin frontier to Vespera Neon Central since 2041.
+          </p>
+          <div class="footer-coords">29.418° N, 14.802° E — PLATFORM ZERO</div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Journey</h4>
+          <ul class="footer-links">
+            <li><a href="#experience">Onboard Experience</a></li>
+            <li><a href="#timetable">Nightly Timetable</a></li>
+            <li><a href="#fares">Suites &amp; Fares</a></li>
+            <li><a href="#journal">Passenger Notes</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Terminals</h4>
+          <ul class="footer-links">
+            <li><a href="#timetable">Ochre Basin (OCH)</a></li>
+            <li><a href="#timetable">Saffron Flats Vista</a></li>
+            <li><a href="#timetable">Vespera Central (VSP)</a></li>
+            <li><a href="#fares" data-open-booking>Private Charter</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Night Dispatch</h4>
+          <p style="font-size:0.86rem;color:var(--text-secondary);line-height:1.55;">
+            Receive seasonal desert-storm alerts, dining menu releases, and solstice sleeper openings.
+          </p>
+          <form class="dispatch-form" id="dispatchForm">
+            <input class="dispatch-input" type="email" id="dispatchEmail" placeholder="traveler@vespera.city" required aria-label="Email address for dispatch updates"/>
+            <button class="btn btn-primary" type="submit" style="padding:10px 18px;font-size:0.82rem;">Join</button>
+          </form>
+          <div class="dispatch-msg" id="dispatchMsg" aria-live="polite"></div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2049 Dune Line Trans-Erg Railway. Fictional concept rail service.</span>
+        <div class="footer-bottom-right">
+          <span>TRACK STATUS: CLEAR</span>
+          <span>DESERT TEMP: 11°C</span>
+          <span>VESPERA: NEON FOG</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Interactive Cabin Reservation Modal -->
+  <div class="modal-backdrop" id="bookingModal" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div>
+          <span class="eyebrow"><span class="eyebrow-dot"></span>Ochre Basin → Vespera</span>
+          <h3 class="modal-title" id="bookingModalTitle">Reserve Your Cabin</h3>
+        </div>
+        <button class="modal-close" type="button" id="closeModalBtn" aria-label="Close reservation dialog">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+            <path d="M3.5 3.5l9 9M12.5 3.5l-9 9"/>
+          </svg>
+        </button>
+      </div>
+
+      <form id="bookingForm">
+        <div class="form-grid">
+          <div class="form-field full">
+            <label for="trainSelect">Departure Service</label>
+            <select id="trainSelect" class="form-control">
+              <option value="DL-01 • Dusk Meridian (20:15)">DL-01 • Dusk Meridian — 20:15 → 04:50</option>
+              <option value="DL-04 • Starlight Limited (21:40)" selected>DL-04 • Starlight Limited — 21:40 → 06:15</option>
+              <option value="DL-07 • Midnight Express (23:10)">DL-07 • Midnight Express — 23:10 → 07:10</option>
+              <option value="DL-09 • Aurora Sleeper (00:25)">DL-09 • Aurora Sleeper — 00:25 → 09:00</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label for="tierSelect">Cabin Tier</label>
+            <select id="tierSelect" class="form-control">
+              <option value="Nomad Berth">Nomad Berth</option>
+              <option value="Mirage Suite" selected>Mirage Suite</option>
+              <option value="Sovereign Observatory">Sovereign Observatory</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label for="tripSelect">Journey</label>
+            <select id="tripSelect" class="form-control">
+              <option value="oneway">One-Way</option>
+              <option value="roundtrip">Round-Trip (-15%)</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label for="guestsSelect">Travelers</label>
+            <select id="guestsSelect" class="form-control">
+              <option value="1">1 Passenger</option>
+              <option value="2">2 Passengers</option>
+              <option value="3">3 Passengers</option>
+              <option value="4">4 Passengers</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label for="passengerName">Passenger Name</label>
+            <input id="passengerName" class="form-control" type="text" placeholder="e.g., Soren Kael" required/>
+          </div>
+        </div>
+
+        <div class="summary-box">
+          <div>
+            <div class="summary-label" id="summaryDesc">Mirage Suite • One-Way • 1 Passenger</div>
+            <div style="font-family:var(--font-mono);font-size:0.68rem;color:var(--text-muted);margin-top:3px;">INCLUDES PLATFORM ZERO PRIORITY ACCESS</div>
+          </div>
+          <div class="summary-total" id="summaryTotal">$460</div>
+        </div>
+
+        <button class="btn btn-primary" type="submit" style="width:100%;">Confirm &amp; Issue Boarding Pass</button>
+      </form>
+
+      <!-- Generated Digital Boarding Pass -->
+      <div class="boarding-pass" id="boardingPass">
+        <div class="pass-top">
+          <div class="pass-codes">
+            <span>OCH</span>
+            <span class="pass-arrow">→</span>
+            <span style="color:var(--neon-cyan);">VSP</span>
+          </div>
+          <span class="status-pill status-boarding"><span class="dot"></span>CONFIRMED</span>
+        </div>
+
+        <div class="pass-meta-grid">
+          <div><span>PASSENGER</span><strong id="passPassenger">—</strong></div>
+          <div><span>TICKET CODE</span><strong id="passCode" style="color:var(--sand-bright);">—</strong></div>
+          <div><span>SERVICE</span><strong id="passService">—</strong></div>
+          <div><span>CABIN</span><strong id="passCabin">—</strong></div>
+        </div>
+
+        <svg viewBox="0 0 420 42" width="100%" height="42" fill="none" aria-hidden="true" style="margin-bottom:18px;">
+          <rect width="420" height="42" rx="6" fill="rgba(255,255,255,0.03)"/>
+          <g fill="#F5ECDF" opacity="0.72">
+            <rect x="18" y="9" width="3" height="24"/><rect x="25" y="9" width="1.5" height="24"/>
+            <rect x="31" y="9" width="5" height="24"/><rect x="41" y="9" width="2" height="24"/>
+            <rect x="48" y="9" width="4" height="24"/><rect x="57" y="9" width="1.5" height="24"/>
+            <rect x="64" y="9" width="3" height="24"/><rect x="72" y="9" width="6" height="24"/>
+            <rect x="83" y="9" width="2" height="24"/><rect x="90" y="9" width="4" height="24"/>
+            <rect x="100" y="9" width="2" height="24"/><rect x="108" y="9" width="5" height="24"/>
+            <rect x="119" y="9" width="1.5" height="24"/><rect x="126" y="9" width="3" height="24"/>
+            <rect x="135" y="9" width="4" height="24"/><rect x="145" y="9" width="2" height="24"/>
+            <rect x="153" y="9" width="6" height="24"/><rect x="165" y="9" width="2" height="24"/>
+            <rect x="172" y="9" width="3" height="24"/><rect x="181" y="9" width="5" height="24"/>
+            <rect x="192" y="9" width="2" height="24"/><rect x="199" y="9" width="3" height="24"/>
+            <rect x="208" y="9" width="1.5" height="24"/><rect x="215" y="9" width="4" height="24"/>
+            <rect x="225" y="9" width="2" height="24"/><rect x="233" y="9" width="5" height="24"/>
+            <rect x="244" y="9" width="2" height="24"/><rect x="252" y="9" width="3" height="24"/>
+            <rect x="261" y="9" width="6" height="24"/><rect x="273" y="9" width="1.5" height="24"/>
+            <rect x="280" y="9" width="4" height="24"/><rect x="290" y="9" width="2" height="24"/>
+            <rect x="298" y="9" width="5" height="24"/><rect x="309" y="9" width="2" height="24"/>
+            <rect x="317" y="9" width="3" height="24"/><rect x="326" y="9" width="4" height="24"/>
+            <rect x="336" y="9" width="1.5" height="24"/><rect x="344" y="9" width="5" height="24"/>
+            <rect x="355" y="9" width="2" height="24"/><rect x="363" y="9" width="3" height="24"/>
+            <rect x="372" y="9" width="5" height="24"/><rect x="383" y="9" width="2" height="24"/>
+            <rect x="391" y="9" width="4" height="24"/><rect x="400" y="9" width="2" height="24"/>
+          </g>
+        </svg>
+
+        <button class="btn btn-secondary" type="button" id="resetBookingBtn" style="width:100%;">Book Another Cabin</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const TIER_PRICES = {
+        "Nomad Berth": { oneway: 210, roundtrip: 355 },
+        "Mirage Suite": { oneway: 460, roundtrip: 780 },
+        "Sovereign Observatory": { oneway: 940, roundtrip: 1590 }
+      };
+
+      let currentTripType = "oneway";
+
+      // Mobile Navigation Toggle
+      const mobileBtn = document.getElementById("mobileMenuBtn");
+      const mobileMenu = document.getElementById("mobileMenu");
+      if (mobileBtn && mobileMenu) {
+        mobileBtn.addEventListener("click", () => {
+          const isOpen = mobileMenu.classList.toggle("open");
+          mobileBtn.setAttribute("aria-expanded", String(isOpen));
+        });
+        mobileMenu.querySelectorAll("a").forEach((link) => {
+          link.addEventListener("click", () => {
+            mobileMenu.classList.remove("open");
+            mobileBtn.setAttribute("aria-expanded", "false");
+          });
+        });
+      }
+
+      // Pricing One-Way / Round-Trip Toggle
+      const toggleButtons = document.querySelectorAll(".toggle-btn");
+      const priceEls = document.querySelectorAll(".tier-price");
+      const periodEls = document.querySelectorAll("[data-period-label]");
+
+      function setTripType(trip) {
+        currentTripType = trip;
+        toggleButtons.forEach((btn) => {
+          btn.classList.toggle("active", btn.dataset.trip === trip);
+        });
+        priceEls.forEach((el) => {
+          const amount = trip === "roundtrip" ? el.dataset.priceRoundtrip : el.dataset.priceOneway;
+          el.textContent = "$" + Number(amount).toLocaleString();
+        });
+        periodEls.forEach((el) => {
+          el.textContent = trip === "roundtrip" ? "round-trip" : "per crossing";
+        });
+      }
+
+      toggleButtons.forEach((btn) => {
+        btn.addEventListener("click", () => setTripType(btn.dataset.trip));
+      });
+
+      // Reservation Modal Logic
+      const modal = document.getElementById("bookingModal");
+      const closeModalBtn = document.getElementById("closeModalBtn");
+      const bookingForm = document.getElementById("bookingForm");
+      const boardingPass = document.getElementById("boardingPass");
+      const resetBookingBtn = document.getElementById("resetBookingBtn");
+
+      const trainSelect = document.getElementById("trainSelect");
+      const tierSelect = document.getElementById("tierSelect");
+      const tripSelect = document.getElementById("tripSelect");
+      const guestsSelect = document.getElementById("guestsSelect");
+      const passengerName = document.getElementById("passengerName");
+      const summaryDesc = document.getElementById("summaryDesc");
+      const summaryTotal = document.getElementById("summaryTotal");
+
+      function updateBookingSummary() {
+        const tier = tierSelect.value;
+        const trip = tripSelect.value;
+        const guests = Number(guestsSelect.value);
+        const unit = TIER_PRICES[tier][trip];
+        const total = unit * guests;
+        const tripLabel = trip === "roundtrip" ? "Round-Trip" : "One-Way";
+        const guestLabel = guests === 1 ? "1 Passenger" : guests + " Passengers";
+        summaryDesc.textContent = tier + " • " + tripLabel + " • " + guestLabel;
+        summaryTotal.textContent = "$" + total.toLocaleString();
+      }
+
+      function openBookingModal(opts) {
+        bookingForm.style.display = "block";
+        boardingPass.classList.remove("visible");
+
+        if (opts && opts.train) {
+          trainSelect.value = opts.train;
+        }
+        if (opts && opts.tier) {
+          tierSelect.value = opts.tier;
+        }
+        tripSelect.value = currentTripType;
+        updateBookingSummary();
+
+        modal.classList.add("open");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeBookingModal() {
+        modal.classList.remove("open");
+        document.body.style.overflow = "";
+      }
+
+      document.querySelectorAll("[data-open-booking]").forEach((trigger) => {
+        trigger.addEventListener("click", (e) => {
+          e.preventDefault();
+          openBookingModal({
+            train: trigger.dataset.train,
+            tier: trigger.dataset.tier
+          });
+        });
+      });
+
+      [tierSelect, tripSelect, guestsSelect].forEach((el) => {
+        el.addEventListener("change", updateBookingSummary);
+      });
+
+      closeModalBtn.addEventListener("click", closeBookingModal);
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) closeBookingModal();
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && modal.classList.contains("open")) {
+          closeBookingModal();
+        }
+      });
+
+      bookingForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const name = passengerName.value.trim() || "Valued Traveler";
+        const codeNum = Math.floor(1000 + Math.random() * 9000);
+
+        document.getElementById("passPassenger").textContent = name.toUpperCase();
+        document.getElementById("passCode").textContent = "DL-" + codeNum + "-VSP";
+        document.getElementById("passService").textContent = trainSelect.value.split("•")[0].trim() + " / " + trainSelect.value.match(/\(([^)]+)\)/)[1];
+        document.getElementById("passCabin").textContent = tierSelect.value.toUpperCase() + " ×" + guestsSelect.value;
+
+        bookingForm.style.display = "none";
+        boardingPass.classList.add("visible");
+      });
+
+      resetBookingBtn.addEventListener("click", () => {
+        bookingForm.reset();
+        tripSelect.value = currentTripType;
+        updateBookingSummary();
+        boardingPass.classList.remove("visible");
+        bookingForm.style.display = "block";
+      });
+
+      // Footer Dispatch Newsletter Form
+      const dispatchForm = document.getElementById("dispatchForm");
+      const dispatchEmail = document.getElementById("dispatchEmail");
+      const dispatchMsg = document.getElementById("dispatchMsg");
+
+      dispatchForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const email = dispatchEmail.value.trim();
+        if (!email) return;
+        dispatchMsg.textContent = "SIGNAL LOCKED — NIGHT DISPATCH REGISTERED FOR " + email.toUpperCase();
+        dispatchEmail.value = "";
+      });
+    })();
+  </script>
+</body>
+</html>

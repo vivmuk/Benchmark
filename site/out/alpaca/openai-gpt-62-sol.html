@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#c8adc1">
+<title>An Evening on the Altiplano</title>
+<style>
+  html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: #c8adc1; }
+  svg { display: block; width: 100%; height: 100%; }
+</style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid slice" role="img" aria-labelledby="title desc">
+  <title id="title">An Evening on the Altiplano</title>
+  <desc id="desc">A fluffy cream alpaca with a red woven collar walks along a highland trail at sunset.</desc>
+  <defs>
+    <linearGradient id="sky" x2="0" y2="1">
+      <stop stop-color="#9d9fbe"/>
+      <stop offset=".36" stop-color="#d9aebe"/>
+      <stop offset=".65" stop-color="#f6c5a7"/>
+      <stop offset="1" stop-color="#e9a297"/>
+    </linearGradient>
+    <radialGradient id="afterglow">
+      <stop stop-color="#ffe0a3" stop-opacity=".8"/>
+      <stop offset="1" stop-color="#ffcca8" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="sun" x2=".2" y2="1">
+      <stop stop-color="#fff0c3"/>
+      <stop offset="1" stop-color="#f8c48e"/>
+    </linearGradient>
+    <linearGradient id="range" x2="0" y2="1">
+      <stop stop-color="#8d82a3"/>
+      <stop offset="1" stop-color="#d0a0ad"/>
+    </linearGradient>
+    <linearGradient id="foothills" x2="0" y2="1">
+      <stop stop-color="#8b7189"/>
+      <stop offset="1" stop-color="#b3868b"/>
+    </linearGradient>
+    <linearGradient id="moor" x2=".14" y2="1">
+      <stop stop-color="#a98a84"/>
+      <stop offset=".65" stop-color="#8b6d70"/>
+      <stop offset="1" stop-color="#745760"/>
+    </linearGradient>
+    <linearGradient id="trail" x2=".07" y2="1">
+      <stop stop-color="#bb8e7c"/>
+      <stop offset=".38" stop-color="#d5a792"/>
+      <stop offset="1" stop-color="#b28073"/>
+    </linearGradient>
+    <linearGradient id="bank" x2="0" y2="1">
+      <stop stop-color="#886567"/>
+      <stop offset="1" stop-color="#513b4e"/>
+    </linearGradient>
+    <linearGradient id="wool" x1=".19" y1=".1" x2=".65" y2="1">
+      <stop stop-color="#fff0d4"/>
+      <stop offset=".42" stop-color="#f7dfc2"/>
+      <stop offset=".77" stop-color="#e8be9e"/>
+      <stop offset="1" stop-color="#c9917d"/>
+    </linearGradient>
+    <linearGradient id="face" x1=".22" y1=".12" x2=".81" y2=".94">
+      <stop stop-color="#fff2d8"/>
+      <stop offset=".61" stop-color="#f4d6b5"/>
+      <stop offset="1" stop-color="#d7a48b"/>
+    </linearGradient>
+    <linearGradient id="foreleg" x2=".25" y2="1">
+      <stop stop-color="#ead0ad"/>
+      <stop offset=".47" stop-color="#e9c2a1"/>
+      <stop offset="1" stop-color="#b17d6c"/>
+    </linearGradient>
+    <linearGradient id="farleg" x2=".25" y2="1">
+      <stop stop-color="#bb9282"/>
+      <stop offset="1" stop-color="#845c59"/>
+    </linearGradient>
+    <linearGradient id="ear" x2=".3" y2="1">
+      <stop stop-color="#945f65"/>
+      <stop offset="1" stop-color="#d29989"/>
+    </linearGradient>
+    <radialGradient id="shadow">
+      <stop stop-color="#513544" stop-opacity=".46"/>
+      <stop offset="1" stop-color="#513544" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="vignette" cx=".48" cy=".38" r=".75">
+      <stop offset=".48" stop-color="#39263f" stop-opacity="0"/>
+      <stop offset="1" stop-color="#39263f" stop-opacity=".2"/>
+    </radialGradient>
+    <filter id="paper" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency=".77" numOctaves="3" seed="8" stitchTiles="stitch"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 .24  0 0 0 0 .13  0 0 0 0 .21  .38 0 0 0 0"/>
+    </filter>
+    <path id="fleece" d="M93 156
+      C98 143 110 137 122 140 C127 129 142 126 153 132
+      C163 120 182 122 191 130 C203 120 220 123 228 131
+      C240 124 254 127 261 135 C272 130 283 130 290 125
+      C291 115 296 108 302 103 C300 95 306 87 310 83
+      C309 76 313 66 319 60 C317 51 322 43 330 39
+      C343 33 355 41 358 53 C361 63 359 71 356 79
+      C361 86 357 98 353 103 C357 111 353 122 349 128
+      C352 139 345 147 342 153 C345 164 338 174 333 179
+      C336 190 328 199 321 203 C319 216 308 223 297 222
+      C288 231 272 230 263 225 C250 232 236 229 228 224
+      C216 232 201 228 194 224 C178 231 165 226 157 221
+      C146 226 133 222 127 217 C112 220 103 213 101 206
+      C90 205 83 196 87 188 C78 179 81 167 88 164 Q87 159 93 156Z"/>
+    <clipPath id="fleeceClip"><use href="#fleece"/></clipPath>
+  </defs>
+
+  <!-- The high country at sunset -->
+  <path fill="url(#sky)" d="M0 0H1280V720H0Z"/>
+  <ellipse cx="420" cy="246" rx="329" ry="254" fill="url(#afterglow)"/>
+  <circle cx="420" cy="233" r="74" fill="url(#sun)"/>
+  <path d="M365 183A74 74 0 0 1 464 174" fill="none" stroke="#fff5d6" stroke-opacity=".65"/>
+  <g fill="#ffe9d1">
+    <path opacity=".26" d="M67 157c35-6 66-10 102-8 32 2 50-5 78-5 23 0 54 4 74 6-53 0-81 7-118 7-39-1-89 3-136 0Z"/>
+    <path opacity=".31" d="M554 211c49-4 69-9 103-9 29 0 41 4 66 2 45-5 76-4 121 1-58 0-82 8-126 7-47-2-90 4-164-1Z"/>
+    <path opacity=".22" d="M893 120c58-3 69-11 111-9 42 2 75-5 122 1-48 1-92 9-125 8-42-2-72 2-108 0Z"/>
+    <path opacity=".38" d="M290 271c49-4 84-6 118-5 34 0 64-7 108-5-33 5-59 11-98 10-39-1-82 4-128 0Z"/>
+    <path opacity=".19" d="M104 300c78-7 134-6 192-4-69 7-136 7-192 4Z"/>
+  </g>
+  <g fill="none" stroke="#7c627b" stroke-linecap="round">
+    <path opacity=".55" stroke-width="1.3" d="M548 253q6-2 11 3 2-5 8-6m14-8q5-1 8 3 3-4 8-4"/>
+    <path opacity=".38" d="M567 266q4-1 8 2 1-4 6-4"/>
+  </g>
+
+  <path fill="url(#range)" d="M0 392 49 365 89 352 120 333 149 329 197 292 217 316 239 321 275 354 304 364 343 391 395 366 424 370 453 349 476 348 512 316 534 304 550 313 569 302 597 332 621 341 652 368 679 376 712 357 744 325 774 310 807 323 843 301 873 305 907 281 934 267 957 247 987 274 1004 280 1034 316 1067 305 1091 317 1113 342 1144 352 1188 326 1207 329 1244 303 1280 319V525H0Z"/>
+  <g fill="#ead0ce" opacity=".67">
+    <path d="m149 329 48-37 20 24 22 5 16 15-25-6-15 3-17-15-9 3-8-7-12 10Z"/>
+    <path d="m476 348 36-32 22-12 16 9 19-11 28 30-19-8-9 4-12-9-9 8-15-10-18 5-11 12Z"/>
+    <path d="m843 301 30 4 34-24 27-14 23-20 30 27 17 6 30 36-25-16-9 1-21-19-7 5-14-14-10 7-10-1-21 14-13-2-16 14-17 3-8-3Z"/>
+    <path d="m1188 326 19 3 37-26 36 16v12l-16-7-10 2-14-9-18 13-13 6Z"/>
+  </g>
+  <g fill="#746b90" opacity=".23">
+    <path d="m197 292 21 48 27 17 28 39-57-30-13-25-15-6 6-13Z"/>
+    <path d="m569 302 7 31 25 27 20 37-43-33-13-21-17-7Z"/>
+    <path d="m957 247 6 36 19 25 13 36 48 39-56-27-16-29-21-11 5-20-14-13Z"/>
+    <path d="m1034 316 33-11 24 12 22 25 31 10-39-3-23-15-15-9Z"/>
+  </g>
+  <path fill="#ffdbc3" opacity=".21" d="M0 388C181 389 267 418 424 398s217-33 362-14 347 21 494-4v64H0Z"/>
+  <path fill="url(#foothills)" d="M0 424C87 418 132 380 210 385c71 5 132 52 203 53 90 1 139-47 236-45 67 1 97 24 164 23 82-2 152-53 232-58 82-5 160 40 235 37v168H0Z"/>
+  <path d="M0 457c104 0 137-49 226-44 101 7 159 45 260 36 93-8 141-31 224-29 68 1 99 22 178 19 116-4 188-55 283-46 45 5 80 17 109 29v142H0Z" fill="#b68c92" opacity=".58"/>
+  <path d="M0 469c132-44 238-15 334-1 130 20 240-34 351-25 108 9 128 32 236 14 140-23 245-22 359 16v162H0Z" fill="#ac878b"/>
+  <path d="M0 504C126 473 207 479 307 503c110 27 179-10 286-21 152-15 206 43 352 11 135-29 234-11 335 20v207H0Z" fill="url(#moor)"/>
+  <path d="M0 536c127-27 191-21 287-4 88 16 157 2 229-14m288 7c106 20 178-13 263-14 89-1 142 13 213 31"
+        fill="none" stroke="#d0a299" stroke-opacity=".34" stroke-width="1.5"/>
+  <path d="M0 574c130-15 231-32 370-16 111 13 198 4 300-7 145-15 252 17 375 7 90-7 153-15 235-8v153H0Z" fill="#987573"/>
+  <path d="M0 605c161-12 266-32 417-28 129 3 207 12 344 5 157-8 293-18 519 5v133H0Z" fill="url(#trail)"/>
+  <path d="M0 609c171-15 281-31 413-29 115 2 199 12 344 5 174-8 322-16 523 5" fill="none" stroke="#efbea0" stroke-opacity=".45" stroke-width="2"/>
+  <g id="meadow"></g>
+  <g id="stones"></g>
+
+  <!-- The walker, built in layers so the far legs pass behind the fleece. -->
+  <g transform="translate(400 245) scale(1.16)">
+    <ellipse id="bodyShadow" cx="210" cy="319" rx="149" ry="14" fill="url(#shadow)"/>
+    <g id="footShadows"></g>
+    <g id="farLegs"></g>
+    <g id="nearLegs"></g>
+    <g id="body">
+      <g id="tail">
+        <path d="M105 151c-12-9-20-4-27-8-9-4-12-11-19-9-9 3-7 13-4 18-4 5 1 12 8 14 2 7 17 10 23 6 9 3 19-5 19-21Z" fill="url(#wool)" stroke="#ae7a71" stroke-width="1.1"/>
+        <path d="M60 141q1 9 11 13m-5 6q9 7 18 4" fill="none" stroke="#ae7a71" stroke-opacity=".45" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M58 141q-1-5 4-5 7 1 13 8" fill="none" stroke="#fff0d1" stroke-width="1.3" stroke-linecap="round"/>
+      </g>
+      <use href="#fleece" fill="url(#wool)" stroke="#aa786f" stroke-width="1.4"/>
+      <g clip-path="url(#fleeceClip)">
+        <path d="M81 184c31 23 55-1 84 12 31 14 56-8 79 2 20 8 39-4 55-19 14-13 24-32 30-60 5-21 11-36 26-46l14 76-38 72-84 26-151-10Z" fill="#b57a72" opacity=".17"/>
+        <path d="M79 159c29-21 57-8 78-17 30-12 66-11 83 1 13 8 44 9 58-5-3 15-28 24-54 22-38-3-45 12-76 4-25-6-62 15-89 6Z" fill="#fff2d8" opacity=".38"/>
+        <path d="M105 145q10-8 23-5m9-6q10-5 19 0m11-7q12-4 20 2m13 0q12-4 21 0m17 2q12-2 20 5m24-2q10-2 17-10m5-14q4-8 9-11m1-13q4-7 8-11"
+              fill="none" stroke="#fff2d6" stroke-width="2" stroke-linecap="round" opacity=".85"/>
+        <g id="curls"></g>
+        <path d="M299 95q27 16 60 1l-2 11q-30 17-60-1Z" fill="#a95551"/>
+        <path d="M299 98q29 16 59 1m-61 5q29 16 61 0" fill="none" stroke="#ebac7b" stroke-width="1.15"/>
+        <path d="M300 101q27 16 58 0" fill="none" stroke="#f9d3a2" stroke-width="1.8" stroke-dasharray="1 3.4" stroke-linecap="round"/>
+      </g>
+      <g id="tassels">
+        <path d="M340 111q4 13 1 23m5-25q8 10 8 18" fill="none" stroke="#9a5351" stroke-width="1.6"/>
+        <path d="M338 131q3 3 7 1l1 11-9-1Zm13-6q3 2 6-1l4 8-8 3Z" fill="#bc6757"/>
+        <path d="m340 135-1 7m4-7 1 7m11-14 2 5" stroke="#e8a478" stroke-width="1" stroke-linecap="round"/>
+        <circle cx="343" cy="111" r="2.6" fill="#f0c492" stroke="#9c5a54" stroke-width=".65"/>
+      </g>
+
+      <g id="head">
+        <g id="farEar">
+          <path d="M346 23c-1-10 3-28 12-41 4-6 8-7 10-1 4 11-1 28-9 43Z" fill="#d0a48e" stroke="#a6716b" stroke-width="1.1"/>
+          <path d="M351 20c1-12 7-29 13-36 2 11-3 27-8 36Z" fill="url(#ear)"/>
+        </g>
+        <g id="nearEar">
+          <path d="M324 29c-8-10-13-29-12-48 0-7 3-12 7-8 9 7 16 28 17 50Z" fill="url(#face)" stroke="#ad7b72" stroke-width="1.1"/>
+          <path d="M325 20c-6-10-9-26-9-41 7 7 12 23 14 41Z" fill="url(#ear)"/>
+          <path d="M314-20q-1 12 3 25" fill="none" stroke="#fff0d2" stroke-width="1.4" stroke-linecap="round"/>
+        </g>
+        <path d="M321 62c-9-6-9-14-5-21-4-5-1-13 6-16-1-6 8-10 14-8 4-6 15-2 18 2 8-2 17 4 19 10 5 3 5 10 10 14 6 3 15 4 17 12 4 9-4 16-13 16-7 4-18 1-25 5-6 6-15 4-20 1-8 4-18-2-18-8Z"
+              fill="url(#face)" stroke="#ad7b72" stroke-width="1.15"/>
+        <path d="M323 31q4-9 13-4 6-9 15-3 9-2 15 5M320 44q3-6 10-5m-8 15q5 4 10 0m-4 12q6 5 12 1"
+              fill="none" stroke="#bd907c" stroke-opacity=".47" stroke-width="1.45" stroke-linecap="round"/>
+        <path d="M323 29q6-7 13-3 7-7 13-3m6 2q7-1 11 5" fill="none" stroke="#fff2d7" stroke-width="1.4" stroke-linecap="round"/>
+        <path d="M378 48c6-2 17 0 20 4 6 8-3 17-12 17-10 0-15-4-15-10 0-4 2-8 7-11Z" fill="#e5b59c"/>
+        <ellipse cx="361" cy="57" rx="8.5" ry="4.4" fill="#d28a83" opacity=".33"/>
+        <path d="M389 53c2-2 7-1 8 1 1 2-2 4-4 4-2 0-6-3-4-5Z" fill="#65424a"/>
+        <path d="M393 58q0 4-2 5-4 3-10 0" fill="none" stroke="#825559" stroke-width="1.25" stroke-linecap="round"/>
+        <path d="M355 36q5-3 9-1" fill="none" stroke="#a77a6c" stroke-width="1.3" stroke-linecap="round"/>
+        <g id="eye">
+          <path d="M355 43q5-5 10-1" fill="none" stroke="#63434a" stroke-width="1.5" stroke-linecap="round"/>
+          <ellipse cx="360.5" cy="44" rx="3.15" ry="3.8" fill="#48343b"/>
+          <circle cx="361.5" cy="42.8" r="1.05" fill="#fff3dc"/>
+        </g>
+      </g>
+    </g>
+  </g>
+
+  <!-- The nearest bank frames the trail. -->
+  <path d="M0 677c106-12 182-14 277-5 117 11 199 11 319 2 167-13 225-16 378-6 127 8 206-11 306-13v65H0Z" fill="url(#bank)"/>
+  <path d="M0 680c106-12 182-14 277-5 117 11 199 11 319 2 167-13 225-16 378-6 127 8 206-11 306-13" fill="none" stroke="#cd9a85" stroke-opacity=".34" stroke-width="1.5"/>
+  <g id="verge"></g>
+  <g fill="none" stroke-linecap="round">
+    <path d="M47 721q0-43-24-66m26 66q11-49 6-83m-5 82q16-36 41-49m-36 49q29-17 48-19M119 722q-5-27-19-44m20 44q0-34 14-52m-11 52q15-17 36-24M1197 721q-2-44-27-72m29 72q12-58 1-88m1 88q17-37 41-53m-33 53q26-20 52-24M1248 721q5-29 30-49" stroke="#554052" stroke-width="2.3"/>
+    <path d="M55 639q-6-11-1-21 7 10 1 21m-32 17q-9-3-14-15 12 5 14 15m68 16q3-10 16-13-4 10-16 13m1109-37q-8-12-5-25 9 9 5 25m-30 16q-9-4-12-16 11 5 12 16m71 18q3-11 16-15-5 12-16 15" stroke="#9f7877" stroke-width="1.25" fill="#9f7877"/>
+  </g>
+  <path d="M0 0H1280V720H0Z" fill="url(#vignette)" pointer-events="none"/>
+  <path d="M0 0H1280V720H0Z" filter="url(#paper)" opacity=".26" pointer-events="none"/>
+</svg>
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const ns = 'http://www.w3.org/2000/svg';
+  const make = (tag, attrs, parent) => {
+    const node = document.createElementNS(ns, tag);
+    for (const [key, value] of Object.entries(attrs)) node.setAttribute(key, value);
+    parent.appendChild(node);
+    return node;
+  };
+  const tau = 2 * Math.PI, mod = (n, d) => ((n % d) + d) % d;
+  const fmt = n => n.toFixed(2);
+  let seed = 9714;
+  const random = () => ((seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0) / 4294967296);
+  const between = (a, b) => a + (b - a) * random();
+
+  // Small raised locks: a shaded curl with a sunlit upper edge.
+  const locks = [
+    [102,161,.9],[120,151,1],[141,144,.8],[164,140,1.1],[187,144,.85],
+    [211,138,1],[235,145,.9],[256,153,1],[277,147,.7],[297,143,.8],
+    [111,180,1.15],[134,171,1],[158,163,1.22],[183,169,1],[205,159,.82],
+    [226,171,1.24],[249,168,.8],[271,176,1.08],[294,164,1.2],[316,161,.78],
+    [105,199,.8],[127,194,1],[150,187,1.1],[175,191,1.2],[197,183,.9],
+    [216,198,1.12],[239,188,1],[259,195,.88],[284,192,1.16],[306,184,.86],
+    [142,210,.82],[168,213,.7],[191,207,.92],[231,216,.77],[257,214,.8],[281,212,.84],[307,207,.7],
+    [314,123,.8],[333,135,.74],[329,151,.65],[323,89,.63],[341,90,.65],[316,100,.5]
+  ];
+  for (const [x,y,s] of locks) {
+    const g = make('g', {transform:`translate(${x} ${y}) rotate(${between(-25,21)}) scale(${s})`}, $('curls'));
+    make('path', {d:'M-6 0Q-2-5 2-3Q7-2 5 2Q3 4 0 2',fill:'none',stroke:'#ae7668','stroke-opacity':between(.23,.44),'stroke-width':1.3,'stroke-linecap':'round'}, g);
+    make('path', {d:'M-7-1Q-3-6 2-4',fill:'none',stroke:'#fff2d8','stroke-opacity':'.73','stroke-width':1.2,'stroke-linecap':'round'}, g);
+  }
+
+  // Repeat seamless strips of hand-shaped vegetation under the stationary hills.
+  const width = 1440;
+  const strips = [];
+  function strip(id, count, rate, draw) {
+    const root = $(id), key = id + 'Tile';
+    const tile = make('g', {id:key}, root);
+    for (let i=0; i<count; i++) draw(tile, (i + random()) * width / count);
+    make('use', {href:'#'+key,x:width}, root);
+    strips.push({root, rate});
+  }
+  function grass(tile, x, y, scale, color, flowers) {
+    const tilt = between(-20,22);
+    const g = make('g', {transform:`translate(${fmt(x)} ${fmt(y)}) rotate(${fmt(tilt)}) scale(${fmt(scale)})`}, tile);
+    make('path', {d:'M0 0Q-4-8-11-13Q-3-11 1-2Q-2-13-1-23Q3-13 3-3Q6-13 15-16Q8-9 5 0Z',fill:color}, g);
+    make('path', {d:'M2-1Q3-15 8-24M0 0Q-6-6-13-7',fill:'none',stroke:color,'stroke-width':'.9','stroke-linecap':'round'}, g);
+    if (flowers) {
+      make('path', {d:'M7-22q-2-3 0-5 2-1 3 1 1 2-3 4m-9 2q-3-3-1-6 3 0 3 3Z',fill:'#e1ad82'}, g);
+    }
+  }
+  strip('meadow', 91, .48, (g,x) => {
+    const y = between(551,584);
+    grass(g,x,y,between(.21,.59),random()<.28?'#c39581':'#795d66',random()<.24);
+  });
+  strip('stones', 88, 1, (g,x) => {
+    const y = between(593,666), rx = between(.6,4.8), ry = rx*between(.17,.36);
+    make('ellipse', {cx:x,cy:y,rx,ry,fill:'#805c60',opacity:between(.14,.32)},g);
+    if(rx>2.8) make('path',{d:`M${fmt(x-rx*.8)} ${fmt(y)}q${fmt(rx*.75)} ${fmt(-ry*2)} ${fmt(rx*1.35)} ${fmt(-ry*.75)}`,fill:'none',stroke:'#f1c1a2','stroke-opacity':'.49','stroke-width':'.75'},g);
+  });
+  strip('verge', 112, 1.23, (g,x) => {
+    const y = between(688,738);
+    const palette = ['#9f7976','#765661','#c0927c','#604857','#ad8478'];
+    grass(g,x,y,between(.36,1.13),palette[Math.floor(random()*palette.length)],random()<.19);
+  });
+
+  // A four-beat walk: near hind, near fore, far hind, far fore.
+  // During stance the foot travels at exactly the trail's speed.
+  const period = 1.34, contact = .64, stride = 49;
+  const trailSpeed = stride * 1.16 / (period * contact);
+  const legs = [
+    {x:134,y:197,floor:313,beat:.50,hind:true,far:true},
+    {x:301,y:193,floor:313,beat:.75,hind:false,far:true},
+    {x:116,y:199,floor:319,beat:0,hind:true,far:false},
+    {x:284,y:197,floor:319,beat:.25,hind:false,far:false}
+  ];
+  for (const leg of legs) {
+    const layer = leg.far ? $('farLegs') : $('nearLegs');
+    leg.shadow = make('ellipse',{cy:leg.floor,rx:15,ry:3.7,fill:'url(#shadow)'},$('footShadows'));
+    leg.shape = make('path',{
+      fill:`url(#${leg.far?'farleg':'foreleg'})`,stroke:leg.far?'#805b58':'#a47568',
+      'stroke-width':1.05,'stroke-linejoin':'round'
+    },layer);
+    leg.shine = make('path',{fill:'none',stroke:leg.far?'#dbad97':'#f9dfbc','stroke-width':1.15,'stroke-opacity':'.72','stroke-linecap':'round'},layer);
+    leg.toes = make('g',{},layer);
+    make('path',{d:'M-4-5Q0-7 4-4L6.5 0Q9 3 8 7Q6.5 9 2.5 8.7L.8 8.1Q-2 9.4-5.2 7.5Q-6.6 5-5.5 1Z',fill:leg.far?'#6c4b4d':'#865d57',stroke:'#6f4e4d','stroke-width':'.7'},leg.toes);
+    make('path',{d:'M-3.8 1.3Q.1-1.1 4.9 2.2M1.4 4.7l-.6 3.4',fill:'none',stroke:leg.far?'#9e746b':'#c59782','stroke-width':'.9','stroke-linecap':'round'},leg.toes);
+  }
+
+  const point = (x,y) => `${fmt(x)} ${fmt(y)}`;
+  function drawLeg(leg, cycle, dx, dy, angle) {
+    const phase = mod(cycle - leg.beat, 1);
+    let travel, lift = 0, roll = 0;
+    if (phase < contact) {
+      travel = stride * (.5 - phase / contact);
+    } else {
+      const u = (phase-contact)/(1-contact);
+      // Hermite swing keeps horizontal velocity continuous at toe-off and landing.
+      travel = -stride/2 + stride*(3*u*u-2*u*u*u)
+        - stride*(1-contact)/contact*u*(1-u)*(1-2*u);
+      lift = (leg.hind?23:27) * Math.pow(Math.sin(Math.PI*u),1.6);
+      roll = 23*Math.sin(tau*u)*Math.sin(Math.PI*u);
+    }
+    const ax = leg.x + travel + (leg.hind ? -4 : 3);
+    const ay = leg.floor - 8.7 - lift;
+    const c = Math.cos(angle), s = Math.sin(angle);
+    const hx = 210 + (leg.x-210)*c - (leg.y-170)*s + dx;
+    const hy = 170 + (leg.x-210)*s + (leg.y-170)*c + dy;
+
+    // Two-bone IK: the foreleg flexes forward at the knee, the hind leg back at the hock.
+    const L1 = leg.hind ? 62 : 61, L2 = 60;
+    const vx = ax-hx, vy = ay-hy, distance = Math.hypot(vx,vy);
+    const ux = vx/distance, uy = vy/distance;
+    const d = Math.min(distance,L1+L2-.001);
+    const along = (L1*L1-L2*L2+d*d)/(2*d);
+    const bend = Math.sqrt(Math.max(0,L1*L1-along*along))*(leg.hind?-1:1);
+    const kx = hx + ux*along + uy*bend, ky = hy + uy*along - ux*bend;
+    const l1 = Math.hypot(kx-hx,ky-hy), l2 = Math.hypot(ax-kx,ay-ky);
+    const n1x = -(ky-hy)/l1, n1y = (kx-hx)/l1;
+    const n2x = -(ay-ky)/l2, n2y = (ax-kx)/l2;
+    const nm = Math.hypot(n1x+n2x,n1y+n2y);
+    const nx = (n1x+n2x)/nm, ny = (n1y+n2y)/nm;
+    const off = (x,y,nx,ny,w) => point(x+nx*w,y+ny*w);
+    const h = w => off(hx,hy,n1x,n1y,w);
+    const q = w => off(hx*.49+kx*.51,hy*.49+ky*.51,n1x,n1y,w);
+    const k = w => off(kx,ky,nx,ny,w);
+    const b = w => off(kx*.46+ax*.54,ky*.46+ay*.54,n2x,n2y,w);
+    const a = w => off(ax,ay,n2x,n2y,w);
+    const w = leg.hind ? 15 : 12;
+    leg.shape.setAttribute('d',`M${h(w)} Q${q(w*.8)} ${k(5.7)} Q${b(3.5)} ${a(4)}
+      L${a(-4.4)} Q${b(-3.2)} ${k(-5.4)} Q${q(-w*.64)} ${h(-w)}Z`);
+    leg.shine.setAttribute('d',`M${q(5.7)} Q${k(4.2)} ${b(2.05)} T${a(2.35)}`);
+    leg.toes.setAttribute('transform',`translate(${fmt(ax)} ${fmt(ay)}) rotate(${fmt(roll)})`);
+    leg.shadow.setAttribute('cx',fmt(ax+2));
+    leg.shadow.setAttribute('opacity',fmt(.79-lift*.024));
+  }
+
+  const body = $('body'), head = $('head'), tail = $('tail'), eye = $('eye');
+  const nearEar = $('nearEar'), farEar = $('farEar'), tassels = $('tassels');
+  const start = performance.now();
+  function frame(now) {
+    const time = (now-start)/1000, cycle = time/period, wave = tau*cycle;
+    const dx = 1.65*Math.sin(wave-.5);
+    const dy = 1.8*Math.cos(2*wave+.4) + .5*Math.sin(wave);
+    const pitch = .9*Math.sin(wave+.6) + .34*Math.sin(2*wave);
+    body.setAttribute('transform',`translate(${fmt(dx)} ${fmt(dy)}) rotate(${fmt(pitch)} 210 170)`);
+    head.setAttribute('transform',`rotate(${fmt(-.7*pitch + 1.35*Math.sin(2*wave-.8))} 340 64)`);
+    tail.setAttribute('transform',`rotate(${fmt(5*Math.sin(wave-.5)+2*Math.sin(time*2.3))} 94 156)`);
+    nearEar.setAttribute('transform',`rotate(${fmt(2.1*Math.sin(wave-.7)+1.25*Math.sin(time*4.2))} 329 24)`);
+    farEar.setAttribute('transform',`rotate(${fmt(2.8*Math.sin(wave+1.1))} 353 23)`);
+    tassels.setAttribute('transform',`rotate(${fmt(6.8*Math.sin(2*wave-1.15)+2*Math.sin(wave))} 343 110)`);
+    const blink = mod(time+2.2,5.6);
+    const open = blink < .17 ? 1-.91*Math.pow(Math.sin(Math.PI*blink/.17),1.45) : 1;
+    eye.setAttribute('transform',`translate(0 ${fmt(44*(1-open))}) scale(1 ${fmt(open)})`);
+    $('bodyShadow').setAttribute('cx',fmt(210+dx*2));
+    for (const leg of legs) drawLeg(leg,cycle,dx,dy,pitch*Math.PI/180);
+    for (const {root,rate} of strips) root.setAttribute('transform',`translate(${fmt(-mod(time*trailSpeed*rate,width))} 0)`);
+    requestAnimationFrame(frame);
+  }
+  frame(start);
+})();
+</script>
+</body>
+</html>

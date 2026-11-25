@@ -1,0 +1,17 @@
+{
+ "text": "When a truck crosses a suspension bridge, its weight reaches the deck through the small patches of pavement beneath its tires. The deck does not have to carry that weight all the way to shore by bending across the entire span. Instead, closely spaced steel hangers support it from above. The deck and the beams beneath it spread each wheel load across part of the bridge\u2019s width and along part of its length, so several hangers share the added load. The weight of the deck itself follows the same route, even when there is no traffic.\n\nEach hanger is attached at its lower end to the deck structure and at its upper end to a main cable. As the deck pulls down on the hanger, the hanger comes under tension: it pulls up on the deck and down on the main cable. The main cables, usually one on each side of the bridge, sag between the towers. That sag is essential because a flexible cable can pull only along its own length. To support a downward load, at least part of its pull must point upward.\n\nTo see how that works, consider the lowest point of a main cable under a symmetric load. The cable slopes upward on either side, so both adjoining portions pull that point upward as well as sideways. Their sideways pulls balance, while their upward pulls together support the load hanging there. Farther toward a tower, the cable becomes progressively steeper. At each hanger, the pull toward the tower has a larger upward component than the pull toward the middle has a downward component. The difference supports that hanger\u2019s load. In this way, the curved cable gathers the loads from many hangers and carries them to the towers.\n\nAt the top of each tower, the main cable passes over a broad steel saddle and slopes down on the far side toward an anchorage. The cable pulls on the saddle in both directions. Under ordinary balanced loading, the horizontal pulls largely offset each other, but the downward pulls add. The tower therefore carries the load mainly by compression, much as a column supports a roof. Its foundation spreads that force into soil or rock capable of bearing it.\n\nIn a conventional ground-anchored suspension bridge, the anchorages complete the load path. At each end, the cable pulls its anchorage upward and toward the bridge. A massive concrete anchorage resists that pull through its weight and its connection to the surrounding ground or bedrock. The towers and anchorages thus do different jobs: the towers provide high supports over which the cables can change direction, while the anchorages hold the cable ends against tension. Together they allow a long deck to hang over open space while the forces from its weight and traffic are ultimately balanced by the ground.",
+ "reasoning_chars": 4404,
+ "usage": {
+  "prompt_tokens": 43,
+  "completion_tokens": 688,
+  "total_tokens": 731,
+  "completion_tokens_details": {
+   "reasoning_tokens": 145
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 5.393495102005545,
+ "t_first_content": 5.393495285999961,
+ "t_total": 17.57005589903565,
+ "cost": 0.027864
+}

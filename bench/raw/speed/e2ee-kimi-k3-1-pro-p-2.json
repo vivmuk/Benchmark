@@ -1,0 +1,21 @@
+{
+ "text": "A suspension bridge carries load through a continuous chain of bending, tension, and compression. The weight of vehicles, people, and the deck itself first bears on the roadway surface. From there, it spreads into the deck\u2019s beams or trusses, which bend over relatively short distances and deliver the load to nearby attachment points. A stiffening girder or truss running along the deck helps distribute concentrated loads, such as a cluster of heavy trucks, among several attachment points. It also limits local sagging and excessive movement, but it does not usually have to act as a beam spanning the entire distance between supports.\n\nAt intervals along the bridge, vertical or nearly vertical hangers connect the deck to the main cables. Each hanger carries its share of the deck load by stretching slightly and going into tension, much like a tightly pulled rope. These forces pass upward into the main cables, which drape between the towers and continue toward their end anchorages. The hangers therefore support the deck at many closely spaced points rather than leaving it unsupported across one enormous opening.\n\nThe main cables also carry their loads in tension. Their curved shape is essential: because they cannot meaningfully resist bending like a rigid girder, they develop large pulling forces along their length that support the downward forces from the hangers. Part of each cable\u2019s force is vertical and part is horizontal. A cable with more sag can generally support the same load with less tension, while a flatter cable requires greater tension. The cables are commonly made from many high-strength steel wires because steel is very efficient at resisting this kind of pulling force.\n\nWhere a main cable passes over a tower, it bears on a curved support called a saddle. Forces from the cable on either side press down through the saddle into the tower. If the cable arrangements on the two sides are reasonably balanced, much of their opposing horizontal pull cancels, so the tower carries the load mainly as compression. The tower then transmits that compression into its foundation. Unbalanced traffic, construction conditions, temperature changes, and wind can introduce additional bending or horizontal forces, which the tower and its connections must also resist.\n\nThe towers alone cannot complete the load path because the main cables still exert strong pulls toward the ends of the bridge. The cables are therefore secured in massive anchorages. A gravity anchorage uses its weight and its interaction with the foundation to resist being dragged inward or lifted; other designs fasten the cables directly into suitable rock. These anchorages supply the forces needed to keep the cable system stretched in its intended shape.\n\nFinally, the tower foundations and anchorages transfer the forces into soil or rock. Foundations spread concentrated loads over enough area, or extend deep enough through piles or shafts, to keep settlement and movement within safe limits. The ground pushes back with reactions that balance the downward weight and the cable forces.\n\nWhen a new load enters the deck, the entire system adjusts slightly: the deck and hangers move, the cable geometry changes by a small amount, and forces redistribute until equilibrium is restored. This arrangement allows a suspension bridge to span very far, because the deck is repeatedly supported, the cables work efficiently in tension, the towers work largely in compression, and the ground ultimately provides every reaction needed to hold the structure in place.",
+ "reasoning_chars": 6829,
+ "usage": {
+  "prompt_tokens": 121,
+  "completion_tokens": 2026,
+  "total_tokens": 2147,
+  "prompt_tokens_details": {
+   "cached_tokens": 64
+  },
+  "cache_read_input_tokens": 64,
+  "completion_tokens_details": {
+   "reasoning_tokens": 1369
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 24.89104247803334,
+ "t_first_content": 126.22515888803173,
+ "t_total": 141.26010969199706,
+ "cost": 0.0256275
+}

@@ -1,0 +1,22 @@
+{
+ "claude-opus-5-5": {
+  "scores": {
+   "subjects": 8.0,
+   "layout": 6.0,
+   "colour": 7.0,
+   "style": 5.0,
+   "overall": 5.0
+  },
+  "note": "All key elements are present. However, the recreation uses a more illustrated, cartoonish style, enlarges and reframes the traveller and alpaca, and moves the cactus, pool and monorail toward the centre-right, so the composition and feel differ noticeably from the photoreal original."
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "subjects": 9.0,
+   "layout": 5.0,
+   "colour": 7.0,
+   "style": 5.0,
+   "overall": 5.0
+  },
+  "note": "Nearly all key elements are present, but the traveller, alpaca, cactus, pool, and track shift substantially, and the recreation is sharper and more stylized."
+ }
+}

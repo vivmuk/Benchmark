@@ -1,0 +1,20 @@
+{
+ "text": "Wide 16:9 cinematic science-fiction digital matte painting. Rolling copper-orange desert dunes fill the lower half, fine parallel wind ripples across the sunlit foreground ridge, deep violet-brown shadows on its left slope, wisps of blowing sand. On the crest at left quarter stand one dark-haired traveler seen from behind, wearing a long burgundy cloak and dark boots, and one smaller shaggy brown llama immediately to their left, both gazing toward the distant city, long shadows stretching lower left. Center-right horizon: futuristic oasis metropolis, clustered low illuminated buildings and broad stepped circular terraces edged in turquoise light. Three dominant tapered glass spires: left teal blade with a cyan outlined vertical sign reading \u201cOASIS\u201d in white letters stacked top to bottom; much taller central needle reaching nearly to the top edge, encircled near its tip by a brilliant horizontal cyan elliptical halo; right slender magenta-lit blade. Pale teal searchlight beams fan upward. Sky grades from star-speckled midnight navy overhead through dusky lavender to glowing peach-gold at the right horizon. Huge dim planetary disk upper left, slender pale crescent along lower-right rim. Golden-lit elevated monorail on slim pillars sweeps from lower right in an S-curve toward the city, one sleek blue train on the near bend. Turquoise pool lower right behind track; tall dark green multiarmed saguaro outlined in neon pink dominates right foreground, one tiny cactus farther right. Atmospheric, softly luminous, richly detailed.",
+ "reasoning_chars": 0,
+ "usage": {
+  "prompt_tokens": 1178,
+  "completion_tokens": 307,
+  "total_tokens": 1485,
+  "prompt_tokens_details": {
+   "cached_tokens": 0,
+   "cache_creation_input_tokens": 1175,
+   "cache_write_tokens": 1175
+  },
+  "cache_creation_input_tokens": 1175
+ },
+ "finish": "stop",
+ "t_first_delta": 3.0123797560227104,
+ "t_first_content": 3.012379949039314,
+ "t_total": 13.222349576011766,
+ "cost": 0.021704
+}

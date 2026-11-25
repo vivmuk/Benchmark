@@ -1,0 +1,22 @@
+{
+ "claude-opus-5-5": {
+  "scores": {
+   "typography": 8.0,
+   "layout": 7.0,
+   "colour": 8.0,
+   "completeness": 10,
+   "originality": 7.0
+  },
+  "note": "A polished dark sleeper-train page with strong sans/italic-serif/mono hierarchy, a cohesive amber-and-neon palette and every required section well executed, though the route-map labels collide at the Mirage Causeway/Vespera end and the overall structure follows a familiar premium-SaaS template."
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "typography": 8.0,
+   "layout": 8.0,
+   "colour": 8.0,
+   "completeness": 10,
+   "originality": 9.0
+  },
+  "note": "A distinctive, complete page with strong visual hierarchy, though some small, low-contrast text and overlapping route labels reduce readability."
+ }
+}

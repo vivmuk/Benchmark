@@ -1,0 +1,14 @@
+{
+ "text": "```json\n{\n  \"q1\": 4227,\n  \"q2\": 62,\n  \"q3\": \"Sunday\",\n  \"q4\": 1,\n  \"q5\": 55440,\n  \"q6\": 232792560,\n  \"q7\": 22062,\n  \"q8\": 457,\n  \"q9\": 832040,\n  \"q10\": \"BEEF\",\n  \"q11\": 9,\n  \"q12\": 204\n}\n```",
+ "reasoning_chars": 3425,
+ "usage": {
+  "prompt_tokens": 363,
+  "completion_tokens": 8588,
+  "total_tokens": 8951
+ },
+ "finish": "stop",
+ "t_first_delta": 4.252620564016979,
+ "t_first_content": 71.93539956700988,
+ "t_total": 73.0777727200184,
+ "cost": 0.16238625
+}

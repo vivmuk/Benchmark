@@ -1,0 +1,17 @@
+{
+ "text": "A suspension bridge carries the weight of its deck and traffic to the ground through two main paths: down through the towers and into the foundations, and out through the main cables to the anchorages at the ends of the bridge. The parts that connect the deck to those paths are the vertical hangers, sometimes called suspenders. To follow the load, imagine a truck crossing the middle of the span.\n\nThe truck\u2019s tires press on the deck, which passes the load into the beams beneath the roadway. Those beams, together with a stiffening truss or a stiff box-shaped girder, spread the truck\u2019s weight along the deck so that several hangers share it. This stiffness matters because the cables are flexible: without a stiff deck, a heavy vehicle would cause a much more pronounced local dip. Each hanger is pulled downward by the deck and held up by a main cable. The hanger is therefore in tension, like a rope holding a weight. In turn, each hanger pulls downward on the main cable.\n\nThe main cable can support those downward pulls because it sags between the towers. A cable can carry tension but cannot act like a rigid beam. Because it slopes upward toward the towers on either side of the span, the tension in the cable has an upward component that supports the deck. A shallower cable would need more tension to provide the same upward support, which is one reason the amount of sag matters.\n\nAt the top of each tower, the main cable passes over a curved support called a saddle. The cable slopes down from the saddle on both sides, so the pulls from both sides have downward components that add together. Their horizontal components point in opposite directions and largely balance under the bridge\u2019s normal weight. The tower therefore carries most of the resulting force downward in compression. When loading is uneven, the horizontal pulls can differ, and the tower can also bend. At the base, the tower\u2019s foundation spreads the load into rock or soil, sometimes through deep piles or shafts.\n\nThe cable does not stop at the tower. In a conventional suspension bridge, it continues down to an anchorage beyond the tower. The cable pulls the anchorage toward the span and upward. A massive concrete anchorage can resist that pull through its weight and its contact with the ground, or it can be secured directly to strong rock. The anchorages keep the cable ends from moving inward, which allows the cables to remain under tension and support the deck.\n\nAs the truck moves, the deck redistributes its weight among successive hangers, and the forces in the cables, towers, and anchorages change slightly. Once the truck leaves, the same system continues to carry the bridge\u2019s own weight. The key is that the flexible parts carry load by being stretched, while the towers carry it mainly by being compressed. The foundations and anchorages pass those forces into the ground.",
+ "reasoning_chars": 4168,
+ "usage": {
+  "prompt_tokens": 43,
+  "completion_tokens": 685,
+  "total_tokens": 728,
+  "completion_tokens_details": {
+   "reasoning_tokens": 107
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 4.310528264963068,
+ "t_first_content": 4.310528606991284,
+ "t_total": 17.389546107966453,
+ "cost": 0.006936
+}

@@ -1,0 +1,20 @@
+{
+ "text": "When a vehicle rolls onto a suspension bridge, its weight first acts on the deck as a local load. The roadway slab and the steel framing beneath it spread that load sideways and along the span. The long stiffening girder or truss is especially important because the main cables are flexible. Without such stiffness, a heavy truck would make a sharp sag or twist at one point; a gust or a crowd could do the same. The deck gathers uneven loads into a smoother load shared by many hangers.\n\nThose hangers are vertical steel ropes or rods clamped to the main cables above and bolted to the stiffening frame below. They cannot push, so the suspended deck puts them in tension. The bridge's own weight keeps them taut while traffic adds and shifts tension from hanger to hanger. Each hanger delivers its share of downward force to a main cable, which runs continuously from one end of the bridge over the towers and across the span to the far end.\n\nThe main cable is the principal carrying member. Made of thousands of strong steel wires bound together, it works almost purely in tension. Because deck load is roughly distributed along the span, the cable hangs in a smooth curve close to a parabola; with only its own weight it would form a catenary. Tension acts along this curve. At each hanger the sloping cable has a vertical component balancing the downward pull, while a large horizontal component continues toward the ends. A flatter cable or a heavier load means greater tension. The bridge therefore changes the deck's tendency to bend into a pulling force in material very strong in tension.\n\nAt a tower the cable generally passes over a saddle instead of stopping. As its direction changes, it presses down. The vertical components of cable tension from the main and side spans combine into a heavy downward force. The tower carries this force mainly as compression, like a column. It does not lift the bridge by itself; it gives the cable a high point, then transmits the load to a pier and foundation. The foundation spreads that concentrated compression into soil or rock by bearing and by the mass of the concrete, so the ground receives this portion of the load.\n\nThe cable's horizontal pull must also reach the ground. At each end it continues as a backstay into an anchorage, a huge concrete block or steelwork embedded in rock. The anchorage's own weight helps it press against the earth while its bond with the rock resists sliding and uplift, holding the cable end so the curved system stays in tension. Changing weather and uneven traffic alter the forces from moment to moment, yet the load still travels from the deck into the stiffening frame, through the hangers into the cables, and out through towers and anchorages to the earth. The structure is efficient because flexible steel is kept in tension while towers and foundations take compression, with the ground supplying the final resistance.",
+ "reasoning_chars": 44458,
+ "usage": {
+  "prompt_tokens": 57,
+  "completion_tokens": 11463,
+  "total_tokens": 11520,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 10883
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 1.1347320850472897,
+ "t_first_content": 133.01684739504708,
+ "t_total": 136.4171100030071,
+ "cost": 0.03589562625
+}

@@ -1,0 +1,21 @@
+{
+ "text": "When a truck crosses a suspension bridge, its tires press down on a small patch of roadway, but the structure does not carry that weight at just one point. The deck spreads the load to the beams beneath it. Beams running across the bridge carry load toward its sides, while stiff girders or trusses running lengthwise share it among several suspension points. This spreading action is why the roadway does not form a sharp dip directly under a heavy vehicle. The weight of the deck itself follows much the same path, even when there is no traffic.\n\nAt intervals along the span, vertical hangers connect the deck structure to the curved main cables above it. Each hanger is in tension: the deck pulls down on its lower end, and the main cable pulls up on its upper end. In turn, the hanger pulls down on the main cable. A hanger therefore supports the deck without having to resist bending or act like a column. It works by being stretched between its two connections.\n\nThe curve of the main cable is essential because a flexible cable can pull only along its own length. Imagine a short piece of the cable where one hanger attaches. The neighboring lengths of cable pull on the two ends of that piece at slightly different angles. The horizontal parts of those pulls balance, while their vertical parts combine to give an upward force that balances the hanger\u2019s downward pull. Near the middle of the span, the cable is almost horizontal. Moving toward either tower, it becomes progressively steeper as the vertical force it must carry grows with the load collected from successive hangers.\n\nAt the top of each tower, the main cable passes over a curved support called a saddle and continues down toward the end of the bridge. The cable pulls on the saddle from both sides. Under a balanced load, the horizontal pulls largely offset each other, while the downward pulls add together. The tower carries that downward force mainly in compression, passing it through its legs into a foundation that spreads the load into soil or rock.\n\nIn a conventional earth-anchored suspension bridge, the cables end in massive anchorages beyond the towers. Each cable pulls its anchorage upward and toward the span. The anchorage resists that pull through its weight and its connection to the surrounding ground or bedrock. The towers and anchorages thus do different jobs: the towers hold the cables high and carry a large downward force, while the anchorages keep the cable ends from drawing inward and rising. Together they allow the tension in the curved cables to support a nearly level roadway, with the ground ultimately providing the reactions that hold the whole bridge in balance.",
+ "reasoning_chars": 6900,
+ "usage": {
+  "prompt_tokens": 3291,
+  "completion_tokens": 2221,
+  "total_tokens": 5512,
+  "prompt_tokens_details": {
+   "cached_tokens": 1164
+  },
+  "cache_read_input_tokens": 1164,
+  "completion_tokens_details": {
+   "reasoning_tokens": 1121
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 41.119972830987535,
+ "t_first_content": 41.11997312202584,
+ "t_total": 41.259959599992726,
+ "cost": 0.115168
+}

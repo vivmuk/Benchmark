@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Walking Alpaca</title>
+    <style>
+        :root {
+            --cycle: 1.6s; /* Full 4-beat walk stride */
+            --bob: calc(var(--cycle) / 2);
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            background: #a0c4ff;
+        }
+
+        svg {
+            display: block;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        /* --- Performance Hints --- */
+        .anim-leg, .anim-knee, #alpaca-bob, #neck-anim, #head-anim, 
+        #tail-anim, #bell-anim, .ear-anim, .fringe-anim, #shadow-anim,
+        .pan-layer, .mote {
+            will-change: transform, opacity;
+        }
+
+        /* --- Parallax Background --- */
+        @keyframes pan {
+            from { transform: translateX(0); }
+            to   { transform: translateX(-1280px); }
+        }
+        .pan-clouds { animation: pan 120s linear infinite; }
+        .pan-far    { animation: pan 70s linear infinite; }
+        .pan-mid    { animation: pan 35s linear infinite; }
+        .pan-near   { animation: pan 18s linear infinite; }
+        .pan-grass  { animation: pan 12s linear infinite; }
+
+        /* --- Floating Dust Motes --- */
+        @keyframes float {
+            0%   { transform: translate(0, 0) scale(1); opacity: 0; }
+            20%  { opacity: 0.7; }
+            80%  { opacity: 0.7; }
+            100% { transform: translate(var(--drift), -180px) scale(0.4); opacity: 0; }
+        }
+        .mote { animation: float linear infinite; filter: blur(0.5px); }
+
+        /* --- Biomechanical Walk Gait --- */
+        /* Upper leg: smooth reach, steady push, quick recovery */
+        @keyframes leg-swing {
+            0%   { transform: rotate(18deg); }
+            12%  { transform: rotate(11deg); }
+            25%  { transform: rotate(2deg); }
+            37%  { transform: rotate(-7deg); }
+            50%  { transform: rotate(-16deg); }
+            60%  { transform: rotate(-12deg); }
+            75%  { transform: rotate(2deg); }
+            90%  { transform: rotate(15deg); }
+            100% { transform: rotate(18deg); }
+        }
+        /* Lower leg: folds up only during forward recovery to clear ground */
+        @keyframes knee-bend {
+            0%, 45% { transform: rotate(0deg); }
+            60%     { transform: rotate(-28deg); }
+            80%     { transform: rotate(-10deg); }
+            100%    { transform: rotate(0deg); }
+        }
+
+        .anim-leg  { animation: leg-swing var(--cycle) linear infinite; }
+        .anim-knee { animation: knee-bend var(--cycle) linear infinite; }
+
+        /* 4-Beat Sequence: LH -> LF -> RH -> RF (Negative delays start mid-cycle instantly) */
+        #leg-bl .anim-leg, #leg-bl .anim-knee { animation-delay: 0s; }
+        #leg-fl .anim-leg, #leg-fl .anim-knee { animation-delay: -0.4s; }
+        #leg-br .anim-leg, #leg-br .anim-knee { animation-delay: -0.8s; }
+        #leg-fr .anim-leg, #leg-fr .anim-knee { animation-delay: -1.2s; }
+
+        /* Depth cue for far-side legs */
+        .far-leg { filter: brightness(0.86) saturate(0.85); }
+
+        /* --- Secondary Motion --- */
+        @keyframes bob {
+            0%, 100% { transform: translateY(1px) rotate(0deg); }
+            25%      { transform: translateY(-4px) rotate(0.5deg); }
+            50%      { transform: translateY(2px) rotate(0deg); }
+            75%      { transform: translateY(-4px) rotate(-0.5deg); }
+        }
+        #alpaca-bob { animation: bob var(--bob) ease-in-out infinite; }
+
+        @keyframes nod {
+            0%, 100% { transform: rotate(1.5deg); }
+            25%, 75% { transform: rotate(-1.5deg); }
+            50%      { transform: rotate(2deg); }
+        }
+        #neck-anim { animation: nod var(--bob) ease-in-out infinite; }
+        #head-anim { animation: nod var(--bob) ease-in-out infinite reverse; }
+
+        @keyframes swish {
+            0%, 100% { transform: rotate(-6deg); }
+            50%      { transform: rotate(8deg); }
+        }
+        #tail-anim { animation: swish var(--bob) ease-in-out infinite; }
+
+        @keyframes swing {
+            0%, 100% { transform: rotate(12deg); }
+            50%      { transform: rotate(-12deg); }
+        }
+        #bell-anim { animation: swing var(--bob) ease-in-out infinite; }
+
+        @keyframes fringe {
+            0%, 100% { transform: rotate(0deg); }
+            50%      { transform: rotate(-3deg); }
+        }
+        .fringe-anim { animation: fringe var(--bob) ease-in-out infinite; }
+
+        @keyframes twitch {
+            0%, 80%, 100% { transform: rotate(0deg); }
+            86%           { transform: rotate(-7deg); }
+            93%           { transform: rotate(4deg); }
+        }
+        .ear-anim { animation: twitch 3.2s ease-in-out infinite; }
+
+        @keyframes shadow-pulse {
+            0%, 50%, 100% { transform: scale(1.02); opacity: 0.18; }
+            25%, 75%      { transform: scale(0.95); opacity: 0.11; }
+        }
+        #shadow-anim { animation: shadow-pulse var(--bob) ease-in-out infinite; }
+    </style>
+</head>
+<body>
+
+<svg viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <!-- Atmosphere -->
+        <linearGradient id="sky" x1="0" y1="1" x2="0" y2="0">
+            <stop offset="0%" stop-color="#ffd6a5"/>
+            <stop offset="45%" stop-color="#e2c2ff"/>
+            <stop offset="100%" stop-color="#a0c4ff"/>
+        </linearGradient>
+        <radialGradient id="sunGlow">
+            <stop offset="0%" stop-color="#fff3b0" stop-opacity="1"/>
+            <stop offset="35%" stop-color="#ffd6a5" stop-opacity="0.7"/>
+            <stop offset="100%" stop-color="#ffd6a5" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#8fa677"/>
+            <stop offset="100%" stop-color="#46593a"/>
+        </linearGradient>
+
+        <!-- Alpaca Materials -->
+        <radialGradient id="fleeceGrad" cx="35%" cy="25%" r="75%">
+            <stop offset="0%" stop-color="#fffdf9"/>
+            <stop offset="55%" stop-color="#f7efe1"/>
+            <stop offset="100%" stop-color="#dfcdb2"/>
+        </radialGradient>
+        <linearGradient id="legGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#c48c5c"/>
+            <stop offset="35%" stop-color="#e6b98f"/>
+            <stop offset="100%" stop-color="#ad7243"/>
+        </linearGradient>
+        <linearGradient id="faceGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#f2cda6"/>
+            <stop offset="100%" stop-color="#c48c5c"/>
+        </linearGradient>
+
+        <!-- Filters -->
+        <filter id="sunBlur"><feGaussianBlur stdDeviation="18"/></filter>
+        <filter id="shadowBlur"><feGaussianBlur stdDeviation="5"/></filter>
+
+        <!-- Blanket Clip -->
+        <clipPath id="blanket-clip">
+            <path d="M -45,-65 C -15,-78 20,-75 45,-60 L 50,10 C 20,22 -15,18 -40,5 Z"/>
+        </clipPath>
+
+        <!-- Reusable Scenery Chunks -->
+        <g id="cloud-group" fill="#ffffff">
+            <ellipse cx="150" cy="150" rx="85" ry="24"/>
+            <ellipse cx="205" cy="132" rx="60" ry="30"/>
+            <ellipse cx="800" cy="240" rx="105" ry="20"/>
+            <ellipse cx="875" cy="225" rx="70" ry="26"/>
+            <ellipse cx="1120" cy="110" rx="95" ry="22"/>
+        </g>
+        <g id="hill-far">
+            <path d="M 0,480 Q 250,350 500,470 T 950,440 Q 1150,380 1280,480 L 1280,720 L 0,720 Z"/>
+        </g>
+        <g id="hill-mid">
+            <path d="M 0,520 Q 200,410 420,510 T 850,495 Q 1060,420 1280,520 L 1280,720 L 0,720 Z"/>
+        </g>
+        <g id="hill-near">
+            <path d="M 0,570 Q 300,495 600,565 T 1000,555 Q 1150,515 1280,570 L 1280,720 L 0,720 Z"/>
+        </g>
+        <g id="tufts">
+            <path d="M 80,580 Q 85,568 88,580 Q 92,572 96,580 Z"/>
+            <path d="M 230,581 Q 233,572 236,581 Q 240,574 243,581 Z"/>
+            <path d="M 410,580 Q 415,566 419,580 Q 424,570 428,580 Z"/>
+            <path d="M 590,582 Q 594,573 597,582 Q 601,575 604,582 Z"/>
+            <path d="M 760,580 Q 765,568 769,580 Q 774,571 778,580 Z"/>
+            <path d="M 940,581 Q 944,570 947,581 Q 951,574 955,581 Z"/>
+            <path d="M 1120,580 Q 1126,565 1130,580 Q 1135,572 1139,580 Z"/>
+        </g>
+    </defs>
+
+    <!-- === SCENE === -->
+    <rect width="100%" height="100%" fill="url(#sky)"/>
+    
+    <!-- Sun -->
+    <circle cx="280" cy="230" r="140" fill="url(#sunGlow)" filter="url(#sunBlur)"/>
+    <circle cx="280" cy="230" r="68" fill="#fff3b0"/>
+
+    <!-- Clouds -->
+    <g class="pan-layer pan-clouds" opacity="0.45">
+        <use href="#cloud-group" x="0"/>
+        <use href="#cloud-group" x="1280"/>
+    </g>
+
+    <!-- Parallax Hills -->
+    <g class="pan-layer pan-far" fill="#cdb4db" opacity="0.65">
+        <use href="#hill-far" x="0"/>
+        <use href="#hill-far" x="1280"/>
+    </g>
+    <g class="pan-layer pan-mid" fill="#aebaff" opacity="0.85">
+        <use href="#hill-mid" x="0"/>
+        <use href="#hill-mid" x="1280"/>
+    </g>
+    <g class="pan-layer pan-near" fill="#9cb380">
+        <use href="#hill-near" x="0"/>
+        <use href="#hill-near" x="1280"/>
+    </g>
+
+    <!-- Ground Base -->
+    <rect x="0" y="580" width="100%" height="140" fill="url(#ground)"/>
+    
+    <!-- Moving Grass -->
+    <g class="pan-layer pan-grass" fill="#6b8352" opacity="0.85">
+        <use href="#tufts" x="0"/>
+        <use href="#tufts" x="1280"/>
+    </g>
+
+    <!-- Floating Pollen / Dust -->
+    <g id="motes"></g>
+
+    <!-- Ground Shadow -->
+    <g transform="translate(640, 582)">
+        <ellipse id="shadow-anim" cx="0" cy="0" rx="105" ry="11" fill="#1a2415" filter="url(#shadowBlur)"/>
+    </g>
+
+
+    <!-- === ALPACA RIG === -->
+    <!-- Root anchored to ground center -->
+    <g transform="translate(640, 580)">
+        
+        <g id="alpaca-bob">
+
+            <!-- 1. BACK RIGHT LEG (Furthest) -->
+            <g id="leg-br" class="far-leg" transform="translate(-45, -102)">
+                <g class="anim-leg">
+                    <path d="M -9,-20 C -13,-5 -10,25 -6,50 L 6,50 C 10,25 13,-5 9,-20 Z" fill="url(#legGrad)"/>
+                    <circle cx="0" cy="-15" r="11" fill="url(#fleeceGrad)"/>
+                    <g transform="translate(0, 50)">
+                        <g class="anim-knee">
+                            <path d="M -5,0 L -4,45 L 4,45 L 5,0 Z" fill="url(#legGrad)"/>
+                            <circle cx="0" cy="0" r="4.5" fill="#dca87a"/>
+                            <path d="M -5,43 L -7,52 C -7,56 7,56 7,52 L 5,43 Z" fill="#3a2e26"/>
+                        </g>
+                    </g>
+                </g>
+            </g>
+
+            <!-- 2. TAIL -->
+            <g transform="translate(-80, -175)">
+                <g id="tail-anim">
+                    <path d="M 0,0 C -15,-5 -22,10 -10,16 C -4,21 6,15 5,5 Z" fill="url(#fleeceGrad)"/>
+                    <circle cx="-9" cy="9" r="7.5" fill="url(#fleeceGrad)"/>
+                </g>
+            </g>
+
+            <!-- 3. BACK LEFT LEG -->
+            <g id="leg-bl" transform="translate(-60, -102)">
+                <g class="anim-leg">
+                    <path d="M -9,-20 C -13,-5 -10,25 -6,50 L 6,50 C 10,25 13,-5 9,-20 Z" fill="url(#legGrad)"/>
+                    <circle cx="0" cy="-15" r="11" fill="url(#fleeceGrad)"/>
+                    <g transform="translate(0, 50)">
+                        <g class="anim-knee">
+                            <path d="M -5,0 L -4,45 L 4,45 L 5,0 Z" fill="url(#legGrad)"/>
+                            <circle cx="0" cy="0" r="4.5" fill="#dca87a"/>
+                            <path d="M -5,43 L -7,52 C -7,56 7,56 7,52 L 5,43 Z" fill="#3a2e26"/>
+                        </g>
+                    </g>
+                </g>
+            </g>
+
+            <!-- 4. BODY & BLANKET -->
+            <g transform="translate(0, -160)">
+                <!-- Fluffy Fleece Cloud -->
+                <path d="M -85,-10 C -100,-25 -95,-50 -75,-55 C -80,-75 -55,-85 -40,-75 C -30,-95 -5,-95 5,-80 C 20,-100 45,-90 55,-75 C 75,-85 95,-65 85,-45 C 100,-30 95,-5 80,5 C 90,25 70,45 50,40 C 35,55 10,50 0,35 C -20,55 -45,45 -50,30 C -75,40 -90,20 -80,5 C -95,-5 -95,-10 -85,-10 Z" fill="url(#fleeceGrad)"/>
+                <!-- Wool Texture -->
+                <path d="M -60,-40 Q -50,-50 -40,-40 T -20,-40 M 20,-50 Q 30,-60 40,-50 M -30,15 Q -20,25 -10,15 M 30,20 Q 40,30 50,20 M -5,-65 Q 5,-75 15,-65" stroke="#e0d2bc" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.6"/>
+
+                <!-- Saddle Blanket -->
+                <path d="M -45,-65 C -15,-78 20,-75 45,-60 L 50,10 C 20,22 -15,18 -40,5 Z" fill="#ff8fa3"/>
+                <g clip-path="url(#blanket-clip)" stroke="#ffd6a5" stroke-width="4" fill="none" opacity="0.85" stroke-linejoin="round">
+                    <path d="M -50,-45 L -10,-25 L 30,-45 L 60,-30"/>
+                    <path d="M -50,-25 L -10,-5 L 30,-25 L 60,-10"/>
+                    <path d="M -50,-5 L -10,15 L 30,-5 L 60,10"/>
+                    <path d="M -50,15 L -10,35 L 30,15 L 60,30"/>
+                </g>
+                <path d="M -45,-65 C -15,-78 20,-75 45,-60 L 50,10 C 20,22 -15,18 -40,5 Z" stroke="#6d6875" stroke-width="3" fill="none"/>
+                
+                <!-- Bouncing Fringe -->
+                <g transform="translate(5, 12)">
+                    <g class="fringe-anim">
+                        <path d="M -43,-4 L -45,5 M -33,0 L -34,9 M -23,2 L -23,11 M -13,3 L -12,12 M -3,3 L -2,12 M 7,2 L 8,11 M 17,0 L 17,9 M 27,-3 L 26,6 M 37,-7 L 35,2" stroke="#ffd6a5" stroke-width="2.5" stroke-linecap="round"/>
+                    </g>
+                </g>
+            </g>
+
+            <!-- 5. FRONT RIGHT LEG (Behind Neck) -->
+            <g id="leg-fr" class="far-leg" transform="translate(65, -95) scale(1.07)">
+                <g class="anim-leg">
+                    <path d="M -9,-20 C -13,-5 -10,25 -6,50 L 6,50 C 10,25 13,-5 9,-20 Z" fill="url(#legGrad)"/>
+                    <circle cx="0" cy="-15" r="11" fill="url(#fleeceGrad)"/>
+                    <g transform="translate(0, 50)">
+                        <g class="anim-knee">
+                            <path d="M -5,0 L -4,45 L 4,45 L 5,0 Z" fill="url(#legGrad)"/>
+                            <circle cx="0" cy="0" r="4.5" fill="#dca87a"/>
+                            <path d="M -5,43 L -7,52 C -7,56 7,56 7,52 L 5,43 Z" fill="#3a2e26"/>
+                        </g>
+                    </g>
+                </g>
+            </g>
+
+            <!-- 6. NECK & HEAD -->
+            <g transform="translate(45, -185)">
+                <g id="neck-anim">
+                    <!-- Long Curved Fluffy Neck -->
+                    <path d="M -15,10 C -25,-15 -15,-35 -5,-45 C -15,-60 -5,-80 5,-85 C 0,-100 15,-115 30,-110 L 55,-105 C 45,-80 40,-40 35,5 Z" fill="url(#fleeceGrad)"/>
+                    <!-- Chest Fluff Overlap -->
+                    <circle cx="8" cy="0" r="19" fill="url(#fleeceGrad)"/>
+                    <circle cx="24" cy="6" r="15" fill="url(#fleeceGrad)"/>
+
+                    <!-- Head Pivot -->
+                    <g transform="translate(40, -110)">
+                        <g id="head-anim">
+                            <!-- Far Ear -->
+                            <g transform="translate(2, -15)">
+                                <g class="ear-anim" style="animation-delay: -0.15s">
+                                    <path d="M 0,0 L -4,-30 L 10,-5 Z" fill="#c48c5c"/>
+                                </g>
+                            </g>
+
+                            <!-- Face Base -->
+                            <path d="M -5,5 C -10,-10 -5,-25 10,-28 L 30,-25 C 42,-20 45,-5 38,2 L 30,12 C 15,15 0,15 -5,5 Z" fill="url(#faceGrad)"/>
+                            
+                            <!-- Forehead Tuft -->
+                            <path d="M -8,-20 C -5,-35 5,-38 12,-32 C 18,-40 28,-35 30,-26 C 20,-30 5,-28 -8,-20 Z" fill="url(#fleeceGrad)"/>
+
+                            <!-- Near Ear -->
+                            <g transform="translate(15, -25)">
+                                <g class="ear-anim">
+                                    <path d="M 0,0 L 3,-30 L 15,-3 Z" fill="#e6b98f"/>
+                                    <path d="M 4,-20 L 6,-27 L 10,-13 Z" fill="#ff8fa3" opacity="0.65"/>
+                                </g>
+                            </g>
+
+                            <!-- Snout & Nose -->
+                            <path d="M 30,-5 C 40,-8 48,-2 46,5 C 44,10 34,12 30,8 Z" fill="#fdf2e2"/>
+                            <path d="M 43,1 C 47,0 48,4 45,5 C 42,6 41,2 43,1 Z" fill="#3a2e26"/>
+                            <path d="M 44,7 Q 41,9 38,7" stroke="#3a2e26" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+
+                            <!-- Eye & Lashes -->
+                            <ellipse cx="22" cy="-10" rx="4.5" ry="5" fill="#2b1d14"/>
+                            <circle cx="23.5" cy="-11.5" r="1.5" fill="#ffffff"/>
+                            <path d="M 18,-15 Q 20,-17 22,-16 M 26,-15 Q 27,-17 28,-15" stroke="#2b1d14" stroke-width="1" fill="none" stroke-linecap="round"/>
+
+                            <!-- Collar -->
+                            <path d="M -2,2 C 10,8 20,8 28,2 L 26,8 C 18,14 8,14 0,8 Z" fill="#ff758f"/>
+                            
+                            <!-- Swinging Bell -->
+                            <g transform="translate(13, 11)">
+                                <g id="bell-anim">
+                                    <circle cx="0" cy="0" r="1.5" fill="#5c4d3c"/>
+                                    <path d="M -4,2 C -4,8 4,8 4,2 Z" fill="#ffd166"/>
+                                    <circle cx="0" cy="6" r="1.2" fill="#5c4d3c"/>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+
+            <!-- 7. FRONT LEFT LEG (Closest, overlaps chest) -->
+            <g id="leg-fl" transform="translate(55, -95) scale(1.07)">
+                <g class="anim-leg">
+                    <path d="M -9,-20 C -13,-5 -10,25 -6,50 L 6,50 C 10,25 13,-5 9,-20 Z" fill="url(#legGrad)"/>
+                    <circle cx="0" cy="-15" r="11" fill="url(#fleeceGrad)"/>
+                    <g transform="translate(0, 50)">
+                        <g class="anim-knee">
+                            <path d="M -5,0 L -4,45 L 4,45 L 5,0 Z" fill="url(#legGrad)"/>
+                            <circle cx="0" cy="0" r="4.5" fill="#dca87a"/>
+                            <path d="M -5,43 L -7,52 C -7,56 7,56 7,52 L 5,43 Z" fill="#3a2e26"/>
+                        </g>
+                    </g>
+                </g>
+            </g>
+
+        </g>
+    </g>
+</svg>
+
+<script>
+    // Generate subtle atmospheric dust motes purely in-code
+    document.addEventListener("DOMContentLoaded", () => {
+        const container = document.getElementById('motes');
+        let markup = '';
+        for (let i = 0; i < 35; i++) {
+            const x = Math.random() * 1280;
+            const y = 320 + Math.random() * 350;
+            const r = 0.8 + Math.random() * 2.2;
+            const dur = 5 + Math.random() * 8;
+            const del = -Math.random() * 15;
+            const drift = -40 - Math.random() * 140;
+            markup += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r.toFixed(1)}" fill="#ffffff" class="mote" style="animation-duration:${dur.toFixed(1)}s; animation-delay:${del.toFixed(1)}s; --drift:${drift.toFixed(1)}px"/>`;
+        }
+        container.innerHTML = markup;
+    });
+</script>
+
+</body>
+</html>

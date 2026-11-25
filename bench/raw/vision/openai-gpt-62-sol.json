@@ -1,0 +1,23 @@
+{
+ "text": "Cinematic 16:9 sci-fi concept art, viewed from a desert dune at twilight. Wind-rippled copper-orange sand fills the foreground, with deep violet-brown hollows and fine sand drifting off the crests. On the left foreground ridge, one short-haired traveler seen from behind wears a long dark burgundy cloak and boots; immediately to their left stands one shaggy brown llama, ears upright. Both face the distant city and cast long shadows toward the lower left.\n\nCenter-right on the horizon, a futuristic metropolis rises from layered, saucer-like terraces edged in cyan, surrounded by smaller buildings with amber windows. Three tapering glass spires dominate: the tallest in the middle, encircled near its tip by a brilliant horizontal cyan halo; a shorter teal spire on the left bearing a vertical cyan sign reading \u201cOASIS\u201d top to bottom; and a shorter purple spire on the right edged in magenta. Thin turquoise searchlight beams fan into the sky.\n\nAn elevated, gold-lit monorail on slender dark pylons enters from the bottom right, bends left, then sweeps back toward the city. One sleek blue-silver train with dark windows rounds the near bend. Behind the track at lower right lies a glowing turquoise oasis pool. A huge ribbed dark-green saguaro with three raised arms and a hot-pink neon outline stands in front of the water; one tiny cactus stands on the far bank.\n\nSparse stars, a huge crescent moon lit along its lower-right rim in the upper left, and a navy-to-mauve sky fading to amber at the right horizon. Atmospheric, finely detailed digital matte painting.",
+ "reasoning_chars": 3804,
+ "usage": {
+  "prompt_tokens": 1178,
+  "completion_tokens": 439,
+  "total_tokens": 1617,
+  "prompt_tokens_details": {
+   "cached_tokens": 0,
+   "cache_creation_input_tokens": 1175,
+   "cache_write_tokens": 1175
+  },
+  "cache_creation_input_tokens": 1175,
+  "completion_tokens_details": {
+   "reasoning_tokens": 97
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 4.747869894024916,
+ "t_first_content": 4.747870123013854,
+ "t_total": 12.571246738021728,
+ "cost": 0.006746
+}

@@ -1,0 +1,20 @@
+{
+ "claude-opus-5-5": {
+  "scores": {
+   "alpaca": 6.0,
+   "motion": 1.0,
+   "beauty": 7.0,
+   "scene": 7.0
+  },
+  "note": "A charming fleecy camelid in a polished pastel dusk landscape, but its long rabbit-like ears and bare deer-thin legs read more llama than alpaca, and the legs and body look identical across all three frames, with at most faint shifts in the foreground grass, so there is effectively no walk."
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "alpaca": 8.0,
+   "motion": 1.0,
+   "beauty": 8.0,
+   "scene": 8.0
+  },
+  "note": "The alpaca and sunset scene are polished, but its legs and body barely change between frames, so the walk is not convincing."
+ }
+}

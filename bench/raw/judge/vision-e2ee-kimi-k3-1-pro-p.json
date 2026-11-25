@@ -1,0 +1,22 @@
+{
+ "claude-opus-5-5": {
+  "scores": {
+   "subjects": 7.0,
+   "layout": 6.0,
+   "colour": 5.0,
+   "style": 6.0,
+   "overall": 5.0
+  },
+  "note": "All key elements are present, but the moon is a large gibbous disc instead of a thin crescent, the alpaca reads as a llama, the city adds saucer-like buildings and a winding road, the figures are larger and closer, and the sky is warmer and hazier than the original's deep blue-purple dusk."
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "subjects": 8.0,
+   "layout": 7.0,
+   "colour": 6.0,
+   "style": 8.0,
+   "overall": 6.0
+  },
+  "note": "Most elements are present and similarly placed, but the moon, traveller and alpaca, tower positions, and warmer lighting make the recreation visibly different."
+ }
+}

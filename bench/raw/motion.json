@@ -9,5 +9,13 @@
  "openai-gpt-61-terra": 0.981,
  "kimi-k3-1-pro": 0.831,
  "kimi-k3-1-pro-highspeed": 0.654,
- "inkling-2-mini": 1.768
+ "inkling-2-mini": 1.768,
+ "hy4": 2.176,
+ "gemini-4-neon": 4.016,
+ "openai-gpt-62-astra": 1.529,
+ "openai-gpt-62-astra-pro": 2.442,
+ "openai-gpt-62-sol": 0.732,
+ "openai-gpt-62-sol-pro": 0.37,
+ "e2ee-kimi-k3-1-pro-p": 0.762,
+ "deepseek-v4-1-flash-1017": 2.309
 }

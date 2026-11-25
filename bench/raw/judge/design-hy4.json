@@ -1,0 +1,22 @@
+{
+ "claude-opus-5-5": {
+  "scores": {
+   "typography": 6.0,
+   "layout": 2.0,
+   "colour": 6.0,
+   "completeness": 2.0,
+   "originality": 5.0
+  },
+  "note": "The synthwave hero has a strong gradient headline, but a cyan line slices through the text and the sun crowds the copy; below it the features, timetable, pricing and testimonial never render (likely stuck scroll-reveal animations), leaving thousands of pixels of empty black between the section headi"
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "typography": 6.0,
+   "layout": 1.0,
+   "colour": 7.0,
+   "completeness": 2.0,
+   "originality": 6.0
+  },
+  "note": "The neon-desert hero has character, but the page is mostly empty after it, with the features, timetable, pricing and testimonial missing."
+ }
+}

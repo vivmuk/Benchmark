@@ -1,0 +1,20 @@
+{
+ "text": "Wide 16:9 sci-fi digital painting of a desert oasis at twilight. Foreground left: a silhouetted person in a long crimson cloak stands beside a light-brown woolly llama on a rolling orange sand dune, both facing away toward a distant futuristic city. Center background: a glowing cyberpunk metropolis with three dominant tapering glass towers\u2014tallest central spire encircled by a floating neon-cyan ring, left tower with vertical cyan neon sign reading \u201cOASIS,\u201d right tower edged in magenta neon\u2014rising from a tiered, circular mega-structure with horizontal cyan light bands and dense city lights. Several diagonal cyan and green light beams shoot upward from the city. Sky gradient from deep starry navy at top through violet and pink to warm orange near the horizon; large pale crescent moon upper left. Right foreground: a tall saguaro cactus outlined in neon pink, a smaller cactus further right, and a glowing turquoise pool. A curving elevated transit track with neon yellow-orange edge lighting sweeps from lower right toward the city, carrying one small blue-teal train. Sand dunes with wind-sculpted ridges and dust haze. Composition emphasizes tiny travelers dwarfed by the luminous city; cinematic lighting, neon reflections, concept-art style, crisp details, volumetric glow.",
+ "reasoning_chars": 2805,
+ "usage": {
+  "prompt_tokens": 643,
+  "completion_tokens": 896,
+  "total_tokens": 1539,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 630
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 1.5128272430156358,
+ "t_first_content": 7.546107966976706,
+ "t_total": 9.777141679020133,
+ "cost": 0.0012681
+}

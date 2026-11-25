@@ -1,0 +1,20 @@
+{
+ "text": "The deck of a suspension bridge first collects the weight of the structure itself and the loads imposed by traffic, snow, or pedestrians. These loads enter the deck\u2019s longitudinal members, such as stringers, floor beams, and a stiffening truss or box girder. The stiffening girder spreads concentrated loads over several hangers and limits local deflections, but in a conventional suspension bridge it is not the main vertical support. Its job is to distribute load and keep the deck line smooth while the hangers and main cables do most of the carrying.\n\nThe hangers, or suspenders, are vertical or nearly vertical tension members spaced along the deck. Each hanger receives its share of deck load from the stiffening girder and pulls upward on the deck while pulling downward on the main cable. Because a hanger can only carry tension, it transfers the deck load to the main cable as a downward pull at each connection point. The main cable, draped in a curve between the towers, responds by developing large tensile force. At every hanger point the cable\u2019s slope changes slightly; the vertical component of that changing cable tension balances the downward hanger load, while the horizontal component remains roughly constant along the cable. In this way the main cable gathers the many small hanger loads and carries them toward the towers and anchorages.\n\nAt the towers, the main cables pass over saddles. The downward pull from the cable segments is transferred through the saddle into the tower, putting the tower principally in compression. The tower then carries that compressive force down through its legs to a foundation, which spreads it into the ground. The horizontal component of the cable tension is not simply carried down the tower; it is resisted by the main cable\u2019s anchorage system. In a conventional suspension bridge, the ends of the main cables are anchored to massive anchorages, rock, or deep foundations. These anchorages resist the cable tension by their weight, friction, and embedded rock anchors or piles, and they pass the force into the surrounding ground.\n\nThus the complete load path is from deck to stiffening girder, from stiffening girder to hangers, from hangers to main cables, and from main cables to towers and anchorages. The towers deliver vertical compression to their foundations, while the anchorages deliver the cable\u2019s horizontal and vertical reactions to the ground. The ground therefore receives the deck load through two main routes: downward compression through the towers and tension through the end anchorages.",
+ "reasoning_chars": 4556,
+ "usage": {
+  "prompt_tokens": 66,
+  "completion_tokens": 1463,
+  "total_tokens": 1529,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 961
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 1.5356754560489208,
+ "t_first_content": 11.525472624052782,
+ "t_total": 16.220937867998146,
+ "cost": 0.0017754
+}

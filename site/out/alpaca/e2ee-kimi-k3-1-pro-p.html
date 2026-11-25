@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alpaca Morning Walk</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    background: #9fbfc0;
+  }
+  body { display: grid; place-items: center; }
+  svg {
+    display: block;
+    width: 100vw;
+    height: 100vh;
+  }
+  .cloud-a { animation: cloudA 24s ease-in-out infinite alternate; }
+  .cloud-b { animation: cloudB 31s ease-in-out infinite alternate; }
+  .cloud-c { animation: cloudC 27s ease-in-out infinite alternate; }
+  .sway-left {
+    transform-origin: 82px 720px;
+    animation: swayLeft 4.8s ease-in-out infinite alternate;
+  }
+  .sway-right {
+    transform-origin: 1190px 720px;
+    animation: swayRight 5.6s ease-in-out infinite alternate;
+  }
+  .leg .upper, .leg .lower, .leg .shine {
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .leg .upper { stroke: #dfc9a8; stroke-width: 24; }
+  .leg .lower { stroke: #d2b694; stroke-width: 12; }
+  .leg .shine { stroke: #fff2d9; stroke-width: 5; opacity: .32; }
+  .leg .knee { fill: #d8bf9e; }
+  .leg.far { opacity: .84; }
+  .leg.far .upper { stroke: #bda787; stroke-width: 20; }
+  .leg.far .lower { stroke: #b49c7e; stroke-width: 10; }
+  .leg.far .knee { fill: #b8a080; }
+  .leg .hoof-shape { fill: #786653; }
+  .leg.far .hoof-shape { fill: #887560; }
+  .leg .toe-line {
+    fill: none;
+    stroke: #51483e;
+    stroke-width: 1.2;
+    stroke-linecap: round;
+    opacity: .42;
+  }
+  @keyframes cloudA {
+    from { transform: translateX(-16px); }
+    to   { transform: translateX(30px); }
+  }
+  @keyframes cloudB {
+    from { transform: translateX(18px); }
+    to   { transform: translateX(-28px); }
+  }
+  @keyframes cloudC {
+    from { transform: translateX(-8px); }
+    to   { transform: translateX(20px); }
+  }
+  @keyframes swayLeft {
+    from { transform: rotate(-1.3deg); }
+    to   { transform: rotate(1.6deg); }
+  }
+  @keyframes swayRight {
+    from { transform: rotate(1.2deg); }
+    to   { transform: rotate(-1.5deg); }
+  }
+</style>
+</head>
+<body>
+<svg id="scene" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720"
+     preserveAspectRatio="xMidYMid slice" role="img" aria-labelledby="sceneTitle sceneDesc">
+  <title id="sceneTitle">An alpaca walking through a peaceful mountain meadow</title>
+  <desc id="sceneDesc">A fluffy cream-colored alpaca walks with a continuously animated four-legged gait through a soft sunrise landscape.</desc>
+
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#91bcc4"/>
+      <stop offset=".48" stop-color="#cbdcd3"/>
+      <stop offset=".78" stop-color="#eed9bd"/>
+      <stop offset="1" stop-color="#f5d3ac"/>
+    </linearGradient>
+
+    <radialGradient id="sunHalo">
+      <stop offset="0" stop-color="#fff8d7" stop-opacity=".85"/>
+      <stop offset=".35" stop-color="#fff1c8" stop-opacity=".4"/>
+      <stop offset="1" stop-color="#fff0c8" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="farMountain" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#91aeb0"/>
+      <stop offset="1" stop-color="#b3c2b5"/>
+    </linearGradient>
+
+    <linearGradient id="midMountain" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#72958f"/>
+      <stop offset="1" stop-color="#91a893"/>
+    </linearGradient>
+
+    <linearGradient id="meadow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#91aa82"/>
+      <stop offset=".55" stop-color="#7f9870"/>
+      <stop offset="1" stop-color="#667f60"/>
+    </linearGradient>
+
+    <linearGradient id="trail" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d7c99f"/>
+      <stop offset=".5" stop-color="#cabb93"/>
+      <stop offset="1" stop-color="#b9aa81"/>
+    </linearGradient>
+
+    <linearGradient id="fleece" x1=".18" y1=".05" x2=".78" y2=".95">
+      <stop offset="0" stop-color="#fff7e5"/>
+      <stop offset=".4" stop-color="#f1e3c9"/>
+      <stop offset=".78" stop-color="#e3cfad"/>
+      <stop offset="1" stop-color="#d4bc99"/>
+    </linearGradient>
+
+    <linearGradient id="neckFleece" x1="0" y1="0" x2="1" y2=".85">
+      <stop offset="0" stop-color="#fff4dc"/>
+      <stop offset=".46" stop-color="#eddcc0"/>
+      <stop offset="1" stop-color="#cdb592"/>
+    </linearGradient>
+
+    <linearGradient id="faceFur" x1=".1" y1="0" x2=".9" y2="1">
+      <stop offset="0" stop-color="#fff4dd"/>
+      <stop offset=".62" stop-color="#ecd9b9"/>
+      <stop offset="1" stop-color="#d6ba96"/>
+    </linearGradient>
+
+    <radialGradient id="groundShadow">
+      <stop offset="0" stop-color="#2f463c" stop-opacity=".28"/>
+      <stop offset=".55" stop-color="#344a3e" stop-opacity=".14"/>
+      <stop offset="1" stop-color="#344a3e" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="foregroundFade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#526f58" stop-opacity="0"/>
+      <stop offset="1" stop-color="#3f604f" stop-opacity=".58"/>
+    </linearGradient>
+
+    <radialGradient id="vignette" cx=".49" cy=".43" r=".74">
+      <stop offset=".55" stop-color="#243e3a" stop-opacity="0"/>
+      <stop offset="1" stop-color="#243e3a" stop-opacity=".16"/>
+    </radialGradient>
+
+    <filter id="bodyLift" x="-20%" y="-20%" width="140%" height="150%" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="5" stdDeviation="4" flood-color="#405445" flood-opacity=".14"/>
+    </filter>
+
+    <path id="bodyOutline" d="
+      M478 365
+      C462 350 474 329 496 332
+      C494 311 519 301 535 314
+      C548 294 576 298 584 314
+      C603 296 629 300 638 316
+      C658 301 685 306 692 323
+      C716 311 741 326 740 345
+      C763 341 779 360 771 379
+      C789 392 781 416 762 421
+      C765 443 742 457 723 447
+      C710 466 682 466 669 450
+      C650 468 623 464 613 449
+      C591 466 565 458 559 443
+      C537 456 513 445 513 427
+      C489 435 469 417 477 398
+      C456 388 458 368 478 365 Z"/>
+
+    <clipPath id="bodyClip">
+      <use href="#bodyOutline"/>
+    </clipPath>
+
+    <g id="tuft" fill="none" stroke="#567756" stroke-width="2" stroke-linecap="round">
+      <path d="M0 0 Q-2-10-8-15 M0 0 Q1-14 5-20 M0 0 Q5-8 12-11"/>
+    </g>
+
+    <g id="fineTuft" fill="none" stroke="#658164" stroke-width="1.4" stroke-linecap="round">
+      <path d="M0 0 Q-1-7-5-11 M0 0 Q2-9 6-13 M0 0 Q5-5 10-6"/>
+    </g>
+
+    <g id="flower">
+      <path d="M0 0 Q-2-11 0-21" fill="none" stroke="#587458" stroke-width="1.5"/>
+      <path d="M-1-8 Q-7-12-8-7 Q-4-5-1-8" fill="#718a64"/>
+      <g fill="#eed8b0">
+        <circle cx="0" cy="-23" r="3.2"/>
+        <circle cx="-3.2" cy="-20.5" r="3.2"/>
+        <circle cx="3.2" cy="-20.5" r="3.2"/>
+        <circle cx="0" cy="-18.5" r="3.2"/>
+      </g>
+      <circle cx="0" cy="-20.8" r="2.1" fill="#b7805e"/>
+    </g>
+
+    <g id="terracottaFlower">
+      <path d="M0 0 Q2-10 0-18" fill="none" stroke="#587458" stroke-width="1.4"/>
+      <g fill="#c98669">
+        <ellipse cx="-2.7" cy="-19" rx="3.2" ry="2.5"/>
+        <ellipse cx="2.7" cy="-19" rx="3.2" ry="2.5"/>
+        <ellipse cx="0" cy="-22" rx="2.7" ry="3.1"/>
+      </g>
+      <circle cx="0" cy="-19.5" r="1.7" fill="#f0d39d"/>
+    </g>
+
+    <g id="groundTile">
+      <use href="#fineTuft" transform="translate(34 586) scale(.65)" opacity=".52"/>
+      <use href="#tuft" transform="translate(105 624) scale(.65)" opacity=".48"/>
+      <use href="#fineTuft" transform="translate(192 574) scale(.55)" opacity=".44"/>
+      <use href="#tuft" transform="translate(287 613) scale(.8)" opacity=".46"/>
+      <use href="#fineTuft" transform="translate(383 592) scale(.72)" opacity=".55"/>
+      <use href="#tuft" transform="translate(496 637) scale(.72)" opacity=".48"/>
+      <use href="#fineTuft" transform="translate(593 579) scale(.6)" opacity=".45"/>
+
+      <use href="#flower" transform="translate(153 618) scale(.62)" opacity=".82"/>
+      <use href="#terracottaFlower" transform="translate(346 585) scale(.55)" opacity=".76"/>
+      <use href="#flower" transform="translate(554 607) scale(.5)" opacity=".66"/>
+
+      <g fill="#8c8468" opacity=".35">
+        <ellipse cx="65" cy="600" rx="4" ry="1.7"/>
+        <ellipse cx="238" cy="632" rx="5.5" ry="2"/>
+        <ellipse cx="429" cy="572" rx="3.8" ry="1.5"/>
+        <ellipse cx="614" cy="626" rx="4.4" ry="1.6"/>
+      </g>
+
+      <g fill="none" stroke="#a59775" stroke-width="1.4" stroke-linecap="round" opacity=".38">
+        <path d="M17 614 l12-1 M127 578 l9 1 M213 603 l14-1 M397 623 l12 1 M465 583 l10-1 M575 592 l13 1"/>
+      </g>
+
+      <g fill="#9c9070" opacity=".18">
+        <ellipse cx="260" cy="578" rx="5" ry="2.2" transform="rotate(-12 260 578)"/>
+        <ellipse cx="272" cy="580" rx="5" ry="2.2" transform="rotate(10 272 580)"/>
+        <ellipse cx="526" cy="596" rx="5" ry="2.2" transform="rotate(-12 526 596)"/>
+        <ellipse cx="538" cy="598" rx="5" ry="2.2" transform="rotate(10 538 598)"/>
+      </g>
+    </g>
+  </defs>
+
+  <!-- Sky and morning light -->
+  <rect width="1280" height="720" fill="url(#sky)"/>
+  <circle cx="238" cy="166" r="150" fill="url(#sunHalo)"/>
+  <circle cx="238" cy="166" r="48" fill="#fff2c5" opacity=".91"/>
+  <circle cx="226" cy="153" r="33" fill="#fff9dd" opacity=".32"/>
+
+  <g class="cloud-a" fill="#fff9e9" opacity=".53">
+    <ellipse cx="420" cy="125" rx="61" ry="16"/>
+    <ellipse cx="385" cy="129" rx="42" ry="12"/>
+    <ellipse cx="443" cy="114" rx="34" ry="22"/>
+    <ellipse cx="407" cy="111" rx="28" ry="25"/>
+    <ellipse cx="468" cy="128" rx="40" ry="11"/>
+  </g>
+
+  <g class="cloud-b" fill="#fff9eb" opacity=".42">
+    <ellipse cx="1001" cy="108" rx="64" ry="14"/>
+    <ellipse cx="958" cy="111" rx="40" ry="11"/>
+    <ellipse cx="1027" cy="98" rx="38" ry="20"/>
+    <ellipse cx="991" cy="94" rx="29" ry="23"/>
+    <ellipse cx="1059" cy="112" rx="31" ry="9"/>
+  </g>
+
+  <g class="cloud-c" fill="#fff8e8" opacity=".27">
+    <ellipse cx="724" cy="183" rx="45" ry="9"/>
+    <ellipse cx="690" cy="185" rx="29" ry="8"/>
+    <ellipse cx="741" cy="176" rx="26" ry="14"/>
+    <ellipse cx="713" cy="174" rx="20" ry="16"/>
+  </g>
+
+  <g fill="none" stroke="#587978" stroke-width="2.1" stroke-linecap="round" opacity=".5">
+    <path d="M1002 194 q8-8 16 0 q8-8 16 0"/>
+    <path d="M1050 169 q6-6 12 0 q6-6 12 0"/>
+    <path d="M1090 207 q5-5 10 0 q5-5 10 0"/>
+  </g>
+
+  <!-- Layered Andean mountains -->
+  <path d="M0 392 L93 319 L169 348 L294 220 L365 300 L420 255 L529 360
+           L625 282 L741 350 L879 231 L1023 355 L1134 287 L1280 368
+           L1280 527 L0 527 Z" fill="url(#farMountain)" opacity=".72"/>
+
+  <g fill="#edf0df" opacity=".65">
+    <path d="M245 276 L294 220 L340 273 L318 260 L303 267 L289 250 L274 268 Z"/>
+    <path d="M833 286 L879 231 L929 282 L904 270 L887 276 L874 257 L858 275 Z"/>
+    <path d="M1098 320 L1134 287 L1171 316 L1151 309 L1138 314 L1128 301 L1116 312 Z" opacity=".65"/>
+  </g>
+
+  <path d="M0 452 C83 410 146 408 224 432
+           C310 458 363 400 442 382
+           C524 363 574 428 649 432
+           C737 437 793 370 873 370
+           C964 370 1021 429 1094 414
+           C1170 398 1217 368 1280 381
+           L1280 547 L0 547 Z" fill="url(#midMountain)" opacity=".82"/>
+
+  <path d="M0 479 C142 420 285 449 423 482
+           C567 516 715 447 837 435
+           C983 420 1100 474 1280 414
+           L1280 573 L0 573 Z" fill="#91a98b"/>
+
+  <path d="M0 538 C155 482 322 507 486 529
+           C656 552 793 478 958 483
+           C1097 487 1182 474 1280 459
+           L1280 720 L0 720 Z" fill="url(#meadow)"/>
+
+  <g fill="none" stroke="#d2d8b6" stroke-width="2" opacity=".24">
+    <path d="M55 514 Q69 491 86 505 M102 511 Q117 487 133 501"/>
+    <path d="M1045 493 Q1059 474 1074 488 M1083 487 Q1094 470 1108 482"/>
+    <path d="M905 509 Q919 490 933 503"/>
+  </g>
+
+  <!-- Walking trail -->
+  <path d="M0 561 C184 550 359 570 527 565
+           C741 558 893 548 1066 561
+           C1146 567 1215 562 1280 552
+           L1280 648 C1093 633 920 646 744 638
+           C526 629 308 650 0 637 Z" fill="url(#trail)"/>
+
+  <path d="M0 562 C259 552 427 574 655 562 C882 550 1080 570 1280 553"
+        fill="none" stroke="#eee0ba" stroke-width="2" opacity=".38"/>
+
+  <g id="groundScroll">
+    <use href="#groundTile" x="0"/>
+    <use href="#groundTile" x="640"/>
+    <use href="#groundTile" x="1280"/>
+  </g>
+
+  <!-- Soft grounding shadows -->
+  <ellipse id="bodyShadow" cx="645" cy="584" rx="185" ry="24" fill="url(#groundShadow)"/>
+
+  <g fill="#405143">
+    <ellipse id="shadow-hindFar" cx="550" cy="576" rx="11" ry="3" opacity=".1"/>
+    <ellipse id="shadow-frontFar" cx="714" cy="576" rx="11" ry="3" opacity=".1"/>
+    <ellipse id="shadow-hindNear" cx="510" cy="582" rx="12" ry="3.2" opacity=".12"/>
+    <ellipse id="shadow-frontNear" cx="674" cy="582" rx="12" ry="3.2" opacity=".12"/>
+  </g>
+
+  <!-- Alpaca -->
+  <g id="alpaca" shape-rendering="geometricPrecision">
+    <g id="tailAssembly">
+      <path d="M488 371
+               C470 369 454 358 452 343
+               C449 330 458 321 468 328
+               C462 312 474 301 486 309
+               C499 317 500 334 493 347
+               C502 353 499 366 488 371 Z"
+            fill="url(#neckFleece)" stroke="#cfb795" stroke-width="1.2"/>
+      <path d="M469 344 Q458 337 465 331 M480 326 Q474 316 483 315"
+            fill="none" stroke="#fff0d3" stroke-width="3" stroke-linecap="round" opacity=".45"/>
+    </g>
+
+    <!-- Far legs -->
+    <g id="hindFar" class="leg far"
+       data-x="550" data-y="434" data-phase=".5" data-bend="-1"
+       data-l1="79" data-l2="81" data-ground="575" data-lift="21">
+      <path class="upper"/>
+      <path class="lower"/>
+      <circle class="knee" r="7"/>
+      <g class="hoof">
+        <path class="hoof-shape" d="M-8-5 L5-5 Q11-4 12 1 Q12 6 5 6 L-7 6 Q-11 3-8-5 Z"/>
+        <path class="toe-line" d="M5-3 L5 4"/>
+      </g>
+    </g>
+
+    <g id="frontFar" class="leg far"
+       data-x="714" data-y="428" data-phase=".75" data-bend="1"
+       data-l1="80" data-l2="82" data-ground="575" data-lift="21">
+      <path class="upper"/>
+      <path class="lower"/>
+      <circle class="knee" r="7"/>
+      <g class="hoof">
+        <path class="hoof-shape" d="M-8-5 L5-5 Q11-4 12 1 Q12 6 5 6 L-7 6 Q-11 3-8-5 Z"/>
+        <path class="toe-line" d="M5-3 L5 4"/>
+      </g>
+    </g>
+
+    <!-- Near legs -->
+    <g id="hindNear" class="leg near"
+       data-x="510" data-y="440" data-phase="0" data-bend="-1"
+       data-l1="79" data-l2="81" data-ground="581" data-lift="24">
+      <path class="upper"/>
+      <path class="shine"/>
+      <path class="lower"/>
+      <circle class="knee" r="8"/>
+      <g class="hoof">
+        <path class="hoof-shape" d="M-8-5 L5-5 Q11-4 12 1 Q12 6 5 6 L-7 6 Q-11 3-8-5 Z"/>
+        <path class="toe-line" d="M5-3 L5 4"/>
+      </g>
+    </g>
+
+    <g id="frontNear" class="leg near"
+       data-x="674" data-y="435" data-phase=".25" data-bend="1"
+       data-l1="80" data-l2="82" data-ground="581" data-lift="24">
+      <path class="upper"/>
+      <path class="shine"/>
+      <path class="lower"/>
+      <circle class="knee" r="8"/>
+      <g class="hoof">
+        <path class="hoof-shape" d="M-8-5 L5-5 Q11-4 12 1 Q12 6 5 6 L-7 6 Q-11 3-8-5 Z"/>
+        <path class="toe-line" d="M5-3 L5 4"/>
+      </g>
+    </g>
+
+    <g id="bodyMotion" filter="url(#bodyLift)">
+      <!-- Long, woolly neck -->
+      <path d="M686 377
+               C679 359 690 345 699 340
+               C691 324 701 307 711 303
+               C705 285 715 269 725 265
+               C720 245 729 228 740 224
+               C736 208 750 197 765 202
+               C781 197 795 211 792 226
+               C803 239 792 255 783 260
+               C790 276 780 291 773 296
+               C782 313 772 329 768 335
+               C779 351 771 367 764 373
+               C772 392 753 408 737 402
+               C721 416 699 403 701 389
+               C693 389 688 384 686 377 Z"
+            fill="url(#neckFleece)" stroke="#d4bd9c" stroke-width="1.2"/>
+
+      <path d="M742 227 C727 266 715 313 713 357"
+            fill="none" stroke="#fff8e5" stroke-width="13" stroke-linecap="round" opacity=".24"/>
+
+      <g fill="none" stroke="#bca483" stroke-width="2" stroke-linecap="round" opacity=".27">
+        <path d="M733 253 q-10-8-14 2 q-2 8 8 8"/>
+        <path d="M751 282 q11-8 14 2 q1 8-9 8"/>
+        <path d="M718 319 q-10-7-13 3 q0 8 9 7"/>
+        <path d="M745 347 q11-8 14 2 q0 8-9 8"/>
+        <path d="M714 375 q-9-6-12 3 q1 7 9 6"/>
+      </g>
+
+      <!-- Fluffy body -->
+      <use href="#bodyOutline" fill="url(#fleece)" stroke="#d3bea0" stroke-width="1.4"/>
+
+      <g clip-path="url(#bodyClip)">
+        <ellipse cx="581" cy="336" rx="125" ry="51" fill="#fffbed" opacity=".3"/>
+        <ellipse cx="763" cy="392" rx="70" ry="103" fill="#b99f7d" opacity=".12"/>
+        <path d="M449 421 C530 397 583 452 650 432 C704 416 750 426 789 458
+                 L789 488 L452 483 Z" fill="#bda483" opacity=".13"/>
+
+        <g fill="none" stroke="#b6a080" stroke-width="2.2" stroke-linecap="round" opacity=".25">
+          <path d="M506 355 q-12-9-18 2 q-3 10 10 10 q9 0 7-7"/>
+          <path d="M550 335 q-9-11-19-2 q-5 9 7 13 q10 2 10-6"/>
+          <path d="M596 350 q-12-9-18 2 q-2 10 10 10 q9 0 8-7"/>
+          <path d="M646 336 q-8-11-18-3 q-6 8 5 13 q10 3 11-5"/>
+          <path d="M692 357 q-11-10-19 0 q-4 10 8 12 q10 1 10-7"/>
+          <path d="M731 378 q-9-10-18-2 q-5 9 6 13 q10 2 11-6"/>
+
+          <path d="M530 390 q-12-8-17 3 q-1 10 11 9 q9-1 6-8"/>
+          <path d="M578 382 q-9-11-19-2 q-5 9 7 13 q10 2 10-6"/>
+          <path d="M622 402 q-12-9-18 2 q-2 10 10 10 q9 0 8-7"/>
+          <path d="M673 387 q-9-11-19-2 q-5 9 7 13 q10 2 10-6"/>
+          <path d="M711 418 q-11-9-18 1 q-3 10 9 11 q9 1 9-6"/>
+          <path d="M568 429 q-11-8-17 2 q-2 9 9 10 q9 0 8-7"/>
+          <path d="M495 414 q-8-7-13 1 q-2 8 7 9"/>
+          <path d="M651 444 q-8-7-14 1 q-2 8 8 9"/>
+        </g>
+
+        <g fill="#fff9e9" opacity=".32">
+          <circle cx="518" cy="326" r="3.4"/>
+          <circle cx="570" cy="317" r="3"/>
+          <circle cx="620" cy="325" r="3.8"/>
+          <circle cx="668" cy="329" r="3"/>
+          <circle cx="492" cy="379" r="2.8"/>
+          <circle cx="610" cy="374" r="2.5"/>
+        </g>
+      </g>
+
+      <!-- Small woven collar -->
+      <path d="M713 281 Q744 294 778 281 L776 292 Q744 305 710 292 Z"
+            fill="#ad6f56"/>
+      <path d="M714 286 Q744 298 776 286" fill="none"
+            stroke="#efcf91" stroke-width="2.4" opacity=".9"/>
+      <path d="M726 287 l4 7 M741 291 l3 7 M758 290 l-2 7"
+            fill="none" stroke="#794f45" stroke-width="1.5" opacity=".65"/>
+      <g id="collarCharm">
+        <path d="M746 297 Q746 305 750 309" fill="none" stroke="#8e674a" stroke-width="1.8"/>
+        <circle cx="751" cy="311" r="5.2" fill="#d5ac66" stroke="#a77b45" stroke-width="1"/>
+        <path d="M748 312 q3 3 6 0" fill="none" stroke="#8a643e" stroke-width="1.2"/>
+      </g>
+
+      <!-- Head and ears -->
+      <g id="headMotion">
+        <path d="M752 194
+                 C744 176 738 151 742 136
+                 C744 127 751 126 756 135
+                 C765 153 769 177 764 195 Z"
+              fill="#d7bf9e" stroke="#bda585" stroke-width="1.2"/>
+        <path d="M753 182 C748 164 746 147 749 140 C755 151 759 168 758 183 Z"
+              fill="#b98f7d" opacity=".62"/>
+
+        <g id="nearEar">
+          <path d="M778 192
+                   C776 171 782 143 793 128
+                   C798 121 805 125 804 135
+                   C803 158 797 180 790 197 Z"
+                fill="url(#faceFur)" stroke="#c8ae8c" stroke-width="1.2"/>
+          <path d="M785 182 C784 164 791 142 798 133 C799 148 794 169 789 184 Z"
+                fill="#d39e8c" opacity=".67"/>
+          <path d="M797 132 Q799 143 796 151" fill="none"
+                stroke="#ffe9cf" stroke-width="2" stroke-linecap="round" opacity=".52"/>
+        </g>
+
+        <path d="M748 197
+                 C759 184 780 183 793 193
+                 C801 199 804 207 811 211
+                 C824 211 841 215 847 224
+                 C853 234 845 244 833 246
+                 C822 248 811 244 804 244
+                 C792 255 769 254 755 244
+                 C741 234 737 210 748 197 Z"
+              fill="url(#faceFur)" stroke="#cbb18f" stroke-width="1.25"/>
+
+        <ellipse cx="824" cy="230" rx="25" ry="16" fill="#e4c5a2" opacity=".72"/>
+        <ellipse cx="806" cy="233" rx="10" ry="5.5" fill="#d99c91" opacity=".16"/>
+
+        <g fill="#f8ecd4">
+          <circle cx="752" cy="204" r="14"/>
+          <circle cx="763" cy="192" r="15"/>
+          <circle cx="778" cy="194" r="14"/>
+          <circle cx="746" cy="216" r="12"/>
+        </g>
+        <g fill="none" stroke="#c5ad8b" stroke-width="1.7" stroke-linecap="round" opacity=".42">
+          <path d="M753 194 q-5-7-10-1 q-3 6 4 8"/>
+          <path d="M770 188 q7-5 11 1 q2 6-5 7"/>
+          <path d="M742 214 q7-5 11 1"/>
+        </g>
+
+        <ellipse id="eye" cx="793" cy="215" rx="5.3" ry="6.2" fill="#34332f"/>
+        <circle id="eyeGlint" cx="794.7" cy="212.8" r="1.65" fill="#fffdf1"/>
+        <path d="M786 204 Q793 201 799 205" fill="none"
+              stroke="#9d8064" stroke-width="1.5" stroke-linecap="round" opacity=".58"/>
+
+        <ellipse cx="841" cy="226" rx="2.7" ry="2" fill="#6f5a4c"/>
+        <path d="M831 237 Q836 242 841 237" fill="none"
+              stroke="#806251" stroke-width="1.6" stroke-linecap="round"/>
+        <path d="M814 242 Q811 246 807 246" fill="none"
+              stroke="#b69273" stroke-width="1.2" stroke-linecap="round" opacity=".7"/>
+      </g>
+    </g>
+  </g>
+
+  <!-- Foreground depth -->
+  <path d="M0 646 C177 663 329 648 493 664
+           C679 682 866 650 1028 662
+           C1122 669 1205 660 1280 650 L1280 720 L0 720 Z"
+        fill="url(#foregroundFade)"/>
+
+  <g class="sway-left" fill="none" stroke="#416551" stroke-linecap="round" opacity=".66">
+    <path d="M46 720 Q42 681 24 652 M52 720 Q60 674 79 643 M65 720 Q69 688 96 668
+             M31 720 Q30 691 13 674 M82 720 Q94 686 116 674" stroke-width="4"/>
+    <path d="M40 689 Q23 677 20 663 M62 679 Q76 666 79 650 M83 696 Q99 682 110 681"
+          stroke-width="2.5"/>
+  </g>
+
+  <g class="sway-right" fill="none" stroke="#416551" stroke-linecap="round" opacity=".63">
+    <path d="M1194 720 Q1190 674 1167 649 M1205 720 Q1210 675 1230 646
+             M1178 720 Q1169 690 1147 674 M1225 720 Q1234 688 1260 668
+             M1241 720 Q1242 695 1256 683" stroke-width="4"/>
+    <path d="M1184 684 Q1168 670 1164 654 M1212 681 Q1224 665 1231 651
+             M1228 696 Q1246 681 1256 680" stroke-width="2.5"/>
+  </g>
+
+  <g opacity=".7">
+    <use href="#flower" transform="translate(112 710) scale(1.05)"/>
+    <use href="#terracottaFlower" transform="translate(1160 708) scale(1.15)"/>
+    <use href="#flower" transform="translate(1230 694) scale(.72)"/>
+  </g>
+
+  <rect width="1280" height="720" fill="url(#vignette)" pointer-events="none"/>
+</svg>
+
+<script>
+(() => {
+  "use strict";
+
+  const TAU = Math.PI * 2;
+  const period = 1.75;
+  const duty = 0.62;
+  const stride = 72;
+  const groundSpeed = stride / (period * duty);
+
+  const body = document.getElementById("bodyMotion");
+  const tail = document.getElementById("tailAssembly");
+  const head = document.getElementById("headMotion");
+  const ear = document.getElementById("nearEar");
+  const charm = document.getElementById("collarCharm");
+  const shadow = document.getElementById("bodyShadow");
+  const ground = document.getElementById("groundScroll");
+  const eye = document.getElementById("eye");
+  const eyeGlint = document.getElementById("eyeGlint");
+
+  function readLeg(id) {
+    const el = document.getElementById(id);
+    const d = el.dataset;
+    return {
+      el,
+      x: Number(d.x),
+      y: Number(d.y),
+      phase: Number(d.phase),
+      bend: Number(d.bend),
+      l1: Number(d.l1),
+      l2: Number(d.l2),
+      ground: Number(d.ground),
+      lift: Number(d.lift),
+      upper: el.querySelector(".upper"),
+      lower: el.querySelector(".lower"),
+      shine: el.querySelector(".shine"),
+      knee: el.querySelector(".knee"),
+      hoof: el.querySelector(".hoof"),
+      contact: document.getElementById("shadow-" + id)
+    };
+  }
+
+  const legs = [
+    readLeg("hindFar"),
+    readLeg("frontFar"),
+    readLeg("hindNear"),
+    readLeg("frontNear")
+  ];
+
+  const fixed = n => n.toFixed(2);
+
+  function poseLeg(leg, time, sway, bob) {
+    const p = ((time / period + leg.phase) % 1 + 1) % 1;
+    let offset;
+    let lift = 0;
+    let hoofAngle = 0;
+
+    if (p < duty) {
+      const q = p / duty;
+      offset = stride * 0.5 - stride * q;
+    } else {
+      const q = (p - duty) / (1 - duty);
+      offset = -stride * 0.5 + stride * q;
+      lift = Math.sin(Math.PI * q) * leg.lift;
+      hoofAngle = -12 * Math.sin(Math.PI * q);
+    }
+
+    const hipX = leg.x + sway;
+    const hipY = leg.y + bob;
+    const footX = leg.x + offset;
+    const footY = leg.ground - lift - 6;
+    const ankleX = footX - 2;
+    const ankleY = footY - 3;
+
+    const dx = ankleX - hipX;
+    const dy = ankleY - hipY;
+    const rawDistance = Math.max(0.001, Math.hypot(dx, dy));
+    const distance = Math.min(rawDistance, leg.l1 + leg.l2 - 0.01);
+    const ux = dx / rawDistance;
+    const uy = dy / rawDistance;
+
+    const a = (leg.l1 * leg.l1 - leg.l2 * leg.l2 + distance * distance) /
+              (2 * distance);
+    const h = Math.sqrt(Math.max(0, leg.l1 * leg.l1 - a * a));
+
+    const baseX = hipX + a * ux;
+    const baseY = hipY + a * uy;
+    const kneeX = baseX + leg.bend * h * (-uy);
+    const kneeY = baseY + leg.bend * h * ux;
+
+    const upperPath = `M${fixed(hipX)} ${fixed(hipY)} L${fixed(kneeX)} ${fixed(kneeY)}`;
+    const lowerPath = `M${fixed(kneeX)} ${fixed(kneeY)} L${fixed(ankleX)} ${fixed(ankleY)}`;
+
+    leg.upper.setAttribute("d", upperPath);
+    leg.lower.setAttribute("d", lowerPath);
+    if (leg.shine) leg.shine.setAttribute("d", upperPath);
+
+    leg.knee.setAttribute("cx", fixed(kneeX));
+    leg.knee.setAttribute("cy", fixed(kneeY));
+    leg.hoof.setAttribute(
+      "transform",
+      `translate(${fixed(footX)} ${fixed(footY)}) rotate(${fixed(hoofAngle)})`
+    );
+
+    leg.contact.setAttribute("cx", fixed(footX));
+    leg.contact.setAttribute("rx", fixed(11 + lift * 0.12));
+    leg.contact.setAttribute("opacity", fixed(Math.max(0.012, 0.13 - lift * 0.0052)));
+  }
+
+  function update(time) {
+    const w = TAU * time / period;
+    const sway = 1.15 * Math.sin(w);
+    const bob = 2.15 * Math.sin(2 * w) - 0.55;
+
+    body.setAttribute("transform", `translate(${fixed(sway)} ${fixed(bob)})`);
+
+    const tailAngle = 6.5 * Math.sin(w - 0.55) + 1.4 * Math.sin(2 * w);
+    tail.setAttribute(
+      "transform",
+      `translate(${fixed(sway)} ${fixed(bob)}) rotate(${fixed(tailAngle)} 486 359)`
+    );
+
+    const headAngle = 1.15 * Math.sin(w + 0.5) + 0.3 * Math.sin(2 * w);
+    head.setAttribute("transform", `rotate(${fixed(headAngle)} 765 246)`);
+    ear.setAttribute("transform", `rotate(${fixed(1.7 * Math.sin(w - 0.8))} 789 192)`);
+    charm.setAttribute("transform", `rotate(${fixed(7 * Math.sin(w + 0.4))} 746 298)`);
+
+    legs.forEach(leg => poseLeg(leg, time, sway, bob));
+
+    shadow.setAttribute("cx", fixed(645 + sway * 0.45));
+    shadow.setAttribute("rx", fixed(185 + bob * 1.7));
+
+    const offset = (time * groundSpeed) % 640;
+    ground.setAttribute("transform", `translate(${fixed(-offset)} 0)`);
+
+    const blinkTime = time % 6.1;
+    let blink = 0;
+    if (blinkTime > 5.75 && blinkTime < 6.0) {
+      blink = Math.sin((blinkTime - 5.75) / 0.25 * Math.PI);
+    }
+    eye.setAttribute("ry", fixed(6.2 * (1 - 0.91 * blink)));
+    eyeGlint.setAttribute("opacity", fixed(1 - blink));
+  }
+
+  update(0);
+  const start = performance.now();
+
+  function frame(now) {
+    update((now - start) / 1000);
+    requestAnimationFrame(frame);
+  }
+
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

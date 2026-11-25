@@ -1,0 +1,22 @@
+{
+ "claude-opus-5-5": {
+  "scores": {
+   "typography": 9.0,
+   "layout": 8.0,
+   "colour": 9.0,
+   "completeness": 10,
+   "originality": 8.0
+  },
+  "note": "A polished, cohesive page: tight grotesk headlines with italic serif accents, monospace timetable details, a dusk palette of peach and lime on near-black broken by a cream timetable band, and all seven sections well formed, though the features strip feels slightly cramped and the testimonial area le"
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "typography": 9.0,
+   "layout": 9.0,
+   "colour": 9.0,
+   "completeness": 10,
+   "originality": 9.0
+  },
+  "note": "A polished, distinctive rail-themed page with clear hierarchy, cohesive colour, and all seven requested sections fully formed."
+ }
+}

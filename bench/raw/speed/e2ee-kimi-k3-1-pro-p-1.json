@@ -1,0 +1,21 @@
+{
+ "text": "A suspension bridge carries load through two main kinds of force: tension, which pulls a member straight, and compression, which pushes it together. The deck, hangers, cables, towers, anchorages, and foundations form a continuous path that eventually delivers the bridge\u2019s weight and the weight of traffic to the soil or rock below.\n\nWhen a vehicle stands on the roadway, its wheels press on the deck. The deck slab spans between supporting beams, which pass the force to floor beams and the stiffening girders or trusses running along the sides of the bridge. These members spread a concentrated wheel load over a longer length of deck, so no single hanger has to carry it alone. The deck\u2019s own weight follows the same route. At regular intervals, vertical or slightly inclined hangers connect this deck structure to the main cables. The hangers stretch by a very small amount and carry their share of the load in tension.\n\nThe main cables therefore receive many downward pulls along their length. Because a flexible cable cannot resist bending like a beam, it takes a curved shape in which its internal pull follows the cable. Each small section passes tension to the next, and the forces accumulate toward the supports. The cable\u2019s tension has both horizontal and vertical components; the large horizontal pull is why the ends must be firmly anchored. The familiar curve is not decorative: it is the geometry that lets the cable support vertical loads mainly by pulling along its own axis. Under a roughly uniform load, the main-span curve is close to a parabola.\n\nNear each tower, the main cable passes over a saddle and changes direction. In doing so, it presses down on the tower. The side-span cable pulls the other way, and under balanced conditions much of the horizontal force cancels across the tower. The tower consequently carries the cable forces chiefly as compression, much as a column carries a building. It sends that compression, together with bending caused by wind or unbalanced traffic, into its foundation.\n\nBeyond the towers, the cables continue to massive anchorages, or sometimes to secure rock fixings. There the cable tension is delivered to concrete, rock, or soil. An anchorage must resist being dragged toward the main span and, commonly, being lifted; its weight, shape, bond with rock, and friction or bearing against the ground provide the resistance. Cable tension is not simply \u201cabsorbed\u201d by the towers.\n\nFinally, tower foundations and anchorage foundations spread their forces over enough area, or through piles or caissons to deeper strata, that the ground can support them without excessive settlement or sliding. The ground pushes back, completing the equilibrium. The stiffening deck also helps the bridge resist wind and limits local movement, while the cables and hangers may elongate and the deck may deflect slightly as loads change. These small movements are expected; the essential path remains deck to hangers, hangers to main cables, cables to towers and anchorages, and then through foundations into the ground.",
+ "reasoning_chars": 12251,
+ "usage": {
+  "prompt_tokens": 121,
+  "completion_tokens": 3329,
+  "total_tokens": 3450,
+  "prompt_tokens_details": {
+   "cached_tokens": 64
+  },
+  "cache_read_input_tokens": 64,
+  "completion_tokens_details": {
+   "reasoning_tokens": 2723
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 8.898387168010231,
+ "t_first_content": 53.106233179045375,
+ "t_total": 57.67994569899747,
+ "cost": 0.041915
+}

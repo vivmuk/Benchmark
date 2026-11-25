@@ -1,0 +1,22 @@
+{
+ "claude-opus-5-5": {
+  "scores": {
+   "subjects": 9.0,
+   "layout": 6.0,
+   "colour": 7.0,
+   "style": 6.0,
+   "overall": 6.0
+  },
+  "note": "Every element is present. However, the recreation makes the city much larger and more central, adds extra searchlight beams, moves the monorail and pool to the foreground centre, makes the moon smaller, and uses a more saturated illustrative look instead of the original's softer photoreal haze, so i"
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "subjects": 9.0,
+   "layout": 6.0,
+   "colour": 6.0,
+   "style": 7.0,
+   "overall": 5.0
+  },
+  "note": "Nearly all key elements are present, but the enlarged towers and figures, repositioned track, and brighter saturation make the recreation visibly different."
+ }
+}

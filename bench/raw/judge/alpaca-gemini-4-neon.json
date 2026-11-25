@@ -1,0 +1,20 @@
+{
+ "claude-opus-5-5": {
+  "scores": {
+   "alpaca": 6.0,
+   "motion": 6.0,
+   "beauty": 6.0,
+   "scene": 7.0
+  },
+  "note": "A clearly readable fleecy alpaca with a long neck, upright ears and a charming collar walks through a soft, tasteful Andean scene with drifting clouds and grass parallax, but its blocky, plate-like upper legs and awkward joint bends weaken both the anatomy and the believability of the gait."
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "alpaca": 8.0,
+   "motion": 4.0,
+   "beauty": 7.0,
+   "scene": 7.0
+  },
+  "note": "The alpaca is charming and recognizable, but its legs change only slightly between frames, making the walk feel more like a shuffle."
+ }
+}

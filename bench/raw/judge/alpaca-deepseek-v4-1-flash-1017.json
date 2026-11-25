@@ -1,0 +1,20 @@
+{
+ "claude-opus-5-5": {
+  "scores": {
+   "alpaca": 5.0,
+   "motion": 5.0,
+   "beauty": 5.0,
+   "scene": 7.0
+  },
+  "note": "The bubble-cluster fleece, long neck, small head and upright ears read clearly as an alpaca, and the legs do swing alternately between frames as the grass scrolls, but the legs are flat, kneeless, tapered slabs only loosely attached to a lumpy body, so the walk is a stiff pendulum shuffle with littl"
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "alpaca": 7.0,
+   "motion": 5.0,
+   "beauty": 6.0,
+   "scene": 6.0
+  },
+  "note": "The fluffy long-necked alpaca is recognizable, but its stiff legs and nearly stationary body make the walk less convincing than the polished pastoral setting."
+ }
+}

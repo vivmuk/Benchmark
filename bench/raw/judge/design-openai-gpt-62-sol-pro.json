@@ -1,0 +1,22 @@
+{
+ "claude-opus-5-5": {
+  "scores": {
+   "typography": 8.0,
+   "layout": 8.0,
+   "colour": 8.0,
+   "completeness": 9.0,
+   "originality": 7.0
+  },
+  "note": "A polished synthwave-dusk design: the tight grotesk headlines pair well with the italic serif and mono labels, and the hero illustration is strong, but the features strip is undersized, the timetable has a lot of dead space in the fares column, and the overall structure follows a familiar premium-te"
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "typography": 9.0,
+   "layout": 9.0,
+   "colour": 9.0,
+   "completeness": 10,
+   "originality": 8.0
+  },
+  "note": "A polished, complete page with a distinctive illustrated hero, though some small text is subdued and the pricing cards follow a familiar pattern."
+ }
+}

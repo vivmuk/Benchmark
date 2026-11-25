@@ -1,0 +1,22 @@
+{
+ "claude-opus-5-5": {
+  "scores": {
+   "subjects": 8.0,
+   "layout": 6.0,
+   "colour": 7.0,
+   "style": 8.0,
+   "overall": 6.0
+  },
+  "note": "All key elements are present, but the cloak reads more purple than red, the searchlights are short fanned beams rather than long sky-spanning shafts, the cactus and pool have shifted to the lower centre with the monorail track curving differently, and the horizon lacks the original's strong orange g"
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "subjects": 9.0,
+   "layout": 6.0,
+   "colour": 7.0,
+   "style": 7.0,
+   "overall": 6.0
+  },
+  "note": "Nearly all key elements are present, but the cactus, traveller, pool and monorail track shift noticeably, and the recreation has flatter lighting."
+ }
+}

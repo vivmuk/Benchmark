@@ -1,0 +1,20 @@
+{
+ "text": "A suspension bridge works by turning the weight of the deck and everything on it into tension in cables and then delivering that force into the towers, anchorages, and foundations. The deck itself is usually stiffened by a girder or truss so that a heavy truck in one place does not simply pull down one hanger; the stiffening element spreads the load among several hangers and helps keep the roadway smooth. From the deck, the load passes into vertical hangers or suspenders. These hangers are in tension: the deck pulls down on them, and they pull down on the main cables above.\n\nThe main cables are the dominant load-carrying members. They hang in a curve, roughly a catenary or parabola, between the towers and often continue down to large anchorages at each end. Because the cables are curved, tension in them has both vertical and horizontal components. The downward pull from each hanger adds to the cable tension, and the cable\u2019s shape redirects the accumulated load toward the towers and anchorages. At the towers, the main cables pass over saddles. The cable\u2019s change in direction produces a large downward force on each tower, so the towers act mainly in compression. That compressive force travels down the tower legs into foundations, which spread it into the ground or rock beneath.\n\nNot all the load goes down through the towers. Much of the main cable\u2019s horizontal tension is carried past the towers to the anchorages, where the cable ends are securely held. The anchorages may be massive concrete blocks, rock anchors, or other arrangements that resist being pulled inward by the cables. In this way the main cables pull against the anchorages, and the anchorages pull back, keeping the cable system in equilibrium. The ground at the anchorages and beneath the tower foundations therefore receives both vertical loads from the towers and horizontal or inclined loads from the cable tensions.\n\nThe complete path is thus from deck to hangers, from hangers to main cables, and from main cables to towers and anchorages. The towers carry compression down to their foundations, while the anchorages resist the outward and horizontal pull of the cables and transfer it into the ground. The deck\u2019s stiffening girder helps distribute local loads and control deflection, but it is the main cables that collect the deck load and hand it to the towers and anchorages. The soil or rock around the foundations and anchorages ultimately balances the whole system, so the bridge\u2019s weight and traffic are carried safely into the ground.",
+ "reasoning_chars": 1664,
+ "usage": {
+  "prompt_tokens": 66,
+  "completion_tokens": 856,
+  "total_tokens": 922,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 347
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 0.9075952640268952,
+ "t_first_content": 4.528600604971871,
+ "t_total": 9.680765122990124,
+ "cost": 0.001047
+}

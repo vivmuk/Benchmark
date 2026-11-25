@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#17242c">
+<meta name="description" content="Dune Line — an overnight rail journey from the open desert of Sola Dunes to the neon streets of Luma City.">
+<title>Dune Line — Desert nights. Neon lights.</title>
+<style>
+  :root {
+    --night:#17242c; --deep:#111d24; --cream:#f5f1e7; --paper:#ebe6d9;
+    --ink:#202d32; --muted:#5c6565; --line:#ccc9bd; --orange:#ffae77;
+    --rust:#9c4929; --pale:#bdc4c1; --serif:Georgia,"Times New Roman",serif;
+    --sans:Arial,Helvetica,sans-serif; --mono:"Courier New",monospace;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html{scroll-behavior:smooth;scroll-padding-top:22px}
+  body{margin:0;background:var(--cream);color:var(--ink);font:16px/1.55 var(--sans);-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  button,select{font:inherit}
+  button,a,select{-webkit-tap-highlight-color:transparent}
+  button{cursor:pointer}
+  button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid #cb743f;outline-offset:4px}
+  button{color:inherit}
+  svg{display:block}
+  figure,h1,h2,h3,p,blockquote{margin:0}
+  .defs{position:absolute;width:0;height:0;overflow:hidden}
+  .wrap{width:min(1440px,100%);margin:auto;padding-inline:clamp(24px,5.4vw,84px)}
+  .mono,.kicker,.tag,th,.small-label{font:700 10px/1.4 var(--mono);letter-spacing:.14em;text-transform:uppercase}
+  .icon{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+  .dark{background:var(--night);color:var(--cream)}
+  .skip{position:fixed;left:12px;top:-100px;z-index:10;background:var(--cream);color:var(--ink);padding:10px 20px}
+  .skip:focus{top:10px}
+  .nav{height:78px;display:flex;align-items:center;justify-content:space-between;gap:28px;border-bottom:1px solid #ffffff24}
+  .brand{display:inline-flex;align-items:center;gap:10px;white-space:nowrap;font-weight:700;font-size:25px;letter-spacing:-1.45px;line-height:1}
+  .brand-mark{width:42px;height:31px;color:var(--orange)}
+  .nav-links{display:flex;gap:34px;margin-left:auto;margin-right:13px}
+  .nav-links a,.footer-links a{font-size:13px;color:#d6dad5;transition:color .2s}
+  .nav-links a:hover,.footer-links a:hover{color:var(--orange)}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:19px;padding:14px 21px;border-radius:3px;border:1px solid transparent;font-size:13px;font-weight:700;line-height:1.4;transition:background .18s,color .18s,border-color .18s}
+  .btn .icon{transition:transform .2s}
+  .btn:hover .icon{transform:translateX(3px)}
+  .btn-peach{background:var(--orange);color:var(--deep)}
+  .btn-peach:hover{background:#ffc294}
+  .btn-outline{background:transparent;border-color:#687379;color:var(--cream);padding:9px 16px}
+  .btn-outline:hover{background:#ffffff0d;border-color:var(--cream)}
+  .hero{display:grid;grid-template-columns:.92fr 1.15fr;gap:clamp(28px,4.5vw,70px);align-items:center;padding:55px 0 47px}
+  .kicker{display:flex;align-items:center;gap:12px;color:var(--rust);letter-spacing:.16em}
+  .kicker::before{content:"";display:block;width:27px;height:2px;background:currentColor}
+  .hero .kicker{color:var(--orange)}
+  h1,h2,h3,blockquote{font-family:var(--serif);font-weight:normal}
+  h1{font-size:clamp(66px,6.6vw,103px);letter-spacing:-.063em;line-height:.99;margin:24px 0 20px}
+  h1 em{font-weight:normal;color:var(--orange);letter-spacing:-.068em}
+  .intro{font-size:clamp(15px,1.22vw,18px);line-height:1.7;max-width:370px;color:#cad0cd}
+  .hero-cta{margin-top:27px}
+  .plate{position:relative;min-width:0;padding:7px;border:1px solid #74808488;background:#1e2b33;box-shadow:0 9px 30px #0b15171a}
+  .scene{width:100%;height:auto;background:#263446}
+  .plate figcaption{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:9px 3px 1px;color:#c7cbc4;font:10px/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase}
+  .plate figcaption span:first-child{color:#e9b08c}
+  .route-strip{border-top:1px solid #ffffff2b;display:flex;align-items:center;min-height:77px;gap:32px}
+  .route-label{display:flex;align-items:center;gap:9px;color:var(--orange);white-space:nowrap}
+  .route-label .icon{width:21px;height:21px}
+  .stops{display:flex;align-items:center;gap:13px;font-size:13px;font-weight:600}
+  .stop-line{display:block;height:1px;width:clamp(46px,7vw,108px);background:#89918e;position:relative}
+  .stop-line::after,.stop-line::before{content:"";position:absolute;width:6px;height:6px;border:1px solid var(--orange);background:var(--night);border-radius:50%;top:-2.5px}
+  .stop-line::after{right:0}
+  .route-stats{margin-left:auto;display:flex;align-items:center;gap:25px;color:#d3d8d4;font:11px var(--mono);letter-spacing:.06em}
+  .route-stats span{display:flex;align-items:center;gap:8px}
+  .route-stats span+span{border-left:1px solid #ffffff30;padding-left:25px}
+  .route-stats .icon{width:15px;height:15px;color:var(--orange)}
+  .section{padding-block:75px}
+  .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:30px;margin-bottom:35px}
+  h2{font-size:clamp(42px,4.35vw,67px);letter-spacing:-.055em;line-height:1.07}
+  .section-head h2,.fare-intro h2{margin-top:13px}
+  .section-note{color:var(--muted);font-size:14px;line-height:1.6;max-width:260px;padding-bottom:3px}
+  .features{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);padding-top:24px}
+  .feature{padding:0 31px;border-right:1px solid var(--line)}
+  .feature:first-child{padding-left:0}
+  .feature:last-child{border:0;padding-right:0}
+  .feature-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+  .feature-art{width:51px;height:42px;stroke:var(--rust);fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.45}
+  .feature-top .mono{color:#7c8079;font-weight:400}
+  h3{font-size:29px;line-height:1.2;letter-spacing:-.045em}
+  .feature p,.fare-card p{font-size:14px;line-height:1.7;color:var(--muted);margin-top:9px;max-width:340px}
+  .schedule{background:var(--paper);border-block:1px solid var(--line)}
+  .schedule-head-note{display:flex;align-items:center;gap:9px;color:var(--muted);font:11px var(--mono);letter-spacing:.04em;padding-bottom:6px}
+  .light{width:7px;height:7px;display:inline-block;background:#577956;border-radius:100%;box-shadow:0 0 0 3px #5779561c}
+  table{width:100%;border-collapse:collapse;text-align:left;font-variant-numeric:tabular-nums}
+  th{color:var(--muted);border-top:2px solid var(--ink);padding:12px 10px;background:#ffffff2b}
+  th:first-child,td:first-child{padding-left:15px}
+  td{border-top:1px solid #c7c4b7;padding:16px 10px}
+  tbody tr:last-child{border-bottom:1px solid #a9ac9f}
+  tbody tr:hover{background:#ffffff38}
+  .service{display:flex;align-items:center;gap:18px}
+  .service b{font:700 11px var(--mono);letter-spacing:.08em;color:var(--rust)}
+  .service-name{font-family:var(--serif);font-size:21px;letter-spacing:-.035em}
+  .time{font:19px var(--mono);letter-spacing:-.045em}
+  .time sup{font-size:10px;color:var(--rust);vertical-align:top;margin-left:3px}
+  .table-days{font-size:13px;color:var(--muted)}
+  .action-cell{text-align:right;width:52px}
+  .round-btn{border:1px solid #969e95;width:33px;height:33px;display:inline-grid;place-items:center;border-radius:50%;background:transparent;transition:background .18s,color .18s}
+  .round-btn:hover{background:var(--ink);color:var(--cream)}
+  .table-foot{margin-top:14px;font:11px/1.6 var(--mono);color:var(--muted)}
+  .fare-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .fare-card{border:1px solid var(--line);border-top:3px solid #969c8f;background:#f9f6ed;display:flex;flex-direction:column;position:relative;overflow:hidden}
+  .fare-card.featured{border-top-color:var(--orange);background:var(--night);color:var(--cream);border-inline-color:var(--night)}
+  .fare-main{padding:24px 25px 19px;flex:1}
+  .fare-over{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:23px;color:var(--muted)}
+  .featured .fare-over,.featured p{color:#bdc8c6}
+  .ticket-dashes{height:12px;width:35px;background:repeating-linear-gradient(90deg,currentColor 0 1px,transparent 1px 4px,currentColor 4px 6px,transparent 6px 8px);opacity:.6}
+  .tag{color:var(--orange);font-size:9px;letter-spacing:.07em}
+  .price{display:flex;align-items:baseline;gap:9px;margin-top:19px}
+  .price strong{font:normal 42px/1.1 var(--serif);letter-spacing:-.06em}
+  .price span{font-size:12px;color:var(--muted)}
+  .featured .price span{color:#bdc8c6}
+  .ticket-foot{border-top:1px dashed #a4a89e;position:relative;padding:16px 25px}
+  .ticket-foot::before,.ticket-foot::after{content:"";position:absolute;top:-6px;width:11px;height:11px;background:var(--cream);border:1px solid var(--line);border-radius:50%;left:-7px}
+  .ticket-foot::after{left:auto;right:-7px}
+  .ticket-foot button{padding:0;display:flex;align-items:center;justify-content:space-between;width:100%;background:transparent;border:0;font-weight:700;font-size:13px}
+  .ticket-foot button:hover{color:var(--rust)}
+  .featured .ticket-foot button{color:var(--orange)}
+  .quote-section{background:#e4e1d4;border-block:1px solid var(--line);overflow:hidden}
+  .quote-layout{position:relative;display:grid;grid-template-columns:.65fr 2fr;gap:35px;padding-block:48px;align-items:start}
+  .quote-mark{font:italic 90px/.9 var(--serif);color:var(--rust);margin-top:13px;height:48px}
+  blockquote{font-size:clamp(24px,2.65vw,39px);letter-spacing:-.04em;line-height:1.24;max-width:850px}
+  .quote-by{margin-top:18px;color:var(--muted);font:11px/1.5 var(--mono);letter-spacing:.04em}
+  footer .wrap{padding-top:34px;padding-bottom:23px}
+  .foot-top,.foot-bottom,.footer-links{display:flex;align-items:center;justify-content:space-between;gap:20px}
+  .footer-links{gap:24px}
+  .foot-bottom{margin-top:29px;padding-top:17px;border-top:1px solid #ffffff24;color:#b9c2c0;font:10px/1.5 var(--mono);letter-spacing:.05em}
+  dialog{width:min(444px,calc(100% - 32px));max-height:90dvh;padding:0;border:1px solid var(--ink);border-radius:4px;background:var(--cream);color:var(--ink);box-shadow:0 22px 120px #0005}
+  dialog::backdrop{background:#0e1920bc}
+  .dialog-head{background:var(--night);color:var(--cream);padding:16px 23px;display:flex;align-items:center;justify-content:space-between}
+  .dialog-head .brand{font-size:21px}
+  .dialog-head .brand-mark{width:33px}
+  .close{background:none;border:0;color:var(--cream);line-height:1;font-size:27px;padding:4px 7px}
+  .dialog-body{padding:25px}
+  .dialog-body h2{font-size:38px;margin:9px 0 15px}
+  .dialog-body label{display:block;margin:17px 0 6px;font:700 11px var(--mono);text-transform:uppercase;letter-spacing:.08em}
+  select{width:100%;border:1px solid #a8aea3;border-radius:3px;background:#fffcf4;color:var(--ink);padding:10px}
+  .itinerary{margin:21px 0 0;border-block:1px dashed #aaafa5;padding:14px 0}
+  .itinerary div{display:flex;justify-content:space-between;gap:10px;font-size:13px;padding:3px 0}
+  .itinerary dt{color:var(--muted)}
+  .itinerary dd{margin:0;font-weight:700}
+  .dialog-note{font-size:12px;color:var(--muted);margin:14px 0}
+  .dialog-body .btn{width:100%;background:var(--ink);color:var(--cream)}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  @media(min-width:1500px){.hero{padding-block:65px}}
+  @media(max-width:980px){
+    .wrap{padding-inline:4.5vw}.hero{gap:26px;grid-template-columns:.91fr 1.09fr}
+    h1{font-size:clamp(58px,7.2vw,73px)}.hero .kicker{font-size:9px}
+    .plate figcaption{font-size:8px}.route-strip{gap:23px}.route-stats{gap:12px}.route-stats span+span{padding-left:12px}
+    .feature{padding-inline:22px}.service{gap:10px}.fare-grid{gap:12px}.fare-main{padding:19px}.ticket-foot{padding-inline:19px}
+  }
+  @media(max-width:740px){
+    .wrap{padding-inline:22px}.nav{height:67px;gap:14px}.brand{font-size:22px}.brand-mark{width:35px}
+    .nav-links{gap:16px;margin-right:0}.nav-links a{font-size:12px}.nav .btn{padding:7px 10px;font-size:12px;gap:8px}
+    .hero{grid-template-columns:1fr;gap:31px;padding-block:37px 27px}
+    h1{font-size:clamp(68px,11.5vw,85px);margin:17px 0}.intro{max-width:450px}.hero-cta{margin-top:20px}
+    .plate{max-width:580px;width:100%;justify-self:center}.plate figcaption{font-size:9px}
+    .route-strip{flex-wrap:wrap;gap:12px 22px;padding:18px 0}.route-stats{font-size:10px}
+    .section{padding-block:52px}.section-head{gap:15px;margin-bottom:27px;flex-wrap:wrap}.section-note{max-width:360px}
+    .feature{padding-inline:15px}.feature h3{font-size:23px}.feature p{font-size:13px}.feature-art{width:42px}
+    .service{flex-direction:column;align-items:flex-start;gap:2px}.service-name{font-size:18px}
+    .fare-grid{grid-template-columns:1fr}.fare-main{display:grid;grid-template-columns:1fr auto;column-gap:16px;padding:18px 22px}
+    .fare-over{grid-column:1/-1;margin-bottom:13px}.fare-card h3,.fare-card p{grid-column:1}.price{grid-column:2;grid-row:2/4;flex-direction:column;gap:2px;align-items:flex-end;justify-content:center;margin:0}
+    .ticket-foot{padding:12px 22px}.quote-layout{grid-template-columns:1fr;gap:16px;padding-block:36px}.quote-mark{display:none}
+  }
+  @media(max-width:520px){
+    .nav{flex-wrap:wrap;height:auto;min-height:76px;padding:13px 0 10px;gap:9px}.nav-links{width:100%;order:3;gap:23px}.nav .btn{margin-left:auto}
+    h1{font-size:clamp(61px,15.6vw,78px)}.hero{padding-top:31px}.hero .kicker{letter-spacing:.12em}
+    .route-strip{gap:12px 16px}.route-stats{width:100%;margin:0}.route-stats span+span{padding-left:16px}.stops{font-size:12px}.stop-line{width:36px}
+    .route-label{font-size:9px}.section-head h2{margin-top:11px}h2{font-size:39px}
+    .features{grid-template-columns:1fr;padding:0}.feature,.feature:first-child,.feature:last-child{position:relative;padding:21px 0 20px 64px;border:0;border-bottom:1px solid var(--line)}
+    .feature-art{position:absolute;left:0;top:23px}.feature-top{margin:0}.feature-top .mono{display:none}.feature h3{font-size:26px}.feature p{margin-top:6px;font-size:14px}
+    .schedule-head-note{font-size:10px}th{font-size:9px;letter-spacing:.055em}th,td{padding-inline:4px}th:first-child,td:first-child{padding-left:0}
+    .service-name{font-size:16px}.service b{font-size:10px}.time{font-size:16px}.days-col{display:none}.action-cell{width:30px}.round-btn{width:28px;height:28px}
+    .foot-top,.foot-bottom{align-items:flex-start;flex-direction:column}.foot-bottom{gap:5px}.footer-links a{font-size:12px}
+  }
+  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<svg class="defs" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <symbol id="brand" viewBox="0 0 48 34"><g fill="none" stroke="currentColor" stroke-width="3.1" stroke-linecap="round" stroke-linejoin="round"><path d="M3 22 16 7q2-2 4 0l9 11q2 2 4-.5L39 10M3 28 16 13q2-2 4 0l9 11q2 2 4-.5l10-12M10 29l6-8q2-2 4 0l7 8h18"/></g></symbol>
+  <symbol id="arrow" viewBox="0 0 24 24"><path d="M4 12h15m-6-6 6 6-6 6"/></symbol>
+  <symbol id="up-arrow" viewBox="0 0 24 24"><path d="M6 18 18 6M7 6h11v11"/></symbol>
+  <symbol id="rail" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="16" rx="4"/><path d="M5 10h14M12 5v5M8 21l2-3m6 3-2-3m-6 2h8"/><circle cx="8.5" cy="14" r=".7"/><circle cx="15.5" cy="14" r=".7"/></symbol>
+  <symbol id="clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 6v6l4 2"/></symbol>
+  <symbol id="moon" viewBox="0 0 24 24"><path d="M20 15A9 9 0 0 1 9 4a9 9 0 1 0 11 11Z"/></symbol>
+</svg>
+
+<header class="dark" id="top">
+  <div class="wrap">
+    <nav class="nav" aria-label="Main navigation">
+      <a class="brand" href="#top" aria-label="Dune Line home"><svg class="brand-mark" aria-hidden="true"><use href="#brand"/></svg>Dune Line</a>
+      <div class="nav-links"><a href="#journey">The journey</a><a href="#timetable">Timetable</a><a href="#fares">Fares</a></div>
+      <button class="btn btn-outline" type="button" data-plan>Plan a trip <svg class="icon" aria-hidden="true"><use href="#up-arrow"/></svg></button>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="dark" aria-labelledby="hero-title">
+    <div class="wrap">
+      <div class="hero">
+        <div>
+          <p class="kicker">Independent rail &nbsp;/&nbsp; Route 01</p>
+          <h1 id="hero-title">Desert nights.<br><em>Neon lights.</em></h1>
+          <p class="intro">An overnight train from the quiet of Sola Dunes to the electric heart of Luma City. Let the world change outside your window.</p>
+          <a class="btn btn-peach hero-cta" href="#timetable">Explore departures <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></a>
+        </div>
+
+        <figure class="plate">
+          <svg class="scene" viewBox="0 0 700 440" role="img" aria-labelledby="scene-title scene-desc" xmlns="http://www.w3.org/2000/svg">
+            <title id="scene-title">The dusk crossing</title>
+            <desc id="scene-desc">A streamlined ivory and vermilion train crosses layered desert dunes beneath a striped setting sun. The first lights of Luma City glow on the horizon.</desc>
+            <defs>
+              <linearGradient id="sky" x2=".15" y2="1" gradientUnits="objectBoundingBox"><stop stop-color="#192d43"/><stop offset=".36" stop-color="#41445a"/><stop offset=".68" stop-color="#ac797e"/><stop offset="1" stop-color="#efb48d"/></linearGradient>
+              <linearGradient id="sun" x2="0" y2="1"><stop stop-color="#ffe0a4"/><stop offset="1" stop-color="#f39473"/></linearGradient>
+              <linearGradient id="shell" x2=".12" y2="1"><stop stop-color="#fff1d0"/><stop offset=".44" stop-color="#e7dbc1"/><stop offset=".78" stop-color="#b6b8aa"/><stop offset="1" stop-color="#87968f"/></linearGradient>
+              <linearGradient id="glass" x2="1" y2=".3"><stop stop-color="#293b47"/><stop offset=".7" stop-color="#475862"/><stop offset="1" stop-color="#192a35"/></linearGradient>
+              <linearGradient id="steel" x2="0" y2="1"><stop stop-color="#9aada9"/><stop offset=".3" stop-color="#415159"/><stop offset="1" stop-color="#1c2b32"/></linearGradient>
+              <pattern id="windows" width="14" height="13" patternUnits="userSpaceOnUse"><path d="M3 4h4m3 0h1" stroke="#ffbd9a" stroke-width="1.5"/><path d="M4 8h2" stroke="#9ec6c0"/></pattern>
+              <pattern id="gravel" width="17" height="7" patternUnits="userSpaceOnUse"><path d="m0 4 3-1m8 3 2-1" stroke="#dfb18a" opacity=".42" stroke-width=".9"/></pattern>
+              <clipPath id="sun-cut"><path d="M346 49h184v90H346zm0 94h184v7H346zm0 11h184v6H346zm0 10h184v5H346zm0 10h184v4H346zm0 9h184v3H346zm0 8h184v3H346z"/></clipPath>
+              <g id="star" fill="#fbe2bf"><path d="m0-4 1 3 3 1-3 1-1 3-1-3-3-1 3-1z"/></g>
+              <path id="town" d="M385 222v-10h9v-12h8v12h6v-24h11v16h8v-37h15v38h6v-46l7-7 7 7v36h9v-24h10v26h7v-49l6-10h9l4 9v49h7v-70l8-19 9 19v60h6v-37h13v36h6v-61h8v-10h11v10h4v57h7v-29h15v25h6v-81l7-12h7l6 12v75h6v-44h12v40h7v-28h12v30h6v-62l7-8 9 8v66h8v-46h10v67H385z"/>
+              <filter id="grain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".76" numOctaves="3" stitchTiles="stitch"/></filter>
+            </defs>
+            <path fill="url(#sky)" d="M0 0h700v440H0z"/>
+            <g fill="#f6dfc4" opacity=".86">
+              <circle cx="35" cy="45" r="1"/><circle cx="103" cy="83" r="1.3"/><circle cx="150" cy="52" r=".9"/><circle cx="207" cy="23" r="1"/><circle cx="293" cy="88" r="1"/><circle cx="334" cy="47" r="1.2"/><circle cx="460" cy="26" r="1"/><circle cx="525" cy="63" r="1.2"/><circle cx="592" cy="35" r=".9"/><circle cx="655" cy="79" r="1.2"/><circle cx="200" cy="130" r="1"/><circle cx="83" cy="119" r=".8"/><circle cx="620" cy="84" r=".8"/><circle cx="680" cy="41" r=".9"/>
+              <use href="#star" transform="translate(73 67)"/><use href="#star" transform="translate(257 53) scale(.8)"/><use href="#star" transform="translate(572 79) scale(.76)"/>
+            </g>
+            <path d="m130 108 48-16" stroke="#eac6ac" opacity=".5"/>
+            <circle cx="436" cy="129" r="76" fill="url(#sun)" clip-path="url(#sun-cut)"/>
+            <path d="m0 200 38-11 25 4 48-22 31 8 36-18 32 7 28-21 46 26 28-10 53 26 38-9 52 13 50-14 65 17 65-30 65 25v68H0" fill="#8b6c77"/>
+            <path d="m0 200 65-7 46-22-15 15-30 14 112-39-21 14-7 9 88-37-24 22-9 3-24 21 102-20-35 15-11 11 94-17-36 19 92-11v38H0" fill="#b58a86"/>
+            <use href="#town" fill="#514756"/><use href="#town" fill="url(#windows)" opacity=".82"/>
+            <g fill="none" stroke="#ffb79d" stroke-width="1.4">
+              <path d="M449 183v-24l6-7m34 32v-35l5-10h8m13 31v-43l7-18 8 18v49m27-22v-19h8v-9h8m35 38v-46l6-10h6m24 62v-23h9m26 16v-26l6-7"/>
+              <path d="M522 111V94m95 16V90" stroke-width=".9"/>
+            </g>
+            <path d="M0 178q81 3 159 28t169 7q102-28 167-15t205-9v116H0" fill="#c58776"/>
+            <path d="M0 207q98-6 172 10t172 1q84-21 153-16-60 0-123 27-95 37-187 14T0 228z" fill="#dca183"/>
+            <path d="M0 246q62-19 127-15t150-16q-63 40-132 37T0 263z" fill="#a65e5d"/>
+            <path d="M0 272q109-30 199-19t207-20q105-36 184-18t110 9v104H0" fill="#e0a180"/>
+            <path d="M221 260q97-6 190-30t164-17q-81-4-161 29t-193 18" fill="#bd796a"/>
+            <path d="M425 259q76-26 163-21t112-2v45q-67-20-133-18t-142-4" fill="#b57869"/>
+            <g fill="none" stroke="#f2c096" opacity=".74" stroke-width="1.2"><path d="M0 253q66-17 111-14m28 2 31-1m124 12q68-11 117-28m60 4q54-17 104-13m27 3 38 7m-12 25 72-1"/><path d="M40 203q42 2 73 9m85 12 36 1m74-20 31-6"/></g>
+            <path d="M0 281q87-15 202-8t222-16q149-31 276-2v185H0" fill="#ce8970"/>
+            <path d="M0 313q111-13 217-10t201-15q116-24 282-14v166H0" fill="#aa6961"/>
+            <!-- The raised permanent way, in two-point perspective. -->
+            <path d="m-12 284 727 69v27L-12 299z" fill="#53464a"/>
+            <path d="m-12 288 727 71v9L-12 294z" fill="url(#gravel)"/>
+            <path d="m-12 283 727 68m-727-61 727 73" fill="none" stroke="#e4ba96" stroke-width="2.1"/>
+            <g transform="translate(0 31)">
+              <path d="m-22 243 627 56 16 8-16 6-627-59" fill="#202c32"/>
+              <g fill="#1b282f" stroke="#626666" stroke-width="2"><ellipse cx="74" cy="252" rx="9" ry="6"/><ellipse cx="121" cy="257" rx="10" ry="6"/><ellipse cx="244" cy="268" rx="12" ry="7"/><ellipse cx="288" cy="272" rx="12" ry="7"/><ellipse cx="465" cy="289" rx="14" ry="8"/><ellipse cx="548" cy="297" rx="15" ry="9"/></g>
+              <path d="m-24 214 450 25 82 4q25 1 43 11l51 28q18 10 31 21 8 7-1 11-12 5-37 2L-24 253z" fill="url(#shell)" stroke="#39454a" stroke-width="1.6"/>
+              <path d="m-20 214 446 24 84 5q31 2 50 16l-41-9-539-31z" fill="#fff0ce"/>
+              <path d="m-20 220 433 25-1 15-432-28z" fill="#884f45"/>
+              <g fill="#ffdaa0" stroke="#533f3d" stroke-width="1.1">
+                <path d="m1 222 10 .6v8l-10-.7zm17 1 10 .6v8l-10-.7zm17 1 11 .6v8l-11-.7zm18 1 11 .6v8l-11-.7zm19 1.2 11 .6v8l-11-.7z"/>
+                <path d="m102 228 13 .8v9l-13-.9zm20 1.2 13 .8v9l-13-.9zm21 1.2 13 .8v9l-13-.9zm21 1.3 14 .8v9l-14-.9zm22 1.2 14 .9v9l-14-.9zm22 1.4 15 .8v10l-15-.9z"/>
+                <path d="m253 236 16 1v11l-16-1zm24 1.4 16 1v11l-16-1zm25 1.5 17 1v11l-17-1zm26 1.6 17 1v11l-17-1zm26 1.6 18 1v12l-18-1zm27 1.7 18 1v12l-18-1.2z"/>
+              </g>
+              <path d="m-22 238 442 32q84 7 137 19l70 16 9 6q-31-1-84-12l-133-24-441-33z" fill="#c96243"/>
+              <path d="m-18 247 439 37 121 12q47 12 92 17-13 7-46 2l-606-61z" fill="url(#steel)"/>
+              <g fill="#38454a"><path d="m90 220 6 .4v43l-6-.7z"/><path d="m233 228 8 .4v48l-8-.8z"/><path d="m411 238 9 .7v54l-9-1z"/></g>
+              <g fill="none" stroke="#b1b2a6" stroke-width="1.3"><path d="M92 221v40m144-31v44m178-33v49"/></g>
+              <path d="m429 249 73 4q27 1 42 9l28 16-77-11-67-5z" fill="url(#glass)"/>
+              <path d="m498 253 3 15m29-12 13 17" stroke="#ccd6c6" stroke-width="3"/>
+              <path d="m430 249 71 4q26 1 42 10" stroke="#fff0d1" stroke-width="2" fill="none"/>
+              <path d="m437 273 55 5m-55-2 54 6m-54-2 48 5" stroke="#70817e" fill="none" stroke-width="1.5"/>
+              <path d="m552 286 30 5 10 5-29-5z" fill="#f8e8bf"/><path d="m607 294 12 6" stroke="#fff3c8" stroke-width="3.8" stroke-linecap="round"/>
+              <path d="M-9 244 405 278m22 4 70 7" stroke="#f0dfbf" stroke-width="1.4" fill="none"/>
+            </g>
+            <path d="M0 319q100 6 173 38t163 29q-99 24-197 1T0 370z" fill="#915e58"/>
+            <path d="M0 351q82-8 181 30t193 26q-94 21-186 3T0 392z" fill="#724e50"/>
+            <path d="M0 389q76-12 177 16t192 9q93-18 166-12t165-29v67H0" fill="#4a4147"/>
+            <path d="M0 414q114-10 220 19m181-12q80-21 139-15" fill="none" stroke="#996b61" stroke-width="2"/>
+            <g fill="none" stroke="#e6ad8a" stroke-width="1.3" opacity=".7"><path d="M22 324q71 3 130 24m14 6 17 6m166 26q54-9 103-7m16 1 32 1m47 12 79-8"/><path d="m42 346 30 2m184 41 34 3m209-23 37 2"/></g>
+            <path d="M0 0h700v440H0z" filter="url(#grain)" opacity=".085" style="mix-blend-mode:soft-light"/>
+            <g fill="none" stroke="#efe1c6" stroke-width="1" opacity=".75"><path d="M13 25V13h12m650 0h12v12M13 415v12h12m650 0h12v-12"/></g>
+            <text x="28" y="30" fill="#dfdbcf" font-family="monospace" font-size="9" letter-spacing="2">DL / E–01</text>
+          </svg>
+          <figcaption><span>Fig. 01</span><span>The dusk crossing &nbsp; / &nbsp; Eastbound</span></figcaption>
+        </figure>
+      </div>
+      <div class="route-strip">
+        <span class="route-label mono"><svg class="icon" aria-hidden="true"><use href="#rail"/></svg> The route</span>
+        <div class="stops">Sola Dunes <span class="stop-line" aria-label="to"></span> Luma City</div>
+        <div class="route-stats"><span>684 KM</span><span><svg class="icon" aria-hidden="true"><use href="#clock"/></svg>9H 20M</span><span><svg class="icon" aria-hidden="true"><use href="#moon"/></svg>NIGHTLY</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="journey" class="wrap section" aria-labelledby="journey-title">
+    <div class="section-head">
+      <div><p class="kicker">01 / Life on board</p><h2 id="journey-title">The hours in between.</h2></div>
+      <p class="section-note">No connections. No rushing the view.<br>Just a night on the rails, well spent.</p>
+    </div>
+    <div class="features">
+      <article class="feature">
+        <div class="feature-top">
+          <svg class="feature-art" viewBox="0 0 58 46" aria-hidden="true"><rect x="5" y="4" width="47" height="34" rx="8"/><rect x="9" y="8" width="39" height="26" rx="5"/><path d="M10 27q10-8 20-2t17-1m-37 6q9-4 18 0m-6 8v4m14-4v4m-20 0h26"/><circle cx="36" cy="17" r="4"/></svg>
+          <span class="mono">A / 01</span>
+        </div>
+        <h3>A window to the dark</h3><p>Wide observation windows frame the last light on the dunes. Later, the lounge lights dim for a sky full of stars.</p>
+      </article>
+      <article class="feature">
+        <div class="feature-top">
+          <svg class="feature-art" viewBox="0 0 58 46" aria-hidden="true"><path d="M5 31h47M9 28a19 19 0 0 1 38 0zM4 35h49l-5 4H10zM16 22q2-6 8-8"/><circle cx="28" cy="7" r="2.2"/><path d="M42 6q-2-3 0-5m6 9q-2-3 0-5"/></svg>
+          <span class="mono">B / 02</span>
+        </div>
+        <h3>The midnight table</h3><p>Take a booth in the dining car for spiced flatbread, a late supper, or a pot of mint tea as the desert rolls by.</p>
+      </article>
+      <article class="feature">
+        <div class="feature-top">
+          <svg class="feature-art" viewBox="0 0 58 46" aria-hidden="true"><path d="M5 13v26m0-6h48m0 6V24q0-5-6-5H27v9H5m22-4h25M9 23h13v-6H9z"/><path d="M44 4a7 7 0 0 0 8 8 7 7 0 0 1-8-8Zm-10 3v4m-2-2h4"/></svg>
+          <span class="mono">C / 03</span>
+        </div>
+        <h3>Sleep past the miles</h3><p>Settle into a quiet carriage with a reading lamp of your own. Wake to soft chimes and the first towers of Luma.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="timetable" class="schedule" aria-labelledby="timetable-title">
+    <div class="wrap section">
+      <div class="section-head">
+        <div><p class="kicker">02 / Eastbound timetable</p><h2 id="timetable-title">Choose your night train.</h2></div>
+        <span class="schedule-head-note"><i class="light"></i> Four departures, every night</span>
+      </div>
+      <table>
+        <caption class="sr-only">Nightly trains from Sola Dunes to Luma City. All arrivals are the following morning.</caption>
+        <thead><tr><th scope="col">Service</th><th scope="col">Sola Dunes</th><th scope="col">Luma City</th><th scope="col" class="days-col">Frequency</th><th scope="col"><span class="sr-only">Plan a trip</span></th></tr></thead>
+        <tbody>
+          <tr><td><div class="service"><b>DL 101</b><span class="service-name">Sundown</span></div></td><td class="time">19:40</td><td class="time">05:00<sup>+1</sup></td><td class="table-days days-col">Nightly</td><td class="action-cell"><button class="round-btn" data-plan data-train="0" aria-label="Plan a trip on Sundown"><svg class="icon"><use href="#up-arrow"/></svg></button></td></tr>
+          <tr><td><div class="service"><b>DL 103</b><span class="service-name">Evening Star</span></div></td><td class="time">20:30</td><td class="time">05:50<sup>+1</sup></td><td class="table-days days-col">Nightly</td><td class="action-cell"><button class="round-btn" data-plan data-train="1" aria-label="Plan a trip on Evening Star"><svg class="icon"><use href="#up-arrow"/></svg></button></td></tr>
+          <tr><td><div class="service"><b>DL 105</b><span class="service-name">Nightfall</span></div></td><td class="time">21:45</td><td class="time">07:05<sup>+1</sup></td><td class="table-days days-col">Nightly</td><td class="action-cell"><button class="round-btn" data-plan data-train="2" aria-label="Plan a trip on Nightfall"><svg class="icon"><use href="#up-arrow"/></svg></button></td></tr>
+          <tr><td><div class="service"><b>DL 107</b><span class="service-name">Moonrise</span></div></td><td class="time">23:10</td><td class="time">08:30<sup>+1</sup></td><td class="table-days days-col">Nightly</td><td class="action-cell"><button class="round-btn" data-plan data-train="3" aria-label="Plan a trip on Moonrise"><svg class="icon"><use href="#up-arrow"/></svg></button></td></tr>
+        </tbody>
+      </table>
+      <p class="table-foot">All times local, 24-hour clock. &nbsp;+1 indicates arrival the following morning.</p>
+    </div>
+  </section>
+
+  <section id="fares" class="wrap section" aria-labelledby="fare-title">
+    <div class="section-head"><div><p class="kicker">03 / Passage &amp; fares</p><h2 id="fare-title">Your place on the line.</h2></div><p class="section-note">One-way fares, per traveller.<br>The observation lounge is open to all.</p></div>
+    <div class="fare-grid">
+      <article class="fare-card">
+        <div class="fare-main"><div class="fare-over"><span class="mono">Class 01 / Seat</span><i class="ticket-dashes"></i></div><h3>Dune Seat</h3><p>A deep reclining seat, a wool blanket, and a generous window on the desert.</p><div class="price"><strong>$68</strong><span>one way</span></div></div>
+        <div class="ticket-foot"><button data-plan data-fare="0">Choose Dune Seat <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></button></div>
+      </article>
+      <article class="fare-card featured">
+        <div class="fare-main"><div class="fare-over"><span class="mono">Class 02 / Berth</span><span class="tag">Sleeper pick</span></div><h3>Moon Berth</h3><p>A curtained sleeping berth with fresh linen, a reading lamp, and morning coffee.</p><div class="price"><strong>$124</strong><span>one way</span></div></div>
+        <div class="ticket-foot"><button data-plan data-fare="1">Choose Moon Berth <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></button></div>
+      </article>
+      <article class="fare-card">
+        <div class="fare-main"><div class="fare-over"><span class="mono">Class 03 / Cabin</span><i class="ticket-dashes"></i></div><h3>Skyline Cabin</h3><p>A private cabin with a full bed, a personal washroom, and breakfast at your door.</p><div class="price"><strong>$216</strong><span>one way</span></div></div>
+        <div class="ticket-foot"><button data-plan data-fare="2">Choose Skyline Cabin <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></button></div>
+      </article>
+    </div>
+  </section>
+
+  <section class="quote-section" aria-label="A passenger's experience">
+    <div class="wrap quote-layout">
+      <div><p class="kicker">Passenger notes</p><div class="quote-mark" aria-hidden="true">“</div></div>
+      <figure><blockquote>“I fell asleep with a whole desert outside my window. When I opened my eyes, there was a pink neon sign level with my pillow.”</blockquote><figcaption class="quote-by">Mara V. &nbsp; / &nbsp; Moon Berth, DL 105</figcaption></figure>
+    </div>
+  </section>
+</main>
+
+<footer class="dark">
+  <div class="wrap">
+    <div class="foot-top"><a class="brand" href="#top"><svg class="brand-mark" aria-hidden="true"><use href="#brand"/></svg>Dune Line</a><nav class="footer-links" aria-label="Footer navigation"><a href="#journey">The journey</a><a href="#timetable">Timetable</a><a href="#fares">Fares</a></nav></div>
+    <div class="foot-bottom"><span>© Dune Line Railway Company</span><span>SOLA DUNES &nbsp;→&nbsp; LUMA CITY &nbsp; / &nbsp; EST. 1978</span></div>
+  </div>
+</footer>
+
+<dialog id="planner" aria-labelledby="planner-title">
+  <div class="dialog-head"><span class="brand"><svg class="brand-mark" aria-hidden="true"><use href="#brand"/></svg>Dune Line</span><button class="close" aria-label="Close trip planner" type="button">×</button></div>
+  <div class="dialog-body">
+    <p class="kicker">Route 01 / Eastbound</p><h2 id="planner-title">Plan your crossing.</h2>
+    <label for="train">Nightly departure</label>
+    <select id="train"><option>DL 101 · Sundown · 19:40</option><option>DL 103 · Evening Star · 20:30</option><option>DL 105 · Nightfall · 21:45</option><option>DL 107 · Moonrise · 23:10</option></select>
+    <label for="fare">Your passage</label>
+    <select id="fare"><option>Dune Seat · $68</option><option>Moon Berth · $124</option><option>Skyline Cabin · $216</option></select>
+    <dl class="itinerary" aria-live="polite"><div><dt>Leave Sola Dunes</dt><dd id="leave">19:40</dd></div><div><dt>Reach Luma City</dt><dd id="reach">05:00 (+1 day)</dd></div><div><dt>One traveller, one way</dt><dd id="total">$68</dd></div></dl>
+    <p class="dialog-note">Keep a copy of your itinerary. This fictional railway does not take reservations or payments.</p>
+    <button class="btn" id="download" type="button">Download itinerary <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></button>
+  </div>
+</dialog>
+<script>
+(() => {
+  const dialog = document.getElementById('planner');
+  const train = document.getElementById('train');
+  const fare = document.getElementById('fare');
+  const starts = ['19:40','20:30','21:45','23:10'];
+  const ends = ['05:00','05:50','07:05','08:30'];
+  const prices = ['$68','$124','$216'];
+  function update() {
+    document.getElementById('leave').textContent = starts[train.selectedIndex];
+    document.getElementById('reach').textContent = ends[train.selectedIndex] + ' (+1 day)';
+    document.getElementById('total').textContent = prices[fare.selectedIndex];
+  }
+  document.querySelectorAll('[data-plan]').forEach(button => {
+    button.addEventListener('click', () => {
+      if (button.dataset.train !== undefined) train.selectedIndex = Number(button.dataset.train);
+      if (button.dataset.fare !== undefined) fare.selectedIndex = Number(button.dataset.fare);
+      update();
+      dialog.showModal();
+      document.body.style.overflow = 'hidden';
+    });
+  });
+  [train, fare].forEach(el => el.addEventListener('change', update));
+  dialog.querySelector('.close').addEventListener('click', () => dialog.close());
+  dialog.addEventListener('close', () => { document.body.style.overflow = ''; });
+  dialog.addEventListener('click', event => {
+    const box = dialog.getBoundingClientRect();
+    if (event.target === dialog && (event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom)) dialog.close();
+  });
+  document.getElementById('download').addEventListener('click', () => {
+    const text = [
+      'DUNE LINE / EASTBOUND ITINERARY', 'Sola Dunes → Luma City', '',
+      train.options[train.selectedIndex].text, 'Runs nightly · 684 km · 9 h 20 min',
+      'Departs Sola Dunes: ' + starts[train.selectedIndex],
+      'Arrives Luma City: ' + ends[train.selectedIndex] + ' the following morning',
+      'Passage: ' + fare.options[fare.selectedIndex].text + ' per traveller, one way',
+      '', 'Travel plan only — Dune Line is a fictional railway.'
+    ].join('\n');
+    const url = URL.createObjectURL(new Blob([text], {type:'text/plain;charset=utf-8'}));
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'Dune-Line-itinerary.txt';
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1500);
+  });
+})();
+</script>
+</body>
+</html>

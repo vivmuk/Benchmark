@@ -1,0 +1,21 @@
+{
+ "text": "A wide 16:9 cinematic science-fiction desert landscape, highly detailed digital matte painting with realistic atmospheric lighting. Rolling orange sand dunes fill the foreground, with fine ripple patterns, windblown dust, and long soft shadows. On the left dune crest, seen from behind and facing the distant city, stand one short-haired man in a flowing dark burgundy cloak and one shaggy tawny-gray llama; the llama is left of the man, its ears upright. A pale sand trail curves from them toward the city.\n\nThe futuristic oasis city occupies the center-right background: a dense cluster of small buildings beneath broad, tiered, saucer-like structures and three slender twisting glass supertowers. The tallest central teal tower tapers to a needle and has a brilliant horizontal cyan halo ring near its summit. The left tower glows turquoise and bears the vertical neon text \u201cOASIS\u201d in capital letters; the right tower is outlined in violet and magenta. Subtle teal searchlight beams angle into the sky.\n\nUpper left hangs an enormous silver crescent moon with its shadowed disk faintly visible. The star-speckled navy sky gradients through dusty purple and peach to a glowing orange horizon.\n\nAt lower right, an irregular turquoise oasis pool sits behind a tall multi-armed saguaro cactus edged in vivid pink neon; one tiny distant cactus stands farther right. A sleek small blue-gray train travels on an elevated golden illuminated monorail track that curves from the bottom-right foreground back toward the city, supported by thin dark posts. Warm sunset light contrasts with cyan, turquoise, and magenta neon.",
+ "reasoning_chars": 3669,
+ "usage": {
+  "prompt_tokens": 1357,
+  "completion_tokens": 1179,
+  "total_tokens": 2536,
+  "prompt_tokens_details": {
+   "cached_tokens": 64
+  },
+  "cache_read_input_tokens": 64,
+  "completion_tokens_details": {
+   "reasoning_tokens": 841
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 75.04511021001963,
+ "t_first_content": 100.64005443401402,
+ "t_total": 108.43631128501147,
+ "cost": 0.01813
+}

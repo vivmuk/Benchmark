@@ -1,0 +1,21 @@
+{
+ "text": "A suspension bridge carries the weight of its deck and traffic along two main paths to the ground: through the towers and through the anchorages at the ends of the bridge. Both paths begin at the deck. When a truck crosses the bridge, its wheels press down on the roadway. The beams and girders beneath the roadway spread that force over a length of deck, so the load does not fall entirely on the nearest hanger. The hangers, which are usually vertical steel cables, pull up on the deck and pull down on the main cables above it. The hangers carry this load in tension: the forces at their ends try to stretch them.\n\nThe main cables also work in tension, but their curved shape lets them support loads that act downward. At each hanger connection, the cable pulls away in two directions along its slope. Because the slope changes across the connection, the two pulls have a net upward component that balances the downward pull of the hanger. Near the middle of the span, the cable is nearly horizontal. As it approaches a tower, it becomes steeper, and its pull has a larger vertical component. The cable\u2019s sag is therefore an essential part of how the bridge works. For the same span and load, a cable pulled into a shallower curve would need to carry more tension.\n\nAt the top of each tower, the main cable rests in a fitting called a saddle. The cable slopes downward away from the saddle on both sides, so its tension pulls down on the tower. The sideways pulls from the two sides oppose each other and largely cancel under balanced loading. The tower then carries most of the resulting force downward in compression, much as a column supports a floor. If traffic or wind loads are uneven, the tower can also bend. Its foundation transfers these forces into the soil or rock below, either directly or through deep piles or shafts.\n\nBeyond the towers, the main cables continue to the anchorages. At each end of a conventional suspension bridge, the cables pull the anchorage inward toward the span and usually upward as well. The anchorage must resist that pull without sliding or lifting. It may do so through the weight of a massive concrete block and its contact with the ground, or by transferring the force directly into sound rock. The towers thus pass much of the vertical load into their foundations, while the anchorages resist the strong inward pull that keeps the cables in tension.\n\nThe deck also helps the bridge respond to changing loads. Without enough stiffness, a heavy vehicle could cause a sharp local dip as it moved from one hanger to the next. The deck girders spread the load among neighboring hangers, producing a gentler change in the shape of the deck and cables. The forces vary as traffic moves, but the basic path stays the same: from the deck into the hangers, from the hangers into the main cables, and from the cables through the towers and anchorages into the ground.",
+ "reasoning_chars": 5300,
+ "usage": {
+  "prompt_tokens": 3178,
+  "completion_tokens": 1764,
+  "total_tokens": 4942,
+  "prompt_tokens_details": {
+   "cached_tokens": 1164
+  },
+  "cache_read_input_tokens": 1164,
+  "completion_tokens_details": {
+   "reasoning_tokens": 592
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 28.103587102959864,
+ "t_first_content": 28.103587422985584,
+ "t_total": 28.152436168980785,
+ "cost": 0.023996
+}

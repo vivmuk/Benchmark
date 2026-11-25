@@ -1,0 +1,20 @@
+{
+ "text": "A suspension bridge carries the roadway and traffic by converting their weight into tension in cables, compression in towers, and resistance in the ground. The deck is the starting point. A truck's weight first presses on the roadway and the steel framing below it. A stiffening girder or truss along the deck spreads that local weight over a greater length. Without this stiffening, a concentrated load would make one part of the deck dip sharply and distort the whole curve of the bridge. The girder also helps the deck resist wind and uneven traffic, so the load is delivered more steadily to the hangers that hang vertically from the main cables.\n\nEach hanger is a slender tension member reaching from a main cable to the deck. It pulls upward on the deck and downward on the cable above. The deck is therefore not supported from below at frequent intervals, as in a beam bridge, but suspended from above. The main cables run over the towers in a long sag and are fixed at each end in anchorages. Because a cable is flexible, it cannot carry bending or compression; it can only pull along its own length. Its curved shape is what lets that pull balance gravity. The tension in the cable has a vertical component that balances the downward hanger loads and a horizontal component resisted at the anchorages. When traffic adds load, the tension rises slightly and the sag changes a little, while the stiffening girder spreads the effect along the span.\n\nAt the towers the cables pass over saddles and change direction. There they press down with great force. The towers take this force mainly as compression and carry it into foundations below. In this sense a tower behaves like a tall post, but it must also tolerate changes caused by uneven loading, wind, heat, and slight cable movement. It is therefore designed for some bending and sideways force as well. The foundations spread the tower load into soil or rock through broad bases that may reach down to firm strata, until the ground can carry it without crushing or settling.\n\nThe pull of the main cables does not vanish at the towers. It continues to the anchorages, which must resist the enormous horizontal component of cable tension. An anchorage is usually a vast mass of concrete or a structure tied deeply into bedrock. Its weight, together with friction and bearing against the surrounding ground, prevents the cable ends from moving. Thus the earth receives vertical compression beneath the towers and strong cable pulls at the anchorages.\n\nThe complete path is continuous. Weight begins on the deck, is spread by stiffening members, passes into hangers, then into the tension of the main cables. From the cables it goes down through towers and outward into anchorages, and finally into foundations and the ground. The bridge remains stable because these forces continually balance. The cables pull while the towers push and the anchorages hold, until the earth supplies the final resistance.",
+ "reasoning_chars": 51404,
+ "usage": {
+  "prompt_tokens": 57,
+  "completion_tokens": 12428,
+  "total_tokens": 12485,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 11847
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 1.0759790040319785,
+ "t_first_content": 145.37360922800144,
+ "t_total": 148.83335949701723,
+ "cost": 0.038912457500000004
+}
