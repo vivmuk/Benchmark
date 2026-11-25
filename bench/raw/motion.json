@@ -8,5 +8,6 @@
  "deepseek-v4-1-flash-1017-uncensored": 2.605,
  "openai-gpt-61-terra": 0.981,
  "kimi-k3-1-pro": 0.831,
- "kimi-k3-1-pro-highspeed": 0.654
+ "kimi-k3-1-pro-highspeed": 0.654,
+ "inkling-2-mini": 1.768
 }

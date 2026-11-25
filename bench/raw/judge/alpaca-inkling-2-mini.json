@@ -1,0 +1,20 @@
+{
+ "claude-opus-5-5": {
+  "scores": {
+   "alpaca": 6.0,
+   "motion": 6.0,
+   "beauty": 6.0,
+   "scene": 6.0
+  },
+  "note": "A recognisable fluffy cream alpaca with a long neck, small head and upright ears walks through a soft, pleasant pastel morning scene with scrolling ground and changing leg poses, but the oversized blob body, stiff stick legs with awkward joint bends, minimal body bob and a stray clipped circle in th"
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "alpaca": 7.0,
+   "motion": 5.0,
+   "beauty": 7.0,
+   "scene": 7.0
+  },
+  "note": "The fluffy alpaca is clearly recognizable and the pastel scene is tasteful, but the legs change without a convincing planted-foot walking cycle."
+ }
+}

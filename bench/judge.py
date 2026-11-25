@@ -4,7 +4,18 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from common import *
 
-CHROME = sorted((Path.home() / "Library/Caches/ms-playwright").glob("chromium_headless_shell-*/*/chrome-headless-shell"))[-1]
+def _chrome():
+    """Newest Chromium headless shell from the Playwright cache, on macOS or Linux."""
+    found = []
+    for root in (Path.home() / ".cache/ms-playwright", Path.home() / "Library/Caches/ms-playwright"):
+        for pattern in ("chromium_headless_shell-*/**/chrome-headless-shell", "chromium_headless_shell-*/**/headless_shell"):
+            found += [p for p in root.glob(pattern) if p.is_file()]
+    if found:
+        return sorted(found)[-1]
+    return Path("/usr/bin/chromium")
+
+
+CHROME = _chrome()
 SHOTS = RAW / "shots"
 
 
@@ -117,8 +128,13 @@ def work(sp):
 
 
 if __name__ == "__main__":
+    import sys
     sp = load(RAW / "specs.json")
+    only = sys.argv[1:]
+    todo = [sp[m] for m in MODELS if not only or m in only]
     with ThreadPoolExecutor(4) as ex:
-        list(ex.map(work, [sp[m] for m in MODELS]))
-    save(RAW / "motion.json", {m: frames_differ(m) for m in MODELS})
+        list(ex.map(work, todo))
+    prev = load(RAW / "motion.json", {}) or {}
+    prev.update({m: frames_differ(m) for m in (only or MODELS)})
+    save(RAW / "motion.json", {m: prev.get(m) for m in MODELS})
     print("PHASE2 DONE", flush=True)

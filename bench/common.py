@@ -19,11 +19,14 @@ MODELS = [
     "openai-gpt-61-terra",
     "kimi-k3-1-pro",
     "kimi-k3-1-pro-highspeed",
+    "inkling-2-mini",
 ]
 ICONS = [("qwen", "qwen-color"), ("gemini", "gemini-color"), ("glm", "zai"), ("claude", "claude-color"),
-         ("deepseek", "deepseek-color"), ("openai", "openai"), ("kimi", "kimi-color")]
+         ("deepseek", "deepseek-color"), ("openai", "openai"), ("kimi", "kimi-color"),
+         ("inkling", "thinkingmachines")]
 LABS = {"qwen": "Alibaba", "gemini": "Google", "glm": "Z.ai", "claude": "Anthropic",
-        "deepseek": "DeepSeek", "openai": "OpenAI", "kimi": "Moonshot AI"}
+        "deepseek": "DeepSeek", "openai": "OpenAI", "kimi": "Moonshot AI",
+        "inkling": "Thinking Machines"}
 IMAGE_MODEL = "nano-banana-2-1"
 JUDGES = ["claude-opus-5-5", "openai-gpt-6-sol"]  # neither is a contestant
 
@@ -31,7 +34,15 @@ JUDGES = ["claude-opus-5-5", "openai-gpt-6-sol"]  # neither is a contestant
 def key():
     k = os.environ.get("VENICE_API_KEY")
     if k:
-        return k
+        return k.strip()
+    local = Path.home() / ".hermes/secrets/venice_api_key"
+    if local.exists():
+        return local.read_text().strip()
+    env = Path.home() / ".hermes/.env"
+    if env.exists():
+        m = re.search(r"VENICE_API_KEY=(.+)", env.read_text())
+        if m:
+            return m.group(1).strip().strip('"')
     cfg = (Path.home() / ".hermes/profiles/pani/config.yaml").read_text()
     return re.search(r"api_key:\s*[\"']?([A-Za-z0-9_\-]+)", cfg).group(1)
 

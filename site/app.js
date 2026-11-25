@@ -42,7 +42,7 @@
     return { ok: ok, rest: rest };
   }
   function head(t, r) {
-    var missing = r.rest.length ? '<p class="notice">' + r.rest.length + ' of ' + B.models.length + ' models have no score here: ' +
+    var missing = r.rest.length ? '<p class="notice">' + r.rest.length + ' of ' + B.models.length + ' models ' + (r.rest.length === 1 ? 'has' : 'have') + ' no score here: ' +
       r.rest.map(function (m) { return esc(m.name); }).join(', ') + '. They are listed at the end with the reason.</p>' : '';
     return '<h1>' + t.title + '</h1><p class="lede">' + t.lede + '</p><details class="how"><summary>How this is scored</summary><p>' + t.how + '</p></details>' + missing;
   }
@@ -145,6 +145,6 @@
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
   window.addEventListener('hashchange', function () { show(location.hash.slice(1)); window.scrollTo(0, 0); });
   window.addEventListener('resize', fit);
-  document.getElementById('foot').textContent = 'Run ' + B.generated + ' through the Venice API. One scored attempt per model per test, nothing cherry-picked. A call was repeated only when the connection failed before the model finished (API spend limit, or Venice closing the stream at 15 minutes). Contestant calls cost $' + B.contestant_spend + '.';
+  document.getElementById('foot').textContent = 'Run ' + B.generated + ' through the Venice API. One scored attempt per model per test, nothing cherry-picked. A call was repeated only when the connection failed before the model finished (API spend limit, or Venice closing the stream at 15 minutes). Contestant calls cost $' + B.contestant_spend + '.' + (B.run_note ? ' ' + B.run_note : '');
   show(location.hash.slice(1));
 })();

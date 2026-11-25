@@ -1,0 +1,22 @@
+{
+ "claude-opus-5-5": {
+  "scores": {
+   "subjects": 8.0,
+   "layout": 6.0,
+   "colour": 6.0,
+   "style": 4.0,
+   "overall": 5.0
+  },
+  "note": "All key elements are present in roughly similar positions, but the recreation is a stylized digital illustration with a darker, starrier sky, a larger city zoomed in closer, and a different monorail and figure design, whereas the original is a softer photoreal matte painting."
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "subjects": 9.0,
+   "layout": 6.0,
+   "colour": 7.0,
+   "style": 6.0,
+   "overall": 5.0
+  },
+  "note": "Nearly every requested element is present, but the towers, traveller, cactus, and track are much larger, making the recreation brighter and less atmospheric than the original."
+ }
+}

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Morning Walk — Alpaca</title>
+<style>
+  html, body { margin:0; padding:0; height:100%; overflow:hidden; background:#7fb0cc; }
+  #stage { display:block; width:100vw; height:100vh; }
+  .caption {
+    position:fixed; left:36px; bottom:26px; pointer-events:none; user-select:none;
+    font-family:Georgia,'Times New Roman',serif; font-size:13px; letter-spacing:.24em;
+    text-transform:uppercase; color:rgba(74,58,38,.55);
+  }
+</style>
+</head>
+<body>
+<svg id="stage" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid slice" role="img" aria-label="An alpaca walking along a path">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7fb0cc"/>
+      <stop offset=".42" stop-color="#c6d4b8"/>
+      <stop offset=".74" stop-color="#f2d8a5"/>
+      <stop offset="1" stop-color="#f6cfa2"/>
+    </linearGradient>
+    <radialGradient id="sunGlow" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="rgba(255,246,220,.95)"/>
+      <stop offset=".45" stop-color="rgba(255,238,196,.45)"/>
+      <stop offset="1" stop-color="rgba(255,238,196,0)"/>
+    </radialGradient>
+    <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#96bf74"/>
+      <stop offset="1" stop-color="#6e9a57"/>
+    </linearGradient>
+    <linearGradient id="pathG" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#eedaa9"/>
+      <stop offset="1" stop-color="#d8ba83"/>
+    </linearGradient>
+    <radialGradient id="fleece" cx=".42" cy=".36" r=".9">
+      <stop offset="0" stop-color="#fbf6ec"/>
+      <stop offset=".6" stop-color="#efe3cf"/>
+      <stop offset="1" stop-color="#dcc8ae"/>
+    </radialGradient>
+    <linearGradient id="neckGrad" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#e2d1b7"/>
+      <stop offset=".55" stop-color="#f3e8d6"/>
+      <stop offset="1" stop-color="#fbf5ea"/>
+    </linearGradient>
+    <radialGradient id="shadowGrad" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="rgba(56,42,26,.42)"/>
+      <stop offset=".65" stop-color="rgba(56,42,26,.2)"/>
+      <stop offset="1" stop-color="rgba(56,42,26,0)"/>
+    </radialGradient>
+    <radialGradient id="vig" cx=".5" cy=".46" r=".78">
+      <stop offset=".6" stop-color="rgba(46,30,14,0)"/>
+      <stop offset="1" stop-color="rgba(46,30,14,.26)"/>
+    </radialGradient>
+    <filter id="fluff" x="-40%" y="-40%" width="180%" height="180%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.052" numOctaves="3" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="22"/>
+    </filter>
+    <filter id="fluffSoft" x="-40%" y="-40%" width="180%" height="180%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.09" numOctaves="2" seed="11" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="11"/>
+    </filter>
+  </defs>
+
+  <!-- sky -->
+  <rect x="0" y="0" width="1280" height="480" fill="url(#sky)"/>
+  <circle id="sunGlow" cx="1002" cy="138" r="165" fill="url(#sunGlow)" opacity=".88"/>
+  <circle cx="1002" cy="138" r="50" fill="#fff4d2"/>
+  <circle cx="1002" cy="138" r="38" fill="#fff9e6"/>
+
+  <!-- clouds -->
+  <g class="cloud" transform="translate(250 126) scale(.95)">
+    <circle cx="0" cy="0" r="32" fill="#ffffff" opacity=".9"/>
+    <circle cx="38" cy="-16" r="30" fill="#ffffff" opacity=".9"/>
+    <circle cx="76" cy="2" r="26" fill="#ffffff" opacity=".9"/>
+    <circle cx="38" cy="8" r="30" fill="#ffffff" opacity=".9"/>
+  </g>
+  <g class="cloud" transform="translate(700 84) scale(.62)">
+    <circle cx="0" cy="0" r="32" fill="#ffffff" opacity=".8"/>
+    <circle cx="40" cy="-14" r="28" fill="#ffffff" opacity=".8"/>
+    <circle cx="74" cy="4" r="24" fill="#ffffff" opacity=".8"/>
+  </g>
+  <g class="cloud" transform="translate(1120 215) scale(1.15)">
+    <circle cx="0" cy="0" r="30" fill="#ffffff" opacity=".75"/>
+    <circle cx="36" cy="-12" r="28" fill="#ffffff" opacity=".75"/>
+    <circle cx="68" cy="4" r="24" fill="#ffffff" opacity=".75"/>
+  </g>
+
+  <!-- birds -->
+  <g class="bird" data-y="158" transform="translate(330 158)">
+    <path d="M0,0 Q8,-8 16,0 Q24,-8 32,0" stroke="#5d7180" stroke-width="3" fill="none" stroke-linecap="round"/>
+  </g>
+  <g class="bird" data-y="118" transform="translate(520 118) scale(.68)">
+    <path d="M0,0 Q8,-8 16,0 Q24,-8 32,0" stroke="#5d7180" stroke-width="3.4" fill="none" stroke-linecap="round"/>
+  </g>
+
+  <!-- hills -->
+  <path d="M-40,442 C150,378 360,420 560,396 C760,372 950,420 1160,392 C1230,384 1300,398 1340,402 L1340,478 L-40,478 Z" fill="#b6c9a2" opacity=".9"/>
+  <path d="M-40,470 C160,438 330,478 540,462 C760,445 900,482 1110,462 C1200,452 1290,470 1340,468 L1340,524 L-40,524 Z" fill="#8fae6d"/>
+  <circle cx="185" cy="462" r="17" fill="#7fa060"/>
+  <circle cx="212" cy="466" r="13" fill="#86a971"/>
+  <circle cx="1065" cy="458" r="15" fill="#7fa060"/>
+  <circle cx="1090" cy="463" r="12" fill="#86a971"/>
+
+  <!-- ground & path -->
+  <rect x="0" y="468" width="1280" height="252" fill="url(#ground)"/>
+  <rect x="-80" y="552" width="1440" height="142" rx="44" fill="url(#pathG)"/>
+  <rect x="-80" y="552" width="1440" height="10" rx="5" fill="#f4e2b8" opacity=".7"/>
+
+  <!-- scrolling features -->
+  <g id="features"></g>
+
+  <!-- dust -->
+  <g id="dust"></g>
+
+  <!-- shadow -->
+  <g id="shadowG" transform="translate(600 601)">
+    <ellipse rx="158" ry="19" fill="url(#shadowGrad)"/>
+  </g>
+
+  <!-- alpaca -->
+  <g id="alpaca">
+    <g id="farLegs"></g>
+
+    <circle cx="-137" cy="-18" r="17" fill="url(#fleece)" filter="url(#fluff)"/>
+    <ellipse cx="0" cy="0" rx="146" ry="71" fill="url(#fleece)" stroke="#d8c2a3" stroke-width="3" stroke-opacity=".55" filter="url(#fluff)"/>
+    <ellipse cx="8" cy="38" rx="98" ry="28" fill="#d9c4aa" opacity=".38"/>
+
+    <g id="neck">
+      <path d="M84,-22 C112,-54 130,-88 141,-126" stroke="url(#neckGrad)" stroke-width="44" fill="none" stroke-linecap="round" filter="url(#fluffSoft)"/>
+      <circle cx="90" cy="-24" r="27" fill="url(#fleece)" filter="url(#fluff)"/>
+      <g id="head" transform="translate(146 -132) rotate(-7)">
+        <ellipse cx="-9" cy="-17" rx="5.5" ry="14" fill="#f3e7d5" filter="url(#fluffSoft)" transform="rotate(-12 -9 -17)"/>
+        <ellipse cx="7" cy="-18" rx="5.5" ry="15" fill="#f3e7d5" filter="url(#fluffSoft)" transform="rotate(10 7 -18)"/>
+        <ellipse cx="-8" cy="-15" rx="2.4" ry="8" fill="#cf9f7f" transform="rotate(-12 -8 -15)"/>
+        <rect x="-20" y="-14" width="46" height="26" rx="13" fill="url(#fleece)" filter="url(#fluffSoft)" transform="rotate(4 3 -1)"/>
+        <ellipse cx="-4" cy="-15" rx="11" ry="6" fill="#faf2e4" filter="url(#fluffSoft)" transform="rotate(-7 -4 -15)"/>
+        <ellipse cx="24" cy="7" rx="11.5" ry="8" fill="#f4ead8" filter="url(#fluffSoft)"/>
+        <circle cx="11" cy="-1" r="5" fill="#eab78d" opacity=".3"/>
+        <circle cx="5" cy="-5" r="3.5" fill="#3c2f24"/>
+        <circle cx="6.1" cy="-6.2" r="1.15" fill="#ffffff" opacity=".95"/>
+        <circle cx="30.5" cy="4.5" r="1.7" fill="#4a3a2e"/>
+        <path d="M25,12 Q29,14.5 33,11.5" stroke="#4a3a2e" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+      </g>
+    </g>
+
+    <g id="nearLegs"></g>
+  </g>
+
+  <!-- vignette -->
+  <rect x="0" y="0" width="1280" height="720" fill="url(#vig)" pointer-events="none"/>
+</svg>
+
+<div class="caption">morning walk &middot; alpaca</div>
+
+<script>
+(function(){
+  const NS = 'http://www.w3.org/2000/svg';
+  const alpaca = document.getElementById('alpaca');
+  const farLayer = document.getElementById('farLegs');
+  const nearLayer = document.getElementById('nearLegs');
+  const neck = document.getElementById('neck');
+  const head = document.getElementById('head');
+  const shadowG = document.getElementById('shadowG');
+  const shadowEllipse = shadowG.querySelector('ellipse');
+  const featuresG = document.getElementById('features');
+  const dustG = document.getElementById('dust');
+  const sunGlow = document.getElementById('sunGlow');
+  const clouds = Array.from(document.querySelectorAll('.cloud'));
+  const birds = Array.from(document.querySelectorAll('.bird'));
+
+  function el(name, attrs, parent){
+    const e = document.createElementNS(NS, name);
+    for (const k in attrs) e.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+
+  let seed = 20240614;
+  function rnd(){ seed = (seed*1664525 + 1013904223) >>> 0; return seed / 4294967296; }
+
+  // ---------- legs ----------
+  function makeLeg(parent, hipX, hipY, far){
+    const g = el('g', { transform: 'translate(' + hipX + ' ' + hipY + ')' }, parent);
+    const upper = el('g', {}, g);
+    el('rect', { x:-12, y:0, width:24, height:80, rx:12, fill: far ? '#c3ac8d' : '#ecdfc7' }, upper);
+    const knee = el('g', { transform:'translate(0 72)' }, upper);
+    el('circle', { cx:0, cy:0, r:10, fill: far ? '#b99f80' : '#e3d3ba' }, knee);
+    el('rect', { x:-8, y:2, width:16, height:60, rx:8, fill: far ? '#b99f80' : '#e3d3ba' }, knee);
+    el('rect', { x:-10, y:54, width:20, height:14, rx:6, fill: far ? '#5d4a3b' : '#6b5646' }, knee);
+    return { upper: upper, knee: knee, hipX: hipX, hipY: hipY, phase0: 0 };
+  }
+
+  const legs = [
+    makeLeg(farLayer,   74, 24, true),   // far front  (phase PI)
+    makeLeg(farLayer,  -70, 24, true),   // far hind   (phase 0)
+    makeLeg(nearLayer,  78, 30, false),  // near front (phase 0)
+    makeLeg(nearLayer, -74, 30, false)   // near hind  (phase PI)
+  ];
+  legs[0].phase0 = Math.PI;
+  legs[3].phase0 = Math.PI;
+
+  // ---------- dust pool ----------
+  const puffs = [];
+  for (let i = 0; i < 16; i++){
+    const c = el('circle', { cx:-100, cy:-100, r:1, fill:'#efe2c8', opacity:0 }, dustG);
+    puffs.push({ el:c, life:0, max:1, x:0, y:0 });
+  }
+  let puffIdx = 0;
+  function spawnDust(x, y){
+    const p = puffs[puffIdx++ % puffs.length];
+    p.life = 0; p.max = 0.75 + Math.random() * 0.4;
+    p.x = x + (Math.random() * 16 - 8);
+    p.y = y + (Math.random() * 5 - 2);
+  }
+
+  // ---------- ground features ----------
+  const features = [];
+  function addTuft(yMin, yMax, scaleMin, scaleMax){
+    const g = el('g', {}, featuresG);
+    const h = 13 + rnd() * 12;
+    for (let b = -1; b <= 1; b++){
+      el('path', {
+        d: 'M0,0 Q ' + (b * 4) + ' ' + (-h * 0.6) + ' ' + (b * 7.5) + ' ' + (-h),
+        stroke: b === 0 ? '#587e41' : (b < 0 ? '#74a35c' : '#6b9953'),
+        'stroke-width': 3, fill:'none', 'stroke-linecap':'round'
+      }, g);
+    }
+    features.push({ g:g, x:rnd()*1400-80, y:yMin + rnd()*(yMax-yMin), s:scaleMin + rnd()*(scaleMax-scaleMin), type:'tuft', ph:rnd()*6.28 });
+  }
+  function addStone(){
+    const g = el('g', {}, featuresG);
+    const rx = 4.5 + rnd() * 5, ry = 3 + rnd() * 2.5;
+    el('ellipse', { cx:0, cy:0, rx:rx, ry:ry, fill:'#d9c9a6', stroke:'#b7a586', 'stroke-width':1.4 }, g);
+    features.push({ g:g, x:rnd()*1400-80, y:556 + rnd()*128, s:0.8 + rnd()*0.7, type:'stone' });
+  }
+  function addDash(){
+    const g = el('g', {}, featuresG);
+    el('rect', { x:-26, y:-3, width:52, height:6, rx:3, fill:'#e3c893', opacity:.7 }, g);
+    features.push({ g:g, x:rnd()*1400-80, y:600 + rnd()*42, s:0.8 + rnd()*0.5, type:'dash' });
+  }
+  function addFlower(){
+    const g = el('g', {}, featuresG);
+    for (let k = 0; k < 5; k++){
+      const a = k / 5 * Math.PI * 2;
+      el('circle', { cx: Math.cos(a)*5.4, cy: Math.sin(a)*5.4, r:3.1, fill:'#f4c9cf' }, g);
+    }
+    el('circle', { cx:0, cy:0, r:2.7, fill:'#f6dd7a' }, g);
+    el('path', { d:'M0,7 L0,16', stroke:'#5d8a4a', 'stroke-width':2.4, 'stroke-linecap':'round' }, g);
+    features.push({ g:g, x:rnd()*1400-80, y:486 + rnd()*52, s:0.8 + rnd()*0.5, type:'flower', ph:rnd()*6.28 });
+  }
+  for (let i = 0; i < 12; i++) addTuft(482, 546, 0.75, 1.25);
+  for (let i = 0; i < 7;  i++) addStone();
+  for (let i = 0; i < 8;  i++) addDash();
+  for (let i = 0; i < 4;  i++) addFlower();
+  for (let i = 0; i < 3;  i++) addTuft(694, 712, 0.6, 0.95);
+
+  // ---------- animation ----------
+  const SWING = 0.40, FLEX = 0.9, R = 180 / Math.PI;
+  const prevPhase = [0, 0, 0, 0];
+  const cloudData = clouds.map(function(c, i){
+    const tr = c.getAttribute('transform');
+    const m = tr.match(/translate\(([\d.]+)[ ,]([\d.]+)\)\s*scale\(([\d.]+)\)/);
+    return { el:c, x:parseFloat(m[1]), y:parseFloat(m[2]), s:parseFloat(m[3]), spd: 7 + i*4, bob: rnd()*6.28 };
+  });
+  const birdData = birds.map(function(b, i){
+    const tr = b.getAttribute('transform');
+    const m = tr.match(/translate\(([\d.]+)[ ,]([\d.]+)\)\s*(?:scale\(([\d.]+)\))?/);
+    return { el:b, x:parseFloat(m[1]), y:parseFloat(m[2]), s: m[3] ? parseFloat(m[3]) : 1, spd: 20 + i*8, ph: i*2.1 };
+  });
+
+  let t = 0, last = performance.now();
+
+  function frame(now){
+    const dt = Math.min((now - last) / 1000, 0.05);
+    last = now;
+    t += dt;
+
+    const p = t * 4.6;                       // gait phase
+    const bob = 4.4 * Math.sin(2 * p);
+    const roll = 1.5 * Math.sin(2 * p + 0.6);
+
+    alpaca.setAttribute('transform', 'translate(600 ' + (424 + bob).toFixed(2) + ') rotate(' + roll.toFixed(3) + ')');
+
+    for (let i = 0; i < 4; i++){
+      const L = legs[i];
+      const ph = p + L.phase0;
+      const upperDeg = -SWING * Math.sin(ph) * R;
+      const flex = FLEX * Math.pow(Math.max(0, Math.cos(ph)), 1.35);
+      L.upper.setAttribute('transform', 'rotate(' + upperDeg.toFixed(2) + ')');
+      L.knee.setAttribute('transform', 'translate(0 72) rotate(' + (flex * R).toFixed(2) + ')');
+
+      if (Math.floor(ph / (Math.PI * 2)) > Math.floor(prevPhase[i] / (Math.PI * 2))){
+        spawnDust(600 + L.hipX + 64 * Math.sin(ph), 597);
+      }
+      prevPhase[i] = ph;
+    }
+
+    neck.setAttribute('transform', 'rotate(' + (2.2 * Math.sin(2 * p + 0.9)).toFixed(2) + ' 86 -26)');
+    head.setAttribute('transform', 'translate(146 -132) rotate(' + (-7 + 4.5 * Math.sin(2 * p + 1.2)).toFixed(2) + ')');
+
+    const sq = 1 - 0.045 * Math.sin(2 * p);
+    shadowG.setAttribute('transform', 'translate(600 601) scale(' + sq.toFixed(3) + ' 1)');
+    shadowEllipse.setAttribute('opacity', (0.92 + 0.08 * Math.sin(2 * p)).toFixed(3));
+
+    // ground scroll
+    for (let i = 0; i < features.length; i++){
+      const f = features[i];
+      f.x -= 92 * dt;
+      if (f.x < -90) f.x += 1470;
+      let rot = 0;
+      if (f.type === 'tuft' || f.type === 'flower') rot = 3.5 * Math.sin(t * 1.6 + f.ph);
+      f.g.setAttribute('transform', 'translate(' + f.x.toFixed(1) + ' ' + f.y.toFixed(1) + ') scale(' + f.s.toFixed(2) + ') rotate(' + rot.toFixed(2) + ')');
+    }
+
+    // clouds
+    for (let i = 0; i < cloudData.length; i++){
+      const c = cloudData[i];
+      c.x -= c.spd * dt;
+      if (c.x < -230) { c.x += 1780; c.y = 70 + Math.random() * 150; }
+      const cy = c.y + 5 * Math.sin(t * 0.5 + c.bob);
+      c.el.setAttribute('transform', 'translate(' + c.x.toFixed(1) + ' ' + cy.toFixed(1) + ') scale(' + c.s + ')');
+    }
+
+    // birds
+    for (let i = 0; i < birdData.length; i++){
+      const b = birdData[i];
+      b.x += b.spd * dt;
+      if (b.x > 1420){ b.x = -120; b.y = 95 + Math.random() * 130; }
+      const by = b.y + 9 * Math.sin(t * 1.4 + b.ph);
+      b.el.setAttribute('transform', 'translate(' + b.x.toFixed(1) + ' ' + by.toFixed(1) + ') scale(' + b.s + ') rotate(' + (2.5 * Math.sin(t * 2.2 + b.ph)).toFixed(2) + ')');
+    }
+
+    // dust
+    for (let i = 0; i < puffs.length; i++){
+      const pf = puffs[i];
+      if (pf.life < pf.max){
+        pf.life += dt;
+        const k = Math.min(1, pf.life / pf.max);
+        pf.el.setAttribute('cx', pf.x.toFixed(1));
+        pf.el.setAttribute('cy', pf.y.toFixed(1));
+        pf.el.setAttribute('r', (4 + k * 16).toFixed(1));
+        pf.el.setAttribute('opacity', (0.36 * (1 - k)).toFixed(3));
+      } else {
+        pf.el.setAttribute('opacity', 0);
+        pf.life = 0; pf.max = 1;
+      }
+    }
+
+    // sun glow breath
+    sunGlow.setAttribute('opacity', (0.82 + 0.12 * Math.sin(t * 0.85)).toFixed(3));
+
+    requestAnimationFrame(frame);
+  }
+
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

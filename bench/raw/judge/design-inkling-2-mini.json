@@ -1,0 +1,22 @@
+{
+ "claude-opus-5-5": {
+  "scores": {
+   "typography": 7.0,
+   "layout": 4.0,
+   "colour": 8.0,
+   "completeness": 5.0,
+   "originality": 7.0
+  },
+  "note": "The dusk-to-neon palette, skyline illustration and serif-italic accent give the page real character, but the hero headline is clipped under the fixed nav and the testimonial section is missing, leaving a large empty purple void before the footer."
+ },
+ "openai-gpt-6-sol": {
+  "scores": {
+   "typography": 8.0,
+   "layout": 5.0,
+   "colour": 8.0,
+   "completeness": 6.0,
+   "originality": 8.0
+  },
+  "note": "The distinctive desert-night design is strong, but the hero heading overlaps the navigation, a large empty gap disrupts the page, and the required testimonial is missing."
+ }
+}

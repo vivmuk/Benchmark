@@ -1,0 +1,17 @@
+{
+ "text": "Cinematic sci-fi desert panorama at dusk, painting-like digital art, ultra-detailed. Lower-left foreground: wind-rippled orange-brown sand dune ridge descending toward center, deep shadows at bottom-left. Silhouette-like figure standing on ridge with back to viewer: short dark hair, long flowing crimson/red hooded cloak, dark legs, gazing across desert. To figure\u2019s left stands a gray-brown alpaca/llama in profile facing right. Background center-right: futuristic metropolis of glass and steel towers on low podiums, tiered curved crown-like bases with glowing cyan horizontal bands, dozens of small lit-window skyscrapers. Tallest central spire: sleek teal-blue tapered glass tower reaching near sky, ringed around upper-middle by a bright cyan neon halo/ellipse. Left slimmer dark-teal spire with pointed tip; adjacent vertical cyan-outlined neon sign clearly reading \u201cOASIS\u201d downward. Right curved violet-purple blade skyscraper with magenta neon edge. Deep navy starry sky fades through purple and pink to orange-gold horizon; large pale crescent moon upper-left, bright edge on right, dark disc, glowing. Thin cyan searchlight beams shoot upward from city toward top edge on left and right. Lower-right: curved raised monorail track with golden-orange glowing rails and dark supports, sleek silver pod; turquoise lagoon beneath/right of track, large saguaro cactus outlined in pink neon at right, small saguaro farther right background. Warm rim light on dunes, neon reflections, orange haze, high contrast, matte cinematic composition.",
+ "reasoning_chars": 3190,
+ "usage": {
+  "prompt_tokens": 666,
+  "completion_tokens": 1223,
+  "total_tokens": 1889,
+  "completion_tokens_details": {
+   "reasoning_tokens": 839
+  }
+ },
+ "finish": "stop",
+ "t_first_delta": 3.1701307680341415,
+ "t_first_content": 6.9922486179857515,
+ "t_total": 8.58902571501676,
+ "cost": 0.00069142
+}

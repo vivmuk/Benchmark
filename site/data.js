@@ -1,12 +1,12 @@
 window.BENCH = {
- "generated": "2026-11-16",
+ "generated": "2026-11-25",
  "models": [
   {
    "id": "qwen-4-max",
    "name": "Qwen 4 Max",
    "lab": "Alibaba",
    "icon": "logos/qwen-color.svg",
-   "released": "2026-11-15",
+   "released": "2026-11-16",
    "price_in": 1.875,
    "price_out": 5.625,
    "vision": true,
@@ -104,7 +104,7 @@ window.BENCH = {
    "name": "Gemini 4 Hydrogen",
    "lab": "Google",
    "icon": "logos/gemini-color.svg",
-   "released": "2026-11-13",
+   "released": "2026-11-14",
    "price_in": 1.875,
    "price_out": 9.375,
    "vision": true,
@@ -222,7 +222,7 @@ window.BENCH = {
    "name": "GLM 5.3 Flash Uncensored",
    "lab": "Z.ai",
    "icon": "logos/zai.svg",
-   "released": "2026-11-12",
+   "released": "2026-11-13",
    "price_in": 0.165,
    "price_out": 0.55,
    "vision": true,
@@ -340,7 +340,7 @@ window.BENCH = {
    "name": "Gemini 4 Carbon",
    "lab": "Google",
    "icon": "logos/gemini-color.svg",
-   "released": "2026-11-09",
+   "released": "2026-11-10",
    "price_in": 2.5,
    "price_out": 12.5,
    "vision": true,
@@ -458,7 +458,7 @@ window.BENCH = {
    "name": "Claude Fable 5.2",
    "lab": "Anthropic",
    "icon": "logos/claude-color.svg",
-   "released": "2026-11-08",
+   "released": "2026-11-09",
    "price_in": 8,
    "price_out": 40,
    "vision": true,
@@ -576,7 +576,7 @@ window.BENCH = {
    "name": "DeepSeek V4.1 Flash 1017 Abliterated",
    "lab": "DeepSeek",
    "icon": "logos/deepseek-color.svg",
-   "released": "2026-11-04",
+   "released": "2026-11-05",
    "price_in": 0.375,
    "price_out": 1.5,
    "vision": false,
@@ -653,7 +653,7 @@ window.BENCH = {
    "name": "DeepSeek V4.1 Flash 1017 Uncensored",
    "lab": "DeepSeek",
    "icon": "logos/deepseek-color.svg",
-   "released": "2026-10-26",
+   "released": "2026-10-27",
    "price_in": 0.33,
    "price_out": 1.32,
    "vision": true,
@@ -771,7 +771,7 @@ window.BENCH = {
    "name": "GPT-6.1 Terra",
    "lab": "OpenAI",
    "icon": "logos/openai.svg",
-   "released": "2026-10-25",
+   "released": "2026-10-26",
    "price_in": 1,
    "price_out": 5,
    "vision": true,
@@ -889,7 +889,7 @@ window.BENCH = {
    "name": "Kimi K3.1 Pro",
    "lab": "Moonshot AI",
    "icon": "logos/kimi-color.svg",
-   "released": "2026-10-22",
+   "released": "2026-10-23",
    "price_in": 2,
    "price_out": 10,
    "vision": true,
@@ -1007,7 +1007,7 @@ window.BENCH = {
    "name": "Kimi K3.1 Pro Highspeed",
    "lab": "Moonshot AI",
    "icon": "logos/kimi-color.svg",
-   "released": "2026-10-22",
+   "released": "2026-10-23",
    "price_in": 5,
    "price_out": 25,
    "vision": true,
@@ -1119,6 +1119,124 @@ window.BENCH = {
     "per_1k": 5.85,
     "per_dollar": 226
    }
+  },
+  {
+   "id": "inkling-2-mini",
+   "name": "Inkling 2 Mini",
+   "lab": "Thinking Machines",
+   "icon": "logos/thinkingmachines.svg",
+   "released": "2026-11-24",
+   "price_in": 0.12,
+   "price_out": 0.5,
+   "vision": true,
+   "alpaca": {
+    "out_tokens": 28767,
+    "cost": 0.01440726,
+    "seconds": 86.1,
+    "finish": "stop",
+    "status": "ok",
+    "score": 62.5,
+    "criteria": {
+     "alpaca": 6.5,
+     "motion": 5.5,
+     "beauty": 6.5,
+     "scene": 6.5
+    },
+    "by_judge": {
+     "claude-opus-5-5": 60.0,
+     "openai-gpt-6-sol": 65.0
+    },
+    "notes": {
+     "claude-opus-5-5": "A recognisable fluffy cream alpaca with a long neck, small head and upright ears walks through a soft, pleasant pastel morning scene with scrolling ground and changing leg poses, but the oversized blob body, stiff stick legs with awkward joint bends, minimal body bob and a stray clipped circle in th",
+     "openai-gpt-6-sol": "The fluffy alpaca is clearly recognizable and the pastel scene is tasteful, but the legs change without a convincing planted-foot walking cycle."
+    },
+    "judges": 2,
+    "motion": 1.768
+   },
+   "design": {
+    "out_tokens": 29053,
+    "cost": 0.01454654,
+    "seconds": 75.9,
+    "finish": "stop",
+    "status": "ok",
+    "score": 66.0,
+    "criteria": {
+     "typography": 7.5,
+     "layout": 4.5,
+     "colour": 8.0,
+     "completeness": 5.5,
+     "originality": 7.5
+    },
+    "by_judge": {
+     "claude-opus-5-5": 62.0,
+     "openai-gpt-6-sol": 70.0
+    },
+    "notes": {
+     "claude-opus-5-5": "The dusk-to-neon palette, skyline illustration and serif-italic accent give the page real character, but the hero headline is clipped under the fixed nav and the testimonial section is missing, leaving a large empty purple void before the footer.",
+     "openai-gpt-6-sol": "The distinctive desert-night design is strong, but the hero heading overlaps the navigation, a large empty gap disrupts the page, and the required testimonial is missing."
+    },
+    "judges": 2
+   },
+   "recreate": {
+    "out_tokens": 1223,
+    "cost": 0.00069142,
+    "seconds": 8.6,
+    "finish": "stop",
+    "status": "ok",
+    "score": 62.0,
+    "criteria": {
+     "subjects": 8.5,
+     "layout": 6.0,
+     "colour": 6.5,
+     "style": 5.0,
+     "overall": 5.0
+    },
+    "by_judge": {
+     "claude-opus-5-5": 58.0,
+     "openai-gpt-6-sol": 66.0
+    },
+    "notes": {
+     "claude-opus-5-5": "All key elements are present in roughly similar positions, but the recreation is a stylized digital illustration with a darker, starrier sky, a larger city zoomed in closer, and a different monorail and figure design, whereas the original is a softer photoreal matte painting.",
+     "openai-gpt-6-sol": "Nearly every requested element is present, but the towers, traveller, cactus, and track are much larger, making the recreation brighter and less atmospheric than the original."
+    },
+    "judges": 2,
+    "prompt": "Cinematic sci-fi desert panorama at dusk, painting-like digital art, ultra-detailed. Lower-left foreground: wind-rippled orange-brown sand dune ridge descending toward center, deep shadows at bottom-left. Silhouette-like figure standing on ridge with back to viewer: short dark hair, long flowing crimson/red hooded cloak, dark legs, gazing across desert. To figure\u2019s left stands a gray-brown alpaca/llama in profile facing right. Background center-right: futuristic metropolis of glass and steel towers on low podiums, tiered curved crown-like bases with glowing cyan horizontal bands, dozens of small lit-window skyscrapers. Tallest central spire: sleek teal-blue tapered glass tower reaching near sky, ringed around upper-middle by a bright cyan neon halo/ellipse. Left slimmer dark-teal spire with pointed tip; adjacent vertical cyan-outlined neon sign clearly reading \u201cOASIS\u201d downward. Right curved violet-purple blade skyscraper with magenta neon edge. Deep navy starry sky fades through purple and pink to orange-gold horizon; large pale crescent moon upper-left, bright edge on right, dark disc, glowing. Thin cyan searchlight beams shoot upward from city toward top edge on left and right. Lower-right: curved raised monorail track with golden-orange glowing rails and dark supports, sleek silver pod; turquoise lagoon beneath/right of track, large saguaro cactus outlined in pink neon at right, small saguaro farther right background. Warm rim light on dunes, neon reflections, orange haze, high contrast, matte cinematic composition."
+   },
+   "speed": {
+    "status": "ok",
+    "runs": 3,
+    "tps": 207.5,
+    "tps_min": 204.3,
+    "tps_max": 228.3,
+    "ttft": 4.27,
+    "seconds": 8.5,
+    "out_tokens": 1731
+   },
+   "value": {
+    "out_tokens": 7306,
+    "cost": 0.00369284,
+    "seconds": 18.7,
+    "finish": "stop",
+    "status": "ok",
+    "correct": 11,
+    "total": 12,
+    "per_q": [
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     false,
+     true,
+     true,
+     true,
+     true,
+     true
+    ],
+    "per_1k": 1.51,
+    "per_dollar": 2979
+   }
   }
  ],
  "judges": [
@@ -1126,6 +1244,7 @@ window.BENCH = {
   "openai-gpt-6-sol"
  ],
  "image_model": "nano-banana-2-1",
- "contestant_spend": 10.28,
- "questions": 12
+ "contestant_spend": 10.31,
+ "questions": 12,
+ "run_note": "The first ten models ran on 2026-11-16; Inkling 2 Mini ran on 2026-11-25."
 };

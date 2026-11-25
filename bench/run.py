@@ -88,10 +88,11 @@ def call(task, sp, messages, suffix=""):
 def source_jpeg():
     from PIL import Image
     out = SITE / "img" / "source.jpg"
-    if not out.exists():
-        im = Image.open(RAW / "source.png").convert("RGB")
-        im.thumbnail((1280, 1280))
-        im.save(out, quality=88)
+    if out.exists():
+        return out
+    im = Image.open(RAW / "source.png").convert("RGB")
+    im.thumbnail((1280, 1280))
+    im.save(out, quality=88)
     return out
 
 

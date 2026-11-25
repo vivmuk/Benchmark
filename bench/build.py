@@ -63,7 +63,7 @@ models, spend = [], 0.0
 for mid in MODELS:
     s = sp[mid]
     m = {"id": mid, "name": s["name"], "lab": s["lab"], "icon": "logos/%s.svg" % dict(ICONS).get(s["family"], "venice-color"),
-         "released": datetime.date.fromtimestamp(s["created"]).isoformat(), "price_in": s["in"], "price_out": s["out"],
+         "released": datetime.datetime.fromtimestamp(s["created"], datetime.timezone.utc).date().isoformat(), "price_in": s["in"], "price_out": s["out"],
          "vision": s["vision"]}
     m["alpaca"] = gen_task("alpaca", mid)
     if m["alpaca"]["status"] != "failed":
@@ -116,7 +116,8 @@ for mid in MODELS:
     models.append(m)
 
 data = {"generated": datetime.date.today().isoformat(), "models": models, "judges": JUDGES, "image_model": IMAGE_MODEL,
-        "contestant_spend": round(spend, 2), "questions": len(answers)}
+        "contestant_spend": round(spend, 2), "questions": len(answers),
+        "run_note": "The first ten models ran on 2026-11-16; Inkling 2 Mini ran on 2026-11-25."}
 (SITE / "data.js").write_text("window.BENCH = " + json.dumps(data, indent=1).replace("</", "<\\/") + ";\n")
 for m in models:
     print("%-44s alp %-8s des %-8s rec %-9s tps %-6s val %s" % (
