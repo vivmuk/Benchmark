@@ -57,7 +57,7 @@
       return '<li><b>' + k + '</b> ' + esc(d.rationale[k]) + '</li>';
     }).join('');
     var vs = d.verdict ? Object.keys(d.verdict).map(function (j) { return '<p class="v"><b>' + esc(j) + ':</b> ' + esc(d.verdict[j]) + '</p>'; }).join('') : '';
-    return '<details class="p"><summary>Why the judges scored it this way</summary><ul class="why">' + rows + '</ul>' + vs + '</details>';
+    return '<details class="p"><summary>Why it scored this way</summary><ul class="why">' + rows + '</ul>' + vs + '</details>';
   }
   function note(d) {
     var n = d.notes && d.notes[Object.keys(d.notes)[0]];
@@ -80,7 +80,7 @@
       h += '<article class="card' + (i === 0 ? ' win' : '') + '">' + who(m, badge(d, i)) +
         '<div class="frame' + (tall ? ' tall' : '') + '">' + inner + '<button data-open="' + src + '" data-name="' + esc(m.name) + '" aria-label="Open ' + esc(m.name) + ' output"></button><span class="hint">Click to open live</span></div>' +
         '<div class="meta">' + crit(d) + why(d) + note(d) + '<div class="stats">' + num(d.out_tokens) + ' tokens · ' + money(d.cost) + ' · ' + d.seconds + 's' +
-        (key === 'alpaca' && d.motion != null ? ' · motion ' + d.motion : '') + '</div></div></article>';
+        (key === 'alpaca' && d.motion != null ? ' · ' + d.motion_changed + '% pixels change' : '') + '</div></div></article>';
     });
     r.rest.forEach(function (m) { h += failCard(m, m[key]); });
     return h + '</div>';
