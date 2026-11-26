@@ -80,7 +80,7 @@
       h += '<article class="card' + (i === 0 ? ' win' : '') + '">' + who(m, badge(d, i)) +
         '<div class="frame' + (tall ? ' tall' : '') + '">' + inner + '<button data-open="' + src + '" data-name="' + esc(m.name) + '" aria-label="Open ' + esc(m.name) + ' output"></button><span class="hint">Click to open live</span></div>' +
         '<div class="meta">' + crit(d) + why(d) + note(d) + '<div class="stats">' + num(d.out_tokens) + ' tokens · <span class="cost">' + money(d.cost) + '</span> · ' + d.seconds + 's' +
-        (key === 'alpaca' && d.motion != null ? ' · ' + d.motion_changed + '% pixels change' : '') + '</div></div></article>';
+        (key === 'alpaca' && d.motion != null ? ' · motion ' + d.motion_changed + '%' : '') + '</div></div></article>';
     });
     r.rest.forEach(function (m) { h += failCard(m, m[key]); });
     return h + '</div>';
