@@ -1,20 +1,99 @@
 {
- "gemini-3-1-pro-preview": {
-  "scores": {
-   "alpaca": 8.0,
-   "motion": 4.0,
-   "beauty": 8.0,
-   "scene": 8.0
-  },
-  "note": "The alpaca is stylized well with overlapping circles and the scene is aesthetically pleasing, but the walking animation appears stiff and mechanically flawed."
+ "rubric": "v9",
+ "median": {
+  "anatomy": 4,
+  "craft": 3,
+  "gait": 3
  },
- "openai-gpt-6-sol": {
-  "scores": {
-   "alpaca": 7.0,
-   "motion": 4.0,
-   "beauty": 7.0,
-   "scene": 7.0
+ "judges_used": 1,
+ "setting": {
+  "depth_planes": 3,
+  "elements": [
+   "sky",
+   "clouds",
+   "sun",
+   "mountains",
+   "hills",
+   "trees",
+   "fence",
+   "grass",
+   "grass tufts",
+   "flowers"
+  ],
+  "palette": "Soft greens and blue-gray backgrounds with warm cream clouds and sunlight, and small colorful flowers.",
+  "placement": "The alpaca is near the horizontal center, slightly right, with its body in the middle of the frame and legs reaching into the foreground.",
+  "clutter": false
+ },
+ "captioner": "openai-gpt-6-luna",
+ "observations": {
+  "description": "A cream-colored alpaca with a long neck walks in a flowered grassy scene.",
+  "anatomy": {
+   "detached_parts": false,
+   "jointless_legs": false,
+   "wrong_proportions": false,
+   "missing_cues": false,
+   "notes": "none"
   },
-  "note": "The woolly alpaca and pastel landscape are appealing, but the body stays nearly fixed while the legs change only slightly, making the walk look stiff."
+  "gait": {
+   "feet_planted": false,
+   "sliding_or_popping": false,
+   "legs_change_between_frames": true,
+   "notes": "The bent legs swing and change position between frames; the hooves appear lifted, with no clear planted step."
+  },
+  "scene": {
+   "depth_planes": 3,
+   "elements": [
+    "sky",
+    "clouds",
+    "sun",
+    "mountains",
+    "hills",
+    "trees",
+    "fence",
+    "grass",
+    "grass tufts",
+    "flowers"
+   ],
+   "palette": "Soft greens and blue-gray backgrounds with warm cream clouds and sunlight, and small colorful flowers.",
+   "placement": "The alpaca is near the horizontal center, slightly right, with its body in the middle of the frame and legs reaching into the foreground.",
+   "clutter": false
+  },
+  "craft": {
+   "seams_or_stray_shapes": false,
+   "inconsistent_light": false,
+   "clipped_elements": true,
+   "contact_shadow": true,
+   "notes": "Trees are cut off at the side edges in some frames."
+  }
+ },
+ "motion": {
+  "mean": 3.89,
+  "changed_pct": 8.26,
+  "leg_pct": 13.61
+ },
+ "rationale": {
+  "anatomy": "none (level 3.91 of 4)",
+  "craft": "Trees are cut off at the side edges in some frames. (level 2.90 of 4)",
+  "setting": "sky, clouds, sun, mountains, hills, trees, fence, grass, grass tufts, flowers. Palette: Soft greens and blue-gray backgrounds with warm cream clouds and sunlight, and small colorful flowers.. Placement: The alpaca is near the horizontal center, slightly right, with its body in the middle of the frame and legs reaching into the foreground..",
+  "gait": "band 4 from 8.26% pixel change; P(planted, coherent)=0.06"
+ },
+ "probabilities": {
+  "anatomy": {
+   "0": 0,
+   "1": 0,
+   "2": 0.02,
+   "3": 0.05,
+   "4": 0.93
+  },
+  "craft": {
+   "0": 0,
+   "1": 0.05,
+   "2": 0.01,
+   "3": 0.93,
+   "4": 0.01
+  }
+ },
+ "verdict": {
+  "jev+openai-gpt-6-luna": "A cream-colored alpaca with a long neck walks in a flowered grassy scene."
  }
 }

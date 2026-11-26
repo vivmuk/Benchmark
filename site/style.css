@@ -42,8 +42,11 @@ h1{font-size:clamp(26px,4vw,38px);line-height:1.1;letter-spacing:-.025em;margin:
 .score{margin-left:10px;font:800 22px var(--sans);letter-spacing:-.02em}
 .score small{font:600 11px var(--sans);color:var(--mute)}
 .frame{position:relative;aspect-ratio:16/9;background:#e9e2d6;overflow:hidden;border-block:1px solid var(--line)}
-.frame iframe{position:absolute;inset:0;width:1280px;height:720px;border:0;transform-origin:0 0;pointer-events:none}
+.frame iframe{position:absolute;inset:0;width:1280px;height:720px;border:0;transform-origin:0 0;pointer-events:none;z-index:1}
 .frame img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.frame .poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;filter:saturate(.98)}
+.frame iframe{opacity:0;transition:opacity .35s ease}
+.frame iframe.ready{opacity:1}
 .frame.tall{aspect-ratio:4/5}
 .frame button{position:absolute;inset:0;border:0;background:transparent;cursor:zoom-in}
 .frame .hint{position:absolute;right:8px;bottom:8px;background:rgba(29,26,38,.78);color:#fff;font-size:12px;padding:3px 8px;border-radius:99px}
@@ -52,6 +55,10 @@ h1{font-size:clamp(26px,4vw,38px);line-height:1.1;letter-spacing:-.025em;margin:
 .crit{display:flex;flex-wrap:wrap;gap:6px}
 .crit span{background:#f1eadf;border-radius:99px;padding:2px 9px;color:var(--ink)}
 .crit b{font-weight:700}
+.crit small{font-weight:400;opacity:.55}
+.why{margin:8px 0 0;padding-left:16px;font-size:13px;line-height:1.5;color:var(--mute)}
+.why li{margin:2px 0}
+.v{font-size:12px;color:var(--mute);margin:6px 0 0}
 .note{font-style:italic}
 .valuenote{max-width:82ch;font-size:14px;line-height:1.65;color:var(--mute);margin:16px 0 0;padding-left:12px;border-left:3px solid var(--line)}
 .valuenote strong{color:var(--ink)}

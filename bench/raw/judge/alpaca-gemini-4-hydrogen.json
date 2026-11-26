@@ -1,20 +1,103 @@
 {
- "claude-opus-5-5": {
-  "scores": {
-   "alpaca": 6.0,
-   "motion": 6.0,
-   "beauty": 7.0,
-   "scene": 7.0
-  },
-  "note": "A polished, softly lit flat-vector dusk scene with a plausible walk cycle, parallax and head bob, though the camelid's bare, spindly, deer-like legs and thin un-fleeced neck read more llama than alpaca, the joints look stiff, and the mountains' inverted-triangle snowcaps look like floating bunting."
+ "rubric": "v9",
+ "median": {
+  "anatomy": 4,
+  "craft": 4,
+  "gait": 3
  },
- "openai-gpt-6-sol": {
-  "scores": {
-   "alpaca": 6.0,
-   "motion": 5.0,
-   "beauty": 7.0,
-   "scene": 7.0
+ "judges_used": 1,
+ "setting": {
+  "depth_planes": 3,
+  "elements": [
+   "sky",
+   "clouds",
+   "stars",
+   "sun",
+   "distant mountains",
+   "snow patches",
+   "hills",
+   "grassy ground",
+   "dirt path",
+   "stones",
+   "grass tufts",
+   "flowers"
+  ],
+  "palette": "Muted greens and purples contrast with the pale alpaca and warm yellow sun.",
+  "placement": "Near the center of the frame, slightly below mid-height, facing right.",
+  "clutter": false
+ },
+ "captioner": "openai-gpt-6-luna",
+ "observations": {
+  "description": "A white alpaca walks toward the right across a flower-dotted meadow, with layered hills and mountains beneath a glowing sun and cloudy sky.",
+  "anatomy": {
+   "detached_parts": false,
+   "jointless_legs": false,
+   "wrong_proportions": false,
+   "missing_cues": false,
+   "notes": "none"
   },
-  "note": "The warm, layered landscape is appealing and the legs change between frames, but the gait is stiff and the bare, narrow neck makes the alpaca less convincing."
+  "gait": {
+   "feet_planted": true,
+   "sliding_or_popping": false,
+   "legs_change_between_frames": true,
+   "notes": "The bent legs alternate their positions across the frames while the hooves remain close to the ground."
+  },
+  "scene": {
+   "depth_planes": 3,
+   "elements": [
+    "sky",
+    "clouds",
+    "stars",
+    "sun",
+    "distant mountains",
+    "snow patches",
+    "hills",
+    "grassy ground",
+    "dirt path",
+    "stones",
+    "grass tufts",
+    "flowers"
+   ],
+   "palette": "Muted greens and purples contrast with the pale alpaca and warm yellow sun.",
+   "placement": "Near the center of the frame, slightly below mid-height, facing right.",
+   "clutter": false
+  },
+  "craft": {
+   "seams_or_stray_shapes": false,
+   "inconsistent_light": false,
+   "clipped_elements": false,
+   "contact_shadow": true,
+   "notes": "none"
+  }
+ },
+ "motion": {
+  "mean": 2.76,
+  "changed_pct": 5.73,
+  "leg_pct": 8.91
+ },
+ "rationale": {
+  "anatomy": "none (level 3.96 of 4)",
+  "craft": "none (level 3.96 of 4)",
+  "setting": "sky, clouds, stars, sun, distant mountains, snow patches, hills, grassy ground, dirt path, stones, grass tufts, flowers. Palette: Muted greens and purples contrast with the pale alpaca and warm yellow sun.. Placement: Near the center of the frame, slightly below mid-height, facing right..",
+  "gait": "band 3 from 5.73% pixel change; P(planted, coherent)=0.96"
+ },
+ "probabilities": {
+  "anatomy": {
+   "0": 0,
+   "1": 0,
+   "2": 0,
+   "3": 0.02,
+   "4": 0.98
+  },
+  "craft": {
+   "0": 0,
+   "1": 0,
+   "2": 0,
+   "3": 0.01,
+   "4": 0.99
+  }
+ },
+ "verdict": {
+  "jev+openai-gpt-6-luna": "A white alpaca walks toward the right across a flower-dotted meadow, with layered hills and mountains beneath a glowing sun and cloudy sky."
  }
 }

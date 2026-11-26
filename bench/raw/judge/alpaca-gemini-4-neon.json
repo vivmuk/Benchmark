@@ -1,20 +1,97 @@
 {
- "claude-opus-5-5": {
-  "scores": {
-   "alpaca": 6.0,
-   "motion": 6.0,
-   "beauty": 6.0,
-   "scene": 7.0
-  },
-  "note": "A clearly readable fleecy alpaca with a long neck, upright ears and a charming collar walks through a soft, tasteful Andean scene with drifting clouds and grass parallax, but its blocky, plate-like upper legs and awkward joint bends weaken both the anatomy and the believability of the gait."
+ "rubric": "v9",
+ "median": {
+  "anatomy": 4,
+  "craft": 2,
+  "gait": 4
  },
- "openai-gpt-6-sol": {
-  "scores": {
-   "alpaca": 8.0,
-   "motion": 4.0,
-   "beauty": 7.0,
-   "scene": 7.0
+ "judges_used": 1,
+ "setting": {
+  "depth_planes": 3,
+  "elements": [
+   "sky",
+   "clouds",
+   "sun",
+   "mountains",
+   "rolling hills",
+   "dirt path",
+   "grass",
+   "flowers",
+   "small light specks"
+  ],
+  "palette": "Soft blue, green, lavender, and tan with warm cream and yellow highlights.",
+  "placement": "The alpaca is near the center of the frame, standing on the path in the lower half.",
+  "clutter": false
+ },
+ "captioner": "openai-gpt-6-luna",
+ "observations": {
+  "description": "A cream-colored alpaca walks along a grassy dirt path in a sunlit mountain landscape.",
+  "anatomy": {
+   "detached_parts": false,
+   "jointless_legs": false,
+   "wrong_proportions": false,
+   "missing_cues": false,
+   "notes": "none"
   },
-  "note": "The alpaca is charming and recognizable, but its legs change only slightly between frames, making the walk feel more like a shuffle."
+  "gait": {
+   "feet_planted": true,
+   "sliding_or_popping": false,
+   "legs_change_between_frames": true,
+   "notes": "The legs alternate through walking poses; one hoof lifts while the others support the alpaca on the path."
+  },
+  "scene": {
+   "depth_planes": 3,
+   "elements": [
+    "sky",
+    "clouds",
+    "sun",
+    "mountains",
+    "rolling hills",
+    "dirt path",
+    "grass",
+    "flowers",
+    "small light specks"
+   ],
+   "palette": "Soft blue, green, lavender, and tan with warm cream and yellow highlights.",
+   "placement": "The alpaca is near the center of the frame, standing on the path in the lower half.",
+   "clutter": false
+  },
+  "craft": {
+   "seams_or_stray_shapes": false,
+   "inconsistent_light": false,
+   "clipped_elements": true,
+   "contact_shadow": false,
+   "notes": "Mountain silhouettes are cropped at the left and right frame edges; no distinct contact shadow is visible beneath the hooves."
+  }
+ },
+ "motion": {
+  "mean": 4.15,
+  "changed_pct": 10.36,
+  "leg_pct": 15.24
+ },
+ "rationale": {
+  "anatomy": "none (level 3.96 of 4)",
+  "craft": "Mountain silhouettes are cropped at the left and right frame edges; no distinct contact shadow is visible beneath the hooves. (level 2.01 of 4)",
+  "setting": "sky, clouds, sun, mountains, rolling hills, dirt path, grass, flowers, small light specks. Palette: Soft blue, green, lavender, and tan with warm cream and yellow highlights.. Placement: The alpaca is near the center of the frame, standing on the path in the lower half..",
+  "gait": "band 4 from 10.36% pixel change; P(planted, coherent)=0.95"
+ },
+ "probabilities": {
+  "anatomy": {
+   "0": 0,
+   "1": 0,
+   "2": 0.01,
+   "3": 0.02,
+   "4": 0.97
+  },
+  "craft": {
+   "0": 0,
+   "1": 0.02,
+   "2": 0.96,
+   "3": 0.02,
+   "4": 0
+  }
+ },
+ "verdict": {
+  "jev+openai-gpt-6-luna": "A cream-colored alpaca walks along a grassy dirt path in a sunlit mountain landscape."
  }
 }

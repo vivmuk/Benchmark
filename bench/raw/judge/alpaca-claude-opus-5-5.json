@@ -1,20 +1,101 @@
 {
- "gemini-3-1-pro-preview": {
-  "scores": {
-   "alpaca": 9.0,
-   "motion": 8.0,
-   "beauty": 8.0,
-   "scene": 8.0
-  },
-  "note": "The alpaca is well-drawn and the walking motion is clearly depicted through the changing leg positions across the frames, set in a beautifully styled vector landscape."
+ "rubric": "v9",
+ "median": {
+  "anatomy": 4,
+  "craft": 3,
+  "gait": 4
  },
- "openai-gpt-6-sol": {
-  "scores": {
-   "alpaca": 8.0,
-   "motion": 5.0,
-   "beauty": 7.0,
-   "scene": 7.0
+ "judges_used": 1,
+ "setting": {
+  "depth_planes": 3,
+  "elements": [
+   "sky",
+   "clouds",
+   "sun",
+   "bird",
+   "mountains",
+   "rolling hills",
+   "water",
+   "grass",
+   "flowers",
+   "dirt path",
+   "small shrubs"
+  ],
+  "palette": "Soft pastel blues, greens, lavender, and warm cream tones.",
+  "placement": "The alpaca is near the center, standing on the path in the lower half of the frame.",
+  "clutter": false
+ },
+ "captioner": "openai-gpt-6-luna",
+ "observations": {
+  "description": "A cream-colored alpaca walks along a flower-dotted path in a layered mountain meadow beneath a bright sky.",
+  "anatomy": {
+   "detached_parts": false,
+   "jointless_legs": false,
+   "wrong_proportions": false,
+   "missing_cues": false,
+   "notes": "none"
   },
-  "note": "The alpaca is clearly recognizable and the pastel landscape is polished, but the leg changes are subtle and the gait looks somewhat stiff."
+  "gait": {
+   "feet_planted": true,
+   "sliding_or_popping": false,
+   "legs_change_between_frames": true,
+   "notes": "The legs bend and alternate positions as the alpaca walks, with hooves touching the path and lifting between frames."
+  },
+  "scene": {
+   "depth_planes": 3,
+   "elements": [
+    "sky",
+    "clouds",
+    "sun",
+    "bird",
+    "mountains",
+    "rolling hills",
+    "water",
+    "grass",
+    "flowers",
+    "dirt path",
+    "small shrubs"
+   ],
+   "palette": "Soft pastel blues, greens, lavender, and warm cream tones.",
+   "placement": "The alpaca is near the center, standing on the path in the lower half of the frame.",
+   "clutter": false
+  },
+  "craft": {
+   "seams_or_stray_shapes": false,
+   "inconsistent_light": false,
+   "clipped_elements": true,
+   "contact_shadow": true,
+   "notes": "A cloud is partially cut off at the left edge; dark hoof shadows are visible on the path."
+  }
+ },
+ "motion": {
+  "mean": 2.46,
+  "changed_pct": 6.7,
+  "leg_pct": 11.85
+ },
+ "rationale": {
+  "anatomy": "none (level 3.97 of 4)",
+  "craft": "A cloud is partially cut off at the left edge; dark hoof shadows are visible on the path. (level 2.91 of 4)",
+  "setting": "sky, clouds, sun, bird, mountains, rolling hills, water, grass, flowers, dirt path, small shrubs. Palette: Soft pastel blues, greens, lavender, and warm cream tones.. Placement: The alpaca is near the center, standing on the path in the lower half of the frame..",
+  "gait": "band 4 from 6.70% pixel change; P(planted, coherent)=0.86"
+ },
+ "probabilities": {
+  "anatomy": {
+   "0": 0,
+   "1": 0,
+   "2": 0,
+   "3": 0.01,
+   "4": 0.99
+  },
+  "craft": {
+   "0": 0,
+   "1": 0.04,
+   "2": 0.01,
+   "3": 0.94,
+   "4": 0.01
+  }
+ },
+ "verdict": {
+  "jev+openai-gpt-6-luna": "A cream-colored alpaca walks along a flower-dotted path in a layered mountain meadow beneath a bright sky."
  }
 }

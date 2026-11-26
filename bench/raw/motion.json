@@ -1,29 +1,133 @@
 {
- "qwen-4-max": 3.124,
- "gemini-4-hydrogen": 2.209,
- "glm-5-3-flash-uncensored": 0.862,
- "gemini-4-carbon": 5.898,
- "claude-fable-5-2": 6.806,
+ "qwen-4-max": {
+  "mean": 3.38,
+  "changed_pct": 9.25,
+  "leg_pct": 10.9
+ },
+ "gemini-4-hydrogen": {
+  "mean": 2.76,
+  "changed_pct": 5.73,
+  "leg_pct": 8.91
+ },
+ "glm-5-3-flash-uncensored": {
+  "mean": 0.96,
+  "changed_pct": 2.5,
+  "leg_pct": 4.92
+ },
+ "gemini-4-carbon": {
+  "mean": 5.05,
+  "changed_pct": 10.61,
+  "leg_pct": 15.58
+ },
+ "claude-fable-5-2": {
+  "mean": 5.19,
+  "changed_pct": 13.69,
+  "leg_pct": 23.31
+ },
  "e2ee-deepseek-v4-1-flash-1017-abliterated": null,
- "deepseek-v4-1-flash-1017-uncensored": 2.605,
- "openai-gpt-61-terra": 0.981,
- "kimi-k3-1-pro": 0.831,
- "kimi-k3-1-pro-highspeed": 0.654,
- "inkling-2-mini": 1.768,
- "hy4": 2.176,
- "gemini-4-neon": 4.016,
- "openai-gpt-62-astra": 1.529,
- "openai-gpt-62-astra-pro": 2.442,
- "openai-gpt-62-sol": 0.732,
- "openai-gpt-62-sol-pro": 0.37,
- "e2ee-kimi-k3-1-pro-p": 0.762,
- "deepseek-v4-1-flash-1017": 2.309,
- "claude-opus-5-5": 3.57,
- "claude-sonnet-5-5": 5.181,
- "claude-haiku-5-5": 3.615,
- "minimax-m3-1-flash": 4.407,
- "nvidia-nemotron-3-5-super-vl-120b-a12b": 0.13,
- "muse-wonder": 2.228,
- "pareto": 0.724,
- "qwen3-6-27b": 0.731
+ "deepseek-v4-1-flash-1017-uncensored": {
+  "mean": 2.62,
+  "changed_pct": 6.77,
+  "leg_pct": 13.96
+ },
+ "openai-gpt-61-terra": {
+  "mean": 0.94,
+  "changed_pct": 2.24,
+  "leg_pct": 4.66
+ },
+ "kimi-k3-1-pro": {
+  "mean": 0.91,
+  "changed_pct": 2.05,
+  "leg_pct": 2.89
+ },
+ "kimi-k3-1-pro-highspeed": {
+  "mean": 0.77,
+  "changed_pct": 1.6,
+  "leg_pct": 1.8
+ },
+ "inkling-2-mini": {
+  "mean": 1.49,
+  "changed_pct": 3.25,
+  "leg_pct": 4.72
+ },
+ "hy4": {
+  "mean": 1.24,
+  "changed_pct": 2.98,
+  "leg_pct": 5.03
+ },
+ "gemini-4-neon": {
+  "mean": 4.15,
+  "changed_pct": 10.36,
+  "leg_pct": 15.24
+ },
+ "openai-gpt-62-astra": {
+  "mean": 1.59,
+  "changed_pct": 3.62,
+  "leg_pct": 6.13
+ },
+ "openai-gpt-62-astra-pro": {
+  "mean": 2.46,
+  "changed_pct": 6.24,
+  "leg_pct": 11.15
+ },
+ "openai-gpt-62-sol": {
+  "mean": 1.59,
+  "changed_pct": 3.79,
+  "leg_pct": 6.77
+ },
+ "openai-gpt-62-sol-pro": {
+  "mean": 1.11,
+  "changed_pct": 2.64,
+  "leg_pct": 3.73
+ },
+ "e2ee-kimi-k3-1-pro-p": {
+  "mean": 0.8,
+  "changed_pct": 1.68,
+  "leg_pct": 2.66
+ },
+ "deepseek-v4-1-flash-1017": {
+  "mean": 1.9,
+  "changed_pct": 3.2,
+  "leg_pct": 5.21
+ },
+ "claude-opus-5-5": {
+  "mean": 2.46,
+  "changed_pct": 6.7,
+  "leg_pct": 11.85
+ },
+ "claude-sonnet-5-5": {
+  "mean": 3.89,
+  "changed_pct": 8.26,
+  "leg_pct": 13.61
+ },
+ "claude-haiku-5-5": {
+  "mean": 2.73,
+  "changed_pct": 7.12,
+  "leg_pct": 14.28
+ },
+ "minimax-m3-1-flash": {
+  "mean": 3.35,
+  "changed_pct": 8.77,
+  "leg_pct": 16.82
+ },
+ "nvidia-nemotron-3-5-super-vl-120b-a12b": {
+  "mean": 0.13,
+  "changed_pct": 0.36,
+  "leg_pct": 0.35
+ },
+ "muse-wonder": {
+  "mean": 1.63,
+  "changed_pct": 3.94,
+  "leg_pct": 7.93
+ },
+ "pareto": {
+  "mean": 0.68,
+  "changed_pct": 1.43,
+  "leg_pct": 2.48
+ },
+ "qwen3-6-27b": {
+  "mean": 0.6,
+  "changed_pct": 1.29,
+  "leg_pct": 1.37
+ }
 }

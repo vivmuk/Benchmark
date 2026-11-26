@@ -1,20 +1,95 @@
 {
- "claude-opus-5-5": {
-  "scores": {
-   "alpaca": 6.0,
-   "motion": 5.0,
-   "beauty": 6.0,
-   "scene": 6.0
-  },
-  "note": "A recognisable, cute alpaca with upright ears, long neck and fluffy fleece, but the legs are stiff unjointed sticks swinging like pendulums under a cloud-blob body with an odd belly smudge, set in a soft, pleasant but generic meadow whose scrolling grass sells the walk better than the gait itself."
+ "rubric": "v9",
+ "median": {
+  "anatomy": 2,
+  "craft": 3,
+  "gait": 4
  },
- "openai-gpt-6-sol": {
-  "scores": {
-   "alpaca": 7.0,
-   "motion": 5.0,
-   "beauty": 6.0,
-   "scene": 6.0
+ "judges_used": 1,
+ "setting": {
+  "depth_planes": 3,
+  "elements": [
+   "sky",
+   "clouds",
+   "sun",
+   "rolling hills",
+   "pale horizon band",
+   "grassy meadow",
+   "grass tufts",
+   "flowers"
+  ],
+  "palette": "Blue sky and hills contrast with the green meadow, pale alpaca, and warm yellow sun.",
+  "placement": "The alpaca is near the center of the frame, slightly right of center.",
+  "clutter": false
+ },
+ "captioner": "openai-gpt-6-luna",
+ "observations": {
+  "description": "A cream-colored alpaca walks through a flower-dotted meadow beneath a sunny, cloudy sky with rolling hills in the distance.",
+  "anatomy": {
+   "detached_parts": false,
+   "jointless_legs": true,
+   "wrong_proportions": false,
+   "missing_cues": false,
+   "notes": "The narrow legs are mostly straight, with no visible joints."
   },
-  "note": "The fluffy, long-necked animal reads as an alpaca, but its stiff legs and nearly stationary body make the walk feel mechanical; the soft meadow is pleasant but simple."
+  "gait": {
+   "feet_planted": true,
+   "sliding_or_popping": false,
+   "legs_change_between_frames": true,
+   "notes": "The legs alternate between more forward and backward positions, with some hooves lifting as the alpaca walks."
+  },
+  "scene": {
+   "depth_planes": 3,
+   "elements": [
+    "sky",
+    "clouds",
+    "sun",
+    "rolling hills",
+    "pale horizon band",
+    "grassy meadow",
+    "grass tufts",
+    "flowers"
+   ],
+   "palette": "Blue sky and hills contrast with the green meadow, pale alpaca, and warm yellow sun.",
+   "placement": "The alpaca is near the center of the frame, slightly right of center.",
+   "clutter": false
+  },
+  "craft": {
+   "seams_or_stray_shapes": false,
+   "inconsistent_light": false,
+   "clipped_elements": true,
+   "contact_shadow": true,
+   "notes": "A cloud is partly cropped at the upper-right edge."
+  }
+ },
+ "motion": {
+  "mean": 2.62,
+  "changed_pct": 6.77,
+  "leg_pct": 13.96
+ },
+ "rationale": {
+  "anatomy": "The narrow legs are mostly straight, with no visible joints. (level 2.11 of 4)",
+  "craft": "A cloud is partly cropped at the upper-right edge. (level 2.92 of 4)",
+  "setting": "sky, clouds, sun, rolling hills, pale horizon band, grassy meadow, grass tufts, flowers. Palette: Blue sky and hills contrast with the green meadow, pale alpaca, and warm yellow sun.. Placement: The alpaca is near the center of the frame, slightly right of center..",
+  "gait": "band 4 from 6.77% pixel change; P(planted, coherent)=0.80"
+ },
+ "probabilities": {
+  "anatomy": {
+   "0": 0,
+   "1": 0.02,
+   "2": 0.88,
+   "3": 0.07,
+   "4": 0.03
+  },
+  "craft": {
+   "0": 0,
+   "1": 0.04,
+   "2": 0.01,
+   "3": 0.94,
+   "4": 0.01
+  }
+ },
+ "verdict": {
+  "jev+openai-gpt-6-luna": "A cream-colored alpaca walks through a flower-dotted meadow beneath a sunny, cloudy sky with rolling hills in the distance."
  }
 }

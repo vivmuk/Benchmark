@@ -24,8 +24,25 @@ def grade(text):
     return out
 
 
+WEIGHTS = {"anatomy": 0.40, "gait": 0.40, "craft": 0.20}
+
+
 def judged(task, mid):
     j = load(RAW / "judge" / ("%s-%s.json" % (task, mid)), {})
+    if task == "alpaca" and j.get("median"):
+        med = j["median"]
+        score = round(sum(WEIGHTS[k] * med[k] / 4 for k in WEIGHTS) * 100, 1)
+        used = [k for k, v in j.items() if isinstance(v, dict) and "scores" in v]
+        if used:
+            by = {k: round(sum(WEIGHTS[c] * j[k]["scores"][c] / 4 for c in WEIGHTS) * 100, 1) for k in used}
+            rat = (j.get(used[0]) or {}).get("rationale", {})
+            verd = {k: j[k].get("verdict", "") for k in used}
+        else:
+            by = {("jev+" + j.get("captioner", "captioner")): score}
+            rat = j.get("rationale") or {}
+            verd = j.get("verdict") or {}
+        return {"score": score, "criteria": med, "by_judge": by, "rationale": rat, "verdict": verd,
+                "setting": j.get("setting"), "judges": j.get("judges_used", len(by)), "rubric": j.get("rubric"), "scale": 4}
     ok = {k: v for k, v in j.items() if "scores" in v}
     if not ok:
         return None
@@ -59,6 +76,37 @@ def gen_task(task, mid):
     return d
 
 
+
+def compliance(mid, ms):
+    """Brief compliance, checked in code rather than by a judge: self-contained, fits 1280x720, animates, renders."""
+    import re as _re
+    notes, ok = [], 0
+    html_p = SITE / "out" / "alpaca" / (mid + ".html")
+    html = html_p.read_text(errors="ignore") if html_p.exists() else ""
+    ext = _re.findall(r'(?:src|href)\s*=\s*["\']https?://|url\(\s*["\']?https?://|@import\s+url\(', html, _re.I)
+    if ext:
+        notes.append("links to %d external asset(s)" % len(ext))
+    else:
+        ok += 1
+    meta_p = RAW / "shots" / ("alpaca-%s-meta.json" % mid)
+    meta = load(meta_p, {}) or {}
+    sw = max(meta.get("sw") or 0, meta.get("bw") or 0)
+    sh = max(meta.get("sh") or 0, meta.get("bh") or 0)
+    if sw and sh and sw <= 1282 and sh <= 722:
+        ok += 1
+    elif sw or sh:
+        notes.append("overflows the 1280x720 stage (%dx%d)" % (sw, sh))
+    if (ms or {}).get("changed_pct", 0) >= 1:
+        ok += 1
+    else:
+        notes.append("barely animates")
+    if len(html) > 800:
+        ok += 1
+    else:
+        notes.append("almost no markup")
+    return ok, notes
+
+
 NAME_OVERRIDE = {"e2ee-kimi-k3-1-pro-p": "Kimi K3.1 Pro (E2EE)"}
 
 models, spend = [], 0.0
@@ -69,7 +117,27 @@ for mid in MODELS:
          "vision": s["vision"]}
     m["alpaca"] = gen_task("alpaca", mid)
     if m["alpaca"]["status"] != "failed":
-        m["alpaca"]["motion"] = motion.get(mid)
+        ms = motion.get(mid) or {}
+        if isinstance(ms, dict):
+            m["alpaca"]["motion"] = ms.get("mean")
+            m["alpaca"]["motion_changed"] = ms.get("changed_pct")
+            m["alpaca"]["motion_leg"] = ms.get("leg_pct")
+        else:
+            m["alpaca"]["motion"] = ms
+        c, cnotes = compliance(mid, ms)
+        m["alpaca"]["compliance"] = c
+        m["alpaca"]["compliance_notes"] = cnotes
+        if m["alpaca"].get("criteria"):
+            crit = dict(m["alpaca"]["criteria"])
+            ch = (ms or {}).get("changed_pct", 0)
+            band = 4 if ch >= 6 else 3 if ch >= 3 else 2 if ch >= 1 else 1 if ch > 0 else 0
+            if crit.get("gait", 0) > band:
+                crit["gait"] = band
+            m["alpaca"]["criteria"] = crit
+            m["alpaca"]["gait_band"] = band
+            visual = round(sum(WEIGHTS[k] * crit[k] / 4 for k in WEIGHTS) * 100, 1)
+            m["alpaca"]["score_visual"] = visual
+            m["alpaca"]["score"] = round(visual * (0.75 + 0.0625 * c), 1)
     m["design"] = gen_task("design", mid)
 
     if not s["vision"]:
@@ -119,7 +187,7 @@ for mid in MODELS:
 
 data = {"generated": datetime.date.today().isoformat(), "models": models, "judges": JUDGES, "image_model": IMAGE_MODEL,
         "contestant_spend": round(spend, 2), "questions": len(answers),
-        "judge_note": "Models added before 2026-11-25 were scored by Claude Opus 5.5 and GPT-6 Sol. Claude Opus 5.5 is now a contestant, so from that date the Claude-side judge is Gemini 3.1 Pro; every row records which judges produced it.",
+        "judge_note": "Alpaca cards are scored differently from the other tabs: a small vision model records what is in the four frames, and Jev, a decision model, maps those observations onto the 0-4 rubric. Design and recreation cards were scored by Claude Opus 5.5 and GPT-6 Sol before 2026-11-25, and by Gemini 3.1 Pro and GPT-6 Sol after Claude Opus 5.5 became a contestant.",
         "run_note": "The first ten models ran on 2026-11-16; the seventeen added since ran on 2026-11-25."}
 # Two axes of "value": answers per 1,000 output tokens (parsimony) and answers per dollar (price).
 # The index is their geometric mean, each axis scaled to the best model, so a model has to be good at both.

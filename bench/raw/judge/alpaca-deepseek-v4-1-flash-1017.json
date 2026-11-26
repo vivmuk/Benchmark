@@ -1,20 +1,95 @@
 {
- "claude-opus-5-5": {
-  "scores": {
-   "alpaca": 5.0,
-   "motion": 5.0,
-   "beauty": 5.0,
-   "scene": 7.0
-  },
-  "note": "The bubble-cluster fleece, long neck, small head and upright ears read clearly as an alpaca, and the legs do swing alternately between frames as the grass scrolls, but the legs are flat, kneeless, tapered slabs only loosely attached to a lumpy body, so the walk is a stiff pendulum shuffle with littl"
+ "rubric": "v9",
+ "median": {
+  "anatomy": 2,
+  "craft": 3,
+  "gait": 2
  },
- "openai-gpt-6-sol": {
-  "scores": {
-   "alpaca": 7.0,
-   "motion": 5.0,
-   "beauty": 6.0,
-   "scene": 6.0
+ "judges_used": 1,
+ "setting": {
+  "depth_planes": 3,
+  "elements": [
+   "sky",
+   "clouds",
+   "sun",
+   "distant hills",
+   "grassy field",
+   "grass tufts",
+   "flowers",
+   "glowing specks"
+  ],
+  "palette": "Soft blue sky, muted purple hills, and green grass with warm yellow light.",
+  "placement": "The alpaca is near the center, slightly to the right, in the lower half of the frame.",
+  "clutter": false
+ },
+ "captioner": "openai-gpt-6-luna",
+ "observations": {
+  "description": "A fluffy white alpaca walks in place in a grassy field beneath a cloudy sky with a low sun.",
+  "anatomy": {
+   "detached_parts": false,
+   "jointless_legs": true,
+   "wrong_proportions": false,
+   "missing_cues": false,
+   "notes": "The four legs are smooth and have no visible knee joints."
   },
-  "note": "The fluffy long-necked alpaca is recognizable, but its stiff legs and nearly stationary body make the walk less convincing than the polished pastoral setting."
+  "gait": {
+   "feet_planted": true,
+   "sliding_or_popping": true,
+   "legs_change_between_frames": true,
+   "notes": "The legs change positions while the hooves stay near the ground and shift horizontally."
+  },
+  "scene": {
+   "depth_planes": 3,
+   "elements": [
+    "sky",
+    "clouds",
+    "sun",
+    "distant hills",
+    "grassy field",
+    "grass tufts",
+    "flowers",
+    "glowing specks"
+   ],
+   "palette": "Soft blue sky, muted purple hills, and green grass with warm yellow light.",
+   "placement": "The alpaca is near the center, slightly to the right, in the lower half of the frame.",
+   "clutter": false
+  },
+  "craft": {
+   "seams_or_stray_shapes": false,
+   "inconsistent_light": false,
+   "clipped_elements": false,
+   "contact_shadow": false,
+   "notes": "No distinct contact shadow is visible beneath the hooves."
+  }
+ },
+ "motion": {
+  "mean": 1.9,
+  "changed_pct": 3.2,
+  "leg_pct": 5.21
+ },
+ "rationale": {
+  "anatomy": "The four legs are smooth and have no visible knee joints. (level 2.15 of 4)",
+  "craft": "No distinct contact shadow is visible beneath the hooves. (level 2.95 of 4)",
+  "setting": "sky, clouds, sun, distant hills, grassy field, grass tufts, flowers, glowing specks. Palette: Soft blue sky, muted purple hills, and green grass with warm yellow light.. Placement: The alpaca is near the center, slightly to the right, in the lower half of the frame..",
+  "gait": "band 3 from 3.20% pixel change; P(planted, coherent)=0.08"
+ },
+ "probabilities": {
+  "anatomy": {
+   "0": 0,
+   "1": 0.01,
+   "2": 0.86,
+   "3": 0.09,
+   "4": 0.04
+  },
+  "craft": {
+   "0": 0,
+   "1": 0.02,
+   "2": 0.02,
+   "3": 0.94,
+   "4": 0.02
+  }
+ },
+ "verdict": {
+  "jev+openai-gpt-6-luna": "A fluffy white alpaca walks in place in a grassy field beneath a cloudy sky with a low sun."
  }
 }

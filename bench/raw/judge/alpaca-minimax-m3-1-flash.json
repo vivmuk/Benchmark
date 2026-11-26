@@ -1,20 +1,103 @@
 {
- "gemini-3-1-pro-preview": {
-  "scores": {
-   "alpaca": 9.0,
-   "motion": 8.0,
-   "beauty": 8.0,
-   "scene": 8.0
-  },
-  "note": "The alpaca is beautifully drawn and the walking animation is convincing, set in a pleasant and stylized landscape."
+ "rubric": "v9",
+ "median": {
+  "anatomy": 4,
+  "craft": 4,
+  "gait": 4
  },
- "openai-gpt-6-sol": {
-  "scores": {
-   "alpaca": 7.0,
-   "motion": 3.0,
-   "beauty": 6.0,
-   "scene": 7.0
+ "judges_used": 1,
+ "setting": {
+  "depth_planes": 3,
+  "elements": [
+   "sky",
+   "clouds",
+   "sun",
+   "birds",
+   "distant mountains",
+   "trees",
+   "bushes",
+   "green field",
+   "sandy path",
+   "grass tufts",
+   "small flowers",
+   "scattered stones"
+  ],
+  "palette": "Bright blue sky, layered blue mountains, green field, and a pale tan path.",
+  "placement": "Near the center of the frame, standing on the path.",
+  "clutter": false
+ },
+ "captioner": "openai-gpt-6-luna",
+ "observations": {
+  "description": "A cream-colored alpaca wearing a striped rust-red blanket walks along a sandy path through a sunny green landscape.",
+  "anatomy": {
+   "detached_parts": false,
+   "jointless_legs": false,
+   "wrong_proportions": false,
+   "missing_cues": false,
+   "notes": "none"
   },
-  "note": "The fleece, long neck and upright ears read as an alpaca, but its thin legs barely change between frames, making the walk feel stiff."
+  "gait": {
+   "feet_planted": true,
+   "sliding_or_popping": false,
+   "legs_change_between_frames": true,
+   "notes": "The legs change angle and position between frames; some hooves lift while others remain near the ground."
+  },
+  "scene": {
+   "depth_planes": 3,
+   "elements": [
+    "sky",
+    "clouds",
+    "sun",
+    "birds",
+    "distant mountains",
+    "trees",
+    "bushes",
+    "green field",
+    "sandy path",
+    "grass tufts",
+    "small flowers",
+    "scattered stones"
+   ],
+   "palette": "Bright blue sky, layered blue mountains, green field, and a pale tan path.",
+   "placement": "Near the center of the frame, standing on the path.",
+   "clutter": false
+  },
+  "craft": {
+   "seams_or_stray_shapes": false,
+   "inconsistent_light": false,
+   "clipped_elements": false,
+   "contact_shadow": true,
+   "notes": "none"
+  }
+ },
+ "motion": {
+  "mean": 3.35,
+  "changed_pct": 8.77,
+  "leg_pct": 16.82
+ },
+ "rationale": {
+  "anatomy": "none (level 3.96 of 4)",
+  "craft": "none (level 3.97 of 4)",
+  "setting": "sky, clouds, sun, birds, distant mountains, trees, bushes, green field, sandy path, grass tufts, small flowers, scattered stones. Palette: Bright blue sky, layered blue mountains, green field, and a pale tan path.. Placement: Near the center of the frame, standing on the path..",
+  "gait": "band 4 from 8.77% pixel change; P(planted, coherent)=0.85"
+ },
+ "probabilities": {
+  "anatomy": {
+   "0": 0,
+   "1": 0,
+   "2": 0.01,
+   "3": 0.01,
+   "4": 0.98
+  },
+  "craft": {
+   "0": 0,
+   "1": 0,
+   "2": 0,
+   "3": 0.01,
+   "4": 0.99
+  }
+ },
+ "verdict": {
+  "jev+openai-gpt-6-luna": "A cream-colored alpaca wearing a striped rust-red blanket walks along a sandy path through a sunny green landscape."
  }
 }

@@ -1,0 +1,35 @@
+{
+ "state": "ANATOMY REPORT\nAll parts attached: yes.\nLegs have joints: yes.\nProportions right for a camelid: yes.\nSpecies cues present (upright ears, muzzle, fleece): yes.\n\nGAIT REPORT\nLegs change between frames: yes.\nFeet stay planted: no.\nAny sliding or popping: no.\nCaptioner note on gait: The legs alternate between angled and nearly vertical positions as the hooves swing above the grass.\n\nSCENE REPORT\nDistinct depth planes: 3 (1 = flat fill, 2 = sky and ground, 3 = foreground, middle, background).\nPalette: Pastel blue and peach sky with soft greens and pale cream highlights..\nPlacement: The alpaca is near the center, slightly right, with its head in the upper half of the frame..\nClutter competing with the subject: no.\n\nCRAFT REPORT\nSeams or stray shapes: no.\nLight direction inconsistent: no.\nElements clipped by the frame: no.\nContact shadow under the animal: yes.\nCaptioner note on craft: No visible artifacts; a soft shadow appears beneath the feet.\n\nMEASURED MOTION: 7.12% of all pixels changed between consecutive frames, 14.28% in the leg band.\n\nDescription of the frames: A cream-colored alpaca walks through a grassy landscape beneath a blue sky.",
+ "questions": {
+  "anatomy": {
+   "type": "score",
+   "instructions": "Read only the ANATOMY REPORT and the captioner note. How good is the animal's anatomy? Pick the level that matches the faults actually reported. Ignore the scene and the motion.",
+   "criteria": [
+    "0 - not recognisably an animal",
+    "1 - several structural faults: detached parts, missing legs, or no camelid shape",
+    "2 - one structural fault, or two cosmetic faults",
+    "3 - one cosmetic fault only",
+    "4 - no fault reported in the anatomy report"
+   ]
+  },
+  "craft": {
+   "type": "score",
+   "instructions": "Read only the CRAFT REPORT. How clean is the execution? Count the artifacts actually reported: seams, inconsistent light, clipping, missing shadow.",
+   "criteria": [
+    "0 - blank or unrenderable",
+    "1 - broken layout or missing parts",
+    "2 - several visible artifacts",
+    "3 - one visible artifact",
+    "4 - no artifact reported in the craft report"
+   ]
+  },
+  "feet": {
+   "type": "noul",
+   "instructions": "According to the GAIT REPORT, do the hooves stay planted and does the leg cycle stay coherent across the frames?",
+   "criteria": {
+    "true": "feet planted and cycle coherent, no sliding or popping reported",
+    "false": "sliding, popping, or no planted foot reported"
+   }
+  }
+ }
+}

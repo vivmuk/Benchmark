@@ -1,20 +1,97 @@
 {
- "claude-opus-5-5": {
-  "scores": {
-   "alpaca": 6.0,
-   "motion": 6.0,
-   "beauty": 6.0,
-   "scene": 7.0
-  },
-  "note": "The fluffy body, long neck and upright ears read as an alpaca, but the overly long, bare, deer-like legs and fox-like head weaken the anatomy; the legs swing plausibly across frames against a scrolling parallax background, and the pastel dusk scene is pleasant though generic, with an empty ground pl"
+ "rubric": "v9",
+ "median": {
+  "anatomy": 4,
+  "craft": 3,
+  "gait": 2
  },
- "openai-gpt-6-sol": {
-  "scores": {
-   "alpaca": 7.0,
-   "motion": 5.0,
-   "beauty": 6.0,
-   "scene": 6.0
+ "judges_used": 1,
+ "setting": {
+  "depth_planes": 3,
+  "elements": [
+   "sky",
+   "sun",
+   "clouds",
+   "distant purple hills",
+   "blue hills",
+   "green rolling hills",
+   "foreground grass",
+   "small grass tufts",
+   "light specks"
+  ],
+  "palette": "Pastel blue and pink sky, yellow sun, layered purple and blue hills, and muted green grass.",
+  "placement": "The alpaca is near the center of the frame, slightly right of center.",
+  "clutter": false
+ },
+ "captioner": "openai-gpt-6-luna",
+ "observations": {
+  "description": "A fluffy alpaca wearing a pink patterned blanket walks across a grassy landscape beneath a pastel sky.",
+  "anatomy": {
+   "detached_parts": false,
+   "jointless_legs": false,
+   "wrong_proportions": false,
+   "missing_cues": false,
+   "notes": "none"
   },
-  "note": "The fleece, long neck and small head read as an alpaca, but the stick-thin legs and modest changes between frames make the walk feel stiff."
+  "gait": {
+   "feet_planted": true,
+   "sliding_or_popping": false,
+   "legs_change_between_frames": true,
+   "notes": "The legs alternate between crossing, lifting, and extending as the alpaca walks."
+  },
+  "scene": {
+   "depth_planes": 3,
+   "elements": [
+    "sky",
+    "sun",
+    "clouds",
+    "distant purple hills",
+    "blue hills",
+    "green rolling hills",
+    "foreground grass",
+    "small grass tufts",
+    "light specks"
+   ],
+   "palette": "Pastel blue and pink sky, yellow sun, layered purple and blue hills, and muted green grass.",
+   "placement": "The alpaca is near the center of the frame, slightly right of center.",
+   "clutter": false
+  },
+  "craft": {
+   "seams_or_stray_shapes": false,
+   "inconsistent_light": false,
+   "clipped_elements": false,
+   "contact_shadow": false,
+   "notes": "No visible contact shadow beneath the hooves."
+  }
+ },
+ "motion": {
+  "mean": 1.24,
+  "changed_pct": 2.98,
+  "leg_pct": 5.03
+ },
+ "rationale": {
+  "anatomy": "none (level 3.97 of 4)",
+  "craft": "No visible contact shadow beneath the hooves. (level 2.97 of 4)",
+  "setting": "sky, sun, clouds, distant purple hills, blue hills, green rolling hills, foreground grass, small grass tufts, light specks. Palette: Pastel blue and pink sky, yellow sun, layered purple and blue hills, and muted green grass.. Placement: The alpaca is near the center of the frame, slightly right of center..",
+  "gait": "band 2 from 2.98% pixel change; P(planted, coherent)=0.96"
+ },
+ "probabilities": {
+  "anatomy": {
+   "0": 0,
+   "1": 0,
+   "2": 0,
+   "3": 0.01,
+   "4": 0.99
+  },
+  "craft": {
+   "0": 0,
+   "1": 0.02,
+   "2": 0.01,
+   "3": 0.95,
+   "4": 0.02
+  }
+ },
+ "verdict": {
+  "jev+openai-gpt-6-luna": "A fluffy alpaca wearing a pink patterned blanket walks across a grassy landscape beneath a pastel sky."
  }
 }

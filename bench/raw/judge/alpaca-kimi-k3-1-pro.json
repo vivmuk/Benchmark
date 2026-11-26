@@ -1,20 +1,99 @@
 {
- "claude-opus-5-5": {
-  "scores": {
-   "alpaca": 6.0,
-   "motion": 6.0,
-   "beauty": 6.0,
-   "scene": 7.0
-  },
-  "note": "A charming, softly coloured camelid with a long neck, fleece and upright ears sits in a tasteful mountain-path scene, but the cloud-blob body, banana-like llama ears and stiff, stick-like wooden legs with awkwardly bending joints weaken both the anatomy and the walk cycle, even though the legs do cl"
+ "rubric": "v9",
+ "median": {
+  "anatomy": 4,
+  "craft": 4,
+  "gait": 2
  },
- "openai-gpt-6-sol": {
-  "scores": {
-   "alpaca": 8.0,
-   "motion": 6.0,
-   "beauty": 8.0,
-   "scene": 7.0
+ "judges_used": 1,
+ "setting": {
+  "depth_planes": 3,
+  "elements": [
+   "sky",
+   "sun",
+   "clouds",
+   "birds",
+   "snow-capped mountains",
+   "rolling green hills",
+   "sandy path",
+   "rocks",
+   "grass tufts",
+   "flowers"
+  ],
+  "palette": "Soft muted greens, pale blue, warm cream, and sandy tan.",
+  "placement": "The alpaca is near the center of the frame, standing on the path.",
+  "clutter": false
+ },
+ "captioner": "openai-gpt-6-luna",
+ "observations": {
+  "description": "A fluffy cream-colored alpaca walks along a sandy path in a green mountain landscape beneath a bright sun.",
+  "anatomy": {
+   "detached_parts": false,
+   "jointless_legs": false,
+   "wrong_proportions": false,
+   "missing_cues": false,
+   "notes": "none"
   },
-  "note": "The woolly alpaca is clear and charming in a tasteful pastel landscape, but its visibly changing legs move somewhat stiffly."
+  "gait": {
+   "feet_planted": true,
+   "sliding_or_popping": false,
+   "legs_change_between_frames": true,
+   "notes": "The long legs bend and swing in alternating positions, with hooves touching or briefly lifting from the path."
+  },
+  "scene": {
+   "depth_planes": 3,
+   "elements": [
+    "sky",
+    "sun",
+    "clouds",
+    "birds",
+    "snow-capped mountains",
+    "rolling green hills",
+    "sandy path",
+    "rocks",
+    "grass tufts",
+    "flowers"
+   ],
+   "palette": "Soft muted greens, pale blue, warm cream, and sandy tan.",
+   "placement": "The alpaca is near the center of the frame, standing on the path.",
+   "clutter": false
+  },
+  "craft": {
+   "seams_or_stray_shapes": false,
+   "inconsistent_light": false,
+   "clipped_elements": false,
+   "contact_shadow": true,
+   "notes": "None."
+  }
+ },
+ "motion": {
+  "mean": 0.91,
+  "changed_pct": 2.05,
+  "leg_pct": 2.89
+ },
+ "rationale": {
+  "anatomy": "none (level 3.98 of 4)",
+  "craft": "None. (level 3.96 of 4)",
+  "setting": "sky, sun, clouds, birds, snow-capped mountains, rolling green hills, sandy path, rocks, grass tufts, flowers. Palette: Soft muted greens, pale blue, warm cream, and sandy tan.. Placement: The alpaca is near the center of the frame, standing on the path..",
+  "gait": "band 2 from 2.05% pixel change; P(planted, coherent)=0.89"
+ },
+ "probabilities": {
+  "anatomy": {
+   "0": 0,
+   "1": 0,
+   "2": 0,
+   "3": 0.01,
+   "4": 0.99
+  },
+  "craft": {
+   "0": 0,
+   "1": 0,
+   "2": 0,
+   "3": 0.01,
+   "4": 0.99
+  }
+ },
+ "verdict": {
+  "jev+openai-gpt-6-luna": "A fluffy cream-colored alpaca walks along a sandy path in a green mountain landscape beneath a bright sun."
  }
 }

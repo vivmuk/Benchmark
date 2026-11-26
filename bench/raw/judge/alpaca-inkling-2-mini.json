@@ -1,20 +1,101 @@
 {
- "claude-opus-5-5": {
-  "scores": {
-   "alpaca": 6.0,
-   "motion": 6.0,
-   "beauty": 6.0,
-   "scene": 6.0
-  },
-  "note": "A recognisable fluffy cream alpaca with a long neck, small head and upright ears walks through a soft, pleasant pastel morning scene with scrolling ground and changing leg poses, but the oversized blob body, stiff stick legs with awkward joint bends, minimal body bob and a stray clipped circle in th"
+ "rubric": "v9",
+ "median": {
+  "anatomy": 4,
+  "craft": 3,
+  "gait": 3
  },
- "openai-gpt-6-sol": {
-  "scores": {
-   "alpaca": 7.0,
-   "motion": 5.0,
-   "beauty": 7.0,
-   "scene": 7.0
+ "judges_used": 1,
+ "setting": {
+  "depth_planes": 3,
+  "elements": [
+   "sky",
+   "clouds",
+   "sun",
+   "bird silhouettes",
+   "distant hills",
+   "grassy field",
+   "bushes",
+   "grass tufts",
+   "flowers",
+   "sandy path",
+   "stones"
+  ],
+  "palette": "Soft pastel blue, green, yellow, and cream tones.",
+  "placement": "The alpaca is near the horizontal center, standing on the lower part of the frame.",
+  "clutter": false
+ },
+ "captioner": "openai-gpt-6-luna",
+ "observations": {
+  "description": "A fluffy white alpaca walks to the right along a sandy path in a sunny, stylized meadow.",
+  "anatomy": {
+   "detached_parts": false,
+   "jointless_legs": false,
+   "wrong_proportions": false,
+   "missing_cues": false,
+   "notes": "none"
   },
-  "note": "The fluffy alpaca is clearly recognizable and the pastel scene is tasteful, but the legs change without a convincing planted-foot walking cycle."
+  "gait": {
+   "feet_planted": true,
+   "sliding_or_popping": false,
+   "legs_change_between_frames": true,
+   "notes": "The legs bend and swing into different positions between frames; some hooves are down on the path while others lift."
+  },
+  "scene": {
+   "depth_planes": 3,
+   "elements": [
+    "sky",
+    "clouds",
+    "sun",
+    "bird silhouettes",
+    "distant hills",
+    "grassy field",
+    "bushes",
+    "grass tufts",
+    "flowers",
+    "sandy path",
+    "stones"
+   ],
+   "palette": "Soft pastel blue, green, yellow, and cream tones.",
+   "placement": "The alpaca is near the horizontal center, standing on the lower part of the frame.",
+   "clutter": false
+  },
+  "craft": {
+   "seams_or_stray_shapes": false,
+   "inconsistent_light": false,
+   "clipped_elements": true,
+   "contact_shadow": true,
+   "notes": "Small vegetation is cropped at the left frame edge; a soft shadow appears beneath the alpaca."
+  }
+ },
+ "motion": {
+  "mean": 1.49,
+  "changed_pct": 3.25,
+  "leg_pct": 4.72
+ },
+ "rationale": {
+  "anatomy": "none (level 3.97 of 4)",
+  "craft": "Small vegetation is cropped at the left frame edge; a soft shadow appears beneath the alpaca. (level 2.90 of 4)",
+  "setting": "sky, clouds, sun, bird silhouettes, distant hills, grassy field, bushes, grass tufts, flowers, sandy path, stones. Palette: Soft pastel blue, green, yellow, and cream tones.. Placement: The alpaca is near the horizontal center, standing on the lower part of the frame..",
+  "gait": "band 3 from 3.25% pixel change; P(planted, coherent)=0.83"
+ },
+ "probabilities": {
+  "anatomy": {
+   "0": 0,
+   "1": 0,
+   "2": 0,
+   "3": 0.01,
+   "4": 0.99
+  },
+  "craft": {
+   "0": 0,
+   "1": 0.05,
+   "2": 0.02,
+   "3": 0.92,
+   "4": 0.01
+  }
+ },
+ "verdict": {
+  "jev+openai-gpt-6-luna": "A fluffy white alpaca walks to the right along a sandy path in a sunny, stylized meadow."
  }
 }

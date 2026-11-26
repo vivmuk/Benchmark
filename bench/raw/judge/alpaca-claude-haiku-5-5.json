@@ -1,20 +1,93 @@
 {
- "gemini-3-1-pro-preview": {
-  "scores": {
-   "alpaca": 6.0,
-   "motion": 4.0,
-   "beauty": 7.0,
-   "scene": 7.0
-  },
-  "note": "The alpaca is cute but its anatomy is a bit disjointed, and while the legs move, the motion lacks a natural walking rhythm."
+ "rubric": "v9",
+ "median": {
+  "anatomy": 4,
+  "craft": 4,
+  "gait": 3
  },
- "openai-gpt-6-sol": {
-  "scores": {
-   "alpaca": 7.0,
-   "motion": 4.0,
-   "beauty": 7.0,
-   "scene": 6.0
+ "judges_used": 1,
+ "setting": {
+  "depth_planes": 3,
+  "elements": [
+   "sky",
+   "clouds",
+   "sun",
+   "rolling hills",
+   "bushes",
+   "grass",
+   "flowers"
+  ],
+  "palette": "Pastel blue and peach sky with soft greens and pale cream highlights.",
+  "placement": "The alpaca is near the center, slightly right, with its head in the upper half of the frame.",
+  "clutter": false
+ },
+ "captioner": "openai-gpt-6-luna",
+ "observations": {
+  "description": "A cream-colored alpaca walks through a grassy landscape beneath a blue sky.",
+  "anatomy": {
+   "detached_parts": false,
+   "jointless_legs": false,
+   "wrong_proportions": false,
+   "missing_cues": false,
+   "notes": "none"
   },
-  "note": "The pastel illustration is charming and recognizably alpaca-like, but its oversized ears and stiff, slightly floating leg movements weaken the anatomy and walk."
+  "gait": {
+   "feet_planted": false,
+   "sliding_or_popping": false,
+   "legs_change_between_frames": true,
+   "notes": "The legs alternate between angled and nearly vertical positions as the hooves swing above the grass."
+  },
+  "scene": {
+   "depth_planes": 3,
+   "elements": [
+    "sky",
+    "clouds",
+    "sun",
+    "rolling hills",
+    "bushes",
+    "grass",
+    "flowers"
+   ],
+   "palette": "Pastel blue and peach sky with soft greens and pale cream highlights.",
+   "placement": "The alpaca is near the center, slightly right, with its head in the upper half of the frame.",
+   "clutter": false
+  },
+  "craft": {
+   "seams_or_stray_shapes": false,
+   "inconsistent_light": false,
+   "clipped_elements": false,
+   "contact_shadow": true,
+   "notes": "No visible artifacts; a soft shadow appears beneath the feet."
+  }
+ },
+ "motion": {
+  "mean": 2.73,
+  "changed_pct": 7.12,
+  "leg_pct": 14.28
+ },
+ "rationale": {
+  "anatomy": "none (level 3.97 of 4)",
+  "craft": "No visible artifacts; a soft shadow appears beneath the feet. (level 3.97 of 4)",
+  "setting": "sky, clouds, sun, rolling hills, bushes, grass, flowers. Palette: Pastel blue and peach sky with soft greens and pale cream highlights.. Placement: The alpaca is near the center, slightly right, with its head in the upper half of the frame..",
+  "gait": "band 4 from 7.12% pixel change; P(planted, coherent)=0.06"
+ },
+ "probabilities": {
+  "anatomy": {
+   "0": 0,
+   "1": 0,
+   "2": 0,
+   "3": 0.01,
+   "4": 0.99
+  },
+  "craft": {
+   "0": 0,
+   "1": 0,
+   "2": 0,
+   "3": 0.01,
+   "4": 0.99
+  }
+ },
+ "verdict": {
+  "jev+openai-gpt-6-luna": "A cream-colored alpaca walks through a grassy landscape beneath a blue sky."
  }
 }

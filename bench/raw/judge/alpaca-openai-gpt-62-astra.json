@@ -1,20 +1,99 @@
 {
- "claude-opus-5-5": {
-  "scores": {
-   "alpaca": 8.0,
-   "motion": 3.0,
-   "beauty": 8.0,
-   "scene": 8.0
-  },
-  "note": "A charming, well-proportioned fleecy alpaca with a woven saddle blanket sits in a polished, tastefully muted Andean scene, but the walk barely registers: frames 1 and 2 show an essentially identical leg pose (only the foreground grass shifts), frame 3 changes the legs only modestly, and the swaying "
+ "rubric": "v9",
+ "median": {
+  "anatomy": 4,
+  "craft": 4,
+  "gait": 3
  },
- "openai-gpt-6-sol": {
-  "scores": {
-   "alpaca": 8.0,
-   "motion": 2.0,
-   "beauty": 9.0,
-   "scene": 9.0
+ "judges_used": 1,
+ "setting": {
+  "depth_planes": 3,
+  "elements": [
+   "sky",
+   "clouds",
+   "sun",
+   "mountains",
+   "hills",
+   "water",
+   "sandy plain",
+   "path",
+   "grasses",
+   "flowers"
+  ],
+  "palette": "Muted teal, sage, ochre, and dusty pink with a pale yellow sun.",
+  "placement": "Near the center, slightly right, on the path in the lower-middle of the frame.",
+  "clutter": false
+ },
+ "captioner": "openai-gpt-6-luna",
+ "observations": {
+  "description": "A cream-colored alpaca wearing a patterned blanket walks along a pale path in a layered mountain landscape.",
+  "anatomy": {
+   "detached_parts": false,
+   "jointless_legs": false,
+   "wrong_proportions": false,
+   "missing_cues": false,
+   "notes": "none"
   },
-  "note": "The alpaca and Andean landscape are beautifully crafted, but the first two poses are nearly identical and the third shows only slight leg movement."
+  "gait": {
+   "feet_planted": true,
+   "sliding_or_popping": false,
+   "legs_change_between_frames": true,
+   "notes": "The legs alternate between bent and extended positions while the hooves remain at the ground line."
+  },
+  "scene": {
+   "depth_planes": 3,
+   "elements": [
+    "sky",
+    "clouds",
+    "sun",
+    "mountains",
+    "hills",
+    "water",
+    "sandy plain",
+    "path",
+    "grasses",
+    "flowers"
+   ],
+   "palette": "Muted teal, sage, ochre, and dusty pink with a pale yellow sun.",
+   "placement": "Near the center, slightly right, on the path in the lower-middle of the frame.",
+   "clutter": false
+  },
+  "craft": {
+   "seams_or_stray_shapes": false,
+   "inconsistent_light": false,
+   "clipped_elements": false,
+   "contact_shadow": true,
+   "notes": "none"
+  }
+ },
+ "motion": {
+  "mean": 1.59,
+  "changed_pct": 3.62,
+  "leg_pct": 6.13
+ },
+ "rationale": {
+  "anatomy": "none (level 3.91 of 4)",
+  "craft": "none (level 3.96 of 4)",
+  "setting": "sky, clouds, sun, mountains, hills, water, sandy plain, path, grasses, flowers. Palette: Muted teal, sage, ochre, and dusty pink with a pale yellow sun.. Placement: Near the center, slightly right, on the path in the lower-middle of the frame..",
+  "gait": "band 3 from 3.62% pixel change; P(planted, coherent)=0.97"
+ },
+ "probabilities": {
+  "anatomy": {
+   "0": 0,
+   "1": 0,
+   "2": 0.02,
+   "3": 0.04,
+   "4": 0.94
+  },
+  "craft": {
+   "0": 0,
+   "1": 0,
+   "2": 0,
+   "3": 0.02,
+   "4": 0.98
+  }
+ },
+ "verdict": {
+  "jev+openai-gpt-6-luna": "A cream-colored alpaca wearing a patterned blanket walks along a pale path in a layered mountain landscape."
  }
 }

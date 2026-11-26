@@ -1,20 +1,87 @@
 {
- "gemini-3-1-pro-preview": {
-  "scores": {
-   "alpaca": 1.0,
-   "motion": 1.0,
-   "beauty": 2.0,
-   "scene": 3.0
-  },
-  "note": "The 'alpaca' is represented by disconnected floating shapes (a head/neck detached from a blob-like body with stick legs), and the motion is just a slight shifting of the stick legs that doesn't resemble a walking cycle."
+ "rubric": "v9",
+ "median": {
+  "anatomy": 1,
+  "craft": 3,
+  "gait": 1
  },
- "openai-gpt-6-sol": {
-  "scores": {
-   "alpaca": 2.0,
-   "motion": 3.0,
-   "beauty": 2.0,
-   "scene": 3.0
+ "judges_used": 1,
+ "setting": {
+  "depth_planes": 2,
+  "elements": [
+   "sky",
+   "sun",
+   "rolling green hill",
+   "green ground"
+  ],
+  "palette": "Soft blue, pale yellow, and two shades of green.",
+  "placement": "The alpaca is near the center, slightly left, standing along the horizon.",
+  "clutter": false
+ },
+ "captioner": "openai-gpt-6-luna",
+ "observations": {
+  "description": "A simple cream-colored alpaca with a separate-looking head and neck stands mid-step on green ground beneath a blue sky and pale sun.",
+  "anatomy": {
+   "detached_parts": true,
+   "jointless_legs": true,
+   "wrong_proportions": true,
+   "missing_cues": true,
+   "notes": "The long neck ends above the torso with a visible gap; the legs are thin, straight sticks without visible joints, and the small torso is disproportionate to the neck."
   },
-  "note": "The small head and ears suggest an alpaca, but its neck is detached from the body, the stick legs move only slightly, and the pleasant landscape is very sparse."
+  "gait": {
+   "feet_planted": true,
+   "sliding_or_popping": false,
+   "legs_change_between_frames": true,
+   "notes": "The thin legs swing and cross between frames while their feet remain at ground level."
+  },
+  "scene": {
+   "depth_planes": 2,
+   "elements": [
+    "sky",
+    "sun",
+    "rolling green hill",
+    "green ground"
+   ],
+   "palette": "Soft blue, pale yellow, and two shades of green.",
+   "placement": "The alpaca is near the center, slightly left, standing along the horizon.",
+   "clutter": false
+  },
+  "craft": {
+   "seams_or_stray_shapes": true,
+   "inconsistent_light": false,
+   "clipped_elements": false,
+   "contact_shadow": true,
+   "notes": "There is a gap between the neck and torso; a soft shadow lies beneath the body."
+  }
+ },
+ "motion": {
+  "mean": 0.13,
+  "changed_pct": 0.36,
+  "leg_pct": 0.35
+ },
+ "rationale": {
+  "anatomy": "The long neck ends above the torso with a visible gap; the legs are thin, straight sticks without visible joints, and the small torso is disproportionate to the neck. (level 1.01 of 4)",
+  "craft": "There is a gap between the neck and torso; a soft shadow lies beneath the body. (level 2.72 of 4)",
+  "setting": "sky, sun, rolling green hill, green ground. Palette: Soft blue, pale yellow, and two shades of green.. Placement: The alpaca is near the center, slightly left, standing along the horizon..",
+  "gait": "band 1 from 0.36% pixel change; P(planted, coherent)=0.78"
+ },
+ "probabilities": {
+  "anatomy": {
+   "0": 0.02,
+   "1": 0.96,
+   "2": 0.02,
+   "3": 0,
+   "4": 0
+  },
+  "craft": {
+   "0": 0,
+   "1": 0.12,
+   "2": 0.05,
+   "3": 0.82,
+   "4": 0.01
+  }
+ },
+ "verdict": {
+  "jev+openai-gpt-6-luna": "A simple cream-colored alpaca with a separate-looking head and neck stands mid-step on green ground beneath a blue sky and pale sun."
  }
 }

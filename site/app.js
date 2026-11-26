@@ -7,8 +7,8 @@
   var TABS = {
     alpaca: {
       title: 'Alpaca walking',
-      lede: 'Can the model build one beautiful animated component from a single prompt? Each card below is the model\'s own HTML, running live.',
-      how: 'One prompt, one attempt, full output budget. The page is rendered in headless Chrome at 1280x720 and captured at three moments of the walk. Two judge models that are not contestants (' + B.judges.join(', ') + ') score alpaca likeness, motion, beauty and scene from 0 to 10; the score is the average, out of 100. "Motion" under each card is the measured pixel change between frames, so a still image cannot score well by looking pretty.'
+      lede: 'One prompt, one attempt: an animated alpaca drawn in code. Every card below is the model\'s own HTML, running live.',
+      how: 'The prompt asks for one self-contained HTML file drawing an alpaca in code, walking in a believable loop, in a small tasteful scene, filling 1280x720. Scoring has three parts. A small vision model, GPT-6 Luna, looks at four frames captured 400 ms apart and records only facts - detached parts, jointless legs, depth planes, seams, contact shadow - never a score. Jev, a decision model, then maps those facts onto a 0-4 rubric for anatomy (30%), scene (20%) and craft (20%), and returns a probability distribution rather than one confident number. The walk itself is measured, not judged: pixel change between frames sets the gait band (30%), capped at 1 below 1% movement and at 2 below 3%, and a deduction can only lower it. Finally a code-checked compliance pass (single file, no external assets, no scrolling at 1280x720, animating on load) scales the total by 0.75 to 1.0. Every card shows the rationale behind its score.'
     },
     design: {
       title: 'Front-end design',
@@ -48,7 +48,16 @@
   }
   function crit(d) {
     if (!d.criteria) return '';
-    return '<div class="crit">' + Object.keys(d.criteria).map(function (k) { return '<span>' + k + ' <b>' + d.criteria[k] + '</b></span>'; }).join('') + '</div>';
+    var max = d.scale || 10;
+    return '<div class="crit">' + Object.keys(d.criteria).map(function (k) { return '<span>' + k + ' <b>' + d.criteria[k] + '</b><small>/' + max + '</small></span>'; }).join('') + '</div>';
+  }
+  function why(d) {
+    if (!d.rationale || !Object.keys(d.rationale).length) return '';
+    var rows = Object.keys(d.rationale).map(function (k) {
+      return '<li><b>' + k + '</b> ' + esc(d.rationale[k]) + '</li>';
+    }).join('');
+    var vs = d.verdict ? Object.keys(d.verdict).map(function (j) { return '<p class="v"><b>' + esc(j) + ':</b> ' + esc(d.verdict[j]) + '</p>'; }).join('') : '';
+    return '<details class="p"><summary>Why the judges scored it this way</summary><ul class="why">' + rows + '</ul>' + vs + '</details>';
   }
   function note(d) {
     var n = d.notes && d.notes[Object.keys(d.notes)[0]];
@@ -66,11 +75,11 @@
     r.ok.forEach(function (m, i) {
       var d = m[key], src = 'out/' + key + '/' + m.id + '.html';
       var inner = key === 'alpaca'
-        ? '<iframe data-src="' + src + '" sandbox="allow-scripts" loading="lazy" title="' + esc(m.name) + ' alpaca"></iframe>'
-        : '<img src="img/design/' + m.id + '.jpg" loading="lazy" alt="' + esc(m.name) + ' landing page">';
+        ? '<img class="poster" src="img/alpaca/' + m.id + '.jpg" loading="lazy" decoding="async" alt=""><iframe data-src="' + src + '" sandbox="allow-scripts" loading="lazy" title="' + esc(m.name) + ' alpaca"></iframe>'
+        : '<img src="img/design/' + m.id + '.jpg" loading="lazy" decoding="async" alt="' + esc(m.name) + ' landing page">';
       h += '<article class="card' + (i === 0 ? ' win' : '') + '">' + who(m, badge(d, i)) +
         '<div class="frame' + (tall ? ' tall' : '') + '">' + inner + '<button data-open="' + src + '" data-name="' + esc(m.name) + '" aria-label="Open ' + esc(m.name) + ' output"></button><span class="hint">Click to open live</span></div>' +
-        '<div class="meta">' + crit(d) + note(d) + '<div class="stats">' + num(d.out_tokens) + ' tokens · ' + money(d.cost) + ' · ' + d.seconds + 's' +
+        '<div class="meta">' + crit(d) + why(d) + note(d) + '<div class="stats">' + num(d.out_tokens) + ' tokens · ' + money(d.cost) + ' · ' + d.seconds + 's' +
         (key === 'alpaca' && d.motion != null ? ' · motion ' + d.motion : '') + '</div></div></article>';
     });
     r.rest.forEach(function (m) { h += failCard(m, m[key]); });
@@ -116,10 +125,26 @@
       '<p class="valuenote"><strong>Token thrift and money thrift are different things.</strong> GPT-6.2 Astra spends 35 output tokens per correct answer where Gemini 4 Neon spends 716, so Astra is 20 times more parsimonious. But Astra\'s output costs $40 per million tokens against Neon\'s $18.75, so its lead in dollars is only 8.5 times. GLM 5.3 Flash goes the other way: 142 tokens per correct answer, four times Astra\'s, yet 19 times more correct answers per dollar, because its output price is $0.55 per million. The index rewards the models that are good on both axes — it is the geometric mean, so a model that is wasteful or expensive cannot buy its way out on the other side.</p>';
   }
 
+  var frameObserver = null;
+  function lazyFrames() {
+    if (frameObserver) frameObserver.disconnect();
+    if (!('IntersectionObserver' in window)) {
+      document.querySelectorAll('iframe[data-src]').forEach(function (f) { f.src = f.dataset.src; });
+      return;
+    }
+    frameObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        var f = en.target.querySelector('iframe[data-src]');
+        if (f && !f.getAttribute('src')) f.src = f.dataset.src;
+        frameObserver.unobserve(en.target);
+      });
+    }, { rootMargin: '800px 0px' });
+    document.querySelectorAll('.frame').forEach(function (el) { frameObserver.observe(el); });
+  }
   function fit() {
     document.querySelectorAll('.frame iframe').forEach(function (f) {
       f.style.transform = 'scale(' + f.parentNode.clientWidth / 1280 + ')';
-      if (!f.src) f.src = f.dataset.src;
     });
   }
   function show(tab) {
@@ -128,6 +153,7 @@
     main.innerHTML = tab === 'alpaca' ? live('alpaca') : tab === 'design' ? live('design', true) : tab === 'recreate' ? recreate() : tab === 'speed' ? speed() : value();
     document.title = TABS[tab].title + ' · BenchmarkViv';
     fit();
+    lazyFrames();
   }
 
   var modal = document.getElementById('modal'), frame = document.getElementById('modal-frame');
@@ -173,6 +199,9 @@
     });
     good.concat(bad).forEach(function (r) { tb.appendChild(r); });
   });
+  document.addEventListener('load', function (e) {
+    if (e.target && e.target.tagName === 'IFRAME') e.target.classList.add('ready');
+  }, true);
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
   window.addEventListener('hashchange', function () { show(location.hash.slice(1)); window.scrollTo(0, 0); });
   window.addEventListener('resize', fit);

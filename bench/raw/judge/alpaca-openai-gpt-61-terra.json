@@ -1,20 +1,97 @@
 {
- "claude-opus-5-5": {
-  "scores": {
-   "alpaca": 6.0,
-   "motion": 6.0,
-   "beauty": 6.0,
-   "scene": 7.0
-  },
-  "note": "The alpaca is readable, with upright ears, a long neck, a small snouted head and a cloud-like fleece body, but the flat slab neck and stiff, dowel-like tube legs weaken its anatomy and charm; the legs do swing in plausible alternating phases between frames, and the soft pastel layered-hill scene wit"
+ "rubric": "v9",
+ "median": {
+  "anatomy": 2,
+  "craft": 4,
+  "gait": 2
  },
- "openai-gpt-6-sol": {
-  "scores": {
-   "alpaca": 7.0,
-   "motion": 4.0,
-   "beauty": 8.0,
-   "scene": 8.0
+ "judges_used": 1,
+ "setting": {
+  "depth_planes": 3,
+  "elements": [
+   "sky",
+   "sun",
+   "clouds",
+   "mountains",
+   "rolling hills",
+   "grassy ground",
+   "stylized trees",
+   "flowers",
+   "grass tufts"
+  ],
+  "palette": "Muted pale greens, sage, cream, and warm beige.",
+  "placement": "The alpaca is near the center of the frame, slightly right of center.",
+  "clutter": false
+ },
+ "captioner": "openai-gpt-6-luna",
+ "observations": {
+  "description": "A cream-colored, woolly alpaca walks across a softly colored landscape with mountains, hills, and small plants.",
+  "anatomy": {
+   "detached_parts": false,
+   "jointless_legs": true,
+   "wrong_proportions": false,
+   "missing_cues": false,
+   "notes": "The four legs are simple straight, unarticulated shapes; the head, ears, eyes, muzzle, and body are present and attached."
   },
-  "note": "The fluffy alpaca and pastel landscape are polished, but its rigid, nearly straight legs make the changing poses feel more like a shuffle than a believable walk."
+  "gait": {
+   "feet_planted": true,
+   "sliding_or_popping": false,
+   "legs_change_between_frames": true,
+   "notes": "The legs alternate between close-together and splayed walking poses, with the hooves staying at the ground line."
+  },
+  "scene": {
+   "depth_planes": 3,
+   "elements": [
+    "sky",
+    "sun",
+    "clouds",
+    "mountains",
+    "rolling hills",
+    "grassy ground",
+    "stylized trees",
+    "flowers",
+    "grass tufts"
+   ],
+   "palette": "Muted pale greens, sage, cream, and warm beige.",
+   "placement": "The alpaca is near the center of the frame, slightly right of center.",
+   "clutter": false
+  },
+  "craft": {
+   "seams_or_stray_shapes": false,
+   "inconsistent_light": false,
+   "clipped_elements": false,
+   "contact_shadow": true,
+   "notes": "A soft shadow appears beneath the alpaca; no other obvious artifacts."
+  }
+ },
+ "motion": {
+  "mean": 0.94,
+  "changed_pct": 2.24,
+  "leg_pct": 4.66
+ },
+ "rationale": {
+  "anatomy": "The four legs are simple straight, unarticulated shapes; the head, ears, eyes, muzzle, and body are present and attached. (level 2.17 of 4)",
+  "craft": "A soft shadow appears beneath the alpaca; no other obvious artifacts. (level 3.96 of 4)",
+  "setting": "sky, sun, clouds, mountains, rolling hills, grassy ground, stylized trees, flowers, grass tufts. Palette: Muted pale greens, sage, cream, and warm beige.. Placement: The alpaca is near the center of the frame, slightly right of center..",
+  "gait": "band 2 from 2.24% pixel change; P(planted, coherent)=0.96"
+ },
+ "probabilities": {
+  "anatomy": {
+   "0": 0,
+   "1": 0.01,
+   "2": 0.86,
+   "3": 0.08,
+   "4": 0.05
+  },
+  "craft": {
+   "0": 0,
+   "1": 0,
+   "2": 0,
+   "3": 0.01,
+   "4": 0.99
+  }
+ },
+ "verdict": {
+  "jev+openai-gpt-6-luna": "A cream-colored, woolly alpaca walks across a softly colored landscape with mountains, hills, and small plants."
  }
 }

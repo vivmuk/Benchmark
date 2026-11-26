@@ -1,20 +1,99 @@
 {
- "claude-opus-5-5": {
-  "scores": {
-   "alpaca": 8.0,
-   "motion": 7.0,
-   "beauty": 8.0,
-   "scene": 8.0
-  },
-  "note": "A charming, clearly readable alpaca with a long fleecy neck, upright ears, and a pom-pom collar walks with distinctly changing leg poses and subtle parallax across a warm, layered dusk landscape; the legs are a bit stiff and stick-like with slightly ambiguous joint bends, and the clouds are somewhat"
+ "rubric": "v9",
+ "median": {
+  "anatomy": 4,
+  "craft": 3,
+  "gait": 4
  },
- "openai-gpt-6-sol": {
-  "scores": {
-   "alpaca": 8.0,
-   "motion": 7.0,
-   "beauty": 8.0,
-   "scene": 7.0
+ "judges_used": 1,
+ "setting": {
+  "depth_planes": 3,
+  "elements": [
+   "sky",
+   "clouds",
+   "sun",
+   "mountains",
+   "hills",
+   "grass",
+   "dirt path",
+   "flowers",
+   "bushes",
+   "rocks"
+  ],
+  "palette": "Pastel lavender and peach sky, green hills, and warm tan ground.",
+  "placement": "The alpaca is near the center of the frame, slightly right of center.",
+  "clutter": false
+ },
+ "captioner": "openai-gpt-6-luna",
+ "observations": {
+  "description": "A white, fluffy alpaca wearing a colorful bell collar walks in place along a dirt path in a layered pastel landscape.",
+  "anatomy": {
+   "detached_parts": false,
+   "jointless_legs": false,
+   "wrong_proportions": false,
+   "missing_cues": false,
+   "notes": "none"
   },
-  "note": "The fleecy alpaca is unmistakable, and its legs change in a plausible if slightly stiff walk through a polished pastel scene."
+  "gait": {
+   "feet_planted": true,
+   "sliding_or_popping": false,
+   "legs_change_between_frames": true,
+   "notes": "The legs alternate between planted and lifted or bent positions, with hooves contacting the path."
+  },
+  "scene": {
+   "depth_planes": 3,
+   "elements": [
+    "sky",
+    "clouds",
+    "sun",
+    "mountains",
+    "hills",
+    "grass",
+    "dirt path",
+    "flowers",
+    "bushes",
+    "rocks"
+   ],
+   "palette": "Pastel lavender and peach sky, green hills, and warm tan ground.",
+   "placement": "The alpaca is near the center of the frame, slightly right of center.",
+   "clutter": false
+  },
+  "craft": {
+   "seams_or_stray_shapes": false,
+   "inconsistent_light": false,
+   "clipped_elements": true,
+   "contact_shadow": true,
+   "notes": "Clouds at the side edges and grass at the bottom edge are partially clipped."
+  }
+ },
+ "motion": {
+  "mean": 5.05,
+  "changed_pct": 10.61,
+  "leg_pct": 15.58
+ },
+ "rationale": {
+  "anatomy": "none (level 3.97 of 4)",
+  "craft": "Clouds at the side edges and grass at the bottom edge are partially clipped. (level 2.95 of 4)",
+  "setting": "sky, clouds, sun, mountains, hills, grass, dirt path, flowers, bushes, rocks. Palette: Pastel lavender and peach sky, green hills, and warm tan ground.. Placement: The alpaca is near the center of the frame, slightly right of center..",
+  "gait": "band 4 from 10.61% pixel change; P(planted, coherent)=0.88"
+ },
+ "probabilities": {
+  "anatomy": {
+   "0": 0,
+   "1": 0,
+   "2": 0,
+   "3": 0.01,
+   "4": 0.99
+  },
+  "craft": {
+   "0": 0,
+   "1": 0.02,
+   "2": 0.01,
+   "3": 0.97,
+   "4": 0
+  }
+ },
+ "verdict": {
+  "jev+openai-gpt-6-luna": "A white, fluffy alpaca wearing a colorful bell collar walks in place along a dirt path in a layered pastel landscape."
  }
 }

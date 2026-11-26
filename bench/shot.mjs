@@ -31,8 +31,12 @@ await cdp('Emulation.setDeviceMetricsOverride', { width: 1280, height: mode === 
 await cdp('Page.navigate', { url: 'file://' + html });
 await sleep(2000);
 if (mode === 'frames') {
-  // three moments of the walk, 450ms of real time apart
-  for (let i = 0; i < 3; i++) { await grab(`${out}-${i}.png`); await sleep(450); }
+  // four moments of the walk, 400ms of real time apart
+  for (let i = 0; i < 4; i++) { await grab(`${out}-${i}.png`); await sleep(400); }
+  const box = await cdp('Runtime.evaluate', { expression:
+    'JSON.stringify({sw: document.documentElement.scrollWidth, sh: document.documentElement.scrollHeight, bw: document.body ? document.body.scrollWidth : 0, bh: document.body ? document.body.scrollHeight : 0})',
+    returnByValue: true });
+  try { writeFileSync(`${out}-meta.json`, box.result.value || '{}'); } catch {}
 } else {
   // scroll the whole page first so scroll-triggered reveals have fired, then capture all of it
   const h = async () => (await cdp('Runtime.evaluate', { expression: 'Math.max(document.documentElement.scrollHeight, document.body ? document.body.scrollHeight : 0)', returnByValue: true })).result.value;

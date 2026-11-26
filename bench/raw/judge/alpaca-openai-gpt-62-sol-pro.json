@@ -1,20 +1,95 @@
 {
- "claude-opus-5-5": {
-  "scores": {
-   "alpaca": 7.0,
-   "motion": 2.0,
-   "beauty": 7.0,
-   "scene": 8.0
-  },
-  "note": "A charming, clearly readable fleecy alpaca in a tasteful pastel altiplano with elegant typography, but its legs and body look essentially frozen across all three frames, so only the scrolling ground plants imply walking, and those plants drift over the 'FIELD STUDY / 01' caption."
+ "rubric": "v9",
+ "median": {
+  "anatomy": 4,
+  "craft": 4,
+  "gait": 1
  },
- "openai-gpt-6-sol": {
-  "scores": {
-   "alpaca": 8.0,
-   "motion": 1.0,
-   "beauty": 9.0,
-   "scene": 9.0
+ "judges_used": 1,
+ "setting": {
+  "depth_planes": 3,
+  "elements": [
+   "sky",
+   "sun",
+   "thin clouds",
+   "layered mountains",
+   "rolling hills",
+   "plateau ground",
+   "grass tufts",
+   "small stones"
+  ],
+  "palette": "Soft pastel lavender, mauve, dusty pink, and warm cream.",
+  "placement": "The alpaca is near the horizontal center, in the lower-middle of the frame.",
+  "clutter": false
+ },
+ "captioner": "openai-gpt-6-luna",
+ "observations": {
+  "description": "A cream-colored alpaca walks across a pastel plateau beneath a sun, with layered mountains behind it and editorial text in the upper left.",
+  "anatomy": {
+   "detached_parts": false,
+   "jointless_legs": false,
+   "wrong_proportions": false,
+   "missing_cues": false,
+   "notes": "None; the legs are articulated and end in visible hooves."
   },
-  "note": "The alpaca and landscape are beautifully drawn, but the legs and body barely change while the ground scrolls."
+  "gait": {
+   "feet_planted": false,
+   "sliding_or_popping": false,
+   "legs_change_between_frames": true,
+   "notes": "The legs alternate between extended and bent positions, with some hooves lifted as the alpaca walks."
+  },
+  "scene": {
+   "depth_planes": 3,
+   "elements": [
+    "sky",
+    "sun",
+    "thin clouds",
+    "layered mountains",
+    "rolling hills",
+    "plateau ground",
+    "grass tufts",
+    "small stones"
+   ],
+   "palette": "Soft pastel lavender, mauve, dusty pink, and warm cream.",
+   "placement": "The alpaca is near the horizontal center, in the lower-middle of the frame.",
+   "clutter": false
+  },
+  "craft": {
+   "seams_or_stray_shapes": false,
+   "inconsistent_light": false,
+   "clipped_elements": false,
+   "contact_shadow": true,
+   "notes": "A faint shadow is visible beneath the alpaca; no obvious stray shapes or clipping."
+  }
+ },
+ "motion": {
+  "mean": 1.11,
+  "changed_pct": 2.64,
+  "leg_pct": 3.73
+ },
+ "rationale": {
+  "anatomy": "None; the legs are articulated and end in visible hooves. (level 3.98 of 4)",
+  "craft": "A faint shadow is visible beneath the alpaca; no obvious stray shapes or clipping. (level 3.96 of 4)",
+  "setting": "sky, sun, thin clouds, layered mountains, rolling hills, plateau ground, grass tufts, small stones. Palette: Soft pastel lavender, mauve, dusty pink, and warm cream.. Placement: The alpaca is near the horizontal center, in the lower-middle of the frame..",
+  "gait": "band 2 from 2.64% pixel change; P(planted, coherent)=0.06"
+ },
+ "probabilities": {
+  "anatomy": {
+   "0": 0,
+   "1": 0,
+   "2": 0,
+   "3": 0.01,
+   "4": 0.99
+  },
+  "craft": {
+   "0": 0,
+   "1": 0,
+   "2": 0,
+   "3": 0.01,
+   "4": 0.99
+  }
+ },
+ "verdict": {
+  "jev+openai-gpt-6-luna": "A cream-colored alpaca walks across a pastel plateau beneath a sun, with layered mountains behind it and editorial text in the upper left."
  }
 }

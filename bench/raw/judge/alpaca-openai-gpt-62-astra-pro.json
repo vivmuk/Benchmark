@@ -1,20 +1,97 @@
 {
- "claude-opus-5-5": {
-  "scores": {
-   "alpaca": 7.0,
-   "motion": 7.0,
-   "beauty": 8.0,
-   "scene": 8.0
-  },
-  "note": "A charming, polished camelid with a fleecy body, long neck and woven saddle blanket, plus plausible gait changes across frames and a tasteful layered Andean plate; the long banana ears and bare, deer-thin legs read more llama than alpaca, and the walk is believable but somewhat stiff."
+ "rubric": "v9",
+ "median": {
+  "anatomy": 4,
+  "craft": 3,
+  "gait": 4
  },
- "openai-gpt-6-sol": {
-  "scores": {
-   "alpaca": 8.0,
-   "motion": 6.0,
-   "beauty": 9.0,
-   "scene": 9.0
+ "judges_used": 1,
+ "setting": {
+  "depth_planes": 3,
+  "elements": [
+   "sky",
+   "clouds",
+   "sun",
+   "birds",
+   "mountains",
+   "hills",
+   "grassland",
+   "grasses",
+   "water"
+  ],
+  "palette": "Muted teal, sage green, cream, and sandy ochre, with warm sunlight.",
+  "placement": "The alpaca is near the horizontal center, in the lower-middle of the frame.",
+  "clutter": false
+ },
+ "captioner": "openai-gpt-6-luna",
+ "observations": {
+  "description": "A cream-colored alpaca wearing a patterned blanket walks across a grassy Andean landscape beneath a bright sun.",
+  "anatomy": {
+   "detached_parts": false,
+   "jointless_legs": false,
+   "wrong_proportions": false,
+   "missing_cues": false,
+   "notes": "none"
   },
-  "note": "The alpaca is recognizable and the Altiplano scene is beautifully composed, though its slender legs move more convincingly than its nearly static body."
+  "gait": {
+   "feet_planted": true,
+   "sliding_or_popping": false,
+   "legs_change_between_frames": true,
+   "notes": "The legs alternately bend and swing; the hooves remain close to the ground."
+  },
+  "scene": {
+   "depth_planes": 3,
+   "elements": [
+    "sky",
+    "clouds",
+    "sun",
+    "birds",
+    "mountains",
+    "hills",
+    "grassland",
+    "grasses",
+    "water"
+   ],
+   "palette": "Muted teal, sage green, cream, and sandy ochre, with warm sunlight.",
+   "placement": "The alpaca is near the horizontal center, in the lower-middle of the frame.",
+   "clutter": false
+  },
+  "craft": {
+   "seams_or_stray_shapes": false,
+   "inconsistent_light": false,
+   "clipped_elements": false,
+   "contact_shadow": false,
+   "notes": "No distinct contact shadow is visible beneath the hooves."
+  }
+ },
+ "motion": {
+  "mean": 2.46,
+  "changed_pct": 6.24,
+  "leg_pct": 11.15
+ },
+ "rationale": {
+  "anatomy": "none (level 3.97 of 4)",
+  "craft": "No distinct contact shadow is visible beneath the hooves. (level 2.96 of 4)",
+  "setting": "sky, clouds, sun, birds, mountains, hills, grassland, grasses, water. Palette: Muted teal, sage green, cream, and sandy ochre, with warm sunlight.. Placement: The alpaca is near the horizontal center, in the lower-middle of the frame..",
+  "gait": "band 4 from 6.24% pixel change; P(planted, coherent)=0.96"
+ },
+ "probabilities": {
+  "anatomy": {
+   "0": 0,
+   "1": 0,
+   "2": 0.01,
+   "3": 0.01,
+   "4": 0.98
+  },
+  "craft": {
+   "0": 0,
+   "1": 0.02,
+   "2": 0.02,
+   "3": 0.94,
+   "4": 0.02
+  }
+ },
+ "verdict": {
+  "jev+openai-gpt-6-luna": "A cream-colored alpaca wearing a patterned blanket walks across a grassy Andean landscape beneath a bright sun."
  }
 }

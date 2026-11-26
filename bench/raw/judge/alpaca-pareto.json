@@ -1,20 +1,95 @@
 {
- "gemini-3-1-pro-preview": {
-  "scores": {
-   "alpaca": 9.0,
-   "motion": 8.0,
-   "beauty": 8.0,
-   "scene": 9.0
-  },
-  "note": "The alpaca is charmingly illustrated and the walk cycle is fluid, set against a tasteful, calming landscape."
+ "rubric": "v9",
+ "median": {
+  "anatomy": 4,
+  "craft": 4,
+  "gait": 2
  },
- "openai-gpt-6-sol": {
-  "scores": {
-   "alpaca": 7.0,
-   "motion": 5.0,
-   "beauty": 8.0,
-   "scene": 8.0
+ "judges_used": 1,
+ "setting": {
+  "depth_planes": 3,
+  "elements": [
+   "sky",
+   "sun",
+   "wispy clouds",
+   "birds",
+   "rolling hills",
+   "grass",
+   "sandy path",
+   "small plants and flowers"
+  ],
+  "palette": "Muted cream and sand with sage-green hills and a warm peach sun.",
+  "placement": "The alpaca is near the center of the frame, standing on the path.",
+  "clutter": false
+ },
+ "captioner": "openai-gpt-6-luna",
+ "observations": {
+  "description": "A cream-colored alpaca walks to the right along a sandy path in a stylized landscape.",
+  "anatomy": {
+   "detached_parts": false,
+   "jointless_legs": false,
+   "wrong_proportions": false,
+   "missing_cues": false,
+   "notes": "none"
   },
-  "note": "The fluffy, long-necked figure reads as an alpaca in a polished pastel scene, though its oversized ears and mostly stationary body make the walk less convincing."
+  "gait": {
+   "feet_planted": true,
+   "sliding_or_popping": false,
+   "legs_change_between_frames": true,
+   "notes": "Its bent legs alternate positions, with hooves touching or lifting slightly above the path."
+  },
+  "scene": {
+   "depth_planes": 3,
+   "elements": [
+    "sky",
+    "sun",
+    "wispy clouds",
+    "birds",
+    "rolling hills",
+    "grass",
+    "sandy path",
+    "small plants and flowers"
+   ],
+   "palette": "Muted cream and sand with sage-green hills and a warm peach sun.",
+   "placement": "The alpaca is near the center of the frame, standing on the path.",
+   "clutter": false
+  },
+  "craft": {
+   "seams_or_stray_shapes": false,
+   "inconsistent_light": false,
+   "clipped_elements": false,
+   "contact_shadow": true,
+   "notes": "none"
+  }
+ },
+ "motion": {
+  "mean": 0.68,
+  "changed_pct": 1.43,
+  "leg_pct": 2.48
+ },
+ "rationale": {
+  "anatomy": "none (level 3.94 of 4)",
+  "craft": "none (level 3.96 of 4)",
+  "setting": "sky, sun, wispy clouds, birds, rolling hills, grass, sandy path, small plants and flowers. Palette: Muted cream and sand with sage-green hills and a warm peach sun.. Placement: The alpaca is near the center of the frame, standing on the path..",
+  "gait": "band 2 from 1.43% pixel change; P(planted, coherent)=0.89"
+ },
+ "probabilities": {
+  "anatomy": {
+   "0": 0,
+   "1": 0,
+   "2": 0.01,
+   "3": 0.04,
+   "4": 0.95
+  },
+  "craft": {
+   "0": 0,
+   "1": 0,
+   "2": 0,
+   "3": 0.01,
+   "4": 0.99
+  }
+ },
+ "verdict": {
+  "jev+openai-gpt-6-luna": "A cream-colored alpaca walks to the right along a sandy path in a stylized landscape."
  }
 }
