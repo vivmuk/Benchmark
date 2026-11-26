@@ -227,6 +227,23 @@ def main():
     print("PAIRWISE DONE", flush=True)
 
 
+
+def refresh_jev():
+    """Re-cast the Jev votes over the pairs already stored, without calling the vision judge again."""
+    data = load(OUT, {}) or {}
+    results = data.get("pairs", {})
+    n = 0
+    for key, r in results.items():
+        a, b = key.split("|")
+        try:
+            r["jev"] = jev_vote(a, b, facts(a), facts(b))
+            n += 1
+        except Exception as e:
+            r["jev"] = {"error": repr(e)[:120]}
+    save(OUT, {"pairs": results})
+    print("JEV REFRESH DONE", n, flush=True)
+
+
 if __name__ == "__main__":
     if "--jev-only" in sys.argv:
         refresh_jev()
