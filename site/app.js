@@ -79,7 +79,7 @@
         : '<img src="img/design/' + m.id + '.jpg" loading="lazy" decoding="async" alt="' + esc(m.name) + ' landing page">';
       h += '<article class="card' + (i === 0 ? ' win' : '') + '">' + who(m, badge(d, i)) +
         '<div class="frame' + (tall ? ' tall' : '') + '">' + inner + '<button data-open="' + src + '" data-name="' + esc(m.name) + '" aria-label="Open ' + esc(m.name) + ' output"></button><span class="hint">Click to open live</span></div>' +
-        '<div class="meta">' + crit(d) + why(d) + note(d) + '<div class="stats">' + num(d.out_tokens) + ' tokens · <span class="cost">' + money(d.cost) + '</span> · ' + d.seconds + 's' +
+        '<div class="meta">' + crit(d) + why(d) + note(d) + '<div class="stats">' + num(d.out_tokens) + ' tok · <span class="cost">' + money(d.cost) + '</span> · ' + d.seconds + 's' +
         (key === 'alpaca' && d.motion != null ? ' · motion ' + d.motion_changed + '%' : '') + '</div></div></article>';
     });
     r.rest.forEach(function (m) { h += failCard(m, m[key]); });
