@@ -1,101 +1,99 @@
 {
- "rubric": "v11",
+ "rubric": "v12",
  "median": {
+  "craft": 4,
   "anatomy": 4,
-  "craft": 3,
-  "gait": 1
+  "proportions": 2.7,
+  "motion": 2
+ },
+ "rationale": {
+  "craft": "level 3.96 of 4",
+  "anatomy": "level 3.57 of 4 - joints 4/4, chest and rump",
+  "proportions": "neck 1.21, head 0.48, leg/depth 1.18",
+  "motion": "band 2, smoothness 2, slider False"
  },
  "judges_used": 1,
- "setting": {
-  "depth_planes": 5,
-  "elements": [
-   "sky",
-   "sun",
-   "clouds",
-   "small birds",
-   "snow-capped mountains",
-   "nearer mountains",
-   "grassy hills",
-   "grass tufts",
-   "sandy path",
-   "small rocks and ground marks"
-  ],
-  "palette": "Muted teal, sage, cream, and tan",
-  "placement": "Near the center, with its feet on the foreground path",
-  "clutter": false
- },
  "captioner": "openai-gpt-6-sol",
  "observations": {
-  "description": "A cream-colored alpaca walks across a sandy path in front of grassy hills and mountains.",
-  "anatomy": {
+  "description": "A cream-colored, curly-fleeced alpaca walks to the right along a sandy path, with mountains, clouds and a sun behind it.",
+  "parts": {
    "legs_visible": 4,
    "legs_with_visible_joint": 4,
    "leg_attachment": "chest_and_rump",
-   "neck_proportion": "too_long",
-   "head_proportion": "right",
+   "ears": "upright_banana",
    "tail_visible": true,
    "detached_parts": false,
-   "notes": "The neck is long and narrow."
+   "notes": "none"
+  },
+  "points": {
+   "chest": [
+    552,
+    595
+   ],
+   "rump": [
+    352,
+    573
+   ],
+   "neck_base": [
+    526,
+    514
+   ],
+   "poll": [
+    543,
+    260
+   ],
+   "muzzle": [
+    603,
+    337
+   ],
+   "belly": [
+    449,
+    682
+   ],
+   "ground": [
+    493,
+    814
+   ]
   },
   "gait": {
    "feet_planted": true,
-   "sliding_or_popping": true,
+   "sliding_or_popping": false,
    "legs_change_between_frames": true,
-   "notes": "The legs bend and alternate positions; some hooves lift while others touch the path, but grounded hooves shift sideways."
-  },
-  "scene": {
-   "depth_planes": 5,
-   "elements": [
-    "sky",
-    "sun",
-    "clouds",
-    "small birds",
-    "snow-capped mountains",
-    "nearer mountains",
-    "grassy hills",
-    "grass tufts",
-    "sandy path",
-    "small rocks and ground marks"
-   ],
-   "palette": "Muted teal, sage, cream, and tan",
-   "placement": "Near the center, with its feet on the foreground path",
-   "clutter": false
+   "notes": "The legs bend and alternate between reaching forward, lifting and touching the ground."
   },
   "craft": {
    "seams_or_stray_shapes": false,
    "inconsistent_light": false,
-   "clipped_elements": true,
+   "clipped_elements": false,
    "contact_shadow": true,
-   "notes": "A small piece of greenery is clipped at the upper-left edge."
+   "notes": "none"
   }
+ },
+ "ratios": {
+  "body_len": 206.6,
+  "neck_len": 253.5,
+  "head_len": 97.6,
+  "leg_len": 134,
+  "neck_body": 1.211,
+  "head_body": 0.485,
+  "leg_depth": 1.179
+ },
+ "smoothness": {
+  "changed": [
+   1.6,
+   1.44,
+   1.29
+  ],
+  "mean": 1.45,
+  "spread": 0.21,
+  "score": 2
  },
  "motion": {
   "mean": 0.77,
   "changed_pct": 1.6,
   "leg_pct": 1.8
  },
- "rationale": {
-  "anatomy": "The neck is long and narrow. (level 3.82 of 4)",
-  "craft": "A small piece of greenery is clipped at the upper-left edge. (level 2.88 of 4)",
-  "gait": "band 2 from 1.60% pixel change; P(planted, coherent)=0.08"
- },
- "probabilities": {
-  "anatomy": {
-   "0": 0,
-   "1": 0.03,
-   "2": 0.85,
-   "3": 0.1,
-   "4": 0.02
-  },
-  "craft": {
-   "0": 0,
-   "1": 0.07,
-   "2": 0.02,
-   "3": 0.9,
-   "4": 0.01
-  }
- },
  "verdict": {
-  "jev+openai-gpt-6-sol": "A cream-colored alpaca walks across a sandy path in front of grassy hills and mountains."
+  "jev+openai-gpt-6-sol": "A cream-colored, curly-fleeced alpaca walks to the right along a sandy path, with mountains, clouds and a sun behind it."
  }
 }

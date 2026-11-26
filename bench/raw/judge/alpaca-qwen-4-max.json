@@ -1,99 +1,99 @@
 {
- "rubric": "v11",
+ "rubric": "v12",
  "median": {
-  "anatomy": 2,
   "craft": 2,
-  "gait": 3
+  "anatomy": 2,
+  "proportions": 2.7,
+  "motion": 3
+ },
+ "rationale": {
+  "craft": "level 1.93 of 4",
+  "anatomy": "level 1.87 of 4 - joints 4/4, chest and rump",
+  "proportions": "neck 1.72, head 0.31, leg/depth 1.69",
+  "motion": "band 4, smoothness 4, slider True"
  },
  "judges_used": 1,
- "setting": {
-  "depth_planes": 5,
-  "elements": [
-   "gradient sky",
-   "clouds",
-   "sun",
-   "two layers of purple hills",
-   "green meadow",
-   "grass tufts",
-   "small flowers",
-   "small bird in the later frames",
-   "bottom-left caption"
-  ],
-  "palette": "Pastel blue, cream, lavender, and muted green.",
-  "placement": "The alpaca is near the center, above the foreground grass.",
-  "clutter": false
- },
  "captioner": "openai-gpt-6-sol",
  "observations": {
-  "description": "A cream-colored alpaca is shown walking through a green meadow with purple hills, clouds, and a sun behind it.",
-  "anatomy": {
+  "description": "A cream-colored alpaca with a long, spotty neck and four legs walks to the right across grass beneath clouds and mountains.",
+  "parts": {
    "legs_visible": 4,
    "legs_with_visible_joint": 4,
    "leg_attachment": "chest_and_rump",
-   "neck_proportion": "too_long",
-   "head_proportion": "too_small",
+   "ears": "small_pointed",
    "tail_visible": false,
    "detached_parts": true,
-   "notes": "The long neck does not touch the body, and the head is small."
+   "notes": "The neck appears separated from the torso, with individual wool spots spaced apart along it."
+  },
+  "points": {
+   "chest": [
+    545,
+    540
+   ],
+   "rump": [
+    385,
+    545
+   ],
+   "neck_base": [
+    538,
+    465
+   ],
+   "poll": [
+    573,
+    184
+   ],
+   "muzzle": [
+    602,
+    225
+   ],
+   "belly": [
+    475,
+    640
+   ],
+   "ground": [
+    488,
+    790
+   ]
   },
   "gait": {
    "feet_planted": true,
    "sliding_or_popping": true,
    "legs_change_between_frames": true,
-   "notes": "The legs alternate between bent positions; some hooves stay near the ground but shift back and forth."
-  },
-  "scene": {
-   "depth_planes": 5,
-   "elements": [
-    "gradient sky",
-    "clouds",
-    "sun",
-    "two layers of purple hills",
-    "green meadow",
-    "grass tufts",
-    "small flowers",
-    "small bird in the later frames",
-    "bottom-left caption"
-   ],
-   "palette": "Pastel blue, cream, lavender, and muted green.",
-   "placement": "The alpaca is near the center, above the foreground grass.",
-   "clutter": false
+   "notes": "The legs alternate between two bent poses; some hooves lift while those on the grass shift position between frames."
   },
   "craft": {
    "seams_or_stray_shapes": true,
    "inconsistent_light": false,
-   "clipped_elements": true,
+   "clipped_elements": false,
    "contact_shadow": true,
-   "notes": "The neck is separated from the body, and a cloud is cut off at the left edge of the first frame."
+   "notes": "A visible gap separates the neck from the torso, and small wool shapes appear isolated along the neck."
   }
+ },
+ "ratios": {
+  "body_len": 166.0,
+  "neck_len": 284.7,
+  "head_len": 50.2,
+  "leg_len": 151,
+  "neck_body": 1.715,
+  "head_body": 0.308,
+  "leg_depth": 1.688
+ },
+ "smoothness": {
+  "changed": [
+   8.53,
+   8.99,
+   9.25
+  ],
+  "mean": 8.92,
+  "spread": 0.08,
+  "score": 4
  },
  "motion": {
   "mean": 3.38,
   "changed_pct": 9.25,
   "leg_pct": 10.9
  },
- "rationale": {
-  "anatomy": "The long neck does not touch the body, and the head is small. (level 1.85 of 4)",
-  "craft": "The neck is separated from the body, and a cloud is cut off at the left edge of the first frame. (level 2.00 of 4)",
-  "gait": "band 4 from 9.25% pixel change; P(planted, coherent)=0.07"
- },
- "probabilities": {
-  "anatomy": {
-   "0": 0.03,
-   "1": 0.8,
-   "2": 0.17,
-   "3": 0,
-   "4": 0
-  },
-  "craft": {
-   "0": 0,
-   "1": 0.02,
-   "2": 0.96,
-   "3": 0.02,
-   "4": 0
-  }
- },
  "verdict": {
-  "jev+openai-gpt-6-sol": "A cream-colored alpaca is shown walking through a green meadow with purple hills, clouds, and a sun behind it."
+  "jev+openai-gpt-6-sol": "A cream-colored alpaca with a long, spotty neck and four legs walks to the right across grass beneath clouds and mountains."
  }
 }

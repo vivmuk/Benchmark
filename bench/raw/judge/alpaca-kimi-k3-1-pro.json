@@ -1,65 +1,65 @@
 {
- "rubric": "v11",
+ "rubric": "v12",
  "median": {
-  "anatomy": 4,
   "craft": 4,
-  "gait": 1
+  "anatomy": 4,
+  "proportions": 4.0,
+  "motion": 2
+ },
+ "rationale": {
+  "craft": "level 3.96 of 4",
+  "anatomy": "level 3.67 of 4 - joints 4/4, chest and rump",
+  "proportions": "neck 0.79, head 0.42, leg/depth 1.42",
+  "motion": "band 2, smoothness 2, slider False"
  },
  "judges_used": 1,
- "setting": {
-  "depth_planes": 4,
-  "elements": [
-   "sun",
-   "clouds",
-   "birds",
-   "snow-capped mountains",
-   "green hills",
-   "bushes",
-   "grass",
-   "flowers",
-   "dirt path",
-   "pebbles"
-  ],
-  "palette": "Pale blue, cream, muted green, and gray.",
-  "placement": "The alpaca is near the center, standing on the path and facing right.",
-  "clutter": false
- },
  "captioner": "openai-gpt-6-sol",
  "observations": {
-  "description": "A cream-colored alpaca walks on a path in a grassy mountain scene.",
-  "anatomy": {
+  "description": "A fluffy alpaca with long upright ears walks along a path in a mountain scene.",
+  "parts": {
    "legs_visible": 4,
    "legs_with_visible_joint": 4,
    "leg_attachment": "chest_and_rump",
-   "neck_proportion": "too_long",
-   "head_proportion": "too_small",
+   "ears": "upright_banana",
    "tail_visible": true,
    "detached_parts": false,
-   "notes": "The neck is long relative to its width, and the head is small relative to the body."
+   "notes": "A small fluffy tail protrudes from the rump."
+  },
+  "points": {
+   "chest": [
+    589,
+    274
+   ],
+   "rump": [
+    343,
+    273
+   ],
+   "neck_base": [
+    555,
+    220
+   ],
+   "poll": [
+    582,
+    106
+   ],
+   "muzzle": [
+    637,
+    153
+   ],
+   "belly": [
+    467,
+    350
+   ],
+   "ground": [
+    541,
+    456
+   ]
   },
   "gait": {
    "feet_planted": true,
-   "sliding_or_popping": true,
+   "sliding_or_popping": false,
    "legs_change_between_frames": true,
-   "notes": "The legs bend and change position; some hooves lift while others touch the path, and the feet shift as the body stays nearly in place."
-  },
-  "scene": {
-   "depth_planes": 4,
-   "elements": [
-    "sun",
-    "clouds",
-    "birds",
-    "snow-capped mountains",
-    "green hills",
-    "bushes",
-    "grass",
-    "flowers",
-    "dirt path",
-    "pebbles"
-   ],
-   "palette": "Pale blue, cream, muted green, and gray.",
-   "placement": "The alpaca is near the center, standing on the path and facing right.",
-   "clutter": false
+   "notes": "The bent legs change position between frames; some hooves lift while others touch the path."
   },
   "craft": {
    "seams_or_stray_shapes": false,
@@ -69,33 +69,31 @@
    "notes": "none"
   }
  },
+ "ratios": {
+  "body_len": 233.2,
+  "neck_len": 181.1,
+  "head_len": 96.2,
+  "leg_len": 180,
+  "neck_body": 0.787,
+  "head_body": 0.418,
+  "leg_depth": 1.419
+ },
+ "smoothness": {
+  "changed": [
+   2.05,
+   1.93,
+   1.67
+  ],
+  "mean": 1.88,
+  "spread": 0.2,
+  "score": 2
+ },
  "motion": {
   "mean": 0.91,
   "changed_pct": 2.05,
   "leg_pct": 2.89
  },
- "rationale": {
-  "anatomy": "The neck is long relative to its width, and the head is small relative to the body. (level 3.84 of 4)",
-  "craft": "none (level 3.96 of 4)",
-  "gait": "band 2 from 2.05% pixel change; P(planted, coherent)=0.08"
- },
- "probabilities": {
-  "anatomy": {
-   "0": 0,
-   "1": 0.08,
-   "2": 0.89,
-   "3": 0.02,
-   "4": 0.01
-  },
-  "craft": {
-   "0": 0,
-   "1": 0,
-   "2": 0,
-   "3": 0.01,
-   "4": 0.99
-  }
- },
  "verdict": {
-  "jev+openai-gpt-6-sol": "A cream-colored alpaca walks on a path in a grassy mountain scene."
+  "jev+openai-gpt-6-sol": "A fluffy alpaca with long upright ears walks along a path in a mountain scene."
  }
 }

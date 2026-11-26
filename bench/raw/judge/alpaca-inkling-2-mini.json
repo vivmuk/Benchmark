@@ -1,101 +1,99 @@
 {
- "rubric": "v11",
+ "rubric": "v12",
  "median": {
-  "anatomy": 3,
-  "craft": 2,
-  "gait": 2
+  "craft": 4,
+  "anatomy": 4,
+  "proportions": 3.3,
+  "motion": 3
+ },
+ "rationale": {
+  "craft": "level 3.86 of 4",
+  "anatomy": "level 3.88 of 4 - joints 4/4, chest and rump",
+  "proportions": "neck 0.73, head 0.18, leg/depth 0.93",
+  "motion": "band 3, smoothness 4, slider False"
  },
  "judges_used": 1,
- "setting": {
-  "depth_planes": 4,
-  "elements": [
-   "sun",
-   "clouds",
-   "bird silhouettes",
-   "rolling hills",
-   "bushes",
-   "grass tufts",
-   "pink flowers",
-   "sandy path",
-   "pebbles",
-   "bottom lettering"
-  ],
-  "palette": "A blue-to-peach sky sits above muted greens and pale yellow sand.",
-  "placement": "Centered on the path, facing right.",
-  "clutter": false
- },
  "captioner": "openai-gpt-6-sol",
  "observations": {
-  "description": "A cream-colored alpaca walks to the right along a sandy path beneath a sun and clouds.",
-  "anatomy": {
+  "description": "A fluffy white alpaca with a small tail walks across a sandy path beneath a sunny sky.",
+  "parts": {
    "legs_visible": 4,
-   "legs_with_visible_joint": 3,
+   "legs_with_visible_joint": 4,
    "leg_attachment": "chest_and_rump",
-   "neck_proportion": "too_long",
-   "head_proportion": "too_small",
+   "ears": "small_pointed",
    "tail_visible": true,
    "detached_parts": false,
-   "notes": "The neck is long and narrow, the head is small, and one hind leg appears nearly straight."
+   "notes": "Four legs, two pointed ears, and a small tail tuft are visible."
+  },
+  "points": {
+   "chest": [
+    577,
+    608
+   ],
+   "rump": [
+    359,
+    604
+   ],
+   "neck_base": [
+    547,
+    521
+   ],
+   "poll": [
+    576,
+    365
+   ],
+   "muzzle": [
+    604,
+    392
+   ],
+   "belly": [
+    465,
+    685
+   ],
+   "ground": [
+    570,
+    797
+   ]
   },
   "gait": {
-   "feet_planted": false,
-   "sliding_or_popping": true,
+   "feet_planted": true,
+   "sliding_or_popping": false,
    "legs_change_between_frames": true,
-   "notes": "The legs change position, but the feet do not remain visibly planted between frames."
-  },
-  "scene": {
-   "depth_planes": 4,
-   "elements": [
-    "sun",
-    "clouds",
-    "bird silhouettes",
-    "rolling hills",
-    "bushes",
-    "grass tufts",
-    "pink flowers",
-    "sandy path",
-    "pebbles",
-    "bottom lettering"
-   ],
-   "palette": "A blue-to-peach sky sits above muted greens and pale yellow sand.",
-   "placement": "Centered on the path, facing right.",
-   "clutter": false
+   "notes": "The legs alternate forward and back, with some hooves raised during steps."
   },
   "craft": {
-   "seams_or_stray_shapes": true,
+   "seams_or_stray_shapes": false,
    "inconsistent_light": false,
-   "clipped_elements": true,
+   "clipped_elements": false,
    "contact_shadow": true,
-   "notes": "A smooth oval belly patch and round shoulder patch have visible edges; a flower and some ground details are cut off at frame edges."
+   "notes": "A soft shadow is visible beneath the alpaca."
   }
+ },
+ "ratios": {
+  "body_len": 215.7,
+  "neck_len": 156.3,
+  "head_len": 39.6,
+  "leg_len": 112,
+  "neck_body": 0.728,
+  "head_body": 0.184,
+  "leg_depth": 0.934
+ },
+ "smoothness": {
+  "changed": [
+   3.02,
+   3.25,
+   2.86
+  ],
+  "mean": 3.05,
+  "spread": 0.13,
+  "score": 4
  },
  "motion": {
   "mean": 1.49,
   "changed_pct": 3.25,
   "leg_pct": 4.72
  },
- "rationale": {
-  "anatomy": "The neck is long and narrow, the head is small, and one hind leg appears nearly straight. (level 2.72 of 4)",
-  "craft": "A smooth oval belly patch and round shoulder patch have visible edges; a flower and some ground details are cut off at frame edges. (level 2.00 of 4)",
-  "gait": "band 3 from 3.25% pixel change; P(planted, coherent)=0.03"
- },
- "probabilities": {
-  "anatomy": {
-   "0": 0,
-   "1": 0.71,
-   "2": 0.28,
-   "3": 0.01,
-   "4": 0
-  },
-  "craft": {
-   "0": 0,
-   "1": 0.01,
-   "2": 0.97,
-   "3": 0.02,
-   "4": 0
-  }
- },
  "verdict": {
-  "jev+openai-gpt-6-sol": "A cream-colored alpaca walks to the right along a sandy path beneath a sun and clouds."
+  "jev+openai-gpt-6-sol": "A fluffy white alpaca with a small tail walks across a sandy path beneath a sunny sky."
  }
 }

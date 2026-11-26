@@ -1,97 +1,99 @@
 {
- "rubric": "v11",
+ "rubric": "v12",
  "median": {
-  "anatomy": 2,
-  "craft": 3,
-  "gait": 2
+  "craft": 4,
+  "anatomy": 4,
+  "proportions": 2.0,
+  "motion": 2
+ },
+ "rationale": {
+  "craft": "level 3.96 of 4",
+  "anatomy": "level 3.76 of 4 - joints 4/4, chest and rump",
+  "proportions": "neck 1.42, head 0.55, leg/depth 1.58",
+  "motion": "band 3, smoothness 2, slider False"
  },
  "judges_used": 1,
- "setting": {
-  "depth_planes": 5,
-  "elements": [
-   "title and small labels",
-   "sun",
-   "thin clouds",
-   "layered mountains",
-   "rolling hills",
-   "winding pale stream",
-   "sandy path",
-   "sparse grasses"
-  ],
-  "palette": "Muted teal and sage with dusty pink, tan, cream, and pale yellow.",
-  "placement": "Near the center, on the foreground path.",
-  "clutter": false
- },
  "captioner": "openai-gpt-6-sol",
  "observations": {
-  "description": "A cream-colored alpaca with a patterned blanket is shown walking to the right on a sandy path in a mountain scene.",
-  "anatomy": {
+  "description": "A cream-colored alpaca with a patterned blanket walks along a sandy path in a mountain scene.",
+  "parts": {
    "legs_visible": 4,
    "legs_with_visible_joint": 4,
    "leg_attachment": "chest_and_rump",
-   "neck_proportion": "too_long",
-   "head_proportion": "too_small",
+   "ears": "small_pointed",
    "tail_visible": true,
-   "detached_parts": true,
-   "notes": "A dark segment of a rear leg appears separated from the body in the second frame."
+   "detached_parts": false,
+   "notes": "none"
+  },
+  "points": {
+   "chest": [
+    541,
+    594
+   ],
+   "rump": [
+    387,
+    556
+   ],
+   "neck_base": [
+    524,
+    507
+   ],
+   "poll": [
+    568,
+    293
+   ],
+   "muzzle": [
+    614,
+    359
+   ],
+   "belly": [
+    470,
+    646
+   ],
+   "ground": [
+    530,
+    783
+   ]
   },
   "gait": {
    "feet_planted": true,
-   "sliding_or_popping": true,
+   "sliding_or_popping": false,
    "legs_change_between_frames": true,
-   "notes": "The legs bend and change position, but the hooves shift along the path while the body stays in nearly the same place."
-  },
-  "scene": {
-   "depth_planes": 5,
-   "elements": [
-    "title and small labels",
-    "sun",
-    "thin clouds",
-    "layered mountains",
-    "rolling hills",
-    "winding pale stream",
-    "sandy path",
-    "sparse grasses"
-   ],
-   "palette": "Muted teal and sage with dusty pink, tan, cream, and pale yellow.",
-   "placement": "Near the center, on the foreground path.",
-   "clutter": false
+   "notes": "The front and rear legs change their bent and extended positions, with hooves touching or lifting just above the path."
   },
   "craft": {
-   "seams_or_stray_shapes": true,
+   "seams_or_stray_shapes": false,
    "inconsistent_light": false,
    "clipped_elements": false,
    "contact_shadow": true,
-   "notes": "A rear-leg segment appears separate from the body in the second frame."
+   "notes": "none"
   }
+ },
+ "ratios": {
+  "body_len": 154.0,
+  "neck_len": 218.0,
+  "head_len": 83.2,
+  "leg_len": 135,
+  "neck_body": 1.415,
+  "head_body": 0.548,
+  "leg_depth": 1.576
+ },
+ "smoothness": {
+  "changed": [
+   3.62,
+   3.26,
+   2.0
+  ],
+  "mean": 2.96,
+  "spread": 0.55,
+  "score": 2
  },
  "motion": {
   "mean": 1.59,
   "changed_pct": 3.62,
   "leg_pct": 6.13
  },
- "rationale": {
-  "anatomy": "A dark segment of a rear leg appears separated from the body in the second frame. (level 1.93 of 4)",
-  "craft": "A rear-leg segment appears separate from the body in the second frame. (level 2.55 of 4)",
-  "gait": "band 3 from 3.62% pixel change; P(planted, coherent)=0.05"
- },
- "probabilities": {
-  "anatomy": {
-   "0": 0.03,
-   "1": 0.87,
-   "2": 0.1,
-   "3": 0,
-   "4": 0
-  },
-  "craft": {
-   "0": 0,
-   "1": 0.19,
-   "2": 0.07,
-   "3": 0.74,
-   "4": 0
-  }
- },
  "verdict": {
-  "jev+openai-gpt-6-sol": "A cream-colored alpaca with a patterned blanket is shown walking to the right on a sandy path in a mountain scene."
+  "jev+openai-gpt-6-sol": "A cream-colored alpaca with a patterned blanket walks along a sandy path in a mountain scene."
  }
 }

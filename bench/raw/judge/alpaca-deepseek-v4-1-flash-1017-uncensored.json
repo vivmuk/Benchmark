@@ -1,95 +1,99 @@
 {
- "rubric": "v11",
+ "rubric": "v12",
  "median": {
+  "craft": 4,
   "anatomy": 2,
-  "craft": 2,
-  "gait": 3
+  "proportions": 3.7,
+  "motion": 3
+ },
+ "rationale": {
+  "craft": "level 3.56 of 4",
+  "anatomy": "level 1.94 of 4 - joints 0/4, chest and rump",
+  "proportions": "neck 0.90, head 0.45, leg/depth 1.09",
+  "motion": "band 4, smoothness 4, slider True"
  },
  "judges_used": 1,
- "setting": {
-  "depth_planes": 3,
-  "elements": [
-   "sky",
-   "clouds",
-   "sun",
-   "blue hills",
-   "pale hills",
-   "grass",
-   "flowers"
-  ],
-  "palette": "Soft blues, greens, cream, and pale yellow.",
-  "placement": "The alpaca is near the center, in front of the hills.",
-  "clutter": false
- },
  "captioner": "openai-gpt-6-sol",
  "observations": {
-  "description": "A cream-colored alpaca walks in place in a grassy scene with hills, flowers, clouds, and a sun.",
-  "anatomy": {
+  "description": "A cream-colored alpaca walks in place in a grassy landscape beneath a blue sky.",
+  "parts": {
    "legs_visible": 4,
    "legs_with_visible_joint": 0,
-   "leg_attachment": "under_belly",
-   "neck_proportion": "too_long",
-   "head_proportion": "too_small",
+   "leg_attachment": "chest_and_rump",
+   "ears": "upright_banana",
    "tail_visible": true,
    "detached_parts": false,
-   "notes": "The rear legs meet the underside of the body rather than the rump; the neck is long and the head is small."
+   "notes": "none"
+  },
+  "points": {
+   "chest": [
+    586,
+    583
+   ],
+   "rump": [
+    401,
+    571
+   ],
+   "neck_base": [
+    552,
+    470
+   ],
+   "poll": [
+    601,
+    311
+   ],
+   "muzzle": [
+    636,
+    387
+   ],
+   "belly": [
+    491,
+    659
+   ],
+   "ground": [
+    456,
+    774
+   ]
   },
   "gait": {
-   "feet_planted": false,
+   "feet_planted": true,
    "sliding_or_popping": true,
    "legs_change_between_frames": true,
-   "notes": "The straight legs change angles, while the hooves shift against the moving ground without a clear planted step."
-  },
-  "scene": {
-   "depth_planes": 3,
-   "elements": [
-    "sky",
-    "clouds",
-    "sun",
-    "blue hills",
-    "pale hills",
-    "grass",
-    "flowers"
-   ],
-   "palette": "Soft blues, greens, cream, and pale yellow.",
-   "placement": "The alpaca is near the center, in front of the hills.",
-   "clutter": false
+   "notes": "The legs alternate forward and back; some hooves lift while others move along the ground as the body stays in place."
   },
   "craft": {
-   "seams_or_stray_shapes": true,
+   "seams_or_stray_shapes": false,
    "inconsistent_light": false,
-   "clipped_elements": true,
+   "clipped_elements": false,
    "contact_shadow": false,
-   "notes": "A narrow line runs down the neck, the cloud at the right edge is clipped, and there is no clear shadow beneath the feet."
+   "notes": "No distinct contact shadow is visible beneath the hooves."
   }
+ },
+ "ratios": {
+  "body_len": 188.4,
+  "neck_len": 166.4,
+  "head_len": 83.7,
+  "leg_len": 115,
+  "neck_body": 0.897,
+  "head_body": 0.451,
+  "leg_depth": 1.087
+ },
+ "smoothness": {
+  "changed": [
+   6.77,
+   6.71,
+   6.76
+  ],
+  "mean": 6.75,
+  "spread": 0.01,
+  "score": 4
  },
  "motion": {
   "mean": 2.62,
   "changed_pct": 6.77,
   "leg_pct": 13.96
  },
- "rationale": {
-  "anatomy": "The rear legs meet the underside of the body rather than the rump; the neck is long and the head is small. (level 1.56 of 4)",
-  "craft": "A narrow line runs down the neck, the cloud at the right edge is clipped, and there is no clear shadow beneath the feet. (level 2.03 of 4)",
-  "gait": "band 4 from 6.77% pixel change; P(planted, coherent)=0.03"
- },
- "probabilities": {
-  "anatomy": {
-   "0": 0,
-   "1": 0.06,
-   "2": 0.91,
-   "3": 0.02,
-   "4": 0.01
-  },
-  "craft": {
-   "0": 0,
-   "1": 0.03,
-   "2": 0.95,
-   "3": 0.02,
-   "4": 0
-  }
- },
  "verdict": {
-  "jev+openai-gpt-6-sol": "A cream-colored alpaca walks in place in a grassy scene with hills, flowers, clouds, and a sun."
+  "jev+openai-gpt-6-sol": "A cream-colored alpaca walks in place in a grassy landscape beneath a blue sky."
  }
 }

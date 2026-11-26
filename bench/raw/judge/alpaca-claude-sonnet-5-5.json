@@ -1,103 +1,99 @@
 {
- "rubric": "v11",
+ "rubric": "v12",
  "median": {
-  "anatomy": 3,
-  "craft": 2,
-  "gait": 3
+  "craft": 4,
+  "anatomy": 2,
+  "proportions": 3.0,
+  "motion": 4
+ },
+ "rationale": {
+  "craft": "level 3.95 of 4",
+  "anatomy": "level 2.01 of 4 - joints 2/4, chest and rump",
+  "proportions": "neck 1.30, head 0.44, leg/depth 1.30",
+  "motion": "band 4, smoothness 4, slider False"
  },
  "judges_used": 1,
- "setting": {
-  "depth_planes": 5,
-  "elements": [
-   "sky",
-   "sun",
-   "clouds",
-   "mountains",
-   "rolling hills",
-   "trees",
-   "wooden fence",
-   "grass",
-   "flowers",
-   "pale dots",
-   "ground shadow"
-  ],
-  "palette": "Soft blues and greens with cream clouds, a brown fence, and pastel flowers.",
-  "placement": "Centered in the foreground, in front of the fence.",
-  "clutter": false
- },
  "captioner": "openai-gpt-6-sol",
  "observations": {
-  "description": "A cream-colored alpaca walks across a grassy field in front of a fence, trees, mountains, clouds, and a sun.",
-  "anatomy": {
+  "description": "A cream-colored alpaca walks to the right through a grassy field with flowers, a fence, trees, mountains, clouds and a sun.",
+  "parts": {
    "legs_visible": 4,
-   "legs_with_visible_joint": 3,
+   "legs_with_visible_joint": 2,
    "leg_attachment": "chest_and_rump",
-   "neck_proportion": "too_long",
-   "head_proportion": "too_small",
+   "ears": "small_pointed",
    "tail_visible": true,
    "detached_parts": false,
-   "notes": "The neck is long and narrow, the head is small, and one hind leg appears straight."
+   "notes": "none"
+  },
+  "points": {
+   "chest": [
+    563,
+    570
+   ],
+   "rump": [
+    357,
+    521
+   ],
+   "neck_base": [
+    538,
+    438
+   ],
+   "poll": [
+    616,
+    174
+   ],
+   "muzzle": [
+    640,
+    266
+   ],
+   "belly": [
+    469,
+    655
+   ],
+   "ground": [
+    535,
+    807
+   ]
   },
   "gait": {
    "feet_planted": true,
-   "sliding_or_popping": true,
+   "sliding_or_popping": false,
    "legs_change_between_frames": true,
-   "notes": "The legs change position; several hooves reach the ground line, but their positions shift between frames."
-  },
-  "scene": {
-   "depth_planes": 5,
-   "elements": [
-    "sky",
-    "sun",
-    "clouds",
-    "mountains",
-    "rolling hills",
-    "trees",
-    "wooden fence",
-    "grass",
-    "flowers",
-    "pale dots",
-    "ground shadow"
-   ],
-   "palette": "Soft blues and greens with cream clouds, a brown fence, and pastel flowers.",
-   "placement": "Centered in the foreground, in front of the fence.",
-   "clutter": false
+   "notes": "The legs alternate forward and backward; some hooves lift while others touch the ground."
   },
   "craft": {
-   "seams_or_stray_shapes": true,
+   "seams_or_stray_shapes": false,
    "inconsistent_light": false,
-   "clipped_elements": true,
+   "clipped_elements": false,
    "contact_shadow": true,
-   "notes": "Ring-like overlaps are visible on the neck and legs; clouds and trees are cut off at the frame edges."
+   "notes": "none"
   }
+ },
+ "ratios": {
+  "body_len": 213.2,
+  "neck_len": 275.3,
+  "head_len": 95.1,
+  "leg_len": 152,
+  "neck_body": 1.3,
+  "head_body": 0.441,
+  "leg_depth": 1.305
+ },
+ "smoothness": {
+  "changed": [
+   8.26,
+   7.59,
+   7.81
+  ],
+  "mean": 7.89,
+  "spread": 0.09,
+  "score": 4
  },
  "motion": {
   "mean": 3.89,
   "changed_pct": 8.26,
   "leg_pct": 13.61
  },
- "rationale": {
-  "anatomy": "The neck is long and narrow, the head is small, and one hind leg appears straight. (level 2.73 of 4)",
-  "craft": "Ring-like overlaps are visible on the neck and legs; clouds and trees are cut off at the frame edges. (level 2.01 of 4)",
-  "gait": "band 4 from 8.26% pixel change; P(planted, coherent)=0.07"
- },
- "probabilities": {
-  "anatomy": {
-   "0": 0,
-   "1": 0.59,
-   "2": 0.41,
-   "3": 0,
-   "4": 0
-  },
-  "craft": {
-   "0": 0,
-   "1": 0.01,
-   "2": 0.97,
-   "3": 0.02,
-   "4": 0
-  }
- },
  "verdict": {
-  "jev+openai-gpt-6-sol": "A cream-colored alpaca walks across a grassy field in front of a fence, trees, mountains, clouds, and a sun."
+  "jev+openai-gpt-6-sol": "A cream-colored alpaca walks to the right through a grassy field with flowers, a fence, trees, mountains, clouds and a sun."
  }
 }

@@ -1,101 +1,99 @@
 {
- "rubric": "v11",
+ "rubric": "v12",
  "median": {
-  "anatomy": 4,
-  "craft": 2,
-  "gait": 2
+  "craft": 4,
+  "anatomy": 3,
+  "proportions": 2.3,
+  "motion": 3
+ },
+ "rationale": {
+  "craft": "level 3.73 of 4",
+  "anatomy": "level 3.38 of 4 - joints 4/4, chest and rump",
+  "proportions": "neck 1.23, head 0.41, leg/depth 2.19",
+  "motion": "band 3, smoothness 4, slider False"
  },
  "judges_used": 1,
- "setting": {
-  "depth_planes": 6,
-  "elements": [
-   "sky",
-   "clouds",
-   "small light specks",
-   "sun",
-   "mountains with pale peaks",
-   "distant hills",
-   "grassy field",
-   "grass tufts",
-   "dirt path",
-   "foreground flowers"
-  ],
-  "palette": "Muted purples and greens with a warm yellow sun.",
-  "placement": "The alpaca is near the center, on the path.",
-  "clutter": false
- },
  "captioner": "openai-gpt-6-sol",
  "observations": {
-  "description": "A white alpaca walks along a path through a grassy landscape with mountains and a glowing sun.",
-  "anatomy": {
+  "description": "A cream-colored alpaca walks along a path in a grassy mountain scene at sunset.",
+  "parts": {
    "legs_visible": 4,
    "legs_with_visible_joint": 4,
    "leg_attachment": "chest_and_rump",
-   "neck_proportion": "too_long",
-   "head_proportion": "too_small",
+   "ears": "upright_banana",
    "tail_visible": true,
    "detached_parts": false,
-   "notes": "The long, narrow neck leads to a small head; the tail and all four bent legs touch the body."
+   "notes": "A small rounded tail is visible behind the rump."
+  },
+  "points": {
+   "chest": [
+    538,
+    578
+   ],
+   "rump": [
+    403,
+    555
+   ],
+   "neck_base": [
+    510,
+    510
+   ],
+   "poll": [
+    550,
+    347
+   ],
+   "muzzle": [
+    585,
+    386
+   ],
+   "belly": [
+    470,
+    625
+   ],
+   "ground": [
+    506,
+    790
+   ]
   },
   "gait": {
-   "feet_planted": false,
-   "sliding_or_popping": true,
+   "feet_planted": true,
+   "sliding_or_popping": false,
    "legs_change_between_frames": true,
-   "notes": "The legs change pose, though the middle two frames repeat; the feet shift against the moving path."
-  },
-  "scene": {
-   "depth_planes": 6,
-   "elements": [
-    "sky",
-    "clouds",
-    "small light specks",
-    "sun",
-    "mountains with pale peaks",
-    "distant hills",
-    "grassy field",
-    "grass tufts",
-    "dirt path",
-    "foreground flowers"
-   ],
-   "palette": "Muted purples and greens with a warm yellow sun.",
-   "placement": "The alpaca is near the center, on the path.",
-   "clutter": false
+   "notes": "The bent legs alternate forward and backward, with hooves reaching the path in each frame."
   },
   "craft": {
-   "seams_or_stray_shapes": true,
+   "seams_or_stray_shapes": false,
    "inconsistent_light": false,
-   "clipped_elements": true,
+   "clipped_elements": false,
    "contact_shadow": false,
-   "notes": "A thin extra outline runs beside the neck, and a cloud is cut off at the right edge; no distinct ground shadow is visible."
+   "notes": "No distinct contact shadow is visible beneath the alpaca."
   }
+ },
+ "ratios": {
+  "body_len": 135.9,
+  "neck_len": 167.8,
+  "head_len": 54.0,
+  "leg_len": 165,
+  "neck_body": 1.231,
+  "head_body": 0.412,
+  "leg_depth": 2.191
+ },
+ "smoothness": {
+  "changed": [
+   5.42,
+   3.58,
+   5.73
+  ],
+  "mean": 4.91,
+  "spread": 0.44,
+  "score": 4
  },
  "motion": {
   "mean": 2.76,
   "changed_pct": 5.73,
   "leg_pct": 8.91
  },
- "rationale": {
-  "anatomy": "The long, narrow neck leads to a small head; the tail and all four bent legs touch the body. (level 3.87 of 4)",
-  "craft": "A thin extra outline runs beside the neck, and a cloud is cut off at the right edge; no distinct ground shadow is visible. (level 2.03 of 4)",
-  "gait": "band 3 from 5.73% pixel change; P(planted, coherent)=0.03"
- },
- "probabilities": {
-  "anatomy": {
-   "0": 0,
-   "1": 0.12,
-   "2": 0.86,
-   "3": 0.01,
-   "4": 0.01
-  },
-  "craft": {
-   "0": 0,
-   "1": 0.01,
-   "2": 0.97,
-   "3": 0.02,
-   "4": 0
-  }
- },
  "verdict": {
-  "jev+openai-gpt-6-sol": "A white alpaca walks along a path through a grassy landscape with mountains and a glowing sun."
+  "jev+openai-gpt-6-sol": "A cream-colored alpaca walks along a path in a grassy mountain scene at sunset."
  }
 }

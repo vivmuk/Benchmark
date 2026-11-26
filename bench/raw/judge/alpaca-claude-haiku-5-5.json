@@ -1,97 +1,99 @@
 {
- "rubric": "v11",
+ "rubric": "v12",
  "median": {
+  "craft": 4,
   "anatomy": 2,
-  "craft": 2,
-  "gait": 3
+  "proportions": 3.0,
+  "motion": 3
+ },
+ "rationale": {
+  "craft": "level 3.97 of 4",
+  "anatomy": "level 1.97 of 4 - joints 2/4, chest and rump",
+  "proportions": "neck 1.35, head 0.31, leg/depth 1.02",
+  "motion": "band 4, smoothness 4, slider True"
  },
  "judges_used": 1,
- "setting": {
-  "depth_planes": 3,
-  "elements": [
-   "sky",
-   "clouds",
-   "sun",
-   "distant hills",
-   "grassy hills",
-   "bushes",
-   "grass",
-   "flowers"
-  ],
-  "palette": "Pastel blue, peach, yellow, and shades of green.",
-  "placement": "The alpaca is near the center, facing right.",
-  "clutter": false
- },
  "captioner": "openai-gpt-6-sol",
  "observations": {
-  "description": "A cream-colored alpaca walks to the right through a grassy scene with hills, bushes, flowers, clouds, and a sun.",
-  "anatomy": {
+  "description": "A cream-colored alpaca with long upright ears walks through a grassy scene beneath clouds and a sun.",
+  "parts": {
    "legs_visible": 4,
    "legs_with_visible_joint": 2,
    "leg_attachment": "chest_and_rump",
-   "neck_proportion": "too_long",
-   "head_proportion": "too_small",
+   "ears": "upright_banana",
    "tail_visible": false,
    "detached_parts": false,
-   "notes": "The neck is long and slender, the head is small, and no distinct tail is visible."
+   "notes": "none"
+  },
+  "points": {
+   "chest": [
+    603,
+    598
+   ],
+   "rump": [
+    374,
+    573
+   ],
+   "neck_base": [
+    566,
+    446
+   ],
+   "poll": [
+    637,
+    174
+   ],
+   "muzzle": [
+    679,
+    227
+   ],
+   "belly": [
+    498,
+    682
+   ],
+   "ground": [
+    438,
+    807
+   ]
   },
   "gait": {
-   "feet_planted": false,
+   "feet_planted": true,
    "sliding_or_popping": true,
    "legs_change_between_frames": true,
-   "notes": "The legs change position, but the hooves shift between frames without a clear planted phase."
-  },
-  "scene": {
-   "depth_planes": 3,
-   "elements": [
-    "sky",
-    "clouds",
-    "sun",
-    "distant hills",
-    "grassy hills",
-    "bushes",
-    "grass",
-    "flowers"
-   ],
-   "palette": "Pastel blue, peach, yellow, and shades of green.",
-   "placement": "The alpaca is near the center, facing right.",
-   "clutter": false
+   "notes": "Two legs bend and swing while the other two stay straighter; the hoof positions shift between frames."
   },
   "craft": {
-   "seams_or_stray_shapes": true,
+   "seams_or_stray_shapes": false,
    "inconsistent_light": false,
-   "clipped_elements": true,
+   "clipped_elements": false,
    "contact_shadow": false,
-   "notes": "A flat tan band crosses the lower body, some foreground plants are cut off at the left edge, and no distinct shadow touches the hooves."
+   "notes": "none"
   }
+ },
+ "ratios": {
+  "body_len": 216.8,
+  "neck_len": 292.0,
+  "head_len": 67.6,
+  "leg_len": 123,
+  "neck_body": 1.346,
+  "head_body": 0.307,
+  "leg_depth": 1.018
+ },
+ "smoothness": {
+  "changed": [
+   6.84,
+   7.12,
+   6.74
+  ],
+  "mean": 6.9,
+  "spread": 0.06,
+  "score": 4
  },
  "motion": {
   "mean": 2.73,
   "changed_pct": 7.12,
   "leg_pct": 14.28
  },
- "rationale": {
-  "anatomy": "The neck is long and slender, the head is small, and no distinct tail is visible. (level 1.93 of 4)",
-  "craft": "A flat tan band crosses the lower body, some foreground plants are cut off at the left edge, and no distinct shadow touches the hooves. (level 2.02 of 4)",
-  "gait": "band 4 from 7.12% pixel change; P(planted, coherent)=0.03"
- },
- "probabilities": {
-  "anatomy": {
-   "0": 0,
-   "1": 0.62,
-   "2": 0.37,
-   "3": 0.01,
-   "4": 0
-  },
-  "craft": {
-   "0": 0,
-   "1": 0.01,
-   "2": 0.96,
-   "3": 0.03,
-   "4": 0
-  }
- },
  "verdict": {
-  "jev+openai-gpt-6-sol": "A cream-colored alpaca walks to the right through a grassy scene with hills, bushes, flowers, clouds, and a sun."
+  "jev+openai-gpt-6-sol": "A cream-colored alpaca with long upright ears walks through a grassy scene beneath clouds and a sun."
  }
 }

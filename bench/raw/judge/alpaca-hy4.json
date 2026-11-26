@@ -1,99 +1,99 @@
 {
- "rubric": "v11",
+ "rubric": "v12",
  "median": {
+  "craft": 4,
   "anatomy": 2,
-  "craft": 3,
-  "gait": 1
+  "proportions": 1.7,
+  "motion": 2
+ },
+ "rationale": {
+  "craft": "level 3.95 of 4",
+  "anatomy": "level 1.88 of 4 - joints 0/4, chest and rump",
+  "proportions": "neck 1.27, head 0.44, leg/depth 2.69",
+  "motion": "band 2, smoothness 2, slider False"
  },
  "judges_used": 1,
- "setting": {
-  "depth_planes": 5,
-  "elements": [
-   "gradient sky",
-   "sun",
-   "clouds",
-   "small white specks",
-   "lavender hills",
-   "blue hills",
-   "green hills",
-   "foreground grass",
-   "small grass tufts"
-  ],
-  "palette": "Soft blues, purples, pinks, yellows, and greens.",
-  "placement": "The alpaca is near the center, in the lower half, facing right.",
-  "clutter": false
- },
  "captioner": "openai-gpt-6-sol",
  "observations": {
-  "description": "A cream-colored alpaca wearing a pink patterned blanket walks in place against a pastel landscape.",
-  "anatomy": {
+  "description": "A white alpaca with a tan face and pink patterned blanket walks to the right through a pastel scene with hills, clouds, and a sun.",
+  "parts": {
    "legs_visible": 4,
    "legs_with_visible_joint": 0,
    "leg_attachment": "chest_and_rump",
-   "neck_proportion": "too_long",
-   "head_proportion": "too_small",
+   "ears": "small_pointed",
    "tail_visible": true,
    "detached_parts": false,
-   "notes": "The neck is long and narrow, the head is small, and the legs have no visible bends."
+   "notes": "A small white tail tuft is visible behind the rump."
+  },
+  "points": {
+   "chest": [
+    560,
+    594
+   ],
+   "rump": [
+    440,
+    578
+   ],
+   "neck_base": [
+    550,
+    509
+   ],
+   "poll": [
+    581,
+    356
+   ],
+   "muzzle": [
+    603,
+    405
+   ],
+   "belly": [
+    499,
+    644
+   ],
+   "ground": [
+    543,
+    823
+   ]
   },
   "gait": {
-   "feet_planted": false,
-   "sliding_or_popping": true,
+   "feet_planted": true,
+   "sliding_or_popping": false,
    "legs_change_between_frames": true,
-   "notes": "The straight legs swing and cross; some hooves shift along the ground while others lift slightly."
-  },
-  "scene": {
-   "depth_planes": 5,
-   "elements": [
-    "gradient sky",
-    "sun",
-    "clouds",
-    "small white specks",
-    "lavender hills",
-    "blue hills",
-    "green hills",
-    "foreground grass",
-    "small grass tufts"
-   ],
-   "palette": "Soft blues, purples, pinks, yellows, and greens.",
-   "placement": "The alpaca is near the center, in the lower half, facing right.",
-   "clutter": false
+   "notes": "The front and hind legs change position, with some legs crossing as the hooves alternate between the ground and a slightly raised position."
   },
   "craft": {
    "seams_or_stray_shapes": false,
    "inconsistent_light": false,
    "clipped_elements": false,
-   "contact_shadow": false,
-   "notes": "No distinct shadow is visible beneath the hooves."
+   "contact_shadow": true,
+   "notes": "none"
   }
+ },
+ "ratios": {
+  "body_len": 121.1,
+  "neck_len": 156.1,
+  "head_len": 53.7,
+  "leg_len": 177,
+  "neck_body": 1.266,
+  "head_body": 0.444,
+  "leg_depth": 2.688
+ },
+ "smoothness": {
+  "changed": [
+   2.88,
+   2.98,
+   2.55
+  ],
+  "mean": 2.8,
+  "spread": 0.16,
+  "score": 2
  },
  "motion": {
   "mean": 1.24,
   "changed_pct": 2.98,
   "leg_pct": 5.03
  },
- "rationale": {
-  "anatomy": "The neck is long and narrow, the head is small, and the legs have no visible bends. (level 1.63 of 4)",
-  "craft": "No distinct shadow is visible beneath the hooves. (level 2.98 of 4)",
-  "gait": "band 2 from 2.98% pixel change; P(planted, coherent)=0.03"
- },
- "probabilities": {
-  "anatomy": {
-   "0": 0.01,
-   "1": 0.97,
-   "2": 0.02,
-   "3": 0,
-   "4": 0
-  },
-  "craft": {
-   "0": 0,
-   "1": 0.02,
-   "2": 0.02,
-   "3": 0.93,
-   "4": 0.03
-  }
- },
  "verdict": {
-  "jev+openai-gpt-6-sol": "A cream-colored alpaca wearing a pink patterned blanket walks in place against a pastel landscape."
+  "jev+openai-gpt-6-sol": "A white alpaca with a tan face and pink patterned blanket walks to the right through a pastel scene with hills, clouds, and a sun."
  }
 }

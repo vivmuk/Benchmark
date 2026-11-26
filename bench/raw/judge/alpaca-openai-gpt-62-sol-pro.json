@@ -1,99 +1,99 @@
 {
- "rubric": "v11",
+ "rubric": "v12",
  "median": {
+  "craft": 4,
   "anatomy": 4,
-  "craft": 3,
-  "gait": 1
+  "proportions": 4.0,
+  "motion": 2
+ },
+ "rationale": {
+  "craft": "level 3.69 of 4",
+  "anatomy": "level 3.66 of 4 - joints 4/4, chest and rump",
+  "proportions": "neck 0.97, head 0.41, leg/depth 1.48",
+  "motion": "band 2, smoothness 2, slider False"
  },
  "judges_used": 1,
- "setting": {
-  "depth_planes": 5,
-  "elements": [
-   "title and small captions",
-   "thin rectangular border",
-   "sun and halo",
-   "wispy cloud lines",
-   "layered mountains",
-   "rolling hills",
-   "sandy ground",
-   "grass tufts",
-   "small stones"
-  ],
-  "palette": "Muted pink, peach, lavender, and cream",
-  "placement": "The alpaca is near the center, to the right of the title.",
-  "clutter": false
- },
  "captioner": "openai-gpt-6-sol",
  "observations": {
-  "description": "A cream-colored alpaca appears in four walking poses in a pastel mountain scene with a sun and text.",
-  "anatomy": {
+  "description": "A fluffy cream alpaca with long upright ears walks to the right across a pastel mountain scene.",
+  "parts": {
    "legs_visible": 4,
    "legs_with_visible_joint": 4,
    "leg_attachment": "chest_and_rump",
-   "neck_proportion": "too_long",
-   "head_proportion": "right",
+   "ears": "upright_banana",
    "tail_visible": true,
    "detached_parts": false,
-   "notes": "The neck is long relative to the body."
+   "notes": "none"
+  },
+  "points": {
+   "chest": [
+    559,
+    552
+   ],
+   "rump": [
+    369,
+    531
+   ],
+   "neck_base": [
+    527,
+    470
+   ],
+   "poll": [
+    591,
+    283
+   ],
+   "muzzle": [
+    650,
+    349
+   ],
+   "belly": [
+    460,
+    606
+   ],
+   "ground": [
+    531,
+    776
+   ]
   },
   "gait": {
    "feet_planted": true,
-   "sliding_or_popping": true,
+   "sliding_or_popping": false,
    "legs_change_between_frames": true,
-   "notes": "The legs bend and change position; raised hooves alternate, while some hooves shift along the ground."
-  },
-  "scene": {
-   "depth_planes": 5,
-   "elements": [
-    "title and small captions",
-    "thin rectangular border",
-    "sun and halo",
-    "wispy cloud lines",
-    "layered mountains",
-    "rolling hills",
-    "sandy ground",
-    "grass tufts",
-    "small stones"
-   ],
-   "palette": "Muted pink, peach, lavender, and cream",
-   "placement": "The alpaca is near the center, to the right of the title.",
-   "clutter": false
+   "notes": "The legs alternately bend and swing, with some hooves touching the ground in each frame."
   },
   "craft": {
    "seams_or_stray_shapes": false,
    "inconsistent_light": false,
    "clipped_elements": false,
    "contact_shadow": false,
-   "notes": "No distinct contact shadow is visible."
+   "notes": "No distinct contact shadow is visible beneath the alpaca."
   }
+ },
+ "ratios": {
+  "body_len": 202.1,
+  "neck_len": 196.7,
+  "head_len": 83.6,
+  "leg_len": 165,
+  "neck_body": 0.974,
+  "head_body": 0.414,
+  "leg_depth": 1.484
+ },
+ "smoothness": {
+  "changed": [
+   2.64,
+   2.08,
+   1.81
+  ],
+  "mean": 2.18,
+  "spread": 0.38,
+  "score": 2
  },
  "motion": {
   "mean": 1.11,
   "changed_pct": 2.64,
   "leg_pct": 3.73
  },
- "rationale": {
-  "anatomy": "The neck is long relative to the body. (level 3.87 of 4)",
-  "craft": "No distinct contact shadow is visible. (level 2.97 of 4)",
-  "gait": "band 2 from 2.64% pixel change; P(planted, coherent)=0.09"
- },
- "probabilities": {
-  "anatomy": {
-   "0": 0,
-   "1": 0.03,
-   "2": 0.91,
-   "3": 0.05,
-   "4": 0.01
-  },
-  "craft": {
-   "0": 0,
-   "1": 0.04,
-   "2": 0.02,
-   "3": 0.88,
-   "4": 0.06
-  }
- },
  "verdict": {
-  "jev+openai-gpt-6-sol": "A cream-colored alpaca appears in four walking poses in a pastel mountain scene with a sun and text."
+  "jev+openai-gpt-6-sol": "A fluffy cream alpaca with long upright ears walks to the right across a pastel mountain scene."
  }
 }

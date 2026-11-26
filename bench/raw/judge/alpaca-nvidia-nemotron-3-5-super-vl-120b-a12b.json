@@ -1,91 +1,99 @@
 {
- "rubric": "v11",
+ "rubric": "v12",
  "median": {
+  "craft": 1,
   "anatomy": 1,
-  "craft": 3,
-  "gait": 0
+  "proportions": 1.7,
+  "motion": 0
+ },
+ "rationale": {
+  "craft": "level 1.48 of 4",
+  "anatomy": "level 1.03 of 4 - joints 0/4, unclear",
+  "proportions": "neck 1.50, head 0.40, leg/depth 2.19",
+  "motion": "band 1, smoothness 1, slider True"
  },
  "judges_used": 1,
- "setting": {
-  "depth_planes": 3,
-  "elements": [
-   "blue sky",
-   "pale yellow sun",
-   "light-green hill",
-   "darker green foreground ground",
-   "gray ground shadow"
-  ],
-  "palette": "Pastel blue, cream, yellow, and greens.",
-  "placement": "Left of center at the boundary between the sky and ground.",
-  "clutter": false
- },
  "captioner": "openai-gpt-6-sol",
  "observations": {
-  "description": "A cream-colored alpaca-like figure stands on green ground beneath a pale sun in a blue sky.",
-  "anatomy": {
+  "description": "A pale alpaca-like figure with a rounded body, long neck, small pointed ears, and four thin legs appears against a blue sky and green ground.",
+  "parts": {
    "legs_visible": 4,
    "legs_with_visible_joint": 0,
-   "leg_attachment": "under_belly",
-   "neck_proportion": "too_long",
-   "head_proportion": "too_small",
+   "leg_attachment": "unclear",
+   "ears": "small_pointed",
    "tail_visible": false,
    "detached_parts": true,
-   "notes": "The head and neck do not touch the torso, and the rightmost leg does not touch the body; all four legs are straight."
+   "notes": "The neck is separated from the torso, and one leg begins away from the body."
+  },
+  "points": {
+   "chest": [
+    447,
+    535
+   ],
+   "rump": [
+    365,
+    535
+   ],
+   "neck_base": [
+    457,
+    469
+   ],
+   "poll": [
+    510,
+    358
+   ],
+   "muzzle": [
+    529,
+    385
+   ],
+   "belly": [
+    405,
+    637
+   ],
+   "ground": [
+    398,
+    736
+   ]
   },
   "gait": {
    "feet_planted": false,
    "sliding_or_popping": true,
    "legs_change_between_frames": true,
-   "notes": "The straight legs shift and cross between frames, while their feet change position along or just above the ground."
-  },
-  "scene": {
-   "depth_planes": 3,
-   "elements": [
-    "blue sky",
-    "pale yellow sun",
-    "light-green hill",
-    "darker green foreground ground",
-    "gray ground shadow"
-   ],
-   "palette": "Pastel blue, cream, yellow, and greens.",
-   "placement": "Left of center at the boundary between the sky and ground.",
-   "clutter": false
+   "notes": "The straight legs shift and cross between frames, and their feet change position along the ground."
   },
   "craft": {
    "seams_or_stray_shapes": true,
    "inconsistent_light": false,
    "clipped_elements": false,
    "contact_shadow": true,
-   "notes": "A gap separates the neck from the torso, and the rightmost leg has a detached upper end."
+   "notes": "There is a gap between the neck and torso, and a leg is separate from the torso."
   }
+ },
+ "ratios": {
+  "body_len": 82.0,
+  "neck_len": 123.0,
+  "head_len": 33.0,
+  "leg_len": 99,
+  "neck_body": 1.5,
+  "head_body": 0.403,
+  "leg_depth": 2.195
+ },
+ "smoothness": {
+  "changed": [
+   0.36,
+   0.23,
+   0.35
+  ],
+  "mean": 0.31,
+  "spread": 0.42,
+  "score": 1
  },
  "motion": {
   "mean": 0.13,
   "changed_pct": 0.36,
   "leg_pct": 0.35
  },
- "rationale": {
-  "anatomy": "The head and neck do not touch the torso, and the rightmost leg does not touch the body; all four legs are straight. (level 0.99 of 4)",
-  "craft": "A gap separates the neck from the torso, and the rightmost leg has a detached upper end. (level 2.66 of 4)",
-  "gait": "band 1 from 0.36% pixel change; P(planted, coherent)=0.03"
- },
- "probabilities": {
-  "anatomy": {
-   "0": 0.11,
-   "1": 0.88,
-   "2": 0.01,
-   "3": 0,
-   "4": 0
-  },
-  "craft": {
-   "0": 0,
-   "1": 0.11,
-   "2": 0.05,
-   "3": 0.83,
-   "4": 0.01
-  }
- },
  "verdict": {
-  "jev+openai-gpt-6-sol": "A cream-colored alpaca-like figure stands on green ground beneath a pale sun in a blue sky."
+  "jev+openai-gpt-6-sol": "A pale alpaca-like figure with a rounded body, long neck, small pointed ears, and four thin legs appears against a blue sky and green ground."
  }
 }

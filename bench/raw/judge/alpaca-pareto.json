@@ -1,103 +1,99 @@
 {
- "rubric": "v11",
+ "rubric": "v12",
  "median": {
+  "craft": 3,
   "anatomy": 4,
-  "craft": 2,
-  "gait": 1
+  "proportions": 4.0,
+  "motion": 2
+ },
+ "rationale": {
+  "craft": "level 2.97 of 4",
+  "anatomy": "level 3.67 of 4 - joints 4/4, chest and rump",
+  "proportions": "neck 0.97, head 0.37, leg/depth 1.09",
+  "motion": "band 2, smoothness 2, slider False"
  },
  "judges_used": 1,
- "setting": {
-  "depth_planes": 5,
-  "elements": [
-   "sun",
-   "bird marks",
-   "short white sky streaks",
-   "layered green hills",
-   "green ground",
-   "sandy path",
-   "two small plants with flowers",
-   "small ground marks",
-   "heading and captions",
-   "decorative line and dot",
-   "right-pointing arrow"
-  ],
-  "palette": "Muted cream, sand, sage green, and warm orange.",
-  "placement": "The alpaca stands near the center of the path.",
-  "clutter": false
- },
  "captioner": "openai-gpt-6-sol",
  "observations": {
-  "description": "A cream alpaca walks along a sandy path beneath the words \u201cA softer pace,\u201d with green hills and a sun behind it.",
-  "anatomy": {
+  "description": "A cream, woolly alpaca with long curved ears walks along a sandy path in front of green hills and a sun.",
+  "parts": {
    "legs_visible": 4,
    "legs_with_visible_joint": 4,
    "leg_attachment": "chest_and_rump",
-   "neck_proportion": "too_long",
-   "head_proportion": "too_small",
+   "ears": "upright_banana",
    "tail_visible": true,
    "detached_parts": false,
-   "notes": "The neck is long and narrow relative to the body, and the head is small."
+   "notes": "none"
+  },
+  "points": {
+   "chest": [
+    574,
+    559
+   ],
+   "rump": [
+    374,
+    540
+   ],
+   "neck_base": [
+    539,
+    497
+   ],
+   "poll": [
+    572,
+    299
+   ],
+   "muzzle": [
+    621,
+    358
+   ],
+   "belly": [
+    471,
+    648
+   ],
+   "ground": [
+    545,
+    768
+   ]
   },
   "gait": {
-   "feet_planted": false,
-   "sliding_or_popping": true,
+   "feet_planted": true,
+   "sliding_or_popping": false,
    "legs_change_between_frames": true,
-   "notes": "The bent legs change positions; some hooves lift, while others shift sideways near the path without a clear planted interval."
-  },
-  "scene": {
-   "depth_planes": 5,
-   "elements": [
-    "sun",
-    "bird marks",
-    "short white sky streaks",
-    "layered green hills",
-    "green ground",
-    "sandy path",
-    "two small plants with flowers",
-    "small ground marks",
-    "heading and captions",
-    "decorative line and dot",
-    "right-pointing arrow"
-   ],
-   "palette": "Muted cream, sand, sage green, and warm orange.",
-   "placement": "The alpaca stands near the center of the path.",
-   "clutter": false
+   "notes": "The legs bend into different stepping positions, with some hooves touching the path while others lift."
   },
   "craft": {
    "seams_or_stray_shapes": true,
    "inconsistent_light": false,
    "clipped_elements": false,
    "contact_shadow": false,
-   "notes": "A thin pale stroke is visible beside a raised front leg in the last frame, and there is no clear shadow directly beneath the hooves."
+   "notes": "A thin pale diagonal line appears beside the front legs in the last frame."
   }
+ },
+ "ratios": {
+  "body_len": 199.7,
+  "neck_len": 192.3,
+  "head_len": 73.5,
+  "leg_len": 120,
+  "neck_body": 0.966,
+  "head_body": 0.368,
+  "leg_depth": 1.093
+ },
+ "smoothness": {
+  "changed": [
+   1.43,
+   1.31,
+   1.32
+  ],
+  "mean": 1.35,
+  "spread": 0.09,
+  "score": 2
  },
  "motion": {
   "mean": 0.68,
   "changed_pct": 1.43,
   "leg_pct": 2.48
  },
- "rationale": {
-  "anatomy": "The neck is long and narrow relative to the body, and the head is small. (level 3.88 of 4)",
-  "craft": "A thin pale stroke is visible beside a raised front leg in the last frame, and there is no clear shadow directly beneath the hooves. (level 2.02 of 4)",
-  "gait": "band 2 from 1.43% pixel change; P(planted, coherent)=0.03"
- },
- "probabilities": {
-  "anatomy": {
-   "0": 0,
-   "1": 0.09,
-   "2": 0.88,
-   "3": 0.02,
-   "4": 0.01
-  },
-  "craft": {
-   "0": 0,
-   "1": 0.01,
-   "2": 0.97,
-   "3": 0.02,
-   "4": 0
-  }
- },
  "verdict": {
-  "jev+openai-gpt-6-sol": "A cream alpaca walks along a sandy path beneath the words \u201cA softer pace,\u201d with green hills and a sun behind it."
+  "jev+openai-gpt-6-sol": "A cream, woolly alpaca with long curved ears walks along a sandy path in front of green hills and a sun."
  }
 }

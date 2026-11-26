@@ -1,105 +1,99 @@
 {
- "rubric": "v11",
+ "rubric": "v12",
  "median": {
+  "craft": 2,
   "anatomy": 2,
-  "craft": 4,
-  "gait": 3
+  "proportions": 3.3,
+  "motion": 4
+ },
+ "rationale": {
+  "craft": "level 2.27 of 4",
+  "anatomy": "level 2.02 of 4 - joints 2/4, chest and rump",
+  "proportions": "neck 0.85, head 0.31, leg/depth 1.98",
+  "motion": "band 4, smoothness 4, slider False"
  },
  "judges_used": 1,
- "setting": {
-  "depth_planes": 6,
-  "elements": [
-   "sky",
-   "sun",
-   "clouds",
-   "distant birds",
-   "two mountain layers",
-   "grassy field",
-   "trees",
-   "bushes",
-   "sandy path",
-   "grass tufts",
-   "small flowers",
-   "pebbles"
-  ],
-  "palette": "Pastel blues and greens with pale yellow and sandy beige.",
-  "placement": "Near the center of the sandy path, facing right.",
-  "clutter": false
- },
  "captioner": "openai-gpt-6-sol",
  "observations": {
-  "description": "A cream-colored alpaca wearing a striped blanket walks to the right on a sandy path beneath a sunny sky.",
-  "anatomy": {
+  "description": "A cream-colored alpaca with a striped reddish saddle walks along a path beneath a blue sky.",
+  "parts": {
    "legs_visible": 4,
    "legs_with_visible_joint": 2,
    "leg_attachment": "chest_and_rump",
-   "neck_proportion": "too_long",
-   "head_proportion": "too_small",
+   "ears": "small_pointed",
    "tail_visible": true,
    "detached_parts": false,
-   "notes": "The hind legs bend; the front legs appear straight, and the head is small relative to the long neck."
+   "notes": "A small white tuft protrudes from the rump."
+  },
+  "points": {
+   "chest": [
+    550,
+    348
+   ],
+   "rump": [
+    399,
+    325
+   ],
+   "neck_base": [
+    528,
+    295
+   ],
+   "poll": [
+    581,
+    219
+   ],
+   "muzzle": [
+    616,
+    239
+   ],
+   "belly": [
+    489,
+    374
+   ],
+   "ground": [
+    544,
+    473
+   ]
   },
   "gait": {
    "feet_planted": true,
-   "sliding_or_popping": true,
+   "sliding_or_popping": false,
    "legs_change_between_frames": true,
-   "notes": "The legs change position and some hooves lift, but grounded hooves stay near the same screen positions while path details move left."
-  },
-  "scene": {
-   "depth_planes": 6,
-   "elements": [
-    "sky",
-    "sun",
-    "clouds",
-    "distant birds",
-    "two mountain layers",
-    "grassy field",
-    "trees",
-    "bushes",
-    "sandy path",
-    "grass tufts",
-    "small flowers",
-    "pebbles"
-   ],
-   "palette": "Pastel blues and greens with pale yellow and sandy beige.",
-   "placement": "Near the center of the sandy path, facing right.",
-   "clutter": false
+   "notes": "The hind legs bend and change position while the front legs remain mostly straight; some hooves lift between frames."
   },
   "craft": {
-   "seams_or_stray_shapes": false,
+   "seams_or_stray_shapes": true,
    "inconsistent_light": false,
    "clipped_elements": false,
    "contact_shadow": true,
-   "notes": "none"
+   "notes": "A thin brown sliver protrudes below the belly."
   }
+ },
+ "ratios": {
+  "body_len": 152.7,
+  "neck_len": 129.8,
+  "head_len": 48.1,
+  "leg_len": 174,
+  "neck_body": 0.851,
+  "head_body": 0.308,
+  "leg_depth": 1.975
+ },
+ "smoothness": {
+  "changed": [
+   8.77,
+   8.33,
+   8.26
+  ],
+  "mean": 8.45,
+  "spread": 0.06,
+  "score": 4
  },
  "motion": {
   "mean": 3.35,
   "changed_pct": 8.77,
   "leg_pct": 16.82
  },
- "rationale": {
-  "anatomy": "The hind legs bend; the front legs appear straight, and the head is small relative to the long neck. (level 2.02 of 4)",
-  "craft": "none (level 3.95 of 4)",
-  "gait": "band 4 from 8.77% pixel change; P(planted, coherent)=0.11"
- },
- "probabilities": {
-  "anatomy": {
-   "0": 0,
-   "1": 0.6,
-   "2": 0.39,
-   "3": 0.01,
-   "4": 0
-  },
-  "craft": {
-   "0": 0,
-   "1": 0,
-   "2": 0,
-   "3": 0.01,
-   "4": 0.99
-  }
- },
  "verdict": {
-  "jev+openai-gpt-6-sol": "A cream-colored alpaca wearing a striped blanket walks to the right on a sandy path beneath a sunny sky."
+  "jev+openai-gpt-6-sol": "A cream-colored alpaca with a striped reddish saddle walks along a path beneath a blue sky."
  }
 }

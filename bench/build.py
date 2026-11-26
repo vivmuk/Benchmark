@@ -25,16 +25,18 @@ def grade(text):
 
 
 WEIGHTS = {"anatomy": 0.40, "gait": 0.40, "craft": 0.20}
+WEIGHTS_V12 = {"anatomy": 0.35, "proportions": 0.10, "motion": 0.30, "craft": 0.25}
 
 
 def judged(task, mid):
     j = load(RAW / "judge" / ("%s-%s.json" % (task, mid)), {})
     if task == "alpaca" and j.get("median"):
         med = j["median"]
-        score = round(sum(WEIGHTS[k] * med[k] / 4 for k in WEIGHTS) * 100, 1)
+        W = WEIGHTS_V12 if j.get("rubric") == "v12" else WEIGHTS
+        score = round(sum(W[k] * med[k] / 4 for k in W) * 100, 1)
         used = [k for k, v in j.items() if isinstance(v, dict) and "scores" in v]
         if used:
-            by = {k: round(sum(WEIGHTS[c] * j[k]["scores"][c] / 4 for c in WEIGHTS) * 100, 1) for k in used}
+            by = {k: round(sum(W[c] * j[k]["scores"][c] / 4 for c in W) * 100, 1) for k in used}
             rat = (j.get(used[0]) or {}).get("rationale", {})
             verd = {k: j[k].get("verdict", "") for k in used}
         else:
@@ -42,7 +44,8 @@ def judged(task, mid):
             rat = j.get("rationale") or {}
             verd = j.get("verdict") or {}
         return {"score": score, "criteria": med, "by_judge": by, "rationale": rat, "verdict": verd,
-                "setting": j.get("setting"), "judges": j.get("judges_used", len(by)), "rubric": j.get("rubric"), "scale": 4}
+                "setting": j.get("setting"), "ratios": j.get("ratios"), "smoothness": j.get("smoothness"),
+                "judges": j.get("judges_used", len(by)), "rubric": j.get("rubric"), "scale": 4}
     ok = {k: v for k, v in j.items() if "scores" in v}
     if not ok:
         return None
@@ -127,7 +130,7 @@ for mid in MODELS:
         c, cnotes = compliance(mid, ms)
         m["alpaca"]["compliance"] = c
         m["alpaca"]["compliance_notes"] = cnotes
-        if m["alpaca"].get("criteria"):
+        if m["alpaca"].get("criteria") and m["alpaca"].get("rubric") != "v12":
             crit = dict(m["alpaca"]["criteria"])
             ch = (ms or {}).get("changed_pct", 0)
             band = 4 if ch >= 6 else 3 if ch >= 3 else 2 if ch >= 1 else 1 if ch > 0 else 0

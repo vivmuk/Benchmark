@@ -1,95 +1,99 @@
 {
- "rubric": "v11",
+ "rubric": "v12",
  "median": {
+  "craft": 4,
   "anatomy": 2,
-  "craft": 3,
-  "gait": 2
+  "proportions": 2.3,
+  "motion": 1
+ },
+ "rationale": {
+  "craft": "level 3.84 of 4",
+  "anatomy": "level 1.91 of 4 - joints 0/4, chest and rump",
+  "proportions": "neck 1.09, head 0.43, leg/depth 2.59",
+  "motion": "band 3, smoothness 2, slider True"
  },
  "judges_used": 1,
- "setting": {
-  "depth_planes": 3,
-  "elements": [
-   "sky",
-   "clouds",
-   "sun",
-   "rolling hills",
-   "grassy field",
-   "small flowers",
-   "floating light specks"
-  ],
-  "palette": "Muted blues and purples above a green field, with warm cream and yellow highlights",
-  "placement": "The alpaca stands near the center of the grassy foreground.",
-  "clutter": false
- },
  "captioner": "openai-gpt-6-sol",
  "observations": {
-  "description": "A white alpaca walks in place in a grassy landscape beneath clouds and a low sun.",
-  "anatomy": {
+  "description": "A cream-colored, woolly alpaca faces right in a grassy scene beneath a cloudy sky.",
+  "parts": {
    "legs_visible": 4,
    "legs_with_visible_joint": 0,
    "leg_attachment": "chest_and_rump",
-   "neck_proportion": "too_long",
-   "head_proportion": "too_small",
+   "ears": "small_pointed",
    "tail_visible": true,
    "detached_parts": false,
-   "notes": "The neck is long and narrow, the head is small, and the legs show no visible bends."
+   "notes": "A small woolly tail is visible at the rear; the legs appear straight."
+  },
+  "points": {
+   "chest": [
+    533,
+    590
+   ],
+   "rump": [
+    420,
+    550
+   ],
+   "neck_base": [
+    530,
+    530
+   ],
+   "poll": [
+    565,
+    400
+   ],
+   "muzzle": [
+    594,
+    443
+   ],
+   "belly": [
+    485,
+    648
+   ],
+   "ground": [
+    524,
+    816
+   ]
   },
   "gait": {
-   "feet_planted": true,
+   "feet_planted": false,
    "sliding_or_popping": true,
    "legs_change_between_frames": true,
-   "notes": "The straight legs swing between frames; some hooves rise while others remain low, and their positions reset as the scene moves."
-  },
-  "scene": {
-   "depth_planes": 3,
-   "elements": [
-    "sky",
-    "clouds",
-    "sun",
-    "rolling hills",
-    "grassy field",
-    "small flowers",
-    "floating light specks"
-   ],
-   "palette": "Muted blues and purples above a green field, with warm cream and yellow highlights",
-   "placement": "The alpaca stands near the center of the grassy foreground.",
-   "clutter": false
+   "notes": "The straight legs shift position between frames while the hooves remain near the same height, with no clear lifted step."
   },
   "craft": {
    "seams_or_stray_shapes": false,
    "inconsistent_light": false,
    "clipped_elements": false,
    "contact_shadow": false,
-   "notes": "No distinct shadow is visible beneath the hooves."
+   "notes": "No distinct contact shadow is visible beneath the hooves."
   }
+ },
+ "ratios": {
+  "body_len": 119.9,
+  "neck_len": 129.3,
+  "head_len": 51.9,
+  "leg_len": 170,
+  "neck_body": 1.09,
+  "head_body": 0.433,
+  "leg_depth": 2.588
+ },
+ "smoothness": {
+  "changed": [
+   3.2,
+   2.41,
+   2.34
+  ],
+  "mean": 2.65,
+  "spread": 0.33,
+  "score": 2
  },
  "motion": {
   "mean": 1.9,
   "changed_pct": 3.2,
   "leg_pct": 5.21
  },
- "rationale": {
-  "anatomy": "The neck is long and narrow, the head is small, and the legs show no visible bends. (level 1.62 of 4)",
-  "craft": "No distinct shadow is visible beneath the hooves. (level 2.96 of 4)",
-  "gait": "band 3 from 3.20% pixel change; P(planted, coherent)=0.06"
- },
- "probabilities": {
-  "anatomy": {
-   "0": 0.02,
-   "1": 0.96,
-   "2": 0.02,
-   "3": 0,
-   "4": 0
-  },
-  "craft": {
-   "0": 0,
-   "1": 0.03,
-   "2": 0.01,
-   "3": 0.93,
-   "4": 0.03
-  }
- },
  "verdict": {
-  "jev+openai-gpt-6-sol": "A white alpaca walks in place in a grassy landscape beneath clouds and a low sun."
+  "jev+openai-gpt-6-sol": "A cream-colored, woolly alpaca faces right in a grassy scene beneath a cloudy sky."
  }
 }

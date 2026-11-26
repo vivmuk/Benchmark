@@ -1,103 +1,99 @@
 {
- "rubric": "v11",
+ "rubric": "v12",
  "median": {
+  "craft": 4,
   "anatomy": 2,
-  "craft": 2,
-  "gait": 1
+  "proportions": 3.3,
+  "motion": 1
+ },
+ "rationale": {
+  "craft": "level 3.94 of 4",
+  "anatomy": "level 1.92 of 4 - joints 0/4, chest and rump",
+  "proportions": "neck 0.55, head 0.47, leg/depth 1.28",
+  "motion": "band 2, smoothness 2, slider True"
  },
  "judges_used": 1,
- "setting": {
-  "depth_planes": 4,
-  "elements": [
-   "sky",
-   "clouds",
-   "sun glow",
-   "mountains",
-   "rolling hills",
-   "path",
-   "trees",
-   "grass tufts",
-   "small flowers",
-   "leaf emblem",
-   "titles and labels"
-  ],
-  "palette": "Muted cream, sage green, and sandy beige.",
-  "placement": "Near the center, slightly to the right, in front of the hills.",
-  "clutter": false
- },
  "captioner": "openai-gpt-6-sol",
  "observations": {
-  "description": "A cream-colored alpaca appears in four walking poses in a pastel landscape with mountains, hills, and a path.",
-  "anatomy": {
+  "description": "A fluffy cream alpaca with two pointed ears and a small tail moves its legs against a pastel mountain scene.",
+  "parts": {
    "legs_visible": 4,
    "legs_with_visible_joint": 0,
    "leg_attachment": "chest_and_rump",
-   "neck_proportion": "too_long",
-   "head_proportion": "right",
+   "ears": "small_pointed",
    "tail_visible": true,
    "detached_parts": false,
-   "notes": "The neck is long and narrow, and the legs show no visible knee, hock, or fetlock bends."
+   "notes": "none"
+  },
+  "points": {
+   "chest": [
+    537,
+    597
+   ],
+   "rump": [
+    311,
+    516
+   ],
+   "neck_base": [
+    534,
+    521
+   ],
+   "poll": [
+    573,
+    307
+   ],
+   "muzzle": [
+    654,
+    392
+   ],
+   "belly": [
+    444,
+    625
+   ],
+   "ground": [
+    384,
+    790
+   ]
   },
   "gait": {
-   "feet_planted": false,
+   "feet_planted": true,
    "sliding_or_popping": true,
    "legs_change_between_frames": true,
-   "notes": "The legs change position, but the body stays in place while the hooves shift horizontally."
-  },
-  "scene": {
-   "depth_planes": 4,
-   "elements": [
-    "sky",
-    "clouds",
-    "sun glow",
-    "mountains",
-    "rolling hills",
-    "path",
-    "trees",
-    "grass tufts",
-    "small flowers",
-    "leaf emblem",
-    "titles and labels"
-   ],
-   "palette": "Muted cream, sage green, and sandy beige.",
-   "placement": "Near the center, slightly to the right, in front of the hills.",
-   "clutter": false
+   "notes": "The straight legs change position, while the hooves shift sideways near the same ground level."
   },
   "craft": {
-   "seams_or_stray_shapes": true,
+   "seams_or_stray_shapes": false,
    "inconsistent_light": false,
-   "clipped_elements": true,
+   "clipped_elements": false,
    "contact_shadow": true,
-   "notes": "Angular joins are visible at the front-leg roots, and a grass tuft is cut off at the bottom edge."
+   "notes": "none"
   }
+ },
+ "ratios": {
+  "body_len": 240.1,
+  "neck_len": 132.6,
+  "head_len": 108.3,
+  "leg_len": 170,
+  "neck_body": 0.549,
+  "head_body": 0.475,
+  "leg_depth": 1.279
+ },
+ "smoothness": {
+  "changed": [
+   1.93,
+   2.24,
+   2.16
+  ],
+  "mean": 2.11,
+  "spread": 0.15,
+  "score": 2
  },
  "motion": {
   "mean": 0.94,
   "changed_pct": 2.24,
   "leg_pct": 4.66
  },
- "rationale": {
-  "anatomy": "The neck is long and narrow, and the legs show no visible knee, hock, or fetlock bends. (level 1.59 of 4)",
-  "craft": "Angular joins are visible at the front-leg roots, and a grass tuft is cut off at the bottom edge. (level 2.01 of 4)",
-  "gait": "band 2 from 2.24% pixel change; P(planted, coherent)=0.03"
- },
- "probabilities": {
-  "anatomy": {
-   "0": 0.01,
-   "1": 0.96,
-   "2": 0.03,
-   "3": 0,
-   "4": 0
-  },
-  "craft": {
-   "0": 0,
-   "1": 0.01,
-   "2": 0.98,
-   "3": 0.01,
-   "4": 0
-  }
- },
  "verdict": {
-  "jev+openai-gpt-6-sol": "A cream-colored alpaca appears in four walking poses in a pastel landscape with mountains, hills, and a path."
+  "jev+openai-gpt-6-sol": "A fluffy cream alpaca with two pointed ears and a small tail moves its legs against a pastel mountain scene."
  }
 }
