@@ -1,99 +1,106 @@
 {
- "rubric": "v12",
+ "rubric": "v13",
  "median": {
-  "craft": 1,
   "anatomy": 1,
-  "proportions": 1.7,
-  "motion": 0
+  "craft": 2,
+  "pace": 1,
+  "smoothness": 1
  },
  "rationale": {
-  "craft": "level 1.48 of 4",
-  "anatomy": "level 1.03 of 4 - joints 0/4, unclear",
-  "proportions": "neck 1.50, head 0.40, leg/depth 2.19",
-  "motion": "band 1, smoothness 1, slider True"
+  "anatomy": "joints 0/4, under belly; level 1.04",
+  "craft": "level 1.71; There are gaps between the torso and neck and between the torso and rightmost leg.",
+  "pace": "0.0 cycles/s (confidence 0.22), 0.27% change per frame",
+  "smoothness": "frame change [0.2, 0.25, 0.38], spread 0.65",
+  "proportions": "neck 1.87, head 0.51, leg/depth 2.14 (diagnostic, not scored)"
  },
- "judges_used": 1,
+ "judges_used": 2,
  "captioner": "openai-gpt-6-sol",
  "observations": {
-  "description": "A pale alpaca-like figure with a rounded body, long neck, small pointed ears, and four thin legs appears against a blue sky and green ground.",
+  "description": "A pale alpaca with a detached head and neck stands on green ground beneath a blue sky and a pale sun.",
   "parts": {
    "legs_visible": 4,
    "legs_with_visible_joint": 0,
-   "leg_attachment": "unclear",
+   "leg_attachment": "under_belly",
    "ears": "small_pointed",
    "tail_visible": false,
    "detached_parts": true,
-   "notes": "The neck is separated from the torso, and one leg begins away from the body."
+   "notes": "The head and neck are separated from the torso, and the rightmost leg is separated from the body."
   },
   "points": {
    "chest": [
-    447,
-    535
+    448,
+    560
    ],
    "rump": [
     365,
-    535
+    550
    ],
    "neck_base": [
-    457,
-    469
+    435,
+    500
    ],
    "poll": [
-    510,
-    358
+    507,
+    361
    ],
    "muzzle": [
-    529,
-    385
+    527,
+    382
    ],
    "belly": [
-    405,
-    637
+    407,
+    635
    ],
    "ground": [
-    398,
-    736
+    395,
+    733
    ]
   },
   "gait": {
-   "feet_planted": false,
+   "feet_planted": true,
    "sliding_or_popping": true,
    "legs_change_between_frames": true,
-   "notes": "The straight legs shift and cross between frames, and their feet change position along the ground."
+   "notes": "The straight legs shift sideways between frames while their feet stay near the ground."
   },
   "craft": {
    "seams_or_stray_shapes": true,
    "inconsistent_light": false,
    "clipped_elements": false,
    "contact_shadow": true,
-   "notes": "There is a gap between the neck and torso, and a leg is separate from the torso."
+   "notes": "There are gaps between the torso and neck and between the torso and rightmost leg."
   }
  },
  "ratios": {
-  "body_len": 82.0,
-  "neck_len": 123.0,
-  "head_len": 33.0,
-  "leg_len": 99,
-  "neck_body": 1.5,
-  "head_body": 0.403,
-  "leg_depth": 2.195
+  "body_len": 85.0,
+  "neck_len": 156.5,
+  "head_len": 43.4,
+  "leg_len": 100,
+  "neck_body": 1.872,
+  "head_body": 0.511,
+  "leg_depth": 2.139
  },
  "smoothness": {
   "changed": [
-   0.36,
-   0.23,
-   0.35
+   0.2,
+   0.25,
+   0.38
   ],
-  "mean": 0.31,
-  "spread": 0.42,
+  "mean": 0.28,
+  "spread": 0.65,
+  "score": 1
+ },
+ "pace": {
+  "cadence": 0.0,
+  "strength": 0.22,
+  "mean_change": 0.27,
   "score": 1
  },
  "motion": {
   "mean": 0.13,
-  "changed_pct": 0.36,
-  "leg_pct": 0.35
+  "changed_pct": 0.38,
+  "leg_pct": 0.29
  },
  "verdict": {
-  "jev+openai-gpt-6-sol": "A pale alpaca-like figure with a rounded body, long neck, small pointed ears, and four thin legs appears against a blue sky and green ground."
+  "jev+openai-gpt-6-sol": "A pale alpaca with a detached head and neck stands on green ground beneath a blue sky and a pale sun."
  }
 }

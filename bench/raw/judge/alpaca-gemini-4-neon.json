@@ -1,65 +1,66 @@
 {
- "rubric": "v12",
+ "rubric": "v13",
  "median": {
+  "anatomy": 2,
   "craft": 4,
-  "anatomy": 4,
-  "proportions": 3.0,
-  "motion": 3
+  "pace": 4,
+  "smoothness": 4
  },
  "rationale": {
-  "craft": "level 3.94 of 4",
-  "anatomy": "level 3.56 of 4 - joints 4/4, chest and rump",
-  "proportions": "neck 1.15, head 0.39, leg/depth 1.81",
-  "motion": "band 4, smoothness 4, slider True"
+  "anatomy": "joints 2/4, chest and rump; level 2.00",
+  "craft": "level 3.95; none",
+  "pace": "0.95 cycles/s (confidence 0.45), 7.74% change per frame",
+  "smoothness": "frame change [8.27, 8.8, 7.91], spread 0.11",
+  "proportions": "neck 1.17, head 0.42, leg/depth 1.93 (diagnostic, not scored)"
  },
- "judges_used": 1,
+ "judges_used": 2,
  "captioner": "openai-gpt-6-sol",
  "observations": {
-  "description": "A cream-colored alpaca wearing a colorful neckband walks along a dirt path with hills and mountains behind it.",
+  "description": "A cream-colored alpaca with a fluffy body, long neck, pointed ears, and a small tail walks along a path in front of hills and mountains.",
   "parts": {
    "legs_visible": 4,
-   "legs_with_visible_joint": 4,
+   "legs_with_visible_joint": 2,
    "leg_attachment": "chest_and_rump",
    "ears": "upright_banana",
    "tail_visible": true,
    "detached_parts": false,
-   "notes": "A rounded tail is visible behind the rump."
+   "notes": "none"
   },
   "points": {
    "chest": [
-    538,
-    559
+    535,
+    542
    ],
    "rump": [
-    373,
-    517
+    369,
+    495
    ],
    "neck_base": [
-    538,
-    448
+    536,
+    429
    ],
    "poll": [
-    573,
-    274
+    575,
+    267
    ],
    "muzzle": [
-    627,
-    319
+    622,
+    309
    ],
    "belly": [
-    459,
-    613
+    462,
+    608
    ],
    "ground": [
-    585,
-    773
+    566,
+    774
    ]
   },
   "gait": {
    "feet_planted": true,
-   "sliding_or_popping": true,
+   "sliding_or_popping": false,
    "legs_change_between_frames": true,
-   "notes": "The legs alternate between bent, lifted positions and ground contact; some hooves shift along the path while touching it."
+   "notes": "The bent legs alternate forward and back; some hooves lift while others touch the path."
   },
   "craft": {
    "seams_or_stray_shapes": false,
@@ -70,30 +71,36 @@
   }
  },
  "ratios": {
-  "body_len": 167.7,
-  "neck_len": 192.8,
-  "head_len": 65.3,
-  "leg_len": 162,
-  "neck_body": 1.149,
-  "head_body": 0.389,
-  "leg_depth": 1.808
+  "body_len": 172.5,
+  "neck_len": 186.8,
+  "head_len": 67.3,
+  "leg_len": 170,
+  "neck_body": 1.168,
+  "head_body": 0.42,
+  "leg_depth": 1.932
  },
  "smoothness": {
   "changed": [
-   10.36,
-   9.22,
-   9.15
+   8.27,
+   8.8,
+   7.91
   ],
-  "mean": 9.57,
-  "spread": 0.13,
+  "mean": 8.33,
+  "spread": 0.11,
+  "score": 4
+ },
+ "pace": {
+  "cadence": 0.95,
+  "strength": 0.45,
+  "mean_change": 7.74,
   "score": 4
  },
  "motion": {
-  "mean": 4.15,
-  "changed_pct": 10.36,
-  "leg_pct": 15.24
+  "mean": 3.53,
+  "changed_pct": 8.8,
+  "leg_pct": 14.19
  },
  "verdict": {
-  "jev+openai-gpt-6-sol": "A cream-colored alpaca wearing a colorful neckband walks along a dirt path with hills and mountains behind it."
+  "jev+openai-gpt-6-sol": "A cream-colored alpaca with a fluffy body, long neck, pointed ears, and a small tail walks along a path in front of hills and mountains."
  }
 }

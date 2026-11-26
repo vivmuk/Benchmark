@@ -1,99 +1,106 @@
 {
- "rubric": "v12",
+ "rubric": "v13",
  "median": {
-  "craft": 4,
   "anatomy": 2,
-  "proportions": 1.3,
-  "motion": 1
+  "craft": 4,
+  "pace": 4,
+  "smoothness": 1
  },
  "rationale": {
-  "craft": "level 3.89 of 4",
-  "anatomy": "level 1.84 of 4 - joints 0/4, chest and rump",
-  "proportions": "neck 1.86, head 0.48, leg/depth 0.31",
-  "motion": "band 2, smoothness 2, slider True"
+  "anatomy": "joints 0/4, under belly; level 1.94",
+  "craft": "level 3.97; none",
+  "pace": "1.33 cycles/s (confidence 0.62), 0.89% change per frame",
+  "smoothness": "frame change [0.9, 0.8, 1.02], spread 0.24",
+  "proportions": "neck 1.80, head 0.44, leg/depth 0.32 (diagnostic, not scored)"
  },
- "judges_used": 1,
+ "judges_used": 2,
  "captioner": "openai-gpt-6-sol",
  "observations": {
-  "description": "A cream-colored, woolly alpaca moves its legs in a green meadow beneath a blue sky with hills, flowers, clouds and a sun.",
+  "description": "A white alpaca with a long neck and short pointed ears walks in place on grass beneath a blue sky.",
   "parts": {
    "legs_visible": 4,
    "legs_with_visible_joint": 0,
-   "leg_attachment": "chest_and_rump",
+   "leg_attachment": "under_belly",
    "ears": "small_pointed",
    "tail_visible": true,
    "detached_parts": false,
-   "notes": "A short white tail extends behind the rump."
+   "notes": "none"
   },
   "points": {
    "chest": [
-    211,
-    776
+    215,
+    773
    ],
    "rump": [
-    105,
-    764
+    101,
+    759
    ],
    "neck_base": [
     214,
-    720
+    722
    ],
    "poll": [
-    239,
-    514
+    237,
+    517
    ],
    "muzzle": [
-    261,
-    566
+    258,
+    563
    ],
    "belly": [
     165,
-    851
+    852
    ],
    "ground": [
     219,
-    869
+    868
    ]
   },
   "gait": {
-   "feet_planted": false,
+   "feet_planted": true,
    "sliding_or_popping": true,
    "legs_change_between_frames": true,
-   "notes": "The legs alternate between angled and straighter positions, with the hooves shifting while the body stays nearly still."
+   "notes": "The legs shift from slanted to more vertical positions while the hooves move sideways near the ground."
   },
   "craft": {
    "seams_or_stray_shapes": false,
    "inconsistent_light": false,
    "clipped_elements": false,
    "contact_shadow": false,
-   "notes": "No distinct contact shadow is visible beneath the hooves."
+   "notes": "none"
   }
  },
  "ratios": {
-  "body_len": 114.0,
-  "neck_len": 209.6,
-  "head_len": 54.6,
-  "leg_len": 18,
-  "neck_body": 1.865,
-  "head_body": 0.477,
-  "leg_depth": 0.307
+  "body_len": 114.9,
+  "neck_len": 206.3,
+  "head_len": 50.6,
+  "leg_len": 20,
+  "neck_body": 1.796,
+  "head_body": 0.444,
+  "leg_depth": 0.319
  },
  "smoothness": {
   "changed": [
-   1.29,
-   0.93,
-   1.28
+   0.9,
+   0.8,
+   1.02
   ],
-  "mean": 1.16,
-  "spread": 0.31,
-  "score": 2
+  "mean": 0.91,
+  "spread": 0.24,
+  "score": 1
+ },
+ "pace": {
+  "cadence": 1.33,
+  "strength": 0.62,
+  "mean_change": 0.89,
+  "score": 4
  },
  "motion": {
-  "mean": 0.6,
-  "changed_pct": 1.29,
-  "leg_pct": 1.37
+  "mean": 0.46,
+  "changed_pct": 1.02,
+  "leg_pct": 1.32
  },
  "verdict": {
-  "jev+openai-gpt-6-sol": "A cream-colored, woolly alpaca moves its legs in a green meadow beneath a blue sky with hills, flowers, clouds and a sun."
+  "jev+openai-gpt-6-sol": "A white alpaca with a long neck and short pointed ears walks in place on grass beneath a blue sky."
  }
 }

@@ -1,99 +1,106 @@
 {
- "rubric": "v12",
+ "rubric": "v13",
  "median": {
-  "craft": 4,
   "anatomy": 2,
-  "proportions": 1.7,
-  "motion": 2
+  "craft": 4,
+  "pace": 4,
+  "smoothness": 2
  },
  "rationale": {
-  "craft": "level 3.95 of 4",
-  "anatomy": "level 1.88 of 4 - joints 0/4, chest and rump",
-  "proportions": "neck 1.27, head 0.44, leg/depth 2.69",
-  "motion": "band 2, smoothness 2, slider False"
+  "anatomy": "joints 2/4, chest and rump; level 1.98",
+  "craft": "level 3.63; No distinct contact shadow is visible beneath the hooves.",
+  "pace": "1.33 cycles/s (confidence 0.41), 1.74% change per frame",
+  "smoothness": "frame change [2.21, 1.58, 2.2], spread 0.32",
+  "proportions": "neck 1.16, head 0.57, leg/depth 3.24 (diagnostic, not scored)"
  },
- "judges_used": 1,
+ "judges_used": 2,
  "captioner": "openai-gpt-6-sol",
  "observations": {
-  "description": "A white alpaca with a tan face and pink patterned blanket walks to the right through a pastel scene with hills, clouds, and a sun.",
+  "description": "A cream-colored alpaca wearing a pink blanket walks across a grassy scene beneath a pastel sky.",
   "parts": {
    "legs_visible": 4,
-   "legs_with_visible_joint": 0,
+   "legs_with_visible_joint": 2,
    "leg_attachment": "chest_and_rump",
    "ears": "small_pointed",
    "tail_visible": true,
    "detached_parts": false,
-   "notes": "A small white tail tuft is visible behind the rump."
+   "notes": "A small fluffy tail is visible behind the rump; one hind leg appears nearly straight."
   },
   "points": {
    "chest": [
-    560,
-    594
+    553,
+    590
    ],
    "rump": [
-    440,
-    578
+    428,
+    568
    ],
    "neck_base": [
-    550,
-    509
+    546,
+    484
    ],
    "poll": [
-    581,
-    356
+    578,
+    354
    ],
    "muzzle": [
-    603,
-    405
+    599,
+    399
    ],
    "belly": [
-    499,
+    508,
     644
    ],
    "ground": [
-    543,
-    823
+    541,
+    816
    ]
   },
   "gait": {
    "feet_planted": true,
-   "sliding_or_popping": false,
+   "sliding_or_popping": true,
    "legs_change_between_frames": true,
-   "notes": "The front and hind legs change position, with some legs crossing as the hooves alternate between the ground and a slightly raised position."
+   "notes": "The forelegs change angle and cross; some hooves shift horizontally near the ground."
   },
   "craft": {
    "seams_or_stray_shapes": false,
    "inconsistent_light": false,
    "clipped_elements": false,
-   "contact_shadow": true,
-   "notes": "none"
+   "contact_shadow": false,
+   "notes": "No distinct contact shadow is visible beneath the hooves."
   }
  },
  "ratios": {
-  "body_len": 121.1,
-  "neck_len": 156.1,
-  "head_len": 53.7,
-  "leg_len": 177,
-  "neck_body": 1.266,
-  "head_body": 0.444,
-  "leg_depth": 2.688
+  "body_len": 126.9,
+  "neck_len": 133.9,
+  "head_len": 58.0,
+  "leg_len": 180,
+  "neck_body": 1.157,
+  "head_body": 0.574,
+  "leg_depth": 3.236
  },
  "smoothness": {
   "changed": [
-   2.88,
-   2.98,
-   2.55
+   2.21,
+   1.58,
+   2.2
   ],
-  "mean": 2.8,
-  "spread": 0.16,
+  "mean": 2.0,
+  "spread": 0.32,
   "score": 2
  },
+ "pace": {
+  "cadence": 1.33,
+  "strength": 0.41,
+  "mean_change": 1.74,
+  "score": 4
+ },
  "motion": {
-  "mean": 1.24,
-  "changed_pct": 2.98,
-  "leg_pct": 5.03
+  "mean": 0.99,
+  "changed_pct": 2.21,
+  "leg_pct": 3.55
  },
  "verdict": {
-  "jev+openai-gpt-6-sol": "A white alpaca with a tan face and pink patterned blanket walks to the right through a pastel scene with hills, clouds, and a sun."
+  "jev+openai-gpt-6-sol": "A cream-colored alpaca wearing a pink blanket walks across a grassy scene beneath a pastel sky."
  }
 }

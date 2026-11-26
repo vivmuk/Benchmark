@@ -1,0 +1,4540 @@
+{
+ "pairs": {
+  "claude-fable-5-2|claude-haiku-5-5": {
+   "a": "claude-fable-5-2",
+   "b": "claude-haiku-5-5",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has more clearly jointed, attached legs and cleaner, more coherent shapes than B."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     1.0,
+     0.0
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.34,
+     0.66
+    ]
+   }
+  },
+  "claude-fable-5-2|claude-opus-5-5": {
+   "a": "claude-fable-5-2",
+   "b": "claude-opus-5-5",
+   "vision": {
+    "anatomy": "B",
+    "craft": "A",
+    "note": "B has a more proportionate neck and a clearer tail, while A has cleaner outlines and fewer stray marks."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.99,
+     0.01
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.24,
+     0.76
+    ]
+   }
+  },
+  "claude-fable-5-2|claude-sonnet-5-5": {
+   "a": "claude-fable-5-2",
+   "b": "claude-sonnet-5-5",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has clearer leg attachments and cleaner outlines, while B has conspicuous overlapping shapes and seams."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.96,
+     0.04
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.29,
+     0.71
+    ]
+   }
+  },
+  "claude-fable-5-2|deepseek-v4-1-flash-1017-uncensored": {
+   "a": "claude-fable-5-2",
+   "b": "deepseek-v4-1-flash-1017-uncensored",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has more clearly jointed, attached legs and cleaner vector edges, while B\u2019s legs are straighter and its shading is less consistent."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     1.0,
+     0.0
+    ],
+    "craft": "A",
+    "craft_p": [
+     1.0,
+     0.0
+    ]
+   }
+  },
+  "claude-fable-5-2|gemini-4-neon": {
+   "a": "claude-fable-5-2",
+   "b": "gemini-4-neon",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has a visible tail and more clearly articulated, attached legs, with cleaner, more consistent construction."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     1.0,
+     0.0
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.34,
+     0.66
+    ]
+   }
+  },
+  "claude-fable-5-2|glm-5-3-flash-uncensored": {
+   "a": "claude-fable-5-2",
+   "b": "glm-5-3-flash-uncensored",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has four visibly attached legs and cleaner construction, while B\u2019s leg shapes appear partly detached from its floating body."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     1.0,
+     0.0
+    ],
+    "craft": "A",
+    "craft_p": [
+     1.0,
+     0.0
+    ]
+   }
+  },
+  "claude-fable-5-2|hy4": {
+   "a": "claude-fable-5-2",
+   "b": "hy4",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has clearer leg joints and attachments, while B\u2019s crossed legs and saddle edges make its construction look less cohesive."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.97,
+     0.03
+    ],
+    "craft": "A",
+    "craft_p": [
+     0.83,
+     0.17
+    ]
+   }
+  },
+  "claude-fable-5-2|inkling-2-mini": {
+   "a": "claude-fable-5-2",
+   "b": "inkling-2-mini",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has more clearly jointed, attached legs and cleaner, more consistent construction; B\u2019s legs and body have visible seams."
+   },
+   "jev": {
+    "anatomy": "tie",
+    "anatomy_p": [
+     0.51,
+     0.49
+    ],
+    "craft": "A",
+    "craft_p": [
+     1.0,
+     0.0
+    ]
+   }
+  },
+  "claude-fable-5-2|kimi-k3-1-pro": {
+   "a": "claude-fable-5-2",
+   "b": "kimi-k3-1-pro",
+   "vision": {
+    "anatomy": "B",
+    "craft": "A",
+    "note": "B has more clearly jointed legs and a fuller alpaca shape, while A\u2019s construction is cleaner without B\u2019s conspicuous neck seam."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.3,
+     0.7
+    ],
+    "craft": "A",
+    "craft_p": [
+     0.63,
+     0.37
+    ]
+   }
+  },
+  "claude-fable-5-2|minimax-m3-1-flash": {
+   "a": "claude-fable-5-2",
+   "b": "minimax-m3-1-flash",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has more proportionate, visibly connected legs and a cleaner construction; B\u2019s thin legs and red shape on its back look less integrated."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.95,
+     0.05
+    ],
+    "craft": "A",
+    "craft_p": [
+     0.57,
+     0.43
+    ]
+   }
+  },
+  "claude-fable-5-2|openai-gpt-61-terra": {
+   "a": "claude-fable-5-2",
+   "b": "openai-gpt-61-terra",
+   "vision": {
+    "anatomy": "A",
+    "craft": "B",
+    "note": "A shows more clearly jointed legs, while B has cleaner, more consistent rendering."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.98,
+     0.02
+    ],
+    "craft": "tie",
+    "craft_p": [
+     0.51,
+     0.49
+    ]
+   }
+  },
+  "claude-fable-5-2|openai-gpt-62-astra": {
+   "a": "claude-fable-5-2",
+   "b": "openai-gpt-62-astra",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has a more proportionate head and neck, more natural leg attachments, and a more cohesive finish."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     1.0,
+     0.0
+    ],
+    "craft": "A",
+    "craft_p": [
+     1.0,
+     0.0
+    ]
+   }
+  },
+  "claude-fable-5-2|openai-gpt-62-astra-pro": {
+   "a": "claude-fable-5-2",
+   "b": "openai-gpt-62-astra-pro",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has a more proportionate head and neck, more clearly jointed legs, and cleaner construction."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.85,
+     0.15
+    ],
+    "craft": "A",
+    "craft_p": [
+     1.0,
+     0.0
+    ]
+   }
+  },
+  "claude-fable-5-2|openai-gpt-62-sol-pro": {
+   "a": "claude-fable-5-2",
+   "b": "openai-gpt-62-sol-pro",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has a visible tail and more proportionate body, with smoother construction and more consistent shading."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.81,
+     0.19
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.26,
+     0.74
+    ]
+   }
+  },
+  "claude-fable-5-2|pareto": {
+   "a": "claude-fable-5-2",
+   "b": "pareto",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has a visible tail and more natural leg joints, with cleaner, more cohesive construction."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.37,
+     0.63
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.42,
+     0.58
+    ]
+   }
+  },
+  "claude-fable-5-2|qwen-4-max": {
+   "a": "claude-fable-5-2",
+   "b": "qwen-4-max",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has a connected neck and more clearly attached legs, while B\u2019s neck appears broken into detached shapes."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     1.0,
+     0.0
+    ],
+    "craft": "A",
+    "craft_p": [
+     1.0,
+     0.0
+    ]
+   }
+  },
+  "claude-haiku-5-5|claude-sonnet-5-5": {
+   "a": "claude-haiku-5-5",
+   "b": "claude-sonnet-5-5",
+   "vision": {
+    "anatomy": "B",
+    "craft": "A",
+    "note": "B shows more articulated legs, while A has cleaner vector shapes with fewer visible seams."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.14,
+     0.86
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.11,
+     0.89
+    ]
+   }
+  },
+  "claude-haiku-5-5|deepseek-v4-1-flash-1017": {
+   "a": "claude-haiku-5-5",
+   "b": "deepseek-v4-1-flash-1017",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A\u2019s legs show clearer bends and attachments, and its vector shapes are cleaner than B\u2019s crowded, visibly overlapping fleece."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.14,
+     0.86
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.09,
+     0.91
+    ]
+   }
+  },
+  "claude-haiku-5-5|e2ee-kimi-k3-1-pro-p": {
+   "a": "claude-haiku-5-5",
+   "b": "e2ee-kimi-k3-1-pro-p",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has visibly jointed legs and more cohesive shading, while A\u2019s legs are straight and its neck looks pieced together."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.0,
+     1.0
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.04,
+     0.96
+    ]
+   }
+  },
+  "claude-haiku-5-5|gemini-4-hydrogen": {
+   "a": "claude-haiku-5-5",
+   "b": "gemini-4-hydrogen",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has visibly jointed, well-attached legs and a tail, with a cleaner silhouette and fewer stray shapes."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.0,
+     1.0
+    ],
+    "craft": "A",
+    "craft_p": [
+     1.0,
+     0.0
+    ]
+   }
+  },
+  "claude-haiku-5-5|hy4": {
+   "a": "claude-haiku-5-5",
+   "b": "hy4",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has a more proportionate neck and clearer leg and tail placement, with fewer visible overlaps and seams."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.01,
+     0.99
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.27,
+     0.73
+    ]
+   }
+  },
+  "claude-haiku-5-5|inkling-2-mini": {
+   "a": "claude-haiku-5-5",
+   "b": "inkling-2-mini",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has a visible tail and more articulated, plausibly attached legs, while A\u2019s neck and body show conspicuous overlapping shapes."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.0,
+     1.0
+    ],
+    "craft": "A",
+    "craft_p": [
+     0.98,
+     0.02
+    ]
+   }
+  },
+  "claude-haiku-5-5|kimi-k3-1-pro": {
+   "a": "claude-haiku-5-5",
+   "b": "kimi-k3-1-pro",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has clearer leg joints and attachments, while A has indistinct legs and overlapping shapes around its body and neck."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.0,
+     1.0
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.16,
+     0.84
+    ]
+   }
+  },
+  "claude-haiku-5-5|kimi-k3-1-pro-highspeed": {
+   "a": "claude-haiku-5-5",
+   "b": "kimi-k3-1-pro-highspeed",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has more clearly jointed, attached legs and a more proportionate head and neck, with more coherent construction overall."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.1,
+     0.9
+    ],
+    "craft": "A",
+    "craft_p": [
+     0.55,
+     0.45
+    ]
+   }
+  },
+  "claude-haiku-5-5|minimax-m3-1-flash": {
+   "a": "claude-haiku-5-5",
+   "b": "minimax-m3-1-flash",
+   "vision": {
+    "anatomy": "A",
+    "craft": "B",
+    "note": "A has a fuller body and more substantial, visibly attached legs, while B has cleaner outlines and more consistent shading."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.0,
+     1.0
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.34,
+     0.66
+    ]
+   }
+  },
+  "claude-haiku-5-5|muse-wonder": {
+   "a": "claude-haiku-5-5",
+   "b": "muse-wonder",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has more clearly attached, articulated legs and a more cohesive vector finish, while A\u2019s neck and leg connections are less defined."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.94,
+     0.06
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.05,
+     0.95
+    ]
+   }
+  },
+  "claude-haiku-5-5|nvidia-nemotron-3-5-super-vl-120b-a12b": {
+   "a": "claude-haiku-5-5",
+   "b": "nvidia-nemotron-3-5-super-vl-120b-a12b",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has connected, more developed legs and a cleaner silhouette, while B\u2019s head and neck are detached from its body."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     1.0,
+     0.0
+    ],
+    "craft": "A",
+    "craft_p": [
+     1.0,
+     0.0
+    ]
+   }
+  },
+  "claude-haiku-5-5|openai-gpt-61-terra": {
+   "a": "claude-haiku-5-5",
+   "b": "openai-gpt-61-terra",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has a visible tail and more coherent leg attachments, with cleaner construction and fewer stray shapes than A."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.09,
+     0.91
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.22,
+     0.78
+    ]
+   }
+  },
+  "claude-haiku-5-5|openai-gpt-62-astra": {
+   "a": "claude-haiku-5-5",
+   "b": "openai-gpt-62-astra",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has more proportionate anatomy and cleaner, more consistent construction; A\u2019s neck is elongated and its body and legs look less coherently joined."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.3,
+     0.7
+    ],
+    "craft": "A",
+    "craft_p": [
+     1.0,
+     0.0
+    ]
+   }
+  },
+  "claude-haiku-5-5|openai-gpt-62-astra-pro": {
+   "a": "claude-haiku-5-5",
+   "b": "openai-gpt-62-astra-pro",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has more clearly jointed, properly attached legs and cleaner, more consistent construction."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.0,
+     1.0
+    ],
+    "craft": "A",
+    "craft_p": [
+     0.99,
+     0.01
+    ]
+   }
+  },
+  "claude-haiku-5-5|openai-gpt-62-sol": {
+   "a": "claude-haiku-5-5",
+   "b": "openai-gpt-62-sol",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has a visible tail and more clearly jointed legs, with cleaner construction and fewer stray shapes."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.0,
+     1.0
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.07,
+     0.93
+    ]
+   }
+  },
+  "claude-haiku-5-5|qwen-4-max": {
+   "a": "claude-haiku-5-5",
+   "b": "qwen-4-max",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has a connected neck and head with cleaner construction, while B\u2019s neck appears as detached floating pieces."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.33,
+     0.67
+    ],
+    "craft": "A",
+    "craft_p": [
+     1.0,
+     0.0
+    ]
+   }
+  },
+  "claude-opus-5-5|deepseek-v4-1-flash-1017": {
+   "a": "claude-opus-5-5",
+   "b": "deepseek-v4-1-flash-1017",
+   "vision": {
+    "anatomy": "A",
+    "craft": "B",
+    "note": "A has more clearly jointed legs and a visible tail, while B has cleaner, more consistent wool shapes than A\u2019s scribbled fur."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.94,
+     0.06
+    ],
+    "craft": "tie",
+    "craft_p": [
+     0.53,
+     0.47
+    ]
+   }
+  },
+  "claude-opus-5-5|deepseek-v4-1-flash-1017-uncensored": {
+   "a": "claude-opus-5-5",
+   "b": "deepseek-v4-1-flash-1017-uncensored",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has more clearly jointed, well-attached legs and a more smoothly integrated neck, while B\u2019s legs are stiff and its neck shows a visible seam."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.99,
+     0.01
+    ],
+    "craft": "A",
+    "craft_p": [
+     0.99,
+     0.01
+    ]
+   }
+  },
+  "claude-opus-5-5|e2ee-kimi-k3-1-pro-p": {
+   "a": "claude-opus-5-5",
+   "b": "e2ee-kimi-k3-1-pro-p",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has more clearly jointed, attached legs and cleaner, more consistent shapes, while A has rougher fur detailing and less distinct leg construction."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.0,
+     1.0
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.44,
+     0.56
+    ]
+   }
+  },
+  "claude-opus-5-5|gemini-4-hydrogen": {
+   "a": "claude-opus-5-5",
+   "b": "gemini-4-hydrogen",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has a clearer tail and four visibly jointed, attached legs, with cleaner outlines than A\u2019s muddled rump and leg construction."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.0,
+     1.0
+    ],
+    "craft": "A",
+    "craft_p": [
+     1.0,
+     0.0
+    ]
+   }
+  },
+  "claude-opus-5-5|gemini-4-neon": {
+   "a": "claude-opus-5-5",
+   "b": "gemini-4-neon",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has more clearly jointed, attached legs and a cleaner, more consistent vector construction."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.45,
+     0.55
+    ],
+    "craft": "A",
+    "craft_p": [
+     0.6,
+     0.4
+    ]
+   }
+  },
+  "claude-opus-5-5|hy4": {
+   "a": "claude-opus-5-5",
+   "b": "hy4",
+   "vision": {
+    "anatomy": "A",
+    "craft": "B",
+    "note": "A has more clearly jointed, integrated legs, while B has cleaner and more consistent vector shapes."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.4,
+     0.6
+    ],
+    "craft": "A",
+    "craft_p": [
+     0.88,
+     0.12
+    ]
+   }
+  },
+  "claude-opus-5-5|inkling-2-mini": {
+   "a": "claude-opus-5-5",
+   "b": "inkling-2-mini",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has clearer leg joints and attachments, while B has conspicuous overlapping shapes across its torso and shoulder."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.0,
+     1.0
+    ],
+    "craft": "A",
+    "craft_p": [
+     0.99,
+     0.01
+    ]
+   }
+  },
+  "claude-opus-5-5|kimi-k3-1-pro": {
+   "a": "claude-opus-5-5",
+   "b": "kimi-k3-1-pro",
+   "vision": {
+    "anatomy": "A",
+    "craft": "B",
+    "note": "A has a visible tail and a more proportionate neck, while B has cleaner vector construction."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.0,
+     1.0
+    ],
+    "craft": "A",
+    "craft_p": [
+     0.58,
+     0.42
+    ]
+   }
+  },
+  "claude-opus-5-5|kimi-k3-1-pro-highspeed": {
+   "a": "claude-opus-5-5",
+   "b": "kimi-k3-1-pro-highspeed",
+   "vision": {
+    "anatomy": "A",
+    "craft": "B",
+    "note": "A shows more clearly articulated legs attached at the chest and rump, while B has cleaner, more consistent vector construction."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.99,
+     0.01
+    ],
+    "craft": "A",
+    "craft_p": [
+     0.82,
+     0.18
+    ]
+   }
+  },
+  "claude-opus-5-5|minimax-m3-1-flash": {
+   "a": "claude-opus-5-5",
+   "b": "minimax-m3-1-flash",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has more clearly jointed, well-attached legs and a more cohesive body, while B\u2019s thin legs and saddle look less integrated."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.22,
+     0.78
+    ],
+    "craft": "A",
+    "craft_p": [
+     0.8,
+     0.2
+    ]
+   }
+  },
+  "claude-opus-5-5|muse-wonder": {
+   "a": "claude-opus-5-5",
+   "b": "muse-wonder",
+   "vision": {
+    "anatomy": "A",
+    "craft": "B",
+    "note": "A shows more clearly jointed legs, while B has cleaner vector shapes and fewer visible seams."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.99,
+     0.01
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.42,
+     0.58
+    ]
+   }
+  },
+  "claude-opus-5-5|nvidia-nemotron-3-5-super-vl-120b-a12b": {
+   "a": "claude-opus-5-5",
+   "b": "nvidia-nemotron-3-5-super-vl-120b-a12b",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has a connected, proportionate body and cleaner construction, while B\u2019s head and neck are detached from its body and its legs look like stray lines."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     1.0,
+     0.0
+    ],
+    "craft": "A",
+    "craft_p": [
+     1.0,
+     0.0
+    ]
+   }
+  },
+  "claude-opus-5-5|openai-gpt-62-astra": {
+   "a": "claude-opus-5-5",
+   "b": "openai-gpt-62-astra",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has more proportionate, clearly attached legs and a cleaner, more consistent vector finish."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.83,
+     0.17
+    ],
+    "craft": "A",
+    "craft_p": [
+     1.0,
+     0.0
+    ]
+   }
+  },
+  "claude-opus-5-5|openai-gpt-62-sol": {
+   "a": "claude-opus-5-5",
+   "b": "openai-gpt-62-sol",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has a clearer tail and more coherently attached, jointed legs, with cleaner construction overall."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.0,
+     1.0
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.39,
+     0.61
+    ]
+   }
+  },
+  "claude-opus-5-5|pareto": {
+   "a": "claude-opus-5-5",
+   "b": "pareto",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has more clearly articulated legs attached at the chest and rump, with cleaner shapes and fewer visible seams."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.0,
+     1.0
+    ],
+    "craft": "tie",
+    "craft_p": [
+     0.49,
+     0.51
+    ]
+   }
+  },
+  "claude-opus-5-5|qwen3-6-27b": {
+   "a": "claude-opus-5-5",
+   "b": "qwen3-6-27b",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has more clearly attached, articulated legs and a proportionate head and neck, while B\u2019s simplified body and limbs are less coherently constructed."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.98,
+     0.02
+    ],
+    "craft": "tie",
+    "craft_p": [
+     0.48,
+     0.52
+    ]
+   }
+  },
+  "claude-sonnet-5-5|deepseek-v4-1-flash-1017": {
+   "a": "claude-sonnet-5-5",
+   "b": "deepseek-v4-1-flash-1017",
+   "vision": {
+    "anatomy": "A",
+    "craft": "B",
+    "note": "A has visibly jointed legs attached at the chest and rump, while B has cleaner, more consistent shapes with fewer conspicuous overlaps."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.31,
+     0.69
+    ],
+    "craft": "A",
+    "craft_p": [
+     0.76,
+     0.24
+    ]
+   }
+  },
+  "claude-sonnet-5-5|deepseek-v4-1-flash-1017-uncensored": {
+   "a": "claude-sonnet-5-5",
+   "b": "deepseek-v4-1-flash-1017-uncensored",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has a more proportionate neck, a visible tail, and cleaner shapes; A\u2019s neck is overlong and its overlapping segments show seams."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.73,
+     0.27
+    ],
+    "craft": "A",
+    "craft_p": [
+     1.0,
+     0.0
+    ]
+   }
+  },
+  "claude-sonnet-5-5|e2ee-kimi-k3-1-pro-p": {
+   "a": "claude-sonnet-5-5",
+   "b": "e2ee-kimi-k3-1-pro-p",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has more proportionate, clearly connected limbs and cleaner shapes, while A\u2019s neck is overly long and its construction shows visible seams."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.0,
+     1.0
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.22,
+     0.78
+    ]
+   }
+  },
+  "claude-sonnet-5-5|gemini-4-hydrogen": {
+   "a": "claude-sonnet-5-5",
+   "b": "gemini-4-hydrogen",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has more proportionate, clearly attached legs and a cleaner silhouette, while A\u2019s oversized neck and overlapping shapes make its construction less coherent."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.0,
+     1.0
+    ],
+    "craft": "A",
+    "craft_p": [
+     1.0,
+     0.0
+    ]
+   }
+  },
+  "claude-sonnet-5-5|gemini-4-neon": {
+   "a": "claude-sonnet-5-5",
+   "b": "gemini-4-neon",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has a more proportionate neck and clearly jointed legs, while A\u2019s neck is elongated and its overlapping shapes look less clean."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.0,
+     1.0
+    ],
+    "craft": "A",
+    "craft_p": [
+     0.62,
+     0.38
+    ]
+   }
+  },
+  "claude-sonnet-5-5|glm-5-3-flash-uncensored": {
+   "a": "claude-sonnet-5-5",
+   "b": "glm-5-3-flash-uncensored",
+   "vision": {
+    "anatomy": "A",
+    "craft": "B",
+    "note": "A shows four jointed legs attached to the body, while B has cleaner construction but most of its legs are not visible."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.97,
+     0.03
+    ],
+    "craft": "A",
+    "craft_p": [
+     1.0,
+     0.0
+    ]
+   }
+  },
+  "claude-sonnet-5-5|inkling-2-mini": {
+   "a": "claude-sonnet-5-5",
+   "b": "inkling-2-mini",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has a more proportionate neck and clearer leg attachments, while A\u2019s segmented neck and overlapping shapes look less coherent."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.0,
+     1.0
+    ],
+    "craft": "A",
+    "craft_p": [
+     1.0,
+     0.0
+    ]
+   }
+  },
+  "claude-sonnet-5-5|kimi-k3-1-pro": {
+   "a": "claude-sonnet-5-5",
+   "b": "kimi-k3-1-pro",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has more proportionate, clearly jointed legs and cleaner construction, while A\u2019s neck and limbs have conspicuous overlapping seams."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.0,
+     1.0
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.41,
+     0.59
+    ]
+   }
+  },
+  "claude-sonnet-5-5|kimi-k3-1-pro-highspeed": {
+   "a": "claude-sonnet-5-5",
+   "b": "kimi-k3-1-pro-highspeed",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has more proportionate, connected anatomy and cleaner shapes, while A\u2019s long, visibly segmented neck and overlapping forms stand out."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.01,
+     0.99
+    ],
+    "craft": "A",
+    "craft_p": [
+     0.84,
+     0.16
+    ]
+   }
+  },
+  "claude-sonnet-5-5|minimax-m3-1-flash": {
+   "a": "claude-sonnet-5-5",
+   "b": "minimax-m3-1-flash",
+   "vision": {
+    "anatomy": "A",
+    "craft": "B",
+    "note": "A shows more clearly articulated legs attached at the chest and rump, while B has cleaner, more consistent vector construction."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.0,
+     1.0
+    ],
+    "craft": "A",
+    "craft_p": [
+     0.75,
+     0.25
+    ]
+   }
+  },
+  "claude-sonnet-5-5|muse-wonder": {
+   "a": "claude-sonnet-5-5",
+   "b": "muse-wonder",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has a more proportionate, connected silhouette and cleaner shapes; A\u2019s neck and legs look overly segmented."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.97,
+     0.03
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.06,
+     0.94
+    ]
+   }
+  },
+  "claude-sonnet-5-5|openai-gpt-61-terra": {
+   "a": "claude-sonnet-5-5",
+   "b": "openai-gpt-61-terra",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has a more proportionate head and neck and cleaner limb construction, while A\u2019s neck and legs have conspicuous overlapping segments."
+   },
+   "jev": {
+    "anatomy": "tie",
+    "anatomy_p": [
+     0.51,
+     0.49
+    ],
+    "craft": "A",
+    "craft_p": [
+     0.65,
+     0.35
+    ]
+   }
+  },
+  "claude-sonnet-5-5|qwen3-6-27b": {
+   "a": "claude-sonnet-5-5",
+   "b": "qwen3-6-27b",
+   "vision": {
+    "anatomy": "A",
+    "craft": "B",
+    "note": "A has more clearly articulated, attached legs, while B has cleaner, more consistent vector shapes with fewer visible seams."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.98,
+     0.02
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.28,
+     0.72
+    ]
+   }
+  },
+  "deepseek-v4-1-flash-1017|deepseek-v4-1-flash-1017-uncensored": {
+   "a": "deepseek-v4-1-flash-1017",
+   "b": "deepseek-v4-1-flash-1017-uncensored",
+   "vision": {
+    "anatomy": "B",
+    "craft": "A",
+    "note": "B has a clearer tail and more proportionate head and body, while A has cleaner-looking construction with fewer visible seams."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.69,
+     0.31
+    ],
+    "craft": "A",
+    "craft_p": [
+     1.0,
+     0.0
+    ]
+   }
+  },
+  "deepseek-v4-1-flash-1017|e2ee-kimi-k3-1-pro-p": {
+   "a": "deepseek-v4-1-flash-1017",
+   "b": "e2ee-kimi-k3-1-pro-p",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has visibly jointed legs and a tail, with cleaner, more consistent shapes than A."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.01,
+     0.99
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.15,
+     0.85
+    ]
+   }
+  },
+  "deepseek-v4-1-flash-1017|gemini-4-carbon": {
+   "a": "deepseek-v4-1-flash-1017",
+   "b": "gemini-4-carbon",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has more clearly articulated, properly placed legs and a cleaner, more cohesive construction."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.0,
+     1.0
+    ],
+    "craft": "A",
+    "craft_p": [
+     1.0,
+     0.0
+    ]
+   }
+  },
+  "deepseek-v4-1-flash-1017|gemini-4-neon": {
+   "a": "deepseek-v4-1-flash-1017",
+   "b": "gemini-4-neon",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has jointed, clearly attached legs and a visible tail, with cleaner construction than A\u2019s straight legs and clustered fleece shapes."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.01,
+     0.99
+    ],
+    "craft": "A",
+    "craft_p": [
+     0.59,
+     0.41
+    ]
+   }
+  },
+  "deepseek-v4-1-flash-1017|glm-5-3-flash-uncensored": {
+   "a": "deepseek-v4-1-flash-1017",
+   "b": "glm-5-3-flash-uncensored",
+   "vision": {
+    "anatomy": "A",
+    "craft": "B",
+    "note": "A has four legs attached beneath the body, while B has cleaner, more consistent vector construction."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.98,
+     0.02
+    ],
+    "craft": "A",
+    "craft_p": [
+     1.0,
+     0.0
+    ]
+   }
+  },
+  "deepseek-v4-1-flash-1017|hy4": {
+   "a": "deepseek-v4-1-flash-1017",
+   "b": "hy4",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has more clearly attached, articulated legs and a cleaner, more consistent vector drawing than A."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.01,
+     0.99
+    ],
+    "craft": "A",
+    "craft_p": [
+     0.76,
+     0.24
+    ]
+   }
+  },
+  "deepseek-v4-1-flash-1017|kimi-k3-1-pro": {
+   "a": "deepseek-v4-1-flash-1017",
+   "b": "kimi-k3-1-pro",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has visibly jointed legs and cleaner, more cohesive construction; A\u2019s legs are straight and its wool overlaps unevenly."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.01,
+     0.99
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.37,
+     0.63
+    ]
+   }
+  },
+  "deepseek-v4-1-flash-1017|kimi-k3-1-pro-highspeed": {
+   "a": "deepseek-v4-1-flash-1017",
+   "b": "kimi-k3-1-pro-highspeed",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has visibly jointed legs and more cohesive vector construction, while A\u2019s legs are straight and its wool looks assembled from separate circles."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.01,
+     0.99
+    ],
+    "craft": "A",
+    "craft_p": [
+     0.7,
+     0.3
+    ]
+   }
+  },
+  "deepseek-v4-1-flash-1017|minimax-m3-1-flash": {
+   "a": "deepseek-v4-1-flash-1017",
+   "b": "minimax-m3-1-flash",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has more clearly jointed, attached legs and cleaner construction, while A\u2019s legs are straight and its fleece shows overlapping circular seams."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.02,
+     0.98
+    ],
+    "craft": "A",
+    "craft_p": [
+     0.72,
+     0.28
+    ]
+   }
+  },
+  "deepseek-v4-1-flash-1017|muse-wonder": {
+   "a": "deepseek-v4-1-flash-1017",
+   "b": "muse-wonder",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has more clearly articulated legs attached to the body and cleaner vector shapes."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.98,
+     0.02
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.05,
+     0.95
+    ]
+   }
+  },
+  "deepseek-v4-1-flash-1017|nvidia-nemotron-3-5-super-vl-120b-a12b": {
+   "a": "deepseek-v4-1-flash-1017",
+   "b": "nvidia-nemotron-3-5-super-vl-120b-a12b",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has an attached head, neck, and four defined legs, while B has a detached head and thin, incomplete-looking legs."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     1.0,
+     0.0
+    ],
+    "craft": "A",
+    "craft_p": [
+     1.0,
+     0.0
+    ]
+   }
+  },
+  "deepseek-v4-1-flash-1017|openai-gpt-62-astra": {
+   "a": "deepseek-v4-1-flash-1017",
+   "b": "openai-gpt-62-astra",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has visibly jointed legs attached at the chest and rump, a proportionate neck and head, and cleaner construction than A."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.58,
+     0.42
+    ],
+    "craft": "A",
+    "craft_p": [
+     1.0,
+     0.0
+    ]
+   }
+  },
+  "deepseek-v4-1-flash-1017|openai-gpt-62-astra-pro": {
+   "a": "deepseek-v4-1-flash-1017",
+   "b": "openai-gpt-62-astra-pro",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has jointed legs and a more proportionate body, with cleaner shapes than A\u2019s straight, stick-like legs."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.01,
+     0.99
+    ],
+    "craft": "A",
+    "craft_p": [
+     0.99,
+     0.01
+    ]
+   }
+  },
+  "deepseek-v4-1-flash-1017|openai-gpt-62-sol": {
+   "a": "deepseek-v4-1-flash-1017",
+   "b": "openai-gpt-62-sol",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has visibly jointed, attached legs and a cleaner, more coherent silhouette than A."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.01,
+     0.99
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.13,
+     0.87
+    ]
+   }
+  },
+  "deepseek-v4-1-flash-1017|openai-gpt-62-sol-pro": {
+   "a": "deepseek-v4-1-flash-1017",
+   "b": "openai-gpt-62-sol-pro",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has clearer leg joints and a proportionate head and neck, with cleaner, more cohesive shapes than A."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.01,
+     0.99
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.14,
+     0.86
+    ]
+   }
+  },
+  "deepseek-v4-1-flash-1017|pareto": {
+   "a": "deepseek-v4-1-flash-1017",
+   "b": "pareto",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has visible leg joints and a tail, with a cleaner, more cohesive construction than A\u2019s straight legs and overlapping wool shapes."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.02,
+     0.98
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.32,
+     0.68
+    ]
+   }
+  },
+  "deepseek-v4-1-flash-1017|qwen3-6-27b": {
+   "a": "deepseek-v4-1-flash-1017",
+   "b": "qwen3-6-27b",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has a more proportionate neck and clearer leg attachments, while B\u2019s elongated neck and stray marks make it look less polished."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.99,
+     0.01
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.2,
+     0.8
+    ]
+   }
+  },
+  "deepseek-v4-1-flash-1017-uncensored|e2ee-kimi-k3-1-pro-p": {
+   "a": "deepseek-v4-1-flash-1017-uncensored",
+   "b": "e2ee-kimi-k3-1-pro-p",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has visibly jointed legs attached to the body and cleaner, more consistent shapes, while A\u2019s legs are straight stubs."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.0,
+     1.0
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.0,
+     1.0
+    ]
+   }
+  },
+  "deepseek-v4-1-flash-1017-uncensored|gemini-4-hydrogen": {
+   "a": "deepseek-v4-1-flash-1017-uncensored",
+   "b": "gemini-4-hydrogen",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has visibly jointed, well-attached legs and cleaner, more consistent vector shapes; A\u2019s legs are straighter and its edges blurrier."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.0,
+     1.0
+    ],
+    "craft": "A",
+    "craft_p": [
+     0.92,
+     0.08
+    ]
+   }
+  },
+  "deepseek-v4-1-flash-1017-uncensored|glm-5-3-flash-uncensored": {
+   "a": "deepseek-v4-1-flash-1017-uncensored",
+   "b": "glm-5-3-flash-uncensored",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has four legs placed beneath the body and a visible tail, while B\u2019s legs protrude from one side and its body has awkward overlaps."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.97,
+     0.03
+    ],
+    "craft": "A",
+    "craft_p": [
+     0.71,
+     0.29
+    ]
+   }
+  },
+  "deepseek-v4-1-flash-1017-uncensored|kimi-k3-1-pro": {
+   "a": "deepseek-v4-1-flash-1017-uncensored",
+   "b": "kimi-k3-1-pro",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has visibly jointed, better-placed legs and cleaner, more consistent vector construction."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.0,
+     1.0
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.02,
+     0.98
+    ]
+   }
+  },
+  "deepseek-v4-1-flash-1017-uncensored|minimax-m3-1-flash": {
+   "a": "deepseek-v4-1-flash-1017-uncensored",
+   "b": "minimax-m3-1-flash",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has more coherent leg attachments and a proportionate head and neck, while B has spindly legs and visible stray marks."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.0,
+     1.0
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.02,
+     0.98
+    ]
+   }
+  },
+  "deepseek-v4-1-flash-1017-uncensored|muse-wonder": {
+   "a": "deepseek-v4-1-flash-1017-uncensored",
+   "b": "muse-wonder",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has more clearly articulated legs attached to the body and cleaner, more consistent vector edges."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.92,
+     0.08
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.01,
+     0.99
+    ]
+   }
+  },
+  "deepseek-v4-1-flash-1017-uncensored|nvidia-nemotron-3-5-super-vl-120b-a12b": {
+   "a": "deepseek-v4-1-flash-1017-uncensored",
+   "b": "nvidia-nemotron-3-5-super-vl-120b-a12b",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has a connected body, neck, head and legs with cleaner construction, while B\u2019s head and neck are detached from its body."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     1.0,
+     0.0
+    ],
+    "craft": "A",
+    "craft_p": [
+     0.99,
+     0.01
+    ]
+   }
+  },
+  "deepseek-v4-1-flash-1017-uncensored|openai-gpt-62-astra": {
+   "a": "deepseek-v4-1-flash-1017-uncensored",
+   "b": "openai-gpt-62-astra",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has more clearly jointed, attached legs and a cleaner, more consistent construction than A."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.69,
+     0.31
+    ],
+    "craft": "A",
+    "craft_p": [
+     0.99,
+     0.01
+    ]
+   }
+  },
+  "deepseek-v4-1-flash-1017-uncensored|openai-gpt-62-astra-pro": {
+   "a": "deepseek-v4-1-flash-1017-uncensored",
+   "b": "openai-gpt-62-astra-pro",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has more clearly jointed, well-attached legs and cleaner, more consistent construction."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.0,
+     1.0
+    ],
+    "craft": "A",
+    "craft_p": [
+     0.71,
+     0.29
+    ]
+   }
+  },
+  "deepseek-v4-1-flash-1017-uncensored|openai-gpt-62-sol": {
+   "a": "deepseek-v4-1-flash-1017-uncensored",
+   "b": "openai-gpt-62-sol",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has more clearly jointed, well-attached legs and cleaner, more consistent construction, while A\u2019s legs appear stiff and unevenly attached."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.0,
+     1.0
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.01,
+     0.99
+    ]
+   }
+  },
+  "deepseek-v4-1-flash-1017-uncensored|openai-gpt-62-sol-pro": {
+   "a": "deepseek-v4-1-flash-1017-uncensored",
+   "b": "openai-gpt-62-sol-pro",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has more clearly jointed, attached legs and a tail, with cleaner, more consistent construction."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.0,
+     1.0
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.0,
+     1.0
+    ]
+   }
+  },
+  "deepseek-v4-1-flash-1017-uncensored|pareto": {
+   "a": "deepseek-v4-1-flash-1017-uncensored",
+   "b": "pareto",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has more clearly jointed, attached legs and a cleaner, more consistent illustration."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.0,
+     1.0
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.01,
+     0.99
+    ]
+   }
+  },
+  "deepseek-v4-1-flash-1017-uncensored|qwen-4-max": {
+   "a": "deepseek-v4-1-flash-1017-uncensored",
+   "b": "qwen-4-max",
+   "vision": {
+    "anatomy": "A",
+    "craft": "B",
+    "note": "A has a connected neck and visible tail, while B has cleaner vector edges despite its detached-looking neck."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.67,
+     0.33
+    ],
+    "craft": "A",
+    "craft_p": [
+     1.0,
+     0.0
+    ]
+   }
+  },
+  "deepseek-v4-1-flash-1017-uncensored|qwen3-6-27b": {
+   "a": "deepseek-v4-1-flash-1017-uncensored",
+   "b": "qwen3-6-27b",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has more clearly attached, visible legs and a proportionate neck and head, with smoother construction and fewer stray shapes."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.96,
+     0.04
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.01,
+     0.99
+    ]
+   }
+  },
+  "e2ee-kimi-k3-1-pro-p|glm-5-3-flash-uncensored": {
+   "a": "e2ee-kimi-k3-1-pro-p",
+   "b": "glm-5-3-flash-uncensored",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has four visibly connected, jointed legs and a more cohesive silhouette, while B appears to float and has a stray-looking leg."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     1.0,
+     0.0
+    ],
+    "craft": "A",
+    "craft_p": [
+     1.0,
+     0.0
+    ]
+   }
+  },
+  "e2ee-kimi-k3-1-pro-p|inkling-2-mini": {
+   "a": "e2ee-kimi-k3-1-pro-p",
+   "b": "inkling-2-mini",
+   "vision": {
+    "anatomy": "B",
+    "craft": "A",
+    "note": "B has a more alpaca-like head and a visible tail, while A has cleaner, more consistent vector shapes."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.44,
+     0.56
+    ],
+    "craft": "A",
+    "craft_p": [
+     1.0,
+     0.0
+    ]
+   }
+  },
+  "e2ee-kimi-k3-1-pro-p|muse-wonder": {
+   "a": "e2ee-kimi-k3-1-pro-p",
+   "b": "muse-wonder",
+   "vision": {
+    "anatomy": "A",
+    "craft": "B",
+    "note": "A shows more clearly jointed legs and a tail, while B has cleaner, more consistent vector construction."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.95,
+     0.05
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.33,
+     0.67
+    ]
+   }
+  },
+  "e2ee-kimi-k3-1-pro-p|openai-gpt-61-terra": {
+   "a": "e2ee-kimi-k3-1-pro-p",
+   "b": "openai-gpt-61-terra",
+   "vision": {
+    "anatomy": "A",
+    "craft": "B",
+    "note": "A shows clearer leg joints and attachments, while B has smoother construction and more consistent lighting."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.98,
+     0.02
+    ],
+    "craft": "A",
+    "craft_p": [
+     0.8,
+     0.2
+    ]
+   }
+  },
+  "e2ee-kimi-k3-1-pro-p|openai-gpt-62-astra-pro": {
+   "a": "e2ee-kimi-k3-1-pro-p",
+   "b": "openai-gpt-62-astra-pro",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has a visible tail and more clearly attached, jointed legs, while A\u2019s cloudlike body and limb joins look less coherent."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.87,
+     0.13
+    ],
+    "craft": "A",
+    "craft_p": [
+     1.0,
+     0.0
+    ]
+   }
+  },
+  "e2ee-kimi-k3-1-pro-p|openai-gpt-62-sol-pro": {
+   "a": "e2ee-kimi-k3-1-pro-p",
+   "b": "openai-gpt-62-sol-pro",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has a visible tail and more coherent leg attachments, with cleaner shading and fewer visible construction artifacts."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.87,
+     0.13
+    ],
+    "craft": "A",
+    "craft_p": [
+     0.57,
+     0.43
+    ]
+   }
+  },
+  "e2ee-kimi-k3-1-pro-p|qwen-4-max": {
+   "a": "e2ee-kimi-k3-1-pro-p",
+   "b": "qwen-4-max",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has a connected neck and head and cleaner construction, while B\u2019s neck appears detached from its body."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     1.0,
+     0.0
+    ],
+    "craft": "A",
+    "craft_p": [
+     1.0,
+     0.0
+    ]
+   }
+  },
+  "gemini-4-carbon|gemini-4-hydrogen": {
+   "a": "gemini-4-carbon",
+   "b": "gemini-4-hydrogen",
+   "vision": {
+    "anatomy": "B",
+    "craft": "A",
+    "note": "B has a visible tail and more clearly jointed legs, while A has cleaner, more cohesive vector construction."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.63,
+     0.37
+    ],
+    "craft": "A",
+    "craft_p": [
+     0.95,
+     0.05
+    ]
+   }
+  },
+  "gemini-4-carbon|gemini-4-neon": {
+   "a": "gemini-4-carbon",
+   "b": "gemini-4-neon",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has a visible tail and more clearly jointed, attached legs, with cleaner, more consistent construction."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     1.0,
+     0.0
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.0,
+     1.0
+    ]
+   }
+  },
+  "gemini-4-carbon|glm-5-3-flash-uncensored": {
+   "a": "gemini-4-carbon",
+   "b": "glm-5-3-flash-uncensored",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has clearly attached legs and a proportionate neck, while B\u2019s legs appear as stray lines beside a rounded body."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     1.0,
+     0.0
+    ],
+    "craft": "tie",
+    "craft_p": [
+     0.51,
+     0.49
+    ]
+   }
+  },
+  "gemini-4-carbon|hy4": {
+   "a": "gemini-4-carbon",
+   "b": "hy4",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has more clearly attached, articulated legs and cleaner construction; B\u2019s thin crossed legs and blanket edge look less resolved."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     1.0,
+     0.0
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.04,
+     0.96
+    ]
+   }
+  },
+  "gemini-4-carbon|inkling-2-mini": {
+   "a": "gemini-4-carbon",
+   "b": "inkling-2-mini",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has more clearly attached legs and cleaner fleece construction, while B has conspicuous overlapping shapes around its chest and belly."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.56,
+     0.44
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.34,
+     0.66
+    ]
+   }
+  },
+  "gemini-4-carbon|kimi-k3-1-pro": {
+   "a": "gemini-4-carbon",
+   "b": "kimi-k3-1-pro",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has clearer leg joints and attachments, while A has a small stray mark near the muzzle."
+   },
+   "jev": {
+    "anatomy": "tie",
+    "anatomy_p": [
+     0.49,
+     0.51
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.0,
+     1.0
+    ]
+   }
+  },
+  "gemini-4-carbon|muse-wonder": {
+   "a": "gemini-4-carbon",
+   "b": "muse-wonder",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B\u2019s legs attach more clearly to the body, and its construction is cleaner; A has a stray mark beside the muzzle."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     1.0,
+     0.0
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.0,
+     1.0
+    ]
+   }
+  },
+  "gemini-4-carbon|nvidia-nemotron-3-5-super-vl-120b-a12b": {
+   "a": "gemini-4-carbon",
+   "b": "nvidia-nemotron-3-5-super-vl-120b-a12b",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has connected, jointed legs and a proportionate head and neck, while B has a detached head and neck and unfinished-looking legs."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     1.0,
+     0.0
+    ],
+    "craft": "A",
+    "craft_p": [
+     0.99,
+     0.01
+    ]
+   }
+  },
+  "gemini-4-carbon|openai-gpt-61-terra": {
+   "a": "gemini-4-carbon",
+   "b": "openai-gpt-61-terra",
+   "vision": {
+    "anatomy": "A",
+    "craft": "B",
+    "note": "A shows more clearly jointed, attached legs, while B has the cleaner vector finish."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     1.0,
+     0.0
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.01,
+     0.99
+    ]
+   }
+  },
+  "gemini-4-carbon|openai-gpt-62-astra": {
+   "a": "gemini-4-carbon",
+   "b": "openai-gpt-62-astra",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has more clearly attached legs and a proportionate head and neck, with cleaner, more consistent shapes."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     1.0,
+     0.0
+    ],
+    "craft": "A",
+    "craft_p": [
+     1.0,
+     0.0
+    ]
+   }
+  },
+  "gemini-4-carbon|openai-gpt-62-sol": {
+   "a": "gemini-4-carbon",
+   "b": "openai-gpt-62-sol",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has a visible tail and more naturally jointed legs, while A has stray shapes near its head."
+   },
+   "jev": {
+    "anatomy": "tie",
+    "anatomy_p": [
+     0.5,
+     0.5
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.0,
+     1.0
+    ]
+   }
+  },
+  "gemini-4-carbon|openai-gpt-62-sol-pro": {
+   "a": "gemini-4-carbon",
+   "b": "openai-gpt-62-sol-pro",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has more clearly attached, jointed legs and cleaner shading, while A has stray marks near the head and an angular seam at the neck."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.72,
+     0.28
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.01,
+     0.99
+    ]
+   }
+  },
+  "gemini-4-carbon|qwen-4-max": {
+   "a": "gemini-4-carbon",
+   "b": "qwen-4-max",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has a connected neck and more coherent legs, while B\u2019s neck appears detached and its construction less clean."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     1.0,
+     0.0
+    ],
+    "craft": "A",
+    "craft_p": [
+     1.0,
+     0.0
+    ]
+   }
+  },
+  "gemini-4-hydrogen|gemini-4-neon": {
+   "a": "gemini-4-hydrogen",
+   "b": "gemini-4-neon",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has a fuller alpaca shape with clearer leg joints, a visible tail, and more consistent detailing."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.99,
+     0.01
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.0,
+     1.0
+    ]
+   }
+  },
+  "gemini-4-hydrogen|hy4": {
+   "a": "gemini-4-hydrogen",
+   "b": "hy4",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has more clearly jointed, well-attached legs and a more proportionate head and neck, with cleaner construction than B\u2019s thin, crossed legs and uneven saddle outline."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.98,
+     0.02
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.01,
+     0.99
+    ]
+   }
+  },
+  "gemini-4-hydrogen|kimi-k3-1-pro-highspeed": {
+   "a": "gemini-4-hydrogen",
+   "b": "kimi-k3-1-pro-highspeed",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has more clearly articulated, properly attached legs and a cleaner silhouette, while B\u2019s legs blend into its woolly body."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.99,
+     0.01
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.0,
+     1.0
+    ]
+   }
+  },
+  "gemini-4-hydrogen|minimax-m3-1-flash": {
+   "a": "gemini-4-hydrogen",
+   "b": "minimax-m3-1-flash",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has more proportionate, visibly jointed legs and cleaner construction; B\u2019s legs are spindly and its sky has stray marks."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.97,
+     0.03
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.0,
+     1.0
+    ]
+   }
+  },
+  "gemini-4-hydrogen|nvidia-nemotron-3-5-super-vl-120b-a12b": {
+   "a": "gemini-4-hydrogen",
+   "b": "nvidia-nemotron-3-5-super-vl-120b-a12b",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has connected, jointed legs, a proportionate neck and a visible tail, while B has a detached head and neck and stray leg lines."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     1.0,
+     0.0
+    ],
+    "craft": "A",
+    "craft_p": [
+     0.95,
+     0.05
+    ]
+   }
+  },
+  "gemini-4-hydrogen|openai-gpt-62-astra": {
+   "a": "gemini-4-hydrogen",
+   "b": "openai-gpt-62-astra",
+   "vision": {
+    "anatomy": "A",
+    "craft": "B",
+    "note": "A shows four more clearly jointed legs attached beneath the body, while B has the more cohesive, polished illustration."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     1.0,
+     0.0
+    ],
+    "craft": "A",
+    "craft_p": [
+     0.95,
+     0.05
+    ]
+   }
+  },
+  "gemini-4-hydrogen|openai-gpt-62-astra-pro": {
+   "a": "gemini-4-hydrogen",
+   "b": "openai-gpt-62-astra-pro",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has more clearly articulated legs and a more coherent body construction, while A\u2019s leg attachments and neck-to-body transition look less resolved."
+   },
+   "jev": {
+    "anatomy": "tie",
+    "anatomy_p": [
+     0.52,
+     0.48
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.01,
+     0.99
+    ]
+   }
+  },
+  "gemini-4-hydrogen|openai-gpt-62-sol": {
+   "a": "gemini-4-hydrogen",
+   "b": "openai-gpt-62-sol",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has a more proportionate head and neck and more cohesive, cleanly constructed shapes."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.27,
+     0.73
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.0,
+     1.0
+    ]
+   }
+  },
+  "gemini-4-hydrogen|pareto": {
+   "a": "gemini-4-hydrogen",
+   "b": "pareto",
+   "vision": {
+    "anatomy": "B",
+    "craft": "A",
+    "note": "B shows clearer leg joints and attachments, while A has smoother, cleaner construction with fewer visible seams."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.43,
+     0.57
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.0,
+     1.0
+    ]
+   }
+  },
+  "gemini-4-neon|glm-5-3-flash-uncensored": {
+   "a": "gemini-4-neon",
+   "b": "glm-5-3-flash-uncensored",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has a proportionate body with attached, jointed legs and a tail, while B\u2019s body appears to float with most legs missing."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     1.0,
+     0.0
+    ],
+    "craft": "A",
+    "craft_p": [
+     1.0,
+     0.0
+    ]
+   }
+  },
+  "gemini-4-neon|hy4": {
+   "a": "gemini-4-neon",
+   "b": "hy4",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has more clearly attached, jointed legs and a visible tail, with more cohesive body construction than B."
+   },
+   "jev": {
+    "anatomy": "tie",
+    "anatomy_p": [
+     0.52,
+     0.48
+    ],
+    "craft": "A",
+    "craft_p": [
+     0.68,
+     0.32
+    ]
+   }
+  },
+  "gemini-4-neon|kimi-k3-1-pro": {
+   "a": "gemini-4-neon",
+   "b": "kimi-k3-1-pro",
+   "vision": {
+    "anatomy": "A",
+    "craft": "B",
+    "note": "A has a visible tail and more proportionate body, while B has cleaner, more consistent vector shapes."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.0,
+     1.0
+    ],
+    "craft": "A",
+    "craft_p": [
+     0.63,
+     0.37
+    ]
+   }
+  },
+  "gemini-4-neon|kimi-k3-1-pro-highspeed": {
+   "a": "gemini-4-neon",
+   "b": "kimi-k3-1-pro-highspeed",
+   "vision": {
+    "anatomy": "A",
+    "craft": "B",
+    "note": "A shows clearer leg joints and attachments, while B has cleaner, more consistent vector shapes."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.99,
+     0.01
+    ],
+    "craft": "A",
+    "craft_p": [
+     0.82,
+     0.18
+    ]
+   }
+  },
+  "gemini-4-neon|openai-gpt-61-terra": {
+   "a": "gemini-4-neon",
+   "b": "openai-gpt-61-terra",
+   "vision": {
+    "anatomy": "A",
+    "craft": "B",
+    "note": "A has more clearly jointed, attached legs and a visible tail, while B has cleaner, more consistent vector construction."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.99,
+     0.01
+    ],
+    "craft": "A",
+    "craft_p": [
+     0.63,
+     0.37
+    ]
+   }
+  },
+  "gemini-4-neon|openai-gpt-62-sol": {
+   "a": "gemini-4-neon",
+   "b": "openai-gpt-62-sol",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B\u2019s legs attach more naturally to the body, and its shapes and lighting look more cohesive."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.0,
+     1.0
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.15,
+     0.85
+    ]
+   }
+  },
+  "gemini-4-neon|openai-gpt-62-sol-pro": {
+   "a": "gemini-4-neon",
+   "b": "openai-gpt-62-sol-pro",
+   "vision": {
+    "anatomy": "A",
+    "craft": "B",
+    "note": "A has more clearly articulated legs, while B has cleaner, more consistent vector construction."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.0,
+     1.0
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.28,
+     0.72
+    ]
+   }
+  },
+  "gemini-4-neon|qwen-4-max": {
+   "a": "gemini-4-neon",
+   "b": "qwen-4-max",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has a connected neck, head, and visibly jointed legs, while B\u2019s neck appears as detached shapes."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.86,
+     0.14
+    ],
+    "craft": "A",
+    "craft_p": [
+     1.0,
+     0.0
+    ]
+   }
+  },
+  "gemini-4-neon|qwen3-6-27b": {
+   "a": "gemini-4-neon",
+   "b": "qwen3-6-27b",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has more clearly attached, jointed legs and a proportionate body, while B\u2019s tail appears detached and its overlapping shapes are less clean."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.98,
+     0.02
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.15,
+     0.85
+    ]
+   }
+  },
+  "glm-5-3-flash-uncensored|inkling-2-mini": {
+   "a": "glm-5-3-flash-uncensored",
+   "b": "inkling-2-mini",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B shows four attached legs and a tail, with cleaner construction; A shows only one visible leg."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.0,
+     1.0
+    ],
+    "craft": "A",
+    "craft_p": [
+     0.86,
+     0.14
+    ]
+   }
+  },
+  "glm-5-3-flash-uncensored|kimi-k3-1-pro": {
+   "a": "glm-5-3-flash-uncensored",
+   "b": "kimi-k3-1-pro",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has four visibly jointed legs and a more coherent, cleanly constructed body, while A appears to float with only one visible leg."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.0,
+     1.0
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.0,
+     1.0
+    ]
+   }
+  },
+  "glm-5-3-flash-uncensored|kimi-k3-1-pro-highspeed": {
+   "a": "glm-5-3-flash-uncensored",
+   "b": "kimi-k3-1-pro-highspeed",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has clearly attached legs and a tail with more coherent construction, while A appears to float with a stray limb-like shape."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.0,
+     1.0
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.01,
+     0.99
+    ]
+   }
+  },
+  "glm-5-3-flash-uncensored|nvidia-nemotron-3-5-super-vl-120b-a12b": {
+   "a": "glm-5-3-flash-uncensored",
+   "b": "nvidia-nemotron-3-5-super-vl-120b-a12b",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has a connected head and neck and more cohesive construction, while B\u2019s head and neck are visibly detached from its body."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.98,
+     0.02
+    ],
+    "craft": "A",
+    "craft_p": [
+     0.99,
+     0.01
+    ]
+   }
+  },
+  "glm-5-3-flash-uncensored|openai-gpt-62-astra": {
+   "a": "glm-5-3-flash-uncensored",
+   "b": "openai-gpt-62-astra",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has four attached, jointed legs and a more coherent, cleanly drawn body, while A appears to float with only one visible leg."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.09,
+     0.91
+    ],
+    "craft": "A",
+    "craft_p": [
+     0.99,
+     0.01
+    ]
+   }
+  },
+  "glm-5-3-flash-uncensored|openai-gpt-62-astra-pro": {
+   "a": "glm-5-3-flash-uncensored",
+   "b": "openai-gpt-62-astra-pro",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has visibly attached legs and a proportionate head and neck, while A appears to float and has an incomplete leg."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.0,
+     1.0
+    ],
+    "craft": "A",
+    "craft_p": [
+     0.66,
+     0.34
+    ]
+   }
+  },
+  "glm-5-3-flash-uncensored|openai-gpt-62-sol": {
+   "a": "glm-5-3-flash-uncensored",
+   "b": "openai-gpt-62-sol",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has four visibly jointed, attached legs and a tail, while A\u2019s floating body and stray leg make its construction less coherent."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.0,
+     1.0
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.0,
+     1.0
+    ]
+   }
+  },
+  "glm-5-3-flash-uncensored|pareto": {
+   "a": "glm-5-3-flash-uncensored",
+   "b": "pareto",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has four attached, jointed legs and cleaner construction, while A appears to float with most of its legs missing."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.0,
+     1.0
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.0,
+     1.0
+    ]
+   }
+  },
+  "glm-5-3-flash-uncensored|qwen-4-max": {
+   "a": "glm-5-3-flash-uncensored",
+   "b": "qwen-4-max",
+   "vision": {
+    "anatomy": "B",
+    "craft": "A",
+    "note": "B has four visibly jointed legs, while A\u2019s construction is cleaner and avoids B\u2019s gapped, bead-like neck."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.25,
+     0.75
+    ],
+    "craft": "A",
+    "craft_p": [
+     0.98,
+     0.02
+    ]
+   }
+  },
+  "glm-5-3-flash-uncensored|qwen3-6-27b": {
+   "a": "glm-5-3-flash-uncensored",
+   "b": "qwen3-6-27b",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has a visible tail and attached legs with cleaner construction, while A\u2019s body floats above a stray-looking leg."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.41,
+     0.59
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.0,
+     1.0
+    ]
+   }
+  },
+  "hy4|kimi-k3-1-pro": {
+   "a": "hy4",
+   "b": "kimi-k3-1-pro",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has visibly jointed legs and more cohesive construction, while A\u2019s legs look straight and its fleece overlaps awkwardly."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.0,
+     1.0
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.13,
+     0.87
+    ]
+   }
+  },
+  "hy4|kimi-k3-1-pro-highspeed": {
+   "a": "hy4",
+   "b": "kimi-k3-1-pro-highspeed",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has more clearly articulated, attached legs and more proportionate features, with cleaner, more consistent shading."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.99,
+     0.01
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.37,
+     0.63
+    ]
+   }
+  },
+  "hy4|minimax-m3-1-flash": {
+   "a": "hy4",
+   "b": "minimax-m3-1-flash",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has more clearly attached legs and a more proportionate head and neck, with more cohesive shading and detail."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.04,
+     0.96
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.3,
+     0.7
+    ]
+   }
+  },
+  "hy4|openai-gpt-62-astra-pro": {
+   "a": "hy4",
+   "b": "openai-gpt-62-astra-pro",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has more clearly jointed, attached legs and a visible tail, with more cohesive construction than A."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.0,
+     1.0
+    ],
+    "craft": "A",
+    "craft_p": [
+     0.97,
+     0.03
+    ]
+   }
+  },
+  "hy4|openai-gpt-62-sol-pro": {
+   "a": "hy4",
+   "b": "openai-gpt-62-sol-pro",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has a clearer tail and more proportionate, visibly jointed legs, with more consistent shading and cleaner construction."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.0,
+     1.0
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.07,
+     0.93
+    ]
+   }
+  },
+  "hy4|pareto": {
+   "a": "hy4",
+   "b": "pareto",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has a visible tail and jointed legs attached to the body, with cleaner, more consistent construction."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.0,
+     1.0
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.14,
+     0.86
+    ]
+   }
+  },
+  "hy4|qwen-4-max": {
+   "a": "hy4",
+   "b": "qwen-4-max",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has a connected neck and cleaner silhouette, while B\u2019s neck appears detached from its body."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.84,
+     0.16
+    ],
+    "craft": "A",
+    "craft_p": [
+     1.0,
+     0.0
+    ]
+   }
+  },
+  "hy4|qwen3-6-27b": {
+   "a": "hy4",
+   "b": "qwen3-6-27b",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has more clearly attached, proportionate limbs and cleaner construction; B\u2019s legs are obscured by overlapping shapes."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     1.0,
+     0.0
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.11,
+     0.89
+    ]
+   }
+  },
+  "inkling-2-mini|kimi-k3-1-pro": {
+   "a": "inkling-2-mini",
+   "b": "kimi-k3-1-pro",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has clearer leg joints and more proportionate anatomy, while A has a tiny head and a conspicuous circular seam on its chest."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.6,
+     0.4
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.01,
+     0.99
+    ]
+   }
+  },
+  "inkling-2-mini|kimi-k3-1-pro-highspeed": {
+   "a": "inkling-2-mini",
+   "b": "kimi-k3-1-pro-highspeed",
+   "vision": {
+    "anatomy": "A",
+    "craft": "B",
+    "note": "A has a clearer tail and legs attached nearer the chest and rump, while B has cleaner, more consistent vector rendering."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.99,
+     0.01
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.01,
+     0.99
+    ]
+   }
+  },
+  "inkling-2-mini|minimax-m3-1-flash": {
+   "a": "inkling-2-mini",
+   "b": "minimax-m3-1-flash",
+   "vision": {
+    "anatomy": "A",
+    "craft": "B",
+    "note": "A shows clearer leg attachment and articulation, while B has cleaner construction without A\u2019s conspicuous circular chest seam."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.99,
+     0.01
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.01,
+     0.99
+    ]
+   }
+  },
+  "inkling-2-mini|muse-wonder": {
+   "a": "inkling-2-mini",
+   "b": "muse-wonder",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B\u2019s legs attach more clearly to the body, while A has a conspicuous circular seam at the shoulder."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.95,
+     0.05
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.01,
+     0.99
+    ]
+   }
+  },
+  "inkling-2-mini|openai-gpt-61-terra": {
+   "a": "inkling-2-mini",
+   "b": "openai-gpt-61-terra",
+   "vision": {
+    "anatomy": "A",
+    "craft": "B",
+    "note": "A shows more clearly articulated legs, while B has cleaner vector construction without A\u2019s conspicuous circular seam at the neck."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.99,
+     0.01
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.01,
+     0.99
+    ]
+   }
+  },
+  "inkling-2-mini|openai-gpt-62-astra": {
+   "a": "inkling-2-mini",
+   "b": "openai-gpt-62-astra",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has more clearly jointed, attached legs and a more cohesive, consistently rendered body."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     1.0,
+     0.0
+    ],
+    "craft": "A",
+    "craft_p": [
+     1.0,
+     0.0
+    ]
+   }
+  },
+  "inkling-2-mini|openai-gpt-62-sol": {
+   "a": "inkling-2-mini",
+   "b": "openai-gpt-62-sol",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has more clearly jointed, attached legs and more cohesive shapes, while A\u2019s legs look rigid and its overlapping body shapes show seams."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.57,
+     0.43
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.01,
+     0.99
+    ]
+   }
+  },
+  "inkling-2-mini|openai-gpt-62-sol-pro": {
+   "a": "inkling-2-mini",
+   "b": "openai-gpt-62-sol-pro",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has more clearly jointed, attached legs and cleaner construction, while A\u2019s legs look straighter and its neck meets the body at a visible seam."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.7,
+     0.3
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.03,
+     0.97
+    ]
+   }
+  },
+  "inkling-2-mini|qwen-4-max": {
+   "a": "inkling-2-mini",
+   "b": "qwen-4-max",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has a connected, proportionate neck and more cohesive legs, while B\u2019s neck appears detached and its construction has more visible stray shapes."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     1.0,
+     0.0
+    ],
+    "craft": "A",
+    "craft_p": [
+     0.99,
+     0.01
+    ]
+   }
+  },
+  "inkling-2-mini|qwen3-6-27b": {
+   "a": "inkling-2-mini",
+   "b": "qwen3-6-27b",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has more clearly attached, jointed legs and a proportionate neck, while B\u2019s short legs and overlapping body shapes make its construction less convincing."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.99,
+     0.01
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.02,
+     0.98
+    ]
+   }
+  },
+  "kimi-k3-1-pro|minimax-m3-1-flash": {
+   "a": "kimi-k3-1-pro",
+   "b": "minimax-m3-1-flash",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has more clearly jointed, attached legs and cleaner, more cohesive shapes; B\u2019s thin legs and saddle overlap look awkward."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.98,
+     0.02
+    ],
+    "craft": "A",
+    "craft_p": [
+     0.61,
+     0.39
+    ]
+   }
+  },
+  "kimi-k3-1-pro|nvidia-nemotron-3-5-super-vl-120b-a12b": {
+   "a": "kimi-k3-1-pro",
+   "b": "nvidia-nemotron-3-5-super-vl-120b-a12b",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has a connected head and neck, jointed legs and a visible tail, while B has a detached head and neck and sparse, disconnected-looking limbs."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     1.0,
+     0.0
+    ],
+    "craft": "A",
+    "craft_p": [
+     1.0,
+     0.0
+    ]
+   }
+  },
+  "kimi-k3-1-pro|pareto": {
+   "a": "kimi-k3-1-pro",
+   "b": "pareto",
+   "vision": {
+    "anatomy": "B",
+    "craft": "A",
+    "note": "B has a more proportionate alpaca shape and a clearly visible tail, while A has cleaner, more consistent vector construction."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.37,
+     0.63
+    ],
+    "craft": "tie",
+    "craft_p": [
+     0.5,
+     0.5
+    ]
+   }
+  },
+  "kimi-k3-1-pro|qwen3-6-27b": {
+   "a": "kimi-k3-1-pro",
+   "b": "qwen3-6-27b",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has clearer jointed legs and more proportionate anatomy, with cleaner shapes than B\u2019s thin neck and irregular legs."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.99,
+     0.01
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.19,
+     0.81
+    ]
+   }
+  },
+  "kimi-k3-1-pro-highspeed|muse-wonder": {
+   "a": "kimi-k3-1-pro-highspeed",
+   "b": "muse-wonder",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has more proportionate, clearly attached legs and cleaner vector shapes, while A\u2019s short legs are partly obscured by its fleece."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.91,
+     0.09
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.05,
+     0.95
+    ]
+   }
+  },
+  "kimi-k3-1-pro-highspeed|openai-gpt-61-terra": {
+   "a": "kimi-k3-1-pro-highspeed",
+   "b": "openai-gpt-61-terra",
+   "vision": {
+    "anatomy": "A",
+    "craft": "B",
+    "note": "A shows more clearly jointed legs, while B has the cleaner, more consistent vector finish."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.98,
+     0.02
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.24,
+     0.76
+    ]
+   }
+  },
+  "kimi-k3-1-pro-highspeed|openai-gpt-62-astra": {
+   "a": "kimi-k3-1-pro-highspeed",
+   "b": "openai-gpt-62-astra",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has more proportionate, clearly attached legs and a cleaner, more consistent construction."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.71,
+     0.29
+    ],
+    "craft": "A",
+    "craft_p": [
+     1.0,
+     0.0
+    ]
+   }
+  },
+  "kimi-k3-1-pro-highspeed|openai-gpt-62-astra-pro": {
+   "a": "kimi-k3-1-pro-highspeed",
+   "b": "openai-gpt-62-astra-pro",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has more clearly jointed, properly attached legs and cleaner construction, while A\u2019s legs look less defined and a stray shape appears near the ground."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.0,
+     1.0
+    ],
+    "craft": "A",
+    "craft_p": [
+     1.0,
+     0.0
+    ]
+   }
+  },
+  "kimi-k3-1-pro-highspeed|openai-gpt-62-sol-pro": {
+   "a": "kimi-k3-1-pro-highspeed",
+   "b": "openai-gpt-62-sol-pro",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has four clearly attached, articulated legs and a more cohesive, polished construction, while A\u2019s legs are less distinct."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.0,
+     1.0
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.17,
+     0.83
+    ]
+   }
+  },
+  "kimi-k3-1-pro-highspeed|qwen-4-max": {
+   "a": "kimi-k3-1-pro-highspeed",
+   "b": "qwen-4-max",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A\u2019s neck connects to its body and its legs are more coherently drawn, while B\u2019s neck appears detached."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.77,
+     0.23
+    ],
+    "craft": "A",
+    "craft_p": [
+     1.0,
+     0.0
+    ]
+   }
+  },
+  "kimi-k3-1-pro-highspeed|qwen3-6-27b": {
+   "a": "kimi-k3-1-pro-highspeed",
+   "b": "qwen3-6-27b",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has more clearly articulated, attached legs and a proportionate head and neck, with more cohesive shading and cleaner construction."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.99,
+     0.01
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.14,
+     0.86
+    ]
+   }
+  },
+  "minimax-m3-1-flash|muse-wonder": {
+   "a": "minimax-m3-1-flash",
+   "b": "muse-wonder",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has more coherently attached legs and cleaner vector shapes, while A\u2019s thin limbs and hooves look awkwardly separated."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.99,
+     0.01
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.1,
+     0.9
+    ]
+   }
+  },
+  "minimax-m3-1-flash|nvidia-nemotron-3-5-super-vl-120b-a12b": {
+   "a": "minimax-m3-1-flash",
+   "b": "nvidia-nemotron-3-5-super-vl-120b-a12b",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has an attached head and neck, more complete legs, and cleaner construction; B\u2019s neck is detached from its body."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     1.0,
+     0.0
+    ],
+    "craft": "A",
+    "craft_p": [
+     1.0,
+     0.0
+    ]
+   }
+  },
+  "minimax-m3-1-flash|openai-gpt-61-terra": {
+   "a": "minimax-m3-1-flash",
+   "b": "openai-gpt-61-terra",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has more proportionate, coherently attached limbs and cleaner construction, while A has awkward leg joins and stray marks."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.98,
+     0.02
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.33,
+     0.67
+    ]
+   }
+  },
+  "minimax-m3-1-flash|openai-gpt-62-astra": {
+   "a": "minimax-m3-1-flash",
+   "b": "openai-gpt-62-astra",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has more coherent leg attachments and joints, with cleaner construction than A\u2019s thin, awkwardly placed legs."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.86,
+     0.14
+    ],
+    "craft": "A",
+    "craft_p": [
+     1.0,
+     0.0
+    ]
+   }
+  },
+  "minimax-m3-1-flash|openai-gpt-62-sol": {
+   "a": "minimax-m3-1-flash",
+   "b": "openai-gpt-62-sol",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has a visible tail and more clearly jointed, attached legs, with cleaner, more consistent construction."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.0,
+     1.0
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.18,
+     0.82
+    ]
+   }
+  },
+  "minimax-m3-1-flash|openai-gpt-62-sol-pro": {
+   "a": "minimax-m3-1-flash",
+   "b": "openai-gpt-62-sol-pro",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has a visible tail and more clearly jointed, attached legs, with cleaner, more consistent construction."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.01,
+     0.99
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.22,
+     0.78
+    ]
+   }
+  },
+  "minimax-m3-1-flash|pareto": {
+   "a": "minimax-m3-1-flash",
+   "b": "pareto",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has more clearly jointed, attached legs and a cleaner, more consistent illustration, while A\u2019s legs look stiff and its construction has visible overlaps."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.01,
+     0.99
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.31,
+     0.69
+    ]
+   }
+  },
+  "minimax-m3-1-flash|qwen3-6-27b": {
+   "a": "minimax-m3-1-flash",
+   "b": "qwen3-6-27b",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has more clearly attached, jointed legs and more coherent shading, while B\u2019s legs and head look disproportionately small."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.99,
+     0.01
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.14,
+     0.86
+    ]
+   }
+  },
+  "muse-wonder|nvidia-nemotron-3-5-super-vl-120b-a12b": {
+   "a": "muse-wonder",
+   "b": "nvidia-nemotron-3-5-super-vl-120b-a12b",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has a complete, connected alpaca with clearly drawn legs, while B has a detached head and neck and sparse, unfinished-looking limbs."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     1.0,
+     0.0
+    ],
+    "craft": "A",
+    "craft_p": [
+     1.0,
+     0.0
+    ]
+   }
+  },
+  "muse-wonder|openai-gpt-62-astra-pro": {
+   "a": "muse-wonder",
+   "b": "openai-gpt-62-astra-pro",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has more clearly articulated, attached legs and more cohesive construction and lighting."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.0,
+     1.0
+    ],
+    "craft": "A",
+    "craft_p": [
+     0.99,
+     0.01
+    ]
+   }
+  },
+  "muse-wonder|openai-gpt-62-sol": {
+   "a": "muse-wonder",
+   "b": "openai-gpt-62-sol",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has more clearly articulated legs attached at the chest and rump, with cleaner construction and more consistent lighting."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.0,
+     1.0
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.3,
+     0.7
+    ]
+   }
+  },
+  "muse-wonder|openai-gpt-62-sol-pro": {
+   "a": "muse-wonder",
+   "b": "openai-gpt-62-sol-pro",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has a visible tail and more clearly articulated legs, along with smoother, more consistent construction and lighting."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.0,
+     1.0
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.24,
+     0.76
+    ]
+   }
+  },
+  "muse-wonder|pareto": {
+   "a": "muse-wonder",
+   "b": "pareto",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has a visible tail and more clearly jointed, attached legs, with cleaner and more consistent construction."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.01,
+     0.99
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.45,
+     0.55
+    ]
+   }
+  },
+  "nvidia-nemotron-3-5-super-vl-120b-a12b|openai-gpt-62-astra-pro": {
+   "a": "nvidia-nemotron-3-5-super-vl-120b-a12b",
+   "b": "openai-gpt-62-astra-pro",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has an attached, proportionate head and neck, articulated legs, and cleaner construction, while A\u2019s head and neck are detached."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.0,
+     1.0
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.0,
+     1.0
+    ]
+   }
+  },
+  "nvidia-nemotron-3-5-super-vl-120b-a12b|openai-gpt-62-sol": {
+   "a": "nvidia-nemotron-3-5-super-vl-120b-a12b",
+   "b": "openai-gpt-62-sol",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has attached, articulated legs and a connected neck and head, while A has detached parts and stray line-like limbs."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.0,
+     1.0
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.0,
+     1.0
+    ]
+   }
+  },
+  "nvidia-nemotron-3-5-super-vl-120b-a12b|openai-gpt-62-sol-pro": {
+   "a": "nvidia-nemotron-3-5-super-vl-120b-a12b",
+   "b": "openai-gpt-62-sol-pro",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has an attached, proportionate head and neck with coherent legs and cleaner construction, while A\u2019s head and neck are detached from its body."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.0,
+     1.0
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.0,
+     1.0
+    ]
+   }
+  },
+  "nvidia-nemotron-3-5-super-vl-120b-a12b|qwen-4-max": {
+   "a": "nvidia-nemotron-3-5-super-vl-120b-a12b",
+   "b": "qwen-4-max",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has articulated legs and a more coherent body, while A\u2019s head and neck are visibly detached from its torso."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.0,
+     1.0
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.37,
+     0.63
+    ]
+   }
+  },
+  "nvidia-nemotron-3-5-super-vl-120b-a12b|qwen3-6-27b": {
+   "a": "nvidia-nemotron-3-5-super-vl-120b-a12b",
+   "b": "qwen3-6-27b",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has an attached head and neck, visible tail, and more cohesive construction, while A\u2019s head and neck are detached from its body."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.0,
+     1.0
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.0,
+     1.0
+    ]
+   }
+  },
+  "openai-gpt-61-terra|openai-gpt-62-astra": {
+   "a": "openai-gpt-61-terra",
+   "b": "openai-gpt-62-astra",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has more clearly jointed, attached legs and a visible tail, with cleaner, more cohesive construction."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.55,
+     0.45
+    ],
+    "craft": "A",
+    "craft_p": [
+     1.0,
+     0.0
+    ]
+   }
+  },
+  "openai-gpt-61-terra|openai-gpt-62-astra-pro": {
+   "a": "openai-gpt-61-terra",
+   "b": "openai-gpt-62-astra-pro",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has visibly jointed legs attached at the chest and rump, and its figure has more consistent construction and lighting."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.0,
+     1.0
+    ],
+    "craft": "A",
+    "craft_p": [
+     1.0,
+     0.0
+    ]
+   }
+  },
+  "openai-gpt-61-terra|openai-gpt-62-sol": {
+   "a": "openai-gpt-61-terra",
+   "b": "openai-gpt-62-sol",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has a visible tail and jointed, well-attached legs, with cleaner construction than A\u2019s straight legs and missing tail."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.0,
+     1.0
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.08,
+     0.92
+    ]
+   }
+  },
+  "openai-gpt-61-terra|pareto": {
+   "a": "openai-gpt-61-terra",
+   "b": "pareto",
+   "vision": {
+    "anatomy": "B",
+    "craft": "A",
+    "note": "B shows a tail and more clearly jointed legs, while A has cleaner, less cluttered vector shapes."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.0,
+     1.0
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.25,
+     0.75
+    ]
+   }
+  },
+  "openai-gpt-61-terra|qwen3-6-27b": {
+   "a": "openai-gpt-61-terra",
+   "b": "qwen3-6-27b",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has more proportionate features and cleaner construction; B\u2019s neck is unusually long and its shapes appear less cohesive."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.97,
+     0.03
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.15,
+     0.85
+    ]
+   }
+  },
+  "openai-gpt-62-astra|openai-gpt-62-sol-pro": {
+   "a": "openai-gpt-62-astra",
+   "b": "openai-gpt-62-sol-pro",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B shows more clearly attached, jointed legs and a tail, with cleaner, more consistent construction."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.0,
+     1.0
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.0,
+     1.0
+    ]
+   }
+  },
+  "openai-gpt-62-astra|qwen-4-max": {
+   "a": "openai-gpt-62-astra",
+   "b": "qwen-4-max",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has a connected, proportionate body and cleaner construction, while B\u2019s head and neck appear detached from its torso."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.76,
+     0.24
+    ],
+    "craft": "A",
+    "craft_p": [
+     0.89,
+     0.11
+    ]
+   }
+  },
+  "openai-gpt-62-astra|qwen3-6-27b": {
+   "a": "openai-gpt-62-astra",
+   "b": "qwen3-6-27b",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has more clearly articulated, properly attached legs and cleaner construction, while B\u2019s legs and neck look less proportionate."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.92,
+     0.08
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.0,
+     1.0
+    ]
+   }
+  },
+  "openai-gpt-62-astra-pro|openai-gpt-62-sol-pro": {
+   "a": "openai-gpt-62-astra-pro",
+   "b": "openai-gpt-62-sol-pro",
+   "vision": {
+    "anatomy": "A",
+    "craft": "B",
+    "note": "A\u2019s legs read as more naturally jointed and attached, while B has cleaner outlines and more consistent shading."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.8,
+     0.2
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.03,
+     0.97
+    ]
+   }
+  },
+  "openai-gpt-62-astra-pro|qwen-4-max": {
+   "a": "openai-gpt-62-astra-pro",
+   "b": "qwen-4-max",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has a connected, proportionate body with a visible tail and cleaner construction, while B\u2019s neck appears detached from its body."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     1.0,
+     0.0
+    ],
+    "craft": "A",
+    "craft_p": [
+     1.0,
+     0.0
+    ]
+   }
+  },
+  "openai-gpt-62-astra-pro|qwen3-6-27b": {
+   "a": "openai-gpt-62-astra-pro",
+   "b": "qwen3-6-27b",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has more proportionate, connected anatomy and cleaner, more consistent construction, while B\u2019s neck is disproportionately long and its legs are less clearly formed."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.99,
+     0.01
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.0,
+     1.0
+    ]
+   }
+  },
+  "openai-gpt-62-sol|openai-gpt-62-sol-pro": {
+   "a": "openai-gpt-62-sol",
+   "b": "openai-gpt-62-sol-pro",
+   "vision": {
+    "anatomy": "B",
+    "craft": "B",
+    "note": "B has more clearly articulated legs attached at the rump and chest, and its vector shapes and lighting look cleaner."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.84,
+     0.16
+    ],
+    "craft": "A",
+    "craft_p": [
+     0.6,
+     0.4
+    ]
+   }
+  },
+  "openai-gpt-62-sol|pareto": {
+   "a": "openai-gpt-62-sol",
+   "b": "pareto",
+   "vision": {
+    "anatomy": "B",
+    "craft": "A",
+    "note": "B shows clearer joints in its legs, while A has more coherent shading and cleaner contours."
+   },
+   "jev": {
+    "anatomy": "tie",
+    "anatomy_p": [
+     0.46,
+     0.54
+    ],
+    "craft": "A",
+    "craft_p": [
+     0.84,
+     0.16
+    ]
+   }
+  },
+  "openai-gpt-62-sol|qwen-4-max": {
+   "a": "openai-gpt-62-sol",
+   "b": "qwen-4-max",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has an attached, proportionate head and neck and more coherent legs, while B\u2019s head and neck appear detached and its construction is less clean."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     1.0,
+     0.0
+    ],
+    "craft": "A",
+    "craft_p": [
+     1.0,
+     0.0
+    ]
+   }
+  },
+  "openai-gpt-62-sol|qwen3-6-27b": {
+   "a": "openai-gpt-62-sol",
+   "b": "qwen3-6-27b",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has more clearly attached, jointed legs and a proportionate neck, with cleaner construction than B\u2019s lumpy body and elongated neck."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.98,
+     0.02
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.22,
+     0.78
+    ]
+   }
+  },
+  "openai-gpt-62-sol-pro|pareto": {
+   "a": "openai-gpt-62-sol-pro",
+   "b": "pareto",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has more clearly jointed, attached legs and cleaner, more consistent outlines than B."
+   },
+   "jev": {
+    "anatomy": "B",
+    "anatomy_p": [
+     0.29,
+     0.71
+    ],
+    "craft": "A",
+    "craft_p": [
+     0.66,
+     0.34
+    ]
+   }
+  },
+  "openai-gpt-62-sol-pro|qwen-4-max": {
+   "a": "openai-gpt-62-sol-pro",
+   "b": "qwen-4-max",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has a continuous neck and more clearly attached legs, while B\u2019s fragmented neck appears detached from its body."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     1.0,
+     0.0
+    ],
+    "craft": "A",
+    "craft_p": [
+     1.0,
+     0.0
+    ]
+   }
+  },
+  "openai-gpt-62-sol-pro|qwen3-6-27b": {
+   "a": "openai-gpt-62-sol-pro",
+   "b": "qwen3-6-27b",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has clearer leg joints and body attachments, with cleaner shapes and more consistent shading than B."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.99,
+     0.01
+    ],
+    "craft": "A",
+    "craft_p": [
+     0.55,
+     0.45
+    ]
+   }
+  },
+  "pareto|qwen-4-max": {
+   "a": "pareto",
+   "b": "qwen-4-max",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has a connected neck and more coherent legs, while B\u2019s neck appears broken into detached shapes."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     1.0,
+     0.0
+    ],
+    "craft": "A",
+    "craft_p": [
+     1.0,
+     0.0
+    ]
+   }
+  },
+  "pareto|qwen3-6-27b": {
+   "a": "pareto",
+   "b": "qwen3-6-27b",
+   "vision": {
+    "anatomy": "A",
+    "craft": "A",
+    "note": "A has more proportionate, visibly attached legs and a cleaner, more consistent illustration; B\u2019s neck and head are disproportionately small relative to its body."
+   },
+   "jev": {
+    "anatomy": "A",
+    "anatomy_p": [
+     0.99,
+     0.01
+    ],
+    "craft": "B",
+    "craft_p": [
+     0.17,
+     0.83
+    ]
+   }
+  }
+ },
+ "theta": {
+  "qwen-4-max": -299.0081881712895,
+  "gemini-4-hydrogen": 39.2331777146267,
+  "glm-5-3-flash-uncensored": 36.618217936590504,
+  "gemini-4-carbon": 39.30379528184065,
+  "claude-fable-5-2": 39.638642822734866,
+  "deepseek-v4-1-flash-1017-uncensored": 38.869509735197,
+  "openai-gpt-61-terra": 38.676606069072506,
+  "kimi-k3-1-pro": 39.49928730182435,
+  "kimi-k3-1-pro-highspeed": 39.06056497195971,
+  "inkling-2-mini": 39.01611320938887,
+  "hy4": 38.29219437016217,
+  "gemini-4-neon": 39.508589694486666,
+  "openai-gpt-62-astra": 39.089138344403764,
+  "openai-gpt-62-astra-pro": 39.431628653350536,
+  "openai-gpt-62-sol": 39.731733245800875,
+  "openai-gpt-62-sol-pro": 39.7016557905636,
+  "e2ee-kimi-k3-1-pro-p": 39.3590579605157,
+  "deepseek-v4-1-flash-1017": 38.92080302958455,
+  "claude-opus-5-5": 39.431628653350536,
+  "claude-sonnet-5-5": 38.65509986385154,
+  "claude-haiku-5-5": 38.71827876547307,
+  "minimax-m3-1-flash": 38.54003053406675,
+  "nvidia-nemotron-3-5-super-vl-120b-a12b": -299.7013353518495,
+  "muse-wonder": 39.03115108675341,
+  "pareto": 39.390806658830286,
+  "qwen3-6-27b": -299.0081881712896
+ },
+ "scores": {
+  "qwen-4-max": 14.7,
+  "gemini-4-hydrogen": 66.7,
+  "glm-5-3-flash-uncensored": 16.7,
+  "gemini-4-carbon": 50.0,
+  "claude-fable-5-2": 58.8,
+  "deepseek-v4-1-flash-1017-uncensored": 34.2,
+  "openai-gpt-61-terra": 53.3,
+  "kimi-k3-1-pro": 84.4,
+  "kimi-k3-1-pro-highspeed": 55.9,
+  "inkling-2-mini": 41.7,
+  "hy4": 31.2,
+  "gemini-4-neon": 78.1,
+  "openai-gpt-62-astra": 87.5,
+  "openai-gpt-62-astra-pro": 93.8,
+  "openai-gpt-62-sol": 88.9,
+  "openai-gpt-62-sol-pro": 92.1,
+  "e2ee-kimi-k3-1-pro-p": 69.2,
+  "deepseek-v4-1-flash-1017": 21.4,
+  "claude-opus-5-5": 47.2,
+  "claude-sonnet-5-5": 18.8,
+  "claude-haiku-5-5": 25.0,
+  "minimax-m3-1-flash": 31.6,
+  "nvidia-nemotron-3-5-super-vl-120b-a12b": 3.1,
+  "muse-wonder": 65.6,
+  "pareto": 78.1,
+  "qwen3-6-27b": 15.8
+ },
+ "record": {
+  "qwen-4-max": [
+   4,
+   28,
+   0
+  ],
+  "gemini-4-hydrogen": [
+   19,
+   9,
+   0
+  ],
+  "glm-5-3-flash-uncensored": [
+   5,
+   29,
+   0
+  ],
+  "gemini-4-carbon": [
+   14,
+   14,
+   0
+  ],
+  "claude-fable-5-2": [
+   19,
+   13,
+   0
+  ],
+  "deepseek-v4-1-flash-1017-uncensored": [
+   12,
+   24,
+   0
+  ],
+  "openai-gpt-61-terra": [
+   15,
+   13,
+   0
+  ],
+  "kimi-k3-1-pro": [
+   26,
+   4,
+   0
+  ],
+  "kimi-k3-1-pro-highspeed": [
+   18,
+   14,
+   0
+  ],
+  "inkling-2-mini": [
+   14,
+   20,
+   0
+  ],
+  "hy4": [
+   9,
+   21,
+   0
+  ],
+  "gemini-4-neon": [
+   24,
+   6,
+   0
+  ],
+  "openai-gpt-62-astra": [
+   27,
+   3,
+   0
+  ],
+  "openai-gpt-62-astra-pro": [
+   29,
+   1,
+   0
+  ],
+  "openai-gpt-62-sol": [
+   31,
+   3,
+   0
+  ],
+  "openai-gpt-62-sol-pro": [
+   34,
+   2,
+   0
+  ],
+  "e2ee-kimi-k3-1-pro-p": [
+   17,
+   7,
+   0
+  ],
+  "deepseek-v4-1-flash-1017": [
+   8,
+   32,
+   0
+  ],
+  "claude-opus-5-5": [
+   16,
+   18,
+   0
+  ],
+  "claude-sonnet-5-5": [
+   5,
+   25,
+   0
+  ],
+  "claude-haiku-5-5": [
+   8,
+   26,
+   0
+  ],
+  "minimax-m3-1-flash": [
+   11,
+   25,
+   0
+  ],
+  "nvidia-nemotron-3-5-super-vl-120b-a12b": [
+   0,
+   30,
+   0
+  ],
+  "muse-wonder": [
+   20,
+   10,
+   0
+  ],
+  "pareto": [
+   24,
+   6,
+   0
+  ],
+  "qwen3-6-27b": [
+   5,
+   31,
+   0
+  ]
+ },
+ "method": "bradley-terry over vision (2) + jev (1) votes"
+}

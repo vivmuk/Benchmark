@@ -1,54 +1,55 @@
 {
- "rubric": "v12",
+ "rubric": "v13",
  "median": {
-  "craft": 4,
-  "anatomy": 4,
-  "proportions": 2.0,
-  "motion": 2
+  "anatomy": 2,
+  "craft": 2,
+  "pace": 4,
+  "smoothness": 4
  },
  "rationale": {
-  "craft": "level 3.96 of 4",
-  "anatomy": "level 3.76 of 4 - joints 4/4, chest and rump",
-  "proportions": "neck 1.42, head 0.55, leg/depth 1.58",
-  "motion": "band 3, smoothness 2, slider False"
+  "anatomy": "joints 4/4, chest and rump; level 1.96",
+  "craft": "level 1.99; A rear leg segment has a visible gap below the rump in some frames.",
+  "pace": "1.67 cycles/s (confidence 0.42), 3.51% change per frame",
+  "smoothness": "frame change [3.18, 3.86, 3.56], spread 0.19",
+  "proportions": "neck 1.61, head 0.68, leg/depth 2.11 (diagnostic, not scored)"
  },
- "judges_used": 1,
+ "judges_used": 2,
  "captioner": "openai-gpt-6-sol",
  "observations": {
-  "description": "A cream-colored alpaca with a patterned blanket walks along a sandy path in a mountain scene.",
+  "description": "A cream-colored alpaca with a patterned blanket walks in place on a sandy path against a mountain backdrop.",
   "parts": {
    "legs_visible": 4,
    "legs_with_visible_joint": 4,
    "leg_attachment": "chest_and_rump",
    "ears": "small_pointed",
    "tail_visible": true,
-   "detached_parts": false,
-   "notes": "none"
+   "detached_parts": true,
+   "notes": "A rear leg segment appears separated from the rump in some frames."
   },
   "points": {
    "chest": [
-    541,
-    594
+    536,
+    601
    ],
    "rump": [
-    387,
-    556
+    385,
+    576
    ],
    "neck_base": [
-    524,
+    520,
     507
    ],
    "poll": [
-    568,
+    566,
     293
    ],
    "muzzle": [
-    614,
-    359
+    615,
+    365
    ],
    "belly": [
-    470,
-    646
+    459,
+    651
    ],
    "ground": [
     530,
@@ -57,43 +58,49 @@
   },
   "gait": {
    "feet_planted": true,
-   "sliding_or_popping": false,
+   "sliding_or_popping": true,
    "legs_change_between_frames": true,
-   "notes": "The front and rear legs change their bent and extended positions, with hooves touching or lifting just above the path."
+   "notes": "The legs alternate bent positions; some hooves shift along the ground, and a rear leg segment appears to pop apart."
   },
   "craft": {
-   "seams_or_stray_shapes": false,
+   "seams_or_stray_shapes": true,
    "inconsistent_light": false,
    "clipped_elements": false,
    "contact_shadow": true,
-   "notes": "none"
+   "notes": "A rear leg segment has a visible gap below the rump in some frames."
   }
  },
  "ratios": {
-  "body_len": 154.0,
-  "neck_len": 218.0,
-  "head_len": 83.2,
-  "leg_len": 135,
-  "neck_body": 1.415,
-  "head_body": 0.548,
-  "leg_depth": 1.576
+  "body_len": 153.1,
+  "neck_len": 218.9,
+  "head_len": 87.1,
+  "leg_len": 140,
+  "neck_body": 1.612,
+  "head_body": 0.676,
+  "leg_depth": 2.114
  },
  "smoothness": {
   "changed": [
-   3.62,
-   3.26,
-   2.0
+   3.18,
+   3.86,
+   3.56
   ],
-  "mean": 2.96,
-  "spread": 0.55,
-  "score": 2
+  "mean": 3.54,
+  "spread": 0.19,
+  "score": 4
+ },
+ "pace": {
+  "cadence": 1.67,
+  "strength": 0.42,
+  "mean_change": 3.51,
+  "score": 4
  },
  "motion": {
-  "mean": 1.59,
-  "changed_pct": 3.62,
-  "leg_pct": 6.13
+  "mean": 1.75,
+  "changed_pct": 3.86,
+  "leg_pct": 6.58
  },
  "verdict": {
-  "jev+openai-gpt-6-sol": "A cream-colored alpaca with a patterned blanket walks along a sandy path in a mountain scene."
+  "jev+openai-gpt-6-sol": "A cream-colored alpaca with a patterned blanket walks in place on a sandy path against a mountain backdrop."
  }
 }

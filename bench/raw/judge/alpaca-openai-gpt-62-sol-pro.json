@@ -1,21 +1,22 @@
 {
- "rubric": "v12",
+ "rubric": "v13",
  "median": {
-  "craft": 4,
   "anatomy": 4,
-  "proportions": 4.0,
-  "motion": 2
+  "craft": 4,
+  "pace": 1,
+  "smoothness": 2
  },
  "rationale": {
-  "craft": "level 3.69 of 4",
-  "anatomy": "level 3.66 of 4 - joints 4/4, chest and rump",
-  "proportions": "neck 0.97, head 0.41, leg/depth 1.48",
-  "motion": "band 2, smoothness 2, slider False"
+  "anatomy": "joints 4/4, chest and rump; level 3.55",
+  "craft": "level 3.66; No distinct contact shadow is visible beneath the hooves.",
+  "pace": "0.0 cycles/s (confidence 0), 2.17% change per frame",
+  "smoothness": "frame change [2.67, 2.0, 2.19], spread 0.29",
+  "proportions": "neck 1.18, head 0.50, leg/depth 1.65 (diagnostic, not scored)"
  },
- "judges_used": 1,
+ "judges_used": 2,
  "captioner": "openai-gpt-6-sol",
  "observations": {
-  "description": "A fluffy cream alpaca with long upright ears walks to the right across a pastel mountain scene.",
+  "description": "A cream-colored alpaca with upright ears and a small tail moves its legs against a pastel mountain scene.",
   "parts": {
    "legs_visible": 4,
    "legs_with_visible_joint": 4,
@@ -27,73 +28,79 @@
   },
   "points": {
    "chest": [
-    559,
-    552
+    565,
+    559
    ],
    "rump": [
-    369,
-    531
+    365,
+    536
    ],
    "neck_base": [
-    527,
-    470
+    531,
+    469
    ],
    "poll": [
-    591,
-    283
+    590,
+    288
    ],
    "muzzle": [
     650,
-    349
+    347
    ],
    "belly": [
-    460,
-    606
+    461,
+    611
    ],
    "ground": [
-    531,
-    776
+    560,
+    774
    ]
   },
   "gait": {
    "feet_planted": true,
-   "sliding_or_popping": false,
+   "sliding_or_popping": true,
    "legs_change_between_frames": true,
-   "notes": "The legs alternately bend and swing, with some hooves touching the ground in each frame."
+   "notes": "The legs alternately bend and step; some hooves shift sideways while touching the ground."
   },
   "craft": {
    "seams_or_stray_shapes": false,
    "inconsistent_light": false,
    "clipped_elements": false,
    "contact_shadow": false,
-   "notes": "No distinct contact shadow is visible beneath the alpaca."
+   "notes": "No distinct contact shadow is visible beneath the hooves."
   }
  },
  "ratios": {
-  "body_len": 202.1,
-  "neck_len": 196.7,
-  "head_len": 83.6,
-  "leg_len": 165,
-  "neck_body": 0.974,
-  "head_body": 0.414,
-  "leg_depth": 1.484
+  "body_len": 201.3,
+  "neck_len": 194.2,
+  "head_len": 84.1,
+  "leg_len": 163,
+  "neck_body": 1.177,
+  "head_body": 0.497,
+  "leg_depth": 1.653
  },
  "smoothness": {
   "changed": [
-   2.64,
-   2.08,
-   1.81
+   2.67,
+   2.0,
+   2.19
   ],
-  "mean": 2.18,
-  "spread": 0.38,
+  "mean": 2.29,
+  "spread": 0.29,
   "score": 2
  },
+ "pace": {
+  "cadence": 0.0,
+  "strength": 0,
+  "mean_change": 2.17,
+  "score": 1
+ },
  "motion": {
-  "mean": 1.11,
-  "changed_pct": 2.64,
-  "leg_pct": 3.73
+  "mean": 1.14,
+  "changed_pct": 2.67,
+  "leg_pct": 3.87
  },
  "verdict": {
-  "jev+openai-gpt-6-sol": "A fluffy cream alpaca with long upright ears walks to the right across a pastel mountain scene."
+  "jev+openai-gpt-6-sol": "A cream-colored alpaca with upright ears and a small tail moves its legs against a pastel mountain scene."
  }
 }

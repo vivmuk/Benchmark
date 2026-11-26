@@ -1,21 +1,22 @@
 {
- "rubric": "v12",
+ "rubric": "v13",
  "median": {
-  "craft": 4,
   "anatomy": 3,
-  "proportions": 2.3,
-  "motion": 3
+  "craft": 3,
+  "pace": 1,
+  "smoothness": 4
  },
  "rationale": {
-  "craft": "level 3.73 of 4",
-  "anatomy": "level 3.38 of 4 - joints 4/4, chest and rump",
-  "proportions": "neck 1.23, head 0.41, leg/depth 2.19",
-  "motion": "band 3, smoothness 4, slider False"
+  "anatomy": "joints 4/4, chest and rump; level 3.33",
+  "craft": "level 2.91; Thin curved outlines are visible behind and alongside the neck.",
+  "pace": "3.33 cycles/s (confidence 0.44), 4.36% change per frame",
+  "smoothness": "frame change [5.0, 5.64, 4.48], spread 0.23",
+  "proportions": "neck 1.55, head 0.57, leg/depth 3.18 (diagnostic, not scored)"
  },
- "judges_used": 1,
+ "judges_used": 2,
  "captioner": "openai-gpt-6-sol",
  "observations": {
-  "description": "A cream-colored alpaca walks along a path in a grassy mountain scene at sunset.",
+  "description": "A cream-colored alpaca walks along a grassy path with mountains and a low sun behind it.",
   "parts": {
    "legs_visible": 4,
    "legs_with_visible_joint": 4,
@@ -27,73 +28,79 @@
   },
   "points": {
    "chest": [
-    538,
-    578
+    552,
+    325
    ],
    "rump": [
-    403,
-    555
+    412,
+    322
    ],
    "neck_base": [
-    510,
-    510
+    519,
+    293
    ],
    "poll": [
-    550,
-    347
+    565,
+    196
    ],
    "muzzle": [
-    585,
-    386
+    597,
+    224
    ],
    "belly": [
-    470,
-    625
+    481,
+    360
    ],
    "ground": [
-    506,
-    790
+    522,
+    455
    ]
   },
   "gait": {
    "feet_planted": true,
    "sliding_or_popping": false,
    "legs_change_between_frames": true,
-   "notes": "The bent legs alternate forward and backward, with hooves reaching the path in each frame."
+   "notes": "The legs alternate between bent, lifted positions and contact with the path."
   },
   "craft": {
-   "seams_or_stray_shapes": false,
+   "seams_or_stray_shapes": true,
    "inconsistent_light": false,
    "clipped_elements": false,
-   "contact_shadow": false,
-   "notes": "No distinct contact shadow is visible beneath the alpaca."
+   "contact_shadow": true,
+   "notes": "Thin curved outlines are visible behind and alongside the neck."
   }
  },
  "ratios": {
-  "body_len": 135.9,
-  "neck_len": 167.8,
-  "head_len": 54.0,
-  "leg_len": 165,
-  "neck_body": 1.231,
-  "head_body": 0.412,
-  "leg_depth": 2.191
+  "body_len": 140.0,
+  "neck_len": 155.2,
+  "head_len": 57.0,
+  "leg_len": 175,
+  "neck_body": 1.552,
+  "head_body": 0.57,
+  "leg_depth": 3.182
  },
  "smoothness": {
   "changed": [
-   5.42,
-   3.58,
-   5.73
+   5.0,
+   5.64,
+   4.48
   ],
-  "mean": 4.91,
-  "spread": 0.44,
+  "mean": 5.04,
+  "spread": 0.23,
   "score": 4
  },
+ "pace": {
+  "cadence": 3.33,
+  "strength": 0.44,
+  "mean_change": 4.36,
+  "score": 1
+ },
  "motion": {
-  "mean": 2.76,
-  "changed_pct": 5.73,
-  "leg_pct": 8.91
+  "mean": 2.87,
+  "changed_pct": 5.64,
+  "leg_pct": 8.95
  },
  "verdict": {
-  "jev+openai-gpt-6-sol": "A cream-colored alpaca walks along a path in a grassy mountain scene at sunset."
+  "jev+openai-gpt-6-sol": "A cream-colored alpaca walks along a grassy path with mountains and a low sun behind it."
  }
 }

@@ -1,99 +1,106 @@
 {
- "rubric": "v12",
+ "rubric": "v13",
  "median": {
+  "anatomy": 2,
   "craft": 4,
-  "anatomy": 4,
-  "proportions": 4.0,
-  "motion": 4
+  "pace": 1,
+  "smoothness": 4
  },
  "rationale": {
-  "craft": "level 3.96 of 4",
-  "anatomy": "level 3.86 of 4 - joints 4/4, chest and rump",
-  "proportions": "neck 0.81, head 0.25, leg/depth 1.30",
-  "motion": "band 4, smoothness 4, slider False"
+  "anatomy": "joints 2/4, chest and rump; level 2.00",
+  "craft": "level 3.98; none",
+  "pace": "0.0 cycles/s (confidence 0.17), 5.46% change per frame",
+  "smoothness": "frame change [5.51, 5.69, 6.0], spread 0.09",
+  "proportions": "neck 1.17, head 0.42, leg/depth 1.81 (diagnostic, not scored)"
  },
- "judges_used": 1,
+ "judges_used": 2,
  "captioner": "openai-gpt-6-sol",
  "observations": {
-  "description": "A cream-colored, curly-fleeced alpaca walks to the right along a dirt path with hills, clouds, and a sun behind it.",
+  "description": "A cream-colored alpaca walks to the right along a dirt path, with hills, clouds, and a sun behind it.",
   "parts": {
    "legs_visible": 4,
-   "legs_with_visible_joint": 4,
+   "legs_with_visible_joint": 2,
    "leg_attachment": "chest_and_rump",
    "ears": "small_pointed",
    "tail_visible": true,
    "detached_parts": false,
-   "notes": "A small tail protrudes behind the rump."
+   "notes": "none"
   },
   "points": {
    "chest": [
-    563,
-    583
+    556,
+    576
    ],
    "rump": [
-    359,
-    549
+    366,
+    545
    ],
    "neck_base": [
-    518,
-    472
+    523,
+    469
    ],
    "poll": [
-    577,
-    310
+    576,
+    309
    ],
    "muzzle": [
-    608,
-    351
+    607,
+    352
    ],
    "belly": [
-    463,
-    679
+    460,
+    681
    ],
    "ground": [
-    532,
-    830
+    527,
+    833
    ]
   },
   "gait": {
    "feet_planted": true,
    "sliding_or_popping": false,
    "legs_change_between_frames": true,
-   "notes": "The legs alternate between bent, lifted positions and hooves touching the path."
+   "notes": "The legs alternate positions and bend as some hooves lift while others touch the path."
   },
   "craft": {
    "seams_or_stray_shapes": false,
    "inconsistent_light": false,
    "clipped_elements": false,
-   "contact_shadow": true,
+   "contact_shadow": false,
    "notes": "none"
   }
  },
  "ratios": {
-  "body_len": 207.0,
-  "neck_len": 172.1,
-  "head_len": 51.4,
-  "leg_len": 151,
-  "neck_body": 0.814,
-  "head_body": 0.249,
-  "leg_depth": 1.299
+  "body_len": 192.5,
+  "neck_len": 186.8,
+  "head_len": 67.3,
+  "leg_len": 160,
+  "neck_body": 1.165,
+  "head_body": 0.42,
+  "leg_depth": 1.815
  },
  "smoothness": {
   "changed": [
-   6.18,
-   6.34,
-   6.7
+   5.51,
+   5.69,
+   6.0
   ],
-  "mean": 6.41,
-  "spread": 0.08,
+  "mean": 5.73,
+  "spread": 0.09,
   "score": 4
  },
+ "pace": {
+  "cadence": 0.0,
+  "strength": 0.17,
+  "mean_change": 5.46,
+  "score": 1
+ },
  "motion": {
-  "mean": 2.46,
-  "changed_pct": 6.7,
-  "leg_pct": 11.85
+  "mean": 2.17,
+  "changed_pct": 6.0,
+  "leg_pct": 11.56
  },
  "verdict": {
-  "jev+openai-gpt-6-sol": "A cream-colored, curly-fleeced alpaca walks to the right along a dirt path with hills, clouds, and a sun behind it."
+  "jev+openai-gpt-6-sol": "A cream-colored alpaca walks to the right along a dirt path, with hills, clouds, and a sun behind it."
  }
 }

@@ -1,21 +1,22 @@
 {
- "rubric": "v12",
+ "rubric": "v13",
  "median": {
-  "craft": 4,
-  "anatomy": 4,
-  "proportions": 2.0,
-  "motion": 4
+  "anatomy": 3,
+  "craft": 3,
+  "pace": 4,
+  "smoothness": 4
  },
  "rationale": {
-  "craft": "level 3.96 of 4",
-  "anatomy": "level 3.57 of 4 - joints 4/4, chest and rump",
-  "proportions": "neck 1.05, head 0.58, leg/depth 2.10",
-  "motion": "band 4, smoothness 4, slider False"
+  "anatomy": "joints 4/4, chest and rump; level 3.47",
+  "craft": "level 2.96; Faint vertical seams appear in the foreground grass band.",
+  "pace": "1.33 cycles/s (confidence 0.52), 4.79% change per frame",
+  "smoothness": "frame change [4.81, 5.13, 5.03], spread 0.06",
+  "proportions": "neck 1.14, head 0.66, leg/depth 2.80 (diagnostic, not scored)"
  },
- "judges_used": 1,
+ "judges_used": 2,
  "captioner": "openai-gpt-6-sol",
  "observations": {
-  "description": "A cream-colored alpaca wearing a patterned blanket walks to the right along a sandy path, with mountains and a sun behind it.",
+  "description": "A cream alpaca wearing a patterned blanket walks to the right along a sandy path with mountains and a low sun behind it.",
   "parts": {
    "legs_visible": 4,
    "legs_with_visible_joint": 4,
@@ -27,31 +28,31 @@
   },
   "points": {
    "chest": [
-    565,
-    514
+    558,
+    528
    ],
    "rump": [
-    393,
-    500
+    403,
+    528
    ],
    "neck_base": [
-    538,
-    429
+    527,
+    434
    ],
    "poll": [
-    566,
-    257
+    565,
+    262
    ],
    "muzzle": [
-    615,
-    340
+    616,
+    342
    ],
    "belly": [
     480,
-    573
+    576
    ],
    "ground": [
-    562,
+    550,
     766
    ]
   },
@@ -59,41 +60,47 @@
    "feet_planted": true,
    "sliding_or_popping": false,
    "legs_change_between_frames": true,
-   "notes": "The legs alternate between forward and backward positions, with some feet lifted while others touch the path."
+   "notes": "The legs alternate between bent, lifted positions and extended positions, with several hooves touching the path."
   },
   "craft": {
-   "seams_or_stray_shapes": false,
+   "seams_or_stray_shapes": true,
    "inconsistent_light": false,
    "clipped_elements": false,
    "contact_shadow": true,
-   "notes": "none"
+   "notes": "Faint vertical seams appear in the foreground grass band."
   }
  },
  "ratios": {
-  "body_len": 167.0,
-  "neck_len": 174.3,
-  "head_len": 96.4,
-  "leg_len": 193,
-  "neck_body": 1.047,
-  "head_body": 0.584,
-  "leg_depth": 2.101
+  "body_len": 155.0,
+  "neck_len": 176.1,
+  "head_len": 94.9,
+  "leg_len": 200,
+  "neck_body": 1.136,
+  "head_body": 0.662,
+  "leg_depth": 2.797
  },
  "smoothness": {
   "changed": [
-   5.5,
-   5.77,
-   6.24
+   4.81,
+   5.13,
+   5.03
   ],
-  "mean": 5.84,
-  "spread": 0.13,
+  "mean": 4.99,
+  "spread": 0.06,
+  "score": 4
+ },
+ "pace": {
+  "cadence": 1.33,
+  "strength": 0.52,
+  "mean_change": 4.79,
   "score": 4
  },
  "motion": {
-  "mean": 2.46,
-  "changed_pct": 6.24,
-  "leg_pct": 11.15
+  "mean": 2.03,
+  "changed_pct": 5.13,
+  "leg_pct": 9.77
  },
  "verdict": {
-  "jev+openai-gpt-6-sol": "A cream-colored alpaca wearing a patterned blanket walks to the right along a sandy path, with mountains and a sun behind it."
+  "jev+openai-gpt-6-sol": "A cream alpaca wearing a patterned blanket walks to the right along a sandy path with mountains and a low sun behind it."
  }
 }

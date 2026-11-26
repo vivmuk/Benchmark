@@ -1,21 +1,22 @@
 {
- "rubric": "v12",
+ "rubric": "v13",
  "median": {
-  "craft": 4,
   "anatomy": 2,
-  "proportions": 3.0,
-  "motion": 3
+  "craft": 4,
+  "pace": 4,
+  "smoothness": 4
  },
  "rationale": {
-  "craft": "level 3.97 of 4",
-  "anatomy": "level 1.97 of 4 - joints 2/4, chest and rump",
-  "proportions": "neck 1.35, head 0.31, leg/depth 1.02",
-  "motion": "band 4, smoothness 4, slider True"
+  "anatomy": "joints 2/4, chest and rump; level 1.96",
+  "craft": "level 3.89; none",
+  "pace": "0.95 cycles/s (confidence 0.33), 6.05% change per frame",
+  "smoothness": "frame change [6.39, 6.57, 5.86], spread 0.11",
+  "proportions": "neck 1.49, head 0.37, leg/depth 1.44 (diagnostic, not scored)"
  },
- "judges_used": 1,
+ "judges_used": 2,
  "captioner": "openai-gpt-6-sol",
  "observations": {
-  "description": "A cream-colored alpaca with long upright ears walks through a grassy scene beneath clouds and a sun.",
+  "description": "A cream-colored alpaca with long upright ears walks across a green field beneath a sunny sky.",
   "parts": {
    "legs_visible": 4,
    "legs_with_visible_joint": 2,
@@ -23,77 +24,83 @@
    "ears": "upright_banana",
    "tail_visible": false,
    "detached_parts": false,
-   "notes": "none"
+   "notes": "Two legs show bends while the other two appear nearly straight."
   },
   "points": {
    "chest": [
-    603,
-    598
+    601,
+    566
    ],
    "rump": [
-    374,
-    573
+    366,
+    559
    ],
    "neck_base": [
-    566,
-    446
+    557,
+    448
    ],
    "poll": [
-    637,
-    174
+    639,
+    172
    ],
    "muzzle": [
-    679,
-    227
+    682,
+    226
    ],
    "belly": [
-    498,
-    682
+    493,
+    681
    ],
    "ground": [
-    438,
-    807
+    441,
+    800
    ]
   },
   "gait": {
    "feet_planted": true,
-   "sliding_or_popping": true,
+   "sliding_or_popping": false,
    "legs_change_between_frames": true,
-   "notes": "Two legs bend and swing while the other two stay straighter; the hoof positions shift between frames."
+   "notes": "The legs alternate between bent, near-vertical, and spread positions; some feet lift while others reach the ground."
   },
   "craft": {
    "seams_or_stray_shapes": false,
    "inconsistent_light": false,
    "clipped_elements": false,
-   "contact_shadow": false,
+   "contact_shadow": true,
    "notes": "none"
   }
  },
  "ratios": {
-  "body_len": 216.8,
-  "neck_len": 292.0,
-  "head_len": 67.6,
-  "leg_len": 123,
-  "neck_body": 1.346,
-  "head_body": 0.307,
-  "leg_depth": 1.018
+  "body_len": 235.1,
+  "neck_len": 287.9,
+  "head_len": 69.0,
+  "leg_len": 143,
+  "neck_body": 1.49,
+  "head_body": 0.372,
+  "leg_depth": 1.435
  },
  "smoothness": {
   "changed": [
-   6.84,
-   7.12,
-   6.74
+   6.39,
+   6.57,
+   5.86
   ],
-  "mean": 6.9,
-  "spread": 0.06,
+  "mean": 6.27,
+  "spread": 0.11,
+  "score": 4
+ },
+ "pace": {
+  "cadence": 0.95,
+  "strength": 0.33,
+  "mean_change": 6.05,
   "score": 4
  },
  "motion": {
-  "mean": 2.73,
-  "changed_pct": 7.12,
-  "leg_pct": 14.28
+  "mean": 2.72,
+  "changed_pct": 6.57,
+  "leg_pct": 12.31
  },
  "verdict": {
-  "jev+openai-gpt-6-sol": "A cream-colored alpaca with long upright ears walks through a grassy scene beneath clouds and a sun."
+  "jev+openai-gpt-6-sol": "A cream-colored alpaca with long upright ears walks across a green field beneath a sunny sky."
  }
 }

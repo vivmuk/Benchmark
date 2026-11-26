@@ -1,65 +1,66 @@
 {
- "rubric": "v12",
+ "rubric": "v13",
  "median": {
-  "craft": 4,
   "anatomy": 2,
-  "proportions": 3.3,
-  "motion": 1
+  "craft": 4,
+  "pace": 1,
+  "smoothness": 2
  },
  "rationale": {
-  "craft": "level 3.94 of 4",
-  "anatomy": "level 1.92 of 4 - joints 0/4, chest and rump",
-  "proportions": "neck 0.55, head 0.47, leg/depth 1.28",
-  "motion": "band 2, smoothness 2, slider True"
+  "anatomy": "joints 0/4, chest and rump; level 1.90",
+  "craft": "level 3.94; none",
+  "pace": "3.33 cycles/s (confidence 0.8), 1.14% change per frame",
+  "smoothness": "frame change [1.4, 0.95, 1.54], spread 0.45",
+  "proportions": "neck 0.73, head 0.69, leg/depth 1.54 (diagnostic, not scored)"
  },
- "judges_used": 1,
+ "judges_used": 2,
  "captioner": "openai-gpt-6-sol",
  "observations": {
-  "description": "A fluffy cream alpaca with two pointed ears and a small tail moves its legs against a pastel mountain scene.",
+  "description": "A cream-colored alpaca walks in place in a pastel landscape across four frames.",
   "parts": {
    "legs_visible": 4,
    "legs_with_visible_joint": 0,
    "leg_attachment": "chest_and_rump",
-   "ears": "small_pointed",
+   "ears": "upright_banana",
    "tail_visible": true,
    "detached_parts": false,
-   "notes": "none"
+   "notes": "A small tan tail is visible behind the rump."
   },
   "points": {
    "chest": [
-    537,
-    597
+    539,
+    548
    ],
    "rump": [
     311,
-    516
+    514
    ],
    "neck_base": [
-    534,
-    521
+    540,
+    413
    ],
    "poll": [
-    573,
-    307
+    574,
+    306
    ],
    "muzzle": [
-    654,
+    655,
     392
    ],
    "belly": [
-    444,
-    625
+    445,
+    627
    ],
    "ground": [
-    384,
-    790
+    555,
+    792
    ]
   },
   "gait": {
    "feet_planted": true,
-   "sliding_or_popping": true,
+   "sliding_or_popping": false,
    "legs_change_between_frames": true,
-   "notes": "The straight legs change position, while the hooves shift sideways near the same ground level."
+   "notes": "The four straight legs change their forward and backward angles while their hooves remain near the ground."
   },
   "craft": {
    "seams_or_stray_shapes": false,
@@ -70,30 +71,36 @@
   }
  },
  "ratios": {
-  "body_len": 240.1,
-  "neck_len": 132.6,
-  "head_len": 108.3,
-  "leg_len": 170,
-  "neck_body": 0.549,
-  "head_body": 0.475,
-  "leg_depth": 1.279
+  "body_len": 230.5,
+  "neck_len": 137.3,
+  "head_len": 129.0,
+  "leg_len": 165,
+  "neck_body": 0.729,
+  "head_body": 0.685,
+  "leg_depth": 1.545
  },
  "smoothness": {
   "changed": [
-   1.93,
-   2.24,
-   2.16
+   1.4,
+   0.95,
+   1.54
   ],
-  "mean": 2.11,
-  "spread": 0.15,
+  "mean": 1.3,
+  "spread": 0.45,
   "score": 2
  },
+ "pace": {
+  "cadence": 3.33,
+  "strength": 0.8,
+  "mean_change": 1.14,
+  "score": 1
+ },
  "motion": {
-  "mean": 0.94,
-  "changed_pct": 2.24,
-  "leg_pct": 4.66
+  "mean": 0.71,
+  "changed_pct": 1.54,
+  "leg_pct": 3.21
  },
  "verdict": {
-  "jev+openai-gpt-6-sol": "A fluffy cream alpaca with two pointed ears and a small tail moves its legs against a pastel mountain scene."
+  "jev+openai-gpt-6-sol": "A cream-colored alpaca walks in place in a pastel landscape across four frames."
  }
 }

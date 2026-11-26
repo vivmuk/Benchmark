@@ -16,53 +16,67 @@ window.BENCH = {
     "seconds": 725.0,
     "finish": "stop",
     "status": "ok",
-    "score": 55.0,
+    "score": 14.7,
     "criteria": {
-     "craft": 2,
      "anatomy": 2,
-     "proportions": 2.7,
-     "motion": 3
+     "craft": 2,
+     "pace": 1,
+     "smoothness": 4
     },
     "by_judge": {
      "jev+openai-gpt-6-sol": 55.0
     },
     "rationale": {
-     "craft": "level 1.93 of 4",
-     "anatomy": "level 1.87 of 4 - joints 4/4, chest and rump",
-     "proportions": "neck 1.72, head 0.31, leg/depth 1.69",
-     "motion": "band 4, smoothness 4, slider True"
+     "anatomy": "joints 4/4, chest and rump; level 1.95",
+     "craft": "level 2.50; A visible gap separates the flecked lower neck from the torso.",
+     "pace": "3.33 cycles/s (confidence 0.63), 6.93% change per frame",
+     "smoothness": "frame change [7.19, 6.71, 5.99], spread 0.18",
+     "proportions": "neck 1.89, head 0.35, leg/depth 1.83 (diagnostic, not scored)"
     },
     "verdict": {
-     "jev+openai-gpt-6-sol": "A cream-colored alpaca with a long, spotty neck and four legs walks to the right across grass beneath clouds and mountains."
+     "jev+openai-gpt-6-sol": "A cream-colored alpaca with a flecked neck and four walking legs appears in a grassy scene with purple hills, clouds, and a sun."
     },
     "setting": null,
     "ratios": {
-     "body_len": 166.0,
-     "neck_len": 284.7,
-     "head_len": 50.2,
-     "leg_len": 151,
-     "neck_body": 1.715,
-     "head_body": 0.308,
-     "leg_depth": 1.688
+     "body_len": 152.3,
+     "neck_len": 285.6,
+     "head_len": 54.1,
+     "leg_len": 152,
+     "neck_body": 1.887,
+     "head_body": 0.355,
+     "leg_depth": 1.826
     },
     "smoothness": {
      "changed": [
-      8.53,
-      8.99,
-      9.25
+      7.19,
+      6.71,
+      5.99
      ],
-     "mean": 8.92,
-     "spread": 0.08,
+     "mean": 6.63,
+     "spread": 0.18,
      "score": 4
     },
-    "judges": 1,
-    "rubric": "v12",
+    "pace": {
+     "cadence": 3.33,
+     "strength": 0.63,
+     "mean_change": 6.93,
+     "score": 1
+    },
+    "judges": 2,
+    "rubric": "v13",
     "scale": 4,
     "motion": 3.38,
     "motion_changed": 9.25,
     "motion_leg": 10.9,
     "compliance": 4,
-    "compliance_notes": []
+    "compliance_notes": [],
+    "score_pairwise": 14.7,
+    "record": [
+     4,
+     28,
+     0
+    ],
+    "method": "pairwise"
    },
    "design": {
     "status": "failed",
@@ -147,53 +161,67 @@ window.BENCH = {
     "seconds": 188.5,
     "finish": "stop",
     "status": "ok",
-    "score": 82.5,
+    "score": 66.7,
     "criteria": {
-     "craft": 4,
      "anatomy": 3,
-     "proportions": 2.3,
-     "motion": 3
+     "craft": 3,
+     "pace": 1,
+     "smoothness": 4
     },
     "by_judge": {
-     "jev+openai-gpt-6-sol": 82.5
+     "jev+openai-gpt-6-sol": 73.8
     },
     "rationale": {
-     "craft": "level 3.73 of 4",
-     "anatomy": "level 3.38 of 4 - joints 4/4, chest and rump",
-     "proportions": "neck 1.23, head 0.41, leg/depth 2.19",
-     "motion": "band 3, smoothness 4, slider False"
+     "anatomy": "joints 4/4, chest and rump; level 3.33",
+     "craft": "level 2.91; Thin curved outlines are visible behind and alongside the neck.",
+     "pace": "3.33 cycles/s (confidence 0.44), 4.36% change per frame",
+     "smoothness": "frame change [5.0, 5.64, 4.48], spread 0.23",
+     "proportions": "neck 1.55, head 0.57, leg/depth 3.18 (diagnostic, not scored)"
     },
     "verdict": {
-     "jev+openai-gpt-6-sol": "A cream-colored alpaca walks along a path in a grassy mountain scene at sunset."
+     "jev+openai-gpt-6-sol": "A cream-colored alpaca walks along a grassy path with mountains and a low sun behind it."
     },
     "setting": null,
     "ratios": {
-     "body_len": 135.9,
-     "neck_len": 167.8,
-     "head_len": 54.0,
-     "leg_len": 165,
-     "neck_body": 1.231,
-     "head_body": 0.412,
-     "leg_depth": 2.191
+     "body_len": 140.0,
+     "neck_len": 155.2,
+     "head_len": 57.0,
+     "leg_len": 175,
+     "neck_body": 1.552,
+     "head_body": 0.57,
+     "leg_depth": 3.182
     },
     "smoothness": {
      "changed": [
-      5.42,
-      3.58,
-      5.73
+      5.0,
+      5.64,
+      4.48
      ],
-     "mean": 4.91,
-     "spread": 0.44,
+     "mean": 5.04,
+     "spread": 0.23,
      "score": 4
     },
-    "judges": 1,
-    "rubric": "v12",
+    "pace": {
+     "cadence": 3.33,
+     "strength": 0.44,
+     "mean_change": 4.36,
+     "score": 1
+    },
+    "judges": 2,
+    "rubric": "v13",
     "scale": 4,
     "motion": 2.76,
     "motion_changed": 5.73,
     "motion_leg": 8.91,
     "compliance": 4,
-    "compliance_notes": []
+    "compliance_notes": [],
+    "score_pairwise": 66.7,
+    "record": [
+     19,
+     9,
+     0
+    ],
+    "method": "pairwise"
    },
    "design": {
     "out_tokens": 25377,
@@ -298,53 +326,67 @@ window.BENCH = {
     "seconds": 94.9,
     "finish": "stop",
     "status": "ok",
-    "score": 52.5,
+    "score": 16.7,
     "criteria": {
+     "anatomy": 1,
      "craft": 3,
-     "anatomy": 2,
-     "proportions": 2.3,
-     "motion": 1
+     "pace": 4,
+     "smoothness": 2
     },
     "by_judge": {
-     "jev+openai-gpt-6-sol": 52.5
+     "jev+openai-gpt-6-sol": 51.2
     },
     "rationale": {
-     "craft": "level 2.58 of 4",
-     "anatomy": "level 1.66 of 4 - joints 1/3, chest and rump",
-     "proportions": "neck 1.14, head 0.47, leg/depth 0.64",
-     "motion": "band 2, smoothness 2, slider True"
+     "anatomy": "joints 0/3, chest and rump; level 1.03",
+     "craft": "level 3.29; A shadow appears well below the feet.",
+     "pace": "0.95 cycles/s (confidence 0.3), 2.28% change per frame",
+     "smoothness": "frame change [2.3, 2.06, 2.36], spread 0.13",
+     "proportions": "neck 1.23, head 0.48, leg/depth 1.27 (diagnostic, not scored)"
     },
     "verdict": {
-     "jev+openai-gpt-6-sol": "A pale alpaca appears above green ground with hills and a sun behind it, while its legs change position across the four frames."
+     "jev+openai-gpt-6-sol": "A cream alpaca with two short pointed ears faces right in a grassy scene while its legs change position across four frames."
     },
     "setting": null,
     "ratios": {
-     "body_len": 161.1,
-     "neck_len": 189.0,
-     "head_len": 73.9,
-     "leg_len": 55,
-     "neck_body": 1.137,
-     "head_body": 0.466,
-     "leg_depth": 0.637
+     "body_len": 158.1,
+     "neck_len": 195.0,
+     "head_len": 76.1,
+     "leg_len": 105,
+     "neck_body": 1.234,
+     "head_body": 0.481,
+     "leg_depth": 1.269
     },
     "smoothness": {
      "changed": [
-      2.22,
-      2.09,
-      2.5
+      2.3,
+      2.06,
+      2.36
      ],
-     "mean": 2.27,
-     "spread": 0.18,
+     "mean": 2.24,
+     "spread": 0.13,
      "score": 2
     },
-    "judges": 1,
-    "rubric": "v12",
+    "pace": {
+     "cadence": 0.95,
+     "strength": 0.3,
+     "mean_change": 2.28,
+     "score": 4
+    },
+    "judges": 2,
+    "rubric": "v13",
     "scale": 4,
     "motion": 0.96,
     "motion_changed": 2.5,
     "motion_leg": 4.92,
     "compliance": 4,
-    "compliance_notes": []
+    "compliance_notes": [],
+    "score_pairwise": 16.7,
+    "record": [
+     5,
+     29,
+     0
+    ],
+    "method": "pairwise"
    },
    "design": {
     "out_tokens": 32938,
@@ -449,53 +491,67 @@ window.BENCH = {
     "seconds": 252.3,
     "finish": "stop",
     "status": "ok",
-    "score": 87.5,
+    "score": 50.0,
     "criteria": {
-     "craft": 4,
-     "anatomy": 3,
-     "proportions": 1.3,
-     "motion": 4
+     "anatomy": 4,
+     "craft": 2,
+     "pace": 4,
+     "smoothness": 4
     },
     "by_judge": {
-     "jev+openai-gpt-6-sol": 87.5
+     "jev+openai-gpt-6-sol": 85.0
     },
     "rationale": {
-     "craft": "level 3.86 of 4",
-     "anatomy": "level 2.76 of 4 - joints 3/4, chest and rump",
-     "proportions": "neck 1.58, head 0.46, leg/depth 2.16",
-     "motion": "band 4, smoothness 4, slider False"
+     "anatomy": "joints 4/4, chest and rump; level 3.66",
+     "craft": "level 2.37; The green hill layer has an abrupt vertical edge to the right of the alpaca.",
+     "pace": "0.95 cycles/s (confidence 0.42), 9.71% change per frame",
+     "smoothness": "frame change [8.93, 9.66, 9.02], spread 0.08",
+     "proportions": "neck 1.73, head 0.58, leg/depth 2.69 (diagnostic, not scored)"
     },
     "verdict": {
-     "jev+openai-gpt-6-sol": "A white alpaca with a long neck walks along a sandy path in front of hills and mountains."
+     "jev+openai-gpt-6-sol": "A cream-colored alpaca with pointed ears and a colorful collar walks to the right through a scene of hills and mountains."
     },
     "setting": null,
     "ratios": {
-     "body_len": 145.8,
-     "neck_len": 230.4,
-     "head_len": 65.2,
-     "leg_len": 170,
-     "neck_body": 1.58,
-     "head_body": 0.455,
-     "leg_depth": 2.159
+     "body_len": 153.9,
+     "neck_len": 215.1,
+     "head_len": 71.1,
+     "leg_len": 181,
+     "neck_body": 1.734,
+     "head_body": 0.584,
+     "leg_depth": 2.69
     },
     "smoothness": {
      "changed": [
-      10.61,
-      10.41,
-      9.34
+      8.93,
+      9.66,
+      9.02
      ],
-     "mean": 10.12,
-     "spread": 0.13,
+     "mean": 9.2,
+     "spread": 0.08,
      "score": 4
     },
-    "judges": 1,
-    "rubric": "v12",
+    "pace": {
+     "cadence": 0.95,
+     "strength": 0.42,
+     "mean_change": 9.71,
+     "score": 4
+    },
+    "judges": 2,
+    "rubric": "v13",
     "scale": 4,
     "motion": 5.05,
     "motion_changed": 10.61,
     "motion_leg": 15.58,
     "compliance": 4,
-    "compliance_notes": []
+    "compliance_notes": [],
+    "score_pairwise": 50.0,
+    "record": [
+     14,
+     14,
+     0
+    ],
+    "method": "pairwise"
    },
    "design": {
     "out_tokens": 25067,
@@ -600,53 +656,67 @@ window.BENCH = {
     "seconds": 699.1,
     "finish": "stop",
     "status": "ok",
-    "score": 100.0,
+    "score": 58.8,
     "criteria": {
+     "anatomy": 3,
      "craft": 4,
-     "anatomy": 4,
-     "proportions": 2.3,
-     "motion": 4
+     "pace": 4,
+     "smoothness": 4
     },
     "by_judge": {
-     "jev+openai-gpt-6-sol": 100.0
+     "jev+openai-gpt-6-sol": 88.8
     },
     "rationale": {
-     "craft": "level 3.94 of 4",
-     "anatomy": "level 3.66 of 4 - joints 4/4, chest and rump",
-     "proportions": "neck 1.36, head 0.39, leg/depth 1.83",
-     "motion": "band 4, smoothness 4, slider False"
+     "anatomy": "joints 4/4, chest and rump; level 3.48",
+     "craft": "level 3.95; none",
+     "pace": "1.33 cycles/s (confidence 0.35), 11.63% change per frame",
+     "smoothness": "frame change [12.03, 11.97, 12.46], spread 0.04",
+     "proportions": "neck 1.75, head 0.53, leg/depth 2.57 (diagnostic, not scored)"
     },
     "verdict": {
-     "jev+openai-gpt-6-sol": "A cream alpaca walks to the right along a sandy path through a flowered meadow, with mountains and a sun behind it."
+     "jev+openai-gpt-6-sol": "A cream-colored alpaca walks along a path in a grassy mountain scene."
     },
     "setting": null,
     "ratios": {
-     "body_len": 178.0,
-     "neck_len": 236.8,
-     "head_len": 72.3,
-     "leg_len": 179,
-     "neck_body": 1.363,
-     "head_body": 0.393,
-     "leg_depth": 1.828
+     "body_len": 176.5,
+     "neck_len": 232.9,
+     "head_len": 70.8,
+     "leg_len": 180,
+     "neck_body": 1.754,
+     "head_body": 0.528,
+     "leg_depth": 2.567
     },
     "smoothness": {
      "changed": [
-      13.69,
-      13.49,
-      13.66
+      12.03,
+      11.97,
+      12.46
      ],
-     "mean": 13.61,
-     "spread": 0.01,
+     "mean": 12.15,
+     "spread": 0.04,
      "score": 4
     },
-    "judges": 1,
-    "rubric": "v12",
+    "pace": {
+     "cadence": 1.33,
+     "strength": 0.35,
+     "mean_change": 11.63,
+     "score": 4
+    },
+    "judges": 2,
+    "rubric": "v13",
     "scale": 4,
     "motion": 5.19,
     "motion_changed": 13.69,
     "motion_leg": 23.31,
     "compliance": 4,
-    "compliance_notes": []
+    "compliance_notes": [],
+    "score_pairwise": 58.8,
+    "record": [
+     19,
+     13,
+     0
+    ],
+    "method": "pairwise"
    },
    "design": {
     "out_tokens": 71250,
@@ -831,53 +901,67 @@ window.BENCH = {
     "seconds": 267.9,
     "finish": "stop",
     "status": "ok",
-    "score": 70.0,
+    "score": 34.2,
     "criteria": {
-     "craft": 4,
      "anatomy": 2,
-     "proportions": 3.7,
-     "motion": 3
+     "craft": 2,
+     "pace": 4,
+     "smoothness": 4
     },
     "by_judge": {
-     "jev+openai-gpt-6-sol": 70.0
+     "jev+openai-gpt-6-sol": 62.5
     },
     "rationale": {
-     "craft": "level 3.56 of 4",
-     "anatomy": "level 1.94 of 4 - joints 0/4, chest and rump",
-     "proportions": "neck 0.90, head 0.45, leg/depth 1.09",
-     "motion": "band 4, smoothness 4, slider True"
+     "anatomy": "joints 0/4, chest and rump; level 1.89",
+     "craft": "level 2.47; A thin darker stripe along the neck ends inside the chest.",
+     "pace": "1.33 cycles/s (confidence 0.27), 6.68% change per frame",
+     "smoothness": "frame change [6.75, 6.6, 6.86], spread 0.04",
+     "proportions": "neck 0.97, head 0.53, leg/depth 1.26 (diagnostic, not scored)"
     },
     "verdict": {
-     "jev+openai-gpt-6-sol": "A cream-colored alpaca walks in place in a grassy landscape beneath a blue sky."
+     "jev+openai-gpt-6-sol": "A cream-colored alpaca with long upright ears and a round tail moves its legs in a grassy scene."
     },
     "setting": null,
     "ratios": {
-     "body_len": 188.4,
-     "neck_len": 166.4,
-     "head_len": 83.7,
-     "leg_len": 115,
-     "neck_body": 0.897,
-     "head_body": 0.451,
-     "leg_depth": 1.087
+     "body_len": 205.1,
+     "neck_len": 167.6,
+     "head_len": 91.9,
+     "leg_len": 120,
+     "neck_body": 0.971,
+     "head_body": 0.533,
+     "leg_depth": 1.264
     },
     "smoothness": {
      "changed": [
-      6.77,
-      6.71,
-      6.76
+      6.75,
+      6.6,
+      6.86
      ],
-     "mean": 6.75,
-     "spread": 0.01,
+     "mean": 6.74,
+     "spread": 0.04,
      "score": 4
     },
-    "judges": 1,
-    "rubric": "v12",
+    "pace": {
+     "cadence": 1.33,
+     "strength": 0.27,
+     "mean_change": 6.68,
+     "score": 4
+    },
+    "judges": 2,
+    "rubric": "v13",
     "scale": 4,
     "motion": 2.62,
     "motion_changed": 6.77,
     "motion_leg": 13.96,
     "compliance": 4,
-    "compliance_notes": []
+    "compliance_notes": [],
+    "score_pairwise": 34.2,
+    "record": [
+     12,
+     24,
+     0
+    ],
+    "method": "pairwise"
    },
    "design": {
     "out_tokens": 29089,
@@ -982,53 +1066,67 @@ window.BENCH = {
     "seconds": 118.1,
     "finish": "stop",
     "status": "ok",
-    "score": 60.0,
+    "score": 53.3,
     "criteria": {
-     "craft": 4,
      "anatomy": 2,
-     "proportions": 3.3,
-     "motion": 1
+     "craft": 4,
+     "pace": 1,
+     "smoothness": 2
     },
     "by_judge": {
-     "jev+openai-gpt-6-sol": 60.0
+     "jev+openai-gpt-6-sol": 62.5
     },
     "rationale": {
-     "craft": "level 3.94 of 4",
-     "anatomy": "level 1.92 of 4 - joints 0/4, chest and rump",
-     "proportions": "neck 0.55, head 0.47, leg/depth 1.28",
-     "motion": "band 2, smoothness 2, slider True"
+     "anatomy": "joints 0/4, chest and rump; level 1.90",
+     "craft": "level 3.94; none",
+     "pace": "3.33 cycles/s (confidence 0.8), 1.14% change per frame",
+     "smoothness": "frame change [1.4, 0.95, 1.54], spread 0.45",
+     "proportions": "neck 0.73, head 0.69, leg/depth 1.54 (diagnostic, not scored)"
     },
     "verdict": {
-     "jev+openai-gpt-6-sol": "A fluffy cream alpaca with two pointed ears and a small tail moves its legs against a pastel mountain scene."
+     "jev+openai-gpt-6-sol": "A cream-colored alpaca walks in place in a pastel landscape across four frames."
     },
     "setting": null,
     "ratios": {
-     "body_len": 240.1,
-     "neck_len": 132.6,
-     "head_len": 108.3,
-     "leg_len": 170,
-     "neck_body": 0.549,
-     "head_body": 0.475,
-     "leg_depth": 1.279
+     "body_len": 230.5,
+     "neck_len": 137.3,
+     "head_len": 129.0,
+     "leg_len": 165,
+     "neck_body": 0.729,
+     "head_body": 0.685,
+     "leg_depth": 1.545
     },
     "smoothness": {
      "changed": [
-      1.93,
-      2.24,
-      2.16
+      1.4,
+      0.95,
+      1.54
      ],
-     "mean": 2.11,
-     "spread": 0.15,
+     "mean": 1.3,
+     "spread": 0.45,
      "score": 2
     },
-    "judges": 1,
-    "rubric": "v12",
+    "pace": {
+     "cadence": 3.33,
+     "strength": 0.8,
+     "mean_change": 1.14,
+     "score": 1
+    },
+    "judges": 2,
+    "rubric": "v13",
     "scale": 4,
     "motion": 0.94,
     "motion_changed": 2.24,
     "motion_leg": 4.66,
     "compliance": 4,
-    "compliance_notes": []
+    "compliance_notes": [],
+    "score_pairwise": 53.3,
+    "record": [
+     15,
+     13,
+     0
+    ],
+    "method": "pairwise"
    },
    "design": {
     "out_tokens": 13410,
@@ -1133,53 +1231,67 @@ window.BENCH = {
     "seconds": 198.9,
     "finish": "stop",
     "status": "ok",
-    "score": 90.0,
+    "score": 84.4,
     "criteria": {
-     "craft": 4,
      "anatomy": 4,
-     "proportions": 4.0,
-     "motion": 2
+     "craft": 4,
+     "pace": 4,
+     "smoothness": 2
     },
     "by_judge": {
-     "jev+openai-gpt-6-sol": 90.0
+     "jev+openai-gpt-6-sol": 92.5
     },
     "rationale": {
-     "craft": "level 3.96 of 4",
-     "anatomy": "level 3.67 of 4 - joints 4/4, chest and rump",
-     "proportions": "neck 0.79, head 0.42, leg/depth 1.42",
-     "motion": "band 2, smoothness 2, slider False"
+     "anatomy": "joints 4/4, chest and rump; level 3.54",
+     "craft": "level 3.95; none",
+     "pace": "1.33 cycles/s (confidence 0.83), 1.37% change per frame",
+     "smoothness": "frame change [1.74, 1.25, 1.45], spread 0.33",
+     "proportions": "neck 1.02, head 0.49, leg/depth 1.73 (diagnostic, not scored)"
     },
     "verdict": {
-     "jev+openai-gpt-6-sol": "A fluffy alpaca with long upright ears walks along a path in a mountain scene."
+     "jev+openai-gpt-6-sol": "A cream-colored alpaca walks in place on a path with mountains and a sun behind it."
     },
     "setting": null,
     "ratios": {
-     "body_len": 233.2,
-     "neck_len": 181.1,
-     "head_len": 96.2,
-     "leg_len": 180,
-     "neck_body": 0.787,
-     "head_body": 0.418,
-     "leg_depth": 1.419
+     "body_len": 237.0,
+     "neck_len": 197.3,
+     "head_len": 97.1,
+     "leg_len": 185,
+     "neck_body": 1.016,
+     "head_body": 0.494,
+     "leg_depth": 1.732
     },
     "smoothness": {
      "changed": [
-      2.05,
-      1.93,
-      1.67
+      1.74,
+      1.25,
+      1.45
      ],
-     "mean": 1.88,
-     "spread": 0.2,
+     "mean": 1.48,
+     "spread": 0.33,
      "score": 2
     },
-    "judges": 1,
-    "rubric": "v12",
+    "pace": {
+     "cadence": 1.33,
+     "strength": 0.83,
+     "mean_change": 1.37,
+     "score": 4
+    },
+    "judges": 2,
+    "rubric": "v13",
     "scale": 4,
     "motion": 0.91,
     "motion_changed": 2.05,
     "motion_leg": 2.89,
     "compliance": 4,
-    "compliance_notes": []
+    "compliance_notes": [],
+    "score_pairwise": 84.4,
+    "record": [
+     26,
+     4,
+     0
+    ],
+    "method": "pairwise"
    },
    "design": {
     "out_tokens": 39853,
@@ -1284,53 +1396,67 @@ window.BENCH = {
     "seconds": 145.3,
     "finish": "stop",
     "status": "ok",
-    "score": 90.0,
+    "score": 55.9,
     "criteria": {
+     "anatomy": 2,
      "craft": 4,
-     "anatomy": 4,
-     "proportions": 2.7,
-     "motion": 2
+     "pace": 4,
+     "smoothness": 2
     },
     "by_judge": {
-     "jev+openai-gpt-6-sol": 90.0
+     "jev+openai-gpt-6-sol": 70.0
     },
     "rationale": {
-     "craft": "level 3.96 of 4",
-     "anatomy": "level 3.57 of 4 - joints 4/4, chest and rump",
-     "proportions": "neck 1.21, head 0.48, leg/depth 1.18",
-     "motion": "band 2, smoothness 2, slider False"
+     "anatomy": "joints 1/4, chest and rump; level 2.00",
+     "craft": "level 3.91; none",
+     "pace": "0.95 cycles/s (confidence 0.42), 1.62% change per frame",
+     "smoothness": "frame change [1.58, 1.6, 1.32], spread 0.19",
+     "proportions": "neck 1.38, head 0.62, leg/depth 1.48 (diagnostic, not scored)"
     },
     "verdict": {
-     "jev+openai-gpt-6-sol": "A cream-colored, curly-fleeced alpaca walks to the right along a sandy path, with mountains, clouds and a sun behind it."
+     "jev+openai-gpt-6-sol": "A cream-colored alpaca with long upright ears walks in place in front of mountains."
     },
     "setting": null,
     "ratios": {
-     "body_len": 206.6,
-     "neck_len": 253.5,
-     "head_len": 97.6,
-     "leg_len": 134,
-     "neck_body": 1.211,
-     "head_body": 0.485,
-     "leg_depth": 1.179
+     "body_len": 201.4,
+     "neck_len": 246.9,
+     "head_len": 104.6,
+     "leg_len": 135,
+     "neck_body": 1.381,
+     "head_body": 0.619,
+     "leg_depth": 1.477
     },
     "smoothness": {
      "changed": [
+      1.58,
       1.6,
-      1.44,
-      1.29
+      1.32
      ],
-     "mean": 1.45,
-     "spread": 0.21,
+     "mean": 1.5,
+     "spread": 0.19,
      "score": 2
     },
-    "judges": 1,
-    "rubric": "v12",
+    "pace": {
+     "cadence": 0.95,
+     "strength": 0.42,
+     "mean_change": 1.62,
+     "score": 4
+    },
+    "judges": 2,
+    "rubric": "v13",
     "scale": 4,
     "motion": 0.77,
     "motion_changed": 1.6,
     "motion_leg": 1.8,
     "compliance": 4,
-    "compliance_notes": []
+    "compliance_notes": [],
+    "score_pairwise": 55.9,
+    "record": [
+     18,
+     14,
+     0
+    ],
+    "method": "pairwise"
    },
    "design": {
     "out_tokens": 31652,
@@ -1435,53 +1561,67 @@ window.BENCH = {
     "seconds": 86.1,
     "finish": "stop",
     "status": "ok",
-    "score": 95.0,
+    "score": 41.7,
     "criteria": {
-     "craft": 4,
      "anatomy": 4,
-     "proportions": 3.3,
-     "motion": 3
+     "craft": 3,
+     "pace": 4,
+     "smoothness": 2
     },
     "by_judge": {
-     "jev+openai-gpt-6-sol": 95.0
+     "jev+openai-gpt-6-sol": 85.0
     },
     "rationale": {
-     "craft": "level 3.86 of 4",
-     "anatomy": "level 3.88 of 4 - joints 4/4, chest and rump",
-     "proportions": "neck 0.73, head 0.18, leg/depth 0.93",
-     "motion": "band 3, smoothness 4, slider False"
+     "anatomy": "joints 4/4, chest and rump; level 3.84",
+     "craft": "level 2.80; The oval underside patch has a visible edge against the fleece.",
+     "pace": "1.67 cycles/s (confidence 0.46), 2.87% change per frame",
+     "smoothness": "frame change [2.87, 3.02, 2.72], spread 0.1",
+     "proportions": "neck 0.76, head 0.24, leg/depth 1.31 (diagnostic, not scored)"
     },
     "verdict": {
-     "jev+openai-gpt-6-sol": "A fluffy white alpaca with a small tail walks across a sandy path beneath a sunny sky."
+     "jev+openai-gpt-6-sol": "A cream-colored alpaca with a fluffy body walks through a grassy scene beneath clouds and a sun."
     },
     "setting": null,
     "ratios": {
-     "body_len": 215.7,
-     "neck_len": 156.3,
-     "head_len": 39.6,
-     "leg_len": 112,
-     "neck_body": 0.728,
-     "head_body": 0.184,
-     "leg_depth": 0.934
+     "body_len": 229.2,
+     "neck_len": 148.1,
+     "head_len": 48.4,
+     "leg_len": 130,
+     "neck_body": 0.756,
+     "head_body": 0.239,
+     "leg_depth": 1.313
     },
     "smoothness": {
      "changed": [
+      2.87,
       3.02,
-      3.25,
-      2.86
+      2.72
      ],
-     "mean": 3.05,
-     "spread": 0.13,
+     "mean": 2.87,
+     "spread": 0.1,
+     "score": 2
+    },
+    "pace": {
+     "cadence": 1.67,
+     "strength": 0.46,
+     "mean_change": 2.87,
      "score": 4
     },
-    "judges": 1,
-    "rubric": "v12",
+    "judges": 2,
+    "rubric": "v13",
     "scale": 4,
     "motion": 1.49,
     "motion_changed": 3.25,
     "motion_leg": 4.72,
     "compliance": 4,
-    "compliance_notes": []
+    "compliance_notes": [],
+    "score_pairwise": 41.7,
+    "record": [
+     14,
+     20,
+     0
+    ],
+    "method": "pairwise"
    },
    "design": {
     "out_tokens": 29053,
@@ -1586,53 +1726,67 @@ window.BENCH = {
     "seconds": 257.5,
     "finish": "stop",
     "status": "ok",
-    "score": 65.0,
+    "score": 31.2,
     "criteria": {
-     "craft": 4,
      "anatomy": 2,
-     "proportions": 1.7,
-     "motion": 2
+     "craft": 4,
+     "pace": 4,
+     "smoothness": 2
     },
     "by_judge": {
-     "jev+openai-gpt-6-sol": 65.0
+     "jev+openai-gpt-6-sol": 70.0
     },
     "rationale": {
-     "craft": "level 3.95 of 4",
-     "anatomy": "level 1.88 of 4 - joints 0/4, chest and rump",
-     "proportions": "neck 1.27, head 0.44, leg/depth 2.69",
-     "motion": "band 2, smoothness 2, slider False"
+     "anatomy": "joints 2/4, chest and rump; level 1.98",
+     "craft": "level 3.63; No distinct contact shadow is visible beneath the hooves.",
+     "pace": "1.33 cycles/s (confidence 0.41), 1.74% change per frame",
+     "smoothness": "frame change [2.21, 1.58, 2.2], spread 0.32",
+     "proportions": "neck 1.16, head 0.57, leg/depth 3.24 (diagnostic, not scored)"
     },
     "verdict": {
-     "jev+openai-gpt-6-sol": "A white alpaca with a tan face and pink patterned blanket walks to the right through a pastel scene with hills, clouds, and a sun."
+     "jev+openai-gpt-6-sol": "A cream-colored alpaca wearing a pink blanket walks across a grassy scene beneath a pastel sky."
     },
     "setting": null,
     "ratios": {
-     "body_len": 121.1,
-     "neck_len": 156.1,
-     "head_len": 53.7,
-     "leg_len": 177,
-     "neck_body": 1.266,
-     "head_body": 0.444,
-     "leg_depth": 2.688
+     "body_len": 126.9,
+     "neck_len": 133.9,
+     "head_len": 58.0,
+     "leg_len": 180,
+     "neck_body": 1.157,
+     "head_body": 0.574,
+     "leg_depth": 3.236
     },
     "smoothness": {
      "changed": [
-      2.88,
-      2.98,
-      2.55
+      2.21,
+      1.58,
+      2.2
      ],
-     "mean": 2.8,
-     "spread": 0.16,
+     "mean": 2.0,
+     "spread": 0.32,
      "score": 2
     },
-    "judges": 1,
-    "rubric": "v12",
+    "pace": {
+     "cadence": 1.33,
+     "strength": 0.41,
+     "mean_change": 1.74,
+     "score": 4
+    },
+    "judges": 2,
+    "rubric": "v13",
     "scale": 4,
     "motion": 1.24,
     "motion_changed": 2.98,
     "motion_leg": 5.03,
     "compliance": 4,
-    "compliance_notes": []
+    "compliance_notes": [],
+    "score_pairwise": 31.2,
+    "record": [
+     9,
+     21,
+     0
+    ],
+    "method": "pairwise"
    },
    "design": {
     "out_tokens": 26815,
@@ -1716,53 +1870,67 @@ window.BENCH = {
     "seconds": 203.4,
     "finish": "stop",
     "status": "ok",
-    "score": 95.0,
+    "score": 78.1,
     "criteria": {
+     "anatomy": 2,
      "craft": 4,
-     "anatomy": 4,
-     "proportions": 3.0,
-     "motion": 3
+     "pace": 4,
+     "smoothness": 4
     },
     "by_judge": {
-     "jev+openai-gpt-6-sol": 95.0
+     "jev+openai-gpt-6-sol": 77.5
     },
     "rationale": {
-     "craft": "level 3.94 of 4",
-     "anatomy": "level 3.56 of 4 - joints 4/4, chest and rump",
-     "proportions": "neck 1.15, head 0.39, leg/depth 1.81",
-     "motion": "band 4, smoothness 4, slider True"
+     "anatomy": "joints 2/4, chest and rump; level 2.00",
+     "craft": "level 3.95; none",
+     "pace": "0.95 cycles/s (confidence 0.45), 7.74% change per frame",
+     "smoothness": "frame change [8.27, 8.8, 7.91], spread 0.11",
+     "proportions": "neck 1.17, head 0.42, leg/depth 1.93 (diagnostic, not scored)"
     },
     "verdict": {
-     "jev+openai-gpt-6-sol": "A cream-colored alpaca wearing a colorful neckband walks along a dirt path with hills and mountains behind it."
+     "jev+openai-gpt-6-sol": "A cream-colored alpaca with a fluffy body, long neck, pointed ears, and a small tail walks along a path in front of hills and mountains."
     },
     "setting": null,
     "ratios": {
-     "body_len": 167.7,
-     "neck_len": 192.8,
-     "head_len": 65.3,
-     "leg_len": 162,
-     "neck_body": 1.149,
-     "head_body": 0.389,
-     "leg_depth": 1.808
+     "body_len": 172.5,
+     "neck_len": 186.8,
+     "head_len": 67.3,
+     "leg_len": 170,
+     "neck_body": 1.168,
+     "head_body": 0.42,
+     "leg_depth": 1.932
     },
     "smoothness": {
      "changed": [
-      10.36,
-      9.22,
-      9.15
+      8.27,
+      8.8,
+      7.91
      ],
-     "mean": 9.57,
-     "spread": 0.13,
+     "mean": 8.33,
+     "spread": 0.11,
      "score": 4
     },
-    "judges": 1,
-    "rubric": "v12",
+    "pace": {
+     "cadence": 0.95,
+     "strength": 0.45,
+     "mean_change": 7.74,
+     "score": 4
+    },
+    "judges": 2,
+    "rubric": "v13",
     "scale": 4,
     "motion": 4.15,
     "motion_changed": 10.36,
     "motion_leg": 15.24,
     "compliance": 4,
-    "compliance_notes": []
+    "compliance_notes": [],
+    "score_pairwise": 78.1,
+    "record": [
+     24,
+     6,
+     0
+    ],
+    "method": "pairwise"
    },
    "design": {
     "out_tokens": 36380,
@@ -1867,53 +2035,67 @@ window.BENCH = {
     "seconds": 247.4,
     "finish": "stop",
     "status": "ok",
-    "score": 90.0,
+    "score": 87.5,
     "criteria": {
-     "craft": 4,
-     "anatomy": 4,
-     "proportions": 2.0,
-     "motion": 2
+     "anatomy": 2,
+     "craft": 2,
+     "pace": 4,
+     "smoothness": 4
     },
     "by_judge": {
-     "jev+openai-gpt-6-sol": 90.0
+     "jev+openai-gpt-6-sol": 62.5
     },
     "rationale": {
-     "craft": "level 3.96 of 4",
-     "anatomy": "level 3.76 of 4 - joints 4/4, chest and rump",
-     "proportions": "neck 1.42, head 0.55, leg/depth 1.58",
-     "motion": "band 3, smoothness 2, slider False"
+     "anatomy": "joints 4/4, chest and rump; level 1.96",
+     "craft": "level 1.99; A rear leg segment has a visible gap below the rump in some frames.",
+     "pace": "1.67 cycles/s (confidence 0.42), 3.51% change per frame",
+     "smoothness": "frame change [3.18, 3.86, 3.56], spread 0.19",
+     "proportions": "neck 1.61, head 0.68, leg/depth 2.11 (diagnostic, not scored)"
     },
     "verdict": {
-     "jev+openai-gpt-6-sol": "A cream-colored alpaca with a patterned blanket walks along a sandy path in a mountain scene."
+     "jev+openai-gpt-6-sol": "A cream-colored alpaca with a patterned blanket walks in place on a sandy path against a mountain backdrop."
     },
     "setting": null,
     "ratios": {
-     "body_len": 154.0,
-     "neck_len": 218.0,
-     "head_len": 83.2,
-     "leg_len": 135,
-     "neck_body": 1.415,
-     "head_body": 0.548,
-     "leg_depth": 1.576
+     "body_len": 153.1,
+     "neck_len": 218.9,
+     "head_len": 87.1,
+     "leg_len": 140,
+     "neck_body": 1.612,
+     "head_body": 0.676,
+     "leg_depth": 2.114
     },
     "smoothness": {
      "changed": [
-      3.62,
-      3.26,
-      2.0
+      3.18,
+      3.86,
+      3.56
      ],
-     "mean": 2.96,
-     "spread": 0.55,
-     "score": 2
+     "mean": 3.54,
+     "spread": 0.19,
+     "score": 4
     },
-    "judges": 1,
-    "rubric": "v12",
+    "pace": {
+     "cadence": 1.67,
+     "strength": 0.42,
+     "mean_change": 3.51,
+     "score": 4
+    },
+    "judges": 2,
+    "rubric": "v13",
     "scale": 4,
     "motion": 1.59,
     "motion_changed": 3.62,
     "motion_leg": 6.13,
     "compliance": 4,
-    "compliance_notes": []
+    "compliance_notes": [],
+    "score_pairwise": 87.5,
+    "record": [
+     27,
+     3,
+     0
+    ],
+    "method": "pairwise"
    },
    "design": {
     "out_tokens": 13227,
@@ -2018,53 +2200,67 @@ window.BENCH = {
     "seconds": 299.7,
     "finish": "stop",
     "status": "ok",
-    "score": 100.0,
+    "score": 93.8,
     "criteria": {
-     "craft": 4,
-     "anatomy": 4,
-     "proportions": 2.0,
-     "motion": 4
+     "anatomy": 3,
+     "craft": 3,
+     "pace": 4,
+     "smoothness": 4
     },
     "by_judge": {
-     "jev+openai-gpt-6-sol": 100.0
+     "jev+openai-gpt-6-sol": 81.2
     },
     "rationale": {
-     "craft": "level 3.96 of 4",
-     "anatomy": "level 3.57 of 4 - joints 4/4, chest and rump",
-     "proportions": "neck 1.05, head 0.58, leg/depth 2.10",
-     "motion": "band 4, smoothness 4, slider False"
+     "anatomy": "joints 4/4, chest and rump; level 3.47",
+     "craft": "level 2.96; Faint vertical seams appear in the foreground grass band.",
+     "pace": "1.33 cycles/s (confidence 0.52), 4.79% change per frame",
+     "smoothness": "frame change [4.81, 5.13, 5.03], spread 0.06",
+     "proportions": "neck 1.14, head 0.66, leg/depth 2.80 (diagnostic, not scored)"
     },
     "verdict": {
-     "jev+openai-gpt-6-sol": "A cream-colored alpaca wearing a patterned blanket walks to the right along a sandy path, with mountains and a sun behind it."
+     "jev+openai-gpt-6-sol": "A cream alpaca wearing a patterned blanket walks to the right along a sandy path with mountains and a low sun behind it."
     },
     "setting": null,
     "ratios": {
-     "body_len": 167.0,
-     "neck_len": 174.3,
-     "head_len": 96.4,
-     "leg_len": 193,
-     "neck_body": 1.047,
-     "head_body": 0.584,
-     "leg_depth": 2.101
+     "body_len": 155.0,
+     "neck_len": 176.1,
+     "head_len": 94.9,
+     "leg_len": 200,
+     "neck_body": 1.136,
+     "head_body": 0.662,
+     "leg_depth": 2.797
     },
     "smoothness": {
      "changed": [
-      5.5,
-      5.77,
-      6.24
+      4.81,
+      5.13,
+      5.03
      ],
-     "mean": 5.84,
-     "spread": 0.13,
+     "mean": 4.99,
+     "spread": 0.06,
      "score": 4
     },
-    "judges": 1,
-    "rubric": "v12",
+    "pace": {
+     "cadence": 1.33,
+     "strength": 0.52,
+     "mean_change": 4.79,
+     "score": 4
+    },
+    "judges": 2,
+    "rubric": "v13",
     "scale": 4,
     "motion": 2.46,
     "motion_changed": 6.24,
     "motion_leg": 11.15,
     "compliance": 4,
-    "compliance_notes": []
+    "compliance_notes": [],
+    "score_pairwise": 93.8,
+    "record": [
+     29,
+     1,
+     0
+    ],
+    "method": "pairwise"
    },
    "design": {
     "out_tokens": 29907,
@@ -2169,53 +2365,67 @@ window.BENCH = {
     "seconds": 205.9,
     "finish": "stop",
     "status": "ok",
-    "score": 95.0,
+    "score": 88.9,
     "criteria": {
-     "craft": 4,
      "anatomy": 4,
-     "proportions": 4.0,
-     "motion": 3
+     "craft": 4,
+     "pace": 4,
+     "smoothness": 4
     },
     "by_judge": {
-     "jev+openai-gpt-6-sol": 95.0
+     "jev+openai-gpt-6-sol": 100.0
     },
     "rationale": {
-     "craft": "level 3.95 of 4",
-     "anatomy": "level 3.76 of 4 - joints 4/4, chest and rump",
-     "proportions": "neck 0.91, head 0.42, leg/depth 1.18",
-     "motion": "band 3, smoothness 4, slider False"
+     "anatomy": "joints 4/4, chest and rump; level 3.71",
+     "craft": "level 3.96; none",
+     "pace": "1.67 cycles/s (confidence 0.32), 3.42% change per frame",
+     "smoothness": "frame change [3.4, 3.09, 3.95], spread 0.25",
+     "proportions": "neck 0.86, head 0.42, leg/depth 1.37 (diagnostic, not scored)"
     },
     "verdict": {
-     "jev+openai-gpt-6-sol": "A cream-colored alpaca with a red collar walks along a path in a pastel mountain scene."
+     "jev+openai-gpt-6-sol": "An alpaca walks to the right along a sandy path with purple mountains and a low sun behind it."
     },
     "setting": null,
     "ratios": {
-     "body_len": 212.5,
-     "neck_len": 188.5,
-     "head_len": 88.2,
-     "leg_len": 139,
-     "neck_body": 0.91,
-     "head_body": 0.425,
-     "leg_depth": 1.181
+     "body_len": 218.1,
+     "neck_len": 188.7,
+     "head_len": 88.5,
+     "leg_len": 142,
+     "neck_body": 0.865,
+     "head_body": 0.42,
+     "leg_depth": 1.368
     },
     "smoothness": {
      "changed": [
       3.4,
-      3.74,
-      3.79
+      3.09,
+      3.95
      ],
-     "mean": 3.64,
-     "spread": 0.11,
+     "mean": 3.48,
+     "spread": 0.25,
      "score": 4
     },
-    "judges": 1,
-    "rubric": "v12",
+    "pace": {
+     "cadence": 1.67,
+     "strength": 0.32,
+     "mean_change": 3.42,
+     "score": 4
+    },
+    "judges": 2,
+    "rubric": "v13",
     "scale": 4,
     "motion": 1.59,
     "motion_changed": 3.79,
     "motion_leg": 6.77,
     "compliance": 4,
-    "compliance_notes": []
+    "compliance_notes": [],
+    "score_pairwise": 88.9,
+    "record": [
+     31,
+     3,
+     0
+    ],
+    "method": "pairwise"
    },
    "design": {
     "out_tokens": 14180,
@@ -2320,53 +2530,67 @@ window.BENCH = {
     "seconds": 241.6,
     "finish": "stop",
     "status": "ok",
-    "score": 90.0,
+    "score": 92.1,
     "criteria": {
-     "craft": 4,
      "anatomy": 4,
-     "proportions": 4.0,
-     "motion": 2
+     "craft": 4,
+     "pace": 1,
+     "smoothness": 2
     },
     "by_judge": {
-     "jev+openai-gpt-6-sol": 90.0
+     "jev+openai-gpt-6-sol": 85.0
     },
     "rationale": {
-     "craft": "level 3.69 of 4",
-     "anatomy": "level 3.66 of 4 - joints 4/4, chest and rump",
-     "proportions": "neck 0.97, head 0.41, leg/depth 1.48",
-     "motion": "band 2, smoothness 2, slider False"
+     "anatomy": "joints 4/4, chest and rump; level 3.55",
+     "craft": "level 3.66; No distinct contact shadow is visible beneath the hooves.",
+     "pace": "0.0 cycles/s (confidence 0), 2.17% change per frame",
+     "smoothness": "frame change [2.67, 2.0, 2.19], spread 0.29",
+     "proportions": "neck 1.18, head 0.50, leg/depth 1.65 (diagnostic, not scored)"
     },
     "verdict": {
-     "jev+openai-gpt-6-sol": "A fluffy cream alpaca with long upright ears walks to the right across a pastel mountain scene."
+     "jev+openai-gpt-6-sol": "A cream-colored alpaca with upright ears and a small tail moves its legs against a pastel mountain scene."
     },
     "setting": null,
     "ratios": {
-     "body_len": 202.1,
-     "neck_len": 196.7,
-     "head_len": 83.6,
-     "leg_len": 165,
-     "neck_body": 0.974,
-     "head_body": 0.414,
-     "leg_depth": 1.484
+     "body_len": 201.3,
+     "neck_len": 194.2,
+     "head_len": 84.1,
+     "leg_len": 163,
+     "neck_body": 1.177,
+     "head_body": 0.497,
+     "leg_depth": 1.653
     },
     "smoothness": {
      "changed": [
-      2.64,
-      2.08,
-      1.81
+      2.67,
+      2.0,
+      2.19
      ],
-     "mean": 2.18,
-     "spread": 0.38,
+     "mean": 2.29,
+     "spread": 0.29,
      "score": 2
     },
-    "judges": 1,
-    "rubric": "v12",
+    "pace": {
+     "cadence": 0.0,
+     "strength": 0,
+     "mean_change": 2.17,
+     "score": 1
+    },
+    "judges": 2,
+    "rubric": "v13",
     "scale": 4,
     "motion": 1.11,
     "motion_changed": 2.64,
     "motion_leg": 3.73,
     "compliance": 4,
-    "compliance_notes": []
+    "compliance_notes": [],
+    "score_pairwise": 92.1,
+    "record": [
+     34,
+     2,
+     0
+    ],
+    "method": "pairwise"
    },
    "design": {
     "out_tokens": 27528,
@@ -2471,53 +2695,67 @@ window.BENCH = {
     "seconds": 408.6,
     "finish": "stop",
     "status": "ok",
-    "score": 90.0,
+    "score": 69.2,
     "criteria": {
-     "craft": 4,
      "anatomy": 4,
-     "proportions": 4.0,
-     "motion": 2
+     "craft": 4,
+     "pace": 4,
+     "smoothness": 2
     },
     "by_judge": {
-     "jev+openai-gpt-6-sol": 90.0
+     "jev+openai-gpt-6-sol": 92.5
     },
     "rationale": {
-     "craft": "level 3.95 of 4",
-     "anatomy": "level 3.64 of 4 - joints 4/4, chest and rump",
-     "proportions": "neck 0.89, head 0.39, leg/depth 1.31",
-     "motion": "band 2, smoothness 2, slider False"
+     "anatomy": "joints 4/4, chest and rump; level 3.50",
+     "craft": "level 3.95; none",
+     "pace": "1.67 cycles/s (confidence 0.65), 1.57% change per frame",
+     "smoothness": "frame change [1.62, 1.41, 1.66], spread 0.16",
+     "proportions": "neck 1.10, head 0.52, leg/depth 1.61 (diagnostic, not scored)"
     },
     "verdict": {
      "jev+openai-gpt-6-sol": "A cream-colored alpaca with a fluffy body and long neck walks along a path in a mountain scene."
     },
     "setting": null,
     "ratios": {
-     "body_len": 222.2,
-     "neck_len": 193.8,
-     "head_len": 87.9,
-     "leg_len": 160,
-     "neck_body": 0.887,
-     "head_body": 0.393,
-     "leg_depth": 1.309
+     "body_len": 233.2,
+     "neck_len": 199.1,
+     "head_len": 94.1,
+     "leg_len": 166,
+     "neck_body": 1.1,
+     "head_body": 0.52,
+     "leg_depth": 1.607
     },
     "smoothness": {
      "changed": [
-      1.64,
-      1.68,
-      1.45
+      1.62,
+      1.41,
+      1.66
      ],
-     "mean": 1.59,
-     "spread": 0.15,
+     "mean": 1.57,
+     "spread": 0.16,
      "score": 2
     },
-    "judges": 1,
-    "rubric": "v12",
+    "pace": {
+     "cadence": 1.67,
+     "strength": 0.65,
+     "mean_change": 1.57,
+     "score": 4
+    },
+    "judges": 2,
+    "rubric": "v13",
     "scale": 4,
     "motion": 0.8,
     "motion_changed": 1.68,
     "motion_leg": 2.66,
     "compliance": 4,
-    "compliance_notes": []
+    "compliance_notes": [],
+    "score_pairwise": 69.2,
+    "record": [
+     17,
+     7,
+     0
+    ],
+    "method": "pairwise"
    },
    "design": {
     "out_tokens": 30214,
@@ -2622,53 +2860,67 @@ window.BENCH = {
     "seconds": 257.8,
     "finish": "stop",
     "status": "ok",
-    "score": 60.0,
+    "score": 21.4,
     "criteria": {
-     "craft": 4,
      "anatomy": 2,
-     "proportions": 2.3,
-     "motion": 1
+     "craft": 4,
+     "pace": 1,
+     "smoothness": 2
     },
     "by_judge": {
-     "jev+openai-gpt-6-sol": 60.0
+     "jev+openai-gpt-6-sol": 62.5
     },
     "rationale": {
-     "craft": "level 3.84 of 4",
-     "anatomy": "level 1.91 of 4 - joints 0/4, chest and rump",
-     "proportions": "neck 1.09, head 0.43, leg/depth 2.59",
-     "motion": "band 3, smoothness 2, slider True"
+     "anatomy": "joints 0/4, chest and rump; level 1.90",
+     "craft": "level 3.94; none",
+     "pace": "3.33 cycles/s (confidence 0.7), 2.21% change per frame",
+     "smoothness": "frame change [2.43, 2.37, 2.31], spread 0.05",
+     "proportions": "neck 1.21, head 0.59, leg/depth 2.46 (diagnostic, not scored)"
     },
     "verdict": {
-     "jev+openai-gpt-6-sol": "A cream-colored, woolly alpaca faces right in a grassy scene beneath a cloudy sky."
+     "jev+openai-gpt-6-sol": "A cream-colored, woolly alpaca with pointed ears walks in a grassy scene beneath a blue sky."
     },
     "setting": null,
     "ratios": {
-     "body_len": 119.9,
-     "neck_len": 129.3,
-     "head_len": 51.9,
-     "leg_len": 170,
-     "neck_body": 1.09,
-     "head_body": 0.433,
-     "leg_depth": 2.588
+     "body_len": 140.0,
+     "neck_len": 155.7,
+     "head_len": 76.3,
+     "leg_len": 180,
+     "neck_body": 1.209,
+     "head_body": 0.592,
+     "leg_depth": 2.455
     },
     "smoothness": {
      "changed": [
-      3.2,
-      2.41,
-      2.34
+      2.43,
+      2.37,
+      2.31
      ],
-     "mean": 2.65,
-     "spread": 0.33,
+     "mean": 2.37,
+     "spread": 0.05,
      "score": 2
     },
-    "judges": 1,
-    "rubric": "v12",
+    "pace": {
+     "cadence": 3.33,
+     "strength": 0.7,
+     "mean_change": 2.21,
+     "score": 1
+    },
+    "judges": 2,
+    "rubric": "v13",
     "scale": 4,
     "motion": 1.9,
     "motion_changed": 3.2,
     "motion_leg": 5.21,
     "compliance": 4,
-    "compliance_notes": []
+    "compliance_notes": [],
+    "score_pairwise": 21.4,
+    "record": [
+     8,
+     32,
+     0
+    ],
+    "method": "pairwise"
    },
    "design": {
     "out_tokens": 45019,
@@ -2773,53 +3025,67 @@ window.BENCH = {
     "seconds": 285.7,
     "finish": "stop",
     "status": "ok",
-    "score": 100.0,
+    "score": 47.2,
     "criteria": {
+     "anatomy": 2,
      "craft": 4,
-     "anatomy": 4,
-     "proportions": 4.0,
-     "motion": 4
+     "pace": 1,
+     "smoothness": 4
     },
     "by_judge": {
-     "jev+openai-gpt-6-sol": 100.0
+     "jev+openai-gpt-6-sol": 70.0
     },
     "rationale": {
-     "craft": "level 3.96 of 4",
-     "anatomy": "level 3.86 of 4 - joints 4/4, chest and rump",
-     "proportions": "neck 0.81, head 0.25, leg/depth 1.30",
-     "motion": "band 4, smoothness 4, slider False"
+     "anatomy": "joints 2/4, chest and rump; level 2.00",
+     "craft": "level 3.98; none",
+     "pace": "0.0 cycles/s (confidence 0.17), 5.46% change per frame",
+     "smoothness": "frame change [5.51, 5.69, 6.0], spread 0.09",
+     "proportions": "neck 1.17, head 0.42, leg/depth 1.81 (diagnostic, not scored)"
     },
     "verdict": {
-     "jev+openai-gpt-6-sol": "A cream-colored, curly-fleeced alpaca walks to the right along a dirt path with hills, clouds, and a sun behind it."
+     "jev+openai-gpt-6-sol": "A cream-colored alpaca walks to the right along a dirt path, with hills, clouds, and a sun behind it."
     },
     "setting": null,
     "ratios": {
-     "body_len": 207.0,
-     "neck_len": 172.1,
-     "head_len": 51.4,
-     "leg_len": 151,
-     "neck_body": 0.814,
-     "head_body": 0.249,
-     "leg_depth": 1.299
+     "body_len": 192.5,
+     "neck_len": 186.8,
+     "head_len": 67.3,
+     "leg_len": 160,
+     "neck_body": 1.165,
+     "head_body": 0.42,
+     "leg_depth": 1.815
     },
     "smoothness": {
      "changed": [
-      6.18,
-      6.34,
-      6.7
+      5.51,
+      5.69,
+      6.0
      ],
-     "mean": 6.41,
-     "spread": 0.08,
+     "mean": 5.73,
+     "spread": 0.09,
      "score": 4
     },
-    "judges": 1,
-    "rubric": "v12",
+    "pace": {
+     "cadence": 0.0,
+     "strength": 0.17,
+     "mean_change": 5.46,
+     "score": 1
+    },
+    "judges": 2,
+    "rubric": "v13",
     "scale": 4,
     "motion": 2.46,
     "motion_changed": 6.7,
     "motion_leg": 11.85,
     "compliance": 4,
-    "compliance_notes": []
+    "compliance_notes": [],
+    "score_pairwise": 47.2,
+    "record": [
+     16,
+     18,
+     0
+    ],
+    "method": "pairwise"
    },
    "design": {
     "out_tokens": 44651,
@@ -2924,53 +3190,67 @@ window.BENCH = {
     "seconds": 101.0,
     "finish": "stop",
     "status": "ok",
-    "score": 75.0,
+    "score": 18.8,
     "criteria": {
-     "craft": 4,
      "anatomy": 2,
-     "proportions": 3.0,
-     "motion": 4
+     "craft": 4,
+     "pace": 1,
+     "smoothness": 4
     },
     "by_judge": {
-     "jev+openai-gpt-6-sol": 75.0
+     "jev+openai-gpt-6-sol": 70.0
     },
     "rationale": {
-     "craft": "level 3.95 of 4",
-     "anatomy": "level 2.01 of 4 - joints 2/4, chest and rump",
-     "proportions": "neck 1.30, head 0.44, leg/depth 1.30",
-     "motion": "band 4, smoothness 4, slider False"
+     "anatomy": "joints 0/4, chest and rump; level 1.90",
+     "craft": "level 3.95; none",
+     "pace": "0.0 cycles/s (confidence 0.24), 6.04% change per frame",
+     "smoothness": "frame change [6.4, 6.6, 6.43], spread 0.03",
+     "proportions": "neck 1.92, head 0.64, leg/depth 1.88 (diagnostic, not scored)"
     },
     "verdict": {
-     "jev+openai-gpt-6-sol": "A cream-colored alpaca walks to the right through a grassy field with flowers, a fence, trees, mountains, clouds and a sun."
+     "jev+openai-gpt-6-sol": "A cream-colored alpaca faces right in a grassy scene with flowers, a fence, trees, mountains, clouds, and a sun."
     },
     "setting": null,
     "ratios": {
-     "body_len": 213.2,
-     "neck_len": 275.3,
-     "head_len": 95.1,
-     "leg_len": 152,
-     "neck_body": 1.3,
-     "head_body": 0.441,
-     "leg_depth": 1.305
+     "body_len": 214.7,
+     "neck_len": 312.4,
+     "head_len": 96.6,
+     "leg_len": 155,
+     "neck_body": 1.919,
+     "head_body": 0.644,
+     "leg_depth": 1.879
     },
     "smoothness": {
      "changed": [
-      8.26,
-      7.59,
-      7.81
+      6.4,
+      6.6,
+      6.43
      ],
-     "mean": 7.89,
-     "spread": 0.09,
+     "mean": 6.48,
+     "spread": 0.03,
      "score": 4
     },
-    "judges": 1,
-    "rubric": "v12",
+    "pace": {
+     "cadence": 0.0,
+     "strength": 0.24,
+     "mean_change": 6.04,
+     "score": 1
+    },
+    "judges": 2,
+    "rubric": "v13",
     "scale": 4,
     "motion": 3.89,
     "motion_changed": 8.26,
     "motion_leg": 13.61,
     "compliance": 4,
-    "compliance_notes": []
+    "compliance_notes": [],
+    "score_pairwise": 18.8,
+    "record": [
+     5,
+     25,
+     0
+    ],
+    "method": "pairwise"
    },
    "design": {
     "out_tokens": 13914,
@@ -3075,53 +3355,67 @@ window.BENCH = {
     "seconds": 119.5,
     "finish": "stop",
     "status": "ok",
-    "score": 70.0,
+    "score": 25.0,
     "criteria": {
-     "craft": 4,
      "anatomy": 2,
-     "proportions": 3.0,
-     "motion": 3
+     "craft": 4,
+     "pace": 4,
+     "smoothness": 4
     },
     "by_judge": {
-     "jev+openai-gpt-6-sol": 70.0
+     "jev+openai-gpt-6-sol": 77.5
     },
     "rationale": {
-     "craft": "level 3.97 of 4",
-     "anatomy": "level 1.97 of 4 - joints 2/4, chest and rump",
-     "proportions": "neck 1.35, head 0.31, leg/depth 1.02",
-     "motion": "band 4, smoothness 4, slider True"
+     "anatomy": "joints 2/4, chest and rump; level 1.96",
+     "craft": "level 3.89; none",
+     "pace": "0.95 cycles/s (confidence 0.33), 6.05% change per frame",
+     "smoothness": "frame change [6.39, 6.57, 5.86], spread 0.11",
+     "proportions": "neck 1.49, head 0.37, leg/depth 1.44 (diagnostic, not scored)"
     },
     "verdict": {
-     "jev+openai-gpt-6-sol": "A cream-colored alpaca with long upright ears walks through a grassy scene beneath clouds and a sun."
+     "jev+openai-gpt-6-sol": "A cream-colored alpaca with long upright ears walks across a green field beneath a sunny sky."
     },
     "setting": null,
     "ratios": {
-     "body_len": 216.8,
-     "neck_len": 292.0,
-     "head_len": 67.6,
-     "leg_len": 123,
-     "neck_body": 1.346,
-     "head_body": 0.307,
-     "leg_depth": 1.018
+     "body_len": 235.1,
+     "neck_len": 287.9,
+     "head_len": 69.0,
+     "leg_len": 143,
+     "neck_body": 1.49,
+     "head_body": 0.372,
+     "leg_depth": 1.435
     },
     "smoothness": {
      "changed": [
-      6.84,
-      7.12,
-      6.74
+      6.39,
+      6.57,
+      5.86
      ],
-     "mean": 6.9,
-     "spread": 0.06,
+     "mean": 6.27,
+     "spread": 0.11,
      "score": 4
     },
-    "judges": 1,
-    "rubric": "v12",
+    "pace": {
+     "cadence": 0.95,
+     "strength": 0.33,
+     "mean_change": 6.05,
+     "score": 4
+    },
+    "judges": 2,
+    "rubric": "v13",
     "scale": 4,
     "motion": 2.73,
     "motion_changed": 7.12,
     "motion_leg": 14.28,
     "compliance": 4,
-    "compliance_notes": []
+    "compliance_notes": [],
+    "score_pairwise": 25.0,
+    "record": [
+     8,
+     26,
+     0
+    ],
+    "method": "pairwise"
    },
    "design": {
     "out_tokens": 34159,
@@ -3226,53 +3520,67 @@ window.BENCH = {
     "seconds": 436.7,
     "finish": "stop",
     "status": "ok",
-    "score": 60.0,
+    "score": 31.6,
     "criteria": {
-     "craft": 2,
      "anatomy": 2,
-     "proportions": 3.3,
-     "motion": 4
+     "craft": 4,
+     "pace": 1,
+     "smoothness": 4
     },
     "by_judge": {
-     "jev+openai-gpt-6-sol": 60.0
+     "jev+openai-gpt-6-sol": 70.0
     },
     "rationale": {
-     "craft": "level 2.27 of 4",
-     "anatomy": "level 2.02 of 4 - joints 2/4, chest and rump",
-     "proportions": "neck 0.85, head 0.31, leg/depth 1.98",
-     "motion": "band 4, smoothness 4, slider False"
+     "anatomy": "joints 2/4, chest and rump; level 1.99",
+     "craft": "level 3.92; none",
+     "pace": "0.0 cycles/s (confidence 0.21), 7.09% change per frame",
+     "smoothness": "frame change [7.31, 7.4, 7.32], spread 0.01",
+     "proportions": "neck 1.25, head 0.37, leg/depth 2.47 (diagnostic, not scored)"
     },
     "verdict": {
-     "jev+openai-gpt-6-sol": "A cream-colored alpaca with a striped reddish saddle walks along a path beneath a blue sky."
+     "jev+openai-gpt-6-sol": "A cream alpaca with a striped saddle walks along a path in a grassy scene."
     },
     "setting": null,
     "ratios": {
-     "body_len": 152.7,
-     "neck_len": 129.8,
-     "head_len": 48.1,
-     "leg_len": 174,
-     "neck_body": 0.851,
-     "head_body": 0.308,
-     "leg_depth": 1.975
+     "body_len": 143.8,
+     "neck_len": 179.9,
+     "head_len": 48.8,
+     "leg_len": 181,
+     "neck_body": 1.251,
+     "head_body": 0.366,
+     "leg_depth": 2.469
     },
     "smoothness": {
      "changed": [
-      8.77,
-      8.33,
-      8.26
+      7.31,
+      7.4,
+      7.32
      ],
-     "mean": 8.45,
-     "spread": 0.06,
+     "mean": 7.34,
+     "spread": 0.01,
      "score": 4
     },
-    "judges": 1,
-    "rubric": "v12",
+    "pace": {
+     "cadence": 0.0,
+     "strength": 0.21,
+     "mean_change": 7.09,
+     "score": 1
+    },
+    "judges": 2,
+    "rubric": "v13",
     "scale": 4,
     "motion": 3.35,
     "motion_changed": 8.77,
     "motion_leg": 16.82,
     "compliance": 4,
-    "compliance_notes": []
+    "compliance_notes": [],
+    "score_pairwise": 31.6,
+    "record": [
+     11,
+     25,
+     0
+    ],
+    "method": "pairwise"
    },
    "design": {
     "out_tokens": 38105,
@@ -3377,47 +3685,54 @@ window.BENCH = {
     "seconds": 24.2,
     "finish": "stop",
     "status": "ok",
-    "score": 20.0,
+    "score": 3.1,
     "criteria": {
-     "craft": 1,
      "anatomy": 1,
-     "proportions": 1.7,
-     "motion": 0
+     "craft": 2,
+     "pace": 1,
+     "smoothness": 1
     },
     "by_judge": {
-     "jev+openai-gpt-6-sol": 20.0
+     "jev+openai-gpt-6-sol": 32.5
     },
     "rationale": {
-     "craft": "level 1.48 of 4",
-     "anatomy": "level 1.03 of 4 - joints 0/4, unclear",
-     "proportions": "neck 1.50, head 0.40, leg/depth 2.19",
-     "motion": "band 1, smoothness 1, slider True"
+     "anatomy": "joints 0/4, under belly; level 1.04",
+     "craft": "level 1.71; There are gaps between the torso and neck and between the torso and rightmost leg.",
+     "pace": "0.0 cycles/s (confidence 0.22), 0.27% change per frame",
+     "smoothness": "frame change [0.2, 0.25, 0.38], spread 0.65",
+     "proportions": "neck 1.87, head 0.51, leg/depth 2.14 (diagnostic, not scored)"
     },
     "verdict": {
-     "jev+openai-gpt-6-sol": "A pale alpaca-like figure with a rounded body, long neck, small pointed ears, and four thin legs appears against a blue sky and green ground."
+     "jev+openai-gpt-6-sol": "A pale alpaca with a detached head and neck stands on green ground beneath a blue sky and a pale sun."
     },
     "setting": null,
     "ratios": {
-     "body_len": 82.0,
-     "neck_len": 123.0,
-     "head_len": 33.0,
-     "leg_len": 99,
-     "neck_body": 1.5,
-     "head_body": 0.403,
-     "leg_depth": 2.195
+     "body_len": 85.0,
+     "neck_len": 156.5,
+     "head_len": 43.4,
+     "leg_len": 100,
+     "neck_body": 1.872,
+     "head_body": 0.511,
+     "leg_depth": 2.139
     },
     "smoothness": {
      "changed": [
-      0.36,
-      0.23,
-      0.35
+      0.2,
+      0.25,
+      0.38
      ],
-     "mean": 0.31,
-     "spread": 0.42,
+     "mean": 0.28,
+     "spread": 0.65,
      "score": 1
     },
-    "judges": 1,
-    "rubric": "v12",
+    "pace": {
+     "cadence": 0.0,
+     "strength": 0.22,
+     "mean_change": 0.27,
+     "score": 1
+    },
+    "judges": 2,
+    "rubric": "v13",
     "scale": 4,
     "motion": 0.13,
     "motion_changed": 0.36,
@@ -3425,7 +3740,14 @@ window.BENCH = {
     "compliance": 3,
     "compliance_notes": [
      "barely animates"
-    ]
+    ],
+    "score_pairwise": 3.1,
+    "record": [
+     0,
+     30,
+     0
+    ],
+    "method": "pairwise"
    },
    "design": {
     "out_tokens": 18483,
@@ -3530,53 +3852,67 @@ window.BENCH = {
     "seconds": 115.7,
     "finish": "stop",
     "status": "ok",
-    "score": 70.0,
+    "score": 65.6,
     "criteria": {
-     "craft": 4,
      "anatomy": 2,
-     "proportions": 3.3,
-     "motion": 3
+     "craft": 4,
+     "pace": 4,
+     "smoothness": 4
     },
     "by_judge": {
-     "jev+openai-gpt-6-sol": 70.0
+     "jev+openai-gpt-6-sol": 77.5
     },
     "rationale": {
-     "craft": "level 3.94 of 4",
-     "anatomy": "level 1.98 of 4 - joints 1/4, chest and rump",
-     "proportions": "neck 0.83, head 0.53, leg/depth 1.53",
-     "motion": "band 3, smoothness 4, slider False"
+     "anatomy": "joints 0/4, chest and rump; level 1.88",
+     "craft": "level 3.95; none",
+     "pace": "0.83 cycles/s (confidence 0.7), 5.05% change per frame",
+     "smoothness": "frame change [5.61, 5.64, 5.25], spread 0.07",
+     "proportions": "neck 1.05, head 0.57, leg/depth 2.22 (diagnostic, not scored)"
     },
     "verdict": {
-     "jev+openai-gpt-6-sol": "A cream-colored alpaca with a colorful striped blanket walks beside a path in a sunny mountain scene."
+     "jev+openai-gpt-6-sol": "A cream alpaca with small pointed ears, a flower and a striped blanket walks along a sandy path."
     },
     "setting": null,
     "ratios": {
-     "body_len": 171.4,
-     "neck_len": 142.6,
-     "head_len": 89.2,
-     "leg_len": 144,
-     "neck_body": 0.835,
-     "head_body": 0.529,
-     "leg_depth": 1.527
+     "body_len": 173.4,
+     "neck_len": 164.2,
+     "head_len": 91.3,
+     "leg_len": 190,
+     "neck_body": 1.053,
+     "head_body": 0.567,
+     "leg_depth": 2.216
     },
     "smoothness": {
      "changed": [
-      3.69,
-      3.88,
-      3.94
+      5.61,
+      5.64,
+      5.25
      ],
-     "mean": 3.84,
+     "mean": 5.5,
      "spread": 0.07,
      "score": 4
     },
-    "judges": 1,
-    "rubric": "v12",
+    "pace": {
+     "cadence": 0.83,
+     "strength": 0.7,
+     "mean_change": 5.05,
+     "score": 4
+    },
+    "judges": 2,
+    "rubric": "v13",
     "scale": 4,
     "motion": 1.63,
     "motion_changed": 3.94,
     "motion_leg": 7.93,
     "compliance": 4,
-    "compliance_notes": []
+    "compliance_notes": [],
+    "score_pairwise": 65.6,
+    "record": [
+     20,
+     10,
+     0
+    ],
+    "method": "pairwise"
    },
    "design": {
     "out_tokens": 17815,
@@ -3681,53 +4017,67 @@ window.BENCH = {
     "seconds": 143.5,
     "finish": "stop",
     "status": "ok",
-    "score": 82.5,
+    "score": 78.1,
     "criteria": {
-     "craft": 3,
      "anatomy": 4,
-     "proportions": 4.0,
-     "motion": 2
+     "craft": 4,
+     "pace": 4,
+     "smoothness": 1
     },
     "by_judge": {
-     "jev+openai-gpt-6-sol": 82.5
+     "jev+openai-gpt-6-sol": 88.8
     },
     "rationale": {
-     "craft": "level 2.97 of 4",
-     "anatomy": "level 3.67 of 4 - joints 4/4, chest and rump",
-     "proportions": "neck 0.97, head 0.37, leg/depth 1.09",
-     "motion": "band 2, smoothness 2, slider False"
+     "anatomy": "joints 4/4, chest and rump; level 3.65",
+     "craft": "level 3.93; none",
+     "pace": "0.83 cycles/s (confidence 0.34), 0.9% change per frame",
+     "smoothness": "frame change [1.1, 0.83, 0.95], spread 0.28",
+     "proportions": "neck 1.01, head 0.55, leg/depth 1.51 (diagnostic, not scored)"
     },
     "verdict": {
-     "jev+openai-gpt-6-sol": "A cream, woolly alpaca with long curved ears walks along a sandy path in front of green hills and a sun."
+     "jev+openai-gpt-6-sol": "A cream-colored alpaca walks in place on a path, with green hills and a sun behind it."
     },
     "setting": null,
     "ratios": {
-     "body_len": 199.7,
-     "neck_len": 192.3,
-     "head_len": 73.5,
-     "leg_len": 120,
-     "neck_body": 0.966,
-     "head_body": 0.368,
-     "leg_depth": 1.093
+     "body_len": 194.1,
+     "neck_len": 195.3,
+     "head_len": 82.0,
+     "leg_len": 125,
+     "neck_body": 1.014,
+     "head_body": 0.547,
+     "leg_depth": 1.515
     },
     "smoothness": {
      "changed": [
-      1.43,
-      1.31,
-      1.32
+      1.1,
+      0.83,
+      0.95
      ],
-     "mean": 1.35,
-     "spread": 0.09,
-     "score": 2
+     "mean": 0.96,
+     "spread": 0.28,
+     "score": 1
     },
-    "judges": 1,
-    "rubric": "v12",
+    "pace": {
+     "cadence": 0.83,
+     "strength": 0.34,
+     "mean_change": 0.9,
+     "score": 4
+    },
+    "judges": 2,
+    "rubric": "v13",
     "scale": 4,
     "motion": 0.68,
     "motion_changed": 1.43,
     "motion_leg": 2.48,
     "compliance": 4,
-    "compliance_notes": []
+    "compliance_notes": [],
+    "score_pairwise": 78.1,
+    "record": [
+     24,
+     6,
+     0
+    ],
+    "method": "pairwise"
    },
    "design": {
     "out_tokens": 14239,
@@ -3832,53 +4182,67 @@ window.BENCH = {
     "seconds": 122.7,
     "finish": "stop",
     "status": "ok",
-    "score": 60.0,
+    "score": 15.8,
     "criteria": {
-     "craft": 4,
      "anatomy": 2,
-     "proportions": 1.3,
-     "motion": 1
+     "craft": 4,
+     "pace": 4,
+     "smoothness": 1
     },
     "by_judge": {
-     "jev+openai-gpt-6-sol": 60.0
+     "jev+openai-gpt-6-sol": 66.2
     },
     "rationale": {
-     "craft": "level 3.89 of 4",
-     "anatomy": "level 1.84 of 4 - joints 0/4, chest and rump",
-     "proportions": "neck 1.86, head 0.48, leg/depth 0.31",
-     "motion": "band 2, smoothness 2, slider True"
+     "anatomy": "joints 0/4, under belly; level 1.94",
+     "craft": "level 3.97; none",
+     "pace": "1.33 cycles/s (confidence 0.62), 0.89% change per frame",
+     "smoothness": "frame change [0.9, 0.8, 1.02], spread 0.24",
+     "proportions": "neck 1.80, head 0.44, leg/depth 0.32 (diagnostic, not scored)"
     },
     "verdict": {
-     "jev+openai-gpt-6-sol": "A cream-colored, woolly alpaca moves its legs in a green meadow beneath a blue sky with hills, flowers, clouds and a sun."
+     "jev+openai-gpt-6-sol": "A white alpaca with a long neck and short pointed ears walks in place on grass beneath a blue sky."
     },
     "setting": null,
     "ratios": {
-     "body_len": 114.0,
-     "neck_len": 209.6,
-     "head_len": 54.6,
-     "leg_len": 18,
-     "neck_body": 1.865,
-     "head_body": 0.477,
-     "leg_depth": 0.307
+     "body_len": 114.9,
+     "neck_len": 206.3,
+     "head_len": 50.6,
+     "leg_len": 20,
+     "neck_body": 1.796,
+     "head_body": 0.444,
+     "leg_depth": 0.319
     },
     "smoothness": {
      "changed": [
-      1.29,
-      0.93,
-      1.28
+      0.9,
+      0.8,
+      1.02
      ],
-     "mean": 1.16,
-     "spread": 0.31,
-     "score": 2
+     "mean": 0.91,
+     "spread": 0.24,
+     "score": 1
     },
-    "judges": 1,
-    "rubric": "v12",
+    "pace": {
+     "cadence": 1.33,
+     "strength": 0.62,
+     "mean_change": 0.89,
+     "score": 4
+    },
+    "judges": 2,
+    "rubric": "v13",
     "scale": 4,
     "motion": 0.6,
     "motion_changed": 1.29,
     "motion_leg": 1.37,
     "compliance": 4,
-    "compliance_notes": []
+    "compliance_notes": [],
+    "score_pairwise": 15.8,
+    "record": [
+     5,
+     31,
+     0
+    ],
+    "method": "pairwise"
    },
    "design": {
     "out_tokens": 14352,

@@ -1,18 +1,19 @@
 {
- "rubric": "v12",
+ "rubric": "v13",
  "median": {
-  "craft": 4,
   "anatomy": 4,
-  "proportions": 4.0,
-  "motion": 2
+  "craft": 4,
+  "pace": 4,
+  "smoothness": 2
  },
  "rationale": {
-  "craft": "level 3.95 of 4",
-  "anatomy": "level 3.64 of 4 - joints 4/4, chest and rump",
-  "proportions": "neck 0.89, head 0.39, leg/depth 1.31",
-  "motion": "band 2, smoothness 2, slider False"
+  "anatomy": "joints 4/4, chest and rump; level 3.50",
+  "craft": "level 3.95; none",
+  "pace": "1.67 cycles/s (confidence 0.65), 1.57% change per frame",
+  "smoothness": "frame change [1.62, 1.41, 1.66], spread 0.16",
+  "proportions": "neck 1.10, head 0.52, leg/depth 1.61 (diagnostic, not scored)"
  },
- "judges_used": 1,
+ "judges_used": 2,
  "captioner": "openai-gpt-6-sol",
  "observations": {
   "description": "A cream-colored alpaca with a fluffy body and long neck walks along a path in a mountain scene.",
@@ -27,39 +28,39 @@
   },
   "points": {
    "chest": [
-    601,
-    540
+    602,
+    556
    ],
    "rump": [
     374,
-    531
+    507
    ],
    "neck_base": [
-    567,
-    451
+    568,
+    444
    ],
    "poll": [
-    604,
+    605,
     253
    ],
    "muzzle": [
-    662,
-    319
+    660,
+    323
    ],
    "belly": [
-    486,
-    637
+    490,
+    634
    ],
    "ground": [
-    501,
-    799
+    519,
+    800
    ]
   },
   "gait": {
    "feet_planted": true,
-   "sliding_or_popping": false,
+   "sliding_or_popping": true,
    "legs_change_between_frames": true,
-   "notes": "The bent legs alternate forward and back; some hooves lift while others touch the path."
+   "notes": "The legs bend and change position; some hooves shift along the path while remaining at ground level."
   },
   "craft": {
    "seams_or_stray_shapes": false,
@@ -70,28 +71,34 @@
   }
  },
  "ratios": {
-  "body_len": 222.2,
-  "neck_len": 193.8,
-  "head_len": 87.9,
-  "leg_len": 160,
-  "neck_body": 0.887,
-  "head_body": 0.393,
-  "leg_depth": 1.309
+  "body_len": 233.2,
+  "neck_len": 199.1,
+  "head_len": 94.1,
+  "leg_len": 166,
+  "neck_body": 1.1,
+  "head_body": 0.52,
+  "leg_depth": 1.607
  },
  "smoothness": {
   "changed": [
-   1.64,
-   1.68,
-   1.45
+   1.62,
+   1.41,
+   1.66
   ],
-  "mean": 1.59,
-  "spread": 0.15,
+  "mean": 1.57,
+  "spread": 0.16,
   "score": 2
  },
+ "pace": {
+  "cadence": 1.67,
+  "strength": 0.65,
+  "mean_change": 1.57,
+  "score": 4
+ },
  "motion": {
-  "mean": 0.8,
-  "changed_pct": 1.68,
-  "leg_pct": 2.66
+  "mean": 0.79,
+  "changed_pct": 1.66,
+  "leg_pct": 2.6
  },
  "verdict": {
   "jev+openai-gpt-6-sol": "A cream-colored alpaca with a fluffy body and long neck walks along a path in a mountain scene."

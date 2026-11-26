@@ -1,24 +1,25 @@
 {
- "rubric": "v12",
+ "rubric": "v13",
  "median": {
-  "craft": 4,
   "anatomy": 2,
-  "proportions": 3.3,
-  "motion": 3
+  "craft": 4,
+  "pace": 4,
+  "smoothness": 4
  },
  "rationale": {
-  "craft": "level 3.94 of 4",
-  "anatomy": "level 1.98 of 4 - joints 1/4, chest and rump",
-  "proportions": "neck 0.83, head 0.53, leg/depth 1.53",
-  "motion": "band 3, smoothness 4, slider False"
+  "anatomy": "joints 0/4, chest and rump; level 1.88",
+  "craft": "level 3.95; none",
+  "pace": "0.83 cycles/s (confidence 0.7), 5.05% change per frame",
+  "smoothness": "frame change [5.61, 5.64, 5.25], spread 0.07",
+  "proportions": "neck 1.05, head 0.57, leg/depth 2.22 (diagnostic, not scored)"
  },
- "judges_used": 1,
+ "judges_used": 2,
  "captioner": "openai-gpt-6-sol",
  "observations": {
-  "description": "A cream-colored alpaca with a colorful striped blanket walks beside a path in a sunny mountain scene.",
+  "description": "A cream alpaca with small pointed ears, a flower and a striped blanket walks along a sandy path.",
   "parts": {
    "legs_visible": 4,
-   "legs_with_visible_joint": 1,
+   "legs_with_visible_joint": 0,
    "leg_attachment": "chest_and_rump",
    "ears": "small_pointed",
    "tail_visible": false,
@@ -27,39 +28,39 @@
   },
   "points": {
    "chest": [
-    581,
-    573
+    554,
+    578
    ],
    "rump": [
-    375,
-    576
+    383,
+    549
    ],
    "neck_base": [
-    547,
-    420
+    552,
+    417
    ],
    "poll": [
-    593,
-    285
+    600,
+    274
    ],
    "muzzle": [
     649,
-    346
+    351
    ],
    "belly": [
-    474,
+    465,
     658
    ],
    "ground": [
-    550,
-    799
+    553,
+    804
    ]
   },
   "gait": {
-   "feet_planted": false,
+   "feet_planted": true,
    "sliding_or_popping": false,
    "legs_change_between_frames": true,
-   "notes": "The legs alternate positions; several hooves remain above the path while a front hoof reaches its edge."
+   "notes": "The legs alternate forward and backward, with some feet lifted while others touch the path."
   },
   "craft": {
    "seams_or_stray_shapes": false,
@@ -70,30 +71,36 @@
   }
  },
  "ratios": {
-  "body_len": 171.4,
-  "neck_len": 142.6,
-  "head_len": 89.2,
-  "leg_len": 144,
-  "neck_body": 0.835,
-  "head_body": 0.529,
-  "leg_depth": 1.527
+  "body_len": 173.4,
+  "neck_len": 164.2,
+  "head_len": 91.3,
+  "leg_len": 190,
+  "neck_body": 1.053,
+  "head_body": 0.567,
+  "leg_depth": 2.216
  },
  "smoothness": {
   "changed": [
-   3.69,
-   3.88,
-   3.94
+   5.61,
+   5.64,
+   5.25
   ],
-  "mean": 3.84,
+  "mean": 5.5,
   "spread": 0.07,
   "score": 4
  },
+ "pace": {
+  "cadence": 0.83,
+  "strength": 0.7,
+  "mean_change": 5.05,
+  "score": 4
+ },
  "motion": {
-  "mean": 1.63,
-  "changed_pct": 3.94,
-  "leg_pct": 7.93
+  "mean": 2.44,
+  "changed_pct": 5.64,
+  "leg_pct": 9.35
  },
  "verdict": {
-  "jev+openai-gpt-6-sol": "A cream-colored alpaca with a colorful striped blanket walks beside a path in a sunny mountain scene."
+  "jev+openai-gpt-6-sol": "A cream alpaca with small pointed ears, a flower and a striped blanket walks along a sandy path."
  }
 }

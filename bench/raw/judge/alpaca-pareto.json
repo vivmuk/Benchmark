@@ -1,21 +1,22 @@
 {
- "rubric": "v12",
+ "rubric": "v13",
  "median": {
-  "craft": 3,
   "anatomy": 4,
-  "proportions": 4.0,
-  "motion": 2
+  "craft": 4,
+  "pace": 4,
+  "smoothness": 1
  },
  "rationale": {
-  "craft": "level 2.97 of 4",
-  "anatomy": "level 3.67 of 4 - joints 4/4, chest and rump",
-  "proportions": "neck 0.97, head 0.37, leg/depth 1.09",
-  "motion": "band 2, smoothness 2, slider False"
+  "anatomy": "joints 4/4, chest and rump; level 3.65",
+  "craft": "level 3.93; none",
+  "pace": "0.83 cycles/s (confidence 0.34), 0.9% change per frame",
+  "smoothness": "frame change [1.1, 0.83, 0.95], spread 0.28",
+  "proportions": "neck 1.01, head 0.55, leg/depth 1.51 (diagnostic, not scored)"
  },
- "judges_used": 1,
+ "judges_used": 2,
  "captioner": "openai-gpt-6-sol",
  "observations": {
-  "description": "A cream, woolly alpaca with long curved ears walks along a sandy path in front of green hills and a sun.",
+  "description": "A cream-colored alpaca walks in place on a path, with green hills and a sun behind it.",
   "parts": {
    "legs_visible": 4,
    "legs_with_visible_joint": 4,
@@ -23,77 +24,83 @@
    "ears": "upright_banana",
    "tail_visible": true,
    "detached_parts": false,
-   "notes": "none"
+   "notes": "A short tail extends behind the rump; all four legs show bends."
   },
   "points": {
    "chest": [
-    574,
-    559
+    571,
+    552
    ],
    "rump": [
-    374,
-    540
+    378,
+    531
    ],
    "neck_base": [
     539,
-    497
+    490
    ],
    "poll": [
-    572,
-    299
+    569,
+    297
    ],
    "muzzle": [
     621,
     358
    ],
    "belly": [
-    471,
+    474,
     648
    ],
    "ground": [
-    545,
-    768
+    550,
+    764
    ]
   },
   "gait": {
    "feet_planted": true,
-   "sliding_or_popping": false,
+   "sliding_or_popping": true,
    "legs_change_between_frames": true,
-   "notes": "The legs bend into different stepping positions, with some hooves touching the path while others lift."
+   "notes": "The legs alternately bend and lift; hooves touching the ground shift horizontally while the torso stays nearly still."
   },
   "craft": {
-   "seams_or_stray_shapes": true,
+   "seams_or_stray_shapes": false,
    "inconsistent_light": false,
    "clipped_elements": false,
-   "contact_shadow": false,
-   "notes": "A thin pale diagonal line appears beside the front legs in the last frame."
+   "contact_shadow": true,
+   "notes": "none"
   }
  },
  "ratios": {
-  "body_len": 199.7,
-  "neck_len": 192.3,
-  "head_len": 73.5,
-  "leg_len": 120,
-  "neck_body": 0.966,
-  "head_body": 0.368,
-  "leg_depth": 1.093
+  "body_len": 194.1,
+  "neck_len": 195.3,
+  "head_len": 82.0,
+  "leg_len": 125,
+  "neck_body": 1.014,
+  "head_body": 0.547,
+  "leg_depth": 1.515
  },
  "smoothness": {
   "changed": [
-   1.43,
-   1.31,
-   1.32
+   1.1,
+   0.83,
+   0.95
   ],
-  "mean": 1.35,
-  "spread": 0.09,
-  "score": 2
+  "mean": 0.96,
+  "spread": 0.28,
+  "score": 1
+ },
+ "pace": {
+  "cadence": 0.83,
+  "strength": 0.34,
+  "mean_change": 0.9,
+  "score": 4
  },
  "motion": {
-  "mean": 0.68,
-  "changed_pct": 1.43,
-  "leg_pct": 2.48
+  "mean": 0.58,
+  "changed_pct": 1.1,
+  "leg_pct": 2.02
  },
  "verdict": {
-  "jev+openai-gpt-6-sol": "A cream, woolly alpaca with long curved ears walks along a sandy path in front of green hills and a sun."
+  "jev+openai-gpt-6-sol": "A cream-colored alpaca walks in place on a path, with green hills and a sun behind it."
  }
 }

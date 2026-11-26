@@ -1,57 +1,58 @@
 {
- "rubric": "v12",
+ "rubric": "v13",
  "median": {
+  "anatomy": 3,
   "craft": 4,
-  "anatomy": 4,
-  "proportions": 2.3,
-  "motion": 4
+  "pace": 4,
+  "smoothness": 4
  },
  "rationale": {
-  "craft": "level 3.94 of 4",
-  "anatomy": "level 3.66 of 4 - joints 4/4, chest and rump",
-  "proportions": "neck 1.36, head 0.39, leg/depth 1.83",
-  "motion": "band 4, smoothness 4, slider False"
+  "anatomy": "joints 4/4, chest and rump; level 3.48",
+  "craft": "level 3.95; none",
+  "pace": "1.33 cycles/s (confidence 0.35), 11.63% change per frame",
+  "smoothness": "frame change [12.03, 11.97, 12.46], spread 0.04",
+  "proportions": "neck 1.75, head 0.53, leg/depth 2.57 (diagnostic, not scored)"
  },
- "judges_used": 1,
+ "judges_used": 2,
  "captioner": "openai-gpt-6-sol",
  "observations": {
-  "description": "A cream alpaca walks to the right along a sandy path through a flowered meadow, with mountains and a sun behind it.",
+  "description": "A cream-colored alpaca walks along a path in a grassy mountain scene.",
   "parts": {
    "legs_visible": 4,
    "legs_with_visible_joint": 4,
    "leg_attachment": "chest_and_rump",
-   "ears": "small_pointed",
+   "ears": "upright_banana",
    "tail_visible": true,
    "detached_parts": false,
-   "notes": "A small tail nub is visible at the rump."
+   "notes": "A small tail protrudes from the rump."
   },
   "points": {
    "chest": [
-    553,
-    550
+    548,
+    590
    ],
    "rump": [
-    375,
-    547
+    381,
+    533
    ],
    "neck_base": [
-    505,
-    465
+    509,
+    457
    ],
    "poll": [
-    537,
-    224
+    539,
+    226
    ],
    "muzzle": [
-    584,
-    280
+    587,
+    278
    ],
    "belly": [
-    466,
-    651
+    465,
+    650
    ],
    "ground": [
-    487,
+    537,
     830
    ]
   },
@@ -59,7 +60,7 @@
    "feet_planted": true,
    "sliding_or_popping": false,
    "legs_change_between_frames": true,
-   "notes": "The legs bend and alternate positions; some feet lift while others touch the path."
+   "notes": "The legs alternate between slightly bent positions while the feet remain near the path."
   },
   "craft": {
    "seams_or_stray_shapes": false,
@@ -70,30 +71,36 @@
   }
  },
  "ratios": {
-  "body_len": 178.0,
-  "neck_len": 236.8,
-  "head_len": 72.3,
-  "leg_len": 179,
-  "neck_body": 1.363,
-  "head_body": 0.393,
-  "leg_depth": 1.828
+  "body_len": 176.5,
+  "neck_len": 232.9,
+  "head_len": 70.8,
+  "leg_len": 180,
+  "neck_body": 1.754,
+  "head_body": 0.528,
+  "leg_depth": 2.567
  },
  "smoothness": {
   "changed": [
-   13.69,
-   13.49,
-   13.66
+   12.03,
+   11.97,
+   12.46
   ],
-  "mean": 13.61,
-  "spread": 0.01,
+  "mean": 12.15,
+  "spread": 0.04,
+  "score": 4
+ },
+ "pace": {
+  "cadence": 1.33,
+  "strength": 0.35,
+  "mean_change": 11.63,
   "score": 4
  },
  "motion": {
-  "mean": 5.19,
-  "changed_pct": 13.69,
-  "leg_pct": 23.31
+  "mean": 4.72,
+  "changed_pct": 12.46,
+  "leg_pct": 21.95
  },
  "verdict": {
-  "jev+openai-gpt-6-sol": "A cream alpaca walks to the right along a sandy path through a flowered meadow, with mountains and a sun behind it."
+  "jev+openai-gpt-6-sol": "A cream-colored alpaca walks along a path in a grassy mountain scene."
  }
 }

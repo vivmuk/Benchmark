@@ -1,21 +1,22 @@
 {
- "rubric": "v12",
+ "rubric": "v13",
  "median": {
-  "craft": 4,
   "anatomy": 4,
-  "proportions": 4.0,
-  "motion": 3
+  "craft": 4,
+  "pace": 4,
+  "smoothness": 4
  },
  "rationale": {
-  "craft": "level 3.95 of 4",
-  "anatomy": "level 3.76 of 4 - joints 4/4, chest and rump",
-  "proportions": "neck 0.91, head 0.42, leg/depth 1.18",
-  "motion": "band 3, smoothness 4, slider False"
+  "anatomy": "joints 4/4, chest and rump; level 3.71",
+  "craft": "level 3.96; none",
+  "pace": "1.67 cycles/s (confidence 0.32), 3.42% change per frame",
+  "smoothness": "frame change [3.4, 3.09, 3.95], spread 0.25",
+  "proportions": "neck 0.86, head 0.42, leg/depth 1.37 (diagnostic, not scored)"
  },
- "judges_used": 1,
+ "judges_used": 2,
  "captioner": "openai-gpt-6-sol",
  "observations": {
-  "description": "A cream-colored alpaca with a red collar walks along a path in a pastel mountain scene.",
+  "description": "An alpaca walks to the right along a sandy path with purple mountains and a low sun behind it.",
   "parts": {
    "legs_visible": 4,
    "legs_with_visible_joint": 4,
@@ -27,39 +28,39 @@
   },
   "points": {
    "chest": [
-    605,
-    630
+    610,
+    620
    ],
    "rump": [
-    398,
-    625
+    392,
+    615
    ],
    "neck_base": [
     578,
-    547
+    550
    ],
    "poll": [
-    619,
-    363
+    615,
+    365
    ],
    "muzzle": [
     674,
-    432
+    431
    ],
    "belly": [
-    501,
+    502,
     703
    ],
    "ground": [
-    567,
-    844
+    580,
+    845
    ]
   },
   "gait": {
    "feet_planted": true,
    "sliding_or_popping": false,
    "legs_change_between_frames": true,
-   "notes": "The legs alternate between bent, lifted steps and contact with the path."
+   "notes": "The legs alternate between bent and extended positions as the hooves step along the path."
   },
   "craft": {
    "seams_or_stray_shapes": false,
@@ -70,30 +71,36 @@
   }
  },
  "ratios": {
-  "body_len": 212.5,
-  "neck_len": 188.5,
-  "head_len": 88.2,
-  "leg_len": 139,
-  "neck_body": 0.91,
-  "head_body": 0.425,
-  "leg_depth": 1.181
+  "body_len": 218.1,
+  "neck_len": 188.7,
+  "head_len": 88.5,
+  "leg_len": 142,
+  "neck_body": 0.865,
+  "head_body": 0.42,
+  "leg_depth": 1.368
  },
  "smoothness": {
   "changed": [
    3.4,
-   3.74,
-   3.79
+   3.09,
+   3.95
   ],
-  "mean": 3.64,
-  "spread": 0.11,
+  "mean": 3.48,
+  "spread": 0.25,
+  "score": 4
+ },
+ "pace": {
+  "cadence": 1.67,
+  "strength": 0.32,
+  "mean_change": 3.42,
   "score": 4
  },
  "motion": {
-  "mean": 1.59,
-  "changed_pct": 3.79,
-  "leg_pct": 6.77
+  "mean": 1.61,
+  "changed_pct": 3.95,
+  "leg_pct": 6.94
  },
  "verdict": {
-  "jev+openai-gpt-6-sol": "A cream-colored alpaca with a red collar walks along a path in a pastel mountain scene."
+  "jev+openai-gpt-6-sol": "An alpaca walks to the right along a sandy path with purple mountains and a low sun behind it."
  }
 }

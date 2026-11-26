@@ -1,21 +1,22 @@
 {
- "rubric": "v12",
+ "rubric": "v13",
  "median": {
-  "craft": 4,
   "anatomy": 2,
-  "proportions": 2.3,
-  "motion": 1
+  "craft": 4,
+  "pace": 1,
+  "smoothness": 2
  },
  "rationale": {
-  "craft": "level 3.84 of 4",
-  "anatomy": "level 1.91 of 4 - joints 0/4, chest and rump",
-  "proportions": "neck 1.09, head 0.43, leg/depth 2.59",
-  "motion": "band 3, smoothness 2, slider True"
+  "anatomy": "joints 0/4, chest and rump; level 1.90",
+  "craft": "level 3.94; none",
+  "pace": "3.33 cycles/s (confidence 0.7), 2.21% change per frame",
+  "smoothness": "frame change [2.43, 2.37, 2.31], spread 0.05",
+  "proportions": "neck 1.21, head 0.59, leg/depth 2.46 (diagnostic, not scored)"
  },
- "judges_used": 1,
+ "judges_used": 2,
  "captioner": "openai-gpt-6-sol",
  "observations": {
-  "description": "A cream-colored, woolly alpaca faces right in a grassy scene beneath a cloudy sky.",
+  "description": "A cream-colored, woolly alpaca with pointed ears walks in a grassy scene beneath a blue sky.",
   "parts": {
    "legs_visible": 4,
    "legs_with_visible_joint": 0,
@@ -23,77 +24,83 @@
    "ears": "small_pointed",
    "tail_visible": true,
    "detached_parts": false,
-   "notes": "A small woolly tail is visible at the rear; the legs appear straight."
+   "notes": "A small woolly tail is visible at the rump; the legs are straight and tapered."
   },
   "points": {
    "chest": [
-    533,
-    590
+    535,
+    594
    ],
    "rump": [
-    420,
-    550
+    411,
+    559
    ],
    "neck_base": [
-    530,
-    530
+    536,
+    526
    ],
    "poll": [
     565,
-    400
+    373
    ],
    "muzzle": [
-    594,
-    443
+    593,
+    444
    ],
    "belly": [
-    485,
-    648
+    477,
+    643
    ],
    "ground": [
-    524,
-    816
+    502,
+    817
    ]
   },
   "gait": {
-   "feet_planted": false,
+   "feet_planted": true,
    "sliding_or_popping": true,
    "legs_change_between_frames": true,
-   "notes": "The straight legs shift position between frames while the hooves remain near the same height, with no clear lifted step."
+   "notes": "The legs change angle and some hooves lift slightly; ground-level hooves shift horizontally between frames."
   },
   "craft": {
    "seams_or_stray_shapes": false,
    "inconsistent_light": false,
    "clipped_elements": false,
-   "contact_shadow": false,
-   "notes": "No distinct contact shadow is visible beneath the hooves."
+   "contact_shadow": true,
+   "notes": "none"
   }
  },
  "ratios": {
-  "body_len": 119.9,
-  "neck_len": 129.3,
-  "head_len": 51.9,
-  "leg_len": 170,
-  "neck_body": 1.09,
-  "head_body": 0.433,
-  "leg_depth": 2.588
+  "body_len": 140.0,
+  "neck_len": 155.7,
+  "head_len": 76.3,
+  "leg_len": 180,
+  "neck_body": 1.209,
+  "head_body": 0.592,
+  "leg_depth": 2.455
  },
  "smoothness": {
   "changed": [
-   3.2,
-   2.41,
-   2.34
+   2.43,
+   2.37,
+   2.31
   ],
-  "mean": 2.65,
-  "spread": 0.33,
+  "mean": 2.37,
+  "spread": 0.05,
   "score": 2
  },
+ "pace": {
+  "cadence": 3.33,
+  "strength": 0.7,
+  "mean_change": 2.21,
+  "score": 1
+ },
  "motion": {
-  "mean": 1.9,
-  "changed_pct": 3.2,
-  "leg_pct": 5.21
+  "mean": 1.51,
+  "changed_pct": 2.43,
+  "leg_pct": 4.3
  },
  "verdict": {
-  "jev+openai-gpt-6-sol": "A cream-colored, woolly alpaca faces right in a grassy scene beneath a cloudy sky."
+  "jev+openai-gpt-6-sol": "A cream-colored, woolly alpaca with pointed ears walks in a grassy scene beneath a blue sky."
  }
 }

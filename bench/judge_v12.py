@@ -19,8 +19,9 @@ from pathlib import Path
 from common import *
 import judge as J
 
-CAPTIONER = "openai-gpt-6-sol"
-RUBRIC_VERSION = "v12"
+CAPTIONERS = ["openai-gpt-6-sol", "gemini-3-1-pro-preview"]
+CAPTIONER = CAPTIONERS[0]
+RUBRIC_VERSION = "v13"
 
 OBSERVE = """You are looking at four frames, 400 ms apart, of one animated HTML component: an alpaca walking in a scene, drawn in code.
 Report only what you can see. Do not rate quality and do not score.
@@ -54,12 +55,12 @@ Every field is required."""
 ALPACA_BANDS = {"neck_body": (0.55, 1.05), "head_body": (0.22, 0.45), "leg_depth": (0.90, 1.70)}
 
 
-def caption(images):
+def caption(model, images):
     content = [{"type": "text", "text": OBSERVE}]
     content += [{"type": "image_url", "image_url": {"url": data_url(i)}} for i in images]
     last = None
     for _ in range(3):
-        r = post("/chat/completions", {"model": CAPTIONER, "messages": [{"role": "user", "content": content}],
+        r = post("/chat/completions", {"model": model, "messages": [{"role": "user", "content": content}],
                                        "max_completion_tokens": 7000, "temperature": 0,
                                        "venice_parameters": {"include_venice_system_prompt": False}})
         try:
@@ -153,6 +154,38 @@ def smoothness(mid):
     return {"changed": [round(c, 2) for c in changed], "mean": round(mean, 2), "spread": round(spread, 2), "score": score}
 
 
+
+def pace(mid):
+    """Cadence in gait cycles per second, from the frame-to-frame change series."""
+    from PIL import Image, ImageChops
+    import math
+    fs = [J.SHOTS / ("alpaca-%s-%d.png" % (mid, i)) for i in range(20)]
+    if not all(f.exists() for f in fs):
+        return {}
+    ims = [Image.open(f).convert("L").resize((240, 135)) for f in fs]
+    d = []
+    for a, b in zip(ims, ims[1:]):
+        diff = ImageChops.difference(a, b)
+        px = list(diff.getdata())
+        d.append(sum(1 for v in px if v > 12) / len(px))
+    mean = sum(d) / len(d)
+    centred = [x - mean for x in d]
+    dt = 0.15
+    best_lag, best_corr = None, 0
+    for lag in range(2, len(centred) // 2):
+        num = sum(centred[i] * centred[i + lag] for i in range(len(centred) - lag))
+        den = math.sqrt(sum(x * x for x in centred) * sum(x * x for x in centred[lag:]))
+        c = num / den if den else 0
+        if c > best_corr:
+            best_corr, best_lag = c, lag
+    if best_lag is None or best_corr < 0.25:
+        return {"cadence": 0.0, "strength": round(best_corr, 2), "mean_change": round(mean * 100, 2),
+                "score": 1 if mean > 0.001 else 0}
+    cadence = 1.0 / (best_lag * dt)
+    score = 4 if 0.6 <= cadence <= 2.2 else 3 if 0.35 <= cadence < 0.6 or 2.2 < cadence <= 3.0 else 2 if 0.15 <= cadence < 0.35 else 1
+    return {"cadence": round(cadence, 2), "strength": round(best_corr, 2), "mean_change": round(mean * 100, 2), "score": score}
+
+
 def build_state(obs, ratios, smooth, motion):
     p = obs["parts"]
     yes = lambda b: "yes" if b else "no"
@@ -219,53 +252,57 @@ def run(mid):
     if old.get("rubric") == RUBRIC_VERSION and old.get("median"):
         print("skip", mid, flush=True)
         return
-    pngs = [J.SHOTS / ("alpaca-%s-%d.png" % (mid, i)) for i in range(4)]
+    pngs = [J.SHOTS / ("alpaca-%s-%d.png" % (mid, i)) for i in range(20)]
     if not all(p.exists() for p in pngs):
         print("no frames", mid, flush=True)
         return
-    images = [J.jpeg(p, RAW / "judge_in" / (p.stem + ".jpg"), 1024) for p in pngs]
+    # four evenly spaced moments go to the vision model; all twenty feed the cadence measure
+    images = [J.jpeg(pngs[i], RAW / "judge_in" / (pngs[i].stem + ".jpg"), 1024) for i in (0, 6, 12, 18)]
     try:
-        # three independent reads, median per measurement: a single vision estimate of a ratio
-        # moves by 20-30% between identical calls, which is too much to score on.
-        obs_all = [caption(images) for _ in range(3)]
-        obs = obs_all[0]
+        reads = []
+        for model in CAPTIONERS:
+            try:
+                reads.append(caption(model, images))
+            except Exception as e:
+                print("caption fail", mid, model, repr(e)[:100], flush=True)
+        if not reads:
+            raise RuntimeError("no captioner succeeded")
+        obs = reads[0]
         motion = J.motion_stats(mid) or {}
-        rs = [box_ratio(o["points"]) for o in obs_all]
+        rs = [box_ratio(o["points"]) for o in reads]
         ratios = {}
         for k in rs[0]:
             vals = sorted(r[k] for r in rs if r.get(k) is not None)
             ratios[k] = vals[len(vals) // 2] if vals else None
-        joints = sorted(int(o["parts"].get("legs_with_visible_joint") or 0) for o in obs_all)
-        obs["parts"]["legs_with_visible_joint"] = joints[1]
+        # conservative on parts: the lower joint count and any detached/absent part reported
+        joints = min(int(o["parts"].get("legs_with_visible_joint") or 0) for o in reads)
+        obs["parts"]["legs_with_visible_joint"] = joints
+        obs["parts"]["detached_parts"] = any(o["parts"].get("detached_parts") for o in reads)
+        pace_m = pace(mid)
         smooth = smoothness(mid)
         ans = ask_jev(build_state(obs, ratios, smooth, motion))
     except Exception as e:
         print("ERR", mid, repr(e)[:200], flush=True)
         return
     a = ans.get("answers", ans)
+    a = ans.get("answers", ans)
     med, why = {}, {}
-    for k in ("parts", "craft"):
-        v = a[k]
-        med[k if k == "parts" else "craft"] = max(0, min(4, round(float(v["score"]))))
-        why[k] = "level %.2f of 4" % float(v["score"])
-    med["anatomy"] = med.pop("parts")
-    why["anatomy"] = why.pop("parts") + " - joints %s/%s, %s" % (
+    med["anatomy"] = max(0, min(4, round(float(a["parts"]["score"]))))
+    med["craft"] = max(0, min(4, round(float(a["craft"]["score"]))))
+    med["pace"] = pace_m.get("score", 0)
+    med["smoothness"] = smooth.get("score", 0)
+    why["anatomy"] = "joints %s/%s, %s; level %.2f" % (
         obs["parts"].get("legs_with_visible_joint"), obs["parts"].get("legs_visible"),
-        str(obs["parts"].get("leg_attachment")).replace("_", " "))
-    prop = [band_score(ratios.get("neck_body"), *ALPACA_BANDS["neck_body"]),
-            band_score(ratios.get("head_body"), *ALPACA_BANDS["head_body"]),
-            band_score(ratios.get("leg_depth"), *ALPACA_BANDS["leg_depth"])]
-    prop = [p for p in prop if p is not None]
-    med["proportions"] = round(sum(prop) / len(prop), 1) if prop else 0
-    why["proportions"] = "neck %.2f, head %.2f, leg/depth %.2f" % (
+        str(obs["parts"].get("leg_attachment")).replace("_", " "), float(a["parts"]["score"]))
+    why["craft"] = "level %.2f; %s" % (float(a["craft"]["score"]), obs["craft"].get("notes", ""))
+    why["pace"] = "%s cycles/s (confidence %s), %s%% change per frame" % (
+        pace_m.get("cadence"), pace_m.get("strength"), pace_m.get("mean_change"))
+    why["smoothness"] = "frame change %s, spread %s" % (smooth.get("changed"), smooth.get("spread"))
+    why["proportions"] = "neck %.2f, head %.2f, leg/depth %.2f (diagnostic, not scored)" % (
         ratios.get("neck_body") or 0, ratios.get("head_body") or 0, ratios.get("leg_depth") or 0)
-    band = 4 if motion.get("changed_pct", 0) >= 6 else 3 if motion.get("changed_pct", 0) >= 3 else 2 if motion.get("changed_pct", 0) >= 1 else 1 if motion.get("changed_pct", 0) > 0 else 0
-    planted = 0 if obs["gait"].get("sliding_or_popping") else 1
-    med["motion"] = max(0, min(band, smooth.get("score", band)) - (0 if planted else 1))
-    why["motion"] = "band %d, smoothness %d, slider %s" % (band, smooth.get("score", -1), not planted)
-    save(out, {"rubric": RUBRIC_VERSION, "median": med, "rationale": why, "judges_used": 1,
+    save(out, {"rubric": RUBRIC_VERSION, "median": med, "rationale": why, "judges_used": len(reads),
                "captioner": CAPTIONER, "observations": obs, "ratios": ratios,
-               "smoothness": smooth, "motion": motion,
+               "smoothness": smooth, "pace": pace_m, "motion": motion,
                "verdict": {"jev+" + CAPTIONER: obs.get("description", "")}})
     print("scored", mid, med, flush=True)
 

@@ -1,21 +1,22 @@
 {
- "rubric": "v12",
+ "rubric": "v13",
  "median": {
-  "craft": 4,
   "anatomy": 4,
-  "proportions": 3.3,
-  "motion": 3
+  "craft": 3,
+  "pace": 4,
+  "smoothness": 2
  },
  "rationale": {
-  "craft": "level 3.86 of 4",
-  "anatomy": "level 3.88 of 4 - joints 4/4, chest and rump",
-  "proportions": "neck 0.73, head 0.18, leg/depth 0.93",
-  "motion": "band 3, smoothness 4, slider False"
+  "anatomy": "joints 4/4, chest and rump; level 3.84",
+  "craft": "level 2.80; The oval underside patch has a visible edge against the fleece.",
+  "pace": "1.67 cycles/s (confidence 0.46), 2.87% change per frame",
+  "smoothness": "frame change [2.87, 3.02, 2.72], spread 0.1",
+  "proportions": "neck 0.76, head 0.24, leg/depth 1.31 (diagnostic, not scored)"
  },
- "judges_used": 1,
+ "judges_used": 2,
  "captioner": "openai-gpt-6-sol",
  "observations": {
-  "description": "A fluffy white alpaca with a small tail walks across a sandy path beneath a sunny sky.",
+  "description": "A cream-colored alpaca with a fluffy body walks through a grassy scene beneath clouds and a sun.",
   "parts": {
    "legs_visible": 4,
    "legs_with_visible_joint": 4,
@@ -23,77 +24,83 @@
    "ears": "small_pointed",
    "tail_visible": true,
    "detached_parts": false,
-   "notes": "Four legs, two pointed ears, and a small tail tuft are visible."
+   "notes": "A small tail is visible at the rump, and the legs bend at their joints."
   },
   "points": {
    "chest": [
-    577,
-    608
+    580,
+    618
    ],
    "rump": [
-    359,
-    604
+    357,
+    565
    ],
    "neck_base": [
-    547,
-    521
+    537,
+    517
    ],
    "poll": [
-    576,
-    365
+    588,
+    378
    ],
    "muzzle": [
-    604,
-    392
+    612,
+    420
    ],
    "belly": [
-    465,
-    685
+    474,
+    690
    ],
    "ground": [
-    570,
-    797
+    530,
+    816
    ]
   },
   "gait": {
    "feet_planted": true,
    "sliding_or_popping": false,
    "legs_change_between_frames": true,
-   "notes": "The legs alternate forward and back, with some hooves raised during steps."
+   "notes": "The legs alternate between reaching forward, extending back, and lifting their hooves."
   },
   "craft": {
-   "seams_or_stray_shapes": false,
+   "seams_or_stray_shapes": true,
    "inconsistent_light": false,
    "clipped_elements": false,
    "contact_shadow": true,
-   "notes": "A soft shadow is visible beneath the alpaca."
+   "notes": "The oval underside patch has a visible edge against the fleece."
   }
  },
  "ratios": {
-  "body_len": 215.7,
-  "neck_len": 156.3,
-  "head_len": 39.6,
-  "leg_len": 112,
-  "neck_body": 0.728,
-  "head_body": 0.184,
-  "leg_depth": 0.934
+  "body_len": 229.2,
+  "neck_len": 148.1,
+  "head_len": 48.4,
+  "leg_len": 130,
+  "neck_body": 0.756,
+  "head_body": 0.239,
+  "leg_depth": 1.313
  },
  "smoothness": {
   "changed": [
+   2.87,
    3.02,
-   3.25,
-   2.86
+   2.72
   ],
-  "mean": 3.05,
-  "spread": 0.13,
+  "mean": 2.87,
+  "spread": 0.1,
+  "score": 2
+ },
+ "pace": {
+  "cadence": 1.67,
+  "strength": 0.46,
+  "mean_change": 2.87,
   "score": 4
  },
  "motion": {
-  "mean": 1.49,
-  "changed_pct": 3.25,
-  "leg_pct": 4.72
+  "mean": 1.39,
+  "changed_pct": 3.02,
+  "leg_pct": 4.87
  },
  "verdict": {
-  "jev+openai-gpt-6-sol": "A fluffy white alpaca with a small tail walks across a sandy path beneath a sunny sky."
+  "jev+openai-gpt-6-sol": "A cream-colored alpaca with a fluffy body walks through a grassy scene beneath clouds and a sun."
  }
 }

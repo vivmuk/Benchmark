@@ -1,21 +1,22 @@
 {
- "rubric": "v12",
+ "rubric": "v13",
  "median": {
-  "craft": 2,
   "anatomy": 2,
-  "proportions": 3.3,
-  "motion": 4
+  "craft": 4,
+  "pace": 1,
+  "smoothness": 4
  },
  "rationale": {
-  "craft": "level 2.27 of 4",
-  "anatomy": "level 2.02 of 4 - joints 2/4, chest and rump",
-  "proportions": "neck 0.85, head 0.31, leg/depth 1.98",
-  "motion": "band 4, smoothness 4, slider False"
+  "anatomy": "joints 2/4, chest and rump; level 1.99",
+  "craft": "level 3.92; none",
+  "pace": "0.0 cycles/s (confidence 0.21), 7.09% change per frame",
+  "smoothness": "frame change [7.31, 7.4, 7.32], spread 0.01",
+  "proportions": "neck 1.25, head 0.37, leg/depth 2.47 (diagnostic, not scored)"
  },
- "judges_used": 1,
+ "judges_used": 2,
  "captioner": "openai-gpt-6-sol",
  "observations": {
-  "description": "A cream-colored alpaca with a striped reddish saddle walks along a path beneath a blue sky.",
+  "description": "A cream alpaca with a striped saddle walks along a path in a grassy scene.",
   "parts": {
    "legs_visible": 4,
    "legs_with_visible_joint": 2,
@@ -23,77 +24,83 @@
    "ears": "small_pointed",
    "tail_visible": true,
    "detached_parts": false,
-   "notes": "A small white tuft protrudes from the rump."
+   "notes": "The two hind legs show bends."
   },
   "points": {
    "chest": [
-    550,
-    348
+    541,
+    609
    ],
    "rump": [
-    399,
-    325
+    401,
+    576
    ],
    "neck_base": [
-    528,
-    295
+    535,
+    559
    ],
    "poll": [
-    581,
-    219
+    567,
+    382
    ],
    "muzzle": [
-    616,
-    239
+    602,
+    415
    ],
    "belly": [
-    489,
-    374
+    475,
+    646
    ],
    "ground": [
-    544,
-    473
+    426,
+    821
    ]
   },
   "gait": {
    "feet_planted": true,
-   "sliding_or_popping": false,
+   "sliding_or_popping": true,
    "legs_change_between_frames": true,
-   "notes": "The hind legs bend and change position while the front legs remain mostly straight; some hooves lift between frames."
+   "notes": "The hind legs shift slightly; one front foot moves sideways along the path without visibly lifting."
   },
   "craft": {
-   "seams_or_stray_shapes": true,
+   "seams_or_stray_shapes": false,
    "inconsistent_light": false,
    "clipped_elements": false,
    "contact_shadow": true,
-   "notes": "A thin brown sliver protrudes below the belly."
+   "notes": "none"
   }
  },
  "ratios": {
-  "body_len": 152.7,
-  "neck_len": 129.8,
-  "head_len": 48.1,
-  "leg_len": 174,
-  "neck_body": 0.851,
-  "head_body": 0.308,
-  "leg_depth": 1.975
+  "body_len": 143.8,
+  "neck_len": 179.9,
+  "head_len": 48.8,
+  "leg_len": 181,
+  "neck_body": 1.251,
+  "head_body": 0.366,
+  "leg_depth": 2.469
  },
  "smoothness": {
   "changed": [
-   8.77,
-   8.33,
-   8.26
+   7.31,
+   7.4,
+   7.32
   ],
-  "mean": 8.45,
-  "spread": 0.06,
+  "mean": 7.34,
+  "spread": 0.01,
   "score": 4
  },
+ "pace": {
+  "cadence": 0.0,
+  "strength": 0.21,
+  "mean_change": 7.09,
+  "score": 1
+ },
  "motion": {
-  "mean": 3.35,
-  "changed_pct": 8.77,
-  "leg_pct": 16.82
+  "mean": 2.8,
+  "changed_pct": 7.4,
+  "leg_pct": 14.68
  },
  "verdict": {
-  "jev+openai-gpt-6-sol": "A cream-colored alpaca with a striped reddish saddle walks along a path beneath a blue sky."
+  "jev+openai-gpt-6-sol": "A cream alpaca with a striped saddle walks along a path in a grassy scene."
  }
 }

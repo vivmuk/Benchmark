@@ -1,21 +1,22 @@
 {
- "rubric": "v12",
+ "rubric": "v13",
  "median": {
-  "craft": 4,
   "anatomy": 2,
-  "proportions": 3.7,
-  "motion": 3
+  "craft": 2,
+  "pace": 4,
+  "smoothness": 4
  },
  "rationale": {
-  "craft": "level 3.56 of 4",
-  "anatomy": "level 1.94 of 4 - joints 0/4, chest and rump",
-  "proportions": "neck 0.90, head 0.45, leg/depth 1.09",
-  "motion": "band 4, smoothness 4, slider True"
+  "anatomy": "joints 0/4, chest and rump; level 1.89",
+  "craft": "level 2.47; A thin darker stripe along the neck ends inside the chest.",
+  "pace": "1.33 cycles/s (confidence 0.27), 6.68% change per frame",
+  "smoothness": "frame change [6.75, 6.6, 6.86], spread 0.04",
+  "proportions": "neck 0.97, head 0.53, leg/depth 1.26 (diagnostic, not scored)"
  },
- "judges_used": 1,
+ "judges_used": 2,
  "captioner": "openai-gpt-6-sol",
  "observations": {
-  "description": "A cream-colored alpaca walks in place in a grassy landscape beneath a blue sky.",
+  "description": "A cream-colored alpaca with long upright ears and a round tail moves its legs in a grassy scene.",
   "parts": {
    "legs_visible": 4,
    "legs_with_visible_joint": 0,
@@ -28,72 +29,78 @@
   "points": {
    "chest": [
     586,
-    583
+    580
    ],
    "rump": [
-    401,
-    571
+    382,
+    559
    ],
    "neck_base": [
-    552,
+    558,
     470
    ],
    "poll": [
-    601,
-    311
+    605,
+    314
    ],
    "muzzle": [
-    636,
-    387
+    630,
+    382
    ],
    "belly": [
-    491,
-    659
+    485,
+    660
    ],
    "ground": [
-    456,
-    774
+    438,
+    775
    ]
   },
   "gait": {
    "feet_planted": true,
-   "sliding_or_popping": true,
+   "sliding_or_popping": false,
    "legs_change_between_frames": true,
-   "notes": "The legs alternate forward and back; some hooves lift while others move along the ground as the body stays in place."
+   "notes": "The legs shift forward and back, and some hooves lift between frames."
   },
   "craft": {
-   "seams_or_stray_shapes": false,
+   "seams_or_stray_shapes": true,
    "inconsistent_light": false,
    "clipped_elements": false,
    "contact_shadow": false,
-   "notes": "No distinct contact shadow is visible beneath the hooves."
+   "notes": "A thin darker stripe along the neck ends inside the chest."
   }
  },
  "ratios": {
-  "body_len": 188.4,
-  "neck_len": 166.4,
-  "head_len": 83.7,
-  "leg_len": 115,
-  "neck_body": 0.897,
-  "head_body": 0.451,
-  "leg_depth": 1.087
+  "body_len": 205.1,
+  "neck_len": 167.6,
+  "head_len": 91.9,
+  "leg_len": 120,
+  "neck_body": 0.971,
+  "head_body": 0.533,
+  "leg_depth": 1.264
  },
  "smoothness": {
   "changed": [
-   6.77,
-   6.71,
-   6.76
+   6.75,
+   6.6,
+   6.86
   ],
-  "mean": 6.75,
-  "spread": 0.01,
+  "mean": 6.74,
+  "spread": 0.04,
+  "score": 4
+ },
+ "pace": {
+  "cadence": 1.33,
+  "strength": 0.27,
+  "mean_change": 6.68,
   "score": 4
  },
  "motion": {
   "mean": 2.62,
-  "changed_pct": 6.77,
-  "leg_pct": 13.96
+  "changed_pct": 6.86,
+  "leg_pct": 14.02
  },
  "verdict": {
-  "jev+openai-gpt-6-sol": "A cream-colored alpaca walks in place in a grassy landscape beneath a blue sky."
+  "jev+openai-gpt-6-sol": "A cream-colored alpaca with long upright ears and a round tail moves its legs in a grassy scene."
  }
 }

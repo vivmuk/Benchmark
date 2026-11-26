@@ -5,6 +5,7 @@ from common import *
 sp = load(RAW / "specs.json")
 answers = load(ROOT / "bench" / "answers.json")
 motion = load(RAW / "motion.json", {})
+pairwise = load(RAW / "pairwise.json", {})
 
 
 def norm(v):
@@ -26,13 +27,14 @@ def grade(text):
 
 WEIGHTS = {"anatomy": 0.40, "gait": 0.40, "craft": 0.20}
 WEIGHTS_V12 = {"anatomy": 0.50, "craft": 0.30, "motion": 0.20}  # proportions reported, not scored
+WEIGHTS_V13 = {"anatomy": 0.45, "craft": 0.30, "pace": 0.10, "smoothness": 0.15}
 
 
 def judged(task, mid):
     j = load(RAW / "judge" / ("%s-%s.json" % (task, mid)), {})
     if task == "alpaca" and j.get("median"):
         med = j["median"]
-        W = WEIGHTS_V12 if j.get("rubric") == "v12" else WEIGHTS
+        W = WEIGHTS_V13 if j.get("rubric") == "v13" else WEIGHTS_V12 if j.get("rubric") == "v12" else WEIGHTS
         score = round(sum(W[k] * med[k] / 4 for k in W) * 100, 1)
         used = [k for k, v in j.items() if isinstance(v, dict) and "scores" in v]
         if used:
@@ -45,6 +47,7 @@ def judged(task, mid):
             verd = j.get("verdict") or {}
         return {"score": score, "criteria": med, "by_judge": by, "rationale": rat, "verdict": verd,
                 "setting": j.get("setting"), "ratios": j.get("ratios"), "smoothness": j.get("smoothness"),
+                "pace": j.get("pace"),
                 "judges": j.get("judges_used", len(by)), "rubric": j.get("rubric"), "scale": 4}
     ok = {k: v for k, v in j.items() if "scores" in v}
     if not ok:
@@ -130,7 +133,13 @@ for mid in MODELS:
         c, cnotes = compliance(mid, ms)
         m["alpaca"]["compliance"] = c
         m["alpaca"]["compliance_notes"] = cnotes
-        if m["alpaca"].get("criteria") and m["alpaca"].get("rubric") != "v12":
+        pw = pairwise.get("scores") or {}
+        if mid in pw:
+            m["alpaca"]["score_pairwise"] = pw[mid]
+            m["alpaca"]["record"] = (pairwise.get("record") or {}).get(mid)
+            m["alpaca"]["method"] = "pairwise"
+            m["alpaca"]["score"] = pw[mid]
+        if m["alpaca"].get("criteria") and m["alpaca"].get("rubric") not in ("v12", "v13"):
             crit = dict(m["alpaca"]["criteria"])
             ch = (ms or {}).get("changed_pct", 0)
             band = 4 if ch >= 6 else 3 if ch >= 3 else 2 if ch >= 1 else 1 if ch > 0 else 0

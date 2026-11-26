@@ -31,8 +31,8 @@ await cdp('Emulation.setDeviceMetricsOverride', { width: 1280, height: mode === 
 await cdp('Page.navigate', { url: 'file://' + html });
 await sleep(2000);
 if (mode === 'frames') {
-  // four moments of the walk, 400ms of real time apart
-  for (let i = 0; i < 4; i++) { await grab(`${out}-${i}.png`); await sleep(400); }
+  // twenty moments of the walk, 150ms apart: enough to measure cadence, not just motion
+  for (let i = 0; i < 20; i++) { await grab(`${out}-${i}.png`); await sleep(150); }
   const box = await cdp('Runtime.evaluate', { expression:
     'JSON.stringify({sw: document.documentElement.scrollWidth, sh: document.documentElement.scrollHeight, bw: document.body ? document.body.scrollWidth : 0, bh: document.body ? document.body.scrollHeight : 0})',
     returnByValue: true });

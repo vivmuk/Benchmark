@@ -1,99 +1,106 @@
 {
- "rubric": "v12",
+ "rubric": "v13",
  "median": {
-  "craft": 4,
-  "anatomy": 3,
-  "proportions": 1.3,
-  "motion": 4
+  "anatomy": 4,
+  "craft": 2,
+  "pace": 4,
+  "smoothness": 4
  },
  "rationale": {
-  "craft": "level 3.86 of 4",
-  "anatomy": "level 2.76 of 4 - joints 3/4, chest and rump",
-  "proportions": "neck 1.58, head 0.46, leg/depth 2.16",
-  "motion": "band 4, smoothness 4, slider False"
+  "anatomy": "joints 4/4, chest and rump; level 3.66",
+  "craft": "level 2.37; The green hill layer has an abrupt vertical edge to the right of the alpaca.",
+  "pace": "0.95 cycles/s (confidence 0.42), 9.71% change per frame",
+  "smoothness": "frame change [8.93, 9.66, 9.02], spread 0.08",
+  "proportions": "neck 1.73, head 0.58, leg/depth 2.69 (diagnostic, not scored)"
  },
- "judges_used": 1,
+ "judges_used": 2,
  "captioner": "openai-gpt-6-sol",
  "observations": {
-  "description": "A white alpaca with a long neck walks along a sandy path in front of hills and mountains.",
+  "description": "A cream-colored alpaca with pointed ears and a colorful collar walks to the right through a scene of hills and mountains.",
   "parts": {
    "legs_visible": 4,
-   "legs_with_visible_joint": 3,
+   "legs_with_visible_joint": 4,
    "leg_attachment": "chest_and_rump",
    "ears": "small_pointed",
    "tail_visible": true,
    "detached_parts": false,
-   "notes": "A small tail extends from the rump, and the legs extend from the front and back of the torso."
+   "notes": "A small tail extends from the rump."
   },
   "points": {
    "chest": [
-    550,
-    590
+    555,
+    573
    ],
    "rump": [
-    410,
-    560
+    402,
+    556
    ],
    "neck_base": [
-    540,
-    470
+    538,
+    474
    ],
    "poll": [
-    555,
-    255
+    543,
+    259
    ],
    "muzzle": [
-    590,
-    310
+    588,
+    307
    ],
    "belly": [
-    475,
+    473,
     630
    ],
    "ground": [
-    540,
-    800
+    402,
+    811
    ]
   },
   "gait": {
    "feet_planted": true,
-   "sliding_or_popping": false,
+   "sliding_or_popping": true,
    "legs_change_between_frames": true,
-   "notes": "The legs alternate between extended and bent positions; some hooves lift while others touch the path."
+   "notes": "The legs alternate between lifted and grounded positions, while grounded feet shift across the scrolling terrain."
   },
   "craft": {
-   "seams_or_stray_shapes": false,
+   "seams_or_stray_shapes": true,
    "inconsistent_light": false,
    "clipped_elements": false,
    "contact_shadow": true,
-   "notes": "Small shadows appear beneath the hooves."
+   "notes": "The green hill layer has an abrupt vertical edge to the right of the alpaca."
   }
  },
  "ratios": {
-  "body_len": 145.8,
-  "neck_len": 230.4,
-  "head_len": 65.2,
-  "leg_len": 170,
-  "neck_body": 1.58,
-  "head_body": 0.455,
-  "leg_depth": 2.159
+  "body_len": 153.9,
+  "neck_len": 215.1,
+  "head_len": 71.1,
+  "leg_len": 181,
+  "neck_body": 1.734,
+  "head_body": 0.584,
+  "leg_depth": 2.69
  },
  "smoothness": {
   "changed": [
-   10.61,
-   10.41,
-   9.34
+   8.93,
+   9.66,
+   9.02
   ],
-  "mean": 10.12,
-  "spread": 0.13,
+  "mean": 9.2,
+  "spread": 0.08,
+  "score": 4
+ },
+ "pace": {
+  "cadence": 0.95,
+  "strength": 0.42,
+  "mean_change": 9.71,
   "score": 4
  },
  "motion": {
-  "mean": 5.05,
-  "changed_pct": 10.61,
-  "leg_pct": 15.58
+  "mean": 4.53,
+  "changed_pct": 9.66,
+  "leg_pct": 14.29
  },
  "verdict": {
-  "jev+openai-gpt-6-sol": "A white alpaca with a long neck walks along a sandy path in front of hills and mountains."
+  "jev+openai-gpt-6-sol": "A cream-colored alpaca with pointed ears and a colorful collar walks to the right through a scene of hills and mountains."
  }
 }

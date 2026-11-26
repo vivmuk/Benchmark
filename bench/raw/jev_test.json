@@ -1,0 +1,1 @@
+{"state": "MODEL A: 2 of 4 legs show a visible joint; 14 wins 20 losses in head-to-head comparisons. MODEL B: 4 of 4 legs show a visible joint; 24 wins 6 losses in head-to-head comparisons.", "questions": {"better": {"type": "choice", "instructions": "Which model has the more accurate alpaca anatomy? A or B?", "criteria": {"A": "model A", "B": "model B"}}}}
