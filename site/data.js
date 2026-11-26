@@ -16,7 +16,7 @@ window.BENCH = {
     "seconds": 725.0,
     "finish": "stop",
     "status": "ok",
-    "score": 59.2,
+    "score": 55.0,
     "criteria": {
      "craft": 2,
      "anatomy": 2,
@@ -24,7 +24,7 @@ window.BENCH = {
      "motion": 3
     },
     "by_judge": {
-     "jev+openai-gpt-6-sol": 59.2
+     "jev+openai-gpt-6-sol": 55.0
     },
     "rationale": {
      "craft": "level 1.93 of 4",
@@ -147,7 +147,7 @@ window.BENCH = {
     "seconds": 188.5,
     "finish": "stop",
     "status": "ok",
-    "score": 79.5,
+    "score": 82.5,
     "criteria": {
      "craft": 4,
      "anatomy": 3,
@@ -155,7 +155,7 @@ window.BENCH = {
      "motion": 3
     },
     "by_judge": {
-     "jev+openai-gpt-6-sol": 79.5
+     "jev+openai-gpt-6-sol": 82.5
     },
     "rationale": {
      "craft": "level 3.73 of 4",
@@ -298,7 +298,7 @@ window.BENCH = {
     "seconds": 94.9,
     "finish": "stop",
     "status": "ok",
-    "score": 49.5,
+    "score": 52.5,
     "criteria": {
      "craft": 3,
      "anatomy": 2,
@@ -306,7 +306,7 @@ window.BENCH = {
      "motion": 1
     },
     "by_judge": {
-     "jev+openai-gpt-6-sol": 49.5
+     "jev+openai-gpt-6-sol": 52.5
     },
     "rationale": {
      "craft": "level 2.58 of 4",
@@ -449,7 +449,7 @@ window.BENCH = {
     "seconds": 252.3,
     "finish": "stop",
     "status": "ok",
-    "score": 84.5,
+    "score": 87.5,
     "criteria": {
      "craft": 4,
      "anatomy": 3,
@@ -457,7 +457,7 @@ window.BENCH = {
      "motion": 4
     },
     "by_judge": {
-     "jev+openai-gpt-6-sol": 84.5
+     "jev+openai-gpt-6-sol": 87.5
     },
     "rationale": {
      "craft": "level 3.86 of 4",
@@ -600,7 +600,7 @@ window.BENCH = {
     "seconds": 699.1,
     "finish": "stop",
     "status": "ok",
-    "score": 95.8,
+    "score": 100.0,
     "criteria": {
      "craft": 4,
      "anatomy": 4,
@@ -608,7 +608,7 @@ window.BENCH = {
      "motion": 4
     },
     "by_judge": {
-     "jev+openai-gpt-6-sol": 95.8
+     "jev+openai-gpt-6-sol": 100.0
     },
     "rationale": {
      "craft": "level 3.94 of 4",
@@ -831,7 +831,7 @@ window.BENCH = {
     "seconds": 267.9,
     "finish": "stop",
     "status": "ok",
-    "score": 74.2,
+    "score": 70.0,
     "criteria": {
      "craft": 4,
      "anatomy": 2,
@@ -839,7 +839,7 @@ window.BENCH = {
      "motion": 3
     },
     "by_judge": {
-     "jev+openai-gpt-6-sol": 74.2
+     "jev+openai-gpt-6-sol": 70.0
     },
     "rationale": {
      "craft": "level 3.56 of 4",
@@ -982,7 +982,7 @@ window.BENCH = {
     "seconds": 118.1,
     "finish": "stop",
     "status": "ok",
-    "score": 58.2,
+    "score": 60.0,
     "criteria": {
      "craft": 4,
      "anatomy": 2,
@@ -990,7 +990,7 @@ window.BENCH = {
      "motion": 1
     },
     "by_judge": {
-     "jev+openai-gpt-6-sol": 58.2
+     "jev+openai-gpt-6-sol": 60.0
     },
     "rationale": {
      "craft": "level 3.94 of 4",
@@ -1133,7 +1133,7 @@ window.BENCH = {
     "seconds": 198.9,
     "finish": "stop",
     "status": "ok",
-    "score": 85.0,
+    "score": 90.0,
     "criteria": {
      "craft": 4,
      "anatomy": 4,
@@ -1141,7 +1141,7 @@ window.BENCH = {
      "motion": 2
     },
     "by_judge": {
-     "jev+openai-gpt-6-sol": 85.0
+     "jev+openai-gpt-6-sol": 90.0
     },
     "rationale": {
      "craft": "level 3.96 of 4",
@@ -1284,7 +1284,7 @@ window.BENCH = {
     "seconds": 145.3,
     "finish": "stop",
     "status": "ok",
-    "score": 81.8,
+    "score": 90.0,
     "criteria": {
      "craft": 4,
      "anatomy": 4,
@@ -1292,7 +1292,7 @@ window.BENCH = {
      "motion": 2
     },
     "by_judge": {
-     "jev+openai-gpt-6-sol": 81.8
+     "jev+openai-gpt-6-sol": 90.0
     },
     "rationale": {
      "craft": "level 3.96 of 4",
@@ -1435,7 +1435,7 @@ window.BENCH = {
     "seconds": 86.1,
     "finish": "stop",
     "status": "ok",
-    "score": 90.8,
+    "score": 95.0,
     "criteria": {
      "craft": 4,
      "anatomy": 4,
@@ -1443,7 +1443,7 @@ window.BENCH = {
      "motion": 3
     },
     "by_judge": {
-     "jev+openai-gpt-6-sol": 90.8
+     "jev+openai-gpt-6-sol": 95.0
     },
     "rationale": {
      "craft": "level 3.86 of 4",
@@ -1586,7 +1586,7 @@ window.BENCH = {
     "seconds": 257.5,
     "finish": "stop",
     "status": "ok",
-    "score": 61.7,
+    "score": 65.0,
     "criteria": {
      "craft": 4,
      "anatomy": 2,
@@ -1594,7 +1594,7 @@ window.BENCH = {
      "motion": 2
     },
     "by_judge": {
-     "jev+openai-gpt-6-sol": 61.7
+     "jev+openai-gpt-6-sol": 65.0
     },
     "rationale": {
      "craft": "level 3.95 of 4",
@@ -1716,7 +1716,7 @@ window.BENCH = {
     "seconds": 203.4,
     "finish": "stop",
     "status": "ok",
-    "score": 90.0,
+    "score": 95.0,
     "criteria": {
      "craft": 4,
      "anatomy": 4,
@@ -1724,7 +1724,7 @@ window.BENCH = {
      "motion": 3
     },
     "by_judge": {
-     "jev+openai-gpt-6-sol": 90.0
+     "jev+openai-gpt-6-sol": 95.0
     },
     "rationale": {
      "craft": "level 3.94 of 4",
@@ -1867,7 +1867,7 @@ window.BENCH = {
     "seconds": 247.4,
     "finish": "stop",
     "status": "ok",
-    "score": 80.0,
+    "score": 90.0,
     "criteria": {
      "craft": 4,
      "anatomy": 4,
@@ -1875,7 +1875,7 @@ window.BENCH = {
      "motion": 2
     },
     "by_judge": {
-     "jev+openai-gpt-6-sol": 80.0
+     "jev+openai-gpt-6-sol": 90.0
     },
     "rationale": {
      "craft": "level 3.96 of 4",
@@ -2018,7 +2018,7 @@ window.BENCH = {
     "seconds": 299.7,
     "finish": "stop",
     "status": "ok",
-    "score": 95.0,
+    "score": 100.0,
     "criteria": {
      "craft": 4,
      "anatomy": 4,
@@ -2026,7 +2026,7 @@ window.BENCH = {
      "motion": 4
     },
     "by_judge": {
-     "jev+openai-gpt-6-sol": 95.0
+     "jev+openai-gpt-6-sol": 100.0
     },
     "rationale": {
      "craft": "level 3.96 of 4",
@@ -2169,7 +2169,7 @@ window.BENCH = {
     "seconds": 205.9,
     "finish": "stop",
     "status": "ok",
-    "score": 92.5,
+    "score": 95.0,
     "criteria": {
      "craft": 4,
      "anatomy": 4,
@@ -2177,7 +2177,7 @@ window.BENCH = {
      "motion": 3
     },
     "by_judge": {
-     "jev+openai-gpt-6-sol": 92.5
+     "jev+openai-gpt-6-sol": 95.0
     },
     "rationale": {
      "craft": "level 3.95 of 4",
@@ -2320,7 +2320,7 @@ window.BENCH = {
     "seconds": 241.6,
     "finish": "stop",
     "status": "ok",
-    "score": 85.0,
+    "score": 90.0,
     "criteria": {
      "craft": 4,
      "anatomy": 4,
@@ -2328,7 +2328,7 @@ window.BENCH = {
      "motion": 2
     },
     "by_judge": {
-     "jev+openai-gpt-6-sol": 85.0
+     "jev+openai-gpt-6-sol": 90.0
     },
     "rationale": {
      "craft": "level 3.69 of 4",
@@ -2471,7 +2471,7 @@ window.BENCH = {
     "seconds": 408.6,
     "finish": "stop",
     "status": "ok",
-    "score": 85.0,
+    "score": 90.0,
     "criteria": {
      "craft": 4,
      "anatomy": 4,
@@ -2479,7 +2479,7 @@ window.BENCH = {
      "motion": 2
     },
     "by_judge": {
-     "jev+openai-gpt-6-sol": 85.0
+     "jev+openai-gpt-6-sol": 90.0
     },
     "rationale": {
      "craft": "level 3.95 of 4",
@@ -2622,7 +2622,7 @@ window.BENCH = {
     "seconds": 257.8,
     "finish": "stop",
     "status": "ok",
-    "score": 55.8,
+    "score": 60.0,
     "criteria": {
      "craft": 4,
      "anatomy": 2,
@@ -2630,7 +2630,7 @@ window.BENCH = {
      "motion": 1
     },
     "by_judge": {
-     "jev+openai-gpt-6-sol": 55.8
+     "jev+openai-gpt-6-sol": 60.0
     },
     "rationale": {
      "craft": "level 3.84 of 4",
@@ -2924,7 +2924,7 @@ window.BENCH = {
     "seconds": 101.0,
     "finish": "stop",
     "status": "ok",
-    "score": 80.0,
+    "score": 75.0,
     "criteria": {
      "craft": 4,
      "anatomy": 2,
@@ -2932,7 +2932,7 @@ window.BENCH = {
      "motion": 4
     },
     "by_judge": {
-     "jev+openai-gpt-6-sol": 80.0
+     "jev+openai-gpt-6-sol": 75.0
     },
     "rationale": {
      "craft": "level 3.95 of 4",
@@ -3075,7 +3075,7 @@ window.BENCH = {
     "seconds": 119.5,
     "finish": "stop",
     "status": "ok",
-    "score": 72.5,
+    "score": 70.0,
     "criteria": {
      "craft": 4,
      "anatomy": 2,
@@ -3083,7 +3083,7 @@ window.BENCH = {
      "motion": 3
     },
     "by_judge": {
-     "jev+openai-gpt-6-sol": 72.5
+     "jev+openai-gpt-6-sol": 70.0
     },
     "rationale": {
      "craft": "level 3.97 of 4",
@@ -3226,7 +3226,7 @@ window.BENCH = {
     "seconds": 436.7,
     "finish": "stop",
     "status": "ok",
-    "score": 68.2,
+    "score": 60.0,
     "criteria": {
      "craft": 2,
      "anatomy": 2,
@@ -3234,7 +3234,7 @@ window.BENCH = {
      "motion": 4
     },
     "by_judge": {
-     "jev+openai-gpt-6-sol": 68.2
+     "jev+openai-gpt-6-sol": 60.0
     },
     "rationale": {
      "craft": "level 2.27 of 4",
@@ -3377,7 +3377,7 @@ window.BENCH = {
     "seconds": 24.2,
     "finish": "stop",
     "status": "ok",
-    "score": 19.2,
+    "score": 20.0,
     "criteria": {
      "craft": 1,
      "anatomy": 1,
@@ -3385,7 +3385,7 @@ window.BENCH = {
      "motion": 0
     },
     "by_judge": {
-     "jev+openai-gpt-6-sol": 19.2
+     "jev+openai-gpt-6-sol": 20.0
     },
     "rationale": {
      "craft": "level 1.48 of 4",
@@ -3530,7 +3530,7 @@ window.BENCH = {
     "seconds": 115.7,
     "finish": "stop",
     "status": "ok",
-    "score": 73.2,
+    "score": 70.0,
     "criteria": {
      "craft": 4,
      "anatomy": 2,
@@ -3538,7 +3538,7 @@ window.BENCH = {
      "motion": 3
     },
     "by_judge": {
-     "jev+openai-gpt-6-sol": 73.2
+     "jev+openai-gpt-6-sol": 70.0
     },
     "rationale": {
      "craft": "level 3.94 of 4",
@@ -3681,7 +3681,7 @@ window.BENCH = {
     "seconds": 143.5,
     "finish": "stop",
     "status": "ok",
-    "score": 78.8,
+    "score": 82.5,
     "criteria": {
      "craft": 3,
      "anatomy": 4,
@@ -3689,7 +3689,7 @@ window.BENCH = {
      "motion": 2
     },
     "by_judge": {
-     "jev+openai-gpt-6-sol": 78.8
+     "jev+openai-gpt-6-sol": 82.5
     },
     "rationale": {
      "craft": "level 2.97 of 4",
@@ -3832,7 +3832,7 @@ window.BENCH = {
     "seconds": 122.7,
     "finish": "stop",
     "status": "ok",
-    "score": 53.2,
+    "score": 60.0,
     "criteria": {
      "craft": 4,
      "anatomy": 2,
@@ -3840,7 +3840,7 @@ window.BENCH = {
      "motion": 1
     },
     "by_judge": {
-     "jev+openai-gpt-6-sol": 53.2
+     "jev+openai-gpt-6-sol": 60.0
     },
     "rationale": {
      "craft": "level 3.89 of 4",

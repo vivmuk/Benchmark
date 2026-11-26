@@ -25,7 +25,7 @@ def grade(text):
 
 
 WEIGHTS = {"anatomy": 0.40, "gait": 0.40, "craft": 0.20}
-WEIGHTS_V12 = {"anatomy": 0.35, "proportions": 0.10, "motion": 0.30, "craft": 0.25}
+WEIGHTS_V12 = {"anatomy": 0.50, "craft": 0.30, "motion": 0.20}  # proportions reported, not scored
 
 
 def judged(task, mid):
