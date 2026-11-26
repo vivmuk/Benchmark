@@ -16,42 +16,42 @@ window.BENCH = {
     "seconds": 725.0,
     "finish": "stop",
     "status": "ok",
-    "score": 65.0,
+    "score": 60.0,
     "criteria": {
-     "anatomy": 1,
-     "craft": 3,
-     "gait": 4
+     "anatomy": 2,
+     "craft": 2,
+     "gait": 3
     },
     "by_judge": {
-     "jev+openai-gpt-6-luna": 65.0
+     "jev+openai-gpt-6-sol": 60.0
     },
     "rationale": {
-     "anatomy": "The head and tufted neck are disconnected from the torso; the legs are very thin and long relative to the body. (level 1.01 of 4)",
-     "craft": "The strand of separate wool tufts between the torso and head appears disconnected. (level 2.80 of 4)",
-     "setting": "sky, clouds, sun, purple hills, green grassland, tall grasses, flowers, bird. Palette: Pastel blue and warm yellow sky, purple hills, and layered greens.. Placement: The alpaca's body is near the center of the lower half, with its head high near the upper center..",
-     "gait": "band 4 from 9.25% pixel change; P(planted, coherent)=0.63"
+     "anatomy": "The long neck does not touch the body, and the head is small. (level 1.85 of 4)",
+     "craft": "The neck is separated from the body, and a cloud is cut off at the left edge of the first frame. (level 2.00 of 4)",
+     "gait": "band 4 from 9.25% pixel change; P(planted, coherent)=0.07"
     },
     "verdict": {
-     "jev+openai-gpt-6-luna": "A cream-colored alpaca walks across a grassy field beneath a blue sky, with its head and a strand of wool tufts visibly separated from its body."
+     "jev+openai-gpt-6-sol": "A cream-colored alpaca is shown walking through a green meadow with purple hills, clouds, and a sun behind it."
     },
     "setting": {
-     "depth_planes": 3,
+     "depth_planes": 5,
      "elements": [
-      "sky",
+      "gradient sky",
       "clouds",
       "sun",
-      "purple hills",
-      "green grassland",
-      "tall grasses",
-      "flowers",
-      "bird"
+      "two layers of purple hills",
+      "green meadow",
+      "grass tufts",
+      "small flowers",
+      "small bird in the later frames",
+      "bottom-left caption"
      ],
-     "palette": "Pastel blue and warm yellow sky, purple hills, and layered greens.",
-     "placement": "The alpaca's body is near the center of the lower half, with its head high near the upper center.",
+     "palette": "Pastel blue, cream, lavender, and muted green.",
+     "placement": "The alpaca is near the center, above the foreground grass.",
      "clutter": false
     },
     "judges": 1,
-    "rubric": "v9",
+    "rubric": "v11",
     "scale": 4,
     "motion": 3.38,
     "motion_changed": 9.25,
@@ -59,7 +59,7 @@ window.BENCH = {
     "compliance": 4,
     "compliance_notes": [],
     "gait_band": 4,
-    "score_visual": 65.0
+    "score_visual": 60.0
    },
    "design": {
     "status": "failed",
@@ -144,46 +144,43 @@ window.BENCH = {
     "seconds": 188.5,
     "finish": "stop",
     "status": "ok",
-    "score": 90.0,
+    "score": 70.0,
     "criteria": {
      "anatomy": 4,
-     "craft": 4,
-     "gait": 3
+     "craft": 2,
+     "gait": 2
     },
     "by_judge": {
-     "jev+openai-gpt-6-luna": 90.0
+     "jev+openai-gpt-6-sol": 70.0
     },
     "rationale": {
-     "anatomy": "none (level 3.96 of 4)",
-     "craft": "none (level 3.96 of 4)",
-     "setting": "sky, clouds, stars, sun, distant mountains, snow patches, hills, grassy ground, dirt path, stones, grass tufts, flowers. Palette: Muted greens and purples contrast with the pale alpaca and warm yellow sun.. Placement: Near the center of the frame, slightly below mid-height, facing right..",
-     "gait": "band 3 from 5.73% pixel change; P(planted, coherent)=0.96"
+     "anatomy": "The long, narrow neck leads to a small head; the tail and all four bent legs touch the body. (level 3.87 of 4)",
+     "craft": "A thin extra outline runs beside the neck, and a cloud is cut off at the right edge; no distinct ground shadow is visible. (level 2.03 of 4)",
+     "gait": "band 3 from 5.73% pixel change; P(planted, coherent)=0.03"
     },
     "verdict": {
-     "jev+openai-gpt-6-luna": "A white alpaca walks toward the right across a flower-dotted meadow, with layered hills and mountains beneath a glowing sun and cloudy sky."
+     "jev+openai-gpt-6-sol": "A white alpaca walks along a path through a grassy landscape with mountains and a glowing sun."
     },
     "setting": {
-     "depth_planes": 3,
+     "depth_planes": 6,
      "elements": [
       "sky",
       "clouds",
-      "stars",
+      "small light specks",
       "sun",
-      "distant mountains",
-      "snow patches",
-      "hills",
-      "grassy ground",
-      "dirt path",
-      "stones",
+      "mountains with pale peaks",
+      "distant hills",
+      "grassy field",
       "grass tufts",
-      "flowers"
+      "dirt path",
+      "foreground flowers"
      ],
-     "palette": "Muted greens and purples contrast with the pale alpaca and warm yellow sun.",
-     "placement": "Near the center of the frame, slightly below mid-height, facing right.",
+     "palette": "Muted purples and greens with a warm yellow sun.",
+     "placement": "The alpaca is near the center, on the path.",
      "clutter": false
     },
     "judges": 1,
-    "rubric": "v9",
+    "rubric": "v11",
     "scale": 4,
     "motion": 2.76,
     "motion_changed": 5.73,
@@ -191,7 +188,7 @@ window.BENCH = {
     "compliance": 4,
     "compliance_notes": [],
     "gait_band": 3,
-    "score_visual": 90.0
+    "score_visual": 70.0
    },
    "design": {
     "out_tokens": 25377,
@@ -296,44 +293,45 @@ window.BENCH = {
     "seconds": 94.9,
     "finish": "stop",
     "status": "ok",
-    "score": 35.0,
+    "score": 30.0,
     "criteria": {
      "anatomy": 1,
-     "craft": 3,
+     "craft": 2,
      "gait": 1
     },
     "by_judge": {
-     "jev+openai-gpt-6-luna": 35.0
+     "jev+openai-gpt-6-sol": 30.0
     },
     "rationale": {
-     "anatomy": "The visible thin leg has no clear joint and ends in a dark hoof; the other legs are largely obscured, and the body appears suspended above the ground. (level 1.08 of 4)",
-     "craft": "Foreground grass tufts are cut off by the bottom edge; a soft oval shadow sits below the alpaca with a visible gap. (level 2.54 of 4)",
-     "setting": "sky, clouds, birds, sun, hills, ground, trees, flowers, grass tufts, small stones. Palette: Muted cream, sage green, terracotta, and ochre.. Placement: The alpaca is slightly left of center, with its body below the middle of the frame and above the ground..",
-     "gait": "band 2 from 2.50% pixel change; P(planted, coherent)=0.04"
+     "anatomy": "The visible legs extend behind the rump, the front legs are not clearly formed, and pale hoof-like pieces sit apart from the body below it. (level 1.33 of 4)",
+     "craft": "Pale hoof-like shapes appear in the shadow well below the body, leaving a visible gap between the animal and the ground. (level 1.99 of 4)",
+     "gait": "band 2 from 2.50% pixel change; P(planted, coherent)=0.03"
     },
     "verdict": {
-     "jev+openai-gpt-6-luna": "A cream-colored alpaca walks in place against a layered pastel landscape with a large sun and small decorative details."
+     "jev+openai-gpt-6-sol": "A cream-colored alpaca appears above a green field in a pastel sunset scene, with its legs changing position across four frames."
     },
     "setting": {
-     "depth_planes": 3,
+     "depth_planes": 4,
      "elements": [
       "sky",
       "clouds",
       "birds",
-      "sun",
+      "sun and halo",
       "hills",
-      "ground",
-      "trees",
-      "flowers",
+      "green field",
+      "small trees",
       "grass tufts",
-      "small stones"
+      "flowers",
+      "pebbles",
+      "shadow",
+      "printed headings and caption"
      ],
-     "palette": "Muted cream, sage green, terracotta, and ochre.",
-     "placement": "The alpaca is slightly left of center, with its body below the middle of the frame and above the ground.",
+     "palette": "Muted peach, orange, cream, and sage green.",
+     "placement": "Slightly left of center, above the field.",
      "clutter": false
     },
     "judges": 1,
-    "rubric": "v9",
+    "rubric": "v11",
     "scale": 4,
     "motion": 0.96,
     "motion_changed": 2.5,
@@ -341,7 +339,7 @@ window.BENCH = {
     "compliance": 4,
     "compliance_notes": [],
     "gait_band": 2,
-    "score_visual": 35.0
+    "score_visual": 30.0
    },
    "design": {
     "out_tokens": 32938,
@@ -446,44 +444,45 @@ window.BENCH = {
     "seconds": 252.3,
     "finish": "stop",
     "status": "ok",
-    "score": 95.0,
+    "score": 60.0,
     "criteria": {
-     "anatomy": 4,
-     "craft": 3,
-     "gait": 4
+     "anatomy": 2,
+     "craft": 2,
+     "gait": 3
     },
     "by_judge": {
-     "jev+openai-gpt-6-luna": 95.0
+     "jev+openai-gpt-6-sol": 60.0
     },
     "rationale": {
-     "anatomy": "none (level 3.97 of 4)",
-     "craft": "Clouds at the side edges and grass at the bottom edge are partially clipped. (level 2.95 of 4)",
-     "setting": "sky, clouds, sun, mountains, hills, grass, dirt path, flowers, bushes, rocks. Palette: Pastel lavender and peach sky, green hills, and warm tan ground.. Placement: The alpaca is near the center of the frame, slightly right of center..",
-     "gait": "band 4 from 10.61% pixel change; P(planted, coherent)=0.88"
+     "anatomy": "The neck is long and narrow, the head is small, and one front and one rear leg show clear bends. (level 1.99 of 4)",
+     "craft": "A vertical boundary is visible at the right end of a green hill; clouds and reeds are cut off by the frame edges. (level 2.01 of 4)",
+     "gait": "band 4 from 10.61% pixel change; P(planted, coherent)=0.07"
     },
     "verdict": {
-     "jev+openai-gpt-6-luna": "A white, fluffy alpaca wearing a colorful bell collar walks in place along a dirt path in a layered pastel landscape."
+     "jev+openai-gpt-6-sol": "A white alpaca walks along a dirt path in front of green hills and snow-capped mountains beneath a pink-purple sky."
     },
     "setting": {
-     "depth_planes": 3,
+     "depth_planes": 5,
      "elements": [
-      "sky",
       "clouds",
       "sun",
-      "mountains",
-      "hills",
-      "grass",
+      "snow-capped mountains",
+      "pink hills",
+      "green hills",
       "dirt path",
+      "pebbles",
+      "shrubs",
+      "grass",
       "flowers",
-      "bushes",
-      "rocks"
+      "foreground reeds",
+      "small sky specks"
      ],
-     "palette": "Pastel lavender and peach sky, green hills, and warm tan ground.",
-     "placement": "The alpaca is near the center of the frame, slightly right of center.",
+     "palette": "Pink and purple sky, cream clouds, mauve mountains, green hills, and tan ground.",
+     "placement": "The alpaca is near the center, facing right on the path.",
      "clutter": false
     },
     "judges": 1,
-    "rubric": "v9",
+    "rubric": "v11",
     "scale": 4,
     "motion": 5.05,
     "motion_changed": 10.61,
@@ -491,7 +490,7 @@ window.BENCH = {
     "compliance": 4,
     "compliance_notes": [],
     "gait_band": 4,
-    "score_visual": 95.0
+    "score_visual": 60.0
    },
    "design": {
     "out_tokens": 25067,
@@ -596,23 +595,22 @@ window.BENCH = {
     "seconds": 699.1,
     "finish": "stop",
     "status": "ok",
-    "score": 100.0,
+    "score": 80.0,
     "criteria": {
      "anatomy": 4,
-     "craft": 4,
-     "gait": 4
+     "craft": 2,
+     "gait": 3
     },
     "by_judge": {
-     "jev+openai-gpt-6-luna": 100.0
+     "jev+openai-gpt-6-sol": 80.0
     },
     "rationale": {
-     "anatomy": "none (level 3.98 of 4)",
-     "craft": "none (level 3.96 of 4)",
-     "setting": "sky, clouds, sun, snow-capped mountains, rolling hills, meadow, dirt path, grass, flowers, small shrubs. Palette: Bright blue sky, cool violet-blue mountains, and layered green meadow with warm cream and yellow accents.. Placement: Near the center of the frame, slightly right of center..",
-     "gait": "band 4 from 13.69% pixel change; P(planted, coherent)=0.97"
+     "anatomy": "The neck is long and the head is small relative to the body. (level 3.85 of 4)",
+     "craft": "A cloud and mountains are cut off at the frame edges; no distinct contact shadow is visible. (level 2.00 of 4)",
+     "gait": "band 4 from 13.69% pixel change; P(planted, coherent)=0.07"
     },
     "verdict": {
-     "jev+openai-gpt-6-luna": "A fluffy cream alpaca walks along a flowered path in a bright mountain meadow beneath a blue sky."
+     "jev+openai-gpt-6-sol": "A cream-colored alpaca walks on a dirt path in a grassy scene with mountains, clouds, and a sun."
     },
     "setting": {
      "depth_planes": 3,
@@ -622,18 +620,18 @@ window.BENCH = {
       "sun",
       "snow-capped mountains",
       "rolling hills",
-      "meadow",
-      "dirt path",
+      "small trees",
       "grass",
       "flowers",
-      "small shrubs"
+      "dirt path",
+      "pebbles"
      ],
-     "palette": "Bright blue sky, cool violet-blue mountains, and layered green meadow with warm cream and yellow accents.",
-     "placement": "Near the center of the frame, slightly right of center.",
+     "palette": "Pastel blue, green, lavender, cream, and tan.",
+     "placement": "Near the center, on the foreground path.",
      "clutter": false
     },
     "judges": 1,
-    "rubric": "v9",
+    "rubric": "v11",
     "scale": 4,
     "motion": 5.19,
     "motion_changed": 13.69,
@@ -641,7 +639,7 @@ window.BENCH = {
     "compliance": 4,
     "compliance_notes": [],
     "gait_band": 4,
-    "score_visual": 100.0
+    "score_visual": 80.0
    },
    "design": {
     "out_tokens": 71250,
@@ -826,23 +824,22 @@ window.BENCH = {
     "seconds": 267.9,
     "finish": "stop",
     "status": "ok",
-    "score": 75.0,
+    "score": 60.0,
     "criteria": {
      "anatomy": 2,
-     "craft": 3,
-     "gait": 4
+     "craft": 2,
+     "gait": 3
     },
     "by_judge": {
-     "jev+openai-gpt-6-luna": 75.0
+     "jev+openai-gpt-6-sol": 60.0
     },
     "rationale": {
-     "anatomy": "The narrow legs are mostly straight, with no visible joints. (level 2.11 of 4)",
-     "craft": "A cloud is partly cropped at the upper-right edge. (level 2.92 of 4)",
-     "setting": "sky, clouds, sun, rolling hills, pale horizon band, grassy meadow, grass tufts, flowers. Palette: Blue sky and hills contrast with the green meadow, pale alpaca, and warm yellow sun.. Placement: The alpaca is near the center of the frame, slightly right of center..",
-     "gait": "band 4 from 6.77% pixel change; P(planted, coherent)=0.80"
+     "anatomy": "The rear legs meet the underside of the body rather than the rump; the neck is long and the head is small. (level 1.56 of 4)",
+     "craft": "A narrow line runs down the neck, the cloud at the right edge is clipped, and there is no clear shadow beneath the feet. (level 2.03 of 4)",
+     "gait": "band 4 from 6.77% pixel change; P(planted, coherent)=0.03"
     },
     "verdict": {
-     "jev+openai-gpt-6-luna": "A cream-colored alpaca walks through a flower-dotted meadow beneath a sunny, cloudy sky with rolling hills in the distance."
+     "jev+openai-gpt-6-sol": "A cream-colored alpaca walks in place in a grassy scene with hills, flowers, clouds, and a sun."
     },
     "setting": {
      "depth_planes": 3,
@@ -850,18 +847,17 @@ window.BENCH = {
       "sky",
       "clouds",
       "sun",
-      "rolling hills",
-      "pale horizon band",
-      "grassy meadow",
-      "grass tufts",
+      "blue hills",
+      "pale hills",
+      "grass",
       "flowers"
      ],
-     "palette": "Blue sky and hills contrast with the green meadow, pale alpaca, and warm yellow sun.",
-     "placement": "The alpaca is near the center of the frame, slightly right of center.",
+     "palette": "Soft blues, greens, cream, and pale yellow.",
+     "placement": "The alpaca is near the center, in front of the hills.",
      "clutter": false
     },
     "judges": 1,
-    "rubric": "v9",
+    "rubric": "v11",
     "scale": 4,
     "motion": 2.62,
     "motion_changed": 6.77,
@@ -869,7 +865,7 @@ window.BENCH = {
     "compliance": 4,
     "compliance_notes": [],
     "gait_band": 4,
-    "score_visual": 75.0
+    "score_visual": 60.0
    },
    "design": {
     "out_tokens": 29089,
@@ -974,43 +970,44 @@ window.BENCH = {
     "seconds": 118.1,
     "finish": "stop",
     "status": "ok",
-    "score": 60.0,
+    "score": 40.0,
     "criteria": {
      "anatomy": 2,
-     "craft": 4,
-     "gait": 2
+     "craft": 2,
+     "gait": 1
     },
     "by_judge": {
-     "jev+openai-gpt-6-luna": 60.0
+     "jev+openai-gpt-6-sol": 40.0
     },
     "rationale": {
-     "anatomy": "The four legs are simple straight, unarticulated shapes; the head, ears, eyes, muzzle, and body are present and attached. (level 2.17 of 4)",
-     "craft": "A soft shadow appears beneath the alpaca; no other obvious artifacts. (level 3.96 of 4)",
-     "setting": "sky, sun, clouds, mountains, rolling hills, grassy ground, stylized trees, flowers, grass tufts. Palette: Muted pale greens, sage, cream, and warm beige.. Placement: The alpaca is near the center of the frame, slightly right of center..",
-     "gait": "band 2 from 2.24% pixel change; P(planted, coherent)=0.96"
+     "anatomy": "The neck is long and narrow, and the legs show no visible knee, hock, or fetlock bends. (level 1.59 of 4)",
+     "craft": "Angular joins are visible at the front-leg roots, and a grass tuft is cut off at the bottom edge. (level 2.01 of 4)",
+     "gait": "band 2 from 2.24% pixel change; P(planted, coherent)=0.03"
     },
     "verdict": {
-     "jev+openai-gpt-6-luna": "A cream-colored, woolly alpaca walks across a softly colored landscape with mountains, hills, and small plants."
+     "jev+openai-gpt-6-sol": "A cream-colored alpaca appears in four walking poses in a pastel landscape with mountains, hills, and a path."
     },
     "setting": {
-     "depth_planes": 3,
+     "depth_planes": 4,
      "elements": [
       "sky",
-      "sun",
       "clouds",
+      "sun glow",
       "mountains",
       "rolling hills",
-      "grassy ground",
-      "stylized trees",
-      "flowers",
-      "grass tufts"
+      "path",
+      "trees",
+      "grass tufts",
+      "small flowers",
+      "leaf emblem",
+      "titles and labels"
      ],
-     "palette": "Muted pale greens, sage, cream, and warm beige.",
-     "placement": "The alpaca is near the center of the frame, slightly right of center.",
+     "palette": "Muted cream, sage green, and sandy beige.",
+     "placement": "Near the center, slightly to the right, in front of the hills.",
      "clutter": false
     },
     "judges": 1,
-    "rubric": "v9",
+    "rubric": "v11",
     "scale": 4,
     "motion": 0.94,
     "motion_changed": 2.24,
@@ -1018,7 +1015,7 @@ window.BENCH = {
     "compliance": 4,
     "compliance_notes": [],
     "gait_band": 2,
-    "score_visual": 60.0
+    "score_visual": 40.0
    },
    "design": {
     "out_tokens": 13410,
@@ -1123,44 +1120,43 @@ window.BENCH = {
     "seconds": 198.9,
     "finish": "stop",
     "status": "ok",
-    "score": 80.0,
+    "score": 70.0,
     "criteria": {
      "anatomy": 4,
      "craft": 4,
-     "gait": 2
+     "gait": 1
     },
     "by_judge": {
-     "jev+openai-gpt-6-luna": 80.0
+     "jev+openai-gpt-6-sol": 70.0
     },
     "rationale": {
-     "anatomy": "none (level 3.98 of 4)",
-     "craft": "None. (level 3.96 of 4)",
-     "setting": "sky, sun, clouds, birds, snow-capped mountains, rolling green hills, sandy path, rocks, grass tufts, flowers. Palette: Soft muted greens, pale blue, warm cream, and sandy tan.. Placement: The alpaca is near the center of the frame, standing on the path..",
-     "gait": "band 2 from 2.05% pixel change; P(planted, coherent)=0.89"
+     "anatomy": "The neck is long relative to its width, and the head is small relative to the body. (level 3.84 of 4)",
+     "craft": "none (level 3.96 of 4)",
+     "gait": "band 2 from 2.05% pixel change; P(planted, coherent)=0.08"
     },
     "verdict": {
-     "jev+openai-gpt-6-luna": "A fluffy cream-colored alpaca walks along a sandy path in a green mountain landscape beneath a bright sun."
+     "jev+openai-gpt-6-sol": "A cream-colored alpaca walks on a path in a grassy mountain scene."
     },
     "setting": {
-     "depth_planes": 3,
+     "depth_planes": 4,
      "elements": [
-      "sky",
       "sun",
       "clouds",
       "birds",
       "snow-capped mountains",
-      "rolling green hills",
-      "sandy path",
-      "rocks",
-      "grass tufts",
-      "flowers"
+      "green hills",
+      "bushes",
+      "grass",
+      "flowers",
+      "dirt path",
+      "pebbles"
      ],
-     "palette": "Soft muted greens, pale blue, warm cream, and sandy tan.",
-     "placement": "The alpaca is near the center of the frame, standing on the path.",
+     "palette": "Pale blue, cream, muted green, and gray.",
+     "placement": "The alpaca is near the center, standing on the path and facing right.",
      "clutter": false
     },
     "judges": 1,
-    "rubric": "v9",
+    "rubric": "v11",
     "scale": 4,
     "motion": 0.91,
     "motion_changed": 2.05,
@@ -1168,7 +1164,7 @@ window.BENCH = {
     "compliance": 4,
     "compliance_notes": [],
     "gait_band": 2,
-    "score_visual": 80.0
+    "score_visual": 70.0
    },
    "design": {
     "out_tokens": 39853,
@@ -1273,42 +1269,43 @@ window.BENCH = {
     "seconds": 145.3,
     "finish": "stop",
     "status": "ok",
-    "score": 75.0,
+    "score": 65.0,
     "criteria": {
      "anatomy": 4,
      "craft": 3,
-     "gait": 2
+     "gait": 1
     },
     "by_judge": {
-     "jev+openai-gpt-6-luna": 75.0
+     "jev+openai-gpt-6-sol": 65.0
     },
     "rationale": {
-     "anatomy": "none (level 3.96 of 4)",
-     "craft": "A small green shape is clipped at the top-left edge. (level 2.94 of 4)",
-     "setting": "sky, clouds, sun, snow-capped mountains, rolling green hills, sandy ground, small grass tufts, rocks. Palette: Muted greens and sandy beige, with pale blue sky and warm cream accents.. Placement: The alpaca is near the horizontal center, standing in the lower half of the frame..",
-     "gait": "band 2 from 1.60% pixel change; P(planted, coherent)=0.88"
+     "anatomy": "The neck is long and narrow. (level 3.82 of 4)",
+     "craft": "A small piece of greenery is clipped at the upper-left edge. (level 2.88 of 4)",
+     "gait": "band 2 from 1.60% pixel change; P(planted, coherent)=0.08"
     },
     "verdict": {
-     "jev+openai-gpt-6-luna": "A fluffy alpaca walks in place in a sandy mountain landscape beneath a sunny, cloudy sky."
+     "jev+openai-gpt-6-sol": "A cream-colored alpaca walks across a sandy path in front of grassy hills and mountains."
     },
     "setting": {
-     "depth_planes": 3,
+     "depth_planes": 5,
      "elements": [
       "sky",
-      "clouds",
       "sun",
+      "clouds",
+      "small birds",
       "snow-capped mountains",
-      "rolling green hills",
-      "sandy ground",
-      "small grass tufts",
-      "rocks"
+      "nearer mountains",
+      "grassy hills",
+      "grass tufts",
+      "sandy path",
+      "small rocks and ground marks"
      ],
-     "palette": "Muted greens and sandy beige, with pale blue sky and warm cream accents.",
-     "placement": "The alpaca is near the horizontal center, standing in the lower half of the frame.",
+     "palette": "Muted teal, sage, cream, and tan",
+     "placement": "Near the center, with its feet on the foreground path",
      "clutter": false
     },
     "judges": 1,
-    "rubric": "v9",
+    "rubric": "v11",
     "scale": 4,
     "motion": 0.77,
     "motion_changed": 1.6,
@@ -1316,7 +1313,7 @@ window.BENCH = {
     "compliance": 4,
     "compliance_notes": [],
     "gait_band": 2,
-    "score_visual": 75.0
+    "score_visual": 65.0
    },
    "design": {
     "out_tokens": 31652,
@@ -1421,45 +1418,43 @@ window.BENCH = {
     "seconds": 86.1,
     "finish": "stop",
     "status": "ok",
-    "score": 85.0,
+    "score": 60.0,
     "criteria": {
-     "anatomy": 4,
-     "craft": 3,
-     "gait": 3
+     "anatomy": 3,
+     "craft": 2,
+     "gait": 2
     },
     "by_judge": {
-     "jev+openai-gpt-6-luna": 85.0
+     "jev+openai-gpt-6-sol": 60.0
     },
     "rationale": {
-     "anatomy": "none (level 3.97 of 4)",
-     "craft": "Small vegetation is cropped at the left frame edge; a soft shadow appears beneath the alpaca. (level 2.90 of 4)",
-     "setting": "sky, clouds, sun, bird silhouettes, distant hills, grassy field, bushes, grass tufts, flowers, sandy path, stones. Palette: Soft pastel blue, green, yellow, and cream tones.. Placement: The alpaca is near the horizontal center, standing on the lower part of the frame..",
-     "gait": "band 3 from 3.25% pixel change; P(planted, coherent)=0.83"
+     "anatomy": "The neck is long and narrow, the head is small, and one hind leg appears nearly straight. (level 2.72 of 4)",
+     "craft": "A smooth oval belly patch and round shoulder patch have visible edges; a flower and some ground details are cut off at frame edges. (level 2.00 of 4)",
+     "gait": "band 3 from 3.25% pixel change; P(planted, coherent)=0.03"
     },
     "verdict": {
-     "jev+openai-gpt-6-luna": "A fluffy white alpaca walks to the right along a sandy path in a sunny, stylized meadow."
+     "jev+openai-gpt-6-sol": "A cream-colored alpaca walks to the right along a sandy path beneath a sun and clouds."
     },
     "setting": {
-     "depth_planes": 3,
+     "depth_planes": 4,
      "elements": [
-      "sky",
-      "clouds",
       "sun",
+      "clouds",
       "bird silhouettes",
-      "distant hills",
-      "grassy field",
+      "rolling hills",
       "bushes",
       "grass tufts",
-      "flowers",
+      "pink flowers",
       "sandy path",
-      "stones"
+      "pebbles",
+      "bottom lettering"
      ],
-     "palette": "Soft pastel blue, green, yellow, and cream tones.",
-     "placement": "The alpaca is near the horizontal center, standing on the lower part of the frame.",
+     "palette": "A blue-to-peach sky sits above muted greens and pale yellow sand.",
+     "placement": "Centered on the path, facing right.",
      "clutter": false
     },
     "judges": 1,
-    "rubric": "v9",
+    "rubric": "v11",
     "scale": 4,
     "motion": 1.49,
     "motion_changed": 3.25,
@@ -1467,7 +1462,7 @@ window.BENCH = {
     "compliance": 4,
     "compliance_notes": [],
     "gait_band": 3,
-    "score_visual": 85.0
+    "score_visual": 60.0
    },
    "design": {
     "out_tokens": 29053,
@@ -1572,43 +1567,42 @@ window.BENCH = {
     "seconds": 257.5,
     "finish": "stop",
     "status": "ok",
-    "score": 75.0,
+    "score": 45.0,
     "criteria": {
-     "anatomy": 4,
+     "anatomy": 2,
      "craft": 3,
-     "gait": 2
+     "gait": 1
     },
     "by_judge": {
-     "jev+openai-gpt-6-luna": 75.0
+     "jev+openai-gpt-6-sol": 45.0
     },
     "rationale": {
-     "anatomy": "none (level 3.97 of 4)",
-     "craft": "No visible contact shadow beneath the hooves. (level 2.97 of 4)",
-     "setting": "sky, sun, clouds, distant purple hills, blue hills, green rolling hills, foreground grass, small grass tufts, light specks. Palette: Pastel blue and pink sky, yellow sun, layered purple and blue hills, and muted green grass.. Placement: The alpaca is near the center of the frame, slightly right of center..",
-     "gait": "band 2 from 2.98% pixel change; P(planted, coherent)=0.96"
+     "anatomy": "The neck is long and narrow, the head is small, and the legs have no visible bends. (level 1.63 of 4)",
+     "craft": "No distinct shadow is visible beneath the hooves. (level 2.98 of 4)",
+     "gait": "band 2 from 2.98% pixel change; P(planted, coherent)=0.03"
     },
     "verdict": {
-     "jev+openai-gpt-6-luna": "A fluffy alpaca wearing a pink patterned blanket walks across a grassy landscape beneath a pastel sky."
+     "jev+openai-gpt-6-sol": "A cream-colored alpaca wearing a pink patterned blanket walks in place against a pastel landscape."
     },
     "setting": {
-     "depth_planes": 3,
+     "depth_planes": 5,
      "elements": [
-      "sky",
+      "gradient sky",
       "sun",
       "clouds",
-      "distant purple hills",
+      "small white specks",
+      "lavender hills",
       "blue hills",
-      "green rolling hills",
+      "green hills",
       "foreground grass",
-      "small grass tufts",
-      "light specks"
+      "small grass tufts"
      ],
-     "palette": "Pastel blue and pink sky, yellow sun, layered purple and blue hills, and muted green grass.",
-     "placement": "The alpaca is near the center of the frame, slightly right of center.",
+     "palette": "Soft blues, purples, pinks, yellows, and greens.",
+     "placement": "The alpaca is near the center, in the lower half, facing right.",
      "clutter": false
     },
     "judges": 1,
-    "rubric": "v9",
+    "rubric": "v11",
     "scale": 4,
     "motion": 1.24,
     "motion_changed": 2.98,
@@ -1616,7 +1610,7 @@ window.BENCH = {
     "compliance": 4,
     "compliance_notes": [],
     "gait_band": 2,
-    "score_visual": 75.0
+    "score_visual": 45.0
    },
    "design": {
     "out_tokens": 26815,
@@ -1700,43 +1694,43 @@ window.BENCH = {
     "seconds": 203.4,
     "finish": "stop",
     "status": "ok",
-    "score": 90.0,
+    "score": 85.0,
     "criteria": {
      "anatomy": 4,
-     "craft": 2,
-     "gait": 4
+     "craft": 3,
+     "gait": 3
     },
     "by_judge": {
-     "jev+openai-gpt-6-luna": 90.0
+     "jev+openai-gpt-6-sol": 85.0
     },
     "rationale": {
-     "anatomy": "none (level 3.96 of 4)",
-     "craft": "Mountain silhouettes are cropped at the left and right frame edges; no distinct contact shadow is visible beneath the hooves. (level 2.01 of 4)",
-     "setting": "sky, clouds, sun, mountains, rolling hills, dirt path, grass, flowers, small light specks. Palette: Soft blue, green, lavender, and tan with warm cream and yellow highlights.. Placement: The alpaca is near the center of the frame, standing on the path in the lower half..",
-     "gait": "band 4 from 10.36% pixel change; P(planted, coherent)=0.95"
+     "anatomy": "The neck is long and the head is small. (level 3.86 of 4)",
+     "craft": "Straight-edged seams are visible where the upper legs overlap the body. (level 2.96 of 4)",
+     "gait": "band 4 from 10.36% pixel change; P(planted, coherent)=0.08"
     },
     "verdict": {
-     "jev+openai-gpt-6-luna": "A cream-colored alpaca walks along a grassy dirt path in a sunlit mountain landscape."
+     "jev+openai-gpt-6-sol": "A cream alpaca walks along a dirt path beneath a sun and clouds, with mountains and green hills behind it."
     },
     "setting": {
-     "depth_planes": 3,
+     "depth_planes": 5,
      "elements": [
       "sky",
       "clouds",
       "sun",
-      "mountains",
+      "snow-capped mountains",
       "rolling hills",
-      "dirt path",
       "grass",
       "flowers",
+      "dirt path",
+      "pebbles",
       "small light specks"
      ],
-     "palette": "Soft blue, green, lavender, and tan with warm cream and yellow highlights.",
-     "placement": "The alpaca is near the center of the frame, standing on the path in the lower half.",
+     "palette": "Muted blues and purples contrast with greens and a tan path.",
+     "placement": "The alpaca is centered on the path, facing right.",
      "clutter": false
     },
     "judges": 1,
-    "rubric": "v9",
+    "rubric": "v11",
     "scale": 4,
     "motion": 4.15,
     "motion_changed": 10.36,
@@ -1744,7 +1738,7 @@ window.BENCH = {
     "compliance": 4,
     "compliance_notes": [],
     "gait_band": 4,
-    "score_visual": 90.0
+    "score_visual": 85.0
    },
    "design": {
     "out_tokens": 36380,
@@ -1849,44 +1843,41 @@ window.BENCH = {
     "seconds": 247.4,
     "finish": "stop",
     "status": "ok",
-    "score": 90.0,
+    "score": 55.0,
     "criteria": {
-     "anatomy": 4,
-     "craft": 4,
-     "gait": 3
+     "anatomy": 2,
+     "craft": 3,
+     "gait": 2
     },
     "by_judge": {
-     "jev+openai-gpt-6-luna": 90.0
+     "jev+openai-gpt-6-sol": 55.0
     },
     "rationale": {
-     "anatomy": "none (level 3.91 of 4)",
-     "craft": "none (level 3.96 of 4)",
-     "setting": "sky, clouds, sun, mountains, hills, water, sandy plain, path, grasses, flowers. Palette: Muted teal, sage, ochre, and dusty pink with a pale yellow sun.. Placement: Near the center, slightly right, on the path in the lower-middle of the frame..",
-     "gait": "band 3 from 3.62% pixel change; P(planted, coherent)=0.97"
+     "anatomy": "A dark segment of a rear leg appears separated from the body in the second frame. (level 1.93 of 4)",
+     "craft": "A rear-leg segment appears separate from the body in the second frame. (level 2.55 of 4)",
+     "gait": "band 3 from 3.62% pixel change; P(planted, coherent)=0.05"
     },
     "verdict": {
-     "jev+openai-gpt-6-luna": "A cream-colored alpaca wearing a patterned blanket walks along a pale path in a layered mountain landscape."
+     "jev+openai-gpt-6-sol": "A cream-colored alpaca with a patterned blanket is shown walking to the right on a sandy path in a mountain scene."
     },
     "setting": {
-     "depth_planes": 3,
+     "depth_planes": 5,
      "elements": [
-      "sky",
-      "clouds",
+      "title and small labels",
       "sun",
-      "mountains",
-      "hills",
-      "water",
-      "sandy plain",
-      "path",
-      "grasses",
-      "flowers"
+      "thin clouds",
+      "layered mountains",
+      "rolling hills",
+      "winding pale stream",
+      "sandy path",
+      "sparse grasses"
      ],
-     "palette": "Muted teal, sage, ochre, and dusty pink with a pale yellow sun.",
-     "placement": "Near the center, slightly right, on the path in the lower-middle of the frame.",
+     "palette": "Muted teal and sage with dusty pink, tan, cream, and pale yellow.",
+     "placement": "Near the center, on the foreground path.",
      "clutter": false
     },
     "judges": 1,
-    "rubric": "v9",
+    "rubric": "v11",
     "scale": 4,
     "motion": 1.59,
     "motion_changed": 3.62,
@@ -1894,7 +1885,7 @@ window.BENCH = {
     "compliance": 4,
     "compliance_notes": [],
     "gait_band": 3,
-    "score_visual": 90.0
+    "score_visual": 55.0
    },
    "design": {
     "out_tokens": 13227,
@@ -1999,43 +1990,44 @@ window.BENCH = {
     "seconds": 299.7,
     "finish": "stop",
     "status": "ok",
-    "score": 95.0,
+    "score": 75.0,
     "criteria": {
-     "anatomy": 4,
+     "anatomy": 3,
      "craft": 3,
-     "gait": 4
+     "gait": 3
     },
     "by_judge": {
-     "jev+openai-gpt-6-luna": 95.0
+     "jev+openai-gpt-6-sol": 75.0
     },
     "rationale": {
-     "anatomy": "none (level 3.97 of 4)",
-     "craft": "No distinct contact shadow is visible beneath the hooves. (level 2.96 of 4)",
-     "setting": "sky, clouds, sun, birds, mountains, hills, grassland, grasses, water. Palette: Muted teal, sage green, cream, and sandy ochre, with warm sunlight.. Placement: The alpaca is near the horizontal center, in the lower-middle of the frame..",
-     "gait": "band 4 from 6.24% pixel change; P(planted, coherent)=0.96"
+     "anatomy": "The neck is long; one front leg is nearly straight. (level 2.86 of 4)",
+     "craft": "A thin vertical seam is visible in the foreground near the bottom edge. (level 2.97 of 4)",
+     "gait": "band 4 from 6.24% pixel change; P(planted, coherent)=0.04"
     },
     "verdict": {
-     "jev+openai-gpt-6-luna": "A cream-colored alpaca wearing a patterned blanket walks across a grassy Andean landscape beneath a bright sun."
+     "jev+openai-gpt-6-sol": "A cream alpaca wearing a patterned blanket walks along a sandy path in a mountain scene beneath a sun and the title \u201cAltiplano.\u201d"
     },
     "setting": {
-     "depth_planes": 3,
+     "depth_planes": 5,
      "elements": [
       "sky",
-      "clouds",
       "sun",
+      "clouds",
       "birds",
-      "mountains",
-      "hills",
-      "grassland",
-      "grasses",
-      "water"
+      "mountain ranges",
+      "rolling hills",
+      "sandy path",
+      "grass tufts",
+      "foreground grass",
+      "title and captions",
+      "patterned blanket"
      ],
-     "palette": "Muted teal, sage green, cream, and sandy ochre, with warm sunlight.",
-     "placement": "The alpaca is near the horizontal center, in the lower-middle of the frame.",
+     "palette": "Muted greens and blues with sandy tan and warm cream",
+     "placement": "The alpaca stands near the center, facing right on the path.",
      "clutter": false
     },
     "judges": 1,
-    "rubric": "v9",
+    "rubric": "v11",
     "scale": 4,
     "motion": 2.46,
     "motion_changed": 6.24,
@@ -2043,7 +2035,7 @@ window.BENCH = {
     "compliance": 4,
     "compliance_notes": [],
     "gait_band": 4,
-    "score_visual": 95.0
+    "score_visual": 75.0
    },
    "design": {
     "out_tokens": 29907,
@@ -2148,43 +2140,41 @@ window.BENCH = {
     "seconds": 205.9,
     "finish": "stop",
     "status": "ok",
-    "score": 90.0,
+    "score": 80.0,
     "criteria": {
      "anatomy": 4,
      "craft": 4,
-     "gait": 3
+     "gait": 2
     },
     "by_judge": {
-     "jev+openai-gpt-6-luna": 90.0
+     "jev+openai-gpt-6-sol": 80.0
     },
     "rationale": {
-     "anatomy": "none (level 3.96 of 4)",
-     "craft": "none (level 3.96 of 4)",
-     "setting": "sky, sun, thin clouds, birds, mountains, rolling hills, sandy path, grasses, flowers. Palette: Muted lavender and rose tones with warm peach and golden highlights.. Placement: The alpaca is near the center of the frame, slightly right of center, on the lower portion of the scene..",
-     "gait": "band 3 from 3.79% pixel change; P(planted, coherent)=0.91"
+     "anatomy": "The neck is long and narrow; no parts appear detached. (level 3.89 of 4)",
+     "craft": "none (level 3.95 of 4)",
+     "gait": "band 3 from 3.79% pixel change; P(planted, coherent)=0.08"
     },
     "verdict": {
-     "jev+openai-gpt-6-luna": "A fluffy cream-colored alpaca walks across a sandy path in a sunset mountain landscape."
+     "jev+openai-gpt-6-sol": "A cream alpaca walks along a sandy path at sunset, with mountains and low hills behind it."
     },
     "setting": {
-     "depth_planes": 3,
+     "depth_planes": 5,
      "elements": [
-      "sky",
       "sun",
       "thin clouds",
-      "birds",
-      "mountains",
+      "small birds",
+      "layered mountains",
       "rolling hills",
       "sandy path",
-      "grasses",
-      "flowers"
+      "scattered grass",
+      "foreground reeds"
      ],
-     "palette": "Muted lavender and rose tones with warm peach and golden highlights.",
-     "placement": "The alpaca is near the center of the frame, slightly right of center, on the lower portion of the scene.",
+     "palette": "Muted lavender and dusty pink with cream and pale yellow.",
+     "placement": "Near the center of the foreground path.",
      "clutter": false
     },
     "judges": 1,
-    "rubric": "v9",
+    "rubric": "v11",
     "scale": 4,
     "motion": 1.59,
     "motion_changed": 3.79,
@@ -2192,7 +2182,7 @@ window.BENCH = {
     "compliance": 4,
     "compliance_notes": [],
     "gait_band": 3,
-    "score_visual": 90.0
+    "score_visual": 80.0
    },
    "design": {
     "out_tokens": 14180,
@@ -2297,42 +2287,42 @@ window.BENCH = {
     "seconds": 241.6,
     "finish": "stop",
     "status": "ok",
-    "score": 70.0,
+    "score": 65.0,
     "criteria": {
      "anatomy": 4,
-     "craft": 4,
+     "craft": 3,
      "gait": 1
     },
     "by_judge": {
-     "jev+openai-gpt-6-luna": 70.0
+     "jev+openai-gpt-6-sol": 65.0
     },
     "rationale": {
-     "anatomy": "None; the legs are articulated and end in visible hooves. (level 3.98 of 4)",
-     "craft": "A faint shadow is visible beneath the alpaca; no obvious stray shapes or clipping. (level 3.96 of 4)",
-     "setting": "sky, sun, thin clouds, layered mountains, rolling hills, plateau ground, grass tufts, small stones. Palette: Soft pastel lavender, mauve, dusty pink, and warm cream.. Placement: The alpaca is near the horizontal center, in the lower-middle of the frame..",
-     "gait": "band 2 from 2.64% pixel change; P(planted, coherent)=0.06"
+     "anatomy": "The neck is long relative to the body. (level 3.87 of 4)",
+     "craft": "No distinct contact shadow is visible. (level 2.97 of 4)",
+     "gait": "band 2 from 2.64% pixel change; P(planted, coherent)=0.09"
     },
     "verdict": {
-     "jev+openai-gpt-6-luna": "A cream-colored alpaca walks across a pastel plateau beneath a sun, with layered mountains behind it and editorial text in the upper left."
+     "jev+openai-gpt-6-sol": "A cream-colored alpaca appears in four walking poses in a pastel mountain scene with a sun and text."
     },
     "setting": {
-     "depth_planes": 3,
+     "depth_planes": 5,
      "elements": [
-      "sky",
-      "sun",
-      "thin clouds",
+      "title and small captions",
+      "thin rectangular border",
+      "sun and halo",
+      "wispy cloud lines",
       "layered mountains",
       "rolling hills",
-      "plateau ground",
+      "sandy ground",
       "grass tufts",
       "small stones"
      ],
-     "palette": "Soft pastel lavender, mauve, dusty pink, and warm cream.",
-     "placement": "The alpaca is near the horizontal center, in the lower-middle of the frame.",
+     "palette": "Muted pink, peach, lavender, and cream",
+     "placement": "The alpaca is near the center, to the right of the title.",
      "clutter": false
     },
     "judges": 1,
-    "rubric": "v9",
+    "rubric": "v11",
     "scale": 4,
     "motion": 1.11,
     "motion_changed": 2.64,
@@ -2340,7 +2330,7 @@ window.BENCH = {
     "compliance": 4,
     "compliance_notes": [],
     "gait_band": 2,
-    "score_visual": 70.0
+    "score_visual": 65.0
    },
    "design": {
     "out_tokens": 27528,
@@ -2445,44 +2435,43 @@ window.BENCH = {
     "seconds": 408.6,
     "finish": "stop",
     "status": "ok",
-    "score": 80.0,
+    "score": 65.0,
     "criteria": {
      "anatomy": 4,
-     "craft": 4,
-     "gait": 2
+     "craft": 3,
+     "gait": 1
     },
     "by_judge": {
-     "jev+openai-gpt-6-luna": 80.0
+     "jev+openai-gpt-6-sol": 65.0
     },
     "rationale": {
-     "anatomy": "none (level 3.98 of 4)",
-     "craft": "none (level 3.96 of 4)",
-     "setting": "sky, sun, clouds, birds, mountains, rolling hills, sandy path, grassy foreground, grass tufts, flowers. Palette: Soft, muted teal, sage green and blue with pale cream and warm yellow accents.. Placement: The alpaca is near the center of the frame, standing on the path..",
-     "gait": "band 2 from 1.68% pixel change; P(planted, coherent)=0.96"
+     "anatomy": "The legs emerge beneath the woolly body; the neck is long and narrow, and the head is small. (level 3.87 of 4)",
+     "craft": "Foreground plants are cut off by the bottom edge. (level 2.88 of 4)",
+     "gait": "band 2 from 1.68% pixel change; P(planted, coherent)=0.03"
     },
     "verdict": {
-     "jev+openai-gpt-6-luna": "A cream-colored alpaca with a brown collar walks across a grassy path in front of rolling hills and mountains."
+     "jev+openai-gpt-6-sol": "A cream-colored alpaca wearing a collar walks along a sandy path in a grassy mountain scene."
     },
     "setting": {
-     "depth_planes": 3,
+     "depth_planes": 5,
      "elements": [
       "sky",
       "sun",
       "clouds",
       "birds",
-      "mountains",
+      "snow-capped mountains",
       "rolling hills",
       "sandy path",
-      "grassy foreground",
       "grass tufts",
-      "flowers"
+      "small flowers",
+      "foreground plants"
      ],
-     "palette": "Soft, muted teal, sage green and blue with pale cream and warm yellow accents.",
-     "placement": "The alpaca is near the center of the frame, standing on the path.",
+     "palette": "Muted teal, sage green, cream, and sandy beige",
+     "placement": "Near the center, over the path",
      "clutter": false
     },
     "judges": 1,
-    "rubric": "v9",
+    "rubric": "v11",
     "scale": 4,
     "motion": 0.8,
     "motion_changed": 1.68,
@@ -2490,7 +2479,7 @@ window.BENCH = {
     "compliance": 4,
     "compliance_notes": [],
     "gait_band": 2,
-    "score_visual": 80.0
+    "score_visual": 65.0
    },
    "design": {
     "out_tokens": 30214,
@@ -2602,16 +2591,15 @@ window.BENCH = {
      "gait": 2
     },
     "by_judge": {
-     "jev+openai-gpt-6-luna": 55.0
+     "jev+openai-gpt-6-sol": 55.0
     },
     "rationale": {
-     "anatomy": "The four legs are smooth and have no visible knee joints. (level 2.15 of 4)",
-     "craft": "No distinct contact shadow is visible beneath the hooves. (level 2.95 of 4)",
-     "setting": "sky, clouds, sun, distant hills, grassy field, grass tufts, flowers, glowing specks. Palette: Soft blue sky, muted purple hills, and green grass with warm yellow light.. Placement: The alpaca is near the center, slightly to the right, in the lower half of the frame..",
-     "gait": "band 3 from 3.20% pixel change; P(planted, coherent)=0.08"
+     "anatomy": "The neck is long and narrow, the head is small, and the legs show no visible bends. (level 1.62 of 4)",
+     "craft": "No distinct shadow is visible beneath the hooves. (level 2.96 of 4)",
+     "gait": "band 3 from 3.20% pixel change; P(planted, coherent)=0.06"
     },
     "verdict": {
-     "jev+openai-gpt-6-luna": "A fluffy white alpaca walks in place in a grassy field beneath a cloudy sky with a low sun."
+     "jev+openai-gpt-6-sol": "A white alpaca walks in place in a grassy landscape beneath clouds and a low sun."
     },
     "setting": {
      "depth_planes": 3,
@@ -2619,18 +2607,17 @@ window.BENCH = {
       "sky",
       "clouds",
       "sun",
-      "distant hills",
+      "rolling hills",
       "grassy field",
-      "grass tufts",
-      "flowers",
-      "glowing specks"
+      "small flowers",
+      "floating light specks"
      ],
-     "palette": "Soft blue sky, muted purple hills, and green grass with warm yellow light.",
-     "placement": "The alpaca is near the center, slightly to the right, in the lower half of the frame.",
+     "palette": "Muted blues and purples above a green field, with warm cream and yellow highlights",
+     "placement": "The alpaca stands near the center of the grassy foreground.",
      "clutter": false
     },
     "judges": 1,
-    "rubric": "v9",
+    "rubric": "v11",
     "scale": 4,
     "motion": 1.9,
     "motion_changed": 3.2,
@@ -2743,45 +2730,45 @@ window.BENCH = {
     "seconds": 285.7,
     "finish": "stop",
     "status": "ok",
-    "score": 95.0,
+    "score": 90.0,
     "criteria": {
      "anatomy": 4,
-     "craft": 3,
+     "craft": 2,
      "gait": 4
     },
     "by_judge": {
-     "jev+openai-gpt-6-luna": 95.0
+     "jev+openai-gpt-6-sol": 90.0
     },
     "rationale": {
-     "anatomy": "none (level 3.97 of 4)",
-     "craft": "A cloud is partially cut off at the left edge; dark hoof shadows are visible on the path. (level 2.91 of 4)",
-     "setting": "sky, clouds, sun, bird, mountains, rolling hills, water, grass, flowers, dirt path, small shrubs. Palette: Soft pastel blues, greens, lavender, and warm cream tones.. Placement: The alpaca is near the center, standing on the path in the lower half of the frame..",
-     "gait": "band 4 from 6.70% pixel change; P(planted, coherent)=0.86"
+     "anatomy": "The neck is long relative to the body, and the head is small. (level 3.86 of 4)",
+     "craft": "A cloud is cut off at the left edge, and no distinct ground shadow is visible. (level 2.00 of 4)",
+     "gait": "band 4 from 6.70% pixel change; P(planted, coherent)=0.82"
     },
     "verdict": {
-     "jev+openai-gpt-6-luna": "A cream-colored alpaca walks along a flower-dotted path in a layered mountain meadow beneath a bright sky."
+     "jev+openai-gpt-6-sol": "A cream alpaca walks to the right along a path through a grassy landscape with mountains, clouds, and a sun."
     },
     "setting": {
-     "depth_planes": 3,
+     "depth_planes": 5,
      "elements": [
       "sky",
-      "clouds",
       "sun",
-      "bird",
-      "mountains",
-      "rolling hills",
-      "water",
-      "grass",
+      "clouds",
+      "small bird",
+      "layered mountains",
+      "rolling green hills",
+      "path",
+      "pebbles",
+      "grass tufts",
       "flowers",
-      "dirt path",
-      "small shrubs"
+      "small bushes",
+      "stones"
      ],
-     "palette": "Soft pastel blues, greens, lavender, and warm cream tones.",
-     "placement": "The alpaca is near the center, standing on the path in the lower half of the frame.",
+     "palette": "Soft blues, lavender, cream, green, tan, and pale gold.",
+     "placement": "The alpaca is near the center, facing right on the foreground path.",
      "clutter": false
     },
     "judges": 1,
-    "rubric": "v9",
+    "rubric": "v11",
     "scale": 4,
     "motion": 2.46,
     "motion_changed": 6.7,
@@ -2789,7 +2776,7 @@ window.BENCH = {
     "compliance": 4,
     "compliance_notes": [],
     "gait_band": 4,
-    "score_visual": 95.0
+    "score_visual": 90.0
    },
    "design": {
     "out_tokens": 44651,
@@ -2894,44 +2881,44 @@ window.BENCH = {
     "seconds": 101.0,
     "finish": "stop",
     "status": "ok",
-    "score": 85.0,
+    "score": 70.0,
     "criteria": {
-     "anatomy": 4,
-     "craft": 3,
+     "anatomy": 3,
+     "craft": 2,
      "gait": 3
     },
     "by_judge": {
-     "jev+openai-gpt-6-luna": 85.0
+     "jev+openai-gpt-6-sol": 70.0
     },
     "rationale": {
-     "anatomy": "none (level 3.91 of 4)",
-     "craft": "Trees are cut off at the side edges in some frames. (level 2.90 of 4)",
-     "setting": "sky, clouds, sun, mountains, hills, trees, fence, grass, grass tufts, flowers. Palette: Soft greens and blue-gray backgrounds with warm cream clouds and sunlight, and small colorful flowers.. Placement: The alpaca is near the horizontal center, slightly right, with its body in the middle of the frame and legs reaching into the foreground..",
-     "gait": "band 4 from 8.26% pixel change; P(planted, coherent)=0.06"
+     "anatomy": "The neck is long and narrow, the head is small, and one hind leg appears straight. (level 2.73 of 4)",
+     "craft": "Ring-like overlaps are visible on the neck and legs; clouds and trees are cut off at the frame edges. (level 2.01 of 4)",
+     "gait": "band 4 from 8.26% pixel change; P(planted, coherent)=0.07"
     },
     "verdict": {
-     "jev+openai-gpt-6-luna": "A cream-colored alpaca with a long neck walks in a flowered grassy scene."
+     "jev+openai-gpt-6-sol": "A cream-colored alpaca walks across a grassy field in front of a fence, trees, mountains, clouds, and a sun."
     },
     "setting": {
-     "depth_planes": 3,
+     "depth_planes": 5,
      "elements": [
       "sky",
-      "clouds",
       "sun",
+      "clouds",
       "mountains",
-      "hills",
+      "rolling hills",
       "trees",
-      "fence",
+      "wooden fence",
       "grass",
-      "grass tufts",
-      "flowers"
+      "flowers",
+      "pale dots",
+      "ground shadow"
      ],
-     "palette": "Soft greens and blue-gray backgrounds with warm cream clouds and sunlight, and small colorful flowers.",
-     "placement": "The alpaca is near the horizontal center, slightly right, with its body in the middle of the frame and legs reaching into the foreground.",
+     "palette": "Soft blues and greens with cream clouds, a brown fence, and pastel flowers.",
+     "placement": "Centered in the foreground, in front of the fence.",
      "clutter": false
     },
     "judges": 1,
-    "rubric": "v9",
+    "rubric": "v11",
     "scale": 4,
     "motion": 3.89,
     "motion_changed": 8.26,
@@ -2939,7 +2926,7 @@ window.BENCH = {
     "compliance": 4,
     "compliance_notes": [],
     "gait_band": 4,
-    "score_visual": 85.0
+    "score_visual": 70.0
    },
    "design": {
     "out_tokens": 13914,
@@ -3044,23 +3031,22 @@ window.BENCH = {
     "seconds": 119.5,
     "finish": "stop",
     "status": "ok",
-    "score": 90.0,
+    "score": 60.0,
     "criteria": {
-     "anatomy": 4,
-     "craft": 4,
+     "anatomy": 2,
+     "craft": 2,
      "gait": 3
     },
     "by_judge": {
-     "jev+openai-gpt-6-luna": 90.0
+     "jev+openai-gpt-6-sol": 60.0
     },
     "rationale": {
-     "anatomy": "none (level 3.97 of 4)",
-     "craft": "No visible artifacts; a soft shadow appears beneath the feet. (level 3.97 of 4)",
-     "setting": "sky, clouds, sun, rolling hills, bushes, grass, flowers. Palette: Pastel blue and peach sky with soft greens and pale cream highlights.. Placement: The alpaca is near the center, slightly right, with its head in the upper half of the frame..",
-     "gait": "band 4 from 7.12% pixel change; P(planted, coherent)=0.06"
+     "anatomy": "The neck is long and slender, the head is small, and no distinct tail is visible. (level 1.93 of 4)",
+     "craft": "A flat tan band crosses the lower body, some foreground plants are cut off at the left edge, and no distinct shadow touches the hooves. (level 2.02 of 4)",
+     "gait": "band 4 from 7.12% pixel change; P(planted, coherent)=0.03"
     },
     "verdict": {
-     "jev+openai-gpt-6-luna": "A cream-colored alpaca walks through a grassy landscape beneath a blue sky."
+     "jev+openai-gpt-6-sol": "A cream-colored alpaca walks to the right through a grassy scene with hills, bushes, flowers, clouds, and a sun."
     },
     "setting": {
      "depth_planes": 3,
@@ -3068,17 +3054,18 @@ window.BENCH = {
       "sky",
       "clouds",
       "sun",
-      "rolling hills",
+      "distant hills",
+      "grassy hills",
       "bushes",
       "grass",
       "flowers"
      ],
-     "palette": "Pastel blue and peach sky with soft greens and pale cream highlights.",
-     "placement": "The alpaca is near the center, slightly right, with its head in the upper half of the frame.",
+     "palette": "Pastel blue, peach, yellow, and shades of green.",
+     "placement": "The alpaca is near the center, facing right.",
      "clutter": false
     },
     "judges": 1,
-    "rubric": "v9",
+    "rubric": "v11",
     "scale": 4,
     "motion": 2.73,
     "motion_changed": 7.12,
@@ -3086,7 +3073,7 @@ window.BENCH = {
     "compliance": 4,
     "compliance_notes": [],
     "gait_band": 4,
-    "score_visual": 90.0
+    "score_visual": 60.0
    },
    "design": {
     "out_tokens": 34159,
@@ -3191,46 +3178,45 @@ window.BENCH = {
     "seconds": 436.7,
     "finish": "stop",
     "status": "ok",
-    "score": 100.0,
+    "score": 70.0,
     "criteria": {
-     "anatomy": 4,
+     "anatomy": 2,
      "craft": 4,
-     "gait": 4
+     "gait": 3
     },
     "by_judge": {
-     "jev+openai-gpt-6-luna": 100.0
+     "jev+openai-gpt-6-sol": 70.0
     },
     "rationale": {
-     "anatomy": "none (level 3.96 of 4)",
-     "craft": "none (level 3.97 of 4)",
-     "setting": "sky, clouds, sun, birds, distant mountains, trees, bushes, green field, sandy path, grass tufts, small flowers, scattered stones. Palette: Bright blue sky, layered blue mountains, green field, and a pale tan path.. Placement: Near the center of the frame, standing on the path..",
-     "gait": "band 4 from 8.77% pixel change; P(planted, coherent)=0.85"
+     "anatomy": "The hind legs bend; the front legs appear straight, and the head is small relative to the long neck. (level 2.02 of 4)",
+     "craft": "none (level 3.95 of 4)",
+     "gait": "band 4 from 8.77% pixel change; P(planted, coherent)=0.11"
     },
     "verdict": {
-     "jev+openai-gpt-6-luna": "A cream-colored alpaca wearing a striped rust-red blanket walks along a sandy path through a sunny green landscape."
+     "jev+openai-gpt-6-sol": "A cream-colored alpaca wearing a striped blanket walks to the right on a sandy path beneath a sunny sky."
     },
     "setting": {
-     "depth_planes": 3,
+     "depth_planes": 6,
      "elements": [
       "sky",
-      "clouds",
       "sun",
-      "birds",
-      "distant mountains",
+      "clouds",
+      "distant birds",
+      "two mountain layers",
+      "grassy field",
       "trees",
       "bushes",
-      "green field",
       "sandy path",
       "grass tufts",
       "small flowers",
-      "scattered stones"
+      "pebbles"
      ],
-     "palette": "Bright blue sky, layered blue mountains, green field, and a pale tan path.",
-     "placement": "Near the center of the frame, standing on the path.",
+     "palette": "Pastel blues and greens with pale yellow and sandy beige.",
+     "placement": "Near the center of the sandy path, facing right.",
      "clutter": false
     },
     "judges": 1,
-    "rubric": "v9",
+    "rubric": "v11",
     "scale": 4,
     "motion": 3.35,
     "motion_changed": 8.77,
@@ -3238,7 +3224,7 @@ window.BENCH = {
     "compliance": 4,
     "compliance_notes": [],
     "gait_band": 4,
-    "score_visual": 100.0
+    "score_visual": 70.0
    },
    "design": {
     "out_tokens": 38105,
@@ -3343,38 +3329,38 @@ window.BENCH = {
     "seconds": 24.2,
     "finish": "stop",
     "status": "ok",
-    "score": 32.8,
+    "score": 23.4,
     "criteria": {
      "anatomy": 1,
      "craft": 3,
-     "gait": 1
+     "gait": 0
     },
     "by_judge": {
-     "jev+openai-gpt-6-luna": 35.0
+     "jev+openai-gpt-6-sol": 25.0
     },
     "rationale": {
-     "anatomy": "The long neck ends above the torso with a visible gap; the legs are thin, straight sticks without visible joints, and the small torso is disproportionate to the neck. (level 1.01 of 4)",
-     "craft": "There is a gap between the neck and torso; a soft shadow lies beneath the body. (level 2.72 of 4)",
-     "setting": "sky, sun, rolling green hill, green ground. Palette: Soft blue, pale yellow, and two shades of green.. Placement: The alpaca is near the center, slightly left, standing along the horizon..",
-     "gait": "band 1 from 0.36% pixel change; P(planted, coherent)=0.78"
+     "anatomy": "The head and neck do not touch the torso, and the rightmost leg does not touch the body; all four legs are straight. (level 0.99 of 4)",
+     "craft": "A gap separates the neck from the torso, and the rightmost leg has a detached upper end. (level 2.66 of 4)",
+     "gait": "band 1 from 0.36% pixel change; P(planted, coherent)=0.03"
     },
     "verdict": {
-     "jev+openai-gpt-6-luna": "A simple cream-colored alpaca with a separate-looking head and neck stands mid-step on green ground beneath a blue sky and pale sun."
+     "jev+openai-gpt-6-sol": "A cream-colored alpaca-like figure stands on green ground beneath a pale sun in a blue sky."
     },
     "setting": {
-     "depth_planes": 2,
+     "depth_planes": 3,
      "elements": [
-      "sky",
-      "sun",
-      "rolling green hill",
-      "green ground"
+      "blue sky",
+      "pale yellow sun",
+      "light-green hill",
+      "darker green foreground ground",
+      "gray ground shadow"
      ],
-     "palette": "Soft blue, pale yellow, and two shades of green.",
-     "placement": "The alpaca is near the center, slightly left, standing along the horizon.",
+     "palette": "Pastel blue, cream, yellow, and greens.",
+     "placement": "Left of center at the boundary between the sky and ground.",
      "clutter": false
     },
     "judges": 1,
-    "rubric": "v9",
+    "rubric": "v11",
     "scale": 4,
     "motion": 0.13,
     "motion_changed": 0.36,
@@ -3384,7 +3370,7 @@ window.BENCH = {
      "barely animates"
     ],
     "gait_band": 1,
-    "score_visual": 35.0
+    "score_visual": 25.0
    },
    "design": {
     "out_tokens": 18483,
@@ -3489,46 +3475,46 @@ window.BENCH = {
     "seconds": 115.7,
     "finish": "stop",
     "status": "ok",
-    "score": 85.0,
+    "score": 55.0,
     "criteria": {
-     "anatomy": 4,
+     "anatomy": 2,
      "craft": 3,
-     "gait": 3
+     "gait": 2
     },
     "by_judge": {
-     "jev+openai-gpt-6-luna": 85.0
+     "jev+openai-gpt-6-sol": 55.0
     },
     "rationale": {
-     "anatomy": "none (level 3.96 of 4)",
-     "craft": "Foreground grass and flowers are cut off at the frame edges. (level 2.94 of 4)",
-     "setting": "sky, clouds, sun, birds, mountains, snowcaps, green hills, path, trees, flowers, grass tufts, stones. Palette: Bright blue sky, soft green hills, and a pale tan path with colorful accents.. Placement: The alpaca is near the center of the frame, slightly to the right, in the lower half..",
-     "gait": "band 3 from 3.94% pixel change; P(planted, coherent)=0.93"
+     "anatomy": "The neck is long and narrow, and the head is small relative to the body. (level 1.88 of 4)",
+     "craft": "Flowers and foreground plants are cut off at the frame edges. (level 2.82 of 4)",
+     "gait": "band 3 from 3.94% pixel change; P(planted, coherent)=0.03"
     },
     "verdict": {
-     "jev+openai-gpt-6-luna": "A cream-colored alpaca with a striped blanket walks through a sunny mountain scene with flowers and trees."
+     "jev+openai-gpt-6-sol": "A cream alpaca wearing a patterned blanket walks through a sunny mountain pasture beneath title text."
     },
     "setting": {
      "depth_planes": 3,
      "elements": [
-      "sky",
-      "clouds",
+      "title and subtitle text",
       "sun",
-      "birds",
-      "mountains",
-      "snowcaps",
+      "clouds",
+      "bird silhouettes",
+      "snow-capped mountains",
       "green hills",
-      "path",
       "trees",
-      "flowers",
       "grass tufts",
-      "stones"
+      "flowers",
+      "tan path",
+      "small stones",
+      "floating light specks",
+      "oval ground shadow"
      ],
-     "palette": "Bright blue sky, soft green hills, and a pale tan path with colorful accents.",
-     "placement": "The alpaca is near the center of the frame, slightly to the right, in the lower half.",
+     "palette": "Pastel blues and greens with warm yellow and cream accents.",
+     "placement": "Near the center, facing right above the path.",
      "clutter": false
     },
     "judges": 1,
-    "rubric": "v9",
+    "rubric": "v11",
     "scale": 4,
     "motion": 1.63,
     "motion_changed": 3.94,
@@ -3536,7 +3522,7 @@ window.BENCH = {
     "compliance": 4,
     "compliance_notes": [],
     "gait_band": 3,
-    "score_visual": 85.0
+    "score_visual": 55.0
    },
    "design": {
     "out_tokens": 17815,
@@ -3641,42 +3627,44 @@ window.BENCH = {
     "seconds": 143.5,
     "finish": "stop",
     "status": "ok",
-    "score": 80.0,
+    "score": 60.0,
     "criteria": {
      "anatomy": 4,
-     "craft": 4,
-     "gait": 2
+     "craft": 2,
+     "gait": 1
     },
     "by_judge": {
-     "jev+openai-gpt-6-luna": 80.0
+     "jev+openai-gpt-6-sol": 60.0
     },
     "rationale": {
-     "anatomy": "none (level 3.94 of 4)",
-     "craft": "none (level 3.96 of 4)",
-     "setting": "sky, sun, wispy clouds, birds, rolling hills, grass, sandy path, small plants and flowers. Palette: Muted cream and sand with sage-green hills and a warm peach sun.. Placement: The alpaca is near the center of the frame, standing on the path..",
-     "gait": "band 2 from 1.43% pixel change; P(planted, coherent)=0.89"
+     "anatomy": "The neck is long and narrow relative to the body, and the head is small. (level 3.88 of 4)",
+     "craft": "A thin pale stroke is visible beside a raised front leg in the last frame, and there is no clear shadow directly beneath the hooves. (level 2.02 of 4)",
+     "gait": "band 2 from 1.43% pixel change; P(planted, coherent)=0.03"
     },
     "verdict": {
-     "jev+openai-gpt-6-luna": "A cream-colored alpaca walks to the right along a sandy path in a stylized landscape."
+     "jev+openai-gpt-6-sol": "A cream alpaca walks along a sandy path beneath the words \u201cA softer pace,\u201d with green hills and a sun behind it."
     },
     "setting": {
-     "depth_planes": 3,
+     "depth_planes": 5,
      "elements": [
-      "sky",
       "sun",
-      "wispy clouds",
-      "birds",
-      "rolling hills",
-      "grass",
+      "bird marks",
+      "short white sky streaks",
+      "layered green hills",
+      "green ground",
       "sandy path",
-      "small plants and flowers"
+      "two small plants with flowers",
+      "small ground marks",
+      "heading and captions",
+      "decorative line and dot",
+      "right-pointing arrow"
      ],
-     "palette": "Muted cream and sand with sage-green hills and a warm peach sun.",
-     "placement": "The alpaca is near the center of the frame, standing on the path.",
+     "palette": "Muted cream, sand, sage green, and warm orange.",
+     "placement": "The alpaca stands near the center of the path.",
      "clutter": false
     },
     "judges": 1,
-    "rubric": "v9",
+    "rubric": "v11",
     "scale": 4,
     "motion": 0.68,
     "motion_changed": 1.43,
@@ -3684,7 +3672,7 @@ window.BENCH = {
     "compliance": 4,
     "compliance_notes": [],
     "gait_band": 2,
-    "score_visual": 80.0
+    "score_visual": 60.0
    },
    "design": {
     "out_tokens": 14239,
@@ -3789,44 +3777,42 @@ window.BENCH = {
     "seconds": 122.7,
     "finish": "stop",
     "status": "ok",
-    "score": 55.0,
+    "score": 40.0,
     "criteria": {
      "anatomy": 2,
-     "craft": 3,
-     "gait": 2
+     "craft": 2,
+     "gait": 1
     },
     "by_judge": {
-     "jev+openai-gpt-6-luna": 55.0
+     "jev+openai-gpt-6-sol": 40.0
     },
     "rationale": {
-     "anatomy": "The legs are simple straight shapes without visible joints. (level 2.28 of 4)",
-     "craft": "No obvious seams or stray shapes; no visible contact shadow. (level 3.03 of 4)",
-     "setting": "sky, clouds, sun, birds, layered green hills, pale blue water, grass, fence, flowers, small light specks. Palette: Bright blue sky and pale clouds above layered greens, with a yellow sun and small colorful flowers.. Placement: The alpaca is low and left of center, with open landscape extending to the right..",
-     "gait": "band 2 from 1.29% pixel change; P(planted, coherent)=0.94"
+     "anatomy": "The neck is long and thin, the head is small, and the visible legs have no clear bends. (level 1.73 of 4)",
+     "craft": "A pale triangular gap appears between grass bands at the left edge; no shadow is visible beneath the hooves. (level 2.04 of 4)",
+     "gait": "band 2 from 1.29% pixel change; P(planted, coherent)=0.03"
     },
     "verdict": {
-     "jev+openai-gpt-6-luna": "A fluffy white alpaca stands in the lower-left of a sunny green landscape, with its legs changing pose across the frames."
+     "jev+openai-gpt-6-sol": "A cream-colored alpaca walks in place at the left of a grassy landscape with hills, flowers, clouds, birds, and a sun."
     },
     "setting": {
-     "depth_planes": 3,
+     "depth_planes": 4,
      "elements": [
-      "sky",
-      "clouds",
+      "blue sky",
+      "three clouds",
       "sun",
-      "birds",
-      "layered green hills",
-      "pale blue water",
+      "distant birds",
+      "layered hills",
       "grass",
-      "fence",
-      "flowers",
-      "small light specks"
+      "small flowers",
+      "dark grass stalks",
+      "scattered pale dots"
      ],
-     "palette": "Bright blue sky and pale clouds above layered greens, with a yellow sun and small colorful flowers.",
-     "placement": "The alpaca is low and left of center, with open landscape extending to the right.",
+     "palette": "Blue, green, and pastel colors with a yellow sun.",
+     "placement": "The alpaca is in the lower-left foreground.",
      "clutter": false
     },
     "judges": 1,
-    "rubric": "v9",
+    "rubric": "v11",
     "scale": 4,
     "motion": 0.6,
     "motion_changed": 1.29,
@@ -3834,7 +3820,7 @@ window.BENCH = {
     "compliance": 4,
     "compliance_notes": [],
     "gait_band": 2,
-    "score_visual": 55.0
+    "score_visual": 40.0
    },
    "design": {
     "out_tokens": 14352,

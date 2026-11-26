@@ -79,7 +79,7 @@
         : '<img src="img/design/' + m.id + '.jpg" loading="lazy" decoding="async" alt="' + esc(m.name) + ' landing page">';
       h += '<article class="card' + (i === 0 ? ' win' : '') + '">' + who(m, badge(d, i)) +
         '<div class="frame' + (tall ? ' tall' : '') + '">' + inner + '<button data-open="' + src + '" data-name="' + esc(m.name) + '" aria-label="Open ' + esc(m.name) + ' output"></button><span class="hint">Click to open live</span></div>' +
-        '<div class="meta">' + crit(d) + why(d) + note(d) + '<div class="stats">' + num(d.out_tokens) + ' tokens · ' + money(d.cost) + ' · ' + d.seconds + 's' +
+        '<div class="meta">' + crit(d) + why(d) + note(d) + '<div class="stats">' + num(d.out_tokens) + ' tokens · <span class="cost">' + money(d.cost) + '</span> · ' + d.seconds + 's' +
         (key === 'alpaca' && d.motion != null ? ' · ' + d.motion_changed + '% pixels change' : '') + '</div></div></article>';
     });
     r.rest.forEach(function (m) { h += failCard(m, m[key]); });
@@ -114,13 +114,13 @@
   }
   function speed() {
     return table('speed', 'tps', ['Range (3 runs)', 'Time to first word', 'Total time', 'Output price / 1M'], function (m, d) {
-      return '<td class="num">' + d.tps_min + ' – ' + d.tps_max + (d.runs < 3 ? ' (' + d.runs + ' runs)' : '') + '</td><td class="num">' + d.ttft + 's</td><td class="num">' + d.seconds + 's</td><td class="num">$' + m.price_out + '</td>';
+      return '<td class="num">' + d.tps_min + ' – ' + d.tps_max + (d.runs < 3 ? ' (' + d.runs + ' runs)' : '') + '</td><td class="num">' + d.ttft + 's</td><td class="num">' + d.seconds + 's</td><td class="num cost">$' + m.price_out + '</td>';
     }, '', 'Tokens / second');
   }
   function value() {
     return table('value', 'per_1k', ['Correct', 'Each Q', 'Tokens / answer', '$ / answer', 'Per $1', 'Index'], function (m, d) {
       return '<td class="num">' + d.correct + ' / ' + d.total + '</td><td><div class="dots">' + d.per_q.map(function (q) { return '<i class="' + (q ? 'ok' : '') + '"></i>'; }).join('') +
-        '</div></td><td class="num">' + num(Math.round(d.out_tokens / d.correct)) + '</td><td class="num">$' + d.per_correct_cost.toFixed(5) + '</td><td class="num">' + num(d.per_dollar) + '</td><td class="num"><strong>' + d.index.toFixed(1) + '</strong><small class="idx">#' + d.index_rank + ' of ' + B.models.length + '</small></td>';
+        '</div></td><td class="num">' + num(Math.round(d.out_tokens / d.correct)) + '</td><td class="num cost">$' + d.per_correct_cost.toFixed(5) + '</td><td class="num">' + num(d.per_dollar) + '</td><td class="num"><strong>' + d.index.toFixed(1) + '</strong><small class="idx">#' + d.index_rank + ' of ' + B.models.length + '</small></td>';
     }, 'v', 'Correct per 1,000 tokens') +
       '<p class="valuenote"><strong>Token thrift and money thrift are different things.</strong> GPT-6.2 Astra spends 35 output tokens per correct answer where Gemini 4 Neon spends 716, so Astra is 20 times more parsimonious. But Astra\'s output costs $40 per million tokens against Neon\'s $18.75, so its lead in dollars is only 8.5 times. GLM 5.3 Flash goes the other way: 142 tokens per correct answer, four times Astra\'s, yet 19 times more correct answers per dollar, because its output price is $0.55 per million. The index rewards the models that are good on both axes — it is the geometric mean, so a model that is wasteful or expensive cannot buy its way out on the other side.</p>';
   }

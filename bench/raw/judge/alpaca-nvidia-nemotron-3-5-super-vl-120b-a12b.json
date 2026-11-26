@@ -1,49 +1,54 @@
 {
- "rubric": "v9",
+ "rubric": "v11",
  "median": {
   "anatomy": 1,
   "craft": 3,
-  "gait": 1
+  "gait": 0
  },
  "judges_used": 1,
  "setting": {
-  "depth_planes": 2,
+  "depth_planes": 3,
   "elements": [
-   "sky",
-   "sun",
-   "rolling green hill",
-   "green ground"
+   "blue sky",
+   "pale yellow sun",
+   "light-green hill",
+   "darker green foreground ground",
+   "gray ground shadow"
   ],
-  "palette": "Soft blue, pale yellow, and two shades of green.",
-  "placement": "The alpaca is near the center, slightly left, standing along the horizon.",
+  "palette": "Pastel blue, cream, yellow, and greens.",
+  "placement": "Left of center at the boundary between the sky and ground.",
   "clutter": false
  },
- "captioner": "openai-gpt-6-luna",
+ "captioner": "openai-gpt-6-sol",
  "observations": {
-  "description": "A simple cream-colored alpaca with a separate-looking head and neck stands mid-step on green ground beneath a blue sky and pale sun.",
+  "description": "A cream-colored alpaca-like figure stands on green ground beneath a pale sun in a blue sky.",
   "anatomy": {
+   "legs_visible": 4,
+   "legs_with_visible_joint": 0,
+   "leg_attachment": "under_belly",
+   "neck_proportion": "too_long",
+   "head_proportion": "too_small",
+   "tail_visible": false,
    "detached_parts": true,
-   "jointless_legs": true,
-   "wrong_proportions": true,
-   "missing_cues": true,
-   "notes": "The long neck ends above the torso with a visible gap; the legs are thin, straight sticks without visible joints, and the small torso is disproportionate to the neck."
+   "notes": "The head and neck do not touch the torso, and the rightmost leg does not touch the body; all four legs are straight."
   },
   "gait": {
-   "feet_planted": true,
-   "sliding_or_popping": false,
+   "feet_planted": false,
+   "sliding_or_popping": true,
    "legs_change_between_frames": true,
-   "notes": "The thin legs swing and cross between frames while their feet remain at ground level."
+   "notes": "The straight legs shift and cross between frames, while their feet change position along or just above the ground."
   },
   "scene": {
-   "depth_planes": 2,
+   "depth_planes": 3,
    "elements": [
-    "sky",
-    "sun",
-    "rolling green hill",
-    "green ground"
+    "blue sky",
+    "pale yellow sun",
+    "light-green hill",
+    "darker green foreground ground",
+    "gray ground shadow"
    ],
-   "palette": "Soft blue, pale yellow, and two shades of green.",
-   "placement": "The alpaca is near the center, slightly left, standing along the horizon.",
+   "palette": "Pastel blue, cream, yellow, and greens.",
+   "placement": "Left of center at the boundary between the sky and ground.",
    "clutter": false
   },
   "craft": {
@@ -51,7 +56,7 @@
    "inconsistent_light": false,
    "clipped_elements": false,
    "contact_shadow": true,
-   "notes": "There is a gap between the neck and torso; a soft shadow lies beneath the body."
+   "notes": "A gap separates the neck from the torso, and the rightmost leg has a detached upper end."
   }
  },
  "motion": {
@@ -60,28 +65,27 @@
   "leg_pct": 0.35
  },
  "rationale": {
-  "anatomy": "The long neck ends above the torso with a visible gap; the legs are thin, straight sticks without visible joints, and the small torso is disproportionate to the neck. (level 1.01 of 4)",
-  "craft": "There is a gap between the neck and torso; a soft shadow lies beneath the body. (level 2.72 of 4)",
-  "setting": "sky, sun, rolling green hill, green ground. Palette: Soft blue, pale yellow, and two shades of green.. Placement: The alpaca is near the center, slightly left, standing along the horizon..",
-  "gait": "band 1 from 0.36% pixel change; P(planted, coherent)=0.78"
+  "anatomy": "The head and neck do not touch the torso, and the rightmost leg does not touch the body; all four legs are straight. (level 0.99 of 4)",
+  "craft": "A gap separates the neck from the torso, and the rightmost leg has a detached upper end. (level 2.66 of 4)",
+  "gait": "band 1 from 0.36% pixel change; P(planted, coherent)=0.03"
  },
  "probabilities": {
   "anatomy": {
-   "0": 0.02,
-   "1": 0.96,
-   "2": 0.02,
+   "0": 0.11,
+   "1": 0.88,
+   "2": 0.01,
    "3": 0,
    "4": 0
   },
   "craft": {
    "0": 0,
-   "1": 0.12,
+   "1": 0.11,
    "2": 0.05,
-   "3": 0.82,
+   "3": 0.83,
    "4": 0.01
   }
  },
  "verdict": {
-  "jev+openai-gpt-6-luna": "A simple cream-colored alpaca with a separate-looking head and neck stands mid-step on green ground beneath a blue sky and pale sun."
+  "jev+openai-gpt-6-sol": "A cream-colored alpaca-like figure stands on green ground beneath a pale sun in a blue sky."
  }
 }

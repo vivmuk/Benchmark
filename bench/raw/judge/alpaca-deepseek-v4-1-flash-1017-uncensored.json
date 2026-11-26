@@ -1,9 +1,9 @@
 {
- "rubric": "v9",
+ "rubric": "v11",
  "median": {
   "anatomy": 2,
-  "craft": 3,
-  "gait": 4
+  "craft": 2,
+  "gait": 3
  },
  "judges_used": 1,
  "setting": {
@@ -12,31 +12,33 @@
    "sky",
    "clouds",
    "sun",
-   "rolling hills",
-   "pale horizon band",
-   "grassy meadow",
-   "grass tufts",
+   "blue hills",
+   "pale hills",
+   "grass",
    "flowers"
   ],
-  "palette": "Blue sky and hills contrast with the green meadow, pale alpaca, and warm yellow sun.",
-  "placement": "The alpaca is near the center of the frame, slightly right of center.",
+  "palette": "Soft blues, greens, cream, and pale yellow.",
+  "placement": "The alpaca is near the center, in front of the hills.",
   "clutter": false
  },
- "captioner": "openai-gpt-6-luna",
+ "captioner": "openai-gpt-6-sol",
  "observations": {
-  "description": "A cream-colored alpaca walks through a flower-dotted meadow beneath a sunny, cloudy sky with rolling hills in the distance.",
+  "description": "A cream-colored alpaca walks in place in a grassy scene with hills, flowers, clouds, and a sun.",
   "anatomy": {
+   "legs_visible": 4,
+   "legs_with_visible_joint": 0,
+   "leg_attachment": "under_belly",
+   "neck_proportion": "too_long",
+   "head_proportion": "too_small",
+   "tail_visible": true,
    "detached_parts": false,
-   "jointless_legs": true,
-   "wrong_proportions": false,
-   "missing_cues": false,
-   "notes": "The narrow legs are mostly straight, with no visible joints."
+   "notes": "The rear legs meet the underside of the body rather than the rump; the neck is long and the head is small."
   },
   "gait": {
-   "feet_planted": true,
-   "sliding_or_popping": false,
+   "feet_planted": false,
+   "sliding_or_popping": true,
    "legs_change_between_frames": true,
-   "notes": "The legs alternate between more forward and backward positions, with some hooves lifting as the alpaca walks."
+   "notes": "The straight legs change angles, while the hooves shift against the moving ground without a clear planted step."
   },
   "scene": {
    "depth_planes": 3,
@@ -44,22 +46,21 @@
     "sky",
     "clouds",
     "sun",
-    "rolling hills",
-    "pale horizon band",
-    "grassy meadow",
-    "grass tufts",
+    "blue hills",
+    "pale hills",
+    "grass",
     "flowers"
    ],
-   "palette": "Blue sky and hills contrast with the green meadow, pale alpaca, and warm yellow sun.",
-   "placement": "The alpaca is near the center of the frame, slightly right of center.",
+   "palette": "Soft blues, greens, cream, and pale yellow.",
+   "placement": "The alpaca is near the center, in front of the hills.",
    "clutter": false
   },
   "craft": {
-   "seams_or_stray_shapes": false,
+   "seams_or_stray_shapes": true,
    "inconsistent_light": false,
    "clipped_elements": true,
-   "contact_shadow": true,
-   "notes": "A cloud is partly cropped at the upper-right edge."
+   "contact_shadow": false,
+   "notes": "A narrow line runs down the neck, the cloud at the right edge is clipped, and there is no clear shadow beneath the feet."
   }
  },
  "motion": {
@@ -68,28 +69,27 @@
   "leg_pct": 13.96
  },
  "rationale": {
-  "anatomy": "The narrow legs are mostly straight, with no visible joints. (level 2.11 of 4)",
-  "craft": "A cloud is partly cropped at the upper-right edge. (level 2.92 of 4)",
-  "setting": "sky, clouds, sun, rolling hills, pale horizon band, grassy meadow, grass tufts, flowers. Palette: Blue sky and hills contrast with the green meadow, pale alpaca, and warm yellow sun.. Placement: The alpaca is near the center of the frame, slightly right of center..",
-  "gait": "band 4 from 6.77% pixel change; P(planted, coherent)=0.80"
+  "anatomy": "The rear legs meet the underside of the body rather than the rump; the neck is long and the head is small. (level 1.56 of 4)",
+  "craft": "A narrow line runs down the neck, the cloud at the right edge is clipped, and there is no clear shadow beneath the feet. (level 2.03 of 4)",
+  "gait": "band 4 from 6.77% pixel change; P(planted, coherent)=0.03"
  },
  "probabilities": {
   "anatomy": {
    "0": 0,
-   "1": 0.02,
-   "2": 0.88,
-   "3": 0.07,
-   "4": 0.03
+   "1": 0.06,
+   "2": 0.91,
+   "3": 0.02,
+   "4": 0.01
   },
   "craft": {
    "0": 0,
-   "1": 0.04,
-   "2": 0.01,
-   "3": 0.94,
-   "4": 0.01
+   "1": 0.03,
+   "2": 0.95,
+   "3": 0.02,
+   "4": 0
   }
  },
  "verdict": {
-  "jev+openai-gpt-6-luna": "A cream-colored alpaca walks through a flower-dotted meadow beneath a sunny, cloudy sky with rolling hills in the distance."
+  "jev+openai-gpt-6-sol": "A cream-colored alpaca walks in place in a grassy scene with hills, flowers, clouds, and a sun."
  }
 }

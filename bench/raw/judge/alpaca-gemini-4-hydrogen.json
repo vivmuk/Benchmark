@@ -1,73 +1,72 @@
 {
- "rubric": "v9",
+ "rubric": "v11",
  "median": {
   "anatomy": 4,
-  "craft": 4,
-  "gait": 3
+  "craft": 2,
+  "gait": 2
  },
  "judges_used": 1,
  "setting": {
-  "depth_planes": 3,
+  "depth_planes": 6,
   "elements": [
    "sky",
    "clouds",
-   "stars",
+   "small light specks",
    "sun",
-   "distant mountains",
-   "snow patches",
-   "hills",
-   "grassy ground",
-   "dirt path",
-   "stones",
+   "mountains with pale peaks",
+   "distant hills",
+   "grassy field",
    "grass tufts",
-   "flowers"
+   "dirt path",
+   "foreground flowers"
   ],
-  "palette": "Muted greens and purples contrast with the pale alpaca and warm yellow sun.",
-  "placement": "Near the center of the frame, slightly below mid-height, facing right.",
+  "palette": "Muted purples and greens with a warm yellow sun.",
+  "placement": "The alpaca is near the center, on the path.",
   "clutter": false
  },
- "captioner": "openai-gpt-6-luna",
+ "captioner": "openai-gpt-6-sol",
  "observations": {
-  "description": "A white alpaca walks toward the right across a flower-dotted meadow, with layered hills and mountains beneath a glowing sun and cloudy sky.",
+  "description": "A white alpaca walks along a path through a grassy landscape with mountains and a glowing sun.",
   "anatomy": {
+   "legs_visible": 4,
+   "legs_with_visible_joint": 4,
+   "leg_attachment": "chest_and_rump",
+   "neck_proportion": "too_long",
+   "head_proportion": "too_small",
+   "tail_visible": true,
    "detached_parts": false,
-   "jointless_legs": false,
-   "wrong_proportions": false,
-   "missing_cues": false,
-   "notes": "none"
+   "notes": "The long, narrow neck leads to a small head; the tail and all four bent legs touch the body."
   },
   "gait": {
-   "feet_planted": true,
-   "sliding_or_popping": false,
+   "feet_planted": false,
+   "sliding_or_popping": true,
    "legs_change_between_frames": true,
-   "notes": "The bent legs alternate their positions across the frames while the hooves remain close to the ground."
+   "notes": "The legs change pose, though the middle two frames repeat; the feet shift against the moving path."
   },
   "scene": {
-   "depth_planes": 3,
+   "depth_planes": 6,
    "elements": [
     "sky",
     "clouds",
-    "stars",
+    "small light specks",
     "sun",
-    "distant mountains",
-    "snow patches",
-    "hills",
-    "grassy ground",
-    "dirt path",
-    "stones",
+    "mountains with pale peaks",
+    "distant hills",
+    "grassy field",
     "grass tufts",
-    "flowers"
+    "dirt path",
+    "foreground flowers"
    ],
-   "palette": "Muted greens and purples contrast with the pale alpaca and warm yellow sun.",
-   "placement": "Near the center of the frame, slightly below mid-height, facing right.",
+   "palette": "Muted purples and greens with a warm yellow sun.",
+   "placement": "The alpaca is near the center, on the path.",
    "clutter": false
   },
   "craft": {
-   "seams_or_stray_shapes": false,
+   "seams_or_stray_shapes": true,
    "inconsistent_light": false,
-   "clipped_elements": false,
-   "contact_shadow": true,
-   "notes": "none"
+   "clipped_elements": true,
+   "contact_shadow": false,
+   "notes": "A thin extra outline runs beside the neck, and a cloud is cut off at the right edge; no distinct ground shadow is visible."
   }
  },
  "motion": {
@@ -76,28 +75,27 @@
   "leg_pct": 8.91
  },
  "rationale": {
-  "anatomy": "none (level 3.96 of 4)",
-  "craft": "none (level 3.96 of 4)",
-  "setting": "sky, clouds, stars, sun, distant mountains, snow patches, hills, grassy ground, dirt path, stones, grass tufts, flowers. Palette: Muted greens and purples contrast with the pale alpaca and warm yellow sun.. Placement: Near the center of the frame, slightly below mid-height, facing right..",
-  "gait": "band 3 from 5.73% pixel change; P(planted, coherent)=0.96"
+  "anatomy": "The long, narrow neck leads to a small head; the tail and all four bent legs touch the body. (level 3.87 of 4)",
+  "craft": "A thin extra outline runs beside the neck, and a cloud is cut off at the right edge; no distinct ground shadow is visible. (level 2.03 of 4)",
+  "gait": "band 3 from 5.73% pixel change; P(planted, coherent)=0.03"
  },
  "probabilities": {
   "anatomy": {
    "0": 0,
-   "1": 0,
-   "2": 0,
-   "3": 0.02,
-   "4": 0.98
+   "1": 0.12,
+   "2": 0.86,
+   "3": 0.01,
+   "4": 0.01
   },
   "craft": {
    "0": 0,
-   "1": 0,
-   "2": 0,
-   "3": 0.01,
-   "4": 0.99
+   "1": 0.01,
+   "2": 0.97,
+   "3": 0.02,
+   "4": 0
   }
  },
  "verdict": {
-  "jev+openai-gpt-6-luna": "A white alpaca walks toward the right across a flower-dotted meadow, with layered hills and mountains beneath a glowing sun and cloudy sky."
+  "jev+openai-gpt-6-sol": "A white alpaca walks along a path through a grassy landscape with mountains and a glowing sun."
  }
 }

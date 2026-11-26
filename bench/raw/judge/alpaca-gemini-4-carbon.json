@@ -1,69 +1,76 @@
 {
- "rubric": "v9",
+ "rubric": "v11",
  "median": {
-  "anatomy": 4,
-  "craft": 3,
-  "gait": 4
+  "anatomy": 2,
+  "craft": 2,
+  "gait": 3
  },
  "judges_used": 1,
  "setting": {
-  "depth_planes": 3,
+  "depth_planes": 5,
   "elements": [
-   "sky",
    "clouds",
    "sun",
-   "mountains",
-   "hills",
-   "grass",
+   "snow-capped mountains",
+   "pink hills",
+   "green hills",
    "dirt path",
+   "pebbles",
+   "shrubs",
+   "grass",
    "flowers",
-   "bushes",
-   "rocks"
+   "foreground reeds",
+   "small sky specks"
   ],
-  "palette": "Pastel lavender and peach sky, green hills, and warm tan ground.",
-  "placement": "The alpaca is near the center of the frame, slightly right of center.",
+  "palette": "Pink and purple sky, cream clouds, mauve mountains, green hills, and tan ground.",
+  "placement": "The alpaca is near the center, facing right on the path.",
   "clutter": false
  },
- "captioner": "openai-gpt-6-luna",
+ "captioner": "openai-gpt-6-sol",
  "observations": {
-  "description": "A white, fluffy alpaca wearing a colorful bell collar walks in place along a dirt path in a layered pastel landscape.",
+  "description": "A white alpaca walks along a dirt path in front of green hills and snow-capped mountains beneath a pink-purple sky.",
   "anatomy": {
+   "legs_visible": 4,
+   "legs_with_visible_joint": 2,
+   "leg_attachment": "chest_and_rump",
+   "neck_proportion": "too_long",
+   "head_proportion": "too_small",
+   "tail_visible": true,
    "detached_parts": false,
-   "jointless_legs": false,
-   "wrong_proportions": false,
-   "missing_cues": false,
-   "notes": "none"
+   "notes": "The neck is long and narrow, the head is small, and one front and one rear leg show clear bends."
   },
   "gait": {
    "feet_planted": true,
-   "sliding_or_popping": false,
+   "sliding_or_popping": true,
    "legs_change_between_frames": true,
-   "notes": "The legs alternate between planted and lifted or bent positions, with hooves contacting the path."
+   "notes": "The legs change position and some hooves lift, while hooves touching the path shift between frames."
   },
   "scene": {
-   "depth_planes": 3,
+   "depth_planes": 5,
    "elements": [
-    "sky",
     "clouds",
     "sun",
-    "mountains",
-    "hills",
-    "grass",
+    "snow-capped mountains",
+    "pink hills",
+    "green hills",
     "dirt path",
+    "pebbles",
+    "shrubs",
+    "grass",
     "flowers",
-    "bushes",
-    "rocks"
+    "foreground reeds",
+    "small sky specks"
    ],
-   "palette": "Pastel lavender and peach sky, green hills, and warm tan ground.",
-   "placement": "The alpaca is near the center of the frame, slightly right of center.",
+   "palette": "Pink and purple sky, cream clouds, mauve mountains, green hills, and tan ground.",
+   "placement": "The alpaca is near the center, facing right on the path.",
    "clutter": false
   },
   "craft": {
-   "seams_or_stray_shapes": false,
+   "seams_or_stray_shapes": true,
    "inconsistent_light": false,
    "clipped_elements": true,
    "contact_shadow": true,
-   "notes": "Clouds at the side edges and grass at the bottom edge are partially clipped."
+   "notes": "A vertical boundary is visible at the right end of a green hill; clouds and reeds are cut off by the frame edges."
   }
  },
  "motion": {
@@ -72,28 +79,27 @@
   "leg_pct": 15.58
  },
  "rationale": {
-  "anatomy": "none (level 3.97 of 4)",
-  "craft": "Clouds at the side edges and grass at the bottom edge are partially clipped. (level 2.95 of 4)",
-  "setting": "sky, clouds, sun, mountains, hills, grass, dirt path, flowers, bushes, rocks. Palette: Pastel lavender and peach sky, green hills, and warm tan ground.. Placement: The alpaca is near the center of the frame, slightly right of center..",
-  "gait": "band 4 from 10.61% pixel change; P(planted, coherent)=0.88"
+  "anatomy": "The neck is long and narrow, the head is small, and one front and one rear leg show clear bends. (level 1.99 of 4)",
+  "craft": "A vertical boundary is visible at the right end of a green hill; clouds and reeds are cut off by the frame edges. (level 2.01 of 4)",
+  "gait": "band 4 from 10.61% pixel change; P(planted, coherent)=0.07"
  },
  "probabilities": {
   "anatomy": {
    "0": 0,
-   "1": 0,
-   "2": 0,
+   "1": 0.27,
+   "2": 0.72,
    "3": 0.01,
-   "4": 0.99
+   "4": 0
   },
   "craft": {
    "0": 0,
-   "1": 0.02,
-   "2": 0.01,
-   "3": 0.97,
+   "1": 0.01,
+   "2": 0.98,
+   "3": 0.01,
    "4": 0
   }
  },
  "verdict": {
-  "jev+openai-gpt-6-luna": "A white, fluffy alpaca wearing a colorful bell collar walks in place along a dirt path in a layered pastel landscape."
+  "jev+openai-gpt-6-sol": "A white alpaca walks along a dirt path in front of green hills and snow-capped mountains beneath a pink-purple sky."
  }
 }

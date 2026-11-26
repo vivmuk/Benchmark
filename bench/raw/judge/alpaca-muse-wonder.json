@@ -1,65 +1,70 @@
 {
- "rubric": "v9",
+ "rubric": "v11",
  "median": {
-  "anatomy": 4,
+  "anatomy": 2,
   "craft": 3,
-  "gait": 3
+  "gait": 2
  },
  "judges_used": 1,
  "setting": {
   "depth_planes": 3,
   "elements": [
-   "sky",
-   "clouds",
+   "title and subtitle text",
    "sun",
-   "birds",
-   "mountains",
-   "snowcaps",
+   "clouds",
+   "bird silhouettes",
+   "snow-capped mountains",
    "green hills",
-   "path",
    "trees",
-   "flowers",
    "grass tufts",
-   "stones"
+   "flowers",
+   "tan path",
+   "small stones",
+   "floating light specks",
+   "oval ground shadow"
   ],
-  "palette": "Bright blue sky, soft green hills, and a pale tan path with colorful accents.",
-  "placement": "The alpaca is near the center of the frame, slightly to the right, in the lower half.",
+  "palette": "Pastel blues and greens with warm yellow and cream accents.",
+  "placement": "Near the center, facing right above the path.",
   "clutter": false
  },
- "captioner": "openai-gpt-6-luna",
+ "captioner": "openai-gpt-6-sol",
  "observations": {
-  "description": "A cream-colored alpaca with a striped blanket walks through a sunny mountain scene with flowers and trees.",
+  "description": "A cream alpaca wearing a patterned blanket walks through a sunny mountain pasture beneath title text.",
   "anatomy": {
+   "legs_visible": 4,
+   "legs_with_visible_joint": 1,
+   "leg_attachment": "chest_and_rump",
+   "neck_proportion": "too_long",
+   "head_proportion": "too_small",
+   "tail_visible": false,
    "detached_parts": false,
-   "jointless_legs": false,
-   "wrong_proportions": false,
-   "missing_cues": false,
-   "notes": "none"
+   "notes": "The neck is long and narrow, and the head is small relative to the body."
   },
   "gait": {
-   "feet_planted": true,
-   "sliding_or_popping": false,
+   "feet_planted": false,
+   "sliding_or_popping": true,
    "legs_change_between_frames": true,
-   "notes": "The legs alternate between bent and extended positions as the hooves lift and plant."
+   "notes": "The legs alternate positions, with one front leg bending; several hooves appear above the path between frames."
   },
   "scene": {
    "depth_planes": 3,
    "elements": [
-    "sky",
-    "clouds",
+    "title and subtitle text",
     "sun",
-    "birds",
-    "mountains",
-    "snowcaps",
+    "clouds",
+    "bird silhouettes",
+    "snow-capped mountains",
     "green hills",
-    "path",
     "trees",
-    "flowers",
     "grass tufts",
-    "stones"
+    "flowers",
+    "tan path",
+    "small stones",
+    "floating light specks",
+    "oval ground shadow"
    ],
-   "palette": "Bright blue sky, soft green hills, and a pale tan path with colorful accents.",
-   "placement": "The alpaca is near the center of the frame, slightly to the right, in the lower half.",
+   "palette": "Pastel blues and greens with warm yellow and cream accents.",
+   "placement": "Near the center, facing right above the path.",
    "clutter": false
   },
   "craft": {
@@ -67,7 +72,7 @@
    "inconsistent_light": false,
    "clipped_elements": true,
    "contact_shadow": true,
-   "notes": "Foreground grass and flowers are cut off at the frame edges."
+   "notes": "Flowers and foreground plants are cut off at the frame edges."
   }
  },
  "motion": {
@@ -76,28 +81,27 @@
   "leg_pct": 7.93
  },
  "rationale": {
-  "anatomy": "none (level 3.96 of 4)",
-  "craft": "Foreground grass and flowers are cut off at the frame edges. (level 2.94 of 4)",
-  "setting": "sky, clouds, sun, birds, mountains, snowcaps, green hills, path, trees, flowers, grass tufts, stones. Palette: Bright blue sky, soft green hills, and a pale tan path with colorful accents.. Placement: The alpaca is near the center of the frame, slightly to the right, in the lower half..",
-  "gait": "band 3 from 3.94% pixel change; P(planted, coherent)=0.93"
+  "anatomy": "The neck is long and narrow, and the head is small relative to the body. (level 1.88 of 4)",
+  "craft": "Flowers and foreground plants are cut off at the frame edges. (level 2.82 of 4)",
+  "gait": "band 3 from 3.94% pixel change; P(planted, coherent)=0.03"
  },
  "probabilities": {
   "anatomy": {
    "0": 0,
-   "1": 0,
-   "2": 0.01,
-   "3": 0.01,
-   "4": 0.98
+   "1": 0.74,
+   "2": 0.26,
+   "3": 0,
+   "4": 0
   },
   "craft": {
    "0": 0,
-   "1": 0.03,
+   "1": 0.06,
    "2": 0.01,
-   "3": 0.95,
+   "3": 0.92,
    "4": 0.01
   }
  },
  "verdict": {
-  "jev+openai-gpt-6-luna": "A cream-colored alpaca with a striped blanket walks through a sunny mountain scene with flowers and trees."
+  "jev+openai-gpt-6-sol": "A cream alpaca wearing a patterned blanket walks through a sunny mountain pasture beneath title text."
  }
 }

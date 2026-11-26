@@ -1,65 +1,70 @@
 {
- "rubric": "v9",
+ "rubric": "v11",
  "median": {
-  "anatomy": 1,
-  "craft": 3,
-  "gait": 4
+  "anatomy": 2,
+  "craft": 2,
+  "gait": 3
  },
  "judges_used": 1,
  "setting": {
-  "depth_planes": 3,
+  "depth_planes": 5,
   "elements": [
-   "sky",
+   "gradient sky",
    "clouds",
    "sun",
-   "purple hills",
-   "green grassland",
-   "tall grasses",
-   "flowers",
-   "bird"
+   "two layers of purple hills",
+   "green meadow",
+   "grass tufts",
+   "small flowers",
+   "small bird in the later frames",
+   "bottom-left caption"
   ],
-  "palette": "Pastel blue and warm yellow sky, purple hills, and layered greens.",
-  "placement": "The alpaca's body is near the center of the lower half, with its head high near the upper center.",
+  "palette": "Pastel blue, cream, lavender, and muted green.",
+  "placement": "The alpaca is near the center, above the foreground grass.",
   "clutter": false
  },
- "captioner": "openai-gpt-6-luna",
+ "captioner": "openai-gpt-6-sol",
  "observations": {
-  "description": "A cream-colored alpaca walks across a grassy field beneath a blue sky, with its head and a strand of wool tufts visibly separated from its body.",
+  "description": "A cream-colored alpaca is shown walking through a green meadow with purple hills, clouds, and a sun behind it.",
   "anatomy": {
+   "legs_visible": 4,
+   "legs_with_visible_joint": 4,
+   "leg_attachment": "chest_and_rump",
+   "neck_proportion": "too_long",
+   "head_proportion": "too_small",
+   "tail_visible": false,
    "detached_parts": true,
-   "jointless_legs": false,
-   "wrong_proportions": true,
-   "missing_cues": true,
-   "notes": "The head and tufted neck are disconnected from the torso; the legs are very thin and long relative to the body."
+   "notes": "The long neck does not touch the body, and the head is small."
   },
   "gait": {
    "feet_planted": true,
-   "sliding_or_popping": false,
+   "sliding_or_popping": true,
    "legs_change_between_frames": true,
-   "notes": "The angular legs swing into different positions across frames, with hooves near the ground and some lifted."
+   "notes": "The legs alternate between bent positions; some hooves stay near the ground but shift back and forth."
   },
   "scene": {
-   "depth_planes": 3,
+   "depth_planes": 5,
    "elements": [
-    "sky",
+    "gradient sky",
     "clouds",
     "sun",
-    "purple hills",
-    "green grassland",
-    "tall grasses",
-    "flowers",
-    "bird"
+    "two layers of purple hills",
+    "green meadow",
+    "grass tufts",
+    "small flowers",
+    "small bird in the later frames",
+    "bottom-left caption"
    ],
-   "palette": "Pastel blue and warm yellow sky, purple hills, and layered greens.",
-   "placement": "The alpaca's body is near the center of the lower half, with its head high near the upper center.",
+   "palette": "Pastel blue, cream, lavender, and muted green.",
+   "placement": "The alpaca is near the center, above the foreground grass.",
    "clutter": false
   },
   "craft": {
    "seams_or_stray_shapes": true,
    "inconsistent_light": false,
-   "clipped_elements": false,
+   "clipped_elements": true,
    "contact_shadow": true,
-   "notes": "The strand of separate wool tufts between the torso and head appears disconnected."
+   "notes": "The neck is separated from the body, and a cloud is cut off at the left edge of the first frame."
   }
  },
  "motion": {
@@ -68,28 +73,27 @@
   "leg_pct": 10.9
  },
  "rationale": {
-  "anatomy": "The head and tufted neck are disconnected from the torso; the legs are very thin and long relative to the body. (level 1.01 of 4)",
-  "craft": "The strand of separate wool tufts between the torso and head appears disconnected. (level 2.80 of 4)",
-  "setting": "sky, clouds, sun, purple hills, green grassland, tall grasses, flowers, bird. Palette: Pastel blue and warm yellow sky, purple hills, and layered greens.. Placement: The alpaca's body is near the center of the lower half, with its head high near the upper center..",
-  "gait": "band 4 from 9.25% pixel change; P(planted, coherent)=0.63"
+  "anatomy": "The long neck does not touch the body, and the head is small. (level 1.85 of 4)",
+  "craft": "The neck is separated from the body, and a cloud is cut off at the left edge of the first frame. (level 2.00 of 4)",
+  "gait": "band 4 from 9.25% pixel change; P(planted, coherent)=0.07"
  },
  "probabilities": {
   "anatomy": {
-   "0": 0.02,
-   "1": 0.96,
-   "2": 0.02,
+   "0": 0.03,
+   "1": 0.8,
+   "2": 0.17,
    "3": 0,
    "4": 0
   },
   "craft": {
    "0": 0,
-   "1": 0.09,
-   "2": 0.03,
-   "3": 0.87,
-   "4": 0.01
+   "1": 0.02,
+   "2": 0.96,
+   "3": 0.02,
+   "4": 0
   }
  },
  "verdict": {
-  "jev+openai-gpt-6-luna": "A cream-colored alpaca walks across a grassy field beneath a blue sky, with its head and a strand of wool tufts visibly separated from its body."
+  "jev+openai-gpt-6-sol": "A cream-colored alpaca is shown walking through a green meadow with purple hills, clouds, and a sun behind it."
  }
 }

@@ -1,59 +1,60 @@
 {
- "rubric": "v9",
+ "rubric": "v11",
  "median": {
   "anatomy": 4,
   "craft": 4,
-  "gait": 3
+  "gait": 2
  },
  "judges_used": 1,
  "setting": {
-  "depth_planes": 3,
+  "depth_planes": 5,
   "elements": [
-   "sky",
    "sun",
    "thin clouds",
-   "birds",
-   "mountains",
+   "small birds",
+   "layered mountains",
    "rolling hills",
    "sandy path",
-   "grasses",
-   "flowers"
+   "scattered grass",
+   "foreground reeds"
   ],
-  "palette": "Muted lavender and rose tones with warm peach and golden highlights.",
-  "placement": "The alpaca is near the center of the frame, slightly right of center, on the lower portion of the scene.",
+  "palette": "Muted lavender and dusty pink with cream and pale yellow.",
+  "placement": "Near the center of the foreground path.",
   "clutter": false
  },
- "captioner": "openai-gpt-6-luna",
+ "captioner": "openai-gpt-6-sol",
  "observations": {
-  "description": "A fluffy cream-colored alpaca walks across a sandy path in a sunset mountain landscape.",
+  "description": "A cream alpaca walks along a sandy path at sunset, with mountains and low hills behind it.",
   "anatomy": {
+   "legs_visible": 4,
+   "legs_with_visible_joint": 4,
+   "leg_attachment": "chest_and_rump",
+   "neck_proportion": "too_long",
+   "head_proportion": "right",
+   "tail_visible": true,
    "detached_parts": false,
-   "jointless_legs": false,
-   "wrong_proportions": false,
-   "missing_cues": false,
-   "notes": "none"
+   "notes": "The neck is long and narrow; no parts appear detached."
   },
   "gait": {
    "feet_planted": true,
-   "sliding_or_popping": false,
+   "sliding_or_popping": true,
    "legs_change_between_frames": true,
-   "notes": "The legs alternate between extended and bent positions, with some hooves lifted and others supporting the alpaca on the ground."
+   "notes": "Three hooves touch the path while one lifts; the touching hooves shift horizontally between frames."
   },
   "scene": {
-   "depth_planes": 3,
+   "depth_planes": 5,
    "elements": [
-    "sky",
     "sun",
     "thin clouds",
-    "birds",
-    "mountains",
+    "small birds",
+    "layered mountains",
     "rolling hills",
     "sandy path",
-    "grasses",
-    "flowers"
+    "scattered grass",
+    "foreground reeds"
    ],
-   "palette": "Muted lavender and rose tones with warm peach and golden highlights.",
-   "placement": "The alpaca is near the center of the frame, slightly right of center, on the lower portion of the scene.",
+   "palette": "Muted lavender and dusty pink with cream and pale yellow.",
+   "placement": "Near the center of the foreground path.",
    "clutter": false
   },
   "craft": {
@@ -70,28 +71,27 @@
   "leg_pct": 6.77
  },
  "rationale": {
-  "anatomy": "none (level 3.96 of 4)",
-  "craft": "none (level 3.96 of 4)",
-  "setting": "sky, sun, thin clouds, birds, mountains, rolling hills, sandy path, grasses, flowers. Palette: Muted lavender and rose tones with warm peach and golden highlights.. Placement: The alpaca is near the center of the frame, slightly right of center, on the lower portion of the scene..",
-  "gait": "band 3 from 3.79% pixel change; P(planted, coherent)=0.91"
+  "anatomy": "The neck is long and narrow; no parts appear detached. (level 3.89 of 4)",
+  "craft": "none (level 3.95 of 4)",
+  "gait": "band 3 from 3.79% pixel change; P(planted, coherent)=0.08"
  },
  "probabilities": {
   "anatomy": {
    "0": 0,
-   "1": 0,
-   "2": 0.01,
-   "3": 0.02,
-   "4": 0.97
+   "1": 0.03,
+   "2": 0.86,
+   "3": 0.09,
+   "4": 0.02
   },
   "craft": {
    "0": 0,
    "1": 0,
    "2": 0,
-   "3": 0.01,
-   "4": 0.99
+   "3": 0.02,
+   "4": 0.98
   }
  },
  "verdict": {
-  "jev+openai-gpt-6-luna": "A fluffy cream-colored alpaca walks across a sandy path in a sunset mountain landscape."
+  "jev+openai-gpt-6-sol": "A cream alpaca walks along a sandy path at sunset, with mountains and low hills behind it."
  }
 }

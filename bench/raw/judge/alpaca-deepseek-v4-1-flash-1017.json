@@ -1,5 +1,5 @@
 {
- "rubric": "v9",
+ "rubric": "v11",
  "median": {
   "anatomy": 2,
   "craft": 3,
@@ -12,31 +12,33 @@
    "sky",
    "clouds",
    "sun",
-   "distant hills",
+   "rolling hills",
    "grassy field",
-   "grass tufts",
-   "flowers",
-   "glowing specks"
+   "small flowers",
+   "floating light specks"
   ],
-  "palette": "Soft blue sky, muted purple hills, and green grass with warm yellow light.",
-  "placement": "The alpaca is near the center, slightly to the right, in the lower half of the frame.",
+  "palette": "Muted blues and purples above a green field, with warm cream and yellow highlights",
+  "placement": "The alpaca stands near the center of the grassy foreground.",
   "clutter": false
  },
- "captioner": "openai-gpt-6-luna",
+ "captioner": "openai-gpt-6-sol",
  "observations": {
-  "description": "A fluffy white alpaca walks in place in a grassy field beneath a cloudy sky with a low sun.",
+  "description": "A white alpaca walks in place in a grassy landscape beneath clouds and a low sun.",
   "anatomy": {
+   "legs_visible": 4,
+   "legs_with_visible_joint": 0,
+   "leg_attachment": "chest_and_rump",
+   "neck_proportion": "too_long",
+   "head_proportion": "too_small",
+   "tail_visible": true,
    "detached_parts": false,
-   "jointless_legs": true,
-   "wrong_proportions": false,
-   "missing_cues": false,
-   "notes": "The four legs are smooth and have no visible knee joints."
+   "notes": "The neck is long and narrow, the head is small, and the legs show no visible bends."
   },
   "gait": {
    "feet_planted": true,
    "sliding_or_popping": true,
    "legs_change_between_frames": true,
-   "notes": "The legs change positions while the hooves stay near the ground and shift horizontally."
+   "notes": "The straight legs swing between frames; some hooves rise while others remain low, and their positions reset as the scene moves."
   },
   "scene": {
    "depth_planes": 3,
@@ -44,14 +46,13 @@
     "sky",
     "clouds",
     "sun",
-    "distant hills",
+    "rolling hills",
     "grassy field",
-    "grass tufts",
-    "flowers",
-    "glowing specks"
+    "small flowers",
+    "floating light specks"
    ],
-   "palette": "Soft blue sky, muted purple hills, and green grass with warm yellow light.",
-   "placement": "The alpaca is near the center, slightly to the right, in the lower half of the frame.",
+   "palette": "Muted blues and purples above a green field, with warm cream and yellow highlights",
+   "placement": "The alpaca stands near the center of the grassy foreground.",
    "clutter": false
   },
   "craft": {
@@ -59,7 +60,7 @@
    "inconsistent_light": false,
    "clipped_elements": false,
    "contact_shadow": false,
-   "notes": "No distinct contact shadow is visible beneath the hooves."
+   "notes": "No distinct shadow is visible beneath the hooves."
   }
  },
  "motion": {
@@ -68,28 +69,27 @@
   "leg_pct": 5.21
  },
  "rationale": {
-  "anatomy": "The four legs are smooth and have no visible knee joints. (level 2.15 of 4)",
-  "craft": "No distinct contact shadow is visible beneath the hooves. (level 2.95 of 4)",
-  "setting": "sky, clouds, sun, distant hills, grassy field, grass tufts, flowers, glowing specks. Palette: Soft blue sky, muted purple hills, and green grass with warm yellow light.. Placement: The alpaca is near the center, slightly to the right, in the lower half of the frame..",
-  "gait": "band 3 from 3.20% pixel change; P(planted, coherent)=0.08"
+  "anatomy": "The neck is long and narrow, the head is small, and the legs show no visible bends. (level 1.62 of 4)",
+  "craft": "No distinct shadow is visible beneath the hooves. (level 2.96 of 4)",
+  "gait": "band 3 from 3.20% pixel change; P(planted, coherent)=0.06"
  },
  "probabilities": {
   "anatomy": {
-   "0": 0,
-   "1": 0.01,
-   "2": 0.86,
-   "3": 0.09,
-   "4": 0.04
+   "0": 0.02,
+   "1": 0.96,
+   "2": 0.02,
+   "3": 0,
+   "4": 0
   },
   "craft": {
    "0": 0,
-   "1": 0.02,
-   "2": 0.02,
-   "3": 0.94,
-   "4": 0.02
+   "1": 0.03,
+   "2": 0.01,
+   "3": 0.93,
+   "4": 0.03
   }
  },
  "verdict": {
-  "jev+openai-gpt-6-luna": "A fluffy white alpaca walks in place in a grassy field beneath a cloudy sky with a low sun."
+  "jev+openai-gpt-6-sol": "A white alpaca walks in place in a grassy landscape beneath clouds and a low sun."
  }
 }

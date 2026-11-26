@@ -1,69 +1,74 @@
 {
- "rubric": "v9",
+ "rubric": "v11",
  "median": {
-  "anatomy": 4,
-  "craft": 3,
+  "anatomy": 3,
+  "craft": 2,
   "gait": 3
  },
  "judges_used": 1,
  "setting": {
-  "depth_planes": 3,
+  "depth_planes": 5,
   "elements": [
    "sky",
-   "clouds",
    "sun",
+   "clouds",
    "mountains",
-   "hills",
+   "rolling hills",
    "trees",
-   "fence",
+   "wooden fence",
    "grass",
-   "grass tufts",
-   "flowers"
+   "flowers",
+   "pale dots",
+   "ground shadow"
   ],
-  "palette": "Soft greens and blue-gray backgrounds with warm cream clouds and sunlight, and small colorful flowers.",
-  "placement": "The alpaca is near the horizontal center, slightly right, with its body in the middle of the frame and legs reaching into the foreground.",
+  "palette": "Soft blues and greens with cream clouds, a brown fence, and pastel flowers.",
+  "placement": "Centered in the foreground, in front of the fence.",
   "clutter": false
  },
- "captioner": "openai-gpt-6-luna",
+ "captioner": "openai-gpt-6-sol",
  "observations": {
-  "description": "A cream-colored alpaca with a long neck walks in a flowered grassy scene.",
+  "description": "A cream-colored alpaca walks across a grassy field in front of a fence, trees, mountains, clouds, and a sun.",
   "anatomy": {
+   "legs_visible": 4,
+   "legs_with_visible_joint": 3,
+   "leg_attachment": "chest_and_rump",
+   "neck_proportion": "too_long",
+   "head_proportion": "too_small",
+   "tail_visible": true,
    "detached_parts": false,
-   "jointless_legs": false,
-   "wrong_proportions": false,
-   "missing_cues": false,
-   "notes": "none"
+   "notes": "The neck is long and narrow, the head is small, and one hind leg appears straight."
   },
   "gait": {
-   "feet_planted": false,
-   "sliding_or_popping": false,
+   "feet_planted": true,
+   "sliding_or_popping": true,
    "legs_change_between_frames": true,
-   "notes": "The bent legs swing and change position between frames; the hooves appear lifted, with no clear planted step."
+   "notes": "The legs change position; several hooves reach the ground line, but their positions shift between frames."
   },
   "scene": {
-   "depth_planes": 3,
+   "depth_planes": 5,
    "elements": [
     "sky",
-    "clouds",
     "sun",
+    "clouds",
     "mountains",
-    "hills",
+    "rolling hills",
     "trees",
-    "fence",
+    "wooden fence",
     "grass",
-    "grass tufts",
-    "flowers"
+    "flowers",
+    "pale dots",
+    "ground shadow"
    ],
-   "palette": "Soft greens and blue-gray backgrounds with warm cream clouds and sunlight, and small colorful flowers.",
-   "placement": "The alpaca is near the horizontal center, slightly right, with its body in the middle of the frame and legs reaching into the foreground.",
+   "palette": "Soft blues and greens with cream clouds, a brown fence, and pastel flowers.",
+   "placement": "Centered in the foreground, in front of the fence.",
    "clutter": false
   },
   "craft": {
-   "seams_or_stray_shapes": false,
+   "seams_or_stray_shapes": true,
    "inconsistent_light": false,
    "clipped_elements": true,
    "contact_shadow": true,
-   "notes": "Trees are cut off at the side edges in some frames."
+   "notes": "Ring-like overlaps are visible on the neck and legs; clouds and trees are cut off at the frame edges."
   }
  },
  "motion": {
@@ -72,28 +77,27 @@
   "leg_pct": 13.61
  },
  "rationale": {
-  "anatomy": "none (level 3.91 of 4)",
-  "craft": "Trees are cut off at the side edges in some frames. (level 2.90 of 4)",
-  "setting": "sky, clouds, sun, mountains, hills, trees, fence, grass, grass tufts, flowers. Palette: Soft greens and blue-gray backgrounds with warm cream clouds and sunlight, and small colorful flowers.. Placement: The alpaca is near the horizontal center, slightly right, with its body in the middle of the frame and legs reaching into the foreground..",
-  "gait": "band 4 from 8.26% pixel change; P(planted, coherent)=0.06"
+  "anatomy": "The neck is long and narrow, the head is small, and one hind leg appears straight. (level 2.73 of 4)",
+  "craft": "Ring-like overlaps are visible on the neck and legs; clouds and trees are cut off at the frame edges. (level 2.01 of 4)",
+  "gait": "band 4 from 8.26% pixel change; P(planted, coherent)=0.07"
  },
  "probabilities": {
   "anatomy": {
    "0": 0,
-   "1": 0,
-   "2": 0.02,
-   "3": 0.05,
-   "4": 0.93
+   "1": 0.59,
+   "2": 0.41,
+   "3": 0,
+   "4": 0
   },
   "craft": {
    "0": 0,
-   "1": 0.05,
-   "2": 0.01,
-   "3": 0.93,
-   "4": 0.01
+   "1": 0.01,
+   "2": 0.97,
+   "3": 0.02,
+   "4": 0
   }
  },
  "verdict": {
-  "jev+openai-gpt-6-luna": "A cream-colored alpaca with a long neck walks in a flowered grassy scene."
+  "jev+openai-gpt-6-sol": "A cream-colored alpaca walks across a grassy field in front of a fence, trees, mountains, clouds, and a sun."
  }
 }

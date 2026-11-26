@@ -1,15 +1,15 @@
 {
- "state": "ANATOMY REPORT\nAll parts attached: yes.\nLegs have joints: yes.\nProportions right for a camelid: yes.\nSpecies cues present (upright ears, muzzle, fleece): yes.\n\nGAIT REPORT\nLegs change between frames: yes.\nFeet stay planted: no.\nAny sliding or popping: no.\nCaptioner note on gait: The legs alternate between angled and nearly vertical positions as the hooves swing above the grass.\n\nSCENE REPORT\nDistinct depth planes: 3 (1 = flat fill, 2 = sky and ground, 3 = foreground, middle, background).\nPalette: Pastel blue and peach sky with soft greens and pale cream highlights..\nPlacement: The alpaca is near the center, slightly right, with its head in the upper half of the frame..\nClutter competing with the subject: no.\n\nCRAFT REPORT\nSeams or stray shapes: no.\nLight direction inconsistent: no.\nElements clipped by the frame: no.\nContact shadow under the animal: yes.\nCaptioner note on craft: No visible artifacts; a soft shadow appears beneath the feet.\n\nMEASURED MOTION: 7.12% of all pixels changed between consecutive frames, 14.28% in the leg band.\n\nDescription of the frames: A cream-colored alpaca walks through a grassy landscape beneath a blue sky.",
+ "state": "ANATOMY REPORT\nLegs visible: 3. Legs with a visible knee, hock or fetlock bend: 0.\nLegs attach at: chest and rump.\nNeck proportion: too long.\nHead proportion: too small.\nTail visible: yes. Any detached part: no.\nCaptioner note on anatomy: The neck is long and thin, the head is small, and the visible legs have no clear bends.\n\nGAIT REPORT\nLegs change between frames: yes.\nFeet stay planted: no.\nAny sliding or popping: yes.\nCaptioner note on gait: The legs alternate between angled and upright positions; the hooves shift while the body stays nearly in place.\n\nSCENE REPORT\nDistinct depth planes: 4 (1 = flat fill, 2 = sky and ground, 3 = foreground, middle, background).\nPalette: Blue, green, and pastel colors with a yellow sun..\nPlacement: The alpaca is in the lower-left foreground..\nClutter competing with the subject: no.\n\nCRAFT REPORT\nSeams or stray shapes: yes.\nLight direction inconsistent: no.\nElements clipped by the frame: no.\nContact shadow under the animal: no.\nCaptioner note on craft: A pale triangular gap appears between grass bands at the left edge; no shadow is visible beneath the hooves.\n\nMEASURED MOTION: 1.29% of all pixels changed between consecutive frames, 1.37% in the leg band.\n\nDescription of the frames: A cream-colored alpaca walks in place at the left of a grassy landscape with hills, flowers, clouds, birds, and a sun.",
  "questions": {
   "anatomy": {
    "type": "score",
    "instructions": "Read only the ANATOMY REPORT and the captioner note. How good is the animal's anatomy? Pick the level that matches the faults actually reported. Ignore the scene and the motion.",
    "criteria": [
     "0 - not recognisably an animal",
-    "1 - several structural faults: detached parts, missing legs, or no camelid shape",
-    "2 - one structural fault, or two cosmetic faults",
-    "3 - one cosmetic fault only",
-    "4 - no fault reported in the anatomy report"
+    "1 - several structural faults: no visible leg joints and a missing or detached part, or not a camelid at all",
+    "2 - one structural fault: fewer than three legs show a joint, or a part is detached or missing",
+    "3 - joints visible on three legs, nothing detached; stylised proportions are acceptable",
+    "4 - joints visible on all four legs, nothing detached, tail present"
    ]
   },
   "craft": {

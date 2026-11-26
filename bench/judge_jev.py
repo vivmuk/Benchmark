@@ -12,8 +12,8 @@ from pathlib import Path
 from common import *
 import judge as J
 
-CAPTIONER = "openai-gpt-6-luna"
-RUBRIC_VERSION = "v9"
+CAPTIONER = "openai-gpt-6-sol"
+RUBRIC_VERSION = "v11"
 LEVELS = [
     "0 - failing: the aspect is absent or the output is broken",
     "1 - poor: present but badly wrong",
@@ -23,17 +23,27 @@ LEVELS = [
 ]
 
 OBSERVE = """You are looking at four frames, 400 ms apart, of one animated HTML component: an alpaca walking in a small scene, drawn in code.
-Answer only what you can see. Do not rate quality, do not score anything, do not guess. Report facts as JSON:
+Answer only what you can see, literally. Do not rate quality and do not score anything. Be skeptical: assume flaws exist until you have checked each one.
 
+Return this JSON object and nothing else:
 {"description":"one sentence on what is on screen",
- "anatomy":{"detached_parts":false,"jointless_legs":false,"wrong_proportions":false,"missing_cues":false,
+ "anatomy":{"legs_visible":0,
+            "legs_with_visible_joint":0,
+            "leg_attachment":"chest_and_rump | under_belly | unclear",
+            "neck_proportion":"too_long | right | too_short",
+            "head_proportion":"too_small | right | too_large",
+            "tail_visible":false,
+            "detached_parts":false,
             "notes":"name the specific parts affected, or 'none'"},
  "gait":{"feet_planted":true,"sliding_or_popping":false,"legs_change_between_frames":true,"notes":"what the legs do"},
- "scene":{"depth_planes":1,"elements":["list every distinct thing in the setting, e.g. sky, ground, sun, clouds, hills, trees, flowers, rocks, buildings; do not list the alpaca"],"palette":"one clause","placement":"where the animal sits in the frame","clutter":false},
- "craft":{"seams_or_stray_shapes":false,"inconsistent_light":false,"clipped_elements":false,"contact_shadow":true,
-          "notes":"specific artifacts, or 'none'"}}
+ "scene":{"depth_planes":1,"elements":["every distinct thing in the setting, not the alpaca"],"palette":"one clause","placement":"where the animal sits","clutter":false},
+ "craft":{"seams_or_stray_shapes":false,"inconsistent_light":false,"clipped_elements":false,"contact_shadow":true,"notes":"specific artifacts, or 'none'"}}
 
-depth_planes is an integer 1-3: 1 = a single flat fill, 2 = sky and ground (or equivalent), 3 = distinct foreground, middle and background. List scene elements literally, one per item.
+Definitions, apply them strictly:
+- legs_with_visible_joint: count legs that show a bend at a knee, hock or fetlock. A straight stick with no bend does NOT count, even if it looks fine.
+- leg_attachment: "chest_and_rump" only if the front pair meets the body at the chest and the rear pair at the rump. If they bunch under the middle or sprout from the belly, say "under_belly".
+- neck_proportion and head_proportion: judge against a real alpaca — short thick neck, relatively large head. A long thin neck or a tiny head is "too_long"/"too_small".
+- detached_parts: true if any drawn part does not touch the body.
 Every field is required. Reply with the JSON object only."""
 
 
@@ -44,7 +54,7 @@ def caption(images):
     last = None
     for _ in range(3):
         r = post("/chat/completions", {"model": CAPTIONER, "messages": [{"role": "user", "content": content}],
-                                       "max_completion_tokens": 2000, "temperature": 0,
+                                       "max_completion_tokens": 7000, "temperature": 0,
                                        "venice_parameters": {"include_venice_system_prompt": False}})
         try:
             txt = r["choices"][0]["message"].get("content") or ""
@@ -86,10 +96,12 @@ def build_state(obs, motion):
     yes = lambda b: "yes" if b else "no"
     lines = []
     lines.append("ANATOMY REPORT")
-    lines.append("All parts attached: %s." % yes(not a["detached_parts"]))
-    lines.append("Legs have joints: %s." % yes(not a["jointless_legs"]))
-    lines.append("Proportions right for a camelid: %s." % yes(not a["wrong_proportions"]))
-    lines.append("Species cues present (upright ears, muzzle, fleece): %s." % yes(not a["missing_cues"]))
+    lines.append("Legs visible: %s. Legs with a visible knee, hock or fetlock bend: %s." % (
+        a.get("legs_visible"), a.get("legs_with_visible_joint")))
+    lines.append("Legs attach at: %s." % str(a.get("leg_attachment", "unclear")).replace("_", " "))
+    lines.append("Neck proportion: %s." % str(a.get("neck_proportion", "right")).replace("_", " "))
+    lines.append("Head proportion: %s." % str(a.get("head_proportion", "right")).replace("_", " "))
+    lines.append("Tail visible: %s. Any detached part: %s." % (yes(a.get("tail_visible")), yes(a.get("detached_parts"))))
     if a.get("notes") and a["notes"].strip().lower() not in ("none", "n/a", ""):
         lines.append("Captioner note on anatomy: " + a["notes"])
     lines.append("")
@@ -123,10 +135,10 @@ def build_state(obs, motion):
 
 ANATOMY_LEVELS = [
     "0 - not recognisably an animal",
-    "1 - several structural faults: detached parts, missing legs, or no camelid shape",
-    "2 - one structural fault, or two cosmetic faults",
-    "3 - one cosmetic fault only",
-    "4 - no fault reported in the anatomy report",
+    "1 - several structural faults: no visible leg joints and a missing or detached part, or not a camelid at all",
+    "2 - one structural fault: fewer than three legs show a joint, or a part is detached or missing",
+    "3 - joints visible on three legs, nothing detached; stylised proportions are acceptable",
+    "4 - joints visible on all four legs, nothing detached, tail present",
 ]
 SCENE_LEVELS = [
     "0 - no scene at all",

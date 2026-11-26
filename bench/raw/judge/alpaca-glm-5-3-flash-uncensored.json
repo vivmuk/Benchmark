@@ -1,69 +1,76 @@
 {
- "rubric": "v9",
+ "rubric": "v11",
  "median": {
   "anatomy": 1,
-  "craft": 3,
+  "craft": 2,
   "gait": 1
  },
  "judges_used": 1,
  "setting": {
-  "depth_planes": 3,
+  "depth_planes": 4,
   "elements": [
    "sky",
    "clouds",
    "birds",
-   "sun",
+   "sun and halo",
    "hills",
-   "ground",
-   "trees",
-   "flowers",
+   "green field",
+   "small trees",
    "grass tufts",
-   "small stones"
+   "flowers",
+   "pebbles",
+   "shadow",
+   "printed headings and caption"
   ],
-  "palette": "Muted cream, sage green, terracotta, and ochre.",
-  "placement": "The alpaca is slightly left of center, with its body below the middle of the frame and above the ground.",
+  "palette": "Muted peach, orange, cream, and sage green.",
+  "placement": "Slightly left of center, above the field.",
   "clutter": false
  },
- "captioner": "openai-gpt-6-luna",
+ "captioner": "openai-gpt-6-sol",
  "observations": {
-  "description": "A cream-colored alpaca walks in place against a layered pastel landscape with a large sun and small decorative details.",
+  "description": "A cream-colored alpaca appears above a green field in a pastel sunset scene, with its legs changing position across four frames.",
   "anatomy": {
-   "detached_parts": false,
-   "jointless_legs": true,
-   "wrong_proportions": true,
-   "missing_cues": true,
-   "notes": "The visible thin leg has no clear joint and ends in a dark hoof; the other legs are largely obscured, and the body appears suspended above the ground."
+   "legs_visible": 2,
+   "legs_with_visible_joint": 1,
+   "leg_attachment": "unclear",
+   "neck_proportion": "too_long",
+   "head_proportion": "too_small",
+   "tail_visible": false,
+   "detached_parts": true,
+   "notes": "The visible legs extend behind the rump, the front legs are not clearly formed, and pale hoof-like pieces sit apart from the body below it."
   },
   "gait": {
    "feet_planted": false,
    "sliding_or_popping": true,
    "legs_change_between_frames": true,
-   "notes": "The visible leg shifts between a raised backward angle, a small partly hidden shape, and a downward extension; the hoof does not visibly meet the ground."
+   "notes": "The rear legs change angle, while the hoof-like pieces remain separated from the body and the feet do not meet the ground."
   },
   "scene": {
-   "depth_planes": 3,
+   "depth_planes": 4,
    "elements": [
     "sky",
     "clouds",
     "birds",
-    "sun",
+    "sun and halo",
     "hills",
-    "ground",
-    "trees",
-    "flowers",
+    "green field",
+    "small trees",
     "grass tufts",
-    "small stones"
+    "flowers",
+    "pebbles",
+    "shadow",
+    "printed headings and caption"
    ],
-   "palette": "Muted cream, sage green, terracotta, and ochre.",
-   "placement": "The alpaca is slightly left of center, with its body below the middle of the frame and above the ground.",
+   "palette": "Muted peach, orange, cream, and sage green.",
+   "placement": "Slightly left of center, above the field.",
    "clutter": false
   },
   "craft": {
-   "seams_or_stray_shapes": false,
+   "seams_or_stray_shapes": true,
    "inconsistent_light": false,
-   "clipped_elements": true,
-   "contact_shadow": true,
-   "notes": "Foreground grass tufts are cut off by the bottom edge; a soft oval shadow sits below the alpaca with a visible gap."
+   "clipped_elements": false,
+   "contact_shadow": false,
+   "notes": "Pale hoof-like shapes appear in the shadow well below the body, leaving a visible gap between the animal and the ground."
   }
  },
  "motion": {
@@ -72,28 +79,27 @@
   "leg_pct": 4.92
  },
  "rationale": {
-  "anatomy": "The visible thin leg has no clear joint and ends in a dark hoof; the other legs are largely obscured, and the body appears suspended above the ground. (level 1.08 of 4)",
-  "craft": "Foreground grass tufts are cut off by the bottom edge; a soft oval shadow sits below the alpaca with a visible gap. (level 2.54 of 4)",
-  "setting": "sky, clouds, birds, sun, hills, ground, trees, flowers, grass tufts, small stones. Palette: Muted cream, sage green, terracotta, and ochre.. Placement: The alpaca is slightly left of center, with its body below the middle of the frame and above the ground..",
-  "gait": "band 2 from 2.50% pixel change; P(planted, coherent)=0.04"
+  "anatomy": "The visible legs extend behind the rump, the front legs are not clearly formed, and pale hoof-like pieces sit apart from the body below it. (level 1.33 of 4)",
+  "craft": "Pale hoof-like shapes appear in the shadow well below the body, leaving a visible gap between the animal and the ground. (level 1.99 of 4)",
+  "gait": "band 2 from 2.50% pixel change; P(planted, coherent)=0.03"
  },
  "probabilities": {
   "anatomy": {
-   "0": 0.02,
+   "0": 0.09,
    "1": 0.89,
-   "2": 0.09,
+   "2": 0.02,
    "3": 0,
    "4": 0
   },
   "craft": {
    "0": 0,
-   "1": 0.1,
-   "2": 0.28,
-   "3": 0.61,
-   "4": 0.01
+   "1": 0.02,
+   "2": 0.95,
+   "3": 0.03,
+   "4": 0
   }
  },
  "verdict": {
-  "jev+openai-gpt-6-luna": "A cream-colored alpaca walks in place against a layered pastel landscape with a large sun and small decorative details."
+  "jev+openai-gpt-6-sol": "A cream-colored alpaca appears above a green field in a pastel sunset scene, with its legs changing position across four frames."
  }
 }

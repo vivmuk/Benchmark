@@ -1,69 +1,72 @@
 {
- "rubric": "v9",
+ "rubric": "v11",
  "median": {
   "anatomy": 4,
-  "craft": 4,
-  "gait": 2
+  "craft": 3,
+  "gait": 1
  },
  "judges_used": 1,
  "setting": {
-  "depth_planes": 3,
+  "depth_planes": 5,
   "elements": [
    "sky",
    "sun",
    "clouds",
    "birds",
-   "mountains",
+   "snow-capped mountains",
    "rolling hills",
    "sandy path",
-   "grassy foreground",
    "grass tufts",
-   "flowers"
+   "small flowers",
+   "foreground plants"
   ],
-  "palette": "Soft, muted teal, sage green and blue with pale cream and warm yellow accents.",
-  "placement": "The alpaca is near the center of the frame, standing on the path.",
+  "palette": "Muted teal, sage green, cream, and sandy beige",
+  "placement": "Near the center, over the path",
   "clutter": false
  },
- "captioner": "openai-gpt-6-luna",
+ "captioner": "openai-gpt-6-sol",
  "observations": {
-  "description": "A cream-colored alpaca with a brown collar walks across a grassy path in front of rolling hills and mountains.",
+  "description": "A cream-colored alpaca wearing a collar walks along a sandy path in a grassy mountain scene.",
   "anatomy": {
+   "legs_visible": 4,
+   "legs_with_visible_joint": 4,
+   "leg_attachment": "under_belly",
+   "neck_proportion": "too_long",
+   "head_proportion": "too_small",
+   "tail_visible": true,
    "detached_parts": false,
-   "jointless_legs": false,
-   "wrong_proportions": false,
-   "missing_cues": false,
-   "notes": "none"
+   "notes": "The legs emerge beneath the woolly body; the neck is long and narrow, and the head is small."
   },
   "gait": {
-   "feet_planted": true,
-   "sliding_or_popping": false,
+   "feet_planted": false,
+   "sliding_or_popping": true,
    "legs_change_between_frames": true,
-   "notes": "The legs bend and alternate their positions as the hooves step along the ground."
+   "notes": "The legs change bends and positions; some hooves shift along the path, and one lifts above it."
   },
   "scene": {
-   "depth_planes": 3,
+   "depth_planes": 5,
    "elements": [
     "sky",
     "sun",
     "clouds",
     "birds",
-    "mountains",
+    "snow-capped mountains",
     "rolling hills",
     "sandy path",
-    "grassy foreground",
     "grass tufts",
-    "flowers"
+    "small flowers",
+    "foreground plants"
    ],
-   "palette": "Soft, muted teal, sage green and blue with pale cream and warm yellow accents.",
-   "placement": "The alpaca is near the center of the frame, standing on the path.",
+   "palette": "Muted teal, sage green, cream, and sandy beige",
+   "placement": "Near the center, over the path",
    "clutter": false
   },
   "craft": {
    "seams_or_stray_shapes": false,
    "inconsistent_light": false,
-   "clipped_elements": false,
+   "clipped_elements": true,
    "contact_shadow": true,
-   "notes": "none"
+   "notes": "Foreground plants are cut off by the bottom edge."
   }
  },
  "motion": {
@@ -72,28 +75,27 @@
   "leg_pct": 2.66
  },
  "rationale": {
-  "anatomy": "none (level 3.98 of 4)",
-  "craft": "none (level 3.96 of 4)",
-  "setting": "sky, sun, clouds, birds, mountains, rolling hills, sandy path, grassy foreground, grass tufts, flowers. Palette: Soft, muted teal, sage green and blue with pale cream and warm yellow accents.. Placement: The alpaca is near the center of the frame, standing on the path..",
-  "gait": "band 2 from 1.68% pixel change; P(planted, coherent)=0.96"
+  "anatomy": "The legs emerge beneath the woolly body; the neck is long and narrow, and the head is small. (level 3.87 of 4)",
+  "craft": "Foreground plants are cut off by the bottom edge. (level 2.88 of 4)",
+  "gait": "band 2 from 1.68% pixel change; P(planted, coherent)=0.03"
  },
  "probabilities": {
   "anatomy": {
    "0": 0,
-   "1": 0,
-   "2": 0,
-   "3": 0.01,
-   "4": 0.99
+   "1": 0.11,
+   "2": 0.86,
+   "3": 0.02,
+   "4": 0.01
   },
   "craft": {
    "0": 0,
-   "1": 0,
-   "2": 0,
-   "3": 0.01,
-   "4": 0.99
+   "1": 0.06,
+   "2": 0.01,
+   "3": 0.92,
+   "4": 0.01
   }
  },
  "verdict": {
-  "jev+openai-gpt-6-luna": "A cream-colored alpaca with a brown collar walks across a grassy path in front of rolling hills and mountains."
+  "jev+openai-gpt-6-sol": "A cream-colored alpaca wearing a collar walks along a sandy path in a grassy mountain scene."
  }
 }

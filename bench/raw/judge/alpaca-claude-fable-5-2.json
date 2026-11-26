@@ -1,9 +1,9 @@
 {
- "rubric": "v9",
+ "rubric": "v11",
  "median": {
   "anatomy": 4,
-  "craft": 4,
-  "gait": 4
+  "craft": 2,
+  "gait": 3
  },
  "judges_used": 1,
  "setting": {
@@ -14,31 +14,34 @@
    "sun",
    "snow-capped mountains",
    "rolling hills",
-   "meadow",
-   "dirt path",
+   "small trees",
    "grass",
    "flowers",
-   "small shrubs"
+   "dirt path",
+   "pebbles"
   ],
-  "palette": "Bright blue sky, cool violet-blue mountains, and layered green meadow with warm cream and yellow accents.",
-  "placement": "Near the center of the frame, slightly right of center.",
+  "palette": "Pastel blue, green, lavender, cream, and tan.",
+  "placement": "Near the center, on the foreground path.",
   "clutter": false
  },
- "captioner": "openai-gpt-6-luna",
+ "captioner": "openai-gpt-6-sol",
  "observations": {
-  "description": "A fluffy cream alpaca walks along a flowered path in a bright mountain meadow beneath a blue sky.",
+  "description": "A cream-colored alpaca walks on a dirt path in a grassy scene with mountains, clouds, and a sun.",
   "anatomy": {
+   "legs_visible": 4,
+   "legs_with_visible_joint": 4,
+   "leg_attachment": "chest_and_rump",
+   "neck_proportion": "too_long",
+   "head_proportion": "too_small",
+   "tail_visible": true,
    "detached_parts": false,
-   "jointless_legs": false,
-   "wrong_proportions": false,
-   "missing_cues": false,
-   "notes": "none"
+   "notes": "The neck is long and the head is small relative to the body."
   },
   "gait": {
    "feet_planted": true,
-   "sliding_or_popping": false,
+   "sliding_or_popping": true,
    "legs_change_between_frames": true,
-   "notes": "The legs alternate between bent and extended positions as the hooves step along the path."
+   "notes": "The legs change bends and positions, but hooves shown on the path shift between frames."
   },
   "scene": {
    "depth_planes": 3,
@@ -48,22 +51,22 @@
     "sun",
     "snow-capped mountains",
     "rolling hills",
-    "meadow",
-    "dirt path",
+    "small trees",
     "grass",
     "flowers",
-    "small shrubs"
+    "dirt path",
+    "pebbles"
    ],
-   "palette": "Bright blue sky, cool violet-blue mountains, and layered green meadow with warm cream and yellow accents.",
-   "placement": "Near the center of the frame, slightly right of center.",
+   "palette": "Pastel blue, green, lavender, cream, and tan.",
+   "placement": "Near the center, on the foreground path.",
    "clutter": false
   },
   "craft": {
    "seams_or_stray_shapes": false,
    "inconsistent_light": false,
-   "clipped_elements": false,
-   "contact_shadow": true,
-   "notes": "none"
+   "clipped_elements": true,
+   "contact_shadow": false,
+   "notes": "A cloud and mountains are cut off at the frame edges; no distinct contact shadow is visible."
   }
  },
  "motion": {
@@ -72,28 +75,27 @@
   "leg_pct": 23.31
  },
  "rationale": {
-  "anatomy": "none (level 3.98 of 4)",
-  "craft": "none (level 3.96 of 4)",
-  "setting": "sky, clouds, sun, snow-capped mountains, rolling hills, meadow, dirt path, grass, flowers, small shrubs. Palette: Bright blue sky, cool violet-blue mountains, and layered green meadow with warm cream and yellow accents.. Placement: Near the center of the frame, slightly right of center..",
-  "gait": "band 4 from 13.69% pixel change; P(planted, coherent)=0.97"
+  "anatomy": "The neck is long and the head is small relative to the body. (level 3.85 of 4)",
+  "craft": "A cloud and mountains are cut off at the frame edges; no distinct contact shadow is visible. (level 2.00 of 4)",
+  "gait": "band 4 from 13.69% pixel change; P(planted, coherent)=0.07"
  },
  "probabilities": {
   "anatomy": {
    "0": 0,
-   "1": 0,
-   "2": 0,
-   "3": 0.01,
-   "4": 0.99
+   "1": 0.06,
+   "2": 0.91,
+   "3": 0.02,
+   "4": 0.01
   },
   "craft": {
    "0": 0,
-   "1": 0,
-   "2": 0,
-   "3": 0.01,
-   "4": 0.99
+   "1": 0.04,
+   "2": 0.94,
+   "3": 0.02,
+   "4": 0
   }
  },
  "verdict": {
-  "jev+openai-gpt-6-luna": "A fluffy cream alpaca walks along a flowered path in a bright mountain meadow beneath a blue sky."
+  "jev+openai-gpt-6-sol": "A cream-colored alpaca walks on a dirt path in a grassy scene with mountains, clouds, and a sun."
  }
 }

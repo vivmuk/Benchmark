@@ -1,65 +1,68 @@
 {
- "rubric": "v9",
+ "rubric": "v11",
  "median": {
-  "anatomy": 4,
+  "anatomy": 2,
   "craft": 4,
-  "gait": 4
+  "gait": 3
  },
  "judges_used": 1,
  "setting": {
-  "depth_planes": 3,
+  "depth_planes": 6,
   "elements": [
    "sky",
-   "clouds",
    "sun",
-   "birds",
-   "distant mountains",
+   "clouds",
+   "distant birds",
+   "two mountain layers",
+   "grassy field",
    "trees",
    "bushes",
-   "green field",
    "sandy path",
    "grass tufts",
    "small flowers",
-   "scattered stones"
+   "pebbles"
   ],
-  "palette": "Bright blue sky, layered blue mountains, green field, and a pale tan path.",
-  "placement": "Near the center of the frame, standing on the path.",
+  "palette": "Pastel blues and greens with pale yellow and sandy beige.",
+  "placement": "Near the center of the sandy path, facing right.",
   "clutter": false
  },
- "captioner": "openai-gpt-6-luna",
+ "captioner": "openai-gpt-6-sol",
  "observations": {
-  "description": "A cream-colored alpaca wearing a striped rust-red blanket walks along a sandy path through a sunny green landscape.",
+  "description": "A cream-colored alpaca wearing a striped blanket walks to the right on a sandy path beneath a sunny sky.",
   "anatomy": {
+   "legs_visible": 4,
+   "legs_with_visible_joint": 2,
+   "leg_attachment": "chest_and_rump",
+   "neck_proportion": "too_long",
+   "head_proportion": "too_small",
+   "tail_visible": true,
    "detached_parts": false,
-   "jointless_legs": false,
-   "wrong_proportions": false,
-   "missing_cues": false,
-   "notes": "none"
+   "notes": "The hind legs bend; the front legs appear straight, and the head is small relative to the long neck."
   },
   "gait": {
    "feet_planted": true,
-   "sliding_or_popping": false,
+   "sliding_or_popping": true,
    "legs_change_between_frames": true,
-   "notes": "The legs change angle and position between frames; some hooves lift while others remain near the ground."
+   "notes": "The legs change position and some hooves lift, but grounded hooves stay near the same screen positions while path details move left."
   },
   "scene": {
-   "depth_planes": 3,
+   "depth_planes": 6,
    "elements": [
     "sky",
-    "clouds",
     "sun",
-    "birds",
-    "distant mountains",
+    "clouds",
+    "distant birds",
+    "two mountain layers",
+    "grassy field",
     "trees",
     "bushes",
-    "green field",
     "sandy path",
     "grass tufts",
     "small flowers",
-    "scattered stones"
+    "pebbles"
    ],
-   "palette": "Bright blue sky, layered blue mountains, green field, and a pale tan path.",
-   "placement": "Near the center of the frame, standing on the path.",
+   "palette": "Pastel blues and greens with pale yellow and sandy beige.",
+   "placement": "Near the center of the sandy path, facing right.",
    "clutter": false
   },
   "craft": {
@@ -76,18 +79,17 @@
   "leg_pct": 16.82
  },
  "rationale": {
-  "anatomy": "none (level 3.96 of 4)",
-  "craft": "none (level 3.97 of 4)",
-  "setting": "sky, clouds, sun, birds, distant mountains, trees, bushes, green field, sandy path, grass tufts, small flowers, scattered stones. Palette: Bright blue sky, layered blue mountains, green field, and a pale tan path.. Placement: Near the center of the frame, standing on the path..",
-  "gait": "band 4 from 8.77% pixel change; P(planted, coherent)=0.85"
+  "anatomy": "The hind legs bend; the front legs appear straight, and the head is small relative to the long neck. (level 2.02 of 4)",
+  "craft": "none (level 3.95 of 4)",
+  "gait": "band 4 from 8.77% pixel change; P(planted, coherent)=0.11"
  },
  "probabilities": {
   "anatomy": {
    "0": 0,
-   "1": 0,
-   "2": 0.01,
+   "1": 0.6,
+   "2": 0.39,
    "3": 0.01,
-   "4": 0.98
+   "4": 0
   },
   "craft": {
    "0": 0,
@@ -98,6 +100,6 @@
   }
  },
  "verdict": {
-  "jev+openai-gpt-6-luna": "A cream-colored alpaca wearing a striped rust-red blanket walks along a sandy path through a sunny green landscape."
+  "jev+openai-gpt-6-sol": "A cream-colored alpaca wearing a striped blanket walks to the right on a sandy path beneath a sunny sky."
  }
 }

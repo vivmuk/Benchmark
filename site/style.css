@@ -68,6 +68,8 @@ th.sortable:hover{color:var(--ink)}
 th.sortable[data-dir=desc]::after{content:" ↓";color:var(--accent)}
 th.sortable[data-dir=asc]::after{content:" ↑";color:var(--accent)}
 .stats{font-family:var(--mono);font-size:12px}
+.cost{color:#0b5fb0;font-weight:700}
+.tbl td.cost{color:#0b5fb0}
 details.p summary{cursor:pointer;color:var(--ink)}
 details.p p{margin:6px 0 0;color:var(--ink)}
 

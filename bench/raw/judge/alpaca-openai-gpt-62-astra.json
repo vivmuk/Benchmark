@@ -1,69 +1,68 @@
 {
- "rubric": "v9",
+ "rubric": "v11",
  "median": {
-  "anatomy": 4,
-  "craft": 4,
-  "gait": 3
+  "anatomy": 2,
+  "craft": 3,
+  "gait": 2
  },
  "judges_used": 1,
  "setting": {
-  "depth_planes": 3,
+  "depth_planes": 5,
   "elements": [
-   "sky",
-   "clouds",
+   "title and small labels",
    "sun",
-   "mountains",
-   "hills",
-   "water",
-   "sandy plain",
-   "path",
-   "grasses",
-   "flowers"
+   "thin clouds",
+   "layered mountains",
+   "rolling hills",
+   "winding pale stream",
+   "sandy path",
+   "sparse grasses"
   ],
-  "palette": "Muted teal, sage, ochre, and dusty pink with a pale yellow sun.",
-  "placement": "Near the center, slightly right, on the path in the lower-middle of the frame.",
+  "palette": "Muted teal and sage with dusty pink, tan, cream, and pale yellow.",
+  "placement": "Near the center, on the foreground path.",
   "clutter": false
  },
- "captioner": "openai-gpt-6-luna",
+ "captioner": "openai-gpt-6-sol",
  "observations": {
-  "description": "A cream-colored alpaca wearing a patterned blanket walks along a pale path in a layered mountain landscape.",
+  "description": "A cream-colored alpaca with a patterned blanket is shown walking to the right on a sandy path in a mountain scene.",
   "anatomy": {
-   "detached_parts": false,
-   "jointless_legs": false,
-   "wrong_proportions": false,
-   "missing_cues": false,
-   "notes": "none"
+   "legs_visible": 4,
+   "legs_with_visible_joint": 4,
+   "leg_attachment": "chest_and_rump",
+   "neck_proportion": "too_long",
+   "head_proportion": "too_small",
+   "tail_visible": true,
+   "detached_parts": true,
+   "notes": "A dark segment of a rear leg appears separated from the body in the second frame."
   },
   "gait": {
    "feet_planted": true,
-   "sliding_or_popping": false,
+   "sliding_or_popping": true,
    "legs_change_between_frames": true,
-   "notes": "The legs alternate between bent and extended positions while the hooves remain at the ground line."
+   "notes": "The legs bend and change position, but the hooves shift along the path while the body stays in nearly the same place."
   },
   "scene": {
-   "depth_planes": 3,
+   "depth_planes": 5,
    "elements": [
-    "sky",
-    "clouds",
+    "title and small labels",
     "sun",
-    "mountains",
-    "hills",
-    "water",
-    "sandy plain",
-    "path",
-    "grasses",
-    "flowers"
+    "thin clouds",
+    "layered mountains",
+    "rolling hills",
+    "winding pale stream",
+    "sandy path",
+    "sparse grasses"
    ],
-   "palette": "Muted teal, sage, ochre, and dusty pink with a pale yellow sun.",
-   "placement": "Near the center, slightly right, on the path in the lower-middle of the frame.",
+   "palette": "Muted teal and sage with dusty pink, tan, cream, and pale yellow.",
+   "placement": "Near the center, on the foreground path.",
    "clutter": false
   },
   "craft": {
-   "seams_or_stray_shapes": false,
+   "seams_or_stray_shapes": true,
    "inconsistent_light": false,
    "clipped_elements": false,
    "contact_shadow": true,
-   "notes": "none"
+   "notes": "A rear-leg segment appears separate from the body in the second frame."
   }
  },
  "motion": {
@@ -72,28 +71,27 @@
   "leg_pct": 6.13
  },
  "rationale": {
-  "anatomy": "none (level 3.91 of 4)",
-  "craft": "none (level 3.96 of 4)",
-  "setting": "sky, clouds, sun, mountains, hills, water, sandy plain, path, grasses, flowers. Palette: Muted teal, sage, ochre, and dusty pink with a pale yellow sun.. Placement: Near the center, slightly right, on the path in the lower-middle of the frame..",
-  "gait": "band 3 from 3.62% pixel change; P(planted, coherent)=0.97"
+  "anatomy": "A dark segment of a rear leg appears separated from the body in the second frame. (level 1.93 of 4)",
+  "craft": "A rear-leg segment appears separate from the body in the second frame. (level 2.55 of 4)",
+  "gait": "band 3 from 3.62% pixel change; P(planted, coherent)=0.05"
  },
  "probabilities": {
   "anatomy": {
-   "0": 0,
-   "1": 0,
-   "2": 0.02,
-   "3": 0.04,
-   "4": 0.94
+   "0": 0.03,
+   "1": 0.87,
+   "2": 0.1,
+   "3": 0,
+   "4": 0
   },
   "craft": {
    "0": 0,
-   "1": 0,
-   "2": 0,
-   "3": 0.02,
-   "4": 0.98
+   "1": 0.19,
+   "2": 0.07,
+   "3": 0.74,
+   "4": 0
   }
  },
  "verdict": {
-  "jev+openai-gpt-6-luna": "A cream-colored alpaca wearing a patterned blanket walks along a pale path in a layered mountain landscape."
+  "jev+openai-gpt-6-sol": "A cream-colored alpaca with a patterned blanket is shown walking to the right on a sandy path in a mountain scene."
  }
 }

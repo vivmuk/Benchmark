@@ -1,61 +1,64 @@
 {
- "rubric": "v9",
+ "rubric": "v11",
  "median": {
   "anatomy": 4,
   "craft": 4,
-  "gait": 2
+  "gait": 1
  },
  "judges_used": 1,
  "setting": {
-  "depth_planes": 3,
+  "depth_planes": 4,
   "elements": [
-   "sky",
    "sun",
    "clouds",
    "birds",
    "snow-capped mountains",
-   "rolling green hills",
-   "sandy path",
-   "rocks",
-   "grass tufts",
-   "flowers"
+   "green hills",
+   "bushes",
+   "grass",
+   "flowers",
+   "dirt path",
+   "pebbles"
   ],
-  "palette": "Soft muted greens, pale blue, warm cream, and sandy tan.",
-  "placement": "The alpaca is near the center of the frame, standing on the path.",
+  "palette": "Pale blue, cream, muted green, and gray.",
+  "placement": "The alpaca is near the center, standing on the path and facing right.",
   "clutter": false
  },
- "captioner": "openai-gpt-6-luna",
+ "captioner": "openai-gpt-6-sol",
  "observations": {
-  "description": "A fluffy cream-colored alpaca walks along a sandy path in a green mountain landscape beneath a bright sun.",
+  "description": "A cream-colored alpaca walks on a path in a grassy mountain scene.",
   "anatomy": {
+   "legs_visible": 4,
+   "legs_with_visible_joint": 4,
+   "leg_attachment": "chest_and_rump",
+   "neck_proportion": "too_long",
+   "head_proportion": "too_small",
+   "tail_visible": true,
    "detached_parts": false,
-   "jointless_legs": false,
-   "wrong_proportions": false,
-   "missing_cues": false,
-   "notes": "none"
+   "notes": "The neck is long relative to its width, and the head is small relative to the body."
   },
   "gait": {
    "feet_planted": true,
-   "sliding_or_popping": false,
+   "sliding_or_popping": true,
    "legs_change_between_frames": true,
-   "notes": "The long legs bend and swing in alternating positions, with hooves touching or briefly lifting from the path."
+   "notes": "The legs bend and change position; some hooves lift while others touch the path, and the feet shift as the body stays nearly in place."
   },
   "scene": {
-   "depth_planes": 3,
+   "depth_planes": 4,
    "elements": [
-    "sky",
     "sun",
     "clouds",
     "birds",
     "snow-capped mountains",
-    "rolling green hills",
-    "sandy path",
-    "rocks",
-    "grass tufts",
-    "flowers"
+    "green hills",
+    "bushes",
+    "grass",
+    "flowers",
+    "dirt path",
+    "pebbles"
    ],
-   "palette": "Soft muted greens, pale blue, warm cream, and sandy tan.",
-   "placement": "The alpaca is near the center of the frame, standing on the path.",
+   "palette": "Pale blue, cream, muted green, and gray.",
+   "placement": "The alpaca is near the center, standing on the path and facing right.",
    "clutter": false
   },
   "craft": {
@@ -63,7 +66,7 @@
    "inconsistent_light": false,
    "clipped_elements": false,
    "contact_shadow": true,
-   "notes": "None."
+   "notes": "none"
   }
  },
  "motion": {
@@ -72,18 +75,17 @@
   "leg_pct": 2.89
  },
  "rationale": {
-  "anatomy": "none (level 3.98 of 4)",
-  "craft": "None. (level 3.96 of 4)",
-  "setting": "sky, sun, clouds, birds, snow-capped mountains, rolling green hills, sandy path, rocks, grass tufts, flowers. Palette: Soft muted greens, pale blue, warm cream, and sandy tan.. Placement: The alpaca is near the center of the frame, standing on the path..",
-  "gait": "band 2 from 2.05% pixel change; P(planted, coherent)=0.89"
+  "anatomy": "The neck is long relative to its width, and the head is small relative to the body. (level 3.84 of 4)",
+  "craft": "none (level 3.96 of 4)",
+  "gait": "band 2 from 2.05% pixel change; P(planted, coherent)=0.08"
  },
  "probabilities": {
   "anatomy": {
    "0": 0,
-   "1": 0,
-   "2": 0,
-   "3": 0.01,
-   "4": 0.99
+   "1": 0.08,
+   "2": 0.89,
+   "3": 0.02,
+   "4": 0.01
   },
   "craft": {
    "0": 0,
@@ -94,6 +96,6 @@
   }
  },
  "verdict": {
-  "jev+openai-gpt-6-luna": "A fluffy cream-colored alpaca walks along a sandy path in a green mountain landscape beneath a bright sun."
+  "jev+openai-gpt-6-sol": "A cream-colored alpaca walks on a path in a grassy mountain scene."
  }
 }

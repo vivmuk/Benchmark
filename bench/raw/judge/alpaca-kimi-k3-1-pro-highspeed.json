@@ -1,57 +1,64 @@
 {
- "rubric": "v9",
+ "rubric": "v11",
  "median": {
   "anatomy": 4,
   "craft": 3,
-  "gait": 2
+  "gait": 1
  },
  "judges_used": 1,
  "setting": {
-  "depth_planes": 3,
+  "depth_planes": 5,
   "elements": [
    "sky",
-   "clouds",
    "sun",
+   "clouds",
+   "small birds",
    "snow-capped mountains",
-   "rolling green hills",
-   "sandy ground",
-   "small grass tufts",
-   "rocks"
+   "nearer mountains",
+   "grassy hills",
+   "grass tufts",
+   "sandy path",
+   "small rocks and ground marks"
   ],
-  "palette": "Muted greens and sandy beige, with pale blue sky and warm cream accents.",
-  "placement": "The alpaca is near the horizontal center, standing in the lower half of the frame.",
+  "palette": "Muted teal, sage, cream, and tan",
+  "placement": "Near the center, with its feet on the foreground path",
   "clutter": false
  },
- "captioner": "openai-gpt-6-luna",
+ "captioner": "openai-gpt-6-sol",
  "observations": {
-  "description": "A fluffy alpaca walks in place in a sandy mountain landscape beneath a sunny, cloudy sky.",
+  "description": "A cream-colored alpaca walks across a sandy path in front of grassy hills and mountains.",
   "anatomy": {
+   "legs_visible": 4,
+   "legs_with_visible_joint": 4,
+   "leg_attachment": "chest_and_rump",
+   "neck_proportion": "too_long",
+   "head_proportion": "right",
+   "tail_visible": true,
    "detached_parts": false,
-   "jointless_legs": false,
-   "wrong_proportions": false,
-   "missing_cues": false,
-   "notes": "none"
+   "notes": "The neck is long and narrow."
   },
   "gait": {
    "feet_planted": true,
-   "sliding_or_popping": false,
+   "sliding_or_popping": true,
    "legs_change_between_frames": true,
-   "notes": "The legs alternate between bent and extended positions, with hooves lifting and touching down."
+   "notes": "The legs bend and alternate positions; some hooves lift while others touch the path, but grounded hooves shift sideways."
   },
   "scene": {
-   "depth_planes": 3,
+   "depth_planes": 5,
    "elements": [
     "sky",
-    "clouds",
     "sun",
+    "clouds",
+    "small birds",
     "snow-capped mountains",
-    "rolling green hills",
-    "sandy ground",
-    "small grass tufts",
-    "rocks"
+    "nearer mountains",
+    "grassy hills",
+    "grass tufts",
+    "sandy path",
+    "small rocks and ground marks"
    ],
-   "palette": "Muted greens and sandy beige, with pale blue sky and warm cream accents.",
-   "placement": "The alpaca is near the horizontal center, standing in the lower half of the frame.",
+   "palette": "Muted teal, sage, cream, and tan",
+   "placement": "Near the center, with its feet on the foreground path",
    "clutter": false
   },
   "craft": {
@@ -59,7 +66,7 @@
    "inconsistent_light": false,
    "clipped_elements": true,
    "contact_shadow": true,
-   "notes": "A small green shape is clipped at the top-left edge."
+   "notes": "A small piece of greenery is clipped at the upper-left edge."
   }
  },
  "motion": {
@@ -68,28 +75,27 @@
   "leg_pct": 1.8
  },
  "rationale": {
-  "anatomy": "none (level 3.96 of 4)",
-  "craft": "A small green shape is clipped at the top-left edge. (level 2.94 of 4)",
-  "setting": "sky, clouds, sun, snow-capped mountains, rolling green hills, sandy ground, small grass tufts, rocks. Palette: Muted greens and sandy beige, with pale blue sky and warm cream accents.. Placement: The alpaca is near the horizontal center, standing in the lower half of the frame..",
-  "gait": "band 2 from 1.60% pixel change; P(planted, coherent)=0.88"
+  "anatomy": "The neck is long and narrow. (level 3.82 of 4)",
+  "craft": "A small piece of greenery is clipped at the upper-left edge. (level 2.88 of 4)",
+  "gait": "band 2 from 1.60% pixel change; P(planted, coherent)=0.08"
  },
  "probabilities": {
   "anatomy": {
    "0": 0,
-   "1": 0,
-   "2": 0.01,
-   "3": 0.02,
-   "4": 0.97
+   "1": 0.03,
+   "2": 0.85,
+   "3": 0.1,
+   "4": 0.02
   },
   "craft": {
    "0": 0,
-   "1": 0.03,
-   "2": 0.01,
-   "3": 0.95,
+   "1": 0.07,
+   "2": 0.02,
+   "3": 0.9,
    "4": 0.01
   }
  },
  "verdict": {
-  "jev+openai-gpt-6-luna": "A fluffy alpaca walks in place in a sandy mountain landscape beneath a sunny, cloudy sky."
+  "jev+openai-gpt-6-sol": "A cream-colored alpaca walks across a sandy path in front of grassy hills and mountains."
  }
 }

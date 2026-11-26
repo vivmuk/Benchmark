@@ -1,69 +1,70 @@
 {
- "rubric": "v9",
+ "rubric": "v11",
  "median": {
   "anatomy": 2,
-  "craft": 3,
-  "gait": 2
+  "craft": 2,
+  "gait": 1
  },
  "judges_used": 1,
  "setting": {
-  "depth_planes": 3,
+  "depth_planes": 4,
   "elements": [
-   "sky",
-   "clouds",
+   "blue sky",
+   "three clouds",
    "sun",
-   "birds",
-   "layered green hills",
-   "pale blue water",
+   "distant birds",
+   "layered hills",
    "grass",
-   "fence",
-   "flowers",
-   "small light specks"
+   "small flowers",
+   "dark grass stalks",
+   "scattered pale dots"
   ],
-  "palette": "Bright blue sky and pale clouds above layered greens, with a yellow sun and small colorful flowers.",
-  "placement": "The alpaca is low and left of center, with open landscape extending to the right.",
+  "palette": "Blue, green, and pastel colors with a yellow sun.",
+  "placement": "The alpaca is in the lower-left foreground.",
   "clutter": false
  },
- "captioner": "openai-gpt-6-luna",
+ "captioner": "openai-gpt-6-sol",
  "observations": {
-  "description": "A fluffy white alpaca stands in the lower-left of a sunny green landscape, with its legs changing pose across the frames.",
+  "description": "A cream-colored alpaca walks in place at the left of a grassy landscape with hills, flowers, clouds, birds, and a sun.",
   "anatomy": {
+   "legs_visible": 3,
+   "legs_with_visible_joint": 0,
+   "leg_attachment": "chest_and_rump",
+   "neck_proportion": "too_long",
+   "head_proportion": "too_small",
+   "tail_visible": true,
    "detached_parts": false,
-   "jointless_legs": true,
-   "wrong_proportions": false,
-   "missing_cues": false,
-   "notes": "The legs are simple straight shapes without visible joints."
+   "notes": "The neck is long and thin, the head is small, and the visible legs have no clear bends."
   },
   "gait": {
-   "feet_planted": true,
-   "sliding_or_popping": false,
+   "feet_planted": false,
+   "sliding_or_popping": true,
    "legs_change_between_frames": true,
-   "notes": "The legs shift between angled and mostly vertical poses while the hooves remain near the ground."
+   "notes": "The legs alternate between angled and upright positions; the hooves shift while the body stays nearly in place."
   },
   "scene": {
-   "depth_planes": 3,
+   "depth_planes": 4,
    "elements": [
-    "sky",
-    "clouds",
+    "blue sky",
+    "three clouds",
     "sun",
-    "birds",
-    "layered green hills",
-    "pale blue water",
+    "distant birds",
+    "layered hills",
     "grass",
-    "fence",
-    "flowers",
-    "small light specks"
+    "small flowers",
+    "dark grass stalks",
+    "scattered pale dots"
    ],
-   "palette": "Bright blue sky and pale clouds above layered greens, with a yellow sun and small colorful flowers.",
-   "placement": "The alpaca is low and left of center, with open landscape extending to the right.",
+   "palette": "Blue, green, and pastel colors with a yellow sun.",
+   "placement": "The alpaca is in the lower-left foreground.",
    "clutter": false
   },
   "craft": {
-   "seams_or_stray_shapes": false,
+   "seams_or_stray_shapes": true,
    "inconsistent_light": false,
    "clipped_elements": false,
    "contact_shadow": false,
-   "notes": "No obvious seams or stray shapes; no visible contact shadow."
+   "notes": "A pale triangular gap appears between grass bands at the left edge; no shadow is visible beneath the hooves."
   }
  },
  "motion": {
@@ -72,28 +73,27 @@
   "leg_pct": 1.37
  },
  "rationale": {
-  "anatomy": "The legs are simple straight shapes without visible joints. (level 2.28 of 4)",
-  "craft": "No obvious seams or stray shapes; no visible contact shadow. (level 3.03 of 4)",
-  "setting": "sky, clouds, sun, birds, layered green hills, pale blue water, grass, fence, flowers, small light specks. Palette: Bright blue sky and pale clouds above layered greens, with a yellow sun and small colorful flowers.. Placement: The alpaca is low and left of center, with open landscape extending to the right..",
-  "gait": "band 2 from 1.29% pixel change; P(planted, coherent)=0.94"
+  "anatomy": "The neck is long and thin, the head is small, and the visible legs have no clear bends. (level 1.73 of 4)",
+  "craft": "A pale triangular gap appears between grass bands at the left edge; no shadow is visible beneath the hooves. (level 2.04 of 4)",
+  "gait": "band 2 from 1.29% pixel change; P(planted, coherent)=0.03"
  },
  "probabilities": {
   "anatomy": {
-   "0": 0,
-   "1": 0.01,
-   "2": 0.73,
-   "3": 0.22,
-   "4": 0.04
+   "0": 0.01,
+   "1": 0.97,
+   "2": 0.02,
+   "3": 0,
+   "4": 0
   },
   "craft": {
    "0": 0,
-   "1": 0.03,
-   "2": 0.04,
-   "3": 0.8,
-   "4": 0.13
+   "1": 0.01,
+   "2": 0.95,
+   "3": 0.04,
+   "4": 0
   }
  },
  "verdict": {
-  "jev+openai-gpt-6-luna": "A fluffy white alpaca stands in the lower-left of a sunny green landscape, with its legs changing pose across the frames."
+  "jev+openai-gpt-6-sol": "A cream-colored alpaca walks in place at the left of a grassy landscape with hills, flowers, clouds, birds, and a sun."
  }
 }
